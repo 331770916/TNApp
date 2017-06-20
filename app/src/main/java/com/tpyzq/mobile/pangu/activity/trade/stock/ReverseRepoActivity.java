@@ -26,6 +26,7 @@ import com.tpyzq.mobile.pangu.data.StockInfoBean;
 import com.tpyzq.mobile.pangu.util.Helper;
 import com.tpyzq.mobile.pangu.util.ToastUtils;
 import com.tpyzq.mobile.pangu.util.TransitionUtils;
+import com.tpyzq.mobile.pangu.view.dialog.CommissionedBuyAndSellDialog;
 
 import org.json.JSONArray;
 import org.json.JSONException;
@@ -99,8 +100,8 @@ public class ReverseRepoActivity extends BaseActivity implements View.OnClickLis
         } else if (stockInfoBean.stockCode.startsWith("2")) {
             addsub = 1000;
         }
-        tv_sub_price.setText(addsub+"");
-        tv_add_price.setText(addsub+"");
+        tv_sub_price.setText(addsub + "");
+        tv_add_price.setText(addsub + "");
         timeCount.start();
         tv_chedan.setOnClickListener(this);
         tv_search.setOnClickListener(this);
@@ -217,9 +218,10 @@ public class ReverseRepoActivity extends BaseActivity implements View.OnClickLis
     }
 
     boolean flag = false;
+
     public void setTextView(String a, String b) {
         tv_using_money.setText(b);
-        if (!flag){
+        if (!flag) {
             price = Double.valueOf(a);
             et_income.setText(a);
             flag = true;
@@ -256,8 +258,8 @@ public class ReverseRepoActivity extends BaseActivity implements View.OnClickLis
                 et_price.setText(amount + "");
                 break;
             case R.id.bt_loan:
-                if (!TextUtils.isEmpty(et_price.getText().toString())) {
-                    //获取最大可借出金额
+                if (!TextUtils.isEmpty(et_price.getText().toString()) && !TextUtils.isEmpty(et_income.getText().toString())) {
+//                    //获取最大可借出金额
                     String tempPrice = tv_price.getText().toString();
                     if (Helper.isNumberDimc(tempPrice)) {//判断文本是否为数字
                         long maxPrice = Long.parseLong(tempPrice);
@@ -265,15 +267,17 @@ public class ReverseRepoActivity extends BaseActivity implements View.OnClickLis
                             //输入的钱大于最大可借出
                             ToastUtils.showShort(this, "你的最大可借出数量为" + maxPrice + "\n\r请确认后重新输入");
                         } else {
-                            //输入钱小于最大可借出
-                            presenter.getBuy(stockInfoBean.stockCode, price + "", amount / 100 + "");
+//                输入钱小于最大可借出
+                            String result = stockInfoBean.stockCode.substring(2, stockInfoBean.stockCode.length());
+                            CommissionedBuyAndSellDialog commissionedBuyAndSellDialog = new CommissionedBuyAndSellDialog(this, commissionedBuyAndSell, stockInfoBean.stockName1, result, price + "", et_price.getText().toString(), "卖", et_income.getText().toString());
+                            commissionedBuyAndSellDialog.show();
                         }
 
                     } else {//最大可借出为"- -"
                         ToastUtils.showShort(this, "你的最大可借出数量为0\n\r请确认后重新输入");
                     }
                 } else {
-                    ToastUtils.showShort(this, "金额不能为空");
+                    ToastUtils.showShort(this, "年利率或金额不能为空");
                 }
                 break;
             case R.id.iv_back:
@@ -295,15 +299,15 @@ public class ReverseRepoActivity extends BaseActivity implements View.OnClickLis
                 break;
             case R.id.Keyboard_LinearLayout:
                 InputMethodManager imm = (InputMethodManager) this.getSystemService(Context.INPUT_METHOD_SERVICE);
-                        if (imm.isActive()){
-                            hideInputWindow(this);
-                        }
+                if (imm.isActive()) {
+                    hideInputWindow(this);
+                }
                 break;
         }
     }
 
-    public void hideInputWindow(Activity context){
-        if(context==null){
+    public void hideInputWindow(Activity context) {
+        if (context == null) {
             return;
         }
         final View v = ((Activity) context).getWindow().peekDecorView();
@@ -329,6 +333,7 @@ public class ReverseRepoActivity extends BaseActivity implements View.OnClickLis
         public void onTick(long millisUntilFinished) {//计时过程显示
 
         }
+
     }
 
     @Override
@@ -347,6 +352,22 @@ public class ReverseRepoActivity extends BaseActivity implements View.OnClickLis
                 break;
         }
     }
+
+    /**
+     * 买卖回调
+     */
+    CommissionedBuyAndSellDialog.CommissionedBuyAndSell commissionedBuyAndSell = new CommissionedBuyAndSellDialog.CommissionedBuyAndSell() {
+
+        @Override
+        public void setBuy(String code, String price, String num) {
+        }
+
+        @Override
+        public void setSell(String code, String price, String num) {
+            presenter.getBuy(stockInfoBean.stockCode, price + "", amount / 100 + "");
+        }
+
+    };
 
     @Override
     protected void onDestroy() {
