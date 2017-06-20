@@ -1,0 +1,24 @@
+﻿<servers>
+
+    <server>
+        <crh_app_name>开户</crh_app_name>
+        <crh_app_type>0</crh_app_type>
+    	<crh_server_domain>sjkh.tpyzq.com</crh_server_domain>
+    	<crh_server_url>https://sjkh.tpyzq.com/indexnew?befromFlag=other</crh_server_url>
+    	<crh_upload_url>https://sjkh.tpyzq.com/upload</crh_upload_url>
+		<crh_cookie_path>/</crh_cookie_path>
+		<crh_video_server_ip></crh_video_server_ip>
+		<crh_video_server_port></crh_video_server_port>
+    </server>
+	<!--
+
+	<crh_app_name>开户</crh_app_name>
+	<crh_app_type>0</crh_app_type>
+	<crh_server_domain>sjkhtest.tpyzq.com</crh_server_domain>
+	<crh_server_url>http://sjkhtest.tpyzq.com/indexnew?befromFlag=other</crh_server_url>
+	<crh_upload_url>http://sjkhtest.tpyzq.com/upload</crh_upload_url>
+	<crh_cookie_path>/</crh_cookie_path>
+	<crh_video_server_ip></crh_video_server_ip>
+	<crh_video_server_port></crh_video_server_port>
+	-->
+</servers>

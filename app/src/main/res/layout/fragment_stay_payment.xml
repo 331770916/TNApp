@@ -1,0 +1,158 @@
+<?xml version="1.0" encoding="utf-8"?>
+<LinearLayout xmlns:android="http://schemas.android.com/apk/res/android"
+    android:layout_width="match_parent"
+    android:layout_height="match_parent"
+    android:background="@color/bgColor"
+    android:orientation="vertical">
+    <View
+        android:layout_width="match_parent"
+        android:layout_height="@dimen/size0.5"
+        android:background="@color/bgColor"/>
+
+    <com.tpyzq.mobile.pangu.view.pullDownGroup.PullDownScrollView
+        android:id="@+id/xiaLaShuaXin"
+        android:layout_width="match_parent"
+        android:layout_height="0dp"
+        android:layout_weight="5"
+        android:orientation="vertical">
+
+        <ScrollView
+            android:id="@+id/scrollView"
+            android:layout_width="match_parent"
+            android:layout_height="wrap_content">
+
+            <LinearLayout
+                android:layout_width="match_parent"
+                android:layout_height="wrap_content"
+                android:orientation="vertical">
+
+                <LinearLayout
+                    android:layout_width="match_parent"
+                    android:layout_height="wrap_content"
+                    android:orientation="vertical">
+
+                    <include layout="@layout/item_stay_payment_hdader" />
+                </LinearLayout>
+
+
+                <RelativeLayout
+                    android:layout_width="match_parent"
+                    android:layout_height="match_parent">
+
+                    <com.tpyzq.mobile.pangu.view.gridview.MyListView
+                        android:id="@+id/lvStayPayment"
+                        android:layout_width="match_parent"
+                        android:layout_height="match_parent">
+
+                    </com.tpyzq.mobile.pangu.view.gridview.MyListView>
+
+                    <ImageView
+                        android:id="@+id/ivStayPaymentKong"
+                        android:layout_width="wrap_content"
+                        android:layout_height="wrap_content"
+                        android:layout_centerInParent="true"
+                        android:layout_marginTop="300dp"
+                        android:src="@mipmap/kong"
+                        android:visibility="visible" />
+
+                </RelativeLayout>
+            </LinearLayout>
+        </ScrollView>
+    </com.tpyzq.mobile.pangu.view.pullDownGroup.PullDownScrollView>
+
+
+    <!-- 下方的 资金转入转让出 -->
+    <LinearLayout
+        android:layout_width="match_parent"
+        android:layout_height="@dimen/size60"
+        android:background="@color/white"
+        android:orientation="vertical">
+
+        <TextView
+            android:layout_width="match_parent"
+            android:layout_height="@dimen/size0.5"
+            android:background="@color/lineColor1" />
+
+        <LinearLayout
+            android:layout_width="match_parent"
+            android:layout_height="match_parent"
+            android:orientation="horizontal">
+            <!-- 资金转入-->
+            <LinearLayout
+                android:id="@+id/llZhuanRu"
+                android:layout_width="0dp"
+                android:layout_height="match_parent"
+                android:layout_weight="1"
+                android:gravity="center"
+                android:orientation="horizontal">
+
+                <LinearLayout
+                    android:layout_width="wrap_content"
+                    android:layout_height="wrap_content"
+                    android:gravity="center"
+                    android:orientation="horizontal">
+
+                    <ImageView
+                        android:layout_width="wrap_content"
+                        android:layout_height="wrap_content"
+                        android:src="@mipmap/zhuanruzijin" />
+
+                    <TextView
+                        android:layout_width="@dimen/size10"
+                        android:layout_height="match_parent" />
+
+                    <TextView
+                        android:layout_width="wrap_content"
+                        android:layout_height="wrap_content"
+                        android:text="转入资金"
+                        android:textColor="@color/hushenTab_titleColor"
+                        android:textSize="@dimen/txtSize14" />
+                </LinearLayout>
+
+            </LinearLayout>
+
+            <TextView
+                android:layout_width="@dimen/size1"
+                android:layout_height="@dimen/size30"
+                android:layout_gravity="center"
+                android:background="@color/lineColor" />
+
+
+            <!--资金转出-->
+            <LinearLayout
+                android:id="@+id/llZhuanChu"
+                android:layout_width="0dp"
+                android:layout_height="match_parent"
+                android:layout_weight="1"
+                android:gravity="center"
+                android:orientation="horizontal">
+
+                <LinearLayout
+                    android:layout_width="wrap_content"
+                    android:layout_height="wrap_content"
+                    android:gravity="center"
+                    android:orientation="horizontal">
+
+                    <ImageView
+                        android:layout_width="wrap_content"
+                        android:layout_height="wrap_content"
+                        android:src="@mipmap/maichugupiao" />
+
+                    <TextView
+                        android:layout_width="@dimen/size10"
+                        android:layout_height="match_parent" />
+
+                    <TextView
+                        android:layout_width="wrap_content"
+                        android:layout_height="wrap_content"
+                        android:text="卖股缴款"
+                        android:textColor="@color/hushenTab_titleColor"
+                        android:textSize="@dimen/txtSize14" />
+                </LinearLayout>
+
+            </LinearLayout>
+        </LinearLayout>
+
+    </LinearLayout>
+
+</LinearLayout>

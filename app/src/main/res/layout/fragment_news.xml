@@ -1,0 +1,43 @@
+<?xml version="1.0" encoding="utf-8"?>
+<RelativeLayout xmlns:android="http://schemas.android.com/apk/res/android"
+    android:id="@+id/rlNews"
+    android:layout_width="match_parent"
+    android:layout_height="wrap_content"
+    android:background="@color/dividerColor">
+
+    <ListView
+        android:id="@+id/lvNews"
+        android:layout_width="match_parent"
+        android:layout_height="wrap_content"
+        android:divider="@null"
+        android:scrollbars="none">
+
+    </ListView>
+
+    <TextView
+        android:id="@+id/tvNewGengDuo"
+        android:layout_below="@id/lvNews"
+        android:layout_width="match_parent"
+        android:layout_height="@dimen/size40"
+        android:gravity="center"
+        android:text="点击查看更多"
+        android:textSize="16sp"/>
+
+    <TextView
+        android:id="@+id/tvNewJiaZai"
+        android:layout_width="wrap_content"
+        android:layout_height="wrap_content"
+        android:padding="@dimen/size30"
+        android:layout_centerInParent="true"
+        android:visibility="gone"
+        android:text="暂无数据，点击重新加载"/>
+
+    <!-- 菊花 -->
+    <ProgressBar
+        android:id="@+id/pb_New_Pager"
+        style="@style/mProgress_circle"
+        android:layout_width="wrap_content"
+        android:layout_height="wrap_content"
+        android:layout_centerInParent="true"/>
+
+</RelativeLayout>

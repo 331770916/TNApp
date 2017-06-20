@@ -1,0 +1,65 @@
+<?xml version="1.0" encoding="utf-8"?>
+<RelativeLayout xmlns:android="http://schemas.android.com/apk/res/android"
+    xmlns:tools="http://schemas.android.com/tools"
+    xmlns:app="http://schemas.android.com/apk/res-auto"
+    android:layout_width="match_parent"
+    android:layout_height="match_parent"
+    android:orientation="vertical"
+    android:background="@color/bgColor"
+    tools:context="com.tpyzq.mobile.pangu.activity.trade.otc_business.OTC_ElectronicContractActivity">
+
+    <RelativeLayout
+        android:id="@+id/OtcElectronicXiaChen"
+        android:layout_width="match_parent"
+        android:layout_height="@dimen/size25"
+        android:background="@color/blue"
+        android:clipToPadding="true"
+        android:fitsSystemWindows="true" />
+
+    <!-- 头布局 -->
+    <RelativeLayout
+        android:id="@+id/OtcElectronicTitle"
+        android:layout_below="@+id/OtcElectronicXiaChen"
+        android:layout_width="match_parent"
+        android:layout_height="@dimen/pickerview_topbar_height"
+        android:background="@color/blue">
+
+        <ImageView
+            android:id="@+id/ivOTC_ElectronicContract_back"
+            android:layout_width="wrap_content"
+            android:layout_height="match_parent"
+            android:layout_alignParentLeft="true"
+            android:padding="@dimen/size10"
+            android:src="@mipmap/back_btn" />
+
+        <TextView
+            android:layout_width="wrap_content"
+            android:layout_height="wrap_content"
+            android:layout_centerInParent="true"
+            android:text="@string/OTC_dianzihetongchaxun"
+            android:textColor="@color/white"
+            android:textSize="@dimen/pickerview_topbar_title_textsize" />
+    </RelativeLayout>
+
+    <com.handmark.pulltorefresh.library.PullToRefreshListView
+        android:id="@+id/lvElectronicContract"
+        android:layout_below="@id/OtcElectronicTitle"
+        android:layout_width="match_parent"
+        android:layout_height="match_parent"
+        app:ptrAnimationStyle="flip"
+        app:ptrMode="pullFromStart"
+        android:scrollbars="none"
+        android:divider="@null"
+        android:layout_marginBottom="@dimen/size10">
+
+    </com.handmark.pulltorefresh.library.PullToRefreshListView>
+
+    <ImageView
+        android:id="@+id/ivOtcElectronicKong"
+        android:layout_width="wrap_content"
+        android:layout_height="wrap_content"
+        android:layout_centerInParent="true"
+        android:visibility="gone"
+        android:src="@mipmap/kong"/>
+
+</RelativeLayout>

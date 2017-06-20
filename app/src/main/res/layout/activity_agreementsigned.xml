@@ -1,0 +1,136 @@
+<?xml version="1.0" encoding="utf-8"?>
+<LinearLayout xmlns:android="http://schemas.android.com/apk/res/android"
+    android:layout_width="match_parent"
+    android:layout_height="match_parent"
+    android:background="@color/bgColor"
+    android:orientation="vertical">
+
+    <RelativeLayout
+        android:id="@+id/AGRelativeLayout"
+        android:layout_width="match_parent"
+        android:layout_height="@dimen/size25"
+        android:background="@color/blue"
+        android:clipToPadding="true"
+        android:fitsSystemWindows="true" />
+
+    <RelativeLayout
+        android:id="@+id/AGRelativeLayout1"
+        android:layout_width="match_parent"
+        android:layout_height="@dimen/pickerview_topbar_height"
+        android:layout_below="@+id/AGRelativeLayout"
+        android:background="@color/blue">
+
+
+        <ImageView
+            android:id="@+id/ASpublish_back"
+            android:layout_width="wrap_content"
+            android:layout_height="match_parent"
+            android:layout_alignParentLeft="true"
+            android:padding="@dimen/size10"
+            android:src="@mipmap/back_btn" />
+
+        <TextView
+            android:id="@+id/publish_title"
+            android:layout_width="wrap_content"
+            android:layout_height="wrap_content"
+            android:layout_centerInParent="true"
+            android:text="@string/AgreementSigned"
+            android:textColor="@color/white"
+            android:textSize="@dimen/pickerview_topbar_title_textsize" />
+    </RelativeLayout>
+
+    <LinearLayout
+        android:id="@+id/Linear_data"
+        android:visibility="visible"
+        android:layout_width="match_parent"
+        android:layout_height="match_parent"
+        android:orientation="vertical">
+
+        <TextView
+            android:id="@+id/tvHuA"
+            android:layout_width="match_parent"
+            android:layout_height="@dimen/size40"
+            android:gravity="center|fill"
+            android:paddingLeft="@dimen/size20"
+            android:text=""
+            android:textColor="@color/newStockTitle"
+            android:textSize="@dimen/txtSize14" />
+        <RelativeLayout
+            android:id="@+id/btnRelativeLayout2"
+            android:layout_width="match_parent"
+            android:layout_height="@dimen/size76"
+            android:layout_marginLeft="@dimen/size10"
+            android:layout_marginRight="@dimen/size10"
+            android:layout_marginTop="@dimen/size9"
+            android:background="@drawable/my_selector">
+
+            <TextView
+                android:layout_width="wrap_content"
+                android:layout_height="wrap_content"
+                android:layout_centerVertical="true"
+                android:paddingLeft="@dimen/size20"
+                android:paddingRight="@dimen/size80"
+                android:text="开通上交所《风险警示股票交易风险揭示书》" />
+
+            <LinearLayout
+                android:id="@+id/ic_LinearLayout2"
+                android:layout_width="@dimen/size65"
+                android:layout_height="@dimen/size76"
+                android:layout_alignParentRight="true"
+                android:background="@drawable/mybut_selector"
+                android:gravity="center"
+                android:orientation="vertical">
+
+                <ImageView
+                    android:id="@+id/ic_NotSatisfied2"
+                    android:layout_width="@dimen/size20"
+                    android:layout_height="@dimen/size20"
+                    android:src="@mipmap/notsatisfied" />
+
+                <TextView
+                    android:id="@+id/tvNotSatisfied2"
+                    android:layout_width="wrap_content"
+                    android:layout_height="wrap_content"
+                    android:paddingTop="@dimen/size11"
+                    android:text="未签署"
+                    android:textColor="@color/white" />
+            </LinearLayout>
+
+
+    </RelativeLayout>
+
+
+    </LinearLayout>
+
+    <RelativeLayout
+        android:id="@+id/stockNewsLayout"
+        android:layout_width="match_parent"
+        android:layout_height="match_parent"
+        android:visibility="gone">
+
+        <FrameLayout
+            android:layout_width="match_parent"
+            android:layout_height="wrap_content"
+            android:layout_centerInParent="true">
+
+            <ImageView
+                android:layout_width="match_parent"
+                android:layout_height="@dimen/size200"
+                android:layout_centerInParent="true"
+                android:scaleX="0.6"
+                android:scaleY="0.5"
+                android:src="@mipmap/chongxinjiazai" />
+
+            <TextView
+                android:layout_width="wrap_content"
+                android:layout_height="wrap_content"
+                android:layout_gravity="bottom|center_horizontal"
+                android:layout_marginBottom="@dimen/size10"
+                android:text="什么也没有,点击重新加载～."
+                android:textColor="@color/text"
+                android:textSize="@dimen/txtSize12" />
+        </FrameLayout>
+    </RelativeLayout>
+
+
+</LinearLayout>

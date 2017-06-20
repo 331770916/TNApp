@@ -1,0 +1,41 @@
+<?xml version="1.0" encoding="utf-8"?>
+<RelativeLayout xmlns:android="http://schemas.android.com/apk/res/android"
+    android:layout_width="@dimen/size250"
+    android:layout_height="@dimen/size350"
+    android:layout_gravity="center"
+    android:background="@mipmap/hintdialog">
+
+    <TextView
+        android:id="@+id/tv_title"
+        android:layout_width="match_parent"
+        android:layout_height="wrap_content"
+        android:layout_marginLeft="@dimen/size20"
+        android:layout_marginRight="@dimen/size20"
+        android:layout_marginTop="@dimen/size80"
+        android:text="" />
+
+    <TextView
+        android:id="@+id/tv_info"
+        android:layout_width="match_parent"
+        android:layout_height="wrap_content"
+        android:layout_below="@id/tv_title"
+        android:layout_marginLeft="@dimen/size20"
+        android:layout_marginRight="@dimen/size20"
+        android:layout_marginTop="@dimen/size10"
+        android:ellipsize="end"
+        android:maxLines="10"
+        android:text="" />
+
+
+    <Button
+        android:id="@+id/but_yes"
+        android:layout_width="@dimen/size150"
+        android:layout_height="@dimen/size35"
+        android:layout_alignParentBottom="true"
+        android:layout_centerHorizontal="true"
+        android:layout_gravity="center"
+        android:layout_marginBottom="@dimen/size20"
+        android:background="@drawable/shape_blue_button"
+        android:text="知道了"
+        android:textColor="@color/white" />
+</RelativeLayout>

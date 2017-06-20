@@ -1,0 +1,258 @@
+<?xml version="1.0" encoding="utf-8"?>
+<LinearLayout xmlns:android="http://schemas.android.com/apk/res/android"
+    android:orientation="vertical"
+    android:background="@color/bgColor"
+    android:layout_width="match_parent"
+    android:layout_height="match_parent">
+
+    <View
+        android:layout_width="match_parent"
+        android:layout_height="@dimen/size25"
+        android:background="@color/steelBlue"/>
+
+    <include layout="@layout/updatepwd_top"/>
+
+    <ScrollView
+        android:layout_width="match_parent"
+        android:layout_height="match_parent">
+        <LinearLayout
+            android:layout_width="match_parent"
+            android:layout_height="wrap_content"
+            android:orientation="vertical">
+            <RelativeLayout
+                android:layout_width="match_parent"
+                android:layout_height="@dimen/size150"
+                android:background="@mipmap/manager_detail_top_bg">
+
+                <RelativeLayout
+                    android:layout_width="match_parent"
+                    android:layout_height="wrap_content"
+                    android:layout_alignParentTop="true">
+                    <TextView
+                        android:id="@+id/precontractName"
+                        android:layout_width="wrap_content"
+                        android:layout_height="wrap_content"
+                        android:textColor="@color/white"
+                        android:padding="@dimen/size5"
+                        android:layout_margin="@dimen/size10"
+                        android:layout_alignParentLeft="true"
+                        android:gravity="left"
+                        android:textSize="@dimen/txtSize14"/>
+
+                </RelativeLayout>
+
+                <LinearLayout
+                    android:layout_width="wrap_content"
+                    android:layout_height="wrap_content"
+                    android:orientation="vertical"
+                    android:layout_centerInParent="true"
+                    android:gravity="center_horizontal">
+
+                    <TextView
+                        android:id="@+id/precontractRadio"
+                        android:layout_width="wrap_content"
+                        android:layout_height="wrap_content"
+                        android:textSize="35sp"
+                        android:textStyle="bold"
+                        android:textColor="@color/white"/>
+
+                    <TextView
+                        android:id="@+id/precontractDisrib"
+                        android:layout_width="wrap_content"
+                        android:layout_height="wrap_content"
+                        android:textSize="@dimen/txtSize10"
+                        android:text="年化收益率"
+                        android:textColor="@color/white"/>
+
+                </LinearLayout>
+
+                <LinearLayout
+                    android:layout_width="match_parent"
+                    android:layout_height="wrap_content"
+                    android:layout_alignParentBottom="true"
+                    android:orientation="horizontal">
+                    <TextView
+                        android:id="@+id/precontractBotom1"
+                        android:layout_width="0dp"
+                        android:layout_height="wrap_content"
+                        android:textColor="@color/white"
+                        android:textSize="@dimen/txtSize12"
+                        android:padding="@dimen/size10"
+                        android:gravity="center"
+                        android:layout_weight="1"/>
+                    <TextView
+                        android:id="@+id/precontractBotom2"
+                        android:layout_width="0dp"
+                        android:layout_height="wrap_content"
+                        android:textColor="@color/white"
+                        android:textSize="@dimen/txtSize12"
+                        android:padding="@dimen/size10"
+                        android:gravity="center"
+                        android:layout_weight="1"/>
+                    <TextView
+                        android:id="@+id/precontractBotom3"
+                        android:layout_width="0dp"
+                        android:layout_height="wrap_content"
+                        android:textColor="@color/white"
+                        android:textSize="@dimen/txtSize12"
+                        android:padding="@dimen/size10"
+                        android:gravity="center"
+                        android:layout_weight="1"/>
+                </LinearLayout>
+
+            </RelativeLayout>
+
+            <LinearLayout
+                android:layout_width="match_parent"
+                android:layout_height="wrap_content"
+                android:orientation="vertical"
+                android:background="@color/white"
+                android:layout_marginTop="@dimen/size10">
+                <LinearLayout
+                    android:layout_width="match_parent"
+                    android:layout_height="wrap_content"
+                    android:orientation="horizontal">
+
+                    <TextView
+                        android:layout_width="wrap_content"
+                        android:layout_height="wrap_content"
+                        android:padding="@dimen/size15"
+                        android:layout_alignParentLeft="true"
+                        android:textColor="@color/newStockTitle"
+                        android:textSize="14sp"
+                        android:text="资金账号："/>
+
+                    <TextView
+                        android:id="@+id/precontract_fundAccount"
+                        android:layout_width="match_parent"
+                        android:layout_height="wrap_content"
+                        android:padding="@dimen/size15"
+                        android:textColor="#4c4c4c"
+                        android:textSize="14sp"
+                        android:layout_alignParentLeft="true"/>
+
+                </LinearLayout>
+
+                <View
+                    android:layout_width="match_parent"
+                    android:layout_height="1px"
+                    android:background="@color/lineColor"
+                    android:layout_marginLeft="@dimen/size10"
+                    />
+
+                <LinearLayout
+                    android:layout_width="match_parent"
+                    android:layout_height="wrap_content"
+                    android:orientation="horizontal">
+
+                    <TextView
+                        android:layout_width="wrap_content"
+                        android:layout_height="wrap_content"
+                        android:padding="@dimen/size15"
+                        android:layout_alignParentLeft="true"
+                        android:textColor="@color/newStockTitle"
+                        android:textSize="14sp"
+                        android:text="发行日期："/>
+
+                    <TextView
+                        android:id="@+id/ipo_begin_date"
+                        android:layout_width="0dp"
+                        android:layout_height="wrap_content"
+                        android:gravity="center"
+                        android:padding="@dimen/size15"
+                        android:layout_weight="1"/>
+
+                    <TextView
+                        android:layout_width="wrap_content"
+                        android:layout_height="wrap_content"
+                        android:padding="@dimen/size15"
+                        android:textColor="#4c4c4c"
+                        android:textSize="14sp"
+                        android:text="至"
+                        android:layout_alignParentLeft="true"/>
+
+                    <TextView
+                        android:id="@+id/ipo_end_date"
+                        android:layout_width="0dp"
+                        android:layout_height="wrap_content"
+                        android:padding="@dimen/size15"
+                        android:text="2017-5-17"
+                        android:layout_weight="1"/>
+                </LinearLayout>
+
+                <View
+                    android:layout_width="match_parent"
+                    android:layout_height="1px"
+                    android:background="@color/lineColor"
+                    android:layout_marginLeft="@dimen/size10"
+                    />
+
+                <LinearLayout
+                    android:layout_width="match_parent"
+                    android:layout_height="wrap_content"
+                    android:orientation="horizontal">
+
+                    <TextView
+                        android:layout_width="wrap_content"
+                        android:layout_height="wrap_content"
+                        android:padding="@dimen/size15"
+                        android:layout_alignParentLeft="true"
+                        android:textColor="@color/colorMyGray"
+                        android:textSize="14sp"
+                        android:text="购买金额："/>
+
+                    <EditText
+                        android:id="@+id/inputPrecontractPriceEdit"
+                        android:layout_width="match_parent"
+                        android:layout_height="wrap_content"
+                        android:padding="@dimen/size15"
+                        android:background="@color/white"
+                        android:textColor="#4c4c4c"
+                        android:inputType="numberDecimal"
+                        android:textSize="14sp"
+                        android:textColorHint="@color/newStockTitle"
+                        android:hint="输入预约购买金额"
+                        android:layout_alignParentLeft="true"/>
+
+                </LinearLayout>
+
+                <View
+                    android:layout_width="match_parent"
+                    android:layout_height="1px"
+                    android:background="@color/lineColor"
+                    />
+
+            </LinearLayout>
+
+
+            <TextView
+                android:id="@+id/productPrecontract_warn"
+                android:layout_width="wrap_content"
+                android:layout_height="wrap_content"
+                android:textColor="@color/newStockTitle"
+                android:layout_margin="@dimen/size15"
+                android:drawablePadding="@dimen/size5"
+                android:drawableLeft="@mipmap/icon_warn"
+                android:text=""/>
+
+
+            <TextView
+                android:id="@+id/precontractBtn"
+                android:layout_width="match_parent"
+                android:layout_height="wrap_content"
+                android:layout_marginLeft="@dimen/size40"
+                android:layout_marginRight="@dimen/size40"
+                android:layout_marginTop="@dimen/size30"
+                android:padding="@dimen/size10"
+                android:gravity="center"
+                android:textColor="@color/white"
+                android:text="确定"
+                android:background="@color/calendarBtnColor"/>
+
+
+        </LinearLayout>
+    </ScrollView>
+
+
+
+</LinearLayout>

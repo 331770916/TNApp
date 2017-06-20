@@ -1,0 +1,9 @@
+<?xml version="1.0" encoding="utf-8"?>
+<selector xmlns:android="http://schemas.android.com/apk/res/android">
+    <!--资讯界面  Tab 编辑页面 的 勾选按钮-->
+    <item android:state_checked="true"
+        android:drawable="@mipmap/lan" /><!--选中时效果-->
+    <item android:state_checked="false"
+        android:drawable="@mipmap/zhihui" /><!--未选中时效果-->
+
+</selector>

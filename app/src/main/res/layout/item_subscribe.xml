@@ -1,0 +1,155 @@
+<?xml version="1.0" encoding="utf-8"?>
+<LinearLayout xmlns:android="http://schemas.android.com/apk/res/android"
+    android:layout_width="match_parent"
+    android:layout_height="wrap_content"
+    android:background="@color/bgColor"
+    android:orientation="vertical">
+
+    <RelativeLayout
+        android:layout_width="match_parent"
+        android:layout_height="@dimen/size260"
+        android:background="@color/white">
+
+        <com.tpyzq.mobile.pangu.view.RiskControlView
+            android:id="@+id/rcv_progress"
+            android:layout_width="@dimen/size200"
+            android:layout_height="@dimen/size200"
+            android:layout_centerHorizontal="true"
+            android:layout_marginTop="@dimen/size50" />
+
+        <LinearLayout
+            android:layout_width="wrap_content"
+            android:layout_height="wrap_content"
+            android:layout_centerVertical="true"
+            android:layout_marginLeft="@dimen/size20"
+            android:gravity="center"
+            android:orientation="vertical">
+            <TextView
+                android:id="@+id/tv_text5"
+                android:layout_width="wrap_content"
+                android:layout_height="wrap_content"
+                android:text="--天"
+                android:textColor="@color/orange2" />
+
+            <TextView
+                android:id="@+id/tv_text9"
+                android:layout_width="wrap_content"
+                android:layout_height="wrap_content"
+                android:layout_marginTop="@dimen/size5"
+                android:textColor="@color/text"
+                android:text="收益期限" />
+        </LinearLayout>
+
+        <LinearLayout
+            android:layout_width="wrap_content"
+            android:layout_height="wrap_content"
+            android:layout_alignParentRight="true"
+            android:layout_centerVertical="true"
+            android:layout_marginRight="@dimen/size20"
+            android:gravity="center"
+            android:orientation="vertical">
+
+            <TextView
+                android:id="@+id/tv_text6"
+                android:layout_width="wrap_content"
+                android:layout_height="wrap_content"
+                android:text="--元"
+                android:textColor="@color/orange2" />
+
+            <TextView
+                android:layout_width="wrap_content"
+                android:layout_height="wrap_content"
+                android:layout_marginTop="@dimen/size5"
+                android:textColor="@color/text"
+                android:text="起投金额" />
+        </LinearLayout>
+
+        <TextView
+            android:id="@+id/tv_text4"
+            android:layout_width="wrap_content"
+            android:layout_height="wrap_content"
+            android:layout_alignParentBottom="true"
+            android:layout_centerHorizontal="true"
+            android:layout_marginBottom="@dimen/size20"
+            android:gravity="center"
+            android:text="--" />
+
+        <LinearLayout
+            android:layout_width="wrap_content"
+            android:layout_height="wrap_content"
+            android:layout_centerInParent="true"
+            android:gravity="center"
+            android:orientation="vertical">
+
+            <TextView
+                android:id="@+id/tv_text1"
+                android:layout_width="wrap_content"
+                android:layout_height="wrap_content"
+                android:textColor="@color/text"
+                android:text="--" />
+
+            <TextView
+                android:id="@+id/tv_text2"
+                android:layout_width="wrap_content"
+                android:layout_height="wrap_content"
+                android:layout_marginTop="@dimen/size20"
+                android:text="--"
+                android:textColor="@color/orange2"
+                android:textSize="@dimen/size30" />
+
+            <TextView
+                android:id="@+id/tv_text3"
+                android:layout_width="wrap_content"
+                android:layout_height="wrap_content"
+                android:layout_marginTop="@dimen/size5"
+                android:textColor="@color/text"
+                android:text="--" />
+
+            <View
+                android:layout_width="@dimen/size100"
+                android:layout_height="@dimen/size1"
+                android:layout_marginTop="@dimen/size5"
+                android:background="@color/lineColor" />
+        </LinearLayout>
+
+        <TextView
+            android:id="@+id/tv_text7"
+            android:layout_width="@dimen/size100"
+            android:layout_height="wrap_content"
+            android:background="@mipmap/bg_bule_item"
+            android:text="--"
+            android:gravity="center"
+            android:layout_alignParentRight="true"
+            android:layout_marginTop="@dimen/size20"
+            android:textColor="@color/white" />
+
+        <TextView
+            android:id="@+id/tv_text8"
+            android:layout_width="wrap_content"
+            android:layout_height="wrap_content"
+            android:layout_centerHorizontal="true"
+            android:layout_marginTop="@dimen/size20"
+            android:textColor="@color/text"
+            android:text="发行时间: --"/>
+        <TextView
+            android:layout_width="wrap_content"
+            android:layout_height="wrap_content"
+            android:text="0%"
+            android:layout_marginBottom="@dimen/size30"
+            android:layout_alignParentBottom="true"
+            android:layout_alignLeft="@+id/rcv_progress"
+            android:textColor="@color/lineColor"/>
+        <TextView
+            android:layout_width="wrap_content"
+            android:layout_height="wrap_content"
+            android:text="20%"
+            android:layout_marginBottom="@dimen/size30"
+            android:layout_alignParentBottom="true"
+            android:layout_alignRight="@+id/rcv_progress"
+            android:textColor="@color/lineColor"/>
+    </RelativeLayout>
+
+    <View
+        android:layout_width="match_parent"
+        android:layout_height="@dimen/size10" />
+</LinearLayout>

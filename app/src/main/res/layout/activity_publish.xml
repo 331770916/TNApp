@@ -1,0 +1,193 @@
+<?xml version="1.0" encoding="utf-8"?>
+<LinearLayout xmlns:android="http://schemas.android.com/apk/res/android"
+    android:layout_width="match_parent"
+    android:layout_height="match_parent"
+    android:orientation="vertical">
+
+    <RelativeLayout
+        android:layout_width="match_parent"
+        android:layout_height="@dimen/size25"
+        android:background="@color/blue"
+        android:clipToPadding="true"
+        android:fitsSystemWindows="true" />
+
+    <RelativeLayout
+        android:layout_width="match_parent"
+        android:layout_height="wrap_content"
+        android:background="@color/blue">
+
+        <TextView
+            android:id="@+id/publish_back"
+            android:layout_width="wrap_content"
+            android:layout_height="wrap_content"
+            android:layout_alignParentLeft="true"
+            android:background="@drawable/btn_back" />
+
+        <TextView
+            android:id="@+id/publish_title"
+            android:layout_width="wrap_content"
+            android:layout_height="wrap_content"
+            android:layout_centerInParent="true"
+            android:text="@string/xgrl1"
+            android:textColor="@color/white"
+            android:textSize="@dimen/txtSize20" />
+
+        <TextView
+            android:id="@+id/publish_request"
+            android:layout_width="wrap_content"
+            android:layout_height="wrap_content"
+            android:layout_alignParentRight="true"
+            android:layout_gravity="center_vertical"
+            android:padding="@dimen/size10"
+            android:text="@string/wdsg"
+            android:textColor="@color/white" />
+
+    </RelativeLayout>
+
+    <ScrollView
+        android:layout_width="match_parent"
+        android:layout_height="match_parent"
+        android:scrollbars="none">
+
+        <LinearLayout
+            android:layout_width="match_parent"
+            android:layout_height="wrap_content"
+            android:orientation="vertical">
+
+            <LinearLayout
+                android:layout_width="match_parent"
+                android:layout_height="wrap_content"
+                android:background="@color/blue"
+                android:gravity="center"
+                android:orientation="horizontal"
+                android:paddingTop="@dimen/size20">
+
+                <ImageView
+                    android:id="@+id/iv_left"
+                    android:layout_width="wrap_content"
+                    android:layout_height="wrap_content"
+                    android:layout_alignParentLeft="true"
+                    android:layout_marginLeft="@dimen/size50"
+                    android:contentDescription="@null"
+                    android:padding="@dimen/size15"
+                    android:src="@mipmap/back_btn" />
+
+                <TextView
+                    android:id="@+id/week_text"
+                    android:layout_width="wrap_content"
+                    android:layout_height="wrap_content"
+                    android:layout_margin="@dimen/size10"
+                    android:text="五月"
+                    android:textColor="@color/white" />
+
+
+                <ImageView
+                    android:id="@+id/iv_right"
+                    android:layout_width="wrap_content"
+                    android:layout_height="wrap_content"
+                    android:layout_alignParentRight="true"
+                    android:layout_marginRight="@dimen/size50"
+                    android:contentDescription="@null"
+                    android:padding="@dimen/size15"
+                    android:src="@mipmap/canlder_right" />
+            </LinearLayout>
+
+            <com.tpyzq.mobile.pangu.view.calendar.WeekDayView
+                android:layout_width="match_parent"
+                android:layout_height="@dimen/size30"
+                android:background="@color/blue" />
+
+            <com.tpyzq.mobile.pangu.view.calendar.MonthDateView
+                android:id="@+id/monthDateView"
+                android:layout_width="match_parent"
+                android:layout_height="@dimen/size200"
+                android:background="@color/blue" />
+
+            <TextView
+                android:id="@+id/Xian"
+                android:layout_width="match_parent"
+                android:layout_height="wrap_content"
+                android:background="@color/bgColor"
+                android:gravity="center_vertical"
+                android:paddingBottom="@dimen/size6"
+                android:paddingLeft="@dimen/size20"
+                android:paddingTop="@dimen/size6"
+                android:text="@string/todayPublish"
+                android:textColor="@color/hideTextColor"
+                android:textSize="@dimen/size13" />
+
+
+            <LinearLayout
+                android:layout_width="match_parent"
+                android:layout_height="wrap_content"
+                android:background="@color/white"
+                android:orientation="horizontal"
+                android:paddingBottom="@dimen/size10"
+                android:paddingTop="@dimen/size10">
+
+                <TextView
+                    android:layout_width="0dp"
+                    android:layout_height="wrap_content"
+                    android:layout_weight="1"
+                    android:gravity="center"
+                    android:text="@string/sgdm"
+                    android:textColor="@color/newStockTitle" />
+
+                <TextView
+                    android:layout_width="0dp"
+                    android:layout_height="wrap_content"
+                    android:layout_weight="1"
+                    android:gravity="center"
+                    android:text="@string/fxj"
+                    android:textColor="@color/newStockTitle" />
+
+                <TextView
+                    android:layout_width="0dp"
+                    android:layout_height="wrap_content"
+                    android:layout_weight="1"
+                    android:gravity="center"
+                    android:text="@string/fxsyl"
+                    android:textColor="@color/newStockTitle" />
+
+
+                <TextView
+                    android:layout_width="0dp"
+                    android:layout_height="wrap_content"
+                    android:layout_weight="1"
+                    android:gravity="center"
+                    android:text="@string/dgsgsj"
+                    android:textColor="@color/newStockTitle" />
+            </LinearLayout>
+
+            <View
+                android:layout_width="match_parent"
+                android:layout_height="@dimen/size1"
+                android:background="@color/lineColor" />
+
+
+
+            <com.tpyzq.mobile.pangu.view.gridview.MyListView
+                android:id="@+id/publishListView1"
+                android:layout_width="match_parent"
+                android:layout_height="wrap_content" />
+
+
+            <RelativeLayout
+                android:layout_width="match_parent"
+                android:layout_height="match_parent"
+                android:gravity="bottom">
+
+                <Button
+                    android:id="@+id/publishcalendarBtn"
+                    android:layout_width="match_parent"
+                    android:layout_height="wrap_content"
+                    android:background="@color/calendarBtnColor"
+                    android:text="@string/yjdx"
+                    android:textColor="@color/white" />
+
+            </RelativeLayout>
+
+        </LinearLayout>
+    </ScrollView>
+
+</LinearLayout>

@@ -1,0 +1,262 @@
+<?xml version="1.0" encoding="utf-8"?>
+<LinearLayout xmlns:android="http://schemas.android.com/apk/res/android"
+    xmlns:tools="http://schemas.android.com/tools"
+    android:layout_width="match_parent"
+    android:layout_height="match_parent"
+    android:orientation="vertical"
+    tools:context="com.tpyzq.mobile.pangu.activity.trade.stock.QueryLimitActivity">
+
+    <RelativeLayout
+        android:layout_width="match_parent"
+        android:layout_height="@dimen/size25"
+        android:background="@color/blue"
+        android:fitsSystemWindows="true"
+        android:clipToPadding="true"/>
+
+    <!-- 头布局 -->
+    <RelativeLayout
+        android:layout_width="match_parent"
+        android:layout_height="@dimen/pickerview_topbar_height"
+        android:background="@color/blue">
+
+        <ImageView
+            android:id="@+id/activityQueryLimit_back"
+            android:layout_width="wrap_content"
+            android:layout_height="match_parent"
+            android:layout_alignParentLeft="true"
+            android:padding="@dimen/size10"
+            android:src="@mipmap/back_btn" />
+
+        <TextView
+            android:layout_width="wrap_content"
+            android:layout_height="wrap_content"
+            android:layout_centerInParent="true"
+            android:text="@string/queryKeYongEDu"
+            android:textColor="@color/white"
+            android:textSize="@dimen/pickerview_topbar_title_textsize" />
+    </RelativeLayout>
+
+
+    <!--下面的 蓝色部分-->
+    <LinearLayout
+        android:layout_width="match_parent"
+        android:layout_height="@dimen/size130"
+        android:background="@color/blue"
+        android:orientation="vertical">
+
+        <RelativeLayout
+            android:layout_width="match_parent"
+            android:layout_height="0dp"
+            android:layout_weight="1">
+
+            <ImageView
+                android:id="@+id/imSubscribeLimit"
+                android:layout_width="wrap_content"
+                android:layout_height="wrap_content"
+                android:layout_centerVertical="true"
+                android:layout_marginLeft="@dimen/size20"
+                android:src="@mipmap/xingushengou" />
+
+            <TextView
+                android:id="@+id/tvSubscribeLimit"
+                android:layout_width="wrap_content"
+                android:layout_height="wrap_content"
+                android:layout_centerVertical="true"
+                android:layout_marginLeft="@dimen/size5"
+                android:textSize="@dimen/txtSize13"
+                android:layout_toRightOf="@id/imSubscribeLimit"
+                android:text="@string/mySubscribeLimit2"
+                android:textColor="@color/white" />
+
+
+        </RelativeLayout>
+
+        <RelativeLayout
+            android:layout_marginTop="@dimen/size10"
+            android:layout_width="match_parent"
+            android:layout_height="0dp"
+            android:layout_weight="3"
+            android:orientation="horizontal">
+
+            <!--分割线-->
+            <TextView
+                android:layout_marginTop="10dp"
+                android:layout_centerHorizontal="true"
+                android:id="@+id/tvFenGeXian"
+                android:layout_width="@dimen/size1"
+                android:layout_height="@dimen/size58"
+                android:background="@color/white"/>
+
+            <LinearLayout
+                android:layout_width="match_parent"
+                android:layout_height="match_parent"
+                android:layout_marginRight="@dimen/size0"
+                android:layout_toLeftOf="@id/tvFenGeXian"
+                android:gravity="center">
+
+                <LinearLayout
+                    android:layout_width="wrap_content"
+                    android:layout_height="wrap_content"
+                    android:gravity="center"
+                    android:orientation="vertical">
+
+                    <TextView
+                        android:id="@+id/tvHuA"
+                        android:layout_width="wrap_content"
+                        android:layout_height="wrap_content"
+                        android:text="沪A"
+                        android:textColor="@color/white"
+                        android:textSize="@dimen/txtSize13" />
+
+                    <TextView
+                        android:id="@+id/tvQueryLimitHuANum"
+                        android:layout_width="wrap_content"
+                        android:layout_height="wrap_content"
+                        android:text="0股"
+                        android:textColor="@color/white"
+                        android:textSize="@dimen/size20" />
+
+                    <TextView
+                        android:layout_width="match_parent"
+                        android:layout_height="@dimen/size10" />
+
+                    <LinearLayout
+                        android:paddingBottom="@dimen/size10"
+                        android:layout_width="wrap_content"
+                        android:layout_height="wrap_content"
+                        android:gravity="center"
+                        android:orientation="horizontal">
+
+                        <TextView
+                            android:layout_width="wrap_content"
+                            android:layout_height="wrap_content"
+                            android:text="上海股东账号"
+                            android:textColor="@color/white"
+                            android:textSize="10sp" />
+
+                        <TextView
+                            android:layout_width="@dimen/size5"
+                            android:layout_height="match_parent" />
+
+                        <TextView
+                            android:id="@+id/tvHuGDID"
+                            android:layout_width="wrap_content"
+                            android:layout_height="wrap_content"
+                            android:text=""
+                            android:textColor="@color/white"
+                            android:textSize="10sp" />
+                    </LinearLayout>
+
+                </LinearLayout>
+
+            </LinearLayout>
+
+            <LinearLayout
+                android:layout_width="match_parent"
+                android:layout_height="match_parent"
+                android:layout_marginLeft="@dimen/size0"
+                android:layout_toRightOf="@id/tvFenGeXian"
+                android:gravity="center">
+
+                <LinearLayout
+                    android:layout_width="wrap_content"
+                    android:layout_height="wrap_content"
+                    android:gravity="center"
+                    android:orientation="vertical">
+
+                    <TextView
+                        android:id="@+id/tvShenA"
+                        android:layout_width="wrap_content"
+                        android:layout_height="wrap_content"
+                        android:text="深A"
+                        android:textColor="@color/white"
+                        android:textSize="@dimen/txtSize13" />
+
+                    <TextView
+                        android:id="@+id/tvQueryLimitShenANum"
+                        android:layout_width="wrap_content"
+                        android:layout_height="wrap_content"
+                        android:text="0股"
+                        android:textColor="@color/white"
+                        android:textSize="@dimen/size20" />
+
+                    <TextView
+                        android:layout_width="match_parent"
+                        android:layout_height="@dimen/size10" />
+
+                    <LinearLayout
+                        android:paddingBottom="@dimen/size10"
+                        android:layout_width="wrap_content"
+                        android:layout_height="wrap_content"
+                        android:gravity="center"
+                        android:orientation="horizontal">
+
+                        <TextView
+                            android:layout_width="wrap_content"
+                            android:layout_height="wrap_content"
+                            android:text="深圳股东账号"
+                            android:textColor="@color/white"
+                            android:textSize="10sp" />
+
+                        <TextView
+                            android:layout_width="@dimen/size5"
+                            android:layout_height="match_parent" />
+
+                        <TextView
+                            android:id="@+id/tvShenGDID"
+                            android:layout_width="wrap_content"
+                            android:layout_height="wrap_content"
+                            android:text=""
+                            android:textColor="@color/white"
+                            android:textSize="10sp" />
+                    </LinearLayout>
+
+                </LinearLayout>
+
+            </LinearLayout>
+
+        </RelativeLayout>
+
+    </LinearLayout>
+
+    <!--灰色分割线-->
+    <View
+        android:layout_width="match_parent"
+        android:layout_height="@dimen/size10"
+        android:background="@color/bgColor" />
+
+    <!--&lt;!&ndash;申购额度规则 标题&ndash;&gt;-->
+    <!--<RelativeLayout-->
+        <!--android:layout_width="match_parent"-->
+        <!--android:layout_height="@dimen/size30">-->
+
+        <!--<ImageView-->
+            <!--android:id="@+id/ivSubscribeLimitRule"-->
+            <!--android:layout_width="wrap_content"-->
+            <!--android:layout_height="wrap_content"-->
+            <!--android:layout_centerVertical="true"-->
+            <!--android:layout_marginLeft="@dimen/size12"-->
+            <!--android:src="@mipmap/shengoueduguize" />-->
+
+        <!--<TextView-->
+            <!--android:layout_width="wrap_content"-->
+            <!--android:layout_height="wrap_content"-->
+            <!--android:layout_centerVertical="true"-->
+            <!--android:layout_marginLeft="@dimen/size8"-->
+            <!--android:layout_toRightOf="@id/ivSubscribeLimitRule"-->
+            <!--android:text="申购额度规则" />-->
+    <!--</RelativeLayout>-->
+
+    <TextView
+        android:layout_width="match_parent"
+        android:layout_height="@dimen/size2"
+        android:background="@color/bgColor" />
+
+    <WebView
+        android:id="@+id/wvSubscribeLimitRule"
+        android:layout_width="wrap_content"
+        android:layout_height="wrap_content">
+
+    </WebView>
+
+</LinearLayout>

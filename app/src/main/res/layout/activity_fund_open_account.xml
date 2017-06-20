@@ -1,0 +1,109 @@
+<LinearLayout xmlns:android="http://schemas.android.com/apk/res/android"
+    android:layout_width="match_parent"
+    android:layout_height="match_parent"
+    android:background="@color/bgColor"
+    android:orientation="vertical">
+
+    <RelativeLayout
+        android:layout_width="match_parent"
+        android:layout_height="@dimen/size25"
+        android:background="@color/blue"
+        android:clipToPadding="true"
+        android:fitsSystemWindows="true" />
+
+    <RelativeLayout
+        android:layout_width="match_parent"
+        android:layout_height="@dimen/pickerview_topbar_height"
+        android:background="@color/blue">
+
+        <TextView
+            android:id="@+id/tv_title"
+            android:layout_width="wrap_content"
+            android:layout_height="wrap_content"
+            android:layout_centerInParent="true"
+            android:text="基金开户"
+            android:textColor="@color/white"
+            android:textSize="@dimen/pickerview_topbar_title_textsize" />
+
+        <ImageView
+            android:id="@+id/iv_back"
+            android:layout_width="wrap_content"
+            android:layout_height="match_parent"
+            android:layout_alignParentLeft="true"
+            android:layout_centerVertical="true"
+            android:paddingLeft="@dimen/size20"
+            android:paddingRight="@dimen/size20"
+            android:src="@mipmap/back_btn" />
+    </RelativeLayout>
+
+    <LinearLayout
+        android:layout_width="match_parent"
+        android:layout_height="@dimen/size50"
+        android:layout_marginTop="@dimen/size10"
+        android:background="@color/white">
+
+        <TextView
+            android:layout_width="0dp"
+            android:layout_height="wrap_content"
+            android:layout_gravity="center_vertical"
+            android:layout_marginLeft="@dimen/size20"
+            android:layout_weight="1"
+            android:text="基金公司"
+            android:textSize="@dimen/txtSize14" />
+
+        <TextView
+            android:id="@+id/tv_fund_company"
+            android:layout_width="wrap_content"
+            android:layout_height="wrap_content"
+            android:layout_gravity="center_vertical"
+            android:layout_marginRight="@dimen/size20"
+            android:drawablePadding="@dimen/size5"
+            android:drawableRight="@mipmap/youjiantou"
+            android:hint="选择基金公司" />
+    </LinearLayout>
+
+    <LinearLayout
+        android:id="@+id/ll_view2"
+        android:layout_width="match_parent"
+        android:layout_height="wrap_content"
+        android:layout_marginTop="@dimen/size20"
+        android:orientation="vertical">
+
+        <LinearLayout
+            android:layout_width="match_parent"
+            android:layout_height="wrap_content"
+            android:background="@color/white"
+            android:orientation="vertical"
+            android:padding="@dimen/size20">
+
+            <TextView
+                android:id="@+id/tv_notice"
+                android:layout_width="wrap_content"
+                android:layout_height="wrap_content"
+                android:text="《证券投资基金投资人权益须知》"
+                android:textColor="@color/blue" />
+        </LinearLayout>
+
+        <CheckBox
+            android:id="@+id/cb_open_fund"
+            android:layout_width="wrap_content"
+            android:layout_height="wrap_content"
+            android:layout_marginBottom="@dimen/size20"
+            android:layout_marginLeft="@dimen/size20"
+            android:layout_marginTop="@dimen/size20"
+            android:button="@drawable/mybg"
+            android:paddingLeft="@dimen/size5"
+            android:text="开通基金账户"
+            android:textSize="@dimen/txtSize12" />
+    </LinearLayout>
+
+    <Button
+        android:id="@+id/bt_true"
+        android:layout_width="@dimen/size300"
+        android:layout_height="wrap_content"
+        android:layout_gravity="center_horizontal"
+        android:layout_marginTop="@dimen/size50"
+        android:background="@drawable/button_login_pitchon"
+        android:text="确定"
+        android:textColor="@color/white" />
+</LinearLayout>

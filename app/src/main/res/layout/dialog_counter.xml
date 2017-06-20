@@ -1,0 +1,160 @@
+<?xml version="1.0" encoding="utf-8"?>
+<LinearLayout xmlns:android="http://schemas.android.com/apk/res/android"
+    android:orientation="vertical"
+    android:background="@drawable/shape_counter_bg"
+    android:layout_width="match_parent"
+    android:layout_height="wrap_content">
+
+    <ImageView
+        android:id="@+id/counter_dissmisiv"
+        android:layout_width="wrap_content"
+        android:layout_height="wrap_content"
+        android:layout_gravity="top|right"
+        android:layout_margin="@dimen/size5"
+        android:src="@mipmap/counter_dismiss"/>
+
+    <TextView
+        android:layout_width="match_parent"
+        android:layout_height="wrap_content"
+        android:padding="@dimen/size10"
+        android:textColor="@color/hushenTab_titleColor"
+        android:gravity="center"
+        android:textSize="@dimen/txtSize16"
+        android:text="收益计算"/>
+
+    <LinearLayout
+        android:layout_width="match_parent"
+        android:layout_height="wrap_content"
+        android:paddingRight="@dimen/size10"
+        android:paddingLeft="@dimen/size10"
+        android:orientation="horizontal">
+        <TextView
+            android:layout_width="0dp"
+            android:layout_weight="1"
+            android:padding="@dimen/size10"
+            android:textColor="@color/hushenTab_titleColor"
+            android:text="存入金额（元）"
+            android:textSize="@dimen/txtSize14"
+            android:gravity="center"
+            android:layout_height="wrap_content" />
+
+        <EditText
+            android:id="@+id/counterPrice"
+            android:layout_width="0dp"
+            android:layout_weight="2"
+            android:padding="@dimen/size10"
+            android:background="@color/white"
+            android:inputType="number"
+            android:textColor="@color/hushenTab_titleColor"
+            android:cursorVisible="true"
+            android:textCursorDrawable="@drawable/cursor_color"
+            android:hint="输入金额"
+            android:textSize="@dimen/txtSize14"
+            android:layout_height="wrap_content" />
+    </LinearLayout>
+    <View
+        android:layout_width="match_parent"
+        android:layout_height="@dimen/size0.5"
+        android:layout_marginRight="@dimen/size10"
+        android:layout_marginLeft="@dimen/size10"
+        android:background="@color/lineColor"/>
+
+    <LinearLayout
+        android:layout_width="match_parent"
+        android:layout_height="wrap_content"
+        android:paddingRight="@dimen/size10"
+        android:paddingLeft="@dimen/size10"
+        android:orientation="horizontal">
+        <TextView
+            android:layout_width="0dp"
+            android:layout_weight="1"
+            android:padding="@dimen/size10"
+            android:textColor="@color/hushenTab_titleColor"
+            android:text="期限(天)"
+            android:textSize="@dimen/txtSize14"
+            android:gravity="center"
+            android:layout_height="wrap_content" />
+
+        <EditText
+            android:id="@+id/counterDay"
+            android:layout_width="0dp"
+            android:layout_weight="2"
+            android:padding="@dimen/size10"
+            android:inputType="number"
+            android:textColor="@color/hushenTab_titleColor"
+            android:background="@color/white"
+            android:cursorVisible="true"
+            android:textCursorDrawable="@drawable/cursor_color"
+            android:hint="输入天数"
+            android:textSize="@dimen/txtSize14"
+            android:layout_height="wrap_content" />
+    </LinearLayout>
+    <View
+        android:layout_width="match_parent"
+        android:layout_height="@dimen/size0.5"
+        android:layout_marginRight="@dimen/size10"
+        android:layout_marginLeft="@dimen/size10"
+        android:background="@color/lineColor"/>
+
+    <LinearLayout
+        android:layout_width="match_parent"
+        android:layout_height="wrap_content"
+        android:paddingRight="@dimen/size10"
+        android:paddingLeft="@dimen/size10"
+        android:orientation="horizontal">
+        <TextView
+            android:layout_width="0dp"
+            android:layout_weight="1"
+            android:padding="@dimen/size10"
+            android:textColor="@color/hushenTab_titleColor"
+            android:text="预计收益（元）"
+            android:textSize="@dimen/txtSize14"
+            android:gravity="center"
+            android:layout_height="wrap_content" />
+
+        <TextView
+            android:id="@+id/counterSavePrice"
+            android:layout_width="0dp"
+            android:layout_weight="2"
+            android:padding="@dimen/size10"
+            android:background="@color/white"
+            android:textColor="@color/red"
+            android:textSize="@dimen/txtSize14"
+            android:layout_height="wrap_content" />
+    </LinearLayout>
+    <View
+        android:layout_width="match_parent"
+        android:layout_height="@dimen/size0.5"
+        android:layout_marginRight="@dimen/size10"
+        android:layout_marginLeft="@dimen/size10"
+        android:background="@color/lineColor"/>
+
+    <!--<LinearLayout-->
+        <!--android:layout_width="match_parent"-->
+        <!--android:layout_height="wrap_content"-->
+        <!--android:paddingRight="@dimen/size10"-->
+        <!--android:paddingLeft="@dimen/size10"-->
+        <!--android:orientation="horizontal">-->
+        <!--<TextView-->
+            <!--android:layout_width="0dp"-->
+            <!--android:layout_weight="1"-->
+            <!--android:padding="@dimen/size10"-->
+            <!--android:textColor="@color/black"-->
+            <!--android:text="银行活期（元）"-->
+            <!--android:textSize="@dimen/txtSize14"-->
+            <!--android:gravity="center"-->
+            <!--android:layout_height="wrap_content" />-->
+
+        <!--<TextView-->
+            <!--android:layout_width="0dp"-->
+            <!--android:layout_weight="2"-->
+            <!--android:padding="@dimen/size10"-->
+            <!--android:background="@color/white"-->
+            <!--android:textColor="@color/blue"-->
+            <!--android:text="1526"-->
+            <!--android:textSize="@dimen/txtSize14"-->
+            <!--android:layout_height="wrap_content" />-->
+    <!--</LinearLayout>-->
+
+
+</LinearLayout>

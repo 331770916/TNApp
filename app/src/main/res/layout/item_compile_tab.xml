@@ -1,0 +1,63 @@
+<?xml version="1.0" encoding="utf-8"?>
+<LinearLayout xmlns:android="http://schemas.android.com/apk/res/android"
+    android:id="@+id/llItemCompileTab"
+    android:layout_width="match_parent"
+    android:layout_height="match_parent"
+    android:orientation="vertical"
+    android:background="@color/white">
+
+    <RelativeLayout
+        android:layout_width="match_parent"
+        android:layout_height="@dimen/size55"
+        android:orientation="horizontal">
+
+        <CheckBox
+            android:id="@+id/ivGouXuan"
+            android:layout_width="wrap_content"
+            android:layout_height="wrap_content"
+            android:layout_centerVertical="true"
+            android:layout_marginLeft="@dimen/size20"
+            android:button="@drawable/tab_compile_check" />
+
+        <LinearLayout
+            android:layout_width="wrap_content"
+            android:layout_height="match_parent"
+            android:orientation="vertical"
+            android:gravity="center_vertical"
+            android:layout_toRightOf="@id/ivGouXuan"
+            android:layout_marginLeft="@dimen/size10">
+            <TextView
+                android:id="@+id/tvBiaoTi"
+                android:layout_width="wrap_content"
+                android:layout_height="wrap_content"
+                android:text="要闻"
+                android:textSize="15sp"/>
+
+            <TextView
+                android:layout_width="match_parent"
+                android:layout_height="@dimen/size7"
+                android:visibility="gone"/>
+
+            <TextView
+                android:id="@+id/tvNeiRong"
+                android:layout_width="wrap_content"
+                android:layout_height="wrap_content"
+                android:text="要闻似的大待会大师热"
+                android:textSize="12sp"
+                android:visibility="gone"
+                android:textColor="@color/text"/>
+
+        </LinearLayout>
+
+        <ImageView
+            android:id="@+id/drag_handle"
+            android:layout_width="wrap_content"
+            android:layout_height="wrap_content"
+            android:layout_centerVertical="true"
+            android:layout_alignParentRight="true"
+            android:padding="@dimen/size20"
+            android:src="@mipmap/gengduo"/>
+
+    </RelativeLayout>
+
+</LinearLayout>

@@ -1,0 +1,60 @@
+<?xml version="1.0" encoding="utf-8"?>
+<RelativeLayout xmlns:android="http://schemas.android.com/apk/res/android"
+    xmlns:tools="http://schemas.android.com/tools"
+    android:layout_width="match_parent"
+    android:layout_height="match_parent"
+    android:background="@color/white">
+
+    <RelativeLayout
+        android:layout_width="match_parent"
+        android:layout_height="match_parent"
+        android:layout_centerInParent="true"
+        android:background="@drawable/home_bg_gv"
+        android:padding="@dimen/size10"
+        android:orientation="vertical">
+        <ImageView
+            android:id="@+id/item_image"
+            android:scaleType="fitCenter"
+            android:layout_width="wrap_content"
+            android:layout_height="@dimen/size20"
+            android:layout_centerHorizontal="true"
+            tools:ignore="ContentDescription" />
+        <TextView
+            android:id="@+id/item_text"
+            android:layout_width="wrap_content"
+            android:layout_height="wrap_content"
+            android:layout_below="@id/item_image"
+            android:paddingTop="@dimen/size1"
+            android:layout_centerHorizontal="true"
+            android:layout_centerInParent="true"
+            android:layout_marginTop="@dimen/size10"
+            android:maxLines="1"
+            android:textColor="@color/home_grideItemColor"
+            android:textSize="13sp" />
+        <!--android:textStyle="bold"-->
+
+        <com.tpyzq.mobile.pangu.view.dragindicator.DragIndicatorView
+            android:id="@+id/dragIndicatorView"
+            android:layout_width="wrap_content"
+            android:layout_height="wrap_content"
+            android:layout_alignParentRight="true"
+            android:layout_below="@id/item_image"
+            android:background="@color/red"
+            android:padding="@dimen/size3"
+            android:textColor="@color/white"
+            android:visibility="gone"
+            android:textSize="@dimen/txtSize10"/>
+    </RelativeLayout>
+    <FrameLayout
+        android:id="@+id/oterItemLayout"
+        android:layout_marginTop="5px"
+        android:layout_width="wrap_content"
+        android:layout_height="wrap_content"
+        >
+        <ImageView
+            android:layout_width="wrap_content"
+            android:layout_height="wrap_content"
+            android:src="@mipmap/home_morecontent"/>
+    </FrameLayout>
+
+</RelativeLayout>

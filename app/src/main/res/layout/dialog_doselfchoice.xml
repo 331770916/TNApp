@@ -1,0 +1,16 @@
+<?xml version="1.0" encoding="utf-8"?>
+<RelativeLayout xmlns:android="http://schemas.android.com/apk/res/android"
+    android:layout_width="match_parent"
+    android:layout_height="match_parent"
+    android:background="#96000000">
+
+    <TextView
+        android:id="@+id/doSelfChoiceResultMsg"
+        android:layout_width="wrap_content"
+        android:layout_height="wrap_content"
+        android:textColor="@color/white"
+        android:text="添加自选股列表成功"
+        android:textSize="@dimen/text_size"
+        android:layout_centerInParent="true"/>
+
+</RelativeLayout>

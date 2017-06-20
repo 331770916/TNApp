@@ -1,0 +1,63 @@
+<?xml version="1.0" encoding="utf-8"?>
+<LinearLayout xmlns:android="http://schemas.android.com/apk/res/android"
+    android:layout_width="match_parent"
+    android:layout_height="wrap_content">
+
+
+        <RelativeLayout
+            android:layout_width="match_parent"
+            android:layout_height="wrap_content"
+            android:layout_marginTop="@dimen/size13"
+            android:layout_marginBottom="@dimen/size13"
+            android:layout_marginLeft="@dimen/size20"
+            android:layout_marginRight="@dimen/size20"
+            android:orientation="vertical">
+
+            <TextView
+                android:id="@+id/tvRelatedInfoTitle"
+                android:layout_width="wrap_content"
+                android:layout_height="wrap_content"
+                android:text="--"
+                android:textSize="16sp"
+                android:maxLines="1"
+                android:ellipsize="end"
+                android:textColor="@color/textss"/>
+
+            <TextView
+                android:id="@+id/tvRelatedInfoKey"
+                android:layout_width="wrap_content"
+                android:layout_height="wrap_content"
+                android:layout_below="@id/tvRelatedInfoTitle"
+                android:layout_marginTop="@dimen/size12"
+                android:text="相关股票："
+                android:textSize="12sp"
+                android:textColor="@color/text"/>
+
+            <TextView
+                android:id="@+id/tvRelatedInfoValue"
+                android:layout_width="@dimen/size180"
+                android:layout_height="wrap_content"
+                android:layout_below="@id/tvRelatedInfoTitle"
+                android:layout_marginTop="@dimen/size12"
+                android:layout_toRightOf="@id/tvRelatedInfoKey"
+                android:text="--"
+                android:lines="1"
+                android:ellipsize="end"
+                android:textSize="12sp"
+                android:textColor="@color/blue"/>
+
+            <TextView
+                android:id="@+id/tvRelatedInfoDate"
+                android:layout_width="wrap_content"
+                android:layout_height="wrap_content"
+                android:layout_below="@id/tvRelatedInfoTitle"
+                android:layout_marginTop="@dimen/size12"
+                android:layout_alignParentRight="true"
+                android:text="--"
+                android:textSize="12sp"
+                android:textColor="@color/text"/>
+
+        </RelativeLayout>
+
+
+</LinearLayout>

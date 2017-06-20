@@ -1,0 +1,294 @@
+<?xml version="1.0" encoding="utf-8"?>
+<LinearLayout xmlns:android="http://schemas.android.com/apk/res/android"
+    android:layout_width="match_parent"
+    android:layout_height="wrap_content"
+    android:background="@color/white"
+    android:orientation="vertical">
+
+    <LinearLayout
+        android:id="@+id/inputPasswordLayout"
+        android:layout_width="match_parent"
+        android:layout_height="wrap_content"
+        android:layout_marginTop="@dimen/size30"
+        android:layout_marginBottom="@dimen/size30"
+        android:orientation="vertical">
+        <TextView
+            android:id="@+id/titleKeybody"
+            android:layout_width="wrap_content"
+            android:layout_gravity="center"
+            android:text="请输入查询密码"
+            android:gravity="center"
+            android:textColor="@color/black"
+            android:textSize="@dimen/txtSize11"
+            android:layout_height="wrap_content" />
+
+        <com.tpyzq.mobile.pangu.view.keybody.InputPasswordView
+            android:id="@+id/inputPasswordView"
+            android:layout_width="match_parent"
+            android:layout_height="wrap_content"
+            android:background="@color/white"
+            android:paddingTop="@dimen/size10"
+            android:paddingBottom="@dimen/size10"
+            android:layout_marginTop="@dimen/size30"
+            android:layout_marginLeft="@dimen/size30"
+            android:layout_marginRight="@dimen/size30"/>
+
+        <TextView
+            android:id="@+id/inputContentView"
+            android:layout_width="match_parent"
+            android:layout_height="wrap_content"
+            android:background="@drawable/sp_balance_querybtn"
+            android:textColor="@color/black"
+            android:paddingTop="@dimen/size10"
+            android:textSize="@dimen/txtSize11"
+            android:paddingBottom="@dimen/size10"
+            android:layout_marginTop="@dimen/size30"
+            android:layout_marginLeft="@dimen/size30"
+            android:layout_marginRight="@dimen/size30"/>
+
+    </LinearLayout>
+
+    <View
+        android:layout_width="match_parent"
+        android:layout_height="@dimen/size0.5"
+        android:background="@color/hideTextColor" />
+
+    <LinearLayout
+        android:layout_width="match_parent"
+        android:layout_height="wrap_content"
+        android:orientation="horizontal">
+
+        <TextView
+            android:id="@+id/keyboard_num1"
+            android:layout_width="0dp"
+            android:layout_height="wrap_content"
+            android:background="@drawable/keyboard_bg"
+            android:layout_weight="1"
+            android:gravity="center"
+            android:paddingTop="@dimen/size15"
+            android:paddingBottom="@dimen/size15"
+            android:text="1"
+            android:textColor="@color/black"
+            android:textSize="@dimen/txtSize20" />
+
+        <View
+            android:layout_width="@dimen/size0.5"
+            android:layout_height="match_parent"
+            android:background="@color/hideTextColor" />
+
+        <TextView
+            android:id="@+id/keyboard_num2"
+            android:layout_width="0dp"
+            android:layout_height="wrap_content"
+            android:background="@drawable/keyboard_bg"
+            android:layout_weight="1"
+            android:gravity="center"
+            android:paddingTop="@dimen/size15"
+            android:paddingBottom="@dimen/size15"
+            android:textColor="@color/black"
+            android:text="2"
+            android:textSize="@dimen/txtSize20" />
+
+        <View
+            android:layout_width="@dimen/size0.5"
+            android:layout_height="match_parent"
+            android:background="@color/hideTextColor" />
+
+        <TextView
+            android:id="@+id/keyboard_num3"
+            android:layout_width="0dp"
+            android:layout_height="wrap_content"
+            android:background="@drawable/keyboard_bg"
+            android:layout_weight="1"
+            android:gravity="center"
+            android:paddingTop="@dimen/size15"
+            android:paddingBottom="@dimen/size15"
+            android:textColor="@color/black"
+            android:text="3"
+            android:textSize="@dimen/txtSize20" />
+    </LinearLayout>
+
+    <View
+        android:layout_width="match_parent"
+        android:layout_height="@dimen/size0.5"
+        android:background="@color/hideTextColor" />
+
+    <LinearLayout
+        android:layout_width="match_parent"
+        android:layout_height="wrap_content"
+        android:orientation="horizontal">
+
+        <TextView
+            android:id="@+id/keyboard_num4"
+            android:layout_width="0dp"
+            android:layout_height="wrap_content"
+            android:background="@drawable/keyboard_bg"
+            android:layout_weight="1"
+            android:gravity="center"
+            android:paddingTop="@dimen/size15"
+            android:paddingBottom="@dimen/size15"
+            android:textColor="@color/black"
+            android:text="4"
+            android:textSize="@dimen/txtSize20" />
+
+        <View
+            android:layout_width="@dimen/size0.5"
+            android:layout_height="match_parent"
+            android:background="@color/hideTextColor" />
+
+        <TextView
+            android:id="@+id/keyboard_num5"
+            android:layout_width="0dp"
+            android:layout_height="wrap_content"
+            android:background="@drawable/keyboard_bg"
+            android:layout_weight="1"
+            android:gravity="center"
+            android:paddingTop="@dimen/size15"
+            android:paddingBottom="@dimen/size15"
+            android:textColor="@color/black"
+            android:text="5"
+            android:textSize="@dimen/txtSize20" />
+
+        <View
+            android:layout_width="@dimen/size0.5"
+            android:layout_height="match_parent"
+            android:background="@color/hideTextColor" />
+
+        <TextView
+            android:id="@+id/keyboard_num6"
+            android:layout_width="0dp"
+            android:layout_height="wrap_content"
+            android:background="@drawable/keyboard_bg"
+            android:layout_weight="1"
+            android:gravity="center"
+            android:paddingTop="@dimen/size15"
+            android:paddingBottom="@dimen/size15"
+            android:textColor="@color/black"
+            android:text="6"
+            android:textSize="@dimen/txtSize20" />
+    </LinearLayout>
+
+    <View
+        android:layout_width="match_parent"
+        android:layout_height="@dimen/size0.5"
+        android:background="@color/hideTextColor" />
+
+    <LinearLayout
+        android:layout_width="match_parent"
+        android:layout_height="wrap_content"
+        android:orientation="horizontal">
+
+        <TextView
+            android:id="@+id/keyboard_num7"
+            android:layout_width="0dp"
+            android:layout_height="wrap_content"
+            android:background="@drawable/keyboard_bg"
+            android:layout_weight="1"
+            android:gravity="center"
+            android:paddingTop="@dimen/size15"
+            android:paddingBottom="@dimen/size15"
+            android:textColor="@color/black"
+            android:text="7"
+            android:textSize="@dimen/txtSize20" />
+
+        <View
+            android:layout_width="@dimen/size0.5"
+            android:layout_height="match_parent"
+            android:background="@color/hideTextColor" />
+
+        <TextView
+            android:id="@+id/keyboard_num8"
+            android:layout_width="0dp"
+            android:layout_height="wrap_content"
+            android:background="@drawable/keyboard_bg"
+            android:layout_weight="1"
+            android:gravity="center"
+            android:paddingTop="@dimen/size15"
+            android:paddingBottom="@dimen/size15"
+            android:textColor="@color/black"
+            android:text="8"
+            android:textSize="@dimen/txtSize20" />
+
+        <View
+            android:layout_width="@dimen/size0.5"
+            android:layout_height="match_parent"
+            android:background="@color/hideTextColor" />
+
+        <TextView
+            android:id="@+id/keyboard_num9"
+            android:layout_width="0dp"
+            android:layout_height="wrap_content"
+            android:background="@drawable/keyboard_bg"
+            android:layout_weight="1"
+            android:gravity="center"
+            android:paddingTop="@dimen/size15"
+            android:paddingBottom="@dimen/size15"
+            android:textColor="@color/black"
+            android:text="9"
+            android:textSize="@dimen/txtSize20" />
+    </LinearLayout>
+
+    <View
+        android:layout_width="match_parent"
+        android:layout_height="@dimen/size0.5"
+        android:background="@color/hideTextColor" />
+
+    <LinearLayout
+        android:layout_width="match_parent"
+        android:layout_height="wrap_content"
+        android:orientation="horizontal">
+
+        <TextView
+            android:id="@+id/keyboard_positiveBtn"
+            android:layout_width="0dp"
+            android:layout_height="match_parent"
+            android:layout_weight="1"
+            android:gravity="center"
+            android:paddingTop="@dimen/size15"
+            android:paddingBottom="@dimen/size15"
+            android:background="@drawable/keyboard_bg"
+            android:text="@string/pickerview_submit"
+            android:textColor="@color/black"
+            android:textSize="@dimen/txtSize20" />
+
+        <View
+            android:layout_width="@dimen/size0.5"
+            android:layout_height="match_parent"
+            android:background="@color/hideTextColor" />
+
+        <TextView
+            android:id="@+id/keyboard_num0"
+            android:layout_width="0dp"
+            android:layout_height="match_parent"
+            android:background="@drawable/keyboard_bg"
+            android:layout_weight="1"
+            android:gravity="center"
+            android:paddingTop="@dimen/size15"
+            android:paddingBottom="@dimen/size15"
+            android:textColor="@color/black"
+            android:text="0"
+            android:textSize="@dimen/txtSize20" />
+
+        <View
+            android:layout_width="@dimen/size0.5"
+            android:layout_height="match_parent"
+            android:background="@color/hideTextColor" />
+
+        <ImageView
+            android:id="@+id/keyboard_delete"
+            android:layout_width="0dp"
+            android:layout_height="wrap_content"
+            android:layout_weight="1"
+            android:gravity="center"
+            android:paddingTop="@dimen/size15"
+            android:paddingBottom="@dimen/size15"
+            android:background="@color/bgColor"
+            android:src="@android:drawable/ic_input_delete"/>
+    </LinearLayout>
+
+    <View
+        android:layout_width="match_parent"
+        android:layout_height="@dimen/size0.5"
+        android:background="@color/hideTextColor" />
+
+</LinearLayout>

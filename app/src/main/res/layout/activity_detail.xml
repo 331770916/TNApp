@@ -1,0 +1,248 @@
+<?xml version="1.0" encoding="utf-8"?>
+<LinearLayout xmlns:android="http://schemas.android.com/apk/res/android"
+    xmlns:tools="http://schemas.android.com/tools"
+    android:orientation="vertical"
+    android:layout_width="match_parent"
+    android:layout_height="match_parent">
+
+    <RelativeLayout
+        android:layout_width="match_parent"
+        android:layout_height="@dimen/size25"
+        android:background="@color/green"
+        android:fitsSystemWindows="true"
+        android:clipToPadding="true"/>
+
+    <RelativeLayout
+        android:layout_width="match_parent"
+        android:layout_height="match_parent">
+
+        <LinearLayout
+            android:id="@+id/detail_BottomLayout"
+            android:layout_width="match_parent"
+            android:layout_height="wrap_content"
+            android:layout_alignParentBottom="true"
+            android:paddingTop="@dimen/size5"
+            android:paddingBottom="@dimen/size5"
+            android:background="@color/bgColor"
+            android:orientation="horizontal">
+            <TextView
+                android:layout_width="0dp"
+                android:layout_height="wrap_content"
+                android:text="@string/buy"
+                android:gravity="center"
+                android:paddingTop="@dimen/size5"
+                android:paddingBottom="@dimen/size5"
+                android:layout_weight="1"/>
+            <TextView
+                android:layout_width="0dp"
+                android:layout_height="wrap_content"
+                android:gravity="center"
+                android:text="@string/sell"
+                android:paddingTop="@dimen/size5"
+                android:paddingBottom="@dimen/size5"
+                android:layout_weight="1"/>
+            <TextView
+                android:layout_width="0dp"
+                android:layout_height="wrap_content"
+                android:gravity="center"
+                android:text="@string/addSelfChoice"
+                android:paddingTop="@dimen/size5"
+                android:paddingBottom="@dimen/size5"
+                android:layout_weight="1"/>
+            <LinearLayout
+                android:id="@+id/detail_moreLayout"
+                android:layout_width="0dp"
+                android:layout_height="wrap_content"
+                android:layout_weight="1"
+                android:orientation="horizontal">
+                <TextView
+                    android:id="@+id/detail_More"
+                    android:layout_width="match_parent"
+                    android:layout_height="wrap_content"
+                    android:paddingTop="@dimen/size5"
+                    android:paddingBottom="@dimen/size5"
+                    android:gravity="center"
+                    android:text="@string/more"
+                    />
+            </LinearLayout>
+        </LinearLayout>
+
+        <ScrollView
+            android:layout_above="@id/detail_BottomLayout"
+            android:scrollbars="none"
+            android:layout_width="match_parent"
+            android:layout_height="match_parent">
+            <LinearLayout
+                android:layout_width="match_parent"
+                android:layout_height="wrap_content"
+                android:orientation="vertical">
+                <include layout="@layout/detail_top"/>
+
+                <include layout="@layout/detail_grideview"/>
+
+                <LinearLayout
+                    android:id="@+id/kchartLayout"
+                    android:layout_width="match_parent"
+                    android:layout_height="wrap_content"
+                    android:background="@color/white"
+                    android:paddingTop="@dimen/size5"
+                    android:paddingBottom="@dimen/size5"
+                    android:layout_marginTop="@dimen/size10"
+                    android:orientation="horizontal">
+
+                    <TextView
+                        android:id="@+id/timeTv"
+                        android:layout_width="0dp"
+                        android:layout_weight="1"
+                        android:gravity="center"
+                        android:text="@string/timek"
+                        android:layout_height="wrap_content" />
+
+                    <TextView
+                        android:id="@+id/fiveTv"
+                        android:layout_width="0dp"
+                        android:layout_weight="1"
+                        android:gravity="center"
+                        android:text="@string/fiveK"
+                        android:layout_height="wrap_content" />
+
+                    <TextView
+                        android:id="@+id/dayTv"
+                        android:layout_width="0dp"
+                        android:layout_weight="1"
+                        android:gravity="center"
+                        android:text="@string/dayK"
+                        android:layout_height="wrap_content" />
+
+                    <TextView
+                        android:id="@+id/weekTv"
+                        android:layout_width="0dp"
+                        android:layout_weight="1"
+                        android:gravity="center"
+                        android:text="@string/weekK"
+                        android:layout_height="wrap_content" />
+
+                    <TextView
+                        android:id="@+id/mounthTv"
+                        android:layout_width="0dp"
+                        android:layout_weight="1"
+                        android:gravity="center"
+                        android:text="@string/mounthK"
+                        android:layout_height="wrap_content" />
+
+                    <LinearLayout
+                        android:id="@+id/minutesLayout"
+                        android:layout_width="0dp"
+                        android:layout_weight="1"
+                        android:layout_height="wrap_content">
+                        <TextView
+                            android:id="@+id/minutesTv"
+                            android:layout_width="match_parent"
+                            android:gravity="center"
+                            android:text="@string/minutesK"
+                            android:layout_height="match_parent" />
+                    </LinearLayout>
+
+                </LinearLayout>
+
+                <ImageView
+                    android:id="@+id/tab_img"
+                    android:layout_width="match_parent"
+                    android:layout_height="@dimen/size1"
+                    android:background="@color/blue"
+                    tools:ignore="ContentDescription" />
+
+                <android.support.v4.view.ViewPager
+                    android:layout_marginTop="@dimen/size10"
+                    android:id="@+id/stockDetailViewPager"
+                    android:layout_width="match_parent"
+                    android:layout_height="@dimen/size300"/>
+
+                <LinearLayout
+                    android:layout_width="match_parent"
+                    android:layout_height="wrap_content"
+                    android:background="@color/white"
+                    android:paddingBottom="@dimen/size5"
+                    android:paddingTop="@dimen/size5"
+                    android:layout_marginTop="@dimen/size10"
+                    android:orientation="horizontal">
+                    <TextView
+                        android:id="@+id/newsTv"
+                        android:layout_width="0dp"
+                        android:layout_weight="1"
+                        android:gravity="center"
+                        android:text="@string/news"
+                        android:layout_height="wrap_content" />
+                    <TextView
+                        android:id="@+id/announcementTv"
+                        android:layout_width="0dp"
+                        android:layout_weight="1"
+                        android:gravity="center"
+                        android:text="@string/announcement"
+                        android:layout_height="wrap_content" />
+                    <TextView
+                        android:id="@+id/studyTv"
+                        android:layout_width="0dp"
+                        android:layout_weight="1"
+                        android:gravity="center"
+                        android:text="@string/study"
+                        android:layout_height="wrap_content" />
+                </LinearLayout>
+                <ImageView
+                    android:id="@+id/tab_img1"
+                    android:layout_width="match_parent"
+                    android:layout_height="@dimen/size1"
+                    android:background="@color/blue"
+                    tools:ignore="ContentDescription" />
+
+                <FrameLayout
+                    android:id="@+id/detail_newsLayout"
+                    android:layout_width="match_parent"
+                    android:layout_height="wrap_content"/>
+
+                <LinearLayout
+                    android:layout_width="match_parent"
+                    android:layout_height="wrap_content"
+                    android:background="@color/white"
+                    android:paddingBottom="@dimen/size5"
+                    android:paddingTop="@dimen/size5"
+                    android:layout_marginTop="@dimen/size10"
+                    android:orientation="horizontal">
+                    <TextView
+                        android:id="@+id/profilesTv"
+                        android:layout_width="0dp"
+                        android:layout_weight="1"
+                        android:gravity="center"
+                        android:text="@string/profiles"
+                        android:layout_height="wrap_content" />
+                    <TextView
+                        android:id="@+id/financeTv"
+                        android:layout_width="0dp"
+                        android:layout_weight="1"
+                        android:gravity="center"
+                        android:text="@string/finance"
+                        android:layout_height="wrap_content" />
+                    <TextView
+                        android:id="@+id/shareholderTv"
+                        android:layout_width="0dp"
+                        android:layout_weight="1"
+                        android:gravity="center"
+                        android:text="@string/shareholder"
+                        android:layout_height="wrap_content" />
+                </LinearLayout>
+                <ImageView
+                    android:id="@+id/tab_img2"
+                    android:layout_width="match_parent"
+                    android:layout_height="@dimen/size1"
+                    android:background="@color/blue"
+                    tools:ignore="ContentDescription" />
+                <FrameLayout
+                    android:id="@+id/detail_commanyLayout"
+                    android:layout_width="match_parent"
+                    android:layout_height="wrap_content"/>
+
+            </LinearLayout>
+        </ScrollView>
+    </RelativeLayout>
+
+</LinearLayout>

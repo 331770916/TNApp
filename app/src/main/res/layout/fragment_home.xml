@@ -1,0 +1,136 @@
+<?xml version="1.0" encoding="utf-8"?>
+<RelativeLayout xmlns:android="http://schemas.android.com/apk/res/android"
+    xmlns:app="http://schemas.android.com/apk/res-auto"
+    android:layout_width="match_parent"
+    android:layout_height="match_parent"
+    android:orientation="vertical">
+        <FrameLayout
+            android:background="@color/bgColor"
+            android:layout_width="match_parent"
+            android:layout_height="match_parent">
+
+            <com.tpyzq.mobile.pangu.view.pullrefreshrecyclerview.PullRefreshView
+                android:id="@+id/selfchoice_PullDownScroll"
+                android:layout_width="match_parent"
+                android:layout_height="match_parent">
+            <com.tpyzq.mobile.pangu.view.gridview.MyScrollView
+                android:background="@color/white"
+                android:id="@+id/homeScrollView"
+                android:layout_width="match_parent"
+                android:layout_height="match_parent"
+                android:scrollbars="none">
+
+                <LinearLayout
+
+                    android:layout_width="match_parent"
+                    android:layout_height="wrap_content"
+                    android:orientation="vertical">
+
+                    <!--<com.bigkoo.convenientbanner.ConvenientBanner-->
+                        <!--android:id="@+id/convenientBanner"-->
+                        <!--android:layout_width="match_parent"-->
+                        <!--android:layout_height="@dimen/size225"-->
+                        <!--app:canLoop="true" />-->
+                    <FrameLayout
+                        android:layout_width="match_parent"
+                        android:layout_height="@dimen/size225"
+                        >
+                        <com.tpyzq.mobile.pangu.view.CarouselView
+                            android:id="@+id/vp_carousel"
+                            android:layout_width="match_parent"
+                            android:layout_height="@dimen/size225"
+                            />
+                        <LinearLayout
+                            android:id="@+id/ll_point"
+                            android:layout_width="wrap_content"
+                            android:layout_height="wrap_content"
+                            android:layout_gravity="bottom|center_horizontal"
+                            android:layout_marginBottom="10dp"
+                            android:orientation="horizontal" />
+                    </FrameLayout>
+
+                    <com.tpyzq.mobile.pangu.view.gridview.MyGridView
+                        android:id="@+id/homeGridView"
+                        android:layout_width="match_parent"
+                        android:layout_height="match_parent"
+                        android:background="@color/lineColor"
+                        android:fadingEdge="none"
+                        android:gravity="center"
+                        android:listSelector="@android:color/transparent"
+                        android:numColumns="4"
+                        android:scrollbars="none"
+                        android:stretchMode="columnWidth"
+                        android:verticalSpacing="1px" />
+
+                    <View
+                        android:layout_width="wrap_content"
+                        android:layout_height="@dimen/size7"
+                        android:background="@color/bgColor" />
+
+                    <ImageView
+                        android:id="@+id/home_middlebander"
+                        android:layout_width="match_parent"
+                        android:layout_height="@dimen/size80"
+                        android:visibility="visible" />
+
+
+                    <View
+                        android:layout_width="wrap_content"
+                        android:layout_height="@dimen/size7"
+                        android:background="@color/bgColor"
+                        android:visibility="gone" />
+
+
+                    <com.tpyzq.mobile.pangu.view.gridview.MyListView
+                        android:id="@+id/homeProductReservation"
+                        android:layout_width="match_parent"
+                        android:layout_height="wrap_content"
+                        android:divider="@null" />
+
+
+                    <com.tpyzq.mobile.pangu.view.gridview.MyListView
+                        android:id="@+id/homeSelfNewsListView"
+                        android:layout_width="match_parent"
+                        android:layout_height="wrap_content" />
+
+                        <LinearLayout
+                            android:id="@+id/ll_homeInfoListLayout"
+                            android:layout_width="match_parent"
+                            android:layout_height="wrap_content"
+                            android:orientation="vertical">
+
+                            <com.tpyzq.mobile.pangu.view.gridview.MyListView
+                                android:id="@+id/homeListView"
+                                android:layout_width="match_parent"
+                                android:layout_height="match_parent"
+                                android:divider="@null" />
+                        </LinearLayout>
+
+                    <View
+                        android:layout_width="wrap_content"
+                        android:layout_height="@dimen/size7"
+                        android:background="@color/bgColor" />
+                    <com.tpyzq.mobile.pangu.view.gridview.MyListView
+                        android:id="@+id/homeHotListView"
+                        android:layout_width="match_parent"
+                        android:layout_height="wrap_content"
+                        android:divider="@null" />
+                </LinearLayout>
+
+            </com.tpyzq.mobile.pangu.view.gridview.MyScrollView>
+            </com.tpyzq.mobile.pangu.view.pullrefreshrecyclerview.PullRefreshView>
+
+        <TextView
+            android:id="@+id/homeLayoutTopTextView"
+            android:layout_width="match_parent"
+            android:layout_height="@dimen/size70"
+            android:layout_gravity="top"
+            android:clickable="true"
+            android:focusable="true"
+            android:gravity="center"
+            android:paddingTop="@dimen/size25"
+            android:textColor="@color/white"
+            android:textSize="@dimen/pickerview_topbar_title_textsize" />
+    </FrameLayout>
+
+</RelativeLayout>

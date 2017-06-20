@@ -1,0 +1,503 @@
+<?xml version="1.0" encoding="utf-8"?>
+<resources>
+    <dimen name="txtSize6">6sp</dimen>
+    <dimen name="txtSize9">9sp</dimen>
+    <dimen name="txtSize10">10sp</dimen>
+    <dimen name="txtSize11">11sp</dimen>
+    <dimen name="txtSize12">12sp</dimen>
+    <dimen name="txtSize13">13sp</dimen>
+    <dimen name="txtSize14">14sp</dimen>
+    <dimen name="txtSize16">16sp</dimen>
+    <dimen name="txtSize18">18sp</dimen>
+    <dimen name="txtSize20">20sp</dimen>
+    <dimen name="txtSize21">21sp</dimen>
+    <dimen name="txtSize22">22sp</dimen>
+    <dimen name="txtSize23">23sp</dimen>
+    <dimen name="txtSize24">24sp</dimen>
+    <dimen name="txtSize25">25sp</dimen>
+    <dimen name="txtSize26">26sp</dimen>
+    <dimen name="txtSize27">27sp</dimen>
+    <dimen name="txtSize28">28sp</dimen>
+    <dimen name="txtSize29">29sp</dimen>
+    <dimen name="txtSize30">30sp</dimen>
+    <dimen name="txtSize31">31sp</dimen>
+    <dimen name="txtSize40">40sp</dimen>
+    <dimen name="txtSize50">50sp</dimen>
+    <dimen name="txtSize54">54sp</dimen>
+    <dimen name="txtSize106">106sp</dimen>
+
+
+    <!-- Default screen margins, per the Android Design guidelines. -->
+    <dimen name="size0">0dp</dimen>
+    <dimen name="size0.5">0.5dp</dimen>
+    <dimen name="size0.3">0.3dp</dimen>
+    <dimen name="size1">1px</dimen>
+    <dimen name="size2">2dp</dimen>
+    <dimen name="size3">3dp</dimen>
+    <!-- 5px for WVGA -->
+    <dimen name="size4">4dp</dimen>
+    <dimen name="size5">5dp</dimen>
+    <dimen name="size6">6dp</dimen>
+    <dimen name="size7">7dp</dimen>
+    <!-- 10px for WVGA -->
+    <dimen name="size8">8dp</dimen>
+    <dimen name="size9">9dp</dimen>
+    <dimen name="size10">10dp</dimen>
+    <dimen name="size11">11dp</dimen>
+    <dimen name="size12">12dp</dimen>
+    <dimen name="size13">13dp</dimen>
+    <!-- 20px for WVGA -->
+    <dimen name="size14">14dp</dimen>
+    <dimen name="size15">15dp</dimen>
+    <dimen name="size16">16dp</dimen>
+    <dimen name="size17">17dp</dimen>
+    <!-- 25px for WVGA -->
+    <dimen name="size18">18dp</dimen>
+    <dimen name="size19">19dp</dimen>
+    <dimen name="size20">20dp</dimen>
+    <dimen name="size21">21dp</dimen>
+    <dimen name="size22">22dp</dimen>
+    <dimen name="size23">23dp</dimen>
+    <dimen name="size24">24dp</dimen>
+    <dimen name="size25">25dp</dimen>
+    <dimen name="size26">26dp</dimen>
+    <dimen name="size27">27dp</dimen>
+    <!-- 40px for WVGA -->
+    <dimen name="size28">28dp</dimen>
+    <dimen name="size30">30dp</dimen>
+    <dimen name="size31">31dp</dimen>
+    <dimen name="size32">32dp</dimen>
+    <dimen name="size33">33dp</dimen>
+    <!-- 50px for WVGA -->
+    <dimen name="size34">34dp</dimen>
+    <dimen name="size35">35dp</dimen>
+    <!-- 52px for WVGA -->
+    <dimen name="size36">36dp</dimen>
+    <dimen name="size37">37dp</dimen>
+    <!-- 56px for WVGA -->
+    <dimen name="size38">38dp</dimen>
+    <dimen name="size39">39dp</dimen>
+    <dimen name="size40">40dp</dimen>
+    <dimen name="size41">41dp</dimen>
+    <dimen name="size42">42dp</dimen>
+    <dimen name="size43">43dp</dimen>
+    <!-- 65px for WVGA -->
+    <dimen name="size44">44dp</dimen>
+    <dimen name="size45">45dp</dimen>
+    <!-- 68px for WVGA -->
+    <dimen name="size46">46dp</dimen>
+    <dimen name="size47">47dp</dimen>
+    <dimen name="size48">48dp</dimen>
+    <dimen name="size49">49dp</dimen>
+    <dimen name="size50">50dp</dimen>
+    <dimen name="size51">51dp</dimen>
+    <dimen name="size52">52dp</dimen>
+    <dimen name="size53">53dp</dimen>
+    <dimen name="size54">54dp</dimen>
+    <dimen name="size55">55dp</dimen>
+    <dimen name="size56">56dp</dimen>
+    <dimen name="size57">57dp</dimen>
+    <dimen name="size58">58dp</dimen>
+    <dimen name="size60">60dp</dimen>
+    <dimen name="size61">61dp</dimen>
+    <dimen name="size62">62dp</dimen>
+    <!-- 92px for WVGA -->
+    <dimen name="size63">63dp</dimen>
+    <dimen name="size64">64dp</dimen>
+    <dimen name="size65">65dp</dimen>
+    <dimen name="size67">67dp</dimen>
+    <!-- 100px for WVGA -->
+    <dimen name="size68">68dp</dimen>
+    <dimen name="size70">70dp</dimen>
+    <dimen name="size72">72dp</dimen>
+    <dimen name="size73">73dp</dimen>
+    <dimen name="size76">76dp</dimen>
+    <dimen name="size77">77dp</dimen>
+    <dimen name="size78">78dp</dimen>
+    <dimen name="size80">80dp</dimen>
+    <dimen name="size81">81dp</dimen>
+    <!-- 122px for WVGA -->
+    <dimen name="size82">82dp</dimen>
+    <dimen name="size83">83dp</dimen>
+    <dimen name="size84">84dp</dimen>
+    <dimen name="size85">85dp</dimen>
+    <dimen name="size86">86dp</dimen>
+    <dimen name="size87">87dp</dimen>
+    <dimen name="size88">88dp</dimen>
+    <dimen name="size89">89dp</dimen>
+    <dimen name="size90">90dp</dimen>
+    <dimen name="size91">91dp</dimen>
+    <dimen name="size92">92dp</dimen>
+    <dimen name="size93">93dp</dimen>
+    <dimen name="size94">94dp</dimen>
+    <dimen name="size95">95dp</dimen>
+    <dimen name="size97">97dp</dimen>
+    <!-- 145px for WVGA -->
+    <dimen name="size100">100dp</dimen>
+    <dimen name="size101">101dp</dimen>
+    <dimen name="size102">102dp</dimen>
+    <dimen name="size103">103dp</dimen>
+    <dimen name="size104">104dp</dimen>
+    <dimen name="size105">105dp</dimen>
+    <dimen name="size107">107dp</dimen>
+    <dimen name="size108">108dp</dimen>
+    <dimen name="size109">109dp</dimen>
+    <dimen name="size110">110dp</dimen>
+    <dimen name="size112">112dp</dimen>
+    <dimen name="size113">113dp</dimen>
+    <!-- 170px for WVGA -->
+    <dimen name="size115">115dp</dimen>
+    <dimen name="size118">118dp</dimen>
+    <dimen name="size120">120dp</dimen>
+    <dimen name="size127">127dp</dimen>
+    <!-- 190px for WVGA -->
+    <dimen name="size116">116dp</dimen>
+    <dimen name="size128">128dp</dimen>
+    <dimen name="size130">130dp</dimen>
+    <dimen name="size132">132dp</dimen>
+    <dimen name="size134">134dp</dimen>
+    <dimen name="size136">136dp</dimen>
+    <dimen name="size138">138dp</dimen>
+    <dimen name="size140">140dp</dimen>
+    <dimen name="size141">141dp</dimen>
+    <dimen name="size142">142dp</dimen>
+    <dimen name="size143">143dp</dimen>
+    <!-- 211px for 4x1 widget width -->
+    <dimen name="size145">145dp</dimen>
+    <dimen name="size146">146dp</dimen>
+    <dimen name="size147">147dp</dimen>
+    <dimen name="size148">148dp</dimen>
+    <dimen name="size149">149dp</dimen>
+    <dimen name="size150">150dp</dimen>
+    <dimen name="size151">151dp</dimen>
+    <dimen name="size154">154dp</dimen>
+    <dimen name="size155">155dp</dimen>
+    <dimen name="size160">160dp</dimen>
+    <dimen name="size161">161dp</dimen>
+    <dimen name="size162">162dp</dimen>
+    <dimen name="size163">163dp</dimen>
+    <dimen name="size168">168dp</dimen>
+    <dimen name="size170">170dp</dimen>
+    <dimen name="size175">175dp</dimen>
+    <dimen name="size180">180dp</dimen>
+    <dimen name="size185">185dp</dimen>
+    <dimen name="size186">186dp</dimen>
+    <dimen name="size190">190dp</dimen>
+    <dimen name="size200">200dp</dimen>
+    <dimen name="size205">205dp</dimen>
+    <dimen name="size210">210dp</dimen>
+    <dimen name="size215">215dp</dimen>
+    <dimen name="size220">220dp</dimen>
+    <dimen name="size225">225dp</dimen>
+    <dimen name="size230">230dp</dimen>
+    <dimen name="size250">250dp</dimen>
+    <dimen name="size260">260dp</dimen>
+    <dimen name="size270">270dp</dimen>
+    <dimen name="size275">275dp</dimen>
+    <dimen name="size280">280dp</dimen>
+    <dimen name="size290">290dp</dimen>
+    <dimen name="size296">296dp</dimen>
+    <dimen name="size300">300dp</dimen>
+    <dimen name="size330">330dp</dimen>
+    <dimen name="size350">350dp</dimen>
+    <dimen name="size315">315dp</dimen>
+    <dimen name="size400">400dp</dimen>
+
+
+    <!-- 顶部按钮栏高度 -->
+    <dimen name="pickerview_topbar_height">44dp</dimen>
+    <!-- 顶部按钮paddingLeft -->
+    <dimen name="pickerview_topbar_paddingleft">20dp</dimen>
+    <!-- 顶部按钮paddingRight -->
+    <dimen name="pickerview_topbar_paddingright">20dp</dimen>
+    <!-- 顶部按钮文字大小 -->
+    <dimen name="pickerview_topbar_btn_textsize">14sp</dimen>
+    <dimen name="pickerview_topbar_title_textsize">16sp</dimen>
+
+
+    <!-- 选项文字大小 需要配合 bools.xml 的 pickerview_customTextSize 为 true 才有效果-->
+    <dimen name="pickerview_textsize">16sp</dimen>
+    <!-- Default screen margins, per the Android Design guidelines. -->
+    <dimen name="activity_horizontal_margin">16dp</dimen>
+    <dimen name="activity_vertical_margin">16dp</dimen>
+    <dimen name="stockDetailNowPiceSize">58dp</dimen>
+    <dimen name="stockDetailOtherSize">14dp</dimen>
+    <dimen name="StockDetailPart1Hei">135dip</dimen>
+
+    <!-- 首页模块 -->
+    <!-- 首页activity_index 首页  行情  1交易  我 字体大小  -->
+
+    <dimen name="home_IndexRadioBtnText">12sp</dimen>
+    <dimen name="home_gridviewText">12sp</dimen>
+    <dimen name="home_newTitle">14sp</dimen>
+
+    <!-- 行情模块  -->
+    <!-- 最新值  -->
+
+
+    <!-- 自选股行情页面字体大小  -->
+    <dimen name="self_stockNameText">16sp</dimen>
+    <dimen name="self_stockNumberText">12sp</dimen>
+    <dimen name="self_stockNumberPrice">16sp</dimen>
+    <dimen name="self_stockNumberZdf">16sp</dimen>
+
+    <!-- 沪深页面行情  -->
+    <dimen name="hushen_TopTitle">14sp</dimen>
+    <dimen name="text_size">14sp</dimen>
+    <dimen name="lineWid">1dip</dimen>
+
+
+    <!-- 金融生活  -->
+    <dimen name="jinrongshnghuo_Height">302dp</dimen>
+    <dimen name="jinrongshnghuo_Left">187dp</dimen>
+    <dimen name="jinrongshnghuo_Width">164dp</dimen>
+    <!-- 最新值  -->
+    <!-- 最新值  -->
+    <!-- 最新值  -->
+    <!-- 最新值  -->
+    <!-- 最新值  -->
+    <!-- 最新值  -->
+    <!-- 最新值  -->
+    <!-- 最新值  -->
+    <!-- 最新值  -->
+    <!-- 最新值  -->
+    <!-- 最新值  -->
+    <!-- 最新值  -->
+    <!-- 最新值  -->
+    <!-- 最新值  -->
+    <!-- 最新值  -->
+    <!-- 最新值  -->
+    <!-- 最新值  -->
+    <!-- 最新值  -->
+    <!-- 最新值  -->
+    <!-- 最新值  -->
+    <!-- 最新值  -->
+    <!-- 最新值  -->
+    <!-- 最新值  -->
+    <!-- 最新值  -->
+    <!-- 最新值  -->
+    <!-- 最新值  -->
+    <!-- 最新值  -->
+    <!-- 最新值  -->
+    <!-- 最新值  -->
+    <!-- 最新值  -->
+    <!-- 最新值  -->
+    <!-- 最新值  -->
+    <!-- 最新值  -->
+    <!-- 最新值  -->
+    <!-- 最新值  -->
+    <!-- 最新值  -->
+    <!-- 最新值  -->
+    <!-- 最新值  -->
+    <!-- 最新值  -->
+    <!-- 最新值  -->
+    <!-- 最新值  -->
+    <!-- 最新值  -->
+    <!-- 最新值  -->
+    <!-- 最新值  -->
+    <!-- 最新值  -->
+    <!-- 最新值  -->
+    <!-- 最新值  -->
+    <!-- 最新值  -->
+    <!-- 最新值  -->
+    <!-- 最新值  -->
+    <!-- 最新值  -->
+    <!-- 最新值  -->
+    <!-- 最新值  -->
+    <!-- 最新值  -->
+    <!-- 最新值  -->
+    <!-- 最新值  -->
+    <!-- 最新值  -->
+    <!-- 最新值  -->
+    <!-- 最新值  -->
+    <!-- 最新值  -->
+    <!-- 最新值  -->
+    <!-- 最新值  -->
+    <!-- 最新值  -->
+    <!-- 最新值  -->
+    <!-- 最新值  -->
+    <!-- 最新值  -->
+    <!-- 最新值  -->
+    <!-- 最新值  -->
+    <!-- 最新值  -->
+    <!-- 最新值  -->
+    <!-- 最新值  -->
+    <!-- 最新值  -->
+    <!-- 最新值  -->
+    <!-- 最新值  -->
+    <!-- 最新值  -->
+    <!-- 最新值  -->
+    <!-- 最新值  -->
+    <!-- 最新值  -->
+    <!-- 最新值  -->
+    <!-- 最新值  -->
+    <!-- 最新值  -->
+    <!-- 最新值  -->
+    <!-- 最新值  -->
+    <!-- 最新值  -->
+    <!-- 最新值  -->
+    <!-- 最新值  -->
+    <!-- 最新值  -->
+    <!-- 最新值  -->
+    <!-- 最新值  -->
+    <!-- 最新值  -->
+    <!-- 最新值  -->
+    <!-- 最新值  -->
+    <!-- 最新值  -->
+    <!-- 最新值  -->
+    <!-- 最新值  -->
+    <!-- 最新值  -->
+    <!-- 最新值  -->
+    <!-- 最新值  -->
+    <!-- 最新值  -->
+    <!-- 最新值  -->
+    <!-- 最新值  -->
+    <!-- 最新值  -->
+    <!-- 最新值  -->
+    <!-- 最新值  -->
+    <!-- 最新值  -->
+    <!-- 最新值  -->
+    <!-- 最新值  -->
+    <!-- 最新值  -->
+    <!-- 最新值  -->
+    <!-- 最新值  -->
+    <!-- 最新值  -->
+    <!-- 最新值  -->
+    <!-- 最新值  -->
+    <!-- 最新值  -->
+    <!-- 最新值  -->
+    <!-- 最新值  -->
+    <!-- 最新值  -->
+    <!-- 最新值  -->
+    <!-- 最新值  -->
+    <!-- 最新值  -->
+    <!-- 最新值  -->
+    <!-- 最新值  -->
+    <!-- 最新值  -->
+    <!-- 最新值  -->
+    <!-- 最新值  -->
+    <!-- 最新值  -->
+    <!-- 最新值  -->
+    <!-- 最新值  -->
+    <!-- 最新值  -->
+    <!-- 最新值  -->
+    <!-- 最新值  -->
+    <!-- 最新值  -->
+    <!-- 最新值  -->
+    <!-- 最新值  -->
+    <!-- 最新值  -->
+    <!-- 最新值  -->
+    <!-- 最新值  -->
+    <!-- 最新值  -->
+    <!-- 最新值  -->
+    <!-- 最新值  -->
+    <!-- 最新值  -->
+    <!-- 最新值  -->
+    <!-- 最新值  -->
+    <!-- 最新值  -->
+    <!-- 最新值  -->
+    <!-- 最新值  -->
+    <!-- 最新值  -->
+    <!-- 最新值  -->
+    <!-- 最新值  -->
+    <!-- 最新值  -->
+    <!-- 最新值  -->
+    <!-- 最新值  -->
+    <!-- 最新值  -->
+    <!-- 最新值  -->
+    <!-- 最新值  -->
+    <!-- 最新值  -->
+    <!-- 最新值  -->
+    <!-- 最新值  -->
+    <!-- 最新值  -->
+    <!-- 最新值  -->
+    <!-- 最新值  -->
+    <!-- 最新值  -->
+    <!-- 最新值  -->
+    <!-- 最新值  -->
+    <!-- 最新值  -->
+    <!-- 最新值  -->
+    <!-- 最新值  -->
+    <!-- 最新值  -->
+    <!-- 最新值  -->
+    <!-- 最新值  -->
+    <!-- 最新值  -->
+    <!-- 最新值  -->
+    <!-- 最新值  -->
+    <!-- 最新值  -->
+    <!-- 最新值  -->
+    <!-- 最新值  -->
+    <!-- 最新值  -->
+    <!-- 最新值  -->
+    <!-- 最新值  -->
+    <!-- 最新值  -->
+    <!-- 最新值  -->
+    <!-- 最新值  -->
+    <!-- 最新值  -->
+    <!-- 最新值  -->
+    <!-- 最新值  -->
+    <!-- 最新值  -->
+    <!-- 最新值  -->
+    <!-- 最新值  -->
+    <!-- 最新值  -->
+    <!-- 最新值  -->
+    <!-- 最新值  -->
+    <!-- 最新值  -->
+    <!-- 最新值  -->
+    <!-- 最新值  -->
+    <!-- 最新值  -->
+    <!-- 最新值  -->
+    <!-- 最新值  -->
+    <!-- 最新值  -->
+    <!-- 最新值  -->
+    <!-- 最新值  -->
+    <!-- 最新值  -->
+    <!-- 最新值  -->
+    <!-- 最新值  -->
+    <!-- 最新值  -->
+    <!-- 最新值  -->
+    <!-- 最新值  -->
+    <!-- 最新值  -->
+    <!-- 最新值  -->
+    <!-- 最新值  -->
+    <!-- 最新值  -->
+    <!-- 最新值  -->
+    <!-- 最新值  -->
+    <!-- 最新值  -->
+    <!-- 最新值  -->
+    <!-- 最新值  -->
+    <!-- 最新值  -->
+    <!-- 最新值  -->
+    <!-- 最新值  -->
+    <!-- 最新值  -->
+    <!-- 最新值  -->
+    <!-- 最新值  -->
+    <!-- 最新值  -->
+    <!-- 最新值  -->
+    <!-- 最新值  -->
+    <!-- 最新值  -->
+    <!-- 最新值  -->
+    <!-- 最新值  -->
+    <!-- 最新值  -->
+    <!-- 最新值  -->
+    <!-- 最新值  -->
+    <!-- 最新值  -->
+    <!-- 最新值  -->
+    <!-- 最新值  -->
+    <!-- 最新值  -->
+    <!-- 最新值  -->
+    <!-- 最新值  -->
+    <!-- 最新值  -->
+    <!-- 最新值  -->
+    <!-- 最新值  -->
+    <!-- 最新值  -->
+    <!-- 最新值  -->
+    <!-- 最新值  -->
+    <!-- 最新值  -->
+    <!-- 最新值  -->
+    <!-- 最新值  -->
+    <!-- 最新值  -->
+    <!-- 最新值  -->
+
+
+</resources>

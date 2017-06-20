@@ -1,0 +1,151 @@
+<?xml version="1.0" encoding="utf-8"?>
+<LinearLayout xmlns:android="http://schemas.android.com/apk/res/android"
+    android:layout_width="match_parent"
+    android:layout_height="wrap_content"
+    android:background="@color/white"
+    android:orientation="vertical">
+
+    <LinearLayout
+        android:layout_width="match_parent"
+        android:layout_height="match_parent"
+        android:gravity="center"
+        android:orientation="horizontal">
+
+        <LinearLayout
+            android:id="@+id/ll_1"
+            android:layout_width="0dp"
+            android:layout_height="40dp"
+            android:layout_marginBottom="@dimen/size5"
+            android:layout_marginTop="@dimen/size5"
+            android:layout_weight="1"
+            android:orientation="vertical">
+
+            <TextView
+                android:id="@+id/tv_revoke_text1"
+                android:layout_width="match_parent"
+                android:layout_height="0dp"
+                android:layout_weight="1"
+                android:gravity="center_vertical"
+                android:paddingBottom="@dimen/size2"
+                android:paddingLeft="@dimen/size20"
+                android:paddingTop="@dimen/size2"
+                android:text="--"
+                android:textSize="@dimen/txtSize14" />
+
+            <TextView
+                android:id="@+id/tv_revoke_text2"
+                android:layout_width="match_parent"
+                android:layout_height="0dp"
+                android:layout_weight="1"
+                android:gravity="center_vertical"
+                android:paddingBottom="@dimen/size2"
+                android:paddingLeft="@dimen/size20"
+                android:paddingTop="@dimen/size2"
+                android:text="--"
+                android:textColor="@color/text"
+                android:textSize="@dimen/txtSize13" />
+        </LinearLayout>
+
+        <LinearLayout
+            android:id="@+id/ll_2"
+            android:layout_width="0dp"
+            android:layout_height="40dp"
+            android:layout_marginBottom="@dimen/size5"
+            android:layout_marginTop="@dimen/size5"
+            android:layout_weight="1"
+            android:orientation="vertical">
+
+            <TextView
+                android:id="@+id/tv_revoke_text3"
+                android:layout_width="match_parent"
+                android:layout_height="0dp"
+                android:layout_weight="1"
+                android:gravity="center"
+                android:paddingBottom="@dimen/size2"
+                android:paddingTop="@dimen/size2"
+                android:text="--"
+                android:textSize="@dimen/txtSize13" />
+
+            <TextView
+                android:id="@+id/tv_revoke_text4"
+                android:layout_width="match_parent"
+                android:layout_height="0dp"
+                android:layout_weight="1"
+                android:gravity="center"
+                android:paddingBottom="@dimen/size2"
+                android:paddingTop="@dimen/size2"
+                android:text="--"
+                android:textSize="@dimen/txtSize13" />
+        </LinearLayout>
+
+        <LinearLayout
+            android:id="@+id/ll_3"
+            android:layout_width="0dp"
+            android:layout_height="40dp"
+            android:layout_marginBottom="@dimen/size5"
+            android:layout_marginTop="@dimen/size5"
+            android:layout_weight="1"
+            android:orientation="vertical">
+
+            <TextView
+                android:id="@+id/tv_revoke_text5"
+                android:layout_width="match_parent"
+                android:layout_height="0dp"
+                android:layout_weight="1"
+                android:gravity="center"
+                android:paddingBottom="@dimen/size2"
+                android:paddingTop="@dimen/size2"
+                android:text="--"
+                android:textSize="@dimen/txtSize13" />
+
+            <TextView
+                android:id="@+id/tv_revoke_text6"
+                android:layout_width="match_parent"
+                android:layout_height="0dp"
+                android:layout_weight="1"
+                android:gravity="center"
+                android:paddingBottom="@dimen/size2"
+                android:paddingTop="@dimen/size2"
+                android:text="--"
+                android:textSize="@dimen/txtSize13" />
+        </LinearLayout>
+
+        <LinearLayout
+            android:id="@+id/ll_4"
+            android:layout_width="0dp"
+            android:layout_height="40dp"
+            android:layout_marginBottom="@dimen/size5"
+            android:layout_marginTop="@dimen/size5"
+            android:layout_weight="1"
+            android:orientation="vertical">
+
+            <TextView
+                android:id="@+id/tv_revoke_text7"
+                android:layout_width="match_parent"
+                android:layout_height="0dp"
+                android:layout_weight="1"
+                android:gravity="center"
+                android:paddingBottom="@dimen/size2"
+                android:paddingTop="@dimen/size2"
+                android:text="--"
+                android:textSize="@dimen/txtSize13" />
+
+            <TextView
+                android:id="@+id/tv_revoke_text8"
+                android:layout_width="match_parent"
+                android:layout_height="0dp"
+                android:layout_weight="1"
+                android:gravity="center"
+                android:paddingBottom="@dimen/size2"
+                android:paddingTop="@dimen/size2"
+                android:text="--"
+                android:textSize="@dimen/txtSize13" />
+        </LinearLayout>
+    </LinearLayout>
+
+    <View
+        android:layout_width="match_parent"
+        android:layout_height="@dimen/size0.5"
+        android:layout_marginLeft="@dimen/size20"
+        android:background="@color/stkDetailDividerColor" />
+</LinearLayout>

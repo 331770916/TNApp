@@ -1,0 +1,231 @@
+<?xml version="1.0" encoding="utf-8"?>
+<LinearLayout xmlns:android="http://schemas.android.com/apk/res/android"
+    android:layout_width="match_parent"
+    android:layout_height="wrap_content"
+    android:background="@color/white"
+    android:orientation="vertical">
+
+    <LinearLayout
+        android:layout_width="match_parent"
+        android:layout_height="wrap_content"
+        android:orientation="horizontal">
+
+        <RelativeLayout
+            android:id="@+id/newStock_gv2"
+            android:layout_width="0dp"
+            android:layout_height="wrap_content"
+            android:background="@drawable/listview_item_bg"
+            android:layout_weight="1"
+            android:padding="@dimen/size10">
+
+            <TextView
+                android:id="@+id/newStock_shenZheng"
+                android:layout_width="wrap_content"
+                android:layout_height="wrap_content"
+                android:layout_centerHorizontal="true"
+                android:textSize="@dimen/hushen_TopTitle"
+                android:textStyle="bold"
+                android:layout_margin="@dimen/size1"
+                android:textColor="@color/hushenTab_titleColor"/>
+
+            <RelativeLayout
+                android:id="@+id/rl_top1Bg"
+                android:layout_width="match_parent"
+                android:layout_height="wrap_content"
+                android:layout_below="@id/newStock_shenZheng">
+                <TextView
+                    android:id="@+id/newStock_shengZhengTv1"
+                    android:layout_width="wrap_content"
+                    android:layout_height="wrap_content"
+                    android:layout_centerHorizontal="true"
+                    android:layout_margin="@dimen/size1"
+                    android:textColor="@color/green"
+                    android:textSize="@dimen/txtSize18"/>
+
+                <LinearLayout
+                    android:layout_width="wrap_content"
+                    android:layout_height="wrap_content"
+                    android:layout_below="@+id/newStock_shengZhengTv1"
+                    android:layout_centerHorizontal="true"
+                    android:orientation="horizontal">
+
+                    <TextView
+                        android:id="@+id/newStock_shengZhengTv2"
+                        android:layout_width="wrap_content"
+                        android:layout_height="wrap_content"
+                        android:layout_marginLeft="@dimen/size4"
+                        android:layout_marginRight="@dimen/size4"
+                        android:layout_marginTop="@dimen/size1"
+                        android:layout_marginBottom="@dimen/size1"
+                        android:textSize="@dimen/txtSize10"
+                        android:textColor="@color/green" />
+
+                    <TextView
+                        android:id="@+id/newStock_shengZhengTv3"
+                        android:layout_width="wrap_content"
+                        android:layout_height="wrap_content"
+                        android:layout_marginLeft="@dimen/size4"
+                        android:layout_marginRight="@dimen/size4"
+                        android:layout_marginTop="@dimen/size1"
+                        android:layout_marginBottom="@dimen/size1"
+                        android:textSize="@dimen/txtSize10"
+                        android:textColor="@color/green" />
+                </LinearLayout>
+            </RelativeLayout>
+
+
+
+        </RelativeLayout>
+
+        <View
+            android:layout_width="1px"
+            android:layout_height="match_parent"
+            android:background="@color/lineColor" />
+
+        <RelativeLayout
+            android:id="@+id/newStock_gv1"
+            android:layout_width="0dp"
+            android:layout_height="wrap_content"
+            android:background="@drawable/listview_item_bg"
+            android:layout_weight="1"
+            android:padding="@dimen/size10">
+
+            <TextView
+                android:id="@+id/newStock_shangZheng"
+                android:layout_width="wrap_content"
+                android:layout_height="wrap_content"
+                android:layout_centerHorizontal="true"
+                android:layout_margin="@dimen/size1"
+                android:textSize="@dimen/hushen_TopTitle"
+                android:textColor="@color/hushenTab_titleColor"
+                android:textStyle="bold" />
+
+            <RelativeLayout
+                android:id="@+id/rl_top2Bg"
+                android:layout_width="match_parent"
+                android:layout_height="wrap_content"
+                android:layout_below="@id/newStock_shangZheng">
+                <TextView
+                    android:id="@+id/newStock_shangZhengTv1"
+                    android:layout_width="wrap_content"
+                    android:layout_height="wrap_content"
+                    android:layout_centerHorizontal="true"
+                    android:layout_margin="@dimen/size1"
+                    android:textColor="@color/green"
+                    android:textSize="@dimen/txtSize18"/>
+
+                <LinearLayout
+                    android:layout_width="wrap_content"
+                    android:layout_height="wrap_content"
+                    android:layout_below="@+id/newStock_shangZhengTv1"
+                    android:layout_centerHorizontal="true"
+                    android:orientation="horizontal">
+
+                    <TextView
+                        android:id="@+id/newStock_shangZhengTv2"
+                        android:layout_width="wrap_content"
+                        android:layout_height="wrap_content"
+                        android:layout_marginLeft="@dimen/size4"
+                        android:layout_marginRight="@dimen/size4"
+                        android:layout_marginTop="@dimen/size1"
+                        android:layout_marginBottom="@dimen/size1"
+                        android:textSize="@dimen/txtSize10"
+                        android:textColor="@color/green" />
+
+                    <TextView
+                        android:id="@+id/newStock_shangZhengTv3"
+                        android:layout_width="wrap_content"
+                        android:layout_height="wrap_content"
+                        android:layout_marginLeft="@dimen/size4"
+                        android:layout_marginRight="@dimen/size4"
+                        android:layout_marginTop="@dimen/size1"
+                        android:layout_marginBottom="@dimen/size1"
+                        android:textSize="@dimen/txtSize10"
+                        android:textColor="@color/green" />
+                </LinearLayout>
+            </RelativeLayout>
+
+
+        </RelativeLayout>
+
+        <!--  123456789 -->
+
+
+
+        <View
+            android:layout_width="1px"
+            android:layout_height="match_parent"
+            android:background="@color/lineColor" />
+
+        <RelativeLayout
+            android:id="@+id/newStock_gv3"
+            android:layout_width="0dp"
+            android:layout_height="wrap_content"
+            android:background="@drawable/listview_item_bg"
+            android:layout_weight="1"
+            android:padding="@dimen/size10">
+
+            <TextView
+                android:id="@+id/newStock_chuangye"
+                android:layout_width="wrap_content"
+                android:layout_height="wrap_content"
+                android:layout_centerHorizontal="true"
+                android:layout_margin="@dimen/size1"
+                android:textSize="@dimen/hushen_TopTitle"
+                android:textColor="@color/hushenTab_titleColor"
+                android:textStyle="bold" />
+
+            <RelativeLayout
+                android:id="@+id/rl_top3Bg"
+                android:layout_width="match_parent"
+                android:layout_height="wrap_content"
+                android:layout_below="@id/newStock_chuangye">
+                <TextView
+                    android:id="@+id/newStock_chuangyeTv1"
+                    android:layout_width="wrap_content"
+                    android:layout_height="wrap_content"
+                    android:layout_centerHorizontal="true"
+                    android:layout_margin="@dimen/size1"
+                    android:textColor="@color/green"
+                    android:textSize="@dimen/txtSize18"/>
+
+                <LinearLayout
+                    android:layout_width="wrap_content"
+                    android:layout_height="wrap_content"
+                    android:layout_below="@id/newStock_chuangyeTv1"
+                    android:layout_centerHorizontal="true"
+                    android:orientation="horizontal">
+
+                    <TextView
+                        android:id="@+id/newStock_chuangyeTv2"
+                        android:layout_width="wrap_content"
+                        android:layout_height="wrap_content"
+                        android:layout_marginLeft="@dimen/size4"
+                        android:layout_marginRight="@dimen/size4"
+                        android:layout_marginTop="@dimen/size1"
+                        android:layout_marginBottom="@dimen/size1"
+                        android:textSize="@dimen/txtSize10"
+                        android:textColor="@color/green" />
+
+                    <TextView
+                        android:id="@+id/newStock_chuangyeTv3"
+                        android:layout_width="wrap_content"
+                        android:layout_height="wrap_content"
+                        android:layout_marginLeft="@dimen/size4"
+                        android:layout_marginRight="@dimen/size4"
+                        android:layout_marginTop="@dimen/size1"
+                        android:layout_marginBottom="@dimen/size1"
+                        android:textSize="@dimen/txtSize10"
+                        android:textColor="@color/green" />
+                </LinearLayout>
+            </RelativeLayout>
+
+        </RelativeLayout>
+
+    </LinearLayout>
+
+    <View
+        android:layout_width="match_parent"
+        android:layout_height="1px"
+        android:background="@color/lineColor" />
+</LinearLayout>

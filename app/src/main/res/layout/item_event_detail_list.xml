@@ -1,0 +1,65 @@
+<?xml version="1.0" encoding="utf-8"?>
+<LinearLayout xmlns:android="http://schemas.android.com/apk/res/android"
+    android:layout_width="match_parent"
+    android:layout_height="wrap_content"
+    android:orientation="vertical">
+
+
+    <LinearLayout
+        android:layout_width="match_parent"
+        android:layout_height="@dimen/size45"
+        android:gravity="center"
+        android:orientation="horizontal">
+
+        <TextView
+            android:layout_weight="1"
+            android:id="@+id/tvEventDeatilStockName"
+            android:layout_width="0dp"
+            android:layout_height="wrap_content"
+            android:gravity="left"
+            android:paddingLeft="@dimen/size20"
+            android:text=""
+            android:textSize="15sp"
+            android:textColor="@color/textss"
+            android:textStyle="bold"
+            />
+
+        <TextView
+            android:layout_weight="1"
+            android:id="@+id/tvEventDeatilStockCode"
+            android:layout_width="0dp"
+            android:layout_height="wrap_content"
+            android:gravity="center"
+            android:text=""
+            android:textSize="14sp"
+            android:textColor="@color/textss" />
+
+        <TextView
+            android:layout_weight="1"
+            android:id="@+id/tvEventDeatilStockPrice"
+            android:layout_width="0dp"
+            android:layout_height="wrap_content"
+            android:gravity="center"
+            android:text=""
+            android:textSize="14sp"
+            android:textColor="@color/textss"/>
+
+        <TextView
+            android:layout_weight="1"
+            android:id="@+id/tvEventDeatilStockRange"
+            android:layout_width="0dp"
+            android:layout_height="wrap_content"
+            android:gravity="right"
+            android:paddingRight = "@dimen/size20"
+            android:text=""
+            android:textSize="14sp"
+            android:textColor="@color/red" />
+
+    </LinearLayout>
+    <View
+        android:id="@+id/v_line"
+        android:layout_width="match_parent"
+        android:layout_height="0.5dp"
+        android:layout_marginLeft="@dimen/size20"
+        android:background="@color/lineColor" />
+</LinearLayout>

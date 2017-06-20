@@ -1,0 +1,90 @@
+<?xml version="1.0" encoding="utf-8"?>
+<LinearLayout xmlns:android="http://schemas.android.com/apk/res/android"
+    android:layout_width="match_parent"
+    android:layout_height="match_parent"
+    android:background="@color/white"
+    android:orientation="vertical">
+
+    <LinearLayout
+        android:layout_width="match_parent"
+        android:layout_height="55dp"
+        android:gravity="center_vertical"
+        android:orientation="horizontal">
+
+        <!--开户时间-->
+        <LinearLayout
+            android:layout_width="0dp"
+            android:layout_height="wrap_content"
+            android:layout_weight="1"
+            android:gravity="left"
+            android:orientation="vertical"
+            android:paddingLeft="@dimen/size12">
+
+            <TextView
+                android:id="@+id/tvOTC_OpenDate"
+                android:layout_width="wrap_content"
+                android:layout_height="wrap_content"
+                android:singleLine="true"
+                android:text="--"
+                android:textColor="@color/hushenTab_titleColor"
+                android:textSize="12sp" />
+
+        </LinearLayout>
+
+
+        <!--账户-->
+        <LinearLayout
+            android:layout_width="0dp"
+            android:layout_height="wrap_content"
+            android:layout_weight="1"
+            android:gravity="center"
+            android:orientation="vertical">
+
+            <TextView
+                android:id="@+id/tvOTC_Account"
+                android:layout_width="wrap_content"
+                android:layout_height="wrap_content"
+                android:text="--"
+                android:textColor="@color/hushenTab_titleColor"
+                android:textSize="@dimen/txtSize12" />
+
+        </LinearLayout>
+
+
+        <!--公司/状态-->
+        <LinearLayout
+            android:layout_width="0dp"
+            android:layout_height="wrap_content"
+            android:layout_weight="1"
+            android:gravity="right"
+            android:orientation="vertical"
+            android:paddingRight="@dimen/size12">
+
+            <TextView
+                android:id="@+id/tvOTC_company"
+                android:layout_width="wrap_content"
+                android:layout_height="wrap_content"
+                android:text="--"
+                android:textColor="@color/hushenTab_titleColor"
+                android:textSize="@dimen/txtSize12" />
+
+            <TextView
+                android:id="@+id/tvOTC_AccountState"
+                android:layout_width="wrap_content"
+                android:layout_height="wrap_content"
+                android:text="--"
+                android:textColor="@color/hushenTab_titleColor"
+                android:textSize="@dimen/txtSize12" />
+
+        </LinearLayout>
+
+    </LinearLayout>
+
+    <!--分割线-->
+
+    <View
+        android:layout_width="match_parent"
+        android:layout_height="@dimen/size0.5"
+        android:background="@color/lineColor" />
+
+</LinearLayout>

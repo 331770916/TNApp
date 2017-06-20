@@ -1,0 +1,15 @@
+<?xml version="1.0" encoding="utf-8"?>
+<resources>
+    <item type="id" name="drag_handle" />
+    <item type="id" name="click_remove" />
+    <item type="id" name="allot_fundTv"/>
+    <item type= "id" name="managerMoney_changeGroupBtn"/>
+    <item type= "id" name="managerMoney_changeGroupIv"/>
+    <item type= "id" name="managerMoney_producetTitle"/>
+    <item type= "id" name="managerMoney_producetPersent"/>
+    <item type= "id" name="managerMoney_producetPersentType"/>
+    <item type= "id" name="managerMoney_producetPersentBottom"/>
+    <item type= "id" name="managerMoney_producetPersentView"/>
+    <item type= "id" name="dialog_image"/>
+    <item type= "id" name="dialog_text"/>
+</resources>

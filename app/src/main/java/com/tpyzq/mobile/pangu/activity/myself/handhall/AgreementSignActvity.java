@@ -1,0 +1,280 @@
+package com.tpyzq.mobile.pangu.activity.myself.handhall;
+
+import android.app.Dialog;
+import android.content.Intent;
+import android.graphics.Color;
+import android.text.TextUtils;
+import android.view.View;
+import android.widget.ImageView;
+import android.widget.LinearLayout;
+import android.widget.RelativeLayout;
+import android.widget.TextView;
+
+import com.tpyzq.mobile.pangu.R;
+import com.tpyzq.mobile.pangu.activity.myself.login.TransactionLoginActivity;
+import com.tpyzq.mobile.pangu.base.BaseActivity;
+import com.tpyzq.mobile.pangu.data.AgreementSignedEntity;
+import com.tpyzq.mobile.pangu.db.Db_PUB_USERS;
+import com.tpyzq.mobile.pangu.http.NetWorkUtil;
+import com.tpyzq.mobile.pangu.log.LogHelper;
+import com.tpyzq.mobile.pangu.log.LogUtil;
+import com.tpyzq.mobile.pangu.util.ConstantUtil;
+import com.tpyzq.mobile.pangu.util.Helper;
+import com.tpyzq.mobile.pangu.util.SpUtils;
+import com.tpyzq.mobile.pangu.view.dialog.LoadingDialog;
+import com.tpyzq.mobile.pangu.view.dialog.MistakeDialog;
+import com.zhy.http.okhttp.callback.StringCallback;
+
+import org.json.JSONArray;
+import org.json.JSONException;
+import org.json.JSONObject;
+
+import java.util.ArrayList;
+import java.util.HashMap;
+import java.util.List;
+
+import okhttp3.Call;
+
+import static com.umeng.socialize.Config.dialog;
+
+
+/**
+ * Created by wangqi on 2016/9/13.
+ * 退市和风险警示协议签署
+ */
+public class AgreementSignActvity extends BaseActivity implements View.OnClickListener {
+    private static String TAG = "AgreementSignActvity";
+    private AgreementSignedEntity _bean;
+    private String Record = null;
+    private List<AgreementSignedEntity> beans;
+    private AgreementSignedEntity.Data _beanDate;
+
+    private String market_a_1, secu_rights_1;
+    private TextView tvHuA, tvNotSatisfied2;
+    private LinearLayout ic_linearLayout2;
+    private ImageView ic_notSatisfied2;
+    private LinearLayout isShow;
+    private RelativeLayout isNodata;
+    private Dialog mDialog;
+
+    @Override
+    public void initView() {
+        findViewById(R.id.ASpublish_back).setOnClickListener(this);
+        tvHuA = (TextView) findViewById(R.id.tvHuA);
+
+        tvNotSatisfied2 = (TextView) findViewById(R.id.tvNotSatisfied2);
+
+        ic_linearLayout2 = (LinearLayout) findViewById(R.id.ic_LinearLayout2);
+
+        ic_notSatisfied2 = (ImageView) findViewById(R.id.ic_NotSatisfied2);
+
+        isShow = (LinearLayout) findViewById(R.id.Linear_data);
+        isNodata = (RelativeLayout) findViewById(R.id.stockNewsLayout);
+
+        findViewById(R.id.btnRelativeLayout2).setOnClickListener(this);
+        isNodata.setOnClickListener(this);
+        isShow.setVisibility(View.GONE);
+        isNodata.setVisibility(View.VISIBLE);
+
+        mDialog = LoadingDialog.initDialog(this, "加载中...");
+    }
+
+    /**
+     * 客户时间 网络请求
+     */
+    private void toConnectDate() {
+        _beanDate = new AgreementSignedEntity.Data();
+        String mSession = SpUtils.getString(this, "mSession", "");
+        HashMap map = new HashMap();
+        HashMap map1 = new HashMap();
+        map.put("funcid", "700071");
+        map.put("token", mSession);
+        map.put("parms", map1);
+        map1.put("SEC_ID", "tpyzq");
+        map1.put("FLAG", "true");
+
+        NetWorkUtil.getInstence().okHttpForPostString(TAG, ConstantUtil.URL_JY, map, new StringCallback() {
+            @Override
+            public void onError(Call call, Exception e, int id) {
+                LogUtil.e(TAG, e.toString());
+                Helper.getInstance().showToast(AgreementSignActvity.this, "网络异常");
+            }
+
+            @Override
+            public void onResponse(String response, int id) {
+                if (TextUtils.isEmpty(response)) {
+                    return;
+                }
+                try {
+                    JSONObject jsonObject = new JSONObject(response);
+                    if ("0".equals(jsonObject.getString("code"))) {
+                        JSONArray data = jsonObject.getJSONArray("data");
+                        if (data != null && data.length() > 0) {
+                            for (int i = 0; i < data.length(); i++) {
+                                String SHFXJS_SIGN_DATE = data.getJSONObject(i).getString("SHFXJS_SIGN_DATE");
+                                String SZTS_SIGN_DATE = data.getJSONObject(i).getString("SZTS_SIGN_DATE");
+                                String SHTS_SIGN_DATE = data.getJSONObject(i).getString("SHTS_SIGN_DATE");
+                                if (!TextUtils.isEmpty(SHFXJS_SIGN_DATE) && !"0".equals(SHFXJS_SIGN_DATE)) {
+                                    _beanDate.setSHFXJS_SIGN_DATE(Helper.getMyDateY_M_D(SHFXJS_SIGN_DATE));//是上海风险警示协议
+                                }
+
+                                if (!TextUtils.isEmpty(SZTS_SIGN_DATE) && !"0".equals(SZTS_SIGN_DATE)) {
+                                    _beanDate.setSZTS_SIGN_DATE(Helper.getMyDateY_M_D(SZTS_SIGN_DATE));    //是深圳退市
+                                }
+
+                                if (!TextUtils.isEmpty(SHTS_SIGN_DATE) && !"0".equals(SHTS_SIGN_DATE)) {
+                                    _beanDate.setSHTS_SIGN_DATE(Helper.getMyDateY_M_D(SHTS_SIGN_DATE));    //是上海退市整理协议
+                                }
+
+                            }
+                        }
+                    } else if ("-6".equals(jsonObject.getString("code"))) {
+                        startActivity(new Intent(AgreementSignActvity.this, TransactionLoginActivity.class));
+                    } else {
+                        MistakeDialog.showDialog(jsonObject.getString("msg"), AgreementSignActvity.this);
+                    }
+                } catch (JSONException e) {
+                    e.printStackTrace();
+                    Helper.getInstance().showToast(AgreementSignActvity.this, "网络异常");
+                }
+            }
+        });
+    }
+
+    /**
+     * 网络请求
+     */
+    private void toConnect() {
+        String mSession = SpUtils.getString(this, "mSession", "");
+        final HashMap map = new HashMap();
+        HashMap map1 = new HashMap();
+        map.put("funcid", "700070");
+        map.put("token", mSession);
+        map.put("parms", map1);
+        map1.put("SEC_ID", "tpyzq");
+        map1.put("FLAG", "true");
+        NetWorkUtil.getInstence().okHttpForPostString(TAG, ConstantUtil.URL_JY, map, new StringCallback() {
+            @Override
+            public void onError(Call call, Exception e, int id) {
+                LogHelper.e(TAG, e.toString());
+                if (dialog != null) {
+                    dialog.dismiss();
+                }
+                isShow.setVisibility(View.GONE);
+                isNodata.setVisibility(View.VISIBLE);
+                Helper.getInstance().showToast(AgreementSignActvity.this, "网络异常");
+            }
+
+            @Override
+            public void onResponse(String response, int id) {
+                if (dialog != null) {
+                    dialog.dismiss();
+                }
+                if (TextUtils.isEmpty(response)) {
+                    return;
+                }
+                try {
+                    JSONObject jsonObject = new JSONObject(response);
+                    beans = new ArrayList<AgreementSignedEntity>();
+                    beans.clear();
+                    if ("0".equals(jsonObject.getString("code"))) {
+                        JSONArray data = jsonObject.getJSONArray("data");
+                        if (data != null && data.length() > 0) {
+                            for (int i = 0; i < data.length(); i++) {
+                                _bean = new AgreementSignedEntity();
+                                _bean.setMarket(data.getJSONObject(i).getString("MARKET"));
+                                _bean.setSecu_code(data.getJSONObject(i).getString("SECU_CODE"));
+                                _bean.setSecu_rights(data.getJSONObject(i).getString("SECU_RIGHTS"));
+                                _bean.setSecu_name(data.getJSONObject(i).getString("SECU_NAME"));
+                                beans.add(_bean);
+                            }
+                        }
+                        if (beans != null && beans.size() > 0) {
+                            isShow.setVisibility(View.VISIBLE);
+                            isNodata.setVisibility(View.GONE);
+                            for (int i = 0; i < beans.size(); i++) {
+                                switch (beans.get(i).getMarket()) {
+                                    case "1":
+                                        market_a_1 = beans.get(i).getSecu_code();
+                                        tvHuA.setText("沪A-" + market_a_1);
+                                        break;
+                                }
+                                if ("1".equals(beans.get(i).getMarket())) {
+                                    secu_rights_1 = beans.get(i).getSecu_rights();
+                                    if (secu_rights_1.contains("w")) {
+                                        tvNotSatisfied2.setText(R.string.Signed);
+                                        ic_linearLayout2.setBackgroundResource(R.drawable.mybut_1_selector);
+                                        ic_notSatisfied2.setImageDrawable(getResources().getDrawable(R.mipmap.sgd));
+                                        tvNotSatisfied2.setTextColor(Color.parseColor("#ffffff"));
+                                    } else {
+                                        tvNotSatisfied2.setText(R.string.nosign);
+                                        tvNotSatisfied2.setTextColor(Color.parseColor("#ffffff"));
+                                        ic_linearLayout2.setBackgroundResource(R.drawable.mybut_selector);
+                                        ic_notSatisfied2.setImageDrawable(getResources().getDrawable(R.mipmap.notsatisfied));
+                                    }
+                                }
+                            }
+                        } else {
+                            isShow.setVisibility(View.GONE);
+                            isNodata.setVisibility(View.VISIBLE);
+                        }
+                    } else if ("-6".equals(jsonObject.getString("msg"))) {
+                        startActivity(new Intent(AgreementSignActvity.this, TransactionLoginActivity.class));
+                    } else {
+                        isShow.setVisibility(View.GONE);
+                        isNodata.setVisibility(View.VISIBLE);
+                        MistakeDialog.showDialog(jsonObject.getString("msg"), AgreementSignActvity.this);
+                    }
+                } catch (JSONException e) {
+                    e.printStackTrace();
+                }
+            }
+        });
+    }
+
+
+    @Override
+    public int getLayoutId() {
+        return R.layout.activity_agreementsigned;
+    }
+
+    @Override
+    public void onClick(View v) {
+        Intent intent = new Intent();
+        switch (v.getId()) {
+            case R.id.ASpublish_back:
+                finish();
+                break;
+            case R.id.btnRelativeLayout2:
+                intent.setClass(this, RiskWarningActivity.class);
+                intent.putExtra("Record", secu_rights_1);
+                intent.putExtra("Code", market_a_1);
+                intent.putExtra("Name", beans.get(0).getSecu_name());
+                if (!TextUtils.isEmpty(_beanDate.getSHFXJS_SIGN_DATE())) {
+                    intent.putExtra("SHFXJSDate", _beanDate.getSHFXJS_SIGN_DATE());
+                }
+                startActivity(intent);
+                break;
+            case R.id.stockNewsLayout:
+                if (!AgreementSignActvity.this.isFinishing()) {
+                    mDialog.show();
+                }
+                toConnect();
+                toConnectDate();
+                break;
+        }
+    }
+
+    @Override
+    protected void onResume() {
+        super.onResume();
+
+        if (Db_PUB_USERS.islogin()) {
+            if (!AgreementSignActvity.this.isFinishing()) {
+                mDialog.show();
+            }
+            toConnect();
+            toConnectDate();
+        }
+    }
+}

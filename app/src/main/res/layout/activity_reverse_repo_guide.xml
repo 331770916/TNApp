@@ -1,0 +1,97 @@
+<?xml version="1.0" encoding="utf-8"?>
+<LinearLayout xmlns:android="http://schemas.android.com/apk/res/android"
+    xmlns:tools="http://schemas.android.com/tools"
+    android:id="@+id/activity_reverse_repo_guide"
+    android:layout_width="match_parent"
+    android:layout_height="match_parent"
+    android:background="@mipmap/bg_reverse_repo"
+    tools:context="com.tpyzq.mobile.pangu.activity.trade.stock.ReverseRepoActivity"
+    android:orientation="vertical">
+
+    <View
+        android:layout_width="match_parent"
+        android:layout_height="@dimen/size25" />
+
+    <RelativeLayout
+        android:layout_width="match_parent"
+        android:layout_height="@dimen/pickerview_topbar_height">
+
+        <TextView
+            android:id="@+id/tv_title"
+            android:layout_width="wrap_content"
+            android:layout_height="wrap_content"
+            android:layout_centerInParent="true"
+            android:text="国债逆回购"
+            android:textColor="@color/white"
+            android:textSize="@dimen/pickerview_topbar_title_textsize" />
+
+        <ImageView
+            android:id="@+id/iv_back"
+            android:layout_width="@dimen/size48"
+            android:layout_height="match_parent"
+            android:scaleType="center"
+            android:src="@mipmap/back_btn" />
+    </RelativeLayout>
+
+    <RelativeLayout
+        android:layout_width="wrap_content"
+        android:layout_height="wrap_content"
+        android:layout_gravity="center_horizontal"
+        android:layout_marginTop="@dimen/size80"
+        android:background="@mipmap/reverse_repo_ring">
+
+        <TextView
+            android:id="@+id/tv_using_money"
+            android:layout_width="wrap_content"
+            android:layout_height="wrap_content"
+            android:layout_centerHorizontal="true"
+            android:layout_marginTop="@dimen/size70"
+            android:text="--"
+            android:textSize="@dimen/txtSize16"
+            android:textColor="@color/white" />
+
+        <TextView
+            android:layout_width="wrap_content"
+            android:layout_height="wrap_content"
+            android:layout_below="@id/tv_using_money"
+            android:layout_centerHorizontal="true"
+            android:layout_marginTop="@dimen/size15"
+            android:text="当前可用资金(元)"
+            android:textColor="@color/white" />
+    </RelativeLayout>
+
+    <LinearLayout
+        android:layout_width="match_parent"
+        android:layout_height="match_parent"
+        android:paddingBottom="@dimen/size70"
+        android:orientation="horizontal">
+
+        <ImageButton
+            android:id="@+id/ib_backbill"
+            android:layout_width="0dp"
+            android:layout_height="wrap_content"
+            android:layout_gravity="bottom"
+            android:src="@mipmap/back_mortgage"
+            android:background="@android:color/transparent"
+            android:layout_weight="1" />
+
+        <ImageButton
+            android:id="@+id/ib_start"
+            android:layout_width="0dp"
+            android:layout_height="wrap_content"
+            android:layout_gravity="bottom"
+            android:src="@mipmap/start_mortgage"
+            android:background="@android:color/transparent"
+            android:layout_weight="1" />
+
+        <ImageButton
+
+            android:id="@+id/ib_search"
+            android:layout_width="0dp"
+            android:layout_height="wrap_content"
+            android:layout_gravity="bottom"
+            android:src="@mipmap/search_mortgage"
+            android:background="@android:color/transparent"
+            android:layout_weight="1" />
+    </LinearLayout>
+</LinearLayout>

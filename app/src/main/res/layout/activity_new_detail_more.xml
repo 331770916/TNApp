@@ -1,0 +1,51 @@
+<?xml version="1.0" encoding="utf-8"?>
+<RelativeLayout xmlns:android="http://schemas.android.com/apk/res/android"
+    xmlns:tools="http://schemas.android.com/tools"
+    android:id="@+id/activity_new_detail_more"
+    android:layout_width="match_parent"
+    android:layout_height="match_parent"
+    tools:context="com.tpyzq.mobile.pangu.activity.home.information.NewsDetailMoreActivity">
+
+    <RelativeLayout
+        android:id="@+id/rlNewDetailMoveXiaChen"
+        android:layout_width="match_parent"
+        android:layout_height="@dimen/size25"
+        android:background="@color/blue"
+        android:clipToPadding="true"
+        android:fitsSystemWindows="true" />
+
+    <!-- 头布局 -->
+    <RelativeLayout
+        android:id="@+id/rlNewsDetailMoreTitle"
+        android:layout_below="@id/rlNewDetailMoveXiaChen"
+        android:layout_width="match_parent"
+        android:layout_height="@dimen/pickerview_topbar_height"
+        android:background="@color/blue">
+
+        <ImageView
+            android:id="@+id/ivNewsDetailMove_back"
+            android:layout_width="wrap_content"
+            android:layout_height="match_parent"
+            android:layout_alignParentLeft="true"
+            android:padding="@dimen/size10"
+            android:src="@mipmap/back_btn" />
+
+        <TextView
+            android:layout_width="wrap_content"
+            android:layout_height="wrap_content"
+            android:layout_centerInParent="true"
+            android:text="新闻详情"
+            android:textColor="@color/white"
+            android:textSize="@dimen/pickerview_topbar_title_textsize" />
+
+    </RelativeLayout>
+
+    <WebView
+        android:id="@+id/wvNewDetalMove"
+        android:layout_below="@id/rlNewsDetailMoreTitle"
+        android:layout_width="match_parent"
+        android:layout_height="match_parent">
+
+    </WebView>
+
+</RelativeLayout>

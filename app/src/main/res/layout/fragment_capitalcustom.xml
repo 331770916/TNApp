@@ -1,0 +1,143 @@
+<?xml version="1.0" encoding="utf-8"?>
+<LinearLayout xmlns:android="http://schemas.android.com/apk/res/android"
+    xmlns:app="http://schemas.android.com/apk/res-auto"
+    android:layout_width="match_parent"
+    android:layout_height="wrap_content"
+    android:orientation="vertical">
+
+    <View
+        android:layout_width="match_parent"
+        android:layout_height="@dimen/size10"
+        android:background="@color/bgColor" />
+
+    <LinearLayout
+        android:layout_width="match_parent"
+        android:layout_height="@dimen/size35"
+        android:background="@color/white"
+        android:orientation="horizontal">
+
+
+        <TextView
+            android:id="@+id/CapitalStartDate"
+            android:layout_width="0dp"
+            android:layout_height="wrap_content"
+            android:layout_marginLeft="@dimen/size22"
+            android:layout_weight="1.5"
+            android:drawableLeft="@mipmap/rililan"
+            android:drawablePadding="@dimen/size10"
+            android:drawableRight="@mipmap/sanjiao"
+            android:gravity="center|end"
+            android:paddingRight="@dimen/size13"
+            android:text="2016-07-07"
+            android:textColor="@color/hideTextColor"
+            android:textSize="@dimen/txtSize12" />
+
+        <TextView
+            android:layout_width="0dp"
+            android:layout_height="wrap_content"
+            android:layout_gravity="center"
+            android:layout_weight="0.4"
+            android:gravity="center"
+            android:text="至"
+            android:textColor="@color/black" />
+
+
+        <TextView
+            android:id="@+id/CapitalFinishDate"
+            android:layout_width="0dp"
+            android:layout_height="wrap_content"
+            android:layout_gravity="center"
+            android:layout_weight="1"
+            android:drawableRight="@mipmap/sanjiao"
+            android:gravity="center"
+            android:text="2016-07-07"
+            android:textColor="@color/hideTextColor"
+            android:textSize="@dimen/txtSize12" />
+
+
+        <TextView
+            android:id="@+id/CapitalInquire"
+            android:layout_width="0dp"
+            android:layout_height="match_parent"
+            android:layout_marginLeft="@dimen/size15"
+            android:layout_weight="1"
+            android:background="@color/calendarBtnColor"
+            android:gravity="center"
+            android:text="查询"
+            android:textColor="@color/white" />
+    </LinearLayout>
+
+    <View
+        android:layout_width="match_parent"
+        android:layout_height="@dimen/size10"
+        android:background="@color/bgColor" />
+
+    <LinearLayout
+        android:paddingLeft="@dimen/size20"
+        android:paddingRight="@dimen/size20"
+        android:layout_width="match_parent"
+        android:layout_height="@dimen/size30"
+        android:background="@color/white"
+        android:gravity="center"
+        android:orientation="horizontal">
+
+        <TextView
+            android:layout_width="0dp"
+            android:layout_height="wrap_content"
+            android:layout_weight="1"
+            android:gravity="center|fill"
+            android:text="@string/cjriq"
+            android:textColor="@color/newStockTitle"
+            android:textSize="@dimen/txtSize12" />
+
+        <TextView
+            android:layout_width="0dp"
+            android:layout_height="wrap_content"
+            android:layout_weight="1"
+            android:gravity="center"
+            android:text="@string/ywcx"
+            android:textColor="@color/newStockTitle"
+            android:textSize="@dimen/txtSize12" />
+
+        <TextView
+            android:layout_width="0dp"
+            android:layout_height="wrap_content"
+            android:layout_weight="1"
+            android:gravity="center|end"
+            android:text="@string/fsje"
+            android:textColor="@color/newStockTitle"
+            android:textSize="@dimen/txtSize12" />
+
+    </LinearLayout>
+
+    <View
+        android:layout_width="match_parent"
+        android:layout_height="@dimen/size0.5"
+        android:background="@color/lineColor" />
+
+    <RelativeLayout
+        android:id="@+id/Kong_Null"
+        android:layout_width="match_parent"
+        android:layout_height="match_parent">
+
+        <com.handmark.pulltorefresh.library.PullToRefreshListView
+            android:id="@+id/CapitalTodayListView"
+            android:layout_width="match_parent"
+            android:layout_height="match_parent"
+            android:divider="@color/lineColor"
+            android:dividerHeight="@dimen/size0.5"
+            android:scrollbars="none"
+            app:ptrAnimationStyle="flip"
+            app:ptrMode="both" />
+
+        <ImageView
+            android:id="@+id/iv_isEmpty"
+            android:scaleType="center"
+            android:layout_width="match_parent"
+            android:layout_height="match_parent"
+            android:layout_centerInParent="true"
+            android:src="@mipmap/kong" />
+    </RelativeLayout>
+
+
+</LinearLayout>

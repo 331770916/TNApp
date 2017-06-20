@@ -1,0 +1,118 @@
+<?xml version="1.0" encoding="utf-8"?>
+<LinearLayout xmlns:android="http://schemas.android.com/apk/res/android"
+    android:orientation="vertical"
+    android:layout_width="match_parent"
+    android:layout_height="wrap_content"
+    android:background="@color/white"
+   >
+
+    <RelativeLayout
+        android:layout_width="match_parent"
+        android:layout_height="wrap_content">
+        <LinearLayout
+            android:layout_width="match_parent"
+            android:layout_height="match_parent"
+            android:paddingTop="@dimen/size5"
+            android:paddingBottom="@dimen/size5"
+            android:orientation="horizontal">
+
+            <RelativeLayout
+                android:layout_width="wrap_content"
+                android:layout_height="wrap_content"
+                android:layout_marginLeft="@dimen/size5"
+                android:layout_gravity="center_vertical">
+                <CheckBox
+                    android:id="@+id/adapter_edit_checkBox"
+                    android:button="@null"
+                    android:background="@drawable/edit_self_bx"
+                    android:scaleX="0.4"
+                    android:scaleY="0.4"
+                    android:layout_width="@dimen/size50"
+                    android:layout_height="@dimen/size50" />
+            </RelativeLayout>
+
+
+            <RelativeLayout
+                android:layout_width="0dp"
+                android:layout_weight="1.3"
+                android:layout_gravity="center_vertical"
+                android:layout_height="wrap_content">
+
+                <TextView
+                    android:id="@+id/adapter_edit_stockName"
+                    android:layout_width="wrap_content"
+                    android:layout_height="wrap_content"
+                    android:layout_alignParentLeft="true"
+                    android:layout_alignParentTop="true"
+                    android:textColor="@color/black"
+                    android:text="--"/>
+
+                <TextView
+                    android:id="@+id/adapter_edit_stockNumber"
+                    android:layout_below="@id/adapter_edit_stockName"
+                    android:layout_width="wrap_content"
+                    android:layout_height="wrap_content"
+                    android:layout_alignLeft="@id/adapter_edit_stockName"
+                    android:textColor="@color/black"
+                    android:text="--"/>
+
+                <ImageView
+                    android:id="@+id/editChoice_HoldIc"
+                    android:layout_width="@dimen/size15"
+                    android:layout_height="@dimen/size15"
+                    android:layout_marginTop="@dimen/size5"
+                    android:layout_toRightOf="@id/adapter_edit_stockName"
+                    android:layout_gravity="center_vertical"
+                    android:src="@mipmap/hold_iv"/>
+
+
+                <ImageView
+                    android:id="@+id/editChoice_HotIc"
+                    android:layout_width="@dimen/size15"
+                    android:layout_height="@dimen/size15"
+                    android:layout_marginTop="@dimen/size5"
+                    android:layout_marginLeft="@dimen/size5"
+                    android:layout_toRightOf="@id/editChoice_HoldIc"
+                    android:layout_gravity="center_vertical"
+                    android:layout_alignParentRight="true"
+                    android:src="@mipmap/hot_iv"/>
+
+            </RelativeLayout>
+
+            <ImageView
+                android:id="@+id/adapter_edit_assign"
+                android:layout_width="0dp"
+                android:layout_weight="1"
+                android:src="@mipmap/assign_top"
+                android:padding="@dimen/size10"
+                android:layout_gravity="center_vertical"
+                android:layout_height="wrap_content" />
+
+            <ImageView
+                android:id="@+id/adapter_edit_remain"
+                android:layout_width="0dp"
+                android:layout_weight="1"
+                android:src="@mipmap/remain"
+                android:padding="@dimen/size10"
+                android:layout_gravity="center_vertical"
+                android:layout_height="wrap_content" />
+
+            <ImageView
+                android:id="@+id/drag_handle"
+                android:layout_width="0dp"
+                android:layout_weight="1"
+                android:src="@mipmap/move"
+                android:layout_gravity="center_vertical"
+                android:padding="@dimen/size10"
+                android:layout_height="wrap_content" />
+        </LinearLayout>
+    </RelativeLayout>
+
+    <View
+        android:layout_width="match_parent"
+        android:layout_height="1px"
+        android:layout_marginLeft="@dimen/size10"
+        android:background="@color/lineColor"/>
+
+
+</LinearLayout>

@@ -1,0 +1,211 @@
+<?xml version="1.0" encoding="utf-8"?>
+<LinearLayout xmlns:android="http://schemas.android.com/apk/res/android"
+    android:layout_width="match_parent"
+    android:layout_height="match_parent"
+    android:orientation="vertical">
+
+    <LinearLayout
+        android:layout_width="match_parent"
+        android:layout_height="wrap_content"
+        android:orientation="horizontal"
+        android:paddingBottom="@dimen/size5"
+        android:paddingTop="@dimen/size5">
+
+        <TextView
+            android:layout_width="0dp"
+            android:layout_height="wrap_content"
+            android:layout_weight="1"
+            android:paddingLeft="@dimen/size20"
+            android:text="总股本"
+            android:textColor="@color/hushenTab_titleColor"
+            android:textSize="@dimen/txtSize14" />
+
+        <TextView
+            android:id="@+id/tv_view1_01"
+            android:layout_width="0dp"
+            android:layout_height="wrap_content"
+            android:layout_weight="1"
+            android:gravity="right"
+            android:paddingLeft="@dimen/size20"
+            android:paddingRight="@dimen/size20"
+            android:text="--.--"
+            android:textColor="@color/hushenTab_titleColor"
+            android:textSize="@dimen/txtSize14" />
+    </LinearLayout>
+
+    <LinearLayout
+        android:layout_width="match_parent"
+        android:layout_height="wrap_content"
+        android:orientation="horizontal"
+        android:paddingBottom="@dimen/size5"
+        android:paddingTop="@dimen/size5">
+
+        <TextView
+            android:layout_width="0dp"
+            android:layout_height="wrap_content"
+            android:layout_weight="1"
+            android:paddingLeft="@dimen/size20"
+            android:text="流通A股"
+            android:textColor="@color/hushenTab_titleColor"
+            android:textSize="@dimen/txtSize14" />
+
+        <TextView
+            android:id="@+id/tv_view1_02"
+            android:layout_width="0dp"
+            android:layout_height="wrap_content"
+            android:layout_weight="1"
+            android:gravity="right"
+            android:paddingLeft="@dimen/size20"
+            android:paddingRight="@dimen/size20"
+            android:text="--.--"
+            android:textColor="@color/hushenTab_titleColor"
+            android:textSize="@dimen/txtSize14" />
+    </LinearLayout>
+
+    <LinearLayout
+        android:layout_width="match_parent"
+        android:layout_height="wrap_content"
+        android:orientation="horizontal"
+        android:paddingBottom="@dimen/size5"
+        android:paddingTop="@dimen/size5">
+
+        <TextView
+            android:layout_width="0dp"
+            android:layout_height="wrap_content"
+            android:layout_weight="1"
+            android:paddingLeft="@dimen/size20"
+            android:text="股东人数"
+            android:textColor="@color/hushenTab_titleColor"
+            android:textSize="@dimen/txtSize14" />
+
+        <TextView
+            android:id="@+id/tv_view1_03"
+            android:layout_width="0dp"
+            android:layout_height="wrap_content"
+            android:layout_weight="1"
+            android:gravity="right"
+            android:paddingLeft="@dimen/size20"
+            android:paddingRight="@dimen/size20"
+            android:text="--.--"
+            android:textColor="@color/hushenTab_titleColor"
+            android:textSize="@dimen/txtSize14" />
+    </LinearLayout>
+
+    <LinearLayout
+
+        android:layout_width="match_parent"
+        android:layout_height="wrap_content"
+        android:orientation="horizontal"
+        android:paddingBottom="@dimen/size5"
+        android:paddingTop="@dimen/size5">
+
+        <TextView
+            android:layout_width="0dp"
+            android:layout_height="wrap_content"
+            android:layout_weight="1"
+            android:paddingLeft="@dimen/size20"
+            android:text="人均持股"
+            android:textColor="@color/hushenTab_titleColor"
+            android:textSize="@dimen/txtSize14" />
+
+        <TextView
+            android:id="@+id/tv_view1_04"
+            android:layout_width="0dp"
+            android:layout_height="wrap_content"
+            android:layout_weight="1"
+            android:gravity="right"
+            android:paddingLeft="@dimen/size20"
+            android:paddingRight="@dimen/size20"
+            android:text="--.--"
+            android:textColor="@color/hushenTab_titleColor"
+            android:textSize="@dimen/txtSize14" />
+    </LinearLayout>
+
+    <View
+        android:layout_width="match_parent"
+        android:layout_height="@dimen/size5"
+        android:background="@color/bgColor" />
+
+    <LinearLayout
+        android:layout_width="match_parent"
+        android:layout_height="wrap_content"
+        android:orientation="horizontal"
+        android:paddingBottom="@dimen/size10"
+        android:paddingTop="@dimen/size10">
+
+        <TextView
+            android:layout_width="0dp"
+            android:layout_height="wrap_content"
+            android:layout_weight="1"
+            android:paddingLeft="@dimen/size20"
+            android:text="十大流通股东"
+            android:textColor="@color/calendarBtnColor"
+            android:textSize="@dimen/txtSize14" />
+
+    </LinearLayout>
+
+    <View
+        android:layout_width="match_parent"
+        android:layout_height="@dimen/size1"
+        android:background="@color/bgColor" />
+
+    <LinearLayout
+
+        android:layout_width="match_parent"
+        android:layout_height="wrap_content"
+        android:orientation="horizontal"
+        android:paddingBottom="@dimen/size5"
+        android:paddingTop="@dimen/size5">
+
+        <TextView
+            android:layout_width="0dp"
+            android:layout_height="wrap_content"
+            android:layout_weight="2"
+            android:paddingLeft="@dimen/size20"
+            android:text="股东"
+            android:textColor="@color/hushenTab_titleColor"
+            android:textSize="@dimen/txtSize14" />
+
+        <TextView
+            android:layout_width="0dp"
+            android:layout_height="wrap_content"
+            android:layout_weight="1"
+            android:gravity="center"
+            android:text="占比"
+            android:textColor="@color/hushenTab_titleColor"
+            android:textSize="@dimen/txtSize14" />
+
+        <TextView
+            android:layout_width="0dp"
+            android:layout_height="wrap_content"
+            android:layout_weight="1"
+            android:gravity="right"
+            android:paddingRight="@dimen/size20"
+            android:text="变动"
+            android:textColor="@color/hushenTab_titleColor"
+            android:textSize="@dimen/txtSize14" />
+    </LinearLayout>
+
+    <View
+        android:layout_width="match_parent"
+        android:layout_height="@dimen/size1"
+        android:background="@color/bgColor" />
+
+    <RelativeLayout
+        android:layout_width="match_parent"
+        android:layout_height="wrap_content">
+
+        <com.tpyzq.mobile.pangu.view.gridview.MyListView
+            android:id="@+id/lv_stockholder"
+            android:layout_width="match_parent"
+            android:layout_height="wrap_content"
+            android:divider="@android:color/transparent"
+            android:dividerHeight="@dimen/size0" />
+
+        <View
+            android:id="@+id/v_null"
+            android:layout_width="match_parent"
+            android:layout_height="@dimen/size40" />
+    </RelativeLayout>
+
+</LinearLayout>

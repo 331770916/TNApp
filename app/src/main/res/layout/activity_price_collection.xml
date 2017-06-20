@@ -1,0 +1,186 @@
+<?xml version="1.0" encoding="utf-8"?>
+<LinearLayout xmlns:android="http://schemas.android.com/apk/res/android"
+    android:orientation="vertical"
+    android:background="@color/bgColor"
+    android:layout_width="match_parent"
+    android:layout_height="match_parent">
+
+    <RelativeLayout
+        android:layout_width="match_parent"
+        android:layout_height="@dimen/size25"
+        android:background="@color/blue"
+        android:clipToPadding="true"
+        android:fitsSystemWindows="true" />
+
+    <RelativeLayout
+        android:layout_width="match_parent"
+        android:layout_height="@dimen/pickerview_topbar_height"
+        android:background="@color/blue">
+        <ImageView
+            android:id="@+id/collection_back"
+            android:layout_width="wrap_content"
+            android:layout_height="match_parent"
+            android:padding="@dimen/size15"
+            android:src="@mipmap/back_btn"/>
+
+        <TextView
+            android:layout_width="wrap_content"
+            android:layout_height="wrap_content"
+            android:textColor="@color/white"
+            android:layout_centerInParent="true"
+            android:textSize="@dimen/pickerview_topbar_title_textsize"
+            android:text="@string/priceCollection"/>
+    </RelativeLayout>
+
+    <LinearLayout
+        android:layout_width="match_parent"
+        android:layout_height="wrap_content"
+        android:orientation="vertical"
+        android:background="@color/blue"
+        android:paddingTop="@dimen/size10"
+        android:paddingLeft="@dimen/size20"
+        android:paddingBottom="@dimen/size20">
+
+        <RelativeLayout
+            android:layout_width="match_parent"
+            android:layout_height="wrap_content"
+            android:layout_marginRight="@dimen/size15">
+
+            <TextView
+                android:id="@+id/priceCollectionTvTitle"
+                android:layout_width="wrap_content"
+                android:layout_height="wrap_content"
+                android:textColor="@color/white"
+                android:textSize="@dimen/txtSize12"
+                android:text="@string/myFund"/>
+
+            <TextView
+                android:id="@+id/collection_AccountNo"
+                android:layout_below="@id/priceCollectionTvTitle"
+                android:layout_width="wrap_content"
+                android:layout_height="wrap_content"
+                android:layout_alignParentLeft="true"
+                android:textColor="@color/white"
+                android:textStyle="bold"
+                android:textSize="@dimen/txtSize20"/>
+
+
+            <TextView
+                android:id="@+id/collection_AccountBank"
+                android:layout_width="wrap_content"
+                android:layout_height="wrap_content"
+                android:layout_alignParentRight="true"
+                android:layout_centerVertical="true"
+                android:textColor="@color/white"
+                android:textSize="@dimen/txtSize12"/>
+
+        </RelativeLayout>
+
+        <TextView
+            android:id="@+id/collection_AccountPrice"
+            android:layout_width="wrap_content"
+            android:layout_height="wrap_content"
+            android:layout_marginTop="@dimen/size10"
+            android:textColor="@color/white"
+            android:textSize="@dimen/txtSize12"/>
+
+    </LinearLayout>
+
+    <RelativeLayout
+        android:layout_width="match_parent"
+        android:layout_height="match_parent">
+
+        <LinearLayout
+            android:id="@+id/collection_checkTopLayout"
+            android:background="@color/white"
+            android:layout_width="match_parent"
+            android:paddingLeft="@dimen/size8"
+            android:layout_height="wrap_content"
+            android:gravity="center_vertical"
+            android:orientation="horizontal">
+            <CheckBox
+                android:id="@+id/editSelfAllcheckBox"
+                android:layout_gravity="center_vertical"
+                android:button="@null"
+                android:background="@drawable/edit_self_bx"
+                android:scaleX="0.4"
+                android:scaleY="0.4"
+                android:layout_width="@dimen/size40"
+                android:layout_height="@dimen/size40"
+                android:layout_alignParentTop="true"/>
+
+            <TextView
+                android:layout_width="wrap_content"
+                android:layout_height="wrap_content"
+                android:textColor="@color/black"
+                android:padding="@dimen/size5"
+                android:gravity="center"
+                android:textSize="@dimen/txtSize12"
+                android:text="选择全部"/>
+        </LinearLayout>
+
+
+        <LinearLayout
+            android:id="@+id/collection_checkBottomLayout"
+            android:background="@color/white"
+            android:layout_width="match_parent"
+            android:layout_height="wrap_content"
+            android:padding="@dimen/size20"
+            android:layout_alignParentBottom="true"
+            android:orientation="horizontal">
+            <TextView
+                android:layout_width="0dp"
+                android:layout_height="wrap_content"
+                android:text="@string/collectionBottomTitle"
+                android:drawableLeft="@mipmap/collect_hint"
+                android:drawablePadding="@dimen/size5"
+                android:textSize="@dimen/txtSize12"
+                android:layout_weight="1"/>
+
+            <TextView
+                android:id="@+id/collectionToMainBtn"
+                android:layout_width="0dp"
+                android:layout_height="match_parent"
+                android:background="@color/calendarBtnColor"
+                android:textColor="@color/white"
+                android:text="@string/collectionToMain"
+                android:gravity="center"
+                android:layout_weight="1"/>
+        </LinearLayout>
+
+
+        <View
+            android:id="@+id/collection_checkTopView"
+            android:layout_below="@id/collection_checkTopLayout"
+            android:layout_width="match_parent"
+            android:layout_height="@dimen/size0.5"
+            android:background="@color/lineColor"/>
+
+        <FrameLayout
+            android:layout_width="match_parent"
+            android:layout_height="match_parent"
+            android:layout_below="@id/collection_checkTopView"
+            android:layout_above="@id/collection_checkBottomLayout">
+            <ListView
+                android:id="@+id/collection_listView"
+                android:layout_width="match_parent"
+                android:layout_height="match_parent"
+                android:scrollbars="none"
+                android:divider="@color/lineColor"
+                android:dividerHeight="@dimen/size0.5"
+                />
+
+            <ImageView
+                android:id="@+id/iv_collection"
+                android:layout_width="@dimen/size100"
+                android:layout_height="@dimen/size80"
+                android:visibility="gone"
+                android:layout_gravity="center"
+                android:src="@mipmap/kong"/>
+        </FrameLayout>
+
+
+
+    </RelativeLayout>
+
+</LinearLayout>

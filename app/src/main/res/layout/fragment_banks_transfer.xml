@@ -1,0 +1,151 @@
+<?xml version="1.0" encoding="utf-8"?>
+<LinearLayout xmlns:android="http://schemas.android.com/apk/res/android"
+    android:layout_width="match_parent"
+    android:layout_height="wrap_content"
+    android:orientation="vertical">
+
+    <LinearLayout
+        android:id="@+id/banks_transfer_itemLayout1"
+        android:layout_width="wrap_content"
+        android:layout_height="130dp"
+        android:background="@drawable/bankstransfer_top"
+        android:gravity="center_vertical"
+        android:orientation="vertical"
+        android:weightSum="3">
+
+        <RelativeLayout
+            android:id="@+id/banksTtop7Layout"
+            android:layout_width="match_parent"
+            android:layout_height="0dp"
+            android:layout_weight="1"
+            android:paddingTop="@dimen/size5">
+
+            <ImageView
+                android:id="@+id/pager_tab0_iv"
+                android:layout_width="wrap_content"
+                android:layout_height="wrap_content"
+                android:layout_alignParentLeft="true"
+                android:layout_centerVertical="true" />
+
+            <TextView
+                android:id="@+id/pager_bankName"
+                android:layout_width="wrap_content"
+                android:layout_height="wrap_content"
+                android:layout_alignParentRight="true"
+                android:layout_centerVertical="true"
+                android:layout_marginTop="@dimen/size10"
+                android:background="@drawable/bankstransfer_bg"
+                android:paddingBottom="@dimen/size3"
+                android:paddingLeft="@dimen/size10"
+                android:paddingRight="@dimen/size10"
+                android:paddingTop="@dimen/size3"
+                android:text="工行存管"
+                android:textColor="@color/white" />
+        </RelativeLayout>
+
+        <TextView
+            android:id="@+id/pager_bankNumber"
+            android:layout_width="match_parent"
+            android:layout_height="0dp"
+            android:layout_weight="1"
+            android:gravity="center"
+            android:paddingBottom="@dimen/size10"
+            android:textColor="@color/black"
+            android:text="**** **** **** 6860"
+            android:textSize="@dimen/txtSize20" />
+
+        <View
+            android:layout_width="match_parent"
+            android:layout_height="1px"
+            android:background="@color/lineColor" />
+
+        <RelativeLayout
+            android:id="@+id/banksTtop6Layout"
+            android:layout_width="match_parent"
+            android:layout_height="0dp"
+            android:layout_weight="1">
+
+            <TextView
+                android:id="@+id/pager_moneyType"
+                android:layout_width="wrap_content"
+                android:layout_height="wrap_content"
+                android:layout_alignParentLeft="true"
+                android:layout_centerVertical="true"
+                android:layout_marginLeft="@dimen/size10"
+                android:text="币种：人民币"
+                android:textSize="12sp"
+                android:textColor="@color/newStockTitle" />
+
+            <TextView
+                android:id="@+id/pager_query"
+                android:layout_width="wrap_content"
+                android:layout_height="wrap_content"
+                android:layout_alignParentRight="true"
+                android:layout_centerVertical="true"
+                android:layout_marginRight="@dimen/size20"
+                android:background="@drawable/bg_pagerbankquery"
+                android:textSize="12sp"
+                android:text="查询余额"
+                android:textColor="@color/blue" />
+
+        </RelativeLayout>
+    </LinearLayout>
+
+    <RelativeLayout
+        android:id="@+id/banks_transfer_itemLayout2"
+        android:layout_width="match_parent"
+        android:layout_height="130dp"
+        android:gravity="center_vertical"
+        android:background="@drawable/bankstransfer_top">
+
+        <RelativeLayout
+            android:id="@+id/pager_layout"
+            android:layout_width="match_parent"
+            android:layout_height="wrap_content"
+            android:paddingTop="@dimen/size10"
+            android:paddingBottom="@dimen/size10"
+            android:layout_gravity="center_vertical"
+            android:background="@color/pagerLayoutColor">
+
+            <ImageView
+                android:id="@+id/pager_tab_iv"
+                android:layout_width="wrap_content"
+                android:layout_height="wrap_content"
+                android:src="@mipmap/main"
+                android:layout_alignParentLeft="true"
+                android:layout_centerVertical="true"/>
+
+            <LinearLayout
+                android:layout_marginLeft="@dimen/size15"
+                android:layout_toRightOf="@id/pager_tab_iv"
+                android:layout_centerInParent="true"
+                android:layout_width="wrap_content"
+                android:layout_height="wrap_content"
+                android:orientation="vertical">
+                <TextView
+                    android:id="@+id/pager_zjName"
+                    android:layout_width="wrap_content"
+                    android:layout_height="wrap_content"
+                    android:layout_centerHorizontal="true"
+                    android:textColor="@color/black"
+                    android:textSize="@dimen/txtSize16"
+                    android:text="辅助资金账号："/>
+
+                <TextView
+                    android:id="@+id/pager_outPrice"
+                    android:layout_alignLeft="@id/pager_zjName"
+                    android:layout_marginTop="@dimen/size1"
+                    android:layout_below="@id/pager_zjName"
+                    android:layout_width="wrap_content"
+                    android:layout_height="wrap_content"
+                    android:textSize="@dimen/txtSize12"
+                    android:textColor="@color/newStockTitle"
+                    android:text="可转出金额："/>
+            </LinearLayout>
+
+
+        </RelativeLayout>
+
+    </RelativeLayout>
+
+</LinearLayout>

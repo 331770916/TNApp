@@ -1,0 +1,92 @@
+<?xml version="1.0" encoding="utf-8"?>
+<RelativeLayout xmlns:android="http://schemas.android.com/apk/res/android"
+    xmlns:app="http://schemas.android.com/apk/res-auto"
+    android:orientation="vertical"
+    android:layout_width="match_parent"
+    android:layout_height="match_parent">
+
+
+    <RadioGroup
+        android:id="@+id/radioGroup"
+        android:layout_width="match_parent"
+        android:layout_height="wrap_content"
+        android:background="@color/bgColor"
+        android:layout_alignParentBottom="true"
+        android:orientation="horizontal">
+
+        <com.tpyzq.mobile.pangu.view.radiobutton.MyRadioButton
+            android:id="@+id/homeRadioBtn"
+            android:layout_width="0dp"
+            android:layout_height="wrap_content"
+            android:gravity="center"
+            android:padding="@dimen/size5"
+            android:button="@null"
+            android:clickable="true"
+            android:checked="true"
+            app:pictureTop="@drawable/search_normal"
+            app:pictureSize="@dimen/size20"
+            android:textColor="@color/radio_textcolor"
+            android:text="@string/home"
+            android:textSize="@dimen/home_IndexRadioBtnText"
+            android:layout_weight="1"/>
+
+        <com.tpyzq.mobile.pangu.view.radiobutton.MyRadioButton
+            android:id="@+id/marketRadioBtn"
+            android:layout_width="0dp"
+            android:layout_height="wrap_content"
+            android:button="@null"
+            app:pictureTop="@drawable/hangqing_normal"
+            android:clickable="true"
+            app:pictureSize="@dimen/size20"
+            android:gravity="center"
+            android:padding="@dimen/size5"
+            android:textSize="@dimen/home_IndexRadioBtnText"
+            android:textColor="@color/radio_textcolor"
+            android:text="@string/market"
+            android:layout_weight="1"/>
+
+        <com.tpyzq.mobile.pangu.view.radiobutton.MyRadioButton
+            android:id="@+id/transactionRadioBtn"
+            android:layout_width="0dp"
+            android:layout_height="wrap_content"
+            android:text="@string/transaction"
+            android:button="@null"
+            app:pictureTop="@drawable/trade_normal"
+            android:clickable="true"
+            app:pictureSize="@dimen/size20"
+            android:gravity="center"
+            android:textSize="@dimen/home_IndexRadioBtnText"
+            android:textColor="@color/radio_textcolor"
+            android:padding="@dimen/size5"
+            android:layout_weight="1"/>
+
+        <com.tpyzq.mobile.pangu.view.radiobutton.MyRadioButton
+            android:id="@+id/informationRadioBtn"
+            android:layout_width="0dp"
+            android:layout_height="wrap_content"
+            android:button="@null"
+            app:pictureTop="@drawable/self_normal"
+            android:clickable="true"
+            app:pictureSize="@dimen/size20"
+            android:gravity="center"
+            android:padding="@dimen/size5"
+            android:textColor="@color/radio_textcolor"
+            android:text="@string/information"
+            android:textSize="@dimen/home_IndexRadioBtnText"
+            android:layout_weight="1"/>
+    </RadioGroup>
+
+    <View
+        android:id="@+id/indexViewTip"
+        android:layout_above="@id/radioGroup"
+        android:layout_width="match_parent"
+        android:layout_height="@dimen/size1"
+        android:background="@color/lineColor"/>
+
+    <FrameLayout
+        android:id="@+id/fragmentLayout"
+        android:layout_above="@id/indexViewTip"
+        android:layout_width="match_parent"
+        android:layout_height="match_parent"/>
+
+</RelativeLayout>

@@ -1,0 +1,92 @@
+<?xml version="1.0" encoding="utf-8"?>
+<LinearLayout xmlns:android="http://schemas.android.com/apk/res/android"
+    android:layout_width="match_parent"
+    android:layout_height="match_parent"
+    android:orientation="vertical">
+
+    <RelativeLayout
+        android:layout_width="match_parent"
+        android:layout_height="@dimen/size25"
+        android:background="@color/blue"
+        android:clipToPadding="true"
+        android:fitsSystemWindows="true" />
+
+    <RelativeLayout
+        android:layout_width="match_parent"
+        android:layout_height="@dimen/pickerview_topbar_height"
+        android:layout_below="@+id/AGRelativeLayout"
+        android:background="@color/blue">
+
+        <ImageView
+            android:id="@+id/managerMoneyBack"
+            android:layout_width="wrap_content"
+            android:layout_height="match_parent"
+            android:layout_alignParentLeft="true"
+            android:padding="@dimen/size10"
+            android:src="@mipmap/back_btn" />
+
+        <TextView
+            android:layout_width="wrap_content"
+            android:layout_height="wrap_content"
+            android:layout_centerInParent="true"
+            android:text="@string/managerPrice"
+            android:textColor="@color/white"
+            android:textSize="@dimen/pickerview_topbar_title_textsize" />
+    </RelativeLayout>
+
+    <ScrollView
+        android:layout_width="match_parent"
+        android:layout_height="match_parent"
+        android:scrollbars="none">
+
+        <LinearLayout
+            android:layout_width="match_parent"
+            android:layout_height="wrap_content"
+            android:focusable="true"
+            android:focusableInTouchMode="true"
+            android:orientation="vertical">
+
+            <FrameLayout
+                android:layout_width="match_parent"
+                android:layout_height="wrap_content">
+
+                <android.support.v4.view.ViewPager
+                    android:id="@+id/managerMoneyViewPager"
+                    android:layout_width="match_parent"
+                    android:layout_height="@dimen/size225"
+                    android:background="@color/blue2" />
+
+            </FrameLayout>
+
+            <LinearLayout
+                android:id="@+id/managerMoenyDotLayout"
+                android:layout_width="match_parent"
+                android:layout_height="@dimen/size20"
+                android:orientation="horizontal"
+                android:gravity="center"
+                android:background="@color/bgColor"/>
+
+            <TextView
+                android:layout_width="match_parent"
+                android:layout_height="wrap_content"
+                android:padding="@dimen/size15"
+                android:text="@string/managerMoneyProduct"/>
+            <View
+                android:layout_width="match_parent"
+                android:layout_height="@dimen/size0.5"
+                android:background="@color/lineColor"
+                android:layout_marginLeft="@dimen/size5"
+                android:layout_marginRight="@dimen/size5"/>
+
+            <com.tpyzq.mobile.pangu.view.gridview.MyListView
+                android:id="@+id/managerMoneyListView"
+                android:layout_marginRight="@dimen/size5"
+                android:layout_marginLeft="@dimen/size5"
+                android:layout_width="match_parent"
+                android:layout_height="wrap_content" />
+
+        </LinearLayout>
+    </ScrollView>
+
+
+</LinearLayout>

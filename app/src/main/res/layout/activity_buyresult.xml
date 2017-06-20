@@ -1,0 +1,128 @@
+<?xml version="1.0" encoding="utf-8"?>
+<LinearLayout xmlns:android="http://schemas.android.com/apk/res/android"
+    android:orientation="vertical"
+    android:background="@color/bgColor"
+    android:layout_width="match_parent"
+    android:layout_height="match_parent">
+
+    <RelativeLayout
+        android:layout_width="match_parent"
+        android:layout_height="@dimen/size25"
+        android:background="@color/blue"
+        android:clipToPadding="true"
+        android:fitsSystemWindows="true" />
+
+    <RelativeLayout
+        android:layout_width="match_parent"
+        android:layout_height="@dimen/pickerview_topbar_height"
+        android:layout_below="@+id/AGRelativeLayout"
+        android:background="@color/blue">
+
+        <ImageView
+            android:id="@+id/iv_back"
+            android:layout_width="wrap_content"
+            android:layout_height="match_parent"
+            android:layout_alignParentLeft="true"
+            android:padding="@dimen/size10"
+            android:src="@mipmap/back_btn" />
+
+        <TextView
+            android:layout_width="wrap_content"
+            android:layout_height="wrap_content"
+            android:layout_centerInParent="true"
+            android:text="产品购买"
+            android:textColor="@color/white"
+            android:textSize="@dimen/pickerview_topbar_title_textsize" />
+    </RelativeLayout>
+
+    <RelativeLayout
+        android:layout_width="match_parent"
+        android:background="@color/blue"
+        android:layout_height="@dimen/size200">
+
+        <TextView
+            android:layout_width="wrap_content"
+            android:layout_height="wrap_content"
+            android:textColor="@color/white"
+            android:layout_centerInParent="true"
+            android:drawableTop="@mipmap/buyresult_ic"
+            android:drawablePadding="@dimen/size10"
+            android:textSize="@dimen/txtSize16"
+            android:textStyle="bold"
+            android:text="您的委托已提交"/>
+
+    </RelativeLayout>
+
+    <RelativeLayout
+        android:layout_width="match_parent"
+        android:background="@color/white"
+        android:layout_height="wrap_content">
+        <TextView
+            android:layout_width="wrap_content"
+            android:layout_height="wrap_content"
+            android:text="产品名称"
+            android:textSize="@dimen/txtSize14"
+            android:layout_alignParentLeft="true"
+            android:padding="@dimen/size10"
+            android:textColor="@color/black"/>
+
+
+        <TextView
+            android:id="@+id/tv_product_name"
+            android:layout_width="wrap_content"
+            android:layout_height="wrap_content"
+            android:text="太平洋证券"
+            android:textSize="@dimen/txtSize14"
+            android:layout_alignParentRight="true"
+            android:padding="@dimen/size10"
+            android:textColor="@color/black"/>
+
+    </RelativeLayout>
+
+    <View
+        android:layout_width="match_parent"
+        android:layout_height="@dimen/size0.5"
+        android:layout_marginRight="@dimen/size10"
+        android:layout_marginLeft="@dimen/size10"
+        android:background="@color/lineColor"/>
+
+    <RelativeLayout
+        android:background="@color/white"
+        android:layout_width="match_parent"
+        android:layout_height="wrap_content">
+        <TextView
+            android:layout_width="wrap_content"
+            android:layout_height="wrap_content"
+            android:text="购买金额"
+            android:textSize="@dimen/txtSize14"
+            android:layout_alignParentLeft="true"
+            android:padding="@dimen/size10"
+            android:textColor="@color/black"/>
+
+
+        <TextView
+            android:id="@+id/tv_product_product"
+            android:layout_width="wrap_content"
+            android:layout_height="wrap_content"
+            android:text="100000.00元"
+            android:textSize="@dimen/txtSize14"
+            android:layout_alignParentRight="true"
+            android:padding="@dimen/size10"
+            android:textColor="@color/black"/>
+
+    </RelativeLayout>
+    <View
+        android:layout_width="match_parent"
+        android:layout_height="@dimen/size0.5"
+        android:background="@color/lineColor"/>
+
+    <TextView
+        android:layout_width="match_parent"
+        android:layout_height="wrap_content"
+        android:layout_marginTop="@dimen/size10"
+        android:padding="@dimen/size10"
+        android:text="@string/buyresult"
+        android:textSize="@dimen/txtSize12"
+        android:textColor="@color/text"/>
+
+</LinearLayout>

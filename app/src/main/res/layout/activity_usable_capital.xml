@@ -1,0 +1,155 @@
+<?xml version="1.0" encoding="utf-8"?>
+<LinearLayout xmlns:android="http://schemas.android.com/apk/res/android"
+    xmlns:app="http://schemas.android.com/apk/res-auto"
+    android:layout_width="match_parent"
+    android:layout_height="match_parent"
+    android:background="@color/bgColor"
+    android:orientation="vertical">
+
+    <RelativeLayout
+        android:layout_width="match_parent"
+        android:layout_height="@dimen/size25"
+        android:background="@color/blue"
+        android:clipToPadding="true"
+        android:fitsSystemWindows="true" />
+
+    <RelativeLayout
+        android:layout_width="match_parent"
+        android:layout_height="@dimen/pickerview_topbar_height"
+        android:background="@color/blue">
+
+        <TextView
+            android:id="@+id/tv_title"
+            android:layout_width="wrap_content"
+            android:layout_height="wrap_content"
+            android:layout_centerInParent="true"
+            android:text="可取资金"
+            android:textColor="@color/white"
+            android:textSize="@dimen/pickerview_topbar_title_textsize" />
+
+        <ImageView
+            android:id="@+id/iv_back"
+            android:layout_width="wrap_content"
+            android:layout_height="match_parent"
+            android:layout_alignParentLeft="true"
+            android:layout_centerVertical="true"
+            android:paddingLeft="@dimen/size20"
+            android:paddingRight="@dimen/size20"
+            android:src="@mipmap/back_btn" />
+    </RelativeLayout>
+
+    <LinearLayout
+        android:layout_width="match_parent"
+        android:layout_height="match_parent"
+        android:orientation="vertical">
+
+        <RelativeLayout
+            android:layout_width="match_parent"
+            android:layout_height="@dimen/size200"
+            android:background="@color/white">
+
+            <ImageView
+                android:layout_width="match_parent"
+                android:layout_height="@dimen/size200"
+                android:layout_margin="@dimen/size15"
+                android:background="@mipmap/keyong_ka"
+                android:paddingTop="@dimen/size30" />
+
+            <TextView
+                android:id="@+id/tv_usable_money"
+                android:layout_width="wrap_content"
+                android:layout_height="wrap_content"
+                android:paddingLeft="@dimen/size20"
+                android:layout_centerInParent="true"
+                android:text="--.--"
+                android:textColor="@color/white"
+                android:textSize="@dimen/txtSize30"
+                />
+            <TextView
+                android:id="@+id/tv_other_title"
+                android:layout_width="wrap_content"
+                android:layout_height="wrap_content"
+                android:text="可取资金（元）"
+                android:layout_below="@id/tv_usable_money"
+                android:layout_centerHorizontal="true"
+                android:textColor="@color/white"
+                android:textSize="@dimen/txtSize14"
+                />
+        </RelativeLayout>
+
+        <LinearLayout
+            android:id="@+id/ll_shiftto"
+            android:layout_width="match_parent"
+            android:layout_height="@dimen/size50"
+            android:background="@color/white"
+            android:orientation="horizontal">
+
+            <TextView
+                android:layout_width="0dp"
+                android:layout_height="wrap_content"
+                android:layout_gravity="center"
+                android:layout_marginLeft="@dimen/size20"
+                android:layout_weight="1"
+                android:drawableLeft="@mipmap/keyong_zhuanru"
+                android:drawablePadding="@dimen/size10"
+                android:gravity="center_vertical"
+                android:text="转入" />
+
+        </LinearLayout>
+
+        <ImageView
+            android:layout_width="match_parent"
+            android:layout_height="@dimen/size0.5"
+            android:background="@color/white"
+            android:paddingLeft="@dimen/size20"
+            android:src="@color/grey" />
+
+        <LinearLayout
+            android:id="@+id/ll_rollout"
+            android:layout_width="match_parent"
+            android:layout_height="@dimen/size50"
+            android:background="@color/white"
+            android:orientation="horizontal">
+
+            <TextView
+                android:layout_width="0dp"
+                android:layout_height="wrap_content"
+                android:layout_gravity="center"
+                android:layout_marginLeft="@dimen/size20"
+                android:layout_weight="1"
+                android:drawableLeft="@mipmap/keyong_zhuanchu"
+                android:drawablePadding="@dimen/size10"
+                android:gravity="center_vertical"
+                android:text="转出" />
+
+        </LinearLayout>
+
+        <ImageView
+            android:layout_width="match_parent"
+            android:layout_height="@dimen/size0.5"
+            android:background="@color/white"
+            android:paddingLeft="@dimen/size20"
+            android:src="@color/grey" />
+
+        <LinearLayout
+            android:id="@+id/ll_capital_detail"
+            android:layout_width="match_parent"
+            android:layout_height="@dimen/size50"
+            android:background="@color/white"
+            android:orientation="horizontal">
+
+            <TextView
+                android:layout_width="0dp"
+                android:layout_height="wrap_content"
+                android:layout_gravity="center"
+                android:layout_marginLeft="@dimen/size20"
+                android:layout_weight="1"
+                android:drawableLeft="@mipmap/keyong_zijinmingxi"
+                android:drawablePadding="@dimen/size10"
+                android:gravity="center_vertical"
+                android:text="资金明细" />
+        </LinearLayout>
+
+    </LinearLayout>
+
+</LinearLayout>

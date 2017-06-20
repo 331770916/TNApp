@@ -1,0 +1,38 @@
+<?xml version="1.0" encoding="utf-8"?>
+<LinearLayout xmlns:android="http://schemas.android.com/apk/res/android"
+    android:layout_width="match_parent"
+    android:layout_height="match_parent"
+    android:background="@color/white"
+    android:orientation="vertical">
+
+    <include
+        android:id="@+id/ll_fourtext"
+        layout="@layout/item_fourtext_header" />
+
+    <View
+        android:layout_width="match_parent"
+        android:layout_height="@dimen/size1"
+        android:background="@color/lineColor"/>
+
+    <RelativeLayout
+        android:layout_width="match_parent"
+        android:layout_height="0dp"
+        android:layout_weight="1"
+        >
+        <ImageView
+            android:id="@+id/tv_empty"
+            android:layout_width="wrap_content"
+            android:layout_height="wrap_content"
+            android:layout_centerInParent="true"
+            android:src="@mipmap/kong"
+            android:scaleX="0.5"
+            android:scaleY="0.5"
+            />
+        <ListView
+            android:id="@+id/lv_transaction"
+            android:layout_width="match_parent"
+            android:layout_height="wrap_content"
+            android:divider="@color/lineColor"
+            android:dividerHeight="@dimen/size0" />
+    </RelativeLayout>
+</LinearLayout>

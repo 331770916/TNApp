@@ -1,0 +1,86 @@
+apply plugin: 'com.android.application'
+apply plugin: 'bonree'
+
+android {
+    compileSdkVersion 23
+    buildToolsVersion "23.0.3"
+
+    defaultConfig {
+        applicationId "com.tpyzq.mobile.pangu"
+//        applicationId "com.tpyzq.self.mobile.pangu"
+        minSdkVersion 15
+        targetSdkVersion 22
+        versionCode 1
+        versionName "1.1.0"
+
+        multiDexEnabled = true
+
+        ndk {
+//              abiFilters 'x86_64', 'x86' , 'armeabi', 'armeabi-v7a', 'arm64-v8a'
+            abiFilters 'armeabi-v7a', 'x86'
+//            abiFilters 'x86', 'x86_64', 'armeabi', 'armeabi-v7a', 'arm64-v8a'·
+//            abiFilters "armeabi"
+        }
+
+        jackOptions {
+            enabled false
+        }
+    }
+    /*
+   *   APK 文件名称
+   *   一级密码
+   *   用户名
+   *   二级密码
+   * */
+    signingConfigs {
+        release {
+            storeFile file('pangu.jks')
+            storePassword 'taipingyang'
+            keyAlias 'Admin'
+            keyPassword 'taipingyang'
+        }
+    }
+
+    buildTypes {
+        release {
+            minifyEnabled false
+            proguardFiles getDefaultProguardFile('proguard-android.txt'), 'proguard-rules.pro'
+            signingConfig signingConfigs.release
+        }
+        debug {
+            signingConfig signingConfigs.release
+        }
+    }
+    sourceSets {
+        main {
+            jniLibs.srcDirs = ['libs']
+        }
+    }
+
+}
+
+dependencies {
+    compile fileTree(include: ['*.jar'], dir: 'libs')
+    testCompile 'junit:junit:4.12'
+    compile 'com.android.support:multidex:1.0.1'
+    compile 'com.android.support:appcompat-v7:23.3.0'
+    compile 'com.android.support:design:23.3.0'
+    compile 'com.zhy:okhttputils:2.6.2'
+    compile 'com.google.code.gson:gson:2.6.2'
+    compile 'org.apache.httpcomponents:httpcore:4.4.4'
+    compile project(':PullToRefreshLib')
+    compile project(':MPChartLib')
+    compile project(':keyboardlibrary')
+    compile project(':library')
+    compile project(':tagcloudlib')
+    compile project(':crhlib')
+    compile 'com.github.ybq:Android-SpinKit:1.1.0'
+    compile 'com.bigkoo:convenientbanner:2.0.5'
+    compile 'com.facebook.fresco:fresco:1.3.0'
+    compile 'com.github.barteksc:android-pdf-viewer:2.3.0'
+    compile 'com.kyleduo.switchbutton:library:1.4.2'
+}
+bonree {
+    enable true
+}
+

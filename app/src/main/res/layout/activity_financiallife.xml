@@ -1,0 +1,312 @@
+<?xml version="1.0" encoding="utf-8"?>
+<LinearLayout xmlns:android="http://schemas.android.com/apk/res/android"
+    android:layout_width="match_parent"
+    android:layout_height="match_parent"
+    android:background="@color/white"
+    android:orientation="vertical">
+
+    <RelativeLayout
+        android:layout_width="match_parent"
+        android:layout_height="@dimen/size25"
+        android:background="@color/black"
+        android:clipToPadding="true"
+        android:fitsSystemWindows="true" />
+
+
+    <RelativeLayout
+        android:id="@+id/el_biaoti"
+        android:layout_width="match_parent"
+        android:layout_height="@dimen/pickerview_topbar_height"
+        android:background="@color/white"
+        android:visibility="gone">
+
+        <ImageView
+            android:id="@+id/iv_back"
+            android:layout_width="wrap_content"
+            android:layout_height="wrap_content"
+            android:layout_alignParentLeft="true"
+            android:layout_centerVertical="true"
+            android:padding="@dimen/size10"
+            android:src="@mipmap/icon_a" />
+
+        <TextView
+            android:id="@+id/publish_detail_title"
+            android:layout_width="wrap_content"
+            android:layout_height="wrap_content"
+            android:layout_centerInParent="true"
+            android:text="@string/financialLife_Text"
+            android:textSize="@dimen/pickerview_topbar_title_textsize" />
+    </RelativeLayout>
+
+    <ScrollView
+        android:id="@+id/RelativeLayout_item"
+        android:layout_width="match_parent"
+        android:layout_height="wrap_content"
+        android:scrollbars="none">
+
+        <LinearLayout
+            android:layout_width="match_parent"
+            android:layout_height="wrap_content"
+            android:orientation="vertical">
+
+            <RelativeLayout
+                android:layout_width="match_parent"
+                android:layout_height="@dimen/jinrongshnghuo_Height"
+                android:background="@mipmap/banner_sik">
+
+                <ImageView
+                    android:id="@+id/iv_back_finish"
+                    android:layout_width="wrap_content"
+                    android:layout_height="wrap_content"
+                    android:padding="@dimen/txtSize20"
+                    android:src="@mipmap/back_btn" />
+
+                <Button
+                    android:visibility="visible"
+                    android:gravity="center"
+                    android:id="@+id/AppDownload"
+                    android:layout_width="@dimen/size110"
+                    android:layout_height="@dimen/size25"
+                    android:layout_alignParentRight="true"
+                    android:layout_marginRight="@dimen/size70"
+                    android:layout_marginTop="@dimen/size175"
+                    android:background="@drawable/jrsh_white_rectangle"
+                    android:text="@string/financialLife_Text10"
+                    android:textColor="@color/white"
+                    android:textSize="@dimen/txtSize12" />
+            </RelativeLayout>
+
+
+            <View
+                android:layout_width="match_parent"
+                android:layout_height="@dimen/size10"
+                android:background="@color/bgColor" />
+
+            <RelativeLayout
+                android:layout_width="match_parent"
+                android:layout_height="@dimen/size50">
+
+                <TextView
+                    android:layout_width="match_parent"
+                    android:layout_height="wrap_content"
+                    android:layout_centerInParent="true"
+                    android:paddingLeft="@dimen/size15"
+                    android:text="@string/financialLife_Text4"
+                    android:textColor="@color/textheise"
+                    android:textSize="@dimen/txtSize14" />
+
+            </RelativeLayout>
+
+            <HorizontalScrollView
+                android:layout_width="match_parent"
+                android:layout_height="wrap_content"
+                android:scrollbars="none">
+
+                <LinearLayout
+                    android:layout_width="match_parent"
+                    android:layout_height="wrap_content"
+                    android:orientation="horizontal"
+                    android:paddingLeft="@dimen/size15"
+                    android:paddingRight="@dimen/size15">
+
+                    <ImageView
+                        android:id="@+id/iv_zuan"
+                        android:layout_width="@dimen/size146"
+                        android:layout_height="@dimen/size86"
+                        android:src="@mipmap/zuanka" />
+
+
+                    <ImageView
+                        android:id="@+id/iv_jin"
+                        android:layout_width="@dimen/size146"
+                        android:layout_height="@dimen/size86"
+                        android:layout_marginLeft="@dimen/size10"
+                        android:src="@mipmap/jinka" />
+
+                    <ImageView
+                        android:id="@+id/iv_yin"
+                        android:layout_width="@dimen/size146"
+                        android:layout_height="@dimen/size86"
+                        android:layout_marginLeft="@dimen/size10"
+                        android:src="@mipmap/yinka" />
+
+
+                    <ImageView
+                        android:id="@+id/iv_qian"
+                        android:layout_width="@dimen/size146"
+                        android:layout_height="@dimen/size86"
+                        android:layout_marginLeft="@dimen/size10"
+                        android:src="@mipmap/qianzaika" />
+
+                    <ImageView
+                        android:id="@+id/iv_pu"
+                        android:layout_width="@dimen/size146"
+                        android:layout_height="@dimen/size86"
+                        android:layout_marginLeft="@dimen/size10"
+                        android:src="@mipmap/puka" />
+                </LinearLayout>
+
+            </HorizontalScrollView>
+
+            <RelativeLayout
+                android:layout_width="match_parent"
+                android:layout_height="@dimen/size40"
+                android:paddingLeft="@dimen/size15">
+
+                <TextView
+                    android:id="@+id/TextView_1"
+                    android:layout_width="wrap_content"
+                    android:layout_height="wrap_content"
+                    android:layout_centerVertical="true"
+                    android:text="@string/financialLife_Text5"
+                    android:textColor="@color/textheise"
+                    android:textSize="@dimen/txtSize14" />
+
+                <TextView
+                    android:id="@+id/tv_ka"
+                    android:layout_width="wrap_content"
+                    android:layout_height="wrap_content"
+                    android:layout_centerVertical="true"
+                    android:layout_toRightOf="@+id/TextView_1"
+                    android:paddingLeft="@dimen/size5"
+                    android:textSize="@dimen/txtSize16" />
+            </RelativeLayout>
+
+
+            <View
+                android:layout_width="match_parent"
+                android:layout_height="@dimen/size0.5"
+                android:background="@color/lineColor" />
+
+
+            <RelativeLayout
+                android:layout_width="match_parent"
+                android:layout_height="wrap_content"
+                android:paddingLeft="@dimen/size15"
+                android:paddingTop="@dimen/size10">
+
+                <TextView
+                    android:layout_width="match_parent"
+                    android:layout_height="wrap_content"
+                    android:lineSpacingExtra="@dimen/size5"
+                    android:lineSpacingMultiplier="1.3"
+                    android:text="@string/financialLife_Text1"
+                    android:textColor="@color/colorMyGray"
+                    android:textSize="@dimen/txtSize14" />
+            </RelativeLayout>
+
+            <RelativeLayout
+                android:layout_width="match_parent"
+                android:layout_height="wrap_content"
+                android:orientation="horizontal"
+                android:paddingBottom="@dimen/size30"
+                android:paddingLeft="@dimen/size15"
+                android:paddingRight="@dimen/size15"
+                android:paddingTop="@dimen/size26">
+
+                <LinearLayout
+                    android:id="@+id/KaiHu_but"
+                    android:layout_width="@dimen/jinrongshnghuo_Width"
+                    android:layout_height="@dimen/size45"
+                    android:layout_alignParentLeft="true"
+                    android:background="@mipmap/kaihu_button"
+                    android:gravity="center"
+                    android:orientation="vertical">
+
+                    <TextView
+                        android:layout_width="match_parent"
+                        android:layout_height="wrap_content"
+                        android:gravity="center"
+                        android:text="@string/financialLife_Text6"
+                        android:textColor="@color/white"
+                        android:textSize="@dimen/txtSize16" />
+
+                    <TextView
+                        android:layout_width="match_parent"
+                        android:layout_height="wrap_content"
+                        android:gravity="center"
+                        android:text="@string/financialLife_Text7"
+                        android:textColor="@color/white"
+                        android:textSize="@dimen/txtSize11" />
+                </LinearLayout>
+
+
+                <LinearLayout
+                    android:id="@+id/LonIn_but"
+                    android:layout_width="@dimen/jinrongshnghuo_Width"
+                    android:layout_height="@dimen/size45"
+                    android:layout_alignParentRight="true"
+                    android:background="@mipmap/red"
+                    android:gravity="center"
+                    android:orientation="vertical">
+
+                    <TextView
+                        android:layout_width="match_parent"
+                        android:layout_height="wrap_content"
+                        android:gravity="center"
+                        android:text="@string/financialLife_Text8"
+                        android:textColor="@color/white"
+                        android:textSize="@dimen/txtSize16" />
+
+                    <TextView
+                        android:layout_width="match_parent"
+                        android:layout_height="wrap_content"
+                        android:gravity="center"
+                        android:text="@string/financialLife_Text9"
+                        android:textColor="@color/white"
+                        android:textSize="@dimen/txtSize11" />
+                </LinearLayout>
+
+                <Button
+                    android:id="@+id/SiKu_but"
+                    android:layout_width="match_parent"
+                    android:layout_height="@dimen/size45"
+                    android:background="@mipmap/kaihu_button"
+                    android:text="@string/financialLife_Button"
+                    android:textColor="@color/white" />
+            </RelativeLayout>
+        </LinearLayout>
+
+    </ScrollView>
+
+    <com.tpyzq.mobile.pangu.view.webview.ProgressWebView
+        android:id="@+id/wb_assets_analysis"
+        android:layout_width="match_parent"
+        android:layout_height="match_parent"
+        android:visibility="gone" />
+
+
+    <FrameLayout
+        android:id="@+id/kong"
+        android:layout_width="match_parent"
+        android:layout_height="wrap_content"
+        android:layout_centerInParent="true"
+        android:visibility="gone">
+
+        <RelativeLayout
+            android:layout_width="match_parent"
+            android:layout_height="wrap_content">
+
+            <ImageView
+                android:layout_width="match_parent"
+                android:layout_height="match_parent"
+                android:layout_centerInParent="true"
+                android:scaleX="0.6"
+                android:scaleY="0.5"
+                android:src="@mipmap/chongxinjiazai" />
+        </RelativeLayout>
+
+        <TextView
+            android:layout_width="match_parent"
+            android:layout_height="wrap_content"
+            android:layout_below="@+id/kong"
+            android:layout_gravity="center"
+            android:layout_marginTop="@dimen/size76"
+            android:gravity="center"
+            android:text="什么也没有,点击重新加载～."
+            android:textColor="@color/text"
+            android:textSize="@dimen/txtSize12" />
+    </FrameLayout>
+
+
+</LinearLayout>

@@ -1,0 +1,110 @@
+<?xml version="1.0" encoding="utf-8"?>
+<LinearLayout xmlns:android="http://schemas.android.com/apk/res/android"
+    xmlns:tools="http://schemas.android.com/tools"
+    android:layout_width="match_parent"
+    android:layout_height="match_parent"
+    android:background="@color/bgColor"
+    android:orientation="vertical"
+    tools:context="com.tpyzq.mobile.pangu.activity.trade.otc_business.OTC_OpenAccountActivity">
+
+
+    <RelativeLayout
+        android:layout_width="match_parent"
+        android:layout_height="@dimen/size25"
+        android:background="@color/blue"
+        android:clipToPadding="true"
+        android:fitsSystemWindows="true" />
+
+    <RelativeLayout
+        android:layout_width="match_parent"
+        android:layout_height="match_parent"
+        android:background="@color/bgColor">
+
+        <!-- 头布局 -->
+        <RelativeLayout
+            android:id="@+id/rlOTC_OpenAccountTitle"
+            android:layout_width="match_parent"
+            android:layout_height="@dimen/pickerview_topbar_height"
+            android:background="@color/blue">
+
+            <ImageView
+                android:id="@+id/ivOTC_OpenAccount_back"
+                android:layout_width="wrap_content"
+                android:layout_height="match_parent"
+                android:layout_alignParentLeft="true"
+                android:padding="@dimen/size10"
+                android:src="@mipmap/back_btn" />
+
+            <TextView
+                android:layout_width="wrap_content"
+                android:layout_height="wrap_content"
+                android:layout_centerInParent="true"
+                android:text="@string/OTC_kaihu"
+                android:textColor="@color/white"
+                android:textSize="@dimen/pickerview_topbar_title_textsize" />
+        </RelativeLayout>
+
+        <TextView
+            android:id="@+id/tvFenGe"
+            android:layout_width="match_parent"
+            android:layout_height="@dimen/size10"
+            android:layout_below="@id/rlOTC_OpenAccountTitle"
+            android:background="@color/bgColor" />
+
+        <RelativeLayout
+            android:id="@+id/rlChooseProduct"
+            android:layout_width="match_parent"
+            android:layout_height="@dimen/size61"
+            android:layout_below="@id/tvFenGe"
+            android:background="@color/white">
+
+            <TextView
+                android:layout_width="wrap_content"
+                android:layout_height="wrap_content"
+                android:layout_centerVertical="true"
+                android:layout_marginLeft="@dimen/size20"
+                android:text="产品公司"
+                android:textColor="@color/hushenTab_titleColor"
+                android:textSize="@dimen/txtSize14" />
+
+            <ImageView
+                android:id="@+id/ivChooseProduct"
+                android:layout_width="wrap_content"
+                android:layout_height="wrap_content"
+                android:layout_alignParentRight="true"
+                android:layout_centerVertical="true"
+                android:layout_marginRight="@dimen/size20"
+                android:src="@mipmap/more" />
+
+            <TextView
+                android:id="@+id/ProductCompany"
+                android:layout_width="wrap_content"
+                android:layout_height="wrap_content"
+                android:layout_centerVertical="true"
+                android:layout_marginRight="@dimen/size8"
+                android:layout_toLeftOf="@id/ivChooseProduct"
+                android:text="选择产品公司"
+                android:textColor="@color/hushenTab_titleColor"
+                android:textSize="@dimen/txtSize14" />
+        </RelativeLayout>
+
+
+        <Button
+            android:id="@+id/bnOTC_OpenAccountQD"
+            android:layout_width="match_parent"
+            android:layout_height="@dimen/size40"
+            android:layout_centerInParent="true"
+            android:layout_marginLeft="@dimen/size20"
+            android:layout_marginRight="@dimen/size20"
+            android:layout_marginTop="@dimen/size100"
+            android:background="@drawable/lonin4"
+            android:clickable="true"
+            android:gravity="center"
+            android:text="确定"
+            android:textColor="@color/white"
+            android:textSize="15sp" />
+
+    </RelativeLayout>
+
+
+</LinearLayout>

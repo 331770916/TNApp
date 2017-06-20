@@ -1,0 +1,157 @@
+<?xml version="1.0" encoding="utf-8"?>
+<RelativeLayout xmlns:android="http://schemas.android.com/apk/res/android"
+    xmlns:app="http://schemas.android.com/apk/res-auto"
+    android:orientation="vertical"
+    android:layout_width="match_parent"
+    android:layout_height="match_parent">
+
+    <RelativeLayout
+        android:id="@+id/topLayout"
+        android:layout_width="match_parent"
+        android:layout_height="@dimen/size25"
+        android:background="@color/blue"
+        android:layout_alignParentTop="true"
+        android:clipToPadding="true"
+        android:fitsSystemWindows="true"/>
+
+    <RelativeLayout
+        android:layout_below="@id/topLayout"
+        android:id="@+id/newStockTopLayout"
+        android:layout_width="match_parent"
+        android:layout_height="wrap_content"
+
+        android:background="@color/blue">
+
+        <TextView
+            android:id="@+id/publish_back"
+            android:layout_width="wrap_content"
+            android:layout_height="wrap_content"
+            android:layout_alignParentLeft="true"
+            android:background="@drawable/btn_back" />
+
+        <TextView
+            android:id="@+id/publish_title"
+            android:layout_width="wrap_content"
+            android:layout_height="wrap_content"
+            android:layout_centerInParent="true"
+            android:text="@string/xgrl1"
+            android:textColor="@color/white"
+            android:textSize="@dimen/txtSize20" />
+
+        <TextView
+            android:id="@+id/publish_request"
+            android:layout_width="wrap_content"
+            android:layout_height="wrap_content"
+            android:layout_alignParentRight="true"
+            android:layout_gravity="center_vertical"
+            android:padding="@dimen/size10"
+            android:text="@string/wdsg"
+            android:textColor="@color/white" />
+    </RelativeLayout>
+
+    <Button
+        android:id="@+id/oneBtnNew"
+        android:layout_alignParentBottom="true"
+        android:background="@drawable/one_new_btnbg"
+        android:text="@string/yjsg"
+        android:gravity="center"
+        android:textColor="@color/white"
+        android:layout_width="match_parent"
+        android:layout_height="wrap_content" />
+
+    <ScrollView
+        android:layout_below="@id/newStockTopLayout"
+        android:layout_above="@id/oneBtnNew"
+        android:layout_width="match_parent"
+        android:layout_height="match_parent">
+
+        <LinearLayout
+            android:layout_width="match_parent"
+            android:layout_height="wrap_content"
+            android:orientation="vertical">
+
+            <com.prolificinteractive.materialcalendarview.MaterialCalendarView
+                android:id="@+id/calendarView"
+                android:layout_width="match_parent"
+                android:layout_height="wrap_content"
+                android:background="@color/blue"
+                app:mcv_arrowColor="@color/white"
+                app:mcv_dateTextAppearance="@style/TextAppearance.MaterialCalendarWidget.Date"
+                app:mcv_selectionColor="@color/white"
+                app:mcv_weekDayTextAppearance="@style/TextAppearance.AppCompat.Inverse" />
+
+            <TextView
+                android:id="@+id/publishTv"
+                android:layout_width="match_parent"
+                android:layout_height="wrap_content"
+                android:background="@color/bgColor"
+                android:gravity="center_vertical"
+                android:padding="@dimen/size5"
+                android:textColor="@color/black"
+                android:textSize="@dimen/txtSize14" />
+
+            <LinearLayout
+                android:layout_width="match_parent"
+                android:layout_height="wrap_content"
+                android:background="@color/white"
+                android:orientation="horizontal">
+
+                <TextView
+                    android:layout_width="0dp"
+                    android:layout_weight="1"
+                    android:textColor="@color/hideTextColor"
+                    android:paddingLeft="@dimen/size10"
+                    android:paddingTop="@dimen/size5"
+                    android:paddingBottom="@dimen/size5"
+                    android:textSize="@dimen/txtSize12"
+                    android:text="@string/sgdm"
+                    android:layout_height="wrap_content" />
+
+                <TextView
+                    android:layout_width="0dp"
+                    android:layout_weight="1"
+                    android:gravity="center"
+                    android:textColor="@color/hideTextColor"
+                    android:padding="@dimen/size5"
+                    android:textSize="@dimen/txtSize12"
+                    android:text="@string/fxjg"
+                    android:layout_height="wrap_content" />
+
+                <TextView
+                    android:layout_width="0dp"
+                    android:layout_weight="1"
+                    android:gravity="center"
+                    android:textColor="@color/hideTextColor"
+                    android:padding="@dimen/size5"
+                    android:textSize="@dimen/txtSize12"
+                    android:text="@string/fxsyl"
+                    android:layout_height="wrap_content" />
+
+                <TextView
+                    android:layout_width="0dp"
+                    android:layout_weight="1"
+                    android:gravity="center"
+                    android:textColor="@color/hideTextColor"
+                    android:padding="@dimen/size5"
+                    android:textSize="@dimen/txtSize12"
+                    android:text="@string/dgsgsj"
+                    android:layout_height="wrap_content" />
+
+            </LinearLayout>
+
+            <View
+                android:layout_width="match_parent"
+                android:layout_height="1px"
+                android:background="@color/lineColor"/>
+
+            <com.tpyzq.mobile.pangu.view.gridview.MyListView
+                android:id="@+id/newStockCalendarListView"
+                android:divider="@null"
+                android:layout_width="match_parent"
+                android:layout_height="wrap_content" />
+
+        </LinearLayout>
+
+    </ScrollView>
+
+</RelativeLayout>

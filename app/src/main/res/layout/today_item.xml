@@ -1,0 +1,137 @@
+<?xml version="1.0" encoding="utf-8"?>
+<LinearLayout xmlns:android="http://schemas.android.com/apk/res/android"
+    android:layout_width="match_parent"
+    android:layout_height="match_parent"
+    android:background="@color/white"
+    android:orientation="vertical">
+
+    <LinearLayout
+        android:gravity="center"
+        android:layout_width="match_parent"
+        android:layout_height="@dimen/size50"
+        android:layout_marginBottom="@dimen/size5"
+        android:layout_marginTop="@dimen/size5"
+        android:orientation="horizontal"
+        android:paddingLeft="@dimen/size5">
+
+
+        <RelativeLayout
+            android:layout_width="@dimen/size0"
+            android:layout_height="wrap_content"
+            android:layout_weight="1">
+
+            <TextView
+                android:id="@+id/Today_Name"
+                android:layout_width="match_parent"
+                android:layout_height="wrap_content"
+                android:layout_centerHorizontal="true"
+                android:gravity="center|fill"
+                android:paddingLeft="@dimen/size14"
+                android:text="--"
+                android:textSize="@dimen/txtSize12" />
+
+            <TextView
+                android:id="@+id/Today_Num"
+                android:layout_width="match_parent"
+                android:layout_height="wrap_content"
+                android:layout_alignLeft="@id/Today_Name"
+                android:layout_below="@id/Today_Name"
+                android:gravity="center|fill"
+                android:paddingLeft="@dimen/size14"
+                android:text="--"
+                android:textColor="@color/newStockTitle"
+                android:textSize="@dimen/txtSize12" />
+        </RelativeLayout>
+
+        <RelativeLayout
+            android:layout_width="@dimen/size0"
+            android:layout_height="wrap_content"
+            android:layout_weight="1">
+
+            <TextView
+                android:id="@+id/Today_Date"
+                android:layout_width="match_parent"
+                android:layout_height="wrap_content"
+                android:layout_centerHorizontal="true"
+                android:gravity="center"
+                android:text="--"
+                android:textColor="@color/hushenTab_titleColor"
+                android:textSize="@dimen/txtSize12" />
+
+            <TextView
+                android:id="@+id/Today_Time"
+                android:layout_width="match_parent"
+                android:layout_height="wrap_content"
+                android:layout_alignLeft="@id/Today_Date"
+                android:layout_below="@id/Today_Date"
+                android:gravity="center"
+                android:text="--"
+                android:textColor="@color/hushenTab_titleColor"
+                android:textSize="@dimen/txtSize12" />
+        </RelativeLayout>
+
+        <RelativeLayout
+            android:layout_width="@dimen/size0"
+            android:layout_height="wrap_content"
+            android:layout_weight="1">
+
+            <TextView
+                android:id="@+id/Today_Succeed"
+                android:layout_width="match_parent"
+                android:layout_height="wrap_content"
+                android:layout_alignLeft="@+id/Today_Entrust"
+                android:layout_below="@+id/Today_Entrust"
+                android:gravity="center"
+                android:paddingLeft="@dimen/size5"
+                android:paddingRight="@dimen/size10"
+                android:text="--"
+                android:textColor="@color/hushenTab_titleColor"
+                android:textSize="@dimen/txtSize12" />
+
+            <TextView
+                android:id="@+id/Today_Entrust"
+                android:layout_width="match_parent"
+                android:layout_height="wrap_content"
+                android:layout_alignParentLeft="true"
+                android:layout_alignParentStart="true"
+                android:layout_alignParentTop="true"
+                android:gravity="center"
+                android:paddingLeft="@dimen/size5"
+                android:paddingRight="@dimen/size10"
+                android:text="--"
+                android:textColor="@color/hushenTab_titleColor"
+                android:textSize="@dimen/txtSize12" />
+        </RelativeLayout>
+
+        <RelativeLayout
+            android:layout_width="@dimen/size0"
+            android:layout_height="wrap_content"
+            android:layout_weight="1"
+            android:paddingLeft="@dimen/size20"
+            android:paddingRight="@dimen/size15">
+
+            <TextView
+                android:id="@+id/Today_Transaction"
+                android:layout_width="wrap_content"
+                android:layout_height="wrap_content"
+                android:layout_alignParentRight="true"
+                android:layout_centerHorizontal="true"
+                android:text="--"
+                android:textColor="@color/hushenTab_titleColor"
+                android:textSize="@dimen/txtSize12" />
+
+            <TextView
+
+                android:id="@+id/Today_Status"
+                android:layout_width="match_parent"
+                android:layout_height="wrap_content"
+                android:layout_alignParentRight="true"
+                android:layout_below="@id/Today_Transaction"
+                android:gravity="center|end"
+                android:text="--"
+                android:textColor="@color/hushenTab_titleColor"
+                android:textSize="@dimen/txtSize12" />
+        </RelativeLayout>
+
+    </LinearLayout>
+</LinearLayout>

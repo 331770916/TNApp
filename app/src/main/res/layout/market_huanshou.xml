@@ -1,0 +1,58 @@
+<?xml version="1.0" encoding="utf-8"?>
+<RelativeLayout xmlns:android="http://schemas.android.com/apk/res/android"
+    android:layout_width="match_parent"
+    android:layout_height="match_parent"
+    android:orientation="vertical">
+
+    <RelativeLayout
+        android:id="@+id/huanshou_topLayout"
+        android:layout_width="match_parent"
+        android:background="@color/blue"
+        android:fitsSystemWindows="true"
+        android:clipToPadding="true"
+        android:layout_alignParentTop="true"
+        android:layout_height="@dimen/size70">
+
+        <RelativeLayout
+            android:layout_width="match_parent"
+            android:layout_height="wrap_content"
+            android:layout_alignParentBottom="true">
+            <TextView
+                android:id="@+id/huanshou_backBtn"
+                android:layout_width="wrap_content"
+                android:layout_height="wrap_content"
+                android:layout_alignParentLeft="true"
+                android:clickable="true"
+                android:background="@drawable/btn_back"/>
+
+            <TextView
+                android:id="@+id/huanshou_searchBtn"
+                android:layout_width="wrap_content"
+                android:layout_height="wrap_content"
+                android:layout_alignParentRight="true"
+                android:clickable="true"
+                android:background="@drawable/btn_search"/>
+
+            <TextView
+                android:id="@+id/huanshou_title"
+                android:layout_width="wrap_content"
+                android:layout_height="wrap_content"
+                android:layout_centerInParent="true"
+                android:textColor="@color/white"
+                android:textSize="@dimen/txtSize16"
+                android:text="沪深换手率榜"/>
+        </RelativeLayout>
+    </RelativeLayout>
+
+
+    <Button
+        android:id="@+id/huanshou_toTopBtn"
+        android:layout_width="wrap_content"
+        android:layout_height="wrap_content"
+        android:text="最顶端"
+        android:gravity="center"
+        android:layout_margin="@dimen/size15"
+        android:layout_alignParentBottom="true"
+        android:layout_alignParentRight="true"/>
+
+</RelativeLayout>

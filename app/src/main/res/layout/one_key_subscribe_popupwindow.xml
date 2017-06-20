@@ -1,0 +1,105 @@
+<?xml version="1.0" encoding="utf-8"?>
+<LinearLayout xmlns:android="http://schemas.android.com/apk/res/android"
+    android:layout_width="match_parent"
+    android:layout_height="wrap_content"
+    android:background="@color/white"
+    android:orientation="vertical">
+
+    <LinearLayout
+        android:layout_width="match_parent"
+        android:layout_height="360dp"
+        android:orientation="vertical">
+
+        <!--标题-->
+        <LinearLayout
+            android:id="@+id/llSbuscribeTitle"
+            android:layout_width="match_parent"
+            android:layout_height="wrap_content"
+            android:gravity="center"
+            android:orientation="horizontal"
+            android:paddingTop="@dimen/size30">
+
+            <ImageView
+                android:id="@+id/cbSubscribeTitle"
+                android:layout_width="wrap_content"
+                android:layout_height="wrap_content"
+                android:src="@mipmap/xinxiqueren" />
+
+            <TextView
+                android:layout_width="5dp"
+                android:layout_height="match_parent" />
+
+            <TextView
+                android:id="@+id/tvSubscribeTitle"
+                android:layout_width="wrap_content"
+                android:layout_height="wrap_content"
+                android:text="申购信息确认"
+                android:textColor="@color/hushenTab_titleColor"
+                android:textSize="@dimen/txtSize16" />
+        </LinearLayout>
+
+
+        <ListView
+            android:layout_marginTop="@dimen/size24"
+            android:id="@+id/lvSubscribeMsgAffirm"
+            android:layout_width="wrap_content"
+            android:layout_height="200dp"
+            android:layout_below="@id/llSbuscribeTitle"
+            android:divider="@null">
+
+        </ListView>
+
+        <LinearLayout
+            android:layout_marginTop="@dimen/size10"
+            android:id="@+id/llAffirm"
+            android:layout_width="match_parent"
+            android:layout_height="wrap_content"
+            android:orientation="horizontal">
+
+            <LinearLayout
+                android:layout_width="0dp"
+                android:layout_height="wrap_content"
+                android:layout_weight="1"
+                android:gravity="center">
+
+                <TextView
+                    android:id="@+id/tvOK"
+                    android:layout_width="155dp"
+                    android:layout_height="40dp"
+                    android:background="@color/blue"
+                    android:clickable="true"
+                    android:gravity="center"
+                    android:text="确认"
+                    android:textColor="@color/white"
+                    android:textSize="15sp" />
+            </LinearLayout>
+
+
+            <LinearLayout
+                android:layout_width="0dp"
+                android:layout_height="wrap_content"
+                android:layout_weight="1"
+                android:gravity="center">
+
+                <TextView
+                    android:id="@+id/tvClose"
+                    android:layout_width="155dp"
+                    android:layout_height="40dp"
+                    android:background="@color/lineColor1"
+                    android:clickable="true"
+                    android:textColor="@color/hushenTab_titleColor"
+                    android:gravity="center"
+                    android:text="取消"
+                    android:textSize="15sp" />
+            </LinearLayout>
+
+        </LinearLayout>
+
+
+    </LinearLayout>
+
+    <TextView
+        android:layout_width="match_parent"
+        android:layout_height="@dimen/size30" />
+
+</LinearLayout>

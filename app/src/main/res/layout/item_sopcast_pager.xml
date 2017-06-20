@@ -1,0 +1,83 @@
+<?xml version="1.0" encoding="utf-8"?>
+<RelativeLayout xmlns:android="http://schemas.android.com/apk/res/android"
+    android:layout_width="match_parent"
+    android:layout_height="match_parent">
+
+    <TextView
+        android:id="@+id/tvSopCastRiQi"
+        android:layout_width="wrap_content"
+        android:layout_height="wrap_content"
+        android:layout_marginLeft="@dimen/size20"
+        android:text="--"
+        android:textSize="10sp"
+        android:textColor="@color/text"/>
+
+    <TextView
+        android:id="@+id/tvSopCastShiJian"
+        android:layout_width="wrap_content"
+        android:layout_height="wrap_content"
+        android:layout_marginLeft="@dimen/size20"
+        android:layout_below="@id/tvSopCastRiQi"
+        android:text="--"
+        android:textSize="10sp"
+        android:textColor="@color/text"/>
+
+    <LinearLayout
+        android:id="@+id/llSopCast"
+        android:layout_width="wrap_content"
+        android:layout_height="wrap_content"
+        android:layout_toRightOf="@id/tvSopCastRiQi"
+        android:layout_marginLeft="@dimen/size9"
+        android:orientation="vertical"
+        android:gravity="center">
+
+        <ImageView
+            android:id="@+id/ivSopCasType"
+            android:layout_width="wrap_content"
+            android:layout_height="wrap_content"
+            android:src="@mipmap/hao"/>
+
+        <TextView
+            android:layout_width="@dimen/size0.3"
+            android:layout_height="@dimen/size78"
+            android:background="@color/text"/>
+
+
+    </LinearLayout>
+
+    <TextView
+        android:id="@+id/tvSopCastTitle"
+        android:layout_width="wrap_content"
+        android:layout_height="wrap_content"
+        android:layout_toRightOf="@id/llSopCast"
+        android:layout_marginLeft="@dimen/size9"
+        android:layout_marginRight="@dimen/size20"
+        android:text=""
+        android:textSize="16sp"
+        android:textColor="@color/black"
+        />
+
+    <TextView
+        android:id="@+id/tvXiangGuanStock"
+        android:layout_width="wrap_content"
+        android:layout_height="wrap_content"
+        android:layout_below="@id/tvSopCastTitle"
+        android:layout_alignLeft="@id/tvSopCastTitle"
+        android:layout_marginTop="@dimen/size18"
+        android:text="相关股票:"
+        android:textSize="12sp"
+        android:textColor="@color/text"/>
+
+    <TextView
+        android:id="@+id/tvXiangGuanContent"
+        android:layout_width="wrap_content"
+        android:layout_height="wrap_content"
+        android:layout_toRightOf="@id/tvXiangGuanStock"
+        android:layout_below="@id/tvSopCastTitle"
+        android:layout_marginTop="@dimen/size18"
+        android:layout_marginLeft="@dimen/size3"
+        android:text=""
+        android:textSize="12sp"
+        android:textColor="@color/blue"/>
+
+</RelativeLayout>

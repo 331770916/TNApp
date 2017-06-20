@@ -1,0 +1,146 @@
+<?xml version="1.0" encoding="utf-8"?>
+<LinearLayout xmlns:android="http://schemas.android.com/apk/res/android"
+    android:id="@+id/searchRootView"
+    android:layout_width="match_parent"
+    android:layout_height="match_parent"
+    android:background="@color/bgColor"
+    android:orientation="vertical">
+
+    <RelativeLayout
+        android:layout_width="match_parent"
+        android:layout_height="@dimen/size25"
+        android:background="@color/blue"
+        android:clipToPadding="true"
+        android:fitsSystemWindows="true" />
+
+
+    <LinearLayout
+        android:layout_width="match_parent"
+        android:layout_height="wrap_content"
+        android:background="@color/blue"
+        android:orientation="horizontal">
+
+        <EditText
+            android:id="@+id/special_ed"
+            android:layout_width="0dp"
+            android:layout_height="wrap_content"
+            android:layout_marginBottom="@dimen/size10"
+            android:layout_marginLeft="@dimen/size20"
+            android:layout_marginTop="@dimen/size10"
+            android:layout_weight="4"
+            android:background="@color/white"
+            android:clickable="true"
+            android:cursorVisible="true"
+            android:drawableLeft="@mipmap/fangdajinghui"
+            android:drawablePadding="@dimen/size10"
+            android:focusable="true"
+            android:hint="@string/search_hintTxt"
+            android:maxLength="6"
+            android:padding="@dimen/size10"
+            android:textColorHint="@color/hideTextColor"
+            android:textSize="@dimen/txtSize12" />
+
+        <TextView
+            android:id="@+id/search_cancle"
+            android:layout_width="0dp"
+            android:layout_height="wrap_content"
+            android:layout_marginTop="@dimen/size10"
+            android:layout_weight="1"
+            android:gravity="center"
+            android:padding="@dimen/size10"
+            android:text="@string/search_cancle"
+            android:textColor="@color/white" />
+    </LinearLayout>
+
+    <LinearLayout
+        android:id="@+id/holdAndhotLayout"
+        android:layout_width="match_parent"
+        android:layout_height="wrap_content"
+        android:paddingBottom="@dimen/size15"
+        android:paddingTop="@dimen/size15"
+        android:background="@color/blue"
+        android:orientation="horizontal">
+
+        <RelativeLayout
+            android:id="@+id/search2_hot"
+            android:layout_width="0dp"
+            android:layout_weight="1"
+            android:layout_height="wrap_content">
+            <TextView
+                android:layout_width="wrap_content"
+                android:layout_height="wrap_content"
+                android:drawableLeft="@mipmap/search_import_hot_ic"
+                android:drawablePadding="@dimen/size10"
+                android:layout_centerInParent="true"
+                android:gravity="center"
+                android:textColor="@color/white"
+                android:textSize="12sp"
+                android:text="热搜股票"/>
+        </RelativeLayout>
+
+        <View
+            android:layout_width="1px"
+            android:layout_height="match_parent"
+            android:background="@color/white"/>
+
+        <RelativeLayout
+            android:id="@+id/search2_hold"
+            android:layout_width="0dp"
+            android:layout_weight="1"
+            android:layout_height="wrap_content">
+            <TextView
+                android:layout_width="wrap_content"
+                android:layout_height="wrap_content"
+                android:gravity="center"
+                android:drawablePadding="@dimen/size10"
+                android:layout_centerInParent="true"
+                android:textSize="12sp"
+                android:drawableLeft="@mipmap/search_import_hold_ic"
+                android:textColor="@color/white"
+                android:text="导入持仓股"/>
+        </RelativeLayout>
+    </LinearLayout>
+
+    <LinearLayout
+        android:id="@+id/searchItemLayout"
+        android:layout_width="match_parent"
+        android:layout_height="0dp"
+        android:layout_weight="1"
+        android:orientation="vertical">
+
+        <com.tpyzq.mobile.pangu.view.magicindicator.MagicIndicator
+            android:id="@+id/search_tabPageIndicator"
+            android:layout_width="match_parent"
+            android:layout_height="@dimen/size45" />
+
+        <View
+            android:layout_width="match_parent"
+            android:layout_height="@dimen/size0.5"
+            android:background="@color/lineColor" />
+
+        <android.support.v4.view.ViewPager
+            android:id="@+id/search_ViewPager"
+            android:layout_width="match_parent"
+            android:layout_height="match_parent" />
+    </LinearLayout>
+
+    <ListView
+        android:id="@+id/search_RecylerView"
+        android:layout_width="match_parent"
+        android:visibility="gone"
+        android:layout_height="0dp"
+        android:layout_weight="1"/>
+
+    <TextView
+        android:id="@+id/noSearchResultTv"
+        android:textSize="@dimen/txtSize18"
+        android:textColor="@color/black"
+        android:gravity="center_horizontal"
+        android:text="@string/noSearchResult"
+        android:paddingTop="@dimen/size40"
+        android:layout_width="match_parent"
+        android:visibility="gone"
+        android:layout_height="0dp"
+        android:layout_weight="1" />
+
+</LinearLayout>

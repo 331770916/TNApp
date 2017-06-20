@@ -1,0 +1,114 @@
+<?xml version="1.0" encoding="utf-8"?>
+<LinearLayout xmlns:android="http://schemas.android.com/apk/res/android"
+    android:layout_width="match_parent"
+    android:layout_height="wrap_content"
+    android:background="@color/white"
+    android:paddingTop="@dimen/size5"
+    android:paddingBottom="@dimen/size5"
+    android:orientation="horizontal">
+
+
+    <LinearLayout
+        android:layout_width="match_parent"
+        android:layout_height="wrap_content"
+        android:orientation="horizontal">
+
+
+        <RelativeLayout
+            android:layout_width="@dimen/size0"
+            android:layout_height="wrap_content"
+            android:layout_weight="1">
+
+            <TextView
+                android:paddingLeft="@dimen/size22"
+                android:id="@+id/clinch_Name"
+                android:layout_width="match_parent"
+                android:layout_height="wrap_content"
+                android:layout_centerHorizontal="true"
+                android:gravity="center|fill"
+                android:text="--"
+                android:textColor="@color/hushenTab_titleColor"
+                android:textSize="@dimen/txtSize14" />
+
+            <TextView
+                android:id="@+id/clinch_Num"
+                android:paddingLeft="@dimen/size22"
+                android:layout_width="match_parent"
+                android:layout_height="wrap_content"
+                android:layout_alignLeft="@id/clinch_Name"
+                android:layout_below="@id/clinch_Name"
+                android:gravity="center|fill"
+                android:text="--"
+                android:textSize="@dimen/txtSize12"
+                android:textColor="@color/colorMyGray"/>
+        </RelativeLayout>
+
+        <RelativeLayout
+            android:layout_width="@dimen/size0"
+            android:layout_height="wrap_content"
+            android:layout_weight="1">
+
+            <TextView
+                android:id="@+id/clinch_Date"
+                android:layout_width="match_parent"
+                android:layout_height="wrap_content"
+                android:layout_centerHorizontal="true"
+                android:gravity="center"
+                android:text="--"
+                android:textSize="@dimen/txtSize12" />
+
+            <TextView
+                android:id="@+id/clinch_Time"
+                android:layout_width="match_parent"
+                android:layout_height="wrap_content"
+                android:layout_alignLeft="@id/clinch_Date"
+                android:layout_below="@id/clinch_Date"
+                android:gravity="center"
+                android:text="--"
+                android:textSize="@dimen/txtSize12" />
+        </RelativeLayout>
+
+        <RelativeLayout
+
+            android:layout_width="@dimen/size0"
+            android:layout_height="wrap_content"
+            android:layout_weight="1">
+
+            <TextView
+                android:paddingLeft="@dimen/size10"
+                android:id="@+id/clinch_Entrust"
+                android:layout_width="match_parent"
+                android:layout_height="wrap_content"
+                android:layout_centerHorizontal="true"
+                android:gravity="center"
+                android:text="--"
+                android:textSize="@dimen/txtSize12" />
+
+            <TextView
+                android:paddingLeft="@dimen/size10"
+                android:id="@+id/clinch_Succeed"
+                android:layout_width="match_parent"
+                android:layout_height="wrap_content"
+                android:layout_alignLeft="@id/clinch_Entrust"
+                android:layout_below="@id/clinch_Entrust"
+                android:gravity="center"
+                android:text="--"
+                android:textSize="@dimen/txtSize12" />
+        </RelativeLayout>
+
+
+        <TextView
+            android:paddingRight="@dimen/size15"
+            android:layout_gravity="center_vertical"
+            android:id="@+id/clinch_Transaction"
+            android:layout_width="0dp"
+            android:layout_height="wrap_content"
+            android:layout_centerInParent="true"
+            android:gravity="center|end"
+            android:layout_weight="1"
+            android:text="--"
+            android:textSize="@dimen/txtSize12" />
+    </LinearLayout>
+
+
+</LinearLayout>

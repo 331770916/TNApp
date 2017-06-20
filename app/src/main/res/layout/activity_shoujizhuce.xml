@@ -1,0 +1,256 @@
+<?xml version="1.0" encoding="utf-8"?>
+<RelativeLayout xmlns:android="http://schemas.android.com/apk/res/android"
+    android:layout_width="match_parent"
+    android:layout_height="match_parent"
+    android:background="@color/bgColor"
+    android:orientation="vertical">
+
+    <RelativeLayout
+        android:id="@+id/RelativeLayoutV19"
+        android:layout_width="match_parent"
+        android:layout_height="wrap_content"
+        android:background="@color/blue"
+        android:padding="@dimen/size25" />
+
+    <RelativeLayout
+        android:id="@+id/RindingLayout"
+        android:layout_width="match_parent"
+        android:layout_height="@dimen/pickerview_topbar_height"
+        android:layout_below="@+id/RelativeLayoutV19"
+        android:background="@color/blue">
+
+        <ImageView
+            android:id="@+id/SJublish_back"
+            android:layout_width="wrap_content"
+            android:layout_height="match_parent"
+            android:padding="@dimen/size10"
+            android:src="@mipmap/back_btn" />
+
+        <TextView
+            android:id="@+id/publish_title"
+            android:layout_width="wrap_content"
+            android:layout_height="wrap_content"
+            android:layout_centerInParent="true"
+            android:text="@string/sjzc"
+            android:textColor="@color/white"
+            android:textSize="@dimen/pickerview_topbar_title_textsize" />
+    </RelativeLayout>
+
+
+    <LinearLayout
+        android:id="@+id/LinearLayout"
+        android:layout_width="match_parent"
+        android:layout_height="wrap_content"
+        android:layout_below="@+id/RindingLayout"
+        android:orientation="vertical">
+
+        <FrameLayout
+            android:layout_width="match_parent"
+            android:layout_height="wrap_content"
+            android:layout_marginTop="@dimen/size30"
+            android:focusable="true"
+            android:focusableInTouchMode="true"
+            android:orientation="vertical"
+            android:paddingLeft="@dimen/size15"
+            android:paddingRight="@dimen/size15">
+
+            <EditText
+                android:id="@+id/SjNumber"
+                android:layout_width="match_parent"
+                android:layout_height="@dimen/size48"
+                android:layout_gravity="center_horizontal"
+                android:background="@drawable/edittext"
+                android:gravity="center_vertical"
+                android:inputType="number"
+                android:maxLength="11"
+                android:numeric="integer"
+                android:paddingLeft="@dimen/size70" />
+
+            <TextView
+                android:layout_width="wrap_content"
+                android:layout_height="wrap_content"
+                android:layout_gravity="center_vertical"
+                android:drawableLeft="@mipmap/shoujichuce"
+                android:drawablePadding="@dimen/size8"
+                android:paddingLeft="@dimen/size10"
+                android:text="+86" />
+
+            <View
+                android:layout_width="@dimen/size0.5"
+                android:layout_height="@dimen/size30"
+                android:layout_gravity="center_vertical"
+                android:layout_marginLeft="@dimen/size60"
+                android:background="@color/gray" />
+        </FrameLayout>
+
+        <LinearLayout
+            android:layout_width="match_parent"
+            android:layout_height="match_parent"
+            android:layout_marginTop="@dimen/size30"
+            android:focusable="true"
+            android:focusableInTouchMode="true"
+            android:orientation="horizontal"
+            android:paddingLeft="@dimen/size15"
+            android:paddingRight="@dimen/size15">
+
+            <EditText
+                android:id="@+id/Captchabtn_ET"
+                android:layout_width="0dp"
+                android:layout_height="@dimen/size48"
+                android:layout_marginRight="@dimen/size10"
+                android:layout_weight="1"
+                android:background="@drawable/edittext"
+                android:drawableLeft="@mipmap/mima"
+                android:drawablePadding="15dp"
+                android:gravity="fill|center"
+                android:hint="@string/sjzcText1"
+                android:maxLength="6"
+                android:numeric="integer"
+                android:paddingLeft="@dimen/size10"
+                android:singleLine="true"
+                android:textSize="@dimen/txtSize16" />
+
+
+            <Button
+                android:id="@+id/Captchabtn"
+                android:layout_width="0dp"
+                android:layout_height="match_parent"
+                android:layout_marginLeft="@dimen/size4"
+                android:layout_weight="0.5"
+                android:background="@drawable/captcha_button_unchecked"
+                android:text="@string/sjzcText2"
+                android:textColor="@drawable/text_green_white_selector"
+                android:textSize="@dimen/size12" />
+        </LinearLayout>
+
+        <Button
+            android:id="@+id/SJLogIn"
+            android:layout_width="match_parent"
+            android:layout_height="wrap_content"
+            android:layout_marginLeft="@dimen/size15"
+            android:layout_marginRight="@dimen/size15"
+            android:layout_marginTop="@dimen/size50"
+            android:background="@drawable/button_login_unchecked"
+            android:text="@string/sjzcText3"
+            android:textColor="@color/white" />
+
+        <RelativeLayout
+            android:layout_width="match_parent"
+            android:layout_height="wrap_content">
+
+            <LinearLayout
+                android:id="@+id/LinearLayout_Marked"
+                android:layout_width="match_parent"
+                android:layout_height="@dimen/size50"
+                android:layout_marginLeft="@dimen/size15"
+                android:layout_marginRight="@dimen/size15"
+                android:layout_marginTop="@dimen/size20"
+                android:background="@drawable/captcha_button_prohibit"
+                android:gravity="center_vertical"
+                android:orientation="horizontal"
+                android:visibility="gone">
+
+
+                <TextView
+                    android:id="@+id/Sound"
+                    android:layout_width="wrap_content"
+                    android:layout_height="wrap_content"
+                    android:drawableLeft="@mipmap/hongtixing"
+                    android:drawablePadding="6dp"
+                    android:paddingLeft="@dimen/size10"
+                    android:text="@string/sjzcText6"
+                    android:textColor="#808080"
+                    android:textSize="@dimen/txtSize14" />
+
+                <TextView
+                    android:id="@+id/Soundtv"
+                    android:layout_width="wrap_content"
+                    android:layout_height="wrap_content"
+                    android:text="@string/sjzcText7"
+                    android:textColor="@color/ZhutextColor"
+                    android:textSize="@dimen/txtSize14" />
+
+            </LinearLayout>
+
+
+            <LinearLayout
+                android:id="@+id/LinearLayout1"
+                android:layout_width="match_parent"
+                android:layout_height="wrap_content"
+                android:layout_marginTop="@dimen/size100"
+                android:gravity="center"
+                android:paddingLeft="@dimen/size15"
+                android:paddingRight="@dimen/size15">
+
+                <View
+                    android:layout_width="125dp"
+                    android:layout_height="@dimen/size0.3"
+                    android:layout_marginRight="@dimen/size12"
+                    android:background="@color/text" />
+
+                <TextView
+                    android:layout_width="wrap_content"
+                    android:layout_height="wrap_content"
+                    android:gravity="center"
+                    android:text="@string/yhzcText"
+                    android:textSize="@dimen/size12" />
+
+                <View
+                    android:layout_width="125dp"
+                    android:layout_height="@dimen/size0.3"
+                    android:layout_marginLeft="@dimen/size12"
+                    android:background="@color/text" />
+            </LinearLayout>
+
+            <TextView
+                android:layout_centerHorizontal="true"
+                android:id="@+id/mWeiXin"
+                android:layout_width="@dimen/size116"
+                android:layout_height="wrap_content"
+                android:layout_below="@+id/LinearLayout1"
+                android:layout_gravity="center_horizontal"
+                android:layout_marginTop="40dp"
+                android:background="@color/bgColor"
+                android:drawableLeft="@mipmap/weixin"
+                android:drawablePadding="6dp"
+                android:gravity="center|fill"
+                android:paddingLeft="@dimen/size20"
+                android:text="@string/yhzcText2"
+                android:textColor="@color/ZhutextColor"
+                android:textSize="@dimen/txtSize12"
+                android:visibility="visible" />
+        </RelativeLayout>
+
+        <View
+            android:layout_width="match_parent"
+            android:layout_height="@dimen/size0.3"
+            android:layout_marginLeft="@dimen/size15"
+            android:layout_marginRight="@dimen/size15"
+            android:layout_marginTop="@dimen/size45"
+            android:background="@color/text"
+            android:visibility="gone" />
+
+
+        <LinearLayout
+            android:id="@+id/LinearLayoutLL"
+            android:layout_width="match_parent"
+            android:layout_height="wrap_content"
+            android:layout_marginTop="@dimen/size20"
+            android:gravity="center"
+            android:orientation="horizontal"
+            android:visibility="visible">
+
+            <TextView
+                android:id="@+id/mtext3"
+                android:layout_width="wrap_content"
+                android:layout_height="wrap_content"
+                android:text="@string/sjzcText5"
+                android:textColor="@color/normalRadioBtnColor"
+                android:textSize="@dimen/size10"
+                android:visibility="gone" />
+        </LinearLayout>
+
+    </LinearLayout>
+
+
+</RelativeLayout>

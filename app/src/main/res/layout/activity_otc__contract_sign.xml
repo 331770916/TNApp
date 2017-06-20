@@ -1,0 +1,181 @@
+<?xml version="1.0" encoding="utf-8"?>
+<LinearLayout xmlns:android="http://schemas.android.com/apk/res/android"
+    xmlns:tools="http://schemas.android.com/tools"
+    android:layout_width="match_parent"
+    android:layout_height="match_parent"
+    android:background="@color/bgColor"
+    android:orientation="vertical"
+    tools:context="com.tpyzq.mobile.pangu.activity.trade.otc_business.OTC_ContractSignActivity">
+
+
+    <RelativeLayout
+        android:layout_width="match_parent"
+        android:layout_height="@dimen/size25"
+        android:background="@color/blue"
+        android:clipToPadding="true"
+        android:fitsSystemWindows="true" />
+    <!-- 头布局 -->
+    <RelativeLayout
+        android:layout_width="match_parent"
+        android:layout_height="@dimen/pickerview_topbar_height"
+        android:background="@color/blue">
+
+        <ImageView
+            android:id="@+id/ivOTC_ContractSign_back"
+            android:layout_width="wrap_content"
+            android:layout_height="match_parent"
+            android:layout_alignParentLeft="true"
+            android:padding="@dimen/size10"
+            android:src="@mipmap/back_btn" />
+
+        <TextView
+            android:layout_width="wrap_content"
+            android:layout_height="wrap_content"
+            android:layout_centerInParent="true"
+            android:text="@string/OTC_dianzihetongqianshu"
+            android:textColor="@color/white"
+            android:textSize="@dimen/pickerview_topbar_title_textsize" />
+    </RelativeLayout>
+
+    <LinearLayout
+        android:id="@+id/ll_view1"
+        android:layout_width="match_parent"
+        android:layout_height="wrap_content"
+        android:orientation="vertical">
+
+        <RelativeLayout
+            android:id="@+id/rlContractSignTitle"
+            android:layout_width="match_parent"
+            android:layout_height="@dimen/size50"
+            android:background="@color/bgColor">
+
+            <TextView
+                android:layout_width="wrap_content"
+                android:layout_height="wrap_content"
+                android:layout_alignParentBottom="true"
+                android:layout_centerHorizontal="true"
+                android:layout_marginBottom="@dimen/size10"
+                android:text="@string/OTC_qingyuedubingqianshuxieyi"
+                android:textColor="@color/hushenTab_titleColor"
+                android:textSize="@dimen/txtSize11" />
+
+        </RelativeLayout>
+
+        <com.tpyzq.mobile.pangu.view.gridview.MyListView
+            android:id="@+id/electronicContractListView"
+            android:layout_width="match_parent"
+            android:layout_height="wrap_content"
+            android:background="@color/white"
+            android:divider="@color/white"
+            android:paddingBottom="@dimen/size20"
+            android:paddingTop="@dimen/size20" />
+
+        <RelativeLayout
+            android:id="@+id/rlTongYiXieYi"
+            android:layout_width="match_parent"
+            android:layout_height="@dimen/size76"
+            android:background="@color/bgColor">
+
+            <LinearLayout
+                android:layout_width="wrap_content"
+                android:layout_height="wrap_content"
+                android:layout_marginLeft="@dimen/size40"
+                android:layout_marginTop="@dimen/size19"
+                android:gravity="center"
+                android:orientation="horizontal">
+
+                <CheckBox
+                    android:id="@+id/cbUp"
+                    android:layout_width="wrap_content"
+                    android:layout_height="wrap_content" />
+
+                <TextView
+                    android:layout_width="@dimen/size7"
+                    android:layout_height="match_parent" />
+
+                <TextView
+                    android:layout_width="wrap_content"
+                    android:layout_height="wrap_content"
+                    android:text="我已仔细阅读并同意签署以上各项协议"
+                    android:textColor="@color/hushenTab_titleColor"
+                    android:textSize="13sp" />
+
+            </LinearLayout>
+
+        </RelativeLayout>
+    </LinearLayout>
+
+    <LinearLayout
+        android:id="@+id/ll_view2"
+        android:layout_width="match_parent"
+        android:layout_height="wrap_content"
+        android:orientation="vertical">
+
+
+        <RelativeLayout
+            android:id="@+id/rlOTCKaiTongQY"
+            android:layout_width="match_parent"
+            android:layout_height="@dimen/size40"
+            android:background="@color/white">
+
+            <TextView
+                android:id="@+id/tv_open"
+                android:layout_width="wrap_content"
+                android:layout_height="wrap_content"
+                android:layout_alignParentLeft="true"
+                android:layout_alignParentStart="true"
+                android:layout_centerVertical="true"
+                android:layout_marginLeft="28dp"
+                android:layout_marginStart="28dp"
+                android:text="@string/OTC_zhengquantouzijinijinjijinrenquanyixuzhi"
+                android:textColor="@color/blue"
+                android:textSize="14sp" />
+
+        </RelativeLayout>
+
+        <LinearLayout
+            android:id="@+id/llOTCKaiTongQY"
+            android:layout_width="wrap_content"
+            android:layout_height="wrap_content"
+            android:visibility="gone"
+            android:layout_marginLeft="@dimen/size40"
+            android:layout_marginTop="@dimen/size19"
+            android:gravity="center"
+            android:orientation="horizontal">
+
+            <CheckBox
+                android:id="@+id/cbDown"
+                android:layout_width="wrap_content"
+                android:layout_height="wrap_content" />
+
+            <TextView
+                android:layout_width="@dimen/size7"
+                android:layout_height="match_parent" />
+
+            <TextView
+                android:textColor="@color/hushenTab_titleColor"
+                android:layout_width="wrap_content"
+                android:layout_height="wrap_content"
+                android:text="@string/OTC_woyizixiyuedubingtongyiqianshu"
+                android:textSize="13sp" />
+
+        </LinearLayout>
+
+    </LinearLayout>
+
+    <TextView
+        android:id="@+id/tvContractSignQD"
+        android:layout_width="match_parent"
+        android:layout_height="@dimen/size40"
+        android:layout_centerInParent="true"
+        android:layout_marginLeft="@dimen/size20"
+        android:layout_marginRight="@dimen/size20"
+        android:layout_marginTop="@dimen/size100"
+        android:background="@color/orange1"
+        android:gravity="center"
+        android:text="确定"
+        android:textColor="@color/white"
+        android:textSize="15sp" />
+
+
+</LinearLayout>

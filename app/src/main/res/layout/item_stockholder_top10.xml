@@ -1,0 +1,39 @@
+<?xml version="1.0" encoding="utf-8"?>
+<LinearLayout xmlns:android="http://schemas.android.com/apk/res/android"
+    android:layout_width="match_parent"
+    android:layout_height="wrap_content"
+    android:paddingTop="@dimen/size5"
+    android:paddingBottom="@dimen/size5"
+    android:orientation="horizontal">
+
+    <TextView
+        android:id="@+id/tv_company_name"
+        android:layout_width="0dp"
+        android:layout_weight="2"
+        android:layout_gravity="center_vertical"
+        android:layout_height="wrap_content"
+        android:textColor="@color/hushenTab_titleColor"
+        android:paddingLeft="@dimen/size20"
+        android:text="--" />
+
+    <TextView
+        android:id="@+id/tv_rate"
+        android:layout_width="0dp"
+        android:layout_weight="1"
+        android:gravity="center"
+        android:layout_gravity="center_vertical"
+        android:layout_height="wrap_content"
+        android:textColor="@color/hushenTab_titleColor"
+        android:text="--" />
+
+    <TextView
+        android:id="@+id/tv_change"
+        android:layout_width="0dp"
+        android:layout_weight="1"
+        android:layout_height="wrap_content"
+        android:gravity="right"
+        android:layout_gravity="center_vertical"
+        android:textColor="@color/hushenTab_titleColor"
+        android:paddingRight="@dimen/size20"
+        />
+</LinearLayout>

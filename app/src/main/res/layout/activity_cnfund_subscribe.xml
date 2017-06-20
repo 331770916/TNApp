@@ -1,0 +1,287 @@
+<?xml version="1.0" encoding="utf-8"?>
+<LinearLayout xmlns:android="http://schemas.android.com/apk/res/android"
+    xmlns:tools="http://schemas.android.com/tools"
+    android:id="@+id/CNFundSubscribeActivity"
+    android:layout_width="match_parent"
+    android:layout_height="match_parent"
+    android:background="@color/bgColor"
+    android:orientation="vertical"
+    tools:context="com.tpyzq.mobile.pangu.activity.trade.stock.CNFundSubscribeActivity">
+
+
+    <RelativeLayout
+        android:layout_width="match_parent"
+        android:layout_height="@dimen/size25"
+        android:background="@color/blue"
+        android:clipToPadding="true"
+        android:fitsSystemWindows="true" />
+
+    <!-- 头布局 -->
+    <RelativeLayout
+        android:layout_width="match_parent"
+        android:layout_height="@dimen/pickerview_topbar_height"
+        android:background="@color/blue">
+
+        <ImageView
+            android:id="@+id/ivCnFundSubscribe_back"
+            android:layout_width="wrap_content"
+            android:layout_height="match_parent"
+            android:layout_alignParentLeft="true"
+            android:padding="@dimen/size10"
+            android:src="@mipmap/back_btn" />
+
+        <TextView
+            android:layout_width="wrap_content"
+            android:layout_height="wrap_content"
+            android:layout_centerInParent="true"
+            android:text="@string/ChangNeiJiJinShenGou"
+            android:textColor="@color/white"
+            android:textSize="@dimen/pickerview_topbar_title_textsize" />
+    </RelativeLayout>
+
+
+    <LinearLayout
+        android:layout_width="match_parent"
+        android:layout_height="wrap_content"
+        android:orientation="vertical">
+        <!--分割线-->
+        <View
+            android:layout_width="match_parent"
+            android:layout_height="@dimen/size10"
+            android:background="@color/bgColor" />
+
+        <LinearLayout
+            android:layout_width="match_parent"
+            android:layout_height="wrap_content"
+            android:background="@color/white"
+            android:orientation="vertical">
+
+            <RelativeLayout
+                android:layout_width="match_parent"
+                android:layout_height="@dimen/size60">
+
+                <TextView
+                    android:id="@+id/tvCnFundCode"
+                    android:layout_width="wrap_content"
+                    android:layout_height="wrap_content"
+                    android:layout_centerVertical="true"
+                    android:layout_marginLeft="@dimen/size20"
+                    android:text="@string/JiJinDaiMa"
+                    android:textColor="@color/hushenTab_titleColor"
+                    android:textSize="@dimen/txtSize14" />
+
+                <EditText
+                    android:id="@+id/etCnFundCode"
+                    android:layout_width="match_parent"
+                    android:layout_height="match_parent"
+                    android:layout_centerVertical="true"
+                    android:layout_marginLeft="@dimen/size35"
+                    android:layout_toRightOf="@id/tvCnFundCode"
+                    android:background="@null"
+                    android:hint="@string/QingShuRuJiJinDaiMa"
+                    android:maxLength="6"
+                    android:singleLine="true"
+                    android:textColor="@color/textss"
+                    android:textColorHint="@color/texts"
+                    android:textSize="@dimen/txtSize14" />
+
+            </RelativeLayout>
+
+            <!--分割线-->
+            <View
+                android:layout_width="match_parent"
+                android:layout_height="@dimen/size0.5"
+                android:layout_marginLeft="@dimen/size20"
+                android:background="@color/stkDetailDividerColor" />
+
+            <!--申购金额-->
+            <RelativeLayout
+                android:layout_width="match_parent"
+                android:layout_height="@dimen/size60">
+
+                <TextView
+                    android:id="@+id/tvCnFundAmount"
+                    android:layout_width="wrap_content"
+                    android:layout_height="wrap_content"
+                    android:layout_centerVertical="true"
+                    android:layout_marginLeft="@dimen/size20"
+                    android:text="@string/ShenGouJinE"
+                    android:textColor="@color/hushenTab_titleColor"
+                    android:textSize="@dimen/txtSize14" />
+
+                <EditText
+                    android:id="@+id/etCnFundAmount"
+                    android:layout_width="match_parent"
+                    android:layout_height="match_parent"
+                    android:layout_centerVertical="true"
+                    android:layout_marginLeft="@dimen/size35"
+                    android:layout_toRightOf="@id/tvCnFundAmount"
+                    android:background="@null"
+                    android:hint="@string/QingShuRuShenGouJinE"
+                    android:inputType="numberDecimal"
+                    android:singleLine="true"
+                    android:textColor="@color/textss"
+                    android:textColorHint="@color/texts"
+                    android:textSize="@dimen/txtSize14"  />
+
+            </RelativeLayout>
+
+            <!--分割线-->
+            <View
+                android:layout_width="match_parent"
+                android:layout_height="@dimen/size0.5"
+                android:layout_marginLeft="@dimen/size20"
+                android:background="@color/stkDetailDividerColor" />
+
+            <!--分割上下-->
+            <View
+                android:background="@color/white"
+                android:layout_width="match_parent"
+                android:layout_height="@dimen/size20" />
+
+            <!--基金名称-->
+            <RelativeLayout
+                android:layout_width="match_parent"
+                android:layout_height="@dimen/size50">
+
+                <TextView
+                    android:id="@+id/tvCnFundName"
+                    android:layout_width="wrap_content"
+                    android:layout_height="wrap_content"
+                    android:layout_centerVertical="true"
+                    android:layout_marginLeft="@dimen/size20"
+                    android:text="@string/JiJinMingCheng"
+                    android:textColor="@color/texts"
+                    android:textSize="@dimen/txtSize14" />
+
+                <TextView
+                    android:id="@+id/tvCnFundNameValue"
+                    android:layout_width="wrap_content"
+                    android:layout_height="wrap_content"
+                    android:layout_centerVertical="true"
+                    android:layout_marginLeft="@dimen/size35"
+                    android:layout_toRightOf="@id/tvCnFundName"
+                    android:text=""
+                    android:textColor="@color/texts"
+                    android:textSize="@dimen/txtSize14" />
+
+            </RelativeLayout>
+
+            <!--资金净值-->
+            <RelativeLayout
+                android:layout_width="match_parent"
+                android:layout_height="@dimen/size50">
+
+                <TextView
+                    android:id="@+id/tvCnFundNetValue"
+                    android:layout_width="wrap_content"
+                    android:layout_height="wrap_content"
+                    android:layout_centerVertical="true"
+                    android:layout_marginLeft="@dimen/size20"
+                    android:text="@string/ZiJinJingZhi"
+                    android:textColor="@color/texts"
+                    android:textSize="@dimen/txtSize14" />
+
+                <TextView
+                    android:id="@+id/tvCnFundNetValueValue"
+                    android:layout_width="wrap_content"
+                    android:layout_height="wrap_content"
+                    android:layout_centerVertical="true"
+                    android:layout_marginLeft="@dimen/size35"
+                    android:layout_toRightOf="@id/tvCnFundNetValue"
+                    android:text=""
+                    android:textColor="@color/texts"
+                    android:textSize="@dimen/txtSize14" />
+
+            </RelativeLayout>
+
+            <!--股东账号-->
+            <RelativeLayout
+                android:layout_width="match_parent"
+                android:layout_height="@dimen/size50">
+
+                <TextView
+                    android:id="@+id/tvCnStockholderNum"
+                    android:layout_width="wrap_content"
+                    android:layout_height="wrap_content"
+                    android:layout_centerVertical="true"
+                    android:layout_marginLeft="@dimen/size20"
+                    android:text="@string/GuDongZhangHao"
+                    android:textColor="@color/texts"
+                    android:textSize="@dimen/txtSize14" />
+
+                <TextView
+                    android:id="@+id/tvCnStockholderNumValue"
+                    android:layout_width="wrap_content"
+                    android:layout_height="wrap_content"
+                    android:layout_centerVertical="true"
+                    android:layout_marginLeft="@dimen/size35"
+                    android:layout_toRightOf="@id/tvCnStockholderNum"
+                    android:text=""
+                    android:textColor="@color/texts"
+                    android:textSize="@dimen/txtSize14" />
+
+            </RelativeLayout>
+
+
+            <!--可用资金-->
+            <RelativeLayout
+                android:layout_width="match_parent"
+                android:layout_height="@dimen/size50">
+
+                <TextView
+                    android:id="@+id/tvCnExpendableFund"
+                    android:layout_width="wrap_content"
+                    android:layout_height="wrap_content"
+                    android:layout_centerVertical="true"
+                    android:layout_marginLeft="@dimen/size20"
+                    android:text="@string/KeYongZiJin"
+                    android:textColor="@color/texts"
+                    android:textSize="@dimen/txtSize14" />
+
+                <TextView
+                    android:id="@+id/tvCnExpendableFundValue"
+                    android:layout_width="wrap_content"
+                    android:layout_height="wrap_content"
+                    android:layout_centerVertical="true"
+                    android:layout_marginLeft="@dimen/size35"
+                    android:layout_toRightOf="@id/tvCnExpendableFund"
+                    android:text=""
+                    android:textColor="@color/texts"
+                    android:textSize="@dimen/txtSize14" />
+
+            </RelativeLayout>
+
+            <View
+                android:background="@color/white"
+                android:layout_width="match_parent"
+                android:layout_height="@dimen/size20" />
+        </LinearLayout>
+        <!--分割线-->
+        <View
+            android:layout_width="match_parent"
+            android:layout_height="@dimen/size1"
+            android:background="@color/dividerColor" />
+
+        <!--确定按钮-->
+        <RelativeLayout
+            android:layout_width="wrap_content"
+            android:layout_height="wrap_content"
+            android:layout_gravity="center_horizontal">
+
+            <Button
+                android:id="@+id/tvCnSubscribeQueDing"
+                android:layout_width="@dimen/size330"
+                android:layout_height="@dimen/size40"
+                android:layout_marginTop="@dimen/size100"
+                android:background="@drawable/lonin"
+                android:clickable="true"
+                android:gravity="center"
+                android:text="@string/pickerview_submit"
+                android:textColor="@color/white"
+                android:textSize="15sp" />
+
+        </RelativeLayout>
+
+    </LinearLayout>
+</LinearLayout>

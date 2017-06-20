@@ -1,0 +1,91 @@
+<?xml version="1.0" encoding="utf-8"?>
+<LinearLayout xmlns:android="http://schemas.android.com/apk/res/android"
+    android:layout_width="match_parent"
+    android:layout_height="match_parent"
+    android:orientation="vertical">
+
+    <RelativeLayout
+        android:id="@+id/AGRelativeLayout"
+        android:layout_width="match_parent"
+        android:layout_height="@dimen/size25"
+        android:background="@color/blue"
+        android:clipToPadding="true"
+        android:fitsSystemWindows="true" />
+
+
+    <RelativeLayout
+        android:id="@+id/AGRelativeLayout1"
+        android:layout_width="match_parent"
+        android:layout_height="@dimen/pickerview_topbar_height"
+        android:layout_below="@+id/AGRelativeLayout"
+        android:background="@color/blue">
+
+
+        <ImageView
+            android:id="@+id/ASpublish_back"
+            android:layout_width="wrap_content"
+            android:layout_height="match_parent"
+            android:layout_alignParentLeft="true"
+            android:padding="@dimen/size10"
+            android:src="@mipmap/back_btn" />
+
+        <TextView
+            android:id="@+id/publish_title"
+            android:layout_width="wrap_content"
+            android:layout_height="wrap_content"
+            android:layout_centerInParent="true"
+            android:text="@string/AnnouncementText"
+            android:textColor="@color/white"
+            android:textSize="@dimen/pickerview_topbar_title_textsize" />
+    </RelativeLayout>
+
+    <ScrollView
+        android:layout_width="match_parent"
+        android:layout_height="match_parent">
+
+        <LinearLayout
+            android:layout_width="match_parent"
+            android:layout_height="match_parent"
+            android:orientation="vertical">
+
+            <TextView
+                android:id="@+id/title_text"
+                android:layout_width="match_parent"
+                android:layout_height="wrap_content"
+                android:paddingLeft="@dimen/size20"
+                android:paddingRight="@dimen/size15"
+                android:paddingTop="@dimen/size10"
+                android:textColor="@color/hushenTab_titleColor"
+                android:textSize="@dimen/txtSize20"
+                android:textStyle="bold" />
+
+            <TextView
+                android:id="@+id/push_time_text"
+                android:layout_width="match_parent"
+                android:layout_height="wrap_content"
+                android:paddingBottom="@dimen/size15"
+                android:paddingLeft="@dimen/size20"
+                android:paddingRight="@dimen/size15"
+                android:paddingTop="@dimen/size8"
+                android:textColor="@color/text" />
+
+            <View
+                android:layout_width="match_parent"
+                android:layout_height="@dimen/size1"
+                android:layout_marginLeft="@dimen/size20"
+                android:background="@color/lineColor" />
+
+            <TextView
+                android:id="@+id/contene_text"
+                android:layout_width="match_parent"
+                android:layout_height="wrap_content"
+                android:layout_marginTop="@dimen/size20"
+                android:lineSpacingExtra="1.3dp"
+                android:lineSpacingMultiplier="1.3"
+                android:paddingLeft="@dimen/size17"
+                android:paddingRight="@dimen/size15"
+                android:textColor="@color/gravy"
+                android:textSize="@dimen/txtSize16" />
+        </LinearLayout>
+    </ScrollView>
+</LinearLayout>

@@ -1,0 +1,192 @@
+<?xml version="1.0" encoding="utf-8"?>
+<LinearLayout xmlns:android="http://schemas.android.com/apk/res/android"
+    android:layout_width="match_parent"
+    android:layout_height="match_parent"
+    android:background="@color/white"
+    android:orientation="vertical">
+
+    <LinearLayout
+        android:paddingLeft="@dimen/size19"
+        android:paddingRight="@dimen/size15"
+        android:layout_width="match_parent"
+        android:layout_height="wrap_content"
+        android:orientation="horizontal"
+        android:paddingBottom="@dimen/size5"
+        android:paddingTop="@dimen/size5">
+
+
+        <RelativeLayout
+            android:layout_width="@dimen/size0"
+            android:layout_height="wrap_content"
+            android:layout_weight="1">
+
+            <TextView
+                android:id="@+id/takeaPositionItem_Name"
+                android:layout_width="match_parent"
+                android:layout_height="wrap_content"
+                android:gravity="center|fill"
+                android:text="海创B股"
+                android:textColor="@color/text_color"
+                android:textSize="@dimen/txtSize14" />
+
+            <TextView
+                android:id="@+id/takeaPosition_NameItem_Num"
+                android:layout_width="match_parent"
+                android:layout_height="wrap_content"
+                android:layout_alignLeft="@id/takeaPositionItem_Name"
+                android:layout_below="@id/takeaPositionItem_Name"
+                android:gravity="center|fill"
+                android:text="99999999.02"
+                android:textColor="@color/bkColor"
+                android:textSize="@dimen/txtSize10" />
+        </RelativeLayout>
+
+        <RelativeLayout
+            android:layout_width="@dimen/size0"
+            android:layout_height="wrap_content"
+            android:layout_weight="1">
+
+            <TextView
+                android:id="@+id/takeaPositionItem_YingKui"
+                android:layout_width="match_parent"
+                android:layout_height="wrap_content"
+                android:gravity="center"
+                android:text="+99990002.00"
+                android:textColor="@color/black"
+                android:textSize="@dimen/txtSize11" />
+
+            <TextView
+                android:id="@+id/takeaPositionItem_Percent"
+                android:layout_width="match_parent"
+                android:layout_height="wrap_content"
+                android:layout_below="@id/takeaPositionItem_YingKui"
+                android:gravity="center"
+                android:text="+99990001.00"
+                android:textColor="@color/black"
+                android:textSize="@dimen/txtSize11" />
+        </RelativeLayout>
+
+        <RelativeLayout
+            android:layout_width="@dimen/size0"
+            android:layout_height="wrap_content"
+            android:layout_weight="1">
+            <TextView
+                android:id="@+id/takeaPositionItem_ChiCangKeYong"
+                android:layout_width="match_parent"
+                android:layout_height="wrap_content"
+                android:gravity="center"
+                android:text="99990100.00"
+                android:textColor="@color/hushenTab_titleColor"
+                android:textSize="@dimen/txtSize11" />
+
+            <TextView
+                android:id="@+id/takeaPositionItem_ChiCangKeYong1"
+                android:layout_width="match_parent"
+                android:layout_height="wrap_content"
+                android:layout_alignLeft="@id/takeaPositionItem_ChiCangKeYong"
+                android:layout_below="@id/takeaPositionItem_ChiCangKeYong"
+                android:gravity="center"
+                android:text="99199000.00"
+                android:textColor="@color/hushenTab_titleColor"
+                android:textSize="@dimen/txtSize11" />
+        </RelativeLayout>
+
+        <RelativeLayout
+            android:layout_width="@dimen/size0"
+            android:layout_height="wrap_content"
+            android:layout_weight="1">
+
+            <TextView
+                android:id="@+id/takeaPositionItem_XianJiaChengBen"
+                android:layout_width="match_parent"
+                android:layout_height="wrap_content"
+                android:gravity="center|end"
+                android:text="9991900.00"
+                android:textColor="@color/hushenTab_titleColor"
+                android:textSize="@dimen/txtSize11" />
+
+            <TextView
+                android:id="@+id/takeaPositionItem_XianJiaChengBen1"
+                android:layout_width="match_parent"
+                android:layout_height="wrap_content"
+                android:layout_alignLeft="@id/takeaPositionItem_XianJiaChengBen"
+                android:layout_below="@id/takeaPositionItem_XianJiaChengBen"
+                android:gravity="center|end"
+                android:text="9991900.02"
+                android:textColor="@color/hushenTab_titleColor"
+                android:textSize="@dimen/txtSize11" />
+        </RelativeLayout>
+
+    </LinearLayout>
+
+    <LinearLayout
+        android:id="@+id/item_menu"
+        android:layout_width="match_parent"
+        android:layout_height="@dimen/size40"
+        android:orientation="horizontal">
+
+        <RelativeLayout
+            android:layout_width="0dp"
+            android:layout_height="wrap_content"
+            android:layout_weight="1">
+
+            <TextView
+                android:id="@+id/item_Buy"
+                android:layout_width="match_parent"
+                android:layout_height="match_parent"
+                android:layout_alignParentLeft="true"
+                android:background="@mipmap/qq"
+                android:drawableLeft="@mipmap/chicangmairu"
+                android:drawablePadding="@dimen/size5"
+                android:gravity="center_vertical"
+                android:paddingLeft="@dimen/size25"
+                android:text="买入"
+                android:textColor="@color/white"
+                android:textSize="15sp" />
+        </RelativeLayout>
+
+        <RelativeLayout
+
+            android:layout_width="0dp"
+            android:layout_height="wrap_content"
+            android:layout_weight="1.5">
+
+            <TextView
+                android:id="@+id/item_Market"
+                android:layout_width="match_parent"
+                android:layout_height="match_parent"
+                android:layout_centerInParent="true"
+                android:background="@mipmap/qw"
+                android:drawableLeft="@mipmap/chicanghangqing"
+                android:drawablePadding="@dimen/size5"
+                android:gravity="center"
+                android:paddingLeft="@dimen/size50"
+                android:paddingRight="@dimen/size50"
+                android:text="行情"
+                android:textColor="@color/white"
+                android:textSize="15sp" />
+
+        </RelativeLayout>
+
+        <RelativeLayout
+            android:layout_width="0dp"
+            android:layout_height="wrap_content"
+            android:layout_weight="1">
+
+            <TextView
+                android:id="@+id/item_Sale"
+                android:layout_width="match_parent"
+                android:layout_height="match_parent"
+                android:layout_alignParentRight="true"
+                android:background="@mipmap/qq"
+                android:drawableLeft="@mipmap/chicangmaichu"
+                android:drawablePadding="@dimen/size5"
+                android:gravity="center_vertical"
+                android:paddingLeft="@dimen/size40"
+                android:text="卖出"
+                android:textColor="@color/white"
+                android:textSize="15sp" />
+        </RelativeLayout>
+    </LinearLayout>
+
+</LinearLayout>

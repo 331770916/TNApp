@@ -1,0 +1,282 @@
+<?xml version="1.0" encoding="utf-8"?>
+<RelativeLayout  xmlns:android="http://schemas.android.com/apk/res/android"
+    xmlns:fresco="http://schemas.android.com/apk/res-auto"
+    android:layout_width="match_parent"
+    android:layout_height="match_parent"
+    android:background="@color/bgColor">
+    <ScrollView
+        android:layout_width="match_parent"
+        android:layout_height="match_parent">
+        <LinearLayout
+            android:layout_width="match_parent"
+            android:layout_height="match_parent"
+            android:background="@color/bgColor"
+            android:orientation="vertical">
+
+            <RelativeLayout
+                android:layout_width="match_parent"
+                android:layout_height="@dimen/size250"
+                android:background="@mipmap/setting_beijing">
+                <com.facebook.drawee.view.SimpleDraweeView
+                    android:id="@+id/iv_user_icon"
+                    android:layout_width="60dp"
+                    android:layout_height="60dp"
+                    android:layout_centerInParent="true"
+                    fresco:placeholderImage="@mipmap/setting_touxiang"
+                    fresco:roundAsCircle="true" />
+
+                <TextView
+                    android:id="@+id/tv_user_icon"
+                    android:layout_width="wrap_content"
+                    android:layout_height="wrap_content"
+                    android:layout_alignParentBottom="true"
+                    android:layout_centerHorizontal="true"
+                    android:layout_marginBottom="@dimen/size60"
+                    android:text="登录/注册"
+                    android:textColor="@color/white" />
+            </RelativeLayout>
+
+            <LinearLayout
+                android:id="@+id/ll_login"
+                android:layout_width="match_parent"
+                android:layout_height="@dimen/size50"
+                android:layout_marginTop="@dimen/size5"
+                android:background="@color/white"
+                android:orientation="horizontal">
+
+                <TextView
+                    android:layout_width="wrap_content"
+                    android:layout_height="wrap_content"
+                    android:layout_gravity="center_vertical"
+                    android:paddingLeft="@dimen/size20"
+                    android:text="当前资金账号" />
+                <TextView
+                    android:id="@+id/tv_account"
+                    android:layout_width="wrap_content"
+                    android:layout_height="wrap_content"
+                    android:layout_gravity="center_vertical"
+                    android:paddingLeft="@dimen/size20"
+                    />
+
+                <TextView
+                    android:id="@+id/tv_now_fund_account"
+                    android:layout_width="0dp"
+                    android:layout_height="wrap_content"
+                    android:layout_gravity="center_vertical"
+                    android:layout_weight="1"
+                    android:drawablePadding="@dimen/size10"
+                    android:drawableRight="@mipmap/more"
+                    android:gravity="right"
+                    android:hint="未登录"
+                    android:textSize="@dimen/txtSize14"
+                    android:paddingRight="@dimen/size20" />
+            </LinearLayout>
+
+            <LinearLayout
+                android:id="@+id/ll_set_remind"
+                android:layout_width="match_parent"
+                android:layout_height="@dimen/size50"
+                android:layout_marginTop="@dimen/size5"
+                android:background="@color/white"
+                android:orientation="horizontal">
+
+                <TextView
+                    android:layout_width="wrap_content"
+                    android:layout_height="wrap_content"
+                    android:layout_gravity="center_vertical"
+                    android:paddingLeft="@dimen/size20"
+                    android:text="设置提醒" />
+
+                <TextView
+                    android:layout_width="0dp"
+                    android:layout_height="wrap_content"
+                    android:layout_gravity="center_vertical"
+                    android:layout_weight="1"
+                    android:drawablePadding="@dimen/size10"
+                    android:drawableRight="@mipmap/more"
+                    android:gravity="right"
+                    android:paddingRight="@dimen/size20" />
+            </LinearLayout>
+            <LinearLayout
+                android:id="@+id/ll_set_refresh"
+                android:layout_width="match_parent"
+                android:layout_height="@dimen/size50"
+                android:layout_marginTop="@dimen/size5"
+                android:background="@color/white"
+                android:orientation="horizontal">
+
+                <TextView
+                    android:layout_width="wrap_content"
+                    android:layout_height="wrap_content"
+                    android:layout_gravity="center_vertical"
+                    android:paddingLeft="@dimen/size20"
+                    android:text="行情刷新频率" />
+
+                <TextView
+                    android:layout_width="0dp"
+                    android:layout_height="wrap_content"
+                    android:layout_gravity="center_vertical"
+                    android:layout_weight="1"
+                    android:drawablePadding="@dimen/size10"
+                    android:drawableRight="@mipmap/more"
+                    android:gravity="right"
+                    android:paddingRight="@dimen/size20" />
+            </LinearLayout>
+            <LinearLayout
+                android:id="@+id/jy_speed"
+                android:layout_width="match_parent"
+                android:layout_height="@dimen/size50"
+                android:layout_marginTop="@dimen/size5"
+                android:background="@color/white"
+                android:orientation="horizontal">
+
+                <TextView
+                    android:layout_width="wrap_content"
+                    android:layout_height="wrap_content"
+                    android:layout_gravity="center_vertical"
+                    android:paddingLeft="@dimen/size20"
+                    android:text="交易站点切换" />
+
+                <TextView
+                    android:layout_width="0dp"
+                    android:layout_height="wrap_content"
+                    android:layout_gravity="center_vertical"
+                    android:layout_weight="1"
+                    android:drawablePadding="@dimen/size10"
+                    android:drawableRight="@mipmap/more"
+                    android:gravity="right"
+                    android:paddingRight="@dimen/size20" />
+            </LinearLayout>
+
+            <LinearLayout
+                android:id="@+id/ll_speed"
+                android:layout_width="match_parent"
+                android:layout_height="@dimen/size50"
+                android:layout_marginTop="@dimen/size5"
+                android:background="@color/white"
+                android:orientation="horizontal">
+
+                <TextView
+                    android:layout_width="wrap_content"
+                    android:layout_height="wrap_content"
+                    android:layout_gravity="center_vertical"
+                    android:paddingLeft="@dimen/size20"
+                    android:text="行情站点切换" />
+
+                <TextView
+                    android:layout_width="0dp"
+                    android:layout_height="wrap_content"
+                    android:layout_gravity="center_vertical"
+                    android:layout_weight="1"
+                    android:drawablePadding="@dimen/size10"
+                    android:drawableRight="@mipmap/more"
+                    android:gravity="right"
+                    android:paddingRight="@dimen/size20" />
+            </LinearLayout>
+
+            <LinearLayout
+                android:id="@+id/ll_version"
+                android:layout_width="match_parent"
+                android:layout_height="@dimen/size50"
+                android:layout_marginTop="@dimen/size1"
+                android:background="@color/white"
+                android:orientation="horizontal">
+
+                <TextView
+                    android:layout_width="wrap_content"
+                    android:layout_height="wrap_content"
+                    android:layout_gravity="center_vertical"
+                    android:paddingLeft="@dimen/size20"
+                    android:text="版本更新" />
+
+                <TextView
+                    android:id="@+id/tv_version_name"
+                    android:layout_width="0dp"
+                    android:layout_height="wrap_content"
+                    android:layout_gravity="center_vertical"
+                    android:layout_weight="1"
+                    android:drawablePadding="@dimen/size10"
+                    android:drawableRight="@mipmap/more"
+                    android:gravity="right"
+                    android:paddingRight="@dimen/size20"
+                    android:text="V1.0.0" />
+            </LinearLayout>
+
+            <LinearLayout
+                android:id="@+id/ll_help_feedback"
+                android:layout_width="match_parent"
+                android:layout_height="@dimen/size50"
+                android:layout_marginTop="@dimen/size1"
+                android:background="@color/white"
+                android:orientation="horizontal">
+
+                <TextView
+                    android:layout_width="wrap_content"
+                    android:layout_height="wrap_content"
+                    android:layout_gravity="center_vertical"
+                    android:paddingLeft="@dimen/size20"
+                    android:text="帮助与反馈" />
+
+                <TextView
+                    android:layout_width="0dp"
+                    android:layout_height="wrap_content"
+                    android:layout_gravity="center_vertical"
+                    android:layout_weight="1"
+                    android:drawablePadding="@dimen/size10"
+                    android:drawableRight="@mipmap/more"
+                    android:gravity="right"
+                    android:paddingRight="@dimen/size20"
+                    />
+            </LinearLayout>
+        </LinearLayout>
+    </ScrollView>
+    <RelativeLayout
+        android:layout_width="match_parent"
+        android:layout_height="@dimen/size90"
+        android:background="@android:color/transparent">
+        <TextView
+            android:id="@+id/tv_choose_account"
+            android:layout_width="wrap_content"
+            android:layout_height="@dimen/size44"
+            android:layout_alignParentRight="true"
+            android:layout_marginTop="@dimen/size25"
+            android:gravity="center"
+            android:text="切换账户"
+            android:textColor="@color/white"
+            android:textSize="@dimen/pickerview_topbar_btn_textsize"
+            android:paddingRight="@dimen/size20"/>
+        <ImageView
+            android:id="@+id/iv_back"
+            android:layout_width="@dimen/size44"
+            android:layout_height="@dimen/size44"
+            android:layout_alignParentLeft="true"
+            android:layout_marginTop="@dimen/size25"
+            android:paddingLeft="@dimen/size20"
+            android:paddingRight="@dimen/size20"
+            android:scaleType="center"
+            android:src="@mipmap/back_btn" />
+
+        <TextView
+            android:id="@+id/tv_exit"
+            android:layout_width="wrap_content"
+            android:layout_height="@dimen/size44"
+            android:layout_alignParentRight="true"
+            android:layout_marginTop="@dimen/size25"
+            android:gravity="center"
+            android:paddingLeft="@dimen/size20"
+            android:paddingRight="@dimen/size20"
+            android:text="退出"
+            android:visibility="gone"
+            android:textColor="@color/white"
+            android:textSize="@dimen/pickerview_topbar_btn_textsize" />
+        <TextView
+            android:layout_width="wrap_content"
+            android:layout_height="@dimen/size44"
+            android:layout_centerHorizontal="true"
+            android:layout_marginTop="@dimen/size25"
+            android:gravity="center"
+            android:text="更多设置"
+            android:textColor="@color/white"
+            android:textSize="@dimen/pickerview_topbar_title_textsize" />
+    </RelativeLayout>
+</RelativeLayout>

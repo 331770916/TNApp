@@ -1,0 +1,79 @@
+<?xml version="1.0" encoding="utf-8"?>
+<RelativeLayout xmlns:android="http://schemas.android.com/apk/res/android"
+    android:id="@+id/bankBg"
+    android:orientation="vertical"
+    android:background="@mipmap/bg_bank_gd"
+    android:layout_width="match_parent"
+    android:layout_height="wrap_content">
+
+    <ImageView
+        android:id="@+id/balance_bankLoag"
+        android:layout_width="wrap_content"
+        android:layout_height="wrap_content"
+        android:layout_marginTop="@dimen/size15"
+        android:layout_marginLeft="@dimen/size10"
+        android:scaleType="fitXY"
+        android:src="@mipmap/abc"/>
+
+    <RelativeLayout
+        android:layout_toRightOf="@id/balance_bankLoag"
+        android:layout_alignTop="@id/balance_bankLoag"
+        android:orientation="vertical"
+        android:paddingLeft="@dimen/size5"
+        android:paddingRight="@dimen/size5"
+        android:layout_marginLeft="@dimen/size10"
+        android:layout_width="match_parent"
+        android:layout_height="wrap_content">
+
+        <TextView
+            android:id="@+id/balanceAccountTv"
+            android:layout_width="wrap_content"
+            android:layout_height="wrap_content"
+            android:textColor="@color/white"
+            android:textStyle="bold"
+            android:textSize="15sp"
+            android:text="资金主账号(--)"/>
+
+        <TextView
+            android:id="@+id/balanceBankNameTv"
+            android:layout_below="@id/balanceAccountTv"
+            android:layout_width="wrap_content"
+            android:layout_height="wrap_content"
+            android:layout_marginTop="@dimen/size5"
+            android:layout_marginBottom="@dimen/size5"
+            android:text="招商存管(******)"
+            android:textSize="@dimen/txtSize11"
+            android:textColor="@color/white"/>
+
+        <RelativeLayout
+            android:layout_below="@id/balanceBankNameTv"
+            android:layout_marginTop="@dimen/size15"
+            android:layout_width="match_parent"
+            android:layout_height="wrap_content">
+
+            <TextView
+                android:id="@+id/balance_currency"
+                android:layout_width="wrap_content"
+                android:layout_height="wrap_content"
+                android:layout_centerVertical="true"
+                android:textColor="@color/white"
+                android:textSize="@dimen/txtSize13"
+                android:text="币种 (人民币)"/>
+
+            <TextView
+                android:id="@+id/banlance_Allotquery"
+                android:layout_width="wrap_content"
+                android:layout_height="wrap_content"
+                android:layout_alignParentRight="true"
+                android:layout_centerVertical="true"
+                android:layout_marginRight="@dimen/size20"
+                android:background="@drawable/sp_balance_querybtn"
+                android:text="查询余额"
+                android:textSize="@dimen/txtSize14"
+                android:textColor="@color/white" />
+
+        </RelativeLayout>
+
+    </RelativeLayout>
+
+</RelativeLayout>

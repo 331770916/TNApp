@@ -1,0 +1,86 @@
+<?xml version="1.0" encoding="utf-8"?>
+<LinearLayout xmlns:android="http://schemas.android.com/apk/res/android"
+    android:layout_width="match_parent"
+    android:layout_height="match_parent"
+    android:id="@+id/IssuingItem_Titlebar"
+    android:orientation="vertical">
+
+    <TextView
+        android:id="@+id/daishangshiTxte"
+        android:layout_width="match_parent"
+        android:layout_height="wrap_content"
+        android:background="@color/bgColor"
+        android:gravity="center_vertical"
+        android:paddingBottom="@dimen/size6"
+        android:paddingLeft="@dimen/size10"
+        android:paddingTop="@dimen/size6"
+        android:text="@string/dss"
+        android:paddingRight="@dimen/size10"
+        android:drawableRight="@mipmap/more"
+        android:textColor="@color/hushenTab_titleColor"
+        android:textSize="12sp"
+        android:visibility="visible" />
+
+    <View
+        android:layout_width="match_parent"
+        android:layout_height="1px"
+        android:background="@color/lineColor"/>
+
+    <LinearLayout
+        android:id="@+id/daishangshiLL"
+        android:layout_width="match_parent"
+        android:layout_height="wrap_content"
+        android:background="@color/white"
+        android:orientation="horizontal"
+        android:paddingBottom="@dimen/size10"
+        android:paddingTop="@dimen/size10"
+        android:visibility="visible">
+
+        <TextView
+            android:layout_width="0dp"
+            android:layout_height="wrap_content"
+            android:layout_weight="1"
+            android:gravity="left"
+            android:paddingLeft="@dimen/size10"
+            android:textSize="14sp"
+            android:text="@string/mcdm"
+            android:textColor="@color/newStockTitle" />
+
+        <TextView
+            android:layout_width="0dp"
+            android:layout_height="wrap_content"
+            android:layout_weight="1"
+            android:gravity="center"
+            android:textSize="14sp"
+            android:text="@string/fxj"
+            android:textColor="@color/newStockTitle" />
+
+        <TextView
+            android:layout_width="0dp"
+            android:layout_height="wrap_content"
+            android:layout_weight="1"
+            android:gravity="center"
+            android:textSize="14sp"
+            android:text="@string/zql"
+            android:textColor="@color/newStockTitle" />
+
+
+        <TextView
+            android:layout_width="0dp"
+            android:layout_height="wrap_content"
+            android:layout_weight="1"
+            android:gravity="right"
+            android:paddingRight="@dimen/size10"
+            android:textSize="14sp"
+            android:text="@string/ssrq"
+            android:textColor="@color/newStockTitle" />
+    </LinearLayout>
+
+    <View
+        android:id="@+id/daishangshiView"
+        android:layout_width="match_parent"
+        android:layout_marginLeft="@dimen/size10"
+        android:layout_height="1px"
+        android:background="@color/lineColor"/>
+
+</LinearLayout>

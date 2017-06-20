@@ -1,0 +1,206 @@
+<?xml version="1.0" encoding="utf-8"?>
+<resources>
+
+    <color name="colorWave">#3cacce</color>
+    <color name="colorPrimary">#3F51B5</color>
+    <color name="colorPrimaryDark">#303F9F</color>
+    <color name="colorAccent">#FF4081</color>
+
+
+    <color name="lightBlue">#374B69</color>
+    <!-- 日期左右切换，斜纹背景的title 等 -->
+
+    <color name="startVidoeTipColor">#64ffffff</color>
+    <color name="backgroundColor">#f4f4f4</color>
+    <color name="TouMingColor">#40000000</color>
+    <color name="dividerColor">#dedede</color>
+    <color name="huise">#f7f7f7</color>
+    <color name="textDate">#ffcccc</color>
+    <color name="fengexian">#cccccc</color>
+    <color name="text">#AAAAAA</color>
+    <color name="texts">#999999</color>
+    <color name="textss">#4c4c4c</color>
+    <color name="hometext">#444444</color>
+    <color name="texthuise">#ffd6d8</color>
+    <color name="textheise">#333333</color>
+    <color name="hintColor">#c1ddf3</color>
+    <color name="white">#FFFFFF</color>
+    <color name="qianlan">#d0eaff</color>
+    <color name="transparent">#FFFFFFFF</color>
+    <color name="steelBlue">#005d9f</color>
+    <color name="lavender">#ebebeb</color>
+    <color name="black">#000000</color>
+    <color name="blue">#1C86EE</color>
+    <color name="blues">#8fc3f9</color>
+    <color name="navigationBtnColor">#39b6ea</color>
+    <color name="blue3">#368DE7</color>
+    <color name="blue2">#368de7</color>
+    <color name="red">#E84242</color>
+    <color name="redd">#f56155</color>
+    <color name="reds">#f57373</color>
+    <color name="dark">#9c9c9c</color>
+    <color name="gravy">#7f7f7f</color>
+    <color name="calcDiv">#dbdbdb</color>
+    <color name="gray">#7C7C7C</color>
+    <color name="grey">#D7D7D7</color>
+    <color name="moreItemTextColor">#323232</color>
+    <color name="dialogTitle">#dee4ee</color>
+    <color name="pressCard">#F39800</color>
+    <color name="info_bg">#d6e5f2</color>
+    <color name="press_Time">#0073ca</color>
+    <drawable name="lightgray">#FFD3D3D3</drawable>
+
+    <drawable name="transparent">#1b1b1b</drawable>
+    <drawable name="calcTextP">#313131</drawable>
+    <drawable name="white">#FFFFFF</drawable>
+    <drawable name="radio_button_n">#f4f4f4</drawable>
+    <drawable name="basedate_item_bg_p">#54b3fb</drawable>
+    <drawable name="roadDispatchGroupItemN">#ffffffff</drawable>
+    <drawable name="info_bg">#d6e5f2</drawable>
+
+
+    <color name="tabTxtN">#8b8b8b</color>
+    <color name="punchInfo">#dd8a00</color>
+    <color name="opacity20">#33000000</color>
+    <color name="opacity50">#80000000</color>
+    <color name="opacity60">#99000000</color>
+    <color name="divider">#33000000</color>
+    <color name="dialogContent">#eceff5</color>
+    <color name="darkBrown">#664015</color>
+    <color name="green">#27aa46</color>
+    <color name="qianGreen">#c7ffd4</color>
+    <color name="infostate">#f4f4f4</color>
+    <color name="orange">#ee8621</color>
+    <color name="orange1">#eda417</color>
+    <color name="orange2">#fbb03b</color>
+
+    <color name="singleBlue">#A3D8FF</color>
+    <color name="input">#8d8888</color>
+    <color name="amageModelColor">#565656</color>
+    <color name="basedataTitleLine">#7cc6fe</color>
+    <color name="deleteRed">#fa5050</color>
+    <color name="dateSureColor">#ee9500</color>
+    <color name="photoBg">#e5e5e5</color>
+    <color name="popupBtnColor">#e4e4e4</color>
+    <color name="ness_check">#2196ee</color>
+    <color name="press_check">#368CE6 </color>
+    <color name="stockNmuberColor">#D1EEEE</color>
+
+    <color name="yellow">#FFEC8B</color>
+    <color name="highLight">#ebd0b5</color>
+    <color name="marker_bg">#1C232E</color>
+
+    <color name="primary">#FF03A9F4</color>
+    <color name="primary_dark">#FF0288D1</color>
+    <color name="status_bar_color">@color/primary_dark</color>
+    <color name="bgColor">#f0f0f0</color>
+    <color name="checkRadioBtnColor">#368de7</color>
+    <color name="normalRadioBtnColor">#666666</color>
+
+    <color name="checkTopMarcketRaido">#7fbdff</color>
+    <color name="lineColor1">#dedede</color>
+    <color name="lineColor">#d1d1d1</color>
+    <color name="newStockTitle">#999999</color>
+    <color name="bkColor">#4D4D4D</color>
+    <color name="orangeyellow">#ffab33</color>
+
+    <color name="calendarBtnColor">#f2ad27</color>
+    <color name="red2">#F97A7A</color>
+    <color name="hideTextColor">#999999</color>
+
+    <color name="huadongColor">#8CC63F</color>
+    <color name="bantoumingColor">#FF50BF6A</color>
+
+    <color name="chicanggreenColor">#FF1DC028</color>
+    <color name="chicangtxetColor">#FFE7F7E8</color>
+
+    <color name="blue1">#4298f1</color>
+    <color name="dotSelectd">#868686</color>
+
+    <color name="pagerLayoutColor">#E9F5FF</color>
+
+    <color name="pickerview_timebtn_nor">#057dff</color>
+    <color name="pickerview_timebtn_pre">#c2daf5</color>
+    <color name="pickerview_bg_topbar">#f5f5f5</color>
+    <color name="pickerview_topbar_title">#000000</color>
+    <color name="pickerview_wheelview_textcolor_out">#a8a8a8</color>
+    <color name="pickerview_wheelview_textcolor_center">#2a2a2a</color>
+    <color name="pickerview_wheelview_textcolor_divider">#d5d5d5</color>
+    <!--覆盖颜色-->
+    <color name="bgColor_overlay">#60000000</color>
+
+    <color name="subscribe">#f2ad27</color>
+
+    <color name="hotCheckedTv">#555555</color>
+    <color name="hotSearch">#F7C152</color>
+
+    <color name="progressGreenBg">#52bb6b</color>
+    <color name="green1">#56D89D</color>
+    <color name="green2">#22AA46</color>
+    <color name="progressRedBg">#ff8086</color>
+
+    <color name="myselfbule">#5EA4EC</color>
+    <color name="myselforange">#F7931E</color>
+
+
+    <color name="mistakeFundChartColor">#63afff</color>
+    <color name="mistakeFundChartFullColor">#96daecff</color>
+    <color name="mistakeFundChartMarkColor">#c8daecff</color>
+
+    <!--金融生活文字颜色-->
+    <color name="financiallife_text">#f8c862</color>
+
+    <!-- 新闻详情里边的  小标签的颜色 -->
+    <color name="tag01">#f85d50</color>
+    <color name="tag02">#eea22a</color>
+    <color name="tag03">#3d9be9</color>
+    <color name="tag04">#f27b2c</color>
+    <color name="tag05">#c9c9c9</color>
+    <color name="tag06">#eea22a</color>
+    <color name="tag07">#2ac7ee</color>
+    <color name="tag08">#fb7c94</color>
+
+
+    <!--股票持仓-->
+    <color name="text_1">#f2f2f2</color>
+
+    <!-- home首页  -->
+
+    <!-- home grideview 字体颜色  -->
+
+    <color name="home_grideItemColor">#808080</color>
+    <!-- 行情  -->
+
+    <!-- 沪深字体颜色  -->
+    <color name="hushenTab_titleColor">#4c4c4c</color>
+    <color name="colorMyGray">#999999</color>
+    <color name="colorMyGreen">#1dc128</color>
+    <color name="colorMyBlue">#018dfe</color>
+    <color name="stkDetailBottomTextColor">#666666</color>
+    <color name="stkDetailDividerColor">#D1D1D1</color>
+
+    <color name="failed">#FF0000</color>
+    <color name="text_color">#333333</color>
+
+
+    <!--统一的颜色-->
+    <color name="hong">#e84242</color>
+    <color name="lu">#27aa46</color>
+
+    <!--热搜股票-->
+    <color name="textColor">#f46e6e</color>
+    <color name="textColor2">#f9d1d5</color>
+    <color name="backgroundColor_resou_1">#db5050</color>
+    <color name="backgroundColor_resou_2">#f36f6f</color>
+
+    <!--注册登录-->
+    <color name="ZhutextColor">#87bd43</color>
+
+    <!--退市和风险警示-->
+    <color name="AgreementSignedColor">#F1AE26</color>
+    <color name="ChangeVerification">#f3f9ff</color>
+
+    <drawable name="main_head">#6699CC</drawable>
+    <color name="IDcard_color">#E6E6E6</color>
+    <color name="sifned">#b2b2b2</color>
+</resources>

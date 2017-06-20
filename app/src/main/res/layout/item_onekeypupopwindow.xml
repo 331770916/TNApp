@@ -1,0 +1,136 @@
+<?xml version="1.0" encoding="utf-8"?>
+<LinearLayout xmlns:android="http://schemas.android.com/apk/res/android"
+    android:layout_width="match_parent"
+    android:layout_height="match_parent"
+    android:orientation="vertical">
+
+    <!--证券名称-->
+    <LinearLayout
+        android:id="@+id/rlStockMsg"
+        android:layout_width="match_parent"
+        android:layout_height="wrap_content"
+        android:layout_marginTop="15dp"
+        android:gravity="center"
+        android:orientation="horizontal">
+
+        <RelativeLayout
+            android:layout_width="0dp"
+            android:layout_height="match_parent"
+            android:layout_weight="1">
+
+            <TextView
+                android:id="@+id/tvStockNameAffirmMsg"
+                android:layout_width="wrap_content"
+                android:layout_height="wrap_content"
+                android:layout_marginLeft="32dp"
+                android:text="证券名称"
+                android:textColor="@color/newStockTitle"
+                android:textSize="15sp" />
+
+            <TextView
+                android:textColor="@color/hushenTab_titleColor"
+                android:id="@+id/tvStockNameValueAffirmMsg"
+                android:layout_width="match_parent"
+                android:layout_height="wrap_content"
+                android:paddingLeft="@dimen/size10"
+                android:layout_toRightOf="@id/tvStockNameAffirmMsg"
+                android:text=""
+                android:textSize="15sp" />
+        </RelativeLayout>
+
+        <RelativeLayout
+            android:layout_width="0dp"
+            android:layout_height="match_parent"
+            android:layout_weight="1">
+
+            <TextView
+                android:id="@+id/tvStockCodeAffirmMsg"
+                android:layout_width="wrap_content"
+                android:layout_height="wrap_content"
+                android:layout_marginLeft="32dp"
+                android:text="股票代码"
+                android:textColor="@color/newStockTitle"
+                android:textSize="15sp" />
+
+            <TextView
+                android:textColor="@color/hushenTab_titleColor"
+                android:id="@+id/tvStockCodeValueAffirmMsg"
+                android:layout_width="wrap_content"
+                android:layout_height="wrap_content"
+                android:layout_marginLeft="10dp"
+                android:layout_toRightOf="@id/tvStockCodeAffirmMsg"
+                android:text="" />
+        </RelativeLayout>
+
+    </LinearLayout>
+
+    <!--申购价格-->
+    <LinearLayout
+        android:id="@+id/rlSubscribeMsg"
+        android:layout_width="match_parent"
+        android:layout_height="wrap_content"
+        android:layout_below="@id/rlStockMsg"
+        android:layout_marginTop="10dp"
+        android:gravity="center"
+        android:orientation="horizontal">
+
+        <RelativeLayout
+            android:layout_width="0dp"
+            android:layout_height="match_parent"
+            android:layout_weight="1">
+
+            <TextView
+                android:id="@+id/tvSubscribePrice"
+                android:layout_width="wrap_content"
+                android:layout_height="wrap_content"
+                android:layout_marginLeft="32dp"
+                android:text="申购价格"
+                android:textColor="@color/newStockTitle"
+                android:textSize="15sp" />
+
+            <TextView
+                android:textColor="@color/hushenTab_titleColor"
+                android:id="@+id/tvSubscribePriceValue"
+                android:layout_width="wrap_content"
+                android:layout_height="wrap_content"
+                android:layout_marginLeft="10dp"
+                android:layout_toRightOf="@id/tvSubscribePrice"
+                android:text=""
+                android:textSize="15sp" />
+        </RelativeLayout>
+
+        <RelativeLayout
+            android:layout_width="0dp"
+            android:layout_height="match_parent"
+            android:layout_weight="1">
+
+            <TextView
+                android:textColor="@color/newStockTitle"
+                android:id="@+id/tvSubscribeNum"
+                android:layout_width="wrap_content"
+                android:layout_height="wrap_content"
+                android:layout_marginLeft="32dp"
+                android:text="申购数量"
+                android:textSize="15sp" />
+
+            <TextView
+                android:textColor="@color/hushenTab_titleColor"
+                android:id="@+id/tvSubscribeNumValue"
+                android:layout_width="wrap_content"
+                android:layout_height="wrap_content"
+                android:layout_marginLeft="10dp"
+                android:layout_toRightOf="@id/tvSubscribeNum"
+                android:text=""
+                android:textSize="15sp" />
+        </RelativeLayout>
+    </LinearLayout>
+
+    <TextView
+        android:layout_width="match_parent"
+        android:layout_height="1dp"
+        android:layout_marginLeft="32dp"
+        android:layout_marginRight="2dp"
+        android:layout_marginTop="15dp"
+        android:background="@color/dividerColor" />
+
+</LinearLayout>

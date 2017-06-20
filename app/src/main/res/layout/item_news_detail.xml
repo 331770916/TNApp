@@ -1,0 +1,61 @@
+<?xml version="1.0" encoding="utf-8"?>
+<LinearLayout xmlns:android="http://schemas.android.com/apk/res/android"
+    android:layout_width="match_parent"
+    android:layout_height="match_parent"
+    >
+    <RelativeLayout
+        android:layout_width="match_parent"
+        android:layout_height="@dimen/size67"
+        android:gravity="center"
+        android:layout_marginLeft="@dimen/size12"
+        android:layout_marginRight="@dimen/size12">
+
+        <TextView
+            android:id="@+id/tvNewsDetailTitle"
+            android:layout_width="wrap_content"
+            android:layout_height="wrap_content"
+            android:text="--"
+            android:singleLine="true"
+            android:ellipsize="end"
+            android:textSize="16sp"
+            android:textColor="@color/textheise"/>
+
+        <TextView
+            android:id="@+id/tvNewsDetailLaiYuan"
+            android:layout_width="wrap_content"
+            android:layout_height="wrap_content"
+            android:layout_below="@id/tvNewsDetailTitle"
+            android:layout_marginTop="@dimen/size10"
+            android:text="来源:"
+            android:textSize="12sp"
+            android:textColor="@color/text"/>
+
+        <TextView
+            android:id="@+id/tvNewsDetailLaiYuanVolue"
+            android:layout_width="wrap_content"
+            android:layout_height="wrap_content"
+            android:layout_below="@id/tvNewsDetailTitle"
+            android:layout_marginTop="@dimen/size10"
+            android:layout_toRightOf="@id/tvNewsDetailLaiYuan"
+            android:layout_marginLeft="@dimen/size3"
+            android:text="暂无"
+            android:textSize="12sp"
+            android:textColor="@color/text"
+            />
+
+        <TextView
+            android:id="@+id/tvNewsDetailTime"
+            android:layout_width="wrap_content"
+            android:layout_height="wrap_content"
+            android:layout_alignParentRight="true"
+            android:layout_below="@id/tvNewsDetailTitle"
+            android:layout_marginTop="@dimen/size10"
+            android:text="--"
+            android:textSize="12sp"
+            android:textColor="@color/text"/>
+
+
+    </RelativeLayout>
+
+
+</LinearLayout>

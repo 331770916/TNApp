@@ -1,0 +1,53 @@
+<?xml version="1.0" encoding="utf-8"?>
+<RelativeLayout xmlns:android="http://schemas.android.com/apk/res/android"
+    android:layout_width="match_parent"
+    android:layout_height="wrap_content"
+    android:background="@drawable/listview_item_bg"
+    android:paddingTop="@dimen/size7">
+
+
+    <TextView
+        android:id="@+id/hushen_stockName"
+        android:layout_width="wrap_content"
+        android:layout_height="wrap_content"
+        android:layout_alignParentLeft="true"
+        android:layout_marginLeft="@dimen/size20"
+        android:textSize="@dimen/self_stockNameText"
+        android:textStyle="bold"
+        android:textColor="@color/hushenTab_titleColor" />
+
+    <TextView
+        android:id="@+id/hushen_stockNumber"
+        android:layout_width="wrap_content"
+        android:layout_height="wrap_content"
+        android:layout_below="@id/hushen_stockName"
+        android:layout_marginLeft="@dimen/size20"
+        android:paddingBottom="@dimen/size7"
+        android:textColor="@color/newStockTitle"
+        android:textSize="@dimen/self_stockNumberText" />
+
+    <TextView
+        android:id="@+id/hushen_stockCurrentPrice"
+        android:layout_width="wrap_content"
+        android:layout_height="wrap_content"
+        android:layout_centerInParent="true"
+        android:text="-"
+        android:textSize="@dimen/self_stockNumberPrice"/>
+
+    <TextView
+        android:id="@+id/hushen_stockZD"
+        android:layout_width="wrap_content"
+        android:layout_height="wrap_content"
+        android:layout_alignParentRight="true"
+        android:layout_centerVertical="true"
+        android:text="-"
+        android:textSize="@dimen/self_stockNumberPrice"
+        android:layout_marginRight="@dimen/size20"/>
+
+    <View
+        android:layout_width="match_parent"
+        android:layout_height="1px"
+        android:layout_marginLeft="@dimen/size10"
+        android:layout_alignParentBottom="true"
+        android:background="@color/lineColor"/>
+</RelativeLayout>

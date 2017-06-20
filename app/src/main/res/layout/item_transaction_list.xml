@@ -1,0 +1,44 @@
+<?xml version="1.0" encoding="utf-8"?>
+<LinearLayout xmlns:android="http://schemas.android.com/apk/res/android"
+    android:orientation="vertical"
+    android:layout_width="match_parent"
+    android:layout_height="match_parent">
+    <LinearLayout
+        android:layout_width="match_parent"
+        android:layout_height="40dp"
+        android:orientation="horizontal"
+        android:background="@android:color/transparent"
+        >
+        <TextView
+            android:id="@+id/tv_market_value"
+            android:layout_width="0dp"
+            android:layout_height="wrap_content"
+            android:layout_weight="1"
+            android:gravity="center"
+            android:layout_gravity="center_vertical"
+            android:textColor="@color/text"
+            android:textSize="@dimen/txtSize12"
+            android:text="总市值:-.--"/>
+        <TextView
+            android:id="@+id/tv_today_value"
+            android:layout_width="0dp"
+            android:gravity="right"
+            android:paddingRight="@dimen/size20"
+            android:layout_weight="1"
+            android:layout_gravity="center_vertical"
+            android:layout_height="wrap_content"
+            android:textSize="@dimen/txtSize12"
+            android:textColor="@color/text"
+            android:text="总盈亏：-.--" />
+    </LinearLayout>
+    <com.tpyzq.mobile.pangu.view.gridview.MyGridView
+        android:id="@+id/gv_item"
+        android:layout_width="match_parent"
+        android:layout_height="match_parent"
+        android:listSelector="@color/white"
+        android:numColumns="4"
+
+        android:horizontalSpacing="1dp"
+        android:verticalSpacing="1dp"
+        />
+</LinearLayout>

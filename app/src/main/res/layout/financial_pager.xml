@@ -1,0 +1,67 @@
+<?xml version="1.0" encoding="utf-8"?>
+<RelativeLayout xmlns:android="http://schemas.android.com/apk/res/android"
+    xmlns:app="http://schemas.android.com/apk/res-auto"
+    android:id="@+id/rl_Pager"
+    android:layout_width="match_parent"
+    android:layout_height="match_parent"
+    android:background="@color/dividerColor">
+
+    <TextView
+        android:id="@+id/tvXian_Telecompager"
+        android:layout_width="match_parent"
+        android:layout_height="@dimen/size10"
+        android:background="@color/bgColor" />
+    <!-- 菊花 -->
+    <ProgressBar
+        android:id="@+id/pb_Pager"
+        style="@style/mProgress_circle"
+        android:layout_width="wrap_content"
+        android:layout_height="wrap_content"
+        android:layout_centerInParent="true" />
+
+    <RelativeLayout
+        android:layout_width="match_parent"
+        android:layout_height="wrap_content"
+        android:layout_below="@id/tvXian_Telecompager">
+
+        <com.handmark.pulltorefresh.library.PullToRefreshListView
+            android:id="@+id/lvFinancial"
+
+            android:layout_width="match_parent"
+            android:layout_height="match_parent"
+            android:scrollbars="none"
+            app:ptrAnimationStyle="flip"
+            app:ptrMode="both" />
+
+
+        <!-- 重新加载的图片 -->
+        <LinearLayout
+            android:id="@+id/llChongXinJiaZai"
+            android:layout_width="match_parent"
+            android:layout_height="match_parent"
+            android:layout_centerInParent="true"
+            android:gravity="center"
+            android:orientation="vertical"
+            android:visibility="gone">
+
+            <ImageView
+                android:layout_width="wrap_content"
+                android:layout_height="wrap_content"
+                android:layout_centerInParent="true"
+                android:src="@mipmap/chongxinjiazai" />
+
+            <TextView
+                android:layout_width="wrap_content"
+                android:layout_height="@dimen/size5" />
+
+            <TextView
+                android:layout_width="wrap_content"
+                android:layout_height="wrap_content"
+                android:text="什么也没有，点击重新加载~"
+                android:textColor="@color/text" />
+        </LinearLayout>
+
+    </RelativeLayout>
+
+
+</RelativeLayout>

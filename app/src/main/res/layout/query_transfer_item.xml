@@ -1,0 +1,91 @@
+<?xml version="1.0" encoding="utf-8"?>
+<LinearLayout xmlns:android="http://schemas.android.com/apk/res/android"
+    android:layout_width="match_parent"
+    android:layout_height="wrap_content"
+    android:orientation="vertical">
+
+    <LinearLayout
+        android:layout_width="match_parent"
+        android:layout_height="wrap_content"
+        android:orientation="horizontal"
+        android:background="@color/white">
+        <LinearLayout
+            android:layout_width="0dp"
+            android:layout_weight="2"
+            android:layout_height="wrap_content"
+            android:layout_alignParentLeft="true"
+            android:orientation="vertical">
+
+            <TextView
+                android:id="@+id/queryTransferTv1"
+                android:layout_width="wrap_content"
+                android:layout_height="wrap_content"
+                android:layout_marginLeft="@dimen/size20"
+                android:singleLine="true"
+                android:textColor="@color/black"
+                android:paddingTop="@dimen/size5"
+                android:paddingBottom="@dimen/size2"
+                android:textSize="@dimen/txtSize14"
+                android:text="银行转账"/>
+
+            <TextView
+                android:id="@+id/queryTransferTv2"
+                android:layout_width="wrap_content"
+                android:layout_height="wrap_content"
+                android:layout_marginLeft="@dimen/size20"
+                android:singleLine="true"
+                android:paddingTop="@dimen/size2"
+                android:paddingBottom="@dimen/size5"
+                android:textColor="@color/hideTextColor"
+                android:textSize="11sp"
+                android:text="2016-06-06 12:02:26"/>
+
+        </LinearLayout>
+
+        <LinearLayout
+            android:layout_width="0dp"
+            android:layout_weight="2"
+            android:layout_height="wrap_content"
+            android:layout_centerInParent="true"
+            android:gravity="center"
+            android:orientation="vertical">
+            <TextView
+                android:id="@+id/queryTransferTv3"
+                android:layout_width="wrap_content"
+                android:layout_height="wrap_content"
+                android:textColor="@color/red"
+                android:paddingTop="@dimen/size5"
+                android:paddingBottom="@dimen/size2"
+                android:singleLine="true"
+                android:text="2002.94"/>
+
+            <TextView
+                android:id="@+id/queryTransferTv4"
+                android:layout_width="wrap_content"
+                android:layout_height="wrap_content"
+                android:singleLine="true"
+                android:paddingTop="@dimen/size2"
+                android:paddingBottom="@dimen/size5"
+                android:text="工行存管(****5656)"
+                android:textSize="11sp"/>
+        </LinearLayout>
+
+        <TextView
+            android:id="@+id/queryTransferTv5"
+            android:layout_width="0dp"
+            android:layout_weight="1"
+            android:gravity="center"
+            android:textColor="@color/blue"
+            android:text="成功"
+            android:layout_height="match_parent"
+            android:layout_alignParentRight="true"/>
+    </LinearLayout>
+
+    <View
+        android:layout_width="match_parent"
+        android:layout_marginTop="@dimen/size5"
+        android:layout_height="1px"
+        android:background="@color/lineColor"/>
+
+
+</LinearLayout>

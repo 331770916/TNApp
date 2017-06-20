@@ -1,0 +1,157 @@
+<?xml version="1.0" encoding="utf-8"?>
+<LinearLayout xmlns:android="http://schemas.android.com/apk/res/android"
+    android:layout_width="match_parent"
+    android:layout_height="match_parent"
+    android:background="@color/bgColor"
+    android:orientation="vertical">
+
+    <RelativeLayout
+        android:layout_width="match_parent"
+        android:layout_height="@dimen/size25"
+        android:background="@color/blue"
+        android:clipToPadding="true"
+        android:fitsSystemWindows="true" />
+
+    <RelativeLayout
+        android:layout_width="match_parent"
+        android:layout_height="@dimen/pickerview_topbar_height"
+        android:background="@color/blue">
+
+        <TextView
+            android:id="@+id/tv_title"
+            android:layout_width="wrap_content"
+            android:layout_height="wrap_content"
+            android:layout_centerInParent="true"
+            android:text="基金电子合同签署"
+            android:textColor="@color/white"
+            android:textSize="@dimen/pickerview_topbar_title_textsize" />
+
+        <ImageView
+            android:id="@+id/iv_back"
+            android:layout_width="wrap_content"
+            android:layout_height="match_parent"
+            android:layout_alignParentLeft="true"
+            android:layout_centerVertical="true"
+            android:paddingLeft="@dimen/size20"
+            android:paddingRight="@dimen/size20"
+            android:src="@mipmap/back_btn" />
+    </RelativeLayout>
+
+    <ScrollView
+        android:layout_width="match_parent"
+        android:layout_height="0dp"
+        android:layout_weight="1">
+
+        <LinearLayout
+            android:layout_width="match_parent"
+            android:layout_height="match_parent"
+            android:background="@color/bgColor"
+            android:orientation="vertical">
+
+            <LinearLayout
+                android:id="@+id/ll_view1"
+                android:layout_width="match_parent"
+                android:layout_height="wrap_content"
+                android:orientation="vertical">
+
+                <TextView
+                    android:id="@+id/textView6"
+                    android:layout_width="match_parent"
+                    android:layout_height="@dimen/size50"
+                    android:gravity="center"
+                    android:text="请阅读并签署协议"
+                    android:textColor="@color/textss"
+                    android:textSize="@dimen/size12" />
+
+                <com.tpyzq.mobile.pangu.view.gridview.MyListView
+                    android:id="@+id/lv_agreement"
+                    android:layout_width="match_parent"
+                    android:layout_marginTop="@dimen/size30"
+                    android:paddingTop="@dimen/size20"
+                    android:paddingBottom="@dimen/size20"
+                    android:divider="@color/white"
+                    android:dividerHeight="@dimen/size5"
+                    android:background="@color/white"
+                    android:layout_height="wrap_content" />
+
+                <!--<LinearLayout-->
+                <!--android:layout_width="match_parent"-->
+                <!--android:layout_height="wrap_content"-->
+                <!--android:background="@color/white"-->
+                <!--android:orientation="vertical"-->
+                <!--android:paddingLeft="@dimen/size20"-->
+                <!--android:paddingRight="@dimen/size20">-->
+
+                <!--<TextView-->
+                <!--android:layout_width="wrap_content"-->
+                <!--android:layout_height="wrap_content"-->
+                <!--android:layout_gravity="center"-->
+                <!--android:layout_marginBottom="@dimen/size20"-->
+                <!--android:layout_marginTop="@dimen/size20"-->
+                <!--android:text="《金融产品或金融服务不适当警示及客户投资确认书》"-->
+                <!--android:textColor="@color/blue" />-->
+                <!--</LinearLayout>-->
+
+                <CheckBox
+                    android:id="@+id/cb_sign_protocol"
+                    android:layout_width="wrap_content"
+                    android:layout_height="wrap_content"
+                    android:layout_marginBottom="@dimen/size30"
+                    android:layout_marginLeft="@dimen/size20"
+                    android:layout_marginTop="@dimen/size20"
+                    android:button="@drawable/mybg"
+                    android:paddingLeft="@dimen/size5"
+                    android:text="我已仔细阅读并同意签署以上各项协议"
+                    android:textSize="@dimen/txtSize12" />
+            </LinearLayout>
+
+            <LinearLayout
+                android:id="@+id/ll_view2"
+                android:layout_width="match_parent"
+                android:layout_height="wrap_content"
+                android:orientation="vertical"
+                android:visibility="gone">
+
+                <LinearLayout
+                    android:layout_width="match_parent"
+                    android:layout_height="wrap_content"
+                    android:background="@color/white"
+                    android:orientation="vertical"
+                    android:paddingBottom="@dimen/size20"
+                    android:paddingLeft="@dimen/size20"
+                    android:paddingRight="@dimen/size20"
+                    android:paddingTop="@dimen/size20">
+
+                    <TextView
+                        android:id="@+id/tv_notice"
+                        android:layout_width="wrap_content"
+                        android:layout_height="wrap_content"
+                        android:text="《证券投资基金投资人权益须知》"
+                        android:textColor="@color/blue" />
+                </LinearLayout>
+
+                <CheckBox
+                    android:id="@+id/cb_open_fund"
+                    android:layout_width="wrap_content"
+                    android:layout_height="wrap_content"
+                    android:layout_marginBottom="@dimen/size20"
+                    android:layout_marginLeft="@dimen/size20"
+                    android:layout_marginTop="@dimen/size20"
+                    android:button="@drawable/mybg"
+                    android:paddingLeft="@dimen/size5"
+                    android:text="开通基金账户"
+                    android:textSize="@dimen/txtSize12" />
+            </LinearLayout>
+
+
+        </LinearLayout>
+    </ScrollView>
+
+    <Button
+        android:id="@+id/bt_sure"
+        android:layout_width="match_parent"
+        android:layout_height="50dp"
+        android:background="@color/lineColor"
+        android:text="确定"
+        android:textSize="@dimen/txtSize14" />
+</LinearLayout>

@@ -1,0 +1,124 @@
+<?xml version="1.0" encoding="utf-8"?>
+<LinearLayout xmlns:android="http://schemas.android.com/apk/res/android"
+    xmlns:tools="http://schemas.android.com/tools"
+    android:id="@+id/rlStudyDetail"
+    android:layout_width="match_parent"
+    android:layout_height="match_parent"
+    android:background="@color/dividerColor"
+    android:orientation="vertical"
+    tools:context="com.tpyzq.mobile.pangu.activity.detail.newsTab.AnnouncementStydyDetailActivity">
+
+    <RelativeLayout
+        android:id="@+id/rlDetailXiaChen"
+        android:layout_width="match_parent"
+        android:layout_height="@dimen/size25"
+        android:background="@color/blue"
+        android:clipToPadding="true"
+        android:fitsSystemWindows="true" />
+
+    <RelativeLayout
+        android:id="@+id/rlStudyDetailTitle"
+        android:layout_width="match_parent"
+        android:layout_height="@dimen/pickerview_topbar_height"
+        android:layout_below="@id/rlDetailXiaChen"
+        android:background="@color/blue">
+
+        <ImageView
+            android:id="@+id/ivStudyDetail_back"
+            android:layout_width="wrap_content"
+            android:layout_height="match_parent"
+            android:layout_alignParentLeft="true"
+            android:padding="@dimen/size10"
+            android:src="@mipmap/back_btn" />
+
+        <TextView
+            android:id="@+id/tvGongGaoYanBaoTitle"
+            android:layout_width="wrap_content"
+            android:layout_height="wrap_content"
+            android:layout_centerInParent="true"
+            android:text="新闻"
+            android:textColor="@color/white"
+            android:textSize="@dimen/pickerview_topbar_title_textsize" />
+
+    </RelativeLayout>
+
+    <ScrollView
+        android:id="@+id/mScrollView"
+        android:layout_width="match_parent"
+        android:layout_height="match_parent"
+        android:scrollbars="none"
+        android:visibility="visible">
+
+        <RelativeLayout
+            android:layout_width="match_parent"
+            android:layout_height="match_parent">
+
+            <TextView
+                android:id="@+id/tvDetailtitle"
+                android:layout_width="wrap_content"
+                android:layout_height="wrap_content"
+                android:layout_marginLeft="@dimen/size12"
+                android:layout_marginTop="15dp"
+                android:text=""
+                android:textColor="@color/black"
+                android:textSize="18sp"
+                android:textStyle="bold" />
+
+            <TextView
+                android:id="@+id/tvDetailTime"
+                android:layout_width="wrap_content"
+                android:layout_height="wrap_content"
+                android:layout_below="@id/tvDetailtitle"
+                android:layout_marginLeft="@dimen/size12"
+                android:layout_marginTop="@dimen/size10"
+                android:text="" />
+
+            <TextView
+                android:id="@+id/tvDetailFenGe"
+                android:layout_width="match_parent"
+                android:layout_height="@dimen/size1"
+                android:layout_below="@id/tvDetailTime"
+                android:layout_marginLeft="@dimen/size12"
+                android:layout_marginTop="@dimen/size15"
+                android:background="@color/dividerColor" />
+
+
+            <WebView
+                android:id="@+id/wvStudyDetail"
+                android:layout_width="match_parent"
+                android:layout_height="match_parent"
+                android:layout_below="@id/tvDetailFenGe">
+
+            </WebView>
+
+        </RelativeLayout>
+    </ScrollView>
+
+    <!-- 重新加载的图片 -->
+    <LinearLayout
+        android:id="@+id/llStudyDetailXinJiaZai"
+        android:layout_width="match_parent"
+        android:layout_height="match_parent"
+        android:layout_centerInParent="true"
+        android:gravity="center"
+        android:orientation="vertical"
+        android:visibility="gone">
+
+        <ImageView
+            android:layout_width="wrap_content"
+            android:layout_height="wrap_content"
+            android:layout_centerInParent="true"
+            android:src="@mipmap/chongxinjiazai" />
+
+        <TextView
+            android:layout_width="wrap_content"
+            android:layout_height="@dimen/size5" />
+
+        <TextView
+            android:layout_width="wrap_content"
+            android:layout_height="wrap_content"
+            android:text="什么也没有，点击重新加载~"
+            android:textColor="@color/text" />
+    </LinearLayout>
+
+</LinearLayout>

@@ -1,0 +1,41 @@
+<?xml version="1.0" encoding="utf-8"?>
+<LinearLayout xmlns:android="http://schemas.android.com/apk/res/android"
+    xmlns:app="http://schemas.android.com/apk/res-auto"
+    android:background="@color/bgColor"
+    android:orientation="vertical"
+    android:layout_width="match_parent"
+    android:layout_height="match_parent">
+
+    <!--<com.tpyzq.self.mobile.pangu.view.tabLineIndicator.TabLineDisClickIndicator-->
+        <!--android:id="@+id/detailExponentDisClickIndicator"-->
+        <!--android:layout_width="match_parent"-->
+        <!--android:layout_height="wrap_content"-->
+        <!--android:background="@color/white"-->
+        <!--android:orientation="horizontal"-->
+        <!--app:tab_count="3" />-->
+
+    <LinearLayout
+        android:layout_width="match_parent"
+        android:layout_height="wrap_content"
+        android:layout_marginTop="@dimen/size5"
+        android:layout_marginBottom="@dimen/size5"
+        android:background="@color/white"
+        android:orientation="vertical">
+        <com.tpyzq.mobile.pangu.view.magicindicator.MagicIndicator
+            android:id="@+id/detailExponentDisClickIndicator"
+            android:layout_width="match_parent"
+            android:layout_height="@dimen/size45"
+            />
+    </LinearLayout>
+
+
+
+    <com.tpyzq.mobile.pangu.view.gridview.MyListView
+        android:layout_marginTop="@dimen/size5"
+        android:id="@+id/detailExponentListView"
+        android:divider="@null"
+        android:layout_width="match_parent"
+        android:layout_height="match_parent"/>
+
+
+</LinearLayout>

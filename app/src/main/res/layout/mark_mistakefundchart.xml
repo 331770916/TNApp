@@ -1,0 +1,22 @@
+<?xml version="1.0" encoding="utf-8"?>
+<LinearLayout xmlns:android="http://schemas.android.com/apk/res/android"
+    android:orientation="vertical"
+    android:background="@drawable/shape_mistakefund_markbg"
+    android:layout_width="match_parent"
+    android:layout_height="match_parent">
+
+    <TextView
+        android:id="@+id/marker_tv"
+        android:layout_width="wrap_content"
+        android:layout_height="wrap_content"
+        android:textColor="@android:color/white"
+        android:gravity="left|center_vertical"
+        android:text=""
+        android:textSize="@dimen/txtSize12"
+        android:paddingTop="@dimen/size3"
+        android:paddingBottom="@dimen/size3"
+        android:paddingRight="@dimen/size5"
+        android:paddingLeft="@dimen/size5"
+        android:background="@drawable/shape_mistakefund_markbg"/>
+
+</LinearLayout>

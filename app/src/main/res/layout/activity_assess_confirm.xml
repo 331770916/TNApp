@@ -1,0 +1,266 @@
+<?xml version="1.0" encoding="utf-8"?>
+<LinearLayout xmlns:android="http://schemas.android.com/apk/res/android"
+    android:layout_width="match_parent"
+    android:layout_height="match_parent"
+    android:background="@color/bgColor"
+    android:orientation="vertical">
+
+    <RelativeLayout
+        android:layout_width="match_parent"
+        android:layout_height="@dimen/size25"
+        android:background="@color/blue"
+        android:clipToPadding="true"
+        android:fitsSystemWindows="true" />
+
+    <RelativeLayout
+        android:layout_width="match_parent"
+        android:layout_height="@dimen/pickerview_topbar_height"
+        android:background="@color/blue">
+
+        <TextView
+            android:id="@+id/tv_title"
+            android:layout_width="wrap_content"
+            android:layout_height="wrap_content"
+            android:layout_centerInParent="true"
+            android:text="协议签署"
+            android:textColor="@color/white"
+            android:textSize="@dimen/pickerview_topbar_title_textsize" />
+
+        <ImageView
+            android:id="@+id/iv_back"
+            android:layout_width="wrap_content"
+            android:layout_height="match_parent"
+            android:layout_alignParentLeft="true"
+            android:layout_centerVertical="true"
+            android:paddingLeft="@dimen/size20"
+            android:paddingRight="@dimen/size20"
+            android:src="@mipmap/back_btn" />
+    </RelativeLayout>
+
+    <ScrollView
+        android:layout_width="match_parent"
+        android:layout_height="0dp"
+        android:layout_weight="1">
+
+
+        <LinearLayout
+            android:layout_width="match_parent"
+            android:layout_height="match_parent"
+            android:orientation="vertical">
+
+            <LinearLayout
+                android:id="@+id/ll_view1"
+                android:layout_width="match_parent"
+                android:layout_height="match_parent"
+                android:orientation="vertical">
+
+                <TextView
+                    android:layout_width="match_parent"
+                    android:layout_height="@dimen/size50"
+                    android:gravity="center|bottom"
+                    android:paddingBottom="@dimen/size5"
+                    android:text="根据您的过往测评对您进行如下评估"
+                    android:textSize="@dimen/txtSize10" />
+
+                <LinearLayout
+                    android:layout_width="match_parent"
+                    android:layout_height="@dimen/size230"
+                    android:background="@color/white"
+                    android:orientation="vertical"
+                    android:paddingBottom="@dimen/size10"
+                    android:paddingLeft="@dimen/size20"
+                    android:paddingRight="@dimen/size20"
+                    android:paddingTop="@dimen/size10">
+
+                    <RelativeLayout
+                        android:layout_width="match_parent"
+                        android:layout_height="@dimen/size110"
+                        android:background="@drawable/shape_dotted_rectangle"
+                        android:paddingBottom="@dimen/size10"
+                        android:paddingLeft="@dimen/size10"
+                        android:paddingRight="@dimen/size10"
+                        android:paddingTop="@dimen/size10">
+
+                        <TextView
+                            android:id="@+id/tv_1"
+                            android:layout_width="wrap_content"
+                            android:layout_height="wrap_content"
+                            android:text="您的风险评估结果："
+                            android:textSize="@dimen/size15"/>
+
+                        <TextView
+                            android:id="@+id/tv_fit"
+                            android:layout_width="wrap_content"
+                            android:layout_height="wrap_content"
+                            android:layout_toRightOf="@id/tv_1"
+                            android:text="----"
+                            android:textSize="@dimen/size15"
+                            android:textColor="@color/calendarBtnColor"
+                           />
+
+                        <TextView
+                            android:id="@+id/tv_2"
+                            android:layout_width="wrap_content"
+                            android:layout_height="wrap_content"
+                            android:layout_below="@id/tv_1"
+                            android:layout_marginTop="@dimen/size3"
+                            android:text="您的风险等级："
+                            android:textSize="@dimen/size13"
+                            android:textColor="@color/text" />
+
+                        <TextView
+                            android:id="@+id/tv_risk_level"
+                            android:layout_width="wrap_content"
+                            android:layout_height="wrap_content"
+                            android:layout_alignTop="@id/tv_2"
+                            android:layout_toRightOf="@id/tv_2"
+                            android:text="----"
+                            android:textSize="@dimen/size13"
+                            android:textColor="@color/calendarBtnColor" />
+
+                        <TextView
+                            android:id="@+id/tv_3"
+                            android:layout_width="wrap_content"
+                            android:layout_height="wrap_content"
+                            android:layout_below="@id/tv_2"
+                            android:layout_marginTop="@dimen/size3"
+                            android:text="本产品的风险等级："
+                            android:textSize="@dimen/size13"
+                            android:textColor="@color/text" />
+
+                        <TextView
+                            android:id="@+id/tv_produce_risk_level"
+                            android:layout_width="wrap_content"
+                            android:layout_height="wrap_content"
+                            android:layout_alignTop="@id/tv_3"
+                            android:layout_toRightOf="@id/tv_3"
+                            android:text="----"
+                            android:textSize="@dimen/size13"
+                            android:textColor="@color/calendarBtnColor" />
+
+                        <TextView
+                            android:id="@+id/tv_evaluating"
+                            android:layout_width="@dimen/size70"
+                            android:layout_height="@dimen/size22"
+                            android:layout_alignParentRight="true"
+                            android:layout_marginTop="@dimen/size18"
+                            android:background="@drawable/shape_bule_rectangle"
+                            android:gravity="center"
+                            android:text="现在测评"
+                            android:textSize="@dimen/size12"
+                            android:textColor="@color/white" />
+
+
+                        <TextView
+                            android:layout_width="wrap_content"
+                            android:layout_height="wrap_content"
+                            android:layout_alignParentBottom="true"
+                            android:layout_centerHorizontal="true"
+                            android:layout_marginTop="@dimen/size3"
+                            android:drawableLeft="@mipmap/icon_warn"
+                            android:drawablePadding="@dimen/size5"
+                            android:gravity="center"
+                            android:text="该结果仅为提示，您仍可自行决定是否投资"
+                            android:textColor="@color/text"
+                            android:textSize="@dimen/size12" />
+                    </RelativeLayout>
+
+
+                    <TextView
+                        android:layout_width="wrap_content"
+                        android:layout_height="wrap_content"
+                        android:layout_marginTop="@dimen/size10"
+                        android:text="特别提示："
+                        android:textSize="@dimen/size15"/>
+
+                    <TextView
+                        android:layout_width="wrap_content"
+                        android:layout_height="wrap_content"
+                        android:text="@string/Remind"
+                        android:textColor="@color/text"
+                        android:layout_marginTop="@dimen/size5"
+                        android:textSize="@dimen/size13" />
+                </LinearLayout>
+            </LinearLayout>
+
+            <LinearLayout
+                android:id="@+id/ll_view2"
+                android:layout_width="match_parent"
+                android:layout_height="match_parent"
+                android:orientation="vertical">
+
+                <com.tpyzq.mobile.pangu.view.gridview.MyListView
+                    android:id="@+id/lv_agreement"
+                    android:layout_width="match_parent"
+                    android:layout_marginTop="@dimen/size30"
+                    android:paddingTop="@dimen/size20"
+                    android:paddingBottom="@dimen/size20"
+                    android:divider="@color/white"
+                    android:background="@color/white"
+                    android:layout_height="wrap_content" />
+
+                <CheckBox
+                    android:id="@+id/cb_affixto"
+                    android:layout_width="wrap_content"
+                    android:layout_height="wrap_content"
+                    android:layout_marginBottom="@dimen/size10"
+                    android:layout_marginLeft="@dimen/size20"
+                    android:layout_marginTop="@dimen/size20"
+                    android:button="@drawable/mybg"
+                    android:paddingLeft="@dimen/size5"
+                    android:text="我已经仔细阅读并同意签署以上各项协议"
+                    android:textSize="@dimen/txtSize12" />
+            </LinearLayout>
+
+            <LinearLayout
+                android:id="@+id/ll_view3"
+                android:layout_width="match_parent"
+                android:layout_height="match_parent"
+                android:visibility="gone"
+                android:orientation="vertical">
+
+                <LinearLayout
+                    android:id="@+id/ll_view3_1"
+                    android:layout_width="match_parent"
+                    android:layout_height="wrap_content"
+                    android:background="@color/white"
+                    android:layout_marginTop="@dimen/size20"
+                    android:orientation="vertical"
+                    android:paddingBottom="@dimen/size20"
+                    android:paddingLeft="@dimen/size20"
+                    android:paddingRight="@dimen/size20">
+
+                    <TextView
+                        android:id="@+id/tv_notice"
+                        android:layout_width="wrap_content"
+                        android:layout_height="wrap_content"
+                        android:layout_marginTop="@dimen/size20"
+                        android:text="《证券投资基金投资人权益须知》"
+                        android:textColor="@color/blue" />
+                </LinearLayout>
+
+                <CheckBox
+                    android:id="@+id/cb_open_fund"
+                    android:layout_width="wrap_content"
+                    android:layout_height="wrap_content"
+                    android:layout_marginBottom="@dimen/size30"
+                    android:layout_marginLeft="@dimen/size20"
+                    android:layout_marginTop="@dimen/size20"
+                    android:button="@drawable/mybg"
+                    android:paddingLeft="@dimen/size5"
+                    android:text="开通基金账户"
+                    android:textSize="@dimen/txtSize12" />
+            </LinearLayout>
+        </LinearLayout>
+    </ScrollView>
+
+    <Button
+        android:id="@+id/bt_continue_buy"
+        android:layout_width="match_parent"
+        android:layout_height="50dp"
+        android:background="@color/lineColor"
+        android:gravity="center"
+        android:text="继续购买"
+        android:textSize="@dimen/txtSize16"
+        android:textColor="@color/white" />
+</LinearLayout>

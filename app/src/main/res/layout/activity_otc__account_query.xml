@@ -1,0 +1,108 @@
+<?xml version="1.0" encoding="utf-8"?>
+<RelativeLayout xmlns:android="http://schemas.android.com/apk/res/android"
+    xmlns:tools="http://schemas.android.com/tools"
+    android:layout_width="match_parent"
+    android:layout_height="match_parent"
+    android:orientation="vertical"
+    android:background="@color/bgColor"
+    tools:context="com.tpyzq.mobile.pangu.activity.trade.otc_business.OTC_AccountQueryActivity">
+
+    <RelativeLayout
+        android:id="@+id/rlOTCAccountQueryXiaChen"
+        android:layout_width="match_parent"
+        android:layout_height="@dimen/size25"
+        android:background="@color/blue"
+        android:clipToPadding="true"
+        android:fitsSystemWindows="true" />
+
+    <!-- 头布局 -->
+    <RelativeLayout
+        android:id="@+id/llOTCAccountQuery"
+        android:layout_below="@id/rlOTCAccountQueryXiaChen"
+        android:layout_width="match_parent"
+        android:layout_height="@dimen/pickerview_topbar_height"
+        android:background="@color/blue">
+
+        <ImageView
+            android:id="@+id/ivOTC_AccountQuery_back"
+            android:layout_width="wrap_content"
+            android:layout_height="match_parent"
+            android:layout_alignParentLeft="true"
+            android:padding="@dimen/size10"
+            android:src="@mipmap/back_btn" />
+
+        <TextView
+            android:layout_width="wrap_content"
+            android:layout_height="wrap_content"
+            android:layout_centerInParent="true"
+            android:text="@string/OTC_zhanghu"
+            android:textColor="@color/white"
+            android:textSize="@dimen/pickerview_topbar_title_textsize" />
+    </RelativeLayout>
+
+    <!--title-->
+    <LinearLayout
+        android:paddingLeft="@dimen/size12"
+        android:paddingRight="@dimen/size12"
+        android:id="@+id/OTCAccountQueryTitle"
+        android:layout_below="@id/llOTCAccountQuery"
+        android:layout_width="match_parent"
+        android:background="@color/white"
+        android:layout_height="@dimen/size30"
+        android:gravity="center">
+
+        <TextView
+            android:layout_weight="1"
+            android:layout_width="0dp"
+            android:layout_height="wrap_content"
+            android:gravity="left"
+            android:text="开户日期"
+            android:textSize="12sp"
+            android:textColor="@color/text"/>
+
+        <TextView
+            android:layout_weight="1"
+            android:layout_width="0dp"
+            android:layout_height="wrap_content"
+            android:gravity="center"
+            android:text="账户"
+            android:textSize="12sp"
+            android:textColor="@color/text"/>
+
+        <TextView
+            android:layout_weight="1"
+            android:layout_width="0dp"
+            android:layout_height="wrap_content"
+            android:gravity="right"
+            android:text="公司/状态"
+            android:textSize="12sp"
+            android:textColor="@color/text"/>
+
+    </LinearLayout>
+
+    <!--分割线-->
+    <TextView
+        android:id="@+id/tvOTCAccountQueryFenGe"
+        android:layout_below="@id/OTCAccountQueryTitle"
+        android:layout_width="match_parent"
+        android:layout_height="@dimen/size0.5"
+        android:background="@color/lineColor"/>
+
+    <ListView
+        android:id="@+id/lvOTC_AccountQuery"
+        android:layout_below="@id/tvOTCAccountQueryFenGe"
+        android:layout_width="match_parent"
+        android:layout_height="match_parent"
+        android:divider="@null">
+
+    </ListView>
+
+    <ImageView
+        android:id="@+id/ivOTC_AccountQueryKong"
+        android:layout_width="wrap_content"
+        android:layout_height="wrap_content"
+        android:layout_centerInParent="true"
+        android:visibility="gone"
+        android:src="@mipmap/kong"/>
+
+</RelativeLayout>

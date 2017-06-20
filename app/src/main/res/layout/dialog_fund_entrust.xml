@@ -1,0 +1,201 @@
+<LinearLayout xmlns:android="http://schemas.android.com/apk/res/android"
+    android:layout_width="match_parent"
+    android:layout_height="wrap_content"
+    android:background="@color/white"
+    android:orientation="vertical">
+
+    <TextView
+        android:id="@+id/tv_title"
+        android:layout_width="wrap_content"
+        android:layout_height="wrap_content"
+        android:layout_gravity="center_horizontal"
+        android:layout_marginTop="@dimen/size20"
+        android:drawableLeft="@mipmap/jy_xuanze"
+        android:drawablePadding="@dimen/size5"
+        android:text="委托方式"
+        android:textColor="@color/black"
+        android:textSize="@dimen/txtSize16"
+        />
+
+    <RadioGroup
+        android:id="@+id/rg_shangzheng"
+        android:layout_width="match_parent"
+        android:layout_height="wrap_content"
+        android:layout_marginTop="@dimen/size20"
+        android:orientation="vertical"
+        android:visibility="gone">
+
+        <RadioButton
+            android:id="@+id/rb_shangzheng_1"
+            android:layout_width="match_parent"
+            android:layout_height="@dimen/size40"
+            android:layout_marginLeft="@dimen/size20"
+            android:layout_marginRight="@dimen/size20"
+            android:background="@drawable/rb_bg_selector"
+            android:button="@null"
+            android:drawableRight="@drawable/rb_duigou_selector"
+            android:paddingLeft="@dimen/size20"
+            android:paddingRight="@dimen/size20"
+            android:text="限价委托"
+            android:textColor="@color/textss" />
+
+        <RadioButton
+            android:id="@+id/rb_shangzheng_2"
+            android:layout_width="match_parent"
+            android:layout_height="@dimen/size40"
+            android:layout_marginLeft="@dimen/size20"
+            android:layout_marginRight="@dimen/size20"
+            android:layout_marginTop="@dimen/size5"
+            android:background="@drawable/rb_bg_selector"
+            android:button="@null"
+            android:drawableRight="@drawable/rb_duigou_selector"
+            android:paddingLeft="@dimen/size20"
+            android:paddingRight="@dimen/size20"
+            android:text="市价委托（五档成交剩余撤销）"
+            android:textColor="@color/textss" />
+
+        <RadioButton
+            android:id="@+id/rb_shangzheng_3"
+            android:layout_width="match_parent"
+            android:layout_height="@dimen/size40"
+            android:layout_marginLeft="@dimen/size20"
+            android:layout_marginRight="@dimen/size20"
+            android:layout_marginTop="@dimen/size5"
+            android:background="@drawable/rb_bg_selector"
+            android:button="@null"
+            android:drawableRight="@drawable/rb_duigou_selector"
+            android:paddingLeft="@dimen/size20"
+            android:paddingRight="@dimen/size20"
+            android:text="市价委托（五档成交剩余转限）"
+            android:textColor="@color/textss" />
+
+    </RadioGroup>
+
+    <RadioGroup
+        android:id="@+id/rg_shenzheng"
+        android:layout_width="match_parent"
+        android:layout_height="wrap_content"
+        android:layout_marginTop="@dimen/size20"
+        android:orientation="vertical">
+
+        <RadioButton
+            android:id="@+id/rb_shenzheng_1"
+            android:layout_width="match_parent"
+            android:layout_height="@dimen/size40"
+            android:layout_marginLeft="@dimen/size20"
+            android:layout_marginRight="@dimen/size20"
+            android:background="@drawable/rb_bg_selector"
+            android:button="@null"
+            android:drawableRight="@drawable/rb_duigou_selector"
+            android:paddingLeft="@dimen/size20"
+            android:paddingRight="@dimen/size20"
+            android:text="限价委托"
+            android:textColor="@color/textss" />
+
+        <RadioButton
+            android:id="@+id/rb_shenzheng_2"
+            android:layout_width="match_parent"
+            android:layout_height="@dimen/size40"
+            android:layout_marginLeft="@dimen/size20"
+            android:layout_marginRight="@dimen/size20"
+            android:layout_marginTop="@dimen/size5"
+            android:background="@drawable/rb_bg_selector"
+            android:button="@null"
+            android:drawableRight="@drawable/rb_duigou_selector"
+            android:paddingLeft="@dimen/size20"
+            android:paddingRight="@dimen/size20"
+            android:text="市价委托（对手方最优）"
+            android:textColor="@color/textss" />
+
+        <RadioButton
+            android:id="@+id/rb_shenzheng_3"
+            android:layout_width="match_parent"
+            android:layout_height="@dimen/size40"
+            android:layout_marginLeft="@dimen/size20"
+            android:layout_marginRight="@dimen/size20"
+            android:layout_marginTop="@dimen/size5"
+            android:background="@drawable/rb_bg_selector"
+            android:button="@null"
+            android:drawableRight="@drawable/rb_duigou_selector"
+            android:paddingLeft="@dimen/size20"
+            android:paddingRight="@dimen/size20"
+            android:text="市价委托（本方最优）"
+            android:textColor="@color/textss" />
+
+        <RadioButton
+            android:id="@+id/rb_shenzheng_4"
+            android:layout_width="match_parent"
+            android:layout_height="@dimen/size40"
+            android:layout_marginLeft="@dimen/size20"
+            android:layout_marginRight="@dimen/size20"
+            android:layout_marginTop="@dimen/size5"
+            android:background="@drawable/rb_bg_selector"
+            android:button="@null"
+            android:drawableRight="@drawable/rb_duigou_selector"
+            android:paddingLeft="@dimen/size20"
+            android:paddingRight="@dimen/size20"
+            android:text="市价委托（即时成交剩余撤销）"
+            android:textColor="@color/textss" />
+
+        <RadioButton
+            android:id="@+id/rb_shenzheng_5"
+            android:layout_width="match_parent"
+            android:layout_height="@dimen/size40"
+            android:layout_marginLeft="@dimen/size20"
+            android:layout_marginRight="@dimen/size20"
+            android:layout_marginTop="@dimen/size5"
+            android:background="@drawable/rb_bg_selector"
+            android:button="@null"
+            android:drawableRight="@drawable/rb_duigou_selector"
+            android:paddingLeft="@dimen/size20"
+            android:paddingRight="@dimen/size20"
+            android:text="市价委托（五档成交剩余撤销）"
+            android:textColor="@color/textss" />
+
+        <RadioButton
+            android:id="@+id/rb_shenzheng_6"
+            android:layout_width="match_parent"
+            android:layout_height="@dimen/size40"
+            android:layout_marginLeft="@dimen/size20"
+            android:layout_marginRight="@dimen/size20"
+            android:layout_marginTop="@dimen/size5"
+            android:background="@drawable/rb_bg_selector"
+            android:button="@null"
+            android:drawableRight="@drawable/rb_duigou_selector"
+            android:paddingLeft="@dimen/size20"
+            android:paddingRight="@dimen/size20"
+            android:text="市价委托（全额成交或撤销）"
+            android:textColor="@color/textss" />
+
+    </RadioGroup>
+
+    <LinearLayout
+        android:id="@+id/ll_bottom"
+        android:layout_width="match_parent"
+        android:layout_height="wrap_content"
+        android:layout_marginTop="@dimen/size20"
+        android:orientation="horizontal"
+        android:paddingBottom="@dimen/size20"
+        android:paddingLeft="@dimen/size20"
+        android:paddingRight="@dimen/size20">
+
+        <Button
+            android:id="@+id/bt_true"
+            android:layout_width="0dp"
+            android:layout_height="@dimen/size50"
+            android:layout_weight="1"
+            android:background="@color/blue"
+            android:text="确定"
+            android:textColor="@color/white" />
+
+        <Button
+            android:id="@+id/bt_false"
+            android:layout_width="0dp"
+            android:layout_height="@dimen/size50"
+            android:layout_marginLeft="@dimen/size20"
+            android:layout_weight="1"
+            android:background="@color/grey"
+            android:text="取消"
+            android:textColor="@color/textss" />
+    </LinearLayout>
+</LinearLayout>

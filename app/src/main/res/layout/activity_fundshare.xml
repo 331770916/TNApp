@@ -1,0 +1,110 @@
+<?xml version="1.0" encoding="utf-8"?>
+<LinearLayout xmlns:android="http://schemas.android.com/apk/res/android"
+    android:layout_width="match_parent"
+    android:layout_height="match_parent"
+    android:background="@color/bgColor"
+    android:orientation="vertical">
+
+    <RelativeLayout
+        android:id="@+id/rl_view1"
+        android:layout_width="match_parent"
+        android:layout_height="@dimen/size70"
+        android:background="@color/red"
+        android:paddingTop="@dimen/size25">
+
+        <ImageView
+            android:id="@+id/fundshareBackbtn"
+            android:layout_width="wrap_content"
+            android:layout_height="match_parent"
+            android:layout_alignParentLeft="true"
+            android:padding="@dimen/size10"
+            android:src="@mipmap/back_btn" />
+
+        <TextView
+            android:layout_width="match_parent"
+            android:layout_height="match_parent"
+            android:gravity="center"
+            android:text="基金份额"
+            android:textColor="@color/white"
+            android:textSize="@dimen/pickerview_topbar_title_textsize" />
+    </RelativeLayout>
+    <ImageView
+        android:id="@+id/iv_kong"
+        android:layout_width="match_parent"
+        android:layout_height="match_parent"
+        android:src="@mipmap/kong"
+        android:scaleX="0.9"
+        android:scaleY="0.9"
+        android:scaleType="center"/>
+    <LinearLayout
+        android:id="@+id/ll_content"
+        android:layout_width="match_parent"
+        android:layout_height="match_parent"
+        android:orientation="vertical">
+        <RelativeLayout
+            android:id="@+id/rl_view2"
+            android:layout_width="match_parent"
+            android:layout_height="@dimen/size150"
+            android:background="@color/red"
+            android:padding="@dimen/size10">
+
+            <TextView
+                android:id="@+id/fundShareTv1"
+                android:layout_width="wrap_content"
+                android:layout_height="wrap_content"
+                android:padding="@dimen/size10"
+                android:text="基金市值（元）"
+                android:textColor="@color/white"
+                android:textSize="@dimen/txtSize14" />
+
+
+            <TextView
+
+                android:id="@+id/fundShareEarn"
+                android:layout_width="wrap_content"
+                android:layout_height="wrap_content"
+                android:layout_alignParentBottom="true"
+                android:layout_alignParentLeft="true"
+                android:padding="@dimen/size10"
+                android:text="盈亏\n--.--"
+                android:textColor="@color/white"
+                android:textSize="@dimen/txtSize14" />
+
+
+            <TextView
+                android:id="@+id/fundShareAveriable"
+                android:layout_width="wrap_content"
+                android:layout_height="wrap_content"
+                android:layout_alignParentBottom="true"
+                android:layout_alignParentRight="true"
+                android:gravity="right"
+                android:padding="@dimen/size10"
+                android:text="可用资金\n--.--"
+                android:textColor="@color/white"
+                android:textSize="@dimen/txtSize14" />
+
+            <TextView
+                android:id="@+id/fundshareMarketPrice"
+                android:layout_width="wrap_content"
+                android:layout_height="wrap_content"
+                android:layout_alignParentLeft="true"
+                android:layout_alignParentStart="true"
+                android:layout_below="@+id/fundShareTv1"
+                android:padding="@dimen/size10"
+                android:text="--.--"
+                android:textColor="@color/white"
+                android:textSize="@dimen/txtSize18"
+                android:textStyle="bold" />
+
+        </RelativeLayout>
+
+        <ListView
+            android:id="@+id/fundshareListView"
+            android:layout_width="match_parent"
+            android:layout_height="match_parent"
+            android:layout_marginTop="@dimen/size10"
+            android:background="@color/white"
+            android:dividerHeight="@dimen/size10"
+            android:scrollbars="none" />
+    </LinearLayout>
+</LinearLayout>

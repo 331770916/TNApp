@@ -1,0 +1,96 @@
+<?xml version="1.0" encoding="utf-8"?>
+<RelativeLayout
+    xmlns:android="http://schemas.android.com/apk/res/android"
+    xmlns:tools="http://schemas.android.com/tools"
+    xmlns:app="http://schemas.android.com/apk/res-auto"
+    android:id="@+id/rlImportantEvent"
+    android:layout_width="match_parent"
+    android:layout_height="match_parent"
+    android:background="@color/dividerColor"
+    tools:context="com.tpyzq.mobile.pangu.activity.home.information.ImportantEventActivity">
+
+
+    <RelativeLayout
+        android:id="@+id/rlImportantEventXiaChen"
+        android:layout_width="match_parent"
+        android:layout_height="@dimen/size25"
+        android:background="@color/blue"
+        android:clipToPadding="true"
+        android:fitsSystemWindows="true" />
+
+    <!-- 头布局 -->
+
+    <RelativeLayout
+        android:id="@+id/rlImportantEventTitle"
+        android:layout_below="@id/rlImportantEventXiaChen"
+        android:layout_width="match_parent"
+        android:layout_height="@dimen/pickerview_topbar_height"
+        android:background="@color/blue">
+
+        <ImageView
+            android:id="@+id/ivImportantEvent_back"
+            android:layout_width="wrap_content"
+            android:layout_height="match_parent"
+            android:layout_alignParentLeft="true"
+            android:padding="@dimen/size10"
+            android:src="@mipmap/back_btn" />
+
+        <TextView
+            android:layout_width="wrap_content"
+            android:layout_height="wrap_content"
+            android:layout_centerInParent="true"
+            android:text="@string/zhongdashijian"
+            android:textColor="@color/white"
+            android:textSize="@dimen/pickerview_topbar_title_textsize" />
+
+    </RelativeLayout>
+
+
+    <!-- 重新加载的图片 -->
+    <LinearLayout
+        android:id="@+id/llImportantEventJiaZai"
+        android:layout_width="wrap_content"
+        android:layout_height="wrap_content"
+        android:layout_centerInParent="true"
+        android:orientation="vertical"
+        android:visibility="gone"
+        android:gravity="center">
+        <ImageView
+            android:layout_width="wrap_content"
+            android:layout_height="wrap_content"
+            android:layout_centerInParent="true"
+            android:src="@mipmap/chongxinjiazai"/>
+
+        <TextView
+            android:layout_width="wrap_content"
+            android:layout_height="@dimen/size5" />
+
+        <TextView
+            android:layout_width="wrap_content"
+            android:layout_height="wrap_content"
+            android:text="什么也没有，点击重新加载~"
+            android:textColor="@color/text"/>
+    </LinearLayout>
+
+    <!--&lt;!&ndash; 菊花 &ndash;&gt;-->
+    <!--<ProgressBar-->
+        <!--android:id="@+id/pb_ImportantEventPager"-->
+        <!--style="@style/mProgress_circle"-->
+        <!--android:layout_width="wrap_content"-->
+        <!--android:layout_height="wrap_content"-->
+        <!--android:layout_centerInParent="true"/>-->
+
+
+    <com.handmark.pulltorefresh.library.PullToRefreshListView
+        android:id="@+id/lvImportantEvent"
+        android:layout_below="@id/rlImportantEventTitle"
+        android:layout_width="match_parent"
+        android:layout_height="match_parent"
+        android:scrollbars="none"
+        app:ptrAnimationStyle="flip"
+        app:ptrMode="both">
+
+    </com.handmark.pulltorefresh.library.PullToRefreshListView>
+
+
+</RelativeLayout>

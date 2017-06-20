@@ -1,0 +1,30 @@
+<animation-list xmlns:android="http://schemas.android.com/apk/res/android"
+
+    android:oneshot="false">
+
+    <item android:drawable="@mipmap/cow_1" android:duration="50"/>
+    <item android:drawable="@mipmap/cow_2" android:duration="50"/>
+    <item android:drawable="@mipmap/cow_3" android:duration="50"/>
+    <item android:drawable="@mipmap/cow_4" android:duration="50"/>
+    <item android:drawable="@mipmap/cow_5" android:duration="50"/>
+    <item android:drawable="@mipmap/cow_6" android:duration="50"/>
+    <item android:drawable="@mipmap/cow_7" android:duration="50"/>
+    <item android:drawable="@mipmap/cow_8" android:duration="50"/>
+    <item android:drawable="@mipmap/cow_9" android:duration="50"/>
+    <item android:drawable="@mipmap/cow_10" android:duration="50"/>
+    <item android:drawable="@mipmap/cow_11" android:duration="50"/>
+    <item android:drawable="@mipmap/cow_12" android:duration="50"/>
+    <item android:drawable="@mipmap/cow_13" android:duration="50"/>
+    <item android:drawable="@mipmap/cow_14" android:duration="50"/>
+    <item android:drawable="@mipmap/cow_15" android:duration="50"/>
+    <item android:drawable="@mipmap/cow_16" android:duration="50"/>
+    <item android:drawable="@mipmap/cow_17" android:duration="50"/>
+    <item android:drawable="@mipmap/cow_18" android:duration="50"/>
+    <item android:drawable="@mipmap/cow_19" android:duration="50"/>
+    <item android:drawable="@mipmap/cow_20" android:duration="50"/>
+    <item android:drawable="@mipmap/cow_21" android:duration="50"/>
+    <item android:drawable="@mipmap/cow_22" android:duration="50"/>
+    <item android:drawable="@mipmap/cow_23" android:duration="50"/>
+    <item android:drawable="@mipmap/cow_24" android:duration="50"/>
+
+</animation-list>

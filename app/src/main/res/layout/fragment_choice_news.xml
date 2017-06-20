@@ -1,0 +1,38 @@
+<?xml version="1.0" encoding="utf-8"?>
+<RelativeLayout xmlns:android="http://schemas.android.com/apk/res/android"
+    android:layout_width="match_parent"
+    android:layout_height="match_parent"
+    android:background="@color/bgColor"
+    android:orientation="vertical">
+
+    <com.tpyzq.mobile.pangu.view.pulllayou.PullLayout
+        android:id="@+id/selfchoiceNewPullDownScroll"
+        android:layout_width="match_parent"
+        android:layout_height="match_parent"
+        android:orientation="vertical">
+
+        <ListView
+            android:id="@+id/selfNewsList"
+            android:layout_width="match_parent"
+            android:layout_height="match_parent"
+            android:divider="@color/lineColor"
+            android:dividerHeight="4dp"/>
+    </com.tpyzq.mobile.pangu.view.pulllayou.PullLayout>
+
+    <FrameLayout
+        android:id="@+id/stockNewsLayout"
+        android:layout_width="match_parent"
+        android:layout_height="wrap_content"
+        android:layout_centerInParent="true">
+
+        <ImageView
+            android:layout_width="match_parent"
+            android:layout_height="@dimen/size200"
+            android:layout_centerInParent="true"
+            android:scaleX="0.6"
+            android:scaleY="0.5"
+            android:src="@mipmap/kong" />
+    </FrameLayout>
+
+
+</RelativeLayout>

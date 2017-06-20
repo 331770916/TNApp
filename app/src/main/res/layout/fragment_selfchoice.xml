@@ -1,0 +1,49 @@
+<?xml version="1.0" encoding="utf-8"?>
+<RelativeLayout xmlns:android="http://schemas.android.com/apk/res/android"
+    xmlns:app="http://schemas.android.com/apk/res-auto"
+    android:layout_width="match_parent"
+    android:background="@color/bgColor"
+    android:layout_height="match_parent">
+
+    <RelativeLayout
+        android:id="@+id/selfchoiceRegisterLayout"
+        android:layout_alignParentBottom="true"
+        android:layout_width="match_parent"
+        android:layout_height="wrap_content"
+        android:background="@color/white">
+        <TextView
+            android:layout_width="wrap_content"
+            android:layout_height="wrap_content"
+            android:layout_centerInParent="true"
+            android:padding="@dimen/size10"
+            android:textColor="@color/hideTextColor"
+            android:drawableRight="@mipmap/more"
+            android:drawablePadding="@dimen/size10"
+            android:gravity="center"
+            android:text="@string/checkAndsynchronization"/>
+    </RelativeLayout>
+
+    <LinearLayout
+        android:layout_above="@id/selfchoiceRegisterLayout"
+        android:layout_width="match_parent"
+        android:layout_height="match_parent"
+        android:orientation="vertical">
+
+        <com.tpyzq.mobile.pangu.view.magicindicator.MagicIndicator
+            android:id="@+id/choice_tabPageIndicator"
+            android:background="@color/white"
+            android:layout_width="match_parent"
+            android:layout_height="@dimen/size45"
+            />
+        <View
+            android:layout_width="match_parent"
+            android:layout_height="1px"
+            android:background="@color/lineColor"/>
+
+        <android.support.v4.view.ViewPager
+            android:id="@+id/choice_viewPager"
+            android:layout_width="match_parent"
+            android:layout_height="match_parent" />
+    </LinearLayout>
+
+</RelativeLayout>

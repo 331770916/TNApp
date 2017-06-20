@@ -1,0 +1,124 @@
+<?xml version="1.0" encoding="utf-8"?>
+<LinearLayout xmlns:android="http://schemas.android.com/apk/res/android"
+    android:id="@+id/root_view"
+    android:layout_width="match_parent"
+    android:layout_height="match_parent"
+    android:background="@color/bgColor"
+    android:orientation="vertical">
+
+    <RelativeLayout
+        android:layout_width="match_parent"
+        android:layout_height="@dimen/size25"
+        android:background="@color/blue"
+        android:clipToPadding="true"
+        android:fitsSystemWindows="true" />
+
+            <LinearLayout
+                android:layout_width="match_parent"
+                android:layout_height="wrap_content"
+                android:background="@color/blue"
+                android:orientation="horizontal">
+                <EditText
+                    android:id="@+id/special_ed"
+                    android:layout_width="0dp"
+                    android:layout_height="wrap_content"
+                    android:layout_marginBottom="@dimen/size10"
+                    android:layout_marginLeft="@dimen/size20"
+                    android:layout_marginTop="@dimen/size10"
+                    android:layout_weight="4"
+                    android:maxLength="6"
+                    android:background="@color/white"
+                    android:clickable="true"
+                    android:cursorVisible="true"
+                    android:drawableLeft="@mipmap/fangdajinghui"
+                    android:drawablePadding="@dimen/size10"
+                    android:focusable="true"
+                    android:hint="@string/search_hintTxt"
+                    android:padding="@dimen/size10"
+                    android:textColorHint="@color/hideTextColor"
+                    android:textSize="@dimen/txtSize12" />
+
+                <TextView
+                    android:id="@+id/search_cancle"
+                    android:layout_width="0dp"
+                    android:layout_height="wrap_content"
+                    android:layout_weight="1"
+                    android:gravity="center"
+                    android:layout_marginTop="@dimen/size10"
+                    android:padding="@dimen/size10"
+                    android:text="@string/search_cancle"
+                    android:textColor="@color/white" />
+            </LinearLayout>
+
+
+    <ListView
+        android:id="@+id/search_listView2"
+        android:layout_width="match_parent"
+        android:visibility="gone"
+        android:layout_height="0dp"
+        android:layout_weight="1"/>
+
+    <TextView
+        android:id="@+id/noSearchResultTv"
+        android:textSize="@dimen/txtSize18"
+        android:textColor="@color/black"
+        android:gravity="center_horizontal"
+        android:text="@string/noSearchResult"
+        android:paddingTop="@dimen/size40"
+        android:layout_width="match_parent"
+        android:visibility="gone"
+        android:layout_height="0dp"
+        android:layout_weight="1" />
+
+
+    <RelativeLayout
+        android:id="@+id/search_Layout2"
+        android:layout_width="match_parent"
+        android:layout_height="0dp"
+        android:layout_weight="1">
+
+        <TextView
+            android:id="@+id/search_moveHistory"
+            android:layout_width="match_parent"
+            android:layout_height="wrap_content"
+            android:background="@color/white"
+            android:gravity="center"
+            android:layout_alignParentBottom="true"
+            android:paddingBottom="@dimen/size10"
+            android:paddingTop="@dimen/size10"
+            android:text="@string/moveHostory"
+            android:textColor="@color/hideTextColor" />
+
+
+        <LinearLayout
+            android:id="@+id/search_radioGroup"
+            android:layout_width="match_parent"
+            android:layout_height="wrap_content"
+            android:background="@color/white"
+            android:orientation="vertical">
+            <com.tpyzq.mobile.pangu.view.magicindicator.MagicIndicator
+                android:id="@+id/search_magicIndicator"
+                android:layout_width="match_parent"
+                android:layout_height="@dimen/size45"
+                />
+        </LinearLayout>
+
+        <View
+            android:id="@+id/search_view2"
+            android:layout_below="@id/search_radioGroup"
+            android:layout_width="match_parent"
+            android:layout_height="@dimen/size0.5"
+            android:background="@color/lineColor" />
+
+        <ListView
+            android:id="@+id/search_listView"
+            android:layout_width="match_parent"
+            android:layout_height="match_parent"
+            android:layout_below="@id/search_view2"
+            android:layout_above="@id/search_moveHistory"
+            android:background="@color/white"
+            android:scrollbars="none" />
+
+    </RelativeLayout>
+
+</LinearLayout>

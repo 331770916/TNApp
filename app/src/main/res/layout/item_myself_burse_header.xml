@@ -1,0 +1,154 @@
+<?xml version="1.0" encoding="utf-8"?>
+<LinearLayout xmlns:android="http://schemas.android.com/apk/res/android"
+    android:layout_width="match_parent"
+    android:layout_height="wrap_content"
+    android:background="@color/bgColor"
+    android:orientation="vertical">
+
+    <RelativeLayout
+        android:layout_width="match_parent"
+        android:layout_height="@dimen/size90"
+        android:background="@color/myselfbule"
+        android:paddingRight="@dimen/size20"
+        android:paddingLeft="@dimen/size20"
+        android:layout_weight="1">
+
+        <LinearLayout
+            android:layout_width="wrap_content"
+            android:layout_height="match_parent"
+            android:layout_centerVertical="true"
+            android:orientation="vertical">
+
+            <TextView
+                android:id="@+id/tv_zongzichan"
+                android:layout_width="wrap_content"
+                android:layout_height="0dp"
+                android:layout_weight="1"
+                android:text="总资产"
+                android:paddingTop="@dimen/size20"
+                android:gravity="center_vertical"
+                android:textColor="@color/white"
+                android:textSize="@dimen/txtSize14" />
+
+            <TextView
+                android:id="@+id/tv_allmoney"
+                android:layout_width="wrap_content"
+                android:layout_height="0dp"
+                android:layout_weight="1"
+                android:layout_below="@id/tv_zongzichan"
+                android:text="-.--"
+                android:paddingBottom="@dimen/size20"
+                android:gravity="center_vertical"
+                android:textColor="@color/white"
+                android:textSize="@dimen/txtSize20" />
+        </LinearLayout>
+
+        <TextView
+            android:id="@+id/tv_fund_account"
+            android:layout_width="@dimen/size180"
+            android:layout_height="@dimen/size30"
+            android:layout_alignParentRight="true"
+            android:layout_centerVertical="true"
+            android:background="@drawable/shape_white_rectangle"
+            android:gravity="center"
+            android:text="资金账号:-.--"
+            android:textColor="@color/myselfbule" />
+    </RelativeLayout>
+
+    <LinearLayout
+        android:layout_width="match_parent"
+        android:layout_height="80dp"
+        android:layout_marginBottom="@dimen/size5"
+        android:background="@color/white">
+
+        <LinearLayout
+            android:layout_width="0dp"
+            android:layout_height="match_parent"
+            android:layout_weight="1"
+            android:orientation="vertical"
+            android:paddingTop="@dimen/size20"
+            android:paddingBottom="@dimen/size20">
+
+            <TextView
+                android:id="@+id/tv_today_money"
+                android:layout_width="match_parent"
+                android:layout_height="0dp"
+                android:layout_weight="1"
+                android:gravity="center"
+                android:text="-.--"
+                android:textColor="@color/red" />
+
+            <TextView
+                android:layout_width="match_parent"
+                android:layout_height="0dp"
+                android:layout_weight="1"
+                android:gravity="center"
+                android:text="持仓收益"
+                android:id="@+id/textView10" />
+        </LinearLayout>
+
+        <View
+            android:layout_width="@dimen/size1"
+            android:layout_height="@dimen/size50"
+            android:layout_gravity="center_vertical"
+            android:background="@color/bgColor" />
+
+        <LinearLayout
+            android:layout_width="0dp"
+            android:layout_height="match_parent"
+            android:layout_weight="1"
+            android:orientation="vertical"
+            android:paddingTop="@dimen/size20"
+            android:paddingBottom="@dimen/size20"
+            >
+
+            <TextView
+                android:id="@+id/tv_allposition"
+                android:layout_width="match_parent"
+                android:layout_height="0dp"
+                android:layout_weight="1"
+                android:gravity="center"
+                android:text="-.--"
+                android:textColor="@color/myselfbule" />
+
+            <TextView
+
+                android:layout_width="match_parent"
+                android:layout_height="0dp"
+                android:layout_weight="1"
+                android:gravity="center"
+                android:text="总持仓" />
+        </LinearLayout>
+
+        <View
+            android:layout_width="@dimen/size1"
+            android:layout_height="@dimen/size50"
+            android:layout_gravity="center_vertical"
+            android:background="@color/bgColor" />
+
+        <LinearLayout
+            android:layout_width="0dp"
+            android:layout_height="match_parent"
+            android:layout_weight="1"
+            android:orientation="vertical"
+            android:paddingTop="@dimen/size20"
+            android:paddingBottom="@dimen/size20">
+
+            <TextView
+                android:id="@+id/tv_usable_money"
+                android:layout_width="match_parent"
+                android:layout_height="0dp"
+                android:layout_weight="1"
+                android:gravity="center"
+                android:text="-.--"
+                android:textColor="@color/myselforange" />
+
+            <TextView
+                android:layout_width="match_parent"
+                android:layout_height="0dp"
+                android:layout_weight="1"
+                android:gravity="center"
+                android:text="可用" />
+        </LinearLayout>
+    </LinearLayout>
+</LinearLayout>

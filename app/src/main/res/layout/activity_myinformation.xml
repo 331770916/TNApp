@@ -1,0 +1,259 @@
+<?xml version="1.0" encoding="utf-8"?>
+<LinearLayout xmlns:android="http://schemas.android.com/apk/res/android"
+    android:layout_width="match_parent"
+    android:layout_height="match_parent"
+    android:orientation="vertical">
+
+    <RelativeLayout
+        android:id="@+id/AGRelativeLayout"
+        android:layout_width="match_parent"
+        android:layout_height="@dimen/size25"
+        android:background="@color/blue"
+        android:clipToPadding="true"
+        android:fitsSystemWindows="true" />
+
+    <RelativeLayout
+        android:layout_width="match_parent"
+        android:layout_height="@dimen/pickerview_topbar_height"
+        android:background="@color/blue">
+
+        <ImageView
+            android:id="@+id/MyI_back"
+            android:layout_width="wrap_content"
+            android:layout_height="match_parent"
+            android:layout_alignParentLeft="true"
+            android:padding="@dimen/size10"
+            android:src="@mipmap/back_btn" />
+
+        <TextView
+            android:id="@+id/publish_title"
+            android:layout_width="wrap_content"
+            android:layout_height="wrap_content"
+            android:layout_centerInParent="true"
+            android:text="@string/MyInformation"
+            android:textColor="@color/white"
+            android:textSize="@dimen/pickerview_topbar_title_textsize" />
+    </RelativeLayout>
+
+    <RelativeLayout
+        android:id="@+id/MyI_RL1"
+        android:layout_width="match_parent"
+        android:layout_height="80dp"
+        android:background="@color/white"
+        android:padding="@dimen/size5">
+
+        <ImageView
+            android:id="@+id/MyI_RL_item_iv1"
+            android:layout_width="wrap_content"
+            android:layout_height="wrap_content"
+            android:layout_alignParentLeft="true"
+            android:layout_centerVertical="true"
+            android:padding="@dimen/size12"
+            android:src="@mipmap/tongzhigonggao" />
+
+        <LinearLayout
+            android:layout_width="match_parent"
+            android:layout_height="wrap_content"
+            android:layout_centerVertical="true"
+            android:layout_marginRight="@dimen/size60"
+            android:layout_toRightOf="@id/MyI_RL_item_iv1"
+            android:orientation="vertical">
+
+            <TextView
+                android:layout_width="wrap_content"
+                android:layout_height="wrap_content"
+                android:text="@string/MyInformationText1"
+                android:textColor="@color/black"
+                android:textSize="@dimen/txtSize16" />
+
+            <TextView
+                android:id="@+id/MyI_item_tv1"
+                android:layout_width="wrap_content"
+                android:layout_height="wrap_content"
+                android:layout_marginTop="@dimen/size5"
+                android:ellipsize="end"
+                android:singleLine="true"
+                android:text="@string/MyInformationText4"
+                android:textColor="@color/hideTextColor"
+                android:textSize="@dimen/txtSize12" />
+        </LinearLayout>
+
+        <TextView
+            android:id="@+id/MyI_date1"
+            android:layout_width="wrap_content"
+            android:layout_height="wrap_content"
+            android:layout_alignParentRight="true"
+            android:layout_marginTop="@dimen/size17"
+            android:paddingRight="@dimen/size20" />
+
+        <com.tpyzq.mobile.pangu.view.dragindicator.DragIndicatorView
+            android:id="@+id/MyI_div_num1"
+            android:layout_width="wrap_content"
+            android:layout_height="wrap_content"
+            android:layout_alignParentRight="true"
+            android:layout_marginLeft="@dimen/size35"
+            android:layout_marginRight="@dimen/size25"
+            android:layout_marginTop="@dimen/size40"
+            android:background="@color/red"
+            android:gravity="center"
+            android:padding="@dimen/size3"
+            android:text="18"
+            android:textColor="@color/white"
+            android:textSize="@dimen/txtSize12"
+            android:visibility="invisible" />
+    </RelativeLayout>
+
+    <View
+        android:layout_width="match_parent"
+        android:layout_height="@dimen/size0.5"
+        android:layout_marginLeft="@dimen/size20"
+        android:background="@color/lineColor" />
+
+    <RelativeLayout
+        android:id="@+id/MyI_RL2"
+        android:layout_width="match_parent"
+        android:layout_height="80dp"
+        android:background="@color/white"
+        android:padding="@dimen/size5">
+
+        <ImageView
+            android:id="@+id/MyI_RL_item_iv2"
+            android:layout_width="wrap_content"
+            android:layout_height="wrap_content"
+            android:layout_alignParentLeft="true"
+            android:layout_centerVertical="true"
+            android:padding="@dimen/size12"
+            android:src="@mipmap/xingushengoutongzhi" />
+
+        <LinearLayout
+            android:layout_width="match_parent"
+            android:layout_height="wrap_content"
+            android:layout_centerVertical="true"
+            android:layout_marginRight="@dimen/size60"
+            android:layout_toRightOf="@id/MyI_RL_item_iv2"
+            android:orientation="vertical">
+
+            <TextView
+                android:layout_width="wrap_content"
+                android:layout_height="wrap_content"
+                android:text="@string/MyInformationText2"
+                android:textColor="@color/black"
+                android:textSize="@dimen/txtSize16" />
+
+            <TextView
+                android:id="@+id/MyI_item_tv2"
+                android:layout_width="wrap_content"
+                android:layout_height="wrap_content"
+                android:layout_marginTop="@dimen/size5"
+                android:ellipsize="end"
+                android:singleLine="true"
+                android:text="@string/MyInformationText4"
+                android:textColor="@color/hideTextColor"
+                android:textSize="@dimen/txtSize12" />
+        </LinearLayout>
+
+        <TextView
+            android:id="@+id/MyI_date2"
+            android:layout_width="wrap_content"
+            android:layout_height="wrap_content"
+            android:layout_alignParentRight="true"
+            android:layout_marginTop="@dimen/size17"
+            android:paddingRight="@dimen/size20" />
+
+        <com.tpyzq.mobile.pangu.view.dragindicator.DragIndicatorView
+            android:id="@+id/MyI_div_num2"
+            android:layout_width="wrap_content"
+            android:layout_height="wrap_content"
+            android:layout_alignParentRight="true"
+            android:layout_marginLeft="@dimen/size35"
+            android:layout_marginRight="@dimen/size25"
+            android:layout_marginTop="@dimen/size40"
+            android:background="@color/red"
+            android:gravity="center"
+            android:padding="@dimen/size3"
+            android:text="18"
+            android:textColor="@color/white"
+            android:textSize="@dimen/txtSize12"
+            android:visibility="invisible" />
+    </RelativeLayout>
+
+    <View
+        android:layout_width="match_parent"
+        android:layout_height="@dimen/size0.5"
+        android:layout_marginLeft="@dimen/size20"
+        android:background="@color/lineColor" />
+
+    <RelativeLayout
+        android:id="@+id/MyI_RL3"
+        android:layout_width="match_parent"
+        android:layout_height="80dp"
+        android:background="@color/white"
+        android:padding="@dimen/size5">
+
+        <ImageView
+            android:id="@+id/MyI_RL_item_iv3"
+            android:layout_width="wrap_content"
+            android:layout_height="wrap_content"
+            android:layout_alignParentLeft="true"
+            android:layout_centerVertical="true"
+            android:padding="@dimen/size12"
+            android:src="@mipmap/hangqingyujingtishi" />
+
+        <LinearLayout
+            android:layout_width="match_parent"
+            android:layout_height="wrap_content"
+            android:layout_centerVertical="true"
+            android:layout_marginRight="@dimen/size70"
+            android:layout_toRightOf="@id/MyI_RL_item_iv3"
+            android:orientation="vertical">
+
+            <TextView
+                android:layout_width="wrap_content"
+                android:layout_height="wrap_content"
+                android:text="@string/MyInformationText3"
+                android:textColor="@color/black"
+                android:textSize="@dimen/txtSize16" />
+
+            <TextView
+                android:id="@+id/MyI_item_tv3"
+                android:layout_width="wrap_content"
+                android:layout_height="wrap_content"
+                android:layout_marginTop="@dimen/size5"
+                android:ellipsize="end"
+                android:singleLine="true"
+                android:text="@string/MyInformationText4"
+                android:textColor="@color/hideTextColor"
+                android:textSize="@dimen/txtSize12" />
+        </LinearLayout>
+
+        <TextView
+            android:id="@+id/MyI_date3"
+            android:layout_width="wrap_content"
+            android:layout_height="wrap_content"
+            android:layout_alignParentRight="true"
+            android:layout_marginTop="@dimen/size17"
+            android:paddingRight="@dimen/size20" />
+
+        <com.tpyzq.mobile.pangu.view.dragindicator.DragIndicatorView
+            android:id="@+id/MyI_div_num3"
+            android:layout_width="wrap_content"
+            android:layout_height="wrap_content"
+            android:layout_alignParentRight="true"
+            android:layout_marginLeft="@dimen/size35"
+            android:layout_marginRight="@dimen/size25"
+            android:layout_marginTop="@dimen/size40"
+            android:background="@color/red"
+            android:gravity="center"
+            android:padding="@dimen/size3"
+            android:text="12"
+            android:textColor="@color/white"
+            android:textSize="@dimen/txtSize12"
+            android:visibility="invisible" />
+    </RelativeLayout>
+
+    <View
+        android:layout_width="match_parent"
+        android:layout_height="@dimen/size0.5"
+        android:layout_marginLeft="@dimen/size20"
+        android:background="@color/lineColor" />
+</LinearLayout>

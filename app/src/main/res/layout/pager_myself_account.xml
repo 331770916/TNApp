@@ -1,0 +1,419 @@
+<?xml version="1.0" encoding="utf-8"?>
+<com.tpyzq.mobile.pangu.view.MultiScroll xmlns:android="http://schemas.android.com/apk/res/android"
+    xmlns:app="http://schemas.android.com/apk/res-auto"
+    xmlns:fresco="http://schemas.android.com/apk/res-auto"
+    android:id="@+id/scrollView"
+    android:layout_width="match_parent"
+    android:layout_height="match_parent"
+    android:background="@color/bgColor"
+    android:descendantFocusability="blocksDescendants"
+    android:fillViewport="true"
+    android:orientation="vertical"
+    android:scrollbars="none">
+
+    <LinearLayout
+        android:layout_width="match_parent"
+        android:layout_height="match_parent"
+        android:background="@color/bgColor"
+        android:orientation="vertical">
+
+        <RelativeLayout
+            android:layout_width="match_parent"
+            android:layout_height="230dp"
+            android:background="@mipmap/banner_background">
+
+            <com.moxun.tagcloudlib.view.TagCloudView
+                android:id="@+id/tag_cloud"
+                android:layout_width="match_parent"
+                android:layout_height="230dp"
+                android:layout_centerInParent="true"
+                android:choiceMode="singleChoice"
+                android:focusable="false"
+                app:autoScrollMode="uniform"
+                app:radiusPercent="0.8"
+                app:scrollSpeed="1" />
+
+            <ImageView
+                android:id="@+id/iv_title"
+                android:layout_width="80dp"
+                android:layout_height="80dp"
+                android:layout_centerInParent="true"
+                android:src="@mipmap/login_no" />
+
+            <TextView
+                android:id="@+id/tv_login"
+                android:layout_width="wrap_content"
+                android:layout_height="wrap_content"
+                android:layout_below="@id/iv_title"
+                android:layout_centerHorizontal="true"
+                android:layout_marginTop="@dimen/size10"
+                android:text="登录交易账号"
+                android:textColor="@color/white" />
+
+        </RelativeLayout>
+
+        <TextView
+            android:id="@+id/tv_headertitle"
+            android:layout_width="match_parent"
+            android:layout_height="wrap_content"
+            android:layout_marginBottom="@dimen/size5"
+            android:background="@color/white"
+            android:gravity="center"
+            android:paddingBottom="@dimen/size20"
+            android:paddingTop="@dimen/size20"
+            android:text="--"
+            android:textColor="@color/text" />
+
+        <TextView
+            android:layout_width="match_parent"
+            android:layout_height="40dp"
+            android:layout_marginBottom="@dimen/size1"
+            android:background="@color/white"
+            android:drawableLeft="@mipmap/yewubanli"
+            android:drawablePadding="@dimen/size10"
+            android:gravity="left|center_vertical"
+            android:paddingLeft="@dimen/size20"
+            android:text="业务办理" />
+
+        <LinearLayout
+            android:layout_width="match_parent"
+            android:layout_height="wrap_content"
+            android:layout_marginBottom="@dimen/size5"
+            android:background="@color/white"
+            android:orientation="horizontal">
+
+            <LinearLayout
+                android:id="@+id/ll"
+                android:layout_width="0dp"
+                android:layout_height="wrap_content"
+                android:layout_centerVertical="true"
+                android:layout_marginLeft="@dimen/size30"
+                android:layout_marginTop="@dimen/size20"
+                android:layout_weight="1"
+                android:orientation="vertical">
+
+                <LinearLayout
+                    android:layout_width="wrap_content"
+                    android:layout_height="25dp"
+                    android:orientation="horizontal">
+
+                    <View
+                        android:layout_width="5dp"
+                        android:layout_height="5dp"
+                        android:layout_gravity="center_vertical"
+                        android:background="@drawable/shape_bule_round_hong" />
+
+                    <TextView
+                        android:id="@+id/tv_open_account"
+                        android:layout_width="wrap_content"
+                        android:layout_height="wrap_content"
+                        android:layout_gravity="center_vertical"
+                        android:layout_marginLeft="@dimen/size10"
+                        android:text="开户"
+                        android:textColor="@color/failed"
+                        android:textSize="@dimen/txtSize12" />
+                </LinearLayout>
+
+                <LinearLayout
+                    android:layout_width="wrap_content"
+                    android:layout_height="25dp"
+                    android:orientation="horizontal">
+
+                    <View
+                        android:layout_width="5dp"
+                        android:layout_height="5dp"
+                        android:layout_gravity="center_vertical"
+                        android:background="@drawable/shape_bule_round" />
+
+                    <TextView
+                        android:id="@+id/tv_myaccount_rights"
+                        android:layout_width="wrap_content"
+                        android:layout_height="wrap_content"
+                        android:layout_gravity="center_vertical"
+                        android:layout_marginLeft="@dimen/size10"
+                        android:text="账户全景图"
+                        android:textColor="@color/black"
+                        android:textSize="@dimen/txtSize12" />
+                </LinearLayout>
+
+                <LinearLayout
+                    android:layout_width="wrap_content"
+                    android:layout_height="25dp"
+                    android:orientation="horizontal">
+
+                    <View
+                        android:layout_width="5dp"
+                        android:layout_height="5dp"
+                        android:layout_gravity="center_vertical"
+                        android:background="@drawable/shape_bule_round" />
+
+                    <TextView
+                        android:id="@+id/tv_electronic_signature_agreement"
+                        android:layout_width="wrap_content"
+                        android:layout_height="wrap_content"
+                        android:layout_gravity="center_vertical"
+                        android:layout_marginLeft="@dimen/size10"
+                        android:text="签署电子签名约定书"
+                        android:textColor="@color/black"
+                        android:textSize="@dimen/txtSize12" />
+                </LinearLayout>
+
+                <LinearLayout
+                    android:layout_width="wrap_content"
+                    android:layout_height="25dp"
+                    android:orientation="horizontal">
+
+                    <View
+                        android:layout_width="5dp"
+                        android:layout_height="5dp"
+                        android:layout_gravity="center_vertical"
+                        android:background="@drawable/shape_bule_round" />
+
+                    <TextView
+                        android:id="@+id/tv_myself_evaluating"
+                        android:layout_width="wrap_content"
+                        android:layout_height="wrap_content"
+                        android:layout_gravity="center_vertical"
+                        android:layout_marginLeft="@dimen/size10"
+                        android:text="风险等级评测"
+                        android:textColor="@color/black"
+                        android:textSize="@dimen/txtSize12" />
+                </LinearLayout>
+
+                <LinearLayout
+                    android:layout_width="wrap_content"
+                    android:layout_height="25dp"
+                    android:visibility="gone"
+                    android:orientation="horizontal">
+
+                    <View
+                        android:layout_width="5dp"
+                        android:layout_height="5dp"
+                        android:layout_gravity="center_vertical"
+                        android:background="@drawable/shape_bule_round" />
+
+                    <TextView
+                        android:id="@+id/tv_gem_sign"
+                        android:layout_width="wrap_content"
+                        android:layout_height="wrap_content"
+                        android:layout_gravity="center_vertical"
+                        android:layout_marginLeft="@dimen/size10"
+                        android:text="创业板转签"
+                        android:textColor="@color/black"
+                        android:textSize="@dimen/txtSize12" />
+                </LinearLayout>
+
+                <LinearLayout
+                    android:visibility="gone"
+                    android:layout_width="wrap_content"
+                    android:layout_height="25dp"
+                    android:orientation="horizontal">
+
+                    <View
+                        android:layout_width="5dp"
+                        android:layout_height="5dp"
+                        android:layout_gravity="center_vertical"
+                        android:background="@drawable/shape_bule_round" />
+
+                    <TextView
+                        android:id="@+id/tv_refresh_iccard"
+                        android:layout_width="wrap_content"
+                        android:layout_height="wrap_content"
+                        android:layout_gravity="center_vertical"
+                        android:layout_marginLeft="@dimen/size10"
+                        android:text="更新身份证有效期"
+                        android:textColor="@color/black"
+                        android:textSize="@dimen/txtSize12" />
+                </LinearLayout>
+            </LinearLayout>
+
+            <View
+                android:id="@+id/view"
+                android:layout_width="@dimen/size1"
+                android:layout_height="@dimen/size100"
+                android:layout_centerInParent="true"
+                android:layout_marginBottom="@dimen/size20"
+                android:layout_marginTop="@dimen/size20"
+                android:background="@color/bgColor" />
+
+            <LinearLayout
+                android:layout_width="0dp"
+                android:layout_height="wrap_content"
+                android:layout_marginLeft="@dimen/size30"
+                android:layout_marginTop="@dimen/size20"
+                android:layout_weight="1"
+                android:orientation="vertical">
+
+                <LinearLayout
+                    android:layout_width="wrap_content"
+                    android:layout_height="25dp"
+                    android:orientation="horizontal">
+
+                    <View
+                        android:layout_width="5dp"
+                        android:layout_height="5dp"
+                        android:layout_gravity="center_vertical"
+                        android:background="@drawable/shape_bule_round" />
+
+                    <TextView
+                        android:id="@+id/tv_myself_partner"
+                        android:layout_width="wrap_content"
+                        android:layout_height="wrap_content"
+                        android:layout_gravity="center_vertical"
+                        android:layout_marginLeft="@dimen/size10"
+                        android:text="股东账户信息查询"
+                        android:textColor="@color/black"
+                        android:textSize="@dimen/txtSize12" />
+                </LinearLayout>
+
+                <LinearLayout
+                    android:layout_width="wrap_content"
+                    android:layout_height="25dp"
+                    android:orientation="horizontal">
+
+                    <View
+                        android:layout_width="5dp"
+                        android:layout_height="5dp"
+                        android:layout_gravity="center_vertical"
+                        android:background="@drawable/shape_bule_round" />
+
+                    <TextView
+                        android:id="@+id/tv_userdata_change"
+                        android:layout_width="wrap_content"
+                        android:layout_height="wrap_content"
+                        android:layout_gravity="center_vertical"
+                        android:layout_marginLeft="@dimen/size10"
+                        android:text="修改个人资料"
+                        android:textColor="@color/black"
+                        android:textSize="@dimen/txtSize12" />
+                </LinearLayout>
+
+                <LinearLayout
+                    android:layout_width="wrap_content"
+                    android:layout_height="25dp"
+                    android:orientation="horizontal">
+
+                    <View
+                        android:layout_width="5dp"
+                        android:layout_height="5dp"
+                        android:layout_gravity="center_vertical"
+                        android:background="@drawable/shape_bule_round" />
+
+                    <TextView
+                        android:id="@+id/tv_warn"
+                        android:layout_width="wrap_content"
+                        android:layout_height="wrap_content"
+                        android:layout_gravity="center_vertical"
+                        android:layout_marginLeft="@dimen/size10"
+                        android:text="签署风险警示协议"
+                        android:textColor="@color/black"
+                        android:textSize="@dimen/txtSize12" />
+                </LinearLayout>
+
+                <LinearLayout
+                    android:layout_width="wrap_content"
+                    android:layout_height="25dp"
+                    android:orientation="horizontal">
+
+                    <View
+                        android:layout_width="5dp"
+                        android:layout_height="5dp"
+                        android:layout_gravity="center_vertical"
+                        android:background="@drawable/shape_bule_round" />
+
+                    <TextView
+                        android:id="@+id/tv_transactionpass_change"
+                        android:layout_width="wrap_content"
+                        android:layout_height="wrap_content"
+                        android:layout_gravity="center_vertical"
+                        android:layout_marginLeft="@dimen/size10"
+                        android:text="修改交易密码"
+                        android:textColor="@color/black"
+                        android:textSize="@dimen/txtSize12" />
+                </LinearLayout>
+                <LinearLayout
+                    android:visibility="gone"
+                    android:layout_width="wrap_content"
+                    android:layout_height="25dp"
+                    android:orientation="horizontal">
+
+                    <View
+                        android:layout_width="5dp"
+                        android:layout_height="5dp"
+                        android:layout_gravity="center_vertical"
+                        android:background="@drawable/shape_bule_round" />
+
+                    <TextView
+                        android:id="@+id/tv_three_bankdeposit"
+                        android:layout_width="wrap_content"
+                        android:layout_height="wrap_content"
+                        android:layout_gravity="center_vertical"
+                        android:layout_marginLeft="@dimen/size10"
+                        android:text="三存银行变更"
+                        android:textColor="@color/black"
+                        android:textSize="@dimen/txtSize12" />
+                </LinearLayout>
+
+                <LinearLayout
+                    android:visibility="gone"
+                    android:layout_width="wrap_content"
+                    android:layout_height="25dp"
+                    android:orientation="horizontal">
+
+                    <View
+                        android:layout_width="5dp"
+                        android:layout_height="5dp"
+                        android:layout_gravity="center_vertical"
+                        android:background="@drawable/shape_bule_round" />
+
+                    <TextView
+                        android:id="@+id/tv_forget_transactionpw"
+                        android:layout_width="wrap_content"
+                        android:layout_height="wrap_content"
+                        android:layout_gravity="center_vertical"
+                        android:layout_marginLeft="@dimen/size10"
+                        android:text="忘记交易密码"
+                        android:textColor="@color/black"
+                        android:textSize="@dimen/txtSize12" />
+                </LinearLayout>
+            </LinearLayout>
+        </LinearLayout>
+
+        <!--  <TextView
+              android:layout_width="match_parent"
+              android:layout_height="40dp"
+              android:layout_marginBottom="@dimen/size5"
+              android:background="@color/white"
+              android:drawableLeft="@mipmap/liuliangkabao"
+              android:drawablePadding="@dimen/size10"
+              android:gravity="left|center_vertical"
+              android:paddingLeft="@dimen/size20"
+              android:text="流量卡包" />-->
+
+        <TextView
+            android:id="@+id/tv_server"
+            android:layout_width="match_parent"
+            android:layout_height="40dp"
+            android:layout_marginBottom="@dimen/size5"
+            android:background="@color/white"
+            android:drawableLeft="@mipmap/kefurexian"
+            android:drawablePadding="@dimen/size10"
+            android:gravity="left|center_vertical"
+            android:paddingLeft="@dimen/size20"
+            android:text="联系客服" />
+
+        <ImageView
+            android:id="@+id/iv_open_account"
+            android:visibility="gone"
+            android:layout_width="match_parent"
+            android:layout_height="@dimen/size50"
+            android:layout_marginTop="@dimen/size5"
+            android:src="@mipmap/account_advert" />
+
+        <View
+            android:layout_width="match_parent"
+            android:layout_height="5dp"
+            android:background="@color/bgColor" />
+
+    </LinearLayout>
+</com.tpyzq.mobile.pangu.view.MultiScroll>

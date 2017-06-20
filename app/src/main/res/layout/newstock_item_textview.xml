@@ -1,0 +1,83 @@
+<?xml version="1.0" encoding="utf-8"?>
+<LinearLayout xmlns:android="http://schemas.android.com/apk/res/android"
+    android:id="@+id/newStockItemData_LinearLayout"
+    android:layout_width="match_parent"
+    android:layout_height="wrap_content"
+    android:background="@drawable/listview_item_bg"
+    android:orientation="vertical">
+
+    <LinearLayout
+        android:layout_width="match_parent"
+        android:layout_height="wrap_content"
+        android:paddingBottom="@dimen/size5"
+        android:paddingTop="@dimen/size5"
+        android:orientation="horizontal">
+        <RelativeLayout
+            android:layout_width="@dimen/size0"
+            android:layout_height="wrap_content"
+            android:layout_weight="1">
+
+            <TextView
+                android:text="aaaa"
+                android:id="@+id/newStockItem_NameTxetView"
+                android:layout_width="wrap_content"
+                android:layout_height="wrap_content"
+                android:layout_marginLeft="@dimen/size10"
+                android:textColor="@color/hushenTab_titleColor"
+                android:padding="@dimen/size1"
+                android:textSize="@dimen/txtSize14" />
+
+            <TextView
+                android:text="aaa"
+                android:id="@+id/newStockItem_NumTxetView"
+                android:padding="@dimen/size1"
+                android:layout_width="wrap_content"
+                android:layout_height="wrap_content"
+                android:layout_below="@id/newStockItem_NameTxetView"
+                android:layout_alignLeft="@id/newStockItem_NameTxetView"
+                android:gravity="center"
+                android:textColor="@color/newStockTitle"
+                android:textSize="@dimen/self_stockNumberText" />
+
+        </RelativeLayout>
+
+        <TextView
+            android:text="aaaa"
+            android:id="@+id/newStockMiddletvTxetView1"
+            android:layout_width="@dimen/size0"
+            android:layout_height="match_parent"
+            android:layout_weight="1"
+            android:gravity="center"
+            android:textColor="@color/hushenTab_titleColor"
+            android:textSize="@dimen/txtSize14" />
+
+        <TextView
+            android:text="aaaa"
+            android:id="@+id/newStockMiddletvTxetView2"
+            android:layout_width="@dimen/size0"
+            android:layout_height="match_parent"
+            android:layout_weight="1"
+            android:gravity="center"
+            android:textColor="@color/hushenTab_titleColor"
+            android:textSize="@dimen/txtSize14" />
+
+        <TextView
+            android:text="aaaa"
+            android:id="@+id/newStockRightTxetView"
+            android:layout_width="@dimen/size0"
+            android:layout_height="match_parent"
+            android:layout_weight="1"
+            android:gravity="right|center_vertical"
+            android:paddingRight="@dimen/size10"
+            android:textColor="@color/hushenTab_titleColor"
+            android:textSize="@dimen/txtSize13" />
+
+    </LinearLayout>
+
+    <View
+        android:layout_width="match_parent"
+        android:layout_height="1px"
+        android:layout_marginLeft="@dimen/size10"
+        android:background="@color/lineColor"/>
+
+</LinearLayout>

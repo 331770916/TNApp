@@ -1,0 +1,34 @@
+<?xml version="1.0" encoding="utf-8"?>
+<LinearLayout xmlns:android="http://schemas.android.com/apk/res/android"
+    android:orientation="vertical" android:layout_width="match_parent"
+    android:layout_height="match_parent">
+
+    <View
+        android:layout_width="match_parent"
+        android:layout_height="@dimen/size25"
+        android:background="@color/blue"/>
+
+    <include layout="@layout/updatepwd_top"/>
+
+    <TextView
+        android:id="@+id/flowTextWarn"
+        android:layout_width="wrap_content"
+        android:layout_height="wrap_content"
+        android:textColor="#4c4c4c"
+        android:layout_marginTop="@dimen/size10"
+        android:layout_marginBottom="@dimen/size10"
+        android:layout_gravity="center_horizontal"
+        android:textSize="@dimen/txtSize13"
+        android:drawableLeft="@mipmap/icon_warn"
+        android:background="@drawable/shape_flow_bg"
+        android:padding="@dimen/size10"
+        android:drawablePadding="@dimen/size5"
+        android:text="本产品只有预约客户才能购买，敬请关注下期产品"/>
+
+    <ImageView
+        android:layout_width="match_parent"
+        android:layout_height="match_parent"
+        android:padding="@dimen/size10"
+        android:src="@mipmap/flow"/>
+
+</LinearLayout>

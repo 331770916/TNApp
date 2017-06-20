@@ -1,0 +1,58 @@
+<LinearLayout xmlns:android="http://schemas.android.com/apk/res/android"
+    android:layout_width="match_parent"
+    android:layout_height="match_parent"
+    android:layout_margin="@dimen/size10"
+    android:orientation="vertical">
+
+
+    <LinearLayout
+        android:layout_marginTop="@dimen/size5"
+        android:id="@+id/pop_layout"
+        android:layout_width="match_parent"
+        android:layout_height="wrap_content"
+        android:layout_alignParentBottom="true"
+        android:background="@color/white"
+        android:orientation="vertical">
+
+        <TextView
+            android:paddingTop="@dimen/size5"
+            android:paddingBottom="@dimen/size5"
+            android:textSize="@dimen/txtSize18"
+            android:layout_width="match_parent"
+            android:layout_height="wrap_content"
+            android:gravity="center"
+            android:text="保存二维码到系统相册"
+            android:textColor="@drawable/basedate_item_bg_p" />
+
+        <View
+            android:layout_width="wrap_content"
+            android:layout_height="@dimen/size0.3"
+            android:background="@color/lineColor" />
+
+        <TextView
+            android:id="@+id/Yse"
+            android:layout_width="match_parent"
+            android:layout_height="wrap_content"
+            android:gravity="center"
+            android:paddingBottom="@dimen/size10"
+            android:paddingTop="@dimen/size10"
+            android:text="确认"
+            android:textSize="@dimen/txtSize16" />
+
+        <View
+            android:layout_width="wrap_content"
+            android:layout_height="@dimen/size0.3"
+            android:background="@color/lineColor" />
+
+        <TextView
+            android:id="@+id/No"
+            android:layout_width="match_parent"
+            android:layout_height="wrap_content"
+            android:gravity="center"
+            android:paddingBottom="@dimen/size10"
+            android:paddingTop="@dimen/size10"
+            android:text="取消"
+            android:textSize="@dimen/txtSize16" />
+    </LinearLayout>
+
+</LinearLayout>

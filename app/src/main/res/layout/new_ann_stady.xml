@@ -1,0 +1,53 @@
+<?xml version="1.0" encoding="utf-8"?>
+<LinearLayout xmlns:android="http://schemas.android.com/apk/res/android"
+    android:layout_width="match_parent"
+    android:layout_height="wrap_content"
+    android:orientation="vertical"
+    android:background="@color/white">
+
+    <RelativeLayout
+        android:layout_width="match_parent"
+        android:layout_height="@dimen/size65">
+        <TextView
+            android:id="@+id/tvNewAnnStudyTitle"
+            android:layout_width="wrap_content"
+            android:layout_height="wrap_content"
+            android:layout_marginTop="@dimen/size12"
+            android:layout_marginLeft="@dimen/size12"
+            android:layout_marginRight="@dimen/size12"
+            android:text=""
+            android:textSize="14sp"
+            android:textColor="@color/bkColor"
+            android:singleLine="true"
+            android:ellipsize="end"/>
+
+        <TextView
+            android:id="@+id/tvNewAnnStudyTime"
+            android:layout_width="wrap_content"
+            android:layout_height="wrap_content"
+            android:layout_alignParentBottom="true"
+            android:layout_marginLeft="@dimen/size12"
+            android:layout_marginBottom="@dimen/size12"
+            android:text=""
+            android:textSize="10sp"
+            android:textColor="@color/texts"/>
+
+        <!--<TextView
+            android:id="@+id/tvNewAnnStudySource"
+            android:layout_width="wrap_content"
+            android:layout_height="wrap_content"
+            android:layout_alignParentBottom="true"
+            android:layout_marginLeft="@dimen/size12"
+            android:layout_marginBottom="@dimen/size12"
+            android:text="深证交易所"
+            android:textSize="10sp"
+            android:textColor="@color/texts"/>-->
+
+    </RelativeLayout>
+
+    <TextView
+        android:layout_width="match_parent"
+        android:layout_height="@dimen/size0.5"
+        android:background="@color/dividerColor"/>
+
+</LinearLayout>

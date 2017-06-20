@@ -1,0 +1,116 @@
+<?xml version="1.0" encoding="utf-8"?>
+<LinearLayout xmlns:android="http://schemas.android.com/apk/res/android"
+    xmlns:app="http://schemas.android.com/apk/res-auto"
+    android:layout_width="match_parent"
+    android:layout_height="match_parent"
+    android:background="@color/bgColor"
+    android:orientation="vertical">
+
+    <LinearLayout
+        android:id="@+id/ll_search"
+        android:layout_width="match_parent"
+        android:layout_height="@dimen/size40"
+        android:background="@color/white"
+        android:orientation="horizontal"
+        android:visibility="gone"
+        android:layout_marginBottom="@dimen/size5"
+        >
+        <TextView
+            android:id="@+id/tv_start_data"
+            android:layout_width="0dp"
+            android:layout_height="wrap_content"
+            android:layout_gravity="center"
+            android:layout_marginLeft="@dimen/size15"
+            android:layout_weight="1.5"
+            android:drawableLeft="@mipmap/rililan"
+            android:drawablePadding="@dimen/size5"
+            android:gravity="center"
+
+            android:text="2016-12-07"
+            android:textColor="@color/hideTextColor"
+            android:textSize="@dimen/txtSize13" />
+
+        <ImageView
+            android:layout_width="wrap_content"
+            android:layout_height="wrap_content"
+            android:layout_gravity="center"
+            android:layout_marginLeft="@dimen/size5"
+            android:src="@mipmap/sanjiao" />
+
+        <TextView
+            android:layout_width="0dp"
+            android:layout_height="wrap_content"
+            android:layout_gravity="center"
+            android:layout_weight="1"
+            android:gravity="center"
+            android:text="至"
+            android:textColor="@color/black" />
+
+
+        <TextView
+            android:id="@+id/tv_end_data"
+            android:layout_width="0dp"
+            android:layout_height="wrap_content"
+            android:layout_gravity="center"
+            android:layout_weight="1.5"
+            android:drawableRight="@mipmap/sanjiao"
+            android:gravity="center"
+            android:text="2016-12-07"
+            android:textColor="@color/hideTextColor"
+            android:textSize="@dimen/txtSize13" />
+
+
+        <TextView
+            android:id="@+id/tv_search"
+            android:layout_width="0dp"
+            android:layout_height="match_parent"
+            android:layout_marginLeft="@dimen/size15"
+            android:layout_weight="1"
+            android:background="@color/calendarBtnColor"
+            android:gravity="center"
+            android:paddingLeft="@dimen/size15"
+            android:paddingRight="@dimen/size15"
+            android:text="查询"
+            android:textSize="@dimen/size15"
+            android:textColor="@color/white" />
+    </LinearLayout>
+
+    <!--<View-->
+    <!--android:layout_width="match_parent"-->
+    <!--android:layout_height="@dimen/size5"-->
+    <!--android:background="@color/lineColor" />-->
+
+    <include
+        android:id="@+id/ll_fourtext"
+        layout="@layout/item_fourtext_header" />
+
+    <View
+        android:layout_width="match_parent"
+        android:layout_height="@dimen/size0.5"
+        android:background="@color/lineColor" />
+
+    <RelativeLayout
+        android:layout_width="match_parent"
+        android:layout_height="0dp"
+        android:layout_weight="1">
+
+        <ImageView
+            android:id="@+id/tv_empty"
+            android:layout_width="match_parent"
+            android:layout_height="match_parent"
+            android:layout_centerInParent="true"
+            android:scaleType="center"
+            android:visibility="visible"
+            android:src="@mipmap/kong" />
+
+        <com.handmark.pulltorefresh.library.PullToRefreshListView
+            android:id="@+id/lv_transaction"
+            android:layout_width="match_parent"
+            android:layout_height="match_parent"
+            android:divider="@android:color/transparent"
+            android:dividerHeight="@dimen/size0"
+            android:scrollbars="none"
+            app:ptrAnimationStyle="flip"
+            app:ptrMode="both" />
+    </RelativeLayout>
+</LinearLayout>

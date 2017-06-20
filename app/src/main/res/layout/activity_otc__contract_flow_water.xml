@@ -1,0 +1,115 @@
+<?xml version="1.0" encoding="utf-8"?>
+<RelativeLayout xmlns:android="http://schemas.android.com/apk/res/android"
+    xmlns:tools="http://schemas.android.com/tools"
+    android:layout_width="match_parent"
+    android:layout_height="match_parent"
+    android:orientation="vertical"
+    android:background="@color/bgColor"
+    tools:context="com.tpyzq.mobile.pangu.activity.trade.otc_business.OTC_ContractFlowWaterActivity">
+
+    <RelativeLayout
+        android:id="@+id/OtcContractXiaChen"
+        android:layout_width="match_parent"
+        android:layout_height="@dimen/size25"
+        android:background="@color/blue"
+        android:clipToPadding="true"
+        android:fitsSystemWindows="true" />
+
+    <!-- 头布局 -->
+    <RelativeLayout
+        android:id="@+id/OtcContractTou"
+        android:layout_below="@id/OtcContractXiaChen"
+        android:layout_width="match_parent"
+        android:layout_height="@dimen/pickerview_topbar_height"
+        android:background="@color/blue">
+
+        <ImageView
+            android:id="@+id/ivOTC_ContractFlowWater_back"
+            android:layout_width="wrap_content"
+            android:layout_height="match_parent"
+            android:layout_alignParentLeft="true"
+            android:padding="@dimen/size10"
+            android:src="@mipmap/back_btn" />
+
+        <TextView
+            android:layout_width="wrap_content"
+            android:layout_height="wrap_content"
+            android:layout_centerInParent="true"
+            android:text="@string/OTC_dianzihetongliushui"
+            android:textColor="@color/white"
+            android:textSize="@dimen/pickerview_topbar_title_textsize" />
+    </RelativeLayout>
+
+    <LinearLayout
+        android:id="@+id/OtcContractTitle"
+        android:layout_below="@id/OtcContractTou"
+        android:layout_width="match_parent"
+        android:layout_height="@dimen/size30"
+        android:gravity="center_vertical">
+
+        <TextView
+            android:layout_weight="1"
+            android:layout_width="0dp"
+            android:layout_height="wrap_content"
+            android:layout_marginLeft="@dimen/size20"
+            android:gravity="left"
+            android:text="产品代码"
+            android:textSize="13sp"
+            android:textColor="@color/text"/>
+
+        <TextView
+            android:layout_weight="1"
+            android:layout_width="0dp"
+            android:layout_height="wrap_content"
+            android:gravity="center"
+            android:text="产品公司"
+            android:textSize="13sp"
+            android:textColor="@color/text"/>
+
+
+        <TextView
+            android:layout_weight="1"
+            android:layout_width="0dp"
+            android:layout_height="wrap_content"
+            android:gravity="center"
+            android:text="状态"
+            android:textSize="13sp"
+            android:textColor="@color/text"/>
+
+        <TextView
+            android:layout_weight="1"
+            android:layout_width="0dp"
+            android:layout_height="wrap_content"
+            android:paddingRight="@dimen/size20"
+            android:gravity="right"
+            android:text="发生日期"
+            android:textSize="13sp"
+            android:textColor="@color/text"/>
+
+    </LinearLayout>
+
+    <TextView
+        android:id="@+id/tvOtcContractFenGe"
+        android:layout_below="@id/OtcContractTitle"
+        android:layout_width="match_parent"
+        android:layout_height="@dimen/size1"
+        android:background="@color/lineColor"/>
+
+    <ListView
+        android:id="@+id/lvContractFlowWater"
+        android:layout_below="@id/tvOtcContractFenGe"
+        android:layout_width="match_parent"
+        android:layout_height="match_parent"
+        android:layout_marginBottom="@dimen/size10">
+
+    </ListView>
+
+    <ImageView
+        android:id="@+id/ivOtcContractKong"
+        android:layout_width="wrap_content"
+        android:layout_height="wrap_content"
+        android:layout_centerInParent="true"
+        android:visibility="gone"
+        android:src="@mipmap/kong"/>
+
+</RelativeLayout>

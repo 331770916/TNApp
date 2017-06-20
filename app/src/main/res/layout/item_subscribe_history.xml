@@ -1,0 +1,470 @@
+<?xml version="1.0" encoding="utf-8"?>
+<LinearLayout xmlns:android="http://schemas.android.com/apk/res/android"
+    android:layout_width="match_parent"
+    android:layout_height="match_parent"
+    android:background="@color/white"
+    android:orientation="vertical">
+
+    <LinearLayout
+        android:id="@+id/layout_showArea"
+        android:layout_width="match_parent"
+        android:layout_height="wrap_content"
+        android:orientation="vertical">
+
+        <RelativeLayout
+            android:layout_width="match_parent"
+            android:layout_height="wrap_content"
+            android:background="#ffffff">
+
+            <TextView
+                android:id="@+id/textViewName"
+                android:layout_width="wrap_content"
+                android:layout_height="wrap_content"
+                android:layout_marginLeft="@dimen/size20"
+                android:layout_marginTop="@dimen/size17"
+                android:textColor="@color/hushenTab_titleColor"
+                android:textSize="@dimen/txtSize14"
+                android:textStyle="bold" />
+
+            <TextView
+                android:id="@+id/textView_num"
+                android:layout_width="wrap_content"
+                android:layout_height="wrap_content"
+                android:layout_alignBottom="@+id/textViewName"
+                android:layout_marginLeft="@dimen/size8"
+                android:layout_toEndOf="@+id/textViewName"
+                android:layout_toRightOf="@+id/textViewName"
+                android:text=""
+                android:textColor="@color/newStockTitle"
+                android:textSize="@dimen/txtSize11" />
+
+            <TextView
+                android:id="@+id/textView3"
+                android:layout_width="wrap_content"
+                android:layout_height="wrap_content"
+                android:layout_alignParentEnd="true"
+                android:layout_alignParentRight="true"
+                android:layout_alignTop="@+id/textViewName"
+                android:layout_marginRight="@dimen/size10"
+                android:background="@drawable/lonin3"
+                android:text=""
+                android:textColor="@color/white" />
+
+            <TextView
+                android:id="@+id/textView4"
+                android:layout_width="match_parent"
+                android:layout_height="@dimen/size1"
+                android:layout_alignParentLeft="true"
+                android:layout_alignParentStart="true"
+                android:layout_below="@+id/textViewName"
+                android:layout_marginLeft="@dimen/size18"
+                android:layout_marginTop="@dimen/size12"
+                android:background="@color/dialogTitle" />
+
+            <TextView
+                android:id="@+id/textViewData"
+                android:layout_width="wrap_content"
+                android:layout_height="wrap_content"
+                android:layout_alignParentLeft="true"
+                android:layout_alignParentStart="true"
+                android:layout_below="@+id/textView4"
+                android:layout_marginLeft="@dimen/size20"
+                android:layout_marginStart="@dimen/size20"
+                android:layout_marginTop="@dimen/size12"
+                android:text="申购日期:"
+                android:textAppearance="?android:attr/textAppearanceSmall"
+                android:textColor="@color/colorMyGray"
+                android:textSize="@dimen/size12"/>
+
+            <TextView
+                android:id="@+id/textViewS_data"
+                android:layout_width="wrap_content"
+                android:layout_height="wrap_content"
+                android:layout_alignBottom="@+id/textViewData"
+                android:layout_marginLeft="@dimen/size8"
+                android:layout_toEndOf="@+id/textViewData"
+                android:layout_toRightOf="@+id/textViewData"
+                android:text=""
+                android:textColor="@color/colorMyGray"
+                android:textSize="@dimen/size12" />
+
+            <TextView
+                android:id="@+id/textView7"
+                android:layout_width="wrap_content"
+                android:layout_height="wrap_content"
+                android:layout_alignParentLeft="true"
+                android:layout_alignParentStart="true"
+                android:layout_below="@+id/textView4"
+                android:layout_marginLeft="188dp"
+                android:layout_marginTop="@dimen/size12"
+                android:text="申购价格:"
+                android:textColor="@color/colorMyGray"
+                android:textSize="@dimen/size12" />
+
+            <TextView
+                android:id="@+id/textViewS_price"
+                android:layout_width="wrap_content"
+                android:layout_height="wrap_content"
+                android:layout_alignBottom="@+id/textView7"
+                android:layout_marginLeft="@dimen/size8"
+                android:layout_toEndOf="@+id/textView7"
+                android:layout_toRightOf="@+id/textView7"
+                android:text=""
+                android:textAppearance="?android:attr/textAppearanceSmall"
+                android:textColor="@color/colorMyGray"
+                android:textSize="@dimen/size12" />
+
+            <TextView
+                android:id="@+id/textView9"
+                android:layout_width="wrap_content"
+                android:layout_height="wrap_content"
+                android:layout_alignLeft="@+id/textViewData"
+                android:layout_alignStart="@+id/textViewData"
+                android:layout_below="@+id/textViewData"
+                android:layout_marginBottom="@dimen/size2"
+                android:layout_marginTop="@dimen/size15"
+                android:text="申购股数:"
+                android:textColor="@color/colorMyGray"
+                android:textSize="@dimen/size12" />
+
+            <TextView
+                android:id="@+id/textViewS_num"
+                android:layout_width="wrap_content"
+                android:layout_height="wrap_content"
+                android:layout_alignBottom="@+id/textView9"
+                android:layout_marginLeft="@dimen/size8"
+                android:layout_toEndOf="@+id/textView9"
+                android:layout_toRightOf="@+id/textView9"
+                android:text=""
+                android:textColor="@color/colorMyGray"
+                android:textSize="@dimen/size12" />
+
+            <TextView
+                android:id="@+id/textView11"
+                android:layout_width="wrap_content"
+                android:layout_height="wrap_content"
+                android:layout_alignBottom="@+id/textViewS_num"
+                android:layout_alignLeft="@+id/textView7"
+                android:layout_alignStart="@+id/textView7"
+                android:text="中签数量:"
+                android:textColor="@color/colorMyGray"
+                android:textSize="@dimen/size12" />
+
+            <TextView
+                android:id="@+id/textViewS_num2"
+                android:layout_width="wrap_content"
+                android:layout_height="wrap_content"
+                android:layout_alignBottom="@+id/textView11"
+                android:layout_alignLeft="@+id/textViewS_price"
+                android:layout_alignStart="@+id/textViewS_price"
+                android:textColor="@color/colorMyGray"
+                android:textSize="@dimen/size12" />
+        </RelativeLayout>
+    </LinearLayout>
+
+    <RelativeLayout
+        android:id="@+id/layout_hideArea"
+        android:layout_width="match_parent"
+        android:layout_height="wrap_content"
+        android:background="@color/white">
+
+        <TextView
+            android:id="@+id/textView14"
+            android:layout_width="@dimen/size1"
+            android:layout_height="@dimen/size22"
+            android:layout_alignParentEnd="true"
+            android:layout_alignParentRight="true"
+            android:layout_alignParentTop="true"
+            android:layout_marginEnd="296dp"
+            android:layout_marginRight="296dp"
+            android:layout_marginTop="@dimen/size10"
+            android:background="@color/lineColor" />
+
+
+
+
+        <ImageView
+            android:id="@+id/imageView"
+            android:layout_width="@dimen/size15"
+            android:layout_height="@dimen/size15"
+            android:layout_alignParentEnd="true"
+            android:layout_alignParentRight="true"
+            android:layout_below="@+id/textView14"
+            android:layout_marginEnd="288.5dp"
+            android:layout_marginRight="288.5dp"
+            android:layout_marginTop="@dimen/size8"
+            android:src="@mipmap/zhongbiao" />
+
+        <TextView
+            android:id="@+id/textView16"
+            android:layout_width="@dimen/size260"
+            android:layout_height="@dimen/size30"
+            android:layout_alignLeft="@+id/imageView"
+            android:layout_alignStart="@+id/imageView"
+            android:layout_below="@+id/textView14"
+            android:layout_marginLeft="391dp"
+            android:layout_marginStart="@dimen/size20"
+            android:background="@drawable/xingushengou"
+            android:gravity="center_vertical"
+            android:text="    申购"
+            android:textAppearance="?android:attr/textAppearanceSmall"
+            android:textColor="@color/hushenTab_titleColor"
+            android:textSize="14dp" />
+
+        <TextView
+            android:id="@+id/textView_time2"
+            android:layout_width="wrap_content"
+            android:layout_height="wrap_content"
+            android:layout_alignLeft="@+id/textView_time1"
+            android:layout_alignStart="@+id/textView_time1"
+            android:layout_below="@+id/textView_time1"
+            android:layout_marginTop="@dimen/size35"
+            android:text="--    --"
+            android:textColor="@color/hushenTab_titleColor"
+            android:textSize="@dimen/size12" />
+
+        <TextView
+            android:id="@+id/textView18"
+            android:layout_width="@dimen/size1"
+            android:layout_height="@dimen/size22"
+            android:layout_alignLeft="@id/textView14"
+            android:layout_alignStart="@id/textView14"
+            android:layout_below="@+id/imageView"
+            android:layout_marginTop="@dimen/size5"
+            android:background="@color/lineColor"
+            android:textAppearance="?android:attr/textAppearanceSmall" />
+
+        <ImageView
+            android:id="@+id/imageView2"
+            android:layout_width="@dimen/size15"
+            android:layout_height="@dimen/size15"
+            android:layout_alignLeft="@+id/imageView"
+            android:layout_alignStart="@+id/imageView"
+            android:layout_alignTop="@+id/textView_time2"
+            android:src="@mipmap/zhongbiao" />
+
+        <TextView
+            android:id="@+id/textView19"
+            android:layout_width="@dimen/size260"
+            android:layout_height="@dimen/size30"
+            android:layout_alignLeft="@+id/textView16"
+            android:layout_alignStart="@+id/textView16"
+            android:layout_below="@+id/textView18"
+            android:background="@drawable/xingushengou"
+            android:gravity="center_vertical"
+            android:text="    配号"
+            android:textAppearance="?android:attr/textAppearanceSmall"
+            android:textColor="@color/hushenTab_titleColor"
+            android:textSize="@dimen/txtSize14" />
+
+        <RelativeLayout
+            android:layout_width="wrap_content"
+            android:layout_height="wrap_content"
+            android:layout_alignBottom="@+id/imageView2"
+            android:layout_alignLeft="@id/textView19"
+            android:layout_alignStart="@id/textView19"
+            android:layout_marginLeft="@dimen/size50">
+
+            <TextView
+                android:id="@+id/tvPaiHaoShuLiang"
+                android:layout_width="wrap_content"
+                android:layout_height="wrap_content"
+                android:layout_centerVertical="true"
+                android:text="配号数量:"
+                android:textColor="@color/colorMyGray"
+                android:textSize="@dimen/txtSize12" />
+
+            <TextView
+                android:id="@+id/tvPaiHaoShuLiangNum"
+                android:layout_width="wrap_content"
+                android:layout_height="wrap_content"
+                android:layout_centerVertical="true"
+                android:layout_marginLeft="@dimen/size2"
+                android:layout_toRightOf="@id/tvPaiHaoShuLiang"
+                android:text=""
+                android:textColor="@color/colorMyGray"
+                android:textSize="@dimen/txtSize12" />
+
+            <TextView
+                android:id="@+id/tvQiShiHao"
+                android:layout_width="wrap_content"
+                android:layout_height="wrap_content"
+                android:layout_centerVertical="true"
+                android:layout_marginLeft="@dimen/size4"
+                android:layout_toRightOf="@id/tvPaiHaoShuLiangNum"
+                android:text=""
+                android:textColor="@color/home_grideItemColor"
+                android:textSize="@dimen/txtSize12" />
+
+
+        </RelativeLayout>
+
+
+        <TextView
+            android:id="@+id/textView_time3"
+            android:layout_width="wrap_content"
+            android:layout_height="wrap_content"
+            android:layout_alignLeft="@+id/textView_time2"
+            android:layout_alignStart="@+id/textView_time2"
+            android:layout_below="@+id/textView_time2"
+            android:layout_marginTop="@dimen/size35"
+            android:text="--    --"
+            android:textColor="@color/hushenTab_titleColor"
+            android:textSize="@dimen/size12" />
+
+        <TextView
+            android:id="@+id/textView21"
+            android:layout_width="@dimen/size1"
+            android:layout_height="@dimen/size22"
+            android:layout_alignLeft="@+id/textView18"
+            android:layout_alignStart="@+id/textView18"
+            android:layout_below="@+id/textView_time2"
+            android:layout_marginTop="@dimen/size5"
+            android:background="@color/lineColor"
+            android:textAppearance="?android:attr/textAppearanceSmall" />
+
+        <ImageView
+            android:id="@+id/imageView3"
+            android:layout_width="@dimen/size15"
+            android:layout_height="@dimen/size15"
+            android:layout_alignLeft="@+id/imageView2"
+            android:layout_alignStart="@+id/imageView2"
+            android:layout_alignTop="@+id/textView_time3"
+            android:src="@mipmap/zhongbiao" />
+
+        <TextView
+            android:id="@+id/textView22"
+            android:layout_width="@dimen/size260"
+            android:layout_height="@dimen/size30"
+            android:layout_alignLeft="@+id/textView19"
+            android:layout_alignStart="@+id/textView19"
+            android:layout_below="@+id/textView21"
+            android:background="@drawable/xingushengou"
+            android:gravity="center_vertical"
+            android:text="    中签"
+            android:textAppearance="?android:attr/textAppearanceSmall"
+            android:textColor="@color/hushenTab_titleColor"
+            android:textSize="@dimen/txtSize14" />
+
+
+        <RelativeLayout
+            android:layout_width="wrap_content"
+            android:layout_height="wrap_content"
+            android:layout_alignLeft="@+id/textView19"
+            android:layout_alignStart="@+id/textView19"
+            android:layout_alignTop="@+id/imageView3"
+            android:layout_marginLeft="@dimen/size50">
+
+            <TextView
+                android:id="@+id/tvZhongQian"
+                android:layout_width="wrap_content"
+                android:layout_height="wrap_content"
+                android:layout_centerVertical="true"
+                android:text="中签数量"
+                android:textColor="@color/colorMyGray"
+                android:textSize="@dimen/txtSize12" />
+
+            <TextView
+                android:id="@+id/tvZhongQianLv"
+                android:layout_width="wrap_content"
+                android:layout_height="wrap_content"
+                android:layout_centerVertical="true"
+                android:layout_marginLeft="@dimen/size5"
+                android:layout_toRightOf="@id/tvZhongQian"
+                android:text=""
+                android:textColor="@color/colorMyGray"
+                android:textSize="@dimen/txtSize10" />
+
+        </RelativeLayout>
+
+
+        <TextView
+            android:id="@+id/textView_time4"
+            android:layout_width="wrap_content"
+            android:layout_height="wrap_content"
+            android:layout_alignLeft="@+id/textView_time3"
+            android:layout_alignStart="@+id/textView_time3"
+            android:layout_below="@+id/textView_time3"
+            android:layout_marginTop="@dimen/size35"
+            android:text="--    --"
+            android:textAppearance="?android:attr/textAppearanceSmall"
+            android:textColor="@color/hushenTab_titleColor"
+            android:textSize="@dimen/size12" />
+
+        <TextView
+            android:id="@+id/textView31"
+            android:layout_width="@dimen/size1"
+            android:layout_height="@dimen/size22"
+            android:layout_alignLeft="@+id/textView21"
+            android:layout_alignStart="@+id/textView21"
+            android:layout_below="@+id/textView_time3"
+            android:layout_marginTop="@dimen/size5"
+            android:background="@color/lineColor"
+            android:textAppearance="?android:attr/textAppearanceSmall" />
+
+        <ImageView
+            android:id="@+id/imageView4"
+            android:layout_width="@dimen/size15"
+            android:layout_height="@dimen/size15"
+            android:layout_alignLeft="@+id/imageView3"
+            android:layout_alignStart="@+id/imageView3"
+            android:layout_alignTop="@+id/textView_time4"
+            android:src="@mipmap/zhongbiao" />
+
+        <TextView
+            android:id="@+id/textView_time1"
+            android:layout_width="wrap_content"
+            android:layout_height="wrap_content"
+            android:layout_alignBottom="@+id/imageView"
+            android:layout_alignParentLeft="true"
+            android:layout_alignParentStart="true"
+            android:layout_marginLeft="@dimen/size20"
+            android:layout_marginStart="@dimen/size20"
+            android:text="--    --"
+            android:textColor="@color/hushenTab_titleColor"
+            android:textSize="@dimen/size12" />
+
+        <TextView
+            android:id="@+id/textView32"
+            android:layout_width="@dimen/size260"
+            android:layout_height="@dimen/size30"
+            android:background="@drawable/xingushengou"
+            android:gravity="center_vertical"
+            android:text="    待上市"
+            android:textSize="@dimen/txtSize14"
+            android:textColor="@color/hushenTab_titleColor"
+            android:layout_below="@+id/textView31"
+            android:layout_alignLeft="@+id/textView22"
+            android:layout_alignStart="@+id/textView22" />
+
+
+    </RelativeLayout>
+
+    <RelativeLayout
+        android:layout_marginTop="@dimen/size10"
+        android:id="@+id/anniu"
+        android:layout_width="match_parent"
+        android:layout_height="wrap_content"
+        android:layout_below="@+id/imageView4">
+
+        <ImageView
+            android:id="@+id/imageView5"
+            android:layout_width="@dimen/size35"
+            android:layout_height="@dimen/size15"
+            android:layout_alignParentEnd="true"
+            android:layout_alignParentRight="true"
+            android:layout_alignParentTop="true"
+            android:paddingLeft="@dimen/size10"
+            android:paddingRight="@dimen/size10"
+            android:layout_marginRight="@dimen/size13"
+            android:background="#f2f2f2"
+            android:src="@mipmap/xia" />
+
+        <TextView
+        android:layout_width="match_parent"
+        android:layout_height="5dp"
+        android:layout_below="@+id/imageView5"
+        android:background="#f2f2f2" />
+    </RelativeLayout>
+
+</LinearLayout>

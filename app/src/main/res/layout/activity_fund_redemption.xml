@@ -1,0 +1,214 @@
+<?xml version="1.0" encoding="utf-8"?>
+<LinearLayout xmlns:android="http://schemas.android.com/apk/res/android"
+    android:layout_width="match_parent"
+    android:layout_height="match_parent"
+    android:background="@color/bgColor"
+    android:orientation="vertical">
+
+    <RelativeLayout
+        android:layout_width="match_parent"
+        android:layout_height="@dimen/size25"
+        android:background="@color/blue"
+        android:clipToPadding="true"
+        android:fitsSystemWindows="true" />
+
+    <RelativeLayout
+        android:layout_width="match_parent"
+        android:layout_height="@dimen/pickerview_topbar_height"
+        android:background="@color/blue">
+
+        <TextView
+            android:id="@+id/tv_title"
+            android:layout_width="wrap_content"
+            android:layout_height="wrap_content"
+            android:layout_centerInParent="true"
+            android:text="基金赎回"
+            android:textColor="@color/white"
+            android:textSize="@dimen/pickerview_topbar_title_textsize" />
+
+        <ImageView
+            android:id="@+id/iv_back"
+            android:layout_width="wrap_content"
+            android:layout_height="match_parent"
+            android:layout_alignParentLeft="true"
+            android:layout_centerVertical="true"
+            android:paddingLeft="@dimen/size20"
+            android:paddingRight="@dimen/size20"
+            android:src="@mipmap/back_btn" />
+    </RelativeLayout>
+
+    <LinearLayout
+        android:layout_width="match_parent"
+        android:layout_height="@dimen/size50"
+        android:layout_marginTop="@dimen/size10"
+        android:background="@color/white"
+        android:orientation="horizontal">
+
+        <TextView
+            android:layout_width="wrap_content"
+            android:layout_height="wrap_content"
+            android:layout_gravity="center"
+            android:layout_marginLeft="@dimen/size20"
+            android:text="基金代码" />
+
+        <EditText
+            android:maxLength="6"
+            android:id="@+id/et_fund_code"
+            android:layout_width="0dp"
+            android:layout_height="wrap_content"
+            android:layout_gravity="center"
+            android:layout_marginLeft="@dimen/size20"
+            android:layout_marginRight="@dimen/size20"
+            android:layout_weight="1"
+            android:background="@android:color/transparent"
+            android:gravity="left"
+            android:hint="@string/shurujijindaima"
+            android:textColorHint="@color/text"
+            android:textSize="@dimen/txtSize14" />
+
+        <TextView
+            android:id="@+id/tv_choose_fund"
+            android:layout_width="wrap_content"
+            android:layout_height="wrap_content"
+            android:layout_gravity="center"
+            android:layout_marginRight="@dimen/size20"
+            android:drawablePadding="@dimen/size5"
+            android:drawableRight="@mipmap/icon_right"
+            android:text="持仓基金"
+            android:textColor="@color/text"
+            android:textSize="@dimen/txtSize14" />
+    </LinearLayout>
+
+    <ImageView
+        android:layout_width="match_parent"
+        android:layout_height="@dimen/size0.5"
+        android:background="@color/white"
+        android:paddingLeft="@dimen/size20"
+        android:src="@color/grey" />
+
+    <LinearLayout
+        android:layout_width="match_parent"
+        android:layout_height="@dimen/size50"
+        android:background="@color/white">
+
+        <TextView
+            android:layout_width="wrap_content"
+            android:layout_height="wrap_content"
+            android:layout_gravity="center"
+            android:layout_marginLeft="@dimen/size20"
+            android:text="赎回份额" />
+
+        <EditText
+            android:id="@+id/et_fund_sum"
+            android:layout_width="0dp"
+            android:layout_height="wrap_content"
+            android:layout_gravity="center"
+            android:layout_marginLeft="@dimen/size20"
+            android:layout_marginRight="@dimen/size20"
+            android:layout_weight="1"
+            android:background="@android:color/transparent"
+            android:gravity="left"
+            android:inputType="number"
+            android:hint="@string/shurushuhuifene"
+            android:textColorHint="@color/text"
+            android:textSize="@dimen/txtSize14" />
+    </LinearLayout>
+
+    <ImageView
+        android:layout_width="match_parent"
+        android:layout_height="@dimen/size0.5"
+        android:background="@color/white"
+        android:paddingLeft="@dimen/size20"
+        android:src="@color/grey" />
+    <LinearLayout
+        android:layout_width="match_parent"
+        android:layout_height="@dimen/size50"
+        android:background="@color/white">
+
+        <TextView
+            android:layout_width="0dp"
+            android:layout_weight="1"
+            android:layout_height="wrap_content"
+            android:layout_gravity="center"
+            android:layout_marginLeft="@dimen/size20"
+            android:text="巨额赎回处理方式" />
+
+        <TextView
+            android:id="@+id/tv_fund_redeem_way"
+            android:layout_width="wrap_content"
+            android:layout_height="wrap_content"
+            android:layout_gravity="center"
+            android:layout_marginLeft="@dimen/size20"
+            android:layout_marginRight="@dimen/size20"
+            android:drawableRight="@mipmap/icon_right"
+            android:drawablePadding="@dimen/size5"
+            android:background="@android:color/transparent"
+            android:gravity="right"
+            android:hint="@string/xuanzeshuhuichulifangshi"
+            android:textColorHint="@color/text"
+            android:textSize="@dimen/txtSize14" />
+    </LinearLayout>
+
+    <ImageView
+        android:layout_width="match_parent"
+        android:layout_height="@dimen/size0.5"
+        android:background="@color/white"
+        android:paddingLeft="@dimen/size20"
+        android:src="@color/grey" />
+
+    <LinearLayout
+        android:layout_width="match_parent"
+        android:layout_height="@dimen/size200"
+        android:background="@color/white"
+        android:orientation="vertical"
+        android:paddingBottom="@dimen/size15"
+        android:paddingLeft="@dimen/size20"
+        android:paddingTop="@dimen/size15">
+
+        <TextView
+            android:id="@+id/tv_fund_name"
+            android:layout_width="match_parent"
+            android:layout_height="0dp"
+            android:layout_weight="1"
+            android:gravity="center_vertical"
+            android:text="基金名称"
+            android:textColor="@color/text" />
+
+        <TextView
+            android:id="@+id/tv_fund_value"
+            android:layout_width="wrap_content"
+            android:layout_height="0dp"
+            android:layout_weight="1"
+            android:gravity="center_vertical"
+            android:text="基金净值"
+            android:textColor="@color/text" />
+
+        <TextView
+            android:id="@+id/tv_redeem_sum"
+            android:layout_width="wrap_content"
+            android:layout_height="0dp"
+            android:layout_weight="1"
+            android:gravity="center_vertical"
+            android:text="可赎份额"
+            android:textColor="@color/text" />
+
+        <TextView
+            android:id="@+id/tv_redeem_min_sum"
+            android:layout_width="wrap_content"
+            android:layout_height="0dp"
+            android:layout_weight="1"
+            android:gravity="center_vertical"
+            android:text="最低赎回份额"
+            android:textColor="@color/text" />
+    </LinearLayout>
+
+    <Button
+        android:id="@+id/bt_true"
+        android:layout_width="@dimen/size300"
+        android:layout_height="wrap_content"
+        android:layout_marginTop="@dimen/size50"
+        android:layout_gravity="center_horizontal"
+        android:background="@drawable/button_login_unchecked"
+        android:text="确定"
+        android:textColor="@color/white"/>
+</LinearLayout>

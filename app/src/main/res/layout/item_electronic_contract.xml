@@ -1,0 +1,52 @@
+<?xml version="1.0" encoding="utf-8"?>
+<RelativeLayout xmlns:android="http://schemas.android.com/apk/res/android"
+    android:layout_width="match_parent"
+    android:layout_height="match_parent">
+
+    <RelativeLayout
+        android:id="@+id/rlProductContract"
+        android:layout_width="match_parent"
+        android:layout_height="@dimen/size85"
+        android:layout_marginTop="@dimen/size10"
+        android:layout_marginLeft="@dimen/size21"
+        android:layout_marginRight="@dimen/size21"
+        android:background="@drawable/otc_open_protocol">
+
+        <TextView
+            android:id="@+id/tvProductContractName"
+            android:layout_width="wrap_content"
+            android:layout_height="wrap_content"
+            android:text="--"
+            android:textColor="@color/black"
+            android:textSize="15sp"
+            android:textStyle="bold"
+            android:layout_marginLeft="@dimen/size20"
+            android:layout_marginTop="@dimen/size21"/>
+
+        <TextView
+            android:id="@+id/tvProductContractCode"
+            android:layout_width="wrap_content"
+            android:layout_height="wrap_content"
+            android:text="--"
+            android:textSize="12sp"
+            android:textColor="@color/text"
+            android:layout_alignParentBottom="true"
+            android:layout_marginBottom="@dimen/size21"
+            android:layout_marginLeft="@dimen/size20"/>
+
+        <TextView
+            android:id="@+id/tvDianJi"
+            android:layout_width="wrap_content"
+            android:layout_height="wrap_content"
+            android:text="点击签约"
+            android:textSize="15sp"
+            android:textColor="@color/orange1"
+            android:layout_alignParentRight="true"
+            android:layout_alignParentBottom="true"
+            android:clickable="true"
+            android:layout_marginBottom="@dimen/size21"
+            android:layout_marginRight="@dimen/size20"/>
+
+    </RelativeLayout>
+
+</RelativeLayout>

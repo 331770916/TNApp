@@ -1,0 +1,177 @@
+<?xml version="1.0" encoding="utf-8"?>
+<LinearLayout xmlns:android="http://schemas.android.com/apk/res/android"
+    android:layout_width="match_parent"
+    android:layout_height="match_parent"
+    android:background="@color/bgColor"
+    android:orientation="vertical">
+
+    <RelativeLayout
+        android:id="@+id/AGRelativeLayout"
+        android:layout_width="match_parent"
+        android:layout_height="@dimen/size25"
+        android:background="@color/blue"
+        android:clipToPadding="true"
+        android:fitsSystemWindows="true" />
+
+    <RelativeLayout
+        android:id="@+id/AGRelativeLayout1"
+        android:layout_width="match_parent"
+        android:layout_height="@dimen/pickerview_topbar_height"
+        android:layout_below="@+id/AGRelativeLayout"
+        android:background="@color/blue">
+
+        <ImageView
+            android:id="@+id/productBuyBack"
+            android:layout_width="wrap_content"
+            android:layout_height="match_parent"
+            android:layout_alignParentLeft="true"
+            android:padding="@dimen/size10"
+            android:src="@mipmap/back_btn" />
+
+        <TextView
+            android:id="@+id/publish_title"
+            android:layout_width="wrap_content"
+            android:layout_height="wrap_content"
+            android:layout_centerInParent="true"
+            android:text="产品购买"
+            android:textColor="@color/white"
+            android:textSize="@dimen/pickerview_topbar_title_textsize" />
+    </RelativeLayout>
+
+    <RelativeLayout
+        android:layout_width="match_parent"
+        android:layout_height="@dimen/size120"
+        android:background="@color/blue">
+
+        <TextView
+            android:id="@+id/tv_stock_name"
+            android:layout_width="match_parent"
+            android:layout_height="wrap_content"
+            android:paddingTop="@dimen/size10"
+            android:paddingLeft="@dimen/size10"
+            android:textColor="@color/white"
+            android:textSize="@dimen/txtSize16"
+            android:textStyle="bold" />
+
+        <TextView
+            android:id="@+id/tv_stock_code"
+            android:layout_width="wrap_content"
+            android:layout_height="wrap_content"
+            android:layout_below="@id/tv_stock_name"
+            android:paddingLeft="@dimen/size10"
+            android:textColor="@color/white"
+            android:textSize="@dimen/txtSize14"
+            android:textStyle="bold" />
+
+        <TextView
+            android:id="@+id/tv_stock_info1"
+            android:layout_width="wrap_content"
+            android:layout_height="wrap_content"
+            android:layout_alignParentBottom="true"
+            android:layout_alignParentLeft="true"
+            android:padding="@dimen/size10"
+            android:textColor="@color/white"
+            android:textSize="@dimen/txtSize14" />
+
+        <TextView
+            android:id="@+id/tv_stock_info2"
+            android:layout_width="wrap_content"
+            android:layout_height="wrap_content"
+            android:layout_alignParentBottom="true"
+            android:layout_alignParentRight="true"
+            android:padding="@dimen/size10"
+            android:textColor="@color/white"
+            android:textSize="@dimen/txtSize14" />
+
+    </RelativeLayout>
+
+    <LinearLayout
+        android:layout_width="match_parent"
+        android:layout_height="@dimen/size60"
+        android:layout_marginTop="@dimen/size10"
+        android:background="@color/white"
+        android:orientation="horizontal"
+        android:padding="@dimen/size10">
+
+        <TextView
+            android:layout_width="0dp"
+            android:layout_height="wrap_content"
+            android:layout_gravity="center_vertical"
+            android:layout_weight="1"
+            android:gravity="left"
+            android:padding="@dimen/size10"
+            android:text="购买金额"
+            android:textColor="@color/texts"
+            android:textSize="@dimen/txtSize14" />
+
+        <EditText
+            android:id="@+id/et_stock_price"
+            android:layout_width="0dp"
+            android:layout_height="wrap_content"
+            android:layout_gravity="center_vertical"
+            android:layout_weight="2"
+            android:background="@color/white"
+            android:hint="请输入购买金额"
+            android:inputType="numberDecimal"
+            android:padding="@dimen/size10"
+            android:textColorHint="@color/texts"
+            android:textSize="@dimen/txtSize14" />
+    </LinearLayout>
+
+    <View
+        android:layout_width="match_parent"
+        android:layout_height="@dimen/size0.5"
+        android:layout_marginLeft="@dimen/size10"
+        android:layout_marginRight="@dimen/size10"
+        android:background="@color/lineColor" />
+
+    <LinearLayout
+        android:layout_width="match_parent"
+        android:layout_height="@dimen/size50"
+        android:background="@color/white"
+        android:orientation="horizontal"
+        android:padding="@dimen/size10">
+
+        <TextView
+            android:id="@+id/tv_transaction_account"
+            android:layout_width="0dp"
+            android:layout_height="wrap_content"
+            android:layout_gravity="center_vertical"
+            android:layout_weight="1"
+            android:gravity="left"
+            android:paddingLeft="@dimen/size10"
+            android:text="保证金账户："
+            android:textColor="@color/texts"
+            android:textSize="@dimen/txtSize14" />
+
+        <TextView
+            android:id="@+id/tv_transaction_price"
+            android:layout_width="0dp"
+            android:layout_height="wrap_content"
+            android:layout_gravity="center_vertical"
+            android:layout_weight="1"
+            android:background="@color/white"
+            android:text="可用：--"
+            android:textColor="@color/textss" />
+    </LinearLayout>
+
+    <View
+        android:layout_width="match_parent"
+        android:layout_height="@dimen/size0.5"
+        android:background="@color/lineColor" />
+
+    <TextView
+        android:id="@+id/tv_sure"
+        android:layout_width="match_parent"
+        android:layout_height="wrap_content"
+        android:layout_marginLeft="@dimen/size20"
+        android:layout_marginRight="@dimen/size20"
+        android:layout_marginTop="@dimen/size50"
+        android:background="@drawable/shape_product_buy_btnbg"
+        android:gravity="center"
+        android:padding="@dimen/size10"
+        android:text="购\u3000买"
+        android:textColor="@color/white"
+        android:textSize="@dimen/txtSize14" />
+
+</LinearLayout>

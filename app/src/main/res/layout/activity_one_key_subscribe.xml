@@ -1,0 +1,308 @@
+<?xml version="1.0" encoding="utf-8"?>
+<RelativeLayout xmlns:android="http://schemas.android.com/apk/res/android"
+    xmlns:tools="http://schemas.android.com/tools"
+    android:id="@+id/one_key_subscribe"
+    android:layout_width="match_parent"
+    android:layout_height="match_parent"
+    android:background="@color/white"
+    android:orientation="vertical"
+    >
+
+    <RelativeLayout
+        android:id="@+id/rlOneKeyXiaChen"
+        android:layout_width="match_parent"
+        android:layout_height="@dimen/size25"
+        android:background="@color/blue"
+        android:clipToPadding="true"
+        android:fitsSystemWindows="true" />
+
+    <!-- 头布局 -->
+
+    <RelativeLayout
+        android:id="@+id/rlOneKeyTitle"
+        android:layout_width="match_parent"
+        android:layout_height="@dimen/pickerview_topbar_height"
+        android:layout_below="@+id/rlOneKeyXiaChen"
+        android:background="@color/blue">
+
+        <ImageView
+            android:id="@+id/activityOneKey_back"
+            android:layout_width="wrap_content"
+            android:layout_height="match_parent"
+            android:layout_alignParentLeft="true"
+            android:padding="@dimen/size10"
+            android:src="@mipmap/back_btn" />
+
+        <TextView
+            android:layout_width="wrap_content"
+            android:layout_height="wrap_content"
+            android:layout_centerInParent="true"
+            android:text="@string/oneKeyShenGog"
+            android:textColor="@color/white"
+            android:textSize="@dimen/pickerview_topbar_title_textsize" />
+    </RelativeLayout>
+
+    <!--头布局下面的蓝色部分-->
+    <LinearLayout
+        android:id="@+id/llLanSe"
+        android:layout_width="match_parent"
+        android:layout_height="@dimen/size130"
+        android:layout_below="@id/rlOneKeyTitle"
+        android:background="@color/blue"
+        android:orientation="vertical">
+
+        <LinearLayout
+            android:id="@+id/tvQueryDetailsLayout"
+            android:layout_width="match_parent"
+            android:layout_height="0dp"
+            android:layout_weight="1"
+            >
+
+            <ImageView
+                android:id="@+id/imSubscribeLimit"
+                android:layout_width="wrap_content"
+                android:layout_height="wrap_content"
+                android:layout_marginLeft="@dimen/size20"
+                android:src="@mipmap/xingushengou" />
+
+            <TextView
+                android:id="@+id/tvSubscribeLimit"
+                android:layout_width="wrap_content"
+                android:layout_height="wrap_content"
+                android:layout_marginLeft="@dimen/size5"
+                android:text="@string/mySubscribeLimit"
+                android:textColor="@color/white"
+                android:textSize="@dimen/txtSize13" />
+
+            <TextView
+                android:id="@+id/rlLookUpDetails"
+                android:layout_width="wrap_content"
+                android:layout_height="wrap_content"
+                android:layout_weight="1"/>
+
+
+
+                <TextView
+
+                    android:layout_width="wrap_content"
+                    android:layout_height="wrap_content"
+                    android:layout_marginRight="@dimen/size10"
+                    android:text="@string/queryDetils"
+                    android:textColor="@color/white"
+                    android:textSize="@dimen/txtSize12" />
+            <ImageView
+                android:id="@+id/imQueryDetails"
+                android:layout_width="wrap_content"
+                android:layout_height="wrap_content"
+                android:layout_marginRight="@dimen/size12"
+                android:src="@mipmap/canlder_right" />
+
+        </LinearLayout>
+
+        <RelativeLayout
+            android:layout_width="match_parent"
+            android:layout_height="0dp"
+            android:layout_weight="3"
+            android:orientation="horizontal">
+
+            <!--分割线-->
+            <TextView
+                android:id="@+id/tvFenGeXian"
+                android:layout_width="@dimen/size1"
+                android:layout_height="@dimen/size35"
+                android:layout_centerInParent="true"
+                android:background="@color/white" />
+
+            <LinearLayout
+                android:layout_width="match_parent"
+                android:layout_height="match_parent"
+                android:layout_marginRight="@dimen/size0"
+                android:layout_toLeftOf="@id/tvFenGeXian"
+                android:gravity="center">
+
+                <LinearLayout
+                    android:layout_width="wrap_content"
+                    android:layout_height="wrap_content"
+                    android:gravity="center"
+                    android:orientation="vertical">
+
+                    <TextView
+                        android:id="@+id/tvHuA"
+                        android:layout_width="wrap_content"
+                        android:layout_height="wrap_content"
+                        android:text="沪A"
+                        android:textColor="@color/white"
+                        android:textSize="@dimen/txtSize13" />
+
+                    <TextView
+                        android:id="@+id/tvHuANum"
+                        android:layout_width="wrap_content"
+                        android:layout_height="wrap_content"
+                        android:text="0股"
+                        android:textColor="@color/white"
+                        android:textSize="@dimen/size20" />
+
+                </LinearLayout>
+
+            </LinearLayout>
+
+            <LinearLayout
+                android:layout_width="match_parent"
+                android:layout_height="match_parent"
+                android:layout_marginLeft="@dimen/size0"
+                android:layout_toRightOf="@id/tvFenGeXian"
+                android:gravity="center"
+                android:orientation="horizontal">
+
+                <LinearLayout
+                    android:layout_width="wrap_content"
+                    android:layout_height="wrap_content"
+                    android:gravity="center"
+                    android:orientation="vertical">
+
+                    <TextView
+                        android:id="@+id/tvShenA"
+                        android:layout_width="wrap_content"
+                        android:layout_height="wrap_content"
+                        android:text="深A"
+                        android:textColor="@color/white"
+                        android:textSize="@dimen/txtSize13" />
+
+                    <TextView
+                        android:id="@+id/tvShenANum"
+                        android:layout_width="wrap_content"
+                        android:layout_height="wrap_content"
+                        android:text="0股"
+                        android:textColor="@color/white"
+                        android:textSize="@dimen/size20" />
+
+                </LinearLayout>
+
+            </LinearLayout>
+
+        </RelativeLayout>
+
+    </LinearLayout>
+
+
+    <!-- 灰色分割线 -->
+    <View
+        android:id="@+id/tvHuiseFenGe"
+        android:layout_width="match_parent"
+        android:layout_height="@dimen/size10"
+        android:layout_below="@id/llLanSe"
+        android:background="@color/bgColor" />
+
+
+    <!-- listView的标题 -->
+    <RelativeLayout
+        android:id="@+id/rlListViewTitle"
+        android:layout_width="match_parent"
+        android:layout_height="@dimen/size30"
+        android:layout_below="@id/tvHuiseFenGe"
+        android:paddingRight="@dimen/size20">
+
+        <RelativeLayout
+            android:id="@+id/rlChoice"
+            android:layout_width="wrap_content"
+            android:layout_height="30dp">
+
+            <CheckBox
+                android:id="@+id/cbChoice"
+                android:layout_width="wrap_content"
+                android:layout_height="wrap_content"
+                android:layout_centerVertical="true"
+                android:layout_marginLeft="@dimen/size21"
+                android:button="@drawable/mybg"
+                android:checked="true" />
+        </RelativeLayout>
+
+        <LinearLayout
+            android:layout_width="match_parent"
+            android:layout_height="@dimen/size30"
+            android:layout_toRightOf="@id/rlChoice"
+            android:orientation="horizontal">
+
+            <TextView
+                android:id="@+id/tvTitleName"
+                android:layout_width="0dp"
+                android:layout_height="match_parent"
+                android:layout_weight="1"
+                android:gravity="center"
+                android:text="名称/代码"
+                android:textColor="@color/newStockTitle"
+                android:textSize="@dimen/txtSize12" />
+
+            <TextView
+                android:id="@+id/tvTitlePrice"
+                android:layout_width="0dp"
+                android:layout_height="match_parent"
+                android:layout_weight="1"
+                android:gravity="center|end"
+                android:text="申购价/申购上限"
+                android:textColor="@color/newStockTitle"
+                android:textSize="@dimen/txtSize12" />
+
+            <TextView
+                android:id="@+id/tvTitleNum"
+                android:layout_width="0dp"
+                android:layout_height="match_parent"
+                android:layout_weight="1"
+                android:gravity="center|end"
+                android:text="申购股数"
+                android:textColor="@color/newStockTitle"
+                android:textSize="@dimen/txtSize12" />
+        </LinearLayout>
+
+
+    </RelativeLayout>
+
+    <!-- 灰色分割线 -->
+    <View
+        android:id="@+id/tvHuiseFenGe2"
+        android:layout_width="match_parent"
+        android:layout_height="@dimen/size0.5"
+        android:layout_below="@id/rlListViewTitle"
+        android:background="@color/bgColor" />
+
+    <ListView
+        android:id="@+id/lvBubscribeStockList"
+        android:layout_width="wrap_content"
+        android:layout_height="195dp"
+        android:layout_below="@id/tvHuiseFenGe2">
+
+    </ListView>
+
+    <RelativeLayout
+        android:layout_width="match_parent"
+        android:layout_height="wrap_content"
+        android:layout_alignParentBottom="true"
+        android:layout_below="@id/lvBubscribeStockList">
+
+        <TextView
+            android:visibility="gone"
+            android:id="@+id/tvOneKeySubscribe"
+            android:layout_width="@dimen/size330"
+            android:layout_height="@dimen/size40"
+            android:layout_alignParentBottom="true"
+            android:layout_centerHorizontal="true"
+            android:layout_marginBottom="@dimen/size120"
+            android:background="@drawable/lonin"
+            android:clickable="true"
+            android:gravity="center"
+            android:text="一键申购"
+            android:textColor="@color/white"
+            android:textSize="15sp" />
+    </RelativeLayout>
+
+
+    <ImageView
+        android:id="@+id/ivOneKeyKong"
+        android:layout_width="wrap_content"
+        android:layout_height="wrap_content"
+        android:layout_below="@id/rlListViewTitle"
+        android:layout_centerHorizontal="true"
+        android:layout_marginTop="@dimen/size80"
+        android:src="@mipmap/kong"
+        android:visibility="gone" />
+</RelativeLayout>

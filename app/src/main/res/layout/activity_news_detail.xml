@@ -1,0 +1,503 @@
+<?xml version="1.0" encoding="utf-8"?>
+<RelativeLayout xmlns:android="http://schemas.android.com/apk/res/android"
+    xmlns:app="http://schemas.android.com/apk/res-auto"
+    xmlns:tools="http://schemas.android.com/tools"
+    android:layout_width="match_parent"
+    android:layout_height="match_parent"
+    android:background="@color/white"
+    tools:context="com.tpyzq.mobile.pangu.activity.home.information.NewsDetailActivity">
+
+    <RelativeLayout
+        android:id="@+id/rlNewDetailXiaChen"
+        android:layout_width="match_parent"
+        android:layout_height="@dimen/size25"
+        android:background="@color/blue"
+        android:clipToPadding="true"
+        android:fitsSystemWindows="true" />
+
+    <!-- 头布局 -->
+    <RelativeLayout
+        android:id="@+id/rlNewsDetailTitle"
+        android:layout_width="match_parent"
+        android:layout_height="@dimen/pickerview_topbar_height"
+        android:layout_below="@+id/rlNewDetailXiaChen"
+        android:background="@color/blue">
+
+        <ImageView
+            android:id="@+id/ivNewsDetail_back"
+            android:layout_width="wrap_content"
+            android:layout_height="match_parent"
+            android:layout_alignParentLeft="true"
+            android:padding="@dimen/size10"
+            android:src="@mipmap/back_btn" />
+
+        <TextView
+            android:layout_width="wrap_content"
+            android:layout_height="wrap_content"
+            android:layout_centerInParent="true"
+            android:text="新闻详情"
+            android:textColor="@color/white"
+            android:textSize="@dimen/pickerview_topbar_title_textsize" />
+
+
+        <ImageView
+            android:id="@+id/ivDetailFenXiang"
+            android:layout_width="wrap_content"
+            android:layout_height="wrap_content"
+            android:layout_alignParentRight="true"
+            android:layout_centerVertical="true"
+            android:padding="@dimen/size10"
+            android:src="@mipmap/fushifenxiang" />
+
+    </RelativeLayout>
+
+    <!-- 重新加载的图片 -->
+    <LinearLayout
+        android:id="@+id/llNewDetailJiaZai"
+        android:layout_width="wrap_content"
+        android:layout_height="wrap_content"
+        android:layout_centerInParent="true"
+        android:gravity="center"
+        android:orientation="vertical"
+        android:visibility="gone">
+
+        <ImageView
+            android:layout_width="wrap_content"
+            android:layout_height="wrap_content"
+            android:layout_centerInParent="true"
+            android:src="@mipmap/chongxinjiazai" />
+
+        <TextView
+            android:layout_width="wrap_content"
+            android:layout_height="@dimen/size5" />
+
+        <TextView
+            android:layout_width="wrap_content"
+            android:layout_height="wrap_content"
+
+            android:text="什么也没有，点击重新加载~"
+            android:textColor="@color/text" />
+    </LinearLayout>
+
+    <!--com.handmark.pulltorefresh.library.PullToRefreshScrollView-->
+    <com.handmark.pulltorefresh.library.PullToRefreshScrollView
+        android:id="@+id/svNewsDetail"
+        android:layout_width="match_parent"
+        android:layout_height="match_parent"
+        android:layout_below="@id/rlNewsDetailTitle"
+        app:ptrAnimationStyle="flip"
+        app:ptrMode="both"
+        android:scrollbars="none">
+
+        <LinearLayout
+            android:layout_width="match_parent"
+            android:layout_height="match_parent"
+            android:orientation="vertical">
+
+            <RelativeLayout
+                android:layout_width="match_parent"
+                android:layout_height="wrap_content">
+
+                <TextView
+                    android:id="@+id/tvNewsTitle"
+                    android:layout_width="wrap_content"
+                    android:layout_height="wrap_content"
+                    android:layout_marginLeft="@dimen/size20"
+                    android:layout_marginRight="@dimen/size20"
+                    android:layout_marginTop="@dimen/size22"
+                    android:lineSpacingExtra="@dimen/size7"
+                    android:text=""
+                    android:textColor="@color/textss"
+                    android:textSize="18sp"
+                    android:textStyle="bold" />
+
+                <RelativeLayout
+                    android:layout_width="match_parent"
+                    android:layout_height="wrap_content"
+                    android:layout_below="@id/tvNewsTitle"
+                    android:layout_marginBottom="@dimen/size20"
+                    android:layout_marginTop="@dimen/size10">
+
+                    <!--<TextView
+                        android:id="@+id/tvLaiYuan"
+                        android:layout_width="wrap_content"
+                        android:layout_height="wrap_content"
+                        android:layout_marginLeft="@dimen/size20"
+                        android:text="来源："
+                        android:textSize="13sp"
+                        android:textColor="@color/text"/>
+
+                    <TextView
+                        android:id="@+id/tvLaiYuanName"
+                        android:layout_width="wrap_content"
+                        android:layout_height="wrap_content"
+                        android:layout_toRightOf="@id/tvLaiYuan"
+                        android:layout_marginLeft="@dimen/size3"
+                        android:text=""
+                        android:textSize="13sp"
+                        android:textColor="@color/text"/>-->
+
+                    <TextView
+                        android:id="@+id/tvLaiYuanDate"
+                        android:layout_width="wrap_content"
+                        android:layout_height="wrap_content"
+
+                        android:layout_marginLeft="@dimen/size20"
+                        android:text=""
+                        android:textColor="@color/text"
+                        android:textSize="13sp" />
+
+                </RelativeLayout>
+
+            </RelativeLayout>
+
+            <TextView
+                android:layout_width="match_parent"
+                android:layout_height="@dimen/size0.3"
+                android:layout_marginLeft="@dimen/size20"
+                android:background="@color/text" />
+
+            <WebView
+                android:id="@+id/wvNewDetal"
+                android:layout_width="match_parent"
+                android:layout_height="wrap_content"/>
+
+            <TextView
+                android:id="@+id/tvChaKanQuanBu"
+                android:layout_width="wrap_content"
+                android:layout_height="wrap_content"
+                android:layout_marginBottom="@dimen/size13"
+                android:layout_marginLeft="@dimen/size13"
+                android:layout_marginRight="@dimen/size13"
+                android:padding="@dimen/size2"
+                android:text="查看全文"
+                android:textColor="@color/blue"
+                android:textSize="14sp" />
+
+            <RelativeLayout
+                android:layout_width="match_parent"
+                android:layout_height="@dimen/size30"
+                android:background="@color/bgColor">
+
+                <TextView
+                    android:layout_width="wrap_content"
+                    android:layout_height="wrap_content"
+                    android:layout_centerVertical="true"
+                    android:layout_marginLeft="@dimen/size20"
+                    android:text="资讯分析"
+                    android:textColor="@color/textss"
+                    android:textSize="14sp" />
+
+            </RelativeLayout>
+
+            <LinearLayout
+                android:layout_width="match_parent"
+                android:layout_height="@dimen/size50"
+                android:layout_marginBottom="@dimen/size10"
+                android:gravity="center"
+                android:orientation="horizontal">
+
+                <TextView
+                    android:id="@+id/tvZuo"
+                    android:layout_width="match_parent"
+                    android:layout_height="@dimen/size0.3"
+                    android:layout_weight="1"
+                    android:background="@color/text" />
+
+                <TextView
+                    android:id="@+id/tvXGXW"
+                    android:layout_width="match_parent"
+                    android:layout_height="wrap_content"
+                    android:layout_weight="1"
+                    android:gravity="center"
+                    android:text="相关新闻标签"
+                    android:textColor="@color/text"
+                    android:textSize="15sp" />
+
+                <TextView
+                    android:id="@+id/tvYou"
+                    android:layout_width="match_parent"
+                    android:layout_height="0.3dp"
+                    android:layout_weight="1"
+                    android:background="@color/text" />
+
+            </LinearLayout>
+
+
+            <com.tpyzq.mobile.pangu.view.FlowLayout
+                android:id="@+id/FlowLayout"
+                android:layout_width="match_parent"
+                android:layout_height="wrap_content">
+
+
+            </com.tpyzq.mobile.pangu.view.FlowLayout>
+
+            <!-- 灰色分割线 -->
+            <TextView
+                android:layout_width="match_parent"
+                android:layout_height="@dimen/size10"
+                android:background="@color/bgColor" />
+
+            <!-- 相关行业 -->
+            <LinearLayout
+                android:visibility="gone"
+                android:id="@+id/llXiangGuanTitle"
+                android:layout_width="match_parent"
+                android:layout_height="@dimen/size50"
+                android:layout_marginBottom="@dimen/size10"
+                android:gravity="center"
+                android:orientation="horizontal">
+
+                <TextView
+                    android:layout_width="match_parent"
+                    android:layout_height="@dimen/size0.3"
+                    android:layout_weight="1"
+                    android:background="@color/text" />
+
+                <TextView
+                    android:layout_width="match_parent"
+                    android:layout_height="wrap_content"
+                    android:layout_weight="1"
+                    android:gravity="center"
+                    android:text="新闻相关行业"
+                    android:textColor="@color/text"
+                    android:textSize="15sp" />
+
+                <TextView
+                    android:layout_width="match_parent"
+                    android:layout_height="0.3dp"
+                    android:layout_weight="1"
+                    android:background="@color/text" />
+
+            </LinearLayout>
+
+            <!-- 相关行业的 三个模块  -->
+            <FrameLayout
+                android:visibility="gone"
+                android:id = "@+id/llRelevantIndustry"
+                android:layout_width="match_parent"
+                android:layout_height="@dimen/size80"
+                android:layout_marginBottom="@dimen/size20">
+
+                <RelativeLayout
+                    android:layout_width="match_parent"
+                    android:layout_height="match_parent"
+                    android:background="@mipmap/zx_huisebeijijng"
+                    android:layout_marginBottom="@dimen/size15">
+                    <LinearLayout
+                        android:layout_width="@dimen/size90"
+                        android:layout_height="match_parent"
+                        android:layout_alignParentLeft="true"
+                        android:layout_marginLeft="@dimen/size20"
+                        android:layout_marginRight="@dimen/size40"
+                        android:orientation="vertical">
+
+                        <TextView
+                            android:id="@+id/tvShangYou"
+                            android:layout_width="match_parent"
+                            android:layout_height="0dp"
+                            android:layout_weight="2"
+                            android:ellipsize="end"
+                            android:maxLines="2"
+                            android:gravity="center"
+                            android:layout_gravity="center"
+                            android:text=""
+                            android:textColor="@color/hushenTab_titleColor"
+                            android:textSize="13sp" />
+
+                        <TextView
+                            android:layout_width="wrap_content"
+                            android:layout_height="0dp"
+                            android:layout_weight="1"
+                            android:text="上游行业"
+                            android:layout_gravity="center"
+                            android:gravity="center"
+                            android:textColor="@color/home_grideItemColor"
+                            android:textSize="12sp"
+                            android:textStyle="bold" />
+                    </LinearLayout>
+
+
+                    <LinearLayout
+                        android:layout_width="@dimen/size100"
+                        android:layout_height="match_parent"
+                        android:layout_marginRight="20dp"
+                        android:gravity="center"
+                        android:orientation="vertical"
+                        android:layout_alignParentTop="true"
+                        android:layout_alignParentRight="true"
+                        android:layout_alignParentEnd="true"
+                        >
+                        <TextView
+                            android:id="@+id/tvXiaYou"
+                            android:layout_width="wrap_content"
+                            android:layout_height="0dp"
+                            android:layout_weight= "2"
+                            android:ellipsize="end"
+                            android:maxLines="2"
+                            android:text=""
+                            android:layout_gravity="center"
+                            android:gravity="center"
+                            android:textColor="@color/hushenTab_titleColor"
+                            android:textSize="13sp" />
+
+                        <TextView
+                            android:layout_width="wrap_content"
+                            android:layout_height="0dp"
+                            android:layout_weight= "1"
+                            android:text="下游行业"
+                            android:textColor="@color/home_grideItemColor"
+                            android:textSize="12sp"
+                            android:textStyle="bold"
+                            android:gravity="center"
+                            android:layout_gravity="center"
+                            android:id="@+id/textView13" />
+
+                    </LinearLayout>
+                </RelativeLayout>
+
+                <LinearLayout
+                    android:layout_width="@dimen/size150"
+                    android:layout_height="wrap_content"
+                    android:layout_gravity="center_horizontal"
+                    android:layout_marginTop="@dimen/size5"
+                    android:background="@mipmap/zx_lansebeijing"
+                    android:orientation="vertical">
+
+                    <TextView
+                        android:id="@+id/tvZhongJian"
+                        android:layout_width="wrap_content"
+                        android:layout_height="0dp"
+                        android:layout_gravity="center"
+                        android:layout_marginLeft="@dimen/size10"
+                        android:layout_marginRight="@dimen/size10"
+                        android:layout_weight="2"
+                        android:ellipsize="end"
+                        android:gravity="center"
+                        android:maxLines="2"
+                        android:text=""
+                        android:textColor="@color/white"
+                        android:textSize="@dimen/txtSize13"
+                        android:textStyle="bold" />
+
+                    <TextView
+                        android:layout_width="wrap_content"
+                        android:layout_height="0dp"
+                        android:layout_gravity="center"
+                        android:layout_marginLeft="@dimen/size10"
+                        android:layout_marginRight="@dimen/size10"
+                        android:layout_weight="1"
+                        android:ellipsize="end"
+                        android:gravity="center"
+                        android:text="当前行业"
+                        android:textColor="@color/bgColor"
+                        android:textSize="12sp"
+                        android:textStyle="bold"
+                        android:id="@+id/textView24" />
+                </LinearLayout>
+            </FrameLayout>
+            <!-- 灰色分割线 -->
+            <TextView
+                android:id="@+id/tvListViewFenGe"
+                android:layout_width="match_parent"
+                android:layout_height="@dimen/size10"
+                android:background="@color/bgColor" />
+
+            <!-- ListView 标题 -->
+            <LinearLayout
+                android:id="@+id/llListViewTitle"
+                android:layout_width="match_parent"
+                android:layout_height="@dimen/size30"
+                android:gravity="center"
+                android:orientation="horizontal">
+
+                <TextView
+                    android:layout_width="0dp"
+                    android:layout_height="wrap_content"
+                    android:layout_weight="1"
+                    android:paddingLeft = "@dimen/size20"
+                    android:text="相关股票"
+                    android:textColor="@color/text"
+                    android:textSize="13sp" />
+
+                <TextView
+                    android:layout_width="0dp"
+                    android:layout_height="wrap_content"
+                    android:layout_weight="1"
+                    android:gravity="center"
+                    android:text="代码"
+                    android:textColor="@color/text"
+                    android:textSize="13sp" />
+
+                <TextView
+                    android:layout_width="0dp"
+                    android:layout_height="wrap_content"
+                    android:layout_weight="1"
+                    android:gravity="center"
+                    android:text="最新价"
+                    android:textColor="@color/text"
+                    android:textSize="13sp" />
+
+                <TextView
+                    android:layout_width="0dp"
+                    android:layout_height="wrap_content"
+                    android:layout_weight="1"
+                    android:paddingRight = "@dimen/size20"
+                    android:gravity="right"
+                    android:text="涨跌幅"
+                    android:textSize="13sp" />
+
+            </LinearLayout>
+
+            <TextView
+                android:layout_width="match_parent"
+                android:layout_height="0.5dp"
+                android:background="@color/lineColor" />
+
+            <!-- ListView -->
+            <com.tpyzq.mobile.pangu.view.SimulateListView
+                android:id="@+id/tvDetailListView"
+                android:layout_width="match_parent"
+                android:orientation="vertical"
+                android:layout_height="wrap_content"/>
+
+            <!-- 一键自选 -->
+            <LinearLayout
+                android:id="@+id/llDetailYiJianZiXuan"
+                android:layout_width="match_parent"
+                android:layout_height="@dimen/size67"
+                android:gravity="center"
+                android:orientation="horizontal">
+
+                <ImageView
+                    android:layout_width="wrap_content"
+                    android:layout_height="wrap_content"
+                    android:src="@mipmap/yijiantianjia" />
+
+                <TextView
+                    android:layout_width="@dimen/size10"
+                    android:layout_height="wrap_content" />
+
+                <TextView
+                    android:id="@+id/tvOneKeyXuan"
+                    android:layout_width="wrap_content"
+                    android:layout_height="wrap_content"
+                    android:text="@string/yijianzixuan"
+                    android:textColor="@color/orange1"
+                    android:textSize="15sp" />
+
+            </LinearLayout>
+
+            <TextView
+                android:layout_width="match_parent"
+                android:layout_height="@dimen/size50"
+                android:text="@string/XW_text"
+                android:textColor="@color/texts"
+                android:gravity="center"
+                android:background = "@color/bgColor"
+                android:textSize="12sp" />
+        </LinearLayout>
+
+    </com.handmark.pulltorefresh.library.PullToRefreshScrollView>
+
+</RelativeLayout>

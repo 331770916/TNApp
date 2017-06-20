@@ -1,0 +1,104 @@
+<?xml version="1.0" encoding="utf-8"?>
+<RelativeLayout xmlns:android="http://schemas.android.com/apk/res/android"
+    android:background="@color/white"
+    android:layout_width="match_parent"
+    android:layout_height="match_parent">
+
+    <RadioGroup
+        android:id="@+id/moneyFundChartBottomLayout"
+        android:layout_alignParentBottom="true"
+        android:layout_width="match_parent"
+        android:layout_height="wrap_content"
+        android:checkedButton="@+id/moneyFundChartBtn1"
+        android:orientation="horizontal">
+
+        <RadioButton
+            android:id="@id/moneyFundChartBtn1"
+            android:layout_width="0dp"
+            android:layout_weight="1"
+            android:layout_height="wrap_content"
+            android:paddingLeft="@dimen/size10"
+            android:paddingRight="@dimen/size10"
+            android:paddingTop="@dimen/size5"
+            android:paddingBottom="@dimen/size5"
+            android:layout_margin="@dimen/size10"
+            android:button="@null"
+            android:text="一个月"
+            android:textSize="@dimen/txtSize12"
+            android:background="@drawable/selector_mistakefund"
+            android:textColor="@color/radio_remain_title"
+            android:gravity="center"/>
+
+        <RadioButton
+            android:id="@+id/moneyFundChartBtn2"
+            android:layout_width="0dp"
+            android:layout_weight="1"
+            android:layout_height="wrap_content"
+            android:paddingLeft="@dimen/size10"
+            android:paddingRight="@dimen/size10"
+            android:paddingTop="@dimen/size5"
+            android:paddingBottom="@dimen/size5"
+            android:button="@null"
+            android:layout_margin="@dimen/size10"
+            android:background="@drawable/selector_mistakefund"
+            android:text="一季度"
+            android:textSize="@dimen/txtSize12"
+            android:textColor="@color/radio_remain_title"
+            android:gravity="center"/>
+        <RadioButton
+            android:id="@+id/moneyFundChartBtn3"
+            android:layout_width="0dp"
+            android:layout_weight="1"
+            android:button="@null"
+            android:layout_height="wrap_content"
+            android:background="@drawable/selector_mistakefund"
+            android:paddingLeft="@dimen/size10"
+            android:paddingRight="@dimen/size10"
+            android:paddingTop="@dimen/size5"
+            android:paddingBottom="@dimen/size5"
+            android:layout_margin="@dimen/size10"
+            android:text="半年"
+            android:textSize="@dimen/txtSize12"
+            android:textColor="@color/radio_remain_title"
+            android:gravity="center"/>
+
+        <RadioButton
+            android:id="@+id/moneyFundChartBtn4"
+            android:layout_width="0dp"
+            android:layout_weight="1"
+            android:button="@null"
+            android:layout_height="wrap_content"
+            android:background="@drawable/selector_mistakefund"
+            android:paddingLeft="@dimen/size10"
+            android:paddingRight="@dimen/size10"
+            android:paddingTop="@dimen/size5"
+            android:paddingBottom="@dimen/size5"
+            android:layout_margin="@dimen/size10"
+            android:text="一年"
+            android:textSize="@dimen/txtSize12"
+            android:textColor="@color/radio_remain_title"
+            android:gravity="center"/>
+    </RadioGroup>
+
+    <FrameLayout
+        android:layout_width="match_parent"
+        android:layout_height="match_parent"
+        android:layout_above="@id/moneyFundChartBottomLayout">
+        <com.tpyzq.mobile.pangu.activity.home.managerMoney.view.chartView.chart.MyLineChart
+            android:id="@+id/moneyFundLineChart"
+            android:layout_width="match_parent"
+            android:layout_height="match_parent"/>
+
+        <ProgressBar
+            android:id="@+id/fundChartProgress"
+            style="?android:attr/progressBarStyleSmall"
+            android:visibility="gone"
+            android:layout_width="wrap_content"
+            android:layout_height="wrap_content"
+            android:layout_gravity="center"
+            android:indeterminateDrawable="@drawable/load_progress"/>
+    </FrameLayout>
+
+
+
+</RelativeLayout>

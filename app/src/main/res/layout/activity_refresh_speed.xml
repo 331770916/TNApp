@@ -1,0 +1,139 @@
+<?xml version="1.0" encoding="utf-8"?>
+<LinearLayout xmlns:android="http://schemas.android.com/apk/res/android"
+    xmlns:tools="http://schemas.android.com/tools"
+    android:id="@+id/activity_refresh_speed"
+    android:layout_width="match_parent"
+    android:layout_height="match_parent"
+    android:orientation="vertical"
+    tools:context="com.tpyzq.mobile.pangu.activity.myself.account.RefreshSpeedActivity">
+
+    <RelativeLayout
+        android:layout_width="match_parent"
+        android:layout_height="@dimen/size25"
+        android:background="@color/blue" />
+
+    <RelativeLayout
+        android:layout_width="match_parent"
+        android:layout_height="@dimen/pickerview_topbar_height"
+        android:background="@color/blue">
+
+        <ImageView
+            android:id="@+id/iv_back"
+            android:layout_width="@dimen/size44"
+            android:layout_height="@dimen/size44"
+            android:layout_alignParentLeft="true"
+            android:layout_centerVertical="true"
+            android:padding="@dimen/size10"
+            android:scaleType="center"
+            android:src="@mipmap/back_btn" />
+
+        <TextView
+            android:id="@+id/iv_title"
+            android:layout_width="wrap_content"
+            android:layout_height="wrap_content"
+            android:layout_centerInParent="true"
+            android:text="行情刷新频率设置"
+            android:textColor="@color/white"
+            android:textSize="@dimen/pickerview_topbar_title_textsize" />
+    </RelativeLayout>
+
+    <RelativeLayout
+        android:id="@+id/rl_time1"
+        android:layout_width="match_parent"
+        android:layout_height="@dimen/size48"
+        android:orientation="horizontal">
+
+        <TextView
+            android:layout_width="wrap_content"
+            android:layout_height="wrap_content"
+            android:layout_gravity="center_vertical"
+            android:layout_marginLeft="@dimen/size20"
+            android:text="1秒"
+            android:layout_centerVertical="true"
+            android:textSize="@dimen/txtSize14" />
+        <ImageView
+            android:id="@+id/iv_time1"
+            android:layout_width="wrap_content"
+            android:layout_height="wrap_content"
+            android:layout_alignParentRight="true"
+            android:layout_centerVertical="true"
+            android:src="@mipmap/duigou"
+            android:visibility="invisible"
+            android:paddingRight="@dimen/size20"
+            />
+    </RelativeLayout>
+
+    <View
+        android:layout_width="match_parent"
+        android:layout_height="@dimen/size0.5"
+        android:layout_marginLeft="@dimen/size20"
+        android:background="@color/lineColor" />
+
+    <RelativeLayout
+        android:id="@+id/rl_time2"
+        android:layout_width="match_parent"
+        android:layout_height="@dimen/size48"
+        android:orientation="horizontal">
+
+        <TextView
+            android:id="@+id/tv_two"
+            android:layout_width="wrap_content"
+            android:layout_height="wrap_content"
+            android:layout_gravity="center_vertical"
+            android:layout_marginLeft="@dimen/size20"
+            android:text="2秒"
+            android:layout_centerVertical="true"
+            android:textSize="@dimen/txtSize14" />
+        <ImageView
+            android:id="@+id/iv_time2"
+            android:layout_width="wrap_content"
+            android:layout_height="wrap_content"
+            android:layout_alignParentRight="true"
+            android:layout_centerVertical="true"
+            android:src="@mipmap/duigou"
+            android:visibility="invisible"
+            android:paddingRight="@dimen/size20"
+            />
+    </RelativeLayout>
+
+    <View
+        android:layout_width="match_parent"
+        android:layout_height="@dimen/size0.5"
+        android:layout_marginLeft="@dimen/size20"
+        android:background="@color/lineColor" />
+
+    <RelativeLayout
+        android:id="@+id/rl_time3"
+        android:layout_width="match_parent"
+        android:layout_height="@dimen/size48"
+        android:orientation="horizontal">
+
+        <TextView
+            android:id="@+id/tv_three"
+            android:layout_width="wrap_content"
+            android:layout_height="wrap_content"
+            android:layout_gravity="center_vertical"
+            android:layout_marginLeft="@dimen/size20"
+            android:layout_centerVertical="true"
+            android:text="3秒"
+            android:textSize="@dimen/txtSize14" />
+
+        <ImageView
+            android:id="@+id/iv_time3"
+            android:layout_width="wrap_content"
+            android:layout_height="wrap_content"
+            android:layout_alignParentRight="true"
+            android:layout_centerVertical="true"
+            android:src="@mipmap/duigou"
+            android:visibility="invisible"
+            android:paddingRight="@dimen/size20"
+            />
+    </RelativeLayout>
+
+    <View
+        android:layout_width="match_parent"
+        android:layout_height="@dimen/size0.5"
+        android:layout_marginLeft="@dimen/size20"
+        android:background="@color/lineColor" />
+
+</LinearLayout>

@@ -1,0 +1,270 @@
+<?xml version="1.0" encoding="utf-8"?>
+<RelativeLayout xmlns:android="http://schemas.android.com/apk/res/android"
+    xmlns:fresco="http://schemas.android.com/apk/res-auto"
+    android:layout_width="match_parent"
+    android:layout_height="match_parent"
+    android:background="@color/bgColor"
+    android:orientation="vertical">
+
+    <RelativeLayout
+        android:id="@+id/RelativeLayout"
+        android:layout_width="match_parent"
+        android:layout_height="@dimen/size25"
+        android:background="@color/blue"
+        android:clipToPadding="true"
+        android:fitsSystemWindows="true" />
+
+    <RelativeLayout
+        android:id="@+id/TransactionLayout"
+        android:layout_width="match_parent"
+        android:layout_height="@dimen/pickerview_topbar_height"
+        android:layout_below="@+id/RelativeLayout"
+        android:background="@color/blue">
+
+        <ImageView
+            android:id="@+id/publish_back"
+            android:layout_width="wrap_content"
+            android:layout_height="wrap_content"
+            android:layout_alignParentLeft="true"
+            android:padding="@dimen/size10"
+            android:src="@mipmap/back_btn" />
+
+        <TextView
+            android:id="@+id/publish_title"
+            android:layout_width="wrap_content"
+            android:layout_height="wrap_content"
+            android:layout_centerInParent="true"
+            android:text="@string/TransactionLogin"
+            android:textColor="@color/white"
+            android:textSize="@dimen/pickerview_topbar_title_textsize" />
+
+        <TextView
+            android:id="@+id/Service"
+            android:layout_width="wrap_content"
+            android:layout_height="match_parent"
+            android:layout_alignParentRight="true"
+            android:layout_gravity="center_vertical"
+            android:gravity="center"
+            android:padding="@dimen/size10"
+            android:text="@string/Service"
+            android:textColor="@color/white"
+            android:textSize="@dimen/pickerview_topbar_btn_textsize" />
+    </RelativeLayout>
+
+    <LinearLayout
+        android:id="@+id/TransactionLayout1"
+        android:layout_width="match_parent"
+        android:layout_height="wrap_content"
+        android:layout_below="@+id/TransactionLayout"
+        android:orientation="vertical">
+
+        <LinearLayout
+            android:layout_width="match_parent"
+            android:layout_height="wrap_content"
+            android:layout_gravity="center_vertical"
+            android:layout_marginTop="@dimen/size30"
+            android:background="@color/white"
+            android:orientation="vertical">
+
+            <View
+                android:layout_width="match_parent"
+                android:layout_height="@dimen/size1"
+                android:background="@color/lineColor" />
+
+            <RelativeLayout
+                android:layout_width="match_parent"
+                android:layout_height="wrap_content">
+
+                <EditText
+                    android:id="@+id/FundsAccount"
+                    android:layout_width="match_parent"
+                    android:layout_height="wrap_content"
+                    android:background="@null"
+                    android:drawableLeft="@mipmap/yonghu"
+                    android:drawablePadding="@dimen/size25"
+                    android:hint="请输入账号"
+                    android:maxLength="10"
+                    android:numeric="integer"
+                    android:paddingBottom="@dimen/size15"
+                    android:paddingLeft="@dimen/size40"
+                    android:paddingTop="@dimen/size15"
+                    android:singleLine="true" />
+
+                <ImageView
+                    android:visibility="gone"
+                    android:id="@+id/CloseIV"
+                    android:paddingRight="20dp"
+                    android:layout_width="wrap_content"
+                    android:layout_height="wrap_content"
+                    android:layout_centerVertical="true"
+                    android:layout_toLeftOf="@+id/Change"
+                    android:src="@mipmap/guanbi" />
+
+
+                <TextView
+                    android:id="@+id/Change"
+                    android:layout_width="wrap_content"
+                    android:layout_height="wrap_content"
+                    android:layout_alignParentRight="true"
+                    android:layout_centerInParent="true"
+                    android:paddingRight="@dimen/size15"
+                    android:text="@string/LoginText3"
+                    android:textColor="@color/blue"
+                    android:textSize="@dimen/txtSize16"
+                    android:visibility="visible" />
+            </RelativeLayout>
+
+            <View
+                android:layout_width="match_parent"
+                android:layout_height="@dimen/size1"
+                android:layout_marginLeft="@dimen/size30"
+                android:background="@color/lineColor" />
+
+            <RelativeLayout
+                android:layout_width="match_parent"
+                android:layout_height="wrap_content">
+
+                <com.tpyzq.mobile.pangu.util.keyboard.NoSoftInputEditText
+                    android:id="@+id/TradersPassword"
+                    android:layout_width="match_parent"
+                    android:layout_height="wrap_content"
+                    android:background="@null"
+                    android:drawableLeft="@mipmap/mima"
+                    android:drawablePadding="@dimen/size25"
+                    android:hint="请输入密码"
+                    android:paddingBottom="@dimen/size15"
+                    android:paddingLeft="@dimen/size40"
+                    android:paddingTop="@dimen/size15"
+                    android:textSize="@dimen/txtSize18"
+                    android:visibility="gone" />
+
+                <EditText
+                    android:id="@+id/TradersPasswordET"
+                    android:layout_width="match_parent"
+                    android:layout_height="wrap_content"
+                    android:background="@null"
+                    android:drawableLeft="@mipmap/mima"
+                    android:drawablePadding="@dimen/size25"
+                    android:hint="请输入密码"
+                    android:inputType="numberPassword"
+                    android:maxLength="6"
+                    android:numeric="integer"
+                    android:paddingBottom="@dimen/size15"
+                    android:paddingLeft="@dimen/size40"
+                    android:paddingTop="@dimen/size15"
+                    android:singleLine="true"
+                    android:visibility="visible" />
+            </RelativeLayout>
+
+            <View
+                android:layout_width="match_parent"
+                android:layout_height="@dimen/size1"
+                android:layout_marginLeft="@dimen/size30"
+                android:background="@color/lineColor" />
+
+            <RelativeLayout
+                android:layout_width="match_parent"
+                android:layout_height="wrap_content">
+
+                <EditText
+                    android:id="@+id/Captcha"
+                    android:layout_width="match_parent"
+                    android:layout_height="wrap_content"
+                    android:background="@null"
+                    android:drawableLeft="@mipmap/yanzhengma"
+                    android:drawablePadding="@dimen/size21"
+                    android:hint="@string/HihiEditText3"
+                    android:maxLength="4"
+                    android:numeric="integer"
+                    android:paddingBottom="@dimen/size15"
+                    android:paddingLeft="@dimen/size40"
+                    android:paddingTop="@dimen/size15"
+                    android:singleLine="true" />
+
+
+                <TextView
+                    android:id="@+id/tvCaptcha"
+                    android:layout_width="@dimen/size120"
+                    android:layout_height="wrap_content"
+                    android:layout_alignParentRight="true"
+                    android:layout_centerInParent="true"
+                    android:layout_centerVertical="true"
+                    android:layout_marginRight="@dimen/size12"
+                    android:gravity="center"
+                    android:padding="@dimen/size10"
+                    android:text="@string/LoginText5"
+                    android:textSize="@dimen/txtSize16"
+                    android:visibility="visible" />
+
+                <com.facebook.drawee.view.SimpleDraweeView
+                    android:visibility="gone"
+                    android:id="@+id/SecurityCode"
+                    android:layout_width="@dimen/size120"
+                    android:layout_height="wrap_content"
+                    android:layout_alignParentRight="true"
+                    android:layout_centerInParent="true"
+                    android:layout_centerVertical="true"
+                    android:layout_marginRight="@dimen/size15"
+                    fresco:actualImageScaleType="fitCenter"
+                    fresco:failureImageScaleType="fitCenter"
+                    fresco:placeholderImageScaleType="fitCenter" />
+            </RelativeLayout>
+
+            <View
+                android:layout_width="match_parent"
+                android:layout_height="@dimen/size1"
+                android:background="@color/lineColor" />
+        </LinearLayout>
+
+        <TextView
+            android:layout_width="match_parent"
+            android:layout_height="wrap_content"
+            android:paddingLeft="@dimen/size20"
+            android:paddingTop="@dimen/size10"
+            android:text="@string/LoginText2"
+            android:textColor="@color/text"
+            android:textSize="@dimen/size12" />
+
+    </LinearLayout>
+
+    <Button
+        android:id="@+id/Transaction_Login"
+        android:layout_width="match_parent"
+        android:layout_height="wrap_content"
+        android:layout_below="@+id/TransactionLayout1"
+        android:layout_marginLeft="@dimen/size23"
+        android:layout_marginRight="@dimen/size23"
+        android:layout_marginTop="@dimen/size50"
+        android:background="@drawable/button_login_unchecked"
+        android:text="@string/Login"
+        android:textColor="@color/white" />
+
+    <RelativeLayout
+        android:id="@+id/LinearLayout_L"
+        android:layout_width="match_parent"
+        android:layout_height="wrap_content"
+        android:layout_below="@+id/Transaction_Login"
+        android:padding="@dimen/size10">
+
+        <TextView
+            android:id="@+id/forgetpassword"
+            android:layout_alignParentLeft="true"
+            android:layout_width="wrap_content"
+            android:layout_height="wrap_content"
+            android:paddingLeft="@dimen/size15"
+            android:text="@string/LoginText"
+            android:textColor="@color/text"
+            android:textSize="@dimen/txtSize16" />
+
+        <TextView
+            android:paddingRight="@dimen/size12"
+            android:layout_alignParentRight="true"
+            android:id="@+id/mKaihu"
+            android:layout_width="wrap_content"
+            android:layout_height="wrap_content"
+            android:text="@string/LoginText1"
+            android:textColor="@color/blue"
+            android:textSize="@dimen/txtSize16" />
+    </RelativeLayout>
+
+</RelativeLayout>

@@ -1,0 +1,331 @@
+<?xml version="1.0" encoding="utf-8"?>
+<LinearLayout xmlns:android="http://schemas.android.com/apk/res/android"
+    android:layout_width="match_parent"
+    android:layout_height="match_parent"
+    android:orientation="vertical">
+    <LinearLayout
+        android:id="@+id/ll_view1"
+        android:layout_width="match_parent"
+        android:layout_height="wrap_content"
+        android:gravity="center"
+        android:orientation="horizontal">
+
+        <LinearLayout
+            android:layout_width="0dp"
+            android:layout_height="match_parent"
+            android:layout_marginBottom="@dimen/size5"
+            android:layout_marginTop="@dimen/size5"
+            android:layout_weight="1"
+            android:orientation="vertical">
+
+            <TextView
+                android:id="@+id/tv_text1"
+                android:layout_width="match_parent"
+                android:layout_height="wrap_content"
+                android:paddingBottom="@dimen/size2"
+                android:paddingTop="@dimen/size2"
+                android:text="--"
+                android:gravity="center_vertical"
+                android:paddingLeft="@dimen/size20"
+                android:textColor="@color/bkColor"
+                android:textSize="@dimen/size14"
+                android:maxLines="2"
+                android:ellipsize="end"
+                android:textStyle="bold" />
+
+            <TextView
+                android:id="@+id/tv_text2"
+                android:layout_width="match_parent"
+                android:layout_height="0dp"
+                android:layout_weight="1"
+                android:paddingBottom="@dimen/size2"
+                android:paddingTop="@dimen/size2"
+                android:gravity="center_vertical"
+                android:text="--"
+                android:paddingLeft="@dimen/size20"
+                android:textColor="@color/text"
+                android:textSize="@dimen/size14" />
+        </LinearLayout>
+
+        <LinearLayout
+            android:id="@+id/ll_2"
+            android:layout_width="0dp"
+            android:layout_height="match_parent"
+            android:layout_marginBottom="@dimen/size5"
+            android:layout_marginTop="@dimen/size5"
+            android:layout_weight="1"
+            android:orientation="vertical">
+
+            <TextView
+                android:id="@+id/tv_text3"
+                android:layout_width="match_parent"
+                android:layout_height="0dp"
+                android:layout_weight="1"
+                android:gravity="center"
+                android:paddingBottom="@dimen/size2"
+                android:paddingTop="@dimen/size2"
+                android:text="--"
+                android:textColor="@color/bkColor"
+                android:textSize="@dimen/size14" />
+
+            <TextView
+                android:id="@+id/tv_text4"
+                android:layout_width="match_parent"
+                android:layout_height="0dp"
+                android:layout_weight="1"
+                android:gravity="center"
+                android:paddingBottom="@dimen/size2"
+                android:paddingTop="@dimen/size2"
+                android:text="--"
+                android:textColor="@color/bkColor"
+                android:textSize="@dimen/size14" />
+        </LinearLayout>
+
+        <LinearLayout
+            android:id="@+id/ll_3"
+            android:layout_width="0dp"
+            android:layout_height="match_parent"
+            android:layout_marginBottom="@dimen/size5"
+            android:layout_marginTop="@dimen/size5"
+            android:layout_weight="1"
+            android:orientation="vertical">
+
+            <TextView
+                android:id="@+id/tv_text5"
+                android:layout_width="match_parent"
+                android:layout_height="0dp"
+                android:layout_weight="1"
+                android:gravity="center"
+                android:paddingBottom="@dimen/size2"
+                android:paddingTop="@dimen/size2"
+                android:text="--"
+                android:textColor="@color/bkColor"
+                android:textSize="@dimen/size14" />
+
+            <TextView
+                android:id="@+id/tv_text6"
+                android:layout_width="match_parent"
+                android:layout_height="0dp"
+                android:layout_weight="1"
+                android:gravity="center"
+                android:paddingBottom="@dimen/size2"
+                android:paddingTop="@dimen/size2"
+                android:text="--"
+                android:textColor="@color/bkColor"
+                android:textSize="@dimen/size14" />
+        </LinearLayout>
+
+        <LinearLayout
+            android:id="@+id/ll_4"
+            android:layout_width="0dp"
+            android:layout_height="match_parent"
+            android:layout_marginBottom="@dimen/size5"
+            android:layout_marginTop="@dimen/size5"
+            android:layout_weight="1"
+            android:orientation="vertical">
+
+            <TextView
+                android:id="@+id/tv_text7"
+                android:layout_width="match_parent"
+                android:layout_height="0dp"
+                android:layout_weight="1"
+                android:gravity="center"
+                android:paddingBottom="@dimen/size2"
+                android:paddingTop="@dimen/size2"
+                android:text="--"
+                android:textColor="@color/bkColor"
+                android:textSize="@dimen/size14" />
+
+            <TextView
+                android:id="@+id/tv_text8"
+                android:layout_width="match_parent"
+                android:layout_height="0dp"
+                android:layout_weight="1"
+                android:gravity="center"
+                android:paddingBottom="@dimen/size2"
+                android:paddingTop="@dimen/size2"
+                android:text="--"
+                android:textColor="@color/bkColor"
+                android:textSize="@dimen/size14" />
+        </LinearLayout>
+    </LinearLayout>
+
+    <View
+        android:layout_width="match_parent"
+        android:layout_height="@dimen/size1"
+        android:background="@color/grey" />
+    <LinearLayout
+        android:id="@+id/ll_view2"
+        android:layout_width="match_parent"
+        android:layout_height="wrap_content"
+        android:orientation="vertical">
+
+        <LinearLayout
+            android:layout_width="match_parent"
+            android:layout_height="@dimen/size40"
+            android:background="@color/bgColor"
+            android:gravity="center_vertical"
+            android:orientation="horizontal">
+
+            <TextView
+                android:layout_width="0dp"
+                android:layout_weight="1.3"
+                android:layout_height="wrap_content"
+                android:text="基金公司名称："
+                android:paddingLeft="@dimen/size20"
+                android:textColor="@color/text"
+                android:textSize="@dimen/txtSize10" />
+
+            <TextView
+                android:id="@+id/tv_fund_company_name"
+                android:layout_width="0dp"
+                android:layout_weight="0.7"
+                android:layout_height="match_parent"
+                android:gravity="center_vertical"
+                android:text=""
+                android:maxLines="2"
+                android:ellipsize="end"
+                android:textColor="@color/black"
+                android:textSize="@dimen/txtSize10" />
+
+            <View
+                android:layout_width="@dimen/size1"
+                android:layout_height="wrap_content"
+                android:background="@color/lineColor" />
+
+            <TextView
+                android:layout_width="0dp"
+                android:layout_height="wrap_content"
+                android:layout_weight="1"
+                android:text="手续费："
+                android:gravity="left"
+                android:paddingLeft="@dimen/size20"
+                android:textColor="@color/text"
+                android:textSize="@dimen/txtSize10" />
+            <TextView
+                android:id="@+id/tv_fund_poundage"
+                android:layout_width="0dp"
+                android:layout_height="wrap_content"
+                android:layout_weight="1"
+                android:gravity="left"
+                android:text="0"
+                android:textColor="@color/black"
+                android:textSize="@dimen/txtSize10" />
+        </LinearLayout>
+
+        <View
+            android:layout_width="match_parent"
+            android:layout_height="@dimen/size1"
+            android:background="@color/lineColor" />
+
+        <LinearLayout
+            android:layout_width="match_parent"
+            android:layout_height="@dimen/size40"
+            android:background="@color/bgColor"
+            android:gravity="center_vertical"
+            android:orientation="horizontal">
+
+            <TextView
+                android:layout_width="0dp"
+                android:layout_weight="1.3"
+                android:layout_height="wrap_content"
+                android:text="基金公司代码："
+                android:paddingLeft="@dimen/size20"
+                android:textColor="@color/text"
+                android:textSize="@dimen/txtSize10" />
+
+            <TextView
+                android:id="@+id/tv_fund_company_code"
+                android:layout_width="0dp"
+                android:layout_weight="0.7"
+                android:layout_height="wrap_content"
+                android:text=""
+                android:textColor="@color/black"
+                android:textSize="@dimen/txtSize10" />
+
+            <View
+                android:layout_width="@dimen/size1"
+                android:layout_height="wrap_content"
+                android:background="@color/lineColor" />
+
+            <TextView
+                android:layout_width="0dp"
+                android:layout_height="wrap_content"
+                android:layout_weight="1"
+                android:text="印花税："
+                android:gravity="left"
+                android:paddingLeft="@dimen/size20"
+                android:textColor="@color/text"
+                android:textSize="@dimen/txtSize10" />
+            <TextView
+                android:id="@+id/tv_tax"
+                android:layout_width="0dp"
+                android:layout_height="wrap_content"
+                android:layout_weight="1"
+                android:gravity="left"
+                android:text="0"
+                android:textColor="@color/black"
+                android:textSize="@dimen/txtSize10" />
+        </LinearLayout>
+
+        <View
+            android:layout_width="match_parent"
+            android:layout_height="@dimen/size1"
+            android:background="@color/lineColor" />
+        <LinearLayout
+            android:layout_width="match_parent"
+            android:layout_height="@dimen/size40"
+            android:background="@color/bgColor"
+            android:gravity="center_vertical"
+            android:orientation="horizontal">
+
+            <TextView
+                android:layout_width="0dp"
+                android:layout_weight="1"
+                android:layout_height="wrap_content"
+                android:paddingLeft="@dimen/size20"
+                android:textColor="@color/text"
+                android:textSize="@dimen/txtSize10" />
+
+            <TextView
+                android:id="@+id/fundShareItemTv11"
+                android:layout_width="0dp"
+                android:layout_weight="1"
+                android:layout_height="wrap_content"
+                android:textColor="@color/black"
+                android:textSize="@dimen/txtSize10" />
+
+            <View
+                android:layout_width="@dimen/size1"
+                android:layout_height="wrap_content"
+                android:background="@color/lineColor" />
+
+            <TextView
+                android:layout_width="0dp"
+                android:layout_height="wrap_content"
+                android:layout_weight="1"
+                android:text="其他费："
+                android:gravity="left"
+                android:paddingLeft="@dimen/size20"
+                android:textColor="@color/text"
+                android:textSize="@dimen/txtSize10" />
+            <TextView
+                android:id="@+id/tv_other_money"
+                android:layout_width="0dp"
+                android:layout_height="wrap_content"
+                android:layout_weight="1"
+                android:gravity="left"
+                android:text="0"
+                android:textColor="@color/black"
+                android:textSize="@dimen/txtSize10" />
+        </LinearLayout>
+
+        <ImageButton
+            android:id="@+id/ib_contract"
+            android:layout_width="match_parent"
+            android:layout_height="wrap_content"
+            android:background="@color/lineColor"
+            android:padding="@dimen/size10"
+            android:src="@mipmap/zhankai" />
+    </LinearLayout>
+</LinearLayout>

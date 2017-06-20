@@ -1,0 +1,223 @@
+<?xml version="1.0" encoding="utf-8"?>
+<LinearLayout xmlns:android="http://schemas.android.com/apk/res/android"
+    android:orientation="vertical"
+    android:background="@color/white"
+    android:layout_width="match_parent"
+    android:layout_height="match_parent">
+
+    <LinearLayout
+        android:layout_width="match_parent"
+        android:layout_height="wrap_content"
+        android:orientation="horizontal">
+        <TextView
+            android:id="@+id/typeTitle"
+            android:layout_width="0dp"
+            android:layout_height="wrap_content"
+            android:padding="@dimen/size10"
+            android:layout_weight="1.5"
+            android:textSize="@dimen/txtSize13"
+            android:gravity="center"
+            android:text="申购进程"
+            android:textColor="@color/black"/>
+
+        <TextView
+            android:layout_width="0dp"
+            android:layout_weight="4"
+            android:padding="@dimen/size10"
+            android:layout_height="wrap_content"/>
+    </LinearLayout>
+
+    <View
+        android:layout_width="match_parent"
+        android:layout_height="1px"
+        android:background="@color/lineColor"/>
+
+    <LinearLayout
+        android:layout_width="match_parent"
+        android:layout_height="wrap_content"
+        android:orientation="horizontal">
+        <TextView
+            android:id="@+id/newItem_title1"
+            android:layout_width="0dp"
+            android:layout_height="wrap_content"
+            android:padding="@dimen/size10"
+            android:layout_weight="1.5"
+            android:textSize="@dimen/txtSize13"
+            android:gravity="center"
+            android:text="股票名称"
+            android:textColor="@color/black"/>
+
+        <TextView
+            android:id="@+id/newItem_value1"
+            android:layout_width="0dp"
+            android:layout_weight="4"
+            android:padding="@dimen/size10"
+            android:layout_height="wrap_content"
+            android:textSize="@dimen/txtSize13"
+            android:text="股票名称"
+            android:textColor="@color/hideTextColor"/>
+    </LinearLayout>
+
+    <LinearLayout
+        android:layout_width="match_parent"
+        android:layout_height="wrap_content"
+        android:orientation="horizontal">
+        <TextView
+            android:id="@+id/newItem_title2"
+            android:layout_width="0dp"
+            android:layout_height="wrap_content"
+            android:padding="@dimen/size10"
+            android:layout_weight="1.5"
+            android:textSize="@dimen/txtSize13"
+            android:gravity="center"
+            android:text="股票名称"
+            android:textColor="@color/black"/>
+
+        <TextView
+            android:id="@+id/newItem_value2"
+            android:layout_width="0dp"
+            android:layout_weight="4"
+            android:padding="@dimen/size10"
+            android:layout_height="wrap_content"
+            android:textSize="@dimen/txtSize13"
+            android:text="股票名称"
+            android:textColor="@color/hideTextColor"/>
+    </LinearLayout>
+
+    <LinearLayout
+        android:layout_width="match_parent"
+        android:layout_height="wrap_content"
+        android:orientation="horizontal">
+        <TextView
+            android:id="@+id/newItem_title3"
+            android:layout_width="0dp"
+            android:layout_height="wrap_content"
+            android:padding="@dimen/size10"
+            android:layout_weight="1.5"
+            android:textSize="@dimen/txtSize13"
+            android:gravity="center"
+            android:text="股票名称"
+            android:textColor="@color/black"/>
+
+        <TextView
+            android:id="@+id/newItem_value3"
+            android:layout_width="0dp"
+            android:layout_weight="4"
+            android:padding="@dimen/size10"
+            android:layout_height="wrap_content"
+            android:textSize="@dimen/txtSize13"
+            android:text="股票名称"
+            android:textColor="@color/hideTextColor"/>
+    </LinearLayout>
+
+    <LinearLayout
+        android:layout_width="match_parent"
+        android:layout_height="wrap_content"
+        android:orientation="horizontal">
+        <TextView
+            android:id="@+id/newItem_title4"
+            android:layout_width="0dp"
+            android:layout_height="wrap_content"
+            android:padding="@dimen/size10"
+            android:layout_weight="1.5"
+            android:textSize="@dimen/txtSize13"
+            android:gravity="center"
+            android:text="股票名称"
+            android:textColor="@color/black"/>
+
+        <TextView
+            android:id="@+id/newItem_value4"
+            android:layout_width="0dp"
+            android:layout_weight="4"
+            android:padding="@dimen/size10"
+            android:layout_height="wrap_content"
+            android:textSize="@dimen/txtSize13"
+            android:text="股票名称"
+            android:textColor="@color/hideTextColor"/>
+    </LinearLayout>
+
+    <LinearLayout
+        android:layout_width="match_parent"
+        android:layout_height="wrap_content"
+        android:orientation="horizontal">
+        <TextView
+            android:id="@+id/newItem_title5"
+            android:layout_width="0dp"
+            android:layout_height="wrap_content"
+            android:padding="@dimen/size10"
+            android:layout_weight="1.5"
+            android:textSize="@dimen/txtSize13"
+            android:gravity="center"
+            android:text="股票名称"
+            android:textColor="@color/black"/>
+
+        <TextView
+            android:id="@+id/newItem_value5"
+            android:layout_width="0dp"
+            android:layout_weight="4"
+            android:padding="@dimen/size10"
+            android:layout_height="wrap_content"
+            android:textSize="@dimen/txtSize13"
+            android:text="股票名称"
+            android:textColor="@color/hideTextColor"/>
+    </LinearLayout>
+
+    <LinearLayout
+        android:layout_width="match_parent"
+        android:layout_height="wrap_content"
+        android:orientation="horizontal">
+        <TextView
+            android:id="@+id/newItem_title6"
+            android:layout_width="0dp"
+            android:layout_height="wrap_content"
+            android:padding="@dimen/size10"
+            android:layout_weight="1.5"
+            android:textSize="@dimen/txtSize13"
+            android:gravity="center"
+            android:text="股票名称"
+            android:textColor="@color/black"/>
+
+        <TextView
+            android:id="@+id/newItem_value6"
+            android:layout_width="0dp"
+            android:layout_weight="4"
+            android:padding="@dimen/size10"
+            android:layout_height="wrap_content"
+            android:textSize="@dimen/txtSize13"
+            android:text="股票名称"
+            android:textColor="@color/hideTextColor"/>
+    </LinearLayout>
+
+    <LinearLayout
+        android:layout_width="match_parent"
+        android:layout_height="wrap_content"
+        android:orientation="horizontal">
+        <TextView
+            android:id="@+id/newItem_title7"
+            android:layout_width="0dp"
+            android:layout_height="wrap_content"
+            android:padding="@dimen/size10"
+            android:layout_weight="1.5"
+            android:textSize="@dimen/txtSize13"
+            android:gravity="center"
+            android:text="股票名称"
+            android:textColor="@color/black"/>
+
+        <TextView
+            android:id="@+id/newItem_value7"
+            android:layout_width="0dp"
+            android:layout_weight="4"
+            android:padding="@dimen/size10"
+            android:layout_height="wrap_content"
+            android:textSize="@dimen/txtSize13"
+            android:text="股票名称"
+            android:textColor="@color/hideTextColor"/>
+    </LinearLayout>
+
+    <View
+        android:layout_width="match_parent"
+        android:layout_height="@dimen/size10"
+        android:background="@color/bgColor"/>
+
+
+</LinearLayout>

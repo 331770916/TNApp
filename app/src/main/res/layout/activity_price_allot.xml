@@ -1,0 +1,260 @@
+<?xml version="1.0" encoding="utf-8"?>
+<LinearLayout xmlns:android="http://schemas.android.com/apk/res/android"
+    android:layout_width="match_parent"
+    android:layout_height="match_parent"
+    android:background="@color/bgColor"
+    android:orientation="vertical">
+
+    <RelativeLayout
+        android:layout_width="match_parent"
+        android:layout_height="@dimen/size25"
+        android:background="@color/blue"
+        android:clipToPadding="true"
+        android:fitsSystemWindows="true" />
+
+    <RelativeLayout
+        android:layout_width="match_parent"
+        android:layout_height="@dimen/pickerview_topbar_height"
+        android:background="@color/blue">
+
+        <ImageView
+            android:id="@+id/allot_price_back"
+            android:layout_width="wrap_content"
+            android:layout_height="match_parent"
+            android:padding="@dimen/size15"
+            android:src="@mipmap/back_btn" />
+
+        <TextView
+            android:layout_width="wrap_content"
+            android:layout_height="wrap_content"
+            android:layout_centerInParent="true"
+            android:text="@string/priceAllot"
+            android:textColor="@color/white"
+            android:textSize="@dimen/pickerview_topbar_title_textsize" />
+    </RelativeLayout>
+
+    <RelativeLayout
+        android:id="@+id/inputViewGroup"
+        android:layout_width="match_parent"
+        android:layout_height="wrap_content"/>
+
+    <LinearLayout
+        android:layout_width="match_parent"
+        android:layout_height="match_parent"
+        android:orientation="vertical">
+
+        <FrameLayout
+            android:id="@+id/priceAllotTopLayout"
+            android:layout_width="match_parent"
+            android:orientation="vertical"
+            android:layout_weight="1.5"
+            android:layout_height="0dp"
+            android:layout_alignParentTop="true">
+
+            <RelativeLayout
+                android:layout_width="match_parent"
+                android:layout_height="@dimen/size120"
+                android:background="@color/blue" >
+                <RelativeLayout
+                    android:id="@+id/allot_priceContentLayout"
+                    android:layout_width="wrap_content"
+                    android:layout_height="wrap_content"/>
+            </RelativeLayout>
+
+            <RelativeLayout
+                android:layout_width="match_parent"
+                android:layout_height="wrap_content"
+                android:layout_marginTop="@dimen/size110"
+                android:layout_marginRight="@dimen/size20"
+                android:layout_marginLeft="@dimen/size20"
+                android:background="@mipmap/fac_to_mac_bg">
+
+                <RelativeLayout
+                    android:layout_width="wrap_content"
+                    android:layout_height="wrap_content"
+                    android:layout_centerVertical="true"
+                    android:layout_alignParentLeft="true"
+                    android:layout_marginLeft="@dimen/size20">
+                    <ImageView
+                        android:id="@+id/changeAcIv1"
+                        android:layout_width="wrap_content"
+                        android:layout_height="wrap_content"
+                        android:src="@mipmap/price_allot_faccount"/>
+                    <TextView
+                        android:id="@+id/changeAcText1"
+                        android:layout_below="@id/changeAcIv1"
+                        android:layout_centerHorizontal="true"
+                        android:layout_marginTop="5dp"
+                        android:layout_width="wrap_content"
+                        android:layout_height="wrap_content"
+                        android:textSize="12sp"
+                        android:textColor="@color/hideTextColor"/>
+
+                </RelativeLayout>
+
+
+                <LinearLayout
+                    android:id="@+id/allot_clickChange"
+                    android:layout_width="wrap_content"
+                    android:layout_height="wrap_content"
+                    android:layout_centerInParent="true"
+                    android:gravity="center"
+                    android:orientation="vertical">
+
+                    <TextView
+                        android:id="@+id/clickChangeTv"
+                        android:layout_width="wrap_content"
+                        android:layout_height="wrap_content"
+                        android:textColor="@color/black"
+                        android:textSize="@dimen/txtSize12"
+                        android:text="辅转主"/>
+
+                    <ImageView
+                        android:layout_width="wrap_content"
+                        android:layout_height="wrap_content"
+                        android:layout_margin="@dimen/size2"
+                        android:src="@mipmap/chgange_ac_iv"/>
+
+                    <TextView
+                        android:layout_width="wrap_content"
+                        android:layout_height="wrap_content"
+                        android:textSize="@dimen/txtSize12"
+                        android:textColor="@color/hideTextColor"
+                        android:text="@string/allotChangeAccount"/>
+
+                </LinearLayout>
+
+                <RelativeLayout
+                    android:layout_width="wrap_content"
+                    android:layout_height="wrap_content"
+                    android:layout_alignParentRight="true"
+                    android:layout_marginRight="@dimen/size20"
+                    android:layout_centerVertical="true">
+                    <ImageView
+                        android:id="@+id/changeAcIv2"
+                        android:layout_width="wrap_content"
+                        android:layout_height="wrap_content"
+                        android:src="@mipmap/price_allot_maccount"/>
+
+                    <TextView
+                        android:id="@+id/changeAcText2"
+                        android:layout_below="@id/changeAcIv2"
+                        android:layout_centerHorizontal="true"
+                        android:layout_marginTop="5dp"
+                        android:layout_width="wrap_content"
+                        android:layout_height="wrap_content"
+                        android:textSize="12sp"
+                        android:textColor="@color/hideTextColor"/>
+                </RelativeLayout>
+
+            </RelativeLayout>
+        </FrameLayout>
+
+        <LinearLayout
+            android:layout_below="@id/priceAllotTopLayout"
+            android:layout_width="match_parent"
+            android:layout_height="wrap_content"
+            android:orientation="vertical"
+            android:layout_marginTop="@dimen/size5"
+            android:background="@color/white">
+
+            <RelativeLayout
+                android:id="@+id/allot_choiceAcLayout"
+                android:layout_width="match_parent"
+                android:layout_height="wrap_content"
+                android:layout_marginLeft="@dimen/size10"
+                android:layout_marginRight="@dimen/size10">
+
+                <TextView
+                    android:layout_width="wrap_content"
+                    android:layout_height="wrap_content"
+                    android:padding="@dimen/size10"
+                    android:textColor="@color/hushenTab_titleColor"
+                    android:textSize="@dimen/txtSize16"
+                    android:text="辅助资金账号"
+                    />
+
+                <ImageView
+                    android:id="@+id/allotPriceIv"
+                    android:layout_width="wrap_content"
+                    android:layout_height="wrap_content"
+                    android:layout_alignParentRight="true"
+                    android:padding="@dimen/size10"
+                    android:layout_centerVertical="true"
+                    android:src="@mipmap/more"/>
+
+                <TextView
+                    android:id="@+id/allot_Account"
+                    android:layout_toLeftOf="@id/allotPriceIv"
+                    android:layout_marginRight="@dimen/size10"
+                    android:layout_width="wrap_content"
+                    android:layout_height="wrap_content"
+                    android:padding="@dimen/size10"
+                    android:hint="选择辅助资金账号"
+                    android:textSize="@dimen/txtSize16"
+                    android:textColorHint="@color/hideTextColor"
+                    android:layout_alignParentTop="true"
+                    android:layout_alignParentRight="true"
+                    android:layout_alignParentEnd="true" />
+            </RelativeLayout>
+
+            <View
+                android:layout_width="match_parent"
+                android:layout_height="1px"
+                android:layout_marginRight="@dimen/size10"
+                android:layout_marginLeft="@dimen/size10"
+                android:background="@color/lineColor"/>
+
+            <EditText
+                android:id="@+id/allot_inputPrice"
+                android:layout_width="match_parent"
+                android:layout_height="wrap_content"
+                android:background="@drawable/sp_allot_editbg"
+                android:gravity="center_vertical"
+                android:inputType="numberDecimal"
+                android:padding="@dimen/size10"
+                android:textSize="@dimen/txtSize16"
+                android:layout_marginLeft="@dimen/size10"
+                android:layout_marginRight="@dimen/size10"
+                android:hint="@string/choicePrice"
+                android:textColorHint="@color/hideTextColor"
+                android:singleLine="true"/>
+        </LinearLayout>
+
+        <RelativeLayout
+            android:layout_width="match_parent"
+            android:layout_height="wrap_content">
+            <TextView
+                android:id="@+id/allotYe"
+                android:layout_width="wrap_content"
+                android:layout_height="wrap_content"
+                android:textColor="@color/hideTextColor"
+                android:textSize="@dimen/txtSize12"
+                android:layout_marginRight="@dimen/size10"
+                android:layout_marginTop="@dimen/size5"
+                android:layout_alignParentRight="true"/>
+        </RelativeLayout>
+
+        <RelativeLayout
+            android:layout_width="match_parent"
+            android:layout_height="0dp"
+            android:layout_weight="1">
+
+            <TextView
+                android:id="@+id/allotPositiveBtn"
+                android:layout_width="match_parent"
+                android:layout_height="wrap_content"
+                android:gravity="center"
+                android:textColor="@color/white"
+                android:layout_centerInParent="true"
+                android:background="@mipmap/price_allot_positivebtn"
+                android:padding="@dimen/size10"
+                android:layout_marginLeft="@dimen/size20"
+                android:layout_marginRight="@dimen/size20"
+                android:layout_marginBottom="@dimen/size40"/>
+
+        </RelativeLayout>
+
+    </LinearLayout>
+
+</LinearLayout>

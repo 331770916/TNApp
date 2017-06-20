@@ -1,0 +1,117 @@
+<?xml version="1.0" encoding="utf-8"?>
+<LinearLayout xmlns:android="http://schemas.android.com/apk/res/android"
+    xmlns:tools="http://schemas.android.com/tools"
+    android:layout_width="match_parent"
+    android:layout_height="match_parent"
+    android:orientation="vertical">
+
+    <RelativeLayout
+        android:layout_width="match_parent"
+        android:layout_height="@dimen/size25"
+        android:background="@color/blue"
+        android:fitsSystemWindows="true"
+        android:clipToPadding="true"/>
+
+    <RelativeLayout
+        android:layout_width="match_parent"
+        android:layout_height="@dimen/pickerview_topbar_height"
+        android:background="@color/blue">
+
+        <TextView
+            android:id="@+id/bianji"
+            android:layout_width="wrap_content"
+            android:layout_height="wrap_content"
+            android:layout_alignParentLeft="true"
+            android:layout_centerVertical="true"
+            android:padding="@dimen/size10"
+            android:text="编辑"
+            android:textColor="@color/white"/>
+
+
+        <RadioGroup
+            android:id="@+id/mark_radioGroup"
+            android:layout_width="150dp"
+            android:layout_height="wrap_content"
+            android:layout_centerInParent="true"
+            android:orientation="horizontal">
+
+
+
+            <com.tpyzq.mobile.pangu.view.radiobutton.MyRadioButton
+                android:id="@+id/market_RadioBtn"
+                android:layout_width="0dp"
+                android:layout_height="wrap_content"
+                android:button="@null"
+                android:clickable="true"
+                android:gravity="center"
+                android:checked="true"
+                android:textSize="@dimen/pickerview_topbar_title_textsize"
+                android:padding="@dimen/size10"
+                android:textColor="@color/radio_textcolor_markettop"
+                android:text="@string/selfchoice"
+                android:layout_weight="1"/>
+
+            <View
+                android:layout_width="@dimen/size1"
+                android:layout_height="@dimen/size25"
+                android:background="@color/checkTopMarcketRaido"
+                android:clickable="true"
+                android:layout_gravity="center_vertical" />
+
+            <com.tpyzq.mobile.pangu.view.radiobutton.MyRadioButton
+                android:id="@+id/market_selfRadioBtn"
+                android:layout_width="0dp"
+                android:layout_height="wrap_content"
+                android:gravity="center"
+                android:padding="@dimen/size10"
+                android:button="@null"
+                android:clickable="true"
+                android:textSize="@dimen/pickerview_topbar_title_textsize"
+                android:textColor="@color/radio_textcolor_markettop"
+                android:text="@string/market"
+                android:layout_weight="1"/>
+
+        </RadioGroup>
+
+        <ImageView
+            android:id="@+id/market_search"
+            android:layout_width="wrap_content"
+            android:layout_height="wrap_content"
+            android:layout_gravity="center_vertical"
+            android:layout_centerVertical="true"
+            android:layout_alignParentRight="true"
+            android:padding="@dimen/size10"
+            android:src="@drawable/btn_search"
+            tools:ignore="ContentDescription" />
+
+        <ImageView
+            android:id="@+id/market_share"
+            android:layout_width="wrap_content"
+            android:layout_height="wrap_content"
+            android:layout_gravity="center_vertical"
+            android:layout_centerVertical="true"
+            android:layout_toLeftOf="@id/market_search"
+            android:padding="@dimen/size10"
+            android:src="@mipmap/fenxiang"
+            tools:ignore="ContentDescription" />
+
+        <ProgressBar
+            android:id="@+id/market_progress"
+            android:layout_toLeftOf="@id/mark_radioGroup"
+            android:layout_marginRight="@dimen/size10"
+            style="?android:attr/progressBarStyleSmall"
+            android:layout_width="wrap_content"
+            android:layout_height="wrap_content"
+            android:visibility="gone"
+            android:indeterminateDrawable="@drawable/load_progress"
+            android:layout_centerVertical="true"/>
+
+    </RelativeLayout>
+
+    <FrameLayout
+        android:id="@+id/market_contentLayout"
+        android:layout_width="match_parent"
+        android:layout_height="match_parent"/>
+
+
+</LinearLayout>

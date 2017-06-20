@@ -1,0 +1,76 @@
+<!DOCTYPE html>
+<html>
+<head>
+    <meta charset="UTF-8">
+    <title>股市回忆录</title>
+    <meta name="viewport"
+          content="width=device-width, initial-scale=1.0, maximum-scale=1, user-scalable=no">
+    <meta name="format-detection" content="telephone=no">
+    <link rel="stylesheet" href="css/history.css"/>
+    <link rel="stylesheet" href="css/swiper-3.3.1.min.css"/>
+    <script src="js/jquery-2.1.1.min.js"></script>
+    <script src="js/swiper-3.3.1.min.js"></script>
+</head>
+<body>
+<div class="swiper-container swiper-container-vertical">
+    <div class="swiper-wrapper">
+        <div class="swiper-slide section_one page_bg">
+            <img src="image/06.png"/>
+            <p>您的太平洋证券账户诞生于</p>
+            <p id="account_data">2015.8.16</p>
+            <div class="arrow-up"></div>
+        </div>
+        <div class="swiper-slide section_two page_bg">
+            <img src="image/07.png"/>
+            <p>您购买的第一支股票为</p>
+            <p id="first_stock" class="blod-yellow">万科A(6000001)</p>
+            <div class="arrow-up"></div>
+        </div>
+        <div class="swiper-slide section_three page_bg">
+            <img src="image/08.png"/>
+            <p>您购买的<span id="win_stock" class="blod-yellow"> 万科A(6000001)</span></p>
+            <p>盈亏为<span id="earn_percent" class="earn-num"> +78%</span></p>
+            <div class="arrow-up"></div>
+        </div>
+        <div class="swiper-slide section_four page_bg">
+            <img src="image/09.png"/>
+            <p>您购买的<span id="lose_stock" class="blod-yellow"> 万科A(6000001)</span></p>
+            <p>盈亏为<span id="lose_percent" class="lose-num"> -78%</span></p>
+            <div class="arrow-up"></div>
+        </div>
+        <div class="swiper-slide section_five page_bg">
+            <img src="image/10.png"/>
+            <p>您购买的<span id="hold_stock" class="blod-yellow"> 万科A(6000001)</span></p>
+            <p>共持有<span id="hold-date" class="normal-yellow"> 236天</span></p>
+        </div>
+    </div>
+</div>
+<script>
+		$(function(){
+			$(".page_bg").css({  "height": document.documentElement.clientHeight});
+			//初始化swiper
+			var swiper = new Swiper('.swiper-container', {
+					direction: 'vertical'
+		    });
+		})
+
+</script>
+<script type="text/javascript">
+            function replace(value1,value2,value3,value4,value5,value6,value7,value8){
+            document.getElementById("account_data").innerHTML = value1
+            document.getElementById("first_stock").innerHTML = value2
+            document.getElementById("win_stock").innerHTML = value3
+            document.getElementById("earn_percent").innerHTML = value4
+            document.getElementById("lose_stock").innerHTML = value5
+            document.getElementById("lose_percent").innerHTML = value6
+            document.getElementById("hold_stock").innerHTML = value7
+            document.getElementById("hold-date").innerHTML = value8
+            }
+            function click(value){
+            document.getElementById("account_data").innerHTML = value
+            }
+            replace('--','--','--','--','--','--','--','--天')
+
+</script>
+</body>
+</html>

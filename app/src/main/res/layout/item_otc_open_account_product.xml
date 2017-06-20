@@ -1,0 +1,35 @@
+<?xml version="1.0" encoding="utf-8"?>
+<RelativeLayout xmlns:android="http://schemas.android.com/apk/res/android"
+    android:layout_width="match_parent"
+    android:layout_height="wrap_content"
+    android:background="@color/white">
+
+    <TextView
+        android:id="@+id/OTC_OpenAccountProductName"
+        android:layout_width="wrap_content"
+        android:layout_height="50dp"
+        android:layout_centerVertical="true"
+        android:layout_marginLeft="@dimen/size20"
+        android:gravity="center"
+        android:text=""
+        android:textColor="@color/hushenTab_titleColor"
+        android:textSize="@dimen/txtSize14" />
+
+
+    <ImageView
+        android:id="@+id/ivOpenAccountDuiGou"
+        android:layout_width="wrap_content"
+        android:layout_height="wrap_content"
+        android:layout_alignParentRight="true"
+        android:layout_centerVertical="true"
+        android:layout_marginRight="@dimen/size20" />
+
+
+    <View
+        android:id="@+id/Xian"
+        android:layout_marginLeft="@dimen/size20"
+        android:layout_width="match_parent"
+        android:layout_height="@dimen/size0.5"
+        android:layout_alignParentBottom="true"
+        android:background="@color/lineColor" />
+</RelativeLayout>

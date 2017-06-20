@@ -1,0 +1,325 @@
+<?xml version="1.0" encoding="utf-8"?>
+<manifest xmlns:android="http://schemas.android.com/apk/res/android"
+    package="com.tpyzq.mobile.pangu">
+
+    <uses-permission android:name="android.permission.GET_ACCOUNTS" />
+    <uses-permission android:name="android.permission.READ_PROFILE" />
+    <uses-permission android:name="android.permission.READ_CONTACTS" />
+    <uses-permission android:name="android.permission.VIBRATE" />
+    <uses-permission android:name="android.permission.ACCESS_FINE_LOCATION" />
+    <uses-permission android:name="android.permission.ACCESS_LOCATION_EXTRA_COMMANDS" />
+    <uses-permission android:name="android.permission.READ_PHONE_STATE" />
+    <uses-permission android:name="android.permission.INTERNET" />
+    <uses-permission android:name="android.permission.RECEIVE_SMS" />
+    <uses-permission android:name="android.permission.RECORD_AUDIO" />
+    <uses-permission android:name="android.permission.MODIFY_AUDIO_SETTINGS" />
+    <uses-permission android:name="android.permission.WRITE_CONTACTS" />
+    <uses-permission android:name="android.permission.WRITE_EXTERNAL_STORAGE" />
+    <uses-permission android:name="android.permission.ACCESS_NETWORK_STATE" />
+    <uses-permission android:name="android.permission.BROADCAST_STICKY" />
+    <uses-permission android:name="android.permission.ACCESS_WIFI_STATE" />
+    <uses-permission android:name="android.permission.READ_EXTERNAL_STORAGE" />
+    <uses-permission android:name="android.permission.CALL_PHONE" />
+
+    <!-- 加密键盘所需权限 -->
+    <uses-permission android:name="android.permission.RECEIVE_USER_PRESENT" />
+
+    <!-- 小米推送权限 -->
+    <uses-permission android:name="android.permission.GET_TASKS" />
+
+    <permission
+        android:name="com.tpyzq.mobile.pangu.permission.MIPUSH_RECEIVE"
+        android:protectionLevel="signature" />
+    <!-- 这里com.xiaomi.mipushdemo改成app的包名 -->
+    <uses-permission android:name="com.tpyzq.mobile.pangu.permission.MIPUSH_RECEIVE" />
+
+    <!-- 友盟分享 -->
+    <uses-permission android:name="android.permission.READ_LOGS" />
+    <uses-permission android:name="android.permission.SET_DEBUG_APP" />
+    <uses-permission android:name="android.permission.SYSTEM_ALERT_WINDOW" />
+    <uses-permission android:name="android.permission.USE_CREDENTIALS" />
+    <uses-permission android:name="android.permission.MANAGE_ACCOUNTS" />
+    <uses-permission android:name="android.permission.MOUNT_UNMOUNT_FILESYSTEMS" />
+    <uses-permission android:name="android.permission.CAMERA" />
+    <uses-permission android:name="android.hardware.camera" />
+    <uses-permission android:name="android.hardware.camera.autofocus" />
+    <uses-permission android:name="android.permission.RESTART_PACKAGES" />
+    <!-- 这个权限用于进行网络定位 -->
+    <uses-permission android:name="android.permission.ACCESS_COARSE_LOCATION" />
+    <!-- 用于访问wifi网络信息，wifi信息会用于进行网络定位 -->
+    <!-- 获取运营商信息，用于支持提供运营商信息相关的接口 -->
+    <!-- 这个权限用于获取wifi的获取权限，wifi信息会用来进行网络定位 -->
+    <uses-permission android:name="android.permission.CHANGE_WIFI_STATE" />
+
+    <!-- 用于读取手机当前的状态 -->
+    <application
+        android:name=".base.CustomApplication"
+        android:allowBackup="true"
+        android:icon="@mipmap/icon_test"
+        android:label="@string/app_name"
+        android:supportsRtl="true"
+        android:theme="@style/AppTheme">
+        <meta-data
+            android:name="UMENG_APPKEY"
+            android:value="57ea3de5e0f55aa0af00058c" />
+        <!-- 开户sdk -->
+        <meta-data
+            android:name="com.baidu.lbsapi.API_KEY"
+            android:value="ljeTCCsVh1rap0tutGgG29Up" />
+        <!-- 开户相关 activity -->
+        <activity
+            android:name="com.cairh.app.sjkh.MainActivity"
+            android:exported="false"
+            android:screenOrientation="portrait"
+            android:theme="@android:style/Theme.Wallpaper.NoTitleBar" />
+        <activity
+            android:name="com.cairh.app.sjkh.ui.VideoActivity"
+            android:exported="false"
+            android:screenOrientation="portrait" />
+        <activity
+            android:name="com.cairh.app.sjkh.ui.CameraMainActivity"
+            android:exported="false"
+            android:screenOrientation="landscape" />
+        <activity android:name="com.cairh.app.sjkh.SchemeActivity">
+            <intent-filter>
+                <action android:name="android.intent.action.VIEW" />
+
+                <category android:name="android.intent.category.DEFAULT" />
+                <category android:name="android.intent.category.BROWSABLE" />
+
+                <data android:scheme="CRHSJKH" />
+            </intent-filter>
+        </activity>
+        <activity
+            android:name="com.cairh.app.sjkh.ui.SingleVideoActivity"
+            android:exported="false"
+            android:screenOrientation="portrait" />
+        <activity
+            android:name="com.cairh.app.sjkh.ui.SingleVideoActivityAnychat"
+            android:screenOrientation="portrait" />
+        <activity
+            android:name="com.cairh.app.sjkh.ui.VideoPreviewActivity"
+            android:exported="false"
+            android:screenOrientation="portrait" />
+        <activity
+            android:name="com.cairh.app.sjkh.ui.FaceCameraActivity"
+            android:exported="false"
+            android:screenOrientation="portrait" />
+        <!-- 微信分享 -->
+        <activity
+            android:name="com.tpyzq.self.mobile.pangu.wxapi.WXEntryActivity"
+            android:configChanges="keyboardHidden|orientation|screenSize"
+            android:exported="true"
+            android:screenOrientation="portrait"
+            android:theme="@android:style/Theme.Translucent.NoTitleBar" />
+
+        <activity
+            android:name=".activity.LuncherActivity"
+            android:screenOrientation="portrait"
+            android:theme="@style/LuncherTheme">
+            <intent-filter>
+                <action android:name="android.intent.action.MAIN" />
+
+                <category android:name="android.intent.category.LAUNCHER" />
+            </intent-filter>
+        </activity>
+        <activity
+            android:name=".activity.navigation.NavigationActivity"
+            android:theme="@android:style/Theme.Light.NoTitleBar.Fullscreen" />
+        <activity
+            android:name=".activity.IndexActivity"
+            android:configChanges="orientation|keyboardHidden|screenSize"
+            android:screenOrientation="portrait"
+            android:theme="@style/Theme.PageIndicatorDefaults" />
+        <activity android:name=".activity.PdfActivity" />
+        <!-- 稳赢 相关activity -->
+        <activity android:name=".activity.home.managerMoney.ManagerMoenyDetailActivity" />
+        <activity android:name=".activity.home.managerMoney.BuyResultActivity" />
+        <activity android:name=".activity.home.managerMoney.ProductBuyActivity" />
+        <activity android:name=".activity.home.managerMoney.product.MoneyFundHistoryListActivity" />
+        <activity android:name=".activity.home.managerMoney.OptionalFinancingActivity" />
+        <activity android:name=".activity.home.MoreActivity" />
+        <activity android:name=".activity.home.AdvertActivity" />
+        <activity android:name=".activity.home.LovingHeartActivity" />
+        <!-- 预约 相关activity -->
+        <activity android:name=".activity.home.managerMoney.product.precontract.AlreadyReservationActivity" />
+        <activity android:name=".activity.home.managerMoney.product.precontract.PrecontractFlowActivity" android:label=""/>
+        <activity android:name=".activity.home.managerMoney.product.precontract.ProductPrecontractActivity"  android:label=""/>
+        <activity android:name=".activity.home.managerMoney.product.precontract.ProductTransferActivity" />
+        <activity android:name=".activity.home.managerMoney.product.precontract.ReservationSuccessActivity" />
+        <!-- 资讯 相关activity -->
+        <activity android:name=".activity.home.information.NewsDetailActivity" />
+        <activity android:name=".activity.home.information.NewsDetailMoreActivity" />
+        <activity android:name=".activity.home.information.IndustryRelevanceActivity" />
+        <activity android:name=".activity.home.information.InformationHomeActivity" />
+        <activity android:name=".activity.home.information.CompileTabActivity" />
+        <activity android:name=".activity.home.information.EventDetailRelatedInfoListActivity" />
+        <activity android:name=".activity.home.information.HotAnalysisDetailActivity" />
+        <activity android:name=".activity.home.information.HotAnalysisListActivity" />
+        <activity android:name=".activity.home.information.ImportantEventActivity" />
+        <activity android:name=".activity.home.information.ImportantEventDetailActivity" />
+        <!-- 热搜 相关activity -->
+        <activity android:name=".activity.home.hotsearchstock.HotSearchStockActivity" />
+        <activity android:name=".activity.home.SearchActivity" />
+        <!-- detail 相关activity -->
+        <activity
+            android:name=".activity.detail.StockDetailActivity"
+            android:configChanges="orientation|keyboardHidden|screenSize"
+            android:launchMode="singleTask" />
+        <activity android:name=".activity.detail.newsTab.AnnouncementStydyDetailActivity" />
+        <activity android:name=".activity.detail.newsTab.DetailNewsListActivity" />
+        <activity android:name=".activity.detail.newsTab.DetailStudyListActivity" />
+        <activity android:name=".activity.detail.newsTab.DetailAnnouncementListActivity" />
+        <activity android:name=".activity.detail.stockTab.BalanceSheetActivity" />
+        <activity android:name=".activity.detail.stockTab.CashFlowActivity" />
+        <activity android:name=".activity.detail.stockTab.KeyIndexActivity" />
+        <activity android:name=".activity.detail.stockTab.StockProfitActivity" />
+        <!-- myself  login相关activity -->
+        <activity
+            android:name=".activity.myself.login.TransactionLoginActivity"
+            android:launchMode="singleTop" />
+        <activity android:name=".activity.myself.login.ChangeAccoutActivity" />
+        <activity android:name=".activity.myself.login.HotlineActivity" />
+        <activity android:name=".activity.myself.login.ShouJiVerificationActivity" />
+        <activity android:name=".activity.myself.login.ShouJiZhuCeActivity" />
+
+        <!-- myself  账户功能相关activity -->
+        <activity android:name=".activity.myself.account.AnnouncementActivity" />
+        <activity android:name=".activity.myself.account.AssetsAnalysisActivity" />
+        <activity android:name=".activity.myself.account.FeedbackActivity" />
+        <activity android:name=".activity.myself.account.FinancialLifeActivity" />
+        <activity android:name=".activity.myself.account.InformActivity" />
+        <activity android:name=".activity.myself.account.MyNewsActivity" />
+        <activity android:name=".activity.myself.account.NewStockTipsActivity" />
+        <activity android:name=".activity.myself.account.PricesPromptActivity" />
+        <activity android:name=".activity.myself.account.RefreshSpeedActivity" />
+        <activity android:name=".activity.myself.account.SettingActivity" />
+        <activity android:name=".activity.myself.account.SpeedTestActivity" />
+        <activity android:name=".activity.myself.account.SpeedJYActivity"/>
+        <activity android:name=".activity.myself.account.StockBillActivity" />
+        <activity android:name=".activity.myself.account.StockRecallActivity" />
+        <activity android:name=".activity.myself.account.TradingDynamicsActivity" />
+        <activity android:name=".activity.myself.account.UsableCapitalActivity" />
+        <activity android:name=".activity.myself.account.VersionUpdateActivity" />
+
+        <!-- myself  掌厅功能相关activity -->
+        <activity android:name=".activity.myself.handhall.AccountPowerActivity" />
+        <activity android:name=".activity.myself.handhall.AgreementActivity" />
+        <activity android:name=".activity.myself.handhall.AgreementSignActvity" />
+        <activity android:name=".activity.myself.handhall.ChangePasswordActivity" />
+        <activity android:name=".activity.myself.handhall.EducationListActivity" />
+        <activity
+            android:name=".activity.myself.handhall.PersonalDataActivity"
+            android:windowSoftInputMode="stateHidden" />
+        <activity android:name=".activity.myself.handhall.ProfessionListActivity" />
+        <activity android:name=".activity.myself.handhall.ProtocolActivity" />
+        <activity android:name=".activity.myself.handhall.RelationListActivity" />
+        <activity android:name=".activity.myself.handhall.RiskEvaluationActivity" />
+        <activity android:name=".activity.myself.handhall.RiskWarningActivity" />
+        <activity android:name=".activity.myself.handhall.StockHolderInfoActivity" />
+
+        <!-- open_fund 基金相关activity -->
+        <activity android:name=".activity.trade.open_fund.AccoundSearchActivity" />
+        <activity android:name=".activity.trade.open_fund.AssessConfirmActivity" />
+        <activity android:name=".activity.trade.open_fund.FlowActivity" />
+        <activity android:name=".activity.trade.open_fund.FundChangeActivity" />
+        <activity android:name=".activity.trade.open_fund.FundCompanyActivity" />
+        <activity android:name=".activity.trade.open_fund.FundContractSignActivity" />
+        <activity android:name=".activity.trade.open_fund.FundEntrustActivity" />
+        <activity android:name=".activity.trade.open_fund.FundHistoryActivity" />
+        <activity android:name=".activity.trade.open_fund.FundInfoActivity" />
+        <activity android:name=".activity.trade.open_fund.FundOpenAccountActivity" />
+        <activity android:name=".activity.trade.open_fund.FundProductActivity" />
+        <activity android:name=".activity.trade.open_fund.FundPurchaseActivity" />
+        <activity android:name=".activity.trade.open_fund.FundRedemptionActivity" />
+        <activity android:name=".activity.trade.open_fund.FundShareActivity" />
+        <activity android:name=".activity.trade.open_fund.FundSubsActivity" />
+        <activity android:name=".activity.trade.open_fund.FundSubscriptionActivity" />
+        <activity android:name=".activity.trade.open_fund.FundWithDrawActivity" />
+        <activity android:name=".activity.trade.open_fund.HugeRdpActivity" />
+        <activity android:name=".activity.trade.open_fund.OpenFundActivity" />
+        <activity android:name=".activity.trade.open_fund.OptionalFundActivity" />
+        <activity android:name=".activity.trade.open_fund.PositionFund2Activity" />
+        <activity android:name=".activity.trade.open_fund.PositionFundActivity" />
+        <activity android:name=".activity.trade.open_fund.ShareFundActivity" />
+        <activity android:name=".activity.trade.open_fund.ShareWayActivity" />
+        <activity android:name=".activity.trade.open_fund.SignActivity" />
+
+        <!-- otc 业务相关activity -->
+        <activity android:name=".activity.trade.otc_business.OTC_AccountActivity" />
+        <activity android:name=".activity.trade.otc_business.OTC_AccountQueryActivity" />
+        <activity android:name=".activity.trade.otc_business.OTC_BargainQueryActivity" />
+        <activity android:name=".activity.trade.otc_business.OTC_ChiCangActivity" />
+        <activity android:name=".activity.trade.otc_business.OTC_ContractFlowWaterActivity" />
+        <activity android:name=".activity.trade.otc_business.OTC_ContractSignActivity" />
+        <activity android:name=".activity.trade.otc_business.OTC_ElectronicContractActivity" />
+        <activity android:name=".activity.trade.otc_business.OTC_EntrustQueryActivity" />
+        <activity android:name=".activity.trade.otc_business.OTC_OpenAccountActivity" />
+        <activity android:name=".activity.trade.otc_business.OTC_OpenAccountProductActivity" />
+        <activity android:name=".activity.trade.otc_business.OTC_ProductActivity" />
+        <activity android:name=".activity.trade.otc_business.OTC_QueryActivity" />
+        <activity android:name=".activity.trade.otc_business.OTC_RedeemActivity" />
+        <activity android:name=".activity.trade.otc_business.OTC_RevokeActivity" />
+        <activity android:name=".activity.trade.otc_business.OTC_ShareActivity" />
+        <activity android:name=".activity.trade.otc_business.OTC_SubscribeActivity" />
+        <activity android:name=".activity.trade.otc_business.OTC_SubscribeProductActivity" />
+        <activity android:name=".activity.trade.otc_business.OTC_SubscriptionActivity" />
+
+        <!-- stock 股票相关activity -->
+        <activity android:name=".activity.trade.stock.AllotAccountDetailActivity" />
+        <activity android:name=".activity.trade.stock.AllotQueryActivity" />
+        <activity android:name=".activity.trade.stock.BankBusinessIndexActivity" />
+        <activity android:name=".activity.trade.stock.BanksBalanceQueryActivity" />
+        <activity android:name=".activity.trade.stock.BanksTransferAccountsActivity" />
+        <activity
+            android:name=".activity.trade.stock.BuyAndSellActivity"
+            android:windowSoftInputMode="adjustPan|stateAlwaysHidden" />
+        <activity android:name=".activity.trade.stock.CalendarNewStockActivity" />
+        <activity
+            android:name=".activity.trade.stock.CapitalQueryActivity"
+            android:theme="@style/Theme.PageIndicatorDefaults" />
+        <activity android:name=".activity.trade.stock.ChangNeiFundActivity" />
+        <activity
+            android:name=".activity.trade.stock.ClinchDealActivity"
+            android:theme="@style/Theme.PageIndicatorDefaults" />
+        <activity android:name=".activity.trade.stock.CNFundRedeemActivity" />
+        <activity android:name=".activity.trade.stock.CNFundSubscribeActivity" />
+        <activity
+            android:name=".activity.trade.stock.DeliveryOrderActivity"
+            android:theme="@style/Theme.PageIndicatorDefaults" />
+        <activity
+            android:name=".activity.trade.stock.EntrustActivity"
+            android:theme="@style/Theme.PageIndicatorDefaults" />
+        <activity android:name=".activity.trade.stock.MySubscribeActivity" />
+        <activity android:name=".activity.trade.stock.NewStockSubscribeActivity" />
+        <activity android:name=".activity.trade.stock.OneKeySubscribeActivity" />
+        <activity android:name=".activity.trade.stock.PriceAllotActivity" />
+        <activity android:name=".activity.trade.stock.PriceCollectionActivity" />
+        <activity android:name=".activity.trade.stock.PublishNewStockDetail" />
+        <activity android:name=".activity.trade.stock.QueryLimitActivity" />
+        <activity android:name=".activity.trade.stock.ReferActivity" />
+        <activity android:name=".activity.trade.stock.RevokeActivity" />
+        <activity android:name=".activity.trade.stock.ReverseRepoActivity"/>
+        <activity android:name=".activity.trade.stock.ReverseRepoGuideActivity"/>
+        <activity android:name=".activity.trade.stock.SubscribeRuleActivity" />
+        <activity android:name=".activity.trade.stock.TakeAPositionActivity" />
+        <activity android:name=".activity.trade.stock.TraChooseBreedActivity"/>
+        <activity android:name=".activity.trade.stock.TranMoreActivity" />
+        <!--行情 相关activity-->
+        <activity android:name=".activity.market.quotation.plate.PlateListActivity" />
+        <activity android:name=".activity.market.quotation.StockListActivity" />
+        <activity android:name=".activity.market.quotation.newstock.NewStockListActivity" />
+        <activity android:name=".activity.market.selfChoice.editorSelfChoiceStock.EditorSelfChoiceStockActivity"/>
+        <activity android:name=".activity.market.selfChoice.childNews.newsdetail.NewsDetailListActivity"/>
+        <activity android:name=".activity.market.selfChoice.editorSelfChoiceStock.remain.RemainActivity"/>
+        <activity android:name=".activity.market.quotation.plate.PlateIndexActivity" />
+
+        <receiver android:name=".activity.market.selfChoice.childNews.SelfNewsReiver">
+            <intent-filter>
+                <action android:name="com.tpyzq.self.mobile.pangu.modle.market.selfChoice.childNews.action" />
+            </intent-filter>
+        </receiver>
+        <service android:name=".activity.market.selfChoice.childNews.SelfNewsService" />
+    </application>
+
+</manifest>

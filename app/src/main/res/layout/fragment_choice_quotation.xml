@@ -1,0 +1,103 @@
+<?xml version="1.0" encoding="utf-8"?>
+<LinearLayout xmlns:android="http://schemas.android.com/apk/res/android"
+    android:orientation="vertical"
+    xmlns:app="http://schemas.android.com/apk/res-auto"
+    android:layout_width="match_parent"
+    android:background="@color/bgColor"
+    android:layout_marginBottom="@dimen/size10"
+    android:layout_height="match_parent">
+
+    <!--<include layout="@layout/view_selfchoice_quotation"/>-->
+
+    <include layout="@layout/view_new_selfchoice_quotation"/>
+
+
+    <View
+        android:layout_width="match_parent"
+        android:layout_height="1px"
+        android:background="@color/lineColor"/>
+    <LinearLayout
+        android:layout_width="match_parent"
+        android:layout_height="wrap_content"
+        android:background="@color/white"
+        android:orientation="horizontal">
+
+        <TextView
+            android:layout_width="0dp"
+            android:layout_height="wrap_content"
+            android:layout_weight="1"
+            android:gravity="center_vertical"
+            android:layout_marginLeft="@dimen/size10"
+            android:paddingBottom="@dimen/size10"
+            android:paddingTop="@dimen/size10"
+            android:text="@string/securityName"
+            android:textColor="@color/hideTextColor" />
+
+        <LinearLayout
+            android:layout_width="@dimen/size0"
+            android:layout_height="wrap_content"
+            android:layout_weight="1"
+            android:gravity="center"
+            android:orientation="horizontal">
+
+            <TextView
+                android:id="@+id/currentPriceHeadtv2"
+                android:layout_width="wrap_content"
+                android:layout_height="wrap_content"
+                android:gravity="center"
+                android:paddingBottom="@dimen/size10"
+                android:paddingTop="@dimen/size10"
+                android:drawablePadding="@dimen/size5"
+                android:text="@string/currentPrice"
+                android:textColor="@color/black" />
+        </LinearLayout>
+
+        <LinearLayout
+            android:layout_width="@dimen/size0"
+            android:layout_height="wrap_content"
+            android:layout_weight="1"
+            android:gravity="right"
+            android:orientation="horizontal">
+
+            <TextView
+                android:id="@+id/zdfHeadtv3"
+                android:layout_width="wrap_content"
+                android:layout_height="wrap_content"
+                android:gravity="center"
+                android:paddingBottom="@dimen/size10"
+                android:paddingTop="@dimen/size10"
+                android:layout_marginRight="@dimen/size10"
+                android:drawablePadding="@dimen/size5"
+                android:text="@string/zdf"
+                android:textColor="@color/black" />
+        </LinearLayout>
+
+    </LinearLayout>
+
+    <View
+        android:layout_width="match_parent"
+        android:layout_height="@dimen/size1"
+        android:background="@color/lineColor" />
+
+    <com.tpyzq.mobile.pangu.view.pulllayou.PullLayout
+        android:id="@+id/selfchoice_PullDownScroll"
+        app:hasFooter="false"
+        android:layout_width="match_parent"
+        android:layout_height="match_parent"
+        android:orientation="vertical">
+
+        <ListView
+            android:id="@+id/choice_quotation_listview"
+            android:layout_width="match_parent"
+            android:layout_height="match_parent"
+            android:background="@color/bgColor"
+            android:divider="@null"
+            android:scrollbars="none" />
+
+    </com.tpyzq.mobile.pangu.view.pulllayou.PullLayout>
+
+
+
+
+
+</LinearLayout>

@@ -1,0 +1,81 @@
+<RelativeLayout xmlns:android="http://schemas.android.com/apk/res/android"
+    android:layout_width="match_parent"
+    android:layout_height="match_parent"
+    android:background="@color/bgColor"
+    android:orientation="vertical">
+
+    <LinearLayout
+        android:id="@+id/choice_quotationLayout1"
+        android:layout_width="match_parent"
+        android:layout_height="match_parent"
+        android:orientation="vertical">
+
+        <RelativeLayout
+            android:layout_width="match_parent"
+            android:layout_height="0dp"
+            android:layout_weight="1">
+
+            <TextView
+                android:id="@+id/headAddtv"
+                android:layout_width="wrap_content"
+                android:layout_height="wrap_content"
+                android:layout_centerInParent="true"
+                android:drawablePadding="@dimen/size10"
+                android:drawableTop="@mipmap/add_head"
+                android:gravity="center"
+                android:text="@string/headAdd"
+                android:textColor="@color/hideTextColor" />
+        </RelativeLayout>
+
+
+        <View
+            android:layout_width="match_parent"
+            android:layout_height="@dimen/size1"
+            android:layout_marginLeft="@dimen/size100"
+            android:layout_marginRight="@dimen/size100"
+            android:background="@color/lineColor" />
+
+        <RelativeLayout
+            android:layout_width="match_parent"
+            android:layout_height="0dp"
+            android:layout_weight="1">
+
+            <TextView
+                android:id="@+id/importHote"
+                android:layout_width="wrap_content"
+                android:layout_height="wrap_content"
+                android:layout_centerInParent="true"
+                android:drawablePadding="@dimen/size10"
+                android:drawableTop="@mipmap/hot_search_stock"
+                android:gravity="center"
+                android:text="@string/hotSearch"
+                android:textColor="@color/hideTextColor" />
+
+        </RelativeLayout>
+
+        <View
+            android:layout_width="match_parent"
+            android:layout_height="@dimen/size1"
+            android:layout_marginLeft="@dimen/size100"
+            android:layout_marginRight="@dimen/size100"
+            android:background="@color/lineColor" />
+
+        <RelativeLayout
+            android:layout_width="match_parent"
+            android:layout_height="0dp"
+            android:layout_weight="1">
+
+            <TextView
+                android:id="@+id/importTv"
+                android:layout_width="wrap_content"
+                android:layout_height="wrap_content"
+                android:layout_centerInParent="true"
+                android:drawablePadding="@dimen/size10"
+                android:drawableTop="@mipmap/import_stock"
+                android:gravity="center"
+                android:text="@string/impleStock"
+                android:textColor="@color/hideTextColor" />
+
+        </RelativeLayout>
+    </LinearLayout>
+</RelativeLayout>

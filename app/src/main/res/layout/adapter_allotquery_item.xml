@@ -1,0 +1,104 @@
+<?xml version="1.0" encoding="utf-8"?>
+<LinearLayout xmlns:android="http://schemas.android.com/apk/res/android"
+    android:orientation="vertical"
+    android:layout_width="match_parent"
+    android:layout_height="wrap_content">
+
+    <LinearLayout
+        android:layout_width="match_parent"
+        android:layout_height="wrap_content"
+        android:orientation="vertical"
+        android:background="@color/white"
+        android:padding="@dimen/size10">
+        <RelativeLayout
+            android:layout_width="match_parent"
+            android:layout_height="wrap_content">
+            <TextView
+                android:id="@+id/allotPrice"
+                android:layout_width="wrap_content"
+                android:layout_height="wrap_content"
+                android:layout_alignParentLeft="true"
+                android:textColor="@color/hushenTab_titleColor"
+                android:padding="@dimen/size10"
+                android:textSize="@dimen/txtSize14"/>
+
+            <TextView
+                android:id="@+id/allotTime"
+                android:layout_width="wrap_content"
+                android:layout_height="wrap_content"
+                android:layout_alignParentRight="true"
+                android:textColor="@color/hideTextColor"
+                android:padding="@dimen/size10"
+                android:textSize="@dimen/txtSize14"/>
+        </RelativeLayout>
+
+        <View
+            android:layout_width="match_parent"
+            android:layout_height="1px"
+            android:background="@color/lineColor"/>
+
+        <RelativeLayout
+            android:layout_width="match_parent"
+            android:layout_height="wrap_content">
+
+            <TextView
+                android:id="@+id/destAccount"
+                android:layout_width="wrap_content"
+                android:layout_height="wrap_content"
+                android:layout_alignParentLeft="true"
+                android:textColor="@color/hushenTab_titleColor"
+                android:paddingLeft="@dimen/size10"
+                android:paddingRight="@dimen/size10"
+                android:paddingBottom="@dimen/size5"
+                android:paddingTop="@dimen/size5"
+                android:textSize="@dimen/txtSize14"/>
+
+            <TextView
+                android:id="@+id/destBank"
+                android:layout_width="wrap_content"
+                android:layout_height="wrap_content"
+                android:layout_alignParentRight="true"
+                android:textColor="@color/hushenTab_titleColor"
+                android:paddingLeft="@dimen/size10"
+                android:paddingRight="@dimen/size10"
+                android:paddingBottom="@dimen/size5"
+                android:paddingTop="@dimen/size5"
+                android:textSize="@dimen/txtSize14"/>
+
+            <TextView
+                android:id="@+id/srcAccount"
+                android:layout_below="@id/destAccount"
+                android:layout_width="wrap_content"
+                android:layout_height="wrap_content"
+                android:layout_alignParentLeft="true"
+                android:textColor="@color/hushenTab_titleColor"
+                android:paddingLeft="@dimen/size10"
+                android:paddingRight="@dimen/size10"
+                android:paddingBottom="@dimen/size5"
+                android:paddingTop="@dimen/size5"
+                android:textSize="@dimen/txtSize14"/>
+
+            <TextView
+                android:id="@+id/srcBank"
+                android:layout_below="@id/destBank"
+                android:layout_width="wrap_content"
+                android:layout_height="wrap_content"
+                android:layout_alignParentRight="true"
+                android:textColor="@color/hushenTab_titleColor"
+                android:paddingLeft="@dimen/size10"
+                android:paddingRight="@dimen/size10"
+                android:paddingBottom="@dimen/size5"
+                android:paddingTop="@dimen/size5"
+                android:textSize="@dimen/txtSize14"/>
+
+        </RelativeLayout>
+
+    </LinearLayout>
+
+
+    <View
+        android:layout_width="match_parent"
+        android:layout_height="1px"
+        android:background="@color/lineColor"/>
+
+</LinearLayout>

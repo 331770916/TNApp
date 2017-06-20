@@ -1,0 +1,71 @@
+<?xml version="1.0" encoding="utf-8"?>
+<LinearLayout xmlns:android="http://schemas.android.com/apk/res/android"
+    android:orientation="vertical"
+    android:layout_width="match_parent"
+    android:layout_height="match_parent">
+
+    <RelativeLayout
+        android:layout_width="match_parent"
+        android:layout_height="@dimen/size25"
+        android:background="@color/red"
+        android:clipToPadding="true"
+        android:fitsSystemWindows="true" />
+    <RelativeLayout
+        android:layout_width="match_parent"
+        android:layout_height="wrap_content"
+        android:background="@color/red">
+        <ImageView
+            android:id="@+id/remainBackbtn"
+            android:layout_width="wrap_content"
+            android:layout_height="wrap_content"
+            android:layout_alignParentLeft="true"
+            android:padding="@dimen/size12"
+            android:src="@mipmap/back_btn"/>
+
+        <RadioGroup
+            android:id="@+id/remainRadioGroup"
+            android:layout_width="wrap_content"
+            android:layout_height="wrap_content"
+            android:layout_centerInParent="true"
+            android:checkedButton="@+id/remain_radio1"
+            android:orientation="horizontal">
+
+            <RadioButton
+                android:id="@+id/remain_radio1"
+                android:layout_width="wrap_content"
+                android:layout_height="wrap_content"
+                android:text="@string/stockPriceRemain"
+                android:paddingLeft="@dimen/size20"
+                android:paddingRight="@dimen/size20"
+                android:paddingTop="@dimen/size5"
+                android:paddingBottom="@dimen/size5"
+                android:background="@drawable/selector_remain_title"
+                android:textColor="@color/radio_remain_title"
+                android:textSize="@dimen/txtSize13"
+                android:button="@null"/>
+
+            <RadioButton
+                android:id="@+id/remain_radio2"
+                android:layout_width="wrap_content"
+                android:layout_height="wrap_content"
+                android:text="@string/mySelfRemain"
+                android:paddingLeft="@dimen/size20"
+                android:paddingRight="@dimen/size20"
+                android:paddingTop="@dimen/size5"
+                android:paddingBottom="@dimen/size5"
+                android:textSize="@dimen/txtSize13"
+                android:background="@drawable/selector_remain_right_title"
+                android:textColor="@color/radio_remain_title"
+                android:button="@null"/>
+
+        </RadioGroup>
+
+    </RelativeLayout>
+
+    <LinearLayout
+        android:id="@+id/remainParentLayout"
+        android:layout_width="match_parent"
+        android:layout_height="match_parent"
+        android:orientation="vertical"/>
+
+</LinearLayout>

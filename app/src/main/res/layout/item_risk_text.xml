@@ -1,0 +1,84 @@
+<?xml version="1.0" encoding="utf-8"?>
+<LinearLayout xmlns:android="http://schemas.android.com/apk/res/android"
+    android:layout_width="match_parent"
+    android:layout_height="match_parent"
+    android:descendantFocusability="blocksDescendants"
+    android:orientation="vertical">
+
+    <TextView
+        android:id="@+id/tv_question"
+        android:layout_width="wrap_content"
+        android:layout_height="wrap_content"
+        android:paddingLeft="@dimen/size15"
+        android:paddingTop="@dimen/size15"
+        android:text="1.请问您的年龄处于："
+        android:textColor="@color/black"
+        android:textSize="@dimen/txtSize14" />
+
+    <RadioGroup
+        android:id="@+id/rg_choose"
+        android:layout_width="match_parent"
+        android:layout_height="300dp"
+        android:orientation="vertical">
+
+        <RadioButton
+            android:id="@+id/rb_num1"
+            android:layout_width="wrap_content"
+            android:layout_height="0dp"
+            android:layout_marginLeft="@dimen/size25"
+            android:layout_marginRight="@dimen/size25"
+            android:layout_weight="1"
+            android:background="@null"
+            android:button="@drawable/radio_button"
+            android:paddingLeft="@dimen/size15"
+            android:textSize="@dimen/txtSize12" />
+
+        <RadioButton
+            android:id="@+id/rb_num2"
+            android:layout_width="wrap_content"
+            android:layout_height="0dp"
+            android:layout_marginLeft="@dimen/size25"
+            android:layout_marginRight="@dimen/size25"
+            android:layout_weight="1"
+            android:background="@null"
+            android:button="@drawable/radio_button"
+            android:paddingLeft="@dimen/size15"
+            android:textSize="@dimen/txtSize12" />
+
+        <RadioButton
+            android:id="@+id/rb_num3"
+            android:layout_width="wrap_content"
+            android:layout_height="0dp"
+            android:layout_marginLeft="@dimen/size25"
+            android:layout_marginRight="@dimen/size25"
+            android:layout_weight="1"
+            android:background="@null"
+            android:button="@drawable/radio_button"
+            android:paddingLeft="@dimen/size15"
+            android:textSize="@dimen/txtSize12" />
+
+        <RadioButton
+            android:id="@+id/rb_num4"
+            android:layout_width="wrap_content"
+            android:layout_height="0dp"
+            android:layout_marginLeft="@dimen/size25"
+            android:layout_marginRight="@dimen/size25"
+            android:layout_weight="1"
+            android:background="@null"
+            android:button="@drawable/radio_button"
+            android:paddingLeft="@dimen/size15"
+            android:textSize="@dimen/txtSize12" />
+
+        <RadioButton
+            android:id="@+id/rb_num5"
+            android:layout_width="wrap_content"
+            android:layout_height="0dp"
+            android:layout_marginLeft="@dimen/size25"
+            android:layout_marginRight="@dimen/size25"
+            android:layout_weight="1"
+            android:background="@null"
+            android:button="@drawable/radio_button"
+            android:paddingLeft="@dimen/size15"
+            android:textSize="@dimen/txtSize12" />
+    </RadioGroup>
+</LinearLayout>

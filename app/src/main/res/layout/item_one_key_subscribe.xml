@@ -1,0 +1,110 @@
+<?xml version="1.0" encoding="utf-8"?>
+<RelativeLayout xmlns:android="http://schemas.android.com/apk/res/android"
+    android:layout_width="match_parent"
+    android:layout_height="wrap_content"
+    android:descendantFocusability="blocksDescendants"
+    android:gravity="center_vertical"
+    android:orientation="horizontal">
+
+    <LinearLayout
+        android:gravity="center_vertical"
+        android:layout_width="match_parent"
+        android:layout_height="@dimen/size55">
+
+        <CheckBox
+            android:id="@+id/cbPitchOn"
+            android:layout_width="wrap_content"
+            android:layout_height="wrap_content"
+            android:layout_centerVertical="true"
+            android:layout_marginLeft="@dimen/size21"
+            android:button="@drawable/mybg"
+            android:textColor="@color/black" />
+
+
+        <LinearLayout
+            android:layout_width="match_parent"
+            android:layout_height="match_parent"
+            android:layout_toRightOf="@id/cbPitchOn"
+            android:gravity="center_vertical"
+            android:orientation="horizontal"
+            android:paddingRight="@dimen/size20">
+
+            <RelativeLayout
+                android:layout_width="@dimen/size0"
+                android:layout_height="wrap_content"
+                android:layout_weight="1"
+                android:paddingLeft="@dimen/size21">
+
+                <TextView
+                    android:id="@+id/tvSubscribeStockName"
+                    android:layout_width="match_parent"
+                    android:layout_height="wrap_content"
+                    android:layout_centerHorizontal="true"
+                    android:gravity="center|fill"
+                    android:paddingLeft="@dimen/size14"
+                    android:textColor="@color/hushenTab_titleColor"
+                    android:text="--"
+                    android:textSize="@dimen/txtSize14" />
+
+                <TextView
+                    android:id="@+id/tvSubscribeStockCode"
+                    android:layout_width="match_parent"
+                    android:layout_height="wrap_content"
+                    android:layout_alignLeft="@id/tvSubscribeStockName"
+                    android:layout_below="@id/tvSubscribeStockName"
+                    android:gravity="center|fill"
+                    android:paddingLeft="@dimen/size14"
+                    android:text="--"
+                    android:textColor="@color/hushenTab_titleColor"
+                    android:textSize="@dimen/self_stockNumberText" />
+            </RelativeLayout>
+
+            <LinearLayout
+                android:layout_width="0dp"
+                android:layout_height="wrap_content"
+                android:layout_weight="1"
+                android:orientation="vertical"
+                android:paddingLeft="@dimen/size10">
+
+                <TextView
+                    android:id="@+id/tvSubscribeStockPrice"
+                    android:layout_width="match_parent"
+                    android:layout_height="wrap_content"
+                    android:gravity="center"
+                    android:text="--"
+                    android:textColor="@color/hushenTab_titleColor"
+                    android:textSize="@dimen/txtSize12" />
+
+                <TextView
+                    android:id="@+id/tvSubscribeStockUpperLimit"
+                    android:layout_width="match_parent"
+                    android:layout_height="wrap_content"
+                    android:gravity="center"
+                    android:text="--"
+                    android:textColor="@color/hushenTab_titleColor"
+                    android:textSize="@dimen/txtSize12" />
+            </LinearLayout>
+
+            <LinearLayout
+                android:gravity="center|end"
+                android:layout_width="0dp"
+                android:layout_height="wrap_content"
+                android:layout_weight="1">
+
+                <TextView
+                    android:id="@+id/tvSubscribeStockNumber"
+                    android:layout_width="@dimen/size70"
+                    android:layout_height="@dimen/size30"
+                    android:background="@drawable/boder"
+                    android:clickable="true"
+                    android:ellipsize="end"
+                    android:focusable="false"
+                    android:gravity="center"
+                    android:singleLine="true"
+                    android:text="0"
+                    android:textColor="@color/hushenTab_titleColor"
+                    android:textSize="@dimen/txtSize12" />
+            </LinearLayout>
+        </LinearLayout>
+    </LinearLayout>
+</RelativeLayout>

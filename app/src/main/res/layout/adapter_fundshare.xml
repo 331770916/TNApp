@@ -1,0 +1,327 @@
+<?xml version="1.0" encoding="utf-8"?>
+<LinearLayout xmlns:android="http://schemas.android.com/apk/res/android"
+    android:id="@+id/adapterFundShareLayout"
+    android:layout_width="match_parent"
+    android:layout_height="wrap_content"
+    android:background="@color/white"
+    android:orientation="vertical">
+
+    <LinearLayout
+        android:layout_width="match_parent"
+        android:layout_height="wrap_content"
+        android:orientation="horizontal"
+        android:padding="@dimen/size10">
+
+        <TextView
+            android:id="@+id/fundShareItemTv1"
+            android:layout_width="wrap_content"
+            android:layout_height="wrap_content"
+            android:text="--"
+            android:textColor="@color/black"
+            android:textSize="@dimen/txtSize14" />
+
+        <TextView
+            android:id="@+id/tv_fund_code"
+            android:layout_width="wrap_content"
+            android:layout_height="wrap_content"
+            android:paddingLeft="@dimen/size5"
+            android:text="(--)"
+            android:textColor="@color/text"
+            android:textSize="@dimen/txtSize12" />
+    </LinearLayout>
+
+    <View
+        android:layout_width="match_parent"
+        android:layout_height="@dimen/size0.5"
+        android:background="@color/lineColor" />
+
+    <LinearLayout
+        android:layout_width="match_parent"
+        android:layout_height="wrap_content"
+        android:orientation="horizontal">
+
+        <LinearLayout
+            android:layout_width="0dp"
+            android:layout_height="wrap_content"
+            android:layout_weight="1"
+            android:orientation="vertical"
+            android:padding="@dimen/size10">
+
+            <TextView
+                android:layout_width="wrap_content"
+                android:layout_height="wrap_content"
+                android:layout_gravity="center"
+                android:text="持有份额/净值"
+                android:textColor="@color/text"
+                android:textSize="@dimen/txtSize12" />
+
+            <TextView
+                android:id="@+id/fundShareItemTv2"
+                android:layout_width="wrap_content"
+                android:layout_height="wrap_content"
+                android:layout_gravity="center"
+                android:text="--/--"
+                android:textColor="@color/black"
+                android:textSize="@dimen/txtSize12" />
+        </LinearLayout>
+
+        <LinearLayout
+            android:layout_width="0dp"
+            android:layout_height="wrap_content"
+            android:layout_weight="1"
+            android:orientation="vertical"
+            android:padding="@dimen/size10">
+
+            <TextView
+                android:layout_width="wrap_content"
+                android:layout_height="wrap_content"
+                android:layout_gravity="center"
+                android:text="市值/盈亏"
+                android:textColor="@color/text"
+                android:textSize="@dimen/txtSize12" />
+
+            <TextView
+                android:id="@+id/fundShareItemTv3"
+                android:layout_width="wrap_content"
+                android:layout_height="wrap_content"
+                android:layout_gravity="center"
+                android:text="--/--"
+                android:textColor="@color/black"
+                android:textSize="@dimen/txtSize12" />
+        </LinearLayout>
+    </LinearLayout>
+
+    <LinearLayout
+        android:layout_width="match_parent"
+        android:layout_height="@dimen/size40"
+        android:orientation="horizontal">
+
+        <TextView
+            android:id="@+id/fundShareItemTv4"
+            android:layout_width="0dp"
+            android:layout_height="match_parent"
+            android:layout_weight="1"
+            android:gravity="center"
+            android:padding="@dimen/size10"
+            android:text="赎回"
+            android:textColor="@color/black"
+            android:textSize="@dimen/txtSize14" />
+
+        <View
+            android:layout_width="@dimen/size0.5"
+            android:layout_height="wrap_content"
+            android:layout_marginBottom="@dimen/size5"
+            android:layout_marginTop="@dimen/size5"
+            android:background="@color/lineColor" />
+
+        <TextView
+            android:id="@+id/fundShareItemTv5"
+            android:layout_width="0dp"
+            android:layout_height="match_parent"
+            android:layout_weight="1"
+            android:gravity="center"
+            android:padding="@dimen/size10"
+            android:text="转换"
+            android:textColor="@color/black"
+            android:textSize="@dimen/txtSize14" />
+
+        <View
+            android:layout_width="@dimen/size0.5"
+            android:layout_height="wrap_content"
+            android:layout_marginBottom="@dimen/size5"
+            android:layout_marginTop="@dimen/size5"
+            android:background="@color/lineColor" />
+
+        <TextView
+            android:id="@+id/fundShareItemTv6"
+            android:layout_width="0dp"
+            android:layout_height="match_parent"
+            android:layout_weight="1"
+            android:gravity="center"
+            android:padding="@dimen/size10"
+            android:text="分红设置"
+            android:textColor="@color/black"
+            android:textSize="@dimen/txtSize14" />
+    </LinearLayout>
+
+    <LinearLayout
+        android:id="@+id/fundShareLayout2"
+        android:layout_width="match_parent"
+        android:layout_height="wrap_content"
+        android:orientation="vertical">
+
+        <View
+            android:layout_width="match_parent"
+            android:layout_height="@dimen/size1"
+            android:background="@color/lineColor" />
+        <LinearLayout
+            android:layout_width="match_parent"
+            android:layout_height="@dimen/size40"
+            android:background="@color/bgColor"
+            android:gravity="center_vertical"
+            android:orientation="horizontal">
+
+            <TextView
+                android:layout_width="0dp"
+                android:layout_weight="1"
+                android:layout_height="wrap_content"
+                android:text="基金公司名称："
+                android:paddingLeft="@dimen/size20"
+                android:textColor="@color/text"
+                android:textSize="@dimen/txtSize12" />
+
+            <TextView
+                android:id="@+id/fundShareItemTv7"
+                android:layout_width="0dp"
+                android:layout_weight="1"
+                android:layout_height="wrap_content"
+                android:text="--"
+                android:textColor="@color/black"
+                android:textSize="@dimen/txtSize12" />
+
+            <View
+                android:layout_width="@dimen/size1"
+                android:layout_height="wrap_content"
+                android:background="@color/lineColor" />
+
+            <TextView
+                android:layout_width="0dp"
+                android:layout_height="wrap_content"
+                android:layout_weight="1"
+                android:text="冻结数量："
+                android:gravity="left"
+                android:paddingLeft="@dimen/size20"
+                android:textColor="@color/text"
+                android:textSize="@dimen/txtSize12" />
+
+            <TextView
+                android:id="@+id/fundShareItemTv8"
+                android:layout_width="0dp"
+                android:layout_height="wrap_content"
+                android:layout_weight="1"
+                android:gravity="left"
+                android:text="0"
+                android:textColor="@color/black"
+                android:textSize="@dimen/txtSize12" />
+        </LinearLayout>
+
+        <View
+            android:layout_width="match_parent"
+            android:layout_height="@dimen/size1"
+            android:background="@color/lineColor" />
+
+        <LinearLayout
+            android:layout_width="match_parent"
+            android:layout_height="@dimen/size40"
+            android:background="@color/bgColor"
+            android:gravity="center_vertical"
+            android:orientation="horizontal">
+
+            <TextView
+                android:layout_width="0dp"
+                android:layout_weight="1"
+                android:layout_height="wrap_content"
+                android:text="基金公司代码："
+                android:paddingLeft="@dimen/size20"
+                android:textColor="@color/text"
+                android:textSize="@dimen/txtSize12" />
+
+            <TextView
+                android:id="@+id/fundShareItemTv9"
+                android:layout_width="0dp"
+                android:layout_weight="1"
+                android:layout_height="wrap_content"
+                android:text="--"
+                android:textColor="@color/black"
+                android:textSize="@dimen/txtSize12" />
+
+            <View
+                android:layout_width="@dimen/size1"
+                android:layout_height="wrap_content"
+                android:background="@color/lineColor" />
+
+            <TextView
+                android:layout_width="0dp"
+                android:layout_height="wrap_content"
+                android:layout_weight="1"
+                android:text="可用数量："
+                android:gravity="left"
+                android:paddingLeft="@dimen/size20"
+                android:textColor="@color/text"
+                android:textSize="@dimen/txtSize12" />
+            <TextView
+                android:id="@+id/fundShareItemTv10"
+                android:layout_width="0dp"
+                android:layout_height="wrap_content"
+                android:layout_weight="1"
+                android:gravity="left"
+                android:text="0"
+                android:textColor="@color/black"
+                android:textSize="@dimen/txtSize12" />
+        </LinearLayout>
+
+        <View
+            android:layout_width="match_parent"
+            android:layout_height="@dimen/size1"
+            android:background="@color/lineColor" />
+        <LinearLayout
+            android:layout_width="match_parent"
+            android:layout_height="@dimen/size40"
+            android:background="@color/bgColor"
+            android:gravity="center_vertical"
+            android:orientation="horizontal">
+
+            <TextView
+                android:layout_width="0dp"
+                android:layout_weight="1"
+                android:layout_height="wrap_content"
+                android:text="分红方式："
+                android:paddingLeft="@dimen/size20"
+                android:textColor="@color/text"
+                android:textSize="@dimen/txtSize12" />
+
+            <TextView
+                android:id="@+id/fundShareItemTv11"
+                android:layout_width="0dp"
+                android:layout_weight="1"
+                android:layout_height="wrap_content"
+                android:text="--"
+                android:textColor="@color/black"
+                android:textSize="@dimen/txtSize12" />
+
+            <View
+                android:layout_width="@dimen/size1"
+                android:layout_height="wrap_content"
+                android:background="@color/lineColor" />
+
+            <TextView
+                android:layout_width="0dp"
+                android:layout_height="wrap_content"
+                android:layout_weight="1"
+                android:text="成本价："
+                android:gravity="left"
+                android:paddingLeft="@dimen/size20"
+                android:textColor="@color/text"
+                android:textSize="@dimen/txtSize12" />
+            <TextView
+                android:id="@+id/fundShareItemTv12"
+                android:layout_width="0dp"
+                android:layout_height="wrap_content"
+                android:layout_weight="1"
+                android:gravity="left"
+                android:text="0"
+                android:textColor="@color/black"
+                android:textSize="@dimen/txtSize12" />
+        </LinearLayout>
+
+        <ImageButton
+            android:id="@+id/fundShareItemTv13"
+            android:layout_width="match_parent"
+            android:layout_height="wrap_content"
+            android:background="@color/lineColor"
+            android:padding="@dimen/size10"
+            android:src="@mipmap/zhankai" />
+    </LinearLayout>
+
+
+</LinearLayout>

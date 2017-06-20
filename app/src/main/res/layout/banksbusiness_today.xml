@@ -1,0 +1,112 @@
+<?xml version="1.0" encoding="utf-8"?>
+<LinearLayout xmlns:android="http://schemas.android.com/apk/res/android"
+    xmlns:app="http://schemas.android.com/apk/res-auto"
+    android:background="@color/bgColor"
+    android:orientation="vertical"
+    android:layout_width="match_parent"
+    android:layout_height="match_parent">
+
+    <LinearLayout
+        android:id="@+id/allotCalenderLayout"
+        android:layout_width="match_parent"
+        android:layout_height="wrap_content"
+        android:background="@color/white"
+        android:visibility="gone"
+        android:paddingTop="@dimen/size5"
+        android:paddingBottom="@dimen/size5"
+        android:orientation="horizontal">
+
+        <ImageView
+            android:layout_width="wrap_content"
+            android:layout_height="wrap_content"
+            android:layout_marginLeft="@dimen/size10"
+            android:layout_gravity="center"
+            android:src="@mipmap/rililan"/>
+
+        <TextView
+            android:id="@+id/allotQueryStartDate"
+            android:layout_width="0dp"
+            android:layout_weight="1.5"
+            android:layout_height="wrap_content"
+            android:textColor="@color/hideTextColor"
+            android:layout_marginLeft="@dimen/size10"
+            android:paddingTop="@dimen/size10"
+            android:paddingBottom="@dimen/size10"
+            android:gravity="center"
+            android:text="请选择日期"
+            android:textSize="@dimen/txtSize12"
+            android:background="@color/white"/>
+
+        <TextView
+            android:layout_width="0dp"
+            android:layout_weight="0.5"
+            android:layout_height="wrap_content"
+            android:gravity="center"
+            android:textColor="@color/black"
+            android:padding="@dimen/size10"
+            android:text="至"/>
+
+        <TextView
+            android:id="@+id/allotQueryEndDate"
+            android:layout_width="0dp"
+            android:layout_weight="1.5"
+            android:layout_height="wrap_content"
+            android:textColor="@color/hideTextColor"
+            android:paddingTop="@dimen/size10"
+            android:paddingBottom="@dimen/size10"
+            android:text="选择日期"
+            android:gravity="center"
+            android:textSize="@dimen/txtSize12"
+            android:background="@color/white"/>
+
+        <TextView
+            android:id="@+id/allotQueryBtn"
+            android:layout_marginLeft="@dimen/size15"
+            android:layout_width="0dp"
+            android:layout_weight="1"
+            android:gravity="center"
+            android:layout_height="wrap_content"
+            android:text="查询"
+            android:paddingTop="@dimen/size10"
+            android:paddingBottom="@dimen/size10"
+            android:paddingRight="@dimen/size15"
+            android:paddingLeft="@dimen/size15"
+            android:background="@color/calendarBtnColor"
+            android:textColor="@color/white"/>
+
+    </LinearLayout>
+
+    <FrameLayout
+        android:layout_width="match_parent"
+        android:layout_height="match_parent">
+        <com.tpyzq.mobile.pangu.view.pulllayou.PullLayout
+            android:id="@+id/pull_layout"
+            android:layout_width="match_parent"
+            android:layout_height="match_parent"
+            app:theme="@style/pull_style">
+            <ListView
+                android:id="@+id/allotQueryListView"
+                android:layout_width="match_parent"
+                android:layout_height="match_parent"
+                android:scrollbars="none"
+                android:divider="@color/bgColor"
+                android:dividerHeight="@dimen/size5"/>
+        </com.tpyzq.mobile.pangu.view.pulllayou.PullLayout>
+
+        <ImageView
+            android:id="@+id/iv_allotQueryTab"
+            android:layout_width="match_parent"
+            android:layout_height="match_parent"
+            android:visibility="gone"
+            android:scaleType="center"
+            android:scaleY="0.9"
+            android:scaleX="0.9"
+            android:layout_marginBottom="@dimen/size60"
+            android:layout_gravity="center_horizontal"
+            android:src="@mipmap/kong"/>
+    </FrameLayout>
+
+
+
+
+</LinearLayout>

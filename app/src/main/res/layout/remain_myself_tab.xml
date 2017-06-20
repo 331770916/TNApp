@@ -1,0 +1,85 @@
+<?xml version="1.0" encoding="utf-8"?>
+<LinearLayout xmlns:android="http://schemas.android.com/apk/res/android"
+    android:orientation="vertical"
+    android:background="@color/white"
+    android:layout_width="match_parent"
+    android:layout_height="match_parent">
+
+    <LinearLayout
+        android:layout_width="match_parent"
+        android:layout_height="wrap_content"
+        android:orientation="horizontal">
+        <TextView
+            android:layout_width="0dp"
+            android:layout_weight="1"
+            android:gravity="left|center_vertical"
+            android:textColor="@color/hideTextColor"
+            android:paddingBottom="@dimen/size10"
+            android:paddingTop="@dimen/size10"
+            android:paddingLeft="@dimen/size10"
+            android:text="@string/zqmc"
+            android:textSize="@dimen/txtSize13"
+            android:layout_height="match_parent" />
+
+        <TextView
+            android:layout_width="0dp"
+            android:layout_weight="1.5"
+            android:textColor="@color/hideTextColor"
+            android:paddingBottom="@dimen/size10"
+            android:paddingTop="@dimen/size10"
+            android:text="@string/remainType"
+            android:textSize="@dimen/txtSize13"
+            android:gravity="center"
+            android:layout_height="match_parent" />
+
+        <TextView
+            android:layout_width="0dp"
+            android:layout_weight="1"
+            android:textColor="@color/hideTextColor"
+            android:paddingBottom="@dimen/size10"
+            android:paddingTop="@dimen/size10"
+            android:paddingRight="@dimen/size10"
+            android:text="@string/delete"
+            android:textSize="@dimen/txtSize13"
+            android:gravity="right"
+            android:layout_height="match_parent"
+            android:id="@+id/textView25" />
+    </LinearLayout>
+    <View
+        android:layout_width="match_parent"
+        android:layout_marginRight="@dimen/size10"
+        android:layout_marginLeft="@dimen/size10"
+        android:layout_height="@dimen/size0.5"
+        android:background="@color/lineColor"/>
+
+    <FrameLayout
+        android:layout_width="match_parent"
+        android:layout_height="match_parent">
+
+        <android.support.v4.widget.SwipeRefreshLayout
+            android:id="@+id/remainRefreshLayout"
+            android:layout_width="match_parent"
+            android:layout_height="match_parent">
+            <ListView
+                android:id="@+id/remainSelfListView"
+                android:layout_width="match_parent"
+                android:layout_height="match_parent"
+                android:divider="@null"
+                android:dividerHeight="@dimen/size0.5"
+                android:scrollbars="none"
+                />
+        </android.support.v4.widget.SwipeRefreshLayout>
+
+        <ImageView
+            android:id="@+id/iv_remain_kong"
+            android:layout_width="@dimen/size150"
+            android:layout_height="@dimen/size130"
+            android:layout_gravity="center"
+            android:visibility="gone"
+            android:src="@mipmap/kong"/>
+
+    </FrameLayout>
+
+
+
+</LinearLayout>

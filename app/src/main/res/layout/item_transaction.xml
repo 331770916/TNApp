@@ -1,0 +1,43 @@
+<?xml version="1.0" encoding="utf-8"?>
+<LinearLayout   xmlns:android="http://schemas.android.com/apk/res/android"
+
+    android:layout_height="wrap_content"
+    android:layout_width="match_parent"
+    android:orientation="vertical">
+    <RelativeLayout
+        android:layout_width="match_parent"
+        android:layout_height="wrap_content"
+        android:background="@color/white"
+        android:orientation="horizontal"
+        >
+
+        <ImageView
+            android:id="@+id/iv_item_img"
+            android:layout_width="wrap_content"
+            android:layout_height="wrap_content"
+            android:layout_centerVertical="true"
+            android:layout_marginLeft="@dimen/size30"
+            android:src="@mipmap/jy_gupiao" />
+
+        <TextView
+            android:id="@+id/tv_item_title"
+            android:layout_width="wrap_content"
+            android:layout_height="@dimen/size50"
+            android:layout_marginLeft="@dimen/size15"
+            android:layout_toRightOf="@id/iv_item_img"
+            android:gravity="center"
+            android:text="股票"
+            android:textSize="@dimen/txtSize14" />
+
+        <ImageView
+            android:id="@+id/iv_item_state"
+            android:layout_width="wrap_content"
+            android:layout_height="wrap_content"
+            android:layout_alignParentRight="true"
+            android:layout_centerVertical="true"
+            android:layout_marginRight="@dimen/size20"
+            android:rotation="0"
+            android:src="@mipmap/jy_xiajiantou" />
+    </RelativeLayout>
+    <include android:id="@+id/ll_grid" layout="@layout/item_transaction_list"/>
+</LinearLayout>

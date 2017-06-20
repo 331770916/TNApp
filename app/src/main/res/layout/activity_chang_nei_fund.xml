@@ -1,0 +1,226 @@
+<?xml version="1.0" encoding="utf-8"?>
+<LinearLayout xmlns:android="http://schemas.android.com/apk/res/android"
+    xmlns:tools="http://schemas.android.com/tools"
+    android:layout_width="match_parent"
+    android:layout_height="match_parent"
+    android:background="@color/bgColor"
+    android:orientation="vertical"
+    tools:context="com.tpyzq.mobile.pangu.activity.trade.stock.ChangNeiFundActivity">
+
+    <RelativeLayout
+        android:layout_width="match_parent"
+        android:layout_height="@dimen/size25"
+        android:background="@color/blue"
+        android:clipToPadding="true"
+        android:fitsSystemWindows="true" />
+
+
+    <!-- 头布局 -->
+    <RelativeLayout
+        android:layout_width="match_parent"
+        android:layout_height="@dimen/pickerview_topbar_height"
+        android:background="@color/blue">
+
+        <ImageView
+            android:id="@+id/ivCNFund_back"
+            android:layout_width="wrap_content"
+            android:layout_height="match_parent"
+            android:layout_alignParentLeft="true"
+            android:padding="@dimen/size10"
+            android:src="@mipmap/back_btn" />
+
+        <TextView
+            android:layout_width="wrap_content"
+            android:layout_height="wrap_content"
+            android:layout_centerInParent="true"
+            android:text="@string/ChangNeiJiJin"
+            android:textColor="@color/white"
+            android:textSize="@dimen/pickerview_topbar_title_textsize" />
+    </RelativeLayout>
+
+
+    <!--分割线-->
+    <LinearLayout
+        android:layout_width="match_parent"
+        android:layout_height="wrap_content"
+        android:orientation="horizontal">
+
+        <TextView
+            android:layout_width="@dimen/size12"
+            android:layout_height="1dp" />
+
+        <TextView
+            android:layout_width="match_parent"
+            android:layout_height="@dimen/size0.5"
+            android:background="@color/lineColor" />
+    </LinearLayout>
+
+
+    <LinearLayout
+        android:layout_width="match_parent"
+        android:layout_height="wrap_content"
+        android:background="@color/white"
+        android:orientation="vertical">
+
+        <RelativeLayout
+            android:id="@+id/rlFundRenGou"
+            android:layout_width="match_parent"
+            android:layout_height="@dimen/size50"
+            android:background="@color/white"
+            android:paddingBottom="@dimen/size7"
+            android:paddingLeft="@dimen/size5"
+            android:paddingRight="@dimen/size5"
+            android:paddingTop="@dimen/size7">
+
+            <ImageView
+                android:id="@+id/ivCNFund"
+                android:layout_width="wrap_content"
+                android:layout_height="wrap_content"
+                android:layout_alignParentLeft="true"
+                android:layout_centerVertical="true"
+                android:padding="@dimen/size7"
+                android:src="@mipmap/jijinrengou" />
+
+            <LinearLayout
+                android:layout_width="wrap_content"
+                android:layout_height="wrap_content"
+                android:layout_centerVertical="true"
+                android:layout_toRightOf="@id/ivCNFund"
+                android:orientation="vertical">
+
+                <TextView
+                    android:id="@+id/wt_item_tv1"
+                    android:layout_width="wrap_content"
+                    android:layout_height="wrap_content"
+                    android:text="@string/JiJinRenGou"
+                    android:textColor="@color/hushenTab_titleColor"
+                    android:textSize="@dimen/txtSize14" />
+
+            </LinearLayout>
+
+
+            <ImageView
+                android:id="@+id/wt_item_iv2"
+                android:layout_width="wrap_content"
+                android:layout_height="wrap_content"
+                android:layout_alignParentRight="true"
+                android:layout_centerVertical="true"
+                android:padding="@dimen/size7"
+                android:src="@mipmap/youjiantou" />
+        </RelativeLayout>
+
+        <View
+            android:layout_width="match_parent"
+            android:layout_height="@dimen/size0.5"
+            android:layout_marginLeft="@dimen/size15"
+            android:background="@color/lineColor" />
+
+
+        <RelativeLayout
+            android:id="@+id/rlFundShenGou"
+            android:layout_width="match_parent"
+            android:layout_height="@dimen/size50"
+            android:background="@color/white"
+            android:paddingBottom="@dimen/size7"
+            android:paddingLeft="@dimen/size5"
+            android:paddingRight="@dimen/size5"
+            android:paddingTop="@dimen/size7">
+
+            <ImageView
+                android:id="@+id/ivFundShenGou"
+                android:layout_width="wrap_content"
+                android:layout_height="wrap_content"
+                android:layout_alignParentLeft="true"
+                android:layout_centerVertical="true"
+                android:padding="@dimen/size7"
+                android:src="@mipmap/jijinshengou" />
+
+            <LinearLayout
+                android:layout_width="wrap_content"
+                android:layout_height="wrap_content"
+                android:layout_centerVertical="true"
+                android:layout_toRightOf="@id/ivFundShenGou"
+                android:orientation="vertical">
+
+                <TextView
+                    android:id="@+id/cj_item_tv1"
+                    android:layout_width="wrap_content"
+                    android:layout_height="wrap_content"
+                    android:text="@string/JiJinShenGou"
+                    android:textColor="@color/hushenTab_titleColor"
+                    android:textSize="@dimen/txtSize14" />
+
+            </LinearLayout>
+
+
+            <ImageView
+                android:id="@+id/cj_item_iv2"
+                android:layout_width="wrap_content"
+                android:layout_height="wrap_content"
+                android:layout_alignParentRight="true"
+                android:layout_centerVertical="true"
+                android:padding="@dimen/size7"
+                android:src="@mipmap/youjiantou" />
+        </RelativeLayout>
+
+        <View
+            android:layout_width="match_parent"
+            android:layout_height="@dimen/size0.5"
+            android:layout_marginLeft="@dimen/size15"
+            android:background="@color/lineColor" />
+
+
+        <RelativeLayout
+            android:id="@+id/rlFundShuHui"
+            android:layout_width="match_parent"
+            android:layout_height="@dimen/size50"
+            android:background="@color/white"
+            android:paddingBottom="@dimen/size7"
+            android:paddingLeft="@dimen/size5"
+            android:paddingRight="@dimen/size5"
+            android:paddingTop="@dimen/size7">
+
+            <ImageView
+                android:id="@+id/ivFundShuHui"
+                android:layout_width="wrap_content"
+                android:layout_height="wrap_content"
+                android:layout_alignParentLeft="true"
+                android:layout_centerVertical="true"
+                android:padding="@dimen/size7"
+                android:src="@mipmap/jijinshuhui" />
+
+            <LinearLayout
+                android:layout_width="wrap_content"
+                android:layout_height="wrap_content"
+                android:layout_centerVertical="true"
+                android:layout_toRightOf="@id/ivFundShuHui"
+                android:orientation="vertical">
+
+                <TextView
+                    android:id="@+id/zj_item_tv1"
+                    android:layout_width="wrap_content"
+                    android:layout_height="wrap_content"
+                    android:text="@string/JiJinShuHui"
+                    android:textColor="@color/hushenTab_titleColor"
+                    android:textSize="@dimen/txtSize14" />
+
+            </LinearLayout>
+
+            <ImageView
+                android:id="@+id/jg_item_iv2"
+                android:layout_width="wrap_content"
+                android:layout_height="wrap_content"
+                android:layout_alignParentRight="true"
+                android:layout_centerVertical="true"
+                android:padding="@dimen/size7"
+                android:src="@mipmap/youjiantou" />
+        </RelativeLayout>
+
+        <View
+            android:layout_width="match_parent"
+            android:layout_height="@dimen/size0.5"
+            android:background="@color/lineColor" />
+    </LinearLayout>
+
+
+</LinearLayout>

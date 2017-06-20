@@ -1,0 +1,30 @@
+<?xml version="1.0" encoding="utf-8"?>
+
+<layer-list xmlns:android="http://schemas.android.com/apk/res/android">
+
+    <item>
+        <shape>
+
+            <!-- 填充 -->
+            <solid
+                android:color="@android:color/white"/><!-- 填充的颜色 -->
+
+            <item  android:top="1px">
+                <shape android:shape="rectangle">
+
+                    <gradient android:startColor="@color/white"
+                        android:endColor="@color/white"
+                        android:angle="270" />
+
+                    <padding android:left="5dp"
+                        android:top="3dp"
+                        android:right="5dp"
+                        android:bottom="3dp" />
+                </shape>
+
+            </item>
+
+        </shape>
+    </item>
+
+</layer-list>

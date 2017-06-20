@@ -1,0 +1,704 @@
+<resources>
+    <string name="app_name">太牛.new</string>
+
+    <string name="home">首页</string>
+    <string name="market">行情</string>
+    <string name="selfchoice">自选</string>
+    <string name="transaction">交易</string>
+    <string name="information">我的</string>
+    <string name="selfChoiceStock">自选股</string>
+
+    <!-- 权限 -->
+    <string name="cancel">取消</string>
+    <string name="setting">设置</string>
+    <string name="notifyTitle">提示</string>
+    <string name="notifyMsg">当前应用缺少必要权限。\n\n请点击\"设置\"-\"权限\"-打开所需权限。</string>
+
+    <!-- 新股模块部分 -->
+    <string name="securityName">证券名称</string>
+    <string name="currentPrice">现价</string>
+    <string name="flowInto">流入资金</string>
+    <string name="progressTitle">正在刷新\u3000最后更新：</string>
+    <string name="ledPlate">领涨板块</string>
+    <string name="ledStock">领涨股</string>
+    <string name="SZZS">上证指数</string>
+    <string name="SZZSS">深证指数</string>
+    <string name="CYBZS">创业板指</string>
+    <string name="electronicInformation">电子信息</string>
+    <string name="communication">通信</string>
+    <string name="transportLogistics">运输物流</string>
+    <string name="foreignTrade">外贸</string>
+    <string name="machinery">机械</string>
+    <string name="buildingMaterials">建材</string>
+    <string name="stockName">股票名称</string>
+    <string name="zfzd">涨幅/涨跌</string>
+    <string name="ldg">领跌股</string>
+
+    <string name="zjlr">资金流入</string>
+    <string name="zjlc">资金流出</string>
+    <string name="hsl">换手率</string>
+    <string name="lcje">流出金额</string>
+    <string name="lrje">流入金额</string>
+    <!-- slidingDrawer -->
+
+    <string name="sliding_cje">成交额</string>
+    <string name="bestHigh">最高</string>
+    <string name="bestLow">最低</string>
+    <string name="open">今开</string>
+
+    <!-- 板块 -->
+    <string name="hybk">行业板块</string>
+    <string name="gnbk">概念板块</string>
+    <string name="dybk">地域板块</string>
+
+    <!-- 还手率 -->
+
+    <string name="dqj">当前价</string>
+    <string name="zdf">涨跌幅</string>
+
+    <!-- 详情 -->
+
+    <string name="timek">分时</string>
+    <string name="fiveK">五日</string>
+    <string name="mounthK">月K</string>
+    <string name="dayK">日K</string>
+    <string name="weekK">周K</string>
+    <string name="minutesK">分钟</string>
+    <string name="buy">买入</string>
+    <string name="sell">卖出</string>
+    <string name="addSelfChoice">添加自选</string>
+    <string name="more">更多</string>
+    <string name="news">新闻</string>
+    <string name="announcement">公告</string>
+    <string name="study">研报</string>
+
+    <string name="profiles">简况</string>
+    <string name="finance">财务</string>
+    <string name="shareholder">股东</string>
+
+    <!-- 更多 -->
+    <string name="cyb">创业板</string>
+    <string name="zf">涨幅</string>
+    <string name="hsag">沪深A股</string>
+    <string name="pankou">盘口</string>
+    <string name="mingxi">明细</string>
+
+
+    <!-- 新股 -->
+
+    <string name="newStockCalendar">新股日历</string>
+    <string name="xgrl1">新股日历</string>
+    <string name="wdsg">我的申购</string>
+    <string name="jrwxgfx">今日无新股发行</string>
+    <string name="yjdx">一键打新</string>
+    <string name="yjsg">一键申购</string>
+    <string name="dss">待上市</string>
+    <string name="mcdm">名称代码</string>
+    <string name="fxj">发行价</string>
+    <string name="zql">中签率</string>
+    <string name="ssrq">上市日期</string>
+    <string name="xghq">新股行情</string>
+    <string name="xj">现价</string>
+    <string name="ljzf">累计涨幅</string>
+    <string name="sjfx">2016年6月29日发行</string>
+    <string name="sgdm">申购代码</string>
+    <string name="fxsyl">发行市盈率</string>
+    <string name="dgsgsj">顶格申购市值</string>
+    <string name="sjss">2016年6月29日上市</string>
+    <string name="totaleIncrease">累计涨幅</string>
+    <string name="todayPublish">今日发行</string>
+    <string name="todayMarket">今日上市</string>
+    <string name="newStockShenGog">新股申购</string>
+    <string name="newStockShenGogGuiZe">新股申购规则</string>
+    <string name="oneKeyShenGog">一键申购</string>
+    <string name="newStockRiLi">新股日历</string>
+    <string name="newStockFaXing">今日2只新股发行</string>
+    <string name="yiJianSubscribe">一键申购</string>
+    <string name="mySubscribe">中签查询</string>
+    <string name="queryLimit">查询可用额度</string>
+    <string name="subscribeRule">新股申购规则</string>
+    <string name="subscribeRule_text">新规一学就会</string>
+    <string name="zglt">中国联通</string>
+    <string name="yiFaXingWeiShangShi">已发行未上市</string>
+    <string name="shenGouRiQi">申购日期：</string>
+    <string name="shenGouJiaGe">申购价格：</string>
+    <string name="shenGouGuShu">申购股数：</string>
+    <string name="ZhongQianShuLiang">中签数量：</string>
+    <string name="RiQi">06.21</string>
+    <string name="kong">           - - </string>
+    <string name="mySubscribeLimit">我的申购额度</string>
+    <string name="mySubscribeLimit2">我的申购额度 (个人多账户市值合并计算)</string>
+    <string name="queryDetils">查看详情</string>
+    <string name="queryKeYongEDu">查询可用额度</string>
+    <string name="updateShenGouEDu">修改申购额度</string>
+
+
+    <!--货币基金-->
+    <string name="HuoBiJiJin">货币基金</string>
+    <string name="HuoBiJiJinShenGou">货币基金申购</string>
+    <string name="HuoBiJiJinShuHui">货币基金赎回</string>
+    <string name="HuoBiJiJinWeiTuoChaXun">货币基金委托查询</string>
+    <string name="HuoBiJiCheDan">货币基金撤单</string>
+    <string name="JiJinDaiMa">基金代码</string>
+    <string name="ShenGouJinE">申购金额</string>
+    <string name="QingShuRuJiJinDaiMa">请输入基金代码</string>
+    <string name="QingShuRuShuHuiFenE">请输入赎回份额</string>
+    <string name="QingShuRuShenGouJinE">请输入申购金额</string>
+    <string name="JiJinMingCheng">基金名称</string>
+    <string name="GuDongZhangHao">股东账号</string>
+    <string name="KeYongZiJin">可用资金</string>
+    <string name="KeYongZiJin_1">可用份额</string>
+    <string name="ShuHuiFenE">赎回份额</string>
+    <string name="ZiJinJingZhi">资金净值</string>
+    <string name="HBJJWeiTuoChaXun">货币基金委托查询</string>
+
+
+    <!--场内基金-->
+    <string name="ChangNeiJiJin">场内基金</string>
+    <string name="JiJinRenGou">基金认购</string>
+    <string name="JiJinShenGou">基金申购</string>
+    <string name="JiJinShuHui">基金赎回</string>
+    <string name="RenGouJinE">认购金额</string>
+    <string name="ChangNeiJiJinRenGou">场内基金认购</string>
+    <string name="QingShuRuRenGouJinE">请输入认购金额</string>
+    <string name="ChangNeiJiJinShenGou">场内基金申购</string>
+    <string name="ChangNeiJiJinShuHui">场内基金赎回</string>
+
+
+    <!--OTC-->
+    <string name="OTC_rengou">OTC认购</string>
+    <string name="OTC_shengou">OTC申购</string>
+    <string name="OTC_shuhui">OTC赎回</string>
+    <string name="OTC_chanpindaima">产品代码</string>
+    <string name="OTC_rengoujine">认购金额</string>
+    <string name="OTC_shengoujine">申购金额</string>
+    <string name="OTC_shuhuifene">赎回份额</string>
+    <string name="OTC_shuruchanpindaima">输入产品代码</string>
+    <string name="OTC_shururengoujine">输入认购金额</string>
+    <string name="OTC_shurufene">输入份额</string>
+    <string name="OTC_chanpinmingcheng">产品名称</string>
+    <string name="OTC_chanpinjingzhi">产品净值</string>
+    <string name="OTC_keyongzijin">可用资金</string>
+    <string name="OTC_xuanzeotcchanpin">选择OTC产品</string>
+    <string name="OTC_xuanzechicangotc">选择持仓OTC</string>
+    <string name="OTC_chaxun">查询</string>
+    <string name="OTC_zhanghu">OTC账户</string>
+    <string name="OTC_weituochaxun">委托查询</string>
+    <string name="OTC_kaihu">OTC开户</string>
+    <string name="OTC_chengjiaochaxun">成交查询</string>
+    <string name="OTC_zhanghuchaxun">OTC账户查询</string>
+    <string name="OTC_wotongyi">我已仔细阅读并同意签署以上各项协议</string>
+    <string name="OTC_dianzihetongchaxun">电子合同查询</string>
+    <string name="OTC_dianzihetongliushui">电子合同流水</string>
+    <string name="OTC_dianzihetongqianshu">电子合同签署</string>
+    <string name="OTC_qingyuedubingqianshuxieyi">请阅读并签署协议</string>
+    <string name="OTC_jihezichanguanlijihuashuomingshu">《集合资产管理计划说明书》</string>
+    <string name="OTC_jihezichanguanlihetong">《集合资产管理合同》</string>
+    <string name="OTC_fengxianjieshishu">《风险揭示书》</string>
+    <string name="OTC_woyizixiyuedubingtongyiqianshu">开通OTC账户</string>
+    <string name="OTC_kaifangshijijinzhanghukaili">《开放式基金账户开立申请协议书》</string>
+    <string name="OTC_zhengquantouzijinijinjijinrenquanyixuzhi">《证券投资基金投资人权益须知》</string>
+
+
+    <!--资讯-->
+    <string name="haoduxinwen">资讯</string>
+    <string name="haodugushi">好读故事</string>
+    <string name="kanzheli">看这里，故事里的股市更精彩</string>
+    <string name="gupiao">相关股票</string>
+    <string name="daima">代码</string>
+    <string name="zuixinjia">最新价</string>
+    <string name="zhangdiefu">涨跌幅</string>
+    <string name="yijianzixuan">一键自选</string>
+    <string name="bianjilanmu">编辑栏目</string>
+    <string name="zhongdashijian">重大事件</string>
+    <string name="newsInfo">资讯新闻</string>
+    <string name="XW_text">以上信息仅供参考。</string>
+
+
+    <string name="dwjj">帝王洁具</string>
+    <string name="sgjc">申购进程</string>
+    <string name="gpdm">股票代码</string>
+    <string name="gpdm1">002798</string>
+    <string name="sgrq">申购日期</string>
+    <string name="sgrq1">1996-09-27</string>
+    <string name="zqgbr">中签公布日</string>
+    <string name="zqgbr1">--</string>
+    <string name="zql1">0.00%</string>
+    <string name="zqh">中签号</string>
+    <string name="jjjdr">资金解冻日</string>
+    <string name="fxzl">发行资料</string>
+    <string name="fxjg">发行价格</string>
+    <string name="fxjg1">10.57元</string>
+    <string name="fxsyl1">22.98</string>
+    <string name="fxzs">发行总数</string>
+    <string name="sgsx">申购上限</string>
+    <string name="sgsx1">20000.00万股</string>
+    <string name="jyfw">经营范围</string>
+    <string name="gsjj">公司简介</string>
+    <string name="ztsmc">招投说明数</string>
+
+    <!-- 搜索页面 -->
+
+    <string name="search_cancle">取消</string>
+    <string name="search_hintTxt">请输入股票代码/或股票名称首字母</string>
+    <string name="remain_search_hintTxt">请输入完整的股票代码</string>
+    <string name="recentlySee">最近浏览过的股票</string>
+    <string name="hostoryChoice">历史自选股</string>
+    <string name="moveHostory">清除记录</string>
+
+    <!-- 自选股行情 -->
+    <string name="checkAndsynchronization">注册用户，同步自选股</string>
+    <string name="headAdd">手工添加</string>
+    <string name="hotSearch">热搜股票</string>
+    <string name="impleStock">导入持仓股</string>
+
+    <string name="sell5">卖5</string>
+    <string name="sell4">卖4</string>
+    <string name="sell3">卖3</string>
+    <string name="sell2">卖2</string>
+    <string name="sell1">卖1</string>
+
+    <string name="buy5">买5</string>
+    <string name="buy4">买4</string>
+    <string name="buy3">买3</string>
+    <string name="buy2">买2</string>
+    <string name="buy1">买1</string>
+
+    <string name="noSearchResult">无搜索结果</string>
+    <string name="exitAppPrompt">在按一次退出</string>
+
+
+    <!--交易-->
+    <string name="ChiCang">持仓</string>
+    <string name="zzc">总资产 ( 元 )</string>
+    <string name="zzcShuLiang">298753.66</string>
+    <string name="ccyk">持仓盈亏</string>
+    <string name="ccykShuLiang">-4000.00</string>
+    <string name="sz">市值</string>
+    <string name="szShuLiang">122400.00</string>
+    <string name="ky">可用</string>
+    <string name="kyShuLiang">10000.00</string>
+    <string name="kq">可取</string>
+    <string name="kqShuLiang">300.00</string>
+    <string name="mcsz">名称/市值</string>
+    <string name="yk">盈亏/%</string>
+    <string name="ccky">持仓/可用</string>
+    <string name="xjcb">现价/成本</string>
+    <string name="StartDate">2016-04-05</string>
+    <string name="to">至</string>
+    <string name="FinishDate">2016-04-05</string>
+
+    <!--委托查询-->
+    <string name="wtcx">委托查询</string>
+    <string name="jr">今日</string>
+    <string name="yzn">一周内</string>
+    <string name="yyn">一月内</string>
+    <string name="syn">三月内</string>
+    <string name="mcgs">名称/价格</string>
+    <string name="wtsj">委托时间</string>
+    <string name="wtcj">委托/成交</string>
+    <string name="mmzt">买卖/状态</string>
+    <string name="cx">查询</string>
+
+    <!--成交查询-->
+    <string name="cjcx">成交查询</string>
+    <string name="mcjg">名称/价格</string>
+    <string name="cj_wtsj">委托/时间</string>
+    <string name="mmsl">买卖/数量</string>
+    <string name="je">金额</string>
+
+    <string name="bankstransfer">银证转账</string>
+    <string name="commitTransferAccount">提交转账</string>
+    <string name="banksTostock">银行转证券</string>
+    <string name="stockTobanks">证券转银行</string>
+    <string name="transferQuery">转账查询</string>
+    <string name="inputAcountPrice">输入转账金额(元)</string>
+    <string name="inputAcountPasswrod">输入账户密码</string>
+    <string name="banksbusiness">银证业务</string>
+
+    <!--资金流水查询-->
+    <string name="zjlscx">资金流水查询</string>
+    <string name="zqmc">证券名称</string>
+    <string name="cjriq">成交日期</string>
+    <string name="ywcx">业务查询</string>
+    <string name="fsje">发生金额</string>
+    <string name="zjye">资金余额</string>
+
+    <string name="zqmc1">证券名称:</string>
+    <string name="zqdm">证券代码:</string>
+    <string name="zqjg">成交价格:</string>
+    <string name="cjsl">成交数量:</string>
+    <string name="bz">币种:</string>
+    <string name="yj">佣金:</string>
+    <string name="yhs">印花税:</string>
+    <string name="ghf">过户费:</string>
+    <string name="qtfy">其他费用:</string>
+
+
+    <!--交割单-->
+    <string name="DeliveryOrder">交割单</string>
+    <string name="Deal">买卖</string>
+    <string name="cjye">发生金额</string>
+    <string name="cjjg">成交价格:</string>
+    <string name="gddm">股东代码:</string>
+    <string name="Remarks">备注:</string>
+
+    <string name="main">主</string>
+    <string name="supplement">辅</string>
+
+    <string name="pickerview_cancel">取消</string>
+    <string name="pickerview_submit">确定</string>
+    <string name="pickerview_year">年</string>
+    <string name="pickerview_month">月</string>
+    <string name="pickerview_day">日</string>
+    <string name="pickerview_hours">时</string>
+    <string name="pickerview_minutes">分</string>
+    <string name="pickerview_seconds">秒</string>
+
+    <string name="hot24Hours">24小时热搜</string>
+    <string name="hot24Day">24小时自选热搜</string>
+    <string name="rankSelfChoice">自选排名</string>
+    <string name="delete">删除</string>
+    <string name="editSelf">编辑自选股</string>
+    <string name="toTop">置顶</string>
+    <string name="remain">提醒</string>
+    <string name="move">移动</string>
+    <string name="uploadCloud">上传到云</string>
+    <string name="downloadCloud">丛云端下载</string>
+    <string name="lookCloud">查看云端</string>
+    <string name="title_activity_transaction_login1">Sign in</string>
+
+    <string name="stockPriceRemain">股价提醒</string>
+    <string name="mySelfRemain">我的提醒</string>
+    <string name="remainType">提醒类型</string>
+
+    <!--交易登录-->
+    <string name="TransactionLogin">交易登录</string>
+    <string name="Service">联系客服</string>
+    <string name="HihiEditText1">请输入资金帐号</string>
+    <string name="HihiEditText2">请输入交易密码</string>
+    <string name="HihiEditText3">请输入验证码</string>
+    <string name="Login">登\t\t录</string>
+    <string name="LoginText">未开通太平洋证券帐户?</string>
+    <string name="LoginText1">立即开户</string>
+    <string name="LoginText2">登录后帐号将被绑定,您可享受更便捷的查询与推送服务。</string>
+    <string name="LoginText3">更换资金帐号</string>
+    <string name="LoginText4">忘记密码</string>
+
+    <!--解绑并更换帐号-->
+    <string name="BindMore">解绑并更换帐号</string>
+
+    <!--客服热线-->
+    <string name="kfrx">客服热线</string>
+    <string name="kf">客服</string>
+    <string name="kfdh">客服电话:</string>
+    <string name="dh">95397</string>
+    <string name="dh1">如有疑问，请致电客服</string>
+
+    <!--手机注册-->
+    <string name="sjzc">注册登录</string>
+    <string name="sjzcText">请输入手机号</string>
+    <string name="sjzcText1">请输入验证码</string>
+    <string name="sjzcText2">短信验证码</string>
+    <string name="sjzcText3">注册登录</string>
+    <string name="sjzcText4">其他注册方式</string>
+    <string name="sjzcText5">注册即代表同意 [太平洋证券] 服务条款 和 隐私条款</string>
+    <string name="sjzcText6">如果没有收到短信验证码，请您尝试</string>
+    <string name="sjzcText7">语音验证码</string>
+
+    <!--手机验证-->
+    <string name="sjyz">手机验证</string>
+    <string name="sjyzText">输入手机号</string>
+    <string name="sjyzText1">点击获取验证吗</string>
+    <string name="sjyzText2">手机号验证</string>
+    <string name="LoginText5">重新加载</string>
+
+    <!--用户注册-->
+    <string name="yhzc">用户注册</string>
+    <string name="yhzcText">其他注册方式</string>
+    <string name="yhzcText1">QQ登录</string>
+    <string name="yhzcText2">微信登录</string>
+    <string name="yhzcText3">微博登录</string>
+
+    <string name="custom">自定义</string>
+
+    <!--查询主页-->
+    <string name="cxzy">查询主页</string>
+    <string name="cxzyTextView">证券账户买入卖出委托历史</string>
+    <string name="cjTextView">证券账户已成交的历史账单</string>
+    <string name="zjTextView">资金变动情况一览</string>
+    <string name="jgTextView">账户所有成交细节变动凭证</string>
+
+    <string name="balanceQuery">多银行余额查询</string>
+    <string name="priceAllot">资金调拨</string>
+
+    <string name="priceCollection">资金归集</string>
+
+    <string name="allotChangeAccount">点击切换</string>
+
+    <!--开放式基金-->
+    <string name="shurujijindaima">输入基金代码</string>
+    <string name="shururengoujine">输入认购金额</string>
+    <string name="shurushengoujine">输入申购金额</string>
+    <string name="shurushuhuifene">输入赎回份额</string>
+    <string name="xuanzeshuhuichulifangshi">选择赎回处理方式</string>
+
+    <!--电子签名约定书-->
+    <string name="Agreement">电子签名约定书</string>
+    <string name="consent">同意</string>
+    <string name="disagree">不同意</string>
+    <string name="Signed">已签署</string>
+    <string name="nosign">未签署</string>
+    <string name="KhName">客户:\t王大猫</string>
+    <string name="KhTiem">时间:\t2106-07-01</string>
+
+    <!--修改密码-->
+    <string name="ChangePassword">修改密码</string>
+    <string name="JingShi">密码修改后,会退出,需要您使用新密码重新登录</string>
+    <string name="ChangeTextView">当前密码</string>
+    <string name="ChangeHiht">请输入当前密码</string>
+    <string name="ChangeTextView1">新密码</string>
+    <string name="ChangeHiht1">请输入新密码</string>
+    <string name="ChangeTextView2">确认密码</string>
+    <string name="ChangeHiht2">请再次输入新密码</string>
+
+
+    <string name="choiceFuzhuAccount">选择辅助资金账号</string>
+    <string name="choicePrice">金额(元)</string>
+    <!--修改个人资料-->
+    <string name="PersonalData">修改个人资料</string>
+    <string name="Compile">编辑</string>
+    <string name="Name">姓名</string>
+    <string name="Name1">张三</string>
+    <string name="IdentityCard">身份证号</string>
+    <string name="IssuingAuthority">签发机关</string>
+    <string name="IdAddress">身份证地址</string>
+    <string name="PersonalDataText">第二联系人</string>
+
+
+    <!--股东资料-->
+    <string name="Information">股东资料</string>
+    <string name="CustomerCode">资金账号</string>
+    <string name="ShareholderSName">股东姓名</string>
+    <string name="AccountType">账户类型</string>
+    <string name="ShareholderSCode">股东代码</string>
+
+    <string name="myFund">我的主资金账号</string>
+
+    <string name="collectionBottomTitle">只有主账号的资金可\n用于股票交易</string>
+    <string name="collectionToMain">资金归集至主账号</string>
+    <string name="allotRecord">调拨记录</string>
+
+    <!--创业板转签-->
+    <string name="GEM">创业板转签</string>
+
+
+    <!--风险测评-->
+    <string name="RiskEvaluation">风险测评</string>
+    <string name="RiskEvaluationText">您的风险等级</string>
+    <string name="RiskEvaluationText1">风险等级</string>
+    <string name="RiskEvaluationText2">稳健型</string>
+    <string name="RiskEvaluationText3">是否过期:</string>
+    <string name="RiskEvaluationText4">到期日期:</string>
+    <string name="RiskEvaluationText5">投资风险评测</string>
+    <string name="RiskEvaluationButton">重新测评</string>
+
+    <!--撤单-->
+    <string name="Revoke">撤单</string>
+    <string name="TextView1">股票名称</string>
+    <string name="TextView2">委托价/成交价</string>
+    <string name="TextView3">委托数/成交数</string>
+    <string name="TextView4">状态/买卖</string>
+
+
+    <!--适当性评估结果确认书-->
+    <string name="Remind">经评估,向您做出提示，建议您审慎考虑，若仍坚持投资该项产品，并愿意承担该项投资可能引起的损失和其他后果，且投资该项产品的决定，系您独立、自主、真实的意思表达，与代销机构无关，请确认。</string>
+
+    <string name="hintTv">提示</string>
+
+    <!--电子签名约定书签署内容-->
+    <string name="AgreementTextView">\t\t\t\t根据《合同法》、《电子签名法》关于民事合同使用数据电文、电子签名的规定，采用电子签名签订的电子合同具有与纸质合同同等的法律效力，以此作为法律依据，本着提高合同签署效力的目的，委托人、集合资产管理计划管理人(以下简称管理人)、推广机构三方就委托人在推广机构参与由管理人所管理的集合资产管理计划过程中使用电子签名合同、电子签名事宜，经协商达成如下一致的意见：
+        \n\t\t\t\t委托人、管理人、推广机构三方同意自本约定书签订之日起，委托人在推广机构参与由管理人所管理的集合资产管理计划过程中，使用电子合同、电子签名、委托人通过身份验证登陆推广机构指定的网络系统，确认并同意接受相关电子合同或文书视为签署电子合同，与在纸质合同上手写签名或者签章的具有同等法律效力 ，无需另行签署纸质合同或文书。
+委托人经密码等有效身份验证登陆委托人账户后的所有操作行为视同委托人本人的行为，委托人承担由此产生的一切法律后果。</string>
+
+    <!--退市和风险警示协议签署-->
+    <string name="Tui">\t\t\t\t为使您充分了解被本所实施风险警示的股票（以下简称“风险警示股票”）的交易风险，根据有关法律、法规、规章和规则的规定，我公司制定《太平洋证券风险警示股票交易风险揭示书》（以下简称“《风险揭示书》”），向您充分揭示参与风险警示股票交易面临的风险，请认真阅读并签署。
+        \n\t\t\t\t一、在参与风险警示股票交易前，应充分了解客户买卖风险警示股票应当采用限价委托的方式。
+        \n\t\t\t\t二、在参与风险警示股票交易前，应充分了解风险警示股票价格的涨跌幅限制与其他股票的涨跌幅限制不同。
+        \n\t\t\t\t三、风险警示股票盘中换手率达到或超过一定比例的，属于异常波动，交易所可以根据市场需要，对其实施盘中临时停牌。
+        \n\t\t\t\t四、当日通过竞价交易和大宗交易累计买入的单只风险警示股票，数量不得超过50万股。当日累计买入风险警示股票数量，按照客户以本人名义开立的证券账户与融资融券信用证券账户的买入量合并计算；委托买入数量与当日已买入数量及已申报买入但尚未成交、也未撤销的数量之和，不得超过50万股。
+        \n\t\t\t\t五、在参与风险警示股票交易前，应充分了解风险警示股票交易规定和相关上市公司的基本面情况，并根据自身财务状况、实际需求及风险承受能力等，审慎考虑是否买入风险警示股票。
+        \n\t\t\t\t六、应当特别关注上市公司发布的风险提示性公告，及时从指定信息披露媒体、上市公司网站以及证券公司网站等渠道获取相关信息。
+        \n\t\t\t\t上述提示事项仅为列举性质，未能详尽列明风险警示股票交易的所有风险，客户可阅读交易所《上海证券交易所风险警示板股票交易管理办法》、《上海证券交易所退市整理期业务实施细则》等业务规则，熟悉并掌握风险警示股票交易的所有风险。
+        \n\t\t\t\t本人确认已阅读并理解风险警示股票交易规则和上述风险揭示书的内容，自愿承担参与风险警示股票交易的风险和损失。</string>
+    <string name="AgreementSigned">签署风险警示协议</string>
+    <string name="AgreementSigned1">您充分了解退市整理期股票的交易风险,根据上海证券交易所《股票上市规则》、《会员管理规则》以及相关退市制度配套业务规则的规定,我公司特向您充分</string>
+    <!--深 或沪上市所退整理板块协议-->
+    <string name="Protocol">上交所退市整理板</string>
+    <string name="Protocol_1">深交所退市整理板</string>
+    <string name="Protoco3">拟终止上市公司股票退市整理期风险交易揭示书</string>
+    <string name="Protoco4">退市整理期股票交易风险揭示书</string>
+    <string name="Protoco2">\t\t\t\t本《风险揭示书》的提示事项仅为列举性质，未能详尽列明拟终止上市公司股票退市整理期交易的所有风险。为保护投资者利益，太平洋证券特别提示：
+        \n\t\t\t\t一、客户在参与退市整理期股票交易前，应充分了解客户买卖退市整理期股票应当采用限价委托的方式。
+        \n\t\t\t\t二、退市整理期拟终止上市公司股票已被证券交易所作出终止上市决定，在一定期限届满后将被终止上市，风险相对较大。
+        \n\t\t\t\t三、退市整理期股票，自退市整理期开始之日起，在风险警示板的交易期限仅为30 个交易日，期限届满后的次日，该股票终止上市，证券交易所对其予以摘牌。客户应当密切关注退市整理股票的剩余交易日和最后交易日，否则有可能错失卖出机会，造成不必要的损失。
+        \n\t\t\t\t退市整理股票在风险警示板交易期间全天停牌的，停牌期间不计入上述30 个交易日的期限内。全天停牌的天数累计不超过5 个交易日。
+        \n\t\t\t\t四、拟终止上市公司股票退市整理期的交易可能存在流动性风险，客户买入后可能因无法在股票终止上市前及时卖出所持股票而导致损失。
+        \n\t\t\t\t五、客户在参与拟终止上市公司股票退市整理期交易前，应充分了解退市制度、退市整理期股票交易规定和进入退市整理期上市公司的基本面情况，并根据自身财务状况、实际需求及风险承受能力等，审慎考虑是否买入退市整理期股票。
+        \n\t\t\t\t六、按照现行有关规定，虽然主板、中小板上市公司股票被终止上市后可以向证券交易所申请重新上市，但须达到交易所重新上市条件，能否重新上市存在较大的不确定性。
+        \n\t\t\t\t七、客户应当特别关注拟终止上市公司退市整理期期间发布的风险提示性公告，及时从指定信息披露媒体、上市公司网站以及证券公司网站等渠道获取相关信息。
+        \n\t\t\t\t本人确认已知晓并理解《风险揭示书》的全部内容，愿意承担拟终止上市公司股票退市整理期交易的风险和损失。</string>
+    <!--上交所风险警示板-->
+    <string name="RiskWarning">上交所风险警示板</string>
+    <string name="RiskWarning2">尊敬的投资者:</string>
+    <string name="RiskWarning3">太平洋证券股份有限公司</string>
+    <string name="RiskWarning4">太平洋证券风险警示股票交易风险揭示书</string>
+    <string name="RiskWarning1">风险警示股票交易风险揭示书</string>
+
+    <!-- TODO: Remove or change this placeholder text -->
+    <string name="hello_blank_fragment">Hello blank fragment</string>
+
+    <string name="remain_up">股价涨到</string>
+    <string name="remain_down">股价跌到</string>
+    <string name="remain_uf">日涨幅到</string>
+    <string name="remain_df">日跌幅到</string>
+    <string name="remain_unit1">元</string>
+    <string name="remain_unit2">%</string>
+
+
+    <!--推送Log-->
+    <string name="register_success">推送注册成功.</string>
+    <string name="register_fail">推送注册失败.</string>
+    <string name="recv_passthrough_message">收到一个透传消息.内容是</string>
+    <string name="click_notification_message">点击一个通知消息.内容是</string>
+    <string name="arrive_notification_message">到达一个通知消息.内容是</string>
+    <string name="set_alias_success">设置别名</string>
+    <string name="set_alias_fail">为设置别名失败</string>
+    <string name="unset_alias_success">设置别名成功.</string>
+    <string name="unset_alias_fail"> 未设置的别名为失败</string>
+    <string name="set_account_success">设置账户成功.</string>
+    <string name="set_account_fail">为设置账户失败</string>
+    <string name="unset_account_success">设置帐户成功.</string>
+    <string name="unset_account_fail">设置帐户为失败</string>
+    <string name="subscribe_topic_success">订阅主题成功</string>
+    <string name="subscribe_topic_fail">订阅主题为失败</string>
+    <string name="unsubscribe_topic_success">取消订阅主题成功</string>
+    <string name="unsubscribe_topic_fail">取消订阅主题为失败</string>
+    <string name="set_accept_time_success">接受时间成功</string>
+    <string name="set_accept_time_fail">为设置时间接受失败</string>
+
+    <string name="managerPrice">智选理财</string>
+    <string name="managerPriceDetail">基金详情</string>
+
+    <string name="risk">风险</string>
+    <string name="earnings">收益</string>
+    <string name="managerMoneyProduct">太平洋热销理财产品</string>
+
+
+    <string name="text2">8月12日，天津港的惊天巨响hello world how are you ，炸碎了很多人的hello world how are
+        you心，人们在感动于救人的同时，禁不住愤怒地责问，为什么一次次重特大hello world how are you事故中生命的代价换不来应有的平hello world how are
+        you安?下个血淋淋的场面将会在哪里出现?是的，我们已经有点伤不起了，因为世间没有什么比生命更宝贵。为了生命的美好，在生产中投入多大的hello world how are
+        you安全成本都不算昂贵。更何况2013年6月，针对全国多个地区接连发生多起重特大安全生产事故，习近平总书记就已强调：“重特大安全生产事故，造成重大人员伤亡和财产损失，必须引起hello
+        world how are you高度重视。人命关天，发展决不能以牺牲人的生命为代价。这必须作为一条不可逾越的红线。”时隔不久，为什么又一次以决堤式的hello world how
+        are you程度来冲毁这条红线，谁该hello world how are you为之买单?
+    </string>
+
+    <string name="argumentDiscrib1">
+        您拟投资的金融产品%1$s，其风险等级为“%2$s”，%3$s于您在客户风险评估中所显示的风险承受能力等级“%4$s”。投资该产品，可能导致%5$s出
+    </string>
+
+    <string name="buyresult">
+        本界面仅代表您的委托申请已提交，请您及时查询委托及成交状态。\n请您到“交易”功能中查询委托及成交详情。根据不同产品，成交后需要T+2日至T+5日才能查询到资产份额。
+    </string>
+
+
+    <string name="MyInformation">我的消息</string>
+    <string name="MyInformationText1">通知公告</string>
+    <string name="MyInformationText2">新股申购通知</string>
+    <string name="MyInformationText3">消息提醒</string>
+
+    <string name="MyInformationText4">暂无新消息</string>
+    <string name="MyInformationText5">20日新股申购:海波重科300517</string>
+    <string name="AnnouncementText">通知公告</string>
+
+
+    <string name="pull_refresh">下拉刷新</string>
+    <string name="loading">努力加载中…</string>
+    <string name="refreshing">努力刷新中…</string>
+    <string name="release_to_loading">释放加载</string>
+    <string name="up_to_loading">上拉加载</string>
+    <string name="release_refresh">释放刷新</string>
+    <string name="bottom">已经到底啦！</string>
+
+
+    <!--金融生活-->
+    <string name="financialLife_Text">金融生活</string>
+    <string name="financialLife_Text1">您将分享信用等级至寺库公司,以获得更多权益。
+        \n本服务由寺库公司为太平洋用户提供,相关服务和责任
+        \n由寺库公司承担,如有问题请致电该公司客服电话：
+        \n400-87-56789。</string>
+    <string name="financialLife_Button">已了解,立刻进入</string>
+    <string name="financialLife_Text2">寺库</string>
+    <string name="financialLife_Text3">太平洋证券与寺库联手服务\n成为太平洋客户
+        \n即可享受超大力度优惠</string>
+    <string name="financialLife_Text4">太平洋客户尊享更大库支票额度，开通支票即送
+        \n200元商场优惠券，同时购物享受如下优惠：</string>
+    <string name="financialLife_Text5">您当前的会员级别：</string>
+    <string name="financialLife_Text6">开户\t></string>
+    <string name="financialLife_Text7">我还不是太平洋用户</string>
+    <string name="financialLife_Text8">现在享受优惠\t></string>
+    <string name="financialLife_Text9">我是太平洋用户</string>
+    <string name="financialLife_Text10">寺库App下载</string>
+
+
+    <!--热搜-->
+    <string name="text_rs">证券名称</string>
+    <string name="text_rs2">涨跌幅</string>
+    <string name="text_rs3">搜索量</string>
+    <string name="text_rs4">加自选</string>
+    <string name="title_activity_main">MainActivity</string>
+
+
+    <!--重置密码-->
+    <string name="getuserId_toolbar_title">填写信息</string>
+    <string name="hint_inputName">请输入姓名</string>
+    <string name="hint_inputIdCard">请输入身份证号码</string>
+    <string name="nextStup">下一步</string>
+    <string name="finish">完成</string>
+    <string name="newPwd">新密码</string>
+    <string name="confirm">确认密码</string>
+    <string name="hint_foundPwd">请输入交易密码</string>
+    <string name="hint_newPwd">请输入密码</string>
+    <string name="hint_confirm">请再次输入密码</string>
+
+
+    <!--三存银行变更-->
+    <string name="ChangBank">三存银行变更</string>
+    <string name="ChangBank_tv1">\n普通账户所支持的银行：</string>
+    <string name="ChangBank_tv2">\n中国银行、中国农业银行、兴业银行、中国光大银行、广发银行、招商银行、平安银行、中国建设银行、浦发银行、中国工商银行、华夏银行、交通银行、中信银行、中国民生银行、宁波银行、北京银行、上海银行、中国邮政、储蓄银行</string>
+    <string name="ChangBank_tv3">注：融资融券客户办理信用账户存管变更，机构客户办理三方存管变更请到营业部。</string>
+    <string name="ChangBank_tv4">资金账户</string>
+    <string name="ChangBank_tv5">请开通新的三方存管银行</string>
+    <string name="ChangBank_tv6">开通三方存管后，您资金可以在银行卡和交易账户中自由调度。</string>
+    <string name="ChangBank_tv7">银行</string>
+    <string name="ChangBank_tv8">卡号</string>
+    <string name="ChangBank_tv9">密码</string>
+    <string name="ChangBank_tv10">输入6位电话银行密码</string>
+    <string name="ChangBank_tv11">选择银行</string>
+    <string name="ChangBank_tv12">输入银行卡号</string>
+    <string name="ChangBank_tv13">开通三方存管</string>
+    <string name="ChangBank_but">下一步</string>
+    <string name="BankName_tv1">选择银行</string>
+    <string name="msg_tv">因执行账户预销户处理，需待T+1日银行回报后才允许做销户处理，确定继续吗？</string>
+    <string name="msg_tv2">允许存管销户，确认继续吗？</string>
+    <string name="msg_tv3">预销户处理成功，您需要隔天再次提交销户申请完成销户！</string>
+
+    <!--身份证有效期变更-->
+    <string name="IDcard">身份证有效期变更</string>
+    <string name="IDcard_text">修改</string>
+
+    <!--产品预约-->
+    <string name="CPYY_text">\t\t\t您的总资&lt;5万，请补充保证金，总资产达到5万以上参与预约。总资产统计包括可用资金，股票，开放式基金。" </string>
+    <string name="CPYY_text1">预约成功仅代表您有意向购买此产品，太平洋证券不承诺预约成功后一定能购买到此产品，预约金额不代表最终的购买金额，以实际购买金额为准，请您在产品发行时间内，尽快登录太牛APP购买产品，系统按照委托时间优先成交</string>
+
+</resources>
