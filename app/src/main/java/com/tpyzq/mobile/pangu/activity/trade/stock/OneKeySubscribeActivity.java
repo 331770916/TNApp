@@ -52,7 +52,7 @@ public class OneKeySubscribeActivity extends BaseActivity implements View.OnClic
     private static final String TAG = "OneKeySubscribe";
     private ImageView imageView_back;
     private ListView listView;
-    private View rlLookUpDetails;
+    private View ll_query;
     private ArrayList<OneKeySubscribeItem> list = new ArrayList<OneKeySubscribeItem>();
     private ArrayList<OneKeySubscribeItem> Islist;
     private HashMap<String, String> hashMap;
@@ -73,8 +73,8 @@ public class OneKeySubscribeActivity extends BaseActivity implements View.OnClic
         this.tvShenANum = (TextView) this.findViewById(R.id.tvShenANum);     //深A的值可购买数量
         this.imageView_back = (ImageView) this.findViewById(R.id.activityOneKey_back);
         this.imageView_back.setOnClickListener(this);                         //点击返回按钮
-        this.rlLookUpDetails =  this.findViewById(R.id.tvQueryDetailsLayout);
-        this.rlLookUpDetails.setOnClickListener(this);                        //点击查看详情
+        this.ll_query =  this.findViewById(R.id.ll_query);
+        this.ll_query.setOnClickListener(this);                        //点击查看详情
         this.tvOneKeySubscribe = (TextView) this.findViewById(R.id.tvOneKeySubscribe);
         this.tvOneKeySubscribe.setOnClickListener(this);                      //点击一键申购
         this.allCheckBox = (CheckBox) this.findViewById(R.id.cbChoice);       //全选按钮
@@ -307,7 +307,7 @@ public class OneKeySubscribeActivity extends BaseActivity implements View.OnClic
             case R.id.activityOneKey_back:  //点击返回按钮销毁当前Activity
                 this.finish();
                 break;
-            case R.id.tvQueryDetailsLayout:      //点击查看详情按钮跳转界面
+            case R.id.ll_query:      //点击查看详情按钮跳转界面
                 Intent intent = new Intent();
                 intent.setClass(OneKeySubscribeActivity.this, QueryLimitActivity.class);
                 intent.putExtra("session", session);
