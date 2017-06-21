@@ -1085,6 +1085,11 @@ public class BuyAndSellActivity extends BaseActivity implements View.OnClickList
 
         @Override
         public void setSell(String code, String price, String num) {
+            if (TextUtils.isEmpty(code)) {
+                Toast.makeText(BuyAndSellActivity.this, "股票代码为空", Toast.LENGTH_SHORT).show();
+                return;
+            }
+
             getSell(code, price, num);
         }
     };

@@ -194,7 +194,7 @@ public class TransferAcountsTab extends BaseTransferSubjectTabView implements
     public void onClick(View v) {
 
         String _price = mPriceEidt.getText().toString();
-        String _password = mBankPasswrodEdit.getText().toString();
+        String _password = keyboardResult;
         int position = mViewPager.getCurrentItem();
         boolean isNeedPassword = !"0".equals(mAccountInfos.get(position).getMONEY_INTO());
 
@@ -577,6 +577,7 @@ public class TransferAcountsTab extends BaseTransferSubjectTabView implements
 
                 if (bean.getCode().equals("0")) {
                     ResultDialog.getInstance().show("转账申请已提交", R.mipmap.lc_success);
+                    keyboardResult= "";
                     mPriceEidt.setText("");
                     mBankPasswrodEdit.setText("");
                     Map<String, String> map = new HashMap<String, String>();
@@ -584,6 +585,7 @@ public class TransferAcountsTab extends BaseTransferSubjectTabView implements
                     notifyObservers(map, "transferToBank");
 
                 } else {
+                    keyboardResult= "";
                     mPriceEidt.setText("");
                     mBankPasswrodEdit.setText("");
                     MistakeDialog.showDialog(bean.getMsg(), mActivity, new MistakeDialog.MistakeDialgoListener() {
@@ -668,6 +670,7 @@ public class TransferAcountsTab extends BaseTransferSubjectTabView implements
                 if (bean.getCode().equals("0")) {
                     ResultDialog.getInstance().show("转账申请已提交", R.mipmap.lc_success);
 
+                    keyboardResult= "";
                     mPriceEidt.setText("");
                     mBankPasswrodEdit.setText("");
 
@@ -675,6 +678,7 @@ public class TransferAcountsTab extends BaseTransferSubjectTabView implements
                     map.put("tranferToStock", transferPrice);
                     notifyObservers(map, "tranferToStock");
                 } else {
+                    keyboardResult= "";
                     mPriceEidt.setText("");
                     mBankPasswrodEdit.setText("");
                     MistakeDialog.showDialog(bean.getMsg(), mActivity, new MistakeDialog.MistakeDialgoListener() {
@@ -736,6 +740,8 @@ public class TransferAcountsTab extends BaseTransferSubjectTabView implements
 
     @Override
     public void getInputEncrypted(String s) {
+        keyboardResult = s;
+
         mBankPasswrodEdit.setText(s);
         mBankPasswrodEdit.setSelection(mBankPasswrodEdit.getText().length());
     }

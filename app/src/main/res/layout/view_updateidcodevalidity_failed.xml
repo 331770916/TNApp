@@ -1,0 +1,105 @@
+<?xml version="1.0" encoding="utf-8"?>
+<ScrollView xmlns:android="http://schemas.android.com/apk/res/android"
+    android:layout_width="match_parent"
+    android:layout_height="wrap_content"
+    android:scrollbars="none">
+
+    <LinearLayout
+        android:layout_width="match_parent"
+        android:layout_height="wrap_content"
+        android:orientation="vertical">
+
+        <RelativeLayout
+            android:layout_width="match_parent"
+            android:layout_height="wrap_content"
+            android:layout_marginBottom="@dimen/size10"
+            android:background="#368CE6">
+
+            <LinearLayout
+                android:id="@+id/resultfailed_title_tip"
+                android:layout_width="wrap_content"
+                android:layout_height="wrap_content"
+                android:layout_centerInParent="true"
+                android:orientation="vertical"
+                android:padding="@dimen/size20">
+
+                <ImageView
+                    android:layout_width="wrap_content"
+                    android:layout_height="wrap_content"
+                    android:layout_gravity="center_horizontal"
+                    android:src="@mipmap/video_check_failed" />
+
+                <TextView
+                    android:layout_width="wrap_content"
+                    android:layout_height="wrap_content"
+                    android:layout_gravity="center_horizontal"
+                    android:layout_marginBottom="@dimen/size30"
+                    android:layout_marginTop="@dimen/size10"
+                    android:text="变更失败"
+                    android:textColor="@color/white" />
+            </LinearLayout>
+
+            <FrameLayout
+                android:layout_width="match_parent"
+                android:layout_height="wrap_content"
+                android:layout_below="@id/resultfailed_title_tip"
+                android:background="@mipmap/videocheck_wave" />
+        </RelativeLayout>
+
+        <TextView
+            android:layout_width="match_parent"
+            android:layout_height="wrap_content"
+            android:gravity="center"
+            android:padding="@dimen/size10"
+            android:text="抱歉，您的身份证有效期变更失败。"
+            android:textColor="@color/hometext"
+            android:textSize="@dimen/txtSize16"
+            android:textStyle="bold" />
+
+        <TextView
+            android:layout_width="wrap_content"
+            android:layout_height="wrap_content"
+            android:layout_gravity="center"
+            android:gravity="center"
+            android:padding="@dimen/size10"
+            android:text="您可重新变更身份证信息，提交审核。\n如有其他问题，请咨询客服。"
+            android:textColor="@color/texts"
+            android:textSize="12sp" />
+
+
+        <LinearLayout
+            android:layout_width="match_parent"
+            android:layout_height="wrap_content"
+            android:layout_gravity="center_horizontal"
+            android:layout_marginLeft="@dimen/size30"
+            android:layout_marginRight="@dimen/size30"
+            android:layout_marginTop="@dimen/size50"
+            android:orientation="horizontal">
+
+            <TextView
+                android:id="@+id/checkTaskFailed_restartCommite"
+                android:layout_width="0dp"
+                android:layout_height="wrap_content"
+                android:layout_marginRight="@dimen/size10"
+                android:layout_weight="1"
+                android:background="@drawable/check_failed_restart_btnbg"
+                android:gravity="center"
+                android:padding="@dimen/size10"
+                android:text="重新变更"
+                android:textColor="@color/white" />
+
+            <TextView
+                android:id="@+id/checkTaskFailed_out"
+                android:layout_width="0dp"
+                android:layout_height="wrap_content"
+                android:layout_marginLeft="@dimen/size10"
+                android:layout_weight="1"
+                android:background="@drawable/check_task_running_btnbg"
+                android:gravity="center"
+                android:padding="@dimen/size10"
+                android:text="退出"
+                android:textColor="#4c4c4c" />
+        </LinearLayout>
+
+    </LinearLayout>
+</ScrollView>

@@ -1,0 +1,79 @@
+<?xml version="1.0" encoding="utf-8"?>
+<ScrollView xmlns:android="http://schemas.android.com/apk/res/android"
+    android:layout_width="match_parent"
+    android:layout_height="match_parent"
+    android:scrollbars="none">
+    <LinearLayout
+        android:layout_width="match_parent"
+        android:layout_height="wrap_content"
+        android:orientation="vertical">
+
+        <RelativeLayout
+            android:layout_width="match_parent"
+            android:layout_height="wrap_content"
+            android:layout_marginBottom="@dimen/size10"
+            android:background="#368CE6">
+
+            <LinearLayout
+                android:id="@+id/resultfailed_title_tip"
+                android:layout_width="wrap_content"
+                android:layout_height="wrap_content"
+                android:padding="@dimen/size20"
+                android:layout_centerInParent="true"
+                android:orientation="vertical">
+                <ImageView
+                    android:layout_width="wrap_content"
+                    android:layout_height="wrap_content"
+                    android:layout_gravity="center_horizontal"
+                    android:src="@mipmap/shenhezhong"
+                    />
+                <TextView
+                    android:layout_width="wrap_content"
+                    android:layout_height="wrap_content"
+                    android:textColor="@color/white"
+                    android:layout_marginTop="@dimen/size10"
+                    android:layout_marginBottom="@dimen/size30"
+                    android:layout_gravity="center_horizontal"
+                    android:text="审核中"/>
+            </LinearLayout>
+
+            <FrameLayout
+                android:layout_below="@id/resultfailed_title_tip"
+                android:layout_width="match_parent"
+                android:layout_height="wrap_content"
+                android:background="@mipmap/videocheck_wave"/>
+        </RelativeLayout>
+
+        <TextView
+            android:layout_width="match_parent"
+            android:layout_height="wrap_content"
+            android:gravity="center"
+            android:padding="@dimen/size10"
+            android:text="您提交的身份证信息，正在审核中。"
+            android:textColor="@color/hometext"
+            android:textSize="@dimen/txtSize16"
+            android:textStyle="bold" />
+
+        <TextView
+            android:layout_width="match_parent"
+            android:layout_height="wrap_content"
+            android:gravity="center"
+            android:textSize="12sp"
+            android:padding="@dimen/size10"
+            android:text="如有其他问题，请咨询客服。"
+            android:textColor="@color/texts" />
+
+
+        <TextView
+            android:id="@+id/checkTaskIsRuning_btn"
+            android:layout_width="match_parent"
+            android:layout_height="wrap_content"
+            android:padding="@dimen/size10"
+            android:gravity="center"
+            android:layout_margin="@dimen/size50"
+            android:background="@drawable/check_task_running_btnbg"
+            android:text="退出"
+            android:textColor="@color/textss" />
+
+    </LinearLayout>
+</ScrollView>
