@@ -298,10 +298,12 @@ public class StockPriceRemainFragment extends BaseFragment implements  View.OnCl
                             mStockName = beans.get(0).getStockName();
                             mStockNumber = beans.get(0).getStockNumber();
                             mResultFlag = true;
-                            mRemainSearchEdit.setFilters(new InputFilter[]{new InputFilter.LengthFilter(12)}); //最大输入长度
+                            mRemainSearchEdit.setFilters(new InputFilter[]{new InputFilter.LengthFilter(11)}); //最大输入长度
                             mAddRainStockNumber = mStockNumber;
                             mStockNumber = mStockNumber.substring(2, mStockNumber.length());
-                            mRemainSearchEdit.setText(mStockName + "\u2000" + mStockNumber);
+                            String content = mStockName + "\u2000" + mStockNumber;
+                            mRemainSearchEdit.setText(content);
+                            mRemainSearchEdit.setSelection(content.length());
                             String _newPrice = beans.get(0).getNewPrice();
                             String  _zdf = mFormat2.format(beans.get(0).getPriceChangeRatio());
                             if ("0.0".equals(_newPrice)||"0".equals(_newPrice)) {

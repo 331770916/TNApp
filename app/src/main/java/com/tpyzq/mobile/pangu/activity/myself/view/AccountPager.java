@@ -18,6 +18,7 @@ import com.tpyzq.mobile.pangu.activity.myself.handhall.ChangePasswordActivity;
 import com.tpyzq.mobile.pangu.activity.myself.handhall.PersonalDataActivity;
 import com.tpyzq.mobile.pangu.activity.myself.handhall.RiskEvaluationActivity;
 import com.tpyzq.mobile.pangu.activity.myself.handhall.StockHolderInfoActivity;
+import com.tpyzq.mobile.pangu.activity.myself.handhall.UpdateIdCodeValidityActivity;
 import com.tpyzq.mobile.pangu.activity.myself.login.HotlineActivity;
 import com.tpyzq.mobile.pangu.activity.myself.login.ShouJiVerificationActivity;
 import com.tpyzq.mobile.pangu.activity.myself.login.ShouJiZhuCeActivity;
@@ -271,7 +272,8 @@ public class AccountPager extends BaseMySelfPager implements View.OnClickListene
 //                mContext.startActivity(intent);
 //                break;
             case R.id.tv_refresh_iccard:
-
+                intent.setClass(mContext, UpdateIdCodeValidityActivity.class);
+                mContext.startActivity(intent);
                 break;
 //            case R.id.tv_forget_transactionpw:
 //                intent.setClass(mContext, GetUserIdActivity.class);

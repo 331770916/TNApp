@@ -44,6 +44,7 @@ import com.tpyzq.mobile.pangu.data.AuthorizeEntity;
 import com.tpyzq.mobile.pangu.data.TimeShareEntity;
 import com.tpyzq.mobile.pangu.data.TransStockEntity;
 import com.tpyzq.mobile.pangu.http.NetWorkUtil;
+import com.tpyzq.mobile.pangu.http.OkHttpUtil;
 import com.tpyzq.mobile.pangu.interfac.StockCodeCallBack;
 import com.tpyzq.mobile.pangu.interfac.StockItemCallBack;
 import com.tpyzq.mobile.pangu.log.LogHelper;
@@ -140,6 +141,7 @@ public class BuyAndSellActivity extends BaseActivity implements View.OnClickList
     private TimeCount timeCount;
     private Boolean priceflag = true;
     private StockPw stockPw;
+    private final String TAG = BuyAndSellActivity.class.getSimpleName();
 
     @Override
     public void initView() {
@@ -416,7 +418,7 @@ public class BuyAndSellActivity extends BaseActivity implements View.OnClickList
         map2.put("type", "0");
         object[0] = map2;
         map003.put("PARAMS", Arrays.toString(object));
-        NetWorkUtil.getInstence().okHttpForGet("", ConstantUtil.URL, map003, new StringCallback() {
+        NetWorkUtil.getInstence().okHttpForGet(TAG, ConstantUtil.URL, map003, new StringCallback() {
             @Override
             public void onError(Call call, Exception e, int id) {
             }
@@ -457,7 +459,9 @@ public class BuyAndSellActivity extends BaseActivity implements View.OnClickList
                     sellAdapter.setYesterdayPrice(jsArray.getString(2), code);
                     buyAdapter.setYesterdayPrice(jsArray.getString(2), code);
                     String market = JudgeStockUtils.getStockMarket(code);
-                    et_stock_code.setText(market + code.substring(2));
+                    String content = market + code.substring(2);
+                    et_stock_code.setText(content);
+                    et_stock_code.setSelection(content.length());
                     tv_stock_name.setText(jsArray.getString(19));
 
                     String down = string2doubleS(TransitionUtils.string2double(jsArray.getString(2)) * 0.9 + "");
@@ -1210,7 +1214,9 @@ public class BuyAndSellActivity extends BaseActivity implements View.OnClickList
      * @param stockInfo
      */
     private void searchNetStock(String stockInfo) {
-        LogUtil.e("1111111111111111");
+
+        timeCount.cancel();
+
         Map map = new HashMap();
         Object[] object = new Object[1];
         Map map2 = new HashMap();
@@ -1222,7 +1228,7 @@ public class BuyAndSellActivity extends BaseActivity implements View.OnClickList
         String strJson = gson.toJson(object);
         map.put("FUNCTIONCODE", "HQING006");
         map.put("PARAMS", strJson);
-        NetWorkUtil.getInstence().okHttpForGet("", ConstantUtil.URL, map, new StringCallback() {
+        NetWorkUtil.getInstence().okHttpForGet(TAG, ConstantUtil.URL, map, new StringCallback() {
 
             @Override
             public void onError(Call call, Exception e, int id) {
@@ -1257,7 +1263,7 @@ public class BuyAndSellActivity extends BaseActivity implements View.OnClickList
                             }
                         }
                     }else if ("-5".equals(code)) {
-                        et_stock_code.setText("");
+//                        et_stock_code.setText("");
                         if (stockPw.isShowing()) {
                             stockPw.dismiss();
                         }
@@ -1309,6 +1315,12 @@ public class BuyAndSellActivity extends BaseActivity implements View.OnClickList
             }
         }
     };
+
+    @Override
+    protected void onDestroy() {
+        super.onDestroy();
+        OkHttpUtil.cancelSingleRequestByTag(TAG);
+    }
 
     /**
      * 获取布局
