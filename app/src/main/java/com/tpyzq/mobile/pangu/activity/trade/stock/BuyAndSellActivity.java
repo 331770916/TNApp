@@ -100,7 +100,7 @@ public class BuyAndSellActivity extends BaseActivity implements View.OnClickList
     private RadioButton rb_sell; //卖
     private ListView lv_sell, lv_buy;   //卖1~5,买1~5列表
     private EditText et_stock_code, et_price, et_num;
-    private TextView tv_stock_name;
+//    private TextView tv_stock_name;
     private TextView tv_drop;
     private TextView tv_rise;
     private TextView tv_sum;
@@ -142,6 +142,7 @@ public class BuyAndSellActivity extends BaseActivity implements View.OnClickList
     private Boolean priceflag = true;
     private StockPw stockPw;
     private final String TAG = BuyAndSellActivity.class.getSimpleName();
+    private String stockName = "";
 
     @Override
     public void initView() {
@@ -176,7 +177,7 @@ public class BuyAndSellActivity extends BaseActivity implements View.OnClickList
         et_stock_code = (EditText) findViewById(R.id.et_stock_code);
         et_price = (EditText) findViewById(R.id.et_price);
         et_num = (EditText) findViewById(R.id.et_num);
-        tv_stock_name = (TextView) findViewById(R.id.tv_stock_name);
+//        tv_stock_name = (TextView) findViewById(R.id.tv_stock_name);
         vp_view = (ViewPager) findViewById(R.id.vp_view);
         tv_drop = (TextView) findViewById(R.id.tv_drop);
         tv_rise = (TextView) findViewById(R.id.tv_rise);
@@ -247,6 +248,15 @@ public class BuyAndSellActivity extends BaseActivity implements View.OnClickList
         bt_buy.setOnClickListener(this);
         iv_depute_way.setOnClickListener(this);
         publish_detail_back.setOnClickListener(this);
+        et_stock_code.setOnFocusChangeListener(new View.OnFocusChangeListener() {
+            @Override
+            public void onFocusChange(View v, boolean hasFocus) {
+                if (hasFocus&&!TextUtils.isEmpty(stockCode)) {
+                    et_stock_code.setText(stockCode.substring(2));
+                    et_stock_code.setSelection(6);
+                }
+            }
+        });
         et_price.setEnabled(false);
         et_num.setEnabled(false);
         iv_depute_way.setClickable(false);
@@ -336,10 +346,10 @@ public class BuyAndSellActivity extends BaseActivity implements View.OnClickList
         }
     }
 
-    private void refresh(final String refreshcode) {
-        stockCode = refreshcode;
+    private void refresh(String refreshcode) {
+//        stockCode = refreshcode;
         et_num.setText("");
-        getHeaderView(stockCode);
+        getHeaderView(refreshcode);
         priceflag = true;
         priceflag = true;
         timeCount.start();
@@ -460,10 +470,12 @@ public class BuyAndSellActivity extends BaseActivity implements View.OnClickList
                     buyAdapter.setYesterdayPrice(jsArray.getString(2), code);
                     String market = JudgeStockUtils.getStockMarket(code);
                     String content = market + code.substring(2);
-                    et_stock_code.setText(content);
+                    /*et_stock_code.setText(content);
                     et_stock_code.setSelection(content.length());
-                    tv_stock_name.setText(jsArray.getString(19));
-
+                    tv_stock_name.setText(jsArray.getString(19));*/
+                    stockCode = code;
+                    stockName = jsArray.getString(19);
+                    et_stock_code.setText(stockName + "  "+content);
                     String down = string2doubleS(TransitionUtils.string2double(jsArray.getString(2)) * 0.9 + "");
                     String up = string2doubleS(TransitionUtils.string2double(jsArray.getString(2)) * 1.1 + "");
                     tv_drop.setText("跌停:" + down);
@@ -488,7 +500,7 @@ public class BuyAndSellActivity extends BaseActivity implements View.OnClickList
                         }
                     }
                     et_price.setEnabled(true);
-
+                    et_price.requestFocus();
                 } catch (JSONException e) {
                     e.printStackTrace();
                 }
@@ -682,6 +694,8 @@ public class BuyAndSellActivity extends BaseActivity implements View.OnClickList
     };
 
     private void clearView() {
+        stockName = "";
+        stockCode = "";
         timeCount.cancel();
         for (int i = 0; i < 5; i++) {
             price_buy[i] = "- -";
@@ -713,7 +727,7 @@ public class BuyAndSellActivity extends BaseActivity implements View.OnClickList
         }
         et_stock_code.setText("");
         tv_sum.setText("----");
-        tv_stock_name.setText("");
+//        tv_stock_name.setText("");
         et_price.setText("");
         et_num.setText("");
         tv_drop.setText("跌停: - -");
@@ -739,7 +753,7 @@ public class BuyAndSellActivity extends BaseActivity implements View.OnClickList
         public void afterTextChanged(Editable s) {
             String numString = s.toString();
 
-            if (!TextUtils.isEmpty(tv_stock_name.getText())) {
+            if (!TextUtils.isEmpty(stockCode)) {
                 iv_add_sum.setClickable(true);
                 iv_sub_sum.setClickable(true);
             } else {
@@ -804,7 +818,7 @@ public class BuyAndSellActivity extends BaseActivity implements View.OnClickList
             iv_add_price.setClickable(false);
             iv_sub_price.setClickable(false);
             if (Helper.isDecimal(numString)) {
-                if (!TextUtils.isEmpty(tv_stock_name.getText())) {
+                if (!TextUtils.isEmpty(stockCode)) {
                     iv_add_price.setClickable(true);
                     iv_sub_price.setClickable(true);
                 }
@@ -895,7 +909,7 @@ public class BuyAndSellActivity extends BaseActivity implements View.OnClickList
                             transactiontype = "买";
                             tv_max_buysell.setText("最大可买:");
                             setIndicatorListen(buy_vp_list);
-                            if (!TextUtils.isEmpty(tv_stock_name.getText())) {
+                            if (!TextUtils.isEmpty(stockCode)) {
 //                                getHeaderView(stockCode);
                                 refresh(stockCode);
                             }
@@ -914,7 +928,7 @@ public class BuyAndSellActivity extends BaseActivity implements View.OnClickList
                             vp_view.setAdapter(new StockVpAdapter(listSell));
                             transactiontype = "卖";
                             setIndicatorListen(sell_vp_ist);
-                            if (!TextUtils.isEmpty(tv_stock_name.getText())) {
+                            if (!TextUtils.isEmpty(stockCode)) {
 //                                getHeaderView(stockCode);
                                 refresh(stockCode);
                             }
@@ -936,8 +950,6 @@ public class BuyAndSellActivity extends BaseActivity implements View.OnClickList
      */
     @Override
     public void onClick(View v) {
-        String stockname = tv_stock_name.getText().toString();
-        String stockcode = et_stock_code.getText().toString();
         String stocknum = et_num.getText().toString();
         switch (v.getId()) {
             case R.id.iv_delete:
@@ -971,12 +983,12 @@ public class BuyAndSellActivity extends BaseActivity implements View.OnClickList
                 finish();
                 break;
             case R.id.bt_buy:
-                if (!TextUtils.isEmpty(tv_stock_name.getText().toString())) {
+                if (!TextUtils.isEmpty(stocknum)) {
                     if (rb_buy.isChecked()) {
                         if ("0".equals(et_num.getText().toString()) || TextUtils.isEmpty(et_num.getText().toString()) || "0".equals(et_price.getText().toString()) || TextUtils.isEmpty(et_price.getText().toString())) {
                             ToastUtils.showShort(this, "请确认价格或数量为有效数值");
                         } else {
-                            CommissionedBuyAndSellDialog commissionedBuyAndSellDialog = new CommissionedBuyAndSellDialog(this, commissionedBuyAndSell, stockname, stockcode, price + "", stocknum, transactiontype, entrustWays);
+                            CommissionedBuyAndSellDialog commissionedBuyAndSellDialog = new CommissionedBuyAndSellDialog(this, commissionedBuyAndSell, stockName, stockCode, price + "", stocknum, transactiontype, entrustWays);
                             commissionedBuyAndSellDialog.show();
                         }
                     } else {
@@ -991,14 +1003,14 @@ public class BuyAndSellActivity extends BaseActivity implements View.OnClickList
                 }
                 break;
             case R.id.bt_sell:
-                if (!TextUtils.isEmpty(tv_stock_name.getText().toString())) {
+                if (!TextUtils.isEmpty(stockCode)) {
                     if (rb_sell.isChecked()) {
                         if ("0".equals(et_num.getText().toString()) || TextUtils.isEmpty(et_num.getText().toString())) {
                             ToastUtils.showShort(BuyAndSellActivity.this, "请确认价格或数量为有效数值");
                         } else if ("0".equals(et_price.getText().toString()) || TextUtils.isEmpty(et_price.getText().toString())) {
                             ToastUtils.showShort(BuyAndSellActivity.this, "请确认价格或数量为有效数值");
                         } else {
-                            CommissionedBuyAndSellDialog commissionedBuyAndSellDialog = new CommissionedBuyAndSellDialog(this, commissionedBuyAndSell, stockname, stockcode, price + "", stocknum, transactiontype, entrustWays);
+                            CommissionedBuyAndSellDialog commissionedBuyAndSellDialog = new CommissionedBuyAndSellDialog(this, commissionedBuyAndSell, stockName, stockCode, price + "", stocknum, transactiontype, entrustWays);
                             commissionedBuyAndSellDialog.show();
                         }
                     } else {
@@ -1013,7 +1025,7 @@ public class BuyAndSellActivity extends BaseActivity implements View.OnClickList
                 }
                 break;
             case R.id.iv_depute_way:
-                FundEntrustDialog fundEntrustDialog = new FundEntrustDialog(this, fundEntrustWays, stockcode);
+                FundEntrustDialog fundEntrustDialog = new FundEntrustDialog(this, fundEntrustWays, stockCode);
                 fundEntrustDialog.show();
                 break;
         }
@@ -1122,6 +1134,7 @@ public class BuyAndSellActivity extends BaseActivity implements View.OnClickList
                     String data = jsonObject.getString("data");
                     if ("0".equals(code)) {
                         et_stock_code.setText("");
+                        clearView();
                         ToastUtils.showShort(BuyAndSellActivity.this,"委托已提交");
                     }else if ("-6".equals(code)){
                         startActivity(new Intent(BuyAndSellActivity.this, TransactionLoginActivity.class));
@@ -1181,6 +1194,7 @@ public class BuyAndSellActivity extends BaseActivity implements View.OnClickList
                     String data = jsonObject.getString("data");
                     if ("0".equals(code)) {
                         et_stock_code.setText("");
+                        clearView();
                         ToastUtils.showShort(BuyAndSellActivity.this,"委托已提交");
                     }else if ("-6".equals(code)){
                         startActivity(new Intent(BuyAndSellActivity.this, TransactionLoginActivity.class));
@@ -1291,8 +1305,9 @@ public class BuyAndSellActivity extends BaseActivity implements View.OnClickList
                 ToastUtils.showShort(BuyAndSellActivity.this, "当前股票代码不可交易");
             } else {
 
-                stockCode = code;
-                refresh(stockCode);
+//                stockCode = code;
+//                stockName = transStockEntity.stockName;
+                refresh(code);
                 iv_depute_way.setClickable(true);
                 iv_depute_way.setBackgroundResource(R.mipmap.icon_entrust_way);
             }
@@ -1308,7 +1323,8 @@ public class BuyAndSellActivity extends BaseActivity implements View.OnClickList
                 ToastUtils.showShort(BuyAndSellActivity.this, "当前股票代码不可交易");
             } else {
                 refresh(code);
-                stockCode = code;
+//                stockCode = code;
+//                stockName = name;
                 iv_depute_way.setClickable(true);
                 iv_depute_way.setBackgroundResource(R.mipmap.icon_entrust_way);
 

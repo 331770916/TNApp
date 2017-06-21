@@ -88,6 +88,7 @@
                     android:background="@drawable/shape_gray_rectangle">
 
                     <ImageView
+                        android:id="@+id/iv_search"
                         android:layout_width="wrap_content"
                         android:layout_height="wrap_content"
                         android:layout_alignParentLeft="true"
@@ -95,43 +96,30 @@
                         android:layout_marginLeft="@dimen/size20"
                         android:src="@mipmap/icon_search" />
 
-                    <LinearLayout
-                        android:layout_width="match_parent"
-                        android:layout_height="wrap_content"
-                        android:layout_centerInParent="true"
-                        android:gravity="center"
-                        android:paddingLeft="@dimen/size20"
-                        android:paddingRight="@dimen/size20">
-
-                        <TextView
-                            android:id="@+id/tv_stock_name"
-                            android:layout_width="wrap_content"
-                            android:layout_height="wrap_content"
-                            android:textSize="@dimen/txtSize16" />
-
-                        <EditText
-                            android:id="@+id/et_stock_code"
-                            android:layout_width="wrap_content"
-                            android:layout_height="@dimen/size20"
-                            android:layout_marginLeft="@dimen/size5"
-                            android:background="@null"
-                            android:hint="股票代码"
-                            android:maxLength="8"
-                            android:textSize="@dimen/txtSize14" />
-                    </LinearLayout>
-
                     <ImageView
                         android:id="@+id/iv_delete"
-                        android:layout_width="@dimen/size40"
+                        android:layout_width="@dimen/size30"
                         android:layout_height="@dimen/size40"
                         android:layout_alignParentRight="true"
                         android:layout_centerVertical="true"
                         android:layout_marginRight="@dimen/size10"
                         android:scaleType="center"
                         android:src="@mipmap/icon_delete" />
-                    />
-                </RelativeLayout>
 
+                        <EditText
+                            android:id="@+id/et_stock_code"
+                            android:layout_width="match_parent"
+                            android:layout_height="match_parent"
+                            android:paddingLeft="@dimen/size5"
+                            android:gravity="center_horizontal"
+                            android:layout_toRightOf="@id/iv_search"
+                            android:layout_marginRight="@dimen/size38"
+                            android:background="@null"
+                            android:layout_gravity="center_horizontal"
+                            android:hint="股票代码"
+                            android:textSize="@dimen/txtSize14" />
+
+                </RelativeLayout>
                 <LinearLayout
                     android:id="@+id/traLayout2"
                     android:layout_width="match_parent"
