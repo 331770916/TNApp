@@ -218,6 +218,7 @@
         <activity android:name=".activity.myself.handhall.RiskWarningActivity" />
         <activity android:name=".activity.myself.handhall.StockHolderInfoActivity" />
         <activity android:name=".activity.myself.handhall.UpdateIdCodeValidityActivity"/>
+        <activity android:name=".activity.myself.handhall.UpLoadIdCardPicActivity"/>
 
         <!-- open_fund 基金相关activity -->
         <activity android:name=".activity.trade.open_fund.AccoundSearchActivity" />
