@@ -55,7 +55,6 @@ public class TranMoreActivity extends BaseActivity implements AdapterView.OnItem
                 break;
         }
         startActivity(intent);
-        finish();
     }
 
     @Override
