@@ -3,6 +3,7 @@ package com.tpyzq.mobile.pangu.view.dialog;
 import android.app.Activity;
 import android.app.Dialog;
 import android.content.Context;
+import android.content.ContextWrapper;
 import android.os.Handler;
 import android.view.LayoutInflater;
 import android.view.View;
@@ -69,6 +70,10 @@ public class DoSelfChoiceResultDialog {
     }
 
     public static void closeDialog(Dialog dialog){
+        if (dialog.getContext() instanceof ContextWrapper)
+            if(((Activity)((ContextWrapper)dialog.getContext()).getBaseContext()).isFinishing()){
+                return;
+        }
         if(dialog != null && dialog.isShowing()){
             dialog.dismiss();
         }

@@ -234,6 +234,7 @@ public class TransactionLoginActivity extends BaseActivity implements View.OnCli
 
         //验证码请求
         toSecurityCode(null);
+        mFirst = SpUtils.getString(this, "First", "");
         if (ConstantUtil.USERFUL_KEYBOARD) {
             IsKeyboardRequestHttp();
         } else {
@@ -262,8 +263,7 @@ public class TransactionLoginActivity extends BaseActivity implements View.OnCli
      * 初始化控件的显示
      */
     private void initTextViewVisibility() {
-        mFirst = SpUtils.getString(this, "First", "");
-        if (mFirst.equals("")) {
+        if ("".equalsIgnoreCase(mFirst)) {
             TextView mChange = (TextView) findViewById(R.id.Change);
             mChange.setVisibility(View.INVISIBLE);
         } else {
@@ -1343,13 +1343,13 @@ public class TransactionLoginActivity extends BaseActivity implements View.OnCli
      */
     public void initImageViewshow() {
         if (TextUtils.isEmpty(mAccount.getText().toString().trim())) {
-            if (mFirst.equals("")) {
+            if ("".equalsIgnoreCase(mFirst)) {
                 mCloseIV.setVisibility(View.GONE);
             } else {
                 mCloseIV.setVisibility(View.GONE);
             }
         } else {
-            if (mFirst.equals("")) {
+            if ("".equalsIgnoreCase(mFirst)) {
                 mCloseIV.setVisibility(View.GONE);
             } else {
                 mCloseIV.setVisibility(View.VISIBLE);
