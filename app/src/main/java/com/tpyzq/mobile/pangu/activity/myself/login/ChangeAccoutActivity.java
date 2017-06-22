@@ -184,6 +184,8 @@ public class ChangeAccoutActivity extends BaseActivity implements View.OnClickLi
         } else {
             initYN(false);
         }
+        //账号监听处理
+        EditTextMonitor();
     }
 
     private void IsKeyboardRequestHttp() {
@@ -264,8 +266,7 @@ public class ChangeAccoutActivity extends BaseActivity implements View.OnClickLi
             inquireCertification();
             //插件键盘数据
             showKeyboardWithHeader();
-            //账号监听处理
-            EditTextMonitor();
+
         } else {
             UserUtil.Keyboard = "0";   //不启用sessionkey加密
             //数据更新
@@ -281,8 +282,7 @@ public class ChangeAccoutActivity extends BaseActivity implements View.OnClickLi
             }
             //查询加密键盘是否显示
             inquireCertification();
-            //账号监听处理
-            EditTextMonitor();
+
         }
 
     }

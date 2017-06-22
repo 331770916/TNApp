@@ -239,6 +239,8 @@ public class TransactionLoginActivity extends BaseActivity implements View.OnCli
         } else {
             initYN(false);
         }
+        //账号监听处理
+        EditTextMonitor();
     }
 
 
@@ -1233,8 +1235,6 @@ public class TransactionLoginActivity extends BaseActivity implements View.OnCli
             inquireCertification();
             //插件键盘数据
             showKeyboardWithHeader();
-            //账号监听处理
-            EditTextMonitor();
         } else {
             UserUtil.Keyboard = "0";
             //数据更新
@@ -1251,8 +1251,6 @@ public class TransactionLoginActivity extends BaseActivity implements View.OnCli
             }
             //查询加密键盘是否显示
             inquireCertification();
-            //账号监听处理
-            EditTextMonitor();
         }
 
     }

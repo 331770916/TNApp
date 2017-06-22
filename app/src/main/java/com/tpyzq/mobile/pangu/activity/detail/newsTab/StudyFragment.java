@@ -143,27 +143,29 @@ public class StudyFragment extends BaseDetailNewsPager implements View.OnClickLi
                     String code = jsonObject.getString("code");
                     if("0".equals(code)){
                         JSONArray data = jsonObject.getJSONArray("data");
-                        for (int i = 0; i < data.length(); i++) {
-                            DetailNewsEntity bean = new DetailNewsEntity();
-                            JSONArray item = data.getJSONArray(i);
-                            String title = item.getString(1);
-                            String source = item.getString(7);
-                            String time = item.getString(19);
-                            String msgId = item.getString(0);
-                            try {
-                                SimpleDateFormat sdf1 = new SimpleDateFormat("yyyy-MM-dd HH:mm:ss");
-                                SimpleDateFormat sdf2 = new SimpleDateFormat("yyyy-MM-dd");
-                                Date parse = sdf1.parse(time);
-                                String format = sdf2.format(parse);
-                                bean.setTime(format);
-                            } catch (ParseException e) {
-                                e.printStackTrace();
+                        if (data != null) {
+                            for (int i = 0; i < data.length(); i++) {
+                                DetailNewsEntity bean = new DetailNewsEntity();
+                                JSONArray item = data.getJSONArray(i);
+                                String title = item.getString(1);
+                                String source = item.getString(7);
+                                String time = item.getString(19);
+                                String msgId = item.getString(0);
+                                try {
+                                    SimpleDateFormat sdf1 = new SimpleDateFormat("yyyy-MM-dd HH:mm:ss");
+                                    SimpleDateFormat sdf2 = new SimpleDateFormat("yyyy-MM-dd");
+                                    Date parse = sdf1.parse(time);
+                                    String format = sdf2.format(parse);
+                                    bean.setTime(format);
+                                } catch (ParseException e) {
+                                    e.printStackTrace();
+                                }
+                                bean.setId(msgId);
+                                bean.setTitle(title);
+                                bean.setSource(source);
+                                bean.setType(2);
+                                list.add(bean);
                             }
-                            bean.setId(msgId);
-                            bean.setTitle(title);
-                            bean.setSource(source);
-                            bean.setType(2);
-                            list.add(bean);
                         }
 
                         pb_Study_Pager.setVisibility(View.GONE);      //隐藏菊花

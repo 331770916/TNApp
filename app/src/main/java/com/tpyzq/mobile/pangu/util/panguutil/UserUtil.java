@@ -1,8 +1,11 @@
 package com.tpyzq.mobile.pangu.util.panguutil;
 
 
+import com.tpyzq.mobile.pangu.data.UserEntity;
 import com.tpyzq.mobile.pangu.db.Db_PUB_USERS;
 import com.tpyzq.mobile.pangu.util.keyboard.KeyEncryptionUtils;
+
+import java.util.List;
 
 /**
  * Created by zhangwenbo on 2016/9/16.
@@ -21,7 +24,13 @@ public class UserUtil {
     public static String Keyboard = "0";
 
     private static String getAccountNumber() {
-        String account = KeyEncryptionUtils.getInstance().localDecryptTradescno().get(0).getTradescno();
+        String account = "";
+        List<UserEntity> list = KeyEncryptionUtils.getInstance().localDecryptTradescno();
+
+        if (list != null && list.size() > 0) {
+            account = list.get(0).getTradescno();
+        }
+
         if (account.contains(",")) {
 
             String[] accounts = account.split(",");
