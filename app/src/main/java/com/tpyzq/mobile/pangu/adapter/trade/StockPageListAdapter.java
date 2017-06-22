@@ -15,14 +15,18 @@ import com.tpyzq.mobile.pangu.util.panguutil.DataUtils;
  */
 public class StockPageListAdapter extends BaseAdapter {
     Context context;
+    String[] titleName;
+    int[] icon;
 
-    public StockPageListAdapter(Context context) {
+    public StockPageListAdapter(Context context, String[] titleName, int[] icon) {
         this.context = context;
+        this.titleName = titleName;
+        this.icon = icon;
     }
 
     @Override
     public int getCount() {
-        return DataUtils.stock_morelist_name.length;
+        return titleName.length;
     }
 
     @Override
@@ -45,8 +49,8 @@ public class StockPageListAdapter extends BaseAdapter {
         } else {
             vh = (ListViewHolder) convertView.getTag();
         }
-        vh.tv_item_title.setText(DataUtils.stock_morelist_name[position]);
-        vh.iv_item_img.setImageResource(DataUtils.stock_morelist_icon[position]);
+        vh.tv_item_title.setText(titleName[position]);
+        vh.iv_item_img.setImageResource(icon[position]);
         vh.tv_item_content.setVisibility(View.GONE);
         return convertView;
     }

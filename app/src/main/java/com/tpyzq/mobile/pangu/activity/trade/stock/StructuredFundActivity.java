@@ -5,29 +5,36 @@ import android.view.View;
 import android.widget.AdapterView;
 import android.widget.ImageView;
 import android.widget.ListView;
+import android.widget.TextView;
 
 import com.tpyzq.mobile.pangu.R;
-import com.tpyzq.mobile.pangu.activity.myself.login.TransactionLoginActivity;
 import com.tpyzq.mobile.pangu.adapter.trade.StockPageListAdapter;
 import com.tpyzq.mobile.pangu.base.BaseActivity;
 import com.tpyzq.mobile.pangu.util.panguutil.DataUtils;
 
-
 /**
- * 股票更多
+ * Created by wangqi on 2017/6/22.
+ * 盘后分级基金
  */
-public class TranMoreActivity extends BaseActivity implements AdapterView.OnItemClickListener, View.OnClickListener {
+
+public class StructuredFundActivity extends BaseActivity implements View.OnClickListener, AdapterView.OnItemClickListener {
+
     private ListView lv_stock_list;
+    private TextView tv_title;
     private ImageView iv_back;
+
     @Override
     public void initView() {
+        tv_title = (TextView) findViewById(R.id.tv_title);
         lv_stock_list = (ListView) findViewById(R.id.lv_stock_list);
         iv_back = (ImageView) findViewById(R.id.iv_back);
+
         initData();
     }
 
     private void initData() {
-        lv_stock_list.setAdapter(new StockPageListAdapter(this, DataUtils.stock_morelist_name,DataUtils.stock_morelist_icon));
+        tv_title.setText(DataUtils.stock_morelist_name[2]);
+        lv_stock_list.setAdapter(new StockPageListAdapter(this, DataUtils.structuredfunda_name, DataUtils.structuredfunda_icon));
         lv_stock_list.setOnItemClickListener(this);
         iv_back.setOnClickListener(this);
     }
@@ -38,32 +45,33 @@ public class TranMoreActivity extends BaseActivity implements AdapterView.OnItem
     }
 
     @Override
-    public void onItemClick(AdapterView<?> parent, View view, int position, long id) {
-        Intent intent = new Intent();
-        switch (position) {
-            case 0:
-                intent.putExtra("pageindex", TransactionLoginActivity.PAGE_INDEX_ChangNeiFundActivity);
-                intent.setClass(this,ChangNeiFundActivity.class);
-                break;
-            case 1:
-                intent.putExtra("pageindex",TransactionLoginActivity.PAGE_INDEX_NIHUIGOU);
-                intent.setClass(this,ReverseRepoGuideActivity.class);
-                break;
-            case 2:
-                intent.putExtra("pageindex",TransactionLoginActivity.PAGE_INDEX_StructuredFundActivity);
-                intent.setClass(this,StructuredFundActivity.class);
-                break;
-        }
-        startActivity(intent);
-        finish();
-    }
-
-    @Override
     public void onClick(View v) {
-        switch (v.getId()){
+        switch (v.getId()) {
             case R.id.iv_back:
                 finish();
                 break;
         }
+    }
+
+    @Override
+    public void onItemClick(AdapterView<?> parent, View view, int position, long id) {
+        Intent intent = new Intent();
+        switch (position) {
+            case 0:
+                break;
+            case 1:
+
+                break;
+            case 2:
+
+                break;
+            case 3:
+
+                break;
+            case 4:
+
+                break;
+        }
+        startActivity(intent);
     }
 }

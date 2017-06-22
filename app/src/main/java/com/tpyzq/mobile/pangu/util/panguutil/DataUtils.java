@@ -27,12 +27,16 @@ public class DataUtils {
     public static String[] open_fund_name = {"委托查询", "历史成交", "分红设置", "基金转换", "基金账户查询", "基金电子合同签署"};
     public static int[] open_fund_icon = {R.mipmap.open_weituochaxun, R.mipmap.open_lishichengjiao, R.mipmap.open_fenhongshezhi, R.mipmap.open_jijinzhuanhuan, R.mipmap.open_jijinzhanghuchaxun, R.mipmap.open_jijindianzihetongqianshu};
 
-    public static String[] stock_morelist_name = {"场内基金", "国债逆回购"};
-    public static int[] stock_morelist_icon = {R.mipmap.item_changnei, R.mipmap.item_nihuigou};
+    public static String[] stock_morelist_name = {"场内基金", "国债逆回购","盘后分级基金"};
+    public static int[] stock_morelist_icon = {R.mipmap.item_changnei, R.mipmap.item_nihuigou,R.mipmap.item_changnei};
 
 
     public static String[] relationship_name = {"父母", "夫妻", "子女", "朋友", "其他"};
 
     public static String[] myself_name = {"股票", "基金", "OTC", "可取资金"};
     public static int[] myself_icon = {R.mipmap.myself_gupiao, R.mipmap.myself_jijin, R.mipmap.myself_licai, R.mipmap.myself_keyongzijin};
+
+
+    public static String[] structuredfunda_name ={"分级基金合并","分级基金分拆","分级基金撤单","委托查询","成交查询"};
+    public static int[] structuredfunda_icon ={R.mipmap.structuredfund_merge,R.mipmap.structuredfund_partition,R.mipmap.structuredfund_revoke,R.mipmap.structuredfund_entrust_inquire,R.mipmap.structuredfund_conclusionofbusiness_inquire};
 }

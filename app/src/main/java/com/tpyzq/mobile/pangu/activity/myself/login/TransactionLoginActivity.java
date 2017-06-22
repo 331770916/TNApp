@@ -168,6 +168,7 @@ public class TransactionLoginActivity extends BaseActivity implements View.OnCli
     public static final int PAGE_INDEX_InputFoundInfoActivity = 46;//修改身份证有效期填写信息页面
     public static final int PAGE_INDEX_PrecontractLoadActivity = 47;//预约界面
     public static final int PAGE_INDEX_ReverseRepoGuideActivity = 48;//国债逆回购
+    public static final int PAGE_INDEX_StructuredFundActivity = 49;//分级基金
 
     private static final String KEY_BOARD_INPUT_ENCRYPTED_FORMAT = "密码键盘输入加密数据:%s";
     //控件
