@@ -122,6 +122,13 @@
 
                 <category android:name="android.intent.category.LAUNCHER" />
             </intent-filter>
+            <intent-filter>
+                <!--h5调用app 协议部分-->
+                <action android:name="android.intent.action.VIEW"/>
+                <category android:name="android.intent.category.DEFAULT" />
+                <category android:name="android.intent.category.BROWSABLE"/>
+                <data android:host="my.com" android:scheme="m" />
+            </intent-filter>
         </activity>
         <activity
             android:name=".activity.navigation.NavigationActivity"
