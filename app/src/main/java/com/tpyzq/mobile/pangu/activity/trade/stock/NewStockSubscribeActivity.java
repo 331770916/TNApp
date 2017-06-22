@@ -14,13 +14,15 @@ import com.google.gson.reflect.TypeToken;
 import com.prolificinteractive.materialcalendarview.CalendarDay;
 import com.tpyzq.mobile.pangu.R;
 import com.tpyzq.mobile.pangu.activity.myself.login.TransactionLoginActivity;
-import com.tpyzq.mobile.pangu.activity.trade.view.MyPurchaseQuotaView;
 import com.tpyzq.mobile.pangu.adapter.trade.NewStockSubAdapter;
 import com.tpyzq.mobile.pangu.base.BaseActivity;
 import com.tpyzq.mobile.pangu.data.NewStockEnitiy;
+import com.tpyzq.mobile.pangu.data.OneKeySubscribeBean;
 import com.tpyzq.mobile.pangu.http.NetWorkUtil;
 import com.tpyzq.mobile.pangu.log.LogHelper;
+import com.tpyzq.mobile.pangu.log.LogUtil;
 import com.tpyzq.mobile.pangu.util.ConstantUtil;
+import com.tpyzq.mobile.pangu.util.SpUtils;
 import com.tpyzq.mobile.pangu.view.dialog.ResultDialog;
 import com.zhy.http.okhttp.callback.StringCallback;
 
@@ -53,15 +55,15 @@ public class NewStockSubscribeActivity extends BaseActivity implements View.OnCl
     private LinearLayout mListViewTitle;
 
     private TextView tvHuANum,tvShenANum;
-    private View mRelativeLayout_btn;
+    private LinearLayout ll_query;
 
     @Override
     public void initView() {
         //我的申购
         this.tvHuANum = (TextView) this.findViewById(R.id.tvHuANum);         //沪A的可购买数量
         this.tvShenANum = (TextView) this.findViewById(R.id.tvShenANum);     //深A的值可购买数量
-        this.mRelativeLayout_btn = this.findViewById(R.id.RelativeLayout_btn);     //深A的值可购买数量
-        MyPurchaseQuotaView myPurchaseQuotaView=new MyPurchaseQuotaView(this,tvHuANum,tvShenANum,mRelativeLayout_btn);
+        this.ll_query = (LinearLayout) this.findViewById(R.id.ll_query);     //深A的值可购买数量
+        this.ll_query.setOnClickListener(this);
         //新股日历
         mListView = (ListView) this.findViewById(R.id.lvNewStockSubscribe); //listView
         this.findViewById(R.id.ivNewStock_back).setOnClickListener(this);   //点击返回按钮销毁当前界面
@@ -85,6 +87,7 @@ public class NewStockSubscribeActivity extends BaseActivity implements View.OnCl
 
     private void initData() {
         adapter = new NewStockSubAdapter(this);
+        initLogIc();
         newStockCalenderConnect();
         mListView.setAdapter(adapter);
 
@@ -124,6 +127,12 @@ public class NewStockSubscribeActivity extends BaseActivity implements View.OnCl
     @Override
     public void onClick(View v) {
         switch (v.getId()) {
+            case R.id.ll_query://查看额度
+                Intent intent = new Intent();
+                intent.setClass(this, QueryLimitActivity.class);
+                intent.putExtra("session", SpUtils.getString(this, "mSession", ""));
+                startActivity(intent);
+                break;
             case R.id.tvYiJianSubscribe:    //一键申购界面
                 Intent intentYiJianSubscribe = new Intent();
                 intentYiJianSubscribe.setClass(this, OneKeySubscribeActivity.class);
@@ -154,6 +163,50 @@ public class NewStockSubscribeActivity extends BaseActivity implements View.OnCl
                 this.finish();
                 break;
         }
+    }
+
+
+    //获取深A和沪股持股数量
+    private void initLogIc() {
+        Map map1 = new HashMap();
+        Map map2 = new HashMap();
+        map2.put("SEC_ID", "tpyzq");
+        map2.put("FLAG", "true");
+        map1.put("funcid", "300380");
+        map1.put("token", SpUtils.getString(this, "mSession", ""));
+        map1.put("parms", map2);
+
+        NetWorkUtil.getInstence().okHttpForPostString(this, ConstantUtil.URL_JY, map1, new StringCallback() {
+            @Override
+            public void onError(Call call, Exception e, int id) {
+                LogUtil.e(TAG, e.toString());
+            }
+
+            @Override
+            public void onResponse(String response, int id) {
+                if (TextUtils.isEmpty(response)) {
+                    return;
+                }
+                Gson gson = new Gson();
+                java.lang.reflect.Type type = new TypeToken<OneKeySubscribeBean>() {
+                }.getType();
+                OneKeySubscribeBean bean = gson.fromJson(response, type);
+                List<OneKeySubscribeBean.DataBean> data = bean.getData();
+                String code = bean.getCode();
+                if (data != null && code.equals("0") && data.size() > 0) {
+                    for (int i = 0; i < data.size(); i++) {
+                        OneKeySubscribeBean.DataBean dataBean = data.get(i);
+                        String market = dataBean.getMARKET();
+                        if (market.equals("1")) {
+                            tvHuANum.setText(dataBean.getENABLE_AMOUNT().substring(0, dataBean.getENABLE_AMOUNT().indexOf(".")) + "股");
+                        } else if (market.equals("2")) {
+                            tvShenANum.setText(dataBean.getENABLE_AMOUNT().substring(0, dataBean.getENABLE_AMOUNT().indexOf(".")) + "股");
+                        }
+                    }
+
+                }
+            }
+        });
     }
 
 

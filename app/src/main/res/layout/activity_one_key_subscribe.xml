@@ -81,7 +81,11 @@
                 android:layout_weight="1"/>
 
 
-
+            <LinearLayout
+                android:id="@+id/ll_query"
+                android:layout_width="wrap_content"
+                android:layout_height="match_parent"
+                android:paddingLeft="@dimen/size20">
                 <TextView
 
                     android:layout_width="wrap_content"
@@ -90,12 +94,13 @@
                     android:text="@string/queryDetils"
                     android:textColor="@color/white"
                     android:textSize="@dimen/txtSize12" />
-            <ImageView
-                android:id="@+id/imQueryDetails"
-                android:layout_width="wrap_content"
-                android:layout_height="wrap_content"
-                android:layout_marginRight="@dimen/size12"
-                android:src="@mipmap/canlder_right" />
+                <ImageView
+                    android:id="@+id/imQueryDetails"
+                    android:layout_width="wrap_content"
+                    android:layout_height="wrap_content"
+                    android:layout_marginRight="@dimen/size12"
+                    android:src="@mipmap/canlder_right" />
+            </LinearLayout>
 
         </LinearLayout>
 

@@ -1,0 +1,311 @@
+<?xml version="1.0" encoding="utf-8"?>
+<LinearLayout xmlns:android="http://schemas.android.com/apk/res/android"
+    android:orientation="vertical"
+    android:layout_width="match_parent"
+    android:layout_height="match_parent">
+    <RelativeLayout
+        android:layout_width="match_parent"
+        android:layout_height="@dimen/size25"
+        android:background="#368CE6"
+        android:clipToPadding="true"
+        android:fitsSystemWindows="true" />
+
+    <include layout="@layout/updatepwd_top"
+        android:id="@+id/startVideTop" />
+
+    <ScrollView
+        android:layout_width="match_parent"
+        android:layout_height="wrap_content"
+        android:scrollbars="none">
+        <LinearLayout
+            android:layout_width="match_parent"
+            android:layout_height="wrap_content"
+            android:orientation="vertical">
+            <RelativeLayout
+                android:layout_width="match_parent"
+                android:layout_height="wrap_content"
+                android:paddingTop="@dimen/size30"
+                android:paddingBottom="@dimen/size30"
+                android:background="@color/blue">
+                <LinearLayout
+                    android:layout_width="match_parent"
+                    android:layout_height="wrap_content"
+                    android:layout_centerInParent="true"
+                    android:orientation="horizontal">
+
+                    <RelativeLayout
+                        android:layout_width="0dp"
+                        android:layout_weight="1"
+                        android:layout_height="wrap_content">
+                        <ImageView
+                            android:id="@+id/pic_front"
+                            android:layout_centerHorizontal="true"
+                            android:layout_width="wrap_content"
+                            android:layout_height="wrap_content"
+                            android:src="@mipmap/idcard_p"/>
+
+                        <TextView
+                            android:id="@+id/frontReuslt"
+                            android:layout_below="@id/pic_front"
+                            android:gravity="center"
+                            android:textSize="12sp"
+                            android:layout_centerHorizontal="true"
+                            android:layout_marginTop="@dimen/size10"
+                            android:layout_width="wrap_content"
+                            android:layout_height="wrap_content"
+                            android:text="上传身份证正面"
+                            android:textColor="@color/white"/>
+
+                    </RelativeLayout>
+
+
+                    <RelativeLayout
+                        android:layout_width="0dp"
+                        android:layout_weight="1"
+                        android:layout_height="wrap_content">
+                        <ImageView
+                            android:id="@+id/pic_back"
+                            android:layout_width="wrap_content"
+                            android:layout_height="wrap_content"
+                            android:layout_centerHorizontal="true"
+                            android:src="@mipmap/idcard_n"/>
+
+                        <TextView
+                            android:id="@+id/blackReuslt"
+                            android:layout_below="@id/pic_back"
+                            android:gravity="center"
+                            android:layout_width="wrap_content"
+                            android:layout_height="wrap_content"
+                            android:layout_centerHorizontal="true"
+                            android:layout_marginTop="@dimen/size10"
+                            android:textSize="12sp"
+                            android:text="上传身份证背面"
+                            android:textColor="@color/white"/>
+
+                    </RelativeLayout>
+                </LinearLayout>
+            </RelativeLayout>
+
+            <LinearLayout
+                android:layout_width="match_parent"
+                android:layout_height="match_parent"
+                android:orientation="vertical">
+                <TextView
+                    android:layout_alignParentTop="true"
+                    android:layout_width="match_parent"
+                    android:layout_height="wrap_content"
+                    android:background="@color/white"
+                    android:padding="@dimen/size15"
+                    android:textSize="14sp"
+                    android:textColor="#4c4c4c"
+                    android:text="身份证上传要求:"/>
+
+                <View
+                    android:layout_width="match_parent"
+                    android:layout_height="8dp"
+                    android:background="#f3f8fc"/>
+
+                <LinearLayout
+                    android:layout_width="match_parent"
+                    android:layout_height="wrap_content"
+                    android:layout_marginTop="@dimen/size10"
+                    android:padding="@dimen/size10"
+                    android:orientation="horizontal">
+                    <ImageView
+                        android:layout_width="wrap_content"
+                        android:layout_height="@dimen/size13"
+                        android:scaleType="center"
+                        android:src="@mipmap/ic_upload_tip"/>
+                    <TextView
+                        android:layout_width="wrap_content"
+                        android:layout_height="wrap_content"
+                        android:layout_marginLeft="@dimen/size10"
+                        android:text="需为本人有效二代身份证；"
+                        android:textSize="13sp"
+                        android:textColor="#999999"/>
+                </LinearLayout>
+
+
+                <LinearLayout
+                    android:layout_width="match_parent"
+                    android:layout_height="wrap_content"
+                    android:padding="@dimen/size10"
+                    android:orientation="horizontal">
+                    <ImageView
+                        android:layout_width="wrap_content"
+                        android:layout_height="@dimen/size13"
+                        android:scaleType="center"
+                        android:src="@mipmap/ic_upload_tip"/>
+                    <TextView
+                        android:id="@+id/tipTv"
+                        android:layout_width="wrap_content"
+                        android:layout_height="wrap_content"
+                        android:layout_marginLeft="@dimen/size10"
+                        android:textSize="13sp"
+                        android:textColor="#999999"/>
+                </LinearLayout>
+
+                <LinearLayout
+                    android:layout_width="match_parent"
+                    android:layout_height="wrap_content"
+                    android:layout_marginTop="@dimen/size20"
+                    android:orientation="horizontal">
+                    <TextView
+                        android:layout_width="wrap_content"
+                        android:layout_height="wrap_content"
+                        android:layout_marginLeft="@dimen/size10"
+                        android:textColor="#666666"
+                        android:background="@drawable/bg_upload_idcard_tip"
+                        android:text="拍摄示例"
+                        android:textSize="@dimen/txtSize9"/>
+                    <View
+                        android:layout_width="match_parent"
+                        android:layout_height="1px"
+                        android:layout_marginRight="@dimen/size10"
+                        android:layout_marginLeft="@dimen/size5"
+                        android:background="@color/lineColor"
+                        android:layout_gravity="center_vertical"/>
+
+                </LinearLayout>
+
+                <LinearLayout
+                    android:layout_marginTop="@dimen/size20"
+                    android:layout_width="match_parent"
+                    android:layout_height="wrap_content"
+                    android:orientation="horizontal">
+
+                    <RelativeLayout
+                        android:layout_width="0dp"
+                        android:layout_weight="1"
+                        android:layout_height="wrap_content"
+                        android:background="@drawable/example_pic_bg"
+                        android:padding="@dimen/size10"
+                        android:layout_margin="@dimen/size5">
+
+                        <ImageView
+                            android:id="@+id/example_idcard_right"
+                            android:layout_width="wrap_content"
+                            android:layout_height="wrap_content"
+                            android:src="@mipmap/right_idcard"/>
+
+                        <TextView
+                            android:layout_width="wrap_content"
+                            android:layout_height="wrap_content"
+                            android:layout_marginTop="@dimen/size5"
+                            android:layout_below="@id/example_idcard_right"
+                            android:text="标准"
+                            android:textSize="14sp"
+                            android:layout_centerInParent="true"
+                            android:gravity="center_horizontal|bottom"
+                            android:textColor="#4c4c4c"/>
+
+
+                    </RelativeLayout>
+
+                    <LinearLayout
+                        android:layout_width="0dp"
+                        android:layout_weight="3"
+                        android:layout_margin="@dimen/size5"
+                        android:background="@drawable/example_pic_bg"
+                        android:layout_height="wrap_content"
+                        android:orientation="horizontal"
+                        android:padding="@dimen/size10">
+
+                        <RelativeLayout
+                            android:layout_width="0dp"
+                            android:layout_height="wrap_content"
+                            android:layout_weight="1">
+
+                            <ImageView
+                                android:id="@+id/example_idcard_error1"
+                                android:layout_width="wrap_content"
+                                android:layout_height="wrap_content"
+                                android:src="@mipmap/idcard_failed1"/>
+
+                            <TextView
+                                android:layout_below="@id/example_idcard_error1"
+                                android:layout_width="wrap_content"
+                                android:layout_height="wrap_content"
+                                android:layout_centerHorizontal="true"
+                                android:layout_marginTop="@dimen/size5"
+                                android:text="边框缺失"
+                                android:textSize="14sp"
+                                android:gravity="center_horizontal|bottom"
+                                android:textColor="#4c4c4c"/>
+
+                        </RelativeLayout>
+
+                        <RelativeLayout
+                            android:layout_width="0dp"
+                            android:layout_height="wrap_content"
+                            android:layout_weight="1">
+
+                            <ImageView
+                                android:id="@+id/example_idcard_error2"
+                                android:layout_width="wrap_content"
+                                android:layout_height="wrap_content"
+                                android:src="@mipmap/idcard_failed2"/>
+
+                            <TextView
+                                android:layout_width="wrap_content"
+                                android:layout_height="wrap_content"
+                                android:layout_below="@id/example_idcard_error2"
+                                android:layout_marginTop="@dimen/size5"
+                                android:layout_centerHorizontal="true"
+                                android:text="照片模糊"
+                                android:textSize="14sp"
+                                android:gravity="center_horizontal|bottom"
+                                android:textColor="#4c4c4c"/>
+
+                        </RelativeLayout>
+
+                        <RelativeLayout
+                            android:layout_width="0dp"
+                            android:layout_height="wrap_content"
+                            android:layout_weight="1">
+
+                            <ImageView
+                                android:id="@+id/example_idcard_error3"
+                                android:layout_width="wrap_content"
+                                android:layout_height="wrap_content"
+                                android:src="@mipmap/idcard_failed3"/>
+
+                            <TextView
+                                android:layout_width="wrap_content"
+                                android:layout_height="wrap_content"
+                                android:layout_below="@id/example_idcard_error3"
+                                android:layout_marginTop="@dimen/size5"
+                                android:layout_centerHorizontal="true"
+                                android:text="闪光强烈"
+                                android:textSize="14sp"
+                                android:gravity="center_horizontal|bottom"
+                                android:textColor="#4c4c4c"/>
+                        </RelativeLayout>
+
+                    </LinearLayout>
+
+                </LinearLayout>
+
+
+            </LinearLayout>
+
+            <TextView
+                android:id="@+id/uploadIdCarBtn"
+                android:layout_width="match_parent"
+                android:layout_height="wrap_content"
+                android:background="@drawable/userid_nextstup_n"
+                android:layout_alignParentBottom="true"
+                android:layout_marginBottom="@dimen/size30"
+                android:padding="@dimen/size10"
+                android:text="@string/nextStup"
+                android:gravity="center"
+                android:textColor="@color/white"
+                android:layout_marginTop="@dimen/size40"
+                android:layout_marginLeft="@dimen/size20"
+                android:layout_marginRight="@dimen/size20"/>
+
+
+        </LinearLayout>
+    </ScrollView>
+
+</LinearLayout>
