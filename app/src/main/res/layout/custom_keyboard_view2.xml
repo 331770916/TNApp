@@ -1,7 +1,7 @@
 <?xml version="1.0" encoding="utf-8"?>
 <RelativeLayout xmlns:android="http://schemas.android.com/apk/res/android"
     android:layout_width="match_parent"
-    android:layout_height="wrap_content">
+    android:layout_height="match_parent">
 
 
     <TextView
@@ -241,12 +241,12 @@
         android:id="@+id/rl_low"
         android:layout_width="match_parent"
         android:layout_height="wrap_content"
+        android:layout_alignParentBottom="true"
         android:visibility="gone">
 
         <LinearLayout
             android:layout_width="match_parent"
             android:layout_height="wrap_content"
-            android:layout_alignParentBottom="true"
             android:background="@drawable/bg_lowercase"
             android:orientation="vertical">
 
@@ -549,12 +549,12 @@
         android:id="@+id/rl_up"
         android:layout_width="match_parent"
         android:layout_height="wrap_content"
+        android:layout_alignParentBottom="true"
         android:visibility="gone">
 
         <LinearLayout
             android:layout_width="match_parent"
             android:layout_height="wrap_content"
-            android:layout_alignParentBottom="true"
             android:background="@drawable/bg_uppercase"
             android:orientation="vertical">
 
@@ -858,12 +858,11 @@
         android:id="@+id/inputPasswordView"
         android:layout_width="match_parent"
         android:layout_height="wrap_content"
-        android:layout_marginBottom="@dimen/size10"
-        android:layout_above="@id/rl_num"
+        android:layout_alignParentBottom="true"
+        android:layout_marginBottom="@dimen/size215"
         android:background="@color/white"
         android:paddingTop="@dimen/size10"
         android:paddingBottom="@dimen/size10"
-        android:layout_marginTop="@dimen/size30"
         android:layout_marginLeft="@dimen/size30"
         android:layout_marginRight="@dimen/size30"/>
 

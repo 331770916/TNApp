@@ -25,11 +25,12 @@ import com.tpyzq.mobile.pangu.util.TransitionUtils;
 public class ResultDialog {
 
     private static ResultDialog mResultDialog;
-    private static Toast mToast;
     private static String oldMsg;
     private static long oneTime = 0;
     private static long towTime = 0;
     private static Context context;
+    private Toast mToastNew;//new的吐司，实现自定义背景
+    private Toast mToastNormal;//普通背景居中吐司
 
     private ResultDialog() {
 
@@ -49,9 +50,9 @@ public class ResultDialog {
             int IMAGE = R.id.dialog_image;
             int TEXT = R.id.dialog_text;
 //          mToast = Toast.makeText(CustomApplication.getContext(), Html.fromHtml(content), Toast.LENGTH_SHORT);
-            mToast = new Toast(context);
+            mToastNew = new Toast(context);
 //          Toast.makeText(CustomApplication.getContext(), content, Toast.LENGTH_SHORT);
-            mToast.setGravity(Gravity.CENTER, 0, 0);
+            mToastNew.setGravity(Gravity.CENTER, 0, 0);
             RelativeLayout toastView = new RelativeLayout(context);
             toastView.setBackgroundResource(R.drawable.toasts);
             toastView.setLayoutParams(new ViewGroup.LayoutParams(ViewGroup.LayoutParams.WRAP_CONTENT, ViewGroup.LayoutParams.WRAP_CONTENT));
@@ -80,33 +81,33 @@ public class ResultDialog {
             textView.setLayoutParams(lp2);
             toastView.addView(textView);
 
-            mToast.setView(toastView);
-            mToast.setDuration(Toast.LENGTH_SHORT);
-            mToast.show();
+            mToastNew.setView(toastView);
+            mToastNew.setDuration(Toast.LENGTH_SHORT);
+            mToastNew.show();
 //        }
     }
 
     public void showText(String content) {
-        if (mToast == null) {
+        if (mToastNormal == null) {
             content = "<font color='#FFFFFF'>" + content + "</font>";
-            mToast = Toast.makeText(CustomApplication.getContext(), Html.fromHtml(content), Toast.LENGTH_SHORT);
-            mToast.setGravity(Gravity.CENTER, 0, 0);
-            LinearLayout toastView = (LinearLayout) mToast.getView();
+            mToastNormal = Toast.makeText(CustomApplication.getContext(), Html.fromHtml(content), Toast.LENGTH_SHORT);
+            mToastNormal.setGravity(Gravity.CENTER, 0, 0);
+            LinearLayout toastView = (LinearLayout) mToastNormal.getView();
             toastView.setBackgroundResource(R.drawable.toasts);
             toastView.setPadding(140, 70, 140, 70);
-            mToast.show();
+            mToastNormal.show();
             oldMsg = content;
             oneTime = System.currentTimeMillis();
         } else {
             towTime = System.currentTimeMillis();
             if (content.equals(oldMsg)) {
                 if (towTime - oneTime > Toast.LENGTH_LONG) {
-                    mToast.show();
+                    mToastNormal.show();
                 }
             } else {
                 oldMsg = content;
-                mToast.setText(content);
-                mToast.show();
+                mToastNormal.setText(content);
+                mToastNormal.show();
             }
         }
         oneTime = towTime;
