@@ -196,6 +196,9 @@ public class TransferAcountsTab extends BaseTransferSubjectTabView implements
         String _price = mPriceEidt.getText().toString();
         String _password = keyboardResult;
         int position = mViewPager.getCurrentItem();
+        if (position > mAccountInfos.size()) {
+            return;
+        }
         boolean isNeedPassword = !"0".equals(mAccountInfos.get(position).getMONEY_INTO());
 
 

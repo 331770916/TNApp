@@ -430,7 +430,7 @@ public class HuShenAdapter extends BaseAdapter {
 
             int num = 0;
             for (int i = 0; i < textViews.length; i++) {
-                if ((i + 1) % 4 == 0) {
+                if ((i + 1) % 4 == 0 && _beans.get(num) != null) {
                     int colors = 100;// 100是绿色， 101是红色  102 是黑色
 
                     if (!TextUtils.isEmpty(_beans.get(num).getStockName())) {
@@ -534,7 +534,7 @@ public class HuShenAdapter extends BaseAdapter {
         if (null != _beans && _beans.size() > 0) {
             int num = 0;
             for (int i = 0; i < textViews.length; i++) {
-                if ((i + 1) % 5 == 0) {
+                if ((i + 1) % 5 == 0 && _beans.get(num) != null) {
 
                     int colors = 100;// 100是绿色， 101是红色  102 是黑色
                     if (!TextUtils.isEmpty(_beans.get(num).getIndustryName())) {

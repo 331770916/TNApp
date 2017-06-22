@@ -3,6 +3,7 @@ package com.tpyzq.mobile.pangu.view.dialog;
 import android.app.Activity;
 import android.app.Dialog;
 import android.content.Context;
+import android.content.ContextWrapper;
 import android.content.DialogInterface;
 import android.graphics.Color;
 import android.text.Spannable;
@@ -239,6 +240,12 @@ public class MistakeDialog {
     }
 
     public static void closeDialog(Dialog dialog) {
+        if (dialog.getContext() instanceof ContextWrapper){
+            if(((ContextWrapper)dialog.getContext()).getBaseContext() instanceof Activity
+                    &&((Activity)(((ContextWrapper)dialog.getContext()).getBaseContext())).isFinishing()){
+                return;
+            }
+        }
         if (dialog != null && dialog.isShowing()) {
             dialog.dismiss();
         }
