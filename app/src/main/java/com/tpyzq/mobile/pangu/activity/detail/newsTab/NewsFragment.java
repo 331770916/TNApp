@@ -150,7 +150,7 @@ public class NewsFragment extends BaseDetailNewsPager implements View.OnClickLis
                     String code = jsonObject.getString("code");
                     if ("200".equals(code)) {
                         JSONArray message = jsonObject.optJSONArray("message");
-                        if (message != null) {
+                        if (message != null&&message.length()>0) {
                             for (int i = 0; i < message.length(); i++) {
                                 DetailNewsEntity bean = new DetailNewsEntity();
                                 JSONObject item = message.getJSONObject(i);
@@ -166,69 +166,75 @@ public class NewsFragment extends BaseDetailNewsPager implements View.OnClickLis
                                 bean.setType(1);
                                 list.add(bean);
                             }
-                        }
-                        pb_New_Pager.setVisibility(View.GONE);      //隐藏菊花
-                        tvNewJiaZai.setVisibility(View.GONE);       //隐藏重新加载
-                        rlNews.setBackgroundColor(ContextCompat.getColor(mContext, R.color.white));      //背景设置为白色
-                        mListView.setVisibility(View.VISIBLE);      //请求到数据 展示 listView
-                        tvNewGengDuo.setVisibility(View.VISIBLE);   //显示点击查看更多
+                            pb_New_Pager.setVisibility(View.GONE);      //隐藏菊花
+                            tvNewJiaZai.setVisibility(View.GONE);       //隐藏重新加载
+                            rlNews.setBackgroundColor(ContextCompat.getColor(mContext, R.color.white));      //背景设置为白色
+                            mListView.setVisibility(View.VISIBLE);      //请求到数据 展示 listView
+                            tvNewGengDuo.setVisibility(View.VISIBLE);   //显示点击查看更多
 
-                        if (list != null && list.size() > 0) {
-                            for (int i = 0; i < list.size(); i++) {
-                                if (i < 2) {
-                                    newlist.add(list.get(i));
+                            if (list != null && list.size() > 0) {
+                                for (int i = 0; i < list.size(); i++) {
+                                    if (i < 2) {
+                                        newlist.add(list.get(i));
+                                    }
+                                }
+
+                                if (newlist != null && newlist.size() > 0) {
+                                    if (newlist.size() >= 2) {
+                                        tvNewGengDuo.setVisibility(View.VISIBLE);
+                                    } else {
+                                        tvNewGengDuo.setVisibility(View.GONE);
+                                    }
                                 }
                             }
-
-                            if (newlist != null && newlist.size() > 0) {
-                                if (newlist.size() >= 2) {
-                                    tvNewGengDuo.setVisibility(View.VISIBLE);
-                                } else {
-                                    tvNewGengDuo.setVisibility(View.GONE);
-                                }
-                            }
+                            adapter.setList(newlist);
+                        } else {
+                            showNoData();
                         }
-                        adapter.setList(newlist);
                     } else {
-                        pb_New_Pager.setVisibility(View.GONE);      //隐藏菊花
-                        rlNews.setBackgroundColor(ContextCompat.getColor(mContext, R.color.white));    //背景 为 白色
-                        mListView.setVisibility(View.GONE);         //隐藏listView
-                        tvNewGengDuo.setVisibility(View.GONE);   //隐藏点击查看更多
-                        tvNewJiaZai.setVisibility(View.VISIBLE);    //显示 重新加载
-                        tvNewJiaZai.setOnClickListener(new View.OnClickListener() {
-                            @Override
-                            public void onClick(View v) {
-                                tvNewJiaZai.setVisibility(View.GONE);  //隐藏重新加载图片
-                                pb_New_Pager.setVisibility(View.VISIBLE);      //显示菊花
-                                rlNews.setVisibility(View.VISIBLE);//显示背景
-                                rlNews.setBackgroundColor(ContextCompat.getColor(mContext, R.color.dividerColor)); //设置为灰色
-
-                                //模拟加载数据线程休息1秒
-                                new AsyncTask<Void, Void, Void>() {
-                                    @Override
-                                    protected Void doInBackground(Void... params) {
-                                        try {
-                                            Thread.sleep(1000);
-                                        } catch (InterruptedException e) {
-                                            e.printStackTrace();
-                                        }
-                                        return null;
-                                    }
-
-                                    @Override
-                                    protected void onPostExecute(Void result) {
-                                        super.onPostExecute(result);
-                                        getData();
-                                    }
-                                }.execute();
-                            }
-                        });
+                        showNoData();
 
                     }
 
                 } catch (JSONException e) {
                     e.printStackTrace();
                 }
+            }
+            //没有数据时的展示
+            private void showNoData() {
+                pb_New_Pager.setVisibility(View.GONE);      //隐藏菊花
+                rlNews.setBackgroundColor(ContextCompat.getColor(mContext, R.color.white));    //背景 为 白色
+                mListView.setVisibility(View.GONE);         //隐藏listView
+                tvNewGengDuo.setVisibility(View.GONE);   //隐藏点击查看更多
+                tvNewJiaZai.setVisibility(View.VISIBLE);    //显示 重新加载
+                tvNewJiaZai.setOnClickListener(new View.OnClickListener() {
+                    @Override
+                    public void onClick(View v) {
+                        tvNewJiaZai.setVisibility(View.GONE);  //隐藏重新加载图片
+                        pb_New_Pager.setVisibility(View.VISIBLE);      //显示菊花
+                        rlNews.setVisibility(View.VISIBLE);//显示背景
+                        rlNews.setBackgroundColor(ContextCompat.getColor(mContext, R.color.dividerColor)); //设置为灰色
+
+                        //模拟加载数据线程休息1秒
+                        new AsyncTask<Void, Void, Void>() {
+                            @Override
+                            protected Void doInBackground(Void... params) {
+                                try {
+                                    Thread.sleep(1000);
+                                } catch (InterruptedException e) {
+                                    e.printStackTrace();
+                                }
+                                return null;
+                            }
+
+                            @Override
+                            protected void onPostExecute(Void result) {
+                                super.onPostExecute(result);
+                                getData();
+                            }
+                        }.execute();
+                    }
+                });
             }
         });
 
