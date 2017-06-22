@@ -164,6 +164,25 @@
     <string name="ChangNeiJiJinShenGou">场内基金申购</string>
     <string name="ChangNeiJiJinShuHui">场内基金赎回</string>
 
+    <!--分级基金合并-->
+    <string name="Gradingfundmerger">分级基金合并</string>
+    <string name="mergerdata">可合数量</string>
+    <string name="mergerstatus">状态说明</string>
+    <string name="shareholdercode">股东代码</string>
+    <string name="fundID">基金代码</string>
+    <string name="mergershare">合并份额</string>
+    <string name="input_fundID">请输入基金代码</string>
+    <string name="input_mergershare">请输入份额</string>
+    <string name="choose_fund">选择基金</string>
+    <string name="merge">合并</string>
+    <string name="securities_code">证券代码</string>
+    <string name="securities_name">证券名称</string>
+    <string name="entrust_name">名称/代码</string>
+    <string name="entrust_status">业务/状态</string>
+    <string name="entrust_time">时间/日期</string>
+
+    
+
 
     <!--OTC-->
     <string name="OTC_rengou">OTC认购</string>

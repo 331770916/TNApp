@@ -7,6 +7,7 @@
     <dimen name="txtSize12">12sp</dimen>
     <dimen name="txtSize13">13sp</dimen>
     <dimen name="txtSize14">14sp</dimen>
+    <dimen name="txtSize15">15sp</dimen>
     <dimen name="txtSize16">16sp</dimen>
     <dimen name="txtSize18">18sp</dimen>
     <dimen name="txtSize20">20sp</dimen>
@@ -198,6 +199,7 @@
     <dimen name="size290">290dp</dimen>
     <dimen name="size296">296dp</dimen>
     <dimen name="size300">300dp</dimen>
+    <dimen name="size325">325dp</dimen>
     <dimen name="size330">330dp</dimen>
     <dimen name="size350">350dp</dimen>
     <dimen name="size315">315dp</dimen>
