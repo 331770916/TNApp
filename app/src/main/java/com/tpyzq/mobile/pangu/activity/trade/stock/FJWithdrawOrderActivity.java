@@ -1,6 +1,7 @@
 package com.tpyzq.mobile.pangu.activity.trade.stock;
 
 import android.text.TextUtils;
+import android.util.Log;
 import android.view.View;
 import android.widget.AdapterView;
 import android.widget.ImageView;
@@ -12,6 +13,8 @@ import com.tpyzq.mobile.pangu.base.BaseActivity;
 import com.tpyzq.mobile.pangu.data.StructuredFundEntity;
 import com.tpyzq.mobile.pangu.http.NetWorkUtil;
 import com.tpyzq.mobile.pangu.util.ConstantUtil;
+import com.tpyzq.mobile.pangu.util.Helper;
+import com.tpyzq.mobile.pangu.view.dialog.StructuredFundDialog;
 import com.zhy.http.okhttp.callback.StringCallback;
 
 import java.util.ArrayList;
@@ -25,8 +28,8 @@ import okhttp3.Call;
  * 分级基金撤单
  */
 
-public class FJWithdrawOrderActivity extends BaseActivity implements AdapterView.OnItemClickListener, View.OnClickListener {
-    private static final String TAG = "FJWithdrawOrder";
+public class FJWithdrawOrderActivity extends BaseActivity implements AdapterView.OnItemClickListener, View.OnClickListener, StructuredFundDialog.Expression {
+    public static final String TAG = "FJWithdrawOrder";
     private ListView mListView;
     private List<StructuredFundEntity> mList;
     private FJWithdrawOrderAdapter mFjwithdrawOrderAdapter;
@@ -81,8 +84,6 @@ public class FJWithdrawOrderActivity extends BaseActivity implements AdapterView
                 if (TextUtils.isEmpty(response)) {
                     return;
                 }
-
-
             }
         });
     }
@@ -94,7 +95,9 @@ public class FJWithdrawOrderActivity extends BaseActivity implements AdapterView
 
     @Override
     public void onItemClick(AdapterView<?> parent, View view, int position, long id) {
-
+        StructuredFundEntity entity = mList.get(position);
+        StructuredFundDialog dialog = new StructuredFundDialog(this, TAG, this, entity, null, null);
+        dialog.show();
     }
 
     @Override
@@ -104,5 +107,10 @@ public class FJWithdrawOrderActivity extends BaseActivity implements AdapterView
                 finish();
                 break;
         }
+    }
+
+    @Override
+    public void State() {
+        Helper.getInstance().showToast(this, "撤销此委托成功");
     }
 }

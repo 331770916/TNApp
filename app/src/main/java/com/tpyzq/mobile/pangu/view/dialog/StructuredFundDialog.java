@@ -1,12 +1,15 @@
 package com.tpyzq.mobile.pangu.view.dialog;
 
 import android.content.Context;
+import android.graphics.drawable.Drawable;
 import android.view.View;
 import android.widget.TextView;
 
+import com.moxun.tagcloudlib.view.Tag;
 import com.tpyzq.mobile.pangu.R;
 import com.tpyzq.mobile.pangu.activity.trade.stock.FJFundGradingMergerActivity;
 import com.tpyzq.mobile.pangu.activity.trade.stock.FJFundSplitActivity;
+import com.tpyzq.mobile.pangu.activity.trade.stock.FJWithdrawOrderActivity;
 import com.tpyzq.mobile.pangu.base.BaseDialog;
 import com.tpyzq.mobile.pangu.data.StructuredFundEntity;
 import com.tpyzq.mobile.pangu.util.Helper;
@@ -32,7 +35,7 @@ public class StructuredFundDialog extends BaseDialog implements View.OnClickList
     private String mShare;
     private String mInput;
 
-    public StructuredFundDialog(Context context, String tag, Expression expression, StructuredFundEntity structuredFundEntity, String share,String input) {
+    public StructuredFundDialog(Context context, String tag, Expression expression, StructuredFundEntity structuredFundEntity, String share, String input) {
         super(context);
         this.mTAG = tag;
         this.mExpression = expression;
@@ -62,7 +65,7 @@ public class StructuredFundDialog extends BaseDialog implements View.OnClickList
 
     @Override
     public void initData() {
-        tv_5.setText(context.getString(R.string.securities_name)+"：");
+        tv_5.setText(context.getString(R.string.securities_name) + "：");
         if (FJFundGradingMergerActivity.TAG.equals(mTAG)) {
             tv_title.setText(R.string.Gradingfundmerger);
             tv_2.setText(R.string.Gradingfundmerger);
@@ -73,6 +76,18 @@ public class StructuredFundDialog extends BaseDialog implements View.OnClickList
         } else if (FJFundSplitActivity.TAG.equals(mTAG)) {
             tv_title.setText(R.string.FJFundSplitActivity);
             tv_2.setText(R.string.FJFundSplitActivity);
+            tv_4.setText(mInput);
+            tv_6.setText(mStructuredFundEntity.getStoken_name());
+            tv_8.setText(mShare);
+            tv_10.setText("");
+        } else if (FJWithdrawOrderActivity.TAG.equals(mTAG)) {
+            Drawable leftDrawable = context.getResources().getDrawable(R.mipmap.bank_img);
+            leftDrawable.setBounds(0, 0, leftDrawable.getIntrinsicWidth(), leftDrawable.getMinimumHeight());
+            tv_title.setCompoundDrawables(leftDrawable, null, null, null);
+            tv_title.setCompoundDrawablePadding(9);//设置图片和text之间的间距
+            tv_title.setPadding(9, 0, 0, 0);
+            tv_title.setText(R.string.IsRecall);
+            tv_2.setText(R.string.Gradingfundmerger);
             tv_4.setText(mInput);
             tv_6.setText(mStructuredFundEntity.getStoken_name());
             tv_8.setText(mShare);
@@ -90,6 +105,10 @@ public class StructuredFundDialog extends BaseDialog implements View.OnClickList
                     dismiss();
                 } else if (FJFundSplitActivity.TAG.equals(mTAG)) {
                     Helper.getInstance().showToast(context, "委托提交成功");
+                    dismiss();
+                } else if (FJWithdrawOrderActivity.TAG.equals(mTAG)) {
+                    Helper.getInstance().showToast(context, "撤销此委托成功");
+                    mExpression.State();
                     dismiss();
                 }
                 break;
