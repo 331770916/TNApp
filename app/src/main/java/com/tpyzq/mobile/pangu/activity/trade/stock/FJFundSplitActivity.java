@@ -15,6 +15,7 @@ import com.tpyzq.mobile.pangu.data.StructuredFundEntity;
 import com.tpyzq.mobile.pangu.http.NetWorkUtil;
 import com.tpyzq.mobile.pangu.util.ConstantUtil;
 import com.tpyzq.mobile.pangu.util.SpUtils;
+import com.tpyzq.mobile.pangu.view.dialog.StructuredFundDialog;
 import com.zhy.http.okhttp.callback.StringCallback;
 
 import org.json.JSONException;
@@ -40,12 +41,14 @@ public class FJFundSplitActivity extends BaseActivity implements View.OnClickLis
     private TextView mStatements_tv;            //状态说明
     private TextView mCnExpendableFundValue_tv; //可合数量
     private Button mConfirm_but;                //拆分
+    private TextView mCnFundAmount_tv;
 
     private String mSession;
 
     private int MAXNUM = 6;
     private int mPoint = -1;
     private TextView mTitle_tv;
+    private StructuredFundEntity bean;
 
 
     @Override
@@ -56,6 +59,7 @@ public class FJFundSplitActivity extends BaseActivity implements View.OnClickLis
         mInput_et = (EditText) findViewById(R.id.editText);
         mAmount_et = (EditText) findViewById(R.id.amount_et);
         mCnFundNameValue_tv = (TextView) findViewById(R.id.tvCnFundNameValue);
+        mCnFundAmount_tv = (TextView) findViewById(R.id.tvCnFundAmount);
         mCnFundNetValueValue_tv = (TextView) findViewById(R.id.tvCnFundNetValueValue);
         mStatements_tv = (TextView) findViewById(R.id.tvStatements);
         mCnExpendableFundValue_tv = (TextView) findViewById(R.id.tvCnExpendableFundValue);
@@ -83,16 +87,18 @@ public class FJFundSplitActivity extends BaseActivity implements View.OnClickLis
                 intent.putExtra("point", mPoint);
                 startActivityForResult(intent, REQUSET);
                 break;
-//            case R.id.butConfirm:
-//
-//                break;
+            case R.id.butConfirm:
+                StructuredFundDialog dialog = new StructuredFundDialog(this, TAG, null, bean, mAmount_et.getText().toString(),mInput_et.getText().toString());
+                dialog.show();
+                break;
         }
     }
 
 
     private void initMonitor() {
         mSession = SpUtils.getString(this, "mSession", "");
-        mTitle_tv.setText("分级基金分拆");
+        mTitle_tv.setText(getString(R.string.FJFundSplitActivity));
+        mCnFundAmount_tv.setText(getString(R.string.fced));
         mConfirm_but.setText("分拆");
         mConfirm_but.setOnClickListener(this);
         mConfirm_but.setClickable(false);
@@ -104,7 +110,7 @@ public class FJFundSplitActivity extends BaseActivity implements View.OnClickLis
     }
 
     private void getAffirmMsg(String stocken_code) {
-        StructuredFundEntity bean = new StructuredFundEntity();
+        bean = new StructuredFundEntity();
         bean.setStoken_name("测试");
         bean.setMerge_amount("1200");
         bean.setFund_status("测试");
@@ -150,8 +156,9 @@ public class FJFundSplitActivity extends BaseActivity implements View.OnClickLis
         super.onActivityResult(requestCode, resultCode, intent);
         if (requestCode == REQUSET && resultCode == RESULT_OK) {
             mPoint = intent.getIntExtra("point", -1);
-            mInput_et.setText(intent.getStringExtra("Name"));
+            mInput_et.setText(intent.getStringExtra("Code"));
             intent.getStringExtra("Market");
+            intent.getStringExtra("Name");
             getAffirmMsg(intent.getStringExtra("Code"));
         }
         if (requestCode == REQUSET && resultCode == 500) {
@@ -209,10 +216,10 @@ public class FJFundSplitActivity extends BaseActivity implements View.OnClickLis
     //清空数据
     private void factoryReset() {
         mAmount_et.setEnabled(false);
-        mCnFundNameValue_tv.setText("");
-        mCnFundNetValueValue_tv.setText("");
-        mStatements_tv.setText("");
-        mCnExpendableFundValue_tv.setText("");
+        mCnFundNameValue_tv.setText("--");
+        mCnFundNetValueValue_tv.setText("--");
+        mStatements_tv.setText("--");
+        mCnExpendableFundValue_tv.setText("--");
         mAmount_et.setText("");
     }
 }

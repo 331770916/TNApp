@@ -195,6 +195,12 @@
     <string name="wtsl">委托数量</string>
     <string name="cj_sl">成交数量</string>
 
+    <string name="FJFundSplitActivity">分级基金分拆</string>
+    <string name="IsRecall">是否撤回此委托</string>
+    <string name="czlb">操作类别：</string>
+    <string name="jjdm">基金代码：</string>
+    <string name="fced">分拆份额：</string>
+
 
     <!--OTC-->
     <string name="OTC_rengou">OTC认购</string>

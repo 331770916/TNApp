@@ -45,6 +45,7 @@ public class FJFundGradingMergerActivity extends BaseActivity implements View.On
 
     private int MAXNUM = 6;
     private int mPoint = -1;
+    private StructuredFundEntity bean;
 
     @Override
     public void initView() {
@@ -78,10 +79,10 @@ public class FJFundGradingMergerActivity extends BaseActivity implements View.On
                 intent.putExtra("point", mPoint);
                 startActivityForResult(intent, REQUSET);
                 break;
-//            case R.id.butConfirm:
-////                StructuredFundDialog dialog = new StructuredFundDialog(this);
-////                dialog.show();
-//                break;
+            case R.id.butConfirm:
+                StructuredFundDialog dialog = new StructuredFundDialog(this,TAG,null,bean,mAmount_et.getText().toString(),mInput_et.getText().toString());
+                dialog.show();
+                break;
         }
     }
 
@@ -99,7 +100,7 @@ public class FJFundGradingMergerActivity extends BaseActivity implements View.On
     private void getAffirmMsg(String stocken_code) {
 
 
-        StructuredFundEntity bean = new StructuredFundEntity();
+        bean = new StructuredFundEntity();
         bean.setStoken_name("测试");
         bean.setMerge_amount("1200");
         bean.setFund_status("测试");
@@ -148,8 +149,9 @@ public class FJFundGradingMergerActivity extends BaseActivity implements View.On
         super.onActivityResult(requestCode, resultCode, intent);
         if (requestCode == REQUSET && resultCode == RESULT_OK) {
             mPoint = intent.getIntExtra("point", -1);
-            mInput_et.setText(intent.getStringExtra("Name"));
+            mInput_et.setText(intent.getStringExtra("Code"));
             intent.getStringExtra("Market");
+            intent.getStringExtra("Name");
             getAffirmMsg(intent.getStringExtra("Code"));
         }
         if (requestCode == REQUSET && resultCode == 500) {
@@ -208,10 +210,10 @@ public class FJFundGradingMergerActivity extends BaseActivity implements View.On
     //清空数据
     private void factoryReset() {
         mAmount_et.setEnabled(false);
-        mCnFundNameValue_tv.setText("");
-        mCnFundNetValueValue_tv.setText("");
-        mStatements_tv.setText("");
-        mCnExpendableFundValue_tv.setText("");
+        mCnFundNameValue_tv.setText("--");
+        mCnFundNetValueValue_tv.setText("--");
+        mStatements_tv.setText("--");
+        mCnExpendableFundValue_tv.setText("--");
         mAmount_et.setText("");
     }
 }

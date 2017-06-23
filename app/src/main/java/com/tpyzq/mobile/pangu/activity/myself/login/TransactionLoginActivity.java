@@ -105,7 +105,6 @@ import java.util.Map;
 
 import okhttp3.Call;
 
-import static com.umeng.socialize.Config.dialog;
 
 
 /**
@@ -389,7 +388,6 @@ public class TransactionLoginActivity extends BaseActivity implements View.OnCli
                         }, new CertificationDialog.CancleClickListener() {
                             @Override
                             public void cancleClick(View v) {
-                                CertificationDialog.closeDialog(dialog);
                                 isHttp = false;
                                 KeyboardRequestHttp(isHttp);
                             }
@@ -489,8 +487,7 @@ public class TransactionLoginActivity extends BaseActivity implements View.OnCli
         mPasswordET.addTextChangedListener(new MyTextWatcher());
         mCaptcha.addTextChangedListener(new MyTextWatcher());
 
-        mAccount.setSelection(mAccount.getText().length());
-        mCaptcha.setSelection(mCaptcha.getText().length());
+
     }
 
     /**
@@ -1252,7 +1249,8 @@ public class TransactionLoginActivity extends BaseActivity implements View.OnCli
             //查询加密键盘是否显示
             inquireCertification();
         }
-
+        mAccount.setSelection(mAccount.getText().length());
+        mCaptcha.setSelection(mCaptcha.getText().length());
     }
 
 
