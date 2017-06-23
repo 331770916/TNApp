@@ -56,25 +56,26 @@ public class StructuredFundActivity extends BaseActivity implements View.OnClick
 
     @Override
     public void onItemClick(AdapterView<?> parent, View view, int position, long id) {
-//        Intent intent = new Intent();
+        Intent intent = new Intent();
         switch (position) {
             case 0:
-                Helper.getInstance().showToast(this,"正在开发中");
-//                intent.setClass(this,FJFundGradingMergerActivity.class);
+//                Helper.getInstance().showToast(this,"正在开发中");
+                intent.setClass(this, FJFundGradingMergerActivity.class);
                 break;
             case 1:
-                Helper.getInstance().showToast(this,"正在开发中");
+//                Helper.getInstance().showToast(this,"正在开发中");
+                intent.setClass(this, FJFundSplitActivity.class);
                 break;
             case 2:
-                Helper.getInstance().showToast(this,"正在开发中");
+                Helper.getInstance().showToast(this, "正在开发中");
                 break;
             case 3:
-                Helper.getInstance().showToast(this,"正在开发中");
+                Helper.getInstance().showToast(this, "正在开发中");
                 break;
             case 4:
-                Helper.getInstance().showToast(this,"正在开发中");
+                Helper.getInstance().showToast(this, "正在开发中");
                 break;
         }
-//        startActivity(intent);
+        startActivity(intent);
     }
 }

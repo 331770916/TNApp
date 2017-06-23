@@ -1,6 +1,5 @@
 package com.tpyzq.mobile.pangu.activity.trade.stock;
 
-
 import android.content.Intent;
 import android.text.Editable;
 import android.text.TextUtils;
@@ -16,7 +15,6 @@ import com.tpyzq.mobile.pangu.data.StructuredFundEntity;
 import com.tpyzq.mobile.pangu.http.NetWorkUtil;
 import com.tpyzq.mobile.pangu.util.ConstantUtil;
 import com.tpyzq.mobile.pangu.util.SpUtils;
-import com.tpyzq.mobile.pangu.view.dialog.StructuredFundDialog;
 import com.zhy.http.okhttp.callback.StringCallback;
 
 import org.json.JSONException;
@@ -27,11 +25,12 @@ import java.util.HashMap;
 import okhttp3.Call;
 
 /**
- * wangq
- * 分级基金合并
+ * Created by wangqi on 2017/6/23.
+ * 分级基金 拆分
  */
-public class FJFundGradingMergerActivity extends BaseActivity implements View.OnClickListener {
-    public static String TAG = "FJFundGradingMergerActivity";
+
+public class FJFundSplitActivity extends BaseActivity implements View.OnClickListener {
+    public static String TAG = "FJFundSplitActivity";
     public static final int REQUSET = 1;
 
     private EditText mInput_et;                 //输入股票代码
@@ -40,16 +39,20 @@ public class FJFundGradingMergerActivity extends BaseActivity implements View.On
     private TextView mCnFundNetValueValue_tv;   //股东代码
     private TextView mStatements_tv;            //状态说明
     private TextView mCnExpendableFundValue_tv; //可合数量
-    private Button mConfirm_but;                //合并
+    private Button mConfirm_but;                //拆分
+
     private String mSession;
 
     private int MAXNUM = 6;
     private int mPoint = -1;
+    private TextView mTitle_tv;
+
 
     @Override
     public void initView() {
         findViewById(R.id.ivCurrencyFundRedeem_back).setOnClickListener(this);
         findViewById(R.id.textView8).setOnClickListener(this);
+        mTitle_tv = (TextView) findViewById(R.id.tvTitle);
         mInput_et = (EditText) findViewById(R.id.editText);
         mAmount_et = (EditText) findViewById(R.id.amount_et);
         mCnFundNameValue_tv = (TextView) findViewById(R.id.tvCnFundNameValue);
@@ -61,10 +64,12 @@ public class FJFundGradingMergerActivity extends BaseActivity implements View.On
         initMonitor();
     }
 
+
     @Override
     public int getLayoutId() {
         return R.layout.activity_grading_fund_merger;
     }
+
 
     @Override
     public void onClick(View v) {
@@ -79,26 +84,26 @@ public class FJFundGradingMergerActivity extends BaseActivity implements View.On
                 startActivityForResult(intent, REQUSET);
                 break;
 //            case R.id.butConfirm:
-////                StructuredFundDialog dialog = new StructuredFundDialog(this);
-////                dialog.show();
+//
 //                break;
         }
     }
 
+
     private void initMonitor() {
         mSession = SpUtils.getString(this, "mSession", "");
-        mConfirm_but.setText("合并");
+        mTitle_tv.setText("分级基金分拆");
+        mConfirm_but.setText("分拆");
         mConfirm_but.setOnClickListener(this);
         mConfirm_but.setClickable(false);
         mInput_et.addTextChangedListener(new MyInputTextWatcher());
         mAmount_et.addTextChangedListener(new MyAmountTextWatcher());
 
         mAmount_et.setEnabled(false);
+
     }
 
     private void getAffirmMsg(String stocken_code) {
-
-
         StructuredFundEntity bean = new StructuredFundEntity();
         bean.setStoken_name("测试");
         bean.setMerge_amount("1200");
@@ -138,10 +143,7 @@ public class FJFundGradingMergerActivity extends BaseActivity implements View.On
                 }
             }
         });
-
-
     }
-
 
     @Override
     protected void onActivityResult(int requestCode, int resultCode, Intent intent) {
@@ -156,7 +158,6 @@ public class FJFundGradingMergerActivity extends BaseActivity implements View.On
             mAmount_et.setText("");
         }
     }
-
 
     /**
      * EditText 内容监听

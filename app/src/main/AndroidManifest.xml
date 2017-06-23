@@ -315,6 +315,9 @@
         <activity android:name=".activity.trade.stock.TraChooseBreedActivity"/>
         <activity android:name=".activity.trade.stock.TranMoreActivity" />
         <activity android:name=".activity.trade.stock.StructuredFundActivity"/>
+        <activity android:name=".activity.trade.stock.FJFundGradingMergerActivity"/>
+        <activity android:name=".activity.trade.stock.FJFundChooseActivity"/>
+        <activity android:name=".activity.trade.stock.FJFundSplitActivity"/>
         <!--行情 相关activity-->
         <activity android:name=".activity.market.quotation.plate.PlateListActivity" />
         <activity android:name=".activity.market.quotation.StockListActivity" />

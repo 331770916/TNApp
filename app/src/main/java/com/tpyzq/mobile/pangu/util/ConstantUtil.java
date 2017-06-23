@@ -102,7 +102,7 @@ public class ConstantUtil {
     public static String URL_BIGDATA = IP + THREE_SERVLET;
     //资讯 故事
     public static String URL_ZX_GS = IP + ONE_SERVLET;
-    //交易
+    //交易 & 分级基金信息查询
     public static String URL_JY = SJYZM + ONE_SERVLET;
 
     //登录验证码

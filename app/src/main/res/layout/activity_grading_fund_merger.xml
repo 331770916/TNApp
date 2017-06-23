@@ -18,6 +18,7 @@
             android:src="@mipmap/back_btn" />
 
         <TextView
+            android:id="@+id/tvTitle"
             android:layout_width="wrap_content"
             android:layout_height="wrap_content"
             android:layout_centerInParent="true"
@@ -112,6 +113,7 @@
                     android:textSize="@dimen/txtSize14" />
 
                 <EditText
+                    android:id="@+id/amount_et"
                     android:layout_width="match_parent"
                     android:layout_height="match_parent"
                     android:layout_centerVertical="true"
@@ -169,7 +171,7 @@
 
             </RelativeLayout>
 
-            <!--资金净值-->
+
             <RelativeLayout
                 android:layout_width="match_parent"
                 android:layout_height="@dimen/size50">
@@ -197,7 +199,6 @@
 
             </RelativeLayout>
 
-            <!--股东账号-->
             <RelativeLayout
                 android:layout_width="match_parent"
                 android:layout_height="@dimen/size50">
@@ -213,6 +214,7 @@
                     android:textSize="@dimen/txtSize14" />
 
                 <TextView
+                    android:id="@+id/tvStatements"
                     android:layout_width="wrap_content"
                     android:layout_height="wrap_content"
                     android:layout_centerVertical="true"
@@ -271,10 +273,11 @@
             android:layout_gravity="center_horizontal">
 
             <Button
+                android:id="@+id/butConfirm"
                 android:layout_width="@dimen/size330"
                 android:layout_height="@dimen/size40"
                 android:layout_marginTop="@dimen/size81"
-                android:background="@drawable/lonin"
+                android:background="@drawable/lonin4"
                 android:clickable="true"
                 android:gravity="center"
                 android:text="@string/pickerview_submit"

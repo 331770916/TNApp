@@ -13,6 +13,44 @@ public class StructuredFundEntity {
     private String fund_status;              //基金状态
     private String stock_account;            //当前市场的主证券账户
 
+    private String stocken_code;            //证券代码
+    private String market;                  //交易市场
+
+    private String init_date;               //交易日期
+    private String entrust_no;              //委托编号
+
+    public String getInit_date() {
+        return init_date;
+    }
+
+    public void setInit_date(String init_date) {
+        this.init_date = init_date;
+    }
+
+    public String getEntrust_no() {
+        return entrust_no;
+    }
+
+    public void setEntrust_no(String entrust_no) {
+        this.entrust_no = entrust_no;
+    }
+
+    public String getMarket() {
+        return market;
+    }
+
+    public void setMarket(String market) {
+        this.market = market;
+    }
+
+    public String getStocken_code() {
+        return stocken_code;
+    }
+
+    public void setStocken_code(String stocken_code) {
+        this.stocken_code = stocken_code;
+    }
+
     public String getStoken_name() {
         return stoken_name;
     }
