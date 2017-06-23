@@ -10,6 +10,7 @@ import android.widget.TextView;
 import com.tpyzq.mobile.pangu.R;
 import com.tpyzq.mobile.pangu.adapter.trade.StockPageListAdapter;
 import com.tpyzq.mobile.pangu.base.BaseActivity;
+import com.tpyzq.mobile.pangu.util.Helper;
 import com.tpyzq.mobile.pangu.util.panguutil.DataUtils;
 
 /**
@@ -58,18 +59,20 @@ public class StructuredFundActivity extends BaseActivity implements View.OnClick
         Intent intent = new Intent();
         switch (position) {
             case 0:
+                Helper.getInstance().showToast(this,"正在开发中");
+//                intent.setClass(this,FJFundGradingMergerActivity.class);
                 break;
             case 1:
-
+                Helper.getInstance().showToast(this,"正在开发中");
                 break;
             case 2:
-
+                Helper.getInstance().showToast(this,"正在开发中");
                 break;
             case 3:
-
+                Helper.getInstance().showToast(this,"正在开发中");
                 break;
             case 4:
-
+                Helper.getInstance().showToast(this,"正在开发中");
                 break;
         }
         startActivity(intent);
