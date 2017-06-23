@@ -15,25 +15,22 @@
             android:layout_weight="1">
 
             <TextView
-
                 android:id="@+id/tv1"
                 android:layout_width="match_parent"
                 android:layout_height="wrap_content"
                 android:layout_centerHorizontal="true"
                 android:layout_marginTop="@dimen/size12"
                 android:gravity="center|fill"
-                android:paddingLeft="@dimen/size14"
+                android:textColor="@color/hushenTab_titleColor"
                 android:textSize="@dimen/txtSize13" />
 
             <TextView
-
                 android:id="@+id/tv2"
                 android:layout_width="match_parent"
                 android:layout_height="wrap_content"
                 android:layout_alignLeft="@id/tv1"
                 android:layout_below="@id/tv1"
                 android:gravity="center|fill"
-                android:paddingLeft="@dimen/size14"
                 android:textColor="@color/newStockTitle"
                 android:textSize="@dimen/txtSize13" />
         </RelativeLayout>
@@ -41,8 +38,10 @@
         <RelativeLayout
             android:layout_width="@dimen/size0"
             android:layout_height="wrap_content"
+            android:layout_marginRight="@dimen/size20"
             android:layout_marginTop="@dimen/size12"
-            android:layout_weight="1">
+            android:layout_weight="1"
+            android:gravity="right">
 
             <TextView
 
@@ -57,7 +56,6 @@
                 android:textSize="@dimen/txtSize13" />
 
             <TextView
-
                 android:id="@+id/tv4"
                 android:layout_width="match_parent"
                 android:layout_height="wrap_content"
@@ -73,10 +71,10 @@
             android:layout_width="@dimen/size0"
             android:layout_height="wrap_content"
             android:layout_marginTop="@dimen/size12"
-            android:layout_weight="1">
+            android:layout_weight="1"
+            android:gravity="right">
 
             <TextView
-
                 android:id="@+id/tv5"
                 android:layout_width="match_parent"
                 android:layout_height="wrap_content"
@@ -89,7 +87,6 @@
                 android:textSize="@dimen/txtSize13" />
 
             <TextView
-
                 android:id="@+id/tv6"
                 android:layout_width="match_parent"
                 android:layout_height="wrap_content"
