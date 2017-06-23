@@ -71,6 +71,7 @@ public class KeyboardUtil {
     private TextView keyboard_tips_tv;
     private static final float TIPS_MARGIN_W = 0.0407f;
     private View inflaterView;
+    private ClickOkListener clickOkListener;
 
     /**
      * 最新构造方法，现在都用这个
@@ -295,6 +296,9 @@ public class KeyboardUtil {
 
         @Override
         public void onClick(View v) {
+            if (null != clickOkListener){
+                clickOkListener.onclickOk();
+            }
             hideKeyboardLayout();
         }
     }
@@ -607,6 +611,15 @@ public class KeyboardUtil {
      */
     public interface InputFinishListener {
         void inputHasOver(int onclickType, EditText editText);
+    }
+    public void setClickOkListener(ClickOkListener clickOkListener) {
+        this.clickOkListener = clickOkListener;
+    }
+    /**
+     * 点击ok回调方法
+     */
+    public interface ClickOkListener {
+        void onclickOk();
     }
 
     /**

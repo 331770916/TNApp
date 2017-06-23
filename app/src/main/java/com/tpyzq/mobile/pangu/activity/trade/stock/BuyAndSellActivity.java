@@ -143,6 +143,7 @@ public class BuyAndSellActivity extends BaseActivity implements View.OnClickList
     private StockPw stockPw;
     private final String TAG = BuyAndSellActivity.class.getSimpleName();
     private String stockName = "";
+    private boolean isClearHeadData = true;//是否清头部数据，用于修改股票代码
 
     @Override
     public void initView() {
@@ -200,6 +201,26 @@ public class BuyAndSellActivity extends BaseActivity implements View.OnClickList
         mKeyBoardUtil.setKeyBoardStateChangeListener(new KeyBoardStateListener());
         // monitor the finish or next Key
         mKeyBoardUtil.setInputOverListener(new InputOverListener());
+        mKeyBoardUtil.setClickOkListener(new KeyboardUtil.ClickOkListener() {
+            @Override
+            public void onclickOk() {
+                //判断股票代码框中股票代码变化没有，如果没有把股票名称 股票代码设置到输入框中
+                String currentStockCode = et_stock_code.getText().toString();
+                if (!TextUtils.isEmpty(stockName) && !TextUtils.isEmpty(stockCode) && !TextUtils.isEmpty(currentStockCode)&&currentStockCode.equalsIgnoreCase(stockCode.substring(2))) {
+                    //拼接股票信息，同getHeaderView
+                    String market = JudgeStockUtils.getStockMarket(stockCode);
+                    String content = market + stockCode.substring(2);
+                    isClearHeadData = false;
+                    et_stock_code.setText(stockName +"  "+ content);
+                    //焦点设置在价格输入框
+                    et_price.setEnabled(true);
+                    et_price.requestFocus();
+                    if (!TextUtils.isEmpty(price+"")) {
+                        et_price.setSelection((price+"").length());
+                    }
+                }
+            }
+        });
         et_stock_code.setOnTouchListener(new KeyboardTouchListener(mKeyBoardUtil, KeyboardUtil.INPUTTYPE_NUM_ABC, -1));
     }
 
@@ -435,10 +456,10 @@ public class BuyAndSellActivity extends BaseActivity implements View.OnClickList
 
             @Override
             public void onResponse(String response, int id) {
-                if (TextUtils.isEmpty(response)) {
-                    return;
-                }
                 try {
+                    if (TextUtils.isEmpty(response)) {
+                        return;
+                    }
                     JSONArray object = new JSONArray(response);
                     JSONObject jsonObject = object.getJSONObject(0);
                     JSONArray jsArray = jsonObject.getJSONArray("data");
@@ -475,6 +496,7 @@ public class BuyAndSellActivity extends BaseActivity implements View.OnClickList
                     tv_stock_name.setText(jsArray.getString(19));*/
                     stockCode = code;
                     stockName = jsArray.getString(19);
+                    isClearHeadData = false;
                     et_stock_code.setText(stockName + "  "+content);
                     String down = string2doubleS(TransitionUtils.string2double(jsArray.getString(2)) * 0.9 + "");
                     String up = string2doubleS(TransitionUtils.string2double(jsArray.getString(2)) * 1.1 + "");
@@ -501,10 +523,15 @@ public class BuyAndSellActivity extends BaseActivity implements View.OnClickList
                     }
                     et_price.setEnabled(true);
                     et_price.requestFocus();
+                    if (!TextUtils.isEmpty(price+"")) {
+                        et_price.setSelection((price+"").length());
+                    }
+                    mKeyBoardUtil.hideAllKeyBoard();
                 } catch (JSONException e) {
                     e.printStackTrace();
+                } finally {
+                    priceflag = false;
                 }
-                priceflag = false;
             }
         });
     }
@@ -659,7 +686,14 @@ public class BuyAndSellActivity extends BaseActivity implements View.OnClickList
 
         @Override
         public void beforeTextChanged(CharSequence s, int start, int count, int after) {
-
+            //股票代码输入6位之后，修改编辑框文字，清空头部信息
+            if (s.length() == 6){
+                if (isClearHeadData) {//请求头部数据返回设置编辑框不清空头部数据
+                    clearView(false);
+                } else {
+                    isClearHeadData = true;
+                }
+            }
         }
 
         @Override
@@ -693,7 +727,11 @@ public class BuyAndSellActivity extends BaseActivity implements View.OnClickList
         }
     };
 
-    private void clearView() {
+    /**
+     * 清空界面数据
+     * @param isClearEtCode 是否清空股票代码输入框
+     */
+    private void clearView(boolean isClearEtCode) {
         stockName = "";
         stockCode = "";
         timeCount.cancel();
@@ -725,7 +763,9 @@ public class BuyAndSellActivity extends BaseActivity implements View.OnClickList
             bt_buy.setText("买");
             bt_sell.setText("卖");
         }
-        et_stock_code.setText("");
+        if (isClearEtCode) {
+            et_stock_code.setText("");
+        }
         tv_sum.setText("----");
 //        tv_stock_name.setText("");
         et_price.setText("");
@@ -953,7 +993,7 @@ public class BuyAndSellActivity extends BaseActivity implements View.OnClickList
         String stocknum = et_num.getText().toString();
         switch (v.getId()) {
             case R.id.iv_delete:
-                clearView();
+                clearView(true);
                 break;
             case R.id.iv_sub_price:
                 price -= 0.01;
@@ -1138,8 +1178,7 @@ public class BuyAndSellActivity extends BaseActivity implements View.OnClickList
                     String msg = jsonObject.getString("msg");
                     String data = jsonObject.getString("data");
                     if ("0".equals(code)) {
-                        et_stock_code.setText("");
-                        clearView();
+                        clearView(true);
                         ToastUtils.showShort(BuyAndSellActivity.this,"委托已提交");
                     }else if ("-6".equals(code)){
                         startActivity(new Intent(BuyAndSellActivity.this, TransactionLoginActivity.class));
@@ -1198,8 +1237,7 @@ public class BuyAndSellActivity extends BaseActivity implements View.OnClickList
                     String msg = jsonObject.getString("msg");
                     String data = jsonObject.getString("data");
                     if ("0".equals(code)) {
-                        et_stock_code.setText("");
-                        clearView();
+                        clearView(true);
                         ToastUtils.showShort(BuyAndSellActivity.this,"委托已提交");
                     }else if ("-6".equals(code)){
                         startActivity(new Intent(BuyAndSellActivity.this, TransactionLoginActivity.class));
