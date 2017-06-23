@@ -1,0 +1,117 @@
+<?xml version="1.0" encoding="utf-8"?>
+<LinearLayout xmlns:android="http://schemas.android.com/apk/res/android"
+    android:layout_width="match_parent"
+    android:layout_height="match_parent"
+    android:orientation="vertical">
+
+    <LinearLayout
+        android:layout_width="match_parent"
+        android:layout_height="@dimen/size55"
+        android:orientation="horizontal">
+
+        <RelativeLayout
+            android:layout_width="@dimen/size0"
+            android:layout_height="wrap_content"
+            android:layout_weight="1">
+
+            <TextView
+
+                android:id="@+id/tv1"
+                android:layout_width="match_parent"
+                android:layout_height="wrap_content"
+                android:layout_centerHorizontal="true"
+                android:layout_marginTop="@dimen/size12"
+                android:gravity="center|fill"
+                android:paddingLeft="@dimen/size14"
+                android:textSize="@dimen/txtSize13" />
+
+            <TextView
+
+                android:id="@+id/tv2"
+                android:layout_width="match_parent"
+                android:layout_height="wrap_content"
+                android:layout_alignLeft="@id/tv1"
+                android:layout_below="@id/tv1"
+                android:gravity="center|fill"
+                android:paddingLeft="@dimen/size14"
+                android:textColor="@color/newStockTitle"
+                android:textSize="@dimen/txtSize13" />
+        </RelativeLayout>
+
+        <RelativeLayout
+            android:layout_width="@dimen/size0"
+            android:layout_height="wrap_content"
+            android:layout_marginTop="@dimen/size12"
+            android:layout_weight="1">
+
+            <TextView
+
+                android:id="@+id/tv3"
+                android:layout_width="match_parent"
+                android:layout_height="wrap_content"
+                android:layout_alignParentLeft="true"
+                android:layout_alignParentStart="true"
+                android:layout_alignParentTop="true"
+                android:gravity="center|right"
+                android:textColor="@color/hushenTab_titleColor"
+                android:textSize="@dimen/txtSize13" />
+
+            <TextView
+
+                android:id="@+id/tv4"
+                android:layout_width="match_parent"
+                android:layout_height="wrap_content"
+                android:layout_below="@id/tv3"
+                android:gravity="center|right"
+                android:textColor="@color/hushenTab_titleColor"
+                android:textSize="@dimen/txtSize13" />
+
+
+        </RelativeLayout>
+
+        <RelativeLayout
+            android:layout_width="@dimen/size0"
+            android:layout_height="wrap_content"
+            android:layout_marginTop="@dimen/size12"
+            android:layout_weight="1">
+
+            <TextView
+
+                android:id="@+id/tv5"
+                android:layout_width="match_parent"
+                android:layout_height="wrap_content"
+                android:layout_alignLeft="@+id/Today_Entrust"
+                android:layout_below="@+id/tv6"
+                android:gravity="center|right"
+                android:paddingLeft="@dimen/size5"
+                android:paddingRight="@dimen/size10"
+                android:textColor="@color/hushenTab_titleColor"
+                android:textSize="@dimen/txtSize13" />
+
+            <TextView
+
+                android:id="@+id/tv6"
+                android:layout_width="match_parent"
+                android:layout_height="wrap_content"
+                android:layout_alignParentLeft="true"
+                android:layout_alignParentStart="true"
+                android:layout_alignParentTop="true"
+                android:gravity="center|right"
+                android:paddingLeft="@dimen/size5"
+                android:paddingRight="@dimen/size10"
+                android:textColor="@color/hushenTab_titleColor"
+                android:textSize="@dimen/txtSize13" />
+        </RelativeLayout>
+
+    </LinearLayout>
+
+    <include
+        layout="@layout/item_delivery"
+        android:visibility="gone" />
+
+    <include
+        layout="@layout/item_fold"
+        android:visibility="gone" />
+
+
+</LinearLayout>

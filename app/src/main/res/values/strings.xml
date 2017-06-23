@@ -166,6 +166,7 @@
 
     <!--分级基金合并-->
     <string name="Gradingfundmerger">分级基金合并</string>
+    <string name="fund_name">基金名称</string>
     <string name="mergerdata">可合数量</string>
     <string name="mergerstatus">状态说明</string>
     <string name="shareholdercode">股东代码</string>
@@ -181,7 +182,18 @@
     <string name="entrust_status">业务/状态</string>
     <string name="entrust_time">时间/日期</string>
 
-    
+    <string name="entru_number">委托数量：</string>
+    <string name="chenjiao">成交金额：</string>
+    <string name="entru_jine">委托金额：</string>
+    <string name="fasheng_riqi">发生日期：</string>
+    <string name="chengjiao_shuliao">成交数量：</string>
+    <string name="liuishuihao">流水号：</string>
+    <string name="chenjiaojiaoge">成交价格：</string>
+
+    <string name="wtbh">委托编号</string>
+    <string name="wtje">委托金额</string>
+    <string name="wtsl">委托数量</string>
+    <string name="cj_sl">成交数量</string>
 
 
     <!--OTC-->

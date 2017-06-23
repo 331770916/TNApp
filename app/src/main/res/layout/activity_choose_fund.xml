@@ -1,0 +1,67 @@
+<?xml version="1.0" encoding="utf-8"?>
+<LinearLayout xmlns:android="http://schemas.android.com/apk/res/android"
+    android:layout_width="match_parent"
+    android:layout_height="match_parent"
+    android:orientation="vertical">
+
+    <RelativeLayout
+        android:layout_width="match_parent"
+        android:layout_height="@dimen/pickerview_topbar_height"
+        android:background="@color/blue">
+
+        <ImageView
+            android:id="@+id/ivCurrencyFundRedeem_back"
+            android:layout_width="wrap_content"
+            android:layout_height="match_parent"
+            android:layout_alignParentLeft="true"
+            android:padding="@dimen/size10"
+            android:src="@mipmap/back_btn" />
+
+        <TextView
+            android:layout_width="wrap_content"
+            android:layout_height="wrap_content"
+            android:layout_centerInParent="true"
+            android:text="@string/Gradingfundmerger"
+            android:textColor="@color/white"
+            android:textSize="@dimen/pickerview_topbar_title_textsize" />
+    </RelativeLayout>
+
+    <LinearLayout
+        android:layout_width="match_parent"
+        android:layout_height="@dimen/size44">
+
+        <TextView
+            android:layout_width="match_parent"
+            android:layout_height="match_parent"
+            android:layout_marginLeft="@dimen/size20"
+            android:layout_weight="1"
+            android:gravity="center_vertical"
+            android:text="@string/securities_code"
+            android:textSize="@dimen/txtSize13" />
+
+        <TextView
+            android:id="@+id/textView"
+            android:layout_width="match_parent"
+            android:layout_height="match_parent"
+            android:layout_marginRight="@dimen/size115"
+            android:layout_weight="1"
+            android:gravity="center_vertical"
+            android:text="@string/securities_name"
+            android:textSize="@dimen/txtSize13" />
+
+
+    </LinearLayout>
+
+    <View
+        android:layout_width="match_parent"
+        android:layout_height="1px"
+        android:background="@color/fengexian" />
+
+    <ListView
+        android:layout_width="match_parent"
+        android:layout_height="match_parent"
+        android:divider="@color/fengexian"
+        android:dividerHeight="1px" />
+
+
+</LinearLayout>

@@ -1,0 +1,42 @@
+<?xml version="1.0" encoding="utf-8"?>
+<LinearLayout xmlns:android="http://schemas.android.com/apk/res/android"
+    android:layout_width="match_parent"
+    android:layout_height="match_parent"
+    android:orientation="vertical">
+
+
+    <LinearLayout
+        android:layout_width="match_parent"
+        android:layout_height="@dimen/size44"
+        android:gravity="center_vertical">
+
+        <TextView
+            android:layout_width="match_parent"
+            android:layout_height="match_parent"
+            android:layout_marginLeft="@dimen/size20"
+            android:layout_weight="1"
+            android:gravity="center_vertical"
+            android:text="@string/securities_code"
+            android:textSize="@dimen/txtSize13" />
+
+        <TextView
+            android:id="@+id/textView"
+            android:layout_width="match_parent"
+            android:layout_height="match_parent"
+            android:layout_marginRight="@dimen/size115"
+            android:layout_weight="1"
+            android:gravity="center_vertical"
+            android:text="@string/securities_name"
+            android:textSize="@dimen/txtSize13" />
+
+
+        <ImageView
+            android:layout_width="@dimen/size32"
+            android:layout_height="@dimen/size32"
+            android:layout_marginRight="@dimen/size11" />
+
+
+    </LinearLayout>
+
+
+</LinearLayout>
