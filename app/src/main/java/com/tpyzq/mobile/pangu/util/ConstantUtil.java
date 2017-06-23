@@ -4,6 +4,8 @@ import android.content.Context;
 import android.text.TextUtils;
 
 
+import com.tpyzq.mobile.pangu.BuildConfig;
+
 import java.io.File;
 
 /**
@@ -77,53 +79,14 @@ public class ConstantUtil {
     public static String NINE_VALIDATION = "/note/sendVoice";     //发送语音
 
 //    public static boolean auto_flag = false;
-    //    测试环境
-//    public static String status = "测试";
-//    public static String IP = "http://106.120.112.246:8082";  //行情 IP
-//    public static String SJYZM = "http://106.120.112.246:8081";   //交易 IP
-//    public static String BORY = "https://123.127.198.52:443/config";   //博瑞url
-//    public static String BORY_APPID = "95f7a69e-db11-40a4-b242-6be2b396a0ee";   //博瑞id 测试
-//    public static String APP_ID = "479a67630d2a36996b6aa485f80a4560abefcb91";   //测试ID   479a67630d2a36996b6aa485f80a4560abefcb91
-//    //        测试测速  https:
-//    public static String SecurityIp = "http://106.120.112.246:8082";   //注册  绑定手机号  资产分析  交易动态  股市月账单
-//    public static String SecurityIps = "http://106.120.112.246:8081";   //短信验证码 语音验证码  验证码验证
-
-    // 生产环境
-//    public static String status = "生产";
-//    public static String IP = "http://bj-tnhq.tpyzq.com";  //行情 IP
-//    public static String SJYZM = "https://bj-tn.tpyzq.com";   //交易 IP
-//    public static String BORY = "https://bj-apm.tpyzq.com/config/";   //博瑞url
-//    public static String BORY_APPID = "3951f553-a63c-4d9e-9896-5f28ce2926f3";   //博瑞id 测试
-//    public static String APP_ID = "479a67630d2a36996b6aa485f80a4560abefcb91";   //测试ID
-//    //        生产测速  https:
-//    public static String SecurityIp = "http://bj-tnhq.tpyzq.com";   //注册  绑定手机号  资产分析  交易动态  股市月账单
-//    public static String SecurityIps = "https://bj-tnhq.tpyzq.com";   //短信验证码 语音验证码  验证码验证
-
-    // 灰度环境
-    public static String status = "灰度";
-    public static String IP = "http://tnhq.tpyzq.com";  //行情 IP
-    public static String SJYZM = "https://tn.tpyzq.com";   //交易 IP
-    public static String BORY = "https://apm.tpyzq.com/config";   //博瑞url
-    public static String BORY_APPID = "ae41fc21-a00c-4263-a7e7-b8a017aebcdf"; //博瑞正式id
-    public static String APP_ID = "479a67630d2a36996b6aa485f80a4560abefcb91";   //生产ID
-
-
-//        灰度测速  https:
-    public static String SecurityIp = "http://tnhq.tpyzq.com";   //注册  绑定手机号  资产分析  交易动态  股市月账单
-    public static String SecurityIps = "https://tnhq.tpyzq.com";   //短信验证码 语音验证码  验证码验证
-
-
-//       //    昆明环境
-//    public static String status = "昆明";
-//    public static String IP = "http://km-tnhq.tpyzq.com";  //行情 IP
-//    public static String SJYZM = "https://km-tn.tpyzq.com";   //交易 IP
-//    public static String BORY = "https://bj-apm.tpyzq.com/config/";   //博瑞url
-//    public static String BORY_APPID = "3951f553-a63c-4d9e-9896-5f28ce2926f3";   //博瑞id 测试
-//    public static String APP_ID = "479a67630d2a36996b6aa485f80a4560abefcb91";   //生产ID
-////    昆明  https:
-//    public static String SecurityIp = "http://km-tnhq.tpyzq.com";   //注册  绑定手机号  资产分析  交易动态  股市月账单
-//    public static String SecurityIps = "https://km-tnhq.tpyzq.com";   //短信验证码 语音验证码  验证码验证
-
+    public static String status = BuildConfig.status;
+    public static String IP = BuildConfig.IP;  //行情 IP
+    public static String SJYZM = BuildConfig.SJYZM;   //交易 IP
+    public static String BORY = BuildConfig.BORY;   //博瑞url
+    public static String BORY_APPID = BuildConfig.BORY_APPID; //博瑞id
+    public static String APP_ID = BuildConfig.APP_ID;   //生产ID
+    public static String SecurityIp = BuildConfig.SecurityIp;   //注册  绑定手机号  资产分析  交易动态  股市月账单
+    public static String SecurityIps = BuildConfig.SecurityIps;   //短信验证码 语音验证码  验证码验证
 
 
     public static final String OPEN_ACCOUNT_CHANNEL = "tainiuapp"; //开户id

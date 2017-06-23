@@ -199,8 +199,12 @@ public class TransferAcountsTab extends BaseTransferSubjectTabView implements
         if (position > mAccountInfos.size()) {
             return;
         }
-        boolean isNeedPassword = !"0".equals(mAccountInfos.get(position).getMONEY_INTO());
-
+        boolean isNeedPassword = false;
+        if (isMainTab) {
+            isNeedPassword = !"0".equals(mAccountInfos.get(position).getMONEY_OUT());
+        } else {
+            isNeedPassword = !"0".equals(mAccountInfos.get(position).getMONEY_INTO());
+        }
 
         if (juedgePriceAndPasswordIsNull(_price, _password, isNeedPassword) && mAccountInfos != null && mAccountInfos.size() > 0) {
 
@@ -400,7 +404,7 @@ public class TransferAcountsTab extends BaseTransferSubjectTabView implements
 
             if (!TextUtils.isEmpty(mAccountInfos.get(position).getMONEY_INTO())) {
 
-                if ("0".equals(mAccountInfos.get(position).getMONEY_INTO())) {
+                if ("0".equals(mAccountInfos.get(position).getMONEY_INTO())) {//0代表不需要校验密码
                     mBankPasswrodEdit.setHint("不需要输入密码");
                     mBankPasswrodEdit.setClickable(false);
                     mBankPasswrodEdit.setFocusable(false);
@@ -410,19 +414,7 @@ public class TransferAcountsTab extends BaseTransferSubjectTabView implements
                     mBankPasswrodEdit.setOnTouchListener(null);
                     mBankPasswrodEdit.setPasswordKeyboard(null);
 
-                } else if ("1".equals(mAccountInfos.get(position).getMONEY_INTO())) {
-                    mBankPasswrodEdit.setHint("校验银行密码");
-                    mBankPasswrodEdit.setClickable(true);
-                    mBankPasswrodEdit.setFocusable(true);
-                    mBankPasswrodEdit.setFocusableInTouchMode(true);
-                    mBankPasswrodEdit.setOnTouchListener(onTouchListener);
-                } else if ("2".equals(mAccountInfos.get(position).getMONEY_INTO())) {
-                    mBankPasswrodEdit.setHint("校验银行密码");
-                    mBankPasswrodEdit.setClickable(true);
-                    mBankPasswrodEdit.setFocusable(true);
-                    mBankPasswrodEdit.setFocusableInTouchMode(true);
-                    mBankPasswrodEdit.setOnTouchListener(onTouchListener);
-                } else if ("3".equals(mAccountInfos.get(position).getMONEY_INTO())) {
+                } else {//1校验交易密码 2校验银行密码 3校验电话银行密码
                     mBankPasswrodEdit.setHint("校验银行密码");
                     mBankPasswrodEdit.setClickable(true);
                     mBankPasswrodEdit.setFocusable(true);
@@ -449,7 +441,7 @@ public class TransferAcountsTab extends BaseTransferSubjectTabView implements
 
             if (!TextUtils.isEmpty(mAccountInfos.get(position).getMONEY_OUT())) {
 
-                if ("0".equals(mAccountInfos.get(position).getMONEY_OUT())) {
+                if ("0".equals(mAccountInfos.get(position).getMONEY_OUT())) {//0代表不需要校验密码
                     mBankPasswrodEdit.setHint("不需要输入密码");
                     mBankPasswrodEdit.setClickable(false);
                     mBankPasswrodEdit.setFocusable(false);
@@ -459,13 +451,7 @@ public class TransferAcountsTab extends BaseTransferSubjectTabView implements
                     mBankPasswrodEdit.setOnTouchListener(null);
                     mBankPasswrodEdit.setPasswordKeyboard(null);
 
-                } else if ("1".equals(mAccountInfos.get(position).getMONEY_OUT())) {
-                    mBankPasswrodEdit.setHint("校验资金密码");
-                    mBankPasswrodEdit.setClickable(true);
-                    mBankPasswrodEdit.setFocusable(true);
-                    mBankPasswrodEdit.setFocusableInTouchMode(true);
-                    mBankPasswrodEdit.setOnTouchListener(onTouchListener);
-                } else if ("2".equals(mAccountInfos.get(position).getMONEY_OUT())) {
+                } else  {//1校验资金密码2校验资金密码和交易
                     mBankPasswrodEdit.setHint("校验资金密码");
                     mBankPasswrodEdit.setClickable(true);
                     mBankPasswrodEdit.setFocusable(true);

@@ -6,12 +6,11 @@ android {
     buildToolsVersion "23.0.3"
 
     defaultConfig {
-        applicationId "com.tpyzq.mobile.pangu"
 //        applicationId "com.tpyzq.self.mobile.pangu"
         minSdkVersion 15
         targetSdkVersion 22
         versionCode 1
-        versionName "1.1.0"
+        versionName "1.6.22"
 
         multiDexEnabled = true
 
@@ -39,8 +38,63 @@ android {
             keyAlias 'Admin'
             keyPassword 'taipingyang'
         }
+        debug {
+            storeFile file('pangu.jks')
+            storePassword 'taipingyang'
+            keyAlias 'Admin'
+            keyPassword 'taipingyang'
+        }
     }
-
+    productFlavors {
+        km_online{
+            applicationId "com.tpyzq.self.mobile.pangu"
+            buildConfigField "String", "IP", '"http://km-tnhq.tpyzq.com"'
+            buildConfigField "String", "SJYZM", '"https://km-tn.tpyzq.com"'
+            buildConfigField "String", "BORY", '"https://bj-apm.tpyzq.com/config/"'
+            buildConfigField "String", "BORY_APPID", '"3951f553-a63c-4d9e-9896-5f28ce2926f3"'
+            buildConfigField "String", "APP_ID", '"479a67630d2a36996b6aa485f80a4560abefcb91"'
+            buildConfigField "String", "SecurityIps", '"https://km-tnhq.tpyzq.com"'
+            buildConfigField "String", "SecurityIp", '"http://km-tnhq.tpyzq.com"'
+            buildConfigField "String", "status", '"生产"'
+            manifestPlaceholders = [appicon:"@mipmap/icon_logo"]
+        }
+        evironment_test{
+            applicationId "com.tpyzq.test.mobile.pangu"
+            buildConfigField "String", "IP", '"http://106.120.112.246:8082"'
+            buildConfigField "String", "SJYZM", '"http://106.120.112.246:8081"'
+            buildConfigField "String", "BORY", '"https://123.127.198.52:443/config"'
+            buildConfigField "String", "BORY_APPID", '"95f7a69e-db11-40a4-b242-6be2b396a0ee"'
+            buildConfigField "String", "APP_ID", '"479a67630d2a36996b6aa485f80a4560abefcb91"'
+            buildConfigField "String", "SecurityIps", '"http://106.120.112.246:8081"'
+            buildConfigField "String", "SecurityIp", '"http://106.120.112.246:8082"'
+            buildConfigField "String", "status", '"测试"'
+            manifestPlaceholders = [appicon:"@mipmap/icon_test"]
+        }
+        bj_online{
+            applicationId "com.tpyzq.self.mobile.pangu"
+            buildConfigField "String", "IP", '"http://bj-tnhq.tpyzq.com"'
+            buildConfigField "String", "SJYZM", '"https://bj-tn.tpyzq.com"'
+            buildConfigField "String", "BORY", '"https://bj-apm.tpyzq.com/config/"'
+            buildConfigField "String", "BORY_APPID", '"3951f553-a63c-4d9e-9896-5f28ce2926f3"'
+            buildConfigField "String", "APP_ID", '"479a67630d2a36996b6aa485f80a4560abefcb91"'
+            buildConfigField "String", "SecurityIps", '"https://bj-tnhq.tpyzq.com"'
+            buildConfigField "String", "SecurityIp", '"http://bj-tnhq.tpyzq.com"'
+            buildConfigField "String", "status", '"生产"'
+            manifestPlaceholders = [appicon:"@mipmap/icon_logo"]
+        }
+        gray{
+            applicationId "com.tpyzq.gary.mobile.pangu"
+            buildConfigField "String", "IP", '"http://tnhq.tpyzq.com"'
+            buildConfigField "String", "SJYZM", '"https://tn.tpyzq.com"'
+            buildConfigField "String", "BORY", '"https://apm.tpyzq.com/config"'
+            buildConfigField "String", "BORY_APPID", '"ae41fc21-a00c-4263-a7e7-b8a017aebcdf"'
+            buildConfigField "String", "APP_ID", '"479a67630d2a36996b6aa485f80a4560abefcb91"'
+            buildConfigField "String", "SecurityIps", '"https://tnhq.tpyzq.com"'
+            buildConfigField "String", "SecurityIp", '"http://tnhq.tpyzq.com"'
+            buildConfigField "String", "status", '"灰度"'
+            manifestPlaceholders = [appicon:"@mipmap/ic_gray"]
+        }
+    }
     buildTypes {
         release {
             minifyEnabled false
