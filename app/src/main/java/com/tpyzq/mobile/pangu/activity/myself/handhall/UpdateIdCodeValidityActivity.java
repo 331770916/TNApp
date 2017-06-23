@@ -133,6 +133,13 @@ public class UpdateIdCodeValidityActivity extends BaseActivity implements Dialog
                 mTempCheckedStateId = R.id.rb_effective_time;
                 mLongTimeRb.setChecked(false);
                 break;
+            case R.id.reCheckTask_btn:
+                isRest = "1";
+                onResume();
+                break;
+            case R.id.checkTaskSuccess_btn:
+                finish();
+                break;
         }
     }
 
@@ -248,15 +255,15 @@ public class UpdateIdCodeValidityActivity extends BaseActivity implements Dialog
 
             @Override
             public void onResponse(String response, int id) {
-                if (mProgressDialog != null && mProgressDialog.isShowing()) {
-                    mProgressDialog.cancel();
-                }
 
                 if (TextUtils.isEmpty(response)) {
+                    if (mProgressDialog != null && mProgressDialog.isShowing()) {
+                        mProgressDialog.cancel();
+                    }
+
                     showMistackDialog("网络数据返回为空", null);
                     return;
                 }
-                Log.e(TAG, response);
 
                 try {
                     JSONObject jsonObject = new JSONObject(response);
@@ -264,11 +271,20 @@ public class UpdateIdCodeValidityActivity extends BaseActivity implements Dialog
                     String error_info = jsonObject.getString("error_info");
 
                     if ("-6".equals(error_no)) {
+
+                        if (mProgressDialog != null && mProgressDialog.isShowing()) {
+                            mProgressDialog.cancel();
+                        }
+
                         sessionFailed(error_info);
                         return;
                     }
 
                     if ("-1".equals(error_no)) {
+                        if (mProgressDialog != null && mProgressDialog.isShowing()) {
+                            mProgressDialog.cancel();
+                        }
+
                         showMistackDialog(error_info, null);
                         return;
                     }
@@ -280,6 +296,11 @@ public class UpdateIdCodeValidityActivity extends BaseActivity implements Dialog
                     }
                     View view = new View(UpdateIdCodeValidityActivity.this);
                     if (!TextUtils.isEmpty(apply_status) && !"8".equals(apply_status)) {
+
+
+                        if (mProgressDialog != null && mProgressDialog.isShowing()) {
+                            mProgressDialog.cancel();
+                        }
 
                         if ("9".equals(apply_status)) {
                             view = LayoutInflater.from(UpdateIdCodeValidityActivity.this).inflate(R.layout.view_updateidcodevalidity_failed, null);
@@ -294,17 +315,21 @@ public class UpdateIdCodeValidityActivity extends BaseActivity implements Dialog
                     }
 
                     String id_no         = jsonObject.getString("id_no");           //身份证号码
-                    String user_id       = jsonObject.getString("user_id");
                     String apply_id      = jsonObject.getString("apply_id");        //申请业务id
                     String id_address    = jsonObject.getString("id_address");      //身份证地址
                     String id_enddate    = jsonObject.getString("id_enddate");      //身份证有效期截止时间
                     String client_name   = jsonObject.getString("client_name");     //名字
-                    String user_biz_id   = jsonObject.getString("user_biz_id");
                     String id_begindate  = jsonObject.getString("id_begindate");    //身份证有效期开始时间
                     String issued_depart = jsonObject.getString("issued_depart");   //身份证签发机关
 
                     if ("8".equals(apply_status)) {
+                        if (mProgressDialog != null && mProgressDialog.isShowing()) {
+                            mProgressDialog.cancel();
+                        }
+
                         view = LayoutInflater.from(UpdateIdCodeValidityActivity.this).inflate(R.layout.view_updateidcodevalidity_success, null);
+                        view.findViewById(R.id.checkTaskSuccess_btn).setOnClickListener(UpdateIdCodeValidityActivity.this);
+                        view.findViewById(R.id.reCheckTask_btn).setOnClickListener(UpdateIdCodeValidityActivity.this);
                         TextView name = (TextView) view.findViewById(R.id.Name);
                         name.setText(client_name);
                         TextView idcode = (TextView) view.findViewById(R.id.IDNumber);
@@ -323,6 +348,8 @@ public class UpdateIdCodeValidityActivity extends BaseActivity implements Dialog
 
                         mParentLayout.addView(view);
                     } else {
+                        String user_id       = jsonObject.getString("user_id");
+                        String user_biz_id   = jsonObject.getString("user_biz_id");
                         mRightBtn.setText("修改");
                         view = LayoutInflater.from(UpdateIdCodeValidityActivity.this).inflate(R.layout.view_updateidcodevalidity, null);
 
@@ -378,14 +405,14 @@ public class UpdateIdCodeValidityActivity extends BaseActivity implements Dialog
                         mEntity.setIssued_depart(issued_depart);
 
                         netStup(user_id, user_biz_id);
-
-
-
                     }
 
                 } catch (Exception e) {
                     e.printStackTrace();
                     showMistackDialog("网络数据解析异常", null);
+                    if (mProgressDialog != null && mProgressDialog.isShowing()) {
+                        mProgressDialog.cancel();
+                    }
                 }
             }
         });
@@ -404,6 +431,10 @@ public class UpdateIdCodeValidityActivity extends BaseActivity implements Dialog
                     intent = new Intent(UpdateIdCodeValidityActivity.this, ShouJiZhuCeActivity.class);
                     UpdateIdCodeValidityActivity.this.startActivity(intent);
                 } else if (!Db_PUB_USERS.islogin()) {
+                    intent = new Intent();
+                    intent.setClass(UpdateIdCodeValidityActivity.this, TransactionLoginActivity.class);
+                    UpdateIdCodeValidityActivity.this.startActivity(intent);
+                } else {
                     intent = new Intent();
                     intent.setClass(UpdateIdCodeValidityActivity.this, TransactionLoginActivity.class);
                     UpdateIdCodeValidityActivity.this.startActivity(intent);
@@ -467,7 +498,6 @@ public class UpdateIdCodeValidityActivity extends BaseActivity implements Dialog
 
                     if ("0".equals(error_no)) {
                         Intent intent = new Intent();
-                        intent.putExtra("flag", "fromValidity");
                         intent.putExtra("entity", mEntity);
                         intent.setClass(UpdateIdCodeValidityActivity.this, UpLoadIdCardPicActivity.class);
                         startActivity(intent);
@@ -506,13 +536,30 @@ public class UpdateIdCodeValidityActivity extends BaseActivity implements Dialog
             @Override
             public void onError(Call call, Exception e, int id) {
                 e.printStackTrace();
-                showMistackDialog("网络异常", null);
+                if (mProgressDialog != null && mProgressDialog.isShowing()) {
+                    mProgressDialog.cancel();
+                }
+                showMistackDialog("网络异常", new DialogInterface.OnClickListener() {
+                    @Override
+                    public void onClick(DialogInterface dialog, int which) {
+                        finish();
+                    }
+                });
             }
 
             @Override
             public void onResponse(String response, int id) {
+                if (mProgressDialog != null && mProgressDialog.isShowing()) {
+                    mProgressDialog.cancel();
+                }
+
                 if (TextUtils.isEmpty(response)) {
-                    showMistackDialog("网络数据返回为空", null);
+                    showMistackDialog("网络数据返回为空", new DialogInterface.OnClickListener() {
+                        @Override
+                        public void onClick(DialogInterface dialog, int which) {
+                            finish();
+                        }
+                    });
                     return;
                 }
 
@@ -524,7 +571,12 @@ public class UpdateIdCodeValidityActivity extends BaseActivity implements Dialog
                     String errorInfo = jsonObject.getString("error_info");
 
                     if (!"0".equals(error_no)) {
-                        showMistackDialog(errorInfo, null);
+                        showMistackDialog(errorInfo, new DialogInterface.OnClickListener() {
+                            @Override
+                            public void onClick(DialogInterface dialog, int which) {
+                                finish();
+                            }
+                        });
                         return;
                     }
 
@@ -534,7 +586,6 @@ public class UpdateIdCodeValidityActivity extends BaseActivity implements Dialog
                 }
             }
         });
-
     }
 
     private void initLoadDialog() {
@@ -548,6 +599,7 @@ public class UpdateIdCodeValidityActivity extends BaseActivity implements Dialog
     private void showMistackDialog(String errorMsg,  DialogInterface.OnClickListener onClickListener) {
         AlertDialog alertDialog = new AlertDialog.Builder(UpdateIdCodeValidityActivity.this).create();
         alertDialog.setMessage(errorMsg);
+        alertDialog.setCancelable(false);
         alertDialog.setButton(AlertDialog.BUTTON_POSITIVE, "确定", onClickListener);
         alertDialog.show();
     }
