@@ -5,7 +5,13 @@ import android.widget.AdapterView;
 import android.widget.ListView;
 
 import com.tpyzq.mobile.pangu.R;
+import com.tpyzq.mobile.pangu.adapter.trade.FJWithdrawOrderAdapter;
 import com.tpyzq.mobile.pangu.base.BaseActivity;
+import com.tpyzq.mobile.pangu.data.StructuredFundEntity;
+
+import java.util.ArrayList;
+import java.util.HashMap;
+import java.util.List;
 
 
 /**
@@ -14,17 +20,25 @@ import com.tpyzq.mobile.pangu.base.BaseActivity;
 
 public class FJWithdrawOrderActivity extends BaseActivity implements AdapterView.OnItemClickListener {
     private ListView mListView;
+    private List<StructuredFundEntity> mList;
+    private FJWithdrawOrderAdapter mFjwithdrawOrderAdapter;
 
 
     @Override
     public void initView() {
+        mList = new ArrayList<>();
         mListView = (ListView) findViewById(R.id.mListView);
         mListView.setOnItemClickListener(this);
-        initData();
+        mFjwithdrawOrderAdapter = new FJWithdrawOrderAdapter(this, mList);
+        requestData();
     }
 
-    private void initData() {
-
+    /**
+     * 请求数据
+     */
+    private void requestData() {
+        HashMap map1 = new HashMap();
+        HashMap map2 = new HashMap();
     }
 
     @Override
