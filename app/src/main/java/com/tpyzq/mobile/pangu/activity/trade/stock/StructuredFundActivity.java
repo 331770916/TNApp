@@ -56,7 +56,7 @@ public class StructuredFundActivity extends BaseActivity implements View.OnClick
 
     @Override
     public void onItemClick(AdapterView<?> parent, View view, int position, long id) {
-        Intent intent = new Intent();
+//        Intent intent = new Intent();
         switch (position) {
             case 0:
                 Helper.getInstance().showToast(this,"正在开发中");
@@ -75,6 +75,6 @@ public class StructuredFundActivity extends BaseActivity implements View.OnClick
                 Helper.getInstance().showToast(this,"正在开发中");
                 break;
         }
-        startActivity(intent);
+//        startActivity(intent);
     }
 }
