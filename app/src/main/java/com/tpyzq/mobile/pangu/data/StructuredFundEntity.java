@@ -43,6 +43,7 @@ public class StructuredFundEntity {
 
     public void setExchange_type(String exchange_type) {
         this.exchange_type = exchange_type;
+
     }
 
     public String getFund_status() {
