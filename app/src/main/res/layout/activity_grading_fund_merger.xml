@@ -193,7 +193,7 @@
                     android:layout_centerVertical="true"
                     android:layout_marginLeft="@dimen/size35"
                     android:layout_toRightOf="@id/tvCnFundNetValue"
-                    android:text=""
+                    android:text="--"
                     android:textColor="@color/texts"
                     android:textSize="@dimen/txtSize14" />
 
@@ -220,7 +220,7 @@
                     android:layout_centerVertical="true"
                     android:layout_marginLeft="@dimen/size35"
                     android:layout_toRightOf="@id/tvCnStockholderNum"
-                    android:text=""
+                    android:text="--"
                     android:textColor="@color/texts"
                     android:textSize="@dimen/txtSize14" />
 
@@ -249,7 +249,7 @@
                     android:layout_centerVertical="true"
                     android:layout_marginLeft="@dimen/size35"
                     android:layout_toRightOf="@id/tvCnExpendableFund"
-                    android:text=""
+                    android:text="--"
                     android:textColor="@color/texts"
                     android:textSize="@dimen/txtSize14" />
 
