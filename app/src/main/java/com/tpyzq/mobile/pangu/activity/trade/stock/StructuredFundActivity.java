@@ -59,25 +59,21 @@ public class StructuredFundActivity extends BaseActivity implements View.OnClick
         Intent intent = new Intent();
         switch (position) {
             case 0:
-//                Helper.getInstance().showToast(this,"正在开发中");
                 intent.setClass(this, FJFundGradingMergerActivity.class);
-                startActivity(intent);
                 break;
             case 1:
-//                Helper.getInstance().showToast(this,"正在开发中");
                 intent.setClass(this, FJFundSplitActivity.class);
-                startActivity(intent);
                 break;
             case 2:
                 intent = new Intent(this, FJWithdrawOrderActivity.class);
-                startActivity(intent);
                 break;
             case 3:
-                Helper.getInstance().showToast(this, "正在开发中");
+                intent = new Intent(this, FJEntrustedQueryActivity.class);
                 break;
             case 4:
-                Helper.getInstance().showToast(this, "正在开发中");
+                intent = new Intent(this, FJDealQueryActivity.class);
                 break;
         }
+        startActivity(intent);
     }
 }

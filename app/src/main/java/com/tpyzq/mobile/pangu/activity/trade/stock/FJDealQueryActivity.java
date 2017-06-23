@@ -1,26 +1,14 @@
 package com.tpyzq.mobile.pangu.activity.trade.stock;
-
 import android.content.Context;
 import android.support.v4.view.ViewPager;
 import android.view.View;
-import android.widget.ImageView;
 import android.widget.TextView;
-
 import com.tpyzq.mobile.pangu.R;
-import com.tpyzq.mobile.pangu.activity.trade.BaseSearchPager;
-import com.tpyzq.mobile.pangu.activity.trade.view.ClinchCustomPager;
-import com.tpyzq.mobile.pangu.activity.trade.view.ClinchInAMonthPager;
-import com.tpyzq.mobile.pangu.activity.trade.view.ClinchOneWeekPager;
-import com.tpyzq.mobile.pangu.activity.trade.view.ClinchThreeWeekPager;
-import com.tpyzq.mobile.pangu.activity.trade.view.ClinchTodayPager;
 import com.tpyzq.mobile.pangu.activity.trade.view.FJEntrustDealQueryPager;
 import com.tpyzq.mobile.pangu.activity.trade.view.ScaleTransitionPagerTitleView;
 import com.tpyzq.mobile.pangu.adapter.trade.FJEntrustedDealAdapter;
-import com.tpyzq.mobile.pangu.adapter.trade.InquireVpAdapter;
 import com.tpyzq.mobile.pangu.base.BaseActivity;
 import com.tpyzq.mobile.pangu.base.BasePager;
-import com.tpyzq.mobile.pangu.base.InterfaceCollection;
-import com.tpyzq.mobile.pangu.data.ResultInfo;
 import com.tpyzq.mobile.pangu.view.magicindicator.MagicIndicator;
 import com.tpyzq.mobile.pangu.view.magicindicator.ViewPagerHelper;
 import com.tpyzq.mobile.pangu.view.magicindicator.buildins.commonnavigator.CommonNavigator;
@@ -37,10 +25,10 @@ import java.util.List;
 /**
  * Created by ltyhome on 23/06/2017.
  * Email: ltyhome@yahoo.com.hk
- * Describe: entrust query 委托查询类
+ * Describe: deal query 成交查询
  */
 
-public class FJEntrustedQueryActivity extends BaseActivity implements View.OnClickListener{
+public class FJDealQueryActivity  extends BaseActivity implements View.OnClickListener{
     private FJEntrustDealQueryPager todayPager,oneWeekPager,inAMonthPager,threeWeekPager,customPager;
     private String[] buy_vp = new String[]{"今日", "一周内", "一月内", "三月内","自定义"};
     private List<String> buy_vp_list = Arrays.asList(buy_vp);
@@ -54,23 +42,15 @@ public class FJEntrustedQueryActivity extends BaseActivity implements View.OnCli
     public void initView() {
         findViewById(R.id.ivCNFund_back).setOnClickListener(this);
         title =(TextView)this.findViewById(R.id.fj_title);
-        title.setText("委托查询");
+        title.setText("成交查询");
         magicIndicator = (MagicIndicator)this.findViewById(R.id.capital_buy);
         viewPager = (ViewPager)this.findViewById(R.id.fj_view);
     }
-
 
     @Override
     protected void onStart() {
         super.onStart();
         setIndicatorListen();
-    }
-
-
-
-    @Override
-    public void onClick(View v) {
-        finish();
     }
 
     private void setIndicatorListen() {
@@ -108,7 +88,7 @@ public class FJEntrustedQueryActivity extends BaseActivity implements View.OnCli
 
             @Override
             public float getTitleWeight(Context context, int index) {
-                    return 1.0f;
+                return 1.0f;
             }
         });
         magicIndicator.setNavigator(commonNavigator);
@@ -142,6 +122,12 @@ public class FJEntrustedQueryActivity extends BaseActivity implements View.OnCli
     }
 
     @Override
+    public void onClick(View v) {
+        finish();
+    }
+
+
+@Override
     public int getLayoutId() {
         return R.layout.activity_fj_entrus_query;
     }

@@ -17,10 +17,13 @@ import android.support.annotation.Nullable;
 import android.support.v4.app.ActivityCompat;
 import android.support.v4.content.ContextCompat;
 import android.support.v7.app.AppCompatActivity;
+import android.view.Gravity;
 import android.view.Window;
 import android.view.WindowManager;
+import android.widget.Toast;
 
 import com.tpyzq.mobile.pangu.R;
+import com.tpyzq.mobile.pangu.http.NetWorkUtil;
 import com.tpyzq.mobile.pangu.util.panguutil.SkipUtils;
 
 import java.util.ArrayList;
@@ -30,10 +33,15 @@ import java.util.List;
  * activity 基础类
  */
 public abstract class BaseActivity extends AppCompatActivity {
-//    protected  boolean isShow = false;
     private boolean isNeedCheck = true; //判断是否需要检测，防止不停的弹框
     private static final int PERMISSON_REQUESTCODE = 0;
-
+    protected InterfaceCollection mInterface;
+    protected long oneTime = 0;
+    protected long towTime = 0;
+    protected String oldMsg;
+    protected NetWorkUtil net;
+    protected SkipUtils skip;
+    protected Toast mToast;
     //需要进行检测的权限数组
     protected String[] needPermissions = {
             Manifest.permission.GET_ACCOUNTS,
@@ -72,7 +80,9 @@ public abstract class BaseActivity extends AppCompatActivity {
             // Translucent status bar
             window.setFlags(WindowManager.LayoutParams.FLAG_TRANSLUCENT_STATUS, WindowManager.LayoutParams.FLAG_TRANSLUCENT_STATUS);
         }
-
+        mInterface = InterfaceCollection.getInstance();
+        net = NetWorkUtil.getInstence();
+        skip = SkipUtils.getInstance();
         initView();
     }
 
@@ -88,20 +98,49 @@ public abstract class BaseActivity extends AppCompatActivity {
         return res;
     }
 
+    /**
+     * 显示tost
+     * @param content 内容
+     */
+    protected void showToast(String content){
+        showToast(content,0,false);
+    }
+
+    protected void showToast(String content,int time,boolean hasGravity) {
+        if (mToast == null) {
+            mToast = Toast.makeText(CustomApplication.getContext(), content,time);
+            if(hasGravity)
+                mToast.setGravity(Gravity.CENTER, 0, 0);
+            mToast.show();
+            oldMsg = content;
+            oneTime = System.currentTimeMillis();
+        } else {
+            towTime = System.currentTimeMillis();
+            if (content.equals(oldMsg)) {
+                if (towTime - oneTime > time)
+                    mToast.show();
+            } else {
+                oldMsg = content;
+                mToast.setText(content);
+                mToast.show();
+            }
+        }
+        oneTime = towTime;
+    }
+
+
     @Override
     protected void onResume() {
         super.onResume();
-//        isShow = true;
-        SkipUtils.getInstance().setFlag(true);
         if (isNeedCheck) {
             checkPermissions(needPermissions);
         }
+        skip.setFlag(true);
     }
 
     @Override
     protected void onPause() {
         super.onPause();
-//        isShow = false;
     }
 
     private void checkPermissions(String... permissions) {
@@ -186,5 +225,15 @@ public abstract class BaseActivity extends AppCompatActivity {
         Intent intent = new Intent(Settings.ACTION_APPLICATION_DETAILS_SETTINGS);
         intent.setData(Uri.parse("package:" + getPackageName()));
         startActivity(intent);
+    }
+
+    public void destroy(){
+
+    }
+
+    @Override
+    protected void onDestroy() {
+        destroy();
+        super.onDestroy();
     }
 }

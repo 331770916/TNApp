@@ -327,6 +327,8 @@
         <activity android:name=".activity.trade.stock.FJFundChooseActivity"/>
         <activity android:name=".activity.trade.stock.FJFundSplitActivity"/>
         <activity android:name=".activity.trade.stock.FJWithdrawOrderActivity" />
+        <activity android:name=".activity.trade.stock.FJEntrustedQueryActivity" />
+        <activity android:name=".activity.trade.stock.FJDealQueryActivity" />
 
         <!--行情 相关activity-->
         <activity android:name=".activity.market.quotation.plate.PlateListActivity" />

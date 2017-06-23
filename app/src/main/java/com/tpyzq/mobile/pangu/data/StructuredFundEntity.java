@@ -16,22 +16,22 @@ public class StructuredFundEntity {
     private String stocken_code;            //证券代码
     private String market;                  //交易市场
 
-    private String init_date;               //交易日期
-    private String entrust_no;              //委托编号
+    private int init_date;               //交易日期
+    private int entrust_no;              //委托编号
 
-    public String getInit_date() {
+    public int getInit_date() {
         return init_date;
     }
 
-    public void setInit_date(String init_date) {
+    public void setInit_date(int init_date) {
         this.init_date = init_date;
     }
 
-    public String getEntrust_no() {
+    public int getEntrust_no() {
         return entrust_no;
     }
 
-    public void setEntrust_no(String entrust_no) {
+    public void setEntrust_no(int entrust_no) {
         this.entrust_no = entrust_no;
     }
 
