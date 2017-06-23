@@ -62,7 +62,12 @@ public class FJWithdrawOrderAdapter extends BaseAdapter {
         }
         viewHolder.tv3.setTextColor(Color.RED);
 
-
+        viewHolder.tv1.setText(mList.get(position).getFund_status());
+        viewHolder.tv2.setText(mList.get(position).getExchange_type());
+        viewHolder.tv3.setText(mList.get(position).getMerge_amount());
+        viewHolder.tv4.setText(mList.get(position).getSplit_amount());
+        viewHolder.tv5.setText(mList.get(position).getStoken_name());
+        viewHolder.tv6.setText(mList.get(position).getStock_account());
         return convertView;
     }
 
