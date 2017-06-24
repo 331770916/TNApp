@@ -1,0 +1,164 @@
+<?xml version="1.0" encoding="utf-8"?>
+<ScrollView xmlns:android="http://schemas.android.com/apk/res/android"
+    android:background="@color/white"
+    android:layout_width="match_parent"
+    android:layout_height="match_parent">
+
+    <LinearLayout
+        android:layout_width="match_parent"
+        android:layout_height="wrap_content"
+        android:orientation="vertical">
+        <View
+            android:layout_width="match_parent"
+            android:layout_height="@dimen/size25"
+            android:background="@color/steelBlue"/>
+
+        <include layout="@layout/updatepwd_top"
+            android:id="@+id/startVideTop" />
+
+        <RelativeLayout
+            android:layout_width="match_parent"
+            android:layout_height="wrap_content"
+            android:layout_marginBottom="@dimen/size10"
+            android:background="#368CE6">
+
+            <LinearLayout
+                android:id="@+id/resultfailed_title_tip"
+                android:layout_width="wrap_content"
+                android:layout_height="wrap_content"
+                android:padding="@dimen/size20"
+                android:layout_centerInParent="true"
+                android:orientation="vertical">
+                <ImageView
+                    android:id="@+id/img_title_tag"
+                    android:layout_width="wrap_content"
+                    android:layout_height="wrap_content"
+                    android:layout_gravity="center_horizontal"
+                    android:src="@mipmap/video_check_failed"
+                    />
+                <TextView
+                    android:layout_width="wrap_content"
+                    android:layout_height="wrap_content"
+                    android:textColor="@color/white"
+                    android:layout_marginTop="@dimen/size10"
+                    android:layout_marginBottom="@dimen/size30"
+                    android:layout_gravity="center_horizontal"
+                    android:text="审核失败"/>
+            </LinearLayout>
+
+            <FrameLayout
+                android:layout_below="@id/resultfailed_title_tip"
+                android:layout_width="match_parent"
+                android:layout_height="wrap_content"
+                android:background="@mipmap/videocheck_wave"/>
+        </RelativeLayout>
+
+        <LinearLayout
+            android:id="@+id/videoResultFailed"
+            android:visibility="gone"
+            android:layout_width="match_parent"
+            android:layout_height="match_parent"
+            android:orientation="vertical">
+
+            <TextView
+                android:layout_width="wrap_content"
+                android:layout_height="wrap_content"
+                android:textSize="20sp"
+                android:layout_gravity="center_horizontal"
+                android:textStyle="bold"
+                android:textColor="#4c4c4c"
+                android:text="抱歉，验证未通过"/>
+
+            <TextView
+                android:layout_width="wrap_content"
+                android:layout_height="wrap_content"
+                android:layout_marginTop="@dimen/size10"
+                android:layout_marginLeft="@dimen/size40"
+                android:layout_marginRight="@dimen/size40"
+                android:layout_gravity="center_horizontal"
+                android:gravity="center"
+                android:textSize="12sp"
+                android:textColor="@color/hideTextColor"
+                android:text="请重新提交资料审核，如有其他问题，请咨询客服"/>
+
+            <LinearLayout
+                android:layout_width="match_parent"
+                android:layout_height="wrap_content"
+                android:layout_marginTop="@dimen/size50"
+                android:layout_marginLeft="@dimen/size30"
+                android:layout_marginRight="@dimen/size30"
+                android:layout_gravity="center_horizontal"
+                android:orientation="horizontal">
+
+                <TextView
+                    android:id="@+id/videoCheckFailed_restartCommite"
+                    android:layout_width="0dp"
+                    android:layout_weight="1"
+                    android:layout_height="wrap_content"
+                    android:padding="@dimen/size10"
+                    android:textColor="@color/white"
+                    android:background="@drawable/check_failed_restart_btnbg"
+                    android:layout_marginRight="@dimen/size10"
+                    android:gravity="center"
+                    android:text="重新提交"/>
+
+                <TextView
+                    android:id="@+id/videoCheckFailed_out"
+                    android:layout_width="0dp"
+                    android:layout_weight="1"
+                    android:layout_height="wrap_content"
+                    android:layout_marginLeft="@dimen/size10"
+                    android:padding="@dimen/size10"
+                    android:background="@drawable/check_task_running_btnbg"
+                    android:text="退出"
+                    android:gravity="center"
+                    android:textColor="#4c4c4c"/>
+            </LinearLayout>
+        </LinearLayout>
+
+        <LinearLayout
+            android:id="@+id/videoResultSuccess"
+            android:layout_width="match_parent"
+            android:layout_height="wrap_content"
+            android:visibility="gone"
+            android:orientation="vertical">
+            <TextView
+                android:layout_width="wrap_content"
+                android:layout_height="wrap_content"
+                android:textSize="20sp"
+                android:layout_gravity="center_horizontal"
+                android:textColor="#4c4c4c"
+                android:text="恭喜你，验证通过"/>
+
+            <TextView
+                android:layout_width="wrap_content"
+                android:layout_height="wrap_content"
+                android:layout_marginTop="@dimen/size10"
+                android:layout_marginLeft="@dimen/size40"
+                android:layout_marginRight="@dimen/size40"
+                android:layout_gravity="center_horizontal"
+                android:gravity="center"
+                android:textSize="12sp"
+                android:textColor="@color/hideTextColor"
+                android:text="可进入下一步设置新的交易密码，如有其他问题，请咨询客服"/>
+
+            <TextView
+                android:id="@+id/videoCheckSuccess_Next"
+                android:layout_width="match_parent"
+                android:layout_height="wrap_content"
+                android:padding="@dimen/size10"
+                android:text="下一步"
+                android:textColor="@color/white"
+                android:layout_margin="@dimen/size50"
+                android:gravity="center"
+                android:background="@color/calendarBtnColor"/>
+
+        </LinearLayout>
+
+    </LinearLayout>
+
+
+
+
+
+</ScrollView>

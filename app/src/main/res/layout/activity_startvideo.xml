@@ -1,0 +1,126 @@
+<?xml version="1.0" encoding="utf-8"?>
+<LinearLayout xmlns:android="http://schemas.android.com/apk/res/android"
+    android:orientation="vertical"
+    android:layout_width="match_parent"
+    android:layout_height="match_parent">
+
+    <View
+        android:layout_width="match_parent"
+        android:layout_height="@dimen/size25"
+        android:background="@color/steelBlue"/>
+
+    <RelativeLayout
+        android:layout_width="match_parent"
+        android:layout_height="match_parent">
+        <include layout="@layout/updatepwd_top"
+            android:id="@+id/startVideTop" />
+
+
+        <RelativeLayout
+            android:id="@+id/startVideBottom"
+            android:layout_width="match_parent"
+            android:layout_height="wrap_content"
+            android:layout_alignParentBottom="true"
+            android:background="@color/white"
+            android:layout_gravity="bottom">
+
+            <LinearLayout
+                android:layout_width="wrap_content"
+                android:layout_height="wrap_content"
+                android:layout_margin="@dimen/size30"
+                android:layout_centerInParent="true"
+                android:orientation="vertical">
+                <LinearLayout
+                    android:layout_width="wrap_content"
+                    android:layout_height="wrap_content"
+                    android:orientation="horizontal">
+                    <TextView
+                        android:layout_width="wrap_content"
+                        android:layout_height="wrap_content"
+                        android:padding="@dimen/size10"
+                        android:layout_marginRight="@dimen/size20"
+                        android:gravity="center"
+                        android:textColor="#4c4c4c"
+                        android:drawablePadding="@dimen/size10"
+                        android:text="光线充足"
+                        android:drawableLeft="@mipmap/sun"/>
+
+                    <TextView
+                        android:layout_width="wrap_content"
+                        android:layout_height="wrap_content"
+                        android:padding="@dimen/size10"
+                        android:gravity="center"
+                        android:textColor="#4c4c4c"
+                        android:layout_marginLeft="@dimen/size20"
+                        android:drawablePadding="@dimen/size10"
+                        android:text="WIFI/3G/4G"
+                        android:drawableLeft="@mipmap/wifi"/>
+                </LinearLayout>
+
+                <LinearLayout
+                    android:layout_width="wrap_content"
+                    android:layout_height="wrap_content"
+                    android:orientation="horizontal">
+                    <TextView
+                        android:layout_width="wrap_content"
+                        android:layout_height="wrap_content"
+                        android:padding="@dimen/size10"
+                        android:gravity="center"
+                        android:textColor="#4c4c4c"
+                        android:layout_marginRight="@dimen/size20"
+                        android:drawablePadding="@dimen/size10"
+                        android:text="环境安静"
+                        android:drawableLeft="@mipmap/query"/>
+
+                    <TextView
+                        android:layout_width="wrap_content"
+                        android:layout_height="wrap_content"
+                        android:padding="@dimen/size10"
+                        android:gravity="center"
+                        android:textColor="#4c4c4c"
+                        android:drawablePadding="@dimen/size10"
+                        android:layout_marginLeft="@dimen/size20"
+                        android:text="不要遮挡面部"
+                        android:drawableLeft="@mipmap/face"/>
+                </LinearLayout>
+
+
+            </LinearLayout>
+
+
+        </RelativeLayout>
+
+
+        <RelativeLayout
+            android:layout_width="match_parent"
+            android:layout_height="match_parent"
+            android:background="@color/blue"
+            android:layout_below="@id/startVideTop"
+            android:layout_above="@id/startVideBottom">
+            <ImageView
+                android:id="@+id/waterView"
+                android:layout_width="wrap_content"
+                android:layout_height="wrap_content"
+                android:padding="@dimen/size20"
+                android:layout_centerInParent="true"
+                android:src="@mipmap/start_video_btn"/>
+
+            <TextView
+                android:layout_width="wrap_content"
+                android:layout_height="@dimen/size40"
+                android:layout_centerHorizontal="true"
+                android:layout_above="@id/waterView"
+                android:paddingTop="@dimen/size10"
+                android:gravity="center_horizontal|top"
+                android:padding="@dimen/size5"
+                android:background="@drawable/icon_starvideotype"
+                android:layout_marginBottom="@dimen/size17"
+                android:text="您将与客服人员进行通话，以完成身份确认"
+                android:textSize="14sp"
+                android:textColor="@color/white"/>
+        </RelativeLayout>
+    </RelativeLayout>
+
+
+
+</LinearLayout>

@@ -58,6 +58,8 @@ public class UpLoadIdCardPicActivity extends BaseActivity implements View.OnClic
     private ImageView mBackImg;
 
     private String biz_unit_id; // 业务id 如果biz_unit_id 是空 代表是从身份证有效期更改过来的
+    private String verify_id ;//当修改资金密码时的双向视频用到的
+    private String fund_account;//资金账号
     private boolean clickBackKey;//判断用户是否点击返回键取消网络请求
 
     private String tempVerifyId1;
@@ -67,6 +69,8 @@ public class UpLoadIdCardPicActivity extends BaseActivity implements View.OnClic
     public void initView() {
         Intent intent = getIntent();
         biz_unit_id = intent.getStringExtra("biz_unit_id");
+        verify_id = intent.getStringExtra("verify_id");
+        fund_account = intent.getStringExtra("fund_account");
         mEntity = intent.getParcelableExtra("entity");
 
         findViewById(R.id.userIdBackBtn).setOnClickListener(this);
@@ -135,6 +139,13 @@ public class UpLoadIdCardPicActivity extends BaseActivity implements View.OnClic
      * 修改密码开启视频任务
      */
     private void toVideoTask() {
+        Intent intent = new Intent();
+        intent.putExtra("verify_id", verify_id);
+        intent.putExtra("fund_account", fund_account);
+        intent.putExtra("entity", mEntity);
+        intent.setClass(UpLoadIdCardPicActivity.this, StartVideoActivity.class);
+        startActivity(intent);
+        finish();
     }
 
     /**

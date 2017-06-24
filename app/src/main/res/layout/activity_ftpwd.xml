@@ -1,0 +1,122 @@
+<?xml version="1.0" encoding="utf-8"?>
+<LinearLayout xmlns:android="http://schemas.android.com/apk/res/android"
+    android:orientation="vertical"
+    android:background="@color/bgColor"
+    android:layout_width="match_parent"
+    android:layout_height="match_parent">
+
+    <RelativeLayout
+        android:layout_width="match_parent"
+        android:layout_height="@dimen/size25"
+        android:background="#368CE6"
+        android:clipToPadding="true"
+        android:fitsSystemWindows="true" />
+
+    <include layout="@layout/updatepwd_top"
+        android:id="@+id/startVideTop" />
+
+    <LinearLayout
+        android:layout_width="match_parent"
+        android:layout_height="wrap_content"
+        android:background="@color/bgColor"
+        android:orientation="vertical">
+        <LinearLayout
+            android:layout_width="match_parent"
+            android:layout_height="wrap_content"
+            android:layout_marginTop="@dimen/size15"
+            android:background="@color/white"
+            android:orientation="vertical">
+
+            <View
+                android:layout_width="match_parent"
+                android:layout_height="1px"
+                android:background="@color/lineColor"/>
+
+            <EditText
+                android:id="@+id/ed_userId_inputFundAccount"
+                android:layout_width="match_parent"
+                android:layout_height="wrap_content"
+                android:hint="@string/HihiEditText1"
+                android:padding="@dimen/size15"
+                android:drawablePadding="@dimen/size10"
+                android:drawableLeft="@mipmap/userid_account"
+                android:singleLine="true"
+                android:inputType="number"
+                android:textSize="14sp"
+                android:background="@null"/>
+
+            <View
+                android:layout_width="match_parent"
+                android:layout_height="1px"
+                android:layout_marginLeft="@dimen/size10"
+                android:background="@color/lineColor"/>
+
+            <EditText
+                android:id="@+id/ed_userId_inputName"
+                android:layout_width="match_parent"
+                android:layout_height="wrap_content"
+                android:hint="@string/hint_inputName"
+                android:drawablePadding="@dimen/size10"
+                android:drawableLeft="@mipmap/userid_name"
+                android:singleLine="true"
+                android:padding="@dimen/size15"
+                android:textSize="14sp"
+                android:background="@null"/>
+
+            <View
+                android:layout_width="match_parent"
+                android:layout_height="1px"
+                android:layout_marginLeft="@dimen/size10"
+                android:background="@color/lineColor"/>
+
+            <EditText
+                android:id="@+id/ed_userId_inputIdCard"
+                android:layout_width="match_parent"
+                android:layout_height="wrap_content"
+                android:hint="@string/hint_inputIdCard"
+                android:drawablePadding="@dimen/size10"
+                android:drawableLeft="@mipmap/userid_idcard"
+                android:digits="0123456789abcdefghigklmnopqrstuvwxyzABCDEFGHIJKLMNOPQRSTUVWXYZ"
+                android:singleLine="true"
+                android:padding="@dimen/size15"
+                android:textSize="14sp"
+                android:maxLength="18"
+                android:background="@null"/>
+
+            <View
+                android:layout_width="match_parent"
+                android:layout_height="1px"
+                android:background="@color/lineColor"/>
+
+        </LinearLayout>
+
+        <TextView
+            android:id="@+id/tv_userid_warn"
+            android:layout_width="match_parent"
+            android:layout_height="wrap_content"
+            android:drawableLeft="@mipmap/userid_warn"
+            android:text=""
+            android:gravity="center_vertical"
+            android:textSize="12sp"
+            android:layout_marginTop="@dimen/size10"
+            android:layout_marginLeft="@dimen/size17"
+            android:drawablePadding="@dimen/size10"
+            android:singleLine="true"/>
+
+        <TextView
+            android:id="@+id/nextStupBtn"
+            android:layout_width="match_parent"
+            android:layout_height="wrap_content"
+            android:background="@drawable/userid_nextstup_n"
+            android:padding="@dimen/size10"
+            android:text="@string/nextStup"
+            android:gravity="center"
+            android:textColor="@color/white"
+            android:layout_marginTop="@dimen/size40"
+            android:layout_marginLeft="@dimen/size20"
+            android:layout_marginRight="@dimen/size20"/>
+
+
+    </LinearLayout>
+
+</LinearLayout>

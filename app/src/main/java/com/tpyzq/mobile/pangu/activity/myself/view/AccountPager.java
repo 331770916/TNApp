@@ -15,6 +15,7 @@ import com.tpyzq.mobile.pangu.activity.myself.handhall.AccountPowerActivity;
 import com.tpyzq.mobile.pangu.activity.myself.handhall.AgreementActivity;
 import com.tpyzq.mobile.pangu.activity.myself.handhall.AgreementSignActvity;
 import com.tpyzq.mobile.pangu.activity.myself.handhall.ChangePasswordActivity;
+import com.tpyzq.mobile.pangu.activity.myself.handhall.FrogetTransactionPwdActivity;
 import com.tpyzq.mobile.pangu.activity.myself.handhall.PersonalDataActivity;
 import com.tpyzq.mobile.pangu.activity.myself.handhall.RiskEvaluationActivity;
 import com.tpyzq.mobile.pangu.activity.myself.handhall.StockHolderInfoActivity;
@@ -275,14 +276,10 @@ public class AccountPager extends BaseMySelfPager implements View.OnClickListene
                 intent.setClass(mContext, UpdateIdCodeValidityActivity.class);
                 mContext.startActivity(intent);
                 break;
-//            case R.id.tv_forget_transactionpw:
-//                intent.setClass(mContext, GetUserIdActivity.class);
-//                if (Build.VERSION.SDK_INT >= Build.VERSION_CODES.JELLY_BEAN) {
-//                    mContext.startActivity(intent, ActivityOptionsCompat.makeSceneTransitionAnimation((Activity) mContext).toBundle());
-//                } else {
-//                    mContext.startActivity(intent);
-//                }
-//                break;
+            case R.id.tv_forget_transactionpw:
+                intent.setClass(mContext, FrogetTransactionPwdActivity.class);
+                mContext.startActivity(intent);
+                break;
             default:
                 clickButton(v, intent);
                 break;
