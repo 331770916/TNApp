@@ -110,7 +110,7 @@ public class UpLoadIdCardPicActivity extends BaseActivity implements View.OnClic
     public void onClick(View v) {
         switch (v.getId()) {
             case R.id.userIdBackBtn:
-                CancelDialog.cancleDialog(UpLoadIdCardPicActivity.this);
+                CancelDialog.cancleDialog(UpLoadIdCardPicActivity.this, "2000-02-02", CancelDialog.RISK_EXPIRE, null);
                 break;
             case R.id.uploadIdCarBtn:
                  if (!TextUtils.isEmpty(biz_unit_id)) {

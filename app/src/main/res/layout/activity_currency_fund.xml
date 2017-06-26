@@ -1,0 +1,196 @@
+<?xml version="1.0" encoding="utf-8"?>
+<LinearLayout xmlns:android="http://schemas.android.com/apk/res/android"
+    android:layout_width="match_parent"
+    android:layout_height="match_parent"
+    android:orientation="vertical">
+
+    <RelativeLayout
+        android:layout_width="match_parent"
+        android:layout_height="@dimen/size25"
+        android:background="@color/blue"
+        android:clipToPadding="true"
+        android:fitsSystemWindows="true" />
+
+    <!-- 头布局 -->
+    <RelativeLayout
+        android:layout_width="match_parent"
+        android:layout_height="@dimen/pickerview_topbar_height"
+        android:background="@color/blue">
+
+        <ImageView
+            android:id="@+id/ivCurrencyFund_back"
+            android:layout_width="wrap_content"
+            android:layout_height="match_parent"
+            android:layout_alignParentLeft="true"
+            android:padding="@dimen/size10"
+            android:src="@mipmap/back_btn" />
+
+        <TextView
+            android:layout_width="wrap_content"
+            android:layout_height="wrap_content"
+            android:layout_centerInParent="true"
+            android:text="@string/HuoBiJiJin"
+            android:textColor="@color/white"
+            android:textSize="@dimen/pickerview_topbar_title_textsize" />
+    </RelativeLayout>
+
+    <!--申购-->
+    <RelativeLayout
+        android:id="@+id/rlFundSubscribe"
+        android:layout_width="match_parent"
+        android:layout_height="@dimen/size50">
+        <ImageView
+            android:id="@+id/ivFundSubscribe"
+            android:layout_width="wrap_content"
+            android:layout_height="wrap_content"
+            android:layout_centerVertical="true"
+            android:layout_marginLeft="@dimen/size12"
+            android:src="@mipmap/huobijijinshengou"/>
+        <TextView
+            android:layout_width="wrap_content"
+            android:layout_height="wrap_content"
+            android:layout_centerVertical="true"
+            android:layout_toRightOf="@id/ivFundSubscribe"
+            android:layout_marginLeft="@dimen/size10"
+            android:text="@string/HuoBiJiJinShenGou"/>
+        <ImageView
+            android:layout_width="wrap_content"
+            android:layout_height="wrap_content"
+            android:layout_centerVertical="true"
+            android:layout_alignParentRight="true"
+            android:layout_marginRight="@dimen/size12"
+            android:src="@mipmap/youjiantou"/>
+
+    </RelativeLayout>
+
+    <!--分割线-->
+    <LinearLayout
+        android:layout_width="match_parent"
+        android:layout_height="wrap_content"
+        android:orientation="horizontal">
+        <TextView
+            android:layout_width="@dimen/size12"
+            android:layout_height="1dp"/>
+        <TextView
+            android:layout_width="match_parent"
+            android:layout_height="@dimen/size1"
+            android:background="@color/dividerColor"/>
+    </LinearLayout>
+
+    <!--赎回-->
+    <RelativeLayout
+        android:id="@+id/rlFundRedeem"
+        android:layout_width="match_parent"
+        android:layout_height="@dimen/size50">
+        <ImageView
+            android:id="@+id/ivFundRedeem"
+            android:layout_width="wrap_content"
+            android:layout_height="wrap_content"
+            android:layout_centerVertical="true"
+            android:layout_marginLeft="@dimen/size12"
+            android:src="@mipmap/huobijijinshuhui"/>
+        <TextView
+            android:layout_width="wrap_content"
+            android:layout_height="wrap_content"
+            android:layout_centerVertical="true"
+            android:layout_toRightOf="@id/ivFundRedeem"
+            android:layout_marginLeft="@dimen/size10"
+            android:text="@string/HuoBiJiJinShuHui"/>
+        <ImageView
+            android:layout_width="wrap_content"
+            android:layout_height="wrap_content"
+            android:layout_centerVertical="true"
+            android:layout_alignParentRight="true"
+            android:layout_marginRight="@dimen/size12"
+            android:src="@mipmap/youjiantou"/>
+    </RelativeLayout>
+
+    <!--分割线-->
+    <LinearLayout
+        android:layout_width="match_parent"
+        android:layout_height="wrap_content"
+        android:orientation="horizontal">
+        <TextView
+            android:layout_width="@dimen/size12"
+            android:layout_height="1dp"/>
+        <TextView
+            android:layout_width="match_parent"
+            android:layout_height="@dimen/size1"
+            android:background="@color/dividerColor"/>
+    </LinearLayout>
+
+    <!--委托查询-->
+    <RelativeLayout
+        android:id="@+id/rlFundQuery"
+        android:layout_width="match_parent"
+        android:layout_height="@dimen/size50">
+
+        <ImageView
+            android:id="@+id/ivFundQuery"
+            android:layout_width="wrap_content"
+            android:layout_height="wrap_content"
+            android:layout_centerVertical="true"
+            android:layout_marginLeft="@dimen/size12"
+            android:src="@mipmap/chaxunweituo"/>
+        <TextView
+            android:layout_width="wrap_content"
+            android:layout_height="wrap_content"
+            android:layout_centerVertical="true"
+            android:layout_toRightOf="@id/ivFundQuery"
+            android:layout_marginLeft="@dimen/size10"
+            android:text="@string/HuoBiJiJinWeiTuoChaXun"/>
+        <ImageView
+            android:layout_width="wrap_content"
+            android:layout_height="wrap_content"
+            android:layout_centerVertical="true"
+            android:layout_alignParentRight="true"
+            android:layout_marginRight="@dimen/size12"
+            android:src="@mipmap/youjiantou"/>
+
+    </RelativeLayout>
+
+    <!--分割线-->
+    <LinearLayout
+        android:layout_width="match_parent"
+        android:layout_height="wrap_content"
+        android:orientation="horizontal">
+        <TextView
+            android:layout_width="@dimen/size12"
+            android:layout_height="1dp"/>
+        <TextView
+            android:layout_width="match_parent"
+            android:layout_height="@dimen/size1"
+            android:background="@color/dividerColor"/>
+    </LinearLayout>
+
+    <!--撤单-->
+    <RelativeLayout
+        android:id="@+id/rlFundRevoke"
+        android:layout_width="match_parent"
+        android:layout_height="@dimen/size50">
+
+        <ImageView
+            android:id="@+id/ivFundRevoke"
+            android:layout_width="wrap_content"
+            android:layout_height="wrap_content"
+            android:layout_centerVertical="true"
+            android:layout_marginLeft="@dimen/size12"
+            android:src="@mipmap/huobijijinchedasn"/>
+        <TextView
+            android:layout_width="wrap_content"
+            android:layout_height="wrap_content"
+            android:layout_centerVertical="true"
+            android:layout_toRightOf="@id/ivFundRevoke"
+            android:layout_marginLeft="@dimen/size10"
+            android:text="@string/HuoBiJiCheDan"/>
+        <ImageView
+            android:layout_width="wrap_content"
+            android:layout_height="wrap_content"
+            android:layout_centerVertical="true"
+            android:layout_alignParentRight="true"
+            android:layout_marginRight="@dimen/size12"
+            android:src="@mipmap/youjiantou"/>
+
+    </RelativeLayout>
+
+</LinearLayout>

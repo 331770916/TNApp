@@ -57,35 +57,35 @@ public class RiskEvaluationActivity extends BaseActivity implements View.OnClick
 
     @Override
     public void initView() {
-        ResulttoConnect();
-
-        findViewById(R.id.AGpublish_back).setOnClickListener(this);
-        Anew = (LinearLayout) findViewById(R.id.Anew);
-        Answer = (LinearLayout) findViewById(R.id.Answer);
-        Result = (LinearLayout) findViewById(R.id.Result);
-        //风险测评表
-        mListView = (NoScrollListView) Answer.findViewById(R.id.mListView);
-        //提交
-        Affirm = (Button) Answer.findViewById(R.id.Affirm);
-        Affirm.setOnClickListener(this);
-        //风险评测结果
-        mType = (TextView) Result.findViewById(R.id.clasTextView);
-        mDate = (TextView) Result.findViewById(R.id.Date);
-        mRestart = (Button) Result.findViewById(R.id.Restart);
-        mYse = (Button) Result.findViewById(R.id.Yse);
-        mRestart.setOnClickListener(this);
-        mYse.setOnClickListener(this);
-        mRoundProgressBar = (RoundProgressBar) findViewById(R.id.RoundProgressBar);
-        mRoundProgressBar.setRoundWidth(15);
-        mRoundProgressBar1 = (RoundProgressBar) findViewById(R.id.RoundProgressBar1);
-        mRoundProgressBar1.setRoundWidth(15);
-        //风险等级查询
-        mResultTV = (TextView) Anew.findViewById(R.id.clasTextView1);
-        mResultTV1 = (TextView) Anew.findViewById(R.id.ResulTextView1);
-        mResulDate1 = (TextView) Anew.findViewById(R.id.ResulDate1);
-        mRestart1 = (Button) findViewById(R.id.Restart1);
-        mRestart1.setOnClickListener(this);
-        initData();
+//        ResulttoConnect();
+//
+//        findViewById(R.id.AGpublish_back).setOnClickListener(this);
+//        Anew = (LinearLayout) findViewById(R.id.Anew);
+//        Answer = (LinearLayout) findViewById(R.id.Answer);
+//        Result = (LinearLayout) findViewById(R.id.Result);
+//        //风险测评表
+//        mListView = (NoScrollListView) Answer.findViewById(R.id.mListView);
+//        //提交
+//        Affirm = (Button) Answer.findViewById(R.id.Affirm);
+//        Affirm.setOnClickListener(this);
+//        //风险评测结果
+//        mType = (TextView) Result.findViewById(R.id.clasTextView);
+//        mDate = (TextView) Result.findViewById(R.id.Date);
+//        mRestart = (Button) Result.findViewById(R.id.Restart);
+//        mYse = (Button) Result.findViewById(R.id.Yse);
+//        mRestart.setOnClickListener(this);
+//        mYse.setOnClickListener(this);
+//        mRoundProgressBar = (RoundProgressBar) findViewById(R.id.RoundProgressBar);
+//        mRoundProgressBar.setRoundWidth(15);
+//        mRoundProgressBar1 = (RoundProgressBar) findViewById(R.id.RoundProgressBar1);
+//        mRoundProgressBar1.setRoundWidth(15);
+//        //风险等级查询
+//        mResultTV = (TextView) Anew.findViewById(R.id.clasTextView1);
+//        mResultTV1 = (TextView) Anew.findViewById(R.id.ResulTextView1);
+//        mResulDate1 = (TextView) Anew.findViewById(R.id.ResulDate1);
+//        mRestart1 = (Button) findViewById(R.id.Restart1);
+//        mRestart1.setOnClickListener(this);
+//        initData();
     }
 
     /**
@@ -500,44 +500,44 @@ public class RiskEvaluationActivity extends BaseActivity implements View.OnClick
 
     @Override
     public void onClick(View v) {
-        switch (v.getId()) {
-            case R.id.AGpublish_back:
-                finish();
-                break;
-            case R.id.Affirm:
-                ResulttoConnect1();
-                Answer.setVisibility(View.GONE);
-                SubmittoConnect();
-                Result.setVisibility(View.VISIBLE);
-                break;
-            case R.id.Restart:
-                count = 0;
-                riskTableBeans.clear();
-                mPenalList.clear();
-                mSerialNumber.clear();
-                riskEvaluationAdapter.notifyDataSetChanged();
-                Answer.setVisibility(View.VISIBLE);
-                Result.setVisibility(View.GONE);
-                Affirm.setVisibility(View.INVISIBLE);
-                initData();
-                toConnect();
-                break;
-            case R.id.Yse:
-                finish();
-                break;
-            case R.id.Restart1:
-                count = 0;
-                riskTableBeans.clear();
-                mPenalList.clear();
-                mSerialNumber.clear();
-                Answer.setVisibility(View.VISIBLE);
-                Result.setVisibility(View.GONE);
-                Anew.setVisibility(View.GONE);
-                Affirm.setVisibility(View.INVISIBLE);
-                initData();
-                toConnect();
-                break;
-        }
+//        switch (v.getId()) {
+//            case R.id.AGpublish_back:
+//                finish();
+//                break;
+////            case R.id.Affirm:
+////                ResulttoConnect1();
+////                Answer.setVisibility(View.GONE);
+////                SubmittoConnect();
+////                Result.setVisibility(View.VISIBLE);
+////                break;
+////            case R.id.Restart:
+////                count = 0;
+////                riskTableBeans.clear();
+////                mPenalList.clear();
+////                mSerialNumber.clear();
+////                riskEvaluationAdapter.notifyDataSetChanged();
+////                Answer.setVisibility(View.VISIBLE);
+////                Result.setVisibility(View.GONE);
+////                Affirm.setVisibility(View.INVISIBLE);
+////                initData();
+////                toConnect();
+////                break;
+//            case R.id.Yse:
+//                finish();
+//                break;
+//            case R.id.Restart1:
+//                count = 0;
+//                riskTableBeans.clear();
+//                mPenalList.clear();
+//                mSerialNumber.clear();
+//                Answer.setVisibility(View.VISIBLE);
+//                Result.setVisibility(View.GONE);
+//                Anew.setVisibility(View.GONE);
+//                Affirm.setVisibility(View.INVISIBLE);
+//                initData();
+//                toConnect();
+//                break;
+//        }
     }
 
     /**
