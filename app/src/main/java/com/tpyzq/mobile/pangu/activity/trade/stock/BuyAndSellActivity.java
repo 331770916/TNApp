@@ -1008,7 +1008,8 @@ public class BuyAndSellActivity extends BaseActivity implements View.OnClickList
                 et_num.setText(amount + "");
                 break;
             case R.id.iv_add_sum:
-                if (!"----".equals(tv_sum.getText().toString()) && amount < Integer.valueOf(tv_sum.getText().toString())) {
+                String tvSumText = tv_sum.getText().toString();
+                if (!TextUtils.isEmpty(tvSumText) && Helper.isDecimal(tvSumText) && amount < Integer.valueOf(tvSumText)) {
                     amount += 100;
                     et_num.setText(amount + "");
                 } else {
