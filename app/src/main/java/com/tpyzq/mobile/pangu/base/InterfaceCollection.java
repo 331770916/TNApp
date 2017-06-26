@@ -1,5 +1,7 @@
 package com.tpyzq.mobile.pangu.base;
 
+import android.text.TextUtils;
+
 import com.tpyzq.mobile.pangu.data.ResultInfo;
 import com.tpyzq.mobile.pangu.data.StructuredFundEntity;
 import com.tpyzq.mobile.pangu.http.NetWorkUtil;
@@ -9,8 +11,6 @@ import com.zhy.http.okhttp.callback.StringCallback;
 import org.json.JSONArray;
 import org.json.JSONException;
 import org.json.JSONObject;
-
-import java.lang.reflect.Field;
 import java.util.ArrayList;
 import java.util.HashMap;
 import java.util.List;
@@ -22,6 +22,7 @@ import okhttp3.Call;
  * Created by ltyhome on 23/06/2017.
  * Email: ltyhome@yahoo.com.hk
  * Describe: Interface Manager
+ * 0 success -1 net error -2 json error -3 no data
  */
 public class InterfaceCollection {
     //网络请求类
@@ -69,7 +70,7 @@ public class InterfaceCollection {
      * @param stock_code 证券代码
      * @param TAG tag
      */
-    public void queryStructuredFund(String session, String stock_code, String TAG){
+    public void queryStructuredFund(String session, String stock_code, final String TAG){
         Map map1 = new HashMap<>();
         map1.put("funcid","300701");
         map1.put("token",session);
@@ -82,38 +83,47 @@ public class InterfaceCollection {
             public void onError(Call call, Exception e, int id) {
                 ResultInfo info = new ResultInfo();
                 info.setCode("-1");
-                info.setMsg(e.getMessage());
+                info.setMsg(ConstantUtil.NETWORK_ERROR);
+                info.setTag(TAG);
                 callback.callResult(info);
             }
 
             @Override
             public void onResponse(String response, int id) {
                 ResultInfo info = new ResultInfo();
-                try {
-                    JSONObject jsonObject = new JSONObject(response);
-                    String code = jsonObject.getString("code");
-                    String msg = jsonObject.getString("msg");
-                    info.setCode(code);
-                    info.setMsg(msg);
-                    if("0".equals(code)){
-                        List<StructuredFundEntity> ses = new ArrayList<>();
-                        JSONArray data = jsonObject.getJSONArray("data");
-                        for (int i = 0; i < data.length(); i++) {
-                            StructuredFundEntity bean = new StructuredFundEntity();
-                            JSONObject obj = data.getJSONObject(i);
-                            bean.setStoken_name(obj.getString("STOKEN_NAME"));
-                            bean.setMerge_amount(obj.getString("MERGE_AMOUNT"));
-                            bean.setSplit_amount(obj.getString("SPLIT_AMOUNT"));
-                            bean.setExchange_type(obj.getString("EXCHANGE_TYPE"));
-                            bean.setFund_status(obj.getString("FUND_STATUS"));
-                            bean.setStock_account(obj.getString("STOCK_ACCOUNT"));
-                            ses.add(bean);
+                if(TextUtils.isEmpty(response)){
+                    info.setCode("-3");
+                    info.setMsg(ConstantUtil.SERVICE_NO_DATA);
+                    info.setTag(TAG);
+                }else{
+                    try {
+                        JSONObject jsonObject = new JSONObject(response);
+                        String code = jsonObject.getString("code");
+                        String msg = jsonObject.getString("msg");
+                        info.setCode(code);
+                        info.setMsg(msg);
+                        info.setTag(TAG);
+                        if("0".equals(code)){
+                            List<StructuredFundEntity> ses = new ArrayList<>();
+                            JSONArray data = jsonObject.getJSONArray("data");
+                            for (int i = 0; i < data.length(); i++) {
+                                StructuredFundEntity bean = new StructuredFundEntity();
+                                JSONObject obj = data.getJSONObject(i);
+                                bean.setStoken_name(obj.getString("STOKEN_NAME"));
+                                bean.setMerge_amount(obj.getString("MERGE_AMOUNT"));
+                                bean.setSplit_amount(obj.getString("SPLIT_AMOUNT"));
+                                bean.setExchange_type(obj.getString("EXCHANGE_TYPE"));
+                                bean.setFund_status(obj.getString("FUND_STATUS"));
+                                bean.setStock_account(obj.getString("STOCK_ACCOUNT"));
+                                ses.add(bean);
+                            }
+                            info.setData(ses);
                         }
-                        info.setData(ses);
+                    } catch (JSONException e) {
+                        info.setCode("-2");
+                        info.setMsg(ConstantUtil.JSON_ERROR);
+                        info.setTag(TAG);
                     }
-                } catch (JSONException e) {
-                    info.setCode("-1");
-                    info.setMsg(e.getMessage());
                 }
                 callback.callResult(info);
             }
@@ -132,7 +142,7 @@ public class InterfaceCollection {
      * @param session token
      * @param TAG tag
      */
-    public void mergerStructuredFund(String sec_id,String exchange_type,String stock_account,String stock_code,int entrust_amount,String session,String TAG){
+    public void mergerStructuredFund(String sec_id,String exchange_type,String stock_account,String stock_code,int entrust_amount,String session,final String TAG){
         Map map1 = new HashMap<>();
         map1.put("funcid","300702");
         map1.put("token",session);
@@ -149,30 +159,39 @@ public class InterfaceCollection {
             public void onError(Call call, Exception e, int id) {
                 ResultInfo info = new ResultInfo();
                 info.setCode("-1");
-                info.setMsg(e.getMessage());
+                info.setMsg(ConstantUtil.NETWORK_ERROR);
+                info.setTag(TAG);
                 callback.callResult(info);
             }
 
             @Override
             public void onResponse(String response, int id) {
                 ResultInfo info = new ResultInfo();
-                try {
-                    JSONObject jsonObject = new JSONObject(response);
-                    String code = jsonObject.getString("code");
-                    String msg = jsonObject.getString("msg");
-                    info.setCode(code);
-                    info.setMsg(msg);
-                    if("0".equals(code)){
-                        JSONArray data = jsonObject.getJSONArray("data");
-                        StructuredFundEntity bean = new StructuredFundEntity();
-                        JSONObject obj = data.getJSONObject(0);
-                        bean.setInit_date(obj.getInt("INIT_DATE"));
-                        bean.setMerge_amount(obj.getString("ENTRUST_NO"));
-                        info.setData(bean);
+                if(TextUtils.isEmpty(response)){
+                    info.setCode("-3");
+                    info.setMsg(ConstantUtil.SERVICE_NO_DATA);
+                    info.setTag(TAG);
+                }else{
+                    try {
+                        JSONObject jsonObject = new JSONObject(response);
+                        String code = jsonObject.getString("code");
+                        String msg = jsonObject.getString("msg");
+                        info.setCode(code);
+                        info.setMsg(msg);
+                        info.setTag(TAG);
+                        if("0".equals(code)){
+                            JSONArray data = jsonObject.getJSONArray("data");
+                            StructuredFundEntity bean = new StructuredFundEntity();
+                            JSONObject obj = data.getJSONObject(0);
+                            bean.setInit_date(obj.getString("INIT_DATE"));
+                            bean.setMerge_amount(obj.getString("ENTRUST_NO"));
+                            info.setData(bean);
+                        }
+                    } catch (JSONException e) {
+                        info.setCode("-2");
+                        info.setMsg(ConstantUtil.JSON_ERROR);
+                        info.setTag(TAG);
                     }
-                } catch (JSONException e) {
-                    info.setCode("-1");
-                    info.setMsg(e.getMessage());
                 }
                 callback.callResult(info);
             }
@@ -191,7 +210,7 @@ public class InterfaceCollection {
      * @param session token
      * @param TAG tag
      */
-    public void splitStructuredFund(String sec_id,String exchange_type,String stock_account,String stock_code,int entrust_amount,String session,String TAG){
+    public void splitStructuredFund(String sec_id,String exchange_type,String stock_account,String stock_code,int entrust_amount,String session,final String TAG){
         Map map1 = new HashMap<>();
         map1.put("funcid","300703");
         map1.put("token",session);
@@ -208,30 +227,39 @@ public class InterfaceCollection {
             public void onError(Call call, Exception e, int id) {
                 ResultInfo info = new ResultInfo();
                 info.setCode("-1");
-                info.setMsg(e.getMessage());
+                info.setMsg(ConstantUtil.NETWORK_ERROR);
+                info.setTag(TAG);
                 callback.callResult(info);
             }
 
             @Override
             public void onResponse(String response, int id) {
                 ResultInfo info = new ResultInfo();
-                try {
-                    JSONObject jsonObject = new JSONObject(response);
-                    String code = jsonObject.getString("code");
-                    String msg = jsonObject.getString("msg");
-                    info.setCode(code);
-                    info.setMsg(msg);
-                    if("0".equals(code)){
-                        JSONArray data = jsonObject.getJSONArray("data");
-                        StructuredFundEntity bean = new StructuredFundEntity();
-                        JSONObject obj = data.getJSONObject(0);
-                        bean.setInit_date(obj.getInt("INIT_DATE"));
-                        bean.setMerge_amount(obj.getString("ENTRUST_NO"));
-                        info.setData(bean);
+                if(TextUtils.isEmpty(response)){
+                    info.setCode("-3");
+                    info.setMsg(ConstantUtil.SERVICE_NO_DATA);
+                    info.setTag(TAG);
+                }else{
+                    try {
+                        JSONObject jsonObject = new JSONObject(response);
+                        String code = jsonObject.getString("code");
+                        String msg = jsonObject.getString("msg");
+                        info.setCode(code);
+                        info.setMsg(msg);
+                        info.setTag(TAG);
+                        if("0".equals(code)){
+                            JSONArray data = jsonObject.getJSONArray("data");
+                            StructuredFundEntity bean = new StructuredFundEntity();
+                            JSONObject obj = data.getJSONObject(0);
+                            bean.setInit_date(obj.getString("INIT_DATE"));
+                            bean.setMerge_amount(obj.getString("ENTRUST_NO"));
+                            info.setData(bean);
+                        }
+                    } catch (JSONException e) {
+                        info.setCode("-2");
+                        info.setMsg(ConstantUtil.JSON_ERROR);
+                        info.setTag(TAG);
                     }
-                } catch (JSONException e) {
-                    info.setCode("-1");
-                    info.setMsg(e.getMessage());
                 }
                 callback.callResult(info);
             }
@@ -242,36 +270,28 @@ public class InterfaceCollection {
 
 
 
-    /**
-     * 给属性设置值
-     * @return object
-     */
-    public Object reflection(Object bean) throws IllegalAccessException{
-        Class clazz =  bean.getClass();
-        Field[] fs = clazz.getDeclaredFields();
-        for (int i = 0; i < fs.length; i++) {
-            Field f = fs[i];
-            f.setAccessible(true);
-            f.set(bean,"111") ;
-        }
-        return bean;
-    }
-
     public void getData(int size){
         ResultInfo info = new ResultInfo();
         info.setCode("0");
-        try {
-             List<StructuredFundEntity> ses = new ArrayList<>();
-             StructuredFundEntity entity;
+        List<StructuredFundEntity> ses = new ArrayList<>();
+         StructuredFundEntity entity;
              for (int i = 0; i < size; i++) {
-                 entity = (StructuredFundEntity) reflection(new StructuredFundEntity());
+                 entity = new StructuredFundEntity();
+                 entity.setStoken_name("证券分级");
+                 entity.setStocken_code("000888");
+                 entity.setBusiness_name("分级基金合并");
+                 entity.setEntrust_status("已报");
+                 entity.setReport_time("10:09:08");
+                 entity.setCurr_date("2017-08-08");
+                 entity.setEntrust_amount("10000");
+                 entity.setEntrust_balance("10000");
+                 entity.setInit_date("2017-09-18");
+                 entity.setBusiness_amount("10000");
+                 entity.setEntrust_no("23456887387");
+                 entity.setSerial_no("10000");
                  ses.add(entity);
              }
-            info.setData(ses);
-        }catch (Exception e){
-            info.setCode("-1");
-            info.setMsg(e.getMessage());
-        }
+        info.setData(ses);
         callback.callResult(info);
     }
 

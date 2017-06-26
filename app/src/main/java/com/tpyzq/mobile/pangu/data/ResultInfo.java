@@ -11,6 +11,7 @@ package com.tpyzq.mobile.pangu.data;
 public class ResultInfo {
    private String code;//0成功  -1失败
    private String msg;//信息
+   private String tag;//标记
    private Object data;//数据
 
    public String getCode(){
@@ -27,6 +28,14 @@ public class ResultInfo {
 
     public void setMsg(String msg) {
         this.msg = msg;
+    }
+
+    public String getTag() {
+        return tag;
+    }
+
+    public void setTag(String tag) {
+        this.tag = tag;
     }
 
     public void setData(Object data) {

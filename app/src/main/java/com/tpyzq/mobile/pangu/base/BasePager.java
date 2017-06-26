@@ -20,6 +20,7 @@ public abstract class BasePager {
     public Helper helper;
     public SkipUtils skip;
     public NetWorkUtil net;
+    public int type;
 
     public BasePager(Context context, String params){
         this.mContext = context;
@@ -29,6 +30,14 @@ public abstract class BasePager {
         skip = SkipUtils.getInstance();
         helper = Helper.getInstance();
         setView(params);
+    }
+
+    public void setType(int type){
+        this.type = type;
+    }
+
+    public int getType() {
+        return type;
     }
 
     public abstract void setView(String params);

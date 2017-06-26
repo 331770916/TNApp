@@ -37,7 +37,7 @@ import java.util.List;
 /**
  * Created by ltyhome on 23/06/2017.
  * Email: ltyhome@yahoo.com.hk
- * Describe: entrust query 委托查询类
+ * Describe: entrust query 委托查询类0
  */
 
 public class FJEntrustedQueryActivity extends BaseActivity implements View.OnClickListener{
@@ -112,18 +112,19 @@ public class FJEntrustedQueryActivity extends BaseActivity implements View.OnCli
             }
         });
         magicIndicator.setNavigator(commonNavigator);
-        ViewPagerHelper.bind(magicIndicator, viewPager);
-        todayPager = new FJEntrustDealQueryPager(this,"今日");
+        ViewPagerHelper.bind(magicIndicator, viewPager);//TAG EntrustTodayPager...
+        todayPager = new FJEntrustDealQueryPager(this,"EntrustTodayPager");
         listBuy.add(todayPager);
-        oneWeekPager = new FJEntrustDealQueryPager(this,"一周内");
+        oneWeekPager = new FJEntrustDealQueryPager(this,"EntrustOneWeekPager");
         listBuy.add(oneWeekPager);
-        inAMonthPager = new FJEntrustDealQueryPager(this,"一月内");
+        inAMonthPager = new FJEntrustDealQueryPager(this,"EntrustInAMonthPager");
         listBuy.add(inAMonthPager);
-        threeWeekPager = new FJEntrustDealQueryPager(this,"三月内");
+        threeWeekPager = new FJEntrustDealQueryPager(this,"EntrustThreeWeekPager");
         listBuy.add(threeWeekPager);
-        customPager = new FJEntrustDealQueryPager(this,"自定义");
+        customPager = new FJEntrustDealQueryPager(this,"EntrustCustomPager");
         listBuy.add(customPager);
-        viewPager.setAdapter(new FJEntrustedDealAdapter(listBuy));
+        viewPager.setAdapter(new FJEntrustedDealAdapter(listBuy,0));
+        todayPager.initData();
         viewPager.setOnPageChangeListener(new ViewPager.OnPageChangeListener() {
             @Override
             public void onPageScrolled(int position, float positionOffset, int positionOffsetPixels) {

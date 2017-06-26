@@ -17,8 +17,10 @@ public class FJEntrustedDealAdapter extends PagerAdapter {
 
     private List<BasePager> pagers;
 
-    public FJEntrustedDealAdapter(List<BasePager> pagers) {
+    public FJEntrustedDealAdapter(List<BasePager> pagers,int type) {
         this.pagers = pagers;
+        for (int i = 0;i < pagers.size();i++)
+            pagers.get(i).setType(type);
     }
 
     @Override
