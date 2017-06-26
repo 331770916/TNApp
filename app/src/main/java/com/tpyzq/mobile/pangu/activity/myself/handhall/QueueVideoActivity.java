@@ -124,6 +124,11 @@ public class QueueVideoActivity extends BaseActivity implements View.OnClickList
                     public void onPositiveClick() {
                         exitQueue();
                     }
+
+                    @Override
+                    public void onNagtiveClick() {
+
+                    }
                 });
                 break;
         }
@@ -185,6 +190,11 @@ public class QueueVideoActivity extends BaseActivity implements View.OnClickList
                 @Override
                 public void onPositiveClick() {
                     exitQueue();
+                }
+
+                @Override
+                public void onNagtiveClick() {
+
                 }
             });
 

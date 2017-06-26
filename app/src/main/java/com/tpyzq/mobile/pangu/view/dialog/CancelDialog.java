@@ -1,6 +1,7 @@
 package com.tpyzq.mobile.pangu.view.dialog;
 
 import android.app.Activity;
+import android.content.Context;
 import android.os.Build;
 import android.support.v7.app.AlertDialog;
 import android.text.Html;
@@ -8,9 +9,14 @@ import android.text.TextUtils;
 import android.view.Gravity;
 import android.view.LayoutInflater;
 import android.view.View;
+import android.view.ViewGroup;
+import android.view.WindowManager;
+import android.widget.LinearLayout;
 import android.widget.TextView;
 
 import com.tpyzq.mobile.pangu.R;
+import com.tpyzq.mobile.pangu.base.CustomApplication;
+import com.tpyzq.mobile.pangu.util.Helper;
 
 /**
  * Created by zhangwenbo on 2017/5/18.
@@ -35,7 +41,7 @@ public class CancelDialog {
             case RISK_SOONEXPIRE:
                 positiveBtn.setText("现在测评");
                 nagtiveBtn.setText("以后再说");
-
+                view.findViewById(R.id.view_flag).setVisibility(View.GONE);
                 tv_message.setText(Html.fromHtml("<html><body> <p>尊敬的客户：</p>" +
                         "<p style='text-indent:2em'>您的风险承受能力评估结果即将过期，到期<br/>日期为"+ message +"，请重新测评。</p>" +
                         "</body></html>"));
@@ -43,7 +49,7 @@ public class CancelDialog {
             case RISK_EXPIRE:
                 positiveBtn.setText("现在测评");
                 nagtiveBtn.setText("以后再说");
-
+                view.findViewById(R.id.view_flag).setVisibility(View.GONE);
                 tv_message.setText(Html.fromHtml("<html><body> <p>尊敬的客户：</p>" +
                         "<p style='text-indent:2em'>您的风险承受能力评估结果已过期，到期<br/>日期为"+ message +"，请重新测评。</p>" +
                         "</body></html>"));
@@ -51,7 +57,7 @@ public class CancelDialog {
             case RISK_NOT:
                 positiveBtn.setText("现在测评");
                 nagtiveBtn.setText("以后再说");
-
+                view.findViewById(R.id.view_flag).setVisibility(View.GONE);
                 tv_message.setText(Html.fromHtml("<html><body> <p>尊敬的客户：</p>" +
                         "<p style=‘text-indent:2em’>您尚未填写《投资者风险承受能力问卷》。</p>" +
                         "<p style=’text-indent:2em‘>根据投资者适当性管理规则，要求风险承受<br/>能力必须与产品相匹配。</p>" +
@@ -59,19 +65,32 @@ public class CancelDialog {
                         "</body></html>"));
                 break;
             case NOT_BUY:
+
+                LinearLayout.LayoutParams layoutParams = new LinearLayout.LayoutParams(ViewGroup.LayoutParams.MATCH_PARENT, ViewGroup.LayoutParams.WRAP_CONTENT);
+                WindowManager wm = (WindowManager) activity.getSystemService(Context.WINDOW_SERVICE);
+                int width = wm.getDefaultDisplay().getWidth();
+                layoutParams.width = width/3;
+                int margin = Helper.dip2px(CustomApplication.getContext(), 10);
+                layoutParams.setMargins(0, margin, 0, margin);
+                positiveBtn.setLayoutParams(layoutParams);
+                view.findViewById(R.id.view_flag).setVisibility(View.GONE);
                 view.findViewById(R.id.cancel_dialog_nagtiveBtn).setVisibility(View.GONE);
                 tv_message.setText(Html.fromHtml("<html><body><p>尊敬的客户：</p>" +
                         "<p style='text-indent:2em'>根据您的风险承受能力等级评测，您选择的</br>产品与您的风险承受能力等级不匹配，您不能购</br>买此产品。</p>" +
                         "</body></html>"));
                 break;
             default:
+                LinearLayout.LayoutParams layoutParams1 = new LinearLayout.LayoutParams(ViewGroup.LayoutParams.MATCH_PARENT, ViewGroup.LayoutParams.WRAP_CONTENT);
+                int margin1 = Helper.dip2px(CustomApplication.getContext(), 20);
+                layoutParams1.setMargins(margin1, margin1, margin1, margin1);
+                tv_message.setLayoutParams(layoutParams1);
                 tv_message.setGravity(Gravity.CENTER);
                 tv_message.setText(message);
                 break;
         }
 
 
-        view.findViewById(R.id.cancel_dialog_positiveBtn).setOnClickListener(new View.OnClickListener() {
+        positiveBtn.setOnClickListener(new View.OnClickListener() {
             @Override
             public void onClick(View v) {
                 if (clickListener == null) {
@@ -90,23 +109,23 @@ public class CancelDialog {
             }
         });
 
-        view.findViewById(R.id.cancel_dialog_nagtiveBtn).setOnClickListener(new View.OnClickListener() {
+        nagtiveBtn.setOnClickListener(new View.OnClickListener() {
             @Override
             public void onClick(View v) {
-                alertDialog.dismiss();
+
+                if (clickListener == null) {
+                    alertDialog.dismiss();
+                } else {
+                    clickListener.onNagtiveClick();
+                    alertDialog.dismiss();
+
+                }
             }
         });
 
         alertDialog.setView(view);
         alertDialog.setCancelable(false);
         alertDialog.show();
-    }
-
-    /**
-     * 风险测评即将到期dialog
-     */
-    private static void soonexpireDialog() {
-
     }
 
     public static void cancleDialog(final Activity activity, String message, final PositiveClickListener clickListener){
@@ -127,6 +146,8 @@ public class CancelDialog {
 
     public interface PositiveClickListener {
         public void onPositiveClick();
+
+        public void onNagtiveClick();
     }
 
 }
