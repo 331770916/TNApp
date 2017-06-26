@@ -124,10 +124,14 @@
             </intent-filter>
             <intent-filter>
                 <!--h5调用app 协议部分-->
-                <action android:name="android.intent.action.VIEW"/>
+                <action android:name="android.intent.action.VIEW" />
+
                 <category android:name="android.intent.category.DEFAULT" />
-                <category android:name="android.intent.category.BROWSABLE"/>
-                <data android:host="my.com" android:scheme="m" />
+                <category android:name="android.intent.category.BROWSABLE" />
+
+                <data
+                    android:host="my.com"
+                    android:scheme="m" />
             </intent-filter>
         </activity>
         <activity
@@ -150,8 +154,12 @@
         <activity android:name=".activity.home.LovingHeartActivity" />
         <!-- 预约 相关activity -->
         <activity android:name=".activity.home.managerMoney.product.precontract.AlreadyReservationActivity" />
-        <activity android:name=".activity.home.managerMoney.product.precontract.PrecontractFlowActivity" android:label=""/>
-        <activity android:name=".activity.home.managerMoney.product.precontract.ProductPrecontractActivity"  android:label=""/>
+        <activity
+            android:name=".activity.home.managerMoney.product.precontract.PrecontractFlowActivity"
+            android:label="" />
+        <activity
+            android:name=".activity.home.managerMoney.product.precontract.ProductPrecontractActivity"
+            android:label="" />
         <activity android:name=".activity.home.managerMoney.product.precontract.ProductTransferActivity" />
         <activity android:name=".activity.home.managerMoney.product.precontract.ReservationSuccessActivity" />
         <!-- 资讯 相关activity -->
@@ -202,7 +210,7 @@
         <activity android:name=".activity.myself.account.RefreshSpeedActivity" />
         <activity android:name=".activity.myself.account.SettingActivity" />
         <activity android:name=".activity.myself.account.SpeedTestActivity" />
-        <activity android:name=".activity.myself.account.SpeedJYActivity"/>
+        <activity android:name=".activity.myself.account.SpeedJYActivity" />
         <activity android:name=".activity.myself.account.StockBillActivity" />
         <activity android:name=".activity.myself.account.StockRecallActivity" />
         <activity android:name=".activity.myself.account.TradingDynamicsActivity" />
@@ -224,8 +232,8 @@
         <activity android:name=".activity.myself.handhall.RiskEvaluationActivity" />
         <activity android:name=".activity.myself.handhall.RiskWarningActivity" />
         <activity android:name=".activity.myself.handhall.StockHolderInfoActivity" />
-        <activity android:name=".activity.myself.handhall.UpdateIdCodeValidityActivity"/>
-        <activity android:name=".activity.myself.handhall.UpLoadIdCardPicActivity"/>
+        <activity android:name=".activity.myself.handhall.UpdateIdCodeValidityActivity" />
+        <activity android:name=".activity.myself.handhall.UpLoadIdCardPicActivity" />
 
         <!-- open_fund 基金相关activity -->
         <activity android:name=".activity.trade.open_fund.AccoundSearchActivity" />
@@ -308,20 +316,28 @@
         <activity android:name=".activity.trade.stock.QueryLimitActivity" />
         <activity android:name=".activity.trade.stock.ReferActivity" />
         <activity android:name=".activity.trade.stock.RevokeActivity" />
-        <activity android:name=".activity.trade.stock.ReverseRepoActivity"/>
-        <activity android:name=".activity.trade.stock.ReverseRepoGuideActivity"/>
+        <activity android:name=".activity.trade.stock.ReverseRepoActivity" />
+        <activity android:name=".activity.trade.stock.ReverseRepoGuideActivity" />
         <activity android:name=".activity.trade.stock.SubscribeRuleActivity" />
         <activity android:name=".activity.trade.stock.TakeAPositionActivity" />
-        <activity android:name=".activity.trade.stock.TraChooseBreedActivity"/>
+        <activity android:name=".activity.trade.stock.TraChooseBreedActivity" />
         <activity android:name=".activity.trade.stock.TranMoreActivity" />
-        <activity android:name=".activity.trade.stock.StructuredFundActivity"/>
+        <activity android:name=".activity.trade.stock.StructuredFundActivity" />
+        <activity android:name=".activity.trade.stock.FJFundGradingMergerActivity" />
+        <activity android:name=".activity.trade.stock.FJFundChooseActivity" />
+        <activity android:name=".activity.trade.stock.FJFundSplitActivity" />
+        <activity android:name=".activity.trade.stock.FJWithdrawOrderActivity" />
+        <activity android:name=".activity.trade.stock.FJEntrustedQueryActivity" />
+        <activity android:name=".activity.trade.stock.FJDealQueryActivity" />
+
+
         <!--行情 相关activity-->
         <activity android:name=".activity.market.quotation.plate.PlateListActivity" />
         <activity android:name=".activity.market.quotation.StockListActivity" />
         <activity android:name=".activity.market.quotation.newstock.NewStockListActivity" />
-        <activity android:name=".activity.market.selfChoice.editorSelfChoiceStock.EditorSelfChoiceStockActivity"/>
-        <activity android:name=".activity.market.selfChoice.childNews.newsdetail.NewsDetailListActivity"/>
-        <activity android:name=".activity.market.selfChoice.editorSelfChoiceStock.remain.RemainActivity"/>
+        <activity android:name=".activity.market.selfChoice.editorSelfChoiceStock.EditorSelfChoiceStockActivity" />
+        <activity android:name=".activity.market.selfChoice.childNews.newsdetail.NewsDetailListActivity" />
+        <activity android:name=".activity.market.selfChoice.editorSelfChoiceStock.remain.RemainActivity" />
         <activity android:name=".activity.market.quotation.plate.PlateIndexActivity" />
 
         <receiver android:name=".activity.market.selfChoice.childNews.SelfNewsReiver">
