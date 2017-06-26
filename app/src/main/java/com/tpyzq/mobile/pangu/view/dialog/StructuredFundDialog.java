@@ -3,6 +3,7 @@ package com.tpyzq.mobile.pangu.view.dialog;
 import android.content.Context;
 import android.graphics.drawable.Drawable;
 import android.view.View;
+import android.widget.ImageView;
 import android.widget.TextView;
 
 import com.moxun.tagcloudlib.view.Tag;
@@ -29,6 +30,7 @@ public class StructuredFundDialog extends BaseDialog implements View.OnClickList
     private TextView tv_6;
     private TextView tv_8;
     private TextView tv_10;
+    private ImageView img_1;
 
     private Expression mExpression;
     private StructuredFundEntity mStructuredFundEntity;
@@ -46,6 +48,7 @@ public class StructuredFundDialog extends BaseDialog implements View.OnClickList
 
     @Override
     public void setView() {
+        img_1 = (ImageView) findViewById(R.id.bank_img);
         tv_title = (TextView) findViewById(R.id.tv_title);
         tv_2 = (TextView) findViewById(R.id.tv_2);
         tv_4 = (TextView) findViewById(R.id.tv_4);
@@ -67,6 +70,7 @@ public class StructuredFundDialog extends BaseDialog implements View.OnClickList
     public void initData() {
         tv_5.setText(context.getString(R.string.securities_name) + "：");
         if (FJFundGradingMergerActivity.TAG.equals(mTAG)) {
+            img_1.setImageResource(R.mipmap.xinxiqueren);
             tv_title.setText(R.string.Gradingfundmerger);
             tv_2.setText(R.string.Gradingfundmerger);
             tv_4.setText(mInput);
@@ -74,6 +78,7 @@ public class StructuredFundDialog extends BaseDialog implements View.OnClickList
             tv_8.setText(mShare);
             tv_10.setText("");
         } else if (FJFundSplitActivity.TAG.equals(mTAG)) {
+            img_1.setImageResource(R.mipmap.xinxiqueren);
             tv_title.setText(R.string.FJFundSplitActivity);
             tv_2.setText(R.string.FJFundSplitActivity);
             tv_4.setText(mInput);
@@ -81,11 +86,7 @@ public class StructuredFundDialog extends BaseDialog implements View.OnClickList
             tv_8.setText(mShare);
             tv_10.setText("");
         } else if (FJWithdrawOrderActivity.TAG.equals(mTAG)) {
-            Drawable leftDrawable = context.getResources().getDrawable(R.mipmap.bank_img);
-            leftDrawable.setBounds(0, 0, leftDrawable.getIntrinsicWidth(), leftDrawable.getMinimumHeight());
-            tv_title.setCompoundDrawables(leftDrawable, null, null, null);
-            tv_title.setCompoundDrawablePadding(9);//设置图片和text之间的间距
-            tv_title.setPadding(9, 0, 0, 0);
+            img_1.setImageResource(R.mipmap.bank_img);
             tv_title.setText(R.string.IsRecall);
             tv_2.setText(R.string.Gradingfundmerger);
             tv_4.setText(mInput);
