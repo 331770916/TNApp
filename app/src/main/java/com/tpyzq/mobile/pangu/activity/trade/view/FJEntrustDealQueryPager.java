@@ -197,13 +197,23 @@ public class FJEntrustDealQueryPager extends BasePager implements InterfaceColle
                         listView.getLoadingLayoutProxy().setRefreshingLabel("正在刷新");
                         listView.getLoadingLayoutProxy().setPullLabel("下拉刷新数据");
                         listView.getLoadingLayoutProxy().setReleaseLabel("释放开始刷新");
-                        SystemClock.sleep(1500);
+                        listView.post(new Runnable() {
+                            @Override
+                            public void run() {
+                                SystemClock.sleep(1500);
+                            }
+                        });
                         refresh("",String.valueOf(refresh),false);
                     }else if (listView.isShownFooter()){
                         listView.getLoadingLayoutProxy().setRefreshingLabel("正在刷新");
                         listView.getLoadingLayoutProxy().setPullLabel("上拉加载数据");
                         listView.getLoadingLayoutProxy().setReleaseLabel("释放开始刷新");
-                        SystemClock.sleep(1500);
+                        listView.post(new Runnable() {
+                            @Override
+                            public void run() {
+                                SystemClock.sleep(1500);
+                            }
+                        });
                         refresh(position,"30",true);
                     }
                 }
