@@ -53,6 +53,63 @@ public class InterfaceCollection {
         void callResult(ResultInfo info);
     }
 
+
+    /**
+     * 300200
+     * 分级基金 选择基金
+     * @param session  token
+     * @param TAG      tag
+     */
+    public void Fundchoice(String session, final String TAG,final InterfaceCallback callback){
+        HashMap map = new HashMap();
+        map.put("funcid", "300200");
+        map.put("token", session);
+        HashMap hashMap = new HashMap();
+        hashMap.put("FLAG", "true");
+        hashMap.put("SEC_ID", "tpyzq");
+        map.put("parms", hashMap);
+        NetWorkUtil.getInstence().okHttpForPostString(TAG, ConstantUtil.URL_JY, map, new StringCallback() {
+            @Override
+            public void onError(Call call, Exception e, int id) {
+                ResultInfo info = new ResultInfo();
+                info.setCode("-1");
+                info.setMsg(e.getMessage());
+                info.setTag(TAG);
+                callback.callResult(info);
+            }
+
+            @Override
+            public void onResponse(String response, int id) {
+                ResultInfo info = new ResultInfo();
+                try {
+                    JSONObject jsonObject=new JSONObject(response);
+                    String code = jsonObject.getString("code");
+                    String msg = jsonObject.getString("msg");
+                    info.setCode(code);
+                    info.setMsg(msg);
+                    if ("0".equals(code)){
+                        List<StructuredFundEntity> list=new ArrayList<StructuredFundEntity>();
+                        JSONArray data = jsonObject.getJSONArray("data");
+                        for (int i = 0; i < data.length(); i++) {
+                            StructuredFundEntity bean = new StructuredFundEntity();
+                            bean.setStocken_code(data.getJSONObject(i).getString("SECU_CODE"));
+                            bean.setMarket(data.getJSONObject(i).getString("MARKET"));
+                            bean.setStoken_name(data.getJSONObject(i).getString("SECU_NAME"));
+                            list.add(bean);
+                        }
+                        info.setData(list);
+                    }
+                } catch (JSONException e) {
+                    info.setCode("-1");
+                    info.setMsg(e.getMessage());
+                }
+                callback.callResult(info);
+            }
+        });
+    }
+
+
+
     /**
      * 300701
      * 分级基金信息查询
@@ -132,7 +189,7 @@ public class InterfaceCollection {
      * @param session token
      * @param TAG tag
      */
-    public void mergerStructuredFund(String sec_id,String exchange_type,String stock_account,String stock_code,int entrust_amount,String session,final String TAG,final InterfaceCallback callback){
+    public void mergerStructuredFund(String sec_id,String exchange_type,String stock_account,String stock_code,String  entrust_amount,String session,final String TAG,final InterfaceCallback callback){
         Map map1 = new HashMap<>();
         map1.put("funcid","300702");
         map1.put("token",session);
@@ -200,7 +257,7 @@ public class InterfaceCollection {
      * @param session token
      * @param TAG tag
      */
-    public void splitStructuredFund(String sec_id,String exchange_type,String stock_account,String stock_code,int entrust_amount,String session,final String TAG,final InterfaceCallback callback){
+    public void splitStructuredFund(String sec_id,String exchange_type,String stock_account,String stock_code,String  entrust_amount,String session,final String TAG,final InterfaceCallback callback){
         Map map1 = new HashMap<>();
         map1.put("funcid","300703");
         map1.put("token",session);
