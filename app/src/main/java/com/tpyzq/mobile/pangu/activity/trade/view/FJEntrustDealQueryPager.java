@@ -82,8 +82,7 @@ public class FJEntrustDealQueryPager extends BasePager implements InterfaceColle
             mAdapter.setCallback(this);
             listView.setAdapter(mAdapter);
             listView.setEmptyView(iv_isEmpty);
-            ifc.setInterfaceCallback(this);
-            ifc.getData(20);
+            ifc.getData(20,this);
             listView.setOnRefreshListener(new PullToRefreshBase.OnRefreshListener<ListView>(){
                 @Override
                 public void onRefresh(PullToRefreshBase<ListView> refreshView) {
@@ -92,13 +91,13 @@ public class FJEntrustDealQueryPager extends BasePager implements InterfaceColle
                         listView.getLoadingLayoutProxy().setPullLabel("下拉刷新数据");
                         listView.getLoadingLayoutProxy().setReleaseLabel("释放开始刷新");
                         SystemClock.sleep(1500);
-                        ifc.getData(20);
+                        ifc.getData(20,FJEntrustDealQueryPager.this);
                     }else if (listView.isShownFooter()){
                         listView.getLoadingLayoutProxy().setRefreshingLabel("正在刷新");
                         listView.getLoadingLayoutProxy().setPullLabel("上拉加载数据");
                         listView.getLoadingLayoutProxy().setReleaseLabel("释放开始刷新");
                         SystemClock.sleep(1500);
-                        ifc.getData(20);
+                        ifc.getData(20,FJEntrustDealQueryPager.this);
                     }
                 }
             });
