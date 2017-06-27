@@ -105,7 +105,7 @@ public class FJFundGradingMergerActivity extends BaseActivity implements View.On
         if (!this.isFinishing()) {
             mDialog.show();
         }
-        ifc.queryStructuredFund(mSession, stocken_code, TAG,this);
+        ifc.queryStructuredFund(mSession, stocken_code, TAG, this);
     }
 
 
@@ -171,12 +171,13 @@ public class FJFundGradingMergerActivity extends BaseActivity implements View.On
 
     @Override
     public boolean onKeyDown(int keyCode, KeyEvent event) {
-        if (keyCode == KeyEvent.KEYCODE_BACK && mDialog.isShowing()) {
-            mDialog.dismiss();
-        } else {
+        if (keyCode == KeyEvent.KEYCODE_BACK) {
+            if (mDialog != null && mDialog.isShowing()) {
+                mDialog.dismiss();
+            }
             finish();
         }
-        return super.onKeyDown(keyCode, event);
+        return false;
     }
 
     /**
