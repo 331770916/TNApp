@@ -135,7 +135,7 @@ public class InterfaceCollection {
         map1.put("funcid","300701");
         map1.put("token",session);
         Map map2 = new HashMap<>();
-        map2.put("FLAG", "ture");
+        map2.put("FLAG", "true");
         map2.put("SEC_ID", "tpyzq");
         map2.put("STOCK_CODE",stock_code);
         map1.put("parms",map2);
@@ -171,7 +171,7 @@ public class InterfaceCollection {
                             for (int i = 0; i < data.length(); i++) {
                                 StructuredFundEntity bean = new StructuredFundEntity();
                                 JSONObject obj = data.getJSONObject(i);
-                                bean.setStoken_name(obj.getString("STOKEN_NAME"));
+                                bean.setStoken_name(obj.getString("STOCK_NAME"));
                                 bean.setMerge_amount(obj.getString("MERGE_AMOUNT"));
                                 bean.setSplit_amount(obj.getString("SPLIT_AMOUNT"));
                                 bean.setExchange_type(obj.getString("EXCHANGE_TYPE"));

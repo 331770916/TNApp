@@ -135,16 +135,6 @@ public class FJFundGradingMergerActivity extends BaseActivity implements View.On
             mStatements_tv.setText(bean.getFund_status());
             mCnExpendableFundValue_tv.setText(bean.getMerge_amount());
 
-
-            bean = new StructuredFundEntity();
-            bean.setStoken_name("测试");
-            bean.setMerge_amount("1200");
-            bean.setFund_status("测试");
-            mCnFundNameValue_tv.setText("测试");
-            mCnFundNetValueValue_tv.setText(bean.getStoken_name());
-            mStatements_tv.setText(bean.getFund_status());
-            mCnExpendableFundValue_tv.setText(bean.getMerge_amount());
-
         } else if ("-1".equals(info.getCode()) || "-2".equals(info.getCode()) || "-3".equals(info.getCode())) {
             Helper.getInstance().showToast(this, info.getMsg());
             factoryReset();
