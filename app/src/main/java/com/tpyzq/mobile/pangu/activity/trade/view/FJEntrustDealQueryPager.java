@@ -106,13 +106,13 @@ public class FJEntrustDealQueryPager extends BasePager implements InterfaceColle
         @Override
         public void onClick(View view) {
             switch (view.getId()) {
-                case R.id.ClinchStartDate:
+                case R.id.fjstartDate:
                     startTime.show();
                     break;
-                case R.id.ClinchFinishDate:
+                case R.id.fjfinishDate:
                     finishTime.show();
                     break;
-                case R.id.ClinchInquire:
+                case R.id.fjInquire:
                     startDate = helper.getMyDate(mtvStartTime.getText().toString());
                     finishDate = helper.getMyDate(mtvFinishTime.getText().toString());
                     if (!TextUtils.isEmpty(startDate) && !TextUtils.isEmpty(finishDate)) {
@@ -124,7 +124,6 @@ public class FJEntrustDealQueryPager extends BasePager implements InterfaceColle
                             mistakeDialog = MistakeDialog.showDialog("选择的日期间隔不能超过3个月", (Activity) mContext);
                         } else {
                             mDialog.show();
-                            myList.clear();
                             mAdapter.notifyDataSetChanged();
                             refresh(position, "30", false);
                         }
@@ -277,7 +276,6 @@ public class FJEntrustDealQueryPager extends BasePager implements InterfaceColle
             mDialog.dismiss();
             mDialog = null;
         }
-        mAdapter.setCallback(null);
         mAdapter = null;
         listView.removeAllViews();
         listView = null;
