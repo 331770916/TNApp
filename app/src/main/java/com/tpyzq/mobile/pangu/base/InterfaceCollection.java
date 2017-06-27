@@ -3,6 +3,7 @@ package com.tpyzq.mobile.pangu.base;
 import android.text.TextUtils;
 
 import com.google.gson.Gson;
+import com.tpyzq.mobile.pangu.data.NetworkVotingEntity;
 import com.tpyzq.mobile.pangu.data.ResultInfo;
 import com.tpyzq.mobile.pangu.data.StructuredFundEntity;
 import com.tpyzq.mobile.pangu.http.NetWorkUtil;
@@ -135,6 +136,7 @@ public class InterfaceCollection {
         map1.put("token",session);
         Map map2 = new HashMap<>();
         map2.put("FLAG", "ture");
+        map2.put("SEC_ID", "tpyzq");
         map2.put("STOCK_CODE",stock_code);
         map1.put("parms",map2);
        String A=new Gson().toJson(map1);
@@ -756,14 +758,22 @@ public class InterfaceCollection {
                         info.setMsg(msg);
                         info.setTag(TAG);
                         if("0".equals(code)){
-//                            List<StructuredFundEntity> ses = new ArrayList<>();
-//                            JSONArray data = jsonObject.getJSONArray("data");
-//                            for (int i = 0; i < data.length(); i++) {
-//                                StructuredFundEntity bean = new StructuredFundEntity();
-//                                JSONObject obj = data.getJSONObject(i);
-//                                ses.add(bean);
-//                            }
-//                            info.setData(ses);
+                            List<NetworkVotingEntity> ses = new ArrayList<>();
+                            JSONArray data = jsonObject.getJSONArray("data");
+                            for (int i = 0; i < data.length(); i++) {
+                                NetworkVotingEntity bean = new NetworkVotingEntity();
+                                JSONObject obj = data.getJSONObject(i);
+                                bean.setMeeting_name(obj.getString("MEETING_NAME"));
+                                bean.setMeeting_seq(obj.getString("MEETING_SEQ"));
+                                bean.setCompany_name(obj.getString("COMPANY_NAME"));
+                                bean.setCompany_code(obj.getString("COMPANY_CODE"));
+                                bean.setBegin_date(obj.getString("BEGIN_DATE"));
+                                bean.setEnd_date(obj.getString("END_DATE"));
+                                bean.setInit_date(obj.getString("INIT_DATE"));
+                                bean.setPosition_str(obj.getString("POSITION_STR"));
+                                ses.add(bean);
+                            }
+                            info.setData(ses);
                         }
                     } catch (JSONException e) {
                         info.setCode("-2");
@@ -819,14 +829,20 @@ public class InterfaceCollection {
                         info.setMsg(msg);
                         info.setTag(TAG);
                         if("0".equals(code)){
-//                            List<StructuredFundEntity> ses = new ArrayList<>();
-//                            JSONArray data = jsonObject.getJSONArray("data");
-//                            for (int i = 0; i < data.length(); i++) {
-//                                StructuredFundEntity bean = new StructuredFundEntity();
-//                                JSONObject obj = data.getJSONObject(i);
-//                                ses.add(bean);
-//                            }
-//                            info.setData(ses);
+                            List<NetworkVotingEntity> ses = new ArrayList<>();
+                            JSONArray data = jsonObject.getJSONArray("data");
+                            for (int i = 0; i < data.length(); i++) {
+                                NetworkVotingEntity bean = new NetworkVotingEntity();
+                                JSONObject obj = data.getJSONObject(i);
+                                bean.setInit_date(obj.getString("INIT_DATE"));
+                                bean.setVote_motion(obj.getString("VOTE_MOTION"));
+                                bean.setVote_info(obj.getString("VOTE_INFO"));
+                                bean.setVote_type(obj.getString("VOTE_TYPE"));
+                                bean.setVote_numcontrol(obj.getString("VOTE_NUMCONTROL"));
+                                bean.setMeeting_seq(obj.getString("MEETING_SEQ"));
+                                ses.add(bean);
+                            }
+                            info.setData(ses);
                         }
                     } catch (JSONException e) {
                         info.setCode("-2");
@@ -943,14 +959,21 @@ public class InterfaceCollection {
                         info.setMsg(msg);
                         info.setTag(TAG);
                         if("0".equals(code)){
-//                            List<StructuredFundEntity> ses = new ArrayList<>();
-//                            JSONArray data = jsonObject.getJSONArray("data");
-//                            for (int i = 0; i < data.length(); i++) {
-//                                StructuredFundEntity bean = new StructuredFundEntity();
-//                                JSONObject obj = data.getJSONObject(i);
-//                                ses.add(bean);
-//                            }
-//                            info.setData(ses);
+                            List<NetworkVotingEntity> ses = new ArrayList<>();
+                            JSONArray data = jsonObject.getJSONArray("data");
+                            for (int i = 0; i < data.length(); i++) {
+                                NetworkVotingEntity bean = new NetworkVotingEntity();
+                                JSONObject obj = data.getJSONObject(i);
+                                bean.setInit_date(obj.getString("INIT_DATE"));
+                                bean.setMeeting_seq(obj.getString("MEETING_SEQ"));
+                                bean.setStock_code(obj.getString("STOCK_CODE"));
+                                bean.setVote_motion(obj.getString("VOTE_MOTION"));
+                                bean.setBusiness_amount(obj.getString("BUSINESS_AMOUNT"));
+                                bean.setStock_name(obj.getString("STOCK_NAME"));
+                                bean.setStatus(obj.getString("STATUS"));
+                                ses.add(bean);
+                            }
+                            info.setData(ses);
                         }
                     } catch (JSONException e) {
                         info.setCode("-2");
