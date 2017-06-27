@@ -400,8 +400,6 @@ public class ShouJiZhuCeActivity extends BaseActivity implements View.OnClickLis
                         if (mLoadingDialog != null) {
                             mLoadingDialog.dismiss();
                         }
-                        ImageVerification();
-                        mImage_et.setTag("");
                         MistakeDialog.showDialog(msg_Str, ShouJiZhuCeActivity.this);
                     }
 
@@ -475,8 +473,6 @@ public class ShouJiZhuCeActivity extends BaseActivity implements View.OnClickLis
                 mCaptchabtn.setClickable(true);
                 mCaptchabtn.setBackgroundResource(R.drawable.captcha_button_unchecked);
                 mCaptchabtn.setTextColor(Color.parseColor("#FFFFFF"));
-                ImageVerification();
-                mImage_et.setTag("");
             }
 
             @Override
@@ -498,8 +494,6 @@ public class ShouJiZhuCeActivity extends BaseActivity implements View.OnClickLis
                                 mCaptchabtn.setClickable(true);
                                 mCaptchabtn.setBackgroundResource(R.drawable.captcha_button_unchecked);
                                 mCaptchabtn.setTextColor(Color.parseColor("#FFFFFF"));
-                                ImageVerification();
-                                mImage_et.setTag("");
                             }
                         });
                     }
@@ -529,8 +523,6 @@ public class ShouJiZhuCeActivity extends BaseActivity implements View.OnClickLis
                 mSoundtv.setClickable(true);
                 mSound.setText(getString(R.string.sjzcText6));
                 mSoundtv.setText("重发语音");
-                ImageVerification();
-                mImage_et.setTag("");
                 Helper.getInstance().showToast(ShouJiZhuCeActivity.this, "网络异常");
             }
 
@@ -555,8 +547,6 @@ public class ShouJiZhuCeActivity extends BaseActivity implements View.OnClickLis
                                 mSoundtv.setClickable(true);
                                 mSound.setText(getString(R.string.sjzcText6));
                                 mSoundtv.setText("重发语音");
-                                ImageVerification();
-                                mImage_et.setTag("");
                             }
                         });
                     }

@@ -14,12 +14,29 @@ public class NetworkVotingEntity {
     private String init_date;   //交易日期<到期交易日 TODO>
     private String position_str; //定位串<股东大会编码 TODO>
     private String vote_motion; //投票议案（序号）
+    private String vote_info;   //议案名称
     private String vote_type;   //投票类别：0	非累积投票制 1累积投票制
     private String vote_numcontrol;   //累积投票应选数
     private String stock_code;   //证券代码
     private String business_amount;   //成交数量<委托数量TODO>
     private String stock_name;   //证券名称
+    private String status;      //委托状态
 
+    public String getStatus() {
+        return status;
+    }
+
+    public void setStatus(String status) {
+        this.status = status;
+    }
+
+    public String getVote_info() {
+        return vote_info;
+    }
+
+    public void setVote_info(String vote_info) {
+        this.vote_info = vote_info;
+    }
 
     public String getMeeting_name() {
         return meeting_name;

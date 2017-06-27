@@ -113,11 +113,11 @@ public class StructuredFundDialog extends BaseDialog implements View.OnClickList
         switch (v.getId()) {
             case R.id.bt_true:
                 if (FJFundGradingMergerActivity.TAG.equals(mTAG)) {
-                    ifc.mergerStructuredFund("tpyzq", mStructuredFundEntity.getExchange_type(), mStructuredFundEntity.getStock_account(), mInput, mShare, mSession, mTAG, this);
+                    ifc.mergerStructuredFund( mStructuredFundEntity.getExchange_type(), mStructuredFundEntity.getStock_account(), mInput, mShare, mSession, mTAG, this);
                     Helper.getInstance().showToast(context, "委托提交成功");
                     dismiss();
                 } else if (FJFundSplitActivity.TAG.equals(mTAG)) {
-                    ifc.splitStructuredFund("tpyzq", mStructuredFundEntity.getExchange_type(), mStructuredFundEntity.getStock_account(), mInput, mShare, mSession, mTAG, this);
+                    ifc.splitStructuredFund(mStructuredFundEntity.getExchange_type(), mStructuredFundEntity.getStock_account(), mInput, mShare, mSession, mTAG, this);
                     Helper.getInstance().showToast(context, "委托提交成功");
                     dismiss();
                 } else if (FJWithdrawOrderActivity.TAG.equals(mTAG)) {

@@ -9,11 +9,11 @@ public class StructuredFundEntity {
     private String stoken_name;              //证券名称
     private String stocken_code;            //证券代码
     private String business_name;            //业务
-    private String report_time;               //时间
-    private String entrust_amount;            //分拆份额（委托数量）
+    private String report_time;               //时间（RETURN_TIME、BUSINESS_TIME）
+    private String entrust_amount;            //分拆份额（委托数量、委托量（OCCUR_AMOUNT））
     private String position_str;               //定位串 翻页用
     private String curr_date;               //日期
-    private String entrust_status;          //状态（0未报、1待报、2已报、3已报待撤。。。）
+    private String entrust_status;          //状态（0未报、1待报、2已报、3已报待撤。。。BUSINESS_STATUS）
     private String entrust_balance;         //委托金额
     private String business_amount;         //成交数量
     private String merge_amount;             //可合并数量
@@ -25,8 +25,17 @@ public class StructuredFundEntity {
     private String init_date;               //交易日期(发生日期)
     private String entrust_no;              //委托编号（撤单操作时使用）
     private String serial_no;                 //流水号
+    private String entrust_bs;              //买卖标志
 
-    private boolean isShowRule;         //控制子view是否显示
+    private boolean isShowRule;             //控制子view是否显示
+
+    public String getEntrust_bs() {
+        return entrust_bs;
+    }
+
+    public void setEntrust_bs(String entrust_bs) {
+        this.entrust_bs = entrust_bs;
+    }
 
     public boolean isShowRule() {
         return isShowRule;

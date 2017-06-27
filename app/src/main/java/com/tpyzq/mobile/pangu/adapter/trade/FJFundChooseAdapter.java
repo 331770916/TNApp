@@ -1,6 +1,7 @@
 package com.tpyzq.mobile.pangu.adapter.trade;
 
 import android.content.Context;
+import android.text.TextUtils;
 import android.view.LayoutInflater;
 import android.view.View;
 import android.view.ViewGroup;
@@ -66,12 +67,12 @@ public class FJFundChooseAdapter extends BaseAdapter {
             viewHolder.stockCode = (TextView) convertView.findViewById(R.id.tv_1);
             viewHolder.stockName = (TextView) convertView.findViewById(R.id.tv_2);
             viewHolder.ivDuiGou = (ImageView) convertView.findViewById(R.id.iv_3);
-
+            convertView.setTag(viewHolder);
         } else {
             viewHolder = (ViewHolder) convertView.getTag();
         }
-        viewHolder.stockCode.setText(mList.get(position).getStocken_code());
-        viewHolder.stockName.setText(mList.get(position).getStoken_name());
+        viewHolder.stockCode.setText(mList.get(position).getStocken_code() + "");
+        viewHolder.stockName.setText(mList.get(position).getStoken_name()+"");
 
         if (mPoint == position) {
             viewHolder.ivDuiGou.setVisibility(View.VISIBLE);
