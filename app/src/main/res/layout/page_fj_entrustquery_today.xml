@@ -60,6 +60,7 @@
         android:layout_height="match_parent">
 
         <com.handmark.pulltorefresh.library.PullToRefreshListView
+            android:id="@+id/listview"
             android:layout_width="match_parent"
             android:layout_height="match_parent"
             android:divider="@color/lineColor"
@@ -69,6 +70,7 @@
             app:ptrMode="both" />
 
         <ImageView
+            android:id="@+id/iv_isEmpty"
             android:layout_width="match_parent"
             android:layout_height="match_parent"
             android:layout_centerInParent="true"
