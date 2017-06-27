@@ -116,7 +116,7 @@ public class ShouJiZhuCeActivity extends BaseActivity implements View.OnClickLis
      * EditText的 监听事件
      */
     private void EditTextMonitor() {
-        time = new TimeCount(100, 1000);
+        time = new TimeCount(120000, 1000);
         time1 = new TimeCount1(120000, 1000);
         mCaptchabtn.setOnClickListener(this);
         mSoundtv.setOnClickListener(this);
@@ -139,7 +139,7 @@ public class ShouJiZhuCeActivity extends BaseActivity implements View.OnClickLis
         NetWorkUtil.getInstence().okHttpForGet(TAG, ConstantUtil.SecurityIps + "/note/getImage", map, new StringCallback() {
             @Override
             public void onError(Call call, Exception e, int id) {
-                Helper.getInstance().showToast(ShouJiZhuCeActivity.this, "网络异常");
+                Helper.getInstance().showToast(ShouJiZhuCeActivity.this, ConstantUtil.NETWORK_ERROR);
             }
 
             @Override
