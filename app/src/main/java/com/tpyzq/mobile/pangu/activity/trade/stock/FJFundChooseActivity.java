@@ -118,11 +118,12 @@ public class FJFundChooseActivity extends BaseActivity implements View.OnClickLi
 
     @Override
     public boolean onKeyDown(int keyCode, KeyEvent event) {
-        if (keyCode == KeyEvent.KEYCODE_BACK && mDialog.isShowing()) {
-            mDialog.dismiss();
-        } else {
+        if (keyCode == KeyEvent.KEYCODE_BACK) {
+            if (mDialog != null && mDialog.isShowing()) {
+                mDialog.dismiss();
+            }
             finish();
         }
-        return super.onKeyDown(keyCode, event);
+        return false;
     }
 }
