@@ -278,8 +278,6 @@ public class ShouJiVerificationActivity extends BaseActivity implements View.OnC
                 mSound.setText(getString(R.string.sjzcText6));
                 mSoundtv.setText("重发语音");
                 Helper.getInstance().showToast(ShouJiVerificationActivity.this, "网络异常");
-                ImageVerification();
-                mImage_et.setTag("");
             }
 
             @Override
@@ -303,8 +301,6 @@ public class ShouJiVerificationActivity extends BaseActivity implements View.OnC
                                 mSoundtv.setClickable(true);
                                 mSound.setText(getString(R.string.sjzcText6));
                                 mSoundtv.setText("重发语音");
-                                ImageVerification();
-                                mImage_et.setTag("");
                             }
                         });
                     }
@@ -336,8 +332,6 @@ public class ShouJiVerificationActivity extends BaseActivity implements View.OnC
                 mSJYZCaptchabtn.setClickable(true);
                 mSJYZCaptchabtn.setBackgroundResource(R.drawable.captcha_button_unchecked);
                 mSJYZCaptchabtn.setTextColor(Color.parseColor("#FFFFFF"));
-                ImageVerification();
-                mImage_et.setTag("");
             }
 
             @Override
@@ -359,8 +353,6 @@ public class ShouJiVerificationActivity extends BaseActivity implements View.OnC
                                 mSJYZCaptchabtn.setClickable(true);
                                 mSJYZCaptchabtn.setBackgroundResource(R.drawable.captcha_button_unchecked);
                                 mSJYZCaptchabtn.setTextColor(Color.parseColor("#FFFFFF"));
-                                ImageVerification();
-                                mImage_et.setTag("");
                             }
                         });
                     }
@@ -477,8 +469,6 @@ public class ShouJiVerificationActivity extends BaseActivity implements View.OnC
                         if (mLoadingDialog != null) {
                             mLoadingDialog.dismiss();
                         }
-                        ImageVerification();
-                        mImage_et.setTag("");
                         MistakeDialog.showDialog(jsonObject.getString("message"), ShouJiVerificationActivity.this);
 //                        Helper.getInstance().showToast(ShouJiVerification.this, jsonObject.getString("msg").toString());
 //                        LogUtil.e(TAG, FileUtil.URL_SJZCBD + "{" + map.toString() + "}");
