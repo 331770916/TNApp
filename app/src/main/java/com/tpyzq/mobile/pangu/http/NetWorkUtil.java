@@ -114,8 +114,8 @@ public class NetWorkUtil {
     }
 
     /** 取消单个请求 */
-    public static void cancelSingleRequestByUrl(String url) {
-        OkHttpUtil.cancelSingleRequestByUrl(url);
+    public void cancelSingleRequest(Object tag) {
+        OkHttpUtil.cancelSingleRequestByTag(tag);
     }
 
     /** 取消单个请求 */
