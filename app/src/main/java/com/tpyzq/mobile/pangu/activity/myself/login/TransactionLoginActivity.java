@@ -1302,6 +1302,9 @@ public class TransactionLoginActivity extends BaseActivity implements View.OnCli
     }
 
     private void initYN(boolean is) {
+        if (isKeyboardDialog!=null && isKeyboardDialog.isShowing()){
+            isKeyboardDialog.dismiss();
+        }
         if (is) {
             UserUtil.Keyboard = "1";
             //键盘插件URL

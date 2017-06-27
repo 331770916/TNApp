@@ -1,0 +1,147 @@
+<?xml version="1.0" encoding="utf-8"?>
+<LinearLayout xmlns:android="http://schemas.android.com/apk/res/android"
+    android:layout_width="match_parent"
+    android:layout_height="match_parent"
+    android:orientation="vertical">
+
+    <View
+        android:layout_width="match_parent"
+        android:layout_height="@dimen/size25"
+        android:background="@color/blue"
+        android:clipToPadding="true"
+        android:fitsSystemWindows="true" />
+
+    <include layout="@layout/updatepwd_top"
+        android:id="@+id/startVideTop" />
+
+    <ScrollView
+        android:layout_width="match_parent"
+        android:layout_height="match_parent"
+        android:background="@color/white"
+        android:scrollbars="none">
+        <LinearLayout
+            android:layout_width="match_parent"
+            android:layout_height="wrap_content"
+            android:orientation="vertical">
+
+            <TextView
+                android:layout_width="match_parent"
+                android:layout_height="wrap_content"
+                android:text="风险承受能力评估结果"
+                android:textColor="@color/hushenTab_titleColor"
+                android:textSize="@dimen/txtSize18"
+                android:padding="@dimen/size10"
+                android:gravity="center"/>
+
+            <TextView
+                android:layout_width="match_parent"
+                android:layout_height="wrap_content"
+                android:gravity="center"
+                android:textSize="@dimen/txtSize14"
+                android:text="到期日期：2017-02-01"
+                android:paddingLeft="@dimen/size10"
+                android:paddingRight="@dimen/size10"
+                android:paddingBottom="@dimen/size15"/>
+
+            <View
+                android:layout_width="match_parent"
+                android:layout_height="1px"
+                android:background="@color/lineColor"/>
+
+            <TextView
+                android:layout_width="wrap_content"
+                android:layout_height="wrap_content"
+                android:textColor="@color/white"
+                android:background="@drawable/risk_tip_bg"
+                android:textSize="@dimen/txtSize12"
+                android:paddingLeft="@dimen/size15"
+                android:drawablePadding="@dimen/size5"
+                android:drawableRight="@drawable/risk_tip_r"
+                android:drawableLeft="@drawable/risk_tip_r"
+                android:layout_marginTop="@dimen/size20"
+                android:layout_marginLeft="@dimen/size10"
+                android:paddingRight="@dimen/size15"
+                android:paddingTop="@dimen/size5"
+                android:paddingBottom="@dimen/size5"
+                android:text="您的风险承受能力"/>
+
+            <TextView
+                android:id="@+id/tv_risk_level"
+                android:layout_width="wrap_content"
+                android:layout_height="match_parent"
+                android:layout_margin="@dimen/size10"
+                android:textSize="@dimen/txtSize14"
+                android:paddingLeft="@dimen/size24"
+                android:textColor="@color/hushenTab_titleColor"
+                android:text="中高风险等级"/>
+
+            <View
+                android:layout_width="match_parent"
+                android:layout_height="@dimen/size5"
+                android:background="@color/bgColor"/>
+
+            <TextView
+                android:layout_width="wrap_content"
+                android:layout_height="wrap_content"
+                android:textColor="@color/white"
+                android:background="@drawable/risk_tip_bg"
+                android:textSize="@dimen/txtSize12"
+                android:paddingLeft="@dimen/size15"
+                android:drawablePadding="@dimen/size5"
+                android:drawableRight="@drawable/risk_tip_r"
+                android:drawableLeft="@drawable/risk_tip_r"
+                android:layout_marginTop="@dimen/size20"
+                android:layout_marginLeft="@dimen/size10"
+                android:paddingRight="@dimen/size15"
+                android:paddingTop="@dimen/size5"
+                android:paddingBottom="@dimen/size5"
+                android:text="您的拟投资期限"/>
+
+            <TextView
+                android:id="@+id/tv_risk_limit"
+                android:layout_width="wrap_content"
+                android:layout_height="match_parent"
+                android:layout_margin="@dimen/size10"
+                android:textSize="@dimen/txtSize14"
+                android:paddingLeft="@dimen/size24"
+                android:textColor="@color/hushenTab_titleColor"
+                android:text="0到1年"/>
+
+            <View
+                android:layout_width="match_parent"
+                android:layout_height="@dimen/size5"
+                android:background="@color/bgColor"/>
+
+            <TextView
+                android:layout_width="wrap_content"
+                android:layout_height="wrap_content"
+                android:textColor="@color/white"
+                android:background="@drawable/risk_tip_bg"
+                android:textSize="@dimen/txtSize12"
+                android:paddingLeft="@dimen/size15"
+                android:drawablePadding="@dimen/size5"
+                android:drawableRight="@drawable/risk_tip_r"
+                android:drawableLeft="@drawable/risk_tip_r"
+                android:layout_marginTop="@dimen/size20"
+                android:layout_marginLeft="@dimen/size10"
+                android:paddingRight="@dimen/size15"
+                android:paddingTop="@dimen/size5"
+                android:paddingBottom="@dimen/size5"
+                android:text="您的拟投资品种"/>
+
+            <TextView
+                android:id="@+id/tv_risk_type"
+                android:layout_width="wrap_content"
+                android:layout_height="match_parent"
+                android:layout_margin="@dimen/size10"
+                android:textSize="@dimen/txtSize14"
+                android:textColor="@color/hushenTab_titleColor"
+                android:text="0到1年"/>
+        </LinearLayout>
+    </ScrollView>
+
+
+
+
+
+</LinearLayout>
