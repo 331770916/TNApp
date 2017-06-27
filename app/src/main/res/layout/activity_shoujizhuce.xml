@@ -1,5 +1,6 @@
 <?xml version="1.0" encoding="utf-8"?>
 <RelativeLayout xmlns:android="http://schemas.android.com/apk/res/android"
+    xmlns:fresco="http://schemas.android.com/tools"
     android:layout_width="match_parent"
     android:layout_height="match_parent"
     android:background="@color/bgColor"
@@ -83,10 +84,51 @@
                 android:background="@color/gray" />
         </FrameLayout>
 
+
         <LinearLayout
             android:layout_width="match_parent"
             android:layout_height="match_parent"
-            android:layout_marginTop="@dimen/size30"
+            android:layout_marginTop="@dimen/size10"
+            android:focusable="true"
+            android:focusableInTouchMode="true"
+            android:orientation="horizontal"
+            android:paddingLeft="@dimen/size15"
+            android:paddingRight="@dimen/size15">
+
+            <EditText
+                android:id="@+id/etImage"
+                android:layout_width="0dp"
+                android:layout_height="@dimen/size48"
+                android:layout_marginRight="@dimen/size10"
+                android:layout_weight="1"
+                android:background="@drawable/edittext"
+                android:drawableLeft="@mipmap/yanzhengma"
+                android:drawablePadding="15dp"
+                android:gravity="fill|center"
+                android:hint="@string/sjzcText1"
+                android:maxLength="6"
+                android:numeric="integer"
+                android:paddingLeft="@dimen/size10"
+                android:singleLine="true"
+                android:textSize="@dimen/txtSize16" />
+
+
+            <com.facebook.drawee.view.SimpleDraweeView
+                android:layout_marginTop="@dimen/size4"
+                android:id="@+id/SecurityCode"
+                android:layout_width="@dimen/size120"
+                android:layout_height="wrap_content"
+                android:layout_marginLeft="@dimen/size4"
+                fresco:actualImageScaleType="fitCenter"
+                fresco:failureImageScaleType="fitCenter"
+                fresco:placeholderImageScaleType="fitCenter" />
+        </LinearLayout>
+
+
+        <LinearLayout
+            android:layout_width="match_parent"
+            android:layout_height="match_parent"
+            android:layout_marginTop="@dimen/size10"
             android:focusable="true"
             android:focusableInTouchMode="true"
             android:orientation="horizontal"
@@ -117,7 +159,7 @@
                 android:layout_height="match_parent"
                 android:layout_marginLeft="@dimen/size4"
                 android:layout_weight="0.5"
-                android:background="@drawable/captcha_button_unchecked"
+                android:background="@drawable/captcha_button_pitchon"
                 android:text="@string/sjzcText2"
                 android:textColor="@drawable/text_green_white_selector"
                 android:textSize="@dimen/size12" />
@@ -203,11 +245,11 @@
             </LinearLayout>
 
             <TextView
-                android:layout_centerHorizontal="true"
                 android:id="@+id/mWeiXin"
                 android:layout_width="@dimen/size116"
                 android:layout_height="wrap_content"
                 android:layout_below="@+id/LinearLayout1"
+                android:layout_centerHorizontal="true"
                 android:layout_gravity="center_horizontal"
                 android:layout_marginTop="40dp"
                 android:background="@color/bgColor"

@@ -40,8 +40,8 @@
 
         <ImageView
             android:id="@+id/iv_3"
-            android:layout_width="@dimen/size32"
-            android:layout_height="@dimen/size32"
+            android:layout_width="@dimen/size16"
+            android:layout_height="@dimen/size14"
             android:layout_alignParentEnd="true"
             android:layout_alignParentRight="true"
             android:layout_centerVertical="true"

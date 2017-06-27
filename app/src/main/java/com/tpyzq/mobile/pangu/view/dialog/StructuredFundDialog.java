@@ -12,8 +12,13 @@ import com.tpyzq.mobile.pangu.activity.trade.stock.FJFundGradingMergerActivity;
 import com.tpyzq.mobile.pangu.activity.trade.stock.FJFundSplitActivity;
 import com.tpyzq.mobile.pangu.activity.trade.stock.FJWithdrawOrderActivity;
 import com.tpyzq.mobile.pangu.base.BaseDialog;
+import com.tpyzq.mobile.pangu.base.InterfaceCollection;
+import com.tpyzq.mobile.pangu.data.ResultInfo;
 import com.tpyzq.mobile.pangu.data.StructuredFundEntity;
 import com.tpyzq.mobile.pangu.util.Helper;
+import com.tpyzq.mobile.pangu.util.SpUtils;
+
+import java.util.List;
 
 /**
  * Created by wangqi on 2017/6/23.
@@ -21,7 +26,7 @@ import com.tpyzq.mobile.pangu.util.Helper;
  * markbit  0 分级基金合并  1 分级基金分拆 2 基金撤单
  */
 
-public class StructuredFundDialog extends BaseDialog implements View.OnClickListener {
+public class StructuredFundDialog extends BaseDialog implements View.OnClickListener, InterfaceCollection.InterfaceCallback {
     private String mTAG;
     private TextView tv_title;
     private TextView tv_2;
@@ -36,6 +41,8 @@ public class StructuredFundDialog extends BaseDialog implements View.OnClickList
     private StructuredFundEntity mStructuredFundEntity;
     private String mShare;
     private String mInput;
+    private InterfaceCollection ifc;
+    private String mSession;
 
     public StructuredFundDialog(Context context, String tag, Expression expression, StructuredFundEntity structuredFundEntity, String share, String input) {
         super(context);
@@ -44,10 +51,12 @@ public class StructuredFundDialog extends BaseDialog implements View.OnClickList
         this.mStructuredFundEntity = structuredFundEntity;
         this.mShare = share;
         this.mInput = input;
+
     }
 
     @Override
     public void setView() {
+
         img_1 = (ImageView) findViewById(R.id.bank_img);
         tv_title = (TextView) findViewById(R.id.tv_title);
         tv_2 = (TextView) findViewById(R.id.tv_2);
@@ -68,9 +77,10 @@ public class StructuredFundDialog extends BaseDialog implements View.OnClickList
 
     @Override
     public void initData() {
+        mSession = SpUtils.getString(context, "mSession", "");
         tv_5.setText(context.getString(R.string.securities_name) + "：");
         if (FJFundGradingMergerActivity.TAG.equals(mTAG)) {
-            img_1.setImageResource(R.mipmap.xinxiqueren);
+            img_1.setImageResource(R.mipmap.structuredfund_merge);
             tv_title.setText(R.string.Gradingfundmerger);
             tv_2.setText(R.string.Gradingfundmerger);
             tv_4.setText(mInput);
@@ -78,7 +88,7 @@ public class StructuredFundDialog extends BaseDialog implements View.OnClickList
             tv_8.setText(mShare);
             tv_10.setText("");
         } else if (FJFundSplitActivity.TAG.equals(mTAG)) {
-            img_1.setImageResource(R.mipmap.xinxiqueren);
+            img_1.setImageResource(R.mipmap.structuredfund_partition);
             tv_title.setText(R.string.FJFundSplitActivity);
             tv_2.setText(R.string.FJFundSplitActivity);
             tv_4.setText(mInput);
@@ -99,12 +109,15 @@ public class StructuredFundDialog extends BaseDialog implements View.OnClickList
 
     @Override
     public void onClick(View v) {
+        ifc = InterfaceCollection.getInstance();
         switch (v.getId()) {
             case R.id.bt_true:
                 if (FJFundGradingMergerActivity.TAG.equals(mTAG)) {
+                    ifc.mergerStructuredFund("tpyzq", mStructuredFundEntity.getExchange_type(), mStructuredFundEntity.getStock_account(), mInput, mShare, mSession, mTAG, this);
                     Helper.getInstance().showToast(context, "委托提交成功");
                     dismiss();
                 } else if (FJFundSplitActivity.TAG.equals(mTAG)) {
+                    ifc.splitStructuredFund("tpyzq", mStructuredFundEntity.getExchange_type(), mStructuredFundEntity.getStock_account(), mInput, mShare, mSession, mTAG, this);
                     Helper.getInstance().showToast(context, "委托提交成功");
                     dismiss();
                 } else if (FJWithdrawOrderActivity.TAG.equals(mTAG)) {
@@ -116,6 +129,24 @@ public class StructuredFundDialog extends BaseDialog implements View.OnClickList
             case R.id.bt_false:
                 dismiss();
                 break;
+        }
+    }
+
+    @Override
+    public void callResult(ResultInfo info) {
+        List<StructuredFundEntity> list = (List<StructuredFundEntity>) info.getData();
+        StructuredFundEntity bean = list.get(0);
+        if ("0".equals(info.getCode())) {
+            bean.getInit_date();
+            bean.getMerge_amount();
+            Helper.getInstance().showToast(context, "委托提交成功");
+            mExpression.State();
+            dismiss();
+        } else if ("-1".equals(info.getCode()) || "-2".equals(info.getCode()) || "-3".equals(info.getCode())) {
+            Helper.getInstance().showToast(context, info.getMsg());
+        } else {
+            Helper.getInstance().showToast(context, "委托提交成功");
+            dismiss();
         }
     }
 

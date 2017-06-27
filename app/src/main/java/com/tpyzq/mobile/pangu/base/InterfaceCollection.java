@@ -2,6 +2,7 @@ package com.tpyzq.mobile.pangu.base;
 
 import android.text.TextUtils;
 
+import com.google.gson.Gson;
 import com.tpyzq.mobile.pangu.data.ResultInfo;
 import com.tpyzq.mobile.pangu.data.StructuredFundEntity;
 import com.tpyzq.mobile.pangu.http.NetWorkUtil;
@@ -73,7 +74,7 @@ public class InterfaceCollection {
             public void onError(Call call, Exception e, int id) {
                 ResultInfo info = new ResultInfo();
                 info.setCode("-1");
-                info.setMsg(e.getMessage());
+                info.setMsg(ConstantUtil.NETWORK_ERROR);
                 info.setTag(TAG);
                 callback.callResult(info);
             }
@@ -81,27 +82,36 @@ public class InterfaceCollection {
             @Override
             public void onResponse(String response, int id) {
                 ResultInfo info = new ResultInfo();
-                try {
-                    JSONObject jsonObject=new JSONObject(response);
-                    String code = jsonObject.getString("code");
-                    String msg = jsonObject.getString("msg");
-                    info.setCode(code);
-                    info.setMsg(msg);
-                    if ("0".equals(code)){
-                        List<StructuredFundEntity> list=new ArrayList<StructuredFundEntity>();
-                        JSONArray data = jsonObject.getJSONArray("data");
-                        for (int i = 0; i < data.length(); i++) {
-                            StructuredFundEntity bean = new StructuredFundEntity();
-                            bean.setStocken_code(data.getJSONObject(i).getString("SECU_CODE"));
-                            bean.setMarket(data.getJSONObject(i).getString("MARKET"));
-                            bean.setStoken_name(data.getJSONObject(i).getString("SECU_NAME"));
-                            list.add(bean);
+                if(TextUtils.isEmpty(response)){
+                    info.setCode("-3");
+                    info.setMsg(ConstantUtil.SERVICE_NO_DATA);
+                    info.setTag(TAG);
+                }else {
+                    try {
+                        JSONObject jsonObject = new JSONObject(response);
+                        String code = jsonObject.getString("code");
+                        String msg = jsonObject.getString("msg");
+                        info.setCode(code);
+                        info.setMsg(msg);
+                        if ("0".equals(code)) {
+                            List<StructuredFundEntity> list = new ArrayList<StructuredFundEntity>();
+                            JSONArray data = jsonObject.getJSONArray("data");
+                            for (int i = 0; i < data.length(); i++) {
+                                StructuredFundEntity bean = new StructuredFundEntity();
+                                bean.setStocken_code(data.getJSONObject(i).getString("SECU_CODE"));
+                                bean.setMarket(data.getJSONObject(i).getString("MARKET"));
+                                bean.setStoken_name(data.getJSONObject(i).getString("SECU_NAME"));
+                                list.add(bean);
+                            }
+
+                            info.setData(list);
                         }
-                        info.setData(list);
+
+                    } catch (JSONException e) {
+                        info.setCode("-2");
+                        info.setMsg(ConstantUtil.JSON_ERROR);
+                        info.setTag(TAG);
                     }
-                } catch (JSONException e) {
-                    info.setCode("-1");
-                    info.setMsg(e.getMessage());
                 }
                 callback.callResult(info);
             }
@@ -125,6 +135,7 @@ public class InterfaceCollection {
         map2.put("FLAG", true);
         map2.put("STOCK_CODE",stock_code);
         map1.put("parms",map2);
+       String A=new Gson().toJson(map1);
         net.okHttpForPostString(TAG, ConstantUtil.URL_JY, map1, new StringCallback() {
             @Override
             public void onError(Call call, Exception e, int id) {
