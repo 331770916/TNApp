@@ -18,6 +18,8 @@ import android.support.v4.app.ActivityCompat;
 import android.support.v4.content.ContextCompat;
 import android.support.v7.app.AppCompatActivity;
 import android.view.Gravity;
+import android.view.View;
+import android.view.ViewGroup;
 import android.view.Window;
 import android.view.WindowManager;
 import android.widget.Toast;
@@ -71,7 +73,8 @@ public abstract class BaseActivity extends AppCompatActivity {
         super.onCreate(savedInstanceState);
 //        getWindow().setSoftInputMode(WindowManager.LayoutParams.SOFT_INPUT_ADJUST_PAN);
         setTheme(R.style.AppTheme);
-        setContentView(getLayoutId());
+        View rootView = View.inflate(this, getLayoutId(), null);
+        setContentView(rootView);
         setRequestedOrientation(ActivityInfo.SCREEN_ORIENTATION_PORTRAIT);
         getWindow().setSoftInputMode(WindowManager.LayoutParams.SOFT_INPUT_ADJUST_PAN|WindowManager.LayoutParams.SOFT_INPUT_STATE_ALWAYS_HIDDEN);     //设置键盘不挤压布局
         //透明状态栏
@@ -84,6 +87,12 @@ public abstract class BaseActivity extends AppCompatActivity {
         net = NetWorkUtil.getInstence();
         skip = SkipUtils.getInstance();
         initView();
+
+        if (Build.VERSION.SDK_INT<19){
+            View fitView=rootView.findViewById(R.id.rl_top_bar);
+            if (fitView!=null)
+                ((ViewGroup)rootView).removeView(fitView);
+        }
     }
 
     public abstract void initView();
