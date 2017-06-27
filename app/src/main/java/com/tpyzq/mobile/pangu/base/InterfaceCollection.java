@@ -75,7 +75,7 @@ public class InterfaceCollection {
         map1.put("funcid","300701");
         map1.put("token",session);
         Map map2 = new HashMap<>();
-        map2.put("FLAG", "true");
+        map2.put("FLAG", true);
         map2.put("STOCK_CODE",stock_code);
         map1.put("parms",map2);
         net.okHttpForPostString(TAG, ConstantUtil.URL_JY, map1, new StringCallback() {
@@ -147,8 +147,8 @@ public class InterfaceCollection {
         map1.put("funcid","300702");
         map1.put("token",session);
         Map map2 = new HashMap<>();
-        map2.put("SEC_ID", "sec_id");
-        map2.put("FLAG", "true");
+        map2.put("SEC_ID", sec_id);
+        map2.put("FLAG", true);
         map2.put("EXCHANGE_TYPE", exchange_type);
         map2.put("STOCK_ACCOUNT",stock_account);
         map2.put("STOCK_CODE",stock_code);
@@ -215,8 +215,8 @@ public class InterfaceCollection {
         map1.put("funcid","300703");
         map1.put("token",session);
         Map map2 = new HashMap<>();
-        map2.put("SEC_ID", "sec_id");
-        map2.put("FLAG", "true");
+        map2.put("SEC_ID", sec_id);
+        map2.put("FLAG", true);
         map2.put("EXCHANGE_TYPE", exchange_type);
         map2.put("STOCK_ACCOUNT",stock_account);
         map2.put("STOCK_CODE",stock_code);
@@ -267,7 +267,84 @@ public class InterfaceCollection {
     }
 
 
+    /**
+     * 300703
+     * 分级基金当日委托查询
+     * @param sec_id  券商代码
+     * @param session token
+     * @param page  查第一页不用传
+     * @param num  查询行数
+     * @param action_in 查询可撤  0查所有  1查可撤
+     * @param TAG tag
+     */
+    public void queryTodayEntrust(String sec_id,String session,String page,String num,String action_in,final String TAG){
+        Map map1 = new HashMap<>();
+        map1.put("funcid","300704");
+        map1.put("token",session);
+        Map map2 = new HashMap<>();
+        map2.put("SEC_ID", sec_id);
+        map2.put("FLAG", true);
+        map2.put("POSITION_STR",page);
+        map2.put("REQUEST_NUM",num);
+        map2.put("ACTION_IN",action_in);
+        map1.put("parms",map2);
+        net.okHttpForPostString(TAG, ConstantUtil.URL_JY, map1, new StringCallback() {
+            @Override
+            public void onError(Call call, Exception e, int id) {
+                ResultInfo info = new ResultInfo();
+                info.setCode("-1");
+                info.setMsg(ConstantUtil.NETWORK_ERROR);
+                info.setTag(TAG);
+                callback.callResult(info);
+            }
 
+            @Override
+            public void onResponse(String response, int id) {
+                ResultInfo info = new ResultInfo();
+                if(TextUtils.isEmpty(response)){
+                    info.setCode("-3");
+                    info.setMsg(ConstantUtil.SERVICE_NO_DATA);
+                    info.setTag(TAG);
+                }else{
+                    try {
+                        JSONObject jsonObject = new JSONObject(response);
+                        String code = jsonObject.getString("code");
+                        String msg = jsonObject.getString("msg");
+                        info.setCode(code);
+                        info.setMsg(msg);
+                        info.setTag(TAG);
+                        if("0".equals(code)){
+                            List<StructuredFundEntity> ses = new ArrayList<>();
+                            JSONArray data = jsonObject.getJSONArray("data");
+                            for (int i = 0; i < data.length(); i++) {
+                                StructuredFundEntity bean = new StructuredFundEntity();
+                                JSONObject obj = data.getJSONObject(i);
+                                bean.setStoken_name(obj.getString("STOCK_NAME"));
+                                bean.setStocken_code(obj.getString("STOCK_CODE"));
+                                bean.setBusiness_name(obj.getString("BUSINESS_NAME"));
+                                bean.setReport_time(obj.getString("REPORT_TIME"));
+                                bean.setEntrust_amount(obj.getString("ENTRUST_AMOUNT"));
+                                bean.setStock_account(obj.getString("STOCK_ACCOUNT"));
+                                bean.setPosition_str(obj.getString("POSITION_STR"));
+                                bean.setCurr_date(obj.getString("CURR_DATE"));
+                                bean.setEntrust_no(obj.getString("ENTRUST_NO"));
+                                bean.setEntrust_status(obj.getString("ENTRUST_STATUS"));
+                                bean.setEntrust_balance(obj.getString("ENTRUST_BALANCE"));
+                                bean.setEntrust_amount(obj.getString("BUSINESS_AMOUNT"));
+                                ses.add(bean);
+                            }
+                            info.setData(ses);
+                        }
+                    } catch (JSONException e) {
+                        info.setCode("-2");
+                        info.setMsg(ConstantUtil.JSON_ERROR);
+                        info.setTag(TAG);
+                    }
+                }
+                callback.callResult(info);
+            }
+        });
+    }
 
 
     public void getData(int size){

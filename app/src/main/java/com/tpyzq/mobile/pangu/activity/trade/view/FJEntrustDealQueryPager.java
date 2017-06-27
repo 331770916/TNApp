@@ -128,6 +128,14 @@ public class FJEntrustDealQueryPager extends BasePager implements InterfaceColle
 
     @Override
     public void destroy() {
-
+        net.cancelSingleRequestByTag(TAG);
+        mAdapter.setCallback(null);
+        mAdapter = null;
+        myList.clear();
+        myList = null;
+        listView.removeAllViews();
+        listView = null;
+        kong_null = null;
+        iv_isEmpty = null;
     }
 }
