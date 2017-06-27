@@ -1,0 +1,102 @@
+<?xml version="1.0" encoding="utf-8"?>
+<LinearLayout xmlns:android="http://schemas.android.com/apk/res/android"
+    android:layout_width="match_parent"
+    android:layout_height="match_parent"
+    android:orientation="vertical">
+
+    <LinearLayout
+        android:layout_width="match_parent"
+        android:layout_height="wrap_content"
+        android:orientation="vertical">
+
+        <LinearLayout
+            android:layout_width="match_parent"
+            android:layout_height="@dimen/size15"
+            android:gravity="center_vertical"
+            android:orientation="horizontal">
+
+            <TextView
+                android:layout_width="wrap_content"
+                android:layout_height="wrap_content"
+                android:layout_marginLeft="@dimen/size20"
+                android:gravity="center_vertical"
+                android:text="1000"
+                android:textColor="@color/hushenTab_titleColor"
+                android:textSize="@dimen/txtSize15" />
+
+            <TextView
+                android:layout_width="wrap_content"
+                android:layout_height="wrap_content"
+                android:layout_marginLeft="@dimen/size21"
+                android:gravity="center_vertical"
+                android:text="《2016年度董事会工作报告》"
+                android:textColor="@color/hushenTab_titleColor"
+                android:textSize="@dimen/txtSize15" />
+
+        </LinearLayout>
+
+        <LinearLayout
+            android:layout_width="match_parent"
+            android:layout_height="@dimen/size40"
+            android:layout_marginTop="@dimen/size24"
+            android:weightSum="3">
+
+            <LinearLayout
+                android:layout_width="0dp"
+                android:layout_height="match_parent"
+                android:layout_weight="1"
+                android:paddingLeft="@dimen/size22"
+                android:paddingRight="@dimen/size22">
+
+                <TextView
+                    android:layout_width="match_parent"
+                    android:layout_height="match_parent"
+                    android:background="@color/blue3"
+                    android:gravity="center"
+                    android:text="@string/consent"
+                    android:textColor="@color/white"
+                    android:textSize="@dimen/txtSize15" />
+
+            </LinearLayout>
+
+            <LinearLayout
+                android:layout_width="0dp"
+                android:layout_height="match_parent"
+                android:layout_weight="1"
+                android:paddingLeft="@dimen/size22"
+                android:paddingRight="@dimen/size22">
+
+                <TextView
+                    android:layout_width="match_parent"
+                    android:layout_height="match_parent"
+                    android:background="@color/photoBg"
+                    android:gravity="center"
+                    android:text="反对"
+                    android:textColor="@color/hushenTab_titleColor"
+                    android:textSize="@dimen/txtSize15" />
+
+            </LinearLayout>
+
+            <LinearLayout
+                android:layout_width="0dp"
+                android:layout_height="match_parent"
+                android:layout_weight="1"
+                android:paddingLeft="@dimen/size22"
+                android:paddingRight="@dimen/size22">
+
+                <TextView
+                    android:layout_width="match_parent"
+                    android:layout_height="match_parent"
+                    android:background="@color/photoBg"
+                    android:gravity="center"
+                    android:text="@string/consent"
+                    android:textColor="@color/hushenTab_titleColor"
+                    android:textSize="@dimen/txtSize15" />
+
+            </LinearLayout>
+
+        </LinearLayout>
+
+    </LinearLayout>
+
+</LinearLayout>

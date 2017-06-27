@@ -1,0 +1,78 @@
+<?xml version="1.0" encoding="utf-8"?>
+<LinearLayout xmlns:android="http://schemas.android.com/apk/res/android"
+    android:layout_width="match_parent"
+    android:layout_height="match_parent"
+    android:background="@color/bgColor"
+    android:orientation="vertical">
+
+
+    <RelativeLayout
+        android:id="@+id/RelativeLayout_color_2"
+        android:layout_width="match_parent"
+        android:layout_height="@dimen/pickerview_topbar_height"
+        android:background="@color/blue">
+
+        <TextView
+            android:id="@+id/detail_topTitle"
+            android:layout_width="wrap_content"
+            android:layout_height="wrap_content"
+            android:layout_centerInParent="true"
+            android:text="投票查询"
+            android:textColor="@color/white"
+            android:textSize="@dimen/pickerview_topbar_title_textsize" />
+
+        <ImageView
+            android:id="@+id/detail_back"
+            android:layout_width="wrap_content"
+            android:layout_height="match_parent"
+            android:layout_alignParentBottom="true"
+            android:layout_alignParentLeft="true"
+            android:paddingLeft="@dimen/size20"
+            android:paddingRight="@dimen/size20"
+            android:src="@mipmap/back_btn" />
+    </RelativeLayout>
+
+    <RelativeLayout
+        android:layout_width="match_parent"
+        android:layout_height="@dimen/size50"
+        android:background="@color/white">
+
+        <TextView
+            android:layout_width="wrap_content"
+            android:layout_height="match_parent"
+            android:layout_marginLeft="@dimen/size20"
+            android:gravity="center_vertical"
+            android:text="@string/shareholdercode"
+            android:textColor="@color/hushenTab_titleColor"
+            android:textSize="@dimen/txtSize15"
+            android:textStyle="bold" />
+
+        <TextView
+            android:layout_width="wrap_content"
+            android:layout_height="match_parent"
+            android:layout_alignParentRight="true"
+            android:layout_marginRight="@dimen/size20"
+            android:drawablePadding="@dimen/size14"
+            android:drawableRight="@mipmap/icon_right"
+            android:gravity="center_vertical"
+            android:text="808080808080980"
+            android:textColor="@color/hushenTab_titleColor"
+            android:textSize="@dimen/txtSize15" />
+
+    </RelativeLayout>
+
+    <com.tpyzq.mobile.pangu.view.magicindicator.MagicIndicator
+        android:layout_width="match_parent"
+        android:layout_height="@dimen/size40"
+        android:layout_marginTop="@dimen/size10"
+        android:background="@color/white" />
+
+    <android.support.v4.view.ViewPager
+        android:layout_width="match_parent"
+        android:layout_height="0dp"
+        android:layout_marginTop="@dimen/size10"
+        android:layout_weight="5"
+        android:background="@color/backgroundColor" />
+
+
+</LinearLayout>

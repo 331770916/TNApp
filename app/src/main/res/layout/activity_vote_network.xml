@@ -1,0 +1,197 @@
+<?xml version="1.0" encoding="utf-8"?>
+<LinearLayout xmlns:android="http://schemas.android.com/apk/res/android"
+    android:layout_width="match_parent"
+    android:layout_height="match_parent"
+    android:orientation="vertical">
+
+    <RelativeLayout
+        android:id="@+id/RelativeLayout_color_2"
+        android:layout_width="match_parent"
+        android:layout_height="@dimen/pickerview_topbar_height"
+        android:background="@color/blue">
+
+        <TextView
+            android:id="@+id/detail_topTitle"
+            android:layout_width="wrap_content"
+            android:layout_height="wrap_content"
+            android:layout_centerInParent="true"
+            android:text="网络投票"
+            android:textColor="@color/white"
+            android:textSize="@dimen/pickerview_topbar_title_textsize" />
+
+        <ImageView
+            android:id="@+id/detail_back"
+            android:layout_width="wrap_content"
+            android:layout_height="match_parent"
+            android:layout_alignParentBottom="true"
+            android:layout_alignParentLeft="true"
+            android:paddingLeft="@dimen/size20"
+            android:paddingRight="@dimen/size20"
+            android:src="@mipmap/back_btn" />
+    </RelativeLayout>
+
+    <ScrollView
+        android:layout_width="match_parent"
+        android:layout_height="match_parent">
+
+
+        <LinearLayout
+            android:layout_width="match_parent"
+            android:layout_height="match_parent"
+            android:orientation="vertical">
+
+
+            <RelativeLayout
+                android:layout_width="match_parent"
+                android:layout_height="@dimen/size50">
+
+                <TextView
+                    android:layout_width="wrap_content"
+                    android:layout_height="match_parent"
+                    android:layout_marginLeft="@dimen/size20"
+                    android:gravity="center_vertical"
+                    android:text="@string/securities_code"
+                    android:textColor="@color/hushenTab_titleColor"
+                    android:textSize="@dimen/txtSize15"
+                    android:textStyle="bold" />
+
+                <TextView
+                    android:layout_width="wrap_content"
+                    android:layout_height="match_parent"
+                    android:layout_alignParentRight="true"
+                    android:layout_marginRight="@dimen/size95"
+                    android:gravity="center_vertical"
+                    android:textSize="@dimen/txtSize15" />
+
+            </RelativeLayout>
+
+            <LinearLayout
+
+                android:layout_width="match_parent"
+                android:layout_height="@dimen/size22" />
+
+            <RelativeLayout
+                android:layout_width="match_parent"
+                android:layout_height="@dimen/size50">
+
+                <TextView
+                    android:layout_width="wrap_content"
+                    android:layout_height="match_parent"
+                    android:layout_marginLeft="@dimen/size20"
+                    android:gravity="center_vertical"
+                    android:text="@string/shareholdercode"
+                    android:textColor="@color/hushenTab_titleColor"
+                    android:textSize="@dimen/txtSize15"
+                    android:textStyle="bold" />
+
+                <TextView
+                    android:layout_width="wrap_content"
+                    android:layout_height="match_parent"
+                    android:layout_alignParentRight="true"
+                    android:layout_marginRight="@dimen/size95"
+                    android:gravity="center_vertical"
+                    android:textSize="@dimen/txtSize15" />
+
+            </RelativeLayout>
+
+
+            <LinearLayout
+
+                android:layout_width="match_parent"
+                android:layout_height="@dimen/size22" />
+
+            <LinearLayout
+                android:layout_width="match_parent"
+                android:layout_height="@dimen/size22"
+                android:layout_marginTop="@dimen/size22">
+
+                <TextView
+                    android:layout_width="@dimen/size22"
+                    android:layout_height="@dimen/size22"
+                    android:layout_marginLeft="@dimen/size20"
+                    android:text="1"
+                    android:textColor="@color/white" />
+
+                <TextView
+                    android:layout_width="wrap_content"
+                    android:layout_height="wrap_content"
+                    android:layout_marginLeft="@dimen/size16"
+                    android:text="非累积投票议案"
+                    android:textColor="@color/blue3"
+                    android:textSize="@dimen/txtSize15" />
+
+            </LinearLayout>
+
+
+            <LinearLayout
+                android:layout_width="match_parent"
+                android:layout_height="@dimen/size14"
+                android:gravity="center"
+                android:visibility="gone">
+
+                <TextView
+                    android:layout_width="wrap_content"
+                    android:layout_height="wrap_content"
+                    android:text="未查询到非累积投票议案"
+                    android:textColor="@color/newStockTitle"
+                    android:textSize="@dimen/txtSize15" />
+
+
+            </LinearLayout>
+
+            <com.tpyzq.mobile.pangu.view.listview.AutoListview
+                android:layout_width="match_parent"
+                android:layout_height="match_parent"
+                android:layout_marginTop="@dimen/size25" />
+
+
+            <LinearLayout
+                android:layout_width="match_parent"
+                android:layout_height="@dimen/size22"
+                android:layout_marginTop="@dimen/size22">
+
+                <TextView
+                    android:layout_width="@dimen/size22"
+                    android:layout_height="@dimen/size22"
+                    android:layout_marginLeft="@dimen/size20"
+                    android:text="2"
+                    android:textColor="@color/white" />
+
+                <TextView
+                    android:layout_width="wrap_content"
+                    android:layout_height="wrap_content"
+                    android:layout_marginLeft="@dimen/size16"
+                    android:text="累积投票议案"
+                    android:textColor="@color/blue3"
+                    android:textSize="@dimen/txtSize15" />
+
+
+            </LinearLayout>
+
+            <LinearLayout
+                android:layout_width="match_parent"
+                android:layout_height="@dimen/size44"
+                android:gravity="center">
+
+                <TextView
+                    android:layout_width="wrap_content"
+                    android:layout_height="wrap_content"
+                    android:layout_marginLeft="@dimen/size20"
+                    android:text="注意：累积投票制选举，对于每个选举议案组，股东可投票总数＝股东持股数×当选人数"
+                    android:textColor="@color/newStockTitle"
+                    android:textSize="@dimen/txtSize15" />
+
+            </LinearLayout>
+
+            <com.tpyzq.mobile.pangu.view.listview.AutoListview
+                android:layout_width="match_parent"
+                android:layout_height="match_parent"
+                android:layout_marginTop="@dimen/size17" />
+
+
+        </LinearLayout>
+
+    </ScrollView>
+
+
+</LinearLayout>
