@@ -134,7 +134,6 @@ public class InterfaceCollection {
         Map map2 = new HashMap<>();
         map2.put("FLAG", true);
         map2.put("SEC_ID", "tpyzq");
-        map2.put("SEC_ID", "tpyzq");
         map2.put("STOCK_CODE",stock_code);
         map1.put("parms",map2);
         net.okHttpForPostString(TAG, ConstantUtil.URL_JY, map1, new StringCallback() {
@@ -208,7 +207,6 @@ public class InterfaceCollection {
         Map map2 = new HashMap<>();
         map2.put("SEC_ID", sec_id);
         map2.put("FLAG", true);
-        map2.put("SEC_ID", "tpyzq");
         map2.put("EXCHANGE_TYPE", exchange_type);
         map2.put("STOCK_ACCOUNT",stock_account);
         map2.put("STOCK_CODE",stock_code);
@@ -277,7 +275,6 @@ public class InterfaceCollection {
         Map map2 = new HashMap<>();
         map2.put("SEC_ID", sec_id);
         map2.put("FLAG", true);
-        map2.put("SEC_ID", "tpyzq");
         map2.put("EXCHANGE_TYPE", exchange_type);
         map2.put("STOCK_ACCOUNT",stock_account);
         map2.put("STOCK_CODE",stock_code);
@@ -345,7 +342,6 @@ public class InterfaceCollection {
         Map map2 = new HashMap<>();
         map2.put("SEC_ID", sec_id);
         map2.put("FLAG", true);
-        map2.put("SEC_ID", "tpyzq");
         map2.put("POSITION_STR",page);
         map2.put("REQUEST_NUM",num);
         map2.put("ACTION_IN",action_in);
@@ -422,7 +418,6 @@ public class InterfaceCollection {
         map1.put("token",session);
         Map map2 = new HashMap<>();
         map2.put("SEC_ID", sec_id);
-        map2.put("SEC_ID", "tpyzq");
         map2.put("FLAG", true);
         map2.put("ENTRUST_NO",entrust_no);
         map1.put("parms",map2);
