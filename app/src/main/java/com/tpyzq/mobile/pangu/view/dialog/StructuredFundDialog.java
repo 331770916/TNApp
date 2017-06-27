@@ -98,10 +98,10 @@ public class StructuredFundDialog extends BaseDialog implements View.OnClickList
         } else if (FJWithdrawOrderActivity.TAG.equals(mTAG)) {
             img_1.setImageResource(R.mipmap.bank_img);
             tv_title.setText(R.string.IsRecall);
-            tv_2.setText(R.string.Gradingfundmerger);
-            tv_4.setText(mInput);
+            tv_2.setText(mStructuredFundEntity.getBusiness_name());
+            tv_4.setText(mStructuredFundEntity.getStocken_code());
             tv_6.setText(mStructuredFundEntity.getStoken_name());
-            tv_8.setText(mShare);
+            tv_8.setText(mStructuredFundEntity.getEntrust_amount());
             tv_10.setText(mStructuredFundEntity.getStock_account());
         }
     }
