@@ -75,9 +75,13 @@ public class CancelDialog {
                 positiveBtn.setLayoutParams(layoutParams);
                 view.findViewById(R.id.view_flag).setVisibility(View.GONE);
                 view.findViewById(R.id.cancel_dialog_nagtiveBtn).setVisibility(View.GONE);
-                tv_message.setText(Html.fromHtml("<html><body><p>尊敬的客户：</p>" +
-                        "<p style='text-indent:2em'>根据您的风险承受能力等级评测，您选择的</br>产品与您的风险承受能力等级不匹配，您不能购</br>买此产品。</p>" +
-                        "</body></html>"));
+                if (TextUtils.isEmpty(message)) {
+                    tv_message.setText(Html.fromHtml("<html><body><p>尊敬的客户：</p>" +
+                            "<p style='text-indent:2em'>根据您的风险承受能力等级评测，您选择的</br>产品与您的风险承受能力等级不匹配，您不能购</br>买此产品。</p>" +
+                            "</body></html>"));
+                } else {
+                    tv_message.setText(message);
+                }
                 break;
             default:
                 LinearLayout.LayoutParams layoutParams1 = new LinearLayout.LayoutParams(ViewGroup.LayoutParams.MATCH_PARENT, ViewGroup.LayoutParams.WRAP_CONTENT);

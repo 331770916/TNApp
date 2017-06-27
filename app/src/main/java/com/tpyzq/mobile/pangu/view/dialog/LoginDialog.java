@@ -17,51 +17,6 @@ import com.tpyzq.mobile.pangu.base.CustomApplication;
  * 切换注册手机Dialog
  */
 public class LoginDialog {
-
-    public static Dialog singleDialog(String msg, final Activity activity, final MistakeDialog.MistakeDialgoListener mistakeDialgoListener) {
-        WindowManager wm = (WindowManager) activity.getSystemService(Context.WINDOW_SERVICE);
-        int width = wm.getDefaultDisplay().getWidth();
-        int height = wm.getDefaultDisplay().getHeight();
-
-        LayoutInflater inflater = LayoutInflater.from(CustomApplication.getContext());
-        final View view = inflater.inflate(R.layout.dialog_mistake, null);
-
-        int minWidth = (int) (width * 0.7);
-        int minHeight = (int) (height * 0.3);
-
-        view.setMinimumWidth(minWidth);
-        view.setMinimumHeight(minHeight);
-
-        final TextView textView = (TextView) view.findViewById(R.id.mistakeMsg);
-        textView.setText(msg);
-
-        final Dialog dialog = new Dialog(activity, R.style.misTakedialog);
-        dialog.setContentView(view);
-        dialog.setCanceledOnTouchOutside(false);
-        dialog.setCancelable(true);
-
-        view.findViewById(R.id.mistakePositive).setOnClickListener(new View.OnClickListener() {
-            @Override
-            public void onClick(View v) {
-
-                if (null != mistakeDialgoListener) {
-                    mistakeDialgoListener.doPositive();
-                }
-
-                closeDialog(dialog, activity);
-            }
-        });
-
-        return dialog;
-    }
-
-
-    public Dialog singleDialog(String msg, Activity activity) {
-
-        return singleDialog(msg, activity, null);
-    }
-
-
     public static Dialog showDialog(String msg, final Activity activity, final MistakeDialog.MistakeDialgoListener mistakeDialgoListener) {
         WindowManager wm = (WindowManager) activity.getSystemService(Context.WINDOW_SERVICE);
         int width = wm.getDefaultDisplay().getWidth();
@@ -87,18 +42,17 @@ public class LoginDialog {
         view.findViewById(R.id.mistakePositive).setOnClickListener(new View.OnClickListener() {
             @Override
             public void onClick(View v) {
-
                 if (null != mistakeDialgoListener) {
+                    if (null!=dialog && dialog.isShowing()) {
+                        dialog.dismiss();
+                    }
                     mistakeDialgoListener.doPositive();
+                } else {
+                    closeDialog(dialog, activity);
                 }
-
-                closeDialog(dialog, activity);
             }
         });
-
         dialog.show();
-
-
         return dialog;
     }
 

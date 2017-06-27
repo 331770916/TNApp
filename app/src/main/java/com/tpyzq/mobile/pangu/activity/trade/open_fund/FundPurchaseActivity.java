@@ -14,6 +14,7 @@ import android.widget.Toast;
 
 import com.google.gson.Gson;
 import com.tpyzq.mobile.pangu.R;
+import com.tpyzq.mobile.pangu.activity.myself.handhall.RiskConfirmActivity;
 import com.tpyzq.mobile.pangu.activity.myself.login.TransactionLoginActivity;
 import com.tpyzq.mobile.pangu.base.BaseActivity;
 import com.tpyzq.mobile.pangu.data.AssessConfirmEntity;
@@ -22,6 +23,7 @@ import com.tpyzq.mobile.pangu.data.FundSubsEntity;
 import com.tpyzq.mobile.pangu.data.SubsStatusEntity;
 import com.tpyzq.mobile.pangu.http.NetWorkUtil;
 import com.tpyzq.mobile.pangu.util.ConstantUtil;
+import com.tpyzq.mobile.pangu.util.Helper;
 import com.tpyzq.mobile.pangu.util.SpUtils;
 import com.tpyzq.mobile.pangu.util.ToastUtils;
 import com.tpyzq.mobile.pangu.util.panguutil.UserUtil;
@@ -44,6 +46,8 @@ import static com.umeng.socialize.utils.DeviceConfig.context;
  * 基金申购
  */
 public class FundPurchaseActivity extends BaseActivity implements View.OnClickListener {
+    private static final int REQUESTCODE = 1001;//进入风险确认页面的请求码
+    private static int REQAGREEMENTCODE = 1002; //进入签署协议页面的请求码
     private TextView tv_choose_fund/*选择基金产品*/, tv_fund_name/*基金名称*/, tv_fund_value/*基金净值*/, tv_low_money/*个人最低投资*/, tv_usable_money/*可用资金*/;
     private ImageView iv_back/*返回*/;
     private EditText et_fund_code/*基金代码*/, et_fund_price/*申购金额*/;
@@ -124,7 +128,14 @@ public class FundPurchaseActivity extends BaseActivity implements View.OnClickLi
 
         @Override
         public void setEntrust(String price, String fund_company, String fund_code) {
-            buy_shengou(price, fund_company, fund_code);
+//            buy_shengou(price, fund_company, fund_code);
+            if (Helper.isGoToActivity(FundPurchaseActivity.this,null)) {
+                Intent intent = new Intent(FundPurchaseActivity.this, RiskConfirmActivity.class);
+                intent.putExtra("fundData",fundData);
+                intent.putExtra("from","fundPurchase");
+                FundPurchaseActivity.this.startActivityForResult(intent, REQUESTCODE);
+            }
+
         }
     };
 
@@ -188,7 +199,7 @@ public class FundPurchaseActivity extends BaseActivity implements View.OnClickLi
                             intent.setClass(FundPurchaseActivity.this, AssessConfirmActivity.class);
                             intent.putExtra("assessConfirm", assessConfirmBean);
                             intent.putExtra("transaction", "true");
-                            startActivityForResult(intent, REQUEST);
+                            startActivityForResult(intent, REQAGREEMENTCODE);
                         }
                     } else if ("-6".equals(code)) {
                         FundPurchaseActivity.this.startActivity(new Intent(FundPurchaseActivity.this, TransactionLoginActivity.class));
@@ -227,8 +238,12 @@ public class FundPurchaseActivity extends BaseActivity implements View.OnClickLi
             et_fund_code.setText(fundData.FUND_CODE);
             getFundData(fundData.FUND_CODE, fundData.FUND_COMPANY_NAME);
         }
-        if (requestCode == REQUEST && resultCode == 500) {
+
+        if (requestCode == REQAGREEMENTCODE && resultCode == RESULT_OK) {//签署协议页面返回
             et_fund_price.setText("");
+        }
+        if (requestCode == REQUESTCODE && resultCode == RESULT_OK) {//风险同意书签署返回
+            buy_shengou(et_fund_price.getText().toString().trim(),fundData.FUND_COMPANY,fundData.FUND_CODE);
         }
     }
 

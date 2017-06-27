@@ -540,6 +540,14 @@
     <string name="RiskEvaluationText5">投资风险评测</string>
     <string name="RiskEvaluationButton">重新测评</string>
 
+    <string name="RiskConfirmLevel">您的风险承受能力等级为：</string>
+    <string name="ReadAll">本人已阅读并同意上述协议内容</string>
+    <string name="RiskConfirmProductLevel">该产品的风险等级为：</string>
+    <string name="RiskConfirmTitle">金融产品或金融服务不适当警示\n及客户投资确认书</string>
+    <string name="RiskConfirmText1">经检测，您拟投资的产品存在以下情况：</string>
+    <string name="RiskConfirmText2">\u3000\u3000本公司就上述适当性匹配结果与您确认，并建议您应当审慎考察该产品的特征及风险，自行作出充分风险评估。</string>
+    <string name="RiskConfirmText3">\u3000\u3000若您经审慎考虑后，仍坚持投资该产品，并愿意承担该项投资可能引起的损失和其他后果；投资该项产品的决定，系您本人独立、自主、真实的意思表示，与我公司及相关从业人员无关，请签署投资确认书。</string>
+
     <!--撤单-->
     <string name="Revoke">撤单</string>
     <string name="TextView1">股票名称</string>

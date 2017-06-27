@@ -19,11 +19,16 @@ import com.android.keyboardlibrary.KeyboardUtil;
 import com.google.gson.Gson;
 import com.google.gson.reflect.TypeToken;
 import com.tpyzq.mobile.pangu.R;
+import com.tpyzq.mobile.pangu.activity.myself.handhall.RiskConfirmActivity;
 import com.tpyzq.mobile.pangu.activity.myself.login.TransactionLoginActivity;
+import com.tpyzq.mobile.pangu.activity.trade.open_fund.AssessConfirmActivity;
 import com.tpyzq.mobile.pangu.base.BaseActivity;
+import com.tpyzq.mobile.pangu.base.InterfaceCollection;
+import com.tpyzq.mobile.pangu.data.AssessConfirmEntity;
 import com.tpyzq.mobile.pangu.data.OTC_SubscriptionAffirmMsgBean;
 import com.tpyzq.mobile.pangu.data.OTC_SubscriptionListEntity;
 import com.tpyzq.mobile.pangu.data.OTC_SubscriptionListMasBean;
+import com.tpyzq.mobile.pangu.data.ResultInfo;
 import com.tpyzq.mobile.pangu.http.NetWorkUtil;
 import com.tpyzq.mobile.pangu.interfac.IsClickedListener;
 import com.tpyzq.mobile.pangu.log.LogUtil;
@@ -65,6 +70,9 @@ public class OTC_SubscriptionActivity extends BaseActivity implements View.OnCli
     private ScrollView mScrollView;
     private Dialog submit;
     private String mSession ;
+    private OTC_SubscriptionDialog dialog;
+    private static int REQUESTCODE = 1001; //进入风险确认页面的请求码
+    private static int REQAGREEMENTCODE = 1002; //进入签署协议页面的请求码
 
     @Override
     public void initView() {
@@ -372,8 +380,8 @@ public class OTC_SubscriptionActivity extends BaseActivity implements View.OnCli
                 String SubscriptionMoney = etOTC_SubscriptionMoney.getText().toString();       //获取输入的认购金额
                 String stockCode = etOTC_ProductCode.getText().toString();          //获取输入的 输入代码
                 //实例化PopupWindow
-                OTC_SubscriptionDialog dialog = new OTC_SubscriptionDialog(this, OTC_SubscriptionActivity.this, map,
-                        SubscriptionMoney, stockCode, this);
+//                dialog = new OTC_SubscriptionDialog(this, OTC_SubscriptionActivity.this, map,SubscriptionMoney, stockCode, this);
+                dialog = new OTC_SubscriptionDialog(this,map.get("prodta_no"),SubscriptionMoney, stockCode, this);
                 dialog.show();
                 break;
         }
@@ -383,25 +391,94 @@ public class OTC_SubscriptionActivity extends BaseActivity implements View.OnCli
     @Override
     protected void onActivityResult(int requestCode, int resultCode, Intent data) {
         super.onActivityResult(requestCode, resultCode, data);
-        if (requestCode == OTC_SubscriptionActivity.REQUSET && resultCode == RESULT_OK) {
+        if (requestCode == OTC_SubscriptionActivity.REQUSET && resultCode == RESULT_OK) {//选择otc产品
             int position = data.getIntExtra("position", -1);
             etOTC_ProductCode.setFocusableInTouchMode(true);
             etOTC_ProductCode.setText(list.get(position).getStockCode());
             point = data.getIntExtra("position", -1);
             etOTC_ProductCode.setSelection(etOTC_ProductCode.getText().length());
         }
-        if (requestCode == 100 && resultCode == 500) {
+        if (requestCode == REQAGREEMENTCODE && resultCode == RESULT_OK) {//签署协议成功返回
             etOTC_SubscriptionMoney.setText("");  //清空认购价格
+        }
+        if (requestCode == REQUESTCODE && resultCode == RESULT_OK) {//风险通知书成功返回
+            final String SubscriptionMoney = etOTC_SubscriptionMoney.getText().toString();       //获取输入的认购金额
+            final String stockCode = etOTC_ProductCode.getText().toString();
+            InterfaceCollection.getInstance().getAffirm(stockCode, map.get("prodta_no"), mSession, SubscriptionMoney, new InterfaceCollection.InterfaceCallback() {
+                @Override
+                public void callResult(ResultInfo info) {
+                    String code = info.getCode();
+                    String msg = info.getMsg();
+                    if (code.equals("-6")) {
+                        Intent intent = new Intent(OTC_SubscriptionActivity.this, TransactionLoginActivity.class);
+                        OTC_SubscriptionActivity.this.startActivity(intent);
+                        if (null!=dialog&&dialog.isShowing()) {
+                            dialog.dismiss();
+                            finish();
+                        }
+                    } else if ("0".equalsIgnoreCase(code)) {
+                        AssessConfirmEntity assessConfirmBean = (AssessConfirmEntity)info.getData();
+                        if("0".equalsIgnoreCase(assessConfirmBean.IS_ABLE)){
+                            getProductMsg(stockCode, SubscriptionMoney);
+                        }else {
+                            Intent intent = new Intent();
+                            intent.putExtra("assessConfirm",assessConfirmBean);
+                            intent.putExtra("transaction", "true");
+                            intent.setClass(OTC_SubscriptionActivity.this,AssessConfirmActivity.class);
+                            OTC_SubscriptionActivity.this.startActivityForResult(intent,REQAGREEMENTCODE);
+                            if (null!=dialog&&dialog.isShowing()){
+                                dialog.dismiss();
+                            }
+                        }
+                    } else {
+                        MistakeDialog.showDialog(msg, OTC_SubscriptionActivity.this);
+                    }
+                }
+            });
         }
     }
 
 
     @Override
     public void callBack(boolean isOk) {
-        //如果  委托成功  所有的 数据清空
-        if (true == isOk) {
-            wipeData();
+        //点击按钮回调 跳转到风险通知书
+        Intent intent = new Intent(OTC_SubscriptionActivity.this, RiskConfirmActivity.class);
+        intent.putExtra("from","OTC_Subscription");
+        intent.putExtra("prodta_no",map.get("prodta_no"));
+        intent.putExtra("prod_code",map.get("prod_code"));
+        OTC_SubscriptionActivity.this.startActivityForResult(intent,REQUESTCODE);
+        if (null!=dialog&&dialog.isShowing()){
+            dialog.dismiss();
         }
+    }
+
+    private void getProductMsg(String stockCode, String subscriptionMoney) {
+        InterfaceCollection.getInstance().getProductMsg(mSession,stockCode,map.get("prodta_no") , subscriptionMoney, new InterfaceCollection.InterfaceCallback() {
+            @Override
+            public void callResult(ResultInfo info) {
+                String code = info.getCode();
+                String msg = info.getMsg();
+                if ("-6".equalsIgnoreCase(code)) {
+                    Intent intent = new Intent(OTC_SubscriptionActivity.this, TransactionLoginActivity.class);
+                    OTC_SubscriptionActivity.this.startActivity(intent);
+                    if (null!=dialog&&dialog.isShowing()) {
+                        dialog.dismiss();
+                        finish();
+                    }
+                    finish();
+                } else
+                if (("0").equalsIgnoreCase(code)) {
+                    ResultDialog.getInstance().show("委托已提交", R.mipmap.duigou);
+                    wipeData();
+                }else {
+                    MistakeDialog.showDialog(msg, OTC_SubscriptionActivity.this);
+                    if (null!=dialog&&dialog.isShowing()) {
+                        dialog.dismiss();
+                        finish();
+                    }
+                }
+            }
+        });
     }
 
     /**

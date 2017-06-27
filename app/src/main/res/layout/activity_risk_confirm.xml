@@ -1,0 +1,205 @@
+<?xml version="1.0" encoding="utf-8"?>
+<LinearLayout xmlns:android="http://schemas.android.com/apk/res/android"
+    android:orientation="vertical" android:layout_width="match_parent"
+    android:layout_height="match_parent">
+    <RelativeLayout
+        android:layout_width="match_parent"
+        android:layout_height="@dimen/size25"
+        android:background="@color/blue"
+        android:clipToPadding="true"
+        android:fitsSystemWindows="true" />
+
+    <RelativeLayout
+        android:layout_width="match_parent"
+        android:layout_height="@dimen/pickerview_topbar_height"
+        android:background="@color/blue">
+
+        <ImageView
+            android:id="@+id/AGpublish_back"
+            android:layout_width="wrap_content"
+            android:layout_height="wrap_content"
+            android:layout_alignParentLeft="true"
+            android:layout_centerInParent="true"
+            android:padding="@dimen/size10"
+            android:src="@mipmap/back_btn" />
+
+        <TextView
+            android:id="@+id/publish_title"
+            android:layout_width="wrap_content"
+            android:layout_height="wrap_content"
+            android:layout_centerInParent="true"
+            android:text="@string/RiskEvaluation"
+            android:textColor="@color/white"
+            android:textSize="@dimen/pickerview_topbar_title_textsize" />
+    </RelativeLayout>
+
+    <ScrollView
+        android:layout_width="match_parent"
+        android:layout_height="0dp"
+        android:layout_weight="1">
+
+        <LinearLayout
+            android:layout_width="match_parent"
+            android:layout_height="match_parent"
+            android:layout_marginLeft="@dimen/size19"
+            android:layout_marginRight="@dimen/size19"
+            android:paddingBottom="@dimen/size28"
+            android:orientation="vertical">
+            <TextView
+                android:id="@+id/Headline"
+                android:layout_width="match_parent"
+                android:layout_height="wrap_content"
+                android:gravity="center"
+                android:padding="@dimen/size15"
+                android:text="@string/RiskConfirmTitle"
+                android:textSize="@dimen/txtSize20" />
+
+            <LinearLayout
+                android:layout_width="match_parent"
+                android:layout_height="@dimen/size128"
+                android:background="#f0f0f0">
+
+                <LinearLayout
+                    android:layout_width="wrap_content"
+                    android:layout_height="wrap_content"
+                    android:layout_marginLeft="@dimen/size20"
+                    android:orientation="vertical"
+                    android:paddingBottom="@dimen/size13"
+                    android:paddingTop="@dimen/size13">
+
+                    <TextView
+                        android:layout_width="wrap_content"
+                        android:layout_height="@dimen/size17"
+                        android:text="@string/RiskConfirmProductLevel"
+                        android:textColor="#4d4d4d"
+                        android:textSize="@dimen/size14" />
+
+                    <TextView
+                        android:id="@+id/tv_risk_level"
+                        android:layout_width="wrap_content"
+                        android:layout_height="@dimen/size20"
+                        style="@style/riskTvStyle"
+                        android:textStyle="bold" />
+
+                    <LinearLayout
+                        android:layout_width="wrap_content"
+                        android:layout_height="wrap_content">
+
+                        <TextView
+                            android:layout_width="wrap_content"
+                            android:layout_height="wrap_content"
+                            android:singleLine="true"
+                            android:textSize="@dimen/size14"
+                            android:text="-------------------------------------------"
+                            android:textColor="#d3d3d3" />
+
+                        <TextView
+                            android:layout_width="wrap_content"
+                            android:layout_height="wrap_content"
+                            android:singleLine="true"
+                            android:textSize="@dimen/size14"
+                            android:text=" >>"
+                            android:textColor="#d3d3d3" />
+                    </LinearLayout>
+
+                    <TextView
+                        android:layout_width="wrap_content"
+                        android:layout_height="@dimen/size17"
+                        android:text="@string/RiskConfirmLevel"
+                        style="@style/riskTvStyle"/>
+
+                    <TextView
+                        android:id="@+id/tv_product_level"
+                        android:layout_width="wrap_content"
+                        android:layout_height="@dimen/size20"
+                        style="@style/riskTvStyle"
+                        android:textStyle="bold" />
+                </LinearLayout>
+
+                <TextView
+                    android:id="@+id/tv_result"
+                    android:layout_width="wrap_content"
+                    android:layout_height="wrap_content"
+                    android:layout_gravity="center_vertical"
+                    android:layout_marginLeft="@dimen/size23"
+                    android:textColor="#d0011b"
+                    android:textSize="@dimen/size24" />
+            </LinearLayout>
+            <LinearLayout
+                android:id="@+id/ll_response"
+                android:layout_width="match_parent"
+                android:layout_height="wrap_content"
+                android:orientation="vertical"
+                android:visibility="gone">
+                <TextView
+                    android:layout_width="match_parent"
+                    android:layout_height="@dimen/size22"
+                    style="@style/riskTvStyle"
+                    android:layout_marginTop="@dimen/size14"
+                    android:text="@string/RiskConfirmText1" />
+                <TextView
+                    android:id="@+id/tv_response"
+                    android:layout_width="match_parent"
+                    android:layout_height="wrap_content"
+                    style="@style/riskTvStyle"
+                    android:textColor="#d0011b"
+                    android:layout_marginLeft="@dimen/size10"
+                    android:text="" />
+            </LinearLayout>
+
+            <TextView
+                android:id="@+id/tv_warn1"
+                android:layout_width="match_parent"
+                android:layout_height="wrap_content"
+                android:layout_marginTop="@dimen/size14"
+                style="@style/riskTvStyle"
+                android:text="@string/RiskConfirmText2" />
+            <TextView
+                android:id="@+id/tv_warn"
+                android:layout_width="match_parent"
+                android:layout_height="wrap_content"
+                style="@style/riskTvStyle"
+                android:visibility="gone"
+                android:text="@string/RiskConfirmText3" />
+
+            <CheckBox
+                android:id="@+id/cb_open_fund"
+                android:layout_width="wrap_content"
+                android:layout_height="@dimen/size20"
+                android:layout_marginTop="@dimen/size28"
+                android:button="@drawable/mybg"
+                android:paddingLeft="@dimen/size5"
+                android:text="@string/ReadAll"
+                android:textSize="@dimen/txtSize12" />
+
+        </LinearLayout>
+    </ScrollView>
+
+    <LinearLayout
+        android:id="@+id/ll_btn"
+        android:layout_width="match_parent"
+        android:layout_height="wrap_content"
+        android:orientation="horizontal"
+        android:visibility="visible">
+
+        <Button
+            android:id="@+id/btn_ok"
+            android:layout_width="wrap_content"
+            android:layout_height="wrap_content"
+            android:layout_weight="1"
+            android:background="@color/subscribe"
+            android:text="@string/consent"
+            android:textColor="@color/white"
+            android:textSize="@dimen/txtSize14" />
+
+        <Button
+            android:id="@+id/btn_cancel"
+            android:layout_width="wrap_content"
+            android:layout_height="wrap_content"
+            android:layout_weight="1"
+            android:background="@color/dividerColor"
+            android:text="@string/cancel"
+            android:textColor="@color/hushenTab_titleColor"
+            android:textSize="@dimen/txtSize14" />
+    </LinearLayout>
+</LinearLayout>

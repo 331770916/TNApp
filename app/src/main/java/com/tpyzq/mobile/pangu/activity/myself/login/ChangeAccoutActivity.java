@@ -88,6 +88,7 @@ import com.tpyzq.mobile.pangu.util.keyboard.ResponseInterface;
 import com.tpyzq.mobile.pangu.util.panguutil.APPInfoUtils;
 import com.tpyzq.mobile.pangu.util.panguutil.BRutil;
 import com.tpyzq.mobile.pangu.util.panguutil.UserUtil;
+import com.tpyzq.mobile.pangu.view.dialog.CancelDialog;
 import com.tpyzq.mobile.pangu.view.dialog.CertificationDialog;
 import com.tpyzq.mobile.pangu.view.dialog.LoadingDialog;
 import com.tpyzq.mobile.pangu.view.dialog.LoginDialog;
@@ -136,6 +137,10 @@ public class ChangeAccoutActivity extends BaseActivity implements View.OnClickLi
     private String passwordFormat;
     //接口数据
     private String OLD_SRRC, OLD_TCC, mSession;
+
+    private String IS_OVERDUE;
+    private String CORP_RISK_LEVEL;
+    private String CORP_END_DATE;
     //插件
     private UnikeyUrls unikeyUrls;
     private String diviceId;
@@ -503,25 +508,40 @@ public class ChangeAccoutActivity extends BaseActivity implements View.OnClickLi
                             mSession = Session.getString("SESSION");
                             OLD_SRRC = Session.getString("OLD_SRRC");
                             OLD_TCC = Session.getString("OLD_TCC");
+                            IS_OVERDUE = Session.optString("IS_OVERDUE");//风险评测状态 0正常 1即将过期 2过期 3未做
+                            CORP_RISK_LEVEL = Session.optString("CORP_RISK_LEVEL");//客户当前风险承受等级
+                            CORP_END_DATE = Session.optString("CORP_END_DATE");//风险测评有效期到期时间
                         }
                         if (code_Str.equals("0")) {
                             isLoginSuc = true;
                             if (mCommit != null) {
                                 mCommit.dismiss();
                             }
+                            //存储风险测试结果 测评状态--测评等级--有效期结束日期
+                            SpUtils.putString(ChangeAccoutActivity.this,"corpResult",IS_OVERDUE+"--"+CORP_RISK_LEVEL+"--"+CORP_END_DATE);
                             //第一次登录数据库交易账号无数据 添加到数据库
                             if (!TextUtils.isEmpty(OLD_SRRC) && !TextUtils.isEmpty(OLD_TCC)) {
                                 if (!DeviceUtil.getDeviceId(CustomApplication.getContext()).equals(OLD_TCC) && !android.os.Build.MODEL.equals(OLD_SRRC)) {
                                     getData(mBDAccount.getText().toString().trim(), "false",mSession);
-                                    Dialog mSuccessDialog = LoginDialog.showDialog("您更换了登录设备，上次使用的设备型号是" + OLD_SRRC, ChangeAccoutActivity.this);
+                                    LoginDialog.showDialog("您更换了登录设备，上次使用的设备型号是" + OLD_SRRC, ChangeAccoutActivity.this, new MistakeDialog.MistakeDialgoListener() {
+                                        @Override
+                                        public void doPositive() {
+                                            if (isNeedShowCropDialog() && !"0".equalsIgnoreCase(IS_OVERDUE)) {
+                                                //弹出风险评测dialog
+                                                showCorpDialog();
+                                            } else {
+                                                finish();
+                                            }
+                                        }
+                                    });
                                     SimpleDateFormat sDateFormat = new SimpleDateFormat("yyyy-MM-dd HH:mm:ss");
                                     final String date = sDateFormat.format(new java.util.Date());
                                     BRutil.menuLogIn(android.os.Build.VERSION.RELEASE, UserUtil.Mobile, DeviceUtil.getDeviceId(CustomApplication.getContext()), APPInfoUtils.getVersionName(ChangeAccoutActivity.this), ip, UserUtil.capitalAccount, date);
                                 } else {
-                                    getData(mBDAccount.getText().toString().trim(), "true",mSession);
+                                    showDialogOrSaveData();
                                 }
                             } else {
-                                getData(mBDAccount.getText().toString().trim(), "true",mSession);
+                                showDialogOrSaveData();
                             }
                         } else {
                             mBindingbtn.setFocusable(true);
@@ -554,7 +574,76 @@ public class ChangeAccoutActivity extends BaseActivity implements View.OnClickLi
             });
         }
     }
+    /**
+     * 显示弹框，绑定账号请求完成后不关闭页面
+     * 不显示弹框，绑定账号请求完成后关闭页面
+     */
+    private void showDialogOrSaveData() {
+        if (isNeedShowCropDialog() && !"0".equalsIgnoreCase(IS_OVERDUE)) {
+            //弹出风险评测dialog
+            showCorpDialog();
+            getData(mBDAccount.getText().toString().trim(), "false",mSession);
+        } else {
+            getData(mBDAccount.getText().toString().trim(), "true", mSession);
+        }
+    }
+    /**
+     * 弹出风险测评弹框
+     */
+    private void showCorpDialog() {
+        int style = 1000;
+        if ("1".equalsIgnoreCase(IS_OVERDUE)) {
+            //即将过期
+            style = 1000;
+        } else if ("2".equalsIgnoreCase(IS_OVERDUE)) {
+            //过期
+            style = 2000;
+        } else {//3的情况  未做
+            style = 3000;
+        }
+        CancelDialog.cancleDialog(ChangeAccoutActivity.this, CORP_END_DATE, style, new CancelDialog.PositiveClickListener() {
+            @Override
+            public void onPositiveClick() {
+                //现在测试按钮
+                isLoginSuc = false;
+                // TODO: 2017/6/26 跳转到测评页面
+                Helper.getInstance().showToast(ChangeAccoutActivity.this,"跳转到测评页面");
+            }
 
+            @Override
+            public void onNagtiveClick() {
+                //以后再说
+                finish();
+            }
+        });
+    }
+    /**
+     * 是否需要返回业务类进行弹框操作
+     * @return true需要 false不需要
+     */
+    private boolean isNeedShowCropDialog() {
+        boolean flag = false;
+        try {
+            String isDialogShow = SpUtils.getString(this,"ISDIALOGSHOW","");//测评状态 存储形式：日期
+            //状态码--风险等级--到期日期 如：20160606--1--中等--20170606
+//            if (!TextUtils.isEmpty(isDialogShow)) {
+            // TODO: 2017/6/26 确定返回日期的格式
+            SimpleDateFormat sDateFormat = new SimpleDateFormat("yyyy-MM-dd");
+            String date = sDateFormat.format(new java.util.Date());
+            SpUtils.putString(this,"ISDIALOGSHOW",date);
+            if (!date.equalsIgnoreCase(isDialogShow)) {
+                //今天是第一次登录了，返回业务类进行弹框
+                flag = true;
+            }
+//            } else {
+//                flag = true;
+//            }
+        } catch (Exception e) {
+            e.printStackTrace();
+        } finally {
+            return flag;
+        }
+    }
     /**
      * 请求验证码
      */

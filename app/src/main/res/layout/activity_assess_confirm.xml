@@ -47,147 +47,19 @@
             android:layout_width="match_parent"
             android:layout_height="match_parent"
             android:orientation="vertical">
-
-            <LinearLayout
-                android:id="@+id/ll_view1"
-                android:layout_width="match_parent"
-                android:layout_height="match_parent"
-                android:orientation="vertical">
-
-                <TextView
-                    android:layout_width="match_parent"
-                    android:layout_height="@dimen/size50"
-                    android:gravity="center|bottom"
-                    android:paddingBottom="@dimen/size5"
-                    android:text="根据您的过往测评对您进行如下评估"
-                    android:textSize="@dimen/txtSize10" />
-
-                <LinearLayout
-                    android:layout_width="match_parent"
-                    android:layout_height="@dimen/size230"
-                    android:background="@color/white"
-                    android:orientation="vertical"
-                    android:paddingBottom="@dimen/size10"
-                    android:paddingLeft="@dimen/size20"
-                    android:paddingRight="@dimen/size20"
-                    android:paddingTop="@dimen/size10">
-
-                    <RelativeLayout
-                        android:layout_width="match_parent"
-                        android:layout_height="@dimen/size110"
-                        android:background="@drawable/shape_dotted_rectangle"
-                        android:paddingBottom="@dimen/size10"
-                        android:paddingLeft="@dimen/size10"
-                        android:paddingRight="@dimen/size10"
-                        android:paddingTop="@dimen/size10">
-
-                        <TextView
-                            android:id="@+id/tv_1"
-                            android:layout_width="wrap_content"
-                            android:layout_height="wrap_content"
-                            android:text="您的风险评估结果："
-                            android:textSize="@dimen/size15"/>
-
-                        <TextView
-                            android:id="@+id/tv_fit"
-                            android:layout_width="wrap_content"
-                            android:layout_height="wrap_content"
-                            android:layout_toRightOf="@id/tv_1"
-                            android:text="----"
-                            android:textSize="@dimen/size15"
-                            android:textColor="@color/calendarBtnColor"
-                           />
-
-                        <TextView
-                            android:id="@+id/tv_2"
-                            android:layout_width="wrap_content"
-                            android:layout_height="wrap_content"
-                            android:layout_below="@id/tv_1"
-                            android:layout_marginTop="@dimen/size3"
-                            android:text="您的风险等级："
-                            android:textSize="@dimen/size13"
-                            android:textColor="@color/text" />
-
-                        <TextView
-                            android:id="@+id/tv_risk_level"
-                            android:layout_width="wrap_content"
-                            android:layout_height="wrap_content"
-                            android:layout_alignTop="@id/tv_2"
-                            android:layout_toRightOf="@id/tv_2"
-                            android:text="----"
-                            android:textSize="@dimen/size13"
-                            android:textColor="@color/calendarBtnColor" />
-
-                        <TextView
-                            android:id="@+id/tv_3"
-                            android:layout_width="wrap_content"
-                            android:layout_height="wrap_content"
-                            android:layout_below="@id/tv_2"
-                            android:layout_marginTop="@dimen/size3"
-                            android:text="本产品的风险等级："
-                            android:textSize="@dimen/size13"
-                            android:textColor="@color/text" />
-
-                        <TextView
-                            android:id="@+id/tv_produce_risk_level"
-                            android:layout_width="wrap_content"
-                            android:layout_height="wrap_content"
-                            android:layout_alignTop="@id/tv_3"
-                            android:layout_toRightOf="@id/tv_3"
-                            android:text="----"
-                            android:textSize="@dimen/size13"
-                            android:textColor="@color/calendarBtnColor" />
-
-                        <TextView
-                            android:id="@+id/tv_evaluating"
-                            android:layout_width="@dimen/size70"
-                            android:layout_height="@dimen/size22"
-                            android:layout_alignParentRight="true"
-                            android:layout_marginTop="@dimen/size18"
-                            android:background="@drawable/shape_bule_rectangle"
-                            android:gravity="center"
-                            android:text="现在测评"
-                            android:textSize="@dimen/size12"
-                            android:textColor="@color/white" />
-
-
-                        <TextView
-                            android:layout_width="wrap_content"
-                            android:layout_height="wrap_content"
-                            android:layout_alignParentBottom="true"
-                            android:layout_centerHorizontal="true"
-                            android:layout_marginTop="@dimen/size3"
-                            android:drawableLeft="@mipmap/icon_warn"
-                            android:drawablePadding="@dimen/size5"
-                            android:gravity="center"
-                            android:text="该结果仅为提示，您仍可自行决定是否投资"
-                            android:textColor="@color/text"
-                            android:textSize="@dimen/size12" />
-                    </RelativeLayout>
-
-
-                    <TextView
-                        android:layout_width="wrap_content"
-                        android:layout_height="wrap_content"
-                        android:layout_marginTop="@dimen/size10"
-                        android:text="特别提示："
-                        android:textSize="@dimen/size15"/>
-
-                    <TextView
-                        android:layout_width="wrap_content"
-                        android:layout_height="wrap_content"
-                        android:text="@string/Remind"
-                        android:textColor="@color/text"
-                        android:layout_marginTop="@dimen/size5"
-                        android:textSize="@dimen/size13" />
-                </LinearLayout>
-            </LinearLayout>
-
             <LinearLayout
                 android:id="@+id/ll_view2"
                 android:layout_width="match_parent"
                 android:layout_height="match_parent"
                 android:orientation="vertical">
+                <TextView
+                    android:layout_width="match_parent"
+                    android:layout_height="@dimen/size15"
+                    android:textSize="@dimen/size15"
+                    android:layout_marginTop="@dimen/size20"
+                    android:textColor="#4d4d4d"
+                    android:layout_marginLeft="@dimen/size20"
+                    android:text="根据产品要求及您账户的情况，需要签署以下协议"/>
 
                 <com.tpyzq.mobile.pangu.view.gridview.MyListView
                     android:id="@+id/lv_agreement"
@@ -209,7 +81,7 @@
                     android:button="@drawable/mybg"
                     android:paddingLeft="@dimen/size5"
                     android:text="我已经仔细阅读并同意签署以上各项协议"
-                    android:textSize="@dimen/txtSize12" />
+                    android:textSize="@dimen/txtSize14" />
             </LinearLayout>
 
             <LinearLayout
