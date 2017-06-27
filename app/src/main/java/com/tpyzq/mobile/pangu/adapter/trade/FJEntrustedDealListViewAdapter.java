@@ -91,8 +91,8 @@ public class FJEntrustedDealListViewAdapter extends BaseAdapter implements View.
                     viewHodler.tableGone.setVisibility(View.VISIBLE);
                     ((TextView)convertView.findViewById(R.id.fj_gonetv1)).setText("委托数量：");
                     ((TextView)convertView.findViewById(R.id.fj_gonetv2)).setText("成交金额：");
-                    ((TextView)convertView.findViewById(R.id.fj_gonetv4)).setText("委托金额：");
-                    ((TextView)convertView.findViewById(R.id.fj_gonetv3)).setText("发生日期：");
+                    ((TextView)convertView.findViewById(R.id.fj_gonetv3)).setText("委托金额：");
+                    ((TextView)convertView.findViewById(R.id.fj_gonetv4)).setText("发生日期：");
                     ((TextView)convertView.findViewById(R.id.fj_gonetv5)).setText("成交数量：");
                     ((TextView)convertView.findViewById(R.id.fj_gonetv6)).setText("流水号：");
                     ((TextView)convertView.findViewById(R.id.fj_gonetv7)).setText("成交价格：");

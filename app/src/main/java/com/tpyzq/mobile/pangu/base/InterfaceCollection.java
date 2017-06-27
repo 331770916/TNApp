@@ -382,7 +382,7 @@ public class InterfaceCollection {
                                 bean.setStoken_name(obj.getString("STOCK_NAME"));
                                 bean.setStocken_code(obj.getString("STOCK_CODE"));
                                 bean.setBusiness_name(obj.getString("BUSINESS_NAME"));
-                                bean.setReport_time(obj.getString("REPORT_TIME"));
+                                bean.setReport_time(obj.getString("CURR_TIME"));
                                 bean.setEntrust_amount(obj.getString("ENTRUST_AMOUNT"));
                                 bean.setStock_account(obj.getString("STOCK_ACCOUNT"));
                                 bean.setPosition_str(obj.getString("POSITION_STR"));
