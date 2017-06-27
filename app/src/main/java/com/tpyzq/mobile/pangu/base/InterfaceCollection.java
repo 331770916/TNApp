@@ -538,10 +538,16 @@ public class InterfaceCollection {
                                 JSONObject obj = data.getJSONObject(i);
                                 bean.setStoken_name(obj.getString("STOCK_NAME"));
                                 bean.setStocken_code(obj.getString("STOCK_CODE"));
-                                bean.setEntrust_amount(obj.getString("ENTRUST_AMOUNT"));
-                                bean.setEntrust_status(obj.getString("ENTRUST_STATUS"));
+                                bean.setBusiness_name(obj.getString("BUSINESS_NAME"));
                                 bean.setReport_time(obj.getString("REPORT_TIME"));
+                                bean.setEntrust_amount(obj.getString("ENTRUST_AMOUNT"));
+                                bean.setStock_account(obj.getString("STOCK_ACCOUNT"));
                                 bean.setPosition_str(obj.getString("POSITION_STR"));
+                                bean.setCurr_date(obj.getString("CURR_DATE"));
+                                bean.setEntrust_no(obj.getString("ENTRUST_NO"));
+                                bean.setEntrust_status(obj.getString("ENTRUST_STATUS"));
+                                bean.setEntrust_balance(obj.getString("ENTRUST_BALANCE"));
+                                bean.setBusiness_amount(obj.getString("BUSINESS_AMOUNT"));
                                 ses.add(bean);
                             }
                             info.setData(ses);
@@ -687,14 +693,19 @@ public class InterfaceCollection {
                             for (int i = 0; i < data.length(); i++) {
                                 StructuredFundEntity bean = new StructuredFundEntity();
                                 JSONObject obj = data.getJSONObject(i);
-                                bean.setStoken_name(obj.getString("STOCK_NAME"));
-                                bean.setStocken_code(obj.getString("STOCK_CODE"));
-                                bean.setEntrust_bs(obj.getString("ENTRUST_BS"));
-                                bean.setEntrust_amount(obj.getString("OCCUR_AMOUNT"));//委托量等同分拆份额
+                                bean.setStoken_name(obj.getString("SECU_NAME"));
+                                bean.setStocken_code(obj.getString("SECU_CODE"));
+                                bean.setBusiness_name(obj.getString("BUSINESS_NAME"));
                                 bean.setEntrust_status(obj.getString("BUSINESS_STATUS"));
-                                bean.setReport_time(obj.getString("BUSINESS_TIME"));
+                                bean.setReport_time(obj.getString("MATCHED_TIME"));
                                 bean.setInit_date(obj.getString("INIT_DATE"));
-                                bean.setPosition_str(obj.getString("POSITION_STR"));
+                                bean.setPosition_str(obj.getString("KEY_STR"));
+                                bean.setEntrust_amount(obj.getString("ENTRUST_AMOUNT"));//委托量等同分拆份额
+                                bean.setEntrust_balance(obj.getString("ENTRUST_BALANCE"));
+                                bean.setBusiness_amount(obj.getString("MATCHED_QTY"));
+                                bean.setMatched_price(obj.getString("MATCHED_PRICE"));
+                                bean.setMatched_amt(obj.getString("MATCHED_AMT"));
+                                bean.setSerial_no(obj.getString("SERIAL_NO"));
                                 ses.add(bean);
                             }
                             info.setData(ses);

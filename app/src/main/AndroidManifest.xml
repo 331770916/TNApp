@@ -334,10 +334,9 @@
         <activity android:name=".activity.trade.stock.FJDealQueryActivity" />
 
         <!--投票 相关activity-->
+        <activity android:name=".activity.trade.stock.NetworkVotingActivity" />
         <activity android:name=".activity.trade.stock.VoteActivity" />
-        <activity android:name=".activity.trade.stock.VoteNetworkActivity" />
         <activity android:name=".activity.trade.stock.VoteQueryActivity" />
-        <activity android:name=".activity.trade.stock.VoteQueryShareholdersAccountActivity" />
 
         <!--行情 相关activity-->
         <activity android:name=".activity.market.quotation.plate.PlateListActivity" />

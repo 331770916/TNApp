@@ -132,12 +132,12 @@ public class FJEntrustedDealListViewAdapter extends BaseAdapter implements View.
                         break;
                     case 1:
                         viewHodler.tvGone1.setText(bean.getEntrust_amount());
-                        viewHodler.tvGone2.setText("10000");
+                        viewHodler.tvGone2.setText(bean.getMatched_amt());
                         viewHodler.tvGone3.setText(bean.getEntrust_balance());
                         viewHodler.tvGone4.setText(bean.getInit_date());
                         viewHodler.tvGone5.setText(bean.getBusiness_amount());
                         viewHodler.tvGone6.setText(bean.getSerial_no());
-                        viewHodler.tvGone7.setText("8.88");
+                        viewHodler.tvGone7.setText(bean.getMatched_price());
                         break;
                 }
             }

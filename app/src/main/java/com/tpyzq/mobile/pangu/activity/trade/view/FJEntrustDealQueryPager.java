@@ -57,7 +57,7 @@ public class FJEntrustDealQueryPager extends BasePager implements InterfaceColle
         listView.setMode(PullToRefreshBase.Mode.PULL_FROM_START);
         iv_isEmpty = (ImageView) rootView.findViewById(R.id.iv_isEmpty);
         kong_null = (RelativeLayout) rootView.findViewById(R.id.FJEAMP_Kong_Null);
-        if(params.equals("EntrustCustomPager")||params.equals("DealCustomPager")) {
+        if("EntrustCustomPager".equals(params)||"DealCustomPager".equals(params)) {
             fjTimepicker = (LinearLayout)rootView.findViewById(R.id.fjTimepicker);
             fjTimepicker.setVisibility(View.VISIBLE);
             mtvStartTime = (TextView)rootView.findViewById(R.id.fjstartDate);
@@ -138,7 +138,7 @@ public class FJEntrustDealQueryPager extends BasePager implements InterfaceColle
         if (mDialog != null)
             mDialog.dismiss();
         String code = info.getCode();
-        if(code.equals("0")){
+        if("0".equals(code)){
             if (!mIsClean&&myList!=null)
                 myList.clear();
             Object object = info.getData();
@@ -154,7 +154,7 @@ public class FJEntrustDealQueryPager extends BasePager implements InterfaceColle
                     kong_null.setVisibility(View.GONE);
                 }
             }
-        }else if(code.equals("-6")){
+        }else if("-6".equals(code)){
             skip.startLogin(mContext);
         }else{//-1,-2,-3情况下显示定义好信息
             helper.showToast(mContext,info.getMsg());
@@ -187,7 +187,7 @@ public class FJEntrustDealQueryPager extends BasePager implements InterfaceColle
             mAdapter.setCallback(this);
             listView.setAdapter(mAdapter);
             listView.setEmptyView(iv_isEmpty);
-            if(!TAG.equals("EntrustCustomPager")&&!TAG.equals("DealCustomPager"))
+            if(!"EntrustCustomPager".equals(TAG)&&!"DealCustomPager".equals(TAG))
                 mDialog.show();
             refresh("","30",false);
             listView.setOnRefreshListener(new PullToRefreshBase.OnRefreshListener<ListView>(){
