@@ -278,5 +278,10 @@ public class FJEntrustDealQueryPager extends BasePager implements InterfaceColle
         listView = null;
         kong_null = null;
         iv_isEmpty = null;
+        mtvStartTime = null;
+        mtvFinishTime =null;
+        fjInquire = null;
+        startDate = null;
+        finishDate = null;
     }
 }
