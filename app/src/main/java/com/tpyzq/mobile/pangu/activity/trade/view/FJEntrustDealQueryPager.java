@@ -56,8 +56,8 @@ public class FJEntrustDealQueryPager extends BasePager implements InterfaceColle
         listView = (PullToRefreshListView) rootView.findViewById(R.id.listview);
         listView.setMode(PullToRefreshBase.Mode.PULL_FROM_START);
         iv_isEmpty = (ImageView) rootView.findViewById(R.id.iv_isEmpty);
-        kong_null = (RelativeLayout) rootView.findViewById(R.id.EAMP_Kong_Null);
-        if(TAG.equals("EntrustCustomPager")||TAG.equals("DealCustomPager")) {
+        kong_null = (RelativeLayout) rootView.findViewById(R.id.FJEAMP_Kong_Null);
+        if(params.equals("EntrustCustomPager")||params.equals("DealCustomPager")) {
             fjTimepicker = (LinearLayout)rootView.findViewById(R.id.fjTimepicker);
             fjTimepicker.setVisibility(View.VISIBLE);
             mtvStartTime = (TextView)rootView.findViewById(R.id.fjstartDate);
@@ -97,6 +97,7 @@ public class FJEntrustDealQueryPager extends BasePager implements InterfaceColle
                 }
             });
         }
+        mDialog = LoadingDialog.initDialog((Activity) mContext, "正在查询...");
     }
 
 
@@ -122,7 +123,6 @@ public class FJEntrustDealQueryPager extends BasePager implements InterfaceColle
                         } else if (days > 90) {
                             mistakeDialog = MistakeDialog.showDialog("选择的日期间隔不能超过3个月", (Activity) mContext);
                         } else {
-                            mDialog = LoadingDialog.initDialog((Activity) mContext, "正在查询...");
                             mDialog.show();
                             myList.clear();
                             mAdapter.notifyDataSetChanged();
@@ -140,15 +140,20 @@ public class FJEntrustDealQueryPager extends BasePager implements InterfaceColle
             mDialog.dismiss();
         String code = info.getCode();
         if(code.equals("0")){
-            if (!mIsClean)
+            if (!mIsClean&&myList!=null)
                 myList.clear();
             Object object = info.getData();
             if(object instanceof List){
                 myList = (List<StructuredFundEntity>)object;
-                position = myList.get(myList.size()-1).getPosition_str();
-                if(mIsClean)
-                    refresh += 30;
-                mAdapter.setData(myList);
+                if(myList.size()>0){
+                    position = myList.get(myList.size()-1).getPosition_str();
+                    if(mIsClean)
+                        refresh += 30;
+                    mAdapter.setData(myList);
+                }else{
+                    helper.showToast(mContext," 暂无数据");
+                    kong_null.setVisibility(View.GONE);
+                }
             }
         }else if(code.equals("-6")){
             skip.startLogin(mContext);
@@ -183,6 +188,8 @@ public class FJEntrustDealQueryPager extends BasePager implements InterfaceColle
             mAdapter.setCallback(this);
             listView.setAdapter(mAdapter);
             listView.setEmptyView(iv_isEmpty);
+            if(!TAG.equals("EntrustCustomPager")&&!TAG.equals("DealCustomPager"))
+                mDialog.show();
             refresh("","30",false);
             listView.setOnRefreshListener(new PullToRefreshBase.OnRefreshListener<ListView>(){
                 @Override
@@ -272,8 +279,6 @@ public class FJEntrustDealQueryPager extends BasePager implements InterfaceColle
         }
         mAdapter.setCallback(null);
         mAdapter = null;
-        myList.clear();
-        myList = null;
         listView.removeAllViews();
         listView = null;
         kong_null = null;

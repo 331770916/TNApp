@@ -120,7 +120,7 @@
         android:background="@color/lineColor" />
 
     <RelativeLayout
-        android:id="@+id/MWP_Kong_Null"
+        android:id="@+id/FJEAMP_Kong_Null"
         android:layout_width="match_parent"
         android:layout_height="match_parent">
 
