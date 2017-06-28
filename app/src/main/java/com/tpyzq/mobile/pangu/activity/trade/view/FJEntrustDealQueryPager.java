@@ -151,14 +151,14 @@ public class FJEntrustDealQueryPager extends BasePager implements InterfaceColle
                     mAdapter.setData(myList);
                 }else{
                     helper.showToast(mContext," 暂无数据");
-//                    kong_null.setVisibility(View.GONE);
+                    kong_null.setVisibility(View.GONE);
                 }
             }
         }else if("-6".equals(code)){
             skip.startLogin(mContext);
         }else{//-1,-2,-3情况下显示定义好信息
             helper.showToast(mContext,info.getMsg());
-//            kong_null.setVisibility(View.GONE);
+            kong_null.setVisibility(View.GONE);
         }
         listView.onRefreshComplete();
     }
