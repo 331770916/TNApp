@@ -282,12 +282,10 @@ public class FundSubsActivity extends BaseActivity implements View.OnClickListen
         fundSubsListen = new FundSubsListen() {
             @Override
             public void setBuy(String price, String fund_company) {
-            if (Helper.isGoToActivity(FundSubsActivity.this,null)){
                 Intent intent = new Intent(FundSubsActivity.this, RiskConfirmActivity.class);
                 intent.putExtra("fundSubsBean",fundDataBean);
                 intent.putExtra("from","fundSubs");
                 FundSubsActivity.this.startActivityForResult(intent, REQUESTCODE);
-            }
             }
         };
         et_fund_code.addTextChangedListener(new TextWatcher() {
