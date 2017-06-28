@@ -15,6 +15,7 @@ import android.widget.Toast;
 import com.google.gson.Gson;
 import com.tpyzq.mobile.pangu.R;
 import com.tpyzq.mobile.pangu.activity.myself.handhall.RiskConfirmActivity;
+import com.tpyzq.mobile.pangu.activity.myself.handhall.RiskEvaluationActivity;
 import com.tpyzq.mobile.pangu.activity.myself.login.TransactionLoginActivity;
 import com.tpyzq.mobile.pangu.base.BaseActivity;
 import com.tpyzq.mobile.pangu.data.AssessConfirmEntity;
@@ -27,7 +28,9 @@ import com.tpyzq.mobile.pangu.util.Helper;
 import com.tpyzq.mobile.pangu.util.SpUtils;
 import com.tpyzq.mobile.pangu.util.ToastUtils;
 import com.tpyzq.mobile.pangu.util.panguutil.UserUtil;
+import com.tpyzq.mobile.pangu.view.dialog.CancelDialog;
 import com.tpyzq.mobile.pangu.view.dialog.FundPurchaseDialog;
+import com.tpyzq.mobile.pangu.view.dialog.FundSubsDialog;
 import com.tpyzq.mobile.pangu.view.dialog.MistakeDialog;
 import com.zhy.http.okhttp.callback.StringCallback;
 
@@ -117,8 +120,25 @@ public class FundPurchaseActivity extends BaseActivity implements View.OnClickLi
                 finish();
                 break;
             case R.id.bt_true:
-                FundPurchaseDialog fundPurchaseDialog = new FundPurchaseDialog(this, fundData, et_fund_price.getText().toString(), fundPurchaseListen);
-                fundPurchaseDialog.show();
+                if (Helper.getInstance().isNeedShowRiskDialog()) {
+                    Helper.getInstance().showCorpDialog(this, new CancelDialog.PositiveClickListener() {
+                        @Override
+                        public void onPositiveClick() {
+                            Intent intent = new Intent(FundPurchaseActivity.this, RiskEvaluationActivity.class);
+                            intent.putExtra("isLogin", true);
+                            FundPurchaseActivity.this.startActivity(intent);
+                        }
+                    }, new CancelDialog.NagtiveClickListener() {
+                        @Override
+                        public void onNagtiveClick() {
+                            FundPurchaseDialog fundPurchaseDialog = new FundPurchaseDialog(FundPurchaseActivity.this, fundData, et_fund_price.getText().toString(), fundPurchaseListen);
+                            fundPurchaseDialog.show();
+                        }
+                    });
+                } else {
+                    FundPurchaseDialog fundPurchaseDialog = new FundPurchaseDialog(this, fundData, et_fund_price.getText().toString(), fundPurchaseListen);
+                    fundPurchaseDialog.show();
+                }
                 break;
         }
     }

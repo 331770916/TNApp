@@ -15,6 +15,8 @@ import android.widget.Toast;
 import com.google.gson.Gson;
 import com.tpyzq.mobile.pangu.R;
 import com.tpyzq.mobile.pangu.activity.myself.handhall.RiskConfirmActivity;
+import com.tpyzq.mobile.pangu.activity.myself.handhall.RiskEvaluationActivity;
+import com.tpyzq.mobile.pangu.activity.myself.login.ChangeAccoutActivity;
 import com.tpyzq.mobile.pangu.activity.myself.login.TransactionLoginActivity;
 import com.tpyzq.mobile.pangu.base.BaseActivity;
 import com.tpyzq.mobile.pangu.data.AssessConfirmEntity;
@@ -28,6 +30,7 @@ import com.tpyzq.mobile.pangu.util.Helper;
 import com.tpyzq.mobile.pangu.util.SpUtils;
 import com.tpyzq.mobile.pangu.util.ToastUtils;
 import com.tpyzq.mobile.pangu.util.panguutil.UserUtil;
+import com.tpyzq.mobile.pangu.view.dialog.CancelDialog;
 import com.tpyzq.mobile.pangu.view.dialog.FundSubsDialog;
 import com.zhy.http.okhttp.callback.StringCallback;
 
@@ -358,8 +361,25 @@ public class FundSubsActivity extends BaseActivity implements View.OnClickListen
                 startActivityForResult(intent, REQUSET);
                 break;
             case R.id.bt_true:
-                FundSubsDialog dialog = new FundSubsDialog(this, fundDataBean, et_rengou_price.getText().toString(), fundSubsListen);
-                dialog.show();
+                if (Helper.getInstance().isNeedShowRiskDialog()) {
+                    Helper.getInstance().showCorpDialog(this, new CancelDialog.PositiveClickListener() {
+                        @Override
+                        public void onPositiveClick() {
+                            Intent intent = new Intent(FundSubsActivity.this, RiskEvaluationActivity.class);
+                            intent.putExtra("isLogin", true);
+                            FundSubsActivity.this.startActivity(intent);
+                        }
+                    }, new CancelDialog.NagtiveClickListener() {
+                        @Override
+                        public void onNagtiveClick() {
+                            FundSubsDialog dialog = new FundSubsDialog(FundSubsActivity.this, fundDataBean, et_rengou_price.getText().toString(), fundSubsListen);
+                            dialog.show();
+                        }
+                    });
+                } else {
+                    FundSubsDialog dialog = new FundSubsDialog(this, fundDataBean, et_rengou_price.getText().toString(), fundSubsListen);
+                    dialog.show();
+                }
                 break;
             case R.id.iv_back:
                 finish();
