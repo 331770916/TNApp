@@ -112,8 +112,10 @@ public class RiskEvaluationActivity extends BaseActivity implements View.OnClick
         vto.addOnGlobalLayoutListener(new ViewTreeObserver.OnGlobalLayoutListener() {
             @Override
             public void onGlobalLayout() {
-                mListView.getViewTreeObserver().removeGlobalOnLayoutListener(this);
                 list_height = mListView.getHeight();
+                if (list_height>0) {
+                    mListView.getViewTreeObserver().removeGlobalOnLayoutListener(this);
+                }
             }
         });
 
