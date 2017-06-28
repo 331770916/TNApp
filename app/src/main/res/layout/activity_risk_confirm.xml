@@ -76,7 +76,7 @@
                         android:textSize="@dimen/size14" />
 
                     <TextView
-                        android:id="@+id/tv_risk_level"
+                        android:id="@+id/tv_product_level"
                         android:layout_width="wrap_content"
                         android:layout_height="@dimen/size20"
                         style="@style/riskTvStyle"
@@ -110,7 +110,7 @@
                         style="@style/riskTvStyle"/>
 
                     <TextView
-                        android:id="@+id/tv_product_level"
+                        android:id="@+id/tv_risk_level"
                         android:layout_width="wrap_content"
                         android:layout_height="@dimen/size20"
                         style="@style/riskTvStyle"
