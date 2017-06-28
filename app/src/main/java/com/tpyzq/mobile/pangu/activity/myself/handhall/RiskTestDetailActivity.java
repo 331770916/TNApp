@@ -3,9 +3,13 @@ package com.tpyzq.mobile.pangu.activity.myself.handhall;
 import android.app.ProgressDialog;
 import android.content.DialogInterface;
 import android.content.Intent;
+import android.support.v4.content.ContextCompat;
 import android.support.v7.app.AlertDialog;
 import android.text.TextUtils;
+import android.view.Gravity;
 import android.view.View;
+import android.view.ViewGroup;
+import android.widget.LinearLayout;
 import android.widget.ListView;
 import android.widget.TextView;
 
@@ -15,6 +19,7 @@ import com.tpyzq.mobile.pangu.adapter.myself.RiskTestDetailAdapter;
 import com.tpyzq.mobile.pangu.base.BaseActivity;
 import com.tpyzq.mobile.pangu.http.OkHttpUtil;
 import com.tpyzq.mobile.pangu.util.ConstantUtil;
+import com.tpyzq.mobile.pangu.util.Helper;
 import com.tpyzq.mobile.pangu.util.SpUtils;
 import com.zhy.http.okhttp.callback.StringCallback;
 
@@ -47,6 +52,19 @@ public class RiskTestDetailActivity extends BaseActivity implements View.OnClick
         findViewById(R.id.userIdBackBtn).setOnClickListener(this);
         ListView listView = (ListView)findViewById(R.id.lv_riskTestDetile);
         mAdapter = new RiskTestDetailAdapter(RiskTestDetailActivity.this);
+
+
+        ListView.LayoutParams layoutParams = new ListView.LayoutParams(ViewGroup.LayoutParams.MATCH_PARENT, ViewGroup.LayoutParams.WRAP_CONTENT);
+        TextView textView = new TextView(this);
+        textView.setText("客户风险承受能力测评");
+        textView.setGravity(Gravity.CENTER);
+        textView.setTextColor(ContextCompat.getColor(this, R.color.hushenTab_titleColor));
+        int padding = Helper.dip2px(this, 15);
+        textView.setPadding(padding, padding, padding, padding);
+        textView.setBackgroundResource(R.drawable.risk_textview_bg);
+        textView.setLayoutParams(layoutParams);
+
+        listView.addHeaderView(textView);
         listView.setAdapter(mAdapter);
         mDatas = new ArrayList<>();
 

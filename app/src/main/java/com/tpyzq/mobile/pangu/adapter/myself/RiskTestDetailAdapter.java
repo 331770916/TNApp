@@ -5,6 +5,7 @@ import android.graphics.Bitmap;
 import android.graphics.drawable.BitmapDrawable;
 import android.graphics.drawable.Drawable;
 import android.support.v4.content.ContextCompat;
+import android.view.Gravity;
 import android.view.LayoutInflater;
 import android.view.View;
 import android.view.ViewGroup;
@@ -101,9 +102,9 @@ public class RiskTestDetailAdapter extends BaseAdapter {
 //                    Drawable drawableAdd = mContext.getResources().getDrawable(R.drawable.risk_radio_bg);
 //                    drawableAdd.setBounds(20, 20, 20, 20);
 //                    radioButton.setCompoundDrawables(drawableAdd, null, null, null);
-                    radioButton.setButtonDrawable(R.drawable.risk_radio_bg);
+                    radioButton.setButtonDrawable(R.drawable.radio_button);
                     radioButton.setPadding(10, 10, 10, 10);
-                    radioButton.setLines(1);//单行
+                    radioButton.setGravity(Gravity.TOP);
                     radioButton.setText(answer.get("answer_content"));
                     radioButton.setFocusable(false);
                     radioButton.setClickable(false);
@@ -124,7 +125,7 @@ public class RiskTestDetailAdapter extends BaseAdapter {
                 for (int i = 0; i < answers.size(); i++) {
                     Map<String, String> answer = answers.get(i);
                     CheckBox checkBox = new CheckBox(mContext);
-                    checkBox.setButtonDrawable(R.drawable.risk_check_bg);
+                    checkBox.setButtonDrawable(R.drawable.update_idcard_checkbox);
                     checkBox.setPadding(10, 10, 10, 10);
                     checkBox.setText(answer.get("answer_content"));
                     checkBox.setFocusable(false);

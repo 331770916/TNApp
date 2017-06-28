@@ -12,8 +12,10 @@ import android.widget.Toast;
 import com.google.gson.Gson;
 import com.tpyzq.mobile.pangu.R;
 import com.tpyzq.mobile.pangu.activity.myself.handhall.RiskConfirmActivity;
+import com.tpyzq.mobile.pangu.activity.myself.handhall.RiskEvaluationActivity;
 import com.tpyzq.mobile.pangu.activity.myself.login.TransactionLoginActivity;
 import com.tpyzq.mobile.pangu.activity.trade.open_fund.AssessConfirmActivity;
+import com.tpyzq.mobile.pangu.activity.trade.open_fund.FundSubsActivity;
 import com.tpyzq.mobile.pangu.base.BaseActivity;
 import com.tpyzq.mobile.pangu.data.AssessConfirmEntity;
 import com.tpyzq.mobile.pangu.data.FundDataEntity;
@@ -23,9 +25,12 @@ import com.tpyzq.mobile.pangu.data.OtcRiskEntity;
 import com.tpyzq.mobile.pangu.data.SubsStatusEntity;
 import com.tpyzq.mobile.pangu.http.NetWorkUtil;
 import com.tpyzq.mobile.pangu.util.ConstantUtil;
+import com.tpyzq.mobile.pangu.util.Helper;
 import com.tpyzq.mobile.pangu.util.SpUtils;
 import com.tpyzq.mobile.pangu.util.ToastUtils;
 import com.tpyzq.mobile.pangu.util.panguutil.UserUtil;
+import com.tpyzq.mobile.pangu.view.dialog.CancelDialog;
+import com.tpyzq.mobile.pangu.view.dialog.FundSubsDialog;
 import com.tpyzq.mobile.pangu.view.dialog.LoadingDialog;
 import com.tpyzq.mobile.pangu.view.dialog.MistakeDialog;
 import com.tpyzq.mobile.pangu.view.dialog.ProductBuyDialog;
@@ -133,9 +138,30 @@ public class ProductBuyActivity extends BaseActivity implements View.OnClickList
                 finish();
                 break;
             case R.id.tv_sure:
-                dialogBean.stockprice = et_stock_price.getText().toString();
-                productBuyDialog = new ProductBuyDialog(ProductBuyActivity.this, ProductBuyActivity.this, dialogBean);
-                productBuyDialog.show();
+
+
+                if (Helper.getInstance().isNeedShowRiskDialog()) {
+                    Helper.getInstance().showCorpDialog(this, new CancelDialog.PositiveClickListener() {
+                        @Override
+                        public void onPositiveClick() {
+                            Intent intent = new Intent(ProductBuyActivity.this, RiskEvaluationActivity.class);
+                            intent.putExtra("isLogin", true);
+                            ProductBuyActivity.this.startActivity(intent);
+                        }
+                    }, new CancelDialog.NagtiveClickListener() {
+                        @Override
+                        public void onNagtiveClick() {
+                            dialogBean.stockprice = et_stock_price.getText().toString();
+                            productBuyDialog = new ProductBuyDialog(ProductBuyActivity.this, ProductBuyActivity.this, dialogBean);
+                            productBuyDialog.show();
+                        }
+                    });
+                } else {
+                    dialogBean.stockprice = et_stock_price.getText().toString();
+                    productBuyDialog = new ProductBuyDialog(ProductBuyActivity.this, ProductBuyActivity.this, dialogBean);
+                    productBuyDialog.show();
+                }
+
                 break;
         }
     }
