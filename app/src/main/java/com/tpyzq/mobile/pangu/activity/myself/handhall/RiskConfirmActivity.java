@@ -170,11 +170,11 @@ public class RiskConfirmActivity extends BaseActivity implements View.OnClickLis
                     //是否可以委托
                     if ("0".equalsIgnoreCase(resultMap.get("ENABLE_FLAG"))) {//不可委托
                         //尊敬的客户:\n       根据证监会《证券期货投资者适当性管理办法》，您购买的产品在购买过程中需要通过录音录像进行确认，请到营业部办理
-                        CancelDialog.cancleDialog(RiskConfirmActivity.this,"",4000,null);
+                        CancelDialog.cancleDialog(RiskConfirmActivity.this,"",4000,null,null);
                     } else {
                         //可以委托 判断是否需要视频录制
                         if ("1".equalsIgnoreCase(resultMap.get("NEED_VIDEO_FLAG"))) {
-                            CancelDialog.cancleDialog(RiskConfirmActivity.this,"尊敬的客户:\n根据证监会《证券期货投资者适当性管理办法》，您购买的产品在购买过程中需要通过录音录像进行确认，请到营业部办理",4000,null);
+                            CancelDialog.cancleDialog(RiskConfirmActivity.this,"尊敬的客户:\n根据证监会《证券期货投资者适当性管理办法》，您购买的产品在购买过程中需要通过录音录像进行确认，请到营业部办理",4000,null,null);
                         }
                     }
                 } else {
