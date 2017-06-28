@@ -7,9 +7,10 @@
     android:orientation="vertical">
 
     <RelativeLayout
-        android:id="@+id/RelativeLayoutV19"
+        android:id="@+id/rl_top_bar"
         android:layout_width="match_parent"
         android:layout_height="wrap_content"
+        android:fitsSystemWindows="true"
         android:background="@color/blue"
         android:padding="@dimen/size25" />
 
@@ -17,7 +18,7 @@
         android:id="@+id/RindingLayout"
         android:layout_width="match_parent"
         android:layout_height="@dimen/pickerview_topbar_height"
-        android:layout_below="@+id/RelativeLayoutV19"
+        android:layout_below="@+id/rl_top_bar"
         android:background="@color/blue">
 
         <ImageView

@@ -10,7 +10,6 @@ import android.widget.Button;
 import android.widget.TextView;
 import com.tpyzq.mobile.pangu.R;
 import com.tpyzq.mobile.pangu.activity.trade.stock.VoteActivity;
-import com.tpyzq.mobile.pangu.activity.trade.stock.VoteDetailActivity;
 import com.tpyzq.mobile.pangu.data.NetworkVotingEntity;
 
 import java.util.List;

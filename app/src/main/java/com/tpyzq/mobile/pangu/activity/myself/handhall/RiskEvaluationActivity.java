@@ -222,33 +222,35 @@ public class RiskEvaluationActivity extends BaseActivity implements View.OnClick
 //                        RiskSureEntity riskSureBean = new Gson().fromJson(jsonArray.getString(0), RiskSureEntity.class);
 //                        String COR = riskSureBean.CORP_RISK_LEVEL;
                         String COR = jsonArray.getJSONObject(0).optString("CORP_RISK_LEVEL");
+
+                        mType.setText(jsonArray.getJSONObject(0).optString("CORP_RISK_LEVEL_NAME"));
                         switch (COR) {
                             case "0":
-                                mType.setText("默认型");
+//                                mType.setText("默认型");
                                 setRoundProgressBar(14);
                                 break;
                             case "1":
-                                mType.setText("保守型");
+//                                mType.setText("保守型");
                                 setRoundProgressBar(28);
                                 break;
                             case "2":
-                                mType.setText("相对保守型");
+//                                mType.setText("相对保守型");
                                 setRoundProgressBar(43);
                                 break;
                             case "3":
-                                mType.setText("稳健型");
+//                                mType.setText("稳健型");
                                 setRoundProgressBar(57);
                                 break;
                             case "4":
-                                mType.setText("相对积极型");
+//                                mType.setText("相对积极型");
                                 setRoundProgressBar(72);
                                 break;
                             case "5":
-                                mType.setText("积极型");
+//                                mType.setText("积极型");
                                 setRoundProgressBar(86);
                                 break;
                             case "100":
-                                mType.setText("自定义风险等级");
+//                                mType.setText("自定义风险等级");
                                 setRoundProgressBar(100);
                                 break;
                         }
@@ -314,33 +316,34 @@ public class RiskEvaluationActivity extends BaseActivity implements View.OnClick
                                         Anew.setVisibility(View.VISIBLE);
                                         Answer.setVisibility(View.GONE);
                                         Result.setVisibility(View.GONE);
+                                        mResultTV.setText(json.optString("RISK_LEVEL"));
                                         switch (json.optString("CORP_RISK_LEVEL")){
                                             case "0":
-                                                mResultTV.setText("默认型");
+//                                                mResultTV.setText("默认型");
                                                 setRoundProgressBar(14);
                                                 break;
                                             case "1":
-                                                mResultTV.setText("保守型");
+//                                                mResultTV.setText("保守型");
                                                 setRoundProgressBar(28);
                                                 break;
                                             case "2":
-                                                mResultTV.setText("相对保守型");
+//                                                mResultTV.setText("相对保守型");
                                                 setRoundProgressBar(43);
                                                 break;
                                             case "3":
-                                                mResultTV.setText("稳健型");
+//                                                mResultTV.setText("稳健型");
                                                 setRoundProgressBar(57);
                                                 break;
                                             case "4":
-                                                mResultTV.setText("相对积极型");
+//                                                mResultTV.setText("相对积极型");
                                                 setRoundProgressBar(72);
                                                 break;
                                             case "5":
-                                                mResultTV.setText("积极型");
+//                                                mResultTV.setText("积极型");
                                                 setRoundProgressBar(86);
                                                 break;
                                             case "100":
-                                                mResultTV.setText("自定义风险等级");
+//                                                mResultTV.setText("自定义风险等级");
                                                 setRoundProgressBar(100);
                                                 break;
                                         }
