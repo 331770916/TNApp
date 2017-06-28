@@ -179,7 +179,7 @@
     <string name="securities_code">证券代码</string>
     <string name="securities_name">证券名称</string>
     <string name="entrust_name">名称/代码</string>
-    <string name="entrust_status">业务/状态</string>
+    <string name="entrust_status">状态/业务</string>
     <string name="entrust_time">时间/日期</string>
 
     <string name="entru_number">委托数量：</string>

@@ -66,7 +66,6 @@ public class FJWithdrawOrderAdapter extends BaseAdapter {
         viewHolder.tv4.setText(mList.get(position).getBusiness_name());
         viewHolder.tv5.setText(mList.get(position).getCurr_date());
         viewHolder.tv6.setText(Helper.getMyDateHMS(mList.get(position).getReport_time()));
-        viewHolder.tv3.setTextColor(Color.RED);
         String entrust_bs = mList.get(position).getEntrust_status();
         switch (entrust_bs) {
             case "0":
@@ -148,7 +147,6 @@ public class FJWithdrawOrderAdapter extends BaseAdapter {
                 viewHolder.tv3.setText("已购回");
                 break;
             default:
-                viewHolder.tv3.setTextColor(Color.parseColor("#4c4c4c"));
                 viewHolder.tv3.setText("--");
                 break;
         }
