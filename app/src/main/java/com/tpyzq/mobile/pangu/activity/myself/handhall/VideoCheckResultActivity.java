@@ -74,11 +74,6 @@ public class VideoCheckResultActivity extends BaseActivity implements View.OnCli
                     public void onPositiveClick() {
                         finish();
                     }
-
-                    @Override
-                    public void onNagtiveClick() {
-
-                    }
                 });
 
                 break;

@@ -273,5 +273,26 @@
         <item name="android:maxHeight">16dp</item>
 
     </style>
-
+    <!--item_vote_list.xml-->
+    <style name="vote_layout_style">
+        <item name="android:layout_width">match_parent</item>
+        <item name="android:layout_height">@dimen/size30</item>
+        <item name="android:layout_marginLeft">@dimen/size12</item>
+        <item name="android:layout_marginTop">@dimen/size10</item>
+        <item name="android:orientation">horizontal</item>
+    </style>
+    <style name="vote_title_style">
+        <item name="android:layout_width">0dp</item>
+        <item name="android:layout_height">match_parent</item>
+        <item name="android:textColor">@color/hushenTab_titleColor</item>
+        <item name="android:textSize">@dimen/txtSize15</item>
+        <item name="android:layout_weight">1</item>
+    </style>
+    <style name="vote_content_style">
+        <item name="android:layout_width">0dp</item>
+        <item name="android:layout_height">match_parent</item>
+        <item name="android:textColor">@color/colorMyGray</item>
+        <item name="android:textSize">@dimen/txtSize15</item>
+        <item name="android:layout_weight">2</item>
+    </style>
 </resources>

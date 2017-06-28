@@ -11,23 +11,24 @@
         android:background="@color/bgColor">
 
         <TextView
+            android:id="@+id/voteNameTv"
             android:layout_width="wrap_content"
             android:layout_height="match_parent"
             android:layout_marginLeft="@dimen/size12"
             android:gravity="center_vertical"
-            android:text="中信证券股东大会"
             android:textColor="@color/hushenTab_titleColor"
             android:textSize="@dimen/txtSize15"
             android:textStyle="bold" />
 
         <Button
+            android:id="@+id/voteTitleBt"
             android:layout_width="@dimen/size60"
             android:layout_height="@dimen/size22"
             android:layout_alignParentRight="true"
             android:layout_centerVertical="true"
             android:layout_marginRight="@dimen/size12"
             android:background="@drawable/lonin5"
-            android:text="进入投票"
+            android:text="@string/voteEnter"
             android:textColor="@color/white"
             android:textSize="@dimen/txtSize12" />
     </RelativeLayout>
@@ -37,163 +38,96 @@
         android:layout_height="wrap_content"
         android:orientation="vertical">
 
-        <RelativeLayout
-            android:layout_width="match_parent"
-            android:layout_height="@dimen/size30"
-            android:layout_marginTop="@dimen/size20">
+        <LinearLayout
+            style="@style/vote_layout_style">
 
             <TextView
-                android:id="@+id/tv_1"
-                android:layout_width="wrap_content"
-                android:layout_height="match_parent"
-                android:layout_marginLeft="@dimen/size12"
-                android:text="中信证券股东:"
-                android:textColor="@color/hushenTab_titleColor"
-                android:textSize="@dimen/txtSize15" />
+                android:text="@string/voteTitle1"
+                style="@style/vote_title_style"/>
 
             <TextView
-                android:layout_width="wrap_content"
-                android:layout_height="match_parent"
-                android:layout_alignParentTop="true"
-                android:layout_marginLeft="@dimen/size30"
-                android:layout_toEndOf="@+id/tv_1"
-                android:layout_toRightOf="@+id/tv_1"
-                android:text="28903809809284092840sdfdafsfsdfsfs2"
-                android:textSize="@dimen/size15" />
+                android:id="@+id/voteContent1"
+                style="@style/vote_content_style" />
 
-        </RelativeLayout>
+        </LinearLayout>
 
-        <RelativeLayout
-            android:layout_width="match_parent"
-            android:layout_height="@dimen/size30"
-            android:layout_marginTop="@dimen/size20">
+        <LinearLayout
+            style="@style/vote_layout_style">
 
             <TextView
-                android:id="@+id/tv_2"
-                android:layout_width="wrap_content"
-                android:layout_height="match_parent"
-                android:layout_marginLeft="@dimen/size12"
-                android:text="中信证券股东:"
-                android:textColor="@color/hushenTab_titleColor"
-                android:textSize="@dimen/txtSize15" />
+                android:text="@string/voteTitle2"
+                style="@style/vote_title_style"/>
 
             <TextView
-                android:layout_width="wrap_content"
-                android:layout_height="match_parent"
-                android:layout_alignParentTop="true"
-                android:layout_marginLeft="@dimen/size30"
-                android:layout_toEndOf="@+id/tv_2"
-                android:layout_toRightOf="@+id/tv_2"
-                android:text="28903809809284092840sdfdafsfsdfsfs2"
-                android:textSize="@dimen/size15" />
+                android:id="@+id/voteContent2"
+                style="@style/vote_content_style" />
 
-        </RelativeLayout>
+        </LinearLayout>
 
-        <RelativeLayout
-            android:layout_width="match_parent"
-            android:layout_height="@dimen/size30"
-            android:layout_marginTop="@dimen/size20">
+        <LinearLayout
+            style="@style/vote_layout_style">
 
             <TextView
-                android:id="@+id/tv_3"
-                android:layout_width="wrap_content"
-                android:layout_height="match_parent"
-                android:layout_marginLeft="@dimen/size12"
-                android:text="中信证券股东:"
-                android:textColor="@color/hushenTab_titleColor"
-                android:textSize="@dimen/txtSize15" />
+                android:text="@string/voteTitle3"
+                style="@style/vote_title_style"/>
 
             <TextView
-                android:layout_width="wrap_content"
-                android:layout_height="match_parent"
-                android:layout_alignParentTop="true"
-                android:layout_marginLeft="@dimen/size30"
-                android:layout_toEndOf="@+id/tv_3"
-                android:layout_toRightOf="@+id/tv_3"
-                android:text="28903809809284092840sdfdafsfsdfsfs2"
-                android:textSize="@dimen/size15" />
+                android:id="@+id/voteContent3"
+                style="@style/vote_content_style" />
 
+        </LinearLayout>
 
-        </RelativeLayout>
-
-        <RelativeLayout
-            android:layout_width="match_parent"
-            android:layout_height="@dimen/size30"
-            android:layout_marginTop="@dimen/size20">
+        <LinearLayout
+            style="@style/vote_layout_style">
 
             <TextView
-                android:id="@+id/tv_4"
-                android:layout_width="wrap_content"
-                android:layout_height="match_parent"
-                android:layout_marginLeft="@dimen/size12"
-                android:text="中信证券股东:"
-                android:textColor="@color/hushenTab_titleColor"
-                android:textSize="@dimen/txtSize15" />
+                android:text="@string/voteTitle4"
+                style="@style/vote_title_style"/>
 
             <TextView
-                android:layout_width="wrap_content"
-                android:layout_height="match_parent"
-                android:layout_alignParentTop="true"
-                android:layout_marginLeft="@dimen/size30"
-                android:layout_toEndOf="@+id/tv_4"
-                android:layout_toRightOf="@+id/tv_4"
-                android:text="28903809809284092840sdfdafsfsdfsfs2"
-                android:textSize="@dimen/size15" />
+                android:id="@+id/voteContent4"
+                style="@style/vote_content_style" />
 
 
-        </RelativeLayout>
+        </LinearLayout>
 
-        <RelativeLayout
-            android:layout_width="match_parent"
-            android:layout_height="@dimen/size30"
-            android:layout_marginTop="@dimen/size20">
+        <LinearLayout
+            style="@style/vote_layout_style">
 
             <TextView
-                android:id="@+id/tv_5"
-                android:layout_width="wrap_content"
-                android:layout_height="match_parent"
-                android:layout_marginLeft="@dimen/size12"
-                android:text="中信证券股东:"
-                android:textColor="@color/hushenTab_titleColor"
-                android:textSize="@dimen/txtSize15" />
+                android:text="@string/voteTitle5"
+                style="@style/vote_title_style"/>
 
             <TextView
-                android:layout_width="wrap_content"
-                android:layout_height="match_parent"
-                android:layout_alignParentTop="true"
-                android:layout_marginLeft="@dimen/size30"
-                android:layout_toEndOf="@+id/tv_5"
-                android:layout_toRightOf="@+id/tv_5"
-                android:text="28903809809284092840sdfdafsfsdfsfs2"
-                android:textSize="@dimen/size15" />
+                android:id="@+id/voteContent5"
+                style="@style/vote_content_style" />
 
 
-        </RelativeLayout>
+        </LinearLayout>
 
-        <RelativeLayout
-            android:layout_width="match_parent"
-            android:layout_height="@dimen/size30"
-            android:layout_marginTop="@dimen/size20">
+        <LinearLayout
+            style="@style/vote_layout_style">
 
             <TextView
-                android:id="@+id/tv_6"
-                android:layout_width="wrap_content"
-                android:layout_height="match_parent"
-                android:layout_marginLeft="@dimen/size12"
-                android:text="中信证券股东:"
-                android:textColor="@color/hushenTab_titleColor"
-                android:textSize="@dimen/txtSize15" />
+                android:text="@string/voteTitle6"
+                style="@style/vote_title_style"/>
 
             <TextView
-                android:layout_width="wrap_content"
-                android:layout_height="match_parent"
-                android:layout_alignParentTop="true"
-                android:layout_marginLeft="@dimen/size30"
-                android:layout_toEndOf="@+id/tv_6"
-                android:layout_toRightOf="@+id/tv_6"
-                android:text="28903809809284092840sdfdafsfsdfsfs2"
-                android:textSize="@dimen/size15" />
+                android:id="@+id/voteContent6"
+                style="@style/vote_content_style" />
 
-        </RelativeLayout>
+        </LinearLayout>
+        <LinearLayout
+            style="@style/vote_layout_style">
+
+            <TextView
+                android:text="@string/voteTitle7"
+                style="@style/vote_title_style"/>
+
+            <TextView
+                android:id="@+id/voteContent7"
+                style="@style/vote_content_style" />
+
+        </LinearLayout>
     </LinearLayout>
 </LinearLayout>

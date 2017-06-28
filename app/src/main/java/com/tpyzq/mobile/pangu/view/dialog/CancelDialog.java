@@ -30,7 +30,7 @@ public class CancelDialog {
     public static final int RISK_NOT = 3000;//未做风险评测
     public static final int NOT_BUY = 4000; //不可购买提示
 
-    public static void cancleDialog(final Activity activity, String message, int style, final PositiveClickListener clickListener){
+    public static void cancleDialog(final Activity activity, String message, int style, final PositiveClickListener positiveClickListener, final NagtiveClickListener nagtiveClickListener){
         final AlertDialog alertDialog = new AlertDialog.Builder(activity).create();
         View view = LayoutInflater.from(activity).inflate(R.layout.dialog_cancel, null);
         TextView positiveBtn = (TextView) view.findViewById(R.id.cancel_dialog_positiveBtn);
@@ -40,7 +40,7 @@ public class CancelDialog {
         switch (style) {
             case RISK_SOONEXPIRE:
                 positiveBtn.setText("现在测评");
-                nagtiveBtn.setText("退出");
+                nagtiveBtn.setText("以后再说");
                 view.findViewById(R.id.view_flag).setVisibility(View.GONE);
                 tv_message.setText(Html.fromHtml("<html><body> <p>尊敬的客户：</p>" +
                         "<p style='text-indent:2em'>您的风险承受能力评估结果即将过期，到期<br/>日期为"+ message +"，请重新测评。</p>" +
@@ -48,7 +48,7 @@ public class CancelDialog {
                 break;
             case RISK_EXPIRE:
                 positiveBtn.setText("现在测评");
-                nagtiveBtn.setText("退出");
+                nagtiveBtn.setText("以后再说");
                 view.findViewById(R.id.view_flag).setVisibility(View.GONE);
                 tv_message.setText(Html.fromHtml("<html><body> <p>尊敬的客户：</p>" +
                         "<p style='text-indent:2em'>您的风险承受能力评估结果已过期，到期<br/>日期为"+ message +"，请重新测评。</p>" +
@@ -56,7 +56,7 @@ public class CancelDialog {
                 break;
             case RISK_NOT:
                 positiveBtn.setText("现在测评");
-                nagtiveBtn.setText("退出");
+                nagtiveBtn.setText("以后再说");
                 view.findViewById(R.id.view_flag).setVisibility(View.GONE);
                 tv_message.setText(Html.fromHtml("<html><body> <p>尊敬的客户：</p>" +
                         "<p style=‘text-indent:2em’>您尚未填写《投资者风险承受能力问卷》。</p>" +
@@ -97,7 +97,7 @@ public class CancelDialog {
         positiveBtn.setOnClickListener(new View.OnClickListener() {
             @Override
             public void onClick(View v) {
-                if (clickListener == null) {
+                if (positiveClickListener == null) {
                     alertDialog.dismiss();
                     if (Build.VERSION.SDK_INT >= Build.VERSION_CODES.LOLLIPOP) {
                         activity.finishAfterTransition();
@@ -105,7 +105,7 @@ public class CancelDialog {
                         activity.finish();
                     }
                 } else {
-                    clickListener.onPositiveClick();
+                    positiveClickListener.onPositiveClick();
                     alertDialog.dismiss();
 
                 }
@@ -117,10 +117,10 @@ public class CancelDialog {
             @Override
             public void onClick(View v) {
 
-                if (clickListener == null) {
+                if (nagtiveClickListener == null) {
                     alertDialog.dismiss();
                 } else {
-                    clickListener.onNagtiveClick();
+                    nagtiveClickListener.onNagtiveClick();
                     alertDialog.dismiss();
 
                 }
@@ -133,7 +133,7 @@ public class CancelDialog {
     }
 
     public static void cancleDialog(final Activity activity, String message, final PositiveClickListener clickListener){
-        cancleDialog(activity, message, -1, clickListener);
+        cancleDialog(activity, message, -1, clickListener,null);
     }
 
     public static void cancleDialog(final Activity activity,  PositiveClickListener clickListener) {
@@ -150,7 +150,8 @@ public class CancelDialog {
 
     public interface PositiveClickListener {
         public void onPositiveClick();
-
+    }
+    public interface NagtiveClickListener {
         public void onNagtiveClick();
     }
 

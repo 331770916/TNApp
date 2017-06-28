@@ -19,6 +19,7 @@ import com.android.keyboardlibrary.KeyboardUtil;
 import com.google.gson.Gson;
 import com.google.gson.reflect.TypeToken;
 import com.tpyzq.mobile.pangu.R;
+import com.tpyzq.mobile.pangu.activity.myself.handhall.RiskEvaluationActivity;
 import com.tpyzq.mobile.pangu.activity.myself.login.TransactionLoginActivity;
 import com.tpyzq.mobile.pangu.activity.trade.open_fund.AssessConfirmActivity;
 import com.tpyzq.mobile.pangu.base.BaseActivity;
@@ -32,8 +33,10 @@ import com.tpyzq.mobile.pangu.http.NetWorkUtil;
 import com.tpyzq.mobile.pangu.interfac.IsClickedListener;
 import com.tpyzq.mobile.pangu.log.LogUtil;
 import com.tpyzq.mobile.pangu.util.ConstantUtil;
+import com.tpyzq.mobile.pangu.util.Helper;
 import com.tpyzq.mobile.pangu.util.SpUtils;
 import com.tpyzq.mobile.pangu.util.panguutil.UserUtil;
+import com.tpyzq.mobile.pangu.view.dialog.CancelDialog;
 import com.tpyzq.mobile.pangu.view.dialog.LoadingDialog;
 import com.tpyzq.mobile.pangu.view.dialog.MistakeDialog;
 import com.tpyzq.mobile.pangu.view.dialog.OTC_SubscriptionDialog;
@@ -463,13 +466,27 @@ public class OTC_SubscribeActivity extends BaseActivity implements View.OnClickL
                 startActivityForResult(intent, REQUSET);
                 break;
             case R.id.bnOTC_SubscribeQueDing:                   //点击弹出申购确认信息
-
                 String SubscriptionMoney = etOTC_SubscribeMoney.getText().toString();       //获取输入的认购金额
                 String stockCode = etOTC_SGProductCode.getText().toString();          //获取输入的 输入代码
                 //实例化PopupWindow
                 dialog = new OTC_SubscriptionDialog(this,map.get("prodta_no"),SubscriptionMoney, stockCode, this);
-                dialog.show();
-
+                if (Helper.getInstance().isNeedShowRiskDialog()) {
+                    Helper.getInstance().showCorpDialog(this, new CancelDialog.PositiveClickListener() {
+                        @Override
+                        public void onPositiveClick() {
+                            Intent intent = new Intent(OTC_SubscribeActivity.this, RiskEvaluationActivity.class);
+                            intent.putExtra("isLogin", true);
+                            OTC_SubscribeActivity.this.startActivity(intent);
+                        }
+                    }, new CancelDialog.NagtiveClickListener() {
+                        @Override
+                        public void onNagtiveClick() {
+                            dialog.show();
+                        }
+                    });
+                } else {
+                    dialog.show();
+                }
                 break;
         }
     }

@@ -55,16 +55,16 @@ public class RiskEvaluationActivity extends BaseActivity implements View.OnClick
     int list_height = 0;
     int count = 0;
     List<String> mPenalList, mSerialNumber;
-    private boolean isLogin; //作用 当用户做风险测评时候，未做完退出，需要把login至为未登录
+//    private boolean isLogin; //作用 当用户做风险测评时候，未做完退出，需要把login至为未登录
 
     private TextView mType, mDate, mResultTV, mResultTV1, mResulDate1;
     private RoundProgressBar mRoundProgressBar, mRoundProgressBar1;
-    private boolean isFinishAnswer = false;
+//    private boolean isFinishAnswer = false;
 
     @Override
     public void initView() {
-        Intent intent = getIntent();
-        isLogin = intent.getBooleanExtra("isLogin", false);
+//        Intent intent = getIntent();
+//        isLogin = intent.getBooleanExtra("isLogin", false);
 
         ResulttoConnect();
 
@@ -514,35 +514,35 @@ public class RiskEvaluationActivity extends BaseActivity implements View.OnClick
         }
     };
 
-    @Override
-    public boolean onKeyDown(int keyCode, KeyEvent event) {
-        if ((keyCode == KeyEvent.KEYCODE_BACK)) {
-
-            if (!isFinishAnswer && isLogin) {
-                UserEntity userEntity=new UserEntity();
-                userEntity.setIslogin("false");
-                Db_PUB_USERS.UpdateIslogin(userEntity);
-            }
-            return super.onKeyDown(keyCode, event);
-        } else {
-            return super.onKeyDown(keyCode, event);
-        }
-
-    }
+//    @Override
+//    public boolean onKeyDown(int keyCode, KeyEvent event) {
+//        if ((keyCode == KeyEvent.KEYCODE_BACK)) {
+//
+//            if (!isFinishAnswer && isLogin) {
+//                UserEntity userEntity=new UserEntity();
+//                userEntity.setIslogin("false");
+//                Db_PUB_USERS.UpdateIslogin(userEntity);
+//            }
+//            return super.onKeyDown(keyCode, event);
+//        } else {
+//            return super.onKeyDown(keyCode, event);
+//        }
+//
+//    }
 
     @Override
     public void onClick(View v) {
         switch (v.getId()) {
             case R.id.AGpublish_back:
-                if (!isFinishAnswer && isLogin) {
-                    UserEntity userEntity=new UserEntity();
-                    userEntity.setIslogin("false");
-                    Db_PUB_USERS.UpdateIslogin(userEntity);
-                }
+//                if (!isFinishAnswer && isLogin) {
+//                    UserEntity userEntity=new UserEntity();
+//                    userEntity.setIslogin("false");
+//                    Db_PUB_USERS.UpdateIslogin(userEntity);
+//                }
                 finish();
                 break;
             case R.id.Affirm:
-                isFinishAnswer = true;
+//                isFinishAnswer = true;
                 ResulttoConnect1();
                 Answer.setVisibility(View.GONE);
                 SubmittoConnect();

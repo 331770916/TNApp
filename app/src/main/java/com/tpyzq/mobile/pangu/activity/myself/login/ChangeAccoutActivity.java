@@ -588,10 +588,7 @@ public class ChangeAccoutActivity extends BaseActivity implements View.OnClickLi
      */
     private void showCorpDialog() {
         int style = 1000;
-        if ("1".equalsIgnoreCase(IS_OVERDUE)) {
-            //即将过期
-            style = 1000;
-        } else if ("2".equalsIgnoreCase(IS_OVERDUE)) {
+        if ("2".equalsIgnoreCase(IS_OVERDUE)) {
             //过期
             style = 2000;
         } else {//3的情况  未做
@@ -607,15 +604,15 @@ public class ChangeAccoutActivity extends BaseActivity implements View.OnClickLi
                 ChangeAccoutActivity.this.startActivity(intent);
                 finish();
             }
-
-            @Override
-            public void onNagtiveClick() {
-                //以后再说
-                isLoginSuc = false;
-                UserEntity userEntity=new UserEntity();
-                userEntity.setIslogin("false");
-                Db_PUB_USERS.UpdateIslogin(userEntity);
-                finish();
+            }, new CancelDialog.NagtiveClickListener() {
+                @Override
+                public void onNagtiveClick() {
+                    //以后再说
+                    /*isLoginSuc = false;
+                    UserEntity userEntity=new UserEntity();
+                    userEntity.setIslogin("false");
+                    Db_PUB_USERS.UpdateIslogin(userEntity);*/
+                    finish();
             }
         });
     }
