@@ -12,6 +12,8 @@ import android.widget.TableLayout;
 import android.widget.TextView;
 import com.tpyzq.mobile.pangu.R;
 import com.tpyzq.mobile.pangu.data.StructuredFundEntity;
+import com.tpyzq.mobile.pangu.util.Helper;
+
 import java.util.List;
 
 /**
@@ -197,7 +199,7 @@ public class FJEntrustedDealListViewAdapter extends BaseAdapter implements View.
         }
 
 
-        viewHodler.tvTime.setText(bean.getReport_time());
+        viewHodler.tvTime.setText(Helper.getMyDateHMS(bean.getReport_time()));
         viewHodler.tvDate.setText(bean.getCurr_date());
         if (bean.isShowRule()) {
             if (viewHodler.llContent.isSelected()) {
