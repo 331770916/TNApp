@@ -283,6 +283,8 @@ public class ShouJiVerificationActivity extends BaseActivity implements View.OnC
                 mSound.setText(getString(R.string.sjzcText6));
                 mSoundtv.setText("重发语音");
                 Helper.getInstance().showToast(ShouJiVerificationActivity.this, "网络异常");
+                mImage_et.setText("");
+                ImageVerification();
             }
 
             @Override
@@ -306,6 +308,8 @@ public class ShouJiVerificationActivity extends BaseActivity implements View.OnC
                                 mSoundtv.setClickable(true);
                                 mSound.setText(getString(R.string.sjzcText6));
                                 mSoundtv.setText("重发语音");
+                                mImage_et.setText("");
+                                ImageVerification();
                             }
                         });
                     }
@@ -337,6 +341,8 @@ public class ShouJiVerificationActivity extends BaseActivity implements View.OnC
                 mSJYZCaptchabtn.setClickable(true);
                 mSJYZCaptchabtn.setBackgroundResource(R.drawable.captcha_button_unchecked);
                 mSJYZCaptchabtn.setTextColor(Color.parseColor("#FFFFFF"));
+                mImage_et.setText("");
+                ImageVerification();
             }
 
             @Override
@@ -358,6 +364,8 @@ public class ShouJiVerificationActivity extends BaseActivity implements View.OnC
                                 mSJYZCaptchabtn.setClickable(true);
                                 mSJYZCaptchabtn.setBackgroundResource(R.drawable.captcha_button_unchecked);
                                 mSJYZCaptchabtn.setTextColor(Color.parseColor("#FFFFFF"));
+                                mImage_et.setText("");
+                                ImageVerification();
                             }
                         });
                     }
@@ -385,6 +393,8 @@ public class ShouJiVerificationActivity extends BaseActivity implements View.OnC
             mSJYZCaptchabtn.setBackgroundResource(R.drawable.captcha_button_unchecked);
             mSJYZCaptchabtn.setTextColor(Color.parseColor("#FFFFFF"));
             LL_Marked.setVisibility(View.VISIBLE);
+            mImage_et.setText("");
+            ImageVerification();
         }
 
         @Override
@@ -411,6 +421,8 @@ public class ShouJiVerificationActivity extends BaseActivity implements View.OnC
             mSoundtv.setClickable(true);
             mSound.setText(getString(R.string.sjzcText6));
             mSoundtv.setText("重发语音");
+            mImage_et.setText("");
+            ImageVerification();
         }
 
         @Override

@@ -315,6 +315,8 @@ public class ShouJiZhuCeActivity extends BaseActivity implements View.OnClickLis
                 if (mLoadingDialog != null) {
                     mLoadingDialog.dismiss();
                 }
+                mImage_et.setText("");
+                ImageVerification();
                 Helper.getInstance().showToast(ShouJiZhuCeActivity.this, "网络异常");
             }
 
@@ -407,6 +409,8 @@ public class ShouJiZhuCeActivity extends BaseActivity implements View.OnClickLis
                         if (mLoadingDialog != null) {
                             mLoadingDialog.dismiss();
                         }
+                        mImage_et.setText("");
+                        ImageVerification();
                         MistakeDialog.showDialog(msg_Str, ShouJiZhuCeActivity.this);
                     }
 
@@ -480,6 +484,8 @@ public class ShouJiZhuCeActivity extends BaseActivity implements View.OnClickLis
                 mCaptchabtn.setClickable(true);
                 mCaptchabtn.setBackgroundResource(R.drawable.captcha_button_unchecked);
                 mCaptchabtn.setTextColor(Color.parseColor("#FFFFFF"));
+                mImage_et.setText("");
+                ImageVerification();
             }
 
             @Override
@@ -501,6 +507,8 @@ public class ShouJiZhuCeActivity extends BaseActivity implements View.OnClickLis
                                 mCaptchabtn.setClickable(true);
                                 mCaptchabtn.setBackgroundResource(R.drawable.captcha_button_unchecked);
                                 mCaptchabtn.setTextColor(Color.parseColor("#FFFFFF"));
+                                mImage_et.setText("");
+                                ImageVerification();
                             }
                         });
                     }
@@ -531,6 +539,8 @@ public class ShouJiZhuCeActivity extends BaseActivity implements View.OnClickLis
                 mSound.setText(getString(R.string.sjzcText6));
                 mSoundtv.setText("重发语音");
                 Helper.getInstance().showToast(ShouJiZhuCeActivity.this, "网络异常");
+                mImage_et.setText("");
+                ImageVerification();
             }
 
             @Override
@@ -554,6 +564,8 @@ public class ShouJiZhuCeActivity extends BaseActivity implements View.OnClickLis
                                 mSoundtv.setClickable(true);
                                 mSound.setText(getString(R.string.sjzcText6));
                                 mSoundtv.setText("重发语音");
+                                mImage_et.setText("");
+                                ImageVerification();
                             }
                         });
                     }
@@ -648,6 +660,8 @@ public class ShouJiZhuCeActivity extends BaseActivity implements View.OnClickLis
             mCaptchabtn.setBackgroundResource(R.drawable.captcha_button_unchecked);
             mCaptchabtn.setTextColor(Color.parseColor("#FFFFFF"));
             LL_Marked.setVisibility(View.VISIBLE);
+            mImage_et.setText("");
+            ImageVerification();
         }
 
         @Override
@@ -674,6 +688,8 @@ public class ShouJiZhuCeActivity extends BaseActivity implements View.OnClickLis
             mSoundtv.setClickable(true);
             mSound.setText(getString(R.string.sjzcText6));
             mSoundtv.setText("重发语音");
+            mImage_et.setText("");
+            ImageVerification();
         }
 
         @Override
