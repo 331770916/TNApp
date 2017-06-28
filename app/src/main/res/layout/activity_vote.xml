@@ -1,5 +1,6 @@
 <?xml version="1.0" encoding="utf-8"?>
 <LinearLayout xmlns:android="http://schemas.android.com/apk/res/android"
+    xmlns:app="http://schemas.android.com/apk/res-auto"
     android:layout_width="match_parent"
     android:layout_height="match_parent"
     android:orientation="vertical">
@@ -31,10 +32,28 @@
     </RelativeLayout>
 
 
-    <ListView
-        android:id="@+id/mListView"
+    <RelativeLayout
+        android:id="@+id/VTEAMP_Kong_Null"
         android:layout_width="match_parent"
-        android:layout_height="match_parent" />
+        android:layout_height="match_parent">
 
+        <com.handmark.pulltorefresh.library.PullToRefreshListView
+            android:id="@+id/listview"
+            android:layout_width="match_parent"
+            android:layout_height="match_parent"
+            android:divider="@color/lineColor"
+            android:dividerHeight="@dimen/size0.5"
+            android:scrollbars="none"
+            app:ptrAnimationStyle="flip"
+            app:ptrMode="both" />
+
+        <ImageView
+            android:id="@+id/iv_isEmpty"
+            android:layout_width="match_parent"
+            android:layout_height="match_parent"
+            android:layout_centerInParent="true"
+            android:scaleType="center"
+            android:src="@mipmap/kong" />
+    </RelativeLayout>
 
 </LinearLayout>

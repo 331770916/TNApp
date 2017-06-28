@@ -338,6 +338,7 @@
         <!--投票 相关activity-->
         <activity android:name=".activity.trade.stock.NetworkVotingActivity" />
         <activity android:name=".activity.trade.stock.VoteActivity" />
+        <activity android:name=".activity.trade.stock.VoteDetailActivity" />
         <activity android:name=".activity.trade.stock.VoteQueryActivity" />
 
         <!--行情 相关activity-->

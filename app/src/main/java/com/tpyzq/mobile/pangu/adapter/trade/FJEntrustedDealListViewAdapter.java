@@ -25,7 +25,7 @@ public class FJEntrustedDealListViewAdapter extends BaseAdapter implements View.
     private StructuredFundEntity bean;
     private ScallCallback callback;
     private Context mContext;
-    private int type,height;
+    private int type;
 
     public FJEntrustedDealListViewAdapter(Context context, int type) {
         mContext = context;
@@ -73,7 +73,6 @@ public class FJEntrustedDealListViewAdapter extends BaseAdapter implements View.
             viewHodler.tvDate = (TextView) convertView.findViewById(R.id.fjtv_date);
             viewHodler.llContent =  (LinearLayout) convertView.findViewById(R.id.fj_content);
             viewHodler.tableSpan = (TableLayout) convertView.findViewById(R.id.fj_tablespan);
-            height = viewHodler.tableSpan.getHeight();
             viewHodler.rlSpan = (RelativeLayout)convertView.findViewById(R.id.fj_goneimage);
             viewHodler.tvGone1 = (TextView)convertView.findViewById(R.id.fj_gonetvcontent1);
             viewHodler.tvGone2 = (TextView)convertView.findViewById(R.id.fj_gonetvcontent2);
@@ -104,17 +103,14 @@ public class FJEntrustedDealListViewAdapter extends BaseAdapter implements View.
             }
             convertView.setTag(viewHodler);
         } else {
-            viewHodler = (FJEntrustedDealListViewAdapter.ViewHodler) convertView.getTag();
+            viewHodler = (ViewHodler) convertView.getTag();
         }
         bean = mList.get(position);
         viewHodler.llContent.setOnClickListener(this);
-        viewHodler.llContent.setTag(bean);
         viewHodler.rlSpan.setOnClickListener(this);
-        viewHodler.rlSpan.setTag(bean);
         viewHodler.tvName.setText(bean.getStoken_name());
         viewHodler.tvCode.setText(bean.getStocken_code());
         viewHodler.tvBuss.setText(bean.getBusiness_name());
-//        viewHodler.tvStatus.setText(bean.getEntrust_status());
         String entrust_bs =bean.getEntrust_status();
         switch (entrust_bs) {
             case "0":
