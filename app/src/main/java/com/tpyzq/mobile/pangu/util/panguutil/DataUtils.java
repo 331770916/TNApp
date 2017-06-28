@@ -27,8 +27,11 @@ public class DataUtils {
     public static String[] open_fund_name = {"委托查询", "历史成交", "分红设置", "基金转换", "基金账户查询", "基金电子合同签署"};
     public static int[] open_fund_icon = {R.mipmap.open_weituochaxun, R.mipmap.open_lishichengjiao, R.mipmap.open_fenhongshezhi, R.mipmap.open_jijinzhuanhuan, R.mipmap.open_jijinzhanghuchaxun, R.mipmap.open_jijindianzihetongqianshu};
 
-    public static String[] stock_morelist_name = {"场内基金", "国债逆回购","盘后分级基金"};
-    public static int[] stock_morelist_icon = {R.mipmap.item_changnei, R.mipmap.item_nihuigou,R.mipmap.item_changnei};
+    public static String[] stock_morelist_name = {"场内基金", "国债逆回购","盘后分级基金"};//,"网络投票"
+    public static int[] stock_morelist_icon = {R.mipmap.item_changnei, R.mipmap.item_nihuigou,R.mipmap.item_changnei};//,R.mipmap.open_lishichengjiao
+
+    public static String[] stock_votelist_name = {"网络投票","投票查询"};
+    public static int[] stock_votelist_icon = {R.mipmap.item_changnei, R.mipmap.item_nihuigou};
 
 
     public static String[] relationship_name = {"父母", "夫妻", "子女", "朋友", "其他"};

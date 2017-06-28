@@ -56,8 +56,8 @@ public class FJEntrustDealQueryPager extends BasePager implements InterfaceColle
         listView = (PullToRefreshListView) rootView.findViewById(R.id.listview);
         listView.setMode(PullToRefreshBase.Mode.PULL_FROM_START);
         iv_isEmpty = (ImageView) rootView.findViewById(R.id.iv_isEmpty);
-        kong_null = (RelativeLayout) rootView.findViewById(R.id.EAMP_Kong_Null);
-        if(TAG.equals("EntrustCustomPager")||TAG.equals("DealCustomPager")) {
+        kong_null = (RelativeLayout) rootView.findViewById(R.id.FJEAMP_Kong_Null);
+        if("EntrustCustomPager".equals(params)||"DealCustomPager".equals(params)) {
             fjTimepicker = (LinearLayout)rootView.findViewById(R.id.fjTimepicker);
             fjTimepicker.setVisibility(View.VISIBLE);
             mtvStartTime = (TextView)rootView.findViewById(R.id.fjstartDate);
@@ -97,6 +97,7 @@ public class FJEntrustDealQueryPager extends BasePager implements InterfaceColle
                 }
             });
         }
+        mDialog = LoadingDialog.initDialog((Activity) mContext, "正在查询...");
     }
 
 
@@ -105,13 +106,13 @@ public class FJEntrustDealQueryPager extends BasePager implements InterfaceColle
         @Override
         public void onClick(View view) {
             switch (view.getId()) {
-                case R.id.ClinchStartDate:
+                case R.id.fjstartDate:
                     startTime.show();
                     break;
-                case R.id.ClinchFinishDate:
+                case R.id.fjfinishDate:
                     finishTime.show();
                     break;
-                case R.id.ClinchInquire:
+                case R.id.fjInquire:
                     startDate = helper.getMyDate(mtvStartTime.getText().toString());
                     finishDate = helper.getMyDate(mtvFinishTime.getText().toString());
                     if (!TextUtils.isEmpty(startDate) && !TextUtils.isEmpty(finishDate)) {
@@ -122,9 +123,7 @@ public class FJEntrustDealQueryPager extends BasePager implements InterfaceColle
                         } else if (days > 90) {
                             mistakeDialog = MistakeDialog.showDialog("选择的日期间隔不能超过3个月", (Activity) mContext);
                         } else {
-                            mDialog = LoadingDialog.initDialog((Activity) mContext, "正在查询...");
                             mDialog.show();
-                            myList.clear();
                             mAdapter.notifyDataSetChanged();
                             refresh(position, "30", false);
                         }
@@ -139,22 +138,27 @@ public class FJEntrustDealQueryPager extends BasePager implements InterfaceColle
         if (mDialog != null)
             mDialog.dismiss();
         String code = info.getCode();
-        if(code.equals("0")){
-            if (!mIsClean)
+        if("0".equals(code)){
+            if (!mIsClean&&myList!=null)
                 myList.clear();
             Object object = info.getData();
             if(object instanceof List){
                 myList = (List<StructuredFundEntity>)object;
-                position = myList.get(myList.size()-1).getPosition_str();
-                if(mIsClean)
-                    refresh += 30;
-                mAdapter.setData(myList);
+                if(myList.size()>0){
+                    position = myList.get(myList.size()-1).getPosition_str();
+                    if(mIsClean)
+                        refresh += 30;
+                    mAdapter.setData(myList);
+                }else{
+                    helper.showToast(mContext," 暂无数据");
+//                    kong_null.setVisibility(View.GONE);
+                }
             }
-        }else if(code.equals("-6")){
+        }else if("-6".equals(code)){
             skip.startLogin(mContext);
         }else{//-1,-2,-3情况下显示定义好信息
             helper.showToast(mContext,info.getMsg());
-            kong_null.setVisibility(View.GONE);
+//            kong_null.setVisibility(View.GONE);
         }
         listView.onRefreshComplete();
     }
@@ -183,6 +187,8 @@ public class FJEntrustDealQueryPager extends BasePager implements InterfaceColle
             mAdapter.setCallback(this);
             listView.setAdapter(mAdapter);
             listView.setEmptyView(iv_isEmpty);
+            if(!"EntrustCustomPager".equals(TAG)&&!"DealCustomPager".equals(TAG))
+                mDialog.show();
             refresh("","30",false);
             listView.setOnRefreshListener(new PullToRefreshBase.OnRefreshListener<ListView>(){
                 @Override
@@ -191,13 +197,23 @@ public class FJEntrustDealQueryPager extends BasePager implements InterfaceColle
                         listView.getLoadingLayoutProxy().setRefreshingLabel("正在刷新");
                         listView.getLoadingLayoutProxy().setPullLabel("下拉刷新数据");
                         listView.getLoadingLayoutProxy().setReleaseLabel("释放开始刷新");
-                        SystemClock.sleep(1500);
+                        listView.post(new Runnable() {
+                            @Override
+                            public void run() {
+                                SystemClock.sleep(1500);
+                            }
+                        });
                         refresh("",String.valueOf(refresh),false);
                     }else if (listView.isShownFooter()){
                         listView.getLoadingLayoutProxy().setRefreshingLabel("正在刷新");
                         listView.getLoadingLayoutProxy().setPullLabel("上拉加载数据");
                         listView.getLoadingLayoutProxy().setReleaseLabel("释放开始刷新");
-                        SystemClock.sleep(1500);
+                        listView.post(new Runnable() {
+                            @Override
+                            public void run() {
+                                SystemClock.sleep(1500);
+                            }
+                        });
                         refresh(position,"30",true);
                     }
                 }
@@ -270,10 +286,7 @@ public class FJEntrustDealQueryPager extends BasePager implements InterfaceColle
             mDialog.dismiss();
             mDialog = null;
         }
-        mAdapter.setCallback(null);
         mAdapter = null;
-        myList.clear();
-        myList = null;
         listView.removeAllViews();
         listView = null;
         kong_null = null;

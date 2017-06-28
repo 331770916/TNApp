@@ -14,6 +14,7 @@ import android.widget.Toast;
 
 import com.google.gson.Gson;
 import com.tpyzq.mobile.pangu.R;
+import com.tpyzq.mobile.pangu.activity.myself.handhall.RiskConfirmActivity;
 import com.tpyzq.mobile.pangu.activity.myself.login.TransactionLoginActivity;
 import com.tpyzq.mobile.pangu.base.BaseActivity;
 import com.tpyzq.mobile.pangu.data.AssessConfirmEntity;
@@ -23,6 +24,7 @@ import com.tpyzq.mobile.pangu.data.FundSubsEntity;
 import com.tpyzq.mobile.pangu.data.SubsStatusEntity;
 import com.tpyzq.mobile.pangu.http.NetWorkUtil;
 import com.tpyzq.mobile.pangu.util.ConstantUtil;
+import com.tpyzq.mobile.pangu.util.Helper;
 import com.tpyzq.mobile.pangu.util.SpUtils;
 import com.tpyzq.mobile.pangu.util.ToastUtils;
 import com.tpyzq.mobile.pangu.util.panguutil.UserUtil;
@@ -53,7 +55,7 @@ public class FundSubsActivity extends BaseActivity implements View.OnClickListen
     private FundSubsEntity fundSubsBean;
     private FundDataEntity fundDataBean;
     private ImageView iv_back;//退出
-    public static final int REQUSET = 1;
+    public static final int REQUSET = 1;//进入产品列表和签署协议界面
     public int point = -1;
     private FundEntity fundBean;
     private List<FundEntity> fundBeans;
@@ -62,6 +64,8 @@ public class FundSubsActivity extends BaseActivity implements View.OnClickListen
     private String fundcode;
     private String session;
     private FundSubsListen fundSubsListen;
+    private static int REQUESTCODE = 1001; //进入风险确认页面的请求码
+    private static int REQAGREEMENTCODE = 1002; //进入签署协议页面的请求码
 
     @Override
     public void initView() {
@@ -235,7 +239,7 @@ public class FundSubsActivity extends BaseActivity implements View.OnClickListen
                             intent.setClass(FundSubsActivity.this, AssessConfirmActivity.class);
                             intent.putExtra("transaction", "true");
                             intent.putExtra("assessConfirm", assessConfirmBean);
-                            startActivityForResult(intent, REQUSET);
+                            startActivityForResult(intent, REQAGREEMENTCODE);
                         }
                     } else {
                         subsStatusBean = new Gson().fromJson(response, SubsStatusEntity.class);
@@ -275,7 +279,12 @@ public class FundSubsActivity extends BaseActivity implements View.OnClickListen
         fundSubsListen = new FundSubsListen() {
             @Override
             public void setBuy(String price, String fund_company) {
-                buy_rengou(price, fund_company);
+            if (Helper.isGoToActivity(FundSubsActivity.this,null)){
+                Intent intent = new Intent(FundSubsActivity.this, RiskConfirmActivity.class);
+                intent.putExtra("fundSubsBean",fundDataBean);
+                intent.putExtra("from","fundSubs");
+                FundSubsActivity.this.startActivityForResult(intent, REQUESTCODE);
+            }
             }
         };
         et_fund_code.addTextChangedListener(new TextWatcher() {
@@ -341,7 +350,6 @@ public class FundSubsActivity extends BaseActivity implements View.OnClickListen
         Intent intent = new Intent();
         switch (v.getId()) {
             case R.id.tv_choose_fund:
-
                 intent.setClass(this, FundProductActivity.class);
                 Bundle bundle = new Bundle();
                 bundle.putSerializable("fundbean", (Serializable) fundBeans);
@@ -350,7 +358,6 @@ public class FundSubsActivity extends BaseActivity implements View.OnClickListen
                 startActivityForResult(intent, REQUSET);
                 break;
             case R.id.bt_true:
-
                 FundSubsDialog dialog = new FundSubsDialog(this, fundDataBean, et_rengou_price.getText().toString(), fundSubsListen);
                 dialog.show();
                 break;
@@ -363,13 +370,16 @@ public class FundSubsActivity extends BaseActivity implements View.OnClickListen
     @Override
     protected void onActivityResult(int requestCode, int resultCode, Intent intent) {
         super.onActivityResult(requestCode, resultCode, intent);
-        if (requestCode == REQUSET && resultCode == RESULT_OK) {
+        if (requestCode == REQUSET && resultCode == RESULT_OK) {//产品列表返回
             point = intent.getIntExtra("point", -1);
             et_fund_code.setText(fundSubsBeans.get(point).FUND_CODE);
             getFundData(fundSubsBeans.get(point).FUND_CODE, fundSubsBeans.get(point).FUND_COMPANY);
         }
-        if (requestCode == REQUSET && resultCode == 500) {
+        if (requestCode == REQAGREEMENTCODE && resultCode == RESULT_OK) {//签署协议页面返回
             et_rengou_price.setText("");
+        }
+        if (requestCode == REQUESTCODE && resultCode == RESULT_OK) {//风险同意书签署返回
+            buy_rengou(et_rengou_price.getText().toString().trim(),fundDataBean.data.get(0).FUND_COMPANY);
         }
     }
 

@@ -4,6 +4,7 @@ import android.app.Activity;
 import android.app.ActivityManager;
 import android.content.ComponentName;
 import android.content.Context;
+import android.content.Intent;
 import android.content.res.AssetManager;
 import android.graphics.Bitmap;
 import android.graphics.BitmapFactory;
@@ -21,10 +22,13 @@ import android.view.inputmethod.InputMethodManager;
 import android.widget.EditText;
 import android.widget.Toast;
 
+import com.tpyzq.mobile.pangu.activity.myself.handhall.RiskConfirmActivity;
+import com.tpyzq.mobile.pangu.activity.trade.open_fund.FundSubsActivity;
 import com.tpyzq.mobile.pangu.base.CustomApplication;
 import com.tpyzq.mobile.pangu.data.StockInfoEntity;
 import com.tpyzq.mobile.pangu.db.Db_PUB_USERS;
 import com.tpyzq.mobile.pangu.log.LogHelper;
+import com.tpyzq.mobile.pangu.view.dialog.CancelDialog;
 
 import org.apache.http.util.EncodingUtils;
 
@@ -1765,6 +1769,23 @@ public class Helper {
         } else {
             return true;
         }
+    }
+
+    public static boolean isGoToActivity(Activity activity, CancelDialog.PositiveClickListener listener) {
+        return true;
+        /*boolean flag = false;
+        String corpResult = SpUtils.getString(activity,"corpResult","");
+        if (TextUtils.isEmpty(corpResult)) {
+            CancelDialog.cancleDialog(activity,"",4000,null);
+        } else {
+            String[] args = corpResult.split("--");
+            if ("2".equalsIgnoreCase(args[0])||"3".equalsIgnoreCase(args[0])) {
+                CancelDialog.cancleDialog(activity,"",4000,null);
+            } else {
+                flag = true;
+            }
+        }
+        return flag;*/
     }
 
 }

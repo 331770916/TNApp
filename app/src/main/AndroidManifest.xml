@@ -226,6 +226,7 @@
         <activity android:name=".activity.myself.handhall.ProtocolActivity" />
         <activity android:name=".activity.myself.handhall.RelationListActivity" />
         <activity android:name=".activity.myself.handhall.RiskEvaluationActivity" />
+        <activity android:name=".activity.myself.handhall.RiskConfirmActivity" />
         <activity android:name=".activity.myself.handhall.RiskWarningActivity" />
         <activity android:name=".activity.myself.handhall.StockHolderInfoActivity" />
         <activity android:name=".activity.myself.handhall.UpdateIdCodeValidityActivity"/>
@@ -235,6 +236,7 @@
         <activity android:name=".activity.myself.handhall.QueueVideoActivity"/>
         <activity android:name=".activity.myself.handhall.VideoCheckResultActivity"/>
         <activity android:name=".activity.myself.handhall.UpdatePasswordActivity"/>
+        <activity android:name=".activity.myself.handhall.RiskTestDetailActivity"/>
 
 
 
@@ -333,6 +335,10 @@
         <activity android:name=".activity.trade.stock.FJEntrustedQueryActivity" />
         <activity android:name=".activity.trade.stock.FJDealQueryActivity" />
 
+        <!--投票 相关activity-->
+        <activity android:name=".activity.trade.stock.NetworkVotingActivity" />
+        <activity android:name=".activity.trade.stock.VoteActivity" />
+        <activity android:name=".activity.trade.stock.VoteQueryActivity" />
 
         <!--行情 相关activity-->
         <activity android:name=".activity.market.quotation.plate.PlateListActivity" />

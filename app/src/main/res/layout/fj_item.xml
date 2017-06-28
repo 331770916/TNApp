@@ -4,6 +4,7 @@
     android:layout_height="wrap_content"
     android:orientation="vertical">
     <LinearLayout
+        android:background="@color/white"
         android:id="@+id/fj_content"
         android:layout_width="match_parent"
         android:layout_height="wrap_content"
@@ -93,7 +94,7 @@
         android:layout_width="match_parent"
         android:layout_height="wrap_content"
         android:layout_marginTop="@dimen/size5"
-        android:background="@color/dividerColor"
+        android:background="@color/IDcard_color"
         android:orientation="vertical"
         android:visibility="gone">
         <TableRow
@@ -328,7 +329,7 @@
                 android:layout_width="0dp"
                 android:layout_height="wrap_content"
                 android:layout_weight="1"
-                android:background="@color/backgroundColor"
+                android:background="@color/IDcard_color"
                 >
                 <ImageView
                     android:layout_width="wrap_content"

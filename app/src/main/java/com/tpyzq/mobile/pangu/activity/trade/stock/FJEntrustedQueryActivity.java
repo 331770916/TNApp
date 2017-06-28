@@ -159,15 +159,5 @@ public class FJEntrustedQueryActivity extends BaseActivity implements View.OnCli
         threeWeekPager=null;
         customPager.destroy();
         customPager = null;
-        buy_vp = null;
-        buy_vp_list.clear();
-        buy_vp_list = null;
-        listBuy.clear();
-        listBuy = null;
-        magicIndicator.removeAllViews();
-        magicIndicator = null;
-        viewPager.removeAllViews();
-        viewPager = null;
-        title = null;
     }
 }

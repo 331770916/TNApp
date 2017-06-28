@@ -7,7 +7,7 @@ import com.tpyzq.mobile.pangu.adapter.trade.VoteAdapter;
 import com.tpyzq.mobile.pangu.base.BaseActivity;
 
 /**
- * 股票   投票界面  点击跳入NetworkVoteActivity
+ * 网络投票界面
  */
 
 public class VoteActivity extends BaseActivity {

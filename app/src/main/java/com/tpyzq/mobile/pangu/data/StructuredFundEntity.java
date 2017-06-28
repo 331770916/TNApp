@@ -15,7 +15,9 @@ public class StructuredFundEntity {
     private String curr_date;               //日期
     private String entrust_status;          //状态（0未报、1待报、2已报、3已报待撤。。。BUSINESS_STATUS）
     private String entrust_balance;         //委托金额
-    private String business_amount;         //成交数量
+    private String business_amount;         //成交数量（MATCHED_QTY）
+    private String matched_price;            //成交价格
+    private String matched_amt;             //成交金额
     private String merge_amount;             //可合并数量
     private String split_amount;             //可拆分数量
     private String exchange_type;            //交易类别
@@ -28,6 +30,22 @@ public class StructuredFundEntity {
     private String entrust_bs;              //买卖标志
 
     private boolean isShowRule;             //控制子view是否显示
+
+    public String getMatched_amt() {
+        return matched_amt;
+    }
+
+    public void setMatched_amt(String matched_amt) {
+        this.matched_amt = matched_amt;
+    }
+
+    public String getMatched_price() {
+        return matched_price;
+    }
+
+    public void setMatched_price(String matched_price) {
+        this.matched_price = matched_price;
+    }
 
     public String getEntrust_bs() {
         return entrust_bs;

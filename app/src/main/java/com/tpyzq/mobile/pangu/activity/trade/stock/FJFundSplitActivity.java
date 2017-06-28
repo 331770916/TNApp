@@ -75,7 +75,8 @@ public class FJFundSplitActivity extends BaseActivity implements View.OnClickLis
         mStatements_tv = (TextView) findViewById(R.id.tvStatements);
         mCnExpendableFundValue_tv = (TextView) findViewById(R.id.tvCnExpendableFundValue);
         mConfirm_but = (Button) findViewById(R.id.butConfirm);
-
+        TextView tvCnExpendableFund = (TextView) findViewById(R.id.tvCnExpendableFund);
+        tvCnExpendableFund.setText("可拆数量");
         initMonitor();
     }
 
@@ -111,7 +112,7 @@ public class FJFundSplitActivity extends BaseActivity implements View.OnClickLis
         mSession = SpUtils.getString(this, "mSession", "");
 
         mTitle_tv.setText(getString(R.string.FJFundSplitActivity));
-        mCnFundAmount_tv.setText(getString(R.string.fced));
+        mCnFundAmount_tv.setText("分拆份额");
         mConfirm_but.setText("分拆");
         mConfirm_but.setOnClickListener(this);
         mConfirm_but.setClickable(false);
@@ -126,7 +127,7 @@ public class FJFundSplitActivity extends BaseActivity implements View.OnClickLis
         if (!this.isFinishing()) {
             mDialog.show();
         }
-        ifc.queryStructuredFund(mSession, stocken_code, TAG,this);
+        ifc.queryStructuredFund(mSession, stocken_code, TAG, this);
     }
 
     @Override
@@ -180,12 +181,12 @@ public class FJFundSplitActivity extends BaseActivity implements View.OnClickLis
 
     @Override
     public boolean onKeyDown(int keyCode, KeyEvent event) {
-        if (keyCode == KeyEvent.KEYCODE_BACK && mDialog.isShowing()) {
-            mDialog.dismiss();
-        } else {
+        if (keyCode == KeyEvent.KEYCODE_BACK) {
+            if (mDialog != null && mDialog.isShowing())
+                mDialog.dismiss();
             finish();
         }
-        return super.onKeyDown(keyCode, event);
+        return false;
     }
 
     /**

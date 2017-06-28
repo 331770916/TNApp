@@ -1,27 +1,29 @@
 package com.tpyzq.mobile.pangu.activity.trade.stock;
 
-import android.text.TextUtils;
-import android.util.Log;
+import android.app.Dialog;
+import android.content.Intent;
 import android.view.View;
 import android.widget.AdapterView;
 import android.widget.ImageView;
 import android.widget.ListView;
 
+import com.handmark.pulltorefresh.library.PullToRefreshBase;
+import com.handmark.pulltorefresh.library.PullToRefreshListView;
 import com.tpyzq.mobile.pangu.R;
+import com.tpyzq.mobile.pangu.activity.myself.login.TransactionLoginActivity;
 import com.tpyzq.mobile.pangu.adapter.trade.FJWithdrawOrderAdapter;
 import com.tpyzq.mobile.pangu.base.BaseActivity;
+import com.tpyzq.mobile.pangu.base.InterfaceCollection;
+import com.tpyzq.mobile.pangu.data.ResultInfo;
 import com.tpyzq.mobile.pangu.data.StructuredFundEntity;
-import com.tpyzq.mobile.pangu.http.NetWorkUtil;
-import com.tpyzq.mobile.pangu.util.ConstantUtil;
 import com.tpyzq.mobile.pangu.util.Helper;
+import com.tpyzq.mobile.pangu.util.SpUtils;
+import com.tpyzq.mobile.pangu.view.dialog.LoadingDialog;
+import com.tpyzq.mobile.pangu.view.dialog.MistakeDialog;
 import com.tpyzq.mobile.pangu.view.dialog.StructuredFundDialog;
-import com.zhy.http.okhttp.callback.StringCallback;
 
 import java.util.ArrayList;
-import java.util.HashMap;
 import java.util.List;
-
-import okhttp3.Call;
 
 
 /**
@@ -30,59 +32,69 @@ import okhttp3.Call;
 
 public class FJWithdrawOrderActivity extends BaseActivity implements AdapterView.OnItemClickListener, View.OnClickListener, StructuredFundDialog.Expression {
     public static final String TAG = "FJWithdrawOrder";
-    private ListView mListView;
+    private PullToRefreshListView mListView;
     private List<StructuredFundEntity> mList;
     private FJWithdrawOrderAdapter mFjwithdrawOrderAdapter;
-
+    private int mPosition;
+    private Dialog mDialog;
 
     @Override
     public void initView() {
+        ImageView imageView = (ImageView) findViewById(R.id.iv_isEmpty);
         mList = new ArrayList<>();
-        mListView = (ListView) findViewById(R.id.mListView);
+        mListView = (PullToRefreshListView) findViewById(R.id.mListView);
         ImageView image = (ImageView) findViewById(R.id.detail_back);
         image.setOnClickListener(this);
         mListView.setOnItemClickListener(this);
         mFjwithdrawOrderAdapter = new FJWithdrawOrderAdapter(this, mList);
         mListView.setAdapter(mFjwithdrawOrderAdapter);
         requestData();
-        //  假数据
-        for (int i = 0; i < 10; i++) {
-            StructuredFundEntity structruedFundEntity = new StructuredFundEntity();
-            structruedFundEntity.setExchange_type("ll00089" + i);
-            structruedFundEntity.setFund_status("ll0009808" + i);
-            structruedFundEntity.setMerge_amount("" + i);
-            structruedFundEntity.setSplit_amount("ll00078" + i);
-            structruedFundEntity.setStoken_name("ll0008" + i);
-            structruedFundEntity.setStock_account("ll0008" + i);
-            mList.add(structruedFundEntity);
-        }
-        mFjwithdrawOrderAdapter.notifyDataSetChanged();
+        mListView.setEmptyView(imageView);
+        mListView.setMode(PullToRefreshBase.Mode.PULL_FROM_START);
+        mListView.setOnRefreshListener(new PullToRefreshBase.OnRefreshListener2<ListView>() {
+            @Override
+            public void onPullDownToRefresh(PullToRefreshBase<ListView> refreshView) {
+                requestData();
+            }
+
+            @Override
+            public void onPullUpToRefresh(PullToRefreshBase<ListView> refreshView) {
+                //  上拉加载
+            }
+        });
     }
 
     /**
      * 请求数据
      */
     private void requestData() {
-        HashMap map1 = new HashMap();
-        HashMap map2 = new HashMap();
-//        map2.put("SEC_ID", "tpyzq");
-//        map2.put("FLAG", "true");
-//        map2.put("SECU_CODE", "");
-//        map2.put("OPEN_TYPE", "1");
-//        map1.put("funcid", "300198");
-//        map1.put("token", "");
-//        map1.put("parms", map2);
-
-        NetWorkUtil.getInstence().okHttpForPost(TAG, ConstantUtil.URL_JY, map1, new StringCallback() {
+        mDialog = LoadingDialog.initDialog(this, "加载中...");
+        if (!this.isFinishing()) {
+            mDialog.show();
+        }
+        String token = SpUtils.getString(this, "mSession", "");
+        InterfaceCollection ifc = InterfaceCollection.getInstance();
+        ifc.queryTodayEntrust(token, "", "30", "1", TAG, new InterfaceCollection.InterfaceCallback() {
             @Override
-            public void onError(Call call, Exception e, int id) {
-
-            }
-
-            @Override
-            public void onResponse(String response, int id) {
-                if (TextUtils.isEmpty(response)) {
-                    return;
+            public void callResult(ResultInfo info) {
+                mList.clear();
+                mListView.onRefreshComplete();
+                if (mDialog != null && mDialog.isShowing()) {
+                    mDialog.dismiss();
+                }
+                if ("0".equals(info.getCode())) {
+                    List<StructuredFundEntity> ses = (List<StructuredFundEntity>) info.getData();
+                    mList.addAll(ses);
+                    mFjwithdrawOrderAdapter.notifyDataSetChanged();
+                } else if ("-1".equals(info.getCode()) || "-2".equals(info.getCode()) || "-3".equals(info.getCode())) {
+                    Helper.getInstance().showToast(FJWithdrawOrderActivity.this, info.getMsg());
+                } else if ("-6".equals(info.getCode())) {
+                    Intent intent = new Intent();
+                    intent.setClass(FJWithdrawOrderActivity.this, TransactionLoginActivity.class);
+                    startActivity(intent);
+                } else {
+                    //   系统弹窗
+                    MistakeDialog.specialshowDialog(info.getMsg(), FJWithdrawOrderActivity.this, null);
                 }
             }
         });
@@ -95,7 +107,8 @@ public class FJWithdrawOrderActivity extends BaseActivity implements AdapterView
 
     @Override
     public void onItemClick(AdapterView<?> parent, View view, int position, long id) {
-        StructuredFundEntity entity = mList.get(position);
+        mPosition = position - 1;
+        StructuredFundEntity entity = mList.get(position - 1);
         StructuredFundDialog dialog = new StructuredFundDialog(this, TAG, this, entity, null, null);
         dialog.show();
     }
@@ -111,6 +124,36 @@ public class FJWithdrawOrderActivity extends BaseActivity implements AdapterView
 
     @Override
     public void State() {
-        Helper.getInstance().showToast(this, "撤销此委托成功");
+        StructuredFundEntity entity = mList.get(mPosition);
+        // 请求撤单接口
+        String token = SpUtils.getString(this, "mSession", "");
+        InterfaceCollection.getInstance().fundWithdrawOrder(token, entity.getEntrust_no(), TAG, new InterfaceCollection.InterfaceCallback() {
+            @Override
+            public void callResult(ResultInfo info) {
+
+                if ("0".equals(info.getCode())) {
+                    Helper.getInstance().showToast(FJWithdrawOrderActivity.this, "撤销此委托成功");
+                    requestData();
+                } else if ("-1".equals(info.getCode()) || "-2".equals(info.getCode()) || "-3".equals(info.getCode())) {
+                    Helper.getInstance().showToast(FJWithdrawOrderActivity.this, info.getMsg());
+                } else if ("-6".equals(info.getCode())) {
+                    Intent intent = new Intent();
+                    intent.setClass(FJWithdrawOrderActivity.this, TransactionLoginActivity.class);
+                    startActivity(intent);
+                } else {
+                    //   系统弹窗
+                    MistakeDialog.specialshowDialog(info.getMsg(), FJWithdrawOrderActivity.this, null);
+                }
+            }
+        });
+
+    }
+
+    @Override
+    protected void onDestroy() {
+        if (mDialog != null && mDialog.isShowing()) {
+            mDialog.dismiss();
+        }
+        super.onDestroy();
     }
 }

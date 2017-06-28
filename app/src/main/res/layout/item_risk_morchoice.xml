@@ -1,0 +1,27 @@
+<?xml version="1.0" encoding="utf-8"?>
+<LinearLayout xmlns:android="http://schemas.android.com/apk/res/android"
+    android:orientation="vertical"
+    android:background="@color/white"
+    android:layout_width="match_parent"
+    android:layout_height="match_parent">
+
+    <TextView
+        android:id="@+id/tv_more_question"
+        android:layout_width="wrap_content"
+        android:layout_height="wrap_content"
+        android:paddingLeft="@dimen/size15"
+        android:paddingTop="@dimen/size15"
+        android:text="1.请问您的年龄处于："
+        android:textColor="@color/black"
+        android:textSize="@dimen/txtSize14" />
+
+    <LinearLayout
+        android:id="@+id/ll_more_layout"
+        android:layout_width="match_parent"
+        android:layout_height="match_parent"
+        android:layout_marginLeft="@dimen/size25"
+        android:layout_marginRight="@dimen/size25"
+        android:orientation="vertical"/>
+
+
+</LinearLayout>

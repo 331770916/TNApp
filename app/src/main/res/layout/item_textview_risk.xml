@@ -1,0 +1,41 @@
+<?xml version="1.0" encoding="utf-8"?>
+<LinearLayout xmlns:android="http://schemas.android.com/apk/res/android"
+    android:layout_width="match_parent"
+    android:layout_height="match_parent"
+    android:background="@color/white"
+    android:descendantFocusability="blocksDescendants"
+    android:orientation="vertical">
+
+    <TextView
+        android:layout_width="match_parent"
+        android:layout_height="wrap_content"
+        android:gravity="center"
+        android:padding="@dimen/size10"
+        android:text="@string/RiskEvaluationText5"
+        android:textSize="@dimen/txtSize18" />
+
+    <View
+        android:layout_width="match_parent"
+        android:layout_height="@dimen/size1"
+        android:background="@color/lineColor" />
+
+    <com.tpyzq.mobile.pangu.view.listview.NoScrollListView
+        android:id="@+id/mListView"
+        android:layout_width="match_parent"
+        android:layout_height="0dp"
+        android:layout_weight="1"
+        android:divider="@null"
+        android:focusable="true"
+        android:listSelector="@android:color/transparent"
+        android:scrollbars="none" />
+
+    <Button
+        android:id="@+id/Affirm"
+        android:layout_width="match_parent"
+        android:layout_height="wrap_content"
+        android:layout_alignParentBottom="true"
+        android:background="@drawable/lonin"
+        android:text="确认"
+        android:textColor="@color/white"
+        android:visibility="gone" />
+</LinearLayout>

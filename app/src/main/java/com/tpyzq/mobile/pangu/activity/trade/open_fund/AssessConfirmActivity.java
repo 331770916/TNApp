@@ -17,7 +17,6 @@ import android.widget.TextView;
 import com.tpyzq.mobile.pangu.R;
 import com.tpyzq.mobile.pangu.activity.PdfActivity;
 import com.tpyzq.mobile.pangu.activity.home.managerMoney.BuyResultActivity;
-import com.tpyzq.mobile.pangu.activity.myself.handhall.RiskEvaluationActivity;
 import com.tpyzq.mobile.pangu.activity.myself.login.TransactionLoginActivity;
 import com.tpyzq.mobile.pangu.base.BaseActivity;
 import com.tpyzq.mobile.pangu.data.AssessConfirmEntity;
@@ -56,7 +55,8 @@ public class AssessConfirmActivity extends BaseActivity implements View.OnClickL
     private AssessConfirmEntity assessConfirmBean;
     private CheckBox cb_affixto, cb_open_fund;
     private ImageView iv_back;
-    private LinearLayout ll_view1, ll_view2, ll_view3, ll_view3_1;
+    private LinearLayout ll_view2, ll_view3, ll_view3_1;
+//    private LinearLayout ll_view1, ll_view2, ll_view3, ll_view3_1;
     private String IS_AGREEMENT;
     private String IS_OPEN;
     private String session;
@@ -67,18 +67,13 @@ public class AssessConfirmActivity extends BaseActivity implements View.OnClickL
     private List<PdfEntity> pdfs;
     private TextView tv_notice;
     private Message message;
-    private TextView tv_fit, tv_risk_level, tv_produce_risk_level, tv_evaluating;
+//    private TextView tv_fit, tv_risk_level, tv_produce_risk_level, tv_evaluating;
     private String SERIAL_NO;
     @Override
     public void initView() {
-        ll_view1 = (LinearLayout) findViewById(R.id.ll_view1);
         ll_view2 = (LinearLayout) findViewById(R.id.ll_view2);
         ll_view3 = (LinearLayout) findViewById(R.id.ll_view3);
         ll_view3_1 = (LinearLayout) findViewById(R.id.ll_view3_1);
-        tv_fit = (TextView) findViewById(R.id.tv_fit);
-        tv_risk_level = (TextView) findViewById(R.id.tv_risk_level);
-        tv_produce_risk_level = (TextView) findViewById(R.id.tv_produce_risk_level);
-        tv_evaluating = (TextView) findViewById(R.id.tv_evaluating);
         iv_back = (ImageView) findViewById(R.id.iv_back);
         bt_continue_buy = (Button) findViewById(R.id.bt_continue_buy);
         cb_affixto = (CheckBox) findViewById(R.id.cb_affixto);
@@ -104,23 +99,6 @@ public class AssessConfirmActivity extends BaseActivity implements View.OnClickL
 
         assessConfirmBean = (AssessConfirmEntity) bundle.getSerializable("assessConfirm");     //上页面传入的bean对象
         bt_continue_buy.setOnClickListener(this);
-        switch (assessConfirmBean.OFRISK_FLAG) {
-            case "0":
-                tv_fit.setText("合规");
-                break;
-            case "2":
-                tv_fit.setText("不匹配");
-                break;
-            case "3":
-                tv_fit.setText("风险测评过期");
-                break;
-            default:
-                tv_fit.setText("未识别类型:" + assessConfirmBean.OFRISK_FLAG);
-                break;
-        }
-        tv_evaluating.setOnClickListener(this);
-        tv_risk_level.setText(assessConfirmBean.RISK_LEVEL_NAME);
-        tv_produce_risk_level.setText(assessConfirmBean.OFUND_RISKLEVEL_NAME);
         cb_affixto.setOnCheckedChangeListener(new CompoundButton.OnCheckedChangeListener() {
             @Override
             public void onCheckedChanged(CompoundButton buttonView, boolean isChecked) {
@@ -165,14 +143,6 @@ public class AssessConfirmActivity extends BaseActivity implements View.OnClickL
                 }
             }
         });
-
-
-        if (!TextUtils.isEmpty(assessConfirmBean.OFRISK_FLAG) && "0".equals(assessConfirmBean.OFRISK_FLAG)) {
-            ll_view1.setVisibility(View.GONE);
-        } else {
-            ll_view1.setVisibility(View.VISIBLE);
-        }
-
 
         if (assessConfirmBean.type.equals("3") || assessConfirmBean.type.equals("4")) {
             cb_open_fund.setText("开通OTC账户");
@@ -396,9 +366,6 @@ public class AssessConfirmActivity extends BaseActivity implements View.OnClickL
                         break;
                 }
                 break;
-            case R.id.tv_evaluating:
-                startActivity(new Intent(this, RiskEvaluationActivity.class));
-                break;
             case R.id.iv_back:
                 finish();
                 break;
@@ -464,7 +431,7 @@ public class AssessConfirmActivity extends BaseActivity implements View.OnClickL
     MistakeDialog.MistakeDialgoListener error_back = new MistakeDialog.MistakeDialgoListener() {
         @Override
         public void doPositive() {
-            setResult(500);
+            setResult(RESULT_OK);
             finish();
         }
     };
@@ -625,7 +592,7 @@ public class AssessConfirmActivity extends BaseActivity implements View.OnClickL
     public void startFinish(String type) {
         if ("true".equals(flag)) {
             ToastUtils.showShort(this, "委托已提交");
-            setResult(500, buyintent);
+            setResult(RESULT_OK, buyintent);
             finish();
         } else {
             Intent intent = new Intent();

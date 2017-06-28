@@ -3,7 +3,11 @@ package com.tpyzq.mobile.pangu.base;
 import android.text.TextUtils;
 
 import com.google.gson.Gson;
+import com.google.gson.reflect.TypeToken;
+import com.tpyzq.mobile.pangu.data.AssessConfirmEntity;
 import com.tpyzq.mobile.pangu.data.NetworkVotingEntity;
+import com.tpyzq.mobile.pangu.data.OTC_AffirmBean;
+import com.tpyzq.mobile.pangu.data.OTC_SubscriptionCommitBean;
 import com.tpyzq.mobile.pangu.data.ResultInfo;
 import com.tpyzq.mobile.pangu.data.StructuredFundEntity;
 import com.tpyzq.mobile.pangu.http.NetWorkUtil;
@@ -13,6 +17,8 @@ import com.zhy.http.okhttp.callback.StringCallback;
 import org.json.JSONArray;
 import org.json.JSONException;
 import org.json.JSONObject;
+
+import java.lang.reflect.Type;
 import java.util.ArrayList;
 import java.util.HashMap;
 import java.util.List;
@@ -135,7 +141,7 @@ public class InterfaceCollection {
         map1.put("funcid","300701");
         map1.put("token",session);
         Map map2 = new HashMap<>();
-        map2.put("FLAG", "ture");
+        map2.put("FLAG", "true");
         map2.put("SEC_ID", "tpyzq");
         map2.put("STOCK_CODE",stock_code);
         map1.put("parms",map2);
@@ -171,7 +177,7 @@ public class InterfaceCollection {
                             for (int i = 0; i < data.length(); i++) {
                                 StructuredFundEntity bean = new StructuredFundEntity();
                                 JSONObject obj = data.getJSONObject(i);
-                                bean.setStoken_name(obj.getString("STOKEN_NAME"));
+                                bean.setStoken_name(obj.getString("STOCK_NAME"));
                                 bean.setMerge_amount(obj.getString("MERGE_AMOUNT"));
                                 bean.setSplit_amount(obj.getString("SPLIT_AMOUNT"));
                                 bean.setExchange_type(obj.getString("EXCHANGE_TYPE"));
@@ -382,7 +388,7 @@ public class InterfaceCollection {
                                 bean.setStoken_name(obj.getString("STOCK_NAME"));
                                 bean.setStocken_code(obj.getString("STOCK_CODE"));
                                 bean.setBusiness_name(obj.getString("BUSINESS_NAME"));
-                                bean.setReport_time(obj.getString("REPORT_TIME"));
+                                bean.setReport_time(obj.getString("CURR_TIME"));
                                 bean.setEntrust_amount(obj.getString("ENTRUST_AMOUNT"));
                                 bean.setStock_account(obj.getString("STOCK_ACCOUNT"));
                                 bean.setPosition_str(obj.getString("POSITION_STR"));
@@ -442,8 +448,8 @@ public class InterfaceCollection {
                 }else{
                     try {
                         JSONObject jsonObject = new JSONObject(response);
-                        String code = jsonObject.getString("MSG_CODE");
-                        String msg = jsonObject.getString("MSG_TEXT");
+                        String code = jsonObject.getString("code");
+                        String msg = jsonObject.getString("msg");
                         info.setCode(code);
                         info.setMsg(msg);
                         info.setTag(TAG);
@@ -453,18 +459,20 @@ public class InterfaceCollection {
                             for (int i = 0; i < data.length(); i++) {
                                 StructuredFundEntity bean = new StructuredFundEntity();
                                 JSONObject obj = data.getJSONObject(i);
-                                bean.setStoken_name(obj.getString("STOCK_NAME"));
-                                bean.setStocken_code(obj.getString("STOCK_CODE"));
-                                bean.setBusiness_name(obj.getString("BUSINESS_NAME"));
-                                bean.setReport_time(obj.getString("REPORT_TIME"));
-                                bean.setEntrust_amount(obj.getString("ENTRUST_AMOUNT"));
-                                bean.setStock_account(obj.getString("STOCK_ACCOUNT"));
-                                bean.setPosition_str(obj.getString("POSITION_STR"));
-                                bean.setCurr_date(obj.getString("CURR_DATE"));
+//                                bean.setStoken_name(obj.getString("STOCK_NAME"));
+//                                bean.setStocken_code(obj.getString("STOCK_CODE"));
+//                                bean.setBusiness_name(obj.getString("BUSINESS_NAME"));
+//                                bean.setReport_time(obj.getString("REPORT_TIME"));
+//                                bean.setEntrust_amount(obj.getString("ENTRUST_AMOUNT"));
+//                                bean.setStock_account(obj.getString("STOCK_ACCOUNT"));
+//                                bean.setPosition_str(obj.getString("POSITION_STR"));
+//                                bean.setCurr_date(obj.getString("CURR_DATE"));
+//                                bean.setEntrust_no(obj.getString("ENTRUST_NO"));
+//                                bean.setEntrust_status(obj.getString("ENTRUST_STATUS"));
+//                                bean.setEntrust_balance(obj.getString("ENTRUST_BALANCE"));
+//                                bean.setEntrust_amount(obj.getString("BUSINESS_AMOUNT"));
+                                bean.setInit_date(obj.getString("INIT_DATE"));
                                 bean.setEntrust_no(obj.getString("ENTRUST_NO"));
-                                bean.setEntrust_status(obj.getString("ENTRUST_STATUS"));
-                                bean.setEntrust_balance(obj.getString("ENTRUST_BALANCE"));
-                                bean.setEntrust_amount(obj.getString("BUSINESS_AMOUNT"));
                                 ses.add(bean);
                             }
                             info.setData(ses);
@@ -525,8 +533,8 @@ public class InterfaceCollection {
                 }else{
                     try {
                         JSONObject jsonObject = new JSONObject(response);
-                        String code = jsonObject.getString("MSG_CODE");
-                        String msg = jsonObject.getString("MSG_TEXT");
+                        String code = jsonObject.getString("code");
+                        String msg = jsonObject.getString("msg");
                         info.setCode(code);
                         info.setMsg(msg);
                         info.setTag(TAG);
@@ -538,10 +546,16 @@ public class InterfaceCollection {
                                 JSONObject obj = data.getJSONObject(i);
                                 bean.setStoken_name(obj.getString("STOCK_NAME"));
                                 bean.setStocken_code(obj.getString("STOCK_CODE"));
-                                bean.setEntrust_amount(obj.getString("ENTRUST_AMOUNT"));
-                                bean.setEntrust_status(obj.getString("ENTRUST_STATUS"));
+                                bean.setBusiness_name(obj.getString("BUSINESS_NAME"));
                                 bean.setReport_time(obj.getString("REPORT_TIME"));
+                                bean.setEntrust_amount(obj.getString("ENTRUST_AMOUNT"));
+                                bean.setStock_account(obj.getString("STOCK_ACCOUNT"));
                                 bean.setPosition_str(obj.getString("POSITION_STR"));
+                                bean.setCurr_date(obj.getString("CURR_DATE"));
+                                bean.setEntrust_no(obj.getString("ENTRUST_NO"));
+                                bean.setEntrust_status(obj.getString("ENTRUST_STATUS"));
+                                bean.setEntrust_balance(obj.getString("ENTRUST_BALANCE"));
+                                bean.setBusiness_amount(obj.getString("BUSINESS_AMOUNT"));
                                 ses.add(bean);
                             }
                             info.setData(ses);
@@ -596,8 +610,8 @@ public class InterfaceCollection {
                 }else{
                     try {
                         JSONObject jsonObject = new JSONObject(response);
-                        String code = jsonObject.getString("MSG_CODE");
-                        String msg = jsonObject.getString("MSG_TEXT");
+                        String code = jsonObject.getString("code");
+                        String msg = jsonObject.getString("msg");
                         info.setCode(code);
                         info.setMsg(msg);
                         info.setTag(TAG);
@@ -676,8 +690,8 @@ public class InterfaceCollection {
                 }else{
                     try {
                         JSONObject jsonObject = new JSONObject(response);
-                        String code = jsonObject.getString("MSG_CODE");
-                        String msg = jsonObject.getString("MSG_TEXT");
+                        String code = jsonObject.getString("code");
+                        String msg = jsonObject.getString("msg");
                         info.setCode(code);
                         info.setMsg(msg);
                         info.setTag(TAG);
@@ -687,14 +701,19 @@ public class InterfaceCollection {
                             for (int i = 0; i < data.length(); i++) {
                                 StructuredFundEntity bean = new StructuredFundEntity();
                                 JSONObject obj = data.getJSONObject(i);
-                                bean.setStoken_name(obj.getString("STOCK_NAME"));
-                                bean.setStocken_code(obj.getString("STOCK_CODE"));
-                                bean.setEntrust_bs(obj.getString("ENTRUST_BS"));
-                                bean.setEntrust_amount(obj.getString("OCCUR_AMOUNT"));//委托量等同分拆份额
+                                bean.setStoken_name(obj.getString("SECU_NAME"));
+                                bean.setStocken_code(obj.getString("SECU_CODE"));
+                                bean.setBusiness_name(obj.getString("BUSINESS_NAME"));
                                 bean.setEntrust_status(obj.getString("BUSINESS_STATUS"));
-                                bean.setReport_time(obj.getString("BUSINESS_TIME"));
+                                bean.setReport_time(obj.getString("MATCHED_TIME"));
                                 bean.setInit_date(obj.getString("INIT_DATE"));
-                                bean.setPosition_str(obj.getString("POSITION_STR"));
+                                bean.setPosition_str(obj.getString("KEY_STR"));
+                                bean.setEntrust_amount(obj.getString("ENTRUST_AMOUNT"));//委托量等同分拆份额
+                                bean.setEntrust_balance(obj.getString("ENTRUST_BALANCE"));
+                                bean.setBusiness_amount(obj.getString("MATCHED_QTY"));
+                                bean.setMatched_price(obj.getString("MATCHED_PRICE"));
+                                bean.setMatched_amt(obj.getString("MATCHED_AMT"));
+                                bean.setSerial_no(obj.getString("SERIAL_NO"));
                                 ses.add(bean);
                             }
                             info.setData(ses);
@@ -982,6 +1001,261 @@ public class InterfaceCollection {
                     }
                 }
                 callback.callResult(info);
+            }
+        });
+    }
+    /**
+     * 331261
+     * 产品适当性交易匹配查询
+     * @param prodta_no  产品TA编号
+     * @param prod_code 产品代码
+     * @param fund_company 基金公司
+     * @param fund_code 基金代码
+     * @param session token
+     * @param TAG tag
+     */
+    public void queryProductSuitability(String session, String prodta_no, String prod_code, String fund_company, String fund_code, String TAG, final InterfaceCallback callback){
+        Map map1 = new HashMap<>();
+        map1.put("funcid","331261");
+        map1.put("token",session);
+        Map map2 = new HashMap<>();
+        map2.put("SEC_ID", "tpyzq");
+        map2.put("FLAG", "true");
+        map2.put("PRODTA_NO", prodta_no);
+        map2.put("PROD_CODE", prod_code);
+//        fund_code = "000326";
+//        fund_company = "01";
+        map2.put("FUND_COMPANY", fund_company);
+        map2.put("FUND_CODE",fund_code);
+        map1.put("parms",map2);
+        net.okHttpForPostString(TAG, ConstantUtil.URL_JY, map1, new StringCallback() {
+            @Override
+            public void onError(Call call, Exception e, int id) {
+                ResultInfo info = new ResultInfo();
+                info.setCode("-1");
+                info.setMsg(e.getMessage());
+                callback.callResult(info);
+            }
+
+            @Override
+            public void onResponse(String response, int id) {
+                ResultInfo info = new ResultInfo();
+                try {
+                    JSONObject jsonObject = new JSONObject(response);
+                    String code = jsonObject.getString("code");
+                    String msg = jsonObject.getString("msg");
+                    info.setCode(code);
+                    info.setMsg(msg);
+                    if("0".equals(code)){
+                        JSONArray data = jsonObject.optJSONArray("data");
+                        if (null!=data&&data.length()>0) {
+                            for (int i=0;i<data.length();i++){
+                                JSONObject subJsonObj = data.optJSONObject(i);
+                                HashMap<String,String> resultMap = new HashMap<String, String>();
+                                resultMap.put("PRODRISK_LEVEL",subJsonObj.optString("PRODRISK_LEVEL"));//产品风险等级描述
+                                resultMap.put("CORP_RISK_LEVEL",subJsonObj.optString("CORP_RISK_LEVEL"));//客户风险等级
+                                resultMap.put("CORP_RISK_LEVEL_INFO",subJsonObj.optString("CORP_RISK_LEVEL_INFO"));//客户风险等级描述
+                                resultMap.put("ELIG_RISK_FLAG",subJsonObj.optString("ELIG_RISK_FLAG"));//风险匹配标志 此接口标志位均为1 匹配 0不匹配
+                                resultMap.put("ELIG_RISK_FLAG_INFO",subJsonObj.optString("ELIG_RISK_FLAG_INFO"));//风险匹配标志描述
+                                resultMap.put("ELIG_INVESTKIND_FLAG",subJsonObj.optString("ELIG_INVESTKIND_FLAG"));//投资品种标志(1 匹配，0 不匹配)
+                                resultMap.put("ELIG_INVESTKIND_FLAG_INFO",subJsonObj.optString("ELIG_INVESTKIND_FLAG_INFO"));//投资品种标志描述
+                                resultMap.put("ELIG_TERM_FLAG",subJsonObj.optString("ELIG_TERM_FLAG"));//投资周期匹配标志(1 匹配，0 不匹配)
+                                resultMap.put("ELIG_TERM_FLAG_INFO",subJsonObj.optString("ELIG_TERM_FLAG_INFO"));//投资周期匹配标志描述
+                                resultMap.put("ELIG_DEFICITRATE_FLAG",subJsonObj.optString("ELIG_DEFICITRATE_FLAG"));//亏损率匹配标志(1 匹配，0 不匹配)
+                                resultMap.put("ENABLE_FLAG",subJsonObj.optString("ENABLE_FLAG"));//可操作标志(1 可以委托，0不可委托)
+                                resultMap.put("NEED_VIDEO_FLAG",subJsonObj.optString("NEED_VIDEO_FLAG"));//是否需要视频录制(0 否，1是)
+                                resultMap.put("URL_ID",subJsonObj.optString("URL_ID"));//跳转对象编号(双录地址)
+                                resultMap.put("INSTR_BATCH_NO",subJsonObj.optString("INSTR_BATCH_NO"));//指令批号(适当性校验批次号)
+                                info.setData(resultMap);
+                            }
+                        }
+                    }
+                } catch (JSONException e) {
+                    info.setCode("-1");
+                    info.setMsg(e.getMessage());
+                }
+                callback.callResult(info);
+            }
+        });
+    }
+
+
+    /**
+     * 331279
+     * 产品适当性记录
+     * @param instr_batch_no  记录批次号
+     * @param oper_info 周边操作信息
+     * @param session token
+     * @param TAG tag
+     */
+    public void productSuitabilityRecord(String session, String instr_batch_no, String oper_info, String TAG, final InterfaceCallback callback){
+        Map map1 = new HashMap<>();
+        map1.put("funcid","331279");
+        map1.put("token",session);
+        Map map2 = new HashMap<>();
+        map2.put("SEC_ID", "tpyzq");
+        map2.put("FLAG", "true");
+        map2.put("INSTR_BATCH_NO", instr_batch_no);
+        map2.put("OPER_INFO", oper_info);
+        map1.put("parms",map2);
+        net.okHttpForPostString(TAG, ConstantUtil.URL_JY, map1, new StringCallback() {
+            @Override
+            public void onError(Call call, Exception e, int id) {
+                ResultInfo info = new ResultInfo();
+                info.setCode("-1");
+                info.setMsg(e.getMessage());
+                callback.callResult(info);
+            }
+
+            @Override
+            public void onResponse(String response, int id) {
+                ResultInfo info = new ResultInfo();
+                try {
+                    JSONObject jsonObject = new JSONObject(response);
+                    String code = jsonObject.getString("code");
+                    String msg = jsonObject.getString("msg");
+                    info.setCode(code);
+                    info.setMsg(msg);
+                } catch (JSONException e) {
+                    info.setCode("-1");
+                    info.setMsg(e.getMessage());
+                }
+                callback.callResult(info);
+            }
+        });
+    }
+
+    /**
+     * OTC认购获取判断是否跳转 确认书界面的 值
+     */
+    public void getAffirm(final String stockCode, final String prodta_no, String session, final String SubscriptionMoney, final InterfaceCallback callback) {
+        HashMap map1 = new HashMap();
+        HashMap map2 = new HashMap();
+        map2.put("SEC_ID","tpyzq");
+        map2.put("PROD_CODE",stockCode);
+        map2.put("PRODTA_NO",prodta_no);
+        map2.put("FLAG","true");
+        map1.put("funcid","300512");
+        map1.put("token",session);
+        map1.put("parms",map2);
+        NetWorkUtil.getInstence().okHttpForPostString("300512", ConstantUtil.URL_JY, map1, new StringCallback() {
+            @Override
+            public void onError(Call call, Exception e, int id) {
+                ResultInfo info = new ResultInfo();
+                info.setCode("-1");
+                info.setMsg(e.getMessage());
+                callback.callResult(info);
+            }
+
+            @Override
+            public void onResponse(String response, int id) {
+                if(TextUtils.isEmpty(response)){
+                    onError(null,new Exception("返回值为空"),0);
+                    return;
+                }
+                Gson gson = new Gson();
+                Type type = new TypeToken<OTC_AffirmBean>() {}.getType();
+                OTC_AffirmBean bean = gson.fromJson(response, type);
+                String code = bean.getCode();
+                String msg = bean.getMsg();
+                List<OTC_AffirmBean.DataBean> data = bean.getData();
+                ResultInfo info = new ResultInfo();
+                info.setCode(code);
+                info.setMsg("");
+                if(("0").equalsIgnoreCase(code) && data != null){
+                    for(int i=0;i<data.size();i++){
+                        OTC_AffirmBean.DataBean dataBean = data.get(i);
+                        String is_ok = dataBean.getIS_OK();
+                        String is_agreement = dataBean.getIS_AGREEMENT();
+                        String is_open = dataBean.getIS_OPEN();
+                        String is_outofdate = dataBean.getIS_OUTOFDATE();
+                        String ofrisk_flag = dataBean.getOFRISK_FLAG();
+                        String prodrisk_level_name = dataBean.getPRODRISK_LEVEL_NAME();
+                        String corp_risk_level = dataBean.getCORP_RISK_LEVEL();
+                        String risk_level_name = dataBean.getRISK_LEVEL_NAME();
+                        String prodrisk_level = dataBean.getPRODRISK_LEVEL();
+                        AssessConfirmEntity assessConfirmBean = new AssessConfirmEntity();
+                        assessConfirmBean.productcode = stockCode;
+                        assessConfirmBean.productcompany = prodta_no;
+                        assessConfirmBean.productprice = SubscriptionMoney;
+                        assessConfirmBean.type = "3";
+                        assessConfirmBean.IS_ABLE = is_ok;
+                        assessConfirmBean.IS_AGREEMENT = is_agreement;
+                        assessConfirmBean.IS_OPEN = is_open;
+                        assessConfirmBean.IS_VALIB_RISK_LEVEL = is_outofdate;
+                        assessConfirmBean.OFRISK_FLAG = ofrisk_flag;
+                        assessConfirmBean.OFUND_RISKLEVEL_NAME = prodrisk_level_name;
+                        assessConfirmBean.RISK_LEVEL = corp_risk_level;
+                        assessConfirmBean.RISK_LEVEL_NAME = risk_level_name;
+                        assessConfirmBean.RISK_RATING = prodrisk_level;
+
+                            /*intent.putExtra("assessConfirm",assessConfirmBean);
+                            intent.putExtra("transaction", "true");
+                            intent.setClass(context,AssessConfirmActivity.class);
+                            mActivity.startActivityForResult(intent,100);
+                            dismiss();*/
+                        info.setData(assessConfirmBean);
+
+                    }
+
+                }
+                callback.callResult(info);
+            }
+        });
+    }
+
+    /**
+     * 认购
+     */
+    public void getProductMsg(String session, String stockCode, String prodta_no, String SubscriptionMoney, final InterfaceCallback callback){
+        HashMap map1 = new HashMap();
+        HashMap map2 = new HashMap();
+        map2.put("SEC_ID","tpyzq");
+        map2.put("PROD_CODE",stockCode);
+        map2.put("PRODTA_NO",prodta_no);
+        map2.put("ENTRUST_BALANCE",SubscriptionMoney);
+        map2.put("FLAG","true");
+        map1.put("funcid","730201");
+        map1.put("token",session);
+        map1.put("parms",map2);
+        NetWorkUtil.getInstence().okHttpForPostString("730201", ConstantUtil.URL_JY, map1, new StringCallback() {
+            @Override
+            public void onError(Call call, Exception e, int id) {
+                ResultInfo info = new ResultInfo();
+                info.setCode("-1");
+                info.setMsg(e.getMessage());
+                callback.callResult(info);
+            }
+
+            @Override
+            public void onResponse(String response, int id) {
+                if(TextUtils.isEmpty(response)){
+                    return;
+                }
+                Gson gson = new Gson();
+                Type type = new TypeToken<OTC_SubscriptionCommitBean>() {}.getType();
+                OTC_SubscriptionCommitBean bean = gson.fromJson(response, type);
+                String code = bean.getCode();
+                String msg = bean.getMsg();
+                ResultInfo info = new ResultInfo();
+                info.setCode(code);
+                info.setMsg(msg);
+                callback.callResult(info);
+                /*if (code.equals("-6")) {
+                    Intent intent = new Intent(context, TransactionLoginActivity.class);
+                    context.startActivity(intent);
+                    dismiss();
+                    ((Activity)context).finish();
+                } else
+                if (code.equals("0")) {
+                    ResultDialog.getInstance().show("委托已提交", R.mipmap.duigou);
+                    dismiss();
+                    isOk.callBack(true);
+                }else {
+                    MistakeDialog.showDialog(msg, mActivity);
+                    dismiss();
+                    isOk.callBack(false);
+                }*/
             }
         });
     }

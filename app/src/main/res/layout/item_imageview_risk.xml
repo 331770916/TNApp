@@ -1,0 +1,157 @@
+<?xml version="1.0" encoding="utf-8"?>
+<LinearLayout xmlns:android="http://schemas.android.com/apk/res/android"
+    xmlns:app="http://schemas.android.com/apk/res-auto"
+    android:layout_width="match_parent"
+    android:layout_height="match_parent"
+    android:orientation="vertical">
+
+    <LinearLayout
+        android:layout_width="match_parent"
+        android:layout_height="wrap_content"
+        android:orientation="vertical"
+        android:padding="@dimen/txtSize18">
+
+        <TextView
+            android:layout_width="match_parent"
+            android:layout_height="wrap_content"
+            android:gravity="center"
+            android:text="@string/RiskEvaluationText"
+            android:textSize="@dimen/txtSize20" />
+
+        <View
+            android:layout_width="match_parent"
+            android:layout_height="@dimen/size1"
+            android:layout_marginTop="@dimen/size10"
+            android:background="@color/lineColor" />
+    </LinearLayout>
+
+    <FrameLayout
+        android:layout_marginTop="@dimen/size10"
+        android:layout_width="match_parent"
+        android:layout_height="wrap_content">
+
+        <com.tpyzq.mobile.pangu.view.progress.RoundProgressBar
+            android:id="@+id/RoundProgressBar1"
+            android:layout_width="@dimen/size220"
+            android:layout_height="@dimen/size220"
+            android:layout_gravity="center"
+            app:max="100"
+            app:roundColor="@color/lineColor"
+            app:roundProgressColor="@color/blue3"
+            app:textColor="@android:color/transparent" />
+
+        <TextView
+            android:layout_width="match_parent"
+            android:layout_height="wrap_content"
+            android:gravity="center"
+            android:paddingTop="@dimen/size80"
+            android:text="@string/RiskEvaluationText1"
+            android:textSize="@dimen/txtSize12" />
+
+        <TextView
+            android:id="@+id/clasTextView1"
+            android:layout_width="match_parent"
+            android:layout_height="wrap_content"
+            android:gravity="center"
+            android:paddingTop="@dimen/size100"
+            android:text="--"
+            android:textColor="@color/dateSureColor"
+            android:textSize="@dimen/txtSize25" />
+    </FrameLayout>
+
+    <LinearLayout
+        android:layout_width="match_parent"
+        android:layout_height="wrap_content"
+        android:orientation="horizontal"
+        android:paddingTop="@dimen/size20">
+
+        <RelativeLayout
+            android:layout_width="0dp"
+            android:layout_height="wrap_content"
+            android:layout_weight="1">
+
+            <TextView
+                android:id="@+id/TextView1"
+                android:layout_width="wrap_content"
+                android:layout_height="wrap_content"
+                android:layout_alignParentLeft="true"
+                android:layout_centerInParent="true"
+                android:paddingLeft="@dimen/size30"
+                android:text="@string/RiskEvaluationText3"
+                android:textColor="@color/text" />
+
+            <TextView
+                android:id="@+id/ResulTextView1"
+                android:layout_width="wrap_content"
+                android:layout_height="wrap_content"
+                android:layout_centerInParent="true"
+                android:layout_toRightOf="@id/TextView1"
+                android:paddingLeft="@dimen/size10"
+                android:textSize="@dimen/txtSize14" />
+        </RelativeLayout>
+
+        <RelativeLayout
+            android:layout_width="0dp"
+            android:layout_height="wrap_content"
+            android:layout_weight="1">
+
+            <TextView
+                android:id="@+id/TextView2"
+                android:layout_width="wrap_content"
+                android:layout_height="wrap_content"
+                android:layout_alignParentLeft="true"
+                android:layout_centerInParent="true"
+                android:paddingLeft="@dimen/size15"
+                android:text="@string/RiskEvaluationText4"
+                android:textColor="@color/text" />
+
+            <TextView
+                android:id="@+id/ResulDate1"
+                android:layout_width="wrap_content"
+                android:layout_height="wrap_content"
+                android:layout_centerInParent="true"
+                android:layout_toRightOf="@id/TextView2"
+                android:paddingLeft="@dimen/size10"
+                android:textSize="@dimen/txtSize14" />
+        </RelativeLayout>
+    </LinearLayout>
+
+
+    <RelativeLayout
+        android:layout_gravity="center"
+        android:layout_width="match_parent"
+        android:layout_height="match_parent"
+        android:paddingLeft="@dimen/size30"
+        android:paddingRight="@dimen/size30">
+
+        <LinearLayout
+            android:layout_width="match_parent"
+            android:layout_height="wrap_content"
+            android:layout_centerInParent="true"
+            android:orientation="vertical">
+            <Button
+                android:id="@+id/lookRiskResultDetail"
+                android:layout_width="match_parent"
+                android:layout_height="wrap_content"
+                android:background="@drawable/shape_flow_bg"
+                android:layout_marginBottom="@dimen/size10"
+                android:text="查看问卷详情"
+                android:textColor="@color/calendarBtnColor"/>
+
+            <Button
+                android:id="@+id/Restart1"
+                android:layout_width="match_parent"
+                android:layout_height="wrap_content"
+                android:layout_marginTop="@dimen/size10"
+                android:background="@drawable/lonin"
+                android:text="@string/RiskEvaluationButton"
+                android:textColor="@color/white"
+                android:layout_centerVertical="true"
+                android:layout_alignParentLeft="true"
+                android:layout_alignParentStart="true" />
+        </LinearLayout>
+
+    </RelativeLayout>
+
+
+</LinearLayout>

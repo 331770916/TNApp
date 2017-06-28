@@ -2,8 +2,10 @@ package com.tpyzq.mobile.pangu.activity.myself.handhall;
 
 import android.app.Dialog;
 import android.content.Intent;
+import android.graphics.Paint;
 import android.os.AsyncTask;
 import android.text.TextUtils;
+import android.view.KeyEvent;
 import android.view.View;
 import android.view.ViewTreeObserver;
 import android.widget.Button;
@@ -16,6 +18,8 @@ import com.tpyzq.mobile.pangu.activity.myself.login.TransactionLoginActivity;
 import com.tpyzq.mobile.pangu.adapter.myself.RiskEvaluationAdapter;
 import com.tpyzq.mobile.pangu.base.BaseActivity;
 import com.tpyzq.mobile.pangu.data.RiskTableEntity;
+import com.tpyzq.mobile.pangu.data.UserEntity;
+import com.tpyzq.mobile.pangu.db.Db_PUB_USERS;
 import com.tpyzq.mobile.pangu.http.NetWorkUtil;
 import com.tpyzq.mobile.pangu.log.LogHelper;
 import com.tpyzq.mobile.pangu.util.ConstantUtil;
@@ -51,41 +55,47 @@ public class RiskEvaluationActivity extends BaseActivity implements View.OnClick
     int list_height = 0;
     int count = 0;
     List<String> mPenalList, mSerialNumber;
+    private boolean isLogin; //作用 当用户做风险测评时候，未做完退出，需要把login至为未登录
 
     private TextView mType, mDate, mResultTV, mResultTV1, mResulDate1;
     private RoundProgressBar mRoundProgressBar, mRoundProgressBar1;
+    private boolean isFinishAnswer = false;
 
     @Override
     public void initView() {
-//        ResulttoConnect();
-//
-//        findViewById(R.id.AGpublish_back).setOnClickListener(this);
-//        Anew = (LinearLayout) findViewById(R.id.Anew);
-//        Answer = (LinearLayout) findViewById(R.id.Answer);
-//        Result = (LinearLayout) findViewById(R.id.Result);
-//        //风险测评表
-//        mListView = (NoScrollListView) Answer.findViewById(R.id.mListView);
-//        //提交
-//        Affirm = (Button) Answer.findViewById(R.id.Affirm);
-//        Affirm.setOnClickListener(this);
-//        //风险评测结果
-//        mType = (TextView) Result.findViewById(R.id.clasTextView);
-//        mDate = (TextView) Result.findViewById(R.id.Date);
-//        mRestart = (Button) Result.findViewById(R.id.Restart);
-//        mYse = (Button) Result.findViewById(R.id.Yse);
-//        mRestart.setOnClickListener(this);
-//        mYse.setOnClickListener(this);
-//        mRoundProgressBar = (RoundProgressBar) findViewById(R.id.RoundProgressBar);
-//        mRoundProgressBar.setRoundWidth(15);
-//        mRoundProgressBar1 = (RoundProgressBar) findViewById(R.id.RoundProgressBar1);
-//        mRoundProgressBar1.setRoundWidth(15);
-//        //风险等级查询
-//        mResultTV = (TextView) Anew.findViewById(R.id.clasTextView1);
-//        mResultTV1 = (TextView) Anew.findViewById(R.id.ResulTextView1);
-//        mResulDate1 = (TextView) Anew.findViewById(R.id.ResulDate1);
-//        mRestart1 = (Button) findViewById(R.id.Restart1);
-//        mRestart1.setOnClickListener(this);
-//        initData();
+        Intent intent = getIntent();
+        isLogin = intent.getBooleanExtra("isLogin", false);
+
+        ResulttoConnect();
+
+        findViewById(R.id.AGpublish_back).setOnClickListener(this);
+        Anew = (LinearLayout) findViewById(R.id.Anew);
+        Answer = (LinearLayout) findViewById(R.id.Answer);
+        Result = (LinearLayout) findViewById(R.id.Result);
+        //风险测评表
+        mListView = (NoScrollListView) Answer.findViewById(R.id.mListView);
+        //提交
+        Affirm = (Button) Answer.findViewById(R.id.Affirm);
+        Affirm.setOnClickListener(this);
+        //风险评测结果
+        mType = (TextView) Result.findViewById(R.id.clasTextView);
+        mDate = (TextView) Result.findViewById(R.id.Date);
+        mRestart = (Button) Result.findViewById(R.id.Restart);
+        mYse = (Button) Result.findViewById(R.id.Yse);
+        mRestart.setOnClickListener(this);
+        mYse.setOnClickListener(this);
+        mRoundProgressBar = (RoundProgressBar) findViewById(R.id.RoundProgressBar);
+        mRoundProgressBar.setRoundWidth(15);
+        mRoundProgressBar1 = (RoundProgressBar) findViewById(R.id.RoundProgressBar1);
+        mRoundProgressBar1.setRoundWidth(15);
+        //风险等级查询
+        mResultTV = (TextView) Anew.findViewById(R.id.clasTextView1);
+        mResultTV1 = (TextView) Anew.findViewById(R.id.ResulTextView1);
+        mResulDate1 = (TextView) Anew.findViewById(R.id.ResulDate1);
+        Anew.findViewById(R.id.lookRiskResultDetail).setOnClickListener(this);
+        mRestart1 = (Button) findViewById(R.id.Restart1);
+        mRestart1.setOnClickListener(this);
+        initData();
     }
 
     /**
@@ -139,6 +149,7 @@ public class RiskEvaluationActivity extends BaseActivity implements View.OnClick
                 if (TextUtils.isEmpty(response)) {
                     return;
                 }
+//
                 try {
                     JSONObject jsonObject = new JSONObject(response);
                     String msg = jsonObject.getString("msg");
@@ -364,83 +375,83 @@ public class RiskEvaluationActivity extends BaseActivity implements View.OnClick
                     MistakeDialog.showDialog(e.toString(), RiskEvaluationActivity.this);
                 }
                 /**
-                Gson gson = new Gson();
-                java.lang.reflect.Type type = new TypeToken<RiskResult>() {
-                }.getType();
-                RiskResult bean = gson.fromJson(response, type);
-                if (bean.getCode().equals("0")) {
-                    for (RiskResult.ResultBean _bean : bean.getData()) {
+                 Gson gson = new Gson();
+                 java.lang.reflect.Type type = new TypeToken<RiskResult>() {
+                 }.getType();
+                 RiskResult bean = gson.fromJson(response, type);
+                 if (bean.getCode().equals("0")) {
+                 for (RiskResult.ResultBean _bean : bean.getData()) {
 
-                        if (mloadingDialog != null) {
-                            mloadingDialog.dismiss();
-                        }
-                        mDate.setText(_bean.getCORP_BEGIN_DATE());
-                        switch (_bean.getCORP_RISK_VAILD()) {
-                            case "0":
-                                Anew.setVisibility(View.VISIBLE);
-                                Answer.setVisibility(View.GONE);
-                                Result.setVisibility(View.GONE);
-                                switch (_bean.getCORP_RISK_LEVEL()) {
-                                    case "0":
-                                        mResultTV.setText("默认型");
-                                        setRoundProgressBar(14);
-                                        break;
-                                    case "1":
-                                        mResultTV.setText("保守型");
-                                        setRoundProgressBar(28);
-                                        break;
-                                    case "2":
-                                        mResultTV.setText("相对保守型");
-                                        setRoundProgressBar(43);
-                                        break;
-                                    case "3":
-                                        mResultTV.setText("稳健型");
-                                        setRoundProgressBar(57);
-                                        break;
-                                    case "4":
-                                        mResultTV.setText("相对积极型");
-                                        setRoundProgressBar(72);
-                                        break;
-                                    case "5":
-                                        mResultTV.setText("积极型");
-                                        setRoundProgressBar(86);
-                                        break;
-                                    case "100":
-                                        mResultTV.setText("自定义风险等级");
-                                        setRoundProgressBar(100);
-                                        break;
-                                }
-                                switch (_bean.getIS_OUTOFDATE()) {
-                                    case "0":
-                                        mResultTV1.setText("否");
-                                        break;
-                                    case "1":
-                                        mResultTV1.setText("是");
-                                        break;
-                                }
-                                mResulDate1.setText(Helper.getMyDateY_M_D(_bean.getCORP_END_DATE()));
-                                break;
-                            case "1":
-                                Anew.setVisibility(View.GONE);
-                                Answer.setVisibility(View.VISIBLE);
-                                Result.setVisibility(View.GONE);
-                                toConnect();
-                                break;
-                        }
-                    }
-                } else if (bean.getCode().equals("-6")) {
-                    if (mloadingDialog != null) {
-                        mloadingDialog.dismiss();
-                    }
-                    Intent intent = new Intent(RiskEvaluation.this, TransactionLoginActivity.class);
-                    startActivity(intent);
-                } else {
-                    if (mloadingDialog != null) {
-                        mloadingDialog.dismiss();
-                    }
-                    MistakeDialog.showDialog(bean.getMsg(), RiskEvaluation.this);
-                }
-                */
+                 if (mloadingDialog != null) {
+                 mloadingDialog.dismiss();
+                 }
+                 mDate.setText(_bean.getCORP_BEGIN_DATE());
+                 switch (_bean.getCORP_RISK_VAILD()) {
+                 case "0":
+                 Anew.setVisibility(View.VISIBLE);
+                 Answer.setVisibility(View.GONE);
+                 Result.setVisibility(View.GONE);
+                 switch (_bean.getCORP_RISK_LEVEL()) {
+                 case "0":
+                 mResultTV.setText("默认型");
+                 setRoundProgressBar(14);
+                 break;
+                 case "1":
+                 mResultTV.setText("保守型");
+                 setRoundProgressBar(28);
+                 break;
+                 case "2":
+                 mResultTV.setText("相对保守型");
+                 setRoundProgressBar(43);
+                 break;
+                 case "3":
+                 mResultTV.setText("稳健型");
+                 setRoundProgressBar(57);
+                 break;
+                 case "4":
+                 mResultTV.setText("相对积极型");
+                 setRoundProgressBar(72);
+                 break;
+                 case "5":
+                 mResultTV.setText("积极型");
+                 setRoundProgressBar(86);
+                 break;
+                 case "100":
+                 mResultTV.setText("自定义风险等级");
+                 setRoundProgressBar(100);
+                 break;
+                 }
+                 switch (_bean.getIS_OUTOFDATE()) {
+                 case "0":
+                 mResultTV1.setText("否");
+                 break;
+                 case "1":
+                 mResultTV1.setText("是");
+                 break;
+                 }
+                 mResulDate1.setText(Helper.getMyDateY_M_D(_bean.getCORP_END_DATE()));
+                 break;
+                 case "1":
+                 Anew.setVisibility(View.GONE);
+                 Answer.setVisibility(View.VISIBLE);
+                 Result.setVisibility(View.GONE);
+                 toConnect();
+                 break;
+                 }
+                 }
+                 } else if (bean.getCode().equals("-6")) {
+                 if (mloadingDialog != null) {
+                 mloadingDialog.dismiss();
+                 }
+                 Intent intent = new Intent(RiskEvaluation.this, TransactionLoginActivity.class);
+                 startActivity(intent);
+                 } else {
+                 if (mloadingDialog != null) {
+                 mloadingDialog.dismiss();
+                 }
+                 MistakeDialog.showDialog(bean.getMsg(), RiskEvaluation.this);
+                 }
+                 */
             }
 
         });
@@ -470,7 +481,12 @@ public class RiskEvaluationActivity extends BaseActivity implements View.OnClick
         @Override
         public void position(int point, int position) {
             mPenalList.add(riskTableBeans.get(position).QUESTION_NO);
-            mSerialNumber.add(riskTableBeans.get(position).OPTION_ANSWER.get(point).ANSWER_NO);
+            if (point < 10) {//如果小于10证明客户选择的是单个题 否则是多选题并且做了多个选择
+                mSerialNumber.add(riskTableBeans.get(position).OPTION_ANSWER.get(point).ANSWER_NO);
+            } else {
+                mSerialNumber.add("" + point);
+            }
+
             if (riskTableBeans.size() - 1 == position) {
 
                 new AsyncTask<Void, Void, Void>() {
@@ -499,45 +515,72 @@ public class RiskEvaluationActivity extends BaseActivity implements View.OnClick
     };
 
     @Override
+    public boolean onKeyDown(int keyCode, KeyEvent event) {
+        if ((keyCode == KeyEvent.KEYCODE_BACK)) {
+
+            if (!isFinishAnswer && isLogin) {
+                UserEntity userEntity=new UserEntity();
+                userEntity.setIslogin("false");
+                Db_PUB_USERS.UpdateIslogin(userEntity);
+            }
+            return super.onKeyDown(keyCode, event);
+        } else {
+            return super.onKeyDown(keyCode, event);
+        }
+
+    }
+
+    @Override
     public void onClick(View v) {
-//        switch (v.getId()) {
-//            case R.id.AGpublish_back:
-//                finish();
-//                break;
-////            case R.id.Affirm:
-////                ResulttoConnect1();
-////                Answer.setVisibility(View.GONE);
-////                SubmittoConnect();
-////                Result.setVisibility(View.VISIBLE);
-////                break;
-////            case R.id.Restart:
-////                count = 0;
-////                riskTableBeans.clear();
-////                mPenalList.clear();
-////                mSerialNumber.clear();
-////                riskEvaluationAdapter.notifyDataSetChanged();
-////                Answer.setVisibility(View.VISIBLE);
-////                Result.setVisibility(View.GONE);
-////                Affirm.setVisibility(View.INVISIBLE);
-////                initData();
-////                toConnect();
-////                break;
-//            case R.id.Yse:
-//                finish();
-//                break;
-//            case R.id.Restart1:
-//                count = 0;
-//                riskTableBeans.clear();
-//                mPenalList.clear();
-//                mSerialNumber.clear();
-//                Answer.setVisibility(View.VISIBLE);
-//                Result.setVisibility(View.GONE);
-//                Anew.setVisibility(View.GONE);
-//                Affirm.setVisibility(View.INVISIBLE);
-//                initData();
-//                toConnect();
-//                break;
-//        }
+        switch (v.getId()) {
+            case R.id.AGpublish_back:
+                if (!isFinishAnswer && isLogin) {
+                    UserEntity userEntity=new UserEntity();
+                    userEntity.setIslogin("false");
+                    Db_PUB_USERS.UpdateIslogin(userEntity);
+                }
+                finish();
+                break;
+            case R.id.Affirm:
+                isFinishAnswer = true;
+                ResulttoConnect1();
+                Answer.setVisibility(View.GONE);
+                SubmittoConnect();
+                Result.setVisibility(View.VISIBLE);
+                break;
+            case R.id.Restart:
+                count = 0;
+                riskTableBeans.clear();
+                mPenalList.clear();
+                mSerialNumber.clear();
+                riskEvaluationAdapter.notifyDataSetChanged();
+                Answer.setVisibility(View.VISIBLE);
+                Result.setVisibility(View.GONE);
+                Affirm.setVisibility(View.INVISIBLE);
+                initData();
+                toConnect();
+                break;
+            case R.id.Yse:
+                finish();
+                break;
+            case R.id.Restart1:
+                count = 0;
+                riskTableBeans.clear();
+                mPenalList.clear();
+                mSerialNumber.clear();
+                Answer.setVisibility(View.VISIBLE);
+                Result.setVisibility(View.GONE);
+                Anew.setVisibility(View.GONE);
+                Affirm.setVisibility(View.INVISIBLE);
+                initData();
+                toConnect();
+                break;
+            case R.id.lookRiskResultDetail:
+                Intent intent = new Intent();
+                intent.setClass(RiskEvaluationActivity.this, RiskTestDetailActivity.class);
+                startActivity(intent);
+                break;
+        }
     }
 
     /**
@@ -583,23 +626,23 @@ public class RiskEvaluationActivity extends BaseActivity implements View.OnClick
 
 
                 /**
-                Gson gson = new Gson();
-                java.lang.reflect.Type type = new TypeToken<RiskResult>() {
-                }.getType();
-                RiskResult bean = gson.fromJson(response, type);
-                if (bean.getCode().equals("0")) {
-                    for (RiskResult.ResultBean _bean : bean.getData()) {
-                        mDate.setText(Helper.getMyDateY_M_D(_bean.getCORP_END_DATE()));
-                        break;
-                    }
-                } else if (bean.getCode().equals("-6")) {
-                    Intent intent = new Intent(RiskEvaluation.this, TransactionLoginActivity.class);
-                    startActivity(intent);
-                } else {
+                 Gson gson = new Gson();
+                 java.lang.reflect.Type type = new TypeToken<RiskResult>() {
+                 }.getType();
+                 RiskResult bean = gson.fromJson(response, type);
+                 if (bean.getCode().equals("0")) {
+                 for (RiskResult.ResultBean _bean : bean.getData()) {
+                 mDate.setText(Helper.getMyDateY_M_D(_bean.getCORP_END_DATE()));
+                 break;
+                 }
+                 } else if (bean.getCode().equals("-6")) {
+                 Intent intent = new Intent(RiskEvaluation.this, TransactionLoginActivity.class);
+                 startActivity(intent);
+                 } else {
 
-                    MistakeDialog.showDialog(bean.getMsg(), RiskEvaluation.this);
-                }
-                */
+                 MistakeDialog.showDialog(bean.getMsg(), RiskEvaluation.this);
+                 }
+                 */
             }
 
         });

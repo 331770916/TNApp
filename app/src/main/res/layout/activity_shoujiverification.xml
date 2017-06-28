@@ -117,12 +117,15 @@
             <com.facebook.drawee.view.SimpleDraweeView
                 android:layout_marginTop="@dimen/size4"
                 android:id="@+id/SecurityCode"
-                android:layout_width="@dimen/size120"
-                android:layout_height="wrap_content"
+                android:layout_width="0dp"
+                android:layout_height="match_parent"
+                android:layout_weight="0.5"
                 android:layout_marginLeft="@dimen/size4"
                 fresco:actualImageScaleType="fitCenter"
                 fresco:failureImageScaleType="fitCenter"
-                fresco:placeholderImageScaleType="fitCenter" />
+                fresco:placeholderImage="@mipmap/ic_again"
+                fresco:retryImage="@mipmap/ic_again"
+                fresco:placeholderImageScaleType="centerInside"/>
         </LinearLayout>
 
 

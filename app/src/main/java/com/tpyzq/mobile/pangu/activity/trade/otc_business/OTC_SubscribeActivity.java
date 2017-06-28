@@ -20,10 +20,14 @@ import com.google.gson.Gson;
 import com.google.gson.reflect.TypeToken;
 import com.tpyzq.mobile.pangu.R;
 import com.tpyzq.mobile.pangu.activity.myself.login.TransactionLoginActivity;
+import com.tpyzq.mobile.pangu.activity.trade.open_fund.AssessConfirmActivity;
 import com.tpyzq.mobile.pangu.base.BaseActivity;
+import com.tpyzq.mobile.pangu.base.InterfaceCollection;
+import com.tpyzq.mobile.pangu.data.AssessConfirmEntity;
 import com.tpyzq.mobile.pangu.data.OTC_SubscribeAffirmMsgBean;
 import com.tpyzq.mobile.pangu.data.OTC_SubscribeEntity;
 import com.tpyzq.mobile.pangu.data.OTC_SubscribeListBean;
+import com.tpyzq.mobile.pangu.data.ResultInfo;
 import com.tpyzq.mobile.pangu.http.NetWorkUtil;
 import com.tpyzq.mobile.pangu.interfac.IsClickedListener;
 import com.tpyzq.mobile.pangu.log.LogUtil;
@@ -32,7 +36,7 @@ import com.tpyzq.mobile.pangu.util.SpUtils;
 import com.tpyzq.mobile.pangu.util.panguutil.UserUtil;
 import com.tpyzq.mobile.pangu.view.dialog.LoadingDialog;
 import com.tpyzq.mobile.pangu.view.dialog.MistakeDialog;
-import com.tpyzq.mobile.pangu.view.dialog.OTC_SubscribeDialog;
+import com.tpyzq.mobile.pangu.view.dialog.OTC_SubscriptionDialog;
 import com.tpyzq.mobile.pangu.view.dialog.ResultDialog;
 import com.zhy.http.okhttp.callback.StringCallback;
 
@@ -64,10 +68,15 @@ public class OTC_SubscribeActivity extends BaseActivity implements View.OnClickL
     private KeyboardUtil mKeyBoardUtil;
     private ScrollView mScrollView;
     private Dialog submit;
+    private OTC_SubscriptionDialog dialog;
+
+    private static int REQUESTCODE = 1001; //进入风险确认页面的请求码
+    private static int REQAGREEMENTCODE = 1002; //进入签署协议页面的请求码
+    private String mSession;
 
     @Override
     public void initView() {
-        final String mSession = SpUtils.getString(this, "mSession", "");
+        mSession = SpUtils.getString(this, "mSession", "");
         list = new ArrayList<OTC_SubscribeEntity>();
         getProductList(mSession);                                                                                    //初始化获取产品列表信息
         etOTC_SGProductCode = (EditText) this.findViewById(R.id.etOTC_SGProductCode);                             //产品代码输入框
@@ -368,9 +377,72 @@ public class OTC_SubscribeActivity extends BaseActivity implements View.OnClickL
             point = data.getIntExtra("position", -1);
             etOTC_SGProductCode.setSelection(etOTC_SGProductCode.getText().length());
         }
-        if (requestCode == 100 && resultCode == 500) {
+        if (requestCode == REQAGREEMENTCODE && resultCode == RESULT_OK) {//签署协议成功返回
             etOTC_SubscribeMoney.setText("");  //清空认购价格
         }
+        if (requestCode == REQUESTCODE && resultCode == RESULT_OK) {//风险通知书成功返回
+            final String SubscriptionMoney = etOTC_SubscribeMoney.getText().toString();       //获取输入的认购金额
+            final String stockCode = etOTC_SGProductCode.getText().toString();
+            InterfaceCollection.getInstance().getAffirm(stockCode, map.get("prodta_no"), mSession, SubscriptionMoney, new InterfaceCollection.InterfaceCallback() {
+                @Override
+                public void callResult(ResultInfo info) {
+                    String code = info.getCode();
+                    String msg = info.getMsg();
+                    if (code.equals("-6")) {
+                        Intent intent = new Intent(OTC_SubscribeActivity.this, TransactionLoginActivity.class);
+                        OTC_SubscribeActivity.this.startActivity(intent);
+                        if (null!=dialog&&dialog.isShowing()) {
+                            dialog.dismiss();
+                            finish();
+                        }
+                    } else if ("0".equalsIgnoreCase(code)) {
+                        AssessConfirmEntity assessConfirmBean = (AssessConfirmEntity)info.getData();
+                        if("0".equalsIgnoreCase(assessConfirmBean.IS_ABLE)){
+                            getProductMsg(stockCode, SubscriptionMoney);
+                        }else {
+                            Intent intent = new Intent();
+                            intent.putExtra("assessConfirm",assessConfirmBean);
+                            intent.putExtra("transaction", "true");
+                            intent.setClass(OTC_SubscribeActivity.this,AssessConfirmActivity.class);
+                            OTC_SubscribeActivity.this.startActivityForResult(intent,REQAGREEMENTCODE);
+                            if (null!=dialog&&dialog.isShowing()){
+                                dialog.dismiss();
+                            }
+                        }
+                    } else {
+                        MistakeDialog.showDialog(msg, OTC_SubscribeActivity.this);
+                    }
+                }
+            });
+        }
+    }
+    private void getProductMsg(String stockCode, String subscriptionMoney) {
+        InterfaceCollection.getInstance().getProductMsg(mSession,stockCode,map.get("prodta_no") , subscriptionMoney, new InterfaceCollection.InterfaceCallback() {
+            @Override
+            public void callResult(ResultInfo info) {
+                String code = info.getCode();
+                String msg = info.getMsg();
+                if ("-6".equalsIgnoreCase(code)) {
+                    Intent intent = new Intent(OTC_SubscribeActivity.this, TransactionLoginActivity.class);
+                    OTC_SubscribeActivity.this.startActivity(intent);
+                    if (null!=dialog&&dialog.isShowing()) {
+                        dialog.dismiss();
+                        finish();
+                    }
+                    finish();
+                } else
+                if (("0").equalsIgnoreCase(code)) {
+                    ResultDialog.getInstance().show("委托已提交", R.mipmap.duigou);
+                    wipeData();
+                }else {
+                    MistakeDialog.showDialog(msg, OTC_SubscribeActivity.this);
+                    if (null!=dialog&&dialog.isShowing()) {
+                        dialog.dismiss();
+                        finish();
+                    }
+                }
+            }
+        });
     }
 
     @Override
@@ -395,7 +467,7 @@ public class OTC_SubscribeActivity extends BaseActivity implements View.OnClickL
                 String SubscriptionMoney = etOTC_SubscribeMoney.getText().toString();       //获取输入的认购金额
                 String stockCode = etOTC_SGProductCode.getText().toString();          //获取输入的 输入代码
                 //实例化PopupWindow
-                OTC_SubscribeDialog dialog = new OTC_SubscribeDialog(this, this, map, SubscriptionMoney, stockCode, this);
+                dialog = new OTC_SubscriptionDialog(this,map.get("prodta_no"),SubscriptionMoney, stockCode, this);
                 dialog.show();
 
                 break;
