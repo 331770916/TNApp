@@ -116,6 +116,7 @@ public class ShouJiZhuCeActivity extends BaseActivity implements View.OnClickLis
      * EditText的 监听事件
      */
     private void EditTextMonitor() {
+        mSecurityCode.setDrawingCacheEnabled(true);
         time = new TimeCount(120000, 1000);
         time1 = new TimeCount1(120000, 1000);
         mCaptchabtn.setOnClickListener(this);
@@ -140,6 +141,7 @@ public class ShouJiZhuCeActivity extends BaseActivity implements View.OnClickLis
             @Override
             public void onError(Call call, Exception e, int id) {
                 Helper.getInstance().showToast(ShouJiZhuCeActivity.this, ConstantUtil.NETWORK_ERROR);
+                mSecurityCode.setImageResource(R.mipmap.ic_again);
             }
 
             @Override
@@ -172,6 +174,11 @@ public class ShouJiZhuCeActivity extends BaseActivity implements View.OnClickLis
         if (TextUtils.isEmpty(mSjNumber.getText().toString())) {
             mSjLogIn.setBackgroundResource(R.drawable.button_login_unchecked);
             mSjLogIn.setTextColor(Color.parseColor("#ffffffff"));
+
+            mCaptchabtn.setClickable(false);
+            mCaptchabtn.setTextColor(Color.parseColor("#87bd43"));
+            mCaptchabtn.setBackgroundResource(R.drawable.captcha_button_pitchon);
+
         } else if (TextUtils.isEmpty(mImage_et.getText().toString())) {
 
             mCaptchabtn.setClickable(false);

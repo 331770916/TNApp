@@ -125,6 +125,7 @@ public class ShouJiVerificationActivity extends BaseActivity implements View.OnC
             @Override
             public void onError(Call call, Exception e, int id) {
                 Helper.getInstance().showToast(ShouJiVerificationActivity.this, "网络异常");
+                mSecurityCode.setImageResource(R.mipmap.ic_again);
             }
 
             @Override
@@ -157,6 +158,10 @@ public class ShouJiVerificationActivity extends BaseActivity implements View.OnC
         if (TextUtils.isEmpty(mSJYZNumber.getText().toString())) {
             mSJYZLogIn.setBackgroundResource(R.drawable.button_login_unchecked);
             mSJYZLogIn.setTextColor(Color.parseColor("#ffffffff"));
+            mSJYZCaptchabtn.setClickable(false);
+            mSJYZCaptchabtn.setTextColor(Color.parseColor("#87bd43"));
+            mSJYZCaptchabtn.setBackgroundResource(R.drawable.captcha_button_pitchon);
+
         } else if (TextUtils.isEmpty(mImage_et.getText().toString())) {
             mSJYZCaptchabtn.setClickable(false);
             mSJYZCaptchabtn.setTextColor(Color.parseColor("#87bd43"));
