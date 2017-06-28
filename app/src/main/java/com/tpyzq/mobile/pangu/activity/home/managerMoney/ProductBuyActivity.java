@@ -11,11 +11,13 @@ import android.widget.Toast;
 
 import com.google.gson.Gson;
 import com.tpyzq.mobile.pangu.R;
+import com.tpyzq.mobile.pangu.activity.myself.handhall.RiskConfirmActivity;
 import com.tpyzq.mobile.pangu.activity.myself.login.TransactionLoginActivity;
 import com.tpyzq.mobile.pangu.activity.trade.open_fund.AssessConfirmActivity;
 import com.tpyzq.mobile.pangu.base.BaseActivity;
 import com.tpyzq.mobile.pangu.data.AssessConfirmEntity;
 import com.tpyzq.mobile.pangu.data.FundDataEntity;
+import com.tpyzq.mobile.pangu.data.FundSubsEntity;
 import com.tpyzq.mobile.pangu.data.OtcDataEntity;
 import com.tpyzq.mobile.pangu.data.OtcRiskEntity;
 import com.tpyzq.mobile.pangu.data.SubsStatusEntity;
@@ -40,10 +42,14 @@ import okhttp3.Call;
 import static com.tpyzq.mobile.pangu.util.keyboard.KeyEncryptionUtils.encryptBySessionKey;
 
 /**
- * Created by zhangwenbo on 2016/10/8.
+ * Created by chenxinyu on 2016/10/8.
  * 产品购买界面
  */
 public class ProductBuyActivity extends BaseActivity implements View.OnClickListener, ProductBuyDialog.ProductBuyDialogPositiveListener {
+
+    private final int REQUEST_CODE_SHEN = 1001;
+    private final int REQUEST_CODE_REN = 1002;
+    private final int REQUEST_CODE_OTC = 1003;
 
     private TextView tv_stock_name;
     private TextView tv_stock_code;
@@ -188,6 +194,16 @@ public class ProductBuyActivity extends BaseActivity implements View.OnClickList
         super.onActivityResult(requestCode, resultCode, data);
         if (requestCode == CLEARVIEW && resultCode == RESULT_OK) {
             et_stock_price.setText("");
+        } else if (requestCode == REQUEST_CODE_REN && resultCode == RESULT_OK) {
+            buy_rengou(dialogBean.stockprice, fundDataEntity.data.get(0).FUND_COMPANY);
+        } else if (requestCode == REQUEST_CODE_SHEN && resultCode == RESULT_OK) {
+            buy_shengou(dialogBean.stockprice, fundDataEntity.data.get(0).FUND_COMPANY);
+        } else if(requestCode == REQUEST_CODE_OTC && resultCode == RESULT_OK) {
+            String otc_status = otcDataEntity.PROD_STATUS;
+            if (TextUtils.isEmpty(otc_status)) {
+                return;
+            }
+            getOTCRISk(otc_status, et_stock_price.getText().toString());
         }
     }
 
@@ -639,19 +655,29 @@ public class ProductBuyActivity extends BaseActivity implements View.OnClickList
             loadingDialog.dismiss();
         }
         String fund_status = null;
-        String otc_status = otcDataEntity.PROD_STATUS;
         if (fundDataEntity.data != null && fundDataEntity.data.size() > 0) {
             fund_status = fundDataEntity.data.get(0).FUND_STATUS;
         }
+
+        Intent intent = new Intent(ProductBuyActivity.this, RiskConfirmActivity.class);
+
         switch (type) {
             case "1":
                 if (TextUtils.isEmpty(fund_status)) {
                     return;
                 }
                 if ("1".equals(fund_status)) {
-                    buy_rengou(dialogBean.stockprice, fundDataEntity.data.get(0).FUND_COMPANY);
+                    intent.putExtra("from", "fundSubs");//认购
+                    intent.putExtra("fundSubsBean", fundDataEntity);
+                    startActivityForResult(intent, REQUEST_CODE_REN);
+
                 } else {
-                    buy_shengou(dialogBean.stockprice, fundDataEntity.data.get(0).FUND_COMPANY);
+                    intent.putExtra("from", "fundPurchase");//申购
+                    FundSubsEntity fundSubsEntity = new FundSubsEntity();
+                    fundSubsEntity.FUND_COMPANY = fundDataEntity.data.get(0).FUND_COMPANY;
+                    fundSubsEntity.FUND_CODE = fundDataEntity.data.get(0).FUND_CODE;
+                    intent.putExtra("fundData", fundSubsEntity);
+                    startActivityForResult(intent, REQUEST_CODE_SHEN);
                 }
                 break;
             case "2":
@@ -660,19 +686,31 @@ public class ProductBuyActivity extends BaseActivity implements View.OnClickList
                 }
                 switch (fund_status) {
                     case "0":
-                        buy_shengou(dialogBean.stockprice, fundDataEntity.data.get(0).FUND_COMPANY);
+                        intent.putExtra("from", "fundPurchase");//申购
+
+                        FundSubsEntity fundSubsEntity = new FundSubsEntity();
+                        fundSubsEntity.FUND_COMPANY = fundDataEntity.data.get(0).FUND_COMPANY;
+                        fundSubsEntity.FUND_CODE = fundDataEntity.data.get(0).FUND_CODE;
+
+                        intent.putExtra("fundData", fundSubsEntity);
+                        startActivityForResult(intent, REQUEST_CODE_SHEN);
                         break;
                     case "1":
-                        buy_rengou(dialogBean.stockprice, fundDataEntity.data.get(0).FUND_COMPANY);
+
+                        intent.putExtra("from", "fundSubs");//认购
+                        intent.putExtra("fundSubsBean", fundDataEntity);
+                        startActivityForResult(intent, REQUEST_CODE_REN);
                         break;
                 }
 
                 break;
             case "3":
-                if (TextUtils.isEmpty(otc_status)) {
-                    return;
-                }
-                getOTCRISk(otc_status, et_stock_price.getText().toString());
+
+                intent.putExtra("from", "OTC");//认购
+                intent.putExtra("prodta_no", otcDataEntity.PRODTA_NO);
+                intent.putExtra("prod_code", fundcode);
+                startActivityForResult(intent, REQUEST_CODE_OTC);
+
                 break;
         }
     }

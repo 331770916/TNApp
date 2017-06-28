@@ -5,6 +5,7 @@ import android.content.Intent;
 import android.graphics.Paint;
 import android.os.AsyncTask;
 import android.text.TextUtils;
+import android.view.KeyEvent;
 import android.view.View;
 import android.view.ViewTreeObserver;
 import android.widget.Button;
@@ -17,6 +18,8 @@ import com.tpyzq.mobile.pangu.activity.myself.login.TransactionLoginActivity;
 import com.tpyzq.mobile.pangu.adapter.myself.RiskEvaluationAdapter;
 import com.tpyzq.mobile.pangu.base.BaseActivity;
 import com.tpyzq.mobile.pangu.data.RiskTableEntity;
+import com.tpyzq.mobile.pangu.data.UserEntity;
+import com.tpyzq.mobile.pangu.db.Db_PUB_USERS;
 import com.tpyzq.mobile.pangu.http.NetWorkUtil;
 import com.tpyzq.mobile.pangu.log.LogHelper;
 import com.tpyzq.mobile.pangu.util.ConstantUtil;
@@ -52,12 +55,17 @@ public class RiskEvaluationActivity extends BaseActivity implements View.OnClick
     int list_height = 0;
     int count = 0;
     List<String> mPenalList, mSerialNumber;
+    private boolean isLogin; //作用 当用户做风险测评时候，未做完退出，需要把login至为未登录
 
     private TextView mType, mDate, mResultTV, mResultTV1, mResulDate1, mLookRiskResultDetail;
     private RoundProgressBar mRoundProgressBar, mRoundProgressBar1;
+    private boolean isFinishAnswer = false;
 
     @Override
     public void initView() {
+        Intent intent = getIntent();
+        isLogin = intent.getBooleanExtra("isLogin", false);
+
         ResulttoConnect();
 
         findViewById(R.id.AGpublish_back).setOnClickListener(this);
@@ -143,7 +151,7 @@ public class RiskEvaluationActivity extends BaseActivity implements View.OnClick
                 if (TextUtils.isEmpty(response)) {
                     return;
                 }
-//                response = "{\"code\":\"0\",\"msg\":\"(试题查询成功)\",\"data\":[{\"QUESTION_SCORE\":\"9.00\",\"QUESTION_CONTENT\":\"请问您的年龄处于：\",\"QUESTION_TYPE\":\"1\",\"ORDER_NO\":\"1\",\"REMARK\":\" \",\"ORGAN_FLAG\":\"0\",\"PAPER_TYPE\":\"1\",\"QUESTION_NO\":\"126\",\"QUESTION_KIND\":\"1\",\"OPTION_ANSWER\":[{\"ANSWER_CONTENT\":\"30岁以下；\",\"ANSWER_NO\":\"1\",\"REMARK\":\" \",\"QUESTION_NO\":\"126\"},{\"ANSWER_CONTENT\":\"31-40岁；\",\"ANSWER_NO\":\"2\",\"REMARK\":\" \",\"QUESTION_NO\":\"126\"},{\"ANSWER_CONTENT\":\"41-50岁；\",\"ANSWER_NO\":\"3\",\"REMARK\":\" \",\"QUESTION_NO\":\"126\"},{\"ANSWER_CONTENT\":\"51-60岁；\",\"ANSWER_NO\":\"4\",\"REMARK\":\" \",\"QUESTION_NO\":\"126\"},{\"ANSWER_CONTENT\":\"60岁以上。\",\"ANSWER_NO\":\"5\",\"REMARK\":\" \",\"QUESTION_NO\":\"126\"}]},{\"QUESTION_SCORE\":\"9.00\",\"QUESTION_CONTENT\":\"您家庭预计进行证券投资的资金占家庭现有总资产（不含自住、自用房及汽车等固定资产）的比例是：\",\"QUESTION_TYPE\":\"1\",\"ORDER_NO\":\"2\",\"REMARK\":\" \",\"ORGAN_FLAG\":\"0\",\"PAPER_TYPE\":\"1\",\"QUESTION_NO\":\"127\",\"QUESTION_KIND\":\"0\",\"OPTION_ANSWER\":[{\"ANSWER_CONTENT\":\"70%以上；\",\"ANSWER_NO\":\"1\",\"REMARK\":\" \",\"QUESTION_NO\":\"127\"},{\"ANSWER_CONTENT\":\"50%-70%；\",\"ANSWER_NO\":\"2\",\"REMARK\":\" \",\"QUESTION_NO\":\"127\"},{\"ANSWER_CONTENT\":\"30%-50%；\",\"ANSWER_NO\":\"3\",\"REMARK\":\" \",\"QUESTION_NO\":\"127\"},{\"ANSWER_CONTENT\":\"10%-30%；\",\"ANSWER_NO\":\"4\",\"REMARK\":\" \",\"QUESTION_NO\":\"127\"},{\"ANSWER_CONTENT\":\"10%以下。\",\"ANSWER_NO\":\"5\",\"REMARK\":\" \",\"QUESTION_NO\":\"127\"}]},{\"QUESTION_SCORE\":\"9.00\",\"QUESTION_CONTENT\":\"进行一项重大投资后，您通常会觉得：\",\"QUESTION_TYPE\":\"1\",\"ORDER_NO\":\"3\",\"REMARK\":\" \",\"ORGAN_FLAG\":\"0\",\"PAPER_TYPE\":\"1\",\"QUESTION_NO\":\"128\",\"QUESTION_KIND\":\"0\",\"OPTION_ANSWER\":[{\"ANSWER_CONTENT\":\"很高兴，对自己的决定很有信心；\",\"ANSWER_NO\":\"1\",\"REMARK\":\" \",\"QUESTION_NO\":\"128\"},{\"ANSWER_CONTENT\":\"轻松，基本持乐观态度；\",\"ANSWER_NO\":\"2\",\"REMARK\":\" \",\"QUESTION_NO\":\"128\"},{\"ANSWER_CONTENT\":\"基本没什么影响；\",\"ANSWER_NO\":\"3\",\"REMARK\":\" \",\"QUESTION_NO\":\"128\"},{\"ANSWER_CONTENT\":\"比较担心投资结果；\",\"ANSWER_NO\":\"4\",\"REMARK\":\" \",\"QUESTION_NO\":\"128\"},{\"ANSWER_CONTENT\":\"非常担心投资结果。\",\"ANSWER_NO\":\"5\",\"REMARK\":\" \",\"QUESTION_NO\":\"128\"}]},{\"QUESTION_SCORE\":\"7.00\",\"QUESTION_CONTENT\":\"如果您需要把大量现金整天携带在身的话，您是否会感到：\",\"QUESTION_TYPE\":\"1\",\"ORDER_NO\":\"4\",\"REMARK\":\" \",\"ORGAN_FLAG\":\"0\",\"PAPER_TYPE\":\"1\",\"QUESTION_NO\":\"129\",\"QUESTION_KIND\":\"0\",\"OPTION_ANSWER\":[{\"ANSWER_CONTENT\":\"非常焦虑；\",\"ANSWER_NO\":\"1\",\"REMARK\":\" \",\"QUESTION_NO\":\"129\"},{\"ANSWER_CONTENT\":\"有点焦虑；\",\"ANSWER_NO\":\"2\",\"REMARK\":\" \",\"QUESTION_NO\":\"129\"},{\"ANSWER_CONTENT\":\"完全不会焦虑。\",\"ANSWER_NO\":\"3\",\"REMARK\":\" \",\"QUESTION_NO\":\"129\"}]},{\"QUESTION_SCORE\":\"9.00\",\"QUESTION_CONTENT\":\"当您独自到外地游玩，遇到三岔路口，您会选择：\",\"QUESTION_TYPE\":\"1\",\"ORDER_NO\":\"5\",\"REMARK\":\" \",\"ORGAN_FLAG\":\"0\",\"PAPER_TYPE\":\"1\",\"QUESTION_NO\":\"130\",\"QUESTION_KIND\":\"0\",\"OPTION_ANSWER\":[{\"ANSWER_CONTENT\":\"仔细研究地图和路标；\",\"ANSWER_NO\":\"1\",\"REMARK\":\" \",\"QUESTION_NO\":\"130\"},{\"ANSWER_CONTENT\":\"找别人问路；\",\"ANSWER_NO\":\"2\",\"REMARK\":\" \",\"QUESTION_NO\":\"130\"},{\"ANSWER_CONTENT\":\"大致判断一下方向；\",\"ANSWER_NO\":\"3\",\"REMARK\":\" \",\"QUESTION_NO\":\"130\"},{\"ANSWER_CONTENT\":\"也许会用掷骰子的方式来做决定。\",\"ANSWER_NO\":\"4\",\"REMARK\":\" \",\"QUESTION_NO\":\"130\"}]},{\"QUESTION_SCORE\":\"9.00\",\"QUESTION_CONTENT\":\"假如有两种不同的投资：投资A预期获得5%的收益，有可能承担非常小的损失；投资B预期获得20%的收益，但是有可能面临25%甚至更高的亏损。您将您的投资资产分配为：\",\"QUESTION_TYPE\":\"1\",\"ORDER_NO\":\"6\",\"REMARK\":\" \",\"ORGAN_FLAG\":\"0\",\"PAPER_TYPE\":\"1\",\"QUESTION_NO\":\"131\",\"QUESTION_KIND\":\"0\",\"OPTION_ANSWER\":[{\"ANSWER_CONTENT\":\"全部投资于A；\",\"ANSWER_NO\":\"1\",\"REMARK\":\" \",\"QUESTION_NO\":\"131\"},{\"ANSWER_CONTENT\":\"大部分投资于A；\",\"ANSWER_NO\":\"2\",\"REMARK\":\" \",\"QUESTION_NO\":\"131\"},{\"ANSWER_CONTENT\":\"两种投资各一半；\",\"ANSWER_NO\":\"3\",\"REMARK\":\" \",\"QUESTION_NO\":\"131\"},{\"ANSWER_CONTENT\":\"大部分投资于B；\",\"ANSWER_NO\":\"4\",\"REMARK\":\" \",\"QUESTION_NO\":\"131\"},{\"ANSWER_CONTENT\":\"全部投资于B。\",\"ANSWER_NO\":\"5\",\"REMARK\":\" \",\"QUESTION_NO\":\"131\"}]},{\"QUESTION_SCORE\":\"7.00\",\"QUESTION_CONTENT\":\"假如您前期用25元购入一只股票，该股现在升到30元，而根据预测该股近期有一半机会升到35元，另一半机会跌倒25元，您现在会：\",\"QUESTION_TYPE\":\"1\",\"ORDER_NO\":\"7\",\"REMARK\":\" \",\"ORGAN_FLAG\":\"0\",\"PAPER_TYPE\":\"1\",\"QUESTION_NO\":\"132\",\"QUESTION_KIND\":\"0\",\"OPTION_ANSWER\":[{\"ANSWER_CONTENT\":\"立刻卖出；\",\"ANSWER_NO\":\"1\",\"REMARK\":\" \",\"QUESTION_NO\":\"132\"},{\"ANSWER_CONTENT\":\"部分卖出；\",\"ANSWER_NO\":\"2\",\"REMARK\":\" \",\"QUESTION_NO\":\"132\"},{\"ANSWER_CONTENT\":\"继续持有；\",\"ANSWER_NO\":\"3\",\"REMARK\":\" \",\"QUESTION_NO\":\"132\"},{\"ANSWER_CONTENT\":\"继续买入。\",\"ANSWER_NO\":\"4\",\"REMARK\":\" \",\"QUESTION_NO\":\"132\"}]},{\"QUESTION_SCORE\":\"7.00\",\"QUESTION_CONTENT\":\"同上题情况，该股现在已经跌到20元，而您估计该股近期有一半机会升回25元，另一半机会继续下跌到15元，您现在会：\",\"QUESTION_TYPE\":\"1\",\"ORDER_NO\":\"8\",\"REMARK\":\" \",\"ORGAN_FLAG\":\"0\",\"PAPER_TYPE\":\"1\",\"QUESTION_NO\":\"133\",\"QUESTION_KIND\":\"0\",\"OPTION_ANSWER\":[{\"ANSWER_CONTENT\":\"立刻卖出；\",\"ANSWER_NO\":\"1\",\"REMARK\":\" \",\"QUESTION_NO\":\"133\"},{\"ANSWER_CONTENT\":\"部分卖出；\",\"ANSWER_NO\":\"2\",\"REMARK\":\" \",\"QUESTION_NO\":\"133\"},{\"ANSWER_CONTENT\":\"继续持有；\",\"ANSWER_NO\":\"3\",\"REMARK\":\" \",\"QUESTION_NO\":\"133\"},{\"ANSWER_CONTENT\":\"继续买入。\",\"ANSWER_NO\":\"4\",\"REMARK\":\" \",\"QUESTION_NO\":\"133\"}]},{\"QUESTION_SCORE\":\"9.00\",\"QUESTION_CONTENT\":\"当您进行投资时，您的首要目标是：\",\"QUESTION_TYPE\":\"1\",\"ORDER_NO\":\"9\",\"REMARK\":\" \",\"ORGAN_FLAG\":\"0\",\"PAPER_TYPE\":\"1\",\"QUESTION_NO\":\"134\",\"QUESTION_KIND\":\"0\",\"OPTION_ANSWER\":[{\"ANSWER_CONTENT\":\"资产保值，我不愿意承担任何投资风险；\",\"ANSWER_NO\":\"1\",\"REMARK\":\" \",\"QUESTION_NO\":\"134\"},{\"ANSWER_CONTENT\":\"尽可能保证本金安全，不在乎收益率比较低；\",\"ANSWER_NO\":\"2\",\"REMARK\":\" \",\"QUESTION_NO\":\"134\"},{\"ANSWER_CONTENT\":\"产生较多的收益，可以承担一定的投资风险；\",\"ANSWER_NO\":\"3\",\"REMARK\":\" \",\"QUESTION_NO\":\"134\"},{\"ANSWER_CONTENT\":\"实现资产大幅增长，愿意承担很大的投资风险。\",\"ANSWER_NO\":\"4\",\"REMARK\":\" \",\"QUESTION_NO\":\"134\"}]},{\"QUESTION_SCORE\":\"9.00\",\"QUESTION_CONTENT\":\"您的投资经验可以被概括为：\",\"QUESTION_TYPE\":\"1\",\"ORDER_NO\":\"10\",\"REMARK\":\" \",\"ORGAN_FLAG\":\"0\",\"PAPER_TYPE\":\"1\",\"QUESTION_NO\":\"135\",\"QUESTION_KIND\":\"0\",\"OPTION_ANSWER\":[{\"ANSWER_CONTENT\":\"有限：除银行活期账户和定期存款外，我基本没有其他投资经验；\",\"ANSWER_NO\":\"1\",\"REMARK\":\" \",\"QUESTION_NO\":\"135\"},{\"ANSWER_CONTENT\":\"一般：除银行活期账户和定期存款外，我购买过基金、保险等理财产品，但还需要进一步的指导；\",\"ANSWER_NO\":\"2\",\"REMARK\":\" \",\"QUESTION_NO\":\"135\"},{\"ANSWER_CONTENT\":\"丰富：我是一位有经验的投资者，参与过股票、基金等产品的交易，并倾向于自己做出投资决策；\",\"ANSWER_NO\":\"3\",\"REMARK\":\" \",\"QUESTION_NO\":\"135\"},{\"ANSWER_CONTENT\":\"非常丰富：我是一位非常有经验的投资者，参与过权证、期货或创业板等高风险产品的交易。\",\"ANSWER_NO\":\"4\",\"REMARK\":\" \",\"QUESTION_NO\":\"135\"}]},{\"QUESTION_SCORE\":\"9.00\",\"QUESTION_CONTENT\":\"您是否了解证券市场的相关知识：\",\"QUESTION_TYPE\":\"1\",\"ORDER_NO\":\"11\",\"REMARK\":\" \",\"ORGAN_FLAG\":\"0\",\"PAPER_TYPE\":\"1\",\"QUESTION_NO\":\"136\",\"QUESTION_KIND\":\"0\",\"OPTION_ANSWER\":[{\"ANSWER_CONTENT\":\"从来没有参与过证券交易，对投资知识完全不了解；\",\"ANSWER_NO\":\"1\",\"REMARK\":\" \",\"QUESTION_NO\":\"136\"},{\"ANSWER_CONTENT\":\"学习过证券投资知识，但没有实际操作经验，不懂投资技巧；\",\"ANSWER_NO\":\"2\",\"REMARK\":\" \",\"QUESTION_NO\":\"136\"},{\"ANSWER_CONTENT\":\"了解证券市场的投资知识，并且有过实际操作经验，懂得一些投资技巧；\",\"ANSWER_NO\":\"3\",\"REMARK\":\" \",\"QUESTION_NO\":\"136\"},{\"ANSWER_CONTENT\":\"参与过多年的证券交易，投资知识丰富，具有一定的专业水平。\",\"ANSWER_NO\":\"4\",\"REMARK\":\" \",\"QUESTION_NO\":\"136\"}]},{\"QUESTION_SCORE\":\"7.00\",\"QUESTION_CONTENT\":\"您用于证券投资的资金不会用作其它用途的时间段为：\",\"QUESTION_TYPE\":\"1\",\"ORDER_NO\":\"12\",\"REMARK\":\" \",\"ORGAN_FLAG\":\"0\",\"PAPER_TYPE\":\"1\",\"QUESTION_NO\":\"137\",\"QUESTION_KIND\":\"0\",\"OPTION_ANSWER\":[{\"ANSWER_CONTENT\":\"短期--0到1年；\",\"ANSWER_NO\":\"1\",\"REMARK\":\" \",\"QUESTION_NO\":\"137\"},{\"ANSWER_CONTENT\":\"中期--1到5年；\",\"ANSWER_NO\":\"2\",\"REMARK\":\" \",\"QUESTION_NO\":\"137\"},{\"ANSWER_CONTENT\":\"长期--5年以上。\",\"ANSWER_NO\":\"3\",\"REMARK\":\" \",\"QUESTION_NO\":\"137\"}]},{\"QUESTION_SCORE\":\"1.00\",\"QUESTION_CONTENT\":\"账户交易总量（万元）？\",\"QUESTION_TYPE\":\"1\",\"ORDER_NO\":\"13\",\"REMARK\":\" \",\"ORGAN_FLAG\":\"0\",\"PAPER_TYPE\":\"1\",\"QUESTION_NO\":\"231\",\"QUESTION_KIND\":\"0\",\"OPTION_ANSWER\":[{\"ANSWER_CONTENT\":\"< 50\",\"ANSWER_NO\":\"1\",\"REMARK\":\" \",\"QUESTION_NO\":\"231\"},{\"ANSWER_CONTENT\":\">= 50 and < 100\",\"ANSWER_NO\":\"2\",\"REMARK\":\" \",\"QUESTION_NO\":\"231\"},{\"ANSWER_CONTENT\":\">= 100 and < 200\",\"ANSWER_NO\":\"3\",\"REMARK\":\" \",\"QUESTION_NO\":\"231\"},{\"ANSWER_CONTENT\":\">= 200\",\"ANSWER_NO\":\"4\",\"REMARK\":\" \",\"QUESTION_NO\":\"231\"}]},{\"QUESTION_SCORE\":\"1.00\",\"QUESTION_CONTENT\":\"周转率\",\"QUESTION_TYPE\":\"1\",\"ORDER_NO\":\"14\",\"REMARK\":\" \",\"ORGAN_FLAG\":\"0\",\"PAPER_TYPE\":\"1\",\"QUESTION_NO\":\"232\",\"QUESTION_KIND\":\"0\",\"OPTION_ANSWER\":[{\"ANSWER_CONTENT\":\"< 1\",\"ANSWER_NO\":\"1\",\"REMARK\":\" \",\"QUESTION_NO\":\"232\"},{\"ANSWER_CONTENT\":\">= 1 and < 2\",\"ANSWER_NO\":\"2\",\"REMARK\":\" \",\"QUESTION_NO\":\"232\"},{\"ANSWER_CONTENT\":\">= 2 and < 3\",\"ANSWER_NO\":\"3\",\"REMARK\":\" \",\"QUESTION_NO\":\"232\"},{\"ANSWER_CONTENT\":\">= 3\",\"ANSWER_NO\":\"4\",\"REMARK\":\" \",\"QUESTION_NO\":\"232\"}]},{\"QUESTION_SCORE\":\"1.00\",\"QUESTION_CONTENT\":\"平均仓位\",\"QUESTION_TYPE\":\"1\",\"ORDER_NO\":\"15\",\"REMARK\":\" \",\"ORGAN_FLAG\":\"0\",\"PAPER_TYPE\":\"1\",\"QUESTION_NO\":\"233\",\"QUESTION_KIND\":\"0\",\"OPTION_ANSWER\":[{\"ANSWER_CONTENT\":\"< 0.2\",\"ANSWER_NO\":\"1\",\"REMARK\":\" \",\"QUESTION_NO\":\"233\"},{\"ANSWER_CONTENT\":\">= 0.2 and < 0.4\",\"ANSWER_NO\":\"2\",\"REMARK\":\" \",\"QUESTION_NO\":\"233\"},{\"ANSWER_CONTENT\":\">= 0.4 and < 0.6\",\"ANSWER_NO\":\"3\",\"REMARK\":\" \",\"QUESTION_NO\":\"233\"},{\"ANSWER_CONTENT\":\">= 0.6\",\"ANSWER_NO\":\"4\",\"REMARK\":\" \",\"QUESTION_NO\":\"233\"}]},{\"QUESTION_SCORE\":\"1.00\",\"QUESTION_CONTENT\":\"投资能力\",\"QUESTION_TYPE\":\"1\",\"ORDER_NO\":\"16\",\"REMARK\":\" \",\"ORGAN_FLAG\":\"0\",\"PAPER_TYPE\":\"1\",\"QUESTION_NO\":\"234\",\"QUESTION_KIND\":\"0\",\"OPTION_ANSWER\":[{\"ANSWER_CONTENT\":\"< -0.2\",\"ANSWER_NO\":\"1\",\"REMARK\":\" \",\"QUESTION_NO\":\"234\"},{\"ANSWER_CONTENT\":\">= -0.2 and < 0\",\"ANSWER_NO\":\"2\",\"REMARK\":\" \",\"QUESTION_NO\":\"234\"},{\"ANSWER_CONTENT\":\">= 0 and < 0.2\",\"ANSWER_NO\":\"3\",\"REMARK\":\" \",\"QUESTION_NO\":\"234\"},{\"ANSWER_CONTENT\":\">= 0.2\",\"ANSWER_NO\":\"4\",\"REMARK\":\" \",\"QUESTION_NO\":\"234\"}]}]}" ;
+//
                 try {
                     JSONObject jsonObject = new JSONObject(response);
                     String msg = jsonObject.getString("msg");
@@ -509,12 +517,34 @@ public class RiskEvaluationActivity extends BaseActivity implements View.OnClick
     };
 
     @Override
+    public boolean onKeyDown(int keyCode, KeyEvent event) {
+        if ((keyCode == KeyEvent.KEYCODE_BACK)) {
+
+            if (!isFinishAnswer && isLogin) {
+                UserEntity userEntity=new UserEntity();
+                userEntity.setIslogin("false");
+                Db_PUB_USERS.UpdateIslogin(userEntity);
+            }
+            return super.onKeyDown(keyCode, event);
+        } else {
+            return super.onKeyDown(keyCode, event);
+        }
+
+    }
+
+    @Override
     public void onClick(View v) {
         switch (v.getId()) {
             case R.id.AGpublish_back:
+                if (!isFinishAnswer && isLogin) {
+                    UserEntity userEntity=new UserEntity();
+                    userEntity.setIslogin("false");
+                    Db_PUB_USERS.UpdateIslogin(userEntity);
+                }
                 finish();
                 break;
             case R.id.Affirm:
+                isFinishAnswer = true;
                 ResulttoConnect1();
                 Answer.setVisibility(View.GONE);
                 SubmittoConnect();

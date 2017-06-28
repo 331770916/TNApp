@@ -158,6 +158,9 @@ public class RiskEvaluationAdapter extends BaseAdapter {
                 int padding = Helper.dip2px(context, 10);
                 button.setPadding(padding, padding, padding, padding);
                 button.setText("下一题");
+                if (position == riskTableBeans.size() -1) {
+                    button.setVisibility(View.GONE);
+                }
                 button.setLayoutParams(layoutParams1);
                 button.setOnClickListener(new View.OnClickListener() {
                     @Override

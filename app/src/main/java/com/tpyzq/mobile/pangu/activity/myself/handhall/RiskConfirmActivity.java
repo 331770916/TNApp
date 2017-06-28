@@ -108,6 +108,12 @@ public class RiskConfirmActivity extends BaseActivity implements View.OnClickLis
             fundCode = "";
             prodta_no = getIntent().getStringExtra("prodta_no");
             prod_code = getIntent().getStringExtra("prod_code");
+        } else if ("OTC".equalsIgnoreCase(from)) {
+            //OTC不区分申购认购
+            fundCompany = "";
+            fundCode = "";
+            prodta_no = getIntent().getStringExtra("prodta_no");
+            prod_code = getIntent().getStringExtra("prod_code");
         }
         session = SpUtils.getString(this, "mSession", null);
         InterfaceCollection.getInstance().queryProductSuitability(session, prodta_no, prod_code, fundCompany, fundCode, "331261", new InterfaceCollection.InterfaceCallback() {
