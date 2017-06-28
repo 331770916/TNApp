@@ -10,6 +10,7 @@ import android.widget.TextView;
 
 import com.tpyzq.mobile.pangu.R;
 import com.tpyzq.mobile.pangu.data.StructuredFundEntity;
+import com.tpyzq.mobile.pangu.util.Helper;
 
 import java.util.List;
 
@@ -60,14 +61,99 @@ public class FJWithdrawOrderAdapter extends BaseAdapter {
         } else {
             viewHolder = (ViewHolder) convertView.getTag();
         }
+        viewHolder.tv1.setText(mList.get(position).getStoken_name());
+        viewHolder.tv2.setText(mList.get(position).getStocken_code());
+        viewHolder.tv4.setText(mList.get(position).getBusiness_name());
+        viewHolder.tv5.setText(mList.get(position).getCurr_date());
+        viewHolder.tv6.setText(Helper.getMyDateHMS(mList.get(position).getReport_time()));
         viewHolder.tv3.setTextColor(Color.RED);
+        String entrust_bs = mList.get(position).getEntrust_status();
+        switch (entrust_bs) {
+            case "0":
+                viewHolder.tv3.setText("未报");
+                break;
+            case "1":
+                viewHolder.tv3.setText("待报");
+                break;
+            case "2":
+                viewHolder.tv3.setText("已报");
+                break;
+            case "3":
+                viewHolder.tv3.setText("已报待撤");
+                break;
+            case "4":
+                viewHolder.tv3.setText("部成待撤");
+                break;
+            case "5":
+                viewHolder.tv3.setText("部撤");
+                break;
+            case "6":
+                viewHolder.tv3.setText("已撤");
+                break;
+            case "7":
+                viewHolder.tv3.setText("部成");
+                break;
+            case "8":
+                viewHolder.tv3.setText("已成");
+                break;
+            case "9":
+                viewHolder.tv3.setText("废单");
+                break;
+            case "A":
+                viewHolder.tv3.setText("已报待改(港股)");
+                break;
+            case "B":
+                viewHolder.tv3.setText("预埋单撤单(港股)");
+                break;
+            case "C":
+                viewHolder.tv3.setText("正报");
+                break;
+            case "D":
+                viewHolder.tv3.setText("撤废");
+                break;
+            case "E":
+                viewHolder.tv3.setText("部成待改(港股)");
+                break;
+            case "F":
+                viewHolder.tv3.setText("预埋单废单(港股)");
+                break;
+            case "G":
+                viewHolder.tv3.setText("单腿成交");
+                break;
+            case "H":
+                viewHolder.tv3.setText("待审核(港股)");
+                break;
+            case "J":
+                viewHolder.tv3.setText("复核未通过(港股)");
+                break;
+            case "M":
+                viewHolder.tv3.setText("Wait for Confirming");
+                break;
+            case "U":
+                viewHolder.tv3.setText("已确认待撤");
+                break;
+            case "V":
+                viewHolder.tv3.setText("已确认");
+                break;
+            case "W":
+                viewHolder.tv3.setText("待确认");
+                break;
+            case "X":
+                viewHolder.tv3.setText("预成交");
+                break;
+            case "Y":
+                viewHolder.tv3.setText("购回待确认");
+                break;
+            case "Z":
+                viewHolder.tv3.setText("已购回");
+                break;
+            default:
+                viewHolder.tv3.setTextColor(Color.parseColor("#4c4c4c"));
+                viewHolder.tv3.setText("--");
+                break;
+        }
 
-        viewHolder.tv1.setText(mList.get(position).getFund_status());
-        viewHolder.tv2.setText(mList.get(position).getExchange_type());
-        viewHolder.tv3.setText(mList.get(position).getMerge_amount());
-        viewHolder.tv4.setText(mList.get(position).getSplit_amount());
-        viewHolder.tv5.setText(mList.get(position).getStoken_name());
-        viewHolder.tv6.setText(mList.get(position).getStock_account());
+
         return convertView;
     }
 

@@ -117,7 +117,7 @@ public class StructuredFundDialog extends BaseDialog implements View.OnClickList
                 } else if (FJFundSplitActivity.TAG.equals(mTAG)) {
                     ifc.splitStructuredFund(mStructuredFundEntity.getExchange_type(), mStructuredFundEntity.getStock_account(), mInput, mShare, mSession, mTAG, this);
                 } else if (FJWithdrawOrderActivity.TAG.equals(mTAG)) {
-                    Helper.getInstance().showToast(context, "撤销此委托成功");
+//                    Helper.getInstance().showToast(context, "撤销此委托成功");
                     mExpression.State();
                     dismiss();
                 }

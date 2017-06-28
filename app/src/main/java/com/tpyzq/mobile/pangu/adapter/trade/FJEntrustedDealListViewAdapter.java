@@ -1,6 +1,7 @@
 package com.tpyzq.mobile.pangu.adapter.trade;
 
 import android.content.Context;
+import android.graphics.Color;
 import android.view.LayoutInflater;
 import android.view.View;
 import android.view.ViewGroup;
@@ -113,7 +114,93 @@ public class FJEntrustedDealListViewAdapter extends BaseAdapter implements View.
         viewHodler.tvName.setText(bean.getStoken_name());
         viewHodler.tvCode.setText(bean.getStocken_code());
         viewHodler.tvBuss.setText(bean.getBusiness_name());
-        viewHodler.tvStatus.setText(bean.getEntrust_status());
+//        viewHodler.tvStatus.setText(bean.getEntrust_status());
+        String entrust_bs =bean.getEntrust_status();
+        switch (entrust_bs) {
+            case "0":
+                viewHodler.tvStatus.setText("未报");
+                break;
+            case "1":
+                viewHodler.tvStatus.setText("待报");
+                break;
+            case "2":
+                viewHodler.tvStatus.setText("已报");
+                break;
+            case "3":
+                viewHodler.tvStatus.setText("已报待撤");
+                break;
+            case "4":
+                viewHodler.tvStatus.setText("部成待撤");
+                break;
+            case "5":
+                viewHodler.tvStatus.setText("部撤");
+                break;
+            case "6":
+                viewHodler.tvStatus.setText("已撤");
+                break;
+            case "7":
+                viewHodler.tvStatus.setText("部成");
+                break;
+            case "8":
+                viewHodler.tvStatus.setText("已成");
+                break;
+            case "9":
+                viewHodler.tvStatus.setText("废单");
+                break;
+            case "A":
+                viewHodler.tvStatus.setText("已报待改(港股)");
+                break;
+            case "B":
+                viewHodler.tvStatus.setText("预埋单撤单(港股)");
+                break;
+            case "C":
+                viewHodler.tvStatus.setText("正报");
+                break;
+            case "D":
+                viewHodler.tvStatus.setText("撤废");
+                break;
+            case "E":
+                viewHodler.tvStatus.setText("部成待改(港股)");
+                break;
+            case "F":
+                viewHodler.tvStatus.setText("预埋单废单(港股)");
+                break;
+            case "G":
+                viewHodler.tvStatus.setText("单腿成交");
+                break;
+            case "H":
+                viewHodler.tvStatus.setText("待审核(港股)");
+                break;
+            case "J":
+                viewHodler.tvStatus.setText("复核未通过(港股)");
+                break;
+            case "M":
+                viewHodler.tvStatus.setText("Wait for Confirming");
+                break;
+            case "U":
+                viewHodler.tvStatus.setText("已确认待撤");
+                break;
+            case "V":
+                viewHodler.tvStatus.setText("已确认");
+                break;
+            case "W":
+                viewHodler.tvStatus.setText("待确认");
+                break;
+            case "X":
+                viewHodler.tvStatus.setText("预成交");
+                break;
+            case "Y":
+                viewHodler.tvStatus.setText("购回待确认");
+                break;
+            case "Z":
+                viewHodler.tvStatus.setText("已购回");
+                break;
+            default:
+                viewHodler.tvStatus.setText("--");
+                break;
+        }
+
+
         viewHodler.tvTime.setText(bean.getReport_time());
         viewHodler.tvDate.setText(bean.getCurr_date());
         if (bean.isShowRule()) {
