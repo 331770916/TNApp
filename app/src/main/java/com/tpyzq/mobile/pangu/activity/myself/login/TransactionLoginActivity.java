@@ -850,6 +850,7 @@ public class TransactionLoginActivity extends BaseActivity implements View.OnCli
             @Override
             public void onNagtiveClick() {
                 //退出
+                isLoginSuc = false;
                 UserEntity userEntity=new UserEntity();
                 userEntity.setIslogin("false");
                 Db_PUB_USERS.UpdateIslogin(userEntity);

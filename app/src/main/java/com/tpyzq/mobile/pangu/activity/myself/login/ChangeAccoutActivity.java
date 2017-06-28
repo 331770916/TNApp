@@ -500,19 +500,19 @@ public class ChangeAccoutActivity extends BaseActivity implements View.OnClickLi
                     }
                     try {
                         JSONObject jsonObj = new JSONObject(response);
-                        String code_Str = jsonObj.getString("code");
-                        String msg_Str = jsonObj.getString("msg");
-                        JSONArray data = jsonObj.getJSONArray("data");
+                        String code_Str = jsonObj.optString("code");
+                        String msg_Str = jsonObj.optString("msg");
+                        JSONArray data = jsonObj.optJSONArray("data");
                         for (int i = 0; i < data.length(); i++) {
                             JSONObject Session = (JSONObject) data.get(i);
-                            mSession = Session.getString("SESSION");
-                            OLD_SRRC = Session.getString("OLD_SRRC");
-                            OLD_TCC = Session.getString("OLD_TCC");
+                            mSession = Session.optString("SESSION");
+                            OLD_SRRC = Session.optString("OLD_SRRC");
+                            OLD_TCC = Session.optString("OLD_TCC");
                             IS_OVERDUE = Session.optString("IS_OVERDUE");//风险评测状态 0正常 1即将过期 2过期 3未做
                             CORP_RISK_LEVEL = Session.optString("CORP_RISK_LEVEL");//客户当前风险承受等级
                             CORP_END_DATE = Session.optString("CORP_END_DATE");//风险测评有效期到期时间
                         }
-                        if (code_Str.equals("0")) {
+                        if ("0".equalsIgnoreCase(code_Str)) {
                             isLoginSuc = true;
                             if (mCommit != null) {
                                 mCommit.dismiss();
@@ -520,26 +520,22 @@ public class ChangeAccoutActivity extends BaseActivity implements View.OnClickLi
                             //存储风险测试结果 测评状态--测评等级--有效期结束日期
                             SpUtils.putString(ChangeAccoutActivity.this,"corpResult",IS_OVERDUE+"--"+CORP_RISK_LEVEL+"--"+CORP_END_DATE);
                             //第一次登录数据库交易账号无数据 添加到数据库
-                            if (!TextUtils.isEmpty(OLD_SRRC) && !TextUtils.isEmpty(OLD_TCC)) {
-                                if (!DeviceUtil.getDeviceId(CustomApplication.getContext()).equals(OLD_TCC) && !android.os.Build.MODEL.equals(OLD_SRRC)) {
-                                    getData(mBDAccount.getText().toString().trim(), "false",mSession);
-                                    LoginDialog.showDialog("您更换了登录设备，上次使用的设备型号是" + OLD_SRRC, ChangeAccoutActivity.this, new MistakeDialog.MistakeDialgoListener() {
-                                        @Override
-                                        public void doPositive() {
-                                            if (isNeedShowCropDialog() && !"0".equalsIgnoreCase(IS_OVERDUE)) {
-                                                //弹出风险评测dialog
-                                                showCorpDialog();
-                                            } else {
-                                                finish();
-                                            }
+                            if (!DeviceUtil.getDeviceId(CustomApplication.getContext()).equals(OLD_TCC) && !android.os.Build.MODEL.equals(OLD_SRRC)) {
+                                getData(mBDAccount.getText().toString().trim(), "false",mSession);
+                                LoginDialog.showDialog("您更换了登录设备，上次使用的设备型号是" + OLD_SRRC, ChangeAccoutActivity.this, new MistakeDialog.MistakeDialgoListener() {
+                                    @Override
+                                    public void doPositive() {
+                                        if ("2".equalsIgnoreCase(IS_OVERDUE)||"3".equalsIgnoreCase(IS_OVERDUE)) {
+                                            //弹出风险评测dialog
+                                            showCorpDialog();
+                                        } else {
+                                            finish();
                                         }
-                                    });
-                                    SimpleDateFormat sDateFormat = new SimpleDateFormat("yyyy-MM-dd HH:mm:ss");
-                                    final String date = sDateFormat.format(new java.util.Date());
-                                    BRutil.menuLogIn(android.os.Build.VERSION.RELEASE, UserUtil.Mobile, DeviceUtil.getDeviceId(CustomApplication.getContext()), APPInfoUtils.getVersionName(ChangeAccoutActivity.this), ip, UserUtil.capitalAccount, date);
-                                } else {
-                                    showDialogOrSaveData();
-                                }
+                                    }
+                                });
+                                SimpleDateFormat sDateFormat = new SimpleDateFormat("yyyy-MM-dd HH:mm:ss");
+                                final String date = sDateFormat.format(new java.util.Date());
+                                BRutil.menuLogIn(android.os.Build.VERSION.RELEASE, UserUtil.Mobile, DeviceUtil.getDeviceId(CustomApplication.getContext()), APPInfoUtils.getVersionName(ChangeAccoutActivity.this), ip, UserUtil.capitalAccount, date);
                             } else {
                                 showDialogOrSaveData();
                             }
@@ -579,7 +575,7 @@ public class ChangeAccoutActivity extends BaseActivity implements View.OnClickLi
      * 不显示弹框，绑定账号请求完成后关闭页面
      */
     private void showDialogOrSaveData() {
-        if (isNeedShowCropDialog() && !"0".equalsIgnoreCase(IS_OVERDUE)) {
+        if ("2".equalsIgnoreCase(IS_OVERDUE)||"3".equalsIgnoreCase(IS_OVERDUE)) {
             //弹出风险评测dialog
             showCorpDialog();
             getData(mBDAccount.getText().toString().trim(), "false",mSession);
@@ -606,13 +602,19 @@ public class ChangeAccoutActivity extends BaseActivity implements View.OnClickLi
             public void onPositiveClick() {
                 //现在测试按钮
                 isLoginSuc = false;
-                // TODO: 2017/6/26 跳转到测评页面
-                Helper.getInstance().showToast(ChangeAccoutActivity.this,"跳转到测评页面");
+                Intent intent = new Intent(ChangeAccoutActivity.this,RiskEvaluationActivity.class);
+                intent.putExtra("isLogin",true);
+                ChangeAccoutActivity.this.startActivity(intent);
+                finish();
             }
 
             @Override
             public void onNagtiveClick() {
                 //以后再说
+                isLoginSuc = false;
+                UserEntity userEntity=new UserEntity();
+                userEntity.setIslogin("false");
+                Db_PUB_USERS.UpdateIslogin(userEntity);
                 finish();
             }
         });
