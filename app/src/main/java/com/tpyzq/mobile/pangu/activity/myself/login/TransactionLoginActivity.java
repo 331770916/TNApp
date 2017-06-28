@@ -736,19 +736,19 @@ public class TransactionLoginActivity extends BaseActivity implements View.OnCli
                     }
                     try {
                         JSONObject jsonObj = new JSONObject(response);
-                        String code_Str = jsonObj.getString("code");
-                        String msg_Str = jsonObj.getString("msg");
-                        JSONArray data = jsonObj.getJSONArray("data");
+                        String code_Str = jsonObj.optString("code");
+                        String msg_Str = jsonObj.optString("msg");
+                        JSONArray data = jsonObj.optJSONArray("data");
                         for (int i = 0; i < data.length(); i++) {
                             JSONObject Session = (JSONObject) data.get(i);
-                            mSession = Session.getString("SESSION");
-                            OLD_SRRC = Session.getString("OLD_SRRC");
-                            OLD_TCC = Session.getString("OLD_TCC");
+                            mSession = Session.optString("SESSION");
+                            OLD_SRRC = Session.optString("OLD_SRRC");
+                            OLD_TCC = Session.optString("OLD_TCC");
                             IS_OVERDUE = Session.optString("IS_OVERDUE");//风险评测状态 0正常 1即将过期 2过期 3未做
                             CORP_RISK_LEVEL = Session.optString("CORP_RISK_LEVEL");//客户当前风险承受等级
                             CORP_END_DATE = Session.optString("CORP_END_DATE");//风险测评有效期到期时间
                         }
-                        if (code_Str.equals("0")) {             //登录成功
+                        if ("0".equalsIgnoreCase(code_Str)) {             //登录成功
                             isLoginSuc = true;
                             if (mCommit != null) {
                                 mCommit.dismiss();
@@ -756,28 +756,24 @@ public class TransactionLoginActivity extends BaseActivity implements View.OnCli
                             //存储风险测试结果 测评状态--测评等级--有效期结束日期
                             SpUtils.putString(TransactionLoginActivity.this,"corpResult",IS_OVERDUE+"--"+CORP_RISK_LEVEL+"--"+CORP_END_DATE);
                             //第一次登录数据库交易账号无数据 添加到数据库
-                            if (!TextUtils.isEmpty(OLD_SRRC) && !TextUtils.isEmpty(OLD_TCC)) {
-                                if (!DeviceUtil.getDeviceId(CustomApplication.getContext()).equals(OLD_TCC) && !android.os.Build.MODEL.equals(OLD_SRRC)) {
-                                    getData(mAccount.getText().toString().trim(), "false",mSession);
-                                    LoginDialog.showDialog("您更换了登录设备，上次使用的设备型号是" + OLD_SRRC, TransactionLoginActivity.this, new MistakeDialog.MistakeDialgoListener() {
-                                        @Override
-                                        public void doPositive() {
-                                            if (isNeedShowCropDialog() && !"0".equalsIgnoreCase(IS_OVERDUE)) {
-                                                //弹出风险评测dialog
-                                                showCorpDialog();
-                                            } else {
-                                                finish();
-                                            }
+                            if (!DeviceUtil.getDeviceId(CustomApplication.getContext()).equalsIgnoreCase(OLD_TCC) && !android.os.Build.MODEL.equals(OLD_SRRC)) {//换手机登录
+                                getData(mAccount.getText().toString().trim(), "false",mSession);
+                                LoginDialog.showDialog("您更换了登录设备，上次使用的设备型号是" + OLD_SRRC, TransactionLoginActivity.this, new MistakeDialog.MistakeDialgoListener() {
+                                    @Override
+                                    public void doPositive() {
+                                        if ("2".equalsIgnoreCase(IS_OVERDUE)||"3".equalsIgnoreCase(IS_OVERDUE)) {
+                                            //未做或过期弹出风险评测dialog
+                                            showCorpDialog();
+                                        } else {
+                                            finish();
                                         }
-                                    });
+                                    }
+                                });
 
-                                    SimpleDateFormat sDateFormat = new SimpleDateFormat("yyyy-MM-dd HH:mm:ss");
-                                    final String date = sDateFormat.format(new java.util.Date());
-                                    BRutil.menuLogIn(android.os.Build.VERSION.RELEASE, UserUtil.Mobile, DeviceUtil.getDeviceId(CustomApplication.getContext()), APPInfoUtils.getVersionName(TransactionLoginActivity.this), ip, UserUtil.capitalAccount, date);
-                                } else {
-                                    showDialogOrSaveData();
-                                }
-                            } else {
+                                SimpleDateFormat sDateFormat = new SimpleDateFormat("yyyy-MM-dd HH:mm:ss");
+                                final String date = sDateFormat.format(new java.util.Date());
+                                BRutil.menuLogIn(android.os.Build.VERSION.RELEASE, UserUtil.Mobile, DeviceUtil.getDeviceId(CustomApplication.getContext()), APPInfoUtils.getVersionName(TransactionLoginActivity.this), ip, UserUtil.capitalAccount, date);
+                            } else {//没有更换手机
                                 showDialogOrSaveData();
                             }
                         } else {
@@ -817,7 +813,7 @@ public class TransactionLoginActivity extends BaseActivity implements View.OnCli
      * 不显示弹框，绑定账号请求完成后关闭页面
      */
     private void showDialogOrSaveData() {
-        if (isNeedShowCropDialog() && !"0".equalsIgnoreCase(IS_OVERDUE)) {
+        if ("2".equalsIgnoreCase(IS_OVERDUE)||"3".equalsIgnoreCase(IS_OVERDUE)) {
             //弹出风险评测dialog
             showCorpDialog();
             getData(mAccount.getText().toString().trim(), "false",mSession);
@@ -845,13 +841,18 @@ public class TransactionLoginActivity extends BaseActivity implements View.OnCli
             public void onPositiveClick() {
                 //现在测试按钮
                 isLoginSuc = false;
-                // TODO: 2017/6/26 跳转到测评页面
-                Helper.getInstance().showToast(TransactionLoginActivity.this,"跳转到测评页面");
+                Intent intent = new Intent(TransactionLoginActivity.this,RiskEvaluationActivity.class);
+                intent.putExtra("isLogin",true);
+                TransactionLoginActivity.this.startActivity(intent);
+                finish();
             }
 
             @Override
             public void onNagtiveClick() {
-                //以后再说
+                //退出
+                UserEntity userEntity=new UserEntity();
+                userEntity.setIslogin("false");
+                Db_PUB_USERS.UpdateIslogin(userEntity);
                 finish();
             }
         });
@@ -1024,6 +1025,7 @@ public class TransactionLoginActivity extends BaseActivity implements View.OnCli
      * 是否需要返回业务类进行弹框操作
      * @return true需要 false不需要
      */
+/*
     private boolean isNeedShowCropDialog() {
         boolean flag = false;
         try {
@@ -1047,6 +1049,7 @@ public class TransactionLoginActivity extends BaseActivity implements View.OnCli
             return flag;
         }
     }
+*/
     /**
      * 新增绑定用户
      */
@@ -1110,10 +1113,10 @@ public class TransactionLoginActivity extends BaseActivity implements View.OnCli
      * 修改数据库字段数据
      */
     private void setData(String isfinish) {
-        UserEntity userEntity = new UserEntity();
         SpUtils.putString(TransactionLoginActivity.this, "mSession", mSession);
         SpUtils.putString(TransactionLoginActivity.this, "First", "1");
 
+        UserEntity userEntity = new UserEntity();
         String mAccount_Str = mAccount.getText().toString().trim();
         //查询资金账号
         String tradescno = KeyEncryptionUtils.getInstance().localDecryptTradescno().get(0).getTradescno();
@@ -1156,10 +1159,10 @@ public class TransactionLoginActivity extends BaseActivity implements View.OnCli
         }
         String Tradescno = sb.toString();
         if (TextUtils.isEmpty(Tradescno)) {
-            setAdded(isfinish,session);
+            setAdded(isfinish,session);//绑定账号
         } else {
             if (Tradescno.contains(data)) {
-                setData(isfinish);
+                setData(isfinish);//修改数据库
             } else {
                 setAdded(isfinish,session);
             }

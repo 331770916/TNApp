@@ -152,6 +152,9 @@ public class FundPurchaseActivity extends BaseActivity implements View.OnClickLi
         map300440_1.put("FUND_COMPANY", encryptBySessionKey(fund_company));
         map300440_1.put("FUND_CODE", encryptBySessionKey(fund_code));
         map300440_1.put("BUY_AMOUNT", encryptBySessionKey(price));
+//        map300440_1.put("FUND_COMPANY", encryptBySessionKey("01"));
+//        map300440_1.put("FUND_CODE", encryptBySessionKey("000326"));
+//        map300440_1.put("BUY_AMOUNT", encryptBySessionKey("10000"));
         map300440_1.put("FLAG", encryptBySessionKey("true"));
         map300440_1.put("DO_OPEN", encryptBySessionKey(""));
         map300440_1.put("DO_CONTRACT", encryptBySessionKey(""));

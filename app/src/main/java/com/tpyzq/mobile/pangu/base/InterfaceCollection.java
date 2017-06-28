@@ -1021,6 +1021,8 @@ public class InterfaceCollection {
         map2.put("FLAG", "true");
         map2.put("PRODTA_NO", prodta_no);
         map2.put("PROD_CODE", prod_code);
+//        fund_code = "000326";
+//        fund_company = "01";
         map2.put("FUND_COMPANY", fund_company);
         map2.put("FUND_CODE",fund_code);
         map1.put("parms",map2);

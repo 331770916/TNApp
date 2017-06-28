@@ -40,7 +40,7 @@ public class CancelDialog {
         switch (style) {
             case RISK_SOONEXPIRE:
                 positiveBtn.setText("现在测评");
-                nagtiveBtn.setText("以后再说");
+                nagtiveBtn.setText("退出");
                 view.findViewById(R.id.view_flag).setVisibility(View.GONE);
                 tv_message.setText(Html.fromHtml("<html><body> <p>尊敬的客户：</p>" +
                         "<p style='text-indent:2em'>您的风险承受能力评估结果即将过期，到期<br/>日期为"+ message +"，请重新测评。</p>" +
@@ -48,7 +48,7 @@ public class CancelDialog {
                 break;
             case RISK_EXPIRE:
                 positiveBtn.setText("现在测评");
-                nagtiveBtn.setText("以后再说");
+                nagtiveBtn.setText("退出");
                 view.findViewById(R.id.view_flag).setVisibility(View.GONE);
                 tv_message.setText(Html.fromHtml("<html><body> <p>尊敬的客户：</p>" +
                         "<p style='text-indent:2em'>您的风险承受能力评估结果已过期，到期<br/>日期为"+ message +"，请重新测评。</p>" +
@@ -56,7 +56,7 @@ public class CancelDialog {
                 break;
             case RISK_NOT:
                 positiveBtn.setText("现在测评");
-                nagtiveBtn.setText("以后再说");
+                nagtiveBtn.setText("退出");
                 view.findViewById(R.id.view_flag).setVisibility(View.GONE);
                 tv_message.setText(Html.fromHtml("<html><body> <p>尊敬的客户：</p>" +
                         "<p style=‘text-indent:2em’>您尚未填写《投资者风险承受能力问卷》。</p>" +
