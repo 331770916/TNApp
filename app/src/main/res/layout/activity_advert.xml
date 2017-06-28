@@ -7,7 +7,7 @@
     tools:context="com.tpyzq.mobile.pangu.activity.home.AdvertActivity">
 
     <RelativeLayout
-        android:id="@+id/rl_size25"
+        android:id="@+id/rl_top_bar"
         android:layout_width="match_parent"
         android:layout_height="@dimen/size25"
         android:clipToPadding="true"
@@ -22,7 +22,7 @@
     <RelativeLayout
         android:layout_width="match_parent"
         android:layout_height="@dimen/pickerview_topbar_height"
-        android:layout_below="@id/rl_size25">
+        android:layout_below="@id/rl_top_bar">
 
         <ImageView
             android:id="@+id/iv_back"

@@ -9,7 +9,7 @@
     >
 
     <RelativeLayout
-        android:id="@+id/rlOneKeyXiaChen"
+        android:id="@+id/rl_top_bar"
         android:layout_width="match_parent"
         android:layout_height="@dimen/size25"
         android:background="@color/blue"
@@ -22,7 +22,7 @@
         android:id="@+id/rlOneKeyTitle"
         android:layout_width="match_parent"
         android:layout_height="@dimen/pickerview_topbar_height"
-        android:layout_below="@+id/rlOneKeyXiaChen"
+        android:layout_below="@+id/rl_top_bar"
         android:background="@color/blue">
 
         <ImageView

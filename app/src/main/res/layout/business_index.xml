@@ -4,15 +4,15 @@
     android:layout_width="match_parent"
     android:layout_height="match_parent">
 
-    <RelativeLayout
-        android:id="@+id/RelativeLayout"
+    <rl_top_bar
+        android:id="@+id/rl_top_bar"
         android:layout_width="match_parent"
         android:layout_height="@dimen/size25"
         android:background="@color/blue"
         android:clipToPadding="true"
         android:fitsSystemWindows="true" />
 
-    <RelativeLayout
+    <rl_top_bar
         android:layout_width="match_parent"
         android:layout_height="@dimen/pickerview_topbar_height"
         android:background="@color/blue">
@@ -31,7 +31,7 @@
             android:textColor="@color/white"
             android:textSize="@dimen/pickerview_topbar_title_textsize"
             android:text="@string/banksbusiness"/>
-    </RelativeLayout>
+    </rl_top_bar>
 
     <ListView
         android:id="@+id/bankIndeListview"

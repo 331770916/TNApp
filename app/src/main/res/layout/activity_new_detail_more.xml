@@ -7,7 +7,7 @@
     tools:context="com.tpyzq.mobile.pangu.activity.home.information.NewsDetailMoreActivity">
 
     <RelativeLayout
-        android:id="@+id/rlNewDetailMoveXiaChen"
+        android:id="@+id/rl_top_bar"
         android:layout_width="match_parent"
         android:layout_height="@dimen/size25"
         android:background="@color/blue"
@@ -17,7 +17,7 @@
     <!-- 头布局 -->
     <RelativeLayout
         android:id="@+id/rlNewsDetailMoreTitle"
-        android:layout_below="@id/rlNewDetailMoveXiaChen"
+        android:layout_below="@id/rl_top_bar"
         android:layout_width="match_parent"
         android:layout_height="@dimen/pickerview_topbar_height"
         android:background="@color/blue">

@@ -9,7 +9,7 @@
     tools:context="com.tpyzq.mobile.pangu.activity.detail.newsTab.DetailAnnouncementListActivity">
 
     <RelativeLayout
-        android:id="@+id/rlDetailAnnouncementXiaChen"
+        android:id="@+id/rl_top_bar"
         android:layout_width="match_parent"
         android:layout_height="@dimen/size25"
         android:background="@color/blue"
@@ -19,7 +19,7 @@
 
     <RelativeLayout
         android:id="@+id/rlDetailAnnouncementList"
-        android:layout_below="@+id/rlDetailAnnouncementXiaChen"
+        android:layout_below="@+id/rl_top_bar"
         android:layout_width="match_parent"
         android:layout_height="@dimen/pickerview_topbar_height"
         android:background="@color/blue">

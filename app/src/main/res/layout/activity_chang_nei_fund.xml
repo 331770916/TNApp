@@ -12,7 +12,8 @@
         android:layout_height="@dimen/size25"
         android:background="@color/blue"
         android:clipToPadding="true"
-        android:fitsSystemWindows="true" />
+        android:id="@+id/rl_top_bar"
+		android:fitsSystemWindows="true" />
 
 
     <!-- 头布局 -->

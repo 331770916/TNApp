@@ -7,7 +7,7 @@
     android:layout_height="match_parent">
 
     <View
-        android:id="@+id/editSelfView"
+        android:id="@+id/rl_top_bar"
         android:layout_width="match_parent"
         android:background="@color/blue"
         android:fitsSystemWindows="true"
@@ -16,7 +16,7 @@
         android:layout_height="@dimen/size25"/>
 
     <LinearLayout
-        android:layout_below="@id/editSelfView"
+        android:layout_below="@id/rl_top_bar"
         android:layout_width="match_parent"
         android:layout_height="match_parent"
         android:orientation="vertical">

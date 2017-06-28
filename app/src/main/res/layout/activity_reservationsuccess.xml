@@ -6,7 +6,7 @@
     android:orientation="vertical">
 
     <RelativeLayout
-        android:id="@+id/AGRelativeLayout"
+        android:id="@+id/rl_top_bar"
         android:layout_width="match_parent"
         android:layout_height="@dimen/size25"
         android:background="#368CE6"

@@ -5,7 +5,7 @@
     android:orientation="vertical">
 
     <RelativeLayout
-        android:id="@+id/AGRelativeLayout"
+        android:id="@+id/rl_top_bar"
         android:layout_width="match_parent"
         android:layout_height="@dimen/size25"
         android:background="@color/blue"
@@ -14,10 +14,10 @@
 
 
     <RelativeLayout
-        android:id="@+id/AGRelativeLayout1"
+        android:id="@+id/rl_top_bar1"
         android:layout_width="match_parent"
         android:layout_height="@dimen/pickerview_topbar_height"
-        android:layout_below="@+id/AGRelativeLayout"
+        android:layout_below="@+id/rl_top_bar"
         android:background="@color/blue">
 
 

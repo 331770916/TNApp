@@ -9,7 +9,7 @@
     tools:context="com.tpyzq.mobile.pangu.activity.trade.otc_business.OTC_ElectronicContractActivity">
 
     <RelativeLayout
-        android:id="@+id/OtcElectronicXiaChen"
+        android:id="@+id/rl_top_bar"
         android:layout_width="match_parent"
         android:layout_height="@dimen/size25"
         android:background="@color/blue"
@@ -19,7 +19,7 @@
     <!-- 头布局 -->
     <RelativeLayout
         android:id="@+id/OtcElectronicTitle"
-        android:layout_below="@+id/OtcElectronicXiaChen"
+        android:layout_below="@+id/rl_top_bar"
         android:layout_width="match_parent"
         android:layout_height="@dimen/pickerview_topbar_height"
         android:background="@color/blue">

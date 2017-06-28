@@ -82,7 +82,7 @@ public class TakeAPositionActivity extends BaseActivity implements AdapterView.O
         mBackground = (LinearLayout) findViewById(R.id.LL);
         kong_null = (RelativeLayout) findViewById(R.id.Kong_Null);
 
-        RelativeLayout_color_1 = (RelativeLayout) findViewById(R.id.RelativeLayout_color_1);
+        RelativeLayout_color_1 = (RelativeLayout) findViewById(R.id.rl_top_bar);
         RelativeLayout_color_2 = (RelativeLayout) findViewById(R.id.RelativeLayout_color_2);
         iv_isEmpty = (ImageView) findViewById(R.id.iv_isEmpty);
         mZczjAmount = (TextView) findViewById(R.id.zczjAmount);

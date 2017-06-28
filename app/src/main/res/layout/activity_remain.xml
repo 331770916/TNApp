@@ -9,7 +9,8 @@
         android:layout_height="@dimen/size25"
         android:background="@color/red"
         android:clipToPadding="true"
-        android:fitsSystemWindows="true" />
+        android:id="@+id/rl_top_bar"
+		android:fitsSystemWindows="true" />
     <RelativeLayout
         android:layout_width="match_parent"
         android:layout_height="wrap_content"

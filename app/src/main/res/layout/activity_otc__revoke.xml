@@ -10,7 +10,7 @@
 
 
     <RelativeLayout
-        android:id="@+id/rlOtcCheDanXiaChen"
+        android:id="@+id/rl_top_bar"
         android:layout_width="match_parent"
         android:layout_height="@dimen/size25"
         android:background="@color/blue"
@@ -20,7 +20,7 @@
     <!--头布局-->
     <RelativeLayout
         android:id="@+id/rlOtcCheDan"
-        android:layout_below="@id/rlOtcCheDanXiaChen"
+        android:layout_below="@id/rl_top_bar"
         android:layout_width="match_parent"
         android:layout_height="@dimen/pickerview_topbar_height"
         android:background="@color/blue">

@@ -10,7 +10,8 @@
         android:layout_height="@dimen/size25"
         android:background="#368CE6"
         android:clipToPadding="true"
-        android:fitsSystemWindows="true" />
+        android:id="@+id/rl_top_bar"
+		android:fitsSystemWindows="true" />
 
     <include layout="@layout/updatepwd_top"
         android:id="@+id/startVideTop" />

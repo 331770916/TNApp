@@ -6,7 +6,7 @@
     android:layout_height="match_parent">
 
     <RelativeLayout
-        android:id="@+id/AGRelativeLayout"
+        android:id="@+id/rl_top_bar"
         android:layout_width="match_parent"
         android:layout_height="@dimen/size25"
         android:background="@color/blue"

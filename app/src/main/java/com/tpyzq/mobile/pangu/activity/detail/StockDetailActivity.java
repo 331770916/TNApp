@@ -286,7 +286,7 @@ public class StockDetailActivity extends BaseActivity implements  View.OnClickLi
 
         minChartWholeLayout = (LinearLayout) findViewById(R.id.minChartWholeLayout);
         land_minChartWholeLayout = (LinearLayout) findViewById(R.id.land_minChartWholeLayout);
-        detailTopLayout = findViewById(R.id.detailTopLayout);
+        detailTopLayout = findViewById(R.id.rl_top_bar);
         detailTitleLayout = findViewById(R.id.detailTitleLayout);
 
         mShareLayout = (LinearLayout) findViewById(R.id.detail_share);
