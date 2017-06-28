@@ -64,7 +64,7 @@ public class RiskTestDetailActivity extends BaseActivity implements View.OnClick
 
     @Override
     public void onCancel(DialogInterface dialog) {
-
+        OkHttpUtil.cancelSingleRequestByTag(TAG);
     }
 
     @Override

@@ -57,16 +57,6 @@
             android:text="--"
             android:textColor="@color/dateSureColor"
             android:textSize="@dimen/txtSize25" />
-
-        <TextView
-            android:id="@+id/lookRiskResultDetail"
-            android:layout_width="match_parent"
-            android:layout_height="wrap_content"
-            android:paddingTop="@dimen/size150"
-            android:gravity="center"
-            android:text="查看问卷详情"
-            android:autoLink="all"
-            android:textColor="@color/blue"/>
     </FrameLayout>
 
     <LinearLayout
@@ -126,24 +116,40 @@
         </RelativeLayout>
     </LinearLayout>
 
+
     <RelativeLayout
-        android:layout_marginBottom="@dimen/size104"
         android:layout_gravity="center"
         android:layout_width="match_parent"
         android:layout_height="match_parent"
         android:paddingLeft="@dimen/size30"
         android:paddingRight="@dimen/size30">
 
-        <Button
-            android:id="@+id/Restart1"
+        <LinearLayout
             android:layout_width="match_parent"
             android:layout_height="wrap_content"
-            android:background="@drawable/lonin"
-            android:text="@string/RiskEvaluationButton"
-            android:textColor="@color/white"
-            android:layout_centerVertical="true"
-            android:layout_alignParentLeft="true"
-            android:layout_alignParentStart="true" />
+            android:layout_centerInParent="true"
+            android:orientation="vertical">
+            <Button
+                android:id="@+id/lookRiskResultDetail"
+                android:layout_width="match_parent"
+                android:layout_height="wrap_content"
+                android:background="@drawable/shape_flow_bg"
+                android:layout_marginBottom="@dimen/size10"
+                android:text="查看问卷详情"
+                android:textColor="@color/calendarBtnColor"/>
+
+            <Button
+                android:id="@+id/Restart1"
+                android:layout_width="match_parent"
+                android:layout_height="wrap_content"
+                android:layout_marginTop="@dimen/size10"
+                android:background="@drawable/lonin"
+                android:text="@string/RiskEvaluationButton"
+                android:textColor="@color/white"
+                android:layout_centerVertical="true"
+                android:layout_alignParentLeft="true"
+                android:layout_alignParentStart="true" />
+        </LinearLayout>
 
     </RelativeLayout>
 

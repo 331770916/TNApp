@@ -57,7 +57,7 @@ public class RiskEvaluationActivity extends BaseActivity implements View.OnClick
     List<String> mPenalList, mSerialNumber;
     private boolean isLogin; //作用 当用户做风险测评时候，未做完退出，需要把login至为未登录
 
-    private TextView mType, mDate, mResultTV, mResultTV1, mResulDate1, mLookRiskResultDetail;
+    private TextView mType, mDate, mResultTV, mResultTV1, mResulDate1;
     private RoundProgressBar mRoundProgressBar, mRoundProgressBar1;
     private boolean isFinishAnswer = false;
 
@@ -92,9 +92,7 @@ public class RiskEvaluationActivity extends BaseActivity implements View.OnClick
         mResultTV = (TextView) Anew.findViewById(R.id.clasTextView1);
         mResultTV1 = (TextView) Anew.findViewById(R.id.ResulTextView1);
         mResulDate1 = (TextView) Anew.findViewById(R.id.ResulDate1);
-        mLookRiskResultDetail = (TextView) Anew.findViewById(R.id.lookRiskResultDetail);
-        mLookRiskResultDetail.getPaint().setFlags(Paint. UNDERLINE_TEXT_FLAG );
-        mLookRiskResultDetail.setOnClickListener(this);
+        Anew.findViewById(R.id.lookRiskResultDetail).setOnClickListener(this);
         mRestart1 = (Button) findViewById(R.id.Restart1);
         mRestart1.setOnClickListener(this);
         initData();

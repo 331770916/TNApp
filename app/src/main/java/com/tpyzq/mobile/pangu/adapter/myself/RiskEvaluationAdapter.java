@@ -151,21 +151,23 @@ public class RiskEvaluationAdapter extends BaseAdapter {
 
                 LinearLayout.LayoutParams layoutParams1 = new LinearLayout.LayoutParams(ViewGroup.LayoutParams.MATCH_PARENT, ViewGroup.LayoutParams.WRAP_CONTENT);
                 layoutParams1.gravity = Gravity.BOTTOM | Gravity.CENTER_HORIZONTAL;
-                Button button = new Button(context);
+                final Button button = new Button(context);
                 button.setBackgroundResource(R.color.calendarBtnColor);
                 button.setTextColor(context.getResources().getColor(R.color.white));
                 button.setGravity(Gravity.CENTER);
                 int padding = Helper.dip2px(context, 10);
                 button.setPadding(padding, padding, padding, padding);
                 button.setText("下一题");
-                if (position == riskTableBeans.size() -1) {
-                    button.setVisibility(View.GONE);
-                }
                 button.setLayoutParams(layoutParams1);
                 button.setOnClickListener(new View.OnClickListener() {
                     @Override
                     public void onClick(View v) {
                         if (!TextUtils.isEmpty(sb.toString())) {
+
+                            if (position == riskTableBeans.size() -1) {
+                                button.setVisibility(View.GONE);
+                            }
+
                             delayTime(Integer.parseInt(sb.toString()), position);
                         } else {
                             Toast.makeText(context, "请选择答案再提交", Toast.LENGTH_SHORT).show();
