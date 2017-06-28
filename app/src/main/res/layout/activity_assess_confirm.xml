@@ -78,7 +78,7 @@
                     android:layout_marginBottom="@dimen/size10"
                     android:layout_marginLeft="@dimen/size20"
                     android:layout_marginTop="@dimen/size20"
-                    android:button="@drawable/mybg"
+                    android:button="@drawable/cb_assess_confirm"
                     android:paddingLeft="@dimen/size5"
                     android:text="我已经仔细阅读并同意签署以上各项协议"
                     android:textSize="@dimen/txtSize14" />

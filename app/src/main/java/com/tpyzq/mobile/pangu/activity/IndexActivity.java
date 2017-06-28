@@ -47,7 +47,7 @@ public class IndexActivity extends BaseActivity {
     private RadioGroup radioGroup;
     private MyRadioButton homeRadioBtn, marketRadioBtn, transactionRaioBtn, mySelfRaioBtn;
 
-    private Fragment[] tab_fragment = new Fragment[4];
+    private Fragment[] tab_fragment;
     private FragmentManager manager;
     private int tabIds[] = new int[]{R.id.homeRadioBtn, R.id.marketRadioBtn, R.id.transactionRadioBtn, R.id.informationRadioBtn};
     private ExitDialog dialog;
@@ -56,6 +56,7 @@ public class IndexActivity extends BaseActivity {
     @Override
     public void initView() {
         CustomApplication.getInstance().addActivity(this);
+        tab_fragment=new Fragment[4];
         getVersionData();       //判断是否是 最新版本
         getHintCode();
         SpUtils.putBoolean(this, "burse", false);

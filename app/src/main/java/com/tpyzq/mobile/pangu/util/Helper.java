@@ -22,7 +22,10 @@ import android.view.inputmethod.InputMethodManager;
 import android.widget.EditText;
 import android.widget.Toast;
 
+import com.tpyzq.mobile.pangu.activity.myself.account.FinancialLifeActivity;
 import com.tpyzq.mobile.pangu.activity.myself.handhall.RiskConfirmActivity;
+import com.tpyzq.mobile.pangu.activity.myself.handhall.RiskEvaluationActivity;
+import com.tpyzq.mobile.pangu.activity.myself.login.ChangeAccoutActivity;
 import com.tpyzq.mobile.pangu.activity.trade.open_fund.FundSubsActivity;
 import com.tpyzq.mobile.pangu.base.CustomApplication;
 import com.tpyzq.mobile.pangu.data.StockInfoEntity;
@@ -1786,6 +1789,39 @@ public class Helper {
             }
         }
         return flag;*/
+    }
+
+    //是否要弹适用性弹框
+    public static boolean isNeedShowRiskDialog() {
+        boolean flag = false;
+        String corpResult = SpUtils.getString(CustomApplication.getContext(),"corpResult","");
+        if (!TextUtils.isEmpty(corpResult)) {
+            String[] args = corpResult.split("--");
+            if (null!=args&&args.length==3) {
+                String IS_OVERDUE = args[0];
+                if ("2".equalsIgnoreCase(IS_OVERDUE) && "3".equalsIgnoreCase(IS_OVERDUE)) {
+                    flag = true;
+                }
+            }
+        }
+        return flag;
+    }
+
+    //弹出适用性弹框
+    public static void showCorpDialog(final Activity activity,CancelDialog.PositiveClickListener listener,CancelDialog.NagtiveClickListener nagtiveClickListener) {
+        int style = 2000;
+        String corpResult = SpUtils.getString(CustomApplication.getContext(),"corpResult","");
+        String[] args = corpResult.split("--");
+        String IS_OVERDUE = args[0];
+        String CORP_END_DATE = args[2];
+
+        if ("2".equalsIgnoreCase(IS_OVERDUE)) {
+            //过期
+            style = 2000;
+        } else {//3的情况  未做
+            style = 3000;
+        }
+        CancelDialog.cancleDialog(activity, CORP_END_DATE, style, listener,nagtiveClickListener);
     }
 
 }

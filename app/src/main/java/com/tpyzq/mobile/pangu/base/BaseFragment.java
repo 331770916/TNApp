@@ -2,6 +2,7 @@ package com.tpyzq.mobile.pangu.base;
 
 import android.app.Activity;
 import android.content.Context;
+import android.os.Build;
 import android.os.Bundle;
 import android.support.annotation.Nullable;
 import android.support.v4.app.Fragment;
@@ -10,6 +11,7 @@ import android.view.LayoutInflater;
 import android.view.View;
 import android.view.ViewGroup;
 
+import com.tpyzq.mobile.pangu.R;
 import com.tpyzq.mobile.pangu.log.capture.CrashHandler;
 
 import java.lang.reflect.Field;
@@ -37,6 +39,11 @@ public abstract class BaseFragment extends Fragment {
         } catch (Exception e) {
             e.printStackTrace();
             storeErr(e);
+        }
+        if (Build.VERSION.SDK_INT<19){
+            View fitView=view.findViewById(R.id.rl_top_bar);
+            if (fitView!=null)
+                ((ViewGroup)view).removeView(fitView);
         }
         return view;
     }

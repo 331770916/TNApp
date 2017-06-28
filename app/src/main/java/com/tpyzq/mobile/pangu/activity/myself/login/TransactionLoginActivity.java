@@ -841,19 +841,19 @@ public class TransactionLoginActivity extends BaseActivity implements View.OnCli
             public void onPositiveClick() {
                 //现在测试按钮
                 isLoginSuc = false;
-                Intent intent = new Intent(TransactionLoginActivity.this,RiskEvaluationActivity.class);
-                intent.putExtra("isLogin",true);
+                Intent intent = new Intent(TransactionLoginActivity.this, RiskEvaluationActivity.class);
+                intent.putExtra("isLogin", true);
                 TransactionLoginActivity.this.startActivity(intent);
                 finish();
             }
-
+        }, new CancelDialog.NagtiveClickListener() {
             @Override
             public void onNagtiveClick() {
-                //退出
-                isLoginSuc = false;
+                //以后再说
+                /*isLoginSuc = false;
                 UserEntity userEntity=new UserEntity();
                 userEntity.setIslogin("false");
-                Db_PUB_USERS.UpdateIslogin(userEntity);
+                Db_PUB_USERS.UpdateIslogin(userEntity);*/
                 finish();
             }
         });

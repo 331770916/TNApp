@@ -14,20 +14,6 @@
     <include layout="@layout/updatepwd_top"
         android:id="@+id/startVideTop" />
 
-    <TextView
-        android:layout_width="match_parent"
-        android:layout_height="wrap_content"
-        android:background="@color/white"
-        android:text="客户风险承受能力测评"
-        android:gravity="center"
-        android:textColor="#4C4C4C"
-        android:padding="@dimen/size15"/>
-
-    <View
-        android:layout_width="match_parent"
-        android:layout_height="1px"
-        android:background="@color/bgColor"/>
-
     <ListView
         android:id="@+id/lv_riskTestDetile"
         android:background="@color/white"
