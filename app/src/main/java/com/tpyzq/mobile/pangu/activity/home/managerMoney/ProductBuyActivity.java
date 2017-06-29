@@ -17,11 +17,13 @@ import com.tpyzq.mobile.pangu.activity.myself.login.TransactionLoginActivity;
 import com.tpyzq.mobile.pangu.activity.trade.open_fund.AssessConfirmActivity;
 import com.tpyzq.mobile.pangu.activity.trade.open_fund.FundSubsActivity;
 import com.tpyzq.mobile.pangu.base.BaseActivity;
+import com.tpyzq.mobile.pangu.base.InterfaceCollection;
 import com.tpyzq.mobile.pangu.data.AssessConfirmEntity;
 import com.tpyzq.mobile.pangu.data.FundDataEntity;
 import com.tpyzq.mobile.pangu.data.FundSubsEntity;
 import com.tpyzq.mobile.pangu.data.OtcDataEntity;
 import com.tpyzq.mobile.pangu.data.OtcRiskEntity;
+import com.tpyzq.mobile.pangu.data.ResultInfo;
 import com.tpyzq.mobile.pangu.data.SubsStatusEntity;
 import com.tpyzq.mobile.pangu.http.NetWorkUtil;
 import com.tpyzq.mobile.pangu.util.ConstantUtil;
@@ -676,7 +678,6 @@ public class ProductBuyActivity extends BaseActivity implements View.OnClickList
      */
     @Override
     public void doPositive() {
-
         if (loadingDialog != null) {
             loadingDialog.dismiss();
         }
@@ -684,61 +685,85 @@ public class ProductBuyActivity extends BaseActivity implements View.OnClickList
         if (fundDataEntity.data != null && fundDataEntity.data.size() > 0) {
             fund_status = fundDataEntity.data.get(0).FUND_STATUS;
         }
-
-        Intent intent = new Intent(ProductBuyActivity.this, RiskConfirmActivity.class);
-
+        String prodta_no ="";
+        String prod_code = "";
+        String fundCompany ="";
+        String fundcode ="";
+        int requestCode = 0;
         switch (type) {
             case "1":
                 if (TextUtils.isEmpty(fund_status)) {
                     return;
                 }
-                if ("1".equals(fund_status)) {
-                    intent.putExtra("from", "fundSubs");//认购
-                    intent.putExtra("fundSubsBean", fundDataEntity);
-                    startActivityForResult(intent, REQUEST_CODE_REN);
-
-                } else {
-                    intent.putExtra("from", "fundPurchase");//申购
-                    FundSubsEntity fundSubsEntity = new FundSubsEntity();
-                    fundSubsEntity.FUND_COMPANY = fundDataEntity.data.get(0).FUND_COMPANY;
-                    fundSubsEntity.FUND_CODE = fundDataEntity.data.get(0).FUND_CODE;
-                    intent.putExtra("fundData", fundSubsEntity);
-                    startActivityForResult(intent, REQUEST_CODE_SHEN);
-                }
+                fundCompany = fundDataEntity.data.get(0).FUND_COMPANY;
+                fundcode = fundDataEntity.data.get(0).FUND_CODE;
+                requestCode = REQUEST_CODE_REN;
                 break;
             case "2":
                 if (TextUtils.isEmpty(fund_status)) {
                     return;
                 }
                 switch (fund_status) {
-                    case "0":
-                        intent.putExtra("from", "fundPurchase");//申购
-
-                        FundSubsEntity fundSubsEntity = new FundSubsEntity();
-                        fundSubsEntity.FUND_COMPANY = fundDataEntity.data.get(0).FUND_COMPANY;
-                        fundSubsEntity.FUND_CODE = fundDataEntity.data.get(0).FUND_CODE;
-
-                        intent.putExtra("fundData", fundSubsEntity);
-                        startActivityForResult(intent, REQUEST_CODE_SHEN);
+                    case "0"://申购
+                        fundCompany = fundDataEntity.data.get(0).FUND_COMPANY;
+                        fundcode = fundDataEntity.data.get(0).FUND_CODE;
+                        requestCode = REQUEST_CODE_SHEN;
                         break;
-                    case "1":
-
-                        intent.putExtra("from", "fundSubs");//认购
-                        intent.putExtra("fundSubsBean", fundDataEntity);
-                        startActivityForResult(intent, REQUEST_CODE_REN);
+                    case "1"://认购
+                        fundCompany = fundDataEntity.data.get(0).FUND_COMPANY;
+                        fundcode = fundDataEntity.data.get(0).FUND_CODE;
+                        requestCode = REQUEST_CODE_SHEN;
                         break;
                 }
-
                 break;
             case "3":
-
-                intent.putExtra("from", "OTC");//认购
-                intent.putExtra("prodta_no", otcDataEntity.PRODTA_NO);
-                intent.putExtra("prod_code", fundcode);
-                startActivityForResult(intent, REQUEST_CODE_OTC);
-
+                prodta_no =otcDataEntity.PRODTA_NO;
+                prod_code = fundcode;
+                requestCode = REQUEST_CODE_OTC;
                 break;
         }
+        queryProductSuitability(session, prodta_no,prod_code,fundCompany,fundcode,requestCode);
+    }
+
+
+    private void queryProductSuitability(String seeesion,String prodta_no, String prod_code,  String fundCompany, String fundcode, final int requestCode) {
+        InterfaceCollection.getInstance().queryProductSuitability(seeesion, prodta_no, prod_code , fundCompany, fundcode, "331261", new InterfaceCollection.InterfaceCallback() {
+            @Override
+            public void callResult(ResultInfo info) {
+                String code = info.getCode();
+                String msg = info.getMsg();
+                HashMap<String,String> resultMap = null;
+                if ("0".equalsIgnoreCase(code)) {
+                    resultMap = (HashMap<String,String>)info.getData();
+                    if (null == resultMap) {
+                        MistakeDialog.showDialog("数据异常", ProductBuyActivity.this, null);
+                        return;
+                    }
+                    //弹框逻辑
+                    //是否可以委托
+                    if ("0".equalsIgnoreCase(resultMap.get("ENABLE_FLAG"))) {//不可委托
+                        //尊敬的客户:\n       根据证监会《证券期货投资者适当性管理办法》，您购买的产品在购买过程中需要通过录音录像进行确认，请到营业部办理
+                        CancelDialog.cancleDialog(ProductBuyActivity.this, "", 4000, new CancelDialog.PositiveClickListener() {
+                            @Override
+                            public void onPositiveClick() {}
+                        },null);
+                        return;
+                    } else {
+                        //可以委托 判断是否需要视频录制
+                        if ("1".equalsIgnoreCase(resultMap.get("NEED_VIDEO_FLAG"))) {
+                            CancelDialog.cancleDialog(ProductBuyActivity.this,"尊敬的客户:\n根据证监会《证券期货投资者适当性管理办法》，您购买的产品在购买过程中需要通过录音录像进行确认，请到营业部办理",4000,null,null);
+                            return;
+                        }
+                    }
+                    //跳转到适用性页面
+                    Intent intent = new Intent(ProductBuyActivity.this, RiskConfirmActivity.class);
+                    intent.putExtra("resultMap",resultMap);
+                    startActivityForResult(intent, requestCode);
+                } else {
+                    MistakeDialog.showDialog(msg, ProductBuyActivity.this, null);
+                }
+            }
+        });
     }
 
     public void startFinish(String name, String price, String type) {
