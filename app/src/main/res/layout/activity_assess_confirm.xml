@@ -119,7 +119,7 @@
                     android:layout_marginBottom="@dimen/size30"
                     android:layout_marginLeft="@dimen/size20"
                     android:layout_marginTop="@dimen/size20"
-                    android:button="@drawable/mybg"
+                    android:button="@drawable/cb_assess_confirm"
                     android:paddingLeft="@dimen/size5"
                     android:text="开通基金账户"
                     android:textSize="@dimen/txtSize12" />
