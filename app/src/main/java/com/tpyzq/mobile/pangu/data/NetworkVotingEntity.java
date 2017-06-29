@@ -22,6 +22,8 @@ public class NetworkVotingEntity {
     private String stock_name;   //证券名称
     private String status;      //委托状态
 
+    private boolean isShowRule;             //控制子view是否显示
+
     public String getStatus() {
         return status;
     }
@@ -148,5 +150,13 @@ public class NetworkVotingEntity {
 
     public void setStock_name(String stock_name) {
         this.stock_name = stock_name;
+    }
+
+    public boolean isShowRule() {
+        return isShowRule;
+    }
+
+    public void setShowRule(boolean showRule) {
+        isShowRule = showRule;
     }
 }

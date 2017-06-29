@@ -10,26 +10,38 @@ import android.widget.ImageView;
 import android.widget.TextView;
 
 import com.tpyzq.mobile.pangu.R;
+import com.tpyzq.mobile.pangu.data.NetworkVotingEntity;
 import com.tpyzq.mobile.pangu.data.StructuredFundEntity;
 
 import java.util.List;
 
 /**
  * Created by wangqi on 2017/6/23.
- * 分级基金选择基金
+ * 分级基金选择基金或网络投票
  */
 
 public class FJFundChooseAdapter extends BaseAdapter {
     private Context mContext;
-    private List<StructuredFundEntity> mList;
+    private List<StructuredFundEntity> mList_SFE;
+    private List<NetworkVotingEntity> mList_NFE;
     private int mPoint;
+    private int mTag;
 
-    public FJFundChooseAdapter(Context context) {
+    public FJFundChooseAdapter(Context context, int tag) {
         this.mContext = context;
+        this.mTag = tag;
     }
 
-    public void setData(List<StructuredFundEntity> list) {
-        this.mList = list;
+    public void setData(Object list) {
+        switch (mTag) {
+            case 0:
+                this.mList_SFE = (List<StructuredFundEntity>) list;
+                break;
+            case 1:
+                this.mList_NFE = (List<NetworkVotingEntity>) list;
+                break;
+        }
+
         notifyDataSetChanged();
     }
 
@@ -39,16 +51,34 @@ public class FJFundChooseAdapter extends BaseAdapter {
 
     @Override
     public int getCount() {
-        if (mList != null && mList.size() > 0) {
-            return mList.size();
+        switch (mTag) {
+            case 0:
+                if (mList_SFE != null && mList_SFE.size() > 0) {
+                    return mList_SFE.size();
+                }
+                break;
+            case 1:
+                if (mList_NFE != null && mList_NFE.size() > 0) {
+                    return mList_NFE.size();
+                }
+                break;
         }
         return 0;
     }
 
     @Override
     public Object getItem(int position) {
-        if (mList != null && mList.size() > 0) {
-            return mList.get(position);
+        switch (mTag) {
+            case 0:
+                if (mList_SFE != null && mList_SFE.size() > 0) {
+                    return mList_SFE.get(position);
+                }
+                break;
+            case 1:
+                if (mList_NFE != null && mList_NFE.size() > 0) {
+                    return mList_NFE.get(position);
+                }
+                break;
         }
         return null;
     }
@@ -67,12 +97,30 @@ public class FJFundChooseAdapter extends BaseAdapter {
             viewHolder.stockCode = (TextView) convertView.findViewById(R.id.tv_1);
             viewHolder.stockName = (TextView) convertView.findViewById(R.id.tv_2);
             viewHolder.ivDuiGou = (ImageView) convertView.findViewById(R.id.iv_3);
+
+            switch (mTag){
+                case 0:
+                    break;
+                case 1:
+                    viewHolder.stockName.setVisibility(View.INVISIBLE);
+                    break;
+            }
             convertView.setTag(viewHolder);
         } else {
             viewHolder = (ViewHolder) convertView.getTag();
         }
-        viewHolder.stockCode.setText(mList.get(position).getStocken_code() + "");
-        viewHolder.stockName.setText(mList.get(position).getStoken_name()+"");
+
+        switch (mTag) {
+            case 0:
+                viewHolder.stockCode.setText(mList_SFE.get(position).getStocken_code() + "");
+                viewHolder.stockName.setText(mList_SFE.get(position).getStoken_name() + "");
+                break;
+            case 1:
+                viewHolder.stockCode.setText(mList_NFE.get(position).getStock_code());
+                viewHolder.stockName.setText(mList_NFE.get(position).getStock_name());
+                break;
+        }
+
 
         if (mPoint == position) {
             viewHolder.ivDuiGou.setVisibility(View.VISIBLE);

@@ -12,7 +12,7 @@
         android:visibility="gone">
         <View
             android:layout_width="match_parent"
-            android:layout_height="@dimen/size10"
+            android:layout_height="@dimen/size5"
             android:background="@color/bgColor" />
         <LinearLayout
             android:layout_width="match_parent"

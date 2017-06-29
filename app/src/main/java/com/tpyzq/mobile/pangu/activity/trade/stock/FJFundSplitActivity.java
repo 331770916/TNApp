@@ -97,6 +97,7 @@ public class FJFundSplitActivity extends BaseActivity implements View.OnClickLis
             case R.id.textView8:        //选择基金
                 intent.setClass(this, FJFundChooseActivity.class);
                 intent.putExtra("point", mPoint);
+                intent.putExtra("tag",0);
                 startActivityForResult(intent, REQUSET);
                 break;
             case R.id.butConfirm:

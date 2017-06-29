@@ -5,12 +5,14 @@
     android:orientation="vertical">
 
     <LinearLayout
+        android:id="@+id/fj_content"
         android:layout_width="match_parent"
         android:layout_height="@dimen/size55"
         android:orientation="horizontal"
         android:weightSum="4">
 
         <TextView
+            android:id="@+id/codeconference"
             android:layout_width="0dp"
             android:layout_height="match_parent"
             android:layout_weight="1"
@@ -18,6 +20,7 @@
             android:textColor="@color/hushenTab_titleColor" />
 
         <TextView
+            android:id="@+id/stockcode"
             android:layout_width="0dp"
             android:layout_height="match_parent"
             android:layout_weight="1"
@@ -25,6 +28,7 @@
             android:textColor="@color/hushenTab_titleColor" />
 
         <TextView
+            android:id="@+id/encode"
             android:layout_width="0dp"
             android:layout_height="match_parent"
             android:layout_weight="1"
@@ -32,6 +36,7 @@
             android:textColor="@color/hushenTab_titleColor" />
 
         <TextView
+            android:id="@+id/status"
             android:layout_width="0dp"
             android:layout_height="match_parent"
             android:layout_weight="1"
@@ -46,6 +51,7 @@
         android:background="@color/fengexian" />
 
     <include
+        android:id="@+id/tableSpan"
         layout="@layout/item_fold"
         android:visibility="gone" />
 

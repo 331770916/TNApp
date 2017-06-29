@@ -942,13 +942,16 @@ public class InterfaceCollection {
      * @param TAG tag
      * @param callback callback
      */
-    public void queryHistoryNetworkVoting(String session,String begin_date,String end_date,final String TAG,final InterfaceCallback callback){
+    public void queryHistoryNetworkVoting(String session,String his_type ,String position_str,String request_num,String begin_date,String end_date,final String TAG,final InterfaceCallback callback){
         Map map1 = new HashMap<>();
         map1.put("funcid","300804");
         map1.put("token",session);
         Map map2 = new HashMap<>();
         map2.put("SEC_ID", "tpyzq");
         map2.put("FLAG", "true");
+        map2.put("HIS_TYPE",his_type);
+        map2.put("POSITION_STR",position_str);
+        map2.put("REQUEST_NUM",request_num);
         map2.put("BEGIN_DATE",begin_date);
         map2.put("END_DATE",end_date);
         map1.put("parms",map2);
@@ -1258,5 +1261,26 @@ public class InterfaceCollection {
                 }*/
             }
         });
+    }
+
+
+    public void getData(int size,final InterfaceCallback callback){
+        ResultInfo info = new ResultInfo();
+        info.setCode("0");
+        List<NetworkVotingEntity> ses = new ArrayList<>();
+        NetworkVotingEntity entity;
+        for (int i = 0; i < size; i++) {
+            entity = new NetworkVotingEntity();
+            entity.setMeeting_seq("证券分级");
+            entity.setStock_code("000888");
+            entity.setStatus("分级基金合并");
+            entity.setBusiness_amount("已报");
+            entity.setStock_name("分级基金合并");
+            entity.setInit_date("2017-09-18");
+            entity.setBusiness_amount("10000");
+            ses.add(entity);
+        }
+        info.setData(ses);
+        callback.callResult(info);
     }
 }
