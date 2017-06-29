@@ -4,6 +4,7 @@ import android.app.Dialog;
 import android.content.Intent;
 import android.graphics.Color;
 import android.text.TextUtils;
+import android.view.KeyEvent;
 import android.view.View;
 import android.widget.ImageView;
 import android.widget.LinearLayout;
@@ -205,5 +206,16 @@ public class AgreementSignActvity extends BaseActivity implements View.OnClickLi
         if (Db_PUB_USERS.islogin()) {
             toConnect();
         }
+    }
+
+    @Override
+    public boolean onKeyDown(int keyCode, KeyEvent event) {
+        if (keyCode == KeyEvent.KEYCODE_BACK) {
+            if (mDialog != null && mDialog.isShowing())
+                NetWorkUtil.getInstence().cancelSingleRequestByTag(TAG);
+                mDialog.dismiss();
+            finish();
+        }
+        return false;
     }
 }

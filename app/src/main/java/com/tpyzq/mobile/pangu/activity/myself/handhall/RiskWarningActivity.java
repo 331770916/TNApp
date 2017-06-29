@@ -3,6 +3,7 @@ package com.tpyzq.mobile.pangu.activity.myself.handhall;
 import android.app.Dialog;
 import android.content.Intent;
 import android.text.TextUtils;
+import android.view.KeyEvent;
 import android.view.View;
 import android.widget.Button;
 import android.widget.LinearLayout;
@@ -40,6 +41,7 @@ import static com.tpyzq.mobile.pangu.R.string.RiskWarning;
  */
 public class RiskWarningActivity extends BaseActivity implements View.OnClickListener {
     private static String TAG = "RiskWarning";
+    private static String TAGDate = "RiskWarningActivity" ;
     private TextView Headline, Data1, Data2, mName, mDate, mtext1, mtext2;
     private Dialog loadingDialog;
     private Button mSigned;
@@ -134,7 +136,7 @@ public class RiskWarningActivity extends BaseActivity implements View.OnClickLis
         map1.put("SEC_ID", "tpyzq");
         map1.put("FLAG", "true");
 
-        NetWorkUtil.getInstence().okHttpForPostString(TAG, ConstantUtil.URL_JY, map, new StringCallback() {
+        NetWorkUtil.getInstence().okHttpForPostString(TAGDate, ConstantUtil.URL_JY, map, new StringCallback() {
             @Override
             public void onError(Call call, Exception e, int id) {
                 LogUtil.e(TAG, e.toString());
@@ -155,7 +157,7 @@ public class RiskWarningActivity extends BaseActivity implements View.OnClickLis
                                 String SHFXJS_SIGN_DATE = data.getJSONObject(i).getString("SHFXJS_SIGN_DATE");
                                 if (!TextUtils.isEmpty(SHFXJS_SIGN_DATE) && !"0".equals(SHFXJS_SIGN_DATE)) {
                                     mDate.setText("日期:" + (Helper.getMyDateY_M_D(SHFXJS_SIGN_DATE)));//是上海风险警示协议
-                                }else {
+                                } else {
                                     mDate.setText("日期:" + "- -");
                                 }
                             }
@@ -246,5 +248,19 @@ public class RiskWarningActivity extends BaseActivity implements View.OnClickLis
         if (requestCode == 100 && resultCode == RESULT_OK) {
             finish();
         }
+    }
+
+
+    @Override
+    public boolean onKeyDown(int keyCode, KeyEvent event) {
+        if (keyCode == KeyEvent.KEYCODE_BACK) {
+            if (loadingDialog != null && loadingDialog.isShowing())
+                NetWorkUtil.getInstence().cancelSingleRequestByTag(TAG);
+                NetWorkUtil.getInstence().cancelSingleRequestByTag(TAGDate);
+            if (loadingDialog!=null)
+                loadingDialog.dismiss();
+            finish();
+        }
+        return false;
     }
 }
