@@ -389,7 +389,7 @@ public class OTC_SubscribeActivity extends BaseActivity implements View.OnClickL
         if (requestCode == REQUESTCODE && resultCode == RESULT_OK) {//风险通知书成功返回
             final String SubscriptionMoney = etOTC_SubscribeMoney.getText().toString();       //获取输入的认购金额
             final String stockCode = etOTC_SGProductCode.getText().toString();
-            InterfaceCollection.getInstance().getAffirm(stockCode, map.get("prodta_no"), mSession, SubscriptionMoney, new InterfaceCollection.InterfaceCallback() {
+            InterfaceCollection.getInstance().getAffirm(stockCode, map.get("prod_name"), mSession, SubscriptionMoney, new InterfaceCollection.InterfaceCallback() {
                 @Override
                 public void callResult(ResultInfo info) {
                     String code = info.getCode();

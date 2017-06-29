@@ -164,7 +164,8 @@ public class RiskConfirmActivity extends BaseActivity implements View.OnClickLis
         }
         tv_response.setText(sb.toString().trim());
 
-        if ("0".equalsIgnoreCase(elig_risk_flag)||"0".equalsIgnoreCase(elig_investkind_flag)||"0".equalsIgnoreCase(elig_term_flag)) {//不匹配
+//        if ("0".equalsIgnoreCase(elig_risk_flag)||"0".equalsIgnoreCase(elig_investkind_flag)||"0".equalsIgnoreCase(elig_term_flag)) {//不匹配
+        if ("0".equalsIgnoreCase(elig_risk_flag)) {//不匹配
             isMatch = false;
             tv_result.setTextColor(Color.parseColor("#d0011b"));
             tv_result.setText("不匹配");//匹配状态
