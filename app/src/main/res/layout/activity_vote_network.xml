@@ -11,7 +11,6 @@
         android:background="@color/blue">
 
         <TextView
-            android:id="@+id/detail_topTitle"
             android:layout_width="wrap_content"
             android:layout_height="wrap_content"
             android:layout_centerInParent="true"
@@ -140,6 +139,7 @@
             </LinearLayout>
 
             <com.tpyzq.mobile.pangu.view.listview.AutoListview
+                android:id="@+id/unAccumulateList"
                 android:layout_width="match_parent"
                 android:layout_height="match_parent"
                 android:layout_marginTop="@dimen/size25" />
@@ -184,6 +184,7 @@
             </LinearLayout>
 
             <com.tpyzq.mobile.pangu.view.listview.AutoListview
+                android:id="@+id/accumulateList"
                 android:layout_width="match_parent"
                 android:layout_height="match_parent"
                 android:layout_marginTop="@dimen/size17" />

@@ -30,8 +30,8 @@ public class VoteAdapter extends BaseAdapter implements View.OnClickListener{
         layoutInflater = LayoutInflater.from(context);
     }
 
-    public void setData(List<NetworkVotingEntity> setText) {
-        mList = setText;
+    public void setData(List<NetworkVotingEntity> data) {
+        mList = data;
         notifyDataSetChanged();
     }
 

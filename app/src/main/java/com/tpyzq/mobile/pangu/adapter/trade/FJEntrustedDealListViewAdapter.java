@@ -109,7 +109,6 @@ public class FJEntrustedDealListViewAdapter extends BaseAdapter implements View.
             viewHodler = (ViewHodler) convertView.getTag();
         }
         bean = mList.get(position);
-
         viewHodler.llContent.setOnClickListener(this);
         viewHodler.llContent.setTag(bean);
         viewHodler.rlSpan.setOnClickListener(this);
@@ -207,9 +206,11 @@ public class FJEntrustedDealListViewAdapter extends BaseAdapter implements View.
         viewHodler.tvDate.setText(bean.getCurr_date());
         if (bean.isShowRule()) {
             if (viewHodler.llContent.isSelected()) {
+                bean.setShowRule(false);
                 viewHodler.llContent.setSelected(false);
                 viewHodler.tableSpan.setVisibility(View.GONE);
             } else {
+                bean.setShowRule(true);
                 viewHodler.llContent.setSelected(true);
                 viewHodler.tableSpan.setVisibility(View.VISIBLE);
                 switch (type) {
@@ -231,6 +232,7 @@ public class FJEntrustedDealListViewAdapter extends BaseAdapter implements View.
                 }
             }
         } else {
+            bean.setShowRule(false);
             viewHodler.llContent.setSelected(false);
             viewHodler.tableSpan.setVisibility(View.GONE);
         }

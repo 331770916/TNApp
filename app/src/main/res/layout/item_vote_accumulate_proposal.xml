@@ -7,38 +7,39 @@
     <LinearLayout
         android:layout_width="match_parent"
         android:layout_height="wrap_content"
+        android:layout_marginTop="@dimen/size13"
         android:orientation="vertical">
 
         <LinearLayout
             android:layout_width="match_parent"
-            android:layout_height="@dimen/size15"
+            android:layout_height="wrap_content"
             android:gravity="center_vertical"
             android:orientation="horizontal">
 
             <TextView
+                android:id="@+id/voteMotion"
                 android:layout_width="wrap_content"
                 android:layout_height="wrap_content"
                 android:layout_marginLeft="@dimen/size20"
                 android:gravity="center_vertical"
-                android:text="1000"
                 android:textColor="@color/hushenTab_titleColor"
                 android:textSize="@dimen/txtSize15" />
 
             <TextView
+                android:id="@+id/voteInfo"
                 android:layout_width="wrap_content"
                 android:layout_height="wrap_content"
                 android:layout_marginLeft="@dimen/size21"
                 android:gravity="center_vertical"
-                android:text="《2016年度董事会工作报告》"
                 android:textColor="@color/hushenTab_titleColor"
                 android:textSize="@dimen/txtSize15" />
 
         </LinearLayout>
-
         <LinearLayout
             android:layout_width="match_parent"
             android:layout_height="@dimen/size40"
             android:layout_marginTop="@dimen/size24"
+            android:layout_marginBottom="@dimen/size13"
             android:weightSum="3">
 
             <LinearLayout
@@ -49,12 +50,14 @@
                 android:paddingRight="@dimen/size22">
 
                 <TextView
+                    android:id="@+id/voteYes"
                     android:layout_width="match_parent"
                     android:layout_height="match_parent"
-                    android:background="@color/blue3"
+                    android:background="@drawable/vote_textbg"
+                    android:clickable="true"
                     android:gravity="center"
                     android:text="@string/consent"
-                    android:textColor="@color/white"
+                    android:textColor="@drawable/vote_textcolor"
                     android:textSize="@dimen/txtSize15" />
 
             </LinearLayout>
@@ -67,12 +70,14 @@
                 android:paddingRight="@dimen/size22">
 
                 <TextView
+                    android:id="@+id/voteNo"
                     android:layout_width="match_parent"
                     android:layout_height="match_parent"
-                    android:background="@color/photoBg"
+                    android:background="@drawable/vote_textbg"
+                    android:clickable="true"
                     android:gravity="center"
                     android:text="反对"
-                    android:textColor="@color/hushenTab_titleColor"
+                    android:textColor="@drawable/vote_textcolor"
                     android:textSize="@dimen/txtSize15" />
 
             </LinearLayout>
@@ -85,12 +90,14 @@
                 android:paddingRight="@dimen/size22">
 
                 <TextView
+                    android:id="@+id/voteAbstention"
                     android:layout_width="match_parent"
                     android:layout_height="match_parent"
-                    android:background="@color/photoBg"
+                    android:background="@drawable/vote_textbg"
+                    android:clickable="true"
                     android:gravity="center"
-                    android:text="@string/consent"
-                    android:textColor="@color/hushenTab_titleColor"
+                    android:text="弃权"
+                    android:textColor="@drawable/vote_textcolor"
                     android:textSize="@dimen/txtSize15" />
 
             </LinearLayout>

@@ -1,14 +1,12 @@
 package com.tpyzq.mobile.pangu.adapter.trade;
 
 import android.content.Context;
-import android.text.TextUtils;
 import android.view.LayoutInflater;
 import android.view.View;
 import android.view.ViewGroup;
 import android.widget.BaseAdapter;
 import android.widget.ImageView;
 import android.widget.TextView;
-
 import com.tpyzq.mobile.pangu.R;
 import com.tpyzq.mobile.pangu.data.NetworkVotingEntity;
 import com.tpyzq.mobile.pangu.data.StructuredFundEntity;
