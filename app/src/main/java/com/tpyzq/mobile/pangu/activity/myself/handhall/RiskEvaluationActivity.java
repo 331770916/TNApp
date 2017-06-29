@@ -359,14 +359,14 @@ public class RiskEvaluationActivity extends BaseActivity implements View.OnClick
                                                 setRoundProgressBar(100);
                                                 break;
                                         }
-//                                        switch (json.optString("IS_OUTOFDATE")) {
-//                                            case "0":
-//                                                mResultTV1.setText("否");
-//                                                break;
-//                                            case "1":
-//                                                mResultTV1.setText("是");
-//                                                break;
-//                                        }
+                                        switch (json.optString("IS_OUTOFDATE")) {
+                                            case "0":
+                                                mResultTV1.setText("否");
+                                                break;
+                                            case "1":
+                                                mResultTV1.setText("是");
+                                                break;
+                                        }
                                         mResulDate1.setText(Helper.getMyDateY_M_D(json.optString("CORP_END_DATE")));
                                         break;
                                     case "1":
