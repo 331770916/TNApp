@@ -168,7 +168,7 @@ public class RiskEvaluationAdapter extends BaseAdapter {
                                 button.setVisibility(View.GONE);
                             }
 
-                            delayTime(Integer.parseInt(sb.toString()), position);
+                            delayTime(Integer.parseInt(sb.toString()) - 1, position);
                         } else {
                             Toast.makeText(context, "请选择答案再提交", Toast.LENGTH_SHORT).show();
                         }

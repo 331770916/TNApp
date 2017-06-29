@@ -224,6 +224,9 @@ public class RiskEvaluationActivity extends BaseActivity implements View.OnClick
 //                        RiskSureEntity riskSureBean = new Gson().fromJson(jsonArray.getString(0), RiskSureEntity.class);
 //                        String COR = riskSureBean.CORP_RISK_LEVEL;
                         String COR = jsonArray.getJSONObject(0).optString("CORP_RISK_LEVEL");
+                        String IS_OUTOFDATE = jsonArray.getJSONObject(0).optString("IS_OUTOFDATE");
+                        String corpEndDate = jsonArray.getJSONObject(0).optString("CORP_END_DATE");
+                        mDate.setText(corpEndDate);
 
                         mType.setText(jsonArray.getJSONObject(0).optString("CORP_RISK_LEVEL_NAME"));
                         switch (COR) {
@@ -256,6 +259,13 @@ public class RiskEvaluationActivity extends BaseActivity implements View.OnClick
                                 setRoundProgressBar(100);
                                 break;
                         }
+
+
+                        SpUtils.putString(RiskEvaluationActivity.this,"IS_OVERDUE", IS_OUTOFDATE.equals("0") ? "0" : "2");
+                        SpUtils.putString(RiskEvaluationActivity.this,"CORP_RISK_LEVEL",COR);
+                        SpUtils.putString(RiskEvaluationActivity.this,"CORP_END_DATE",corpEndDate);
+
+
                     } else if (code.equals("-6")) {
                         Intent intent = new Intent(RiskEvaluationActivity.this, TransactionLoginActivity.class);
                         startActivity(intent);
@@ -318,7 +328,7 @@ public class RiskEvaluationActivity extends BaseActivity implements View.OnClick
                                         Anew.setVisibility(View.VISIBLE);
                                         Answer.setVisibility(View.GONE);
                                         Result.setVisibility(View.GONE);
-                                        mResultTV.setText(json.optString("RISK_LEVEL"));
+                                        mResultTV.setText(json.optString("RISK_LEVEL_NAME"));
                                         switch (json.optString("CORP_RISK_LEVEL")){
                                             case "0":
 //                                                mResultTV.setText("默认型");
@@ -349,14 +359,14 @@ public class RiskEvaluationActivity extends BaseActivity implements View.OnClick
                                                 setRoundProgressBar(100);
                                                 break;
                                         }
-                                        switch (json.optString("IS_OUTOFDATE")) {
-                                            case "0":
-                                                mResultTV1.setText("否");
-                                                break;
-                                            case "1":
-                                                mResultTV1.setText("是");
-                                                break;
-                                        }
+//                                        switch (json.optString("IS_OUTOFDATE")) {
+//                                            case "0":
+//                                                mResultTV1.setText("否");
+//                                                break;
+//                                            case "1":
+//                                                mResultTV1.setText("是");
+//                                                break;
+//                                        }
                                         mResulDate1.setText(Helper.getMyDateY_M_D(json.optString("CORP_END_DATE")));
                                         break;
                                     case "1":
@@ -548,7 +558,7 @@ public class RiskEvaluationActivity extends BaseActivity implements View.OnClick
                 break;
             case R.id.Affirm:
 //                isFinishAnswer = true;
-                ResulttoConnect1();
+//                ResulttoConnect1();
                 Answer.setVisibility(View.GONE);
                 SubmittoConnect();
                 Result.setVisibility(View.VISIBLE);

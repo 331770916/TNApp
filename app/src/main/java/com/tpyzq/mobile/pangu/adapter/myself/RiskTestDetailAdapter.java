@@ -102,9 +102,9 @@ public class RiskTestDetailAdapter extends BaseAdapter {
 //                    Drawable drawableAdd = mContext.getResources().getDrawable(R.drawable.risk_radio_bg);
 //                    drawableAdd.setBounds(20, 20, 20, 20);
 //                    radioButton.setCompoundDrawables(drawableAdd, null, null, null);
-                    radioButton.setButtonDrawable(R.drawable.radio_button);
+                    radioButton.setButtonDrawable(R.drawable.risk_radio_bg);
                     radioButton.setPadding(10, 10, 10, 10);
-                    radioButton.setGravity(Gravity.TOP);
+                    radioButton.setGravity(Gravity.CENTER_VERTICAL);
                     radioButton.setText(answer.get("answer_content"));
                     radioButton.setFocusable(false);
                     radioButton.setClickable(false);
@@ -125,7 +125,7 @@ public class RiskTestDetailAdapter extends BaseAdapter {
                 for (int i = 0; i < answers.size(); i++) {
                     Map<String, String> answer = answers.get(i);
                     CheckBox checkBox = new CheckBox(mContext);
-                    checkBox.setButtonDrawable(R.drawable.update_idcard_checkbox);
+                    checkBox.setButtonDrawable(R.drawable.risk_check_bg);
                     checkBox.setPadding(10, 10, 10, 10);
                     checkBox.setText(answer.get("answer_content"));
                     checkBox.setFocusable(false);
