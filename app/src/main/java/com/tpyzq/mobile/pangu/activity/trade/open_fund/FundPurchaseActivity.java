@@ -149,13 +149,10 @@ public class FundPurchaseActivity extends BaseActivity implements View.OnClickLi
         @Override
         public void setEntrust(String price, String fund_company, String fund_code) {
 //            buy_shengou(price, fund_company, fund_code);
-            if (Helper.isGoToActivity(FundPurchaseActivity.this,null)) {
-                Intent intent = new Intent(FundPurchaseActivity.this, RiskConfirmActivity.class);
-                intent.putExtra("fundData",fundData);
-                intent.putExtra("from","fundPurchase");
-                FundPurchaseActivity.this.startActivityForResult(intent, REQUESTCODE);
-            }
-
+            Intent intent = new Intent(FundPurchaseActivity.this, RiskConfirmActivity.class);
+            intent.putExtra("fundData",fundData);
+            intent.putExtra("from","fundPurchase");
+            FundPurchaseActivity.this.startActivityForResult(intent, REQUESTCODE);
         }
     };
 

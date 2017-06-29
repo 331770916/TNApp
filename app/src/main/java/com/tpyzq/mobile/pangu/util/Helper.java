@@ -1794,15 +1794,9 @@ public class Helper {
     //是否要弹适用性弹框
     public static boolean isNeedShowRiskDialog() {
         boolean flag = false;
-        String corpResult = SpUtils.getString(CustomApplication.getContext(),"corpResult","");
-        if (!TextUtils.isEmpty(corpResult)) {
-            String[] args = corpResult.split("--");
-            if (null!=args&&args.length==3) {
-                String IS_OVERDUE = args[0];
-                if ("2".equalsIgnoreCase(IS_OVERDUE) && "3".equalsIgnoreCase(IS_OVERDUE)) {
-                    flag = true;
-                }
-            }
+        String IS_OVERDUE = SpUtils.getString(CustomApplication.getContext(),"IS_OVERDUE","");
+        if ("2".equalsIgnoreCase(IS_OVERDUE) || "3".equalsIgnoreCase(IS_OVERDUE)) {
+            flag = true;
         }
         return flag;
     }
@@ -1810,10 +1804,8 @@ public class Helper {
     //弹出适用性弹框
     public static void showCorpDialog(final Activity activity,CancelDialog.PositiveClickListener listener,CancelDialog.NagtiveClickListener nagtiveClickListener) {
         int style = 2000;
-        String corpResult = SpUtils.getString(CustomApplication.getContext(),"corpResult","");
-        String[] args = corpResult.split("--");
-        String IS_OVERDUE = args[0];
-        String CORP_END_DATE = args[2];
+        String IS_OVERDUE = SpUtils.getString(CustomApplication.getContext(),"IS_OVERDUE","");
+        String CORP_END_DATE = SpUtils.getString(CustomApplication.getContext(),"CORP_END_DATE","");;
 
         if ("2".equalsIgnoreCase(IS_OVERDUE)) {
             //过期

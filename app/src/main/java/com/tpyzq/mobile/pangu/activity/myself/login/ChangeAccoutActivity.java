@@ -518,7 +518,9 @@ public class ChangeAccoutActivity extends BaseActivity implements View.OnClickLi
                                 mCommit.dismiss();
                             }
                             //存储风险测试结果 测评状态--测评等级--有效期结束日期
-                            SpUtils.putString(ChangeAccoutActivity.this,"corpResult",IS_OVERDUE+"--"+CORP_RISK_LEVEL+"--"+CORP_END_DATE);
+                            SpUtils.putString(ChangeAccoutActivity.this,"IS_OVERDUE",IS_OVERDUE);
+                            SpUtils.putString(ChangeAccoutActivity.this,"CORP_RISK_LEVEL",CORP_RISK_LEVEL);
+                            SpUtils.putString(ChangeAccoutActivity.this,"CORP_END_DATE",CORP_END_DATE);
                             //第一次登录数据库交易账号无数据 添加到数据库
                             if (!DeviceUtil.getDeviceId(CustomApplication.getContext()).equals(OLD_TCC) && !android.os.Build.MODEL.equals(OLD_SRRC)) {
                                 getData(mBDAccount.getText().toString().trim(), "false",mSession);

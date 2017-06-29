@@ -329,9 +329,9 @@ public class TransitionUtils {
                     return "0.00";
                 } else {
                     double d = Double.parseDouble(s);
-                    if (Math.abs(d) > 100000000) {
+                    if (Math.abs(d) >= 100000000) {
                         return df.format(d / 100000000) + "亿";
-                    } else if (Math.abs(d) > 10000) {
+                    } else if (Math.abs(d) >= 10000) {
                         return df.format(d / 10000) + "万";
                     } else {
                         return "" + (int) d;
@@ -344,9 +344,9 @@ public class TransitionUtils {
             BigDecimal bd = new BigDecimal(s);
             String ss = bd.toPlainString();
             double d = Double.parseDouble(ss);
-            if (Math.abs(d) > 100000000) {
+            if (Math.abs(d) >= 100000000) {
                 return df.format(d / 100000000) + "亿";
-            } else if (Math.abs(d) > 10000) {
+            } else if (Math.abs(d) >= 10000) {
                 return df.format(d / 10000) + "万";
             } else {
                 return "" + (int) d;

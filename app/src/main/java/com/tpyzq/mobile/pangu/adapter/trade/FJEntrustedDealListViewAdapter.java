@@ -10,6 +10,7 @@ import android.widget.LinearLayout;
 import android.widget.RelativeLayout;
 import android.widget.TableLayout;
 import android.widget.TextView;
+
 import com.tpyzq.mobile.pangu.R;
 import com.tpyzq.mobile.pangu.data.StructuredFundEntity;
 import com.tpyzq.mobile.pangu.util.Helper;
@@ -22,7 +23,7 @@ import java.util.List;
  * Describe:  entrusted deal listview adapter
  */
 
-public class FJEntrustedDealListViewAdapter extends BaseAdapter implements View.OnClickListener{
+public class FJEntrustedDealListViewAdapter extends BaseAdapter implements View.OnClickListener {
     private List<StructuredFundEntity> mList;
     private StructuredFundEntity bean;
     private ScallCallback callback;
@@ -73,34 +74,34 @@ public class FJEntrustedDealListViewAdapter extends BaseAdapter implements View.
             viewHodler.tvStatus = (TextView) convertView.findViewById(R.id.fjtv_status);
             viewHodler.tvTime = (TextView) convertView.findViewById(R.id.fjtv_time);
             viewHodler.tvDate = (TextView) convertView.findViewById(R.id.fjtv_date);
-            viewHodler.llContent =  (LinearLayout) convertView.findViewById(R.id.fj_content);
+            viewHodler.llContent = (LinearLayout) convertView.findViewById(R.id.fj_content);
             viewHodler.tableSpan = (TableLayout) convertView.findViewById(R.id.fj_tablespan);
-            viewHodler.rlSpan = (RelativeLayout)convertView.findViewById(R.id.fj_goneimage);
-            viewHodler.tvGone1 = (TextView)convertView.findViewById(R.id.fj_gonetvcontent1);
-            viewHodler.tvGone2 = (TextView)convertView.findViewById(R.id.fj_gonetvcontent2);
-            viewHodler.tvGone3 = (TextView)convertView.findViewById(R.id.fj_gonetvcontent3);
-            viewHodler.tvGone4 = (TextView)convertView.findViewById(R.id.fj_gonetvcontent4);
+            viewHodler.rlSpan = (RelativeLayout) convertView.findViewById(R.id.fj_goneimage);
+            viewHodler.tvGone1 = (TextView) convertView.findViewById(R.id.fj_gonetvcontent1);
+            viewHodler.tvGone2 = (TextView) convertView.findViewById(R.id.fj_gonetvcontent2);
+            viewHodler.tvGone3 = (TextView) convertView.findViewById(R.id.fj_gonetvcontent3);
+            viewHodler.tvGone4 = (TextView) convertView.findViewById(R.id.fj_gonetvcontent4);
             viewHodler.tableGone = (TableLayout) convertView.findViewById(R.id.fj_tablegone);
-            switch (type){
+            switch (type) {
                 case 0:
                     viewHodler.tableGone.setVisibility(View.GONE);
-                    ((TextView)convertView.findViewById(R.id.fj_gonetv1)).setText("委托编号：");
-                    ((TextView)convertView.findViewById(R.id.fj_gonetv2)).setText("委托金额：");
-                    ((TextView)convertView.findViewById(R.id.fj_gonetv3)).setText("委托数量：");
-                    ((TextView)convertView.findViewById(R.id.fj_gonetv4)).setText("成交数量：");
+                    ((TextView) convertView.findViewById(R.id.fj_gonetv1)).setText("委托编号：");
+                    ((TextView) convertView.findViewById(R.id.fj_gonetv2)).setText("委托金额：");
+                    ((TextView) convertView.findViewById(R.id.fj_gonetv3)).setText("委托数量：");
+                    ((TextView) convertView.findViewById(R.id.fj_gonetv4)).setText("成交数量：");
                     break;
                 case 1:
                     viewHodler.tableGone.setVisibility(View.VISIBLE);
-                    ((TextView)convertView.findViewById(R.id.fj_gonetv1)).setText("委托数量：");
-                    ((TextView)convertView.findViewById(R.id.fj_gonetv2)).setText("成交金额：");
-                    ((TextView)convertView.findViewById(R.id.fj_gonetv3)).setText("委托金额：");
-                    ((TextView)convertView.findViewById(R.id.fj_gonetv4)).setText("发生日期：");
-                    ((TextView)convertView.findViewById(R.id.fj_gonetv5)).setText("成交数量：");
-                    ((TextView)convertView.findViewById(R.id.fj_gonetv6)).setText("流水号：");
-                    ((TextView)convertView.findViewById(R.id.fj_gonetv7)).setText("成交价格：");
-                    viewHodler.tvGone5 = (TextView)convertView.findViewById(R.id.fj_gonetvcontent5);
-                    viewHodler.tvGone6 = (TextView)convertView.findViewById(R.id.fj_gonetvcontent6);
-                    viewHodler.tvGone7 = (TextView)convertView.findViewById(R.id.fj_gonetvcontent7);
+                    ((TextView) convertView.findViewById(R.id.fj_gonetv1)).setText("委托数量：");
+                    ((TextView) convertView.findViewById(R.id.fj_gonetv2)).setText("成交金额：");
+                    ((TextView) convertView.findViewById(R.id.fj_gonetv3)).setText("委托金额：");
+                    ((TextView) convertView.findViewById(R.id.fj_gonetv4)).setText("发生日期：");
+                    ((TextView) convertView.findViewById(R.id.fj_gonetv5)).setText("成交数量：");
+                    ((TextView) convertView.findViewById(R.id.fj_gonetv6)).setText("流水号：");
+                    ((TextView) convertView.findViewById(R.id.fj_gonetv7)).setText("成交价格：");
+                    viewHodler.tvGone5 = (TextView) convertView.findViewById(R.id.fj_gonetvcontent5);
+                    viewHodler.tvGone6 = (TextView) convertView.findViewById(R.id.fj_gonetvcontent6);
+                    viewHodler.tvGone7 = (TextView) convertView.findViewById(R.id.fj_gonetvcontent7);
                     break;
             }
             convertView.setTag(viewHodler);
@@ -108,12 +109,15 @@ public class FJEntrustedDealListViewAdapter extends BaseAdapter implements View.
             viewHodler = (ViewHodler) convertView.getTag();
         }
         bean = mList.get(position);
+
         viewHodler.llContent.setOnClickListener(this);
+        viewHodler.llContent.setTag(bean);
         viewHodler.rlSpan.setOnClickListener(this);
+        viewHodler.rlSpan.setTag(bean);
         viewHodler.tvName.setText(bean.getStoken_name());
         viewHodler.tvCode.setText(bean.getStocken_code());
         viewHodler.tvBuss.setText(bean.getBusiness_name());
-        String entrust_bs =bean.getEntrust_status();
+        String entrust_bs = bean.getEntrust_status();
         switch (entrust_bs) {
             case "0":
                 viewHodler.tvStatus.setText("未报");
@@ -208,7 +212,7 @@ public class FJEntrustedDealListViewAdapter extends BaseAdapter implements View.
             } else {
                 viewHodler.llContent.setSelected(true);
                 viewHodler.tableSpan.setVisibility(View.VISIBLE);
-                switch (type){
+                switch (type) {
                     case 0:
                         viewHodler.tvGone1.setText(bean.getEntrust_no());
                         viewHodler.tvGone2.setText(bean.getEntrust_balance());
@@ -235,8 +239,8 @@ public class FJEntrustedDealListViewAdapter extends BaseAdapter implements View.
 
     @Override
     public void onClick(View v) {
-        bean = (StructuredFundEntity)v.getTag();
-        if(bean.isShowRule())
+        bean = (StructuredFundEntity) v.getTag();
+        if (bean.isShowRule())
             bean.setShowRule(false);
         else
             bean.setShowRule(true);
@@ -250,8 +254,8 @@ public class FJEntrustedDealListViewAdapter extends BaseAdapter implements View.
 
     class ViewHodler {
         LinearLayout llContent;
-        TextView tvName,tvCode,tvBuss,tvStatus,tvTime,tvDate,tvGone1,tvGone2,tvGone3,tvGone4,tvGone5,tvGone6,tvGone7;
-        TableLayout tableSpan,tableGone;
+        TextView tvName, tvCode, tvBuss, tvStatus, tvTime, tvDate, tvGone1, tvGone2, tvGone3, tvGone4, tvGone5, tvGone6, tvGone7;
+        TableLayout tableSpan, tableGone;
         RelativeLayout rlSpan;
     }
 }
