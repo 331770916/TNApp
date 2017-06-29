@@ -2,6 +2,7 @@ package com.tpyzq.mobile.pangu.activity;
 
 import android.app.Dialog;
 import android.content.res.Configuration;
+import android.os.Bundle;
 import android.support.v4.app.Fragment;
 import android.support.v4.app.FragmentManager;
 import android.support.v4.app.FragmentTransaction;
@@ -47,7 +48,7 @@ public class IndexActivity extends BaseActivity {
     private RadioGroup radioGroup;
     private MyRadioButton homeRadioBtn, marketRadioBtn, transactionRaioBtn, mySelfRaioBtn;
 
-    private Fragment[] tab_fragment;
+    private Fragment[] tab_fragment=new Fragment[4];
     private FragmentManager manager;
     private int tabIds[] = new int[]{R.id.homeRadioBtn, R.id.marketRadioBtn, R.id.transactionRadioBtn, R.id.informationRadioBtn};
     private ExitDialog dialog;
@@ -56,7 +57,12 @@ public class IndexActivity extends BaseActivity {
     @Override
     public void initView() {
         CustomApplication.getInstance().addActivity(this);
-        tab_fragment=new Fragment[4];
+        for (Fragment frag:tab_fragment) {
+            if (frag!=null){
+                tab_fragment=new Fragment[4];
+                break;
+            }
+        }
         getVersionData();       //判断是否是 最新版本
         getHintCode();
         SpUtils.putBoolean(this, "burse", false);
@@ -351,5 +357,10 @@ public class IndexActivity extends BaseActivity {
                 == Configuration.HARDKEYBOARDHIDDEN_YES) {
             //实体键盘处于合上状态，在此处添加额外的处理代码
         }
+    }
+
+    @Override
+    protected void onRestoreInstanceState(Bundle savedInstanceState) {
+        super.onRestoreInstanceState(savedInstanceState);
     }
 }
