@@ -151,6 +151,7 @@ public class RiskEvaluationActivity extends BaseActivity implements View.OnClick
                 if (TextUtils.isEmpty(response)) {
                     return;
                 }
+
 //
                 try {
                     JSONObject jsonObject = new JSONObject(response);
@@ -311,6 +312,9 @@ public class RiskEvaluationActivity extends BaseActivity implements View.OnClick
                 if (TextUtils.isEmpty(response)) {
                     return;
                 }
+
+                //{"code":"0","msg":"(客户风险等级查询成功)","data":[{"IS_OUTOFDATE":"0","CORP_RISK_VAILD":"0","RISK_LEVEL_NAME":"积极型","CORP_BEGIN_DATE":"20170629","CORP_END_DATE":"20190628","CORP_RISK_LEVEL":"3"}]}
+
                 if (mloadingDialog != null) {
                     mloadingDialog.dismiss();
                 }
@@ -494,9 +498,9 @@ public class RiskEvaluationActivity extends BaseActivity implements View.OnClick
         }
 
         @Override
-        public void position(int point, int position) {
+        public void position(int point, final int position) {
             mPenalList.add(riskTableBeans.get(position).QUESTION_NO);
-            if (point < 10) {//如果小于10证明客户选择的是单个题 否则是多选题并且做了多个选择
+            if ("0".equals(riskTableBeans.get(position).QUESTION_KIND)) {//单选
                 mSerialNumber.add(riskTableBeans.get(position).OPTION_ANSWER.get(point).ANSWER_NO);
             } else {
                 mSerialNumber.add("" + point);
@@ -520,7 +524,16 @@ public class RiskEvaluationActivity extends BaseActivity implements View.OnClick
                     @Override
                     protected void onPostExecute(Void aVoid) {
                         super.onPostExecute(aVoid);
-                        Affirm.setVisibility(View.VISIBLE);
+
+                        if ("1".equals(riskTableBeans.get(position).QUESTION_KIND) && position == riskTableBeans.size() - 1) {
+                            Answer.setVisibility(View.GONE);
+                            SubmittoConnect();
+                            Result.setVisibility(View.VISIBLE);
+                        } else {
+                            Affirm.setVisibility(View.VISIBLE);
+                        }
+
+
                     }
                 }.execute();
             }
