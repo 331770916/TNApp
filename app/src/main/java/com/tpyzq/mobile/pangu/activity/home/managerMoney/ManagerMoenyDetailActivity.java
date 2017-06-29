@@ -460,7 +460,7 @@ public class ManagerMoenyDetailActivity extends BaseActivity implements View.OnC
                         if ("true".equals(login)) {
 
                             if (mEntities != null && mEntities.size() > 0) {
-                                intent.putParcelableArrayListExtra("cleverManamgerMoneyEntitys", mEntities);
+                                intent.putExtra("cleverManamgerMoneyEntitys", mEntities);
                             }
 
 

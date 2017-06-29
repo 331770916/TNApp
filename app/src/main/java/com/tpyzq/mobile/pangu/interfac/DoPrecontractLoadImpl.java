@@ -149,7 +149,7 @@ public class DoPrecontractLoadImpl implements IDoPrecontractLoad, PrecontractLoa
                 if ("0".equals(oreder)) {
                     Intent intent = new Intent();
                     intent.putExtra("productCode", mProductCode);
-                    intent.putParcelableArrayListExtra("cleverManamgerMoneyEntitys", mCleverManamgerMoneyEntitys);
+                    intent.putExtra("cleverManamgerMoneyEntitys", mCleverManamgerMoneyEntitys);
                     intent.setClass(mActivity, ProductPrecontractActivity.class);
                     mActivity.startActivity(intent);
                     mActivity.finish();

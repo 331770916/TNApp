@@ -1,8 +1,6 @@
 package com.tpyzq.mobile.pangu.data;
 
-import android.os.Parcel;
-import android.os.Parcelable;
-
+import java.io.Serializable;
 import java.util.List;
 import java.util.Map;
 
@@ -10,7 +8,7 @@ import java.util.Map;
  * Created by zhangwenbo on 2016/9/22.
  * 智选理财实体类
  */
-public class CleverManamgerMoneyEntity implements Parcelable {
+public class CleverManamgerMoneyEntity implements Serializable {
 
     private String mistackMsg;
 
@@ -120,188 +118,6 @@ public class CleverManamgerMoneyEntity implements Parcelable {
     private String CHANGEPCTRM;         //月涨跌幅（%）
     private String INVESTADVISORNAME;   //基金管理人（基金公司）
     private String FUNDTYPECODE;        //1101-股票型；1103-混合型；1105-债券型；1107-保本型；1109-货币型；1199-其他型
-
-
-    @Override
-    public int describeContents() {
-        return 0;
-    }
-
-
-    @Override
-    public void writeToParcel(Parcel dest, int flags) {
-        dest.writeString(fundName);
-        dest.writeString(fundCode);
-        dest.writeString(fundLevel);
-        dest.writeString(earnType);
-        dest.writeString(fundExpectEarnings);
-        dest.writeString(fundTimeLimit);
-        dest.writeString(fundStartBuy);
-        dest.writeString(historyNetValueDate);
-        dest.writeString(historyNetValueUnit);
-        dest.writeString(historyNetValueTotal);
-        dest.writeString(productCode);
-        dest.writeString(productType);
-        dest.writeString(fundCompany);
-        dest.writeString(fundOpenState);
-        dest.writeString(fundType);
-        dest.writeString(fundCreatTime);
-        dest.writeString(generalSituationTitle);
-        dest.writeString(generalSituationContent);
-        dest.writeString(generalSituationContentUrl);
-        dest.writeString(startTime);
-        dest.writeString(endTime);
-        dest.writeString(manager);
-        dest.writeString(period);
-        dest.writeString(earn);
-        dest.writeString(stockName);
-        dest.writeString(stockNumber);
-        dest.writeString(progressPersent);
-        dest.writeString(announceTitle);
-        dest.writeString(announceFrom);
-        dest.writeString(announceDate);
-        dest.writeString(announceId);
-        dest.writeString(PRODCODE);
-        dest.writeString(PRODNAME);
-        dest.writeString(COMPREF);
-        dest.writeString(BUY_LOW_AMOUNT);
-        dest.writeString(INVESTDAYS);
-        dest.writeString(RISKLEVEL);
-        dest.writeString(FIRSTAMMOUNT);
-        dest.writeString(APPENDAMMOUNT);
-        dest.writeString(PRODTYPE);
-        dest.writeString(PUBCOMPANY);
-        dest.writeString(DESCRIPITION);
-        dest.writeString(TYPE);
-        dest.writeString(ORDERNUM);
-        dest.writeString(ISHOT);
-        dest.writeString(ISSHOW);
-        dest.writeString(CREATETIME);
-        dest.writeString(MODIFYTIME);
-        dest.writeString(SUBNAME);
-        dest.writeString(DESCRIPTION);
-        dest.writeString(TIP);
-        dest.writeString(INCOMETYPE);
-        dest.writeString(PRODRATIO);
-        dest.writeString(REVENUERULE);
-        dest.writeString(IPO_END_DATE);
-        dest.writeString(INTERESTDAY);
-        dest.writeString(ENDDAY);
-        dest.writeString(PAYDAY);
-        dest.writeString(INVEST_TYPE);
-        dest.writeString(PROD_STATUS);
-        dest.writeString(IPO_BEGIN_DATE);
-        dest.writeSerializable(CREAT_TIME);
-        dest.writeString(SECURITYCODE);
-        dest.writeString(FUNDNAME);
-        dest.writeString(KFZT);
-        dest.writeString(FXDJ);
-        dest.writeString(QGJE);
-        dest.writeString(FUNDTYPE);
-        dest.writeString(ESTABLISHMENTDATE);
-        dest.writeString(UNITNV);
-        dest.writeString(ACCUMULATEDUNITNV);
-        dest.writeString(DAILYPROFIT);
-        dest.writeString(LATESTWEEKLYYIELD);
-        dest.writeString(CHANGEPCTRM);
-        dest.writeString(INVESTADVISORNAME);
-        dest.writeString(FUNDTYPECODE);
-    }
-
-
-
-    public static final Creator<CleverManamgerMoneyEntity> CREATOR  = new Creator<CleverManamgerMoneyEntity>() {
-        @Override
-        public CleverManamgerMoneyEntity createFromParcel(Parcel source) {
-            CleverManamgerMoneyEntity bean = new CleverManamgerMoneyEntity();
-
-
-            bean.fundName = source.readString();
-            bean.fundCode =  source.readString();
-            bean.fundLevel =  source.readString();
-            bean.earnType =  source.readString();
-            bean.fundExpectEarnings =  source.readString();
-            bean.fundTimeLimit =  source.readString();
-            bean.fundStartBuy =  source.readString();
-            bean.historyNetValueDate =  source.readString();
-            bean.historyNetValueUnit =  source.readString();
-            bean.historyNetValueTotal =  source.readString();
-            bean.productCode =  source.readString();
-            bean.productType =  source.readString();
-            bean.fundCompany =  source.readString();
-            bean.fundOpenState =  source.readString();
-            bean.fundType =  source.readString();
-            bean.fundCreatTime =  source.readString();
-            bean.generalSituationTitle =  source.readString();
-            bean.generalSituationContent =  source.readString();
-            bean.generalSituationContentUrl = source.readString();
-            bean.startTime =  source.readString();
-            bean.endTime =  source.readString();
-            bean.manager =  source.readString();
-            bean.period =  source.readString();
-            bean.earn =  source.readString();
-            bean.stockName =  source.readString();
-            bean.stockNumber =  source.readString();
-            bean.progressPersent =  source.readString();
-            bean.announceTitle =  source.readString();
-            bean.announceFrom =  source.readString();
-            bean.announceDate =  source.readString();
-            bean.announceId = source.readString();
-            bean.PRODCODE =  source.readString();
-            bean.PRODNAME =  source.readString();
-
-            bean.COMPREF =  source.readString();
-            bean.BUY_LOW_AMOUNT =  source.readString();
-            bean.INVESTDAYS =  source.readString();
-            bean.RISKLEVEL =  source.readString();
-            bean.FIRSTAMMOUNT =  source.readString();
-            bean.APPENDAMMOUNT =  source.readString();
-            bean.PRODTYPE =  source.readString();
-            bean.PUBCOMPANY =  source.readString();
-            bean.DESCRIPITION =  source.readString();
-            bean.TYPE =  source.readString();
-            bean.ORDERNUM =  source.readString();
-            bean.ISHOT =  source.readString();
-            bean.ISSHOW =  source.readString();
-            bean.CREATETIME =  source.readString();
-            bean. MODIFYTIME =  source.readString();
-            bean.SUBNAME =  source.readString();
-            bean.DESCRIPTION =  source.readString();
-            bean.TIP =  source.readString();
-            bean.INCOMETYPE =  source.readString();
-            bean.PRODRATIO =  source.readString();
-            bean.REVENUERULE =  source.readString();
-            bean.IPO_END_DATE =  source.readString();
-            bean.INTERESTDAY =  source.readString();
-            bean.ENDDAY =  source.readString();
-            bean.PAYDAY =  source.readString();
-            bean.INVEST_TYPE = source.readString();
-            bean.PROD_STATUS = source.readString();
-            bean.IPO_BEGIN_DATE = source.readString();
-            bean.CREAT_TIME = source.readString();
-            bean.SECURITYCODE =  source.readString();
-            bean.FUNDNAME =  source.readString();
-            bean.KFZT =  source.readString();
-            bean.FXDJ =  source.readString();
-            bean.QGJE =  source.readString();
-            bean.FUNDTYPE =  source.readString();
-            bean.ESTABLISHMENTDATE =  source.readString();
-            bean.UNITNV =  source.readString();
-            bean.ACCUMULATEDUNITNV =  source.readString();
-            bean.DAILYPROFIT =  source.readString();
-            bean.LATESTWEEKLYYIELD =  source.readString();
-            bean.CHANGEPCTRM =  source.readString();
-            bean.INVESTADVISORNAME =  source.readString();
-            bean.FUNDTYPECODE =  source.readString();
-
-            return bean;
-        }
-
-        @Override
-        public CleverManamgerMoneyEntity[] newArray(int size) {
-            return new CleverManamgerMoneyEntity[size];
-        }
-    };
 
     public String getMistackMsg() {
         return mistackMsg;

@@ -61,7 +61,7 @@ public class ProductPrecontractActivity extends BaseActivity implements View.OnC
         Intent intent = getIntent();
 
         mProductCode = intent.getStringExtra("productCode");
-        cleverManamgerMoneyEntitys = intent.getParcelableArrayListExtra("cleverManamgerMoneyEntitys");
+        cleverManamgerMoneyEntitys = (ArrayList<CleverManamgerMoneyEntity>) intent.getSerializableExtra("cleverManamgerMoneyEntitys");
 
         if (cleverManamgerMoneyEntitys != null && cleverManamgerMoneyEntitys.size() > 0) {
             initTop(cleverManamgerMoneyEntitys.get(0));
@@ -107,7 +107,7 @@ public class ProductPrecontractActivity extends BaseActivity implements View.OnC
         progressCancel();
 
         Intent intent = new Intent();
-        intent.putParcelableArrayListExtra("cleverManamgerMoneyEntitys", cleverManamgerMoneyEntitys);
+        intent.putExtra("cleverManamgerMoneyEntitys", cleverManamgerMoneyEntitys);
         intent.setClass(this, ReservationSuccessActivity.class);
         startActivity(intent);
         finish();

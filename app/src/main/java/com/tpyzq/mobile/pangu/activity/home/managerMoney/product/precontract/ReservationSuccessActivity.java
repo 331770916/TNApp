@@ -34,7 +34,7 @@ public class ReservationSuccessActivity extends BaseActivity implements View.OnC
         mPrompt = (TextView) findViewById(R.id.Prompt);
 
         Intent intent = getIntent();
-        ArrayList<CleverManamgerMoneyEntity> cleverManamgerMoneyEntitys = intent.getParcelableArrayListExtra("cleverManamgerMoneyEntitys");
+        ArrayList<CleverManamgerMoneyEntity> cleverManamgerMoneyEntitys = (ArrayList<CleverManamgerMoneyEntity>)intent.getSerializableExtra("cleverManamgerMoneyEntitys");
 
         if (cleverManamgerMoneyEntitys != null && cleverManamgerMoneyEntitys.size() > 0) {
             mName.setText(cleverManamgerMoneyEntitys.get(0).getPRODNAME());
