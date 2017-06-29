@@ -17,7 +17,6 @@ import com.tpyzq.mobile.pangu.data.AgreementSignedEntity;
 import com.tpyzq.mobile.pangu.db.Db_PUB_USERS;
 import com.tpyzq.mobile.pangu.http.NetWorkUtil;
 import com.tpyzq.mobile.pangu.log.LogHelper;
-import com.tpyzq.mobile.pangu.log.LogUtil;
 import com.tpyzq.mobile.pangu.util.ConstantUtil;
 import com.tpyzq.mobile.pangu.util.Helper;
 import com.tpyzq.mobile.pangu.util.SpUtils;
@@ -35,8 +34,6 @@ import java.util.List;
 
 import okhttp3.Call;
 
-import static com.umeng.socialize.Config.dialog;
-
 
 /**
  * Created by wangqi on 2016/9/13.
@@ -45,9 +42,7 @@ import static com.umeng.socialize.Config.dialog;
 public class AgreementSignActvity extends BaseActivity implements View.OnClickListener {
     private static String TAG = "AgreementSignActvity";
     private AgreementSignedEntity _bean;
-    private String Record = null;
     private List<AgreementSignedEntity> beans;
-    private AgreementSignedEntity.Data _beanDate;
 
     private String market_a_1, secu_rights_1;
     private TextView tvHuA, tvNotSatisfied2;
@@ -79,72 +74,15 @@ public class AgreementSignActvity extends BaseActivity implements View.OnClickLi
         mDialog = LoadingDialog.initDialog(this, "加载中...");
     }
 
-    /**
-     * 客户时间 网络请求
-     */
-    private void toConnectDate() {
-        _beanDate = new AgreementSignedEntity.Data();
-        String mSession = SpUtils.getString(this, "mSession", "");
-        HashMap map = new HashMap();
-        HashMap map1 = new HashMap();
-        map.put("funcid", "700071");
-        map.put("token", mSession);
-        map.put("parms", map1);
-        map1.put("SEC_ID", "tpyzq");
-        map1.put("FLAG", "true");
 
-        NetWorkUtil.getInstence().okHttpForPostString(TAG, ConstantUtil.URL_JY, map, new StringCallback() {
-            @Override
-            public void onError(Call call, Exception e, int id) {
-                LogUtil.e(TAG, e.toString());
-                Helper.getInstance().showToast(AgreementSignActvity.this, "网络异常");
-            }
-
-            @Override
-            public void onResponse(String response, int id) {
-                if (TextUtils.isEmpty(response)) {
-                    return;
-                }
-                try {
-                    JSONObject jsonObject = new JSONObject(response);
-                    if ("0".equals(jsonObject.getString("code"))) {
-                        JSONArray data = jsonObject.getJSONArray("data");
-                        if (data != null && data.length() > 0) {
-                            for (int i = 0; i < data.length(); i++) {
-                                String SHFXJS_SIGN_DATE = data.getJSONObject(i).getString("SHFXJS_SIGN_DATE");
-                                String SZTS_SIGN_DATE = data.getJSONObject(i).getString("SZTS_SIGN_DATE");
-                                String SHTS_SIGN_DATE = data.getJSONObject(i).getString("SHTS_SIGN_DATE");
-                                if (!TextUtils.isEmpty(SHFXJS_SIGN_DATE) && !"0".equals(SHFXJS_SIGN_DATE)) {
-                                    _beanDate.setSHFXJS_SIGN_DATE(Helper.getMyDateY_M_D(SHFXJS_SIGN_DATE));//是上海风险警示协议
-                                }
-
-                                if (!TextUtils.isEmpty(SZTS_SIGN_DATE) && !"0".equals(SZTS_SIGN_DATE)) {
-                                    _beanDate.setSZTS_SIGN_DATE(Helper.getMyDateY_M_D(SZTS_SIGN_DATE));    //是深圳退市
-                                }
-
-                                if (!TextUtils.isEmpty(SHTS_SIGN_DATE) && !"0".equals(SHTS_SIGN_DATE)) {
-                                    _beanDate.setSHTS_SIGN_DATE(Helper.getMyDateY_M_D(SHTS_SIGN_DATE));    //是上海退市整理协议
-                                }
-
-                            }
-                        }
-                    } else if ("-6".equals(jsonObject.getString("code"))) {
-                        startActivity(new Intent(AgreementSignActvity.this, TransactionLoginActivity.class));
-                    } else {
-                        MistakeDialog.showDialog(jsonObject.getString("msg"), AgreementSignActvity.this);
-                    }
-                } catch (JSONException e) {
-                    e.printStackTrace();
-                    Helper.getInstance().showToast(AgreementSignActvity.this, "网络异常");
-                }
-            }
-        });
-    }
 
     /**
      * 网络请求
      */
     private void toConnect() {
+        if (!AgreementSignActvity.this.isFinishing()) {
+            mDialog.show();
+        }
         String mSession = SpUtils.getString(this, "mSession", "");
         final HashMap map = new HashMap();
         HashMap map1 = new HashMap();
@@ -157,8 +95,8 @@ public class AgreementSignActvity extends BaseActivity implements View.OnClickLi
             @Override
             public void onError(Call call, Exception e, int id) {
                 LogHelper.e(TAG, e.toString());
-                if (dialog != null) {
-                    dialog.dismiss();
+                if (mDialog != null) {
+                    mDialog.dismiss();
                 }
                 isShow.setVisibility(View.GONE);
                 isNodata.setVisibility(View.VISIBLE);
@@ -167,8 +105,8 @@ public class AgreementSignActvity extends BaseActivity implements View.OnClickLi
 
             @Override
             public void onResponse(String response, int id) {
-                if (dialog != null) {
-                    dialog.dismiss();
+                if (mDialog != null) {
+                    mDialog.dismiss();
                 }
                 if (TextUtils.isEmpty(response)) {
                     return;
@@ -250,9 +188,6 @@ public class AgreementSignActvity extends BaseActivity implements View.OnClickLi
                 intent.putExtra("Record", secu_rights_1);
                 intent.putExtra("Code", market_a_1);
                 intent.putExtra("Name", beans.get(0).getSecu_name());
-                if (!TextUtils.isEmpty(_beanDate.getSHFXJS_SIGN_DATE())) {
-                    intent.putExtra("SHFXJSDate", _beanDate.getSHFXJS_SIGN_DATE());
-                }
                 startActivity(intent);
                 break;
             case R.id.stockNewsLayout:
@@ -260,7 +195,6 @@ public class AgreementSignActvity extends BaseActivity implements View.OnClickLi
                     mDialog.show();
                 }
                 toConnect();
-                toConnectDate();
                 break;
         }
     }
@@ -268,13 +202,8 @@ public class AgreementSignActvity extends BaseActivity implements View.OnClickLi
     @Override
     protected void onResume() {
         super.onResume();
-
         if (Db_PUB_USERS.islogin()) {
-            if (!AgreementSignActvity.this.isFinishing()) {
-                mDialog.show();
-            }
             toConnect();
-            toConnectDate();
         }
     }
 }

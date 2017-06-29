@@ -11,8 +11,10 @@ import android.widget.TextView;
 import com.tpyzq.mobile.pangu.R;
 import com.tpyzq.mobile.pangu.activity.myself.login.TransactionLoginActivity;
 import com.tpyzq.mobile.pangu.base.BaseActivity;
+import com.tpyzq.mobile.pangu.data.AgreementSignedEntity;
 import com.tpyzq.mobile.pangu.http.NetWorkUtil;
 import com.tpyzq.mobile.pangu.log.LogHelper;
+import com.tpyzq.mobile.pangu.log.LogUtil;
 import com.tpyzq.mobile.pangu.util.ConstantUtil;
 import com.tpyzq.mobile.pangu.util.Helper;
 import com.tpyzq.mobile.pangu.util.SpUtils;
@@ -21,6 +23,7 @@ import com.tpyzq.mobile.pangu.view.dialog.MistakeDialog;
 import com.tpyzq.mobile.pangu.view.dialog.ResultDialog;
 import com.zhy.http.okhttp.callback.StringCallback;
 
+import org.json.JSONArray;
 import org.json.JSONException;
 import org.json.JSONObject;
 
@@ -37,8 +40,7 @@ import static com.tpyzq.mobile.pangu.R.string.RiskWarning;
  */
 public class RiskWarningActivity extends BaseActivity implements View.OnClickListener {
     private static String TAG = "RiskWarning";
-    private TextView Headline, Data1, Data2, Name, Date, mtext1, mtext2;
-    private LinearLayout pLinearLayout;
+    private TextView Headline, Data1, Data2, mName, mDate, mtext1, mtext2;
     private Dialog loadingDialog;
     private Button mSigned;
     private LinearLayout mAGLinearLayout;
@@ -52,8 +54,8 @@ public class RiskWarningActivity extends BaseActivity implements View.OnClickLis
         Headline = (TextView) findViewById(R.id.Headline);
         Data1 = (TextView) findViewById(R.id.Data1);
         Data2 = (TextView) findViewById(R.id.Data2);
-        Name = (TextView) findViewById(R.id.Name);
-        Date = (TextView) findViewById(R.id.Date);
+        mName = (TextView) findViewById(R.id.Name);
+        mDate = (TextView) findViewById(R.id.Date);
         mtext1 = (TextView) findViewById(R.id.mtext1);
         mtext2 = (TextView) findViewById(R.id.mtext2);
         findViewById(R.id.Yse).setOnClickListener(this);
@@ -75,29 +77,23 @@ public class RiskWarningActivity extends BaseActivity implements View.OnClickLis
         }
 
         initData();
+        toConnectDate();
     }
+
 
     private void initData() {
         String KeyName = getIntent().getStringExtra("Name");
         if (!TextUtils.isEmpty(KeyName)) {
-            Name.setText("客户:" + KeyName);
+            mName.setText("客户:" + KeyName);
         } else {
-            Name.setText("客户:" + "- -");
+            mName.setText("客户:" + "- -");
         }
 
-        String KeySHFXJSDate = getIntent().getStringExtra("SHFXJSDate");
-        if (!TextUtils.isEmpty(KeySHFXJSDate) && !"0".equals(KeySHFXJSDate)) {
-            Date.setText("日期:" + KeySHFXJSDate);
-        } else {
-            Date.setText("日期:" + "- -");
-        }
         Headline.setText(getString(R.string.RiskWarning1));
         mtext1.setText(getString(R.string.RiskWarning3));
         mtext2.setText(getString(R.string.RiskWarning4));
         Data1.setText(getString(R.string.RiskWarning2));
         Data2.setText(getString(R.string.Tui));
-
-
     }
 
     @Override
@@ -112,8 +108,6 @@ public class RiskWarningActivity extends BaseActivity implements View.OnClickLis
                 finish();
                 break;
             case R.id.Yse:
-                loadingDialog = LoadingDialog.initDialog(this, "正在加载");
-                loadingDialog.show();
                 toConnect();
                 break;
             case R.id.NO:
@@ -128,9 +122,64 @@ public class RiskWarningActivity extends BaseActivity implements View.OnClickLis
     }
 
     /**
+     * 客户时间 网络请求
+     */
+    private void toConnectDate() {
+        String mSession = SpUtils.getString(this, "mSession", "");
+        HashMap map = new HashMap();
+        HashMap map1 = new HashMap();
+        map.put("funcid", "700071");
+        map.put("token", mSession);
+        map.put("parms", map1);
+        map1.put("SEC_ID", "tpyzq");
+        map1.put("FLAG", "true");
+
+        NetWorkUtil.getInstence().okHttpForPostString(TAG, ConstantUtil.URL_JY, map, new StringCallback() {
+            @Override
+            public void onError(Call call, Exception e, int id) {
+                LogUtil.e(TAG, e.toString());
+                Helper.getInstance().showToast(RiskWarningActivity.this, "网络异常");
+            }
+
+            @Override
+            public void onResponse(String response, int id) {
+                if (TextUtils.isEmpty(response)) {
+                    return;
+                }
+                try {
+                    JSONObject jsonObject = new JSONObject(response);
+                    if ("0".equals(jsonObject.getString("code"))) {
+                        JSONArray data = jsonObject.getJSONArray("data");
+                        if (data != null && data.length() > 0) {
+                            for (int i = 0; i < data.length(); i++) {
+                                String SHFXJS_SIGN_DATE = data.getJSONObject(i).getString("SHFXJS_SIGN_DATE");
+                                if (!TextUtils.isEmpty(SHFXJS_SIGN_DATE) && !"0".equals(SHFXJS_SIGN_DATE)) {
+                                    mDate.setText("日期:" + (Helper.getMyDateY_M_D(SHFXJS_SIGN_DATE)));//是上海风险警示协议
+                                }else {
+                                    mDate.setText("日期:" + "- -");
+                                }
+                            }
+                        }
+                    } else if ("-6".equals(jsonObject.getString("code"))) {
+                        startActivity(new Intent(RiskWarningActivity.this, TransactionLoginActivity.class));
+                    } else {
+                        MistakeDialog.showDialog(jsonObject.getString("msg"), RiskWarningActivity.this);
+                    }
+                } catch (JSONException e) {
+                    e.printStackTrace();
+                    Helper.getInstance().showToast(RiskWarningActivity.this, "网络异常");
+                }
+            }
+        });
+    }
+
+
+    /**
      * 网络请求
      */
     private void toConnect() {
+        loadingDialog = LoadingDialog.initDialog(this, "正在加载");
+        loadingDialog.show();
         String mSession = SpUtils.getString(this, "mSession", "");
         String Code = getIntent().getStringExtra("Code");
         HashMap map = new HashMap();
@@ -176,7 +225,7 @@ public class RiskWarningActivity extends BaseActivity implements View.OnClickLis
                         if (loadingDialog != null) {
                             loadingDialog.dismiss();
                         }
-                        startActivityForResult(new Intent(RiskWarningActivity.this, AgreementActivity.class),100);
+                        startActivityForResult(new Intent(RiskWarningActivity.this, AgreementActivity.class), 100);
                     } else {
                         if (loadingDialog != null) {
                             loadingDialog.dismiss();
@@ -190,10 +239,11 @@ public class RiskWarningActivity extends BaseActivity implements View.OnClickLis
             }
         });
     }
+
     @Override
     protected void onActivityResult(int requestCode, int resultCode, Intent data) {
         super.onActivityResult(requestCode, resultCode, data);
-        if (requestCode == 100 && resultCode == RESULT_OK){
+        if (requestCode == 100 && resultCode == RESULT_OK) {
             finish();
         }
     }
