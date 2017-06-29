@@ -71,12 +71,11 @@
                     <TextView
                         android:layout_width="wrap_content"
                         android:layout_height="@dimen/size17"
-                        android:text="@string/RiskConfirmProductLevel"
-                        android:textColor="#4d4d4d"
-                        android:textSize="@dimen/size14" />
+                        android:text="@string/RiskConfirmLevel"
+                        style="@style/riskTvStyle"/>
 
                     <TextView
-                        android:id="@+id/tv_product_level"
+                        android:id="@+id/tv_risk_level"
                         android:layout_width="wrap_content"
                         android:layout_height="@dimen/size20"
                         style="@style/riskTvStyle"
@@ -106,11 +105,12 @@
                     <TextView
                         android:layout_width="wrap_content"
                         android:layout_height="@dimen/size17"
-                        android:text="@string/RiskConfirmLevel"
-                        style="@style/riskTvStyle"/>
+                        android:text="@string/RiskConfirmProductLevel"
+                        android:textColor="#4d4d4d"
+                        android:textSize="@dimen/size14" />
 
                     <TextView
-                        android:id="@+id/tv_risk_level"
+                        android:id="@+id/tv_product_level"
                         android:layout_width="wrap_content"
                         android:layout_height="@dimen/size20"
                         style="@style/riskTvStyle"

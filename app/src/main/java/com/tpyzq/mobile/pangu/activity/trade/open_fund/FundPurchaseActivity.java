@@ -18,9 +18,11 @@ import com.tpyzq.mobile.pangu.activity.myself.handhall.RiskConfirmActivity;
 import com.tpyzq.mobile.pangu.activity.myself.handhall.RiskEvaluationActivity;
 import com.tpyzq.mobile.pangu.activity.myself.login.TransactionLoginActivity;
 import com.tpyzq.mobile.pangu.base.BaseActivity;
+import com.tpyzq.mobile.pangu.base.InterfaceCollection;
 import com.tpyzq.mobile.pangu.data.AssessConfirmEntity;
 import com.tpyzq.mobile.pangu.data.FundDataEntity;
 import com.tpyzq.mobile.pangu.data.FundSubsEntity;
+import com.tpyzq.mobile.pangu.data.ResultInfo;
 import com.tpyzq.mobile.pangu.data.SubsStatusEntity;
 import com.tpyzq.mobile.pangu.http.NetWorkUtil;
 import com.tpyzq.mobile.pangu.util.ConstantUtil;
@@ -60,6 +62,7 @@ public class FundPurchaseActivity extends BaseActivity implements View.OnClickLi
     private FundSubsEntity fundData;
     private AssessConfirmEntity assessConfirmBean;
     private SubsStatusEntity subsStatusBean;
+    private String mSession;
 
     @Override
     public void initView() {
@@ -77,6 +80,7 @@ public class FundPurchaseActivity extends BaseActivity implements View.OnClickLi
     }
 
     private void initData() {
+        mSession = SpUtils.getString(FundPurchaseActivity.this, "mSession", null);
         tv_choose_fund.setOnClickListener(this);
         iv_back.setOnClickListener(this);
         et_fund_price.setEnabled(false);
@@ -149,10 +153,44 @@ public class FundPurchaseActivity extends BaseActivity implements View.OnClickLi
         @Override
         public void setEntrust(String price, String fund_company, String fund_code) {
 //            buy_shengou(price, fund_company, fund_code);
-            Intent intent = new Intent(FundPurchaseActivity.this, RiskConfirmActivity.class);
-            intent.putExtra("fundData",fundData);
-            intent.putExtra("from","fundPurchase");
-            FundPurchaseActivity.this.startActivityForResult(intent, REQUESTCODE);
+            InterfaceCollection.getInstance().queryProductSuitability(mSession, "", "", fundData.FUND_COMPANY, fundData.FUND_CODE, "331261", new InterfaceCollection.InterfaceCallback() {
+                @Override
+                public void callResult(ResultInfo info) {
+                    String code = info.getCode();
+                    String msg = info.getMsg();
+                    HashMap<String,String> resultMap = null;
+                    if ("0".equalsIgnoreCase(code)) {
+                        resultMap = (HashMap<String,String>)info.getData();
+                        if (null == resultMap) {
+                            MistakeDialog.showDialog("数据异常", FundPurchaseActivity.this, null);
+                            return;
+                        }
+                        //弹框逻辑
+                        //是否可以委托
+                        if ("0".equalsIgnoreCase(resultMap.get("ENABLE_FLAG"))) {//不可委托
+                            //尊敬的客户:\n       根据证监会《证券期货投资者适当性管理办法》，您购买的产品在购买过程中需要通过录音录像进行确认，请到营业部办理
+                            CancelDialog.cancleDialog(FundPurchaseActivity.this, "", 4000, new CancelDialog.PositiveClickListener() {
+                                @Override
+                                public void onPositiveClick() {}
+                            },null);
+                            return;
+                        } else {
+                            //可以委托 判断是否需要视频录制
+                            if ("1".equalsIgnoreCase(resultMap.get("NEED_VIDEO_FLAG"))) {
+                                CancelDialog.cancleDialog(FundPurchaseActivity.this,"尊敬的客户:\n根据证监会《证券期货投资者适当性管理办法》，您购买的产品在购买过程中需要通过录音录像进行确认，请到营业部办理",4000,null,null);
+                                return;
+                            }
+                        }
+                        //跳转到适用性页面
+                        Intent intent = new Intent(FundPurchaseActivity.this, RiskConfirmActivity.class);
+                        intent.putExtra("resultMap",resultMap);
+                        FundPurchaseActivity.this.startActivityForResult(intent, REQUESTCODE);
+                    } else {
+                        MistakeDialog.showDialog(msg, FundPurchaseActivity.this, null);
+                    }
+                }
+            });
+
         }
     };
 

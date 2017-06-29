@@ -19,6 +19,7 @@ import com.android.keyboardlibrary.KeyboardUtil;
 import com.google.gson.Gson;
 import com.google.gson.reflect.TypeToken;
 import com.tpyzq.mobile.pangu.R;
+import com.tpyzq.mobile.pangu.activity.myself.handhall.RiskConfirmActivity;
 import com.tpyzq.mobile.pangu.activity.myself.handhall.RiskEvaluationActivity;
 import com.tpyzq.mobile.pangu.activity.myself.login.TransactionLoginActivity;
 import com.tpyzq.mobile.pangu.activity.trade.open_fund.AssessConfirmActivity;
@@ -247,6 +248,7 @@ public class OTC_SubscribeActivity extends BaseActivity implements View.OnClickL
                         OTC_SubscribeAffirmMsgBean.DataBean dataBean = data.get(i);
                         String prod_name = dataBean.getPROD_NAME();                //产品名称
                         String prodta_no = dataBean.getPRODTA_NO();                //产品TA编号
+                        String prod_no = dataBean.getPROD_CODE();                //产品编号
                         String last_price = dataBean.getLAST_PRICE();              //产品净值
                         String enable_balance = dataBean.getENABLE_BALANCE();      //可用资金
 
@@ -257,6 +259,7 @@ public class OTC_SubscribeActivity extends BaseActivity implements View.OnClickL
 
                         map.put("prod_name", prod_name);
                         map.put("prodta_no", prodta_no);
+                        map.put("prod_no", prod_no);
                     }
 
                     IsMakenappointment(mSession, stockCode);        //查询是否预约
@@ -494,10 +497,43 @@ public class OTC_SubscribeActivity extends BaseActivity implements View.OnClickL
 
     @Override
     public void callBack(boolean isOk) {
-        //如果  委托成功   清空 首页数据
-        if (true == isOk) {
-            wipeData();
-        }
+        InterfaceCollection.getInstance().queryProductSuitability(mSession, map.get("prodta_no"), map.get("prod_code"), "", "", "331261", new InterfaceCollection.InterfaceCallback() {
+            @Override
+            public void callResult(ResultInfo info) {
+                String code = info.getCode();
+                String msg = info.getMsg();
+                HashMap<String,String> resultMap = null;
+                if ("0".equalsIgnoreCase(code)) {
+                    resultMap = (HashMap<String,String>)info.getData();
+                    if (null == resultMap) {
+                        MistakeDialog.showDialog("数据异常", OTC_SubscribeActivity.this, null);
+                        return;
+                    }
+                    //弹框逻辑
+                    //是否可以委托
+                    if ("0".equalsIgnoreCase(resultMap.get("ENABLE_FLAG"))) {//不可委托
+                        //尊敬的客户:\n       根据证监会《证券期货投资者适当性管理办法》，您购买的产品在购买过程中需要通过录音录像进行确认，请到营业部办理
+                        CancelDialog.cancleDialog(OTC_SubscribeActivity.this, "", 4000, new CancelDialog.PositiveClickListener() {
+                            @Override
+                            public void onPositiveClick() {}
+                        },null);
+                        return;
+                    } else {
+                        //可以委托 判断是否需要视频录制
+                        if ("1".equalsIgnoreCase(resultMap.get("NEED_VIDEO_FLAG"))) {
+                            CancelDialog.cancleDialog(OTC_SubscribeActivity.this,"尊敬的客户:\n根据证监会《证券期货投资者适当性管理办法》，您购买的产品在购买过程中需要通过录音录像进行确认，请到营业部办理",4000,null,null);
+                            return;
+                        }
+                    }
+                    //跳转到适用性页面
+                    Intent intent = new Intent(OTC_SubscribeActivity.this, RiskConfirmActivity.class);
+                    intent.putExtra("resultMap",resultMap);
+                    OTC_SubscribeActivity.this.startActivityForResult(intent, REQUESTCODE);
+                } else {
+                    MistakeDialog.showDialog(msg, OTC_SubscribeActivity.this, null);
+                }
+            }
+        });
     }
 
 

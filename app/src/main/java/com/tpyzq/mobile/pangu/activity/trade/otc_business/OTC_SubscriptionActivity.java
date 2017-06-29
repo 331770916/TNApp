@@ -460,11 +460,44 @@ public class OTC_SubscriptionActivity extends BaseActivity implements View.OnCli
     @Override
     public void callBack(boolean isOk) {
         //点击按钮回调 跳转到风险通知书
-        Intent intent = new Intent(OTC_SubscriptionActivity.this, RiskConfirmActivity.class);
-        intent.putExtra("from","OTC_Subscription");
-        intent.putExtra("prodta_no",map.get("prodta_no"));
-        intent.putExtra("prod_code",map.get("prod_code"));
-        OTC_SubscriptionActivity.this.startActivityForResult(intent,REQUESTCODE);
+        InterfaceCollection.getInstance().queryProductSuitability(mSession, map.get("prodta_no"), map.get("prod_code"), "", "", "331261", new InterfaceCollection.InterfaceCallback() {
+            @Override
+            public void callResult(ResultInfo info) {
+                String code = info.getCode();
+                String msg = info.getMsg();
+                HashMap<String,String> resultMap = null;
+                if ("0".equalsIgnoreCase(code)) {
+                    resultMap = (HashMap<String,String>)info.getData();
+                    if (null == resultMap) {
+                        MistakeDialog.showDialog("数据异常", OTC_SubscriptionActivity.this, null);
+                        return;
+                    }
+                    //弹框逻辑
+                    //是否可以委托
+                    if ("0".equalsIgnoreCase(resultMap.get("ENABLE_FLAG"))) {//不可委托
+                        //尊敬的客户:\n       根据证监会《证券期货投资者适当性管理办法》，您购买的产品在购买过程中需要通过录音录像进行确认，请到营业部办理
+                        CancelDialog.cancleDialog(OTC_SubscriptionActivity.this, "", 4000, new CancelDialog.PositiveClickListener() {
+                            @Override
+                            public void onPositiveClick() {}
+                        },null);
+                        return;
+                    } else {
+                        //可以委托 判断是否需要视频录制
+                        if ("1".equalsIgnoreCase(resultMap.get("NEED_VIDEO_FLAG"))) {
+                            CancelDialog.cancleDialog(OTC_SubscriptionActivity.this,"尊敬的客户:\n根据证监会《证券期货投资者适当性管理办法》，您购买的产品在购买过程中需要通过录音录像进行确认，请到营业部办理",4000,null,null);
+                            return;
+                        }
+                    }
+                    //跳转到适用性页面
+                    Intent intent = new Intent(OTC_SubscriptionActivity.this, RiskConfirmActivity.class);
+                    intent.putExtra("resultMap",resultMap);
+                    OTC_SubscriptionActivity.this.startActivityForResult(intent, REQUESTCODE);
+                } else {
+                    MistakeDialog.showDialog(msg, OTC_SubscriptionActivity.this, null);
+                }
+            }
+        });
+
         if (null!=dialog&&dialog.isShowing()){
             dialog.dismiss();
         }

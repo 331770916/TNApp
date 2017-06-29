@@ -43,8 +43,9 @@ public class RiskConfirmActivity extends BaseActivity implements View.OnClickLis
     private String instr_batch_no;//记录批次号
     private FundSubsEntity fundData;
     private String fundCompany,fundCode,prodta_no,prod_code;
-    private String elig_risk_flag;
     private String from;
+    private HashMap<String, String> resultMap;
+    private boolean isMatch = true;
 
     @Override
     public void initView() {
@@ -57,65 +58,14 @@ public class RiskConfirmActivity extends BaseActivity implements View.OnClickLis
         tv_warn = (TextView)findViewById(R.id.tv_warn);//警告提示
         tv_response = (TextView)findViewById(R.id.tv_response);//风险内容
         cb_open_fund = (CheckBox)findViewById(R.id.cb_open_fund);//同意协议选择框
-       /* cb_open_fund.setOnCheckedChangeListener(new CompoundButton.OnCheckedChangeListener() {
-            @Override
-            public void onCheckedChanged(CompoundButton buttonView, boolean isChecked) {
-                if (isChecked) {
-                    btn_ok.setClickable(true);
-                    btn_ok.setBackgroundColor(ColorUtils.ORANGE);
-                } else {
-                    btn_ok.setClickable(false);
-                    btn_ok.setBackgroundColor(ColorUtils.BT_GRAY);
-                }
-            }
-        });*/
-//        ll_btn = (LinearLayout)findViewById(R.id.ll_btn);//按钮大布局
         btn_ok = (Button)findViewById(R.id.btn_ok);//同意按钮
         btn_ok.setOnClickListener(this);
         btn_cancel = (Button)findViewById(R.id.btn_cancel);//取消按钮
         btn_cancel.setOnClickListener(this);
-        from = getIntent().getStringExtra("from");//从那个页面回来 fundPurchase 基金申购 fundSubs 基金认购 OTC_Subscription  OTC认购 OTC_Subscribe  OTC申购
+        setData();
+//        from = getIntent().getStringExtra("from");//从那个页面回来 fundPurchase 基金申购 fundSubs 基金认购 OTC_Subscription  OTC认购 OTC_Subscribe  OTC申购
 
-        if ("fundSubs".equalsIgnoreCase(from)) {
-            //基金认购
-            fundSubsBean = (FundDataEntity)getIntent().getSerializableExtra("fundSubsBean");
-            fundCompany = fundSubsBean.data.get(0).FUND_COMPANY;
-            fundCode = fundSubsBean.data.get(0).FUND_CODE;
-//            fundCompany = "01";
-//            fundCode = "000326";
-            prodta_no = "";
-            prod_code = "";
-        } else if ("fundPurchase".equalsIgnoreCase(from)) {
-            //基金申购
-            fundData = (FundSubsEntity)getIntent().getSerializableExtra("fundData");
-            fundCompany = fundData.FUND_COMPANY;
-            fundCode = fundData.FUND_CODE;
-//            fundCompany = "01";
-//            fundCode = "000326";
-            prodta_no = "";
-            prod_code = "";
-        } else if ("OTC_Subscription".equalsIgnoreCase(from)){
-            // OTC认购
-            fundCompany = "";
-            fundCode = "";
-            prodta_no = getIntent().getStringExtra("prodta_no");
-            prod_code = getIntent().getStringExtra("prod_code");
-//            prodta_no = "D01";
-//            prod_code = "130858";
-        } else if ("OTC_Subscribe".equalsIgnoreCase(from)){
-            // OTC申购
-            fundCompany = "";
-            fundCode = "";
-            prodta_no = getIntent().getStringExtra("prodta_no");
-            prod_code = getIntent().getStringExtra("prod_code");
-        } else if ("OTC".equalsIgnoreCase(from)) {
-            //OTC不区分申购认购
-            fundCompany = "";
-            fundCode = "";
-            prodta_no = getIntent().getStringExtra("prodta_no");
-            prod_code = getIntent().getStringExtra("prod_code");
-        }
-        session = SpUtils.getString(this, "mSession", null);
+/*
         InterfaceCollection.getInstance().queryProductSuitability(session, prodta_no, prod_code, fundCompany, fundCode, "331261", new InterfaceCollection.InterfaceCallback() {
             @Override
             public void callResult(ResultInfo info) {
@@ -182,18 +132,54 @@ public class RiskConfirmActivity extends BaseActivity implements View.OnClickLis
                 }
             }
         });
+*/
 
     }
 
-    private void showErrorDialog(String msg) {
-        MistakeDialog.showDialog(msg, RiskConfirmActivity.this, new MistakeDialog.MistakeDialgoListener() {
-            @Override
-            public void doPositive() {
-                finish();
+    private void setData() {
+        resultMap = (HashMap<String,String>)getIntent().getSerializableExtra("resultMap");//传递数据进入
+        tv_product_level.setText(resultMap.get("PRODRISK_LEVEL"));//产品等级
+        tv_risk_level.setText(resultMap.get("CORP_RISK_LEVEL_INFO"));//用户等级
+        StringBuffer sb = new StringBuffer();
+        String elig_risk_flag = resultMap.get("ELIG_RISK_FLAG");//风险匹配标志
+        CharSequence eligRiskFlagInfo = resultMap.get("ELIG_RISK_FLAG_INFO");//风险匹配标志描述
+        if ("0".equalsIgnoreCase(elig_risk_flag)&& !TextUtils.isEmpty(eligRiskFlagInfo)) {
+            sb.append("·"+eligRiskFlagInfo);
+        }
+        String elig_term_flag = resultMap.get("ELIG_TERM_FLAG");//投资周期匹配标志
+        String elig_term_flag_info = resultMap.get("ELIG_TERM_FLAG_INFO");//投资品种标志描述
+        if ("0".equalsIgnoreCase(elig_term_flag) && !TextUtils.isEmpty(elig_term_flag_info)) {
+            if (!TextUtils.isEmpty(sb.toString())){
+                sb.append("\r\n");
             }
-        });
-    }
+            sb.append("·"+elig_term_flag_info);
+        }
+        String elig_investkind_flag = resultMap.get("ELIG_INVESTKIND_FLAG");//投资品种标志
+        String elig_investkind_flag_info = resultMap.get("ELIG_INVESTKIND_FLAG_INFO");//投资品种标志描述
+        if ("0".equalsIgnoreCase(elig_investkind_flag) && !TextUtils.isEmpty(elig_investkind_flag_info)) {
+            if (!TextUtils.isEmpty(sb.toString())){
+                sb.append("\r\n");
+            }
+            sb.append("·"+elig_investkind_flag_info);
+        }
+        tv_response.setText(sb.toString().trim());
 
+        if ("0".equalsIgnoreCase(elig_risk_flag)||"0".equalsIgnoreCase(elig_investkind_flag)||"0".equalsIgnoreCase(elig_term_flag)) {//不匹配
+            isMatch = false;
+            tv_result.setTextColor(Color.parseColor("#d0011b"));
+            tv_result.setText("不匹配");//匹配状态
+            ll_response.setVisibility(View.VISIBLE);
+            tv_warn.setVisibility(View.VISIBLE);
+        } else {
+            isMatch = true;
+            tv_result.setTextColor(Color.parseColor("#28a946"));
+            tv_result.setText("匹配");//匹配状态
+            ll_response.setVisibility(View.GONE);
+            tv_warn.setVisibility(View.GONE);
+        }
+        instr_batch_no = resultMap.get("INSTR_BATCH_NO");//指令批号
+        session = SpUtils.getString(this, "mSession", null);
+    }
     @Override
     public int getLayoutId() {
         return R.layout.activity_risk_confirm;
@@ -213,7 +199,7 @@ public class RiskConfirmActivity extends BaseActivity implements View.OnClickLis
                     break;
                 }
                 String oper_info;
-                if ("1".equalsIgnoreCase(elig_risk_flag)) {
+                if (isMatch) {
                     oper_info = "已向用户揭示适当性评估结果确认书，经用户确认同意后继续委托";
                 } else {
                     oper_info = "已向用户揭示适当性评估结果不匹配确认书，经用户确认同意后继续委托";

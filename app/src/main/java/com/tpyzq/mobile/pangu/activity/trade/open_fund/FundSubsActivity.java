@@ -1,6 +1,7 @@
 package com.tpyzq.mobile.pangu.activity.trade.open_fund;
 
 import android.content.Intent;
+import android.graphics.Color;
 import android.os.Bundle;
 import android.text.Editable;
 import android.text.TextUtils;
@@ -19,10 +20,12 @@ import com.tpyzq.mobile.pangu.activity.myself.handhall.RiskEvaluationActivity;
 import com.tpyzq.mobile.pangu.activity.myself.login.ChangeAccoutActivity;
 import com.tpyzq.mobile.pangu.activity.myself.login.TransactionLoginActivity;
 import com.tpyzq.mobile.pangu.base.BaseActivity;
+import com.tpyzq.mobile.pangu.base.InterfaceCollection;
 import com.tpyzq.mobile.pangu.data.AssessConfirmEntity;
 import com.tpyzq.mobile.pangu.data.FundDataEntity;
 import com.tpyzq.mobile.pangu.data.FundEntity;
 import com.tpyzq.mobile.pangu.data.FundSubsEntity;
+import com.tpyzq.mobile.pangu.data.ResultInfo;
 import com.tpyzq.mobile.pangu.data.SubsStatusEntity;
 import com.tpyzq.mobile.pangu.http.NetWorkUtil;
 import com.tpyzq.mobile.pangu.util.ConstantUtil;
@@ -32,6 +35,7 @@ import com.tpyzq.mobile.pangu.util.ToastUtils;
 import com.tpyzq.mobile.pangu.util.panguutil.UserUtil;
 import com.tpyzq.mobile.pangu.view.dialog.CancelDialog;
 import com.tpyzq.mobile.pangu.view.dialog.FundSubsDialog;
+import com.tpyzq.mobile.pangu.view.dialog.MistakeDialog;
 import com.zhy.http.okhttp.callback.StringCallback;
 
 import org.json.JSONArray;
@@ -282,10 +286,43 @@ public class FundSubsActivity extends BaseActivity implements View.OnClickListen
         fundSubsListen = new FundSubsListen() {
             @Override
             public void setBuy(String price, String fund_company) {
-                Intent intent = new Intent(FundSubsActivity.this, RiskConfirmActivity.class);
-                intent.putExtra("fundSubsBean",fundDataBean);
-                intent.putExtra("from","fundSubs");
-                FundSubsActivity.this.startActivityForResult(intent, REQUESTCODE);
+                InterfaceCollection.getInstance().queryProductSuitability(session, "", "", fundDataBean.data.get(0).FUND_COMPANY, fundDataBean.data.get(0).FUND_CODE, "331261", new InterfaceCollection.InterfaceCallback() {
+                    @Override
+                    public void callResult(ResultInfo info) {
+                        String code = info.getCode();
+                        String msg = info.getMsg();
+                        HashMap<String,String> resultMap = null;
+                        if ("0".equalsIgnoreCase(code)) {
+                            resultMap = (HashMap<String,String>)info.getData();
+                            if (null == resultMap) {
+                                MistakeDialog.showDialog("数据异常", FundSubsActivity.this, null);
+                                return;
+                            }
+                            //弹框逻辑
+                            //是否可以委托
+                            if ("0".equalsIgnoreCase(resultMap.get("ENABLE_FLAG"))) {//不可委托
+                                //尊敬的客户:\n       根据证监会《证券期货投资者适当性管理办法》，您购买的产品在购买过程中需要通过录音录像进行确认，请到营业部办理
+                                CancelDialog.cancleDialog(FundSubsActivity.this, "", 4000, new CancelDialog.PositiveClickListener() {
+                                    @Override
+                                    public void onPositiveClick() {}
+                                },null);
+                                return;
+                            } else {
+                                //可以委托 判断是否需要视频录制
+                                if ("1".equalsIgnoreCase(resultMap.get("NEED_VIDEO_FLAG"))) {
+                                    CancelDialog.cancleDialog(FundSubsActivity.this,"尊敬的客户:\n根据证监会《证券期货投资者适当性管理办法》，您购买的产品在购买过程中需要通过录音录像进行确认，请到营业部办理",4000,null,null);
+                                    return;
+                                }
+                            }
+                            //跳转到适用性页面
+                            Intent intent = new Intent(FundSubsActivity.this, RiskConfirmActivity.class);
+                            intent.putExtra("resultMap",resultMap);
+                            FundSubsActivity.this.startActivityForResult(intent, REQUESTCODE);
+                        } else {
+                            MistakeDialog.showDialog(msg, FundSubsActivity.this, null);
+                        }
+                    }
+                });
             }
         };
         et_fund_code.addTextChangedListener(new TextWatcher() {
@@ -312,7 +349,6 @@ public class FundSubsActivity extends BaseActivity implements View.OnClickListen
             }
         });
     }
-
     private void clearView() {
         et_fund_code.setText("");
         et_rengou_price.setText("");
