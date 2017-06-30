@@ -747,6 +747,7 @@
     <string name="CPYY_text1">预约成功仅代表您有意向购买此产品，太平洋证券不承诺预约成功后一定能购买到此产品，预约金额不代表最终的购买金额，以实际购买金额为准，请您在产品发行时间内，尽快登录太牛APP购买产品，系统按照委托时间优先成交</string>
 
     <!--网络投票-->
+    <string name="voteEnterTitle">投票查询</string>
     <string name="voteEnter">进入投票</string>
     <string name="voteTitle1">股东大会名称：</string>
     <string name="voteTitle2">大会编码：</string>
