@@ -147,19 +147,19 @@ public class AssessConfirmActivity extends BaseActivity implements View.OnClickL
         if (assessConfirmBean.type.equals("3") || assessConfirmBean.type.equals("4")) {
             cb_open_fund.setText("开通OTC账户");
             ll_view3_1.setVisibility(View.GONE);
-            if (!TextUtils.isEmpty(assessConfirmBean.IS_AGREEMENT) && "0".equals(assessConfirmBean.IS_AGREEMENT)) {
+            if (!TextUtils.isEmpty(assessConfirmBean.IS_AGREEMENT) && "0".equals(assessConfirmBean.IS_AGREEMENT)) {//不需要
                 ll_view2.setVisibility(View.GONE);
-            } else if (!TextUtils.isEmpty(assessConfirmBean.IS_AGREEMENT) && "1".equals(assessConfirmBean.IS_AGREEMENT)) {
+            } else if (!TextUtils.isEmpty(assessConfirmBean.IS_AGREEMENT) && "1".equals(assessConfirmBean.IS_AGREEMENT)) {//需要
                 ll_view2.setVisibility(View.VISIBLE);
             }
 
         } else {
             cb_open_fund.setText("开通基金账户");
             ll_view3_1.setVisibility(View.VISIBLE);
-            if (!TextUtils.isEmpty(assessConfirmBean.IS_AGREEMENT) && "1".equals(assessConfirmBean.IS_AGREEMENT)) {
+            if (!TextUtils.isEmpty(assessConfirmBean.IS_AGREEMENT) && "1".equals(assessConfirmBean.IS_AGREEMENT)) {//不需要
                 ll_view2.setVisibility(View.GONE);
                 IS_AGREEMENT = "0";
-            } else if (!TextUtils.isEmpty(assessConfirmBean.IS_AGREEMENT) && "0".equals(assessConfirmBean.IS_AGREEMENT)) {
+            } else if (!TextUtils.isEmpty(assessConfirmBean.IS_AGREEMENT) && "0".equals(assessConfirmBean.IS_AGREEMENT)) {//需要
                 ll_view2.setVisibility(View.VISIBLE);
                 IS_AGREEMENT = "1";
             }

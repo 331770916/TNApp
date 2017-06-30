@@ -234,7 +234,8 @@ public class FundPurchaseActivity extends BaseActivity implements View.OnClickLi
                     if ("0".equals(code)) {
                         subsStatusBean = new Gson().fromJson(response, SubsStatusEntity.class);
                         //判断是否跳转风险评测界面
-                        if (!TextUtils.isEmpty(subsStatusBean.data.get(0).IS_ABLE) && "0".equals(subsStatusBean.data.get(0).IS_ABLE)) {
+//                        if (!TextUtils.isEmpty(subsStatusBean.data.get(0).IS_ABLE) && "0".equals(subsStatusBean.data.get(0).IS_ABLE)) {
+                        if ("0".equalsIgnoreCase(subsStatusBean.data.get(0).IS_OPEN)&&"1".equalsIgnoreCase(subsStatusBean.data.get(0).IS_AGREEMENT)) {
                             startFinish();
                         } else {
                             assessConfirmBean = new AssessConfirmEntity();

@@ -420,7 +420,7 @@ public class OTC_SubscriptionActivity extends BaseActivity implements View.OnCli
         if (requestCode == REQUESTCODE && resultCode == RESULT_OK) {//风险通知书成功返回
             final String SubscriptionMoney = etOTC_SubscriptionMoney.getText().toString();       //获取输入的认购金额
             final String stockCode = etOTC_ProductCode.getText().toString();
-            InterfaceCollection.getInstance().getAffirm(stockCode, map.get("prodta_no"), mSession, SubscriptionMoney, new InterfaceCollection.InterfaceCallback() {
+            InterfaceCollection.getInstance().getAffirm("3",stockCode, map.get("prodta_no"), mSession, SubscriptionMoney, new InterfaceCollection.InterfaceCallback() {
                 @Override
                 public void callResult(ResultInfo info) {
                     String code = info.getCode();
@@ -434,7 +434,7 @@ public class OTC_SubscriptionActivity extends BaseActivity implements View.OnCli
                         }
                     } else if ("0".equalsIgnoreCase(code)) {
                         AssessConfirmEntity assessConfirmBean = (AssessConfirmEntity)info.getData();
-                        if("0".equalsIgnoreCase(assessConfirmBean.IS_ABLE)){
+                        if("0".equalsIgnoreCase(assessConfirmBean.IS_OPEN)&&"0".equalsIgnoreCase(assessConfirmBean.IS_AGREEMENT)){
                             getProductMsg(stockCode, SubscriptionMoney);
                         }else {
                             Intent intent = new Intent();
@@ -503,7 +503,7 @@ public class OTC_SubscriptionActivity extends BaseActivity implements View.OnCli
     }
 
     private void getProductMsg(String stockCode, String subscriptionMoney) {
-        InterfaceCollection.getInstance().getProductMsg(mSession,stockCode,map.get("prodta_no") , subscriptionMoney, new InterfaceCollection.InterfaceCallback() {
+        InterfaceCollection.getInstance().getProductMsg("730201",mSession,stockCode,map.get("prodta_no") , subscriptionMoney, new InterfaceCollection.InterfaceCallback() {
             @Override
             public void callResult(ResultInfo info) {
                 String code = info.getCode();

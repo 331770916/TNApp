@@ -1131,7 +1131,16 @@ public class InterfaceCollection {
     /**
      * OTC认购获取判断是否跳转 确认书界面的 值
      */
-    public void getAffirm(final String stockCode, final String prodta_no, String session, final String SubscriptionMoney, final InterfaceCallback callback) {
+    /**
+     * OTC认购或申购获取判断是否跳转 确认书界面的 值
+     * @param requestType 3 申购 4认购
+     * @param stockCode
+     * @param prodta_no
+     * @param session
+     * @param SubscriptionMoney
+     * @param callback
+     */
+    public void getAffirm(final String requestType, final String stockCode, final String prodta_no, String session, final String SubscriptionMoney, final InterfaceCallback callback) {
         HashMap map1 = new HashMap();
         HashMap map2 = new HashMap();
         map2.put("SEC_ID","tpyzq");
@@ -1181,7 +1190,7 @@ public class InterfaceCollection {
                         assessConfirmBean.productcode = stockCode;
                         assessConfirmBean.productcompany = prodta_no;
                         assessConfirmBean.productprice = SubscriptionMoney;
-                        assessConfirmBean.type = "3";
+                        assessConfirmBean.type = requestType;
                         assessConfirmBean.IS_ABLE = is_ok;
                         assessConfirmBean.IS_AGREEMENT = is_agreement;
                         assessConfirmBean.IS_OPEN = is_open;
@@ -1210,7 +1219,7 @@ public class InterfaceCollection {
     /**
      * 认购
      */
-    public void getProductMsg(String session, String stockCode, String prodta_no, String SubscriptionMoney, final InterfaceCallback callback){
+    public void getProductMsg(String funcid,String session, String stockCode, String prodta_no, String SubscriptionMoney, final InterfaceCallback callback){
         HashMap map1 = new HashMap();
         HashMap map2 = new HashMap();
         map2.put("SEC_ID","tpyzq");
@@ -1218,7 +1227,8 @@ public class InterfaceCollection {
         map2.put("PRODTA_NO",prodta_no);
         map2.put("ENTRUST_BALANCE",SubscriptionMoney);
         map2.put("FLAG","true");
-        map1.put("funcid","730201");
+//        map1.put("funcid","730201");
+        map1.put("funcid",funcid);
         map1.put("token",session);
         map1.put("parms",map2);
         NetWorkUtil.getInstence().okHttpForPostString("730201", ConstantUtil.URL_JY, map1, new StringCallback() {
