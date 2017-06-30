@@ -87,6 +87,7 @@
 
 
         <LinearLayout
+            android:visibility="gone"
             android:layout_width="match_parent"
             android:layout_height="match_parent"
             android:layout_marginTop="@dimen/size10"
@@ -163,7 +164,7 @@
                 android:layout_height="match_parent"
                 android:layout_marginLeft="@dimen/size4"
                 android:layout_weight="0.5"
-                android:background="@drawable/captcha_button_pitchon"
+                android:background="@drawable/captcha_button_unchecked"
                 android:text="@string/sjzcText2"
                 android:textColor="@drawable/text_green_white_selector"
                 android:textSize="@dimen/size12" />
