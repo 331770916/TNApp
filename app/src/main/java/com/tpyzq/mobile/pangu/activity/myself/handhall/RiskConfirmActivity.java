@@ -5,7 +5,6 @@ import android.text.TextUtils;
 import android.view.View;
 import android.widget.Button;
 import android.widget.CheckBox;
-import android.widget.CompoundButton;
 import android.widget.ImageView;
 import android.widget.LinearLayout;
 import android.widget.TextView;
@@ -17,10 +16,8 @@ import com.tpyzq.mobile.pangu.data.FundDataEntity;
 import com.tpyzq.mobile.pangu.data.FundSubsEntity;
 import com.tpyzq.mobile.pangu.data.ResultInfo;
 import com.tpyzq.mobile.pangu.http.OkHttpUtil;
-import com.tpyzq.mobile.pangu.util.ColorUtils;
 import com.tpyzq.mobile.pangu.util.Helper;
 import com.tpyzq.mobile.pangu.util.SpUtils;
-import com.tpyzq.mobile.pangu.view.dialog.CancelDialog;
 import com.tpyzq.mobile.pangu.view.dialog.MistakeDialog;
 
 import java.util.HashMap;
@@ -146,22 +143,23 @@ public class RiskConfirmActivity extends BaseActivity implements View.OnClickLis
         if ("0".equalsIgnoreCase(elig_risk_flag)&& !TextUtils.isEmpty(eligRiskFlagInfo)) {
             sb.append("·"+eligRiskFlagInfo);
         }
-        String elig_term_flag = resultMap.get("ELIG_TERM_FLAG");//投资周期匹配标志
-        String elig_term_flag_info = resultMap.get("ELIG_TERM_FLAG_INFO");//投资品种标志描述
-        if ("0".equalsIgnoreCase(elig_term_flag) && !TextUtils.isEmpty(elig_term_flag_info)) {
-            if (!TextUtils.isEmpty(sb.toString())){
-                sb.append("\r\n");
-            }
-            sb.append("·"+elig_term_flag_info);
-        }
-        String elig_investkind_flag = resultMap.get("ELIG_INVESTKIND_FLAG");//投资品种标志
-        String elig_investkind_flag_info = resultMap.get("ELIG_INVESTKIND_FLAG_INFO");//投资品种标志描述
-        if ("0".equalsIgnoreCase(elig_investkind_flag) && !TextUtils.isEmpty(elig_investkind_flag_info)) {
-            if (!TextUtils.isEmpty(sb.toString())){
-                sb.append("\r\n");
-            }
-            sb.append("·"+elig_investkind_flag_info);
-        }
+        //暂时只处理风险匹配信息，其他暂不考虑
+//        String elig_term_flag = resultMap.get("ELIG_TERM_FLAG");//投资周期匹配标志
+//        String elig_term_flag_info = resultMap.get("ELIG_TERM_FLAG_INFO");//投资品种标志描述
+//        if ("0".equalsIgnoreCase(elig_term_flag) && !TextUtils.isEmpty(elig_term_flag_info)) {
+//            if (!TextUtils.isEmpty(sb.toString())){
+//                sb.append("\r\n");
+//            }
+//            sb.append("·"+elig_term_flag_info);
+//        }
+//        String elig_investkind_flag = resultMap.get("ELIG_INVESTKIND_FLAG");//投资品种标志
+//        String elig_investkind_flag_info = resultMap.get("ELIG_INVESTKIND_FLAG_INFO");//投资品种标志描述
+//        if ("0".equalsIgnoreCase(elig_investkind_flag) && !TextUtils.isEmpty(elig_investkind_flag_info)) {
+//            if (!TextUtils.isEmpty(sb.toString())){
+//                sb.append("\r\n");
+//            }
+//            sb.append("·"+elig_investkind_flag_info);
+//        }
         tv_response.setText(sb.toString().trim());
 
 //        if ("0".equalsIgnoreCase(elig_risk_flag)||"0".equalsIgnoreCase(elig_investkind_flag)||"0".equalsIgnoreCase(elig_term_flag)) {//不匹配
