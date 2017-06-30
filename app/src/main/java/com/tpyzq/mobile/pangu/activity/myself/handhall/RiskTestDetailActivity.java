@@ -191,20 +191,18 @@ public class RiskTestDetailActivity extends BaseActivity implements View.OnClick
 
                                     if ("0".equals(question_kind)) {
                                         if (answer_history.contains("" + j)) {
-                                            sb.append("<img src=\"file:///android_res/mipmap/ic_launcher.png\" style=\"margin-right:10px\"/><span>");
+                                            sb.append("<img src=\"file:///android_res/mipmap/risk_radio_n.png\" style=\"margin-right:10px\"/><span>");
                                         } else {
-                                            sb.append("<img src=\"file:///android_res/mipmap/ic_launcher.png\" style=\"margin-right:10px\"/><span>");
+                                            sb.append("<img src=\"file:///android_res/mipmap/risk_radio_p.png\" style=\"margin-right:10px\"/><span>");
                                         }
 
                                     } else {
 
                                         if (answer_history.contains("" + j)) {
-                                            sb.append("<img src=\"file:///android_res/mipmap/ic_launcher.png\" style=\"margin-right:10px\"/><span>");
+                                            sb.append("<img src=\"file:///android_res/mipmap/risk_check_p.png\" style=\"margin-right:10px\"/><span>");
                                         } else {
-                                            sb.append("<img src=\"file:///android_res/mipmap/ic_launcher.png\" style=\"margin-right:10px\"/><span>");
+                                            sb.append("<img src=\"file:///android_res/mipmap/risk_check_n.png\" style=\"margin-right:10px\"/><span>");
                                         }
-
-
                                     }
 
 
