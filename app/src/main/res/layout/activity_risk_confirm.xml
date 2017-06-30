@@ -52,7 +52,6 @@
                 android:layout_height="wrap_content"
                 android:gravity="center"
                 android:padding="@dimen/size15"
-                android:text="@string/RiskConfirmTitle"
                 android:textSize="@dimen/txtSize20" />
 
             <LinearLayout

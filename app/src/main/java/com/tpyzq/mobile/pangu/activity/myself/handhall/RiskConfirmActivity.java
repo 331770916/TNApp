@@ -43,12 +43,16 @@ public class RiskConfirmActivity extends BaseActivity implements View.OnClickLis
     private String from;
     private HashMap<String, String> resultMap;
     private boolean isMatch = true;
+    private static String OK_RESULT = "适当性评估结果确认书";
+    private static String ERROR_RESULT = "金融产品或金融服务不适当警示\n及客户投资确认书";
+    private TextView Headline;//页面标题
 
     @Override
     public void initView() {
         AGpublish_back = (ImageView)findViewById(R.id.AGpublish_back);//返回按钮
         AGpublish_back.setOnClickListener(this);
         tv_risk_level = (TextView)findViewById(R.id.tv_risk_level);//风险测评等级
+        Headline = (TextView) findViewById(R.id.Headline);//风险测评等级
         tv_product_level = (TextView)findViewById(R.id.tv_product_level);//产品风险等级
         ll_response = (LinearLayout)findViewById(R.id.ll_response);//不匹配原因大布局
         tv_result = (TextView)findViewById(R.id.tv_result);//不匹配项
@@ -164,12 +168,14 @@ public class RiskConfirmActivity extends BaseActivity implements View.OnClickLis
 
 //        if ("0".equalsIgnoreCase(elig_risk_flag)||"0".equalsIgnoreCase(elig_investkind_flag)||"0".equalsIgnoreCase(elig_term_flag)) {//不匹配
         if ("0".equalsIgnoreCase(elig_risk_flag)) {//不匹配
+            Headline.setText(ERROR_RESULT);
             isMatch = false;
             tv_result.setTextColor(Color.parseColor("#d0011b"));
             tv_result.setText("不匹配");//匹配状态
             ll_response.setVisibility(View.VISIBLE);
             tv_warn.setVisibility(View.VISIBLE);
         } else {
+            Headline.setText(OK_RESULT);
             isMatch = true;
             tv_result.setTextColor(Color.parseColor("#28a946"));
             tv_result.setText("匹配");//匹配状态

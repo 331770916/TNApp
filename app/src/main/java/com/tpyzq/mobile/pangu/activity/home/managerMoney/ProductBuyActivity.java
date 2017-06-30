@@ -695,9 +695,15 @@ public class ProductBuyActivity extends BaseActivity implements View.OnClickList
                 if (TextUtils.isEmpty(fund_status)) {
                     return;
                 }
-                fundCompany = fundDataEntity.data.get(0).FUND_COMPANY;
-                fundcode = fundDataEntity.data.get(0).FUND_CODE;
-                requestCode = REQUEST_CODE_REN;
+                if ("0".equalsIgnoreCase(fund_status)) {
+                    fundCompany = fundDataEntity.data.get(0).FUND_COMPANY;
+                    fundcode = fundDataEntity.data.get(0).FUND_CODE;
+                    requestCode = REQUEST_CODE_SHEN;
+                } else {
+                    fundCompany = fundDataEntity.data.get(0).FUND_COMPANY;
+                    fundcode = fundDataEntity.data.get(0).FUND_CODE;
+                    requestCode = REQUEST_CODE_REN;
+                }
                 break;
             case "2":
                 if (TextUtils.isEmpty(fund_status)) {
@@ -712,7 +718,7 @@ public class ProductBuyActivity extends BaseActivity implements View.OnClickList
                     case "1"://认购
                         fundCompany = fundDataEntity.data.get(0).FUND_COMPANY;
                         fundcode = fundDataEntity.data.get(0).FUND_CODE;
-                        requestCode = REQUEST_CODE_SHEN;
+                        requestCode = REQUEST_CODE_REN;
                         break;
                 }
                 break;
