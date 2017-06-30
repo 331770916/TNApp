@@ -1,7 +1,6 @@
 package com.tpyzq.mobile.pangu.activity.trade.open_fund;
 
 import android.content.Intent;
-import android.graphics.Color;
 import android.os.Bundle;
 import android.text.Editable;
 import android.text.TextUtils;
@@ -17,7 +16,6 @@ import com.google.gson.Gson;
 import com.tpyzq.mobile.pangu.R;
 import com.tpyzq.mobile.pangu.activity.myself.handhall.RiskConfirmActivity;
 import com.tpyzq.mobile.pangu.activity.myself.handhall.RiskEvaluationActivity;
-import com.tpyzq.mobile.pangu.activity.myself.login.ChangeAccoutActivity;
 import com.tpyzq.mobile.pangu.activity.myself.login.TransactionLoginActivity;
 import com.tpyzq.mobile.pangu.base.BaseActivity;
 import com.tpyzq.mobile.pangu.base.InterfaceCollection;
@@ -307,13 +305,14 @@ public class FundSubsActivity extends BaseActivity implements View.OnClickListen
                                     public void onPositiveClick() {}
                                 },null);
                                 return;
-                            } else {
-                                //可以委托 判断是否需要视频录制
-                                if ("1".equalsIgnoreCase(resultMap.get("NEED_VIDEO_FLAG"))) {
-                                    CancelDialog.cancleDialog(FundSubsActivity.this,"尊敬的客户:\n根据证监会《证券期货投资者适当性管理办法》，您购买的产品在购买过程中需要通过录音录像进行确认，请到营业部办理",4000,null,null);
-                                    return;
-                                }
                             }
+//                            else {
+//                                //可以委托 判断是否需要视频录制
+//                                if ("1".equalsIgnoreCase(resultMap.get("NEED_VIDEO_FLAG"))) {
+//                                    CancelDialog.cancleDialog(FundSubsActivity.this,"尊敬的客户:\n根据证监会《证券期货投资者适当性管理办法》，您购买的产品在购买过程中需要通过录音录像进行确认，请到营业部办理",4000,null,null);
+//                                    return;
+//                                }
+//                            }
                             //跳转到适用性页面
                             Intent intent = new Intent(FundSubsActivity.this, RiskConfirmActivity.class);
                             intent.putExtra("resultMap",resultMap);

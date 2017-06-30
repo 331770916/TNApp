@@ -23,7 +23,6 @@ import com.tpyzq.mobile.pangu.activity.myself.handhall.RiskConfirmActivity;
 import com.tpyzq.mobile.pangu.activity.myself.handhall.RiskEvaluationActivity;
 import com.tpyzq.mobile.pangu.activity.myself.login.TransactionLoginActivity;
 import com.tpyzq.mobile.pangu.activity.trade.open_fund.AssessConfirmActivity;
-import com.tpyzq.mobile.pangu.activity.trade.open_fund.FundPurchaseActivity;
 import com.tpyzq.mobile.pangu.base.BaseActivity;
 import com.tpyzq.mobile.pangu.base.InterfaceCollection;
 import com.tpyzq.mobile.pangu.data.AssessConfirmEntity;
@@ -39,7 +38,6 @@ import com.tpyzq.mobile.pangu.util.Helper;
 import com.tpyzq.mobile.pangu.util.SpUtils;
 import com.tpyzq.mobile.pangu.util.panguutil.UserUtil;
 import com.tpyzq.mobile.pangu.view.dialog.CancelDialog;
-import com.tpyzq.mobile.pangu.view.dialog.FundPurchaseDialog;
 import com.tpyzq.mobile.pangu.view.dialog.LoadingDialog;
 import com.tpyzq.mobile.pangu.view.dialog.MistakeDialog;
 import com.tpyzq.mobile.pangu.view.dialog.OTC_SubscriptionDialog;
@@ -481,13 +479,14 @@ public class OTC_SubscriptionActivity extends BaseActivity implements View.OnCli
                             public void onPositiveClick() {}
                         },null);
                         return;
-                    } else {
-                        //可以委托 判断是否需要视频录制
-                        if ("1".equalsIgnoreCase(resultMap.get("NEED_VIDEO_FLAG"))) {
-                            CancelDialog.cancleDialog(OTC_SubscriptionActivity.this,"尊敬的客户:\n根据证监会《证券期货投资者适当性管理办法》，您购买的产品在购买过程中需要通过录音录像进行确认，请到营业部办理",4000,null,null);
-                            return;
-                        }
                     }
+//                    else {
+//                        //可以委托 判断是否需要视频录制
+//                        if ("1".equalsIgnoreCase(resultMap.get("NEED_VIDEO_FLAG"))) {
+//                            CancelDialog.cancleDialog(OTC_SubscriptionActivity.this,"尊敬的客户:\n根据证监会《证券期货投资者适当性管理办法》，您购买的产品在购买过程中需要通过录音录像进行确认，请到营业部办理",4000,null,null);
+//                            return;
+//                        }
+//                    }
                     //跳转到适用性页面
                     Intent intent = new Intent(OTC_SubscriptionActivity.this, RiskConfirmActivity.class);
                     intent.putExtra("resultMap",resultMap);

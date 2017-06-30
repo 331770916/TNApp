@@ -518,13 +518,15 @@ public class OTC_SubscribeActivity extends BaseActivity implements View.OnClickL
                             public void onPositiveClick() {}
                         },null);
                         return;
-                    } else {
-                        //可以委托 判断是否需要视频录制
-                        if ("1".equalsIgnoreCase(resultMap.get("NEED_VIDEO_FLAG"))) {
-                            CancelDialog.cancleDialog(OTC_SubscribeActivity.this,"尊敬的客户:\n根据证监会《证券期货投资者适当性管理办法》，您购买的产品在购买过程中需要通过录音录像进行确认，请到营业部办理",4000,null,null);
-                            return;
-                        }
                     }
+                    //双录也暂时不做判断
+//                    else {
+//                        //可以委托 判断是否需要视频录制
+//                        if ("1".equalsIgnoreCase(resultMap.get("NEED_VIDEO_FLAG"))) {
+//                            CancelDialog.cancleDialog(OTC_SubscribeActivity.this,"尊敬的客户:\n根据证监会《证券期货投资者适当性管理办法》，您购买的产品在购买过程中需要通过录音录像进行确认，请到营业部办理",4000,null,null);
+//                            return;
+//                        }
+//                    }
                     //跳转到适用性页面
                     Intent intent = new Intent(OTC_SubscribeActivity.this, RiskConfirmActivity.class);
                     intent.putExtra("resultMap",resultMap);
