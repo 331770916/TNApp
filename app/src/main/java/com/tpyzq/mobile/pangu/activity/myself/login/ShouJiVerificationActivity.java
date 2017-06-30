@@ -2,7 +2,6 @@ package com.tpyzq.mobile.pangu.activity.myself.login;
 
 import android.app.Dialog;
 import android.content.Intent;
-import android.graphics.Bitmap;
 import android.graphics.Color;
 import android.graphics.Paint;
 import android.os.CountDownTimer;
@@ -15,16 +14,13 @@ import android.widget.EditText;
 import android.widget.LinearLayout;
 import android.widget.TextView;
 
-import com.facebook.drawee.view.SimpleDraweeView;
 import com.tpyzq.mobile.pangu.R;
 import com.tpyzq.mobile.pangu.base.BaseActivity;
-import com.tpyzq.mobile.pangu.base.CustomApplication;
 import com.tpyzq.mobile.pangu.data.UserEntity;
 import com.tpyzq.mobile.pangu.db.Db_PUB_USERS;
 import com.tpyzq.mobile.pangu.http.NetWorkUtil;
 import com.tpyzq.mobile.pangu.log.LogUtil;
 import com.tpyzq.mobile.pangu.util.ConstantUtil;
-import com.tpyzq.mobile.pangu.util.DeviceUtil;
 import com.tpyzq.mobile.pangu.util.Helper;
 import com.tpyzq.mobile.pangu.util.keyboard.KeyEncryptionUtils;
 import com.tpyzq.mobile.pangu.util.panguutil.UserUtil;
@@ -62,8 +58,6 @@ public class ShouJiVerificationActivity extends BaseActivity implements View.OnC
     private String mIdentify = "";
     private int pageIndex = 0;
     private String destnumber, verifycode;
-    private EditText mImage_et;
-    private SimpleDraweeView mSecurityCode;
 
     @Override
     public void initView() {
@@ -84,11 +78,6 @@ public class ShouJiVerificationActivity extends BaseActivity implements View.OnC
 
         mSoundtv = (TextView) findViewById(R.id.Soundtv);
         LL_Marked = (LinearLayout) findViewById(R.id.LinearLayout_Marked);
-
-        //填写图片验证码
-        mImage_et = (EditText) findViewById(R.id.etImage);
-        //图片验证码
-        mSecurityCode = (SimpleDraweeView) findViewById(R.id.SecurityCode);
         EditTextMonitor();
 
     }
@@ -102,82 +91,23 @@ public class ShouJiVerificationActivity extends BaseActivity implements View.OnC
         mSJYZ_ET.setOnClickListener(this);
         mSJYZCaptchabtn.setOnClickListener(this);
         mSoundtv.setOnClickListener(this);
-        mSecurityCode.setOnClickListener(this);
         mSJYZNumber.addTextChangedListener(new MyTextWatcher());
         mSJYZ_ET.addTextChangedListener(new MyTextWatcher());
-        mImage_et.addTextChangedListener(new MyTextWatcher());
 
         mSoundtv.getPaint().setFlags(Paint.UNDERLINE_TEXT_FLAG);//下划线
-        mSJYZCaptchabtn.setClickable(false);
-
-        requestData();
-    }
-
-    //获取图片验证码
-    private void requestData() {
-        ImageVerification();
-    }
-
-    private void ImageVerification() {
-        HashMap map = new HashMap();
-        map.put("equipment", DeviceUtil.getDeviceId(CustomApplication.getContext()));
-        NetWorkUtil.getInstence().okHttpForGet(TAG, ConstantUtil.SecurityIps + "/note/getImage", map, new StringCallback() {
-            @Override
-            public void onError(Call call, Exception e, int id) {
-                Helper.getInstance().showToast(ShouJiVerificationActivity.this, "网络异常");
-                mSecurityCode.setImageResource(R.mipmap.ic_again);
-            }
-
-            @Override
-            public void onResponse(String response, int id) {
-                try {
-                    JSONObject jsonObject = new JSONObject(response);
-
-                    String code = jsonObject.getString("code");
-
-                    String type = jsonObject.getString("type");
-                    if ("0".equals(code)) {
-                        String message = jsonObject.getString("message");
-                        Bitmap bitmap = Helper.base64ToBitmap(message);
-                        mSecurityCode.setImageBitmap(bitmap);
-                        mSecurityCode.setAspectRatio(3.2f);
-                    } else {
-                        Helper.getInstance().showToast(ShouJiVerificationActivity.this, type.toString());
-                    }
-                } catch (JSONException e) {
-                    e.printStackTrace();
-                }
-            }
-        });
     }
 
     /**
      * 注册按钮状态
      */
     private void initButtonshow() {
-        if (TextUtils.isEmpty(mSJYZNumber.getText().toString())) {
+        if (mSJYZNumber.getText().toString().equals("")) {
             mSJYZLogIn.setBackgroundResource(R.drawable.button_login_unchecked);
             mSJYZLogIn.setTextColor(Color.parseColor("#ffffffff"));
-            mSJYZCaptchabtn.setClickable(false);
-            mSJYZCaptchabtn.setTextColor(Color.parseColor("#87bd43"));
-            mSJYZCaptchabtn.setBackgroundResource(R.drawable.captcha_button_pitchon);
-
-        } else if (TextUtils.isEmpty(mImage_et.getText().toString())) {
-            mSJYZCaptchabtn.setClickable(false);
-            mSJYZCaptchabtn.setTextColor(Color.parseColor("#87bd43"));
-            mSJYZCaptchabtn.setBackgroundResource(R.drawable.captcha_button_pitchon);
-
+        } else if (mSJYZ_ET.getText().toString().equals("")) {
             mSJYZLogIn.setBackgroundResource(R.drawable.button_login_unchecked);
             mSJYZLogIn.setTextColor(Color.parseColor("#ffffffff"));
-        } else if (TextUtils.isEmpty(mSJYZ_ET.getText().toString())) {
-            if (!mCaptchabtnState) {
-                mSJYZCaptchabtn.setClickable(true);
-                mSJYZCaptchabtn.setBackgroundResource(R.drawable.captcha_button_unchecked);
-                mSJYZCaptchabtn.setTextColor(Color.parseColor("#FFFFFF"));
-            }
-            mSJYZLogIn.setBackgroundResource(R.drawable.button_login_unchecked);
-            mSJYZLogIn.setTextColor(Color.parseColor("#ffffffff"));
-        } else if (!mCaptchabtnState) {
+        } else if (mCaptchabtnState == false) {
             mSJYZLogIn.setBackgroundResource(R.drawable.button_login_unchecked);
             mSJYZLogIn.setTextColor(Color.parseColor("#ffffffff"));
         } else {
@@ -204,7 +134,6 @@ public class ShouJiVerificationActivity extends BaseActivity implements View.OnC
     public void onClick(View v) {
         String SJYZNumber = mSJYZNumber.getText().toString().trim();
         String SJYZ_ET = mSJYZ_ET.getText().toString().trim();
-        String mImage_str = mImage_et.getText().toString().trim();
         switch (v.getId()) {
             case R.id.SJYZ_back:
                 finish();
@@ -237,17 +166,12 @@ public class ShouJiVerificationActivity extends BaseActivity implements View.OnC
                     if (mLoadingDialog != null) {
                         mLoadingDialog.dismiss();
                     }
-                    Helper.getInstance().showToast(this, "请输手机短信入验证码");
+                    Helper.getInstance().showToast(this, "请输入验证码");
                 } else if (SJYZNumber.equals("")) {
                     if (mLoadingDialog != null) {
                         mLoadingDialog.dismiss();
                     }
                     Helper.getInstance().showToast(this, "请输入手机号");
-                } else if (mImage_str.equals("")) {
-                    if (mLoadingDialog != null) {
-                        mLoadingDialog.dismiss();
-                    }
-                    Helper.getInstance().showToast(this, "请输入验证码");
                 } else if (!Helper.isMobileNO(SJYZNumber)) {
                     if (mLoadingDialog != null) {
                         mLoadingDialog.dismiss();
@@ -255,12 +179,10 @@ public class ShouJiVerificationActivity extends BaseActivity implements View.OnC
                     Helper.getInstance().showToast(this, "请输入正确的手机号");
                 } else {
                     mSJYZLogIn.setEnabled(false);
-                    toConnect();
+                    Validatio();
+
+                    break;
                 }
-                break;
-            case R.id.SecurityCode:
-                ImageVerification();
-                break;
         }
     }
 
@@ -270,11 +192,9 @@ public class ShouJiVerificationActivity extends BaseActivity implements View.OnC
     private void HTTPVSound() {
         time1.start();
         HashMap map = new HashMap();
-        map.put("equipment", DeviceUtil.getDeviceId(CustomApplication.getContext()));
         map.put("phone", mSJYZNumber.getText().toString().trim());
-        map.put("auth", mImage_et.getText().toString().trim());
 
-        NetWorkUtil.getInstence().okHttpForGet(TAG, ConstantUtil.SecurityIps+"/note/imgAuthVoice?=&=&=", map, new StringCallback() {
+        NetWorkUtil.getInstence().okHttpForGet(TAG, ConstantUtil.URL_YY, map, new StringCallback() {
             @Override
             public void onError(Call call, Exception e, int id) {
                 LogUtil.e(TAG, e.toString());
@@ -283,8 +203,6 @@ public class ShouJiVerificationActivity extends BaseActivity implements View.OnC
                 mSound.setText(getString(R.string.sjzcText6));
                 mSoundtv.setText("重发语音");
                 Helper.getInstance().showToast(ShouJiVerificationActivity.this, "网络异常");
-                mImage_et.setText("");
-                ImageVerification();
             }
 
             @Override
@@ -295,7 +213,7 @@ public class ShouJiVerificationActivity extends BaseActivity implements View.OnC
                 try {
                     JSONObject jsonObject = new JSONObject(response);
                     String code = jsonObject.getString("code");
-                    if ("0".equals(code)) {
+                    if ("200".equals(code)) {
 //                        JSONObject message = jsonObject.getJSONObject("message");
 //                        String destnumber = message.getString("destnumber");
 //                        String mVerifycode = message.getString("verifycode");
@@ -308,8 +226,6 @@ public class ShouJiVerificationActivity extends BaseActivity implements View.OnC
                                 mSoundtv.setClickable(true);
                                 mSound.setText(getString(R.string.sjzcText6));
                                 mSoundtv.setText("重发语音");
-                                mImage_et.setText("");
-                                ImageVerification();
                             }
                         });
                     }
@@ -328,10 +244,8 @@ public class ShouJiVerificationActivity extends BaseActivity implements View.OnC
     private void HTTPVerificationCode() {
         time.start();
         HashMap map = new HashMap();
-        map.put("equipment", DeviceUtil.getDeviceId(CustomApplication.getContext()));
         map.put("phone", mSJYZNumber.getText().toString().trim());
-        map.put("auth", mImage_et.getText().toString().trim());
-        NetWorkUtil.getInstence().okHttpForGet(TAG, ConstantUtil.SecurityIps+"/note/imgAuthSms", map, new StringCallback() {
+        NetWorkUtil.getInstence().okHttpForGet(TAG, ConstantUtil.URL_SJYZM, map, new StringCallback() {
             @Override
             public void onError(Call call, Exception e, int id) {
                 LogUtil.e("手机短信", e.toString());
@@ -341,8 +255,6 @@ public class ShouJiVerificationActivity extends BaseActivity implements View.OnC
                 mSJYZCaptchabtn.setClickable(true);
                 mSJYZCaptchabtn.setBackgroundResource(R.drawable.captcha_button_unchecked);
                 mSJYZCaptchabtn.setTextColor(Color.parseColor("#FFFFFF"));
-                mImage_et.setText("");
-                ImageVerification();
             }
 
             @Override
@@ -353,7 +265,7 @@ public class ShouJiVerificationActivity extends BaseActivity implements View.OnC
                 try {
                     JSONObject jsonObject = new JSONObject(response);
                     String code = jsonObject.getString("code");
-                    if ("0".equals(code)) {
+                    if ("200".equals(code)) {
 //                        Helper.getInstance().showToast(ShouJiZhuCe.this,"发送短信成功");
                     } else {
                         MistakeDialog.showDialog("验证码获取失败", ShouJiVerificationActivity.this, new MistakeDialog.MistakeDialgoListener() {
@@ -364,8 +276,6 @@ public class ShouJiVerificationActivity extends BaseActivity implements View.OnC
                                 mSJYZCaptchabtn.setClickable(true);
                                 mSJYZCaptchabtn.setBackgroundResource(R.drawable.captcha_button_unchecked);
                                 mSJYZCaptchabtn.setTextColor(Color.parseColor("#FFFFFF"));
-                                mImage_et.setText("");
-                                ImageVerification();
                             }
                         });
                     }
@@ -378,7 +288,7 @@ public class ShouJiVerificationActivity extends BaseActivity implements View.OnC
     }
 
     /**
-     * 手机短信验证码倒计时
+     * 手机获取验证码倒计时
      */
     class TimeCount extends CountDownTimer {
 
@@ -393,8 +303,6 @@ public class ShouJiVerificationActivity extends BaseActivity implements View.OnC
             mSJYZCaptchabtn.setBackgroundResource(R.drawable.captcha_button_unchecked);
             mSJYZCaptchabtn.setTextColor(Color.parseColor("#FFFFFF"));
             LL_Marked.setVisibility(View.VISIBLE);
-            mImage_et.setText("");
-            ImageVerification();
         }
 
         @Override
@@ -421,8 +329,6 @@ public class ShouJiVerificationActivity extends BaseActivity implements View.OnC
             mSoundtv.setClickable(true);
             mSound.setText(getString(R.string.sjzcText6));
             mSoundtv.setText("重发语音");
-            mImage_et.setText("");
-            ImageVerification();
         }
 
         @Override
@@ -435,15 +341,67 @@ public class ShouJiVerificationActivity extends BaseActivity implements View.OnC
 
 
     /**
+     * 验证码效验
+     */
+    private void Validatio() {
+        HashMap map = new HashMap();
+        map.put("phone", mSJYZNumber.getText().toString().trim());
+        map.put("auth", mSJYZ_ET.getText().toString().trim());
+        NetWorkUtil.getInstence().okHttpForGet(TAG, ConstantUtil.URL_VALIDATION, map, new StringCallback() {
+            @Override
+            public void onError(Call call, Exception e, int id) {
+                LogUtil.e("验证码效验", e.toString());
+                if (mLoadingDialog != null) {
+                    mLoadingDialog.dismiss();
+                }
+                mSJYZLogIn.setEnabled(true);
+                Helper.getInstance().showToast(ShouJiVerificationActivity.this, ConstantUtil.NETWORK_ERROR);
+            }
+
+            @Override
+            public void onResponse(String response, int id) {
+                if (TextUtils.isEmpty(response)) {
+                    return;
+                }
+                try {
+                    JSONObject jsonObject = new JSONObject(response);
+                    String code = jsonObject.getString("code");
+                    String type = jsonObject.getString("type");
+                    String message = jsonObject.getString("message");
+                    if ("200".equals(code)) {
+                        toConnect();
+                    } else {
+                        if (mLoadingDialog != null) {
+                            mLoadingDialog.dismiss();
+                        }
+                        mSJYZLogIn.setEnabled(true);
+                        Helper.getInstance().showToast(ShouJiVerificationActivity.this, message);
+                    }
+
+                } catch (JSONException e) {
+                    e.printStackTrace();
+                }
+            }
+        });
+
+    }
+
+
+    /**
      * 绑定手机号
      */
     private void toConnect() {
-         HashMap map = new HashMap();
-        map.put("phone",mSJYZNumber.getText().toString().trim());
-        map.put("user_account",UserUtil.userId);
-        map.put("user_type",KeyEncryptionUtils.getInstance().Typescno());
+        final HashMap map = new HashMap();
+        HashMap map1 = new HashMap();
+        map.put("funcid", "800101");
+        map.put("token", "");
+        map.put("parms", map1);
+        map1.put("user_type", KeyEncryptionUtils.getInstance().Typescno());
+        map1.put("user_account", UserUtil.userId);
+        map1.put("phone", mSJYZNumber.getText().toString().trim());
 
-        NetWorkUtil.getInstence().okHttpForGet("", ConstantUtil.SecurityIps+"/note/WXBinding", map, new StringCallback() {
+
+        NetWorkUtil.getInstence().okHttpForPostString("", ConstantUtil.URL_SJZCBD, map, new StringCallback() {
             @Override
             public void onError(Call call, Exception e, int id) {
                 LogUtil.e("", e.toString());
@@ -480,13 +438,13 @@ public class ShouJiVerificationActivity extends BaseActivity implements View.OnC
                         } else {
                             SuccessDialog.showDialog("验证成功", ShouJiVerificationActivity.this);
                         }
-                        LogUtil.e(TAG, jsonObject.getString("message"));
+                        LogUtil.e(TAG, jsonObject.getString("msg"));
                     } else {
                         mSJYZLogIn.setEnabled(true);
                         if (mLoadingDialog != null) {
                             mLoadingDialog.dismiss();
                         }
-                        MistakeDialog.showDialog(jsonObject.getString("message"), ShouJiVerificationActivity.this);
+                        MistakeDialog.showDialog(jsonObject.getString("msg"), ShouJiVerificationActivity.this);
 //                        Helper.getInstance().showToast(ShouJiVerification.this, jsonObject.getString("msg").toString());
 //                        LogUtil.e(TAG, FileUtil.URL_SJZCBD + "{" + map.toString() + "}");
 //                        LogUtil.e(TAG, jsonObject.getInt("code") + jsonObject.getString("msg"));
@@ -510,7 +468,6 @@ public class ShouJiVerificationActivity extends BaseActivity implements View.OnC
 
         @Override
         public void onTextChanged(CharSequence s, int start, int before, int count) {
-
         }
 
         @Override
