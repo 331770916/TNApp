@@ -72,7 +72,7 @@ public class OptionalFundActivity extends BaseActivity implements View.OnClickLi
         fundSubsBeans = new ArrayList<FundSubsEntity>();
         optionalFundAdapter = new OptionalFundAdapter(this);
         tv_text1.setText("名称");
-        tv_text2.setText("净值/最低资产");
+        tv_text2.setText("净值/最低投资");
         tv_text3.setText("风险等级");
         tv_text4.setText("状态");
         iv_back.setOnClickListener(this);
