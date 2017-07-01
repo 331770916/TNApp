@@ -263,7 +263,7 @@ public class FundPurchaseActivity extends BaseActivity implements View.OnClickLi
                     } else if ("-6".equals(code)) {
                         FundPurchaseActivity.this.startActivity(new Intent(FundPurchaseActivity.this, TransactionLoginActivity.class));
                     } else {
-                        MistakeDialog.showDialog(response, (Activity) FundPurchaseActivity.this);
+                        MistakeDialog.showDialog(msg, (Activity) FundPurchaseActivity.this);
                     }
                 } catch (JSONException e) {
                     e.printStackTrace();
