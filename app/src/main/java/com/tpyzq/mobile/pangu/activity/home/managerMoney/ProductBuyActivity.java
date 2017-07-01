@@ -724,7 +724,7 @@ public class ProductBuyActivity extends BaseActivity implements View.OnClickList
                 break;
             case "3":
                 prodta_no =otcDataEntity.PRODTA_NO;
-                prod_code = fundcode;
+                prod_code = otcDataEntity.PROD_CODE;
                 requestCode = REQUEST_CODE_OTC;
                 break;
         }
