@@ -4,7 +4,6 @@ import android.app.Activity;
 import android.app.ActivityManager;
 import android.content.ComponentName;
 import android.content.Context;
-import android.content.Intent;
 import android.content.res.AssetManager;
 import android.graphics.Bitmap;
 import android.graphics.BitmapFactory;
@@ -22,11 +21,6 @@ import android.view.inputmethod.InputMethodManager;
 import android.widget.EditText;
 import android.widget.Toast;
 
-import com.tpyzq.mobile.pangu.activity.myself.account.FinancialLifeActivity;
-import com.tpyzq.mobile.pangu.activity.myself.handhall.RiskConfirmActivity;
-import com.tpyzq.mobile.pangu.activity.myself.handhall.RiskEvaluationActivity;
-import com.tpyzq.mobile.pangu.activity.myself.login.ChangeAccoutActivity;
-import com.tpyzq.mobile.pangu.activity.trade.open_fund.FundSubsActivity;
 import com.tpyzq.mobile.pangu.base.CustomApplication;
 import com.tpyzq.mobile.pangu.data.StockInfoEntity;
 import com.tpyzq.mobile.pangu.db.Db_PUB_USERS;
@@ -1201,16 +1195,17 @@ public class Helper {
     }
 
     public static String StringToDateYMD(String dateStr, String dateFormatStr, String formatStr) {
-        DateFormat sdf = new SimpleDateFormat(dateFormatStr);
+       String nDate = dateStr ;
         Date date = null;
         try {
+            DateFormat sdf = new SimpleDateFormat(dateFormatStr);
             date = sdf.parse(dateStr);
+            SimpleDateFormat s = new SimpleDateFormat(formatStr);
+            nDate = s.format(date);
         } catch (ParseException e) {
             e.printStackTrace();
         }
-        SimpleDateFormat s = new SimpleDateFormat(formatStr);
-
-        return s.format(date);
+        return nDate ;
     }
 
     /**
@@ -1235,16 +1230,17 @@ public class Helper {
     }
 
     public static String StringToDateY_M_D(String dateStr, String dateFormatStr, String formatStr) {
-        DateFormat sdf = new SimpleDateFormat(dateFormatStr);
+       String nDate = dateStr ;
         Date date = null;
         try {
+            DateFormat sdf = new SimpleDateFormat(dateFormatStr);
             date = sdf.parse(dateStr);
+            SimpleDateFormat s = new SimpleDateFormat(formatStr);
+            nDate = s.format(date);
         } catch (ParseException e) {
             e.printStackTrace();
         }
-        SimpleDateFormat s = new SimpleDateFormat(formatStr);
-
-        return s.format(date);
+        return nDate ;
     }
 
 
