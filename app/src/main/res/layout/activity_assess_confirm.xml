@@ -55,7 +55,7 @@
                 android:orientation="vertical">
                 <TextView
                     android:layout_width="match_parent"
-                    android:layout_height="@dimen/size15"
+                    android:layout_height="wrap_content"
                     android:textSize="@dimen/size15"
                     android:layout_marginTop="@dimen/size20"
                     android:textColor="#4d4d4d"

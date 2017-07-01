@@ -42,15 +42,26 @@
     </RelativeLayout>
     <RelativeLayout
         android:layout_width="match_parent"
-        android:layout_height="wrap_content"
+        android:layout_height="match_parent"
         android:background="@color/white"
         android:paddingLeft="15dp">
         <ListView
             android:id="@+id/lv_fund_product"
             android:layout_width="match_parent"
-            android:layout_height="wrap_content"
+            android:layout_height="match_parent"
             android:divider="@color/lineColor"
             android:dividerHeight="@dimen/size1" />
+
+
+        <ImageView
+            android:id="@+id/Null"
+            android:layout_width="wrap_content"
+            android:layout_height="wrap_content"
+            android:layout_centerInParent="true"
+            android:background="@mipmap/kong"
+            android:scaleType="center"
+            android:scaleX="0.9"
+            android:scaleY="0.9" />
     </RelativeLayout>
 
 </LinearLayout>

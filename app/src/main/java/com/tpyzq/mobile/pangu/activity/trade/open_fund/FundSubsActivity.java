@@ -249,7 +249,8 @@ public class FundSubsActivity extends BaseActivity implements View.OnClickListen
                         }
                     } else {
                         subsStatusBean = new Gson().fromJson(response, SubsStatusEntity.class);
-                        ToastUtils.showShort(FundSubsActivity.this, msg);
+//                        ToastUtils.showShort(FundSubsActivity.this, msg);
+                        MistakeDialog.showDialog(msg,FundSubsActivity.this);
                     }
 
                 } catch (JSONException e) {

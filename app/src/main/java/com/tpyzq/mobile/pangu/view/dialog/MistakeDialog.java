@@ -114,9 +114,9 @@ public class MistakeDialog {
                 closeDialog(dialog);
             }
         });
-        if (!Helper.isActivityRunning(activity,activity.getClass().getName())){
+        /*if (!Helper.isActivityRunning(activity,activity.getClass().getName())){
             return null;
-        }
+        }*/
         if (!activity.isFinishing()) {
             dialog.show();
         }

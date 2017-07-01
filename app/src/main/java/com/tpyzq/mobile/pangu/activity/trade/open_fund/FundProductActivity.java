@@ -22,10 +22,12 @@ public class FundProductActivity extends BaseActivity implements View.OnClickLis
     ListView lv_fund_product;
     ArrayList<FundEntity> fundBeens;
     FundProductAdapter fundProductAdapter;
+    private ImageView iv_null;
 
     @Override
     public void initView() {
         iv_back = (ImageView) findViewById(R.id.iv_back);
+        iv_null = (ImageView) findViewById(R.id.Null);
         lv_fund_product = (ListView) findViewById(R.id.lv_fund_product);
         initData();
     }
@@ -49,6 +51,11 @@ public class FundProductActivity extends BaseActivity implements View.OnClickLis
                 finish();
             }
         });
+        if (null==fundBeens || fundBeens.size()==0) {
+            iv_null.setVisibility(View.VISIBLE);
+        } else {
+            iv_null.setVisibility(View.GONE);
+        }
     }
     @Override
     public void onClick(View v) {
