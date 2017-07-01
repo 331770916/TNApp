@@ -17,6 +17,7 @@ import android.widget.TextView;
 import com.tpyzq.mobile.pangu.R;
 import com.tpyzq.mobile.pangu.activity.PdfActivity;
 import com.tpyzq.mobile.pangu.activity.home.managerMoney.BuyResultActivity;
+import com.tpyzq.mobile.pangu.activity.myself.handhall.AgreementActivity;
 import com.tpyzq.mobile.pangu.activity.myself.login.TransactionLoginActivity;
 import com.tpyzq.mobile.pangu.base.BaseActivity;
 import com.tpyzq.mobile.pangu.data.AssessConfirmEntity;
@@ -416,8 +417,12 @@ public class AssessConfirmActivity extends BaseActivity implements View.OnClickL
                     JSONObject object = new JSONObject(response);
                     String code = object.getString("code");
                     String msg = object.getString("msg");
-                    if (code.equals("0")) {
+                    if ("0".equalsIgnoreCase(code)) {
                         startFinish("0");
+                    } else if ("-6".equalsIgnoreCase(code)) {
+                        startActivity(new Intent(AssessConfirmActivity.this, TransactionLoginActivity.class));
+                    } else if ("400".equalsIgnoreCase(code)) {
+                        startActivity(new Intent(AssessConfirmActivity.this, AgreementActivity.class));
                     } else {
                         MistakeDialog.showDialog(msg, AssessConfirmActivity.this, error_back);
                     }
@@ -473,8 +478,12 @@ public class AssessConfirmActivity extends BaseActivity implements View.OnClickL
                     JSONObject object = new JSONObject(response);
                     String code = object.getString("code");
                     String msg = object.getString("msg");
-                    if (code.equals("0")) {
+                    if ("0".equalsIgnoreCase(code)) {
                         startFinish("0");
+                    } else if ("-6".equalsIgnoreCase(code)) {
+                        startActivity(new Intent(AssessConfirmActivity.this, TransactionLoginActivity.class));
+                    }  else if ("400".equalsIgnoreCase(code)) {
+                        startActivity(new Intent(AssessConfirmActivity.this, AgreementActivity.class));
                     } else {
                         MistakeDialog.showDialog(msg, AssessConfirmActivity.this, error_back);
                     }
@@ -515,13 +524,13 @@ public class AssessConfirmActivity extends BaseActivity implements View.OnClickL
                     String code = jsonObject.getString("code");
                     String msg = jsonObject.getString("msg");
                     String data = jsonObject.getString("data");
-                    if ("0".equals(code)) {
+                    if ("0".equalsIgnoreCase(code)) {
                         SERIAL_NO = new JSONArray(data).getJSONObject(0).getString("SERIAL_NO");
                         startFinish("1");
-                    } else if ("-6".equals(code)) {
+                    } else if ("-6".equalsIgnoreCase(code)) {
                         startActivity(new Intent(AssessConfirmActivity.this, TransactionLoginActivity.class));
-                    } else if ("400".equals(code)) {
-//                        startActivity(new Intent(AssessConfirmActivity.this, Agreement.class));
+                    } else if ("400".equalsIgnoreCase(code)) {
+                        startActivity(new Intent(AssessConfirmActivity.this, AgreementActivity.class));
                     } else {
                         MistakeDialog.showDialog(msg, AssessConfirmActivity.this, error_back);
                     }
@@ -562,13 +571,13 @@ public class AssessConfirmActivity extends BaseActivity implements View.OnClickL
                     String code = jsonObject.getString("code");
                     String msg = jsonObject.getString("msg");
                     String data = jsonObject.getString("data");
-                    if ("0".equals(code)) {
+                    if ("0".equalsIgnoreCase(code)) {
                         SERIAL_NO = new JSONArray(data).getJSONObject(0).getString("SERIAL_NO");
                         startFinish("1");
-                    } else if ("-6".equals(code)) {
+                    } else if ("-6".equalsIgnoreCase(code)) {
                         startActivity(new Intent(AssessConfirmActivity.this, TransactionLoginActivity.class));
-                    } else if ("400".equals(code)) {
-//                        startActivity(new Intent(AssessConfirmActivity.this, Agreement.class));
+                    } else if ("400".equalsIgnoreCase(code)) {
+                        startActivity(new Intent(AssessConfirmActivity.this, AgreementActivity.class));
                     } else {
                         MistakeDialog.showDialog(msg, AssessConfirmActivity.this, error_back);
                     }
