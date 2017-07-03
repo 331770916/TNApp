@@ -48,19 +48,19 @@
             android:layout_width="match_parent"
             android:layout_height="match_parent"
             android:orientation="vertical">
+            <TextView
+                android:layout_width="match_parent"
+                android:layout_height="wrap_content"
+                android:textSize="@dimen/size15"
+                android:layout_marginTop="@dimen/size20"
+                android:textColor="#4d4d4d"
+                android:layout_marginLeft="@dimen/size20"
+                android:text="根据产品要求及您账户的情况，需要签署以下协议"/>
             <LinearLayout
                 android:id="@+id/ll_view2"
                 android:layout_width="match_parent"
                 android:layout_height="match_parent"
                 android:orientation="vertical">
-                <TextView
-                    android:layout_width="match_parent"
-                    android:layout_height="wrap_content"
-                    android:textSize="@dimen/size15"
-                    android:layout_marginTop="@dimen/size20"
-                    android:textColor="#4d4d4d"
-                    android:layout_marginLeft="@dimen/size20"
-                    android:text="根据产品要求及您账户的情况，需要签署以下协议"/>
 
                 <com.tpyzq.mobile.pangu.view.gridview.MyListView
                     android:id="@+id/lv_agreement"

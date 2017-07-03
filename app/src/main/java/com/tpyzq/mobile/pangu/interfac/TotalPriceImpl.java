@@ -56,7 +56,9 @@ public class TotalPriceImpl implements ITotalPrice {
                             String enable_balance = json.optString("ENABLE_BALANCE");
                             String opfund_market_value = json.optString("OPFUND_MARKET_VALUE");
                             String market_value = json.optString("MARKET_VALUE");
-                            double d_total = Double.valueOf(enable_balance) + Double.valueOf(opfund_market_value)+Double.valueOf(market_value);
+                            String ASSET_BALANCE = json.optString("ASSET_BALANCE");
+                            String OTC_MARKET_VALUE = json.optString("OTC_MARKET_VALUE");
+                            double d_total = Double.valueOf(ASSET_BALANCE) - Double.valueOf(OTC_MARKET_VALUE);
                             iTotalPriceResult.getStockPriceResultSuccess(String.valueOf(d_total));
                         }
                     }else if("-6".equals(code)){

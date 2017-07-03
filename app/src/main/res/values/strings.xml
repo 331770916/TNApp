@@ -1,5 +1,5 @@
 <resources>
-    <string name="app_name">太牛.new</string>
+    <string name="app_name">太牛</string>
 
     <string name="home">首页</string>
     <string name="market">行情</string>
@@ -744,7 +744,7 @@
     <string name="IDcard_text">修改</string>
 
     <!--产品预约-->
-    <string name="CPYY_text">\t\t\t您的总资&lt;5万，请补充保证金，总资产达到5万以上参与预约。总资产统计包括可用资金，股票，开放式基金。" </string>
+    <string name="CPYY_text">\t\t\t您的总资产&lt;5万，请补充保证金，总资产达到5万以上参与预约。总资产统计包括可用资金，股票，开放式基金。" </string>
     <string name="CPYY_text1">预约成功仅代表您有意向购买此产品，太平洋证券不承诺预约成功后一定能购买到此产品，预约金额不代表最终的购买金额，以实际购买金额为准，请您在产品发行时间内，尽快登录太牛APP购买产品，系统按照委托时间优先成交</string>
 
     <!--网络投票-->
