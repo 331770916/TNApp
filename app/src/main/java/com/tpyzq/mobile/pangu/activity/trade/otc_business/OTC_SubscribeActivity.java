@@ -295,7 +295,7 @@ public class OTC_SubscribeActivity extends BaseActivity implements View.OnClickL
         hashMap.put("fund_account", UserUtil.capitalAccount);
         map.put("PARAMS", hashMap);
 
-        NetWorkUtil.getInstence().okHttpForPostString(TAG, ConstantUtil.URL_YY, map, new StringCallback() {
+        NetWorkUtil.getInstence().okHttpForPostString(TAG, ConstantUtil.URL_UPDATE, map, new StringCallback() {
             @Override
             public void onError(Call call, Exception e, int id) {
                 submit.dismiss();

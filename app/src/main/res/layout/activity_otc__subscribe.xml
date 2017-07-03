@@ -132,9 +132,7 @@
                 android:layout_marginLeft="@dimen/size35"
                 android:layout_toRightOf="@id/tvOTC_SubscribeMoney"
                 android:background="@null"
-                android:digits="0123456789"
-                android:hint="@string/OTC_shururengoujine"
-                android:numeric="integer"
+                android:hint="@string/shurushengoujine"
                 android:singleLine="true"
                 android:textColorHint="@color/text"
                 android:textSize="@dimen/txtSize14" />

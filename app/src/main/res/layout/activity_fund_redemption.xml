@@ -109,7 +109,7 @@
             android:layout_weight="1"
             android:background="@android:color/transparent"
             android:gravity="left"
-            android:inputType="number"
+            android:inputType="numberDecimal"
             android:hint="@string/shurushuhuifene"
             android:textColorHint="@color/text"
             android:textSize="@dimen/txtSize14" />
