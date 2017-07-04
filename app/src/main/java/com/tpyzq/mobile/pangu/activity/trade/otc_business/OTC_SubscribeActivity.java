@@ -472,7 +472,7 @@ public class OTC_SubscribeActivity extends BaseActivity implements View.OnClickL
                 String SubscriptionMoney = etOTC_SubscribeMoney.getText().toString();       //获取输入的认购金额
                 String stockCode = etOTC_SGProductCode.getText().toString();          //获取输入的 输入代码
                 //实例化PopupWindow
-                dialog = new OTC_SubscriptionDialog(this,map.get("prodta_no"),SubscriptionMoney, stockCode, this);
+                dialog = new OTC_SubscriptionDialog(this,"OTC申购",map.get("prodta_no"),SubscriptionMoney, stockCode, this);
                 if (Helper.getInstance().isNeedShowRiskDialog()) {
                     Helper.getInstance().showCorpDialog(this, new CancelDialog.PositiveClickListener() {
                         @Override
@@ -497,7 +497,7 @@ public class OTC_SubscribeActivity extends BaseActivity implements View.OnClickL
 
     @Override
     public void callBack(boolean isOk) {
-        InterfaceCollection.getInstance().queryProductSuitability(mSession, map.get("prodta_no"), map.get("prod_code"), "", "", "331261", new InterfaceCollection.InterfaceCallback() {
+        InterfaceCollection.getInstance().queryProductSuitability(mSession, map.get("prodta_no"), map.get("prod_no"), "", "", "331261", new InterfaceCollection.InterfaceCallback() {
             @Override
             public void callResult(ResultInfo info) {
                 String code = info.getCode();

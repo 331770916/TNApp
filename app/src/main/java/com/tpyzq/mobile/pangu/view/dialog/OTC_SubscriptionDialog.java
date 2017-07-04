@@ -22,8 +22,10 @@ public class OTC_SubscriptionDialog extends BaseDialog implements View.OnClickLi
     private String stockCode;
     private String SubscriptionMoney;
     private IsClickedListener isOk;
+    private TextView tv_title;
+    private String title;
 
-    public OTC_SubscriptionDialog(Context context, String pro_name,
+    public OTC_SubscriptionDialog(Context context,String title, String pro_name,
                                   String SubscriptionMoney, String stockCode, IsClickedListener isOk) {
         super(context);
         this.context=context;
@@ -31,10 +33,13 @@ public class OTC_SubscriptionDialog extends BaseDialog implements View.OnClickLi
         this.stockCode=stockCode;
         this.SubscriptionMoney=SubscriptionMoney;
         this.isOk = isOk;
+        this.title = title;
     }
 
     @Override
     public void setView() {
+        tv_title= (TextView) findViewById(R.id.tv_title);       //弹框标题
+        tv_title.setText(title);
         tvOTC_ChanPinMingCheng= (TextView) findViewById(R.id.tvOTC_ChanPinMingCheng);       //产品名称
         tvOTC_ChanPinMingCheng.setText(pro_name);
         tvOTC_ChanPinDaiMa= (TextView) findViewById(R.id.tvOTC_ChanPinDaiMa);               //产品代码

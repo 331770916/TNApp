@@ -381,7 +381,7 @@ public class OTC_SubscriptionActivity extends BaseActivity implements View.OnCli
             case R.id.bnOTC_SubscriptionQueDing:        //点击确定 弹出 确认信息窗口
                 String SubscriptionMoney = etOTC_SubscriptionMoney.getText().toString();       //获取输入的认购金额
                 String stockCode = etOTC_ProductCode.getText().toString();          //获取输入的 输入代码
-                dialog = new OTC_SubscriptionDialog(this, map.get("prod_name"), SubscriptionMoney, stockCode, this);
+                dialog = new OTC_SubscriptionDialog(this,"OTC认购", map.get("prod_name"), SubscriptionMoney, stockCode, this);
                 if (Helper.getInstance().isNeedShowRiskDialog()) {
                     Helper.getInstance().showCorpDialog(this, new CancelDialog.PositiveClickListener() {
                         @Override
