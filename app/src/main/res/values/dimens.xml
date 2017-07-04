@@ -191,6 +191,7 @@
     <dimen name="size220">220dp</dimen>
     <dimen name="size225">225dp</dimen>
     <dimen name="size230">230dp</dimen>
+    <dimen name="size236">236dp</dimen>
     <dimen name="size250">250dp</dimen>
     <dimen name="size260">260dp</dimen>
     <dimen name="size270">270dp</dimen>

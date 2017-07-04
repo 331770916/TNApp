@@ -203,4 +203,6 @@
     <drawable name="main_head">#6699CC</drawable>
     <color name="IDcard_color">#E6E6E6</color>
     <color name="sifned">#b2b2b2</color>
+    <color name="texthintb7">#b7b7b7</color>
+    <color name="texthint93">#939393</color>
 </resources>
