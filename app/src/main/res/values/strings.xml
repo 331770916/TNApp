@@ -757,4 +757,30 @@
     <string name="voteTitle5">开始日期：</string>
     <string name="voteTitle6">终止日期：</string>
     <string name="voteTitle7">最后交易日：</string>
+
+
+    <!--  etf    -->
+    <string name="etf_wtbh">委托编号:</string>
+    <string name="etf_gddm">股东代码:</string>
+    <string name="etf_ztsm">状态说明:</string>
+    <string name="etf_jysmc">交易所名称:</string>
+    <string name="etf_wtb_number">委托编号</string>
+    <string name="etf_number_amount">数量金额</string>
+    <string name="etf_cf_query">ETF成分股查询</string>
+    <string name="etf_numbers_amount">数量/金额</string>
+    <string name="etf_status_transaction">状态/交易</string>
+    <string name="etf_wtje">委托金额:</string>
+    <string name="etf_wt_account">委托数量:</string>
+    <string name="etf_ycbl">溢价比例:</string>
+    <string name="etf_tdbz">替代标志:</string>
+    <string name="etf_company_count">单位数量:</string>
+    <string name="etf_history_query">ETF申赎历史查询</string>
+    <string name="etf_ss_cj_query">ETF申赎成交查询</string>
+    <string name="etf_attribute">属性</string>
+    <string name="etf_wtl">委托量</string>
+    <string name="etf_status_data">状态/日期</string>
+    <string name="etf_business_name">业务名称</string>
+    <string name="etf_status_number">状态/成交量</string>
+
+
 </resources>
