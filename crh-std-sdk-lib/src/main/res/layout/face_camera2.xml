@@ -1,0 +1,77 @@
+<FrameLayout xmlns:android="http://schemas.android.com/apk/res/android"
+             xmlns:tools="http://schemas.android.com/tools"
+             android:layout_width="match_parent"
+             android:layout_height="match_parent"
+             android:fitsSystemWindows="true">
+
+    <com.cairh.app.sjkh.camera.CameraSurfaceView
+        android:id="@+id/camera_surfaceview"
+        android:layout_width="match_parent"
+        android:layout_height="match_parent"/>
+
+    <com.cairh.app.sjkh.ui.FaceView
+        android:id="@+id/face_view"
+        android:layout_width="match_parent"
+        android:layout_height="match_parent"/>
+
+    <ImageView
+        android:id="@+id/iv_scanline"
+        android:layout_width="match_parent"
+        android:layout_height="match_parent"
+        android:scaleType="centerCrop"
+        android:src="@drawable/ic_mask_person"/>
+
+    <ImageView
+        android:id="@+id/iv_start_txt"
+        android:layout_width="wrap_content"
+        android:layout_height="wrap_content"
+        android:layout_gravity="center_horizontal"
+        android:layout_marginTop="20dp"
+        android:background="@null"
+        android:gravity="top|center"
+        android:src="@drawable/ic_satrt_txt"
+        android:visibility="gone"/>
+
+    <TextView
+        android:id="@+id/top"
+        android:layout_width="match_parent"
+        android:layout_height="wrap_content"
+        android:layout_gravity="center_horizontal"
+        android:layout_marginTop="50dp"
+        android:background="@android:color/transparent"
+        android:gravity="top|center"
+        android:text="请确保您的头部在头像框里，眼睛直视摄像头"
+        android:textColor="#ffffff"
+        android:textSize="14sp"
+        android:visibility="gone"/>
+
+    <RelativeLayout
+        android:id="@+id/layout_bottom"
+        android:layout_width="match_parent"
+        android:layout_height="60dp"
+        android:layout_gravity="bottom"
+        android:background="#B2000000">
+
+        <TextView
+            android:id="@+id/tv_back"
+            android:layout_width="wrap_content"
+            android:layout_height="wrap_content"
+            android:layout_alignParentLeft="true"
+            android:layout_centerVertical="true"
+            android:layout_marginLeft="4dp"
+            android:padding="4dp"
+            android:text="返回"
+            android:textColor="@android:color/white"
+            android:textSize="16sp"/>
+
+        <ImageView
+            android:id="@+id/iv_take"
+            android:layout_width="wrap_content"
+            android:layout_height="wrap_content"
+            android:layout_centerHorizontal="true"
+            android:layout_centerVertical="true"
+            android:layout_margin="4dp"
+            android:src="@drawable/ic_start"/>
+    </RelativeLayout>
+
+</FrameLayout>

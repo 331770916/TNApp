@@ -1,0 +1,15 @@
+<resources>
+
+    <!-- Application theme. -->
+    <style name="CRHAppTheme" parent="android:Theme.Light">
+
+        <!-- All customizations that are NOT specific to a particular API-level can go here. -->
+        <item name="android:windowNoTitle">true</item>
+    </style>
+
+    <style name="PopupAnimation" parent="android:Animation">
+        <item name="android:windowEnterAnimation">@anim/crh_popup_in</item>
+        <item name="android:windowExitAnimation">@anim/crh_popup_out</item>
+    </style>
+
+</resources>

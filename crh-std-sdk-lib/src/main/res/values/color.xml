@@ -1,0 +1,12 @@
+<?xml version="1.0" encoding="utf-8"?>
+<resources>
+
+    <color name="green">#5CEB6A</color>
+    <color name="gray">#909090</color>
+    <color name="result_view">#b0000000</color>
+    <color name="viewfinder_mask">#60000000</color>
+    <color name="possible_result_points">#c0ffff00</color>
+    <color name="crh_green">#5CEB6A</color>
+    <color name="crh_gray">#909090</color>
+
+</resources>

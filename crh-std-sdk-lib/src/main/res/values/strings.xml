@@ -1,0 +1,9 @@
+<?xml version="1.0" encoding="utf-8"?>
+<resources>
+
+    <string name="crh_app_name">SDK</string>
+    <string name="crh_app_version_code">15072210</string>
+    <string name="crh_app_version_name">Android_sdk_15072210</string>
+    <string name="scan_text">将二维码放入框内, 即可自动扫描</string>
+	<string name="crh_string_facecamera_new_top_tip">头像拍摄时请手持  %s 拍摄</string>
+</resources>

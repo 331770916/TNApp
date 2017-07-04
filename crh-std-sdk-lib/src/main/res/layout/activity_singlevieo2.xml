@@ -1,0 +1,145 @@
+<!--
+  ~ Copyright (c) 2017.
+  ~ 财人汇 All right reserved
+  -->
+
+<RelativeLayout xmlns:android="http://schemas.android.com/apk/res/android"
+                xmlns:tools="http://schemas.android.com/tools"
+                android:id="@+id/container"
+                android:layout_width="match_parent"
+                android:layout_height="match_parent"
+                android:background="#92000000"
+                android:fitsSystemWindows="true"
+                android:orientation="vertical">
+
+    <FrameLayout
+        android:id="@+id/layout_surfaceView"
+        android:layout_width="match_parent"
+        android:layout_height="match_parent">
+
+        <SurfaceView
+            android:id="@+id/cameraSurfaceView1"
+            android:layout_width="match_parent"
+            android:layout_height="match_parent"
+            android:layout_marginBottom="40dp"/>
+
+        <TextView
+            android:id="@+id/tv_alert_in_area"
+            android:layout_width="wrap_content"
+            android:layout_height="wrap_content"
+            android:layout_centerInParent="true"
+            android:layout_gravity="center"
+            android:layout_marginTop="9dp"
+            android:gravity="center"
+            android:text="请面对取景框后点击开始按钮"
+            android:textColor="#FFFF00"
+            android:textSize="20sp"
+            android:visibility="gone"/>
+
+
+        <ImageView
+            android:id="@+id/iv_masker"
+            android:layout_width="match_parent"
+            android:layout_height="match_parent"
+            android:alpha="0.6"
+            android:background="#00000000"
+            android:scaleType="centerCrop"
+            android:src="@drawable/ic_mask_person"/>
+    </FrameLayout>
+
+    <LinearLayout
+        android:id="@+id/read_area"
+        android:layout_width="match_parent"
+        android:layout_height="wrap_content"
+        android:layout_alignParentTop="true"
+        android:layout_gravity="top"
+        android:orientation="vertical"
+        android:padding="5dp">
+
+        <TextView
+            android:id="@+id/timer_txt"
+            android:layout_width="match_parent"
+            android:layout_height="20dp"
+            android:gravity="center"
+            android:text="00:10"
+            android:textColor="#FD861A"
+            android:textSize="16sp"
+            android:visibility="gone"/>
+
+        <ImageView
+            android:id="@+id/iv_start_txt"
+            android:layout_width="wrap_content"
+            android:layout_height="wrap_content"
+            android:layout_gravity="center"
+            android:layout_marginTop="3dp"
+            android:src="@drawable/ic_satrt_record_txt"/>
+
+        <TextView
+            android:id="@+id/tip_text_begin"
+            android:layout_width="wrap_content"
+            android:layout_height="wrap_content"
+            android:layout_gravity="center"
+            android:padding="4dp"
+            android:text="录制时请大声朗读以下文字"
+            android:textColor="@android:color/darker_gray"
+            android:textSize="16sp"/>
+
+        <TextView
+            android:id="@+id/tv_alert_txt"
+            android:layout_width="match_parent"
+            android:layout_height="wrap_content"
+            android:layout_gravity="center"
+            android:layout_margin="3dp"
+            android:layout_marginLeft="30dp"
+            android:layout_marginRight="30dp"
+            android:layout_marginTop="6dp"
+            android:gravity="center"
+            android:textColor="#fff"
+            android:textSize="18sp"/>
+
+
+    </LinearLayout>
+
+    <RelativeLayout
+        android:id="@+id/relativeLayout1"
+        android:layout_width="match_parent"
+        android:layout_height="80dp"
+        android:layout_alignParentBottom="true"
+        android:layout_gravity="bottom"
+        android:background="#B2000000"
+        android:gravity="center_vertical">
+
+        <TextView
+            android:id="@+id/imgbtn_back"
+            android:layout_width="wrap_content"
+            android:layout_height="wrap_content"
+            android:layout_alignParentLeft="true"
+            android:layout_centerVertical="true"
+            android:layout_marginLeft="20dp"
+            android:gravity="center"
+            android:padding="6dp"
+            android:text="返回"
+            android:textColor="#fff"
+            android:textSize="20sp"/>
+
+        <ImageView
+            android:id="@id/start_record"
+            android:layout_width="70dp"
+            android:layout_height="70dp"
+            android:layout_centerHorizontal="true"
+            android:layout_centerInParent="true"
+            android:background="#00000000"
+            android:src="@drawable/ic_start"
+            android:visibility="visible"/>
+    </RelativeLayout>
+
+    <FrameLayout
+        android:id="@+id/layout_preview"
+        android:layout_width="match_parent"
+        android:layout_height="match_parent"
+        android:visibility="gone">
+
+        <include layout="@layout/layout_preview"/>
+    </FrameLayout>
+
+</RelativeLayout>
