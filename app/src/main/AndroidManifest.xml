@@ -69,42 +69,76 @@
         <!-- 开户相关 activity -->
         <activity
             android:name="com.cairh.app.sjkh.MainActivity"
-            android:exported="false"
+            android:configChanges="orientation|keyboard|screenSize"
             android:screenOrientation="portrait"
-            android:theme="@android:style/Theme.Wallpaper.NoTitleBar" />
+            android:theme="@style/CRHAppTheme"
+            android:windowSoftInputMode="stateHidden|adjustResize">
+        </activity>
         <activity
             android:name="com.cairh.app.sjkh.ui.VideoActivity"
             android:exported="false"
-            android:screenOrientation="portrait" />
+            android:screenOrientation="portrait"
+            android:theme="@style/CRHAppTheme"/>
         <activity
             android:name="com.cairh.app.sjkh.ui.CameraMainActivity"
             android:exported="false"
-            android:screenOrientation="landscape" />
-        <activity android:name="com.cairh.app.sjkh.SchemeActivity">
+            android:screenOrientation="landscape"
+            android:theme="@style/CRHAppTheme"/>
+        <activity
+            android:name="com.cairh.app.sjkh.SchemeActivity"
+            android:theme="@style/CRHAppTheme">
             <intent-filter>
-                <action android:name="android.intent.action.VIEW" />
+                <action android:name="android.intent.action.VIEW"/>
 
-                <category android:name="android.intent.category.DEFAULT" />
-                <category android:name="android.intent.category.BROWSABLE" />
+                <category android:name="android.intent.category.DEFAULT"/>
+                <category android:name="android.intent.category.BROWSABLE"/>
 
-                <data android:scheme="CRHSJKH" />
+                <data android:scheme="CRHSJKH"/>
             </intent-filter>
         </activity>
         <activity
             android:name="com.cairh.app.sjkh.ui.SingleVideoActivity"
             android:exported="false"
-            android:screenOrientation="portrait" />
-        <activity
-            android:name="com.cairh.app.sjkh.ui.SingleVideoActivityAnychat"
-            android:screenOrientation="portrait" />
+            android:screenOrientation="portrait"
+            android:theme="@style/CRHAppTheme"/>
         <activity
             android:name="com.cairh.app.sjkh.ui.VideoPreviewActivity"
             android:exported="false"
-            android:screenOrientation="portrait" />
+            android:screenOrientation="portrait"
+            android:theme="@style/CRHAppTheme"/>
         <activity
             android:name="com.cairh.app.sjkh.ui.FaceCameraActivity"
             android:exported="false"
-            android:screenOrientation="portrait" />
+            android:screenOrientation="portrait"
+            android:theme="@android:style/Theme.Holo.Light.NoActionBar.Fullscreen"/>
+
+        <activity
+            android:name="com.cairh.app.sjkh.ui.FaceCamera2Activity"
+            android:exported="false"
+            android:screenOrientation="portrait"
+            android:theme="@android:style/Theme.Holo.Light.NoActionBar.Fullscreen"/>
+
+        <activity
+            android:name="com.cairh.app.sjkh.ui.FaceCameraNewActivity"
+            android:exported="false"
+            android:screenOrientation="portrait"
+            android:theme="@android:style/Theme.Holo.Light.NoActionBar.Fullscreen"/>
+
+        <activity
+            android:name="com.cairh.app.sjkh.ui.SingleVideo2Activity"
+            android:exported="false"
+            android:screenOrientation="portrait"
+            android:theme="@android:style/Theme.Holo.Light.NoActionBar.Fullscreen"/>
+        <activity
+            android:name="com.cairh.app.sjkh.ui.SingleViewoPreivewActivity"
+            android:exported="false"
+            android:screenOrientation="portrait"
+            android:theme="@android:style/Theme.Holo.Light.NoActionBar.Fullscreen"/>
+        <activity
+            android:name="com.cairh.app.sjkh.ui.Camera2Activity"
+            android:exported="false"
+            android:screenOrientation="landscape"
+            android:theme="@android:style/Theme.Holo.Light.NoActionBar.Fullscreen"/>
         <!-- 微信分享 -->
         <activity
             android:name="com.tpyzq.self.mobile.pangu.wxapi.WXEntryActivity"

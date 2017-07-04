@@ -1,1 +1,1 @@
-include ':app', ':PullToRefreshLib',':MPChartLib',':keyboardlibrary', ':library', ':tagcloudlib', ':crhlib'
+include ':app', ':PullToRefreshLib',':MPChartLib',':keyboardlibrary', ':library', ':tagcloudlib', ':crh-std-sdk-lib'
