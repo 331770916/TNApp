@@ -9,6 +9,8 @@ import android.widget.BaseAdapter;
 import android.widget.Button;
 import android.widget.TextView;
 import com.tpyzq.mobile.pangu.R;
+import com.tpyzq.mobile.pangu.activity.trade.stock.VoteActivity;
+import com.tpyzq.mobile.pangu.activity.trade.stock.VoteDetailActivity;
 import com.tpyzq.mobile.pangu.data.NetworkVotingEntity;
 
 import java.util.List;
@@ -18,7 +20,7 @@ import java.util.List;
  * 股票   投票界面  Adapter
  */
 
-public class VoteAdapter extends BaseAdapter implements View.OnClickListener{
+public class VoteAdapter extends BaseAdapter{
     private List<NetworkVotingEntity> mList;
     private LayoutInflater layoutInflater;
     private NetworkVotingEntity bean;
@@ -70,9 +72,19 @@ public class VoteAdapter extends BaseAdapter implements View.OnClickListener{
             convertView.setTag(viewHodler);
         }else
             viewHodler = (ViewHodler) convertView.getTag();
-        viewHodler.button.setOnClickListener(this);
         bean = mList.get(position);
-        viewHodler.tv1.setText(bean.getMeeting_name());
+        viewHodler.button.setOnClickListener(new View.OnClickListener() {
+            @Override
+            public void onClick(View v) {
+                Intent intent = new Intent(mContext, VoteDetailActivity.class);
+                intent.putExtra("meeting_seq",bean.getMeeting_seq());//股东大会编码
+                intent.putExtra("company_code",bean.getCompany_code());//证卷代码
+                intent.putExtra("stock_account",bean.getStock_account());//股东代码
+                intent.putExtra("exchange_type",bean.getExchange_type());//市场
+                mContext.startActivity(intent);
+            }
+        });
+        viewHodler.tv1.setText(bean.getCompany_name()+"股东大会");
         viewHodler.tv2.setText(bean.getMeeting_name());
         viewHodler.tv3.setText(bean.getMeeting_seq());
         viewHodler.tv4.setText(bean.getCompany_name());
@@ -81,11 +93,6 @@ public class VoteAdapter extends BaseAdapter implements View.OnClickListener{
         viewHodler.tv7.setText(bean.getEnd_date());
         viewHodler.tv8.setText(bean.getInit_date());
         return convertView;
-    }
-
-    @Override
-    public void onClick(View v) {
-//        mContext.startActivity(new Intent(mContext, VoteDetailActivity.class));
     }
 
     class ViewHodler {

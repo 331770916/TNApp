@@ -1,5 +1,7 @@
 package com.tpyzq.mobile.pangu.data;
 
+import java.util.List;
+
 /**
  * Created by wangqi on 2017/6/27.
  * 网络投票
@@ -8,21 +10,64 @@ public class NetworkVotingEntity {
     private String meeting_name; //股东大会名称
     private String meeting_seq;  //股东大会编码
     private String company_name; //公司名称
-    private String company_code; //公司代码
+    private String company_code; //公司代码(股票代码)
     private String begin_date;  //起始日期
     private String end_date;    //到期日期
-    private String init_date;   //交易日期<到期交易日 TODO>
+    private String init_date;   //交易日期<到期交易日 委托日期 TODO>
     private String position_str; //定位串<股东大会编码 TODO>
-    private String vote_motion; //投票议案（序号）
+    private String vote_motion; //投票议案（序号,议案编号）
     private String vote_info;   //议案名称
     private String vote_type;   //投票类别：0	非累积投票制 1累积投票制
-    private String vote_numcontrol;   //累积投票应选数
     private String stock_code;   //证券代码
-    private String business_amount;   //成交数量<委托数量TODO>
+    private String stock_account; //股东代码
+    private String business_amount;   //成交数量<委托数量 TODO>
     private String stock_name;   //证券名称
     private String status;      //委托状态
-
+    private String exchange_type; //市场
     private boolean isShowRule;             //控制子view是否显示
+    private String entrust_amount;//累积投票和非累积投票 <委托状态名称 TODO>
+    private String entrust_no;
+    private List<NetworkVotingEntity> list;
+
+    public String getEntrust_no() {
+        return entrust_no;
+    }
+
+    public void setEntrust_no(String entrust_no) {
+        this.entrust_no = entrust_no;
+    }
+
+    public String getEntrust_amount() {
+        return entrust_amount;
+    }
+
+    public void setEntrust_amount(String entrust_amount) {
+        this.entrust_amount = entrust_amount;
+    }
+
+    public String getExchange_type() {
+        return exchange_type;
+    }
+
+    public void setExchange_type(String exchange_type) {
+        this.exchange_type = exchange_type;
+    }
+
+    public String getStock_account() {
+        return stock_account;
+    }
+
+    public void setStock_account(String stock_account) {
+        this.stock_account = stock_account;
+    }
+
+    public List<NetworkVotingEntity> getList() {
+        return list;
+    }
+
+    public void setList(List<NetworkVotingEntity> list) {
+        this.list = list;
+    }
 
     public String getStatus() {
         return status;
@@ -118,14 +163,6 @@ public class NetworkVotingEntity {
 
     public void setVote_type(String vote_type) {
         this.vote_type = vote_type;
-    }
-
-    public String getVote_numcontrol() {
-        return vote_numcontrol;
-    }
-
-    public void setVote_numcontrol(String vote_numcontrol) {
-        this.vote_numcontrol = vote_numcontrol;
     }
 
     public String getStock_code() {

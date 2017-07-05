@@ -757,6 +757,7 @@
     <string name="voteTitle5">开始日期：</string>
     <string name="voteTitle6">终止日期：</string>
     <string name="voteTitle7">最后交易日：</string>
+    <string name="voteDialogTitle">网络投票</string>
 
 
     <!--  etf    -->

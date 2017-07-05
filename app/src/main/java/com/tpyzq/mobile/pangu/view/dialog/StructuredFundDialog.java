@@ -12,6 +12,7 @@ import com.tpyzq.mobile.pangu.activity.trade.stock.ETFApplyforOrRedeemActivity;
 import com.tpyzq.mobile.pangu.activity.trade.stock.FJFundGradingMergerActivity;
 import com.tpyzq.mobile.pangu.activity.trade.stock.FJFundSplitActivity;
 import com.tpyzq.mobile.pangu.activity.trade.stock.FJWithdrawOrderActivity;
+import com.tpyzq.mobile.pangu.activity.trade.stock.VoteDetailActivity;
 import com.tpyzq.mobile.pangu.base.BaseDialog;
 import com.tpyzq.mobile.pangu.base.InterfaceCollection;
 import com.tpyzq.mobile.pangu.data.EtfDataEntity;
@@ -31,11 +32,15 @@ import java.util.List;
 public class StructuredFundDialog extends BaseDialog implements View.OnClickListener, InterfaceCollection.InterfaceCallback {
     private String mTAG;
     private TextView tv_title;
-    private TextView tv_2,tv_1,tv_3,tv_7,tv_9;
+    private TextView tv_1;
+    private TextView tv_2;
+    private TextView tv_3;
     private TextView tv_4;
     private TextView tv_5;
     private TextView tv_6;
+    private TextView tv_7;
     private TextView tv_8;
+    private TextView tv_9;
     private TextView tv_10;
     private ImageView img_1;
 
@@ -112,6 +117,19 @@ public class StructuredFundDialog extends BaseDialog implements View.OnClickList
             tv_6.setText(mStructuredFundEntity.getStoken_name());
             tv_8.setText(mStructuredFundEntity.getEntrust_amount());
             tv_10.setText(mStructuredFundEntity.getStock_account());
+        }else if (VoteDetailActivity.TAG.equals(mTAG)){
+            img_1.setImageResource(R.mipmap.vote_dialog_icon);
+            tv_title.setText(R.string.voteDialogTitle);
+            tv_1.setText("共有"+mShare+"笔委托需要提交，请确认");
+            tv_2.setVisibility(View.GONE);
+            tv_3.setText("股东代码：");
+            tv_4.setText(mInput);
+            tv_5.setVisibility(View.GONE);
+            tv_6.setVisibility(View.GONE);
+            tv_7.setVisibility(View.GONE);
+            tv_8.setVisibility(View.GONE);
+            tv_9.setVisibility(View.GONE);
+            tv_10.setVisibility(View.GONE);
         }else if (ETFApplyforOrRedeemActivity.TAG.equals(mTAG)){   //  申购
             EtfDataEntity etfDataEntity = (EtfDataEntity)object;
             tv_title.setText("ETF申购");
@@ -137,23 +155,25 @@ public class StructuredFundDialog extends BaseDialog implements View.OnClickList
             tv_6.setText(etfDataEntity.getStock_name());
             tv_8.setText(etfDataEntity.getStock_code());
         }
-
-
     }
 
 
     @Override
     public void onClick(View v) {
-        StructuredFundEntity mStructuredFundEntity = (StructuredFundEntity)object;
         ifc = InterfaceCollection.getInstance();
         switch (v.getId()) {
             case R.id.bt_true:
                 if (FJFundGradingMergerActivity.TAG.equals(mTAG)) {
+                    StructuredFundEntity mStructuredFundEntity = (StructuredFundEntity)object;
                     ifc.mergerStructuredFund(mStructuredFundEntity.getExchange_type(), mStructuredFundEntity.getStock_account(), mInput, mShare, mSession, mTAG, this);
                 } else if (FJFundSplitActivity.TAG.equals(mTAG)) {
+                    StructuredFundEntity mStructuredFundEntity = (StructuredFundEntity)object;
                     ifc.splitStructuredFund(mStructuredFundEntity.getExchange_type(), mStructuredFundEntity.getStock_account(), mInput, mShare, mSession, mTAG, this);
                 } else if (FJWithdrawOrderActivity.TAG.equals(mTAG)) {
 //                    Helper.getInstance().showToast(context, "撤销此委托成功");
+                    mExpression.State();
+                    dismiss();
+                }else if(VoteDetailActivity.TAG.equals(mTAG)){
                     mExpression.State();
                     dismiss();
                 }else if (ETFApplyforOrRedeemActivity.TAG.equals(mTAG)){   //  申购
@@ -179,9 +199,7 @@ public class StructuredFundDialog extends BaseDialog implements View.OnClickList
             Helper.getInstance().showToast(context, "委托提交成功");
             mExpression.State();
             dismiss();
-        } else if ("-1".equals(info.getCode()) || "-2".equals(info.getCode()) || "-3".equals(info.getCode())) {
-            Helper.getInstance().showToast(context, info.getMsg());
-        } else {
+        } else  {
             Helper.getInstance().showToast(context, info.getMsg());
         }
     }

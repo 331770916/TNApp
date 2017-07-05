@@ -3,7 +3,13 @@
     android:layout_width="match_parent"
     android:layout_height="match_parent"
     android:orientation="vertical">
-
+    <RelativeLayout
+        android:layout_width="match_parent"
+        android:layout_height="@dimen/size25"
+        android:background="@color/blue"
+        android:clipToPadding="true"
+        android:id="@+id/rl_top_bar"
+        android:fitsSystemWindows="true" />
     <RelativeLayout
         android:id="@+id/rl_top_bar"
         android:layout_width="match_parent"
@@ -63,6 +69,7 @@
                     android:textStyle="bold" />
 
                 <TextView
+                    android:id="@+id/voteTitleName"
                     android:layout_width="wrap_content"
                     android:layout_height="match_parent"
                     android:layout_alignParentRight="true"
@@ -92,6 +99,7 @@
                     android:textStyle="bold" />
 
                 <TextView
+                    android:id="@+id/voteTitleCode"
                     android:layout_width="wrap_content"
                     android:layout_height="match_parent"
                     android:layout_alignParentRight="true"
@@ -117,6 +125,8 @@
                     android:layout_height="@dimen/size22"
                     android:layout_marginLeft="@dimen/size20"
                     android:text="1"
+                    android:gravity="center"
+                    android:background="@mipmap/bluecycle"
                     android:textColor="@color/white" />
 
                 <TextView
@@ -163,6 +173,8 @@
                     android:layout_height="@dimen/size22"
                     android:layout_marginLeft="@dimen/size20"
                     android:text="2"
+                    android:gravity="center"
+                    android:background="@mipmap/bluecycle"
                     android:textColor="@color/white" />
 
                 <TextView
@@ -196,11 +208,20 @@
                 android:layout_width="match_parent"
                 android:layout_height="match_parent"
                 android:layout_marginTop="@dimen/size17" />
-
+            <Button
+                android:id="@+id/voteSubmit"
+                android:layout_width="match_parent"
+                android:layout_height="wrap_content"
+                android:layout_marginBottom="@dimen/size16"
+                android:textColor="@color/white"
+                android:layout_marginLeft="@dimen/size16"
+                android:layout_marginRight="@dimen/size16"
+                android:text="提   交"
+                android:gravity="center"
+                android:background="@mipmap/vote_submit_bg"/>
 
         </LinearLayout>
-
     </ScrollView>
-
+    
 
 </LinearLayout>

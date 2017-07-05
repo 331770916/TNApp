@@ -214,20 +214,18 @@ public class VoteQueryPager extends BasePager implements InterfaceCollection.Int
 
         switch (getType()) {
             case 0:
-//                if (TAG.equals("VoteQueryOneWeekPager")) {
-//                    ifc.queryHistoryNetworkVoting(mSession, "1", page,num, null, null, TAG, this);
-//                } else if (TAG.equals("VoteQueryInAMonthPager")) {
-//                    ifc.queryHistoryNetworkVoting(mSession, "2", page, num,null, null, TAG, this);
-//                } else if (TAG.equals("VoteQueryThreeWeekPager")) {
-//                    ifc.queryHistoryNetworkVoting(mSession, "3", page, num,null, null, TAG, this);
-//                } else if (TAG.equals("VoteQueryCustomPager") && !TextUtils.isEmpty(startDate) && !TextUtils.isEmpty(finishDate)) {
-//                    ifc.queryHistoryNetworkVoting(mSession, "0", page, num,startDate, finishDate, TAG, this);
-//                }
-//                break;
-
-                ifc.getData(10, this);
+                if(TAG.equals("VoteQueryTodayPager")){
+                    ifc.queryTodayVoting(mSession, "", page,num,  TAG, this);
+                }else if (TAG.equals("VoteQueryOneWeekPager")) {
+                    ifc.queryHistoryNetworkVoting(mSession, "1", page,num, null, null, TAG, this);
+                } else if (TAG.equals("VoteQueryInAMonthPager")) {
+                    ifc.queryHistoryNetworkVoting(mSession, "2", page, num,null, null, TAG, this);
+                } else if (TAG.equals("VoteQueryThreeWeekPager")) {
+                    ifc.queryHistoryNetworkVoting(mSession, "3", page, num,null, null, TAG, this);
+                } else if (TAG.equals("VoteQueryCustomPager") && !TextUtils.isEmpty(startDate) && !TextUtils.isEmpty(finishDate)) {
+                    ifc.queryHistoryNetworkVoting(mSession, "0", page, num,startDate, finishDate, TAG, this);
+                }
                 break;
-
         }
         mIsClean = isClean;
     }
@@ -256,9 +254,9 @@ public class VoteQueryPager extends BasePager implements InterfaceCollection.Int
             if (object instanceof List) {
                 myList = (List<NetworkVotingEntity>) object;
                 if (myList.size() > 0) {
-//                    position = myList.get(myList.size()-1).getPosition_str();
-//                    if(mIsClean)
-//                        refresh += 30;
+                    position = myList.get(myList.size()-1).getPosition_str();
+                    if(mIsClean)
+                        refresh += 30;
                     mAdapter.setData(myList);
                 } else {
                     helper.showToast(mContext, " 暂无数据");

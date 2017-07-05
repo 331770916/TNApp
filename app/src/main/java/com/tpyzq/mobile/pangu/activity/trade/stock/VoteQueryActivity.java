@@ -32,8 +32,8 @@ import java.util.List;
  */
 
 public class VoteQueryActivity extends BaseActivity implements View.OnClickListener {
-    private VoteQueryPager  oneWeekPager, inAMonthPager, threeWeekPager, customPager;
-    private String[] buy_vp = new String[]{ "一周内", "一月内", "三月内", "自定义"};
+    private VoteQueryPager  todayPager,oneWeekPager, inAMonthPager, threeWeekPager, customPager;
+    private String[] buy_vp = new String[]{ "今日","一周内", "一月内", "三月内", "自定义"};
     private List<String> buy_vp_list = Arrays.asList(buy_vp);
     private List<BasePager> listBuy = new ArrayList<>();
 
@@ -135,6 +135,8 @@ public class VoteQueryActivity extends BaseActivity implements View.OnClickListe
 
         magicIndicator.setNavigator(commonNavigator);
         ViewPagerHelper.bind(magicIndicator, viewPager);//TAG VoteQueryTodayPager...
+        todayPager = new VoteQueryPager(this,"VoteQueryTodayPager");
+        listBuy.add(todayPager);
         oneWeekPager = new VoteQueryPager(this, "VoteQueryOneWeekPager");
         listBuy.add(oneWeekPager);
         inAMonthPager = new VoteQueryPager(this, "VoteQueryInAMonthPager");
@@ -145,7 +147,7 @@ public class VoteQueryActivity extends BaseActivity implements View.OnClickListe
         listBuy.add(customPager);
 
         viewPager.setAdapter(new FJEntrustedDealAdapter(listBuy, 0));
-        oneWeekPager.initData();
+        todayPager.initData();
         viewPager.setOnPageChangeListener(new ViewPager.OnPageChangeListener() {
             @Override
             public void onPageScrolled(int position, float positionOffset, int positionOffsetPixels) {
@@ -165,6 +167,7 @@ public class VoteQueryActivity extends BaseActivity implements View.OnClickListe
 
     @Override
     public void destroy() {
+        todayPager.destroy();
         oneWeekPager.destroy();
         oneWeekPager = null;
         inAMonthPager.destroy();

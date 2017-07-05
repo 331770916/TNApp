@@ -1589,7 +1589,7 @@ public class Helper {
      * @param orginal
      * @return
      */
-    private static boolean isMatch(String regex, String orginal) {
+    public static boolean isMatch(String regex, String orginal) {
         if (orginal == null || orginal.trim().equals("")) {
             return false;
         }
