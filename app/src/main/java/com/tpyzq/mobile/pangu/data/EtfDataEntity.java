@@ -21,6 +21,14 @@ public class EtfDataEntity {
     private String entrust_balance;    // 委托金额
     private String entrust_amount;     // 委托数量
     private String entrust_prop;       // 委托属性  0 买卖 1 配股 2	转托  3 申购  4	回购
+    private String curr_time;          // 交易日期
+    private String prev_balance;       // 冻结解冻金额
+    private String entrust_bs;          //  买卖标记   1：买    2：卖
+    private String entrust_status_name;   // 委托状态名称
+    private String exchange_type_name;    //交易市场
+
+
+
     /**
      * 委托状态
      * 0	未报
@@ -85,6 +93,46 @@ public class EtfDataEntity {
 
     public void setBusiness_balance(String business_balance) {
         this.business_balance = business_balance;
+    }
+
+    public String getEntrust_status_name() {
+        return entrust_status_name;
+    }
+
+    public void setEntrust_status_name(String entrust_status_name) {
+        this.entrust_status_name = entrust_status_name;
+    }
+
+    public String getExchange_type_name() {
+        return exchange_type_name;
+    }
+
+    public void setExchange_type_name(String exchange_type_name) {
+        this.exchange_type_name = exchange_type_name;
+    }
+
+    public String getCurr_time() {
+        return curr_time;
+    }
+
+    public void setCurr_time(String curr_time) {
+        this.curr_time = curr_time;
+    }
+
+    public String getPrev_balance() {
+        return prev_balance;
+    }
+
+    public void setPrev_balance(String prev_balance) {
+        this.prev_balance = prev_balance;
+    }
+
+    public String getEntrust_bs() {
+        return entrust_bs;
+    }
+
+    public void setEntrust_bs(String entrust_bs) {
+        this.entrust_bs = entrust_bs;
     }
 
     public boolean isShowRule() {
