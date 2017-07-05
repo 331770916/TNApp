@@ -54,9 +54,13 @@ public class TranMoreActivity extends BaseActivity implements AdapterView.OnItem
                 intent.setClass(this,StructuredFundActivity.class);
                 break;
             case 3:
+                intent.setClass(this,ETFNavigationBarActivity.class);
+                break;
+            case 4:
                 intent.putExtra("pageindex",TransactionLoginActivity.PAGE_INDEX_NetworkVotingActivity);
                 intent.setClass(this,NetworkVotingActivity.class);
                 break;
+
         }
         startActivity(intent);
     }

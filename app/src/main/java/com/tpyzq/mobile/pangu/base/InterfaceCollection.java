@@ -1766,4 +1766,24 @@ public class InterfaceCollection {
         info.setData(ses);
         callback.callResult(info);
     }
+
+    public void getDatas(int size, final InterfaceCallback callback) {
+        ResultInfo info = new ResultInfo();
+        info.setCode("0");
+        List<EtfDataEntity> ses = new ArrayList<>();
+        EtfDataEntity entity;
+        for (int i = 0; i < size; i++) {
+            entity = new EtfDataEntity();
+            entity.setPosition_str("证券分级");
+            entity.setStock_code("000888");
+            entity.setEntrust_status("分级基金合并");
+            entity.setBusiness_amount("已报");
+            entity.setStock_name("分级基金合并");
+            entity.setInit_date("2017-09-18");
+            entity.setBusiness_amount("10000");
+            ses.add(entity);
+        }
+        info.setData(ses);
+        callback.callResult(info);
+    }
 }

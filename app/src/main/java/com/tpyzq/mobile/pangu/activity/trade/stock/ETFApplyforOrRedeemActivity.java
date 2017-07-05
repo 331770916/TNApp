@@ -83,28 +83,7 @@ public class ETFApplyforOrRedeemActivity extends BaseActivity implements TextWat
 
     @Override
     public void beforeTextChanged(CharSequence s, int start, int count, int after) {
-        switch (getCurrentFocus().getId()) {
-            case R.id.et_input_code:
-                if (s.length() == 6) {
-                    //  请求网络接口
-                    mDialog = LoadingDialog.initDialog(this, "正在查询...");
-                    InterfaceCollection.getInstance().queryApplyfor(token, s.toString().trim(), TAG, this);
-                }else {
-                     //  清空数据
-                    tv_upperlimit.setText("");
-                    available_funds.setText("");
-                    etf_code.setText("");
-                    tv_shareholder.setText("");
-                }
-                break;
-            case R.id.et_input_count:
-                if (s.toString().isEmpty() && mInputCode.toString().length()==6){
-                    btSubmit.setBackgroundResource(R.drawable.lonin);
-                    btSubmit.setEnabled(true);
-                }
 
-                break;
-        }
 
     }
 
@@ -115,7 +94,29 @@ public class ETFApplyforOrRedeemActivity extends BaseActivity implements TextWat
 
     @Override
     public void afterTextChanged(Editable s) {
+        switch (getCurrentFocus().getId()) {
+            case R.id.et_input_code:
+                if (s.length() == 6) {
+                    //  请求网络接口
+                    mDialog = LoadingDialog.initDialog(this, "正在查询...");
+                    InterfaceCollection.getInstance().queryApplyfor(token, s.toString().trim(), TAG, this);
+                }else {
+                    //  清空数据
+                    tv_upperlimit.setText("");
+                    available_funds.setText("");
+                    etf_code.setText("");
+                    tv_shareholder.setText("");
+                    btSubmit.setEnabled(false);
+                }
+                break;
+            case R.id.et_input_count:
+                if (s.toString().isEmpty() && mInputCode.toString().length()==6){
+                    btSubmit.setBackgroundResource(R.drawable.lonin);
+                    btSubmit.setEnabled(true);
+                }
 
+                break;
+        }
     }
 
     @Override

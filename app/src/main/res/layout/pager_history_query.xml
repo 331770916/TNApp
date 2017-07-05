@@ -131,6 +131,7 @@
         android:layout_height="match_parent">
 
         <com.handmark.pulltorefresh.library.PullToRefreshListView
+            android:id="@id/listView_stock"
             android:layout_width="match_parent"
             android:layout_height="match_parent"
             android:divider="@color/lineColor"
@@ -140,6 +141,7 @@
             app:ptrMode="both" />
 
         <ImageView
+            android:id="@+id/isEmpty"
             android:layout_width="match_parent"
             android:layout_height="match_parent"
             android:layout_centerInParent="true"

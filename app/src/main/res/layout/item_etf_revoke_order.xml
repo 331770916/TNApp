@@ -4,7 +4,12 @@
     android:layout_height="match_parent"
     android:orientation="vertical">
 
-    <!--  ETF申赎撤单  -->
+    <!--  ETF申赎撤单 和
+     ETF申赎历史查询
+     共用一个布局
+      底部隐藏部分  -->
+
+
 
     <LinearLayout
         android:id="@+id/fj_content"
@@ -21,6 +26,7 @@
             android:orientation="vertical">
 
             <TextView
+                android:id="@+id/tv1"
                 android:layout_width="wrap_content"
                 android:layout_height="wrap_content"
                 android:layout_marginLeft="@dimen/size20"
@@ -30,6 +36,7 @@
                 android:textStyle="bold" />
 
             <TextView
+                android:id="@+id/tv2"
                 android:layout_width="wrap_content"
                 android:layout_height="wrap_content"
                 android:layout_marginBottom="@dimen/size12"
@@ -48,6 +55,7 @@
             android:orientation="vertical">
 
             <TextView
+                android:id="@+id/tv3"
                 android:layout_width="wrap_content"
                 android:layout_height="wrap_content"
                 android:textColor="@color/hushenTab_titleColor"
@@ -62,6 +70,7 @@
             android:orientation="vertical">
 
             <TextView
+                android:id="@+id/tv4"
                 android:layout_width="wrap_content"
                 android:layout_height="wrap_content"
                 android:layout_gravity="center"
@@ -70,6 +79,7 @@
                 android:textSize="@dimen/txtSize13" />
 
             <TextView
+                android:id="@+id/tv5"
                 android:layout_width="wrap_content"
                 android:layout_height="wrap_content"
                 android:layout_gravity="center"
@@ -87,6 +97,7 @@
             android:orientation="vertical">
 
             <TextView
+                android:id="@+id/tv6"
                 android:layout_width="wrap_content"
                 android:layout_height="wrap_content"
                 android:layout_gravity="right"
@@ -96,6 +107,7 @@
                 android:textSize="@dimen/txtSize13" />
 
             <TextView
+                android:id="@+id/tv7"
                 android:layout_width="wrap_content"
                 android:layout_height="wrap_content"
                 android:layout_gravity="right"
@@ -106,6 +118,157 @@
                 android:textSize="@dimen/self_stockNumberText" />
         </LinearLayout>
     </LinearLayout>
+
+    <LinearLayout
+        android:id="@+id/tableSpan"
+        android:visibility="gone"
+        android:layout_width="match_parent"
+        android:layout_height="wrap_content"
+        android:layout_marginTop="@dimen/size5"
+        android:background="@color/dividerColor"
+        android:orientation="vertical">
+
+        <LinearLayout
+            android:layout_width="match_parent"
+            android:layout_height="wrap_content"
+            android:layout_marginTop="@dimen/size2"
+            android:orientation="horizontal">
+
+            <LinearLayout
+                android:layout_width="0dp"
+                android:layout_height="wrap_content"
+                android:layout_weight="1"
+                android:background="@color/backgroundColor"
+                android:orientation="horizontal"
+                android:padding="@dimen/size10">
+
+                <TextView
+                    android:layout_width="wrap_content"
+                    android:layout_height="wrap_content"
+                    android:paddingLeft="@dimen/size5"
+                    android:text="@string/etf_wtbh"
+                    android:textColor="@color/text" />
+
+                <TextView
+                    android:id="@+id/ll_tv1"
+                    android:text="00000"
+                    android:layout_width="wrap_content"
+                    android:layout_height="wrap_content"
+                    android:paddingLeft="@dimen/size10"
+                    android:textColor="@color/text" />
+            </LinearLayout>
+
+            <View
+                android:layout_width="@dimen/size1"
+                android:layout_height="0dp" />
+
+            <LinearLayout
+                android:layout_width="0dp"
+                android:layout_height="wrap_content"
+                android:layout_weight="1"
+                android:background="@color/backgroundColor"
+                android:padding="@dimen/size10">
+
+                <TextView
+                    android:layout_width="wrap_content"
+                    android:layout_height="wrap_content"
+                    android:layout_centerVertical="true"
+                    android:paddingLeft="@dimen/size5"
+                    android:text="@string/etf_wtje"
+                    android:textColor="@color/text" />
+
+                <TextView
+                    android:id="@+id/ll_tv2"
+                    android:text="00000"
+                    android:layout_width="wrap_content"
+                    android:layout_height="wrap_content"
+                    android:paddingLeft="@dimen/size10"
+                    android:textColor="@color/text" />
+            </LinearLayout>
+        </LinearLayout>
+
+
+        <LinearLayout
+            android:layout_width="match_parent"
+            android:layout_height="wrap_content"
+            android:layout_marginTop="@dimen/size2"
+            android:orientation="horizontal">
+
+            <LinearLayout
+                android:layout_width="0dp"
+                android:layout_height="wrap_content"
+                android:layout_weight="1"
+                android:background="@color/backgroundColor"
+                android:orientation="horizontal"
+                android:padding="@dimen/size10">
+
+                <TextView
+                    android:layout_width="wrap_content"
+                    android:layout_height="wrap_content"
+                    android:paddingLeft="@dimen/size5"
+                    android:text="@string/etf_wt_account"
+                    android:textColor="@color/text" />
+
+                <TextView
+                    android:id="@+id/ll_tv3"
+                    android:text="00000"
+                    android:layout_width="wrap_content"
+                    android:layout_height="wrap_content"
+                    android:paddingLeft="@dimen/size10"
+                    android:textColor="@color/text" />
+            </LinearLayout>
+
+            <View
+                android:layout_width="@dimen/size1"
+                android:layout_height="0dp" />
+
+            <LinearLayout
+                android:layout_width="0dp"
+                android:layout_height="wrap_content"
+                android:layout_weight="1"
+                android:background="@color/backgroundColor"
+                android:orientation="horizontal"
+                android:padding="@dimen/size10">
+
+                <TextView
+                    android:layout_width="wrap_content"
+                    android:layout_height="wrap_content"
+                    android:paddingLeft="@dimen/size5"
+                    android:text="@string/etf_gddm"
+                    android:textColor="@color/text" />
+
+                <TextView
+                    android:id="@+id/ll_tv4"
+                    android:text="00000"
+                    android:layout_width="wrap_content"
+                    android:layout_height="wrap_content"
+                    android:paddingLeft="@dimen/size10"
+                    android:textColor="@color/text" />
+            </LinearLayout>
+
+
+
+        </LinearLayout>
+
+        <LinearLayout
+            android:layout_width="match_parent"
+            android:layout_height="wrap_content"
+            android:layout_marginTop="@dimen/size2"
+            android:orientation="horizontal">
+
+
+        </LinearLayout>
+
+        <ImageView
+            android:id="@+id/deliveryImageView"
+            android:layout_width="match_parent"
+            android:layout_height="@dimen/size40"
+            android:gravity="center"
+            android:scaleType="center"
+            android:src="@mipmap/zhankai" />
+
+    </LinearLayout>
+
 
 
 </LinearLayout>

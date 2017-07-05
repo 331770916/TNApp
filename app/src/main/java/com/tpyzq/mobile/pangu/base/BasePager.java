@@ -26,6 +26,7 @@ public abstract class BasePager {
     public NetWorkUtil net;
     public String mSession;
     public int type;
+    public String exchangeType;
 
     public BasePager(Context context, String params){
         this.mContext = context;
@@ -45,6 +46,11 @@ public abstract class BasePager {
     public int getType() {
         return type;
     }
+
+    public void setExchangeType(String exchangeType){
+        this.exchangeType=exchangeType;
+    }
+    public String getExchangeType(){return exchangeType;}
 
     public abstract void setView(String params);
     public abstract  void initData();

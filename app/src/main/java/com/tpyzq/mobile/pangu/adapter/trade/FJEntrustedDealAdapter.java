@@ -17,10 +17,23 @@ public class FJEntrustedDealAdapter extends PagerAdapter {
 
     private List<BasePager> pagers;
 
+    public FJEntrustedDealAdapter(List<BasePager> pagers){
+        this.pagers = pagers;
+    }
+
     public FJEntrustedDealAdapter(List<BasePager> pagers,int type) {
         this.pagers = pagers;
         for (int i = 0;i < pagers.size();i++)
             pagers.get(i).setType(type);
+    }
+
+    public FJEntrustedDealAdapter(List<BasePager> pagers,int type,String exchange_type){
+        this.pagers = pagers;
+        for (int i = 0;i < pagers.size();i++)
+            pagers.get(i).setType(type);
+        for (int i = 0; i < pagers.size(); i++) {
+            pagers.get(i).setExchangeType(exchange_type);
+        }
     }
 
     @Override

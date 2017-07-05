@@ -785,6 +785,16 @@
     <string name="etf_mmfx">买卖方向</string>
     <string name="etf_djjdje">冻结解冻金额</string>
     <string name="etf_wtsx">委托属性</string>
+    <string name="ETFTitle">ETF</string>
+    <string name="ETF_shengou">ETF申购</string>
+    <string name="ETF_shuhui">ETF赎回</string>
+    <string name="ETF_shenshu_Revoke">ETF申赎撤单</string>
+    <string name="ETFConstituentStock">ETF成分股查询</string>
+    <string name="ETF_shenshu_ClosingTheDeal">ETF申赎成交查询</string>
+    <string name="ETF_shenshu_History">ETF申赎历史查询</string>
+
+
+
 
 
 </resources>

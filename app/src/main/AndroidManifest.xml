@@ -368,6 +368,9 @@
         <activity android:name=".activity.trade.stock.FJWithdrawOrderActivity" />
         <activity android:name=".activity.trade.stock.FJEntrustedQueryActivity" />
         <activity android:name=".activity.trade.stock.FJDealQueryActivity" />
+        <activity android:name=".activity.trade.stock.ETFNavigationBarActivity"/>
+        <activity android:name=".activity.trade.stock.ETFHistoryInquireActivity"/>
+        <activity android:name=".activity.trade.stock.ETFApplyforOrRedeemActivity"/>
 
         <!--投票 相关activity-->
         <activity android:name=".activity.trade.stock.NetworkVotingActivity" />
