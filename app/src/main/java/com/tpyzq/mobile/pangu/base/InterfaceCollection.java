@@ -1329,8 +1329,8 @@ public class InterfaceCollection {
                 } else {
                     try {
                         JSONObject jsonObject = new JSONObject(response);
-                        String code = jsonObject.getString("MSG_CODE");
-                        String msg = jsonObject.getString("MSG_TEXT");
+                        String code = jsonObject.getString("code");
+                        String msg = jsonObject.getString("msg");
                         info.setCode(code);
                         info.setMsg(msg);
                         info.setTag(TAG);

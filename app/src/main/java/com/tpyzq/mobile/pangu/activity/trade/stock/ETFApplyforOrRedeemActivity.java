@@ -99,6 +99,9 @@ public class ETFApplyforOrRedeemActivity extends BaseActivity implements TextWat
                 if (s.length() == 6) {
                     //  请求网络接口
                     mDialog = LoadingDialog.initDialog(this, "正在查询...");
+                    if (!this.isFinishing()) {
+                        mDialog.show();
+                    }
                     InterfaceCollection.getInstance().queryApplyfor(token, s.toString().trim(), TAG, this);
                 }else {
                     //  清空数据
@@ -110,7 +113,7 @@ public class ETFApplyforOrRedeemActivity extends BaseActivity implements TextWat
                 }
                 break;
             case R.id.et_input_count:
-                if (s.toString().isEmpty() && mInputCode.toString().length()==6){
+                if (!s.toString().isEmpty() && mInputCode.getText().toString().length()==6){
                     btSubmit.setBackgroundResource(R.drawable.lonin);
                     btSubmit.setEnabled(true);
                 }
