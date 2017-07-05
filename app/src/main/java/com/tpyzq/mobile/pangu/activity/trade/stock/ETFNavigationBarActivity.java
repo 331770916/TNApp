@@ -40,12 +40,12 @@ public class ETFNavigationBarActivity extends BaseActivity implements View.OnCli
             case R.id.Layout_1:   //  申购
 //                Helper.getInstance().showToast(this,getString(R.string.ETF_shengou));
                 intent.setClass(this,ETFApplyforOrRedeemActivity.class);
-                intent.putExtra("Applyfor","");
+                intent.putExtra("type","Applyfor");
                 break;
             case R.id.Layout_2:   //赎回
 //                Helper.getInstance().showToast(this,getString(R.string.ETF_shuhui));
                 intent.setClass(this,ETFApplyforOrRedeemActivity.class);
-                intent.putExtra("Redeem","");
+                intent.putExtra("type","Redeem");
                 break;
             case R.id.Layout_3:
                 intent.setClass(this,ETFRevokeActivity.class);
