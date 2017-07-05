@@ -111,16 +111,18 @@ public class ETFTransactrionQueryAdapter extends BaseAdapter {
         viewHolder.fj_content.setOnClickListener(new View.OnClickListener() {
             @Override
             public void onClick(View v) {
-                if (mPoint!=-1) {
-                    mList.get(mPoint).setShowRule(false);
-                }
-                /*if (etfDataEntity.isShowRule()) {
+                if (mPoint == position) {
+                    //如果点击的条目和展示的条目一样的话，直接进行取反
                     etfDataEntity.setShowRule(false);
-                } else  {
+                    mPoint = -1;
+                } else {
+                    //如果点击条目和展示的条目不一样，将point位置的条目设置为false，将position位置的条目设置为true
+                    if (mPoint != -1) {
+                        mList.get(mPoint).setShowRule(false);
+                    }
                     etfDataEntity.setShowRule(true);
-                }*/
-                etfDataEntity.setShowRule(true);
-                mPoint = position;
+                    mPoint = position;
+                }
                 notifyDataSetChanged();
             }
         });

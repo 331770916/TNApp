@@ -13,7 +13,8 @@ import com.tpyzq.mobile.pangu.data.EtfDataEntity;
 import java.util.ArrayList;
 
 /**
- * Created by 33920_000 on 2017/7/5.
+ * Created by 李雄 on 2017/7/5.
+ * 申赎撤单适配器
  */
 
 public class ETFRevokeAdapter  extends BaseAdapter {
