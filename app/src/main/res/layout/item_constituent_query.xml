@@ -7,6 +7,7 @@
     <!--  ETF成分股查询   列表     详情 共用一个xml -->
 
     <LinearLayout
+        android:id="@+id/ll_content"
         android:layout_width="match_parent"
         android:layout_height="@dimen/size53"
         android:background="@color/white"
@@ -66,6 +67,7 @@
                     android:textColor="@color/text" />
 
                 <TextView
+                    android:id="@+id/tv1"
                     android:text="00000"
                     android:layout_width="wrap_content"
                     android:layout_height="wrap_content"
@@ -93,6 +95,7 @@
                     android:textColor="@color/text" />
 
                 <TextView
+                    android:id="@+id/tv2"
                     android:text="00000"
                     android:layout_width="wrap_content"
                     android:layout_height="wrap_content"
@@ -125,7 +128,7 @@
 
                 <TextView
                     android:text="00000"
-                    android:id="@+id/TextView6"
+                    android:id="@+id/tv3"
                     android:layout_width="wrap_content"
                     android:layout_height="wrap_content"
                     android:paddingLeft="@dimen/size10"
@@ -148,6 +151,7 @@
         </LinearLayout>
 
         <ImageView
+            android:id="@+id/iv_top"
             android:layout_width="match_parent"
             android:layout_height="@dimen/size40"
             android:gravity="center"
