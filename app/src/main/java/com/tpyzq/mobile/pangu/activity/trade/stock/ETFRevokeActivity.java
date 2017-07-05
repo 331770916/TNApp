@@ -10,13 +10,14 @@ import com.handmark.pulltorefresh.library.PullToRefreshBase;
 import com.handmark.pulltorefresh.library.PullToRefreshListView;
 import com.tpyzq.mobile.pangu.R;
 import com.tpyzq.mobile.pangu.adapter.trade.ETFRevokeAdapter;
-import com.tpyzq.mobile.pangu.adapter.trade.ETFTransactrionQueryAdapter;
 import com.tpyzq.mobile.pangu.base.BaseActivity;
 import com.tpyzq.mobile.pangu.base.InterfaceCollection;
 import com.tpyzq.mobile.pangu.data.EtfDataEntity;
 import com.tpyzq.mobile.pangu.data.ResultInfo;
+import com.tpyzq.mobile.pangu.http.OkHttpUtil;
 import com.tpyzq.mobile.pangu.util.SpUtils;
 import com.tpyzq.mobile.pangu.view.dialog.LoadingDialog;
+import com.tpyzq.mobile.pangu.view.dialog.MistakeDialog;
 import com.tpyzq.mobile.pangu.view.dialog.StructuredFundDialog;
 
 import java.util.ArrayList;
@@ -25,17 +26,18 @@ import java.util.ArrayList;
  * Created by 33920_000 on 2017/7/5.
  */
 
-public class ETFRevokeActivity extends BaseActivity {
+public class ETFRevokeActivity extends BaseActivity implements  StructuredFundDialog.Expression {
     private ImageView iv_back;
     private PullToRefreshListView lv;
     private ImageView iv_null;
     private String position_str = "";//定位串
     private ArrayList<EtfDataEntity> mList;
     private ETFRevokeAdapter adapter;
-    private final String TAG = "ETFRevokeActivity";
+    public static final String TAG = "ETFRevokeActivity";
     private final int PAGESIZE = 30;//每页条数
     private String mSession;//手机识别码
     private Dialog mDialog;//等待条
+    public EtfDataEntity clickEntity;//点击的条目实体
     //    private boolean isMore = true;//是否还有更多
     @Override
     public void initView() {
@@ -47,14 +49,17 @@ public class ETFRevokeActivity extends BaseActivity {
                 finish();
             }
         });
-        lv = (PullToRefreshListView)findViewById(R.id.lv);
         iv_null = (ImageView)findViewById(R.id.iv_null);
+        lv = (PullToRefreshListView)findViewById(R.id.lv);
         lv.setEmptyView(iv_null);
+        lv.setMode(PullToRefreshBase.Mode.BOTH);
         lv.setOnItemClickListener(new AdapterView.OnItemClickListener() {
+
             @Override
             public void onItemClick(AdapterView<?> parent, View view, int position, long id) {
-                /*StructuredFundDialog dialog = new StructuredFundDialog(this, TAG_SH, this, etfDataEntity, null, null);
-                dialog.show();*/
+                clickEntity = mList.get(position);
+                StructuredFundDialog dialog = new StructuredFundDialog(ETFRevokeActivity.this, TAG, ETFRevokeActivity.this, mList.get(position), null, null);
+                dialog.show();
             }
         });
         mList = new ArrayList<EtfDataEntity>();
@@ -79,7 +84,7 @@ public class ETFRevokeActivity extends BaseActivity {
                 }
             }
         });
-        mDialog = LoadingDialog.initDialog(this, "正在查询...");
+        mDialog = LoadingDialog.initDialog(this, "");
 
         initData(true);
     }
@@ -92,18 +97,23 @@ public class ETFRevokeActivity extends BaseActivity {
         if (isRefresh) {
             tempposition_str = "";
         }
-        InterfaceCollection.getInstance().queryDeal(mSession, tempposition_str, PAGESIZE+"", TAG, new InterfaceCollection.InterfaceCallback() {
+        InterfaceCollection.getInstance().queryEntrust(mSession, "1",tempposition_str, PAGESIZE+"", TAG, new InterfaceCollection.InterfaceCallback() {
             @Override
             public void callResult(ResultInfo info) {
                 String code = info.getCode();
                 String msg = info.getMsg();
                 if ("0".equalsIgnoreCase(code)) {
                     if (isRefresh) {
-                        position_str = "";
                         mList.clear();
                     }
                     ArrayList<EtfDataEntity> tempList = (ArrayList<EtfDataEntity>) info.getData();
-                    //判断是否取到整页数
+                    //判断是否取到整页数据
+                    if (null==tempList||tempList.size()<PAGESIZE&&lv.getMode()== PullToRefreshBase.Mode.BOTH){
+                        lv.setMode(PullToRefreshBase.Mode.PULL_FROM_START);
+                    } else if (null!=tempList||tempList.size()==PAGESIZE&&lv.getMode()== PullToRefreshBase.Mode.PULL_FROM_START){
+                        lv.setMode(PullToRefreshBase.Mode.BOTH);
+                    }
+                    //获取定位串
                     if (null!=tempList&&tempList.size()>0) {
                         position_str = tempList.get(0).getPosition_str();
                     }
@@ -123,5 +133,36 @@ public class ETFRevokeActivity extends BaseActivity {
     @Override
     public int getLayoutId() {
         return R.layout.activity_etf_revoke_order;
+    }
+
+    @Override
+    public void State() {
+        if (null == clickEntity) {
+            return;
+        }
+        if (null!=mDialog && !mDialog.isShowing()) {
+            mDialog.show();
+        }
+        InterfaceCollection.getInstance().revokeOrder(mSession, clickEntity.getExchange_type(), clickEntity.getEntrust_no(), clickEntity.getStock_code(), TAG, new InterfaceCollection.InterfaceCallback() {
+            @Override
+            public void callResult(ResultInfo info) {
+                String code = info.getCode();
+                String msg = info.getMsg();
+                if ("0".equalsIgnoreCase(code)) {
+                    MistakeDialog.showDialog(msg,ETFRevokeActivity.this,null);
+                } else {
+                    MistakeDialog.showDialog(msg,ETFRevokeActivity.this,null);
+                }
+                if (null!=mDialog && mDialog.isShowing()) {
+                    mDialog.dismiss();
+                }
+            }
+        });
+    }
+
+    @Override
+    protected void onDestroy() {
+        super.onDestroy();
+        OkHttpUtil.cancelSingleRequestByTag(TAG);
     }
 }

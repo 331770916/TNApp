@@ -47,9 +47,10 @@ public class ETFTrasactionQueryActivity extends BaseActivity {
                 finish();
             }
         });
-        lv = (PullToRefreshListView)findViewById(R.id.lv);
         iv_null = (ImageView)findViewById(R.id.iv_null);
+        lv = (PullToRefreshListView)findViewById(R.id.lv);
         lv.setEmptyView(iv_null);
+        lv.setMode(PullToRefreshBase.Mode.BOTH);
         mList = new ArrayList<EtfDataEntity>();
         adapter = new ETFTransactrionQueryAdapter(this, mList);
         lv.setAdapter(adapter);
@@ -96,17 +97,16 @@ public class ETFTrasactionQueryActivity extends BaseActivity {
                 String msg = info.getMsg();
                 if ("0".equalsIgnoreCase(code)) {
                     if (isRefresh) {
-                        position_str = "";
                         mList.clear();
                         adapter.setPoint(-1);
                     }
                     ArrayList<EtfDataEntity> tempList = (ArrayList<EtfDataEntity>) info.getData();
                     //判断是否取到整页数据
-                    /*if (null==tempList||tempList.size()<PAGESIZE){
+                    if (null==tempList||tempList.size()<PAGESIZE){
                         lv.setMode(PullToRefreshBase.Mode.PULL_FROM_START);
                     } else {
                         lv.setMode(PullToRefreshBase.Mode.BOTH);
-                    }*/
+                    }
                     //
                     /*if (null!=tempList&&tempList.size()>0) {
                         position_str = tempList.get(0).getPosition_str();

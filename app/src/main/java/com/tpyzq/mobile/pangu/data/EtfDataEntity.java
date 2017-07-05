@@ -46,7 +46,7 @@ public class EtfDataEntity {
     private String entrust_price;     // 委托价格  （委托金额）
     private String position_str;    //  定位串
     private String trade_plat;   // 交易平台
-    private String entrust_bs;//申赎成交查询 买卖方向
+    private String entrust_bs;//申赎成交查询 买卖方向 1 买入  2  卖出
     private String real_status_name;//申赎成交查询 状态名称
     private String real_status ;      //申赎成交查询 状态
     private String curr_time ;      //申赎成交查询 委托时间

@@ -9,6 +9,7 @@ import android.widget.TextView;
 import com.moxun.tagcloudlib.view.Tag;
 import com.tpyzq.mobile.pangu.R;
 import com.tpyzq.mobile.pangu.activity.trade.stock.ETFApplyforOrRedeemActivity;
+import com.tpyzq.mobile.pangu.activity.trade.stock.ETFRevokeActivity;
 import com.tpyzq.mobile.pangu.activity.trade.stock.FJFundGradingMergerActivity;
 import com.tpyzq.mobile.pangu.activity.trade.stock.FJFundSplitActivity;
 import com.tpyzq.mobile.pangu.activity.trade.stock.FJWithdrawOrderActivity;
@@ -154,6 +155,19 @@ public class StructuredFundDialog extends BaseDialog implements View.OnClickList
             tv_4.setText(etfDataEntity.getStock_code());
             tv_6.setText(etfDataEntity.getStock_name());
             tv_8.setText(etfDataEntity.getStock_code());
+        } else if (ETFRevokeActivity.TAG.equalsIgnoreCase(mTAG)) {
+            EtfDataEntity etfDataEntity = (EtfDataEntity)object;
+            tv_title.setText("ETF申赎撤单");
+            tv_1.setText("操作类别:");
+            tv_3.setText("ETF代码:");
+            tv_5.setText("ETF名称:");
+            tv_7.setText("赎回份额:");
+            tv_9.setText("股东代码:");
+            tv_2.setText(etfDataEntity.getExchange_type());
+            tv_4.setText(etfDataEntity.getStock_code());
+            tv_6.setText(etfDataEntity.getStock_name());
+            tv_8.setText(etfDataEntity.getEntrust_balance());
+            tv_10.setText(etfDataEntity.getStock_account());
         }
     }
 
@@ -182,6 +196,8 @@ public class StructuredFundDialog extends BaseDialog implements View.OnClickList
                 }else if (ETFApplyforOrRedeemActivity.TAG_SH.equals(mTAG)){   //  赎回
                     mExpression.State();
                     dismiss();
+                } else if (ETFRevokeActivity.TAG.equalsIgnoreCase(mTAG)) {
+                    mExpression.State();
                 }
                 break;
             case R.id.bt_false:

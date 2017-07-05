@@ -97,7 +97,11 @@ public class ETFTransactrionQueryAdapter extends BaseAdapter {
         viewHolder.tv_entrust_code.setText(etfDataEntity.getEntrust_no());
         viewHolder.tv_entrust_code1.setText(etfDataEntity.getCbp_business_id());
         viewHolder.tv_limit.setText(etfDataEntity.getBusiness_balance());
-        viewHolder.tv_direction.setText(etfDataEntity.getEntrust_bs());
+        if ("1".equalsIgnoreCase(etfDataEntity.getEntrust_bs())) {
+            viewHolder.tv_direction.setText("买入");
+        } else {
+            viewHolder.tv_direction.setText("卖出");
+        }
         if (etfDataEntity.isShowRule()) {
             viewHolder.ll_show.setVisibility(View.VISIBLE);
         } else {
