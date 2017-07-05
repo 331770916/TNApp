@@ -141,9 +141,9 @@ public class ReverseRepoActivityPresenter {
         HashMap map300140_1 = new HashMap();
         map300140_1.put("SEC_ID", "tpyzq");
         String market_code = "";
-        if (prodcode.startsWith("SZ")) {
+        if (prodcode.startsWith("2")) {
             market_code = "2";
-        } else if (prodcode.startsWith("SH")) {
+        } else if (prodcode.startsWith("1")) {
             market_code = "1";
         }
         map300140_1.put("MARKET", market_code);
