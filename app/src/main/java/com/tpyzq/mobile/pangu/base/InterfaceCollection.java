@@ -783,6 +783,8 @@ public class InterfaceCollection {
                             for (int i = 0; i < data.length(); i++) {
                                 NetworkVotingEntity bean = new NetworkVotingEntity();
                                 JSONObject obj = data.getJSONObject(i);
+                                bean.setStock_account(obj.getString("STOCK_ACCOUNT"));
+                                bean.setExchange_type(obj.getString("EXCHANGE_TYPE"));
                                 bean.setMeeting_name(obj.getString("MEETING_NAME"));
                                 bean.setMeeting_seq(obj.getString("MEETING_SEQ"));
                                 bean.setCompany_name(obj.getString("COMPANY_NAME"));
