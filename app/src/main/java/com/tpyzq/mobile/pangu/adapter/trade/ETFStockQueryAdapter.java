@@ -106,6 +106,9 @@ public class ETFStockQueryAdapter extends BaseAdapter{
             });
         } else {
             //成分股查询
+            viewHolder.tv_code.setText(etfDataEntity.getStock_code());
+            viewHolder.tv_name.setText(etfDataEntity.getStock_name());
+            viewHolder.tv_etfcode.setText(etfDataEntity.getStock_code());
         }
         return convertView;
     }

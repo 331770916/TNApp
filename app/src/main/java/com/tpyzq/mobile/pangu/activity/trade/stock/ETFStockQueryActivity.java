@@ -2,15 +2,25 @@ package com.tpyzq.mobile.pangu.activity.trade.stock;
 
 import android.app.Activity;
 import android.app.Dialog;
+import android.content.Intent;
 import android.view.View;
 import android.widget.AdapterView;
+import android.widget.ListView;
 
+import com.handmark.pulltorefresh.library.PullToRefreshBase;
 import com.handmark.pulltorefresh.library.PullToRefreshListView;
 import com.tpyzq.mobile.pangu.R;
+import com.tpyzq.mobile.pangu.adapter.trade.ETFStockQueryAdapter;
 import com.tpyzq.mobile.pangu.base.BaseActivity;
 import com.tpyzq.mobile.pangu.base.InterfaceCollection;
+import com.tpyzq.mobile.pangu.data.EtfDataEntity;
 import com.tpyzq.mobile.pangu.data.ResultInfo;
+import com.tpyzq.mobile.pangu.util.Helper;
+import com.tpyzq.mobile.pangu.util.SpUtils;
 import com.tpyzq.mobile.pangu.view.dialog.LoadingDialog;
+
+import java.util.ArrayList;
+import java.util.List;
 
 /**
  * Created by ltyhome on 05/07/2017.
@@ -18,25 +28,48 @@ import com.tpyzq.mobile.pangu.view.dialog.LoadingDialog;
  * Describe: 成分股查询
  */
 
-public class ETFStockQueryActivity extends BaseActivity implements View.OnClickListener ,InterfaceCollection.InterfaceCallback, AdapterView.OnItemClickListener {
+public class ETFStockQueryActivity extends BaseActivity implements View.OnClickListener, InterfaceCollection.InterfaceCallback, AdapterView.OnItemClickListener {
     private PullToRefreshListView etfList;
     private Dialog mDialog;
+    private List<EtfDataEntity> mList;
+    private final String TAG = "ETFStockQueryActivity";
+    private ETFStockQueryAdapter adapter;
+    private String token;
 
 
     @Override
     public void initView() {
+        mList = new ArrayList<>();
         findViewById(R.id.iv_back).setOnClickListener(this);
         etfList = (PullToRefreshListView) findViewById(R.id.etfList);
         etfList.setOnItemClickListener(this);
-        requestData();
+        adapter = new ETFStockQueryAdapter(this, mList, TAG);
+        token = SpUtils.getString(this, "mSession", "");
+        requestData("", "");
+        etfList.setMode(PullToRefreshBase.Mode.PULL_FROM_END);
+        etfList.setOnRefreshListener(new PullToRefreshBase.OnRefreshListener2<ListView>() {
+            @Override
+            public void onPullDownToRefresh(PullToRefreshBase<ListView> refreshView) {
+                requestData("", "30");
+            }
+
+            @Override
+            public void onPullUpToRefresh(PullToRefreshBase<ListView> refreshView) {
+                if (mList.size() > 0 && !mList.get(0).getPosition_str().isEmpty()) {
+                    String position = mList.get(0).getPosition_str();
+                    requestData(position, "30");
+                }
+
+            }
+        });
     }
 
-    private void requestData() {
+    private void requestData(String page, String num) {
         mDialog = LoadingDialog.initDialog(this, "正在查询...");
         if (!mDialog.isShowing())
             mDialog.show();
 
-
+        InterfaceCollection.getInstance().constituentStock(token, "", page, num, TAG, this);
     }
 
     @Override
@@ -47,7 +80,23 @@ public class ETFStockQueryActivity extends BaseActivity implements View.OnClickL
 
     @Override
     public void callResult(ResultInfo info) {
+        if (mDialog.isShowing() && mDialog != null) {
+            mDialog.dismiss();
+        }
+        if (TAG.equals(info.getTag())) {
+            String code = info.getCode();
+            if ("0".equals(code)) {
+                List<EtfDataEntity> list = (List<EtfDataEntity>) info.getData();
+                mList.addAll(list);
+                adapter.notifyDataSetChanged();
+            } else if ("-6".equals(code)) {
+                skip.startLogin(this);
+            } else {
+                Helper.getInstance().showToast(this, info.getMsg());
+            }
 
+        }
+        etfList.onRefreshComplete();
     }
 
     @Override
@@ -58,6 +107,8 @@ public class ETFStockQueryActivity extends BaseActivity implements View.OnClickL
 
     @Override
     public void onItemClick(AdapterView<?> parent, View view, int position, long id) {
-
+        Intent intent = new Intent(this, ETFStockListActivity.class);
+        intent.putExtra("stock_no", mList.get(position - 1).getStock_code());
+        startActivity(intent);
     }
 }
