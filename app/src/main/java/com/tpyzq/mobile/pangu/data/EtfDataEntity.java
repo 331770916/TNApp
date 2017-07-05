@@ -38,9 +38,54 @@ public class EtfDataEntity {
     private String report_time;    // 申报时间
     private String business_amount;  //  成交数量
     private String entrust_price;     // 委托价格  （委托金额）
-    private String real_status ;      //状态
     private String position_str;    //  定位串
     private String trade_plat;   // 交易平台
+    private String entrust_bs;//申赎成交查询 买卖方向
+    private String real_status_name;//申赎成交查询 状态名称
+    private String real_status ;      //申赎成交查询 状态
+    private String curr_time ;      //申赎成交查询 委托时间
+    private String business_balance ;      //申赎成交查询 成交金额
+    private String cbp_business_id ;      //申赎成交查询 成交编号
+
+    public String getCbp_business_id() {
+        return cbp_business_id;
+    }
+
+    public void setCbp_business_id(String cbp_business_id) {
+        this.cbp_business_id = cbp_business_id;
+    }
+
+    public String getEntrust_bs() {
+        return entrust_bs;
+    }
+
+    public void setEntrust_bs(String entrust_bs) {
+        this.entrust_bs = entrust_bs;
+    }
+
+    public String getReal_status_name() {
+        return real_status_name;
+    }
+
+    public void setReal_status_name(String real_status_name) {
+        this.real_status_name = real_status_name;
+    }
+
+    public String getCurr_time() {
+        return curr_time;
+    }
+
+    public void setCurr_time(String curr_time) {
+        this.curr_time = curr_time;
+    }
+
+    public String getBusiness_balance() {
+        return business_balance;
+    }
+
+    public void setBusiness_balance(String business_balance) {
+        this.business_balance = business_balance;
+    }
 
     public boolean isShowRule() {
         return isShowRule;

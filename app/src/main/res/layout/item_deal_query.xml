@@ -21,6 +21,7 @@
             android:orientation="vertical">
 
             <TextView
+                android:id="@+id/tv_name"
                 android:layout_width="wrap_content"
                 android:layout_height="wrap_content"
                 android:layout_marginLeft="@dimen/size20"
@@ -30,6 +31,7 @@
                 android:textStyle="bold" />
 
             <TextView
+                android:id="@+id/tv_code"
                 android:layout_width="wrap_content"
                 android:layout_height="wrap_content"
                 android:layout_marginBottom="@dimen/size12"
@@ -48,6 +50,7 @@
             android:orientation="vertical">
 
             <TextView
+                android:id="@+id/tv_tranaction_num"
                 android:layout_width="wrap_content"
                 android:layout_height="wrap_content"
                 android:layout_gravity="right"
@@ -57,6 +60,7 @@
                 android:textSize="@dimen/txtSize13" />
 
             <TextView
+                android:id="@+id/tv_transaction_status"
                 android:layout_width="wrap_content"
                 android:layout_height="wrap_content"
                 android:layout_gravity="right"
@@ -75,6 +79,7 @@
             android:orientation="vertical">
 
             <TextView
+                android:id="@+id/tv_date"
                 android:layout_width="wrap_content"
                 android:layout_height="wrap_content"
                 android:layout_gravity="center"
@@ -86,6 +91,7 @@
     </LinearLayout>
 
     <LinearLayout
+        android:id="@+id/ll_show"
         android:layout_width="match_parent"
         android:layout_height="wrap_content"
         android:layout_marginTop="@dimen/size5"
@@ -114,6 +120,7 @@
                     android:textColor="@color/text" />
 
                 <TextView
+                    android:id="@+id/tv_entrust_code"
                     android:layout_width="wrap_content"
                     android:layout_height="wrap_content"
                     android:paddingLeft="@dimen/size10"
@@ -141,6 +148,7 @@
                     android:textColor="@color/text" />
 
                 <TextView
+                    android:id="@+id/tv_limit"
                     android:layout_width="wrap_content"
                     android:layout_height="wrap_content"
                     android:paddingLeft="@dimen/size10"
@@ -168,10 +176,11 @@
                     android:layout_width="wrap_content"
                     android:layout_height="wrap_content"
                     android:paddingLeft="@dimen/size5"
-                    android:text="@string/etf_wtbh"
+                    android:text="@string/etf_cjbh"
                     android:textColor="@color/text" />
 
                 <TextView
+                    android:id="@+id/tv_entrust_code1"
                     android:layout_width="wrap_content"
                     android:layout_height="wrap_content"
                     android:paddingLeft="@dimen/size10"
@@ -199,6 +208,7 @@
                     android:textColor="@color/text" />
 
                 <TextView
+                    android:id="@+id/tv_direction"
                     android:layout_width="wrap_content"
                     android:layout_height="wrap_content"
                     android:paddingLeft="@dimen/size10"
@@ -219,6 +229,7 @@
         </LinearLayout>
 
         <ImageView
+            android:id="@+id/iv_top"
             android:layout_width="match_parent"
             android:layout_height="@dimen/size40"
             android:gravity="center"
