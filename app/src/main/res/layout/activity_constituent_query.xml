@@ -52,7 +52,7 @@
             android:layout_height="wrap_content"
             android:layout_weight="1"
             android:gravity="center|left"
-            android:text="@string/entrust_name"
+            android:text="@string/etf_jjdm"
             android:textColor="@color/newStockTitle"
             android:textSize="@dimen/txtSize12" />
 
@@ -61,7 +61,7 @@
             android:layout_height="wrap_content"
             android:layout_weight="1"
             android:gravity="center"
-            android:text="@string/etf_wtb_number"
+            android:text="@string/etf_jjname"
             android:textColor="@color/newStockTitle"
             android:textSize="@dimen/txtSize12" />
 
@@ -70,7 +70,7 @@
             android:layout_height="wrap_content"
             android:layout_weight="1"
             android:gravity="center|right"
-            android:text="@string/etf_number_amount"
+            android:text="@string/etf_code"
             android:textColor="@color/newStockTitle"
             android:textSize="@dimen/txtSize12" />
     </LinearLayout>
