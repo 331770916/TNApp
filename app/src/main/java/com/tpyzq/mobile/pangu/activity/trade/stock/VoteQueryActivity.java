@@ -84,7 +84,7 @@ public class VoteQueryActivity extends BaseActivity implements View.OnClickListe
             mMarket = intent.getStringExtra("Market");
             mShareholderCode_tv.setText(intent.getStringExtra("Code"));
             for (int i = 0;i<listBuy.size();i++)
-                    ((VoteQueryPager)listBuy.get(i)).setmMarket(mMarket);
+                ((VoteQueryPager) listBuy.get(i)).setmMarket(mMarket,mPostion);
             viewPager.setCurrentItem(mPostion);
         }
     }

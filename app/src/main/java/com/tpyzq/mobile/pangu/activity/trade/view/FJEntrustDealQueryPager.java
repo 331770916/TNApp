@@ -55,7 +55,7 @@ public class FJEntrustDealQueryPager extends BasePager implements InterfaceColle
     @Override
     public void setView(String params) {
         listView = (PullToRefreshListView) rootView.findViewById(R.id.listview);
-        listView.setMode(PullToRefreshBase.Mode.PULL_FROM_START);
+        listView.setMode(PullToRefreshBase.Mode.BOTH);
         iv_isEmpty = (ImageView) rootView.findViewById(R.id.iv_isEmpty);
         if ("EntrustCustomPager".equals(params) || "DealCustomPager".equals(params)) {
             fjTimepicker = (LinearLayout) rootView.findViewById(R.id.fjTimepicker);
@@ -148,6 +148,10 @@ public class FJEntrustDealQueryPager extends BasePager implements InterfaceColle
             if (object instanceof List) {
                 myList = (List<StructuredFundEntity>) object;
                 if (myList.size() > 0) {
+                    if(myList.size()<30)
+                        listView.setMode(PullToRefreshBase.Mode.PULL_FROM_START);
+                    else
+                        listView.setMode(PullToRefreshBase.Mode.BOTH);
                     position = myList.get(myList.size() - 1).getPosition_str();
                     if (mIsClean)
                         refresh += 30;

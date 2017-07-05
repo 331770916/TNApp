@@ -37,6 +37,7 @@ import java.util.List;
  */
 
 public class VoteQueryPager extends BasePager implements InterfaceCollection.InterfaceCallback, VoteQueryAdapter.ScallCallback {
+    private static final String[] TAGS=new String[]{"VoteQueryTodayPager","VoteQueryOneWeekPager","VoteQueryInAMonthPager","VoteQueryThreeWeekPager","VoteQueryCustomPager"};
     private TextView mtvStartTime, mtvFinishTime, fjInquire;
     private String TAG, startDate, finishDate, position = "";
     private TimePickerView startTime, finishTime;
@@ -46,8 +47,9 @@ public class VoteQueryPager extends BasePager implements InterfaceCollection.Int
     private PullToRefreshListView mListView;
     private VoteQueryAdapter mAdapter;
     private ImageView iv_isEmpty;
-    private String mMarket = "1";
+    private String mMarket = "1",mTAG;
     private int refresh = 30;
+    private boolean isFirstInit = false;
     private List<NetworkVotingEntity> myList;
 
     public VoteQueryPager(Context context, String params) {
@@ -55,9 +57,16 @@ public class VoteQueryPager extends BasePager implements InterfaceCollection.Int
         this.TAG = params;
     }
 
-    public void setmMarket(String market){
+    public void setmMarket(String market,int mPostion){
         mMarket = market;
-        refresh("", "30", false);
+        mTAG = TAGS[mPostion];
+        isFirstInit = true;
+        if(TAG.equals(mTAG))//只刷新当前页面，其它页面数据置空
+            refresh("", "30", false);
+        else if(myList!=null&&!mIsClean){
+            myList.clear();
+            mAdapter.notifyDataSetChanged();
+        }
     }
 
     @Override
@@ -154,9 +163,6 @@ public class VoteQueryPager extends BasePager implements InterfaceCollection.Int
             mAdapter.setCallback(this);
             mListView.setAdapter(mAdapter);
             mListView.setEmptyView(iv_isEmpty);
-            if (!"VoteQueryCustomPager".equals(TAG))
-                mDialog.show();
-            refresh("", "30", false);
             mListView.setOnRefreshListener(new PullToRefreshBase.OnRefreshListener<ListView>() {
                 @Override
                 public void onRefresh(PullToRefreshBase<ListView> refreshView) {
@@ -200,11 +206,16 @@ public class VoteQueryPager extends BasePager implements InterfaceCollection.Int
                 public void onScroll(AbsListView view, int firstVisibleItem, int visibleItemCount, int totalItemCount) {
                 }
             });
+            isFirstInit = true;
+        }
+        if(isFirstInit){
+            if (!"VoteQueryCustomPager".equals(TAG))
+                mDialog.show();
+            refresh("", "30", false);
         }
     }
 
     public void refresh(String page, String num, boolean isClean) {
-
         switch (getType()) {
             case 0:
                 if(TAG.equals("VoteQueryTodayPager")){
@@ -221,6 +232,7 @@ public class VoteQueryPager extends BasePager implements InterfaceCollection.Int
                 break;
         }
         mIsClean = isClean;
+        isFirstInit =false;
     }
 
     @Override
@@ -251,6 +263,8 @@ public class VoteQueryPager extends BasePager implements InterfaceCollection.Int
                 if (myList.size() > 0) {
                     if(myList.size()<30)
                         mListView.setMode(PullToRefreshBase.Mode.PULL_FROM_START);
+                    else
+                        mListView.setMode(PullToRefreshBase.Mode.BOTH);
                     position = myList.get(myList.size()-1).getPosition_str();
                     if(mIsClean)
                         refresh += 30;

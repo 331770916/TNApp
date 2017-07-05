@@ -1856,12 +1856,6 @@ public class InterfaceCollection {
 
             @Override
             public void onResponse(String response, int id) {
-                //json数据
-                /*if ("".equalsIgnoreCase(position_str)) {
-                    response= "{\"code\":\"0\",\"msg\":\"332634成功\",\"data\":[{\"STOCK_CODE\":\"000888\",\"STOCK_NAME\":\"医药ETF\",\"ENTRUST_BS\":\"买入\",\"REAL_STATUS\":\"2\",\"REAL_STATUS_NAME\":\"拒绝\",\"BUSINESS_AMOUNT\":\"成交数量\",\"BUSINESS_BALANCE\":\"10088.00\",\"INIT_DATE\":\"2017-08-03\",\"CURR_TIME\":\"2016-09-09\",\"ENTRUST_NO\":\"1234567890\",\"STOCK_ACCOUNT\":\"1234567890\",\"TRADE_PLAT\":\"交易场所\",\"POSITION_STR_LONG\":\"11111111\",\"CBP_BUSINESS_ID\":\"0987654321\"},{\"STOCK_CODE\":\"000888\",\"STOCK_NAME\":\"医药ETF\",\"ENTRUST_BS\":\"买入\",\"REAL_STATUS\":\"2\",\"REAL_STATUS_NAME\":\"拒绝\",\"BUSINESS_AMOUNT\":\"成交数量\",\"BUSINESS_BALANCE\":\"10088.00\",\"INIT_DATE\":\"2017-08-03\",\"CURR_TIME\":\"2016-09-09\",\"ENTRUST_NO\":\"1234567890\",\"STOCK_ACCOUNT\":\"1234567890\",\"TRADE_PLAT\":\"交易场所\",\"POSITION_STR_LONG\":\"11111111\",\"CBP_BUSINESS_ID\":\"0987654321\"},{\"STOCK_CODE\":\"000888\",\"STOCK_NAME\":\"医药ETF\",\"ENTRUST_BS\":\"买入\",\"REAL_STATUS\":\"2\",\"REAL_STATUS_NAME\":\"拒绝\",\"BUSINESS_AMOUNT\":\"成交数量\",\"BUSINESS_BALANCE\":\"10088.00\",\"INIT_DATE\":\"2017-08-03\",\"CURR_TIME\":\"2016-09-09\",\"ENTRUST_NO\":\"1234567890\",\"STOCK_ACCOUNT\":\"1234567890\",\"TRADE_PLAT\":\"交易场所\",\"POSITION_STR_LONG\":\"11111111\",\"CBP_BUSINESS_ID\":\"0987654321\"},{\"STOCK_CODE\":\"000888\",\"STOCK_NAME\":\"医药ETF\",\"ENTRUST_BS\":\"买入\",\"REAL_STATUS\":\"2\",\"REAL_STATUS_NAME\":\"拒绝\",\"BUSINESS_AMOUNT\":\"成交数量\",\"BUSINESS_BALANCE\":\"10088.00\",\"INIT_DATE\":\"2017-08-03\",\"CURR_TIME\":\"2016-09-09\",\"ENTRUST_NO\":\"1234567890\",\"STOCK_ACCOUNT\":\"1234567890\",\"TRADE_PLAT\":\"交易场所\",\"POSITION_STR_LONG\":\"11111111\",\"CBP_BUSINESS_ID\":\"0987654321\"},{\"STOCK_CODE\":\"000888\",\"STOCK_NAME\":\"医药ETF\",\"ENTRUST_BS\":\"买入\",\"REAL_STATUS\":\"2\",\"REAL_STATUS_NAME\":\"拒绝\",\"BUSINESS_AMOUNT\":\"成交数量\",\"BUSINESS_BALANCE\":\"10088.00\",\"INIT_DATE\":\"2017-08-03\",\"CURR_TIME\":\"2016-09-09\",\"ENTRUST_NO\":\"1234567890\",\"STOCK_ACCOUNT\":\"1234567890\",\"TRADE_PLAT\":\"交易场所\",\"POSITION_STR_LONG\":\"11111111\",\"CBP_BUSINESS_ID\":\"0987654321\"},{\"STOCK_CODE\":\"000888\",\"STOCK_NAME\":\"医药ETF\",\"ENTRUST_BS\":\"买入\",\"REAL_STATUS\":\"2\",\"REAL_STATUS_NAME\":\"拒绝\",\"BUSINESS_AMOUNT\":\"成交数量\",\"BUSINESS_BALANCE\":\"10088.00\",\"INIT_DATE\":\"2017-08-03\",\"CURR_TIME\":\"2016-09-09\",\"ENTRUST_NO\":\"1234567890\",\"STOCK_ACCOUNT\":\"1234567890\",\"TRADE_PLAT\":\"交易场所\",\"POSITION_STR_LONG\":\"11111111\",\"CBP_BUSINESS_ID\":\"0987654321\"},{\"STOCK_CODE\":\"000888\",\"STOCK_NAME\":\"医药ETF\",\"ENTRUST_BS\":\"买入\",\"REAL_STATUS\":\"2\",\"REAL_STATUS_NAME\":\"拒绝\",\"BUSINESS_AMOUNT\":\"成交数量\",\"BUSINESS_BALANCE\":\"10088.00\",\"INIT_DATE\":\"2017-08-03\",\"CURR_TIME\":\"2016-09-09\",\"ENTRUST_NO\":\"1234567890\",\"STOCK_ACCOUNT\":\"1234567890\",\"TRADE_PLAT\":\"交易场所\",\"POSITION_STR_LONG\":\"11111111\",\"CBP_BUSINESS_ID\":\"0987654321\"},{\"STOCK_CODE\":\"000888\",\"STOCK_NAME\":\"医药ETF\",\"ENTRUST_BS\":\"买入\",\"REAL_STATUS\":\"2\",\"REAL_STATUS_NAME\":\"拒绝\",\"BUSINESS_AMOUNT\":\"成交数量\",\"BUSINESS_BALANCE\":\"10088.00\",\"INIT_DATE\":\"2017-08-03\",\"CURR_TIME\":\"2016-09-09\",\"ENTRUST_NO\":\"1234567890\",\"STOCK_ACCOUNT\":\"1234567890\",\"TRADE_PLAT\":\"交易场所\",\"POSITION_STR_LONG\":\"11111111\",\"CBP_BUSINESS_ID\":\"0987654321\"},{\"STOCK_CODE\":\"000888\",\"STOCK_NAME\":\"医药ETF\",\"ENTRUST_BS\":\"买入\",\"REAL_STATUS\":\"2\",\"REAL_STATUS_NAME\":\"拒绝\",\"BUSINESS_AMOUNT\":\"成交数量\",\"BUSINESS_BALANCE\":\"10088.00\",\"INIT_DATE\":\"2017-08-03\",\"CURR_TIME\":\"2016-09-09\",\"ENTRUST_NO\":\"1234567890\",\"STOCK_ACCOUNT\":\"1234567890\",\"TRADE_PLAT\":\"交易场所\",\"POSITION_STR_LONG\":\"11111111\",\"CBP_BUSINESS_ID\":\"0987654321\"},{\"STOCK_CODE\":\"000888\",\"STOCK_NAME\":\"医药ETF\",\"ENTRUST_BS\":\"买入\",\"REAL_STATUS\":\"2\",\"REAL_STATUS_NAME\":\"拒绝\",\"BUSINESS_AMOUNT\":\"成交数量\",\"BUSINESS_BALANCE\":\"10088.00\",\"INIT_DATE\":\"2017-08-03\",\"CURR_TIME\":\"2016-09-09\",\"ENTRUST_NO\":\"1234567890\",\"STOCK_ACCOUNT\":\"1234567890\",\"TRADE_PLAT\":\"交易场所\",\"POSITION_STR_LONG\":\"11111111\",\"CBP_BUSINESS_ID\":\"0987654321\"},{\"STOCK_CODE\":\"000888\",\"STOCK_NAME\":\"医药ETF\",\"ENTRUST_BS\":\"买入\",\"REAL_STATUS\":\"2\",\"REAL_STATUS_NAME\":\"拒绝\",\"BUSINESS_AMOUNT\":\"成交数量\",\"BUSINESS_BALANCE\":\"10088.00\",\"INIT_DATE\":\"2017-08-03\",\"CURR_TIME\":\"2016-09-09\",\"ENTRUST_NO\":\"1234567890\",\"STOCK_ACCOUNT\":\"1234567890\",\"TRADE_PLAT\":\"交易场所\",\"POSITION_STR_LONG\":\"11111111\",\"CBP_BUSINESS_ID\":\"0987654321\"},{\"STOCK_CODE\":\"000888\",\"STOCK_NAME\":\"医药ETF\",\"ENTRUST_BS\":\"买入\",\"REAL_STATUS\":\"2\",\"REAL_STATUS_NAME\":\"拒绝\",\"BUSINESS_AMOUNT\":\"成交数量\",\"BUSINESS_BALANCE\":\"10088.00\",\"INIT_DATE\":\"2017-08-03\",\"CURR_TIME\":\"2016-09-09\",\"ENTRUST_NO\":\"1234567890\",\"STOCK_ACCOUNT\":\"1234567890\",\"TRADE_PLAT\":\"交易场所\",\"POSITION_STR_LONG\":\"11111111\",\"CBP_BUSINESS_ID\":\"0987654321\"},{\"STOCK_CODE\":\"000888\",\"STOCK_NAME\":\"医药ETF\",\"ENTRUST_BS\":\"买入\",\"REAL_STATUS\":\"2\",\"REAL_STATUS_NAME\":\"拒绝\",\"BUSINESS_AMOUNT\":\"成交数量\",\"BUSINESS_BALANCE\":\"10088.00\",\"INIT_DATE\":\"2017-08-03\",\"CURR_TIME\":\"2016-09-09\",\"ENTRUST_NO\":\"1234567890\",\"STOCK_ACCOUNT\":\"1234567890\",\"TRADE_PLAT\":\"交易场所\",\"POSITION_STR_LONG\":\"11111111\",\"CBP_BUSINESS_ID\":\"0987654321\"},{\"STOCK_CODE\":\"000888\",\"STOCK_NAME\":\"医药ETF\",\"ENTRUST_BS\":\"买入\",\"REAL_STATUS\":\"2\",\"REAL_STATUS_NAME\":\"拒绝\",\"BUSINESS_AMOUNT\":\"成交数量\",\"BUSINESS_BALANCE\":\"10088.00\",\"INIT_DATE\":\"2017-08-03\",\"CURR_TIME\":\"2016-09-09\",\"ENTRUST_NO\":\"1234567890\",\"STOCK_ACCOUNT\":\"1234567890\",\"TRADE_PLAT\":\"交易场所\",\"POSITION_STR_LONG\":\"11111111\",\"CBP_BUSINESS_ID\":\"0987654321\"},{\"STOCK_CODE\":\"000888\",\"STOCK_NAME\":\"医药ETF\",\"ENTRUST_BS\":\"买入\",\"REAL_STATUS\":\"2\",\"REAL_STATUS_NAME\":\"拒绝\",\"BUSINESS_AMOUNT\":\"成交数量\",\"BUSINESS_BALANCE\":\"10088.00\",\"INIT_DATE\":\"2017-08-03\",\"CURR_TIME\":\"2016-09-09\",\"ENTRUST_NO\":\"1234567890\",\"STOCK_ACCOUNT\":\"1234567890\",\"TRADE_PLAT\":\"交易场所\",\"POSITION_STR_LONG\":\"11111111\",\"CBP_BUSINESS_ID\":\"0987654321\"},{\"STOCK_CODE\":\"000888\",\"STOCK_NAME\":\"医药ETF\",\"ENTRUST_BS\":\"买入\",\"REAL_STATUS\":\"2\",\"REAL_STATUS_NAME\":\"拒绝\",\"BUSINESS_AMOUNT\":\"成交数量\",\"BUSINESS_BALANCE\":\"10088.00\",\"INIT_DATE\":\"2017-08-03\",\"CURR_TIME\":\"2016-09-09\",\"ENTRUST_NO\":\"1234567890\",\"STOCK_ACCOUNT\":\"1234567890\",\"TRADE_PLAT\":\"交易场所\",\"POSITION_STR_LONG\":\"11111111\",\"CBP_BUSINESS_ID\":\"0987654321\"},{\"STOCK_CODE\":\"000888\",\"STOCK_NAME\":\"医药ETF\",\"ENTRUST_BS\":\"买入\",\"REAL_STATUS\":\"2\",\"REAL_STATUS_NAME\":\"拒绝\",\"BUSINESS_AMOUNT\":\"成交数量\",\"BUSINESS_BALANCE\":\"10088.00\",\"INIT_DATE\":\"2017-08-03\",\"CURR_TIME\":\"2016-09-09\",\"ENTRUST_NO\":\"1234567890\",\"STOCK_ACCOUNT\":\"1234567890\",\"TRADE_PLAT\":\"交易场所\",\"POSITION_STR_LONG\":\"11111111\",\"CBP_BUSINESS_ID\":\"0987654321\"},{\"STOCK_CODE\":\"000888\",\"STOCK_NAME\":\"医药ETF\",\"ENTRUST_BS\":\"买入\",\"REAL_STATUS\":\"2\",\"REAL_STATUS_NAME\":\"拒绝\",\"BUSINESS_AMOUNT\":\"成交数量\",\"BUSINESS_BALANCE\":\"10088.00\",\"INIT_DATE\":\"2017-08-03\",\"CURR_TIME\":\"2016-09-09\",\"ENTRUST_NO\":\"1234567890\",\"STOCK_ACCOUNT\":\"1234567890\",\"TRADE_PLAT\":\"交易场所\",\"POSITION_STR_LONG\":\"11111111\",\"CBP_BUSINESS_ID\":\"0987654321\"},{\"STOCK_CODE\":\"000888\",\"STOCK_NAME\":\"医药ETF\",\"ENTRUST_BS\":\"买入\",\"REAL_STATUS\":\"2\",\"REAL_STATUS_NAME\":\"拒绝\",\"BUSINESS_AMOUNT\":\"成交数量\",\"BUSINESS_BALANCE\":\"10088.00\",\"INIT_DATE\":\"2017-08-03\",\"CURR_TIME\":\"2016-09-09\",\"ENTRUST_NO\":\"1234567890\",\"STOCK_ACCOUNT\":\"1234567890\",\"TRADE_PLAT\":\"交易场所\",\"POSITION_STR_LONG\":\"11111111\",\"CBP_BUSINESS_ID\":\"0987654321\"},{\"STOCK_CODE\":\"000888\",\"STOCK_NAME\":\"医药ETF\",\"ENTRUST_BS\":\"买入\",\"REAL_STATUS\":\"2\",\"REAL_STATUS_NAME\":\"拒绝\",\"BUSINESS_AMOUNT\":\"成交数量\",\"BUSINESS_BALANCE\":\"10088.00\",\"INIT_DATE\":\"2017-08-03\",\"CURR_TIME\":\"2016-09-09\",\"ENTRUST_NO\":\"1234567890\",\"STOCK_ACCOUNT\":\"1234567890\",\"TRADE_PLAT\":\"交易场所\",\"POSITION_STR_LONG\":\"11111111\",\"CBP_BUSINESS_ID\":\"0987654321\"},{\"STOCK_CODE\":\"000888\",\"STOCK_NAME\":\"医药ETF\",\"ENTRUST_BS\":\"买入\",\"REAL_STATUS\":\"2\",\"REAL_STATUS_NAME\":\"拒绝\",\"BUSINESS_AMOUNT\":\"成交数量\",\"BUSINESS_BALANCE\":\"10088.00\",\"INIT_DATE\":\"2017-08-03\",\"CURR_TIME\":\"2016-09-09\",\"ENTRUST_NO\":\"1234567890\",\"STOCK_ACCOUNT\":\"1234567890\",\"TRADE_PLAT\":\"交易场所\",\"POSITION_STR_LONG\":\"11111111\",\"CBP_BUSINESS_ID\":\"0987654321\"},{\"STOCK_CODE\":\"000888\",\"STOCK_NAME\":\"医药ETF\",\"ENTRUST_BS\":\"买入\",\"REAL_STATUS\":\"2\",\"REAL_STATUS_NAME\":\"拒绝\",\"BUSINESS_AMOUNT\":\"成交数量\",\"BUSINESS_BALANCE\":\"10088.00\",\"INIT_DATE\":\"2017-08-03\",\"CURR_TIME\":\"2016-09-09\",\"ENTRUST_NO\":\"1234567890\",\"STOCK_ACCOUNT\":\"1234567890\",\"TRADE_PLAT\":\"交易场所\",\"POSITION_STR_LONG\":\"11111111\",\"CBP_BUSINESS_ID\":\"0987654321\"},{\"STOCK_CODE\":\"000888\",\"STOCK_NAME\":\"医药ETF\",\"ENTRUST_BS\":\"买入\",\"REAL_STATUS\":\"2\",\"REAL_STATUS_NAME\":\"拒绝\",\"BUSINESS_AMOUNT\":\"成交数量\",\"BUSINESS_BALANCE\":\"10088.00\",\"INIT_DATE\":\"2017-08-03\",\"CURR_TIME\":\"2016-09-09\",\"ENTRUST_NO\":\"1234567890\",\"STOCK_ACCOUNT\":\"1234567890\",\"TRADE_PLAT\":\"交易场所\",\"POSITION_STR_LONG\":\"11111111\",\"CBP_BUSINESS_ID\":\"0987654321\"},{\"STOCK_CODE\":\"000888\",\"STOCK_NAME\":\"医药ETF\",\"ENTRUST_BS\":\"买入\",\"REAL_STATUS\":\"2\",\"REAL_STATUS_NAME\":\"拒绝\",\"BUSINESS_AMOUNT\":\"成交数量\",\"BUSINESS_BALANCE\":\"10088.00\",\"INIT_DATE\":\"2017-08-03\",\"CURR_TIME\":\"2016-09-09\",\"ENTRUST_NO\":\"1234567890\",\"STOCK_ACCOUNT\":\"1234567890\",\"TRADE_PLAT\":\"交易场所\",\"POSITION_STR_LONG\":\"11111111\",\"CBP_BUSINESS_ID\":\"0987654321\"},{\"STOCK_CODE\":\"000888\",\"STOCK_NAME\":\"医药ETF\",\"ENTRUST_BS\":\"买入\",\"REAL_STATUS\":\"2\",\"REAL_STATUS_NAME\":\"拒绝\",\"BUSINESS_AMOUNT\":\"成交数量\",\"BUSINESS_BALANCE\":\"10088.00\",\"INIT_DATE\":\"2017-08-03\",\"CURR_TIME\":\"2016-09-09\",\"ENTRUST_NO\":\"1234567890\",\"STOCK_ACCOUNT\":\"1234567890\",\"TRADE_PLAT\":\"交易场所\",\"POSITION_STR_LONG\":\"11111111\",\"CBP_BUSINESS_ID\":\"0987654321\"},{\"STOCK_CODE\":\"000888\",\"STOCK_NAME\":\"医药ETF\",\"ENTRUST_BS\":\"买入\",\"REAL_STATUS\":\"2\",\"REAL_STATUS_NAME\":\"拒绝\",\"BUSINESS_AMOUNT\":\"成交数量\",\"BUSINESS_BALANCE\":\"10088.00\",\"INIT_DATE\":\"2017-08-03\",\"CURR_TIME\":\"2016-09-09\",\"ENTRUST_NO\":\"1234567890\",\"STOCK_ACCOUNT\":\"1234567890\",\"TRADE_PLAT\":\"交易场所\",\"POSITION_STR_LONG\":\"11111111\",\"CBP_BUSINESS_ID\":\"0987654321\"},{\"STOCK_CODE\":\"000888\",\"STOCK_NAME\":\"医药ETF\",\"ENTRUST_BS\":\"买入\",\"REAL_STATUS\":\"2\",\"REAL_STATUS_NAME\":\"拒绝\",\"BUSINESS_AMOUNT\":\"成交数量\",\"BUSINESS_BALANCE\":\"10088.00\",\"INIT_DATE\":\"2017-08-03\",\"CURR_TIME\":\"2016-09-09\",\"ENTRUST_NO\":\"1234567890\",\"STOCK_ACCOUNT\":\"1234567890\",\"TRADE_PLAT\":\"交易场所\",\"POSITION_STR_LONG\":\"11111111\",\"CBP_BUSINESS_ID\":\"0987654321\"},{\"STOCK_CODE\":\"000888\",\"STOCK_NAME\":\"医药ETF\",\"ENTRUST_BS\":\"买入\",\"REAL_STATUS\":\"2\",\"REAL_STATUS_NAME\":\"拒绝\",\"BUSINESS_AMOUNT\":\"成交数量\",\"BUSINESS_BALANCE\":\"10088.00\",\"INIT_DATE\":\"2017-08-03\",\"CURR_TIME\":\"2016-09-09\",\"ENTRUST_NO\":\"1234567890\",\"STOCK_ACCOUNT\":\"1234567890\",\"TRADE_PLAT\":\"交易场所\",\"POSITION_STR_LONG\":\"11111111\",\"CBP_BUSINESS_ID\":\"0987654321\"},{\"STOCK_CODE\":\"000888\",\"STOCK_NAME\":\"医药ETF\",\"ENTRUST_BS\":\"买入\",\"REAL_STATUS\":\"2\",\"REAL_STATUS_NAME\":\"拒绝\",\"BUSINESS_AMOUNT\":\"成交数量\",\"BUSINESS_BALANCE\":\"10088.00\",\"INIT_DATE\":\"2017-08-03\",\"CURR_TIME\":\"2016-09-09\",\"ENTRUST_NO\":\"1234567890\",\"STOCK_ACCOUNT\":\"1234567890\",\"TRADE_PLAT\":\"交易场所\",\"POSITION_STR_LONG\":\"11111111\",\"CBP_BUSINESS_ID\":\"0987654321\"},{\"STOCK_CODE\":\"000888\",\"STOCK_NAME\":\"医药ETF\",\"ENTRUST_BS\":\"买入\",\"REAL_STATUS\":\"2\",\"REAL_STATUS_NAME\":\"拒绝\",\"BUSINESS_AMOUNT\":\"成交数量\",\"BUSINESS_BALANCE\":\"10088.00\",\"INIT_DATE\":\"2017-08-03\",\"CURR_TIME\":\"2016-09-09\",\"ENTRUST_NO\":\"1234567890\",\"STOCK_ACCOUNT\":\"1234567890\",\"TRADE_PLAT\":\"交易场所\",\"POSITION_STR_LONG\":\"11111111\",\"CBP_BUSINESS_ID\":\"0987654321\"}]}";
-                } else {
-                    response= "{\"code\":\"0\",\"msg\":\"332634成功\",\"data\":[{\"STOCK_CODE\":\"000888\",\"STOCK_NAME\":\"医药ETF\",\"ENTRUST_BS\":\"买入\",\"REAL_STATUS\":\"2\",\"REAL_STATUS_NAME\":\"拒绝\",\"BUSINESS_AMOUNT\":\"成交数量\",\"BUSINESS_BALANCE\":\"10088.00\",\"INIT_DATE\":\"2017-08-03\",\"CURR_TIME\":\"2016-09-09\",\"ENTRUST_NO\":\"1234567890\",\"STOCK_ACCOUNT\":\"1234567890\",\"TRADE_PLAT\":\"交易场所\",\"POSITION_STR_LONG\":\"11111111\",\"CBP_BUSINESS_ID\":\"0987654321\"},{\"STOCK_CODE\":\"000888\",\"STOCK_NAME\":\"医药ETF\",\"ENTRUST_BS\":\"买入\",\"REAL_STATUS\":\"2\",\"REAL_STATUS_NAME\":\"拒绝\",\"BUSINESS_AMOUNT\":\"成交数量\",\"BUSINESS_BALANCE\":\"10088.00\",\"INIT_DATE\":\"2017-08-03\",\"CURR_TIME\":\"2016-09-09\",\"ENTRUST_NO\":\"1234567890\",\"STOCK_ACCOUNT\":\"1234567890\",\"TRADE_PLAT\":\"交易场所\",\"POSITION_STR_LONG\":\"11111111\",\"CBP_BUSINESS_ID\":\"0987654321\"},{\"STOCK_CODE\":\"000888\",\"STOCK_NAME\":\"医药ETF\",\"ENTRUST_BS\":\"买入\",\"REAL_STATUS\":\"2\",\"REAL_STATUS_NAME\":\"拒绝\",\"BUSINESS_AMOUNT\":\"成交数量\",\"BUSINESS_BALANCE\":\"10088.00\",\"INIT_DATE\":\"2017-08-03\",\"CURR_TIME\":\"2016-09-09\",\"ENTRUST_NO\":\"1234567890\",\"STOCK_ACCOUNT\":\"1234567890\",\"TRADE_PLAT\":\"交易场所\",\"POSITION_STR_LONG\":\"11111111\",\"CBP_BUSINESS_ID\":\"0987654321\"},{\"STOCK_CODE\":\"000888\",\"STOCK_NAME\":\"医药ETF\",\"ENTRUST_BS\":\"买入\",\"REAL_STATUS\":\"2\",\"REAL_STATUS_NAME\":\"拒绝\",\"BUSINESS_AMOUNT\":\"成交数量\",\"BUSINESS_BALANCE\":\"10088.00\",\"INIT_DATE\":\"2017-08-03\",\"CURR_TIME\":\"2016-09-09\",\"ENTRUST_NO\":\"1234567890\",\"STOCK_ACCOUNT\":\"1234567890\",\"TRADE_PLAT\":\"交易场所\",\"POSITION_STR_LONG\":\"11111111\",\"CBP_BUSINESS_ID\":\"0987654321\"}]}";
-                }*/
                 ResultInfo info = new ResultInfo();
                 if (TextUtils.isEmpty(response)) {
                     info.setCode("-3");
@@ -1910,4 +1904,83 @@ public class InterfaceCollection {
             }
         });
     }
+
+    /**
+     * 300744
+     * ETF成分股
+     * @param session token
+     * @param stock_code
+     * @param page
+     * @param num
+     * @param TAG
+     * @param callback
+     */
+    public void constituentStock(String session,String stock_code,String page,String num,final String TAG, final InterfaceCallback callback){
+        Map map1 = new HashMap<>();
+        map1.put("funcid", "300744");
+        map1.put("token", session);
+        Map map2 = new HashMap<>();
+        map2.put("SEC_ID", "tpyzq");
+        map2.put("FLAG", "true");
+        map2.put("STOCK_CODE",stock_code);
+        map2.put("POSITION_STR", page);
+        map2.put("REQUEST_NUM", num);
+        map1.put("parms", map2);
+        net.okHttpForPostString(TAG, ConstantUtil.URL_JY, map1, new StringCallback() {
+            @Override
+            public void onError(Call call, Exception e, int id) {
+                ResultInfo info = new ResultInfo();
+                info.setCode("-1");
+                info.setMsg(ConstantUtil.NETWORK_ERROR);
+                info.setTag(TAG);
+                callback.callResult(info);
+            }
+
+            @Override
+            public void onResponse(String response, int id) {
+                ResultInfo info = new ResultInfo();
+                if (TextUtils.isEmpty(response)) {
+                    info.setCode("-3");
+                    info.setMsg(ConstantUtil.SERVICE_NO_DATA);
+                    info.setTag(TAG);
+                } else {
+                    try {
+                        JSONObject jsonObject = new JSONObject(response);
+                        String code = jsonObject.getString("code");
+                        String msg = jsonObject.getString("msg");
+                        info.setCode(code);
+                        info.setMsg(msg);
+                        info.setTag(TAG);
+                        if ("0".equals(code)) {
+                            List<EtfDataEntity> ses = new ArrayList<>();
+                            JSONArray data = jsonObject.getJSONArray("data");
+                            for (int i = 0; i < data.length(); i++) {
+                                EtfDataEntity bean = new EtfDataEntity();
+                                JSONObject obj = data.getJSONObject(i);
+                                bean.setStock_code(obj.getString("STOCK_CODE"));//证券代码
+                                bean.setComponent_code(obj.getString("COMPONENT_CODE"));//成份股代码
+                                bean.setStock_name(obj.getString("COMPONENT_NAME"));//成份股名称
+                                bean.setEnable_balance(obj.getString("REPLACE_BALANCE"));//替代金额
+                                bean.setEntrust_amount(obj.optString("COMPONENT_AMOUNT"));//成份股数量<单位数量>
+                                bean.setStock_max(obj.getString("REPLACE_RATIO"));//溢价比率
+                                bean.setCash_max(obj.getString("REPLACE_FLAG"));//替代标志
+                                bean.setAllot_max(obj.getString("REPLACE_FLAG_NAME"));//替代标志名称
+                                bean.setPosition_str(obj.getString("POSITION_STR"));//定位穿
+                                bean.setShowRule(false);
+                                ses.add(bean);
+                            }
+                            info.setData(ses);
+                        }
+                    } catch (Exception e) {
+                        info.setCode("-2");
+                        info.setMsg(ConstantUtil.JSON_ERROR);
+                        info.setTag(TAG);
+                    }
+                }
+                callback.callResult(info);
+            }
+        });
+    };
+
+
 }

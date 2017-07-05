@@ -8,25 +8,23 @@ package com.tpyzq.mobile.pangu.data;
 public class EtfDataEntity {
     private String exchange_type;    // 交易类别
     private String stock_code;       // 证券代码     基金代码
-    private String stock_name;       // 证券名称     基金名称
+    private String stock_name;       // 证券名称     基金名称  <成份股名称 COMPONENT_NAME TODO>
+    private String component_code;      //成份股代码
     private String stock_account;    // 股东账号
     private String enable_balance;   // 可用资金
-    private String stock_max;        //  网下股票认购上限
-    private String cash_max;         // 网下现金认购上限
-    private String allot_max;      // 申购上限
+    private String stock_max;        //  网下股票认购上限 <溢价比率 REPLACE_RATIO TODO>
+    private String cash_max;         // 网下现金认购上限 <替代标志 REPLACE_FLAG TODO>
+    private String allot_max;      // 申购上限 <替代标志名称 REPLACE_FLAG_NAME TODO>
     private String redeem_max;       //赎回上限
 
     private String init_date;        //  交易日期
     private String entrust_no;       // 委托编号
-    private String entrust_balance;    // 委托金额
-    private String entrust_amount;     // 委托数量
+    private String entrust_balance;    // 委托金额 （<替代金额 REPLACE_BALANCE TODO>）
+    private String entrust_amount;     // 委托数量（<成分股数量 COMPONENT_AMOUNT TODO>）
     private String entrust_prop;       // 委托属性  0 买卖 1 配股 2	转托  3 申购  4	回购
     private String prev_balance;       // 冻结解冻金额
     private String entrust_status_name;   // 委托状态名称
     private String exchange_type_name;    //状态名称
-
-
-
     /**
      * 委托状态
      * 0	未报
@@ -61,8 +59,13 @@ public class EtfDataEntity {
         this.cbp_business_id = cbp_business_id;
     }
 
+    public String getComponent_code() {
+        return component_code;
+    }
 
-
+    public void setComponent_code(String component_code) {
+        this.component_code = component_code;
+    }
 
     public String getReal_status_name() {
         return real_status_name;
