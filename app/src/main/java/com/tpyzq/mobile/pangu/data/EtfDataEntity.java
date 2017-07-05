@@ -21,9 +21,7 @@ public class EtfDataEntity {
     private String entrust_balance;    // 委托金额
     private String entrust_amount;     // 委托数量
     private String entrust_prop;       // 委托属性  0 买卖 1 配股 2	转托  3 申购  4	回购
-    private String curr_time;          // 交易日期
     private String prev_balance;       // 冻结解冻金额
-    private String entrust_bs;          //  买卖标记   1：买    2：卖
     private String entrust_status_name;   // 委托状态名称
     private String exchange_type_name;    //交易市场
 
@@ -63,13 +61,8 @@ public class EtfDataEntity {
         this.cbp_business_id = cbp_business_id;
     }
 
-    public String getEntrust_bs() {
-        return entrust_bs;
-    }
 
-    public void setEntrust_bs(String entrust_bs) {
-        this.entrust_bs = entrust_bs;
-    }
+
 
     public String getReal_status_name() {
         return real_status_name;
@@ -79,13 +72,6 @@ public class EtfDataEntity {
         this.real_status_name = real_status_name;
     }
 
-    public String getCurr_time() {
-        return curr_time;
-    }
-
-    public void setCurr_time(String curr_time) {
-        this.curr_time = curr_time;
-    }
 
     public String getBusiness_balance() {
         return business_balance;
