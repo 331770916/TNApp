@@ -27,15 +27,6 @@ public class FJEntrustedDealAdapter extends PagerAdapter {
             pagers.get(i).setType(type);
     }
 
-    public FJEntrustedDealAdapter(List<BasePager> pagers,int type,String exchange_type){
-        this.pagers = pagers;
-        for (int i = 0;i < pagers.size();i++)
-            pagers.get(i).setType(type);
-        for (int i = 0; i < pagers.size(); i++) {
-            pagers.get(i).setExchangeType(exchange_type);
-        }
-    }
-
     @Override
     public int getCount() {
         return pagers.size();

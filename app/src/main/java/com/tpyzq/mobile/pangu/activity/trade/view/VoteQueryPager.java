@@ -46,12 +46,19 @@ public class VoteQueryPager extends BasePager implements InterfaceCollection.Int
     private PullToRefreshListView mListView;
     private VoteQueryAdapter mAdapter;
     private ImageView iv_isEmpty;
+    private String mMarket = "1";
     private int refresh = 30;
     private List<NetworkVotingEntity> myList;
 
     public VoteQueryPager(Context context, String params) {
         super(context, params);
         this.TAG = params;
+    }
+
+    public void setmMarket(String market,boolean isRefresh){
+        mMarket = market;
+        if(isRefresh)
+            refresh("", "30", false);
     }
 
     @Override
@@ -215,15 +222,15 @@ public class VoteQueryPager extends BasePager implements InterfaceCollection.Int
         switch (getType()) {
             case 0:
                 if(TAG.equals("VoteQueryTodayPager")){
-                    ifc.queryTodayVoting(mSession, "", page,num,  TAG, this);
+                    ifc.queryTodayVoting(mSession, mMarket, page,num,  TAG, this);
                 }else if (TAG.equals("VoteQueryOneWeekPager")) {
-                    ifc.queryHistoryNetworkVoting(mSession, "1", page,num, null, null, TAG, this);
+                    ifc.queryHistoryNetworkVoting(mSession, "1", mMarket,page,num, null, null, TAG, this);
                 } else if (TAG.equals("VoteQueryInAMonthPager")) {
-                    ifc.queryHistoryNetworkVoting(mSession, "2", page, num,null, null, TAG, this);
+                    ifc.queryHistoryNetworkVoting(mSession, "2",mMarket, page, num,null, null, TAG, this);
                 } else if (TAG.equals("VoteQueryThreeWeekPager")) {
-                    ifc.queryHistoryNetworkVoting(mSession, "3", page, num,null, null, TAG, this);
+                    ifc.queryHistoryNetworkVoting(mSession, "3", mMarket,page, num,null, null, TAG, this);
                 } else if (TAG.equals("VoteQueryCustomPager") && !TextUtils.isEmpty(startDate) && !TextUtils.isEmpty(finishDate)) {
-                    ifc.queryHistoryNetworkVoting(mSession, "0", page, num,startDate, finishDate, TAG, this);
+                    ifc.queryHistoryNetworkVoting(mSession, "0",mMarket, page, num,startDate, finishDate, TAG, this);
                 }
                 break;
         }

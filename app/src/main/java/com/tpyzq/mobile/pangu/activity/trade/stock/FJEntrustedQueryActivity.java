@@ -57,12 +57,6 @@ public class FJEntrustedQueryActivity extends BaseActivity implements View.OnCli
         title.setText("委托查询");
         magicIndicator = (MagicIndicator)this.findViewById(R.id.capital_buy);
         viewPager = (ViewPager)this.findViewById(R.id.fj_view);
-    }
-
-
-    @Override
-    protected void onStart() {
-        super.onStart();
         setIndicatorListen();
     }
 

@@ -10,6 +10,7 @@ import com.tpyzq.mobile.pangu.data.NetworkVotingEntity;
 import com.tpyzq.mobile.pangu.data.OTC_AffirmBean;
 import com.tpyzq.mobile.pangu.data.OTC_SubscriptionCommitBean;
 import com.tpyzq.mobile.pangu.data.ResultInfo;
+import com.tpyzq.mobile.pangu.data.StockHolderInfoEntity;
 import com.tpyzq.mobile.pangu.data.StructuredFundEntity;
 import com.tpyzq.mobile.pangu.http.NetWorkUtil;
 import com.tpyzq.mobile.pangu.util.ConstantUtil;
@@ -460,18 +461,6 @@ public class InterfaceCollection {
                             for (int i = 0; i < data.length(); i++) {
                                 StructuredFundEntity bean = new StructuredFundEntity();
                                 JSONObject obj = data.getJSONObject(i);
-//                                bean.setStoken_name(obj.getString("STOCK_NAME"));
-//                                bean.setStocken_code(obj.getString("STOCK_CODE"));
-//                                bean.setBusiness_name(obj.getString("BUSINESS_NAME"));
-//                                bean.setReport_time(obj.getString("REPORT_TIME"));
-//                                bean.setEntrust_amount(obj.getString("ENTRUST_AMOUNT"));
-//                                bean.setStock_account(obj.getString("STOCK_ACCOUNT"));
-//                                bean.setPosition_str(obj.getString("POSITION_STR"));
-//                                bean.setCurr_date(obj.getString("CURR_DATE"));
-//                                bean.setEntrust_no(obj.getString("ENTRUST_NO"));
-//                                bean.setEntrust_status(obj.getString("ENTRUST_STATUS"));
-//                                bean.setEntrust_balance(obj.getString("ENTRUST_BALANCE"));
-//                                bean.setEntrust_amount(obj.getString("BUSINESS_AMOUNT"));
                                 bean.setInit_date(obj.getString("INIT_DATE"));
                                 bean.setEntrust_no(obj.getString("ENTRUST_NO"));
                                 ses.add(bean);
@@ -972,7 +961,7 @@ public class InterfaceCollection {
      * @param TAG        tag
      * @param callback   callback
      */
-    public void queryHistoryNetworkVoting(String session, String his_type, String position_str, String request_num, String begin_date, String end_date, final String TAG, final InterfaceCallback callback) {
+    public void queryHistoryNetworkVoting(String session, String his_type, String exchange_type,String position_str, String request_num, String begin_date, String end_date, final String TAG, final InterfaceCallback callback) {
         Map map1 = new HashMap<>();
         map1.put("funcid", "300804");
         map1.put("token", session);
@@ -982,6 +971,7 @@ public class InterfaceCollection {
         map2.put("HIS_TYPE", his_type);
         map2.put("POSITION_STR", position_str);
         map2.put("REQUEST_NUM", request_num);
+        map2.put("EXCHANGE_TYPE",exchange_type);
         map2.put("BEGIN_DATE", begin_date);
         map2.put("END_DATE", end_date);
         map1.put("parms", map2);
@@ -1016,16 +1006,14 @@ public class InterfaceCollection {
                             for (int i = 0; i < data.length(); i++) {
                                 NetworkVotingEntity bean = new NetworkVotingEntity();
                                 JSONObject obj = data.getJSONObject(i);
-                                bean.setInit_date(obj.getString("INIT_DATE"));
-                                bean.setMeeting_seq(obj.getString("MEETING_SEQ"));
                                 bean.setStock_code(obj.getString("STOCK_CODE"));
-                                bean.setVote_motion(obj.getString("ENTRUST_PRICE"));
                                 bean.setBusiness_amount(obj.getString("BUSINESS_AMOUNT"));
-                                bean.setStock_name(obj.getString("STOCK_NAME"));
                                 bean.setStatus(obj.getString("ENTRUST_STATUS"));
-                                bean.setEntrust_amount(obj.getString("ENTRUST_STATUS_NAME"));
+                                bean.setStock_name(obj.getString("STOCK_NAME"));
+                                bean.setMeeting_seq(obj.getString("MEETING_SEQ"));
+                                bean.setInit_date(obj.getString("INIT_DATE"));
                                 bean.setEntrust_no(obj.getString("ENTRUST_NO"));
-                                bean.setPosition_str(obj.getString("POSITION_STR"));
+                                bean.setVote_motion(obj.getString("VOTE_MOTION"));
                                 ses.add(bean);
                             }
                             info.setData(ses);
@@ -1103,6 +1091,71 @@ public class InterfaceCollection {
                                 bean.setPosition_str(obj.getString("POSITION_STR"));
                                 bean.setEntrust_no(obj.getString("ENTRUST_NO"));
                                 ses.add(bean);
+                            }
+                            info.setData(ses);
+                        }
+                    } catch (JSONException e) {
+                        info.setCode("-2");
+                        info.setMsg(ConstantUtil.JSON_ERROR);
+                        info.setTag(TAG);
+                    }
+                }
+                callback.callResult(info);
+            }
+        });
+    }
+
+    /**
+     * 700070
+     * 查询股东资料
+     * @param mSession token
+     * @param TAG tag
+     * @param callback callback
+     */
+    public void queryStockInfo(String mSession,final String TAG, final InterfaceCallback callback){
+        HashMap map = new HashMap();
+        HashMap map1 = new HashMap();
+        map.put("funcid", "700070");
+        map.put("token", mSession);
+        map.put("parms", map1);
+        map1.put("SEC_ID", "tpyzq");
+        map1.put("FLAG", "true");
+        net.okHttpForPostString(TAG, ConstantUtil.URL_JY, map, new StringCallback() {
+            @Override
+            public void onError(Call call, Exception e, int i) {
+                ResultInfo info = new ResultInfo();
+                info.setCode("-1");
+                info.setMsg(ConstantUtil.NETWORK_ERROR);
+                info.setTag(TAG);
+                callback.callResult(info);
+            }
+
+            @Override
+            public void onResponse(String response, int id) {
+                ResultInfo info = new ResultInfo();
+                if(TextUtils.isEmpty(response)){
+                    info.setCode("-3");
+                    info.setMsg(ConstantUtil.SERVICE_NO_DATA);
+                    info.setTag(TAG);
+                }else{
+                    try {
+                        JSONObject jsonObject = new JSONObject(response);
+                        String code = jsonObject.getString("code");
+                        String msg = jsonObject.getString("msg");
+                        info.setCode(code);
+                        info.setMsg(msg);
+                        info.setTag(TAG);
+                        if("0".equals(code)){
+                            List<StockHolderInfoEntity> ses = new ArrayList<>();
+                            JSONArray data = jsonObject.getJSONArray("data");
+                            for (int i = 0; i < data.length(); i++) {
+                                StockHolderInfoEntity _bean = new StockHolderInfoEntity();
+                                JSONObject obj = data.getJSONObject(i);
+                                _bean.setCustomerCode(obj.getString("FUND_ACCOUNT"));    // 资金账号
+                                _bean.setAccountType(obj.getString("MARKET"));        //市场
+                                _bean.setShareholderSName(obj.getString("SECU_NAME"));//股票名称
+                                _bean.setShareholderSCode(obj.getString("SECU_CODE"));//股票代码
+                                ses.add(_bean);
                             }
                             info.setData(ses);
                         }
@@ -1835,26 +1888,5 @@ public class InterfaceCollection {
                 callback.callResult(info);
             }
         });
-    }
-
-
-    public void getData(int size, final InterfaceCallback callback) {
-        ResultInfo info = new ResultInfo();
-        info.setCode("0");
-        List<NetworkVotingEntity> ses = new ArrayList<>();
-        NetworkVotingEntity entity;
-        for (int i = 0; i < size; i++) {
-            entity = new NetworkVotingEntity();
-            entity.setMeeting_seq("证券分级");
-            entity.setStock_code("000888");
-            entity.setStatus("分级基金合并");
-            entity.setBusiness_amount("已报");
-            entity.setStock_name("分级基金合并");
-            entity.setInit_date("2017-09-18");
-            entity.setBusiness_amount("10000");
-            ses.add(entity);
-        }
-        info.setData(ses);
-        callback.callResult(info);
     }
 }

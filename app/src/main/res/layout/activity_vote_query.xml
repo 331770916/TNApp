@@ -60,9 +60,9 @@
             android:layout_alignParentRight="true"
             android:layout_marginRight="@dimen/size20"
             android:drawablePadding="@dimen/size14"
+            android:text="请选择股东代码"
             android:drawableRight="@mipmap/icon_right"
             android:gravity="center_vertical"
-            android:text="808080808080980"
             android:textColor="@color/hushenTab_titleColor"
             android:textSize="@dimen/txtSize15" />
 

@@ -45,13 +45,9 @@ public class FJDealQueryActivity  extends BaseActivity implements View.OnClickLi
         title.setText("成交查询");
         magicIndicator = (MagicIndicator)this.findViewById(R.id.capital_buy);
         viewPager = (ViewPager)this.findViewById(R.id.fj_view);
-    }
-
-    @Override
-    protected void onStart() {
-        super.onStart();
         setIndicatorListen();
     }
+
 
     private void setIndicatorListen() {
         CommonNavigator commonNavigator = new CommonNavigator(this);

@@ -26,7 +26,7 @@ public class NetworkVotingEntity {
     private String exchange_type; //市场
     private boolean isShowRule;             //控制子view是否显示
     private String entrust_amount;//累积投票和非累积投票 <委托状态名称 TODO>
-    private String entrust_no;
+    private String entrust_no;//委托编号
     private List<NetworkVotingEntity> list;
 
     public String getEntrust_no() {

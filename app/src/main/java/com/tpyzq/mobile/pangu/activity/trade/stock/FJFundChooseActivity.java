@@ -17,6 +17,7 @@ import com.tpyzq.mobile.pangu.base.BaseActivity;
 import com.tpyzq.mobile.pangu.base.InterfaceCollection;
 import com.tpyzq.mobile.pangu.data.NetworkVotingEntity;
 import com.tpyzq.mobile.pangu.data.ResultInfo;
+import com.tpyzq.mobile.pangu.data.StockHolderInfoEntity;
 import com.tpyzq.mobile.pangu.data.StructuredFundEntity;
 import com.tpyzq.mobile.pangu.util.ConstantUtil;
 import com.tpyzq.mobile.pangu.util.Helper;
@@ -36,7 +37,7 @@ public class FJFundChooseActivity extends BaseActivity implements View.OnClickLi
 
     private ListView mListView;
     private List<StructuredFundEntity> list_SFE;
-    private List<NetworkVotingEntity> list_NVE;
+    private List<StockHolderInfoEntity> list_NVE;
     private String mSession;
     private InterfaceCollection ifc;
     private FJFundChooseAdapter adapter;
@@ -73,8 +74,6 @@ public class FJFundChooseActivity extends BaseActivity implements View.OnClickLi
                 isShow.setVisibility(View.GONE);
                 break;
         }
-
-
         adapter = new FJFundChooseAdapter(this, mTag);
         adapter.setPoint(mPoint);
         mListView.setAdapter(adapter);
@@ -87,14 +86,12 @@ public class FJFundChooseActivity extends BaseActivity implements View.OnClickLi
         if (!this.isFinishing()) {
             mDialog.show();
         }
-
         switch (mTag) {
             case 0:
                 ifc.Fundchoice(mSession, TAG, this);
                 break;
             case 1:
-//                ifc.
-                ifc.getData(10, this);
+                ifc.queryStockInfo(mSession,TAG,this);
                 break;
         }
 
@@ -125,11 +122,12 @@ public class FJFundChooseActivity extends BaseActivity implements View.OnClickLi
                 intent.putExtra("point", position);
                 break;
             case 1:
-                intent.putExtra("Code", list_NVE.get(position).getStock_code());
+                intent.putExtra("Name", list_NVE.get(position).getShareholderSName());
+                intent.putExtra("Code", list_NVE.get(position).getShareholderSCode());
+                intent.putExtra("Market", list_NVE.get(position).getAccountType());
                 intent.putExtra("point", position);
                 break;
         }
-
         setResult(RESULT_OK, intent);
         finish();
     }
@@ -148,14 +146,12 @@ public class FJFundChooseActivity extends BaseActivity implements View.OnClickLi
                     adapter.setData(list_SFE);
                     break;
                 case 1:
-                    list_NVE = (List<NetworkVotingEntity>) info.getData();
+                    list_NVE = (List<StockHolderInfoEntity>) info.getData();
                     adapter.setData(list_NVE);
                     break;
             }
         } else if ("-6".equals(info.getCode())) {
-            Intent intent = new Intent();
-            intent.setClass(this, TransactionLoginActivity.class);
-            startActivity(intent);
+            skip.startLogin(this);
         } else {
             MistakeDialog.showDialog(info.getMsg(), this, new MistakeDialog.MistakeDialgoListener() {
                 @Override
@@ -166,14 +162,10 @@ public class FJFundChooseActivity extends BaseActivity implements View.OnClickLi
         }
     }
 
+
     @Override
-    public boolean onKeyDown(int keyCode, KeyEvent event) {
-        if (keyCode == KeyEvent.KEYCODE_BACK) {
-            if (mDialog != null && mDialog.isShowing()) {
-                mDialog.dismiss();
-            }
-            finish();
-        }
-        return false;
+    public void destroy() {
+        if (mDialog != null)
+            mDialog.dismiss();
     }
 }
