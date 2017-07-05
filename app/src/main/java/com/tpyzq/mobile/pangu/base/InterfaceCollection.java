@@ -1487,6 +1487,7 @@ public class InterfaceCollection {
                                 bean.setExchange_type(obj.getString("EXCHANGE_TYPE"));
                                 bean.setStock_code(obj.getString("STOCK_CODE"));
                                 bean.setStock_name(obj.getString("STOCK_NAME"));
+                                bean.setStock_account(obj.getString("STOCK_ACCOUNT"));
                                 bean.setEnable_balance(obj.getString("ENABLE_BALANCE"));
                                 bean.setStock_max(obj.getString("STOCK_MAX"));
                                 bean.setCash_max(obj.getString("CASH_MAX"));
@@ -1518,10 +1519,10 @@ public class InterfaceCollection {
      * @param TAG            tag
      * @param callback       callback
      */
-    public void applyforDetermine(String token, String exchange_type, String stock_code,
+    public void applyforDetermine(String funcid ,String token, String exchange_type, String stock_code,
                                   String entrust_amount, final String TAG, final InterfaceCallback callback) {
         Map map1 = new HashMap<>();
-        map1.put("funcid", "300734");
+        map1.put("funcid", funcid);
         map1.put("token", token);
         Map map2 = new HashMap<>();
         map2.put("SEC_ID", "tpyzq");
@@ -1591,7 +1592,7 @@ public class InterfaceCollection {
     public void queryEntrust(String token, String query_kind, String position_str,
                              String request_num, final String TAG, final InterfaceCallback callback) {
         Map map1 = new HashMap<>();
-        map1.put("funcid", "300734");
+        map1.put("funcid", "300738");
         map1.put("token", token);
         Map map2 = new HashMap<>();
         map2.put("SEC_ID", "tpyzq");
@@ -1632,15 +1633,21 @@ public class InterfaceCollection {
                             for (int i = 0; i < data.length(); i++) {
                                 EtfDataEntity bean = new EtfDataEntity();
                                 JSONObject obj = data.getJSONObject(i);
+                                bean.setInit_date(obj.getString("INIT_DATE"));
+                                bean.setCurr_time(obj.getString("CURR_TIME"));
                                 bean.setStock_code(obj.getString("STOCK_CODE"));
                                 bean.setStock_name(obj.getString("STOCK_NAME"));
                                 bean.setStock_account(obj.getString("STOCK_ACCOUNT"));
+                                bean.setPrev_balance(obj.getString("PREV_BALANCE"));
+                                bean.setEntrust_bs(obj.getString("ENTRUST_BS"));
                                 bean.setEntrust_no(obj.getString("ENTRUST_NO"));
                                 bean.setEnable_balance(obj.getString("ENTRUST_BALANCE"));
                                 bean.setEntrust_amount(obj.getString("ENTRUST_AMOUNT"));
                                 bean.setEntrust_prop(obj.getString("ENTRUST_PROP"));
                                 bean.setEntrust_status(obj.getString("ENTRUST_STATUS"));
                                 bean.setPosition_str(obj.getString("POSITION_STR"));
+                                bean.setEntrust_status_name(obj.getString("ENTRUST_STATUS_NAME"));
+                                bean.setExchange_type_name(obj.getString("EXCHANGE_TYPE_NAME"));
                                 ses.add(bean);
                             }
                             info.setData(ses);
@@ -1796,7 +1803,9 @@ public class InterfaceCollection {
                                 bean.setEntrust_amount(obj.getString("ENTRUST_AMOUNT"));
                                 bean.setEntrust_status(obj.getString("ENTRUST_STATUS"));
                                 bean.setReport_time(obj.getString("REPORT_TIME"));
-                                bean.setBusiness_amount(obj.getString("BUSINESS_AMOUNT"));
+                                bean.setEntrust_status_name(obj.getString("ENTRUST_STATUS_NAME"));
+                                bean.setPrev_balance(obj.getString("PREV_BALANCE"));
+                                bean.setEntrust_bs(obj.getString("ENTRUST_BS"));
                                 bean.setEntrust_price(obj.getString("ENTRUST_PRICE"));
                                 bean.setStock_account(obj.getString("STOCK_ACCOUNT"));
                                 ses.add(bean);

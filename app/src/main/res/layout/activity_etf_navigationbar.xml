@@ -172,7 +172,7 @@
                 android:background="@color/bgColor" />
 
             <LinearLayout
-                android:id="@+id/Layout_5"
+                android:id="@+id/Layout_4"
                 android:layout_width="match_parent"
                 android:layout_height="wrap_content"
                 android:orientation="horizontal">
@@ -213,7 +213,7 @@
                 android:background="@color/bgColor" />
 
             <LinearLayout
-                android:id="@+id/Layout_6"
+                android:id="@+id/Layout_5"
                 android:layout_width="match_parent"
                 android:layout_height="wrap_content"
                 android:orientation="horizontal">
@@ -260,7 +260,7 @@
                 android:background="@color/bgColor" />
 
             <LinearLayout
-                android:id="@+id/Layout_4"
+                android:id="@+id/Layout_6"
                 android:layout_width="match_parent"
                 android:layout_height="wrap_content"
                 android:orientation="horizontal">

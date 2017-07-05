@@ -139,10 +139,11 @@ public class StructuredFundDialog extends BaseDialog implements View.OnClickList
             tv_5.setText("ETF名称:");
             tv_7.setText("申购数量:");
             tv_9.setText("股东代码:");
-            tv_2.setText(etfDataEntity.getExchange_type());
+            tv_2.setText("ETF申购");
             tv_4.setText(etfDataEntity.getStock_code());
             tv_6.setText(etfDataEntity.getStock_name());
-            tv_8.setText(etfDataEntity.getStock_code());
+            tv_8.setText(etfDataEntity.getEntrust_amount());
+            tv_10.setText(etfDataEntity.getStock_account());
         }else if (ETFApplyforOrRedeemActivity.TAG_SH.equals(mTAG)){   //  赎回
             EtfDataEntity etfDataEntity = (EtfDataEntity)object;
             tv_title.setText("ETF赎回");
@@ -151,9 +152,11 @@ public class StructuredFundDialog extends BaseDialog implements View.OnClickList
             tv_5.setText("ETF名称:");
             tv_7.setText("赎回数量:");
             tv_9.setText("股东代码:");
-            tv_2.setText(etfDataEntity.getExchange_type());
+            tv_2.setText("ETF赎回");
             tv_4.setText(etfDataEntity.getStock_code());
             tv_6.setText(etfDataEntity.getStock_name());
+            tv_8.setText(etfDataEntity.getEntrust_amount());
+            tv_10.setText(etfDataEntity.getStock_account());
             tv_8.setText(etfDataEntity.getStock_code());
         } else if (ETFRevokeActivity.TAG.equalsIgnoreCase(mTAG)) {
             EtfDataEntity etfDataEntity = (EtfDataEntity)object;
@@ -215,7 +218,9 @@ public class StructuredFundDialog extends BaseDialog implements View.OnClickList
             Helper.getInstance().showToast(context, "委托提交成功");
             mExpression.State();
             dismiss();
-        } else  {
+        } else if ("-1".equals(info.getCode()) || "-2".equals(info.getCode()) || "-3".equals(info.getCode())) {
+            Helper.getInstance().showToast(context, info.getMsg());
+        } else {
             Helper.getInstance().showToast(context, info.getMsg());
         }
     }

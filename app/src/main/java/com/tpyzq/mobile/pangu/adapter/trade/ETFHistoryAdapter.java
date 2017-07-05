@@ -65,7 +65,6 @@ public class ETFHistoryAdapter extends BaseAdapter implements View.OnClickListen
             viewHodler.llContent = (LinearLayout) convertView.findViewById(R.id.fj_content);
             viewHodler.tvName = (TextView) convertView.findViewById(R.id.tv1);
             viewHodler.tvCode = (TextView) convertView.findViewById(R.id.tv2);
-            viewHodler.tvVocationalName = (TextView) convertView.findViewById(R.id.tv3);
             viewHodler.tvStatus = (TextView) convertView.findViewById(R.id.tv4);
             viewHodler.tvQuantity = (TextView) convertView.findViewById(R.id.tv5);
             viewHodler.tvTime = (TextView) convertView.findViewById(R.id.tv6);
@@ -77,6 +76,7 @@ public class ETFHistoryAdapter extends BaseAdapter implements View.OnClickListen
             viewHodler.tvGone2 = (TextView) convertView.findViewById(R.id.ll_tv2);
             viewHodler.tvGone3 = (TextView) convertView.findViewById(R.id.ll_tv3);
             viewHodler.tvGone4 = (TextView) convertView.findViewById(R.id.ll_tv4);
+            viewHodler.tvGon5  = (TextView) convertView.findViewById(R.id.ll_tv5);
             convertView.setTag(viewHodler);
         } else {
             viewHodler = (ViewHodler) convertView.getTag();
@@ -90,43 +90,48 @@ public class ETFHistoryAdapter extends BaseAdapter implements View.OnClickListen
 
         viewHodler.tvName.setText(bean.getStock_name());
         viewHodler.tvCode.setText(bean.getStock_code());
-        viewHodler.tvVocationalName.setText("");
-        switch (bean.getEntrust_status()) {
-            case "0":
-                viewHodler.tvStatus.setText("未报");
-                break;
-            case "1":
-                viewHodler.tvStatus.setText("待报");
-                break;
-            case "2":
-                viewHodler.tvStatus.setText("已报");
-                break;
-            case "3":
-                viewHodler.tvStatus.setText("已报待撤");
-                break;
-            case "4":
-                viewHodler.tvStatus.setText("部成待撤");
-                break;
-            case "5":
-                viewHodler.tvStatus.setText("部撤");
-                break;
-            case "6":
-                viewHodler.tvStatus.setText("已撤");
-                break;
-            case "7":
-                viewHodler.tvStatus.setText("部成");
-                break;
-            case "8":
-                viewHodler.tvStatus.setText("已成");
-                break;
-            case "9":
-                viewHodler.tvStatus.setText("废单");
-                break;
-            default:
-                viewHodler.tvStatus.setText("--");
-                break;
-        }
-        viewHodler.tvQuantity.setText(bean.getBusiness_amount());
+//        viewHodler.tvVocationalName.setText("");
+        viewHodler.tvStatus.setText(bean.getEntrust_amount());
+        viewHodler.tvQuantity.setText(bean.getEntrust_status());
+        viewHodler.tvTime.setText(bean.getReport_time());
+        viewHodler.tvDate.setText(bean.getInit_date());
+
+//        switch (bean.getEntrust_status()) {
+//            case "0":
+//
+//                break;
+//            case "1":
+//                viewHodler.tvStatus.setText("待报");
+//                break;
+//            case "2":
+//                viewHodler.tvStatus.setText("已报");
+//                break;
+//            case "3":
+//                viewHodler.tvStatus.setText("已报待撤");
+//                break;
+//            case "4":
+//                viewHodler.tvStatus.setText("部成待撤");
+//                break;
+//            case "5":
+//                viewHodler.tvStatus.setText("部撤");
+//                break;
+//            case "6":
+//                viewHodler.tvStatus.setText("已撤");
+//                break;
+//            case "7":
+//                viewHodler.tvStatus.setText("部成");
+//                break;
+//            case "8":
+//                viewHodler.tvStatus.setText("已成");
+//                break;
+//            case "9":
+//                viewHodler.tvStatus.setText("废单");
+//                break;
+//            default:
+//                viewHodler.tvStatus.setText("--");
+//                break;
+//        }
+
         if (bean.isShowRule()) {
             if (viewHodler.llContent.isSelected()) {
                 bean.setShowRule(false);
@@ -136,10 +141,16 @@ public class ETFHistoryAdapter extends BaseAdapter implements View.OnClickListen
                 bean.setShowRule(true);
                 viewHodler.llContent.setSelected(true);
                 viewHodler.tableSpan.setVisibility(View.VISIBLE);
-                viewHodler.tvGone1.setText(bean.getInit_date());
-                viewHodler.tvGone2.setText(bean.getBusiness_amount());
-                viewHodler.tvGone3.setText(bean.getStock_name());
-                viewHodler.tvGone4.setText(bean.getEntrust_no());
+                viewHodler.tvGone1.setText(bean.getEntrust_no());
+                viewHodler.tvGone2.setText(bean.getPrev_balance());
+                viewHodler.tvGone3.setText(bean.getEntrust_prop());
+                String entrust_bs = bean.getEntrust_bs();
+                if ("1".equals(entrust_bs)){
+                    viewHodler.tvGone4.setText("买");
+                }else {
+                    viewHodler.tvGone4.setText("卖");
+                }
+                viewHodler.tvGon5.setText("--");
             }
         } else {
             bean.setShowRule(false);
@@ -167,7 +178,7 @@ public class ETFHistoryAdapter extends BaseAdapter implements View.OnClickListen
 
     class ViewHodler {
         LinearLayout llContent, tableSpan;
-        TextView tvName, tvCode, tvVocationalName, tvStatus, tvQuantity, tvTime, tvDate, tvGone1, tvGone2, tvGone3, tvGone4;
+        TextView tvName, tvCode, tvVocationalName, tvStatus, tvQuantity, tvTime, tvDate, tvGone1, tvGone2, tvGone3, tvGone4,tvGon5;
         ImageView rlSpan;
     }
 }

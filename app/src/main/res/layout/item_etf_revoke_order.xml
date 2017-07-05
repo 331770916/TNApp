@@ -47,21 +47,6 @@
                 android:textSize="@dimen/self_stockNumberText" />
         </LinearLayout>
 
-        <LinearLayout
-            android:layout_width="0dip"
-            android:layout_height="match_parent"
-            android:layout_weight="1"
-            android:gravity="center"
-            android:orientation="vertical">
-
-            <TextView
-                android:id="@+id/tv3"
-                android:layout_width="wrap_content"
-                android:layout_height="wrap_content"
-                android:textColor="@color/hushenTab_titleColor"
-                android:textSize="@dimen/txtSize13" />
-        </LinearLayout>
-
 
         <LinearLayout
             android:layout_width="0dip"
@@ -121,7 +106,7 @@
 
     <LinearLayout
         android:id="@+id/tableSpan"
-        android:visibility="gone"
+
         android:layout_width="match_parent"
         android:layout_height="wrap_content"
         android:layout_marginTop="@dimen/size5"
@@ -174,7 +159,7 @@
                     android:layout_height="wrap_content"
                     android:layout_centerVertical="true"
                     android:paddingLeft="@dimen/size5"
-                    android:text="@string/etf_wtje"
+                    android:text="冻结解冻金额:"
                     android:textColor="@color/text" />
 
                 <TextView
@@ -206,7 +191,7 @@
                     android:layout_width="wrap_content"
                     android:layout_height="wrap_content"
                     android:paddingLeft="@dimen/size5"
-                    android:text="@string/etf_wt_account"
+                    android:text="委托属性:"
                     android:textColor="@color/text" />
 
                 <TextView
@@ -234,7 +219,7 @@
                     android:layout_width="wrap_content"
                     android:layout_height="wrap_content"
                     android:paddingLeft="@dimen/size5"
-                    android:text="@string/etf_gddm"
+                    android:text="买卖方向:"
                     android:textColor="@color/text" />
 
                 <TextView
@@ -249,6 +234,45 @@
 
 
         </LinearLayout>
+
+        <LinearLayout
+            android:layout_width="match_parent"
+            android:layout_height="wrap_content"
+            android:layout_marginTop="@dimen/size2"
+            android:orientation="horizontal">
+
+            <LinearLayout
+                android:layout_width="0dp"
+                android:layout_height="wrap_content"
+                android:layout_weight="1"
+                android:background="@color/backgroundColor"
+                android:orientation="horizontal"
+                android:padding="@dimen/size10">
+
+                <TextView
+                    android:layout_width="wrap_content"
+                    android:layout_height="wrap_content"
+                    android:paddingLeft="@dimen/size5"
+                    android:text="废单原因:"
+                    android:textColor="@color/text" />
+
+                <TextView
+                    android:id="@+id/ll_tv5"
+                    android:text="--"
+                    android:layout_width="wrap_content"
+                    android:layout_height="wrap_content"
+                    android:paddingLeft="@dimen/size10"
+                    android:textColor="@color/text" />
+            </LinearLayout>
+
+            <View
+                android:layout_width="@dimen/size1"
+                android:layout_height="0dp" />
+
+
+
+        </LinearLayout>
+
 
         <LinearLayout
             android:layout_width="match_parent"

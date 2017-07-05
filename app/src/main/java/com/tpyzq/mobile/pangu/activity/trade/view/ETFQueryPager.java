@@ -24,6 +24,7 @@ import com.tpyzq.mobile.pangu.base.InterfaceCollection;
 import com.tpyzq.mobile.pangu.data.EtfDataEntity;
 import com.tpyzq.mobile.pangu.data.NetworkVotingEntity;
 import com.tpyzq.mobile.pangu.data.ResultInfo;
+import com.tpyzq.mobile.pangu.util.SpUtils;
 import com.tpyzq.mobile.pangu.view.dialog.LoadingDialog;
 import com.tpyzq.mobile.pangu.view.dialog.MistakeDialog;
 import com.tpyzq.mobile.pangu.view.pickTime.TimePickerView;
@@ -47,11 +48,13 @@ public class ETFQueryPager extends BasePager implements InterfaceCollection.Inte
     private ETFHistoryAdapter mAdapter;
     private ImageView iv_isEmpty;
     private int refresh = 30;
+    private String token ;
 
     private List<EtfDataEntity> myList;
     public ETFQueryPager(Context context, String params) {
         super(context, params);
         this.TAG = params;
+        token = SpUtils.getString(context, "mSession", "");
     }
 
     @Override
@@ -133,7 +136,7 @@ public class ETFQueryPager extends BasePager implements InterfaceCollection.Inte
                             isCustomRefresh = true;
                             mDialog.show();
                             mAdapter.notifyDataSetChanged();
-                            refresh(position, "30", false);
+                            refresh(position, "30", false,startDate,finishDate);
                         }
                     }
                     break;
@@ -153,9 +156,9 @@ public class ETFQueryPager extends BasePager implements InterfaceCollection.Inte
         mAdapter.setCallback(this);
         mListView.setAdapter(mAdapter);
         mListView.setEmptyView(iv_isEmpty);
-        if (!"VoteQueryCustomPager".equals(TAG))
+        if (!"ETFQueryCustomPager".equals(TAG))
             mDialog.show();
-        refresh("", "30", false);
+        refresh("", "30", false,"","");
         mListView.setOnRefreshListener(new PullToRefreshBase.OnRefreshListener<ListView>() {
             @Override
             public void onRefresh(PullToRefreshBase<ListView> refreshView) {
@@ -163,7 +166,7 @@ public class ETFQueryPager extends BasePager implements InterfaceCollection.Inte
                     mListView.getLoadingLayoutProxy().setRefreshingLabel("正在刷新");
                     mListView.getLoadingLayoutProxy().setPullLabel("下拉刷新数据");
                     mListView.getLoadingLayoutProxy().setReleaseLabel("释放开始刷新");
-                    if ("VoteQueryCustomPager".equals(TAG) && !isCustomRefresh) {
+                    if ("ETFQueryCustomPager".equals(TAG) && !isCustomRefresh) {
 
                         mListView.postDelayed(new Runnable() {
                             @Override
@@ -173,7 +176,7 @@ public class ETFQueryPager extends BasePager implements InterfaceCollection.Inte
                         },500);
 
                     } else {
-                        refresh("", String.valueOf(refresh), false);
+                        refresh("", String.valueOf(refresh), false,"","");
                     }
 
                 } else if (mListView.isShownFooter()) {
@@ -186,7 +189,7 @@ public class ETFQueryPager extends BasePager implements InterfaceCollection.Inte
                             SystemClock.sleep(1500);
                         }
                     });
-                    refresh(position, "30", true);
+                    refresh(position, "30", true,"","");
                 }
             }
         });
@@ -214,9 +217,9 @@ public class ETFQueryPager extends BasePager implements InterfaceCollection.Inte
         });
     }
 
-    public void refresh(String page, String num, boolean isClean) {
+    public void refresh(String page, String num, boolean isClean,String begin_date,String end_date) {
 
-        ifc.getDatas(10, this);
+//        ifc.getDatas(10, this);
 //        if (TAG.equals("VoteQueryOneWeekPager")) {
 //            ifc.queryHistoryNetworkVoting(mSession, "1", getExchangeType(), page, num, null, null, TAG, this);
 //        } else if (TAG.equals("VoteQueryInAMonthPager")) {
@@ -226,6 +229,17 @@ public class ETFQueryPager extends BasePager implements InterfaceCollection.Inte
 //        } else if (TAG.equals("VoteQueryCustomPager") && !TextUtils.isEmpty(startDate) && !TextUtils.isEmpty(finishDate)) {
 //            ifc.queryHistoryNetworkVoting(mSession, "0", getExchangeType(), page, num, startDate, finishDate, TAG, this);
 //        }
+        if (TAG.equals("ETFQueryTodayPager")){
+                ifc.queryEntrust(token,"0",page,num,TAG,this);
+        }else if (TAG.equals("ETFQueryOneWeekPager")){
+                ifc.queryHistory(token,"","","1",page,num,TAG,this);
+        }else if (TAG.equals("ETFQueryInAMonthPager")){
+            ifc.queryHistory(token,"","","2",page,num,TAG,this);
+        }else if (TAG.equals("ETFQueryThreeWeekPager")){
+            ifc.queryHistory(token,"","","3",page,num,TAG,this);
+        }else if (TAG.equals("ETFQueryCustomPager")){
+            ifc.queryHistory(token,"","","0",page,num,TAG,this);
+        }
 
         mIsClean = isClean;
     }

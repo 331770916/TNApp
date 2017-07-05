@@ -102,16 +102,7 @@
             android:layout_height="wrap_content"
             android:layout_weight="1"
             android:gravity="center"
-            android:text="@string/etf_business_name"
-            android:textColor="@color/newStockTitle"
-            android:textSize="@dimen/txtSize12" />
-
-        <TextView
-            android:layout_width="0dp"
-            android:layout_height="wrap_content"
-            android:layout_weight="1"
-            android:gravity="center"
-            android:text="@string/etf_status_number"
+            android:text="委托数量/状态"
             android:textColor="@color/newStockTitle"
             android:textSize="@dimen/txtSize12" />
 
@@ -121,7 +112,7 @@
             android:layout_weight="1"
             android:gravity="center|end"
             android:paddingRight="@dimen/size3"
-            android:text="@string/entrust_time"
+            android:text="状态/日期"
             android:textColor="@color/newStockTitle"
             android:textSize="@dimen/txtSize12" />
     </LinearLayout>
