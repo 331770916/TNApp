@@ -61,15 +61,6 @@
             android:layout_height="wrap_content"
             android:layout_weight="1"
             android:gravity="center"
-            android:text="@string/etf_attribute"
-            android:textColor="@color/newStockTitle"
-            android:textSize="@dimen/txtSize12" />
-
-        <TextView
-            android:layout_width="0dp"
-            android:layout_height="wrap_content"
-            android:layout_weight="1"
-            android:gravity="center"
             android:text="@string/etf_wtl"
             android:textColor="@color/newStockTitle"
             android:textSize="@dimen/txtSize12" />
@@ -93,6 +84,7 @@
         android:layout_height="match_parent">
 
         <com.handmark.pulltorefresh.library.PullToRefreshListView
+            android:id="@+id/lv"
             app:ptrAnimationStyle="flip"
             app:ptrMode="both"
             android:layout_width="match_parent"
@@ -102,9 +94,11 @@
             android:scrollbars="none" />
 
         <ImageView
+            android:id="@+id/iv_null"
             android:layout_width="match_parent"
             android:layout_height="match_parent"
             android:layout_centerInParent="true"
+            android:visibility="gone"
             android:scaleType="center"
             android:src="@mipmap/kong" />
     </RelativeLayout>

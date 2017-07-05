@@ -54,7 +54,7 @@ public class ETFNavigationBarActivity extends BaseActivity implements View.OnCli
                 Helper.getInstance().showToast(this,getString(R.string.ETFConstituentStock));
                 break;
             case R.id.Layout_5:
-                Helper.getInstance().showToast(this,getString(R.string.ETF_shenshu_ClosingTheDeal));
+                intent.setClass(this,ETFTrasactionQueryActivity.class);
                 break;
             case R.id.Layout_6:
                 intent.setClass(this,ETFHistoryInquireActivity.class);

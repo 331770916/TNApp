@@ -762,6 +762,7 @@
 
     <!--  etf    -->
     <string name="etf_wtbh">委托编号:</string>
+    <string name="etf_cjbh">成交编号:</string>
     <string name="etf_gddm">股东代码:</string>
     <string name="etf_ztsm">状态说明:</string>
     <string name="etf_jysmc">交易所名称:</string>
@@ -778,7 +779,7 @@
     <string name="etf_history_query">ETF申赎历史查询</string>
     <string name="etf_ss_cj_query">ETF申赎成交查询</string>
     <string name="etf_attribute">属性</string>
-    <string name="etf_wtl">委托量</string>
+    <string name="etf_wtl">成交数量/状态</string>
     <string name="etf_status_data">状态/日期</string>
     <string name="etf_business_name">业务名称</string>
     <string name="etf_status_number">状态/成交量</string>

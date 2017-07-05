@@ -16,6 +16,7 @@
     <uses-permission android:name="android.permission.WRITE_CONTACTS" />
     <uses-permission android:name="android.permission.WRITE_EXTERNAL_STORAGE" />
     <uses-permission android:name="android.permission.ACCESS_NETWORK_STATE" />
+    <uses-permission android:name="android.permission.ACCESS_NETWORK_STATE" />
     <uses-permission android:name="android.permission.BROADCAST_STICKY" />
     <uses-permission android:name="android.permission.ACCESS_WIFI_STATE" />
     <uses-permission android:name="android.permission.READ_EXTERNAL_STORAGE" />
@@ -327,6 +328,7 @@
         <activity android:name=".activity.trade.stock.BankBusinessIndexActivity" />
         <activity android:name=".activity.trade.stock.BanksBalanceQueryActivity" />
         <activity android:name=".activity.trade.stock.BanksTransferAccountsActivity" />
+        <activity android:name=".activity.trade.stock.ETFTrasactionQueryActivity" />
         <activity
             android:name=".activity.trade.stock.BuyAndSellActivity"
             android:windowSoftInputMode="adjustPan|stateAlwaysHidden" />
