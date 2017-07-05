@@ -781,6 +781,10 @@
     <string name="etf_status_data">状态/日期</string>
     <string name="etf_business_name">业务名称</string>
     <string name="etf_status_number">状态/成交量</string>
+    <string name="etf_fdyy">废单原因</string>
+    <string name="etf_mmfx">买卖方向</string>
+    <string name="etf_djjdje">冻结解冻金额</string>
+    <string name="etf_wtsx">委托属性</string>
 
 
 </resources>
