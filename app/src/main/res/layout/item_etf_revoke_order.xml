@@ -1,0 +1,111 @@
+<?xml version="1.0" encoding="utf-8"?>
+<LinearLayout xmlns:android="http://schemas.android.com/apk/res/android"
+    android:layout_width="match_parent"
+    android:layout_height="match_parent"
+    android:orientation="vertical">
+
+    <!--  ETF申赎撤单  -->
+
+    <LinearLayout
+        android:id="@+id/fj_content"
+        android:layout_width="match_parent"
+        android:layout_height="wrap_content"
+        android:background="@color/white"
+        android:orientation="horizontal">
+
+        <LinearLayout
+            android:layout_width="0dp"
+            android:layout_height="match_parent"
+            android:layout_marginLeft="@dimen/size5"
+            android:layout_weight="1"
+            android:orientation="vertical">
+
+            <TextView
+                android:layout_width="wrap_content"
+                android:layout_height="wrap_content"
+                android:layout_marginLeft="@dimen/size20"
+                android:layout_marginTop="@dimen/size12"
+                android:textColor="@color/hushenTab_titleColor"
+                android:textSize="@dimen/self_stockNameText"
+                android:textStyle="bold" />
+
+            <TextView
+                android:layout_width="wrap_content"
+                android:layout_height="wrap_content"
+                android:layout_marginBottom="@dimen/size12"
+                android:layout_marginLeft="@dimen/size20"
+                android:layout_marginTop="@dimen/size4"
+                android:gravity="left"
+                android:textColor="@color/newStockTitle"
+                android:textSize="@dimen/self_stockNumberText" />
+        </LinearLayout>
+
+        <LinearLayout
+            android:layout_width="0dip"
+            android:layout_height="match_parent"
+            android:layout_weight="1"
+            android:gravity="center"
+            android:orientation="vertical">
+
+            <TextView
+                android:layout_width="wrap_content"
+                android:layout_height="wrap_content"
+                android:textColor="@color/hushenTab_titleColor"
+                android:textSize="@dimen/txtSize13" />
+        </LinearLayout>
+
+
+        <LinearLayout
+            android:layout_width="0dip"
+            android:layout_height="match_parent"
+            android:layout_weight="1"
+            android:orientation="vertical">
+
+            <TextView
+                android:layout_width="wrap_content"
+                android:layout_height="wrap_content"
+                android:layout_gravity="center"
+                android:layout_marginTop="@dimen/size13"
+                android:textColor="@color/hushenTab_titleColor"
+                android:textSize="@dimen/txtSize13" />
+
+            <TextView
+                android:layout_width="wrap_content"
+                android:layout_height="wrap_content"
+                android:layout_gravity="center"
+                android:layout_marginBottom="@dimen/size12"
+                android:layout_marginTop="@dimen/size4"
+                android:textColor="@color/hushenTab_titleColor"
+                android:textSize="@dimen/self_stockNumberText" />
+        </LinearLayout>
+
+        <LinearLayout
+            android:layout_width="0dp"
+            android:layout_height="match_parent"
+            android:layout_marginRight="@dimen/size10"
+            android:layout_weight="1"
+            android:orientation="vertical">
+
+            <TextView
+                android:layout_width="wrap_content"
+                android:layout_height="wrap_content"
+                android:layout_gravity="right"
+                android:layout_marginRight="@dimen/size21"
+                android:layout_marginTop="@dimen/size13"
+                android:textColor="@color/hushenTab_titleColor"
+                android:textSize="@dimen/txtSize13" />
+
+            <TextView
+                android:layout_width="wrap_content"
+                android:layout_height="wrap_content"
+                android:layout_gravity="right"
+                android:layout_marginBottom="@dimen/size12"
+                android:layout_marginRight="@dimen/size21"
+                android:layout_marginTop="@dimen/size4"
+                android:textColor="@color/hushenTab_titleColor"
+                android:textSize="@dimen/self_stockNumberText" />
+        </LinearLayout>
+    </LinearLayout>
+
+
+</LinearLayout>
