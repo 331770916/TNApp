@@ -15,7 +15,12 @@ import com.tpyzq.mobile.pangu.util.Helper;
 public class ETFNavigationBarActivity extends BaseActivity implements View.OnClickListener {
     @Override
     public void initView() {
-        findViewById(R.id.argumentBack).setOnClickListener(this);
+        findViewById(R.id.argumentBack).setOnClickListener(new View.OnClickListener(){
+            @Override
+            public void onClick(View v) {
+                finish();
+            }
+        });
         findViewById(R.id.Layout_1).setOnClickListener(this);
         findViewById(R.id.Layout_2).setOnClickListener(this);
         findViewById(R.id.Layout_3).setOnClickListener(this);
@@ -34,34 +39,27 @@ public class ETFNavigationBarActivity extends BaseActivity implements View.OnCli
     public void onClick(View v) {
         Intent intent =new Intent();
         switch (v.getId()) {
-            case R.id.argumentBack:
-                finish();
-                break;
-            case R.id.Layout_1:   //  申购
-//                Helper.getInstance().showToast(this,getString(R.string.ETF_shengou));
+            case R.id.Layout_1://申购
                 intent.setClass(this,ETFApplyforOrRedeemActivity.class);
                 intent.putExtra("type","Applyfor");
                 break;
-            case R.id.Layout_2:   //赎回
-//                Helper.getInstance().showToast(this,getString(R.string.ETF_shuhui));
+            case R.id.Layout_2://赎回
                 intent.setClass(this,ETFApplyforOrRedeemActivity.class);
                 intent.putExtra("type","Redeem");
                 break;
-            case R.id.Layout_3:
+            case R.id.Layout_3://申赎撤单
                 intent.setClass(this,ETFRevokeActivity.class);
                 break;
-            case R.id.Layout_4:
-                Helper.getInstance().showToast(this,getString(R.string.ETFConstituentStock));
-                break;
-            case R.id.Layout_5:
+            case R.id.Layout_4://申赎成交
                 intent.setClass(this,ETFTrasactionQueryActivity.class);
                 break;
-            case R.id.Layout_6:
+            case R.id.Layout_5://申赎历史
                 intent.setClass(this,ETFHistoryInquireActivity.class);
-//                Helper.getInstance().showToast(this,getString(R.string.ETF_shenshu_History));
+                break;
+            case R.id.Layout_6://成分股
+                intent.setClass(this,ETFStockQueryActivity.class);
                 break;
         }
         startActivity(intent);
-
     }
 }

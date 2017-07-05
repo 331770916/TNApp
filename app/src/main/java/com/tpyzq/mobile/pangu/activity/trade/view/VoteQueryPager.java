@@ -69,7 +69,7 @@ public class VoteQueryPager extends BasePager implements InterfaceCollection.Int
     public void setView(String params) {
         mListView = (PullToRefreshListView) rootView.findViewById(R.id.listView_stock);
         iv_isEmpty = (ImageView) rootView.findViewById(R.id.isEmpty);
-        mListView.setMode(PullToRefreshBase.Mode.PULL_FROM_START);
+        mListView.setMode(PullToRefreshBase.Mode.BOTH);
         if ("VoteQueryCustomPager".equals(params)) {
             LinearLayout fjTimepicker = (LinearLayout) rootView.findViewById(R.id.fjTimepicker);
             fjTimepicker.setVisibility(View.VISIBLE);
@@ -249,6 +249,8 @@ public class VoteQueryPager extends BasePager implements InterfaceCollection.Int
             if (object instanceof List) {
                 myList = (List<NetworkVotingEntity>) object;
                 if (myList.size() > 0) {
+                    if(myList.size()<30)
+                        mListView.setMode(PullToRefreshBase.Mode.PULL_FROM_START);
                     position = myList.get(myList.size()-1).getPosition_str();
                     if(mIsClean)
                         refresh += 30;
