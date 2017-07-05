@@ -13,6 +13,7 @@
         android:orientation="horizontal">
 
         <TextView
+            android:id="@+id/tv_code"
             android:layout_width="@dimen/size0"
             android:layout_height="match_parent"
             android:layout_weight="1"
@@ -20,13 +21,14 @@
             android:paddingLeft="@dimen/size20" />
 
         <TextView
+            android:id="@+id/tv_name"
             android:layout_width="@dimen/size0"
             android:layout_height="match_parent"
             android:layout_weight="1"
             android:gravity="center" />
 
         <TextView
-            android:id="@+id/textView34"
+            android:id="@+id/tv_etf_code"
             android:layout_width="@dimen/size0"
             android:layout_height="match_parent"
             android:layout_weight="1"
