@@ -794,9 +794,9 @@
     <string name="ETFConstituentStock">ETF成分股查询</string>
     <string name="ETF_shenshu_ClosingTheDeal">ETF申赎成交查询</string>
     <string name="ETF_shenshu_History">ETF申赎历史查询</string>
-
-
-
+    <string name="etf_code">ETF代码</string>
+    <string name="etf_jjname">基金名称</string>
+    <string name="etf_jjdm">基金代码</string>
 
 
 </resources>
