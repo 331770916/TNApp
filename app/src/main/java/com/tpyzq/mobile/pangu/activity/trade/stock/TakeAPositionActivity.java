@@ -70,7 +70,6 @@ public class TakeAPositionActivity extends BaseActivity implements AdapterView.O
     private ImageView iv_isEmpty;
     private TextView mView;
     private AutoListview mCcListView;
-    private RelativeLayout kong_null;
     private RelativeLayout RelativeLayout_color_1, RelativeLayout_color_2;
     private PullDownScrollView mPullDownScrollView;
 
@@ -80,7 +79,6 @@ public class TakeAPositionActivity extends BaseActivity implements AdapterView.O
         beans = new ArrayList<TakeAPositionEntity>();
         findViewById(R.id.detail_back).setOnClickListener(this);
         mBackground = (LinearLayout) findViewById(R.id.LL);
-        kong_null = (RelativeLayout) findViewById(R.id.Kong_Null);
 
         RelativeLayout_color_1 = (RelativeLayout) findViewById(R.id.rl_top_bar);
         RelativeLayout_color_2 = (RelativeLayout) findViewById(R.id.RelativeLayout_color_2);
@@ -139,7 +137,6 @@ public class TakeAPositionActivity extends BaseActivity implements AdapterView.O
             public void onError(Call call, Exception e, int id) {
                 LogHelper.e(TAG, e.toString());
                 ResultDialog.getInstance().showText("网络异常");
-                kong_null.setVisibility(View.GONE);
             }
 
             @Override
@@ -150,6 +147,7 @@ public class TakeAPositionActivity extends BaseActivity implements AdapterView.O
                 try {
                     JSONObject jsonObject = new JSONObject(response);
                     if ("0".equals(jsonObject.getString("code"))) {
+                        beans.clear();
                         JSONArray jsonArray = jsonObject.getJSONArray("data");
                         if (jsonArray != null && jsonArray.length() > 0) {
                             for (int i = 0; i < jsonArray.length(); i++) {
@@ -212,18 +210,14 @@ public class TakeAPositionActivity extends BaseActivity implements AdapterView.O
                                         }
                                         beans.add(_bean);
                                     }
-                                } else {
-                                    kong_null.setVisibility(View.GONE);
                                 }
                             }
-                            adapter.setData(beans);
-                            adapter.notifyDataSetChanged();
                         }
+                        adapter.setData(beans);
                     } else if ("-6".equals(jsonObject.getString("code"))) {
                         startActivity(new Intent(TakeAPositionActivity.this, TransactionLoginActivity.class));
                     } else {
                         ResultDialog.getInstance().showText("网络异常");
-                        kong_null.setVisibility(View.GONE);
                     }
                 } catch (JSONException e) {
                     e.printStackTrace();
@@ -280,7 +274,6 @@ public class TakeAPositionActivity extends BaseActivity implements AdapterView.O
             public void run() {
                 DateFormat format1 = new SimpleDateFormat("yyyy-MM-dd HH:mm:ss");
                 String bDate = format1.format(new Date());
-                beans.clear();
                 toConnect();
 //                mPullDownScrollView.finishRefresh("上次刷新时间:" + bDate);
                 mPullDownScrollView.finishRefresh("");

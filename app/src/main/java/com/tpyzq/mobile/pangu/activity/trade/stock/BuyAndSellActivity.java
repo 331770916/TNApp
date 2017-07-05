@@ -1314,20 +1314,22 @@ public class BuyAndSellActivity extends BaseActivity implements View.OnClickList
                         }
                         if (this != null) {
                             if (!BuyAndSellActivity.this.isFinishing()) {
-                                if (!stockPw.isShowing()) {
+                                if (null!=stockPw&&!stockPw.isShowing()) {
                                     stockPw.showPopupWindow(traLayout1);
                                 }
-                                stockPw.refreshView();
+                                if (null!=stockPw) {
+                                    stockPw.refreshView();
+                                }
                             }
                         }
                     }else if ("-5".equals(code)) {
 //                        et_stock_code.setText("");
-                        if (stockPw.isShowing()) {
+                        if (null!=stockPw&&stockPw.isShowing()) {
                             stockPw.dismiss();
                         }
                         Helper.getInstance().showToast(BuyAndSellActivity.this, "该股票不存在");
                     } else {
-                        if (stockPw.isShowing()) {
+                        if (null!=stockPw&&stockPw.isShowing()) {
                             stockPw.dismiss();
                         }
                     }
