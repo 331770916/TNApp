@@ -48,7 +48,7 @@ public class ETFNavigationBarActivity extends BaseActivity implements View.OnCli
                 intent.putExtra("Redeem","");
                 break;
             case R.id.Layout_3:
-                Helper.getInstance().showToast(this,getString(R.string.ETF_shenshu_Revoke));
+                intent.setClass(this,ETFRevokeActivity.class);
                 break;
             case R.id.Layout_4:
                 Helper.getInstance().showToast(this,getString(R.string.ETFConstituentStock));

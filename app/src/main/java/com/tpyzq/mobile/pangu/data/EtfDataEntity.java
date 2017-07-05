@@ -23,7 +23,7 @@ public class EtfDataEntity {
     private String entrust_prop;       // 委托属性  0 买卖 1 配股 2	转托  3 申购  4	回购
     private String prev_balance;       // 冻结解冻金额
     private String entrust_status_name;   // 委托状态名称
-    private String exchange_type_name;    //交易市场
+    private String exchange_type_name;    //状态名称
 
 
 

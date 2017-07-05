@@ -329,6 +329,7 @@
         <activity android:name=".activity.trade.stock.BanksBalanceQueryActivity" />
         <activity android:name=".activity.trade.stock.BanksTransferAccountsActivity" />
         <activity android:name=".activity.trade.stock.ETFTrasactionQueryActivity" />
+        <activity android:name=".activity.trade.stock.ETFRevokeActivity" />
         <activity
             android:name=".activity.trade.stock.BuyAndSellActivity"
             android:windowSoftInputMode="adjustPan|stateAlwaysHidden" />
