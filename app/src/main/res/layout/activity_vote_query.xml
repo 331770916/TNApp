@@ -4,7 +4,13 @@
     android:layout_height="match_parent"
     android:background="@color/bgColor"
     android:orientation="vertical">
-
+    <RelativeLayout
+        android:id="@+id/rl_top_bar"
+        android:layout_width="match_parent"
+        android:layout_height="@dimen/size25"
+        android:background="@color/blue"
+        android:clipToPadding="true"
+        android:fitsSystemWindows="true" />
 
     <RelativeLayout
         android:id="@+id/RelativeLayout_color_2"

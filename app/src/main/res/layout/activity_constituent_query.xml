@@ -2,7 +2,9 @@
 <LinearLayout xmlns:android="http://schemas.android.com/apk/res/android"
     android:layout_width="match_parent"
     android:layout_height="match_parent"
+    xmlns:app="http://schemas.android.com/apk/res-auto"
     android:orientation="vertical">
+    <!--  ETF 成分股查询   -->
 
     <RelativeLayout
         android:id="@+id/rl_top_bar"
@@ -15,78 +17,90 @@
     <RelativeLayout
         android:layout_width="match_parent"
         android:layout_height="@dimen/pickerview_topbar_height"
+        android:layout_below="@+id/AGRelativeLayout"
         android:background="@color/blue">
 
         <ImageView
-            android:id="@+id/ivCurrencyFundRedeem_back"
+            android:id="@+id/iv_back"
             android:layout_width="wrap_content"
             android:layout_height="match_parent"
             android:layout_alignParentLeft="true"
-            android:layout_marginLeft="@dimen/size20"
+            android:padding="@dimen/size10"
             android:src="@mipmap/back_btn" />
 
+        <!--   -->
         <TextView
-            android:id="@+id/tvTitle"
             android:layout_width="wrap_content"
             android:layout_height="wrap_content"
             android:layout_centerInParent="true"
-            android:text="@string/Gradingfundmerger"
+            android:text="@string/etf_cf_query"
             android:textColor="@color/white"
             android:textSize="@dimen/pickerview_topbar_title_textsize" />
     </RelativeLayout>
 
     <LinearLayout
-        android:id="@+id/isShow"
         android:layout_width="match_parent"
-        android:layout_height="@dimen/size44"
-        android:background="@color/white">
+        android:layout_height="@dimen/size30"
+        android:background="@color/white"
+        android:gravity="center"
+        android:orientation="horizontal"
+        android:paddingLeft="@dimen/size20"
+        android:paddingRight="@dimen/size20">
 
         <TextView
-            android:layout_width="match_parent"
-            android:layout_height="match_parent"
-            android:layout_marginLeft="@dimen/size20"
+            android:layout_width="0dp"
+            android:layout_height="wrap_content"
             android:layout_weight="1"
-            android:gravity="center_vertical"
-            android:text="@string/securities_code"
-            android:textSize="@dimen/txtSize13" />
+            android:gravity="center|left"
+            android:text="@string/entrust_name"
+            android:textColor="@color/newStockTitle"
+            android:textSize="@dimen/txtSize12" />
 
         <TextView
-            android:id="@+id/textView"
-            android:layout_width="match_parent"
-            android:layout_height="match_parent"
-            android:layout_marginRight="@dimen/size115"
+            android:layout_width="0dp"
+            android:layout_height="wrap_content"
             android:layout_weight="1"
-            android:gravity="center_vertical"
-            android:text="@string/securities_name"
-            android:textSize="@dimen/txtSize13" />
+            android:gravity="center"
+            android:text="@string/etf_wtb_number"
+            android:textColor="@color/newStockTitle"
+            android:textSize="@dimen/txtSize12" />
 
-
+        <TextView
+            android:layout_width="0dp"
+            android:layout_height="wrap_content"
+            android:layout_weight="1"
+            android:gravity="center|right"
+            android:text="@string/etf_number_amount"
+            android:textColor="@color/newStockTitle"
+            android:textSize="@dimen/txtSize12" />
     </LinearLayout>
 
-    <View
-        android:layout_width="match_parent"
-        android:layout_height="1px"
-        android:background="@color/fengexian" />
 
     <RelativeLayout
         android:layout_width="match_parent"
-        android:layout_height="wrap_content">
+        android:layout_height="match_parent">
 
-        <ListView
-            android:id="@+id/listView"
+        <com.handmark.pulltorefresh.library.PullToRefreshListView
             android:layout_width="match_parent"
             android:layout_height="match_parent"
-            android:divider="@color/fengexian"
-            android:dividerHeight="1px" />
+            android:divider="@color/lineColor"
+            android:dividerHeight="@dimen/size0.5"
+            android:scrollbars="none"
+            app:ptrAnimationStyle="flip"
+            app:ptrMode="both" />
 
         <ImageView
-            android:id="@+id/isEmpty"
-            android:visibility="gone"
             android:layout_width="match_parent"
             android:layout_height="match_parent"
             android:layout_centerInParent="true"
             android:scaleType="center"
             android:src="@mipmap/kong" />
     </RelativeLayout>
+
+
+
+
+
+
 
 </LinearLayout>
