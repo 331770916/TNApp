@@ -55,10 +55,9 @@ public class VoteQueryPager extends BasePager implements InterfaceCollection.Int
         this.TAG = params;
     }
 
-    public void setmMarket(String market,boolean isRefresh){
+    public void setmMarket(String market){
         mMarket = market;
-        if(isRefresh)
-            refresh("", "30", false);
+        refresh("", "30", false);
     }
 
     @Override

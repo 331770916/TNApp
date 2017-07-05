@@ -83,12 +83,8 @@ public class VoteQueryActivity extends BaseActivity implements View.OnClickListe
         if (requestCode == REQUSET && resultCode == RESULT_OK) {
             mMarket = intent.getStringExtra("Market");
             mShareholderCode_tv.setText(intent.getStringExtra("Code"));
-            for (int i = 0;i<listBuy.size();i++){
-                if(i==mPostion)
-                    ((VoteQueryPager)listBuy.get(i)).setmMarket(mMarket,true);
-                else
-                    ((VoteQueryPager)listBuy.get(i)).setmMarket(mMarket,false);
-            }
+            for (int i = 0;i<listBuy.size();i++)
+                    ((VoteQueryPager)listBuy.get(i)).setmMarket(mMarket);
             viewPager.setCurrentItem(mPostion);
         }
     }
