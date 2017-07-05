@@ -43,7 +43,6 @@ public class FJEntrustDealQueryPager extends BasePager implements InterfaceColle
     private boolean isScallBottom, mIsClean;
     private Dialog mistakeDialog, mDialog;
     private LinearLayout fjTimepicker;
-    private RelativeLayout kong_null;
     private ImageView iv_isEmpty;
     private int refresh = 30;
     private boolean isCustomRefresh = false;
@@ -58,7 +57,6 @@ public class FJEntrustDealQueryPager extends BasePager implements InterfaceColle
         listView = (PullToRefreshListView) rootView.findViewById(R.id.listview);
         listView.setMode(PullToRefreshBase.Mode.PULL_FROM_START);
         iv_isEmpty = (ImageView) rootView.findViewById(R.id.iv_isEmpty);
-        kong_null = (RelativeLayout) rootView.findViewById(R.id.FJEAMP_Kong_Null);
         if ("EntrustCustomPager".equals(params) || "DealCustomPager".equals(params)) {
             fjTimepicker = (LinearLayout) rootView.findViewById(R.id.fjTimepicker);
             fjTimepicker.setVisibility(View.VISIBLE);
@@ -142,8 +140,10 @@ public class FJEntrustDealQueryPager extends BasePager implements InterfaceColle
             mDialog.dismiss();
         String code = info.getCode();
         if ("0".equals(code)) {
-            if (!mIsClean && myList != null)
+            if (!mIsClean && myList != null) {
                 myList.clear();
+                mAdapter.notifyDataSetChanged();
+            }
             Object object = info.getData();
             if (object instanceof List) {
                 myList = (List<StructuredFundEntity>) object;
@@ -154,14 +154,12 @@ public class FJEntrustDealQueryPager extends BasePager implements InterfaceColle
                     mAdapter.setData(myList);
                 } else {
                     helper.showToast(mContext, " 暂无数据");
-//                    kong_null.setVisibility(View.GONE);
                 }
             }
         } else if ("-6".equals(code)) {
             skip.startLogin(mContext);
         } else {//-1,-2,-3情况下显示定义好信息
             helper.showToast(mContext, info.getMsg());
-//            kong_null.setVisibility(View.GONE);
         }
         listView.onRefreshComplete();
     }
@@ -200,12 +198,6 @@ public class FJEntrustDealQueryPager extends BasePager implements InterfaceColle
                         listView.getLoadingLayoutProxy().setRefreshingLabel("正在刷新");
                         listView.getLoadingLayoutProxy().setPullLabel("下拉刷新数据");
                         listView.getLoadingLayoutProxy().setReleaseLabel("释放开始刷新");
-//                        listView.post(new Runnable() {
-//                            @Override
-//                            public void run() {
-//                                SystemClock.sleep(1500);
-//                            }
-//                        });
                         if ("EntrustCustomPager".equals(TAG) && !isCustomRefresh) {
                                 listView.onRefreshComplete();
                         } else if ("DealCustomPager".equals(TAG) && !isCustomRefresh) {
@@ -217,12 +209,6 @@ public class FJEntrustDealQueryPager extends BasePager implements InterfaceColle
                         listView.getLoadingLayoutProxy().setRefreshingLabel("正在刷新");
                         listView.getLoadingLayoutProxy().setPullLabel("上拉加载数据");
                         listView.getLoadingLayoutProxy().setReleaseLabel("释放开始刷新");
-//                        listView.post(new Runnable() {
-//                            @Override
-//                            public void run() {
-//                                SystemClock.sleep(1500);
-//                            }
-//                        });
                         if ("EntrustCustomPager".equals(TAG) && !isCustomRefresh) {
                             listView.onRefreshComplete();
                         } else if ("DealCustomPager".equals(TAG) && !isCustomRefresh) {
@@ -304,9 +290,7 @@ public class FJEntrustDealQueryPager extends BasePager implements InterfaceColle
             mDialog = null;
         }
         mAdapter = null;
-        listView.removeAllViews();
         listView = null;
-        kong_null = null;
         iv_isEmpty = null;
         mtvStartTime = null;
         mtvFinishTime = null;

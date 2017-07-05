@@ -165,13 +165,6 @@ public class VoteQueryPager extends BasePager implements InterfaceCollection.Int
                         mListView.getLoadingLayoutProxy().setRefreshingLabel("正在刷新");
                         mListView.getLoadingLayoutProxy().setPullLabel("下拉刷新数据");
                         mListView.getLoadingLayoutProxy().setReleaseLabel("释放开始刷新");
-//                  释放开始刷新
-                        mListView.post(new Runnable() {
-                            @Override
-                            public void run() {
-                                SystemClock.sleep(1500);
-                            }
-                        });
                         if ("VoteQueryCustomPager".equals(TAG) && !isCustomRefresh) {
                             mListView.onRefreshComplete();
                         } else {
@@ -182,12 +175,6 @@ public class VoteQueryPager extends BasePager implements InterfaceCollection.Int
                         mListView.getLoadingLayoutProxy().setRefreshingLabel("正在刷新");
                         mListView.getLoadingLayoutProxy().setPullLabel("上拉加载数据");
                         mListView.getLoadingLayoutProxy().setReleaseLabel("释放开始刷新");
-                        mListView.post(new Runnable() {
-                            @Override
-                            public void run() {
-                                SystemClock.sleep(1500);
-                            }
-                        });
                         refresh(position, "30", true);
                     }
                 }
@@ -255,8 +242,10 @@ public class VoteQueryPager extends BasePager implements InterfaceCollection.Int
             mDialog.dismiss();
         String code = info.getCode();
         if ("0".equals(code)) {
-            if (!mIsClean && myList != null)
+            if (!mIsClean && myList != null) {
                 myList.clear();
+                mAdapter.notifyDataSetChanged();
+            }
             Object object = info.getData();
             if (object instanceof List) {
                 myList = (List<NetworkVotingEntity>) object;
@@ -274,14 +263,7 @@ public class VoteQueryPager extends BasePager implements InterfaceCollection.Int
         } else {//-1,-2,-3情况下显示定义好信息
             helper.showToast(mContext, info.getMsg());
         }
-        mListView.postDelayed(new Runnable() {
-            @Override
-            public void run() {
         mListView.onRefreshComplete();
-            }
-        },500);
-
-
     }
 
 
@@ -297,7 +279,6 @@ public class VoteQueryPager extends BasePager implements InterfaceCollection.Int
             mDialog = null;
         }
         mAdapter = null;
-        mListView.removeAllViews();
         mListView = null;
         iv_isEmpty = null;
         mtvStartTime = null;
