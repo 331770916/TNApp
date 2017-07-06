@@ -76,26 +76,25 @@ public class VoteDetailAdapter extends BaseAdapter {
                     TextView tv4 = (TextView) convertView.findViewById(R.id.voteNo);
                     TextView tv5 = (TextView) convertView.findViewById(R.id.voteAbstention);
                     final TextView[] tvs = new TextView[]{tv3, tv4, tv5};
-                    bean.setEntrust_amount("");
                     tv3.setOnClickListener(new View.OnClickListener() {
                         @Override
                         public void onClick(View v) {
                             changeColorAndBackgroud(tvs, 0);
-                            bean.setEntrust_amount("1");
+                            bean.setEntrust_no("1");
                         }
                     });
                     tv4.setOnClickListener(new View.OnClickListener() {
                         @Override
                         public void onClick(View v) {
                             changeColorAndBackgroud(tvs, 1);
-                            bean.setEntrust_amount("2");
+                            bean.setEntrust_no("2");
                         }
                     });
                     tv5.setOnClickListener(new View.OnClickListener() {
                         @Override
                         public void onClick(View v) {
                             changeColorAndBackgroud(tvs, 2);
-                            bean.setEntrust_amount("3");
+                            bean.setEntrust_no("3");
                         }
                     });
                     break;
@@ -134,7 +133,6 @@ public class VoteDetailAdapter extends BaseAdapter {
         etNum.setInputType(InputType.TYPE_CLASS_NUMBER);
         lps.leftMargin = (int)mContext.getResources().getDimension(R.dimen.size31);
         ll.addView(etNum,etlps);
-        entity.setEntrust_amount("");
         etNum.addTextChangedListener(new TextWatcher() {
             @Override
             public void beforeTextChanged(CharSequence s, int start, int count, int after) {
@@ -145,7 +143,7 @@ public class VoteDetailAdapter extends BaseAdapter {
             public void afterTextChanged(Editable s) {
                 String editString = s.toString();
                 if(!TextUtils.isEmpty(editString)&&!editString.startsWith("0"))
-                    entity.setEntrust_amount(editString);
+                    entity.setEntrust_no(editString);
                 else
                     Helper.getInstance().showToast(mContext,"议案投票数必须为整数");
             }
