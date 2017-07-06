@@ -2,6 +2,7 @@ package com.tpyzq.mobile.pangu.activity.myself.login;
 
 import android.app.Dialog;
 import android.content.Intent;
+import android.graphics.Bitmap;
 import android.graphics.Color;
 import android.graphics.Paint;
 import android.os.CountDownTimer;
@@ -14,6 +15,7 @@ import android.widget.EditText;
 import android.widget.LinearLayout;
 import android.widget.TextView;
 
+import com.facebook.drawee.view.SimpleDraweeView;
 import com.tpyzq.mobile.pangu.R;
 import com.tpyzq.mobile.pangu.base.BaseActivity;
 import com.tpyzq.mobile.pangu.base.CustomApplication;
@@ -35,6 +37,7 @@ import com.tpyzq.mobile.pangu.interfac.ICallbackResult;
 import com.tpyzq.mobile.pangu.log.LogHelper;
 import com.tpyzq.mobile.pangu.log.LogUtil;
 import com.tpyzq.mobile.pangu.util.ConstantUtil;
+import com.tpyzq.mobile.pangu.util.DeviceUtil;
 import com.tpyzq.mobile.pangu.util.Helper;
 import com.tpyzq.mobile.pangu.util.SpUtils;
 import com.tpyzq.mobile.pangu.util.keyboard.KeyEncryptionUtils;
@@ -76,8 +79,9 @@ public class ShouJiZhuCeActivity extends BaseActivity implements View.OnClickLis
     private int pageIndex = 0;
     private int Marker = 0;
 
-    private String destnumber, verifycode;
     private LinearLayout LL_Marked;
+    private EditText mImage_et;
+    private SimpleDraweeView mSecurityCode;
 
     @Override
     public void initView() {
@@ -98,6 +102,13 @@ public class ShouJiZhuCeActivity extends BaseActivity implements View.OnClickLis
         mSoundtv = (TextView) findViewById(R.id.Soundtv);
         LL_Marked = (LinearLayout) findViewById(R.id.LinearLayout_Marked);
         mSoundtv.getPaint().setFlags(Paint.UNDERLINE_TEXT_FLAG);//下划线
+
+        //填写图片验证码
+        mImage_et = (EditText) findViewById(R.id.etImage);
+        //图片验证码
+        mSecurityCode = (SimpleDraweeView) findViewById(R.id.SecurityCode);
+
+
         EditTextMonitor();
     }
 
@@ -105,26 +116,88 @@ public class ShouJiZhuCeActivity extends BaseActivity implements View.OnClickLis
      * EditText的 监听事件
      */
     private void EditTextMonitor() {
+        mSecurityCode.setDrawingCacheEnabled(true);
         time = new TimeCount(120000, 1000);
         time1 = new TimeCount1(120000, 1000);
         mCaptchabtn.setOnClickListener(this);
         mSoundtv.setOnClickListener(this);
+        mSecurityCode.setOnClickListener(this);
         mSjNumber.addTextChangedListener(new MyTextWatcher());
+        mImage_et.addTextChangedListener(new MyTextWatcher());
         mCaptchabtn_ET.addTextChangedListener(new MyTextWatcher());
+        mCaptchabtn.setClickable(false);
+        requestData();
     }
 
+    //获取图片验证码
+    private void requestData() {
+        ImageVerification();
+    }
+
+    private void ImageVerification() {
+        mCaptchabtnState = false;
+        HashMap map = new HashMap();
+        map.put("equipment", DeviceUtil.getDeviceId(CustomApplication.getContext()));
+        NetWorkUtil.getInstence().okHttpForGet(TAG, ConstantUtil.SecurityIps + "/note/getImage", map, new StringCallback() {
+            @Override
+            public void onError(Call call, Exception e, int id) {
+                Helper.getInstance().showToast(ShouJiZhuCeActivity.this, ConstantUtil.NETWORK_ERROR);
+                mSecurityCode.setImageResource(R.mipmap.ic_again);
+            }
+
+            @Override
+            public void onResponse(String response, int id) {
+                try {
+                    JSONObject jsonObject = new JSONObject(response);
+
+                    String code = jsonObject.getString("code");
+
+                    String type = jsonObject.getString("type");
+                    if ("0".equals(code)) {
+                        String message = jsonObject.getString("message");
+                        Bitmap bitmap = Helper.base64ToBitmap(message);
+                        mSecurityCode.setImageBitmap(bitmap);
+                        mSecurityCode.setAspectRatio(3.2f);
+                    } else {
+                        Helper.getInstance().showToast(ShouJiZhuCeActivity.this, type.toString());
+                    }
+                } catch (JSONException e) {
+                    e.printStackTrace();
+                }
+            }
+        });
+    }
 
     /**
      * 注册登录显示状态
      */
     private void initButtonshow() {
-        if (mSjNumber.getText().toString().equals("")) {
+        if (TextUtils.isEmpty(mSjNumber.getText().toString())) {
             mSjLogIn.setBackgroundResource(R.drawable.button_login_unchecked);
             mSjLogIn.setTextColor(Color.parseColor("#ffffffff"));
-        } else if (mCaptchabtn_ET.getText().toString().equals("")) {
+
+            mCaptchabtn.setClickable(false);
+            mCaptchabtn.setTextColor(Color.parseColor("#87bd43"));
+            mCaptchabtn.setBackgroundResource(R.drawable.captcha_button_pitchon);
+
+        } else if (TextUtils.isEmpty(mImage_et.getText().toString())) {
+
+            mCaptchabtn.setClickable(false);
+            mCaptchabtn.setTextColor(Color.parseColor("#87bd43"));
+            mCaptchabtn.setBackgroundResource(R.drawable.captcha_button_pitchon);
+
             mSjLogIn.setBackgroundResource(R.drawable.button_login_unchecked);
             mSjLogIn.setTextColor(Color.parseColor("#ffffffff"));
-        } else if (mCaptchabtnState == false) {
+        } else if (TextUtils.isEmpty(mCaptchabtn_ET.getText().toString())) {
+            if (!mCaptchabtnState) {
+                mCaptchabtn.setClickable(true);
+                mCaptchabtn.setBackgroundResource(R.drawable.captcha_button_unchecked);
+                mCaptchabtn.setTextColor(Color.parseColor("#FFFFFF"));
+            }
+
+            mSjLogIn.setBackgroundResource(R.drawable.button_login_unchecked);
+            mSjLogIn.setTextColor(Color.parseColor("#ffffffff"));
+        } else if (!mCaptchabtnState) {
             mSjLogIn.setBackgroundResource(R.drawable.button_login_unchecked);
             mSjLogIn.setTextColor(Color.parseColor("#ffffffff"));
         } else {
@@ -132,7 +205,9 @@ public class ShouJiZhuCeActivity extends BaseActivity implements View.OnClickLis
             mSjLogIn.setBackgroundResource(R.drawable.button_login_pitchon);
             mSjLogIn.setTextColor(Color.parseColor("#ffffffff"));
         }
+
     }
+
 
     @Override
     public int getLayoutId() {
@@ -143,6 +218,7 @@ public class ShouJiZhuCeActivity extends BaseActivity implements View.OnClickLis
     public void onClick(View v) {
         String Captchabtn_ET = mCaptchabtn_ET.getText().toString().trim();
         String jNumber = mSjNumber.getText().toString().trim();
+        String mImage_str = mImage_et.getText().toString().trim();
         switch (v.getId()) {
             case R.id.SJublish_back:
                 finish();
@@ -155,12 +231,17 @@ public class ShouJiZhuCeActivity extends BaseActivity implements View.OnClickLis
                     if (mLoadingDialog != null) {
                         mLoadingDialog.dismiss();
                     }
-                    Helper.getInstance().showToast(this, "请输入验证码");
+                    Helper.getInstance().showToast(this, "请输手机短信入验证码");
                 } else if (jNumber.equals("")) {
                     if (mLoadingDialog != null) {
                         mLoadingDialog.dismiss();
                     }
                     Helper.getInstance().showToast(this, "请输入手机号");
+                } else if (mImage_str.equals("")) {
+                    if (mLoadingDialog != null) {
+                        mLoadingDialog.dismiss();
+                    }
+                    Helper.getInstance().showToast(this, "请输入验证码");
                 } else if (!Helper.isMobileNO(jNumber)) {
                     if (mLoadingDialog != null) {
                         mLoadingDialog.dismiss();
@@ -168,7 +249,8 @@ public class ShouJiZhuCeActivity extends BaseActivity implements View.OnClickLis
                     Helper.getInstance().showToast(this, "请输入正确的手机号");
                 } else {
                     mSjLogIn.setEnabled(false);
-                    Validatio();
+//                    Validatio();
+                    InscriptionRegistry();
                 }
                 break;
             case R.id.Captchabtn://短信
@@ -195,6 +277,9 @@ public class ShouJiZhuCeActivity extends BaseActivity implements View.OnClickLis
                 WXLogin login = new WXLogin(ShouJiZhuCeActivity.this, ShouJiZhuCeActivity.this, Marker);
                 Marker = 1;
                 break;
+            case R.id.SecurityCode:
+                ImageVerification();
+                break;
         }
     }
 
@@ -205,51 +290,6 @@ public class ShouJiZhuCeActivity extends BaseActivity implements View.OnClickLis
     }
 
 
-    /**
-     * 验证码效验
-     */
-    private void Validatio() {
-        HashMap map = new HashMap();
-        map.put("phone", mSjNumber.getText().toString().trim());
-        map.put("auth", mCaptchabtn_ET.getText().toString().trim());
-        NetWorkUtil.getInstence().okHttpForGet(TAG, ConstantUtil.URL_VALIDATION, map, new StringCallback() {
-            @Override
-            public void onError(Call call, Exception e, int id) {
-                LogUtil.e("验证码效验", e.toString());
-                if (mLoadingDialog != null) {
-                    mLoadingDialog.dismiss();
-                }
-                mSjLogIn.setEnabled(true);
-                Helper.getInstance().showToast(ShouJiZhuCeActivity.this, ConstantUtil.NETWORK_ERROR);
-            }
-
-            @Override
-            public void onResponse(String response, int id) {
-                if (TextUtils.isEmpty(response)) {
-                    return;
-                }
-                try {
-                    JSONObject jsonObject = new JSONObject(response);
-                    String code = jsonObject.getString("code");
-                    String message = jsonObject.getString("message");
-                    if ("200".equals(code)) {
-                        InscriptionRegistry();
-                    } else {
-                        if (mLoadingDialog != null) {
-                            mLoadingDialog.dismiss();
-                        }
-                        mSjLogIn.setEnabled(true);
-                        Helper.getInstance().showToast(ShouJiZhuCeActivity.this, message);
-                    }
-
-                } catch (JSONException e) {
-                    e.printStackTrace();
-                }
-            }
-        });
-
-    }
-
 
     /**
      * 注册登录
@@ -257,18 +297,18 @@ public class ShouJiZhuCeActivity extends BaseActivity implements View.OnClickLis
     private void InscriptionRegistry() {
         String mSjNumber_str = mSjNumber.getText().toString().trim();
         String mRegId = SpUtils.getString(this, "RegId", "");
-        Map map = new HashMap<>();
-        Map map1 = new HashMap<>();
-        map.put("funcid", "800100");
-        map.put("token", "");
-        map.put("parms", map1);
-        map1.put("user_type", "1");//账户号码类型 1：手机用户   2：QQ用户 3：微信用户 4：微博用户 9：其他用户
-        map1.put("user_account", mSjNumber_str); //账户号码
-        map1.put("phone", mSjNumber_str);  //手机号
-        map1.put("phone_type", "1");      //手机类型 1.安卓 2.苹果 3.其他
-        map1.put("token", mRegId);
 
-        NetWorkUtil.getInstence().okHttpForPostString(TAG, ConstantUtil.URL_SJLI, map, new StringCallback() {
+        HashMap map= new HashMap();
+        map.put("equipment",DeviceUtil.getDeviceId(CustomApplication.getContext()));
+        map.put("phone",mSjNumber_str);
+        map.put("auth",mCaptchabtn_ET.getText().toString());
+        map.put("phone_type","1");  //手机类型 1.安卓 2.苹果 3.其他
+        map.put("token",mRegId);
+        map.put("user_account",mSjNumber_str);
+        map.put("user_type","1");//账户类型，1：手机，2：qq，3：微信
+
+
+        NetWorkUtil.getInstence().okHttpForGet(TAG, ConstantUtil.SecurityIps+"/note/authAndRegister", map, new StringCallback() {
             @Override
             public void onError(Call call, Exception e, int id) {
                 mSjLogIn.setEnabled(true);
@@ -276,6 +316,8 @@ public class ShouJiZhuCeActivity extends BaseActivity implements View.OnClickLis
                 if (mLoadingDialog != null) {
                     mLoadingDialog.dismiss();
                 }
+                mImage_et.setText("");
+                ImageVerification();
                 Helper.getInstance().showToast(ShouJiZhuCeActivity.this, "网络异常");
             }
 
@@ -288,8 +330,8 @@ public class ShouJiZhuCeActivity extends BaseActivity implements View.OnClickLis
                 try {
                     JSONObject object = new JSONObject(response);
                     String code_Str = object.getString("code");
-                    String msg_Str = object.getString("msg");
-                    if (code_Str.equals("0")) { //新用户
+                    String msg_Str = object.getString("message");
+                    if ("0".equals(code_Str)) { //新用户
                         WipeData();
                         UserEntity userEntity = new UserEntity();
                         userEntity.setScno(mSjNumber.getText().toString().trim());       //注册账号
@@ -368,10 +410,32 @@ public class ShouJiZhuCeActivity extends BaseActivity implements View.OnClickLis
                         if (mLoadingDialog != null) {
                             mLoadingDialog.dismiss();
                         }
-                        MistakeDialog.showDialog(msg_Str, ShouJiZhuCeActivity.this);
+                        MistakeDialog.showDialog(msg_Str, ShouJiZhuCeActivity.this, new MistakeDialog.MistakeDialgoListener() {
+                            @Override
+                            public void doPositive() {
+                                time.cancel();
+                                time1.cancel();
+                                mCaptchabtn.setText("重发短信");
+                                mCaptchabtn.setClickable(true);
+                                mCaptchabtn.setBackgroundResource(R.drawable.captcha_button_unchecked);
+                                mCaptchabtn.setTextColor(Color.parseColor("#FFFFFF"));
+
+                                mSoundtv.setClickable(true);
+                                mSound.setText(getString(R.string.sjzcText6));
+                                mSoundtv.setText("重发语音");
+
+                                mCaptchabtn_ET.setText("");
+                                mImage_et.setText("");
+                                ImageVerification();
+                            }
+                        });
                     }
 
                 } catch (JSONException e) {
+                    mSjLogIn.setEnabled(true);
+                    if (mLoadingDialog != null) {
+                        mLoadingDialog.dismiss();
+                    }
                     e.printStackTrace();
                 }
             }
@@ -423,8 +487,11 @@ public class ShouJiZhuCeActivity extends BaseActivity implements View.OnClickLis
     private void HTTPVerificationCode() {
         time.start();
         HashMap map = new HashMap();
+        map.put("equipment",DeviceUtil.getDeviceId(CustomApplication.getContext()));
         map.put("phone", mSjNumber.getText().toString().trim());
-        NetWorkUtil.getInstence().okHttpForGet(TAG, ConstantUtil.URL_SJYZM, map, new StringCallback() {
+        map.put("auth", mImage_et.getText().toString().trim());
+
+        NetWorkUtil.getInstence().okHttpForGet(TAG, ConstantUtil.SecurityIps+"/note/imgAuthSms", map, new StringCallback() {
             @Override
             public void onError(Call call, Exception e, int id) {
                 LogUtil.e("手机短信", e.toString());
@@ -434,6 +501,8 @@ public class ShouJiZhuCeActivity extends BaseActivity implements View.OnClickLis
                 mCaptchabtn.setClickable(true);
                 mCaptchabtn.setBackgroundResource(R.drawable.captcha_button_unchecked);
                 mCaptchabtn.setTextColor(Color.parseColor("#FFFFFF"));
+                mImage_et.setText("");
+                ImageVerification();
             }
 
             @Override
@@ -444,7 +513,7 @@ public class ShouJiZhuCeActivity extends BaseActivity implements View.OnClickLis
                 try {
                     JSONObject jsonObject = new JSONObject(response);
                     String code = jsonObject.getString("code");
-                    if ("200".equals(code)) {
+                    if ("0".equals(code)) {
 //                        Helper.getInstance().showToast(ShouJiZhuCe.this,"发送短信成功");
                     } else {
                         MistakeDialog.showDialog("验证码获取失败", ShouJiZhuCeActivity.this, new MistakeDialog.MistakeDialgoListener() {
@@ -455,6 +524,8 @@ public class ShouJiZhuCeActivity extends BaseActivity implements View.OnClickLis
                                 mCaptchabtn.setClickable(true);
                                 mCaptchabtn.setBackgroundResource(R.drawable.captcha_button_unchecked);
                                 mCaptchabtn.setTextColor(Color.parseColor("#FFFFFF"));
+                                mImage_et.setText("");
+                                ImageVerification();
                             }
                         });
                     }
@@ -472,9 +543,11 @@ public class ShouJiZhuCeActivity extends BaseActivity implements View.OnClickLis
     private void HTTPVSound() {
         time1.start();
         HashMap map = new HashMap();
+        map.put("equipment", DeviceUtil.getDeviceId(CustomApplication.getContext()));
         map.put("phone", mSjNumber.getText().toString().trim());
+        map.put("auth", mImage_et.getText().toString().trim());
 
-        NetWorkUtil.getInstence().okHttpForGet(TAG, ConstantUtil.URL_YY, map, new StringCallback() {
+        NetWorkUtil.getInstence().okHttpForGet(TAG, ConstantUtil.SecurityIps+"/note/imgAuthVoice?=&=&=", map, new StringCallback()  {
             @Override
             public void onError(Call call, Exception e, int id) {
                 LogUtil.e(TAG, e.toString());
@@ -483,6 +556,8 @@ public class ShouJiZhuCeActivity extends BaseActivity implements View.OnClickLis
                 mSound.setText(getString(R.string.sjzcText6));
                 mSoundtv.setText("重发语音");
                 Helper.getInstance().showToast(ShouJiZhuCeActivity.this, "网络异常");
+                mImage_et.setText("");
+                ImageVerification();
             }
 
             @Override
@@ -493,7 +568,7 @@ public class ShouJiZhuCeActivity extends BaseActivity implements View.OnClickLis
                 try {
                     JSONObject jsonObject = new JSONObject(response);
                     String code = jsonObject.getString("code");
-                    if ("200".equals(code)) {
+                    if ("0".equals(code)) {
 //                        JSONObject message = jsonObject.getJSONObject("message");
 //                        String destnumber = message.getString("destnumber");
 //                        String mVerifycode = message.getString("verifycode");
@@ -506,6 +581,9 @@ public class ShouJiZhuCeActivity extends BaseActivity implements View.OnClickLis
                                 mSoundtv.setClickable(true);
                                 mSound.setText(getString(R.string.sjzcText6));
                                 mSoundtv.setText("重发语音");
+
+                                mImage_et.setText("");
+                                ImageVerification();
                             }
                         });
                     }
@@ -600,6 +678,8 @@ public class ShouJiZhuCeActivity extends BaseActivity implements View.OnClickLis
             mCaptchabtn.setBackgroundResource(R.drawable.captcha_button_unchecked);
             mCaptchabtn.setTextColor(Color.parseColor("#FFFFFF"));
             LL_Marked.setVisibility(View.VISIBLE);
+            mImage_et.setText("");
+            ImageVerification();
         }
 
         @Override
@@ -626,6 +706,8 @@ public class ShouJiZhuCeActivity extends BaseActivity implements View.OnClickLis
             mSoundtv.setClickable(true);
             mSound.setText(getString(R.string.sjzcText6));
             mSoundtv.setText("重发语音");
+            mImage_et.setText("");
+            ImageVerification();
         }
 
         @Override
@@ -648,6 +730,7 @@ public class ShouJiZhuCeActivity extends BaseActivity implements View.OnClickLis
 
         @Override
         public void onTextChanged(CharSequence s, int start, int before, int count) {
+
 
         }
 

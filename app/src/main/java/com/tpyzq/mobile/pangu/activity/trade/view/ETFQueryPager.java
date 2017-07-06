@@ -219,16 +219,6 @@ public class ETFQueryPager extends BasePager implements InterfaceCollection.Inte
 
     public void refresh(String page, String num, boolean isClean,String begin_date,String end_date) {
 
-//        ifc.getDatas(10, this);
-//        if (TAG.equals("VoteQueryOneWeekPager")) {
-//            ifc.queryHistoryNetworkVoting(mSession, "1", getExchangeType(), page, num, null, null, TAG, this);
-//        } else if (TAG.equals("VoteQueryInAMonthPager")) {
-//            ifc.queryHistoryNetworkVoting(mSession, "2", getExchangeType(), page, num, null, null, TAG, this);
-//        } else if (TAG.equals("VoteQueryThreeWeekPager")) {
-//            ifc.queryHistoryNetworkVoting(mSession, "3", getExchangeType(), page, num, null, null, TAG, this);
-//        } else if (TAG.equals("VoteQueryCustomPager") && !TextUtils.isEmpty(startDate) && !TextUtils.isEmpty(finishDate)) {
-//            ifc.queryHistoryNetworkVoting(mSession, "0", getExchangeType(), page, num, startDate, finishDate, TAG, this);
-//        }
         if (TAG.equals("ETFQueryTodayPager")){
                 ifc.queryEntrust(token,"0",page,num,TAG,this);
         }else if (TAG.equals("ETFQueryOneWeekPager")){
