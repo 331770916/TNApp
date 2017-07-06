@@ -38,6 +38,7 @@ public class ETFRevokeActivity extends BaseActivity implements  StructuredFundDi
     private final int PAGESIZE = 30;//每页条数
     private String mSession;//手机识别码
     private Dialog mDialog;//等待条
+    private Dialog mSubDialog;//提交等待条
     public EtfDataEntity clickEntity;//点击的条目实体
     //    private boolean isMore = true;//是否还有更多
     @Override
@@ -85,7 +86,8 @@ public class ETFRevokeActivity extends BaseActivity implements  StructuredFundDi
                 }
             }
         });
-        mDialog = LoadingDialog.initDialog(this, "");
+        mDialog = LoadingDialog.initDialog(this, "正在查询...");
+        mSubDialog = LoadingDialog.initDialog(this, "操作中...");
 
         initData(true);
     }
@@ -141,8 +143,9 @@ public class ETFRevokeActivity extends BaseActivity implements  StructuredFundDi
         if (null == clickEntity) {
             return;
         }
-        if (null!=mDialog && !mDialog.isShowing()) {
-            mDialog.show();
+
+        if (null!=mSubDialog && !mSubDialog.isShowing()) {
+            mSubDialog.show();
         }
         InterfaceCollection.getInstance().revokeOrder(mSession, clickEntity.getExchange_type(), clickEntity.getEntrust_no(), clickEntity.getStock_code(), TAG, new InterfaceCollection.InterfaceCallback() {
             @Override
@@ -154,8 +157,8 @@ public class ETFRevokeActivity extends BaseActivity implements  StructuredFundDi
                 } else {
                     MistakeDialog.showDialog(msg,ETFRevokeActivity.this,null);
                 }
-                if (null!=mDialog && mDialog.isShowing()) {
-                    mDialog.dismiss();
+                if (null!=mSubDialog && mSubDialog.isShowing()) {
+                    mSubDialog.dismiss();
                 }
             }
         });

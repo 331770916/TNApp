@@ -5,6 +5,7 @@ import android.app.Dialog;
 import android.content.Intent;
 import android.view.View;
 import android.widget.AdapterView;
+import android.widget.ImageView;
 import android.widget.ListView;
 
 import com.handmark.pulltorefresh.library.PullToRefreshBase;
@@ -35,6 +36,7 @@ public class ETFStockQueryActivity extends BaseActivity implements View.OnClickL
     private final String TAG = "ETFStockQueryActivity";
     private ETFStockQueryAdapter adapter;
     private String token;
+    private ImageView imageView;
 
 
     @Override
@@ -42,12 +44,15 @@ public class ETFStockQueryActivity extends BaseActivity implements View.OnClickL
         mList = new ArrayList<>();
         findViewById(R.id.iv_back).setOnClickListener(this);
         etfList = (PullToRefreshListView) findViewById(R.id.etfList);
+        imageView = (ImageView) findViewById(R.id.img_show);
+        etfList.setEmptyView(imageView);
         etfList.setOnItemClickListener(this);
         adapter = new ETFStockQueryAdapter(this, mList, TAG);
+        etfList.setAdapter(adapter);
         token = SpUtils.getString(this, "mSession", "");
         mDialog = LoadingDialog.initDialog(this, "正在查询...");
         requestData("", "30");
-        etfList.setMode(PullToRefreshBase.Mode.PULL_FROM_END);
+        etfList.setMode(PullToRefreshBase.Mode.BOTH);
         etfList.setOnRefreshListener(new PullToRefreshBase.OnRefreshListener2<ListView>() {
             @Override
             public void onPullDownToRefresh(PullToRefreshBase<ListView> refreshView) {

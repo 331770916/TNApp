@@ -60,11 +60,12 @@ public class ETFStockQueryAdapter extends BaseAdapter{
             viewHolder.tv_code = (TextView) convertView.findViewById(R.id.tv_code);
             viewHolder.tv_name = (TextView) convertView.findViewById(R.id.tv_name);
             viewHolder.tv_etfcode = (TextView) convertView.findViewById(R.id.tv_etf_code);
-            viewHolder.fj_content = (LinearLayout) convertView.findViewById(R.id.fj_content);
+            viewHolder.fj_content = (LinearLayout) convertView.findViewById(R.id.ll_content);
             viewHolder.iv_top = (ImageView) convertView.findViewById(R.id.iv_top);
             viewHolder.tv1 = (TextView) convertView.findViewById(R.id.tv1);
             viewHolder.tv2 = (TextView) convertView.findViewById(R.id.tv2);
             viewHolder.tv3 = (TextView) convertView.findViewById(R.id.tv3);
+            viewHolder.ll_isShow = (LinearLayout) convertView.findViewById(R.id.ll_isShow);
             convertView.setTag(viewHolder);
         }else {
             viewHolder = (ViewHolder) convertView.getTag();
@@ -78,6 +79,11 @@ public class ETFStockQueryAdapter extends BaseAdapter{
             viewHolder.tv1.setText(etfDataEntity.getEntrust_amount());//单位数量
             viewHolder.tv2.setText(etfDataEntity.getStock_max());//溢价比例
             viewHolder.tv3.setText(etfDataEntity.getCash_max());//替代标记
+            if (etfDataEntity.isShowRule()) {
+                viewHolder.ll_isShow.setVisibility(View.VISIBLE);
+            } else {
+                viewHolder.ll_isShow.setVisibility(View.GONE);
+            }
             viewHolder.fj_content.setOnClickListener(new View.OnClickListener() {
                 @Override
                 public void onClick(View v) {
@@ -106,6 +112,7 @@ public class ETFStockQueryAdapter extends BaseAdapter{
             });
         } else {
             //成分股查询
+            viewHolder.ll_isShow.setVisibility(View.GONE);
             viewHolder.tv_code.setText(etfDataEntity.getStock_code());
             viewHolder.tv_name.setText(etfDataEntity.getStock_name());
             viewHolder.tv_etfcode.setText(etfDataEntity.getStock_code());
@@ -116,6 +123,6 @@ public class ETFStockQueryAdapter extends BaseAdapter{
     class ViewHolder {
         TextView tv_code,tv_name,tv_etfcode,tv1,tv2,tv3;
         ImageView iv_top;
-        LinearLayout fj_content;
+        LinearLayout fj_content,ll_isShow;
     }
 }

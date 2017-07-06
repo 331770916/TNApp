@@ -1,0 +1,116 @@
+<?xml version="1.0" encoding="utf-8"?>
+<LinearLayout xmlns:android="http://schemas.android.com/apk/res/android"
+    xmlns:tools="http://schemas.android.com/tools"
+    android:layout_width="match_parent"
+    android:layout_height="match_parent"
+    android:orientation="vertical"
+    tools:context="com.tpyzq.mobile.pangu.activity.trade.currency_fund.CurrencyFundQueryActivity">
+
+    <RelativeLayout
+        android:id="@+id/rl_top_bar"
+        android:layout_width="match_parent"
+        android:layout_height="@dimen/size25"
+        android:background="@color/blue"
+        android:clipToPadding="true"
+        android:fitsSystemWindows="true" />
+
+
+    <RelativeLayout
+        android:layout_width="match_parent"
+        android:layout_height="@dimen/pickerview_topbar_height"
+        android:background="@color/blue">
+
+        <ImageView
+            android:id="@+id/ivHBJJWTCX_back"
+            android:layout_width="wrap_content"
+            android:layout_height="match_parent"
+            android:layout_alignParentLeft="true"
+            android:padding="@dimen/size10"
+            android:src="@mipmap/back_btn" />
+
+        <TextView
+            android:layout_width="wrap_content"
+            android:layout_height="wrap_content"
+            android:layout_centerInParent="true"
+            android:text="@string/HBJJWeiTuoChaXun"
+            android:textColor="@color/white"
+            android:textSize="@dimen/pickerview_topbar_title_textsize" />
+    </RelativeLayout>
+
+    <RadioGroup
+        android:id="@+id/rgTime_choose"
+        android:layout_width="match_parent"
+        android:layout_height="@dimen/size40"
+        android:background="@color/white"
+        android:orientation="horizontal">
+
+        <RadioButton
+            android:id="@+id/rb_jinri"
+            style="@style/rbStyle"
+            android:layout_width="0dp"
+            android:layout_height="match_parent"
+            android:layout_marginLeft="@dimen/size5"
+            android:layout_marginRight="@dimen/size5"
+            android:drawableBottom="@drawable/shape_bule_line"
+            android:text="今日"
+            android:textColor="@drawable/text_bkcolor_bule_selector" />
+
+        <RadioButton
+            android:id="@+id/rb_yizhou"
+            style="@style/rbStyle"
+            android:layout_width="0dp"
+            android:layout_height="match_parent"
+            android:text="一周内"
+            android:textColor="@drawable/text_bkcolor_bule_selector" />
+
+        <RadioButton
+            android:id="@+id/rb_yiyue"
+            style="@style/rbStyle"
+            android:layout_width="0dp"
+            android:layout_height="match_parent"
+            android:text="一月内"
+            android:textColor="@drawable/text_bkcolor_bule_selector" />
+
+        <RadioButton
+            android:id="@+id/rb_sanyue"
+            style="@style/rbStyle"
+            android:layout_width="0dp"
+            android:layout_height="match_parent"
+            android:text="三月内"
+            android:textColor="@drawable/text_bkcolor_bule_selector" />
+
+
+        <RadioButton
+            android:id="@+id/rb_zidingyi"
+            style="@style/rbStyle"
+            android:layout_width="0dp"
+            android:layout_height="match_parent"
+            android:text="自定义"
+            android:textColor="@drawable/text_bkcolor_bule_selector" />
+
+
+    </RadioGroup>
+
+    <LinearLayout
+        android:layout_width="match_parent"
+        android:layout_height="wrap_content"
+        android:background="@color/white">
+
+        <ImageView
+            android:id="@+id/ivTab_buttom"
+            android:layout_width="@dimen/size50"
+            android:layout_height="@dimen/size3"
+            android:layout_marginLeft="@dimen/size18"
+            android:background="@color/blue" />
+    </LinearLayout>
+
+    <android.support.v4.view.ViewPager
+        android:id="@+id/vpHBJJEntrustQuery"
+        android:layout_width="match_parent"
+        android:layout_height="0dp"
+        android:layout_weight="5"
+        android:background="@color/backgroundColor" />
+
+    <!--NoScrollViewPager-->
+
+</LinearLayout>

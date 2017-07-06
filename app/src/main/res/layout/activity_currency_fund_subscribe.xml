@@ -1,0 +1,257 @@
+<?xml version="1.0" encoding="utf-8"?>
+<LinearLayout xmlns:android="http://schemas.android.com/apk/res/android"
+    xmlns:tools="http://schemas.android.com/tools"
+    android:layout_width="match_parent"
+    android:layout_height="match_parent"
+    android:orientation="vertical"
+    android:id="@+id/CurrencyFundActivity"
+    tools:context="com.tpyzq.mobile.pangu.activity.trade.currency_fund.CurrencyFundSubscribeActivity">
+
+    <RelativeLayout
+        android:id="@+id/rl_top_bar"
+        android:layout_width="match_parent"
+        android:layout_height="@dimen/size25"
+        android:background="@color/blue"
+        android:clipToPadding="true"
+        android:fitsSystemWindows="true" />
+
+    <!-- 头布局 -->
+    <RelativeLayout
+    android:layout_width="match_parent"
+    android:layout_height="@dimen/pickerview_topbar_height"
+    android:background="@color/blue">
+
+    <ImageView
+        android:id="@+id/ivCurrencyFundSubscribe_back"
+        android:layout_width="wrap_content"
+        android:layout_height="match_parent"
+        android:layout_alignParentLeft="true"
+        android:padding="@dimen/size10"
+        android:src="@mipmap/back_btn" />
+
+    <TextView
+        android:layout_width="wrap_content"
+        android:layout_height="wrap_content"
+        android:layout_centerInParent="true"
+        android:text="@string/HuoBiJiJinShenGou"
+        android:textColor="@color/white"
+        android:textSize="@dimen/pickerview_topbar_title_textsize" />
+</RelativeLayout>
+
+    <!--分割线-->
+    <TextView
+        android:layout_width="match_parent"
+        android:layout_height="@dimen/size10"
+        android:background="@color/dividerColor"/>
+
+    <RelativeLayout
+        android:layout_width="match_parent"
+        android:layout_height="@dimen/size50">
+        <TextView
+            android:id="@+id/tvFundCode"
+            android:layout_width="wrap_content"
+            android:layout_height="wrap_content"
+            android:layout_centerVertical="true"
+            android:layout_marginLeft="@dimen/size20"
+            android:text="@string/JiJinDaiMa"
+            android:textSize="13sp"
+            android:textStyle="bold"/>
+        <EditText
+            android:id="@+id/etFundCode"
+            android:layout_width="match_parent"
+            android:layout_height="wrap_content"
+            android:layout_centerVertical="true"
+            android:layout_toRightOf="@id/tvFundCode"
+            android:layout_marginLeft="@dimen/size35"
+            android:hint="@string/QingShuRuJiJinDaiMa"
+            android:maxLength="6"
+            android:digits="0123456789abcdefjhigklmnopqrstuvwxyzABCDEFJHIGKLMNOPQRSTUVWXYZ"
+            android:textColorHint="@color/text"
+            android:textSize="13sp"
+            android:singleLine="true"
+            android:background="@null"/>
+
+    </RelativeLayout>
+
+    <!--分割线-->
+    <LinearLayout
+        android:layout_width="match_parent"
+        android:layout_height="wrap_content"
+        android:orientation="horizontal">
+        <TextView
+            android:layout_weight="1"
+            android:layout_width="0dp"
+            android:layout_height="@dimen/size1"/>
+        <TextView
+            android:layout_weight="20"
+            android:layout_width="0dp"
+            android:layout_height="@dimen/size1"
+            android:background="@color/dividerColor"/>
+        <TextView
+            android:layout_weight="1"
+            android:layout_width="0dp"
+            android:layout_height="@dimen/size1" />
+    </LinearLayout>
+
+    <!--申购金额-->
+    <RelativeLayout
+        android:layout_width="match_parent"
+        android:layout_height="@dimen/size50">
+        <TextView
+            android:id="@+id/tvFundAmount"
+            android:layout_width="wrap_content"
+            android:layout_height="wrap_content"
+            android:layout_centerVertical="true"
+            android:layout_marginLeft="@dimen/size20"
+            android:text="@string/ShenGouJinE"
+            android:textSize="13sp"
+            android:textStyle="bold"/>
+        <EditText
+            android:id="@+id/etFundAmount"
+            android:layout_width="match_parent"
+            android:layout_height="wrap_content"
+            android:layout_centerVertical="true"
+            android:layout_toRightOf="@id/tvFundAmount"
+            android:layout_marginLeft="@dimen/size35"
+            android:hint="@string/QingShuRuShenGouJinE"
+            android:maxLength="6"
+            android:digits="0123456789"
+            android:textColorHint="@color/text"
+            android:textSize="13sp"
+            android:singleLine="true"
+            android:background="@null"/>
+
+    </RelativeLayout>
+
+    <!--分割线-->
+    <LinearLayout
+        android:layout_width="match_parent"
+        android:layout_height="wrap_content"
+        android:orientation="horizontal">
+        <TextView
+            android:layout_weight="1"
+            android:layout_width="0dp"
+            android:layout_height="@dimen/size1"/>
+        <TextView
+            android:layout_weight="20"
+            android:layout_width="0dp"
+            android:layout_height="@dimen/size1"
+            android:background="@color/dividerColor"/>
+        <TextView
+            android:layout_weight="1"
+            android:layout_width="0dp"
+            android:layout_height="@dimen/size1" />
+    </LinearLayout>
+
+    <!--分割上下-->
+    <TextView
+        android:layout_width="match_parent"
+        android:layout_height="@dimen/size20" />
+
+    <!--基金名称-->
+    <RelativeLayout
+        android:layout_width="match_parent"
+        android:layout_height="@dimen/size50">
+        <TextView
+            android:id="@+id/tvFundName"
+            android:layout_width="wrap_content"
+            android:layout_height="wrap_content"
+            android:layout_centerVertical="true"
+            android:layout_marginLeft="@dimen/size20"
+            android:text="@string/JiJinMingCheng"
+            android:textColor="@color/text"
+            android:textSize="13sp" />
+        <TextView
+            android:id="@+id/tvFundNameValue"
+            android:layout_width="wrap_content"
+            android:layout_height="wrap_content"
+            android:layout_centerVertical="true"
+            android:layout_toRightOf="@id/tvFundName"
+            android:layout_marginLeft="@dimen/size35"
+            android:text=""
+            android:textColor="@color/text"
+            android:textSize="13sp" />
+
+    </RelativeLayout>
+
+
+    <!--股东账号-->
+    <RelativeLayout
+        android:layout_width="match_parent"
+        android:layout_height="@dimen/size50">
+        <TextView
+            android:id="@+id/tvStockholderNum"
+            android:layout_width="wrap_content"
+            android:layout_height="wrap_content"
+            android:layout_centerVertical="true"
+            android:layout_marginLeft="@dimen/size20"
+            android:text="@string/GuDongZhangHao"
+            android:textColor="@color/text"
+            android:textSize="13sp" />
+        <TextView
+            android:id="@+id/tvStockholderNumValue"
+            android:layout_width="wrap_content"
+            android:layout_height="wrap_content"
+            android:layout_centerVertical="true"
+            android:layout_toRightOf="@id/tvStockholderNum"
+            android:layout_marginLeft="@dimen/size35"
+            android:text=""
+            android:textColor="@color/text"
+            android:textSize="13sp" />
+
+    </RelativeLayout>
+
+
+    <!--可用资金-->
+    <RelativeLayout
+        android:layout_width="match_parent"
+        android:layout_height="@dimen/size50">
+        <TextView
+            android:id="@+id/tvExpendableFund"
+            android:layout_width="wrap_content"
+            android:layout_height="wrap_content"
+            android:layout_centerVertical="true"
+            android:layout_marginLeft="@dimen/size20"
+            android:text="@string/KeYongZiJin"
+            android:textColor="@color/text"
+            android:textSize="13sp" />
+        <TextView
+            android:id="@+id/tvExpendableFundValue"
+            android:layout_width="wrap_content"
+            android:layout_height="wrap_content"
+            android:layout_centerVertical="true"
+            android:layout_toRightOf="@id/tvExpendableFund"
+            android:layout_marginLeft="@dimen/size35"
+            android:text=""
+            android:textColor="@color/text"
+            android:textSize="13sp" />
+
+    </RelativeLayout>
+
+    <!--分割线-->
+    <TextView
+        android:layout_width="match_parent"
+        android:layout_height="@dimen/size1"
+        android:background="@color/dividerColor"/>
+
+    <!--确定按钮-->
+    <RelativeLayout
+        android:layout_width="wrap_content"
+        android:layout_height="wrap_content"
+        android:layout_gravity="center_horizontal">
+        <Button
+            android:id="@+id/tvCurrencySubscribeQueDing"
+            android:layout_width="@dimen/size330"
+            android:layout_height="@dimen/size40"
+            android:layout_marginTop="@dimen/size100"
+            android:gravity="center"
+            android:text="@string/pickerview_submit"
+            android:textColor="@color/white"
+            android:textSize="15sp"
+            android:clickable="true"
+            android:background="@drawable/lonin"/>
+
+    </RelativeLayout>
+
+
+</LinearLayout>
