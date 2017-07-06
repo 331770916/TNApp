@@ -321,6 +321,13 @@
         <activity android:name=".activity.trade.otc_business.OTC_SubscribeProductActivity" />
         <activity android:name=".activity.trade.otc_business.OTC_SubscriptionActivity" />
 
+        <!-- currency_fund 相关activity -->
+        <activity android:name=".activity.trade.currency_fund.CurrencyFundActivity"/>
+        <activity android:name=".activity.trade.currency_fund.CurrencyFundQueryActivity"/>
+        <activity android:name=".activity.trade.currency_fund.CurrencyFundRedeemActivity"/>
+        <activity android:name=".activity.trade.currency_fund.CurrencyFundRevokeActivity"/>
+        <activity android:name=".activity.trade.currency_fund.CurrencyFundSubscribeActivity"/>
+
         <!-- stock 股票相关activity -->
         <activity android:name=".activity.trade.stock.AllotAccountDetailActivity" />
         <activity android:name=".activity.trade.stock.AllotQueryActivity" />

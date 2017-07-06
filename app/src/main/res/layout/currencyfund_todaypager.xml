@@ -1,0 +1,129 @@
+<?xml version="1.0" encoding="utf-8"?>
+<LinearLayout xmlns:android="http://schemas.android.com/apk/res/android"
+    android:layout_width="match_parent"
+    android:layout_height="match_parent"
+    android:orientation="vertical">
+
+    <View
+        android:layout_width="match_parent"
+        android:layout_height="@dimen/size5"
+        android:background="@color/lineColor" />
+
+    <LinearLayout
+        android:id="@+id/llZiDingYi"
+        android:layout_width="match_parent"
+        android:layout_height="wrap_content"
+        android:background="@color/bgColor"
+        android:orientation="horizontal"
+        android:padding="@dimen/size10"
+        android:visibility="gone">
+
+        <TextView
+            android:id="@+id/tvZDYStartDate"
+            android:layout_width="0dp"
+            android:layout_height="wrap_content"
+            android:layout_weight="1.5"
+            android:background="@drawable/shape_grey_rectangle_nor"
+            android:drawableLeft="@mipmap/rilihui"
+            android:drawablePadding="@dimen/size10"
+            android:paddingBottom="@dimen/size10"
+            android:paddingTop="@dimen/size10"
+            android:text="2016-07-07"
+            android:textColor="@color/hideTextColor"
+            android:textSize="@dimen/txtSize12" />
+
+        <TextView
+            android:layout_width="0dp"
+            android:layout_height="wrap_content"
+            android:layout_weight="0.5"
+            android:gravity="center"
+            android:padding="@dimen/size10"
+            android:text="至"
+            android:textColor="@color/black" />
+
+        <TextView
+            android:id="@+id/tvZDYEndDate"
+            android:layout_width="0dp"
+            android:layout_height="wrap_content"
+            android:layout_weight="1.5"
+            android:background="@drawable/shape_grey_rectangle_nor"
+            android:drawableLeft="@mipmap/rilihui"
+            android:drawablePadding="@dimen/size10"
+            android:paddingBottom="@dimen/size10"
+            android:paddingTop="@dimen/size10"
+            android:text="2016-07-07"
+            android:textColor="@color/hideTextColor"
+            android:textSize="@dimen/txtSize12" />
+
+        <TextView
+            android:id="@+id/tvZDYQueryBtn"
+            android:layout_width="0dp"
+            android:layout_height="wrap_content"
+            android:layout_marginLeft="@dimen/size15"
+            android:layout_weight="1"
+            android:background="@color/calendarBtnColor"
+            android:gravity="center"
+            android:paddingBottom="@dimen/size10"
+            android:paddingLeft="@dimen/size15"
+            android:paddingRight="@dimen/size15"
+            android:paddingTop="@dimen/size10"
+            android:text="查询"
+            android:textColor="@color/white" />
+
+
+    </LinearLayout>
+
+
+    <LinearLayout
+        android:layout_width="match_parent"
+        android:layout_height="wrap_content"
+        android:background="@color/white"
+        android:orientation="horizontal"
+        android:paddingBottom="@dimen/size10"
+        android:paddingTop="@dimen/size10">
+
+        <TextView
+            android:layout_width="0dp"
+            android:layout_height="wrap_content"
+            android:layout_weight="1"
+            android:gravity="center"
+            android:text="基金名称"
+            android:textColor="@color/newStockTitle" />
+
+        <TextView
+            android:layout_width="0dp"
+            android:layout_height="wrap_content"
+            android:layout_weight="1"
+            android:gravity="center"
+            android:text="委托时间"
+            android:textColor="@color/newStockTitle" />
+
+        <TextView
+            android:layout_width="0dp"
+            android:layout_height="wrap_content"
+            android:layout_weight="1"
+            android:gravity="center"
+            android:text="数量/金额"
+            android:textColor="@color/newStockTitle" />
+
+
+        <TextView
+            android:layout_width="0dp"
+            android:layout_height="wrap_content"
+            android:layout_weight="1"
+            android:gravity="center"
+            android:text="类型/状态"
+            android:textColor="@color/newStockTitle" />
+    </LinearLayout>
+
+    <View
+        android:layout_width="match_parent"
+        android:layout_height="@dimen/size1"
+        android:background="@color/lineColor" />
+
+    <com.tpyzq.mobile.pangu.view.RefreshListView
+        android:id="@+id/rlRefresh"
+        android:layout_width="match_parent"
+        android:layout_height="match_parent" />
+
+</LinearLayout>
