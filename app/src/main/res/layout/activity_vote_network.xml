@@ -205,10 +205,8 @@
                 android:id="@+id/voteSubmit"
                 android:layout_width="match_parent"
                 android:layout_height="wrap_content"
-                android:layout_marginBottom="@dimen/size16"
+                android:layout_margin="@dimen/size16"
                 android:textColor="@color/white"
-                android:layout_marginLeft="@dimen/size16"
-                android:layout_marginRight="@dimen/size16"
                 android:text="提   交"
                 android:gravity="center"
                 android:background="@mipmap/vote_submit_bg"/>
