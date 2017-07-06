@@ -52,7 +52,7 @@ public class ETFStockQueryActivity extends BaseActivity implements View.OnClickL
         token = SpUtils.getString(this, "mSession", "");
         mDialog = LoadingDialog.initDialog(this, "正在查询...");
         requestData("", "30");
-        etfList.setMode(PullToRefreshBase.Mode.PULL_FROM_END);
+        etfList.setMode(PullToRefreshBase.Mode.BOTH);
         etfList.setOnRefreshListener(new PullToRefreshBase.OnRefreshListener2<ListView>() {
             @Override
             public void onPullDownToRefresh(PullToRefreshBase<ListView> refreshView) {
