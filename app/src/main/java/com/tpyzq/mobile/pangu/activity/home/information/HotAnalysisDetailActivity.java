@@ -388,6 +388,14 @@ public class HotAnalysisDetailActivity extends BaseActivity implements View.OnCl
     @Override
     public void onDestroy() {
         super.onDestroy();
+        try {
+            if (mWebView!=null){
+                mWebView.removeAllViews();
+                mWebView.destroy();
+                mWebView=null;
+            }
+        } catch (Exception e) {
+        }
         NetWorkUtil.cancelSingleRequestByTag(TAG);
     }
 }
