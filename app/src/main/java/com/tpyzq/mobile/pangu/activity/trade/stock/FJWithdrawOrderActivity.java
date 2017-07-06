@@ -91,7 +91,7 @@ public class FJWithdrawOrderActivity extends BaseActivity implements AdapterView
                     List<StructuredFundEntity> ses = (List<StructuredFundEntity>) info.getData();
                     mList.addAll(ses);
                     mFjwithdrawOrderAdapter.notifyDataSetChanged();
-                } else if ("-1".equals(info.getCode()) || "-2".equals(info.getCode()) || "-3".equals(info.getCode())) {
+                } else if ("400".equals(info.getCode()) || "-2".equals(info.getCode()) || "-3".equals(info.getCode())) {
                     Helper.getInstance().showToast(FJWithdrawOrderActivity.this, info.getMsg());
                 } else if ("-6".equals(info.getCode())) {
                     Intent intent = new Intent();
@@ -139,7 +139,7 @@ public class FJWithdrawOrderActivity extends BaseActivity implements AdapterView
                 if ("0".equals(info.getCode())) {
                     Helper.getInstance().showToast(FJWithdrawOrderActivity.this, "撤销此委托成功");
                     requestData("");
-                } else if ("-1".equals(info.getCode()) || "-2".equals(info.getCode()) || "-3".equals(info.getCode())) {
+                } else if ("400".equals(info.getCode()) || "-2".equals(info.getCode()) || "-3".equals(info.getCode())) {
                     Helper.getInstance().showToast(FJWithdrawOrderActivity.this, info.getMsg());
                 } else if ("-6".equals(info.getCode())) {
                     Intent intent = new Intent();

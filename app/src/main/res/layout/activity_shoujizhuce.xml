@@ -110,7 +110,7 @@
                 android:drawablePadding="15dp"
                 android:gravity="fill|center"
                 android:hint="@string/sjzcText1"
-                android:maxLength="6"
+                android:maxLength="4"
                 android:numeric="integer"
                 android:paddingLeft="@dimen/size10"
                 android:singleLine="true"

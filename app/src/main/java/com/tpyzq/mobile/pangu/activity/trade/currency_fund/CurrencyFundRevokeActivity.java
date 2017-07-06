@@ -20,6 +20,7 @@ import com.tpyzq.mobile.pangu.base.BaseActivity;
 import com.tpyzq.mobile.pangu.data.CurrencyFundEntrustQueryTodayBean;
 import com.tpyzq.mobile.pangu.http.NetWorkUtil;
 import com.tpyzq.mobile.pangu.util.ConstantUtil;
+import com.tpyzq.mobile.pangu.util.Helper;
 import com.tpyzq.mobile.pangu.util.panguutil.UserUtil;
 import com.zhy.http.okhttp.callback.StringCallback;
 
@@ -36,7 +37,7 @@ import okhttp3.Call;
 public class CurrencyFundRevokeActivity extends BaseActivity implements View.OnClickListener,FundRevokePopupWindow.IClick {
 
     private String TAG = "CurrencyFundRevoke";
-    private ListView listView=null;
+    private ListView listView;
     private ArrayList<HashMap<String,String>> list;
     private CurrencyFundRevokeAdapter adapter;
 
@@ -99,7 +100,7 @@ public class CurrencyFundRevokeActivity extends BaseActivity implements View.OnC
         NetWorkUtil.getInstence().okHttpForPostString(TAG, ConstantUtil.URL_JY, map1, new StringCallback() {
             @Override
             public void onError(Call call, Exception e, int id) {
-
+                Helper.getInstance().showToast(CurrencyFundRevokeActivity.this,ConstantUtil.NETWORK_ERROR);
             }
 
             @Override

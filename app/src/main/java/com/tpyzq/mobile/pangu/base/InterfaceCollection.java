@@ -33,7 +33,7 @@ import okhttp3.Call;
  * Created by ltyhome on 23/06/2017.
  * Email: ltyhome@yahoo.com.hk
  * Describe: Interface Manager
- * 0 success -1 net error -2 json error -3 no data -6 jump
+ * 0 success 400 net error -2 json error -3 no data -6 jump
  */
 public class InterfaceCollection {
     //网络请求类
@@ -84,7 +84,7 @@ public class InterfaceCollection {
             @Override
             public void onError(Call call, Exception e, int id) {
                 ResultInfo info = new ResultInfo();
-                info.setCode("-1");
+                info.setCode("400");
                 info.setMsg(ConstantUtil.NETWORK_ERROR);
                 info.setTag(TAG);
                 callback.callResult(info);
@@ -153,7 +153,7 @@ public class InterfaceCollection {
             @Override
             public void onError(Call call, Exception e, int id) {
                 ResultInfo info = new ResultInfo();
-                info.setCode("-1");
+                info.setCode("400");
                 info.setMsg(ConstantUtil.NETWORK_ERROR);
                 info.setTag(TAG);
                 callback.callResult(info);
@@ -229,7 +229,7 @@ public class InterfaceCollection {
             @Override
             public void onError(Call call, Exception e, int id) {
                 ResultInfo info = new ResultInfo();
-                info.setCode("-1");
+                info.setCode("400");
                 info.setMsg(ConstantUtil.NETWORK_ERROR);
                 info.setTag(TAG);
                 callback.callResult(info);
@@ -296,7 +296,7 @@ public class InterfaceCollection {
             @Override
             public void onError(Call call, Exception e, int id) {
                 ResultInfo info = new ResultInfo();
-                info.setCode("-1");
+                info.setCode("400");
                 info.setMsg(ConstantUtil.NETWORK_ERROR);
                 info.setTag(TAG);
                 callback.callResult(info);
@@ -361,7 +361,7 @@ public class InterfaceCollection {
             @Override
             public void onError(Call call, Exception e, int id) {
                 ResultInfo info = new ResultInfo();
-                info.setCode("-1");
+                info.setCode("400");
                 info.setMsg(ConstantUtil.NETWORK_ERROR);
                 info.setTag(TAG);
                 callback.callResult(info);
@@ -435,7 +435,7 @@ public class InterfaceCollection {
             @Override
             public void onError(Call call, Exception e, int id) {
                 ResultInfo info = new ResultInfo();
-                info.setCode("-1");
+                info.setCode("400");
                 info.setMsg(ConstantUtil.NETWORK_ERROR);
                 info.setTag(TAG);
                 callback.callResult(info);
@@ -508,7 +508,7 @@ public class InterfaceCollection {
             @Override
             public void onError(Call call, Exception e, int id) {
                 ResultInfo info = new ResultInfo();
-                info.setCode("-1");
+                info.setCode("400");
                 info.setMsg(ConstantUtil.NETWORK_ERROR);
                 info.setTag(TAG);
                 callback.callResult(info);
@@ -585,7 +585,7 @@ public class InterfaceCollection {
             @Override
             public void onError(Call call, Exception e, int id) {
                 ResultInfo info = new ResultInfo();
-                info.setCode("-1");
+                info.setCode("400");
                 info.setMsg(ConstantUtil.NETWORK_ERROR);
                 info.setTag(TAG);
                 callback.callResult(info);
@@ -665,7 +665,7 @@ public class InterfaceCollection {
             @Override
             public void onError(Call call, Exception e, int id) {
                 ResultInfo info = new ResultInfo();
-                info.setCode("-1");
+                info.setCode("400");
                 info.setMsg(ConstantUtil.NETWORK_ERROR);
                 info.setTag(TAG);
                 callback.callResult(info);
@@ -746,7 +746,7 @@ public class InterfaceCollection {
             @Override
             public void onError(Call call, Exception e, int id) {
                 ResultInfo info = new ResultInfo();
-                info.setCode("-1");
+                info.setCode("400");
                 info.setMsg(ConstantUtil.NETWORK_ERROR);
                 info.setTag(TAG);
                 callback.callResult(info);
@@ -819,7 +819,7 @@ public class InterfaceCollection {
             @Override
             public void onError(Call call, Exception e, int id) {
                 ResultInfo info = new ResultInfo();
-                info.setCode("-1");
+                info.setCode("400");
                 info.setMsg(ConstantUtil.NETWORK_ERROR);
                 info.setTag(TAG);
                 callback.callResult(info);
@@ -921,7 +921,7 @@ public class InterfaceCollection {
             @Override
             public void onError(Call call, Exception e, int id) {
                 ResultInfo info = new ResultInfo();
-                info.setCode("-1");
+                info.setCode("400");
                 info.setMsg(ConstantUtil.NETWORK_ERROR);
                 info.setTag(TAG);
                 callback.callResult(info);
@@ -981,7 +981,7 @@ public class InterfaceCollection {
             @Override
             public void onError(Call call, Exception e, int id) {
                 ResultInfo info = new ResultInfo();
-                info.setCode("-1");
+                info.setCode("400");
                 info.setMsg(ConstantUtil.NETWORK_ERROR);
                 info.setTag(TAG);
                 callback.callResult(info);
@@ -1056,7 +1056,7 @@ public class InterfaceCollection {
             @Override
             public void onError(Call call, Exception e, int id) {
                 ResultInfo info = new ResultInfo();
-                info.setCode("-1");
+                info.setCode("400");
                 info.setMsg(ConstantUtil.NETWORK_ERROR);
                 info.setTag(TAG);
                 callback.callResult(info);
@@ -1126,7 +1126,7 @@ public class InterfaceCollection {
             @Override
             public void onError(Call call, Exception e, int i) {
                 ResultInfo info = new ResultInfo();
-                info.setCode("-1");
+                info.setCode("400");
                 info.setMsg(ConstantUtil.NETWORK_ERROR);
                 info.setTag(TAG);
                 callback.callResult(info);
@@ -1200,7 +1200,7 @@ public class InterfaceCollection {
             @Override
             public void onError(Call call, Exception e, int id) {
                 ResultInfo info = new ResultInfo();
-                info.setCode("-1");
+                info.setCode("400");
                 info.setMsg(e.getMessage());
                 callback.callResult(info);
             }
@@ -1239,7 +1239,7 @@ public class InterfaceCollection {
                         }
                     }
                 } catch (JSONException e) {
-                    info.setCode("-1");
+                    info.setCode("400");
                     info.setMsg(e.getMessage());
                 }
                 callback.callResult(info);
@@ -1270,7 +1270,7 @@ public class InterfaceCollection {
             @Override
             public void onError(Call call, Exception e, int id) {
                 ResultInfo info = new ResultInfo();
-                info.setCode("-1");
+                info.setCode("400");
                 info.setMsg(e.getMessage());
                 callback.callResult(info);
             }
@@ -1285,7 +1285,7 @@ public class InterfaceCollection {
                     info.setCode(code);
                     info.setMsg(msg);
                 } catch (JSONException e) {
-                    info.setCode("-1");
+                    info.setCode("400");
                     info.setMsg(e.getMessage());
                 }
                 callback.callResult(info);
@@ -1319,7 +1319,7 @@ public class InterfaceCollection {
             @Override
             public void onError(Call call, Exception e, int id) {
                 ResultInfo info = new ResultInfo();
-                info.setCode("-1");
+                info.setCode("400");
                 info.setMsg(e.getMessage());
                 callback.callResult(info);
             }
@@ -1400,7 +1400,7 @@ public class InterfaceCollection {
             @Override
             public void onError(Call call, Exception e, int id) {
                 ResultInfo info = new ResultInfo();
-                info.setCode("-1");
+                info.setCode("400");
                 info.setMsg(e.getMessage());
                 callback.callResult(info);
             }
@@ -1460,7 +1460,7 @@ public class InterfaceCollection {
             @Override
             public void onError(Call call, Exception e, int id) {
                 ResultInfo info = new ResultInfo();
-                info.setCode("-1");
+                info.setCode("400");
                 info.setMsg(e.getMessage());
                 callback.callResult(info);
             }
@@ -1537,7 +1537,7 @@ public class InterfaceCollection {
             @Override
             public void onError(Call call, Exception e, int id) {
                 ResultInfo info = new ResultInfo();
-                info.setCode("-1");
+                info.setCode("400");
                 info.setMsg(e.getMessage());
             }
 
@@ -1608,7 +1608,7 @@ public class InterfaceCollection {
             @Override
             public void onError(Call call, Exception e, int id) {
                 ResultInfo info = new ResultInfo();
-                info.setCode("-1");
+                info.setCode("400");
                 info.setMsg(ConstantUtil.NETWORK_ERROR);
                 info.setTag(TAG);
                 callback.callResult(info);
@@ -1697,7 +1697,7 @@ public class InterfaceCollection {
             @Override
             public void onError(Call call, Exception e, int id) {
                 ResultInfo info = new ResultInfo();
-                info.setCode("-1");
+                info.setCode("400");
                 info.setMsg(ConstantUtil.NETWORK_ERROR);
                 info.setTag(TAG);
                 callback.callResult(info);
@@ -1773,7 +1773,7 @@ public class InterfaceCollection {
             @Override
             public void onError(Call call, Exception e, int id) {
                 ResultInfo info = new ResultInfo();
-                info.setCode("-1");
+                info.setCode("400");
                 info.setMsg(ConstantUtil.NETWORK_ERROR);
                 info.setTag(TAG);
                 callback.callResult(info);
@@ -1854,7 +1854,7 @@ public class InterfaceCollection {
             @Override
             public void onError(Call call, Exception e, int id) {
                 ResultInfo info = new ResultInfo();
-                info.setCode("-1");
+                info.setCode("400");
                 info.setMsg(ConstantUtil.NETWORK_ERROR);
                 info.setTag(TAG);
                 callback.callResult(info);
@@ -1936,7 +1936,7 @@ public class InterfaceCollection {
             @Override
             public void onError(Call call, Exception e, int id) {
                 ResultInfo info = new ResultInfo();
-                info.setCode("-1");
+                info.setCode("400");
                 info.setMsg(ConstantUtil.NETWORK_ERROR);
                 info.setTag(TAG);
                 callback.callResult(info);

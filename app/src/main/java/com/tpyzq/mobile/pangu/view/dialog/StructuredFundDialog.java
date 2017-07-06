@@ -1,5 +1,6 @@
 package com.tpyzq.mobile.pangu.view.dialog;
 
+import android.app.Activity;
 import android.content.Context;
 import android.graphics.drawable.Drawable;
 import android.view.View;
@@ -218,10 +219,16 @@ public class StructuredFundDialog extends BaseDialog implements View.OnClickList
             Helper.getInstance().showToast(context, "委托提交成功");
             mExpression.State();
             dismiss();
-        } else if ("-1".equals(info.getCode()) || "-2".equals(info.getCode()) || "-3".equals(info.getCode())) {
+        } else if ("400".equals(info.getCode()) || "-2".equals(info.getCode()) || "-3".equals(info.getCode())) {
             Helper.getInstance().showToast(context, info.getMsg());
         } else {
-            Helper.getInstance().showToast(context, info.getMsg());
+//            Helper.getInstance().showToast(context, info.getMsg());
+            MistakeDialog.showDialog(info.getMsg(), (Activity) context, new MistakeDialog.MistakeDialgoListener() {
+                @Override
+                public void doPositive() {
+                   dismiss();
+                }
+            });
         }
     }
 
