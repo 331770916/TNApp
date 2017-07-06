@@ -871,17 +871,18 @@ public class InterfaceCollection {
             JSONObject obj = array.getJSONObject(i);
             String vt = obj.getString("VOTE_TYPE");
             bean = new NetworkVotingEntity();
+            bean.setVote_info(obj.getString("VOTE_INFO"));
+            bean.setEntrust_amount(obj.getString("VOTE_NUMCONTROL"));
+            bean.setStatus(obj.getString("EN_REFCODE"));//stock_code入参
             bean.setInit_date(obj.getString("INIT_DATE"));
             bean.setVote_motion(obj.getString("VOTE_MOTION"));
-            bean.setVote_info(obj.getString("VOTE_INFO"));
+            bean.setMeeting_seq(obj.getString("MEETING_SEQ"));
             bean.setVote_type(vt);
             String list = obj.optString("LIST");
             if(vt.equals("1")&&!TextUtils.isEmpty(list)){
                JSONArray arr = new JSONArray(list);
                bean.setList(parseJSONArray(arr));
             }
-            bean.setEntrust_amount(obj.getString("VOTE_NUMCONTROL"));
-            bean.setMeeting_seq(obj.getString("MEETING_SEQ"));
             ses.add(bean);
         }
         return ses;
