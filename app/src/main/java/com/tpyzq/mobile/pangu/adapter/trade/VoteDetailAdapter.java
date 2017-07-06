@@ -106,8 +106,10 @@ public class VoteDetailAdapter extends BaseAdapter {
                     TextView tv7 = (TextView) convertView.findViewById(R.id.voteContent);
                     tv7.setText(bean.getVote_info() + "(当选人数：" + list.size() + ")");
                     LinearLayout ll = (LinearLayout) convertView.findViewById(R.id.voteSubContent);
+                    LayoutParams lp = new LayoutParams(-1,-2);
+                    lp.leftMargin = (int)mContext.getResources().getDimension(R.dimen.size45);
                     for (int i = 0; i < list.size(); i++)
-                        ll.addView(getSubView(list.get(i)));
+                        ll.addView(getSubView(list.get(i)),lp);
                     break;
             }
         }
@@ -117,18 +119,17 @@ public class VoteDetailAdapter extends BaseAdapter {
     private LinearLayout getSubView(final NetworkVotingEntity entity){
         LinearLayout ll = new LinearLayout(mContext);
         ll.setOrientation(LinearLayout.HORIZONTAL);
-        LayoutParams lps = new LayoutParams(-2,-2);
         TextView tvTitle = new TextView(mContext);
         tvTitle.setTextColor(mContext.getResources().getColor(R.color.textss));
-        lps.leftMargin = (int)mContext.getResources().getDimension(R.dimen.size85);
         tvTitle.setText(entity.getVote_motion());
-        ll.addView(tvTitle,lps);
+        ll.addView(tvTitle);
         TextView tvContent = new TextView(mContext);
         tvContent.setTextColor(mContext.getResources().getColor(R.color.textss));
+        LayoutParams lps = new LayoutParams(-2,-2);
         lps.leftMargin = (int)mContext.getResources().getDimension(R.dimen.size10);
         tvContent.setText(entity.getVote_info());
         ll.addView(tvContent,lps);
-        LayoutParams etlps = new LayoutParams((int)mContext.getResources().getDimension(R.dimen.size80),-2);
+        LayoutParams etlps = new LayoutParams((int)mContext.getResources().getDimension(R.dimen.size100),(int)mContext.getResources().getDimension(R.dimen.size35));
         EditText etNum = new EditText(mContext);
         etNum.setBackgroundResource(R.mipmap.vote_et_style);
         etNum.setInputType(InputType.TYPE_CLASS_NUMBER);
