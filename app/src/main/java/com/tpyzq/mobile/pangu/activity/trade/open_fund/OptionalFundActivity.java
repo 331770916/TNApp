@@ -187,13 +187,12 @@ public class OptionalFundActivity extends BaseActivity implements View.OnClickLi
                             fundSubsBean = new Gson().fromJson(jsonArray.getString(i), FundSubsEntity.class);
                             fundSubsBeans.add(fundSubsBean);
                         }
-                        optionalFundAdapter.setData(fundSubsBeans);
                     } else if ("-6".equals(code)) {
                         startActivity(new Intent(OptionalFundActivity.this, TransactionLoginActivity.class));
                     } else {
                         ToastUtils.showShort(OptionalFundActivity.this, msg);
                     }
-
+                    optionalFundAdapter.setData(fundSubsBeans);
                 } catch (JSONException e) {
                     e.printStackTrace();
                 }
