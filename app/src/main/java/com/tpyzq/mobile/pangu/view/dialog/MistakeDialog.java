@@ -28,7 +28,11 @@ import com.tpyzq.mobile.pangu.util.Helper;
  */
 public class MistakeDialog {
 
-    public static Dialog showDialog(Object msg, final Activity activity, final MistakeDialgoListener mistakeDialgoListener) {
+    public static Dialog showDialog(Object msg, final Activity activity, final MistakeDialgoListener mistakeDialgoListener){
+        return showDialog("提示",msg.toString()+ "(" + activity.getResources().getString(R.string.dh1) + activity.getResources().getString(R.string.dh) + ")",true,activity,mistakeDialgoListener);
+    }
+
+    public static Dialog showDialog(String title,String msgData,boolean hasSpannable,final Activity activity, final MistakeDialgoListener mistakeDialgoListener) {
         if (activity==null||activity.isFinishing())return null;
         WindowManager wm = (WindowManager) activity.getSystemService(Context.WINDOW_SERVICE);
         int width = wm.getDefaultDisplay().getWidth();
@@ -36,18 +40,14 @@ public class MistakeDialog {
 
         LayoutInflater inflater = LayoutInflater.from(CustomApplication.getContext());
         final View view = inflater.inflate(R.layout.dialog_mistake, null);
-
         int minWidth = (int) (width * 0.7);
         int minHeight = (int) (height * 0.3);
-
         view.setMinimumWidth(minWidth);
         view.setMinimumHeight(minHeight);
-
+        final TextView textTitle = (TextView) view.findViewById(R.id.mistakeTitle);
+        textTitle.setText(title);
         final TextView textView = (TextView) view.findViewById(R.id.mistakeMsg);
-
-        if (msg instanceof String) {
-
-            String msgData = (String) msg + "(" + activity.getResources().getString(R.string.dh1) + activity.getResources().getString(R.string.dh) + ")";
+        if(hasSpannable){
             SpannableString spanText = new SpannableString(msgData);
             spanText.setSpan(new ClickableSpan() {
                 @Override
@@ -65,30 +65,8 @@ public class MistakeDialog {
             textView.setHighlightColor(Color.TRANSPARENT); //设置点击后的颜色为透明，否则会一直出现高亮
             textView.setText(spanText);
             textView.setMovementMethod(LinkMovementMethod.getInstance());//开始响应点击事件
-
-
-        } else if (msg instanceof SpannableString) {
-            String msgData = (SpannableString) msg + "(" + activity.getResources().getString(R.string.dh1) + activity.getResources().getString(R.string.dh) + ")";
-            SpannableString spanText = new SpannableString(msgData);
-            spanText.setSpan(new ClickableSpan() {
-                @Override
-                public void updateDrawState(TextPaint ds) {
-                    super.updateDrawState(ds);
-                    ds.setColor(Color.parseColor("#1C86EE"));
-                    ds.setUnderlineText(true);      //设置下划线
-                }
-
-                @Override
-                public void onClick(View widget) {
-                    getPermission(activity);
-
-                }
-            }, msgData.length() - 6, msgData.length() - 1, Spannable.SPAN_EXCLUSIVE_EXCLUSIVE);
-            textView.setHighlightColor(Color.TRANSPARENT); //设置点击后的颜色为透明，否则会一直出现高亮
-            textView.setText(spanText);
-            textView.setMovementMethod(LinkMovementMethod.getInstance());//开始响应点击事件
-        }
-
+        }else
+            textView.setText(msgData);
         final Dialog dialog = new Dialog(activity, R.style.misTakedialog);
         dialog.setContentView(view);
         dialog.setCanceledOnTouchOutside(false);

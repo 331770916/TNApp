@@ -24,6 +24,7 @@ import com.tpyzq.mobile.pangu.util.Helper;
 import com.tpyzq.mobile.pangu.util.SpUtils;
 import com.tpyzq.mobile.pangu.util.ToastUtils;
 import com.tpyzq.mobile.pangu.view.dialog.LoadingDialog;
+import com.tpyzq.mobile.pangu.view.dialog.MistakeDialog;
 import com.tpyzq.mobile.pangu.view.dialog.StructuredFundDialog;
 import com.tpyzq.mobile.pangu.view.listview.AutoListview;
 
@@ -44,9 +45,11 @@ public class VoteDetailActivity extends BaseActivity  implements InterfaceCollec
     private String mSession,meeting_seq="",company_code="",stock_account="",exchange_type="";
     private AutoListview accumulateList,unAccumulateList;
     public static final String TAG = "VoteDetailActivity";
+    private NetworkVotingEntity entity;
+    private Dialog mDialog,mistake;
     private ImageView back;
     private Button submit;
-    private Dialog mDialog;
+
 
     @Override
     public void initView() {
@@ -116,20 +119,25 @@ public class VoteDetailActivity extends BaseActivity  implements InterfaceCollec
             case R.id.voteSubmit:
                 submitList.clear();
                 if(accumulate.size()>0){
-                    boolean canSubmit = false;
-                    for (NetworkVotingEntity entity:accumulate) {
-                        List<NetworkVotingEntity> subList = entity.getList();
+                    boolean canSubmit = false,isFirstNull=true;
+                    for (NetworkVotingEntity et:accumulate) {
+                        List<NetworkVotingEntity> subList = et.getList();
                         if(subList.size()>0){
                             for (NetworkVotingEntity ve:subList) {
-                                if(!TextUtils.isEmpty(ve.getEntrust_amount())){
+                                if(!TextUtils.isEmpty(ve.getEntrust_no())){
                                     canSubmit = true;//有一个不为空就可以提交
                                     submitList.add(ve);
                                 }
                             }
+                            if(!canSubmit&&isFirstNull){
+                                entity = et;
+                                isFirstNull = false;
+                            }
                         }
                     }
-                    if(!canSubmit){
-                        showToast("议案投票不能为空");
+                    if(!canSubmit&&entity!=null){
+                        String msg = "议案组：\""+ entity.getVote_info() + "(当选人数：" + entity.getList().size() + ")\"未表决，请表决后再提交!";
+                        mistake = MistakeDialog.showDialog( "提示",msg,false, this,null);
                     }else{
                         StructuredFundDialog dialog = new StructuredFundDialog(VoteDetailActivity.this, TAG, new StructuredFundDialog.Expression() {
                             @Override
@@ -167,6 +175,10 @@ public class VoteDetailActivity extends BaseActivity  implements InterfaceCollec
         if(mDialog!=null){
             mDialog.dismiss();
             mDialog = null;
+        }
+        if(mistake!=null){
+            mistake.dismiss();
+            mistake = null;
         }
         accumulateAdapter = null;
         unAccumulateAdapter = null;
