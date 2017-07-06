@@ -303,7 +303,7 @@ public class StockPriceRemainFragment extends BaseFragment implements  View.OnCl
                             mStockNumber = mStockNumber.substring(2, mStockNumber.length());
                             String content = mStockName + "\u2000" + mStockNumber;
                             mRemainSearchEdit.setText(content);
-                            mRemainSearchEdit.setSelection(content.length());
+                            mRemainSearchEdit.setSelection(content.length()-1);
                             String _newPrice = beans.get(0).getNewPrice();
                             String  _zdf = mFormat2.format(beans.get(0).getPriceChangeRatio());
                             if ("0.0".equals(_newPrice)||"0".equals(_newPrice)) {
@@ -316,7 +316,7 @@ public class StockPriceRemainFragment extends BaseFragment implements  View.OnCl
                         MistakeDialog.showDialog("无该只股票", mActivity).show();
                         mRemainSearchEdit.setText("");
                     }
-                }catch (JSONException e){
+                }catch (Exception e){
                     e.printStackTrace();
                 }
             }
