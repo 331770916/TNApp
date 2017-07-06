@@ -8,6 +8,7 @@ import android.widget.ListView;
 
 import com.tpyzq.mobile.pangu.R;
 import com.tpyzq.mobile.pangu.activity.myself.login.TransactionLoginActivity;
+import com.tpyzq.mobile.pangu.activity.trade.currency_fund.CurrencyFundActivity;
 import com.tpyzq.mobile.pangu.adapter.trade.StockPageListAdapter;
 import com.tpyzq.mobile.pangu.base.BaseActivity;
 import com.tpyzq.mobile.pangu.util.panguutil.DataUtils;
@@ -61,9 +62,10 @@ public class TranMoreActivity extends BaseActivity implements AdapterView.OnItem
                 intent.putExtra("pageindex",TransactionLoginActivity.PAGE_INDEX_NetworkVotingActivity);
                 intent.setClass(this,NetworkVotingActivity.class);
                 break;
-//            case 5:
-//
-//                break;
+            case 5:
+//                intent.putExtra("pageindex",TransactionLoginActivity.PAGE_INDEX_NetworkVotingActivity);
+                intent.setClass(this,CurrencyFundActivity.class);
+                break;
 
         }
         startActivity(intent);

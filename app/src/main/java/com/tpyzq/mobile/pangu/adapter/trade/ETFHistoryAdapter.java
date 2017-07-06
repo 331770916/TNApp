@@ -76,7 +76,7 @@ public class ETFHistoryAdapter extends BaseAdapter implements View.OnClickListen
             viewHodler.tvGone2 = (TextView) convertView.findViewById(R.id.ll_tv2);
             viewHodler.tvGone3 = (TextView) convertView.findViewById(R.id.ll_tv3);
             viewHodler.tvGone4 = (TextView) convertView.findViewById(R.id.ll_tv4);
-            viewHodler.tvGon5  = (TextView) convertView.findViewById(R.id.ll_tv5);
+            viewHodler.tvGone5  = (TextView) convertView.findViewById(R.id.ll_tv5);
             convertView.setTag(viewHodler);
         } else {
             viewHodler = (ViewHodler) convertView.getTag();
@@ -150,7 +150,7 @@ public class ETFHistoryAdapter extends BaseAdapter implements View.OnClickListen
                 }else {
                     viewHodler.tvGone4.setText("卖");
                 }
-                viewHodler.tvGon5.setText("--");
+                viewHodler.tvGone5.setText("--");
             }
         } else {
             bean.setShowRule(false);
@@ -178,7 +178,7 @@ public class ETFHistoryAdapter extends BaseAdapter implements View.OnClickListen
 
     class ViewHodler {
         LinearLayout llContent, tableSpan;
-        TextView tvName, tvCode, tvVocationalName, tvStatus, tvQuantity, tvTime, tvDate, tvGone1, tvGone2, tvGone3, tvGone4,tvGon5;
+        TextView tvName, tvCode, tvVocationalName, tvStatus, tvQuantity, tvTime, tvDate, tvGone1, tvGone2, tvGone3, tvGone4,tvGone5;
         ImageView rlSpan;
     }
 }

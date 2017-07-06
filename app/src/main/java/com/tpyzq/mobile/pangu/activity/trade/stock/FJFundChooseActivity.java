@@ -30,6 +30,7 @@ import java.util.List;
 /**
  * wangq
  * 选择基金
+ * tag 0 盘后分级基金选择  1 网络投票选择
  */
 
 public class FJFundChooseActivity extends BaseActivity implements View.OnClickListener, AdapterView.OnItemClickListener, InterfaceCollection.InterfaceCallback {
@@ -66,14 +67,17 @@ public class FJFundChooseActivity extends BaseActivity implements View.OnClickLi
         mListView.setOnItemClickListener(this);
 
 
-        switch (mTag){
+        switch (mTag) {
             case 0:
+                mTitl_tv.setText(getString(R.string.Gradingfundmerger));
                 break;
             case 1:
-                mTitl_tv.setText("投票查询");
+                mTitl_tv.setText(getString(R.string.voteEnterTitle));
                 isShow.setVisibility(View.GONE);
                 break;
         }
+
+
         adapter = new FJFundChooseAdapter(this, mTag);
         adapter.setPoint(mPoint);
         mListView.setAdapter(adapter);
@@ -86,6 +90,7 @@ public class FJFundChooseActivity extends BaseActivity implements View.OnClickLi
         if (!this.isFinishing()) {
             mDialog.show();
         }
+
         switch (mTag) {
             case 0:
                 ifc.Fundchoice(mSession, TAG, this);
