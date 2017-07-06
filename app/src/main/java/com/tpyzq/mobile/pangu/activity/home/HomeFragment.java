@@ -4,6 +4,7 @@ import android.content.Intent;
 import android.graphics.Bitmap;
 import android.graphics.Color;
 import android.graphics.drawable.Drawable;
+import android.net.Uri;
 import android.os.Handler;
 import android.support.v4.content.ContextCompat;
 import android.text.TextUtils;
@@ -232,7 +233,9 @@ public class HomeFragment extends BaseFragment implements AdapterView.OnItemClic
             @Override
             public void handle(final int index, SimpleDraweeView view) {
                 view.setScaleType(ImageView.ScaleType.FIT_XY);
-                view.setImageResource(image[index]);
+                Uri uri = Uri.parse("res:///"+image[index]);
+                view.setImageURI(uri);
+//                view.setImageResource(image[index]);
                 view.setOnClickListener(new View.OnClickListener() {
                     @Override
                     public void onClick(View v) {
