@@ -1989,4 +1989,78 @@ public class InterfaceCollection {
     }
 
 
+    /**
+     * 300742
+     * ETF列表查询
+     * @param token  token
+     * @param position_str  定位串
+     * @param request_num   num
+     * @param TAG tag
+     * @param callback callback
+     */
+    public void  constituentStockList(String token , String position_str,String request_num,final String TAG,final InterfaceCallback callback){
+        Map map1 = new HashMap<>();
+        map1.put("funcid", "300742");
+        map1.put("token", token);
+        Map map2 = new HashMap<>();
+        map2.put("SEC_ID", "tpyzq");
+        map2.put("FLAG", "true");
+        map2.put("POSITION_STR", position_str);
+        map2.put("REQUEST_NUM", request_num);
+        map1.put("parms", map2);
+        net.okHttpForPostString(TAG, ConstantUtil.URL_JY, map1, new StringCallback() {
+            @Override
+            public void onError(Call call, Exception e, int id) {
+                ResultInfo info = new ResultInfo();
+                info.setCode("-1");
+                info.setMsg(ConstantUtil.NETWORK_ERROR);
+                info.setTag(TAG);
+                callback.callResult(info);
+            }
+
+            @Override
+            public void onResponse(String response, int id) {
+                ResultInfo info = new ResultInfo();
+                if (TextUtils.isEmpty(response)) {
+                    info.setCode("-3");
+                    info.setMsg(ConstantUtil.SERVICE_NO_DATA);
+                    info.setTag(TAG);
+                }else {
+                    try {
+                        JSONObject jsonObject = new JSONObject(response);
+                        String code = jsonObject.getString("code");
+                        String msg = jsonObject.getString("msg");
+                        info.setCode(code);
+                        info.setMsg(msg);
+                        info.setTag(TAG);
+                        if ("0".equals(code)) {
+                            List<EtfDataEntity> ses = new ArrayList<>();
+                            JSONArray data = jsonObject.getJSONArray("data");
+                            for (int i = 0; i < data.length(); i++) {
+                                EtfDataEntity bean = new EtfDataEntity();
+                                JSONObject obj = data.getJSONObject(i);
+                                bean.setStock_code(obj.getString("STOCK_CODE_0"));
+                                bean.setComponent_code(obj.getString("STOCK_CODE_3"));
+                                bean.setStock_name(obj.getString("STOCK_NAME"));
+                                bean.setPosition_str(obj.getString("POSITION_STR"));
+                                ses.add(bean);
+                            }
+                            info.setData(ses);
+                        }
+                    } catch (Exception e) {
+                        info.setCode("-2");
+                        info.setMsg(ConstantUtil.JSON_ERROR);
+                        info.setTag(TAG);
+                    }
+                    callback.callResult(info);
+
+                }
+
+            }
+        });
+
+
+    }
+
+
 }

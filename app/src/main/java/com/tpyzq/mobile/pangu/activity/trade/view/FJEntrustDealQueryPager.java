@@ -253,7 +253,7 @@ public class FJEntrustDealQueryPager extends BasePager implements InterfaceColle
         switch (getType()) {
             case 0://委托
                 if (TAG.equals("EntrustTodayPager")) {
-                    ifc.queryTodayEntrust(mSession, page, num, "1", TAG, this);
+                    ifc.queryTodayEntrust(mSession, page, num, "0", TAG, this);
                 } else if (TAG.equals("EntrustOneWeekPager")) {
                     ifc.queryHistoryEntrust(mSession, page, num, "1", "", "", TAG, this);
                 } else if (TAG.equals("EntrustInAMonthPager")) {

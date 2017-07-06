@@ -48,18 +48,23 @@ public class FJWithdrawOrderActivity extends BaseActivity implements AdapterView
         mListView.setOnItemClickListener(this);
         mFjwithdrawOrderAdapter = new FJWithdrawOrderAdapter(this, mList);
         mListView.setAdapter(mFjwithdrawOrderAdapter);
-        requestData();
+        requestData("");
         mListView.setEmptyView(imageView);
-        mListView.setMode(PullToRefreshBase.Mode.PULL_FROM_START);
+        mListView.setMode(PullToRefreshBase.Mode.BOTH);
         mListView.setOnRefreshListener(new PullToRefreshBase.OnRefreshListener2<ListView>() {
             @Override
             public void onPullDownToRefresh(PullToRefreshBase<ListView> refreshView) {
-                requestData();
+                requestData("");
             }
 
             @Override
             public void onPullUpToRefresh(PullToRefreshBase<ListView> refreshView) {
                 //  上拉加载
+                if (mList!=null &&mList.size()>0){
+                    String page = mList.get(mList.size()-1).getPosition_str();
+                    requestData(page);
+                }
+
             }
         });
     }
@@ -67,22 +72,22 @@ public class FJWithdrawOrderActivity extends BaseActivity implements AdapterView
     /**
      * 请求数据
      */
-    private void requestData() {
+    private void requestData(String page) {
         mDialog = LoadingDialog.initDialog(this, "加载中...");
         if (!this.isFinishing()) {
             mDialog.show();
         }
         String token = SpUtils.getString(this, "mSession", "");
         InterfaceCollection ifc = InterfaceCollection.getInstance();
-        ifc.queryTodayEntrust(token, "", "30", "1", TAG, new InterfaceCollection.InterfaceCallback() {
+        ifc.queryTodayEntrust(token, page, "30", "1", TAG, new InterfaceCollection.InterfaceCallback() {
             @Override
             public void callResult(ResultInfo info) {
-                mList.clear();
                 mListView.onRefreshComplete();
                 if (mDialog != null && mDialog.isShowing()) {
                     mDialog.dismiss();
                 }
                 if ("0".equals(info.getCode())) {
+                    mList.clear();
                     List<StructuredFundEntity> ses = (List<StructuredFundEntity>) info.getData();
                     mList.addAll(ses);
                     mFjwithdrawOrderAdapter.notifyDataSetChanged();
@@ -133,7 +138,7 @@ public class FJWithdrawOrderActivity extends BaseActivity implements AdapterView
 
                 if ("0".equals(info.getCode())) {
                     Helper.getInstance().showToast(FJWithdrawOrderActivity.this, "撤销此委托成功");
-                    requestData();
+                    requestData("");
                 } else if ("-1".equals(info.getCode()) || "-2".equals(info.getCode()) || "-3".equals(info.getCode())) {
                     Helper.getInstance().showToast(FJWithdrawOrderActivity.this, info.getMsg());
                 } else if ("-6".equals(info.getCode())) {

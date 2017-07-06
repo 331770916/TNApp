@@ -64,7 +64,7 @@ public class FJWithdrawOrderAdapter extends BaseAdapter {
         viewHolder.tv1.setText(mList.get(position).getStoken_name());
         viewHolder.tv2.setText(mList.get(position).getStocken_code());
         viewHolder.tv4.setText(mList.get(position).getBusiness_name());
-        viewHolder.tv5.setText(mList.get(position).getCurr_date());
+        viewHolder.tv5.setText(Helper.formateDate1(mList.get(position).getCurr_date()));
         viewHolder.tv6.setText(Helper.getMyDateHMS(mList.get(position).getReport_time()));
         String entrust_bs = mList.get(position).getEntrust_status();
         switch (entrust_bs) {
