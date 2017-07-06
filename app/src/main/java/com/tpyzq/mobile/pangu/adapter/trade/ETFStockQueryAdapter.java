@@ -60,7 +60,7 @@ public class ETFStockQueryAdapter extends BaseAdapter{
             viewHolder.tv_code = (TextView) convertView.findViewById(R.id.tv_code);
             viewHolder.tv_name = (TextView) convertView.findViewById(R.id.tv_name);
             viewHolder.tv_etfcode = (TextView) convertView.findViewById(R.id.tv_etf_code);
-            viewHolder.fj_content = (LinearLayout) convertView.findViewById(R.id.fj_content);
+            viewHolder.fj_content = (LinearLayout) convertView.findViewById(R.id.ll_content);
             viewHolder.iv_top = (ImageView) convertView.findViewById(R.id.iv_top);
             viewHolder.tv1 = (TextView) convertView.findViewById(R.id.tv1);
             viewHolder.tv2 = (TextView) convertView.findViewById(R.id.tv2);
@@ -79,6 +79,11 @@ public class ETFStockQueryAdapter extends BaseAdapter{
             viewHolder.tv1.setText(etfDataEntity.getEntrust_amount());//单位数量
             viewHolder.tv2.setText(etfDataEntity.getStock_max());//溢价比例
             viewHolder.tv3.setText(etfDataEntity.getCash_max());//替代标记
+            if (etfDataEntity.isShowRule()) {
+                viewHolder.ll_isShow.setVisibility(View.VISIBLE);
+            } else {
+                viewHolder.ll_isShow.setVisibility(View.GONE);
+            }
             viewHolder.fj_content.setOnClickListener(new View.OnClickListener() {
                 @Override
                 public void onClick(View v) {

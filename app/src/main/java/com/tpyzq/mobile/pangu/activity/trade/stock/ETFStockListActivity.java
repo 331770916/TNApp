@@ -59,8 +59,8 @@ public class ETFStockListActivity extends BaseActivity {
                 finish();
             }
         });
-        iv_null = (ImageView)findViewById(R.id.iv_null);
-        lv = (PullToRefreshListView)findViewById(R.id.lv);
+        iv_null = (ImageView)findViewById(R.id.img_show);
+        lv = (PullToRefreshListView)findViewById(R.id.etfList);
         lv.setEmptyView(iv_null);
         lv.setMode(PullToRefreshBase.Mode.BOTH);
         mList = new ArrayList<EtfDataEntity>();
@@ -82,7 +82,7 @@ public class ETFStockListActivity extends BaseActivity {
                 }
             }
         });
-        mDialog = LoadingDialog.initDialog(this, "");
+        mDialog = LoadingDialog.initDialog(this, "正在查询...");
 
         initData(true);
     }
