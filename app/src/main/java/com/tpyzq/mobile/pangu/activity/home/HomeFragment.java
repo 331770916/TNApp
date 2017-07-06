@@ -231,7 +231,6 @@ public class HomeFragment extends BaseFragment implements AdapterView.OnItemClic
         vp_carousel.init(image.length, new CarouselView.SimpleDraweeViewHandler() {
             @Override
             public void handle(final int index, SimpleDraweeView view) {
-                view.getHierarchy().setPlaceholderImage(R.mipmap.ic_launcher);
                 view.setScaleType(ImageView.ScaleType.FIT_XY);
                 view.setImageResource(image[index]);
                 view.setOnClickListener(new View.OnClickListener() {
