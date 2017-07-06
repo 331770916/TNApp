@@ -56,6 +56,7 @@ public class ETFStockQueryActivity extends BaseActivity implements View.OnClickL
         etfList.setOnRefreshListener(new PullToRefreshBase.OnRefreshListener2<ListView>() {
             @Override
             public void onPullDownToRefresh(PullToRefreshBase<ListView> refreshView) {
+                mList.clear();
                 requestData("", "30");
             }
 

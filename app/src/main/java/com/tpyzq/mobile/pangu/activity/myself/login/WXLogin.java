@@ -80,6 +80,7 @@ public class WXLogin implements ICallbackResult {
     private UMAuthListener wwumAuthListener = new UMAuthListener() {
         @Override
         public void onComplete(SHARE_MEDIA share_media, int i, Map<String, String> map) {
+            if (mContext instanceof Activity&&((Activity)mContext).isFinishing())return;
             //获取用户信息
             mLoadingDialog = LoadingDialog.initDialog((Activity) mContext, "正在提交...");
             //显示Dialog
