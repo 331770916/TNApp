@@ -124,7 +124,18 @@ public class FJDealQueryActivity  extends BaseActivity implements View.OnClickLi
     }
 
 
-@Override
+
+    @Override
+    protected void onResume() {
+        super.onResume();
+        if(!listBuy.isEmpty()){
+            for (BasePager pager:listBuy)
+                ((FJEntrustDealQueryPager)pager).setIsFirst(true);
+        }
+    }
+
+
+    @Override
     public int getLayoutId() {
         return R.layout.activity_fj_entrus_query;
     }

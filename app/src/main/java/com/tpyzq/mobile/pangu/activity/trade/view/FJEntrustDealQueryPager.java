@@ -39,13 +39,15 @@ public class FJEntrustDealQueryPager extends BasePager implements InterfaceColle
     private FJEntrustedDealListViewAdapter mAdapter;
     private TimePickerView startTime, finishTime;
     private List<StructuredFundEntity> myList;
+    private boolean isCustomRefresh = false;
     private PullToRefreshListView listView;
     private boolean isScallBottom, mIsClean;
     private Dialog mistakeDialog, mDialog;
     private LinearLayout fjTimepicker;
     private ImageView iv_isEmpty;
+    private boolean isFirst=true;
     private int refresh = 30;
-    private boolean isCustomRefresh = false;
+
 
     public FJEntrustDealQueryPager(Context context, String params) {
         super(context, params);
@@ -156,14 +158,12 @@ public class FJEntrustDealQueryPager extends BasePager implements InterfaceColle
                     if (mIsClean)
                         refresh += 30;
                     mAdapter.setData(myList);
-                } else {
-                    helper.showToast(mContext, " 暂无数据");
                 }
             }
         } else if ("-6".equals(code)) {
             skip.startLogin(mContext);
         } else {//-1,-2,-3情况下显示定义好信息
-            helper.showToast(mContext, info.getMsg());
+            mistakeDialog = MistakeDialog.showDialog("提示",info.getMsg(),false,(Activity) mContext,null);
         }
         listView.onRefreshComplete();
     }
@@ -192,9 +192,6 @@ public class FJEntrustDealQueryPager extends BasePager implements InterfaceColle
             mAdapter.setCallback(this);
             listView.setAdapter(mAdapter);
             listView.setEmptyView(iv_isEmpty);
-            if (!"EntrustCustomPager".equals(TAG) && !"DealCustomPager".equals(TAG))
-                mDialog.show();
-            refresh("", "30", false);
             listView.setOnRefreshListener(new PullToRefreshBase.OnRefreshListener<ListView>() {
                 @Override
                 public void onRefresh(PullToRefreshBase<ListView> refreshView) {
@@ -247,7 +244,19 @@ public class FJEntrustDealQueryPager extends BasePager implements InterfaceColle
                 }
             });
         }
+        if(isFirst){
+            if (!"EntrustCustomPager".equals(TAG) && !"DealCustomPager".equals(TAG))
+                mDialog.show();
+            refresh("", "30", false);
+            isFirst = false;
+        }
     }
+
+
+    public void setIsFirst(boolean is){
+        isFirst = is;
+    }
+
 
     public void refresh(String page, String num, boolean isClean) {
         switch (getType()) {
