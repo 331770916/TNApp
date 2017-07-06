@@ -76,6 +76,7 @@ public class VoteDetailAdapter extends BaseAdapter {
                     TextView tv4 = (TextView) convertView.findViewById(R.id.voteNo);
                     TextView tv5 = (TextView) convertView.findViewById(R.id.voteAbstention);
                     final TextView[] tvs = new TextView[]{tv3, tv4, tv5};
+                    bean.setEntrust_amount("");
                     tv3.setOnClickListener(new View.OnClickListener() {
                         @Override
                         public void onClick(View v) {
@@ -133,10 +134,10 @@ public class VoteDetailAdapter extends BaseAdapter {
         etNum.setInputType(InputType.TYPE_CLASS_NUMBER);
         lps.leftMargin = (int)mContext.getResources().getDimension(R.dimen.size31);
         ll.addView(etNum,etlps);
+        entity.setEntrust_amount("");
         etNum.addTextChangedListener(new TextWatcher() {
             @Override
             public void beforeTextChanged(CharSequence s, int start, int count, int after) {
-                entity.setEntrust_amount("");
             }
             @Override
             public void onTextChanged(CharSequence s, int start, int before, int count) {}

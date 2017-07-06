@@ -1980,7 +1980,7 @@ public class InterfaceCollection {
                 callback.callResult(info);
             }
         });
-    };
+    }
 
 
 }
