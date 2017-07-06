@@ -54,6 +54,7 @@ public class FJWithdrawOrderActivity extends BaseActivity implements AdapterView
         mListView.setOnRefreshListener(new PullToRefreshBase.OnRefreshListener2<ListView>() {
             @Override
             public void onPullDownToRefresh(PullToRefreshBase<ListView> refreshView) {
+                mList.clear();
                 requestData("");
             }
 
@@ -87,7 +88,6 @@ public class FJWithdrawOrderActivity extends BaseActivity implements AdapterView
                     mDialog.dismiss();
                 }
                 if ("0".equals(info.getCode())) {
-                    mList.clear();
                     List<StructuredFundEntity> ses = (List<StructuredFundEntity>) info.getData();
                     mList.addAll(ses);
                     mFjwithdrawOrderAdapter.notifyDataSetChanged();
