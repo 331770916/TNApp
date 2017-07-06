@@ -97,7 +97,7 @@ public class FJFundSplitActivity extends BaseActivity implements View.OnClickLis
             case R.id.textView8:        //选择基金
                 intent.setClass(this, FJFundChooseActivity.class);
                 intent.putExtra("point", mPoint);
-                intent.putExtra("tag",0);
+                intent.putExtra("tag", 0);
                 startActivityForResult(intent, REQUSET);
                 break;
             case R.id.butConfirm:
@@ -155,8 +155,8 @@ public class FJFundSplitActivity extends BaseActivity implements View.OnClickLis
             mCnFundNameValue_tv.setText(bean.getStoken_name());
             mCnFundNetValueValue_tv.setText(bean.getStock_account());
             mStatements_tv.setText(bean.getFund_status());
-            mCnExpendableFundValue_tv.setText(bean.getMerge_amount());
-        } else if ("-1".equals(info.getCode()) || "-2".equals(info.getCode()) || "-3".equals(info.getCode())) {
+            mCnExpendableFundValue_tv.setText(bean.getSplit_amount());
+        } else if ("400".equals(info.getCode()) || "-2".equals(info.getCode()) || "-3".equals(info.getCode())) {
             Helper.getInstance().showToast(this, info.getMsg());
         } else if ("-6".equals(info.getCode())) {
             Intent intent = new Intent();

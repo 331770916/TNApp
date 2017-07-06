@@ -79,7 +79,7 @@ public class FJFundGradingMergerActivity extends BaseActivity implements View.On
             case R.id.textView8:        //选择基金
                 intent.setClass(this, FJFundChooseActivity.class);
                 intent.putExtra("point", mPoint);
-                intent.putExtra("tag",0);
+                intent.putExtra("tag", 0);
                 startActivityForResult(intent, REQUSET);
                 break;
             case R.id.butConfirm:
@@ -136,7 +136,7 @@ public class FJFundGradingMergerActivity extends BaseActivity implements View.On
             mStatements_tv.setText(bean.getFund_status());
             mCnExpendableFundValue_tv.setText(bean.getMerge_amount());
 
-        } else if ("-1".equals(info.getCode()) || "-2".equals(info.getCode()) || "-3".equals(info.getCode())) {
+        } else if ("400".equals(info.getCode()) || "-2".equals(info.getCode()) || "-3".equals(info.getCode())) {
             Helper.getInstance().showToast(this, info.getMsg());
             factoryReset();
         } else if ("-6".equals(info.getCode())) {

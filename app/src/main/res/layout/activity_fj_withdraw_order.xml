@@ -80,7 +80,7 @@
             android:layout_toLeftOf="@+id/textView29"
             android:layout_toStartOf="@+id/textView29"
             android:gravity="center"
-            android:text="买卖/业务"
+            android:text="状态/业务名称"
             android:textColor="@color/newStockTitle"
             android:textSize="@dimen/txtSize12" />
 

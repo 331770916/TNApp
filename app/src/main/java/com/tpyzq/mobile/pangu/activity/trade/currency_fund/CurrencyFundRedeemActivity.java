@@ -22,7 +22,9 @@ import com.tpyzq.mobile.pangu.base.BaseActivity;
 import com.tpyzq.mobile.pangu.data.CurrencyFundShuHuiBean;
 import com.tpyzq.mobile.pangu.http.NetWorkUtil;
 import com.tpyzq.mobile.pangu.util.ConstantUtil;
+import com.tpyzq.mobile.pangu.util.Helper;
 import com.tpyzq.mobile.pangu.util.SpUtils;
+import com.tpyzq.mobile.pangu.view.dialog.MistakeDialog;
 import com.zhy.http.okhttp.callback.StringCallback;
 
 import java.lang.reflect.Type;
@@ -205,6 +207,7 @@ public class CurrencyFundRedeemActivity extends BaseActivity implements View.OnC
         NetWorkUtil.getInstence().okHttpForPostString(TAG, ConstantUtil.URL_JY, map1, new StringCallback() {
             @Override
             public void onError(Call call, Exception e, int id) {
+                Helper.getInstance().showToast(CurrencyFundRedeemActivity.this,ConstantUtil.NETWORK_ERROR);
                 e.toString();
             }
 
@@ -241,6 +244,8 @@ public class CurrencyFundRedeemActivity extends BaseActivity implements View.OnC
                         tvRedeemExpendableFundValue.setText(enable_amount);   //可用份额
                         etRedeemFundAmount.setFocusableInTouchMode(true);
                     }
+                }else {
+                    MistakeDialog.showDialog(bean.getMsg(),CurrencyFundRedeemActivity.this);
                 }
 
             }
