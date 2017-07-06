@@ -130,6 +130,7 @@ public class VoteDetailAdapter extends BaseAdapter {
         ll.addView(tvContent,lps);
         LayoutParams etlps = new LayoutParams((int)mContext.getResources().getDimension(R.dimen.size80),-2);
         EditText etNum = new EditText(mContext);
+        etNum.setBackgroundResource(R.mipmap.vote_et_style);
         etNum.setInputType(InputType.TYPE_CLASS_NUMBER);
         lps.leftMargin = (int)mContext.getResources().getDimension(R.dimen.size31);
         ll.addView(etNum,etlps);
