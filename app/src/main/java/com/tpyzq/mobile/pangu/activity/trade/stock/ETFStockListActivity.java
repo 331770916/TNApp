@@ -122,11 +122,15 @@ public class ETFStockListActivity extends BaseActivity {
                         position_str = "";
                     }*/
                     if (null!=tempList&&tempList.size()>0) {
-                        position_str = tempList.get(0).getPosition_str();
+                        position_str = tempList.get(tempList.size()-1).getPosition_str();
                     }
                     mList.addAll(tempList);
                     adapter.notifyDataSetChanged();
                 } else {
+                    //在初始化时如果网络失败只允许下拉
+                    if (isRefresh&&mList.size()==0) {
+                        lv.setMode(PullToRefreshBase.Mode.PULL_FROM_START);
+                    }
                     showToast(msg);
                 }
                 lv.onRefreshComplete();
