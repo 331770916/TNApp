@@ -92,45 +92,44 @@ public class ETFHistoryAdapter extends BaseAdapter implements View.OnClickListen
         viewHodler.tvCode.setText(bean.getStock_code());
 //        viewHodler.tvVocationalName.setText("");
         viewHodler.tvStatus.setText(bean.getEntrust_amount());
-        viewHodler.tvQuantity.setText(bean.getEntrust_status());
-        viewHodler.tvTime.setText(bean.getReport_time());
-        viewHodler.tvDate.setText(bean.getInit_date());
-
-//        switch (bean.getEntrust_status()) {
-//            case "0":
-//
-//                break;
-//            case "1":
-//                viewHodler.tvStatus.setText("待报");
-//                break;
-//            case "2":
-//                viewHodler.tvStatus.setText("已报");
-//                break;
-//            case "3":
-//                viewHodler.tvStatus.setText("已报待撤");
-//                break;
-//            case "4":
-//                viewHodler.tvStatus.setText("部成待撤");
-//                break;
-//            case "5":
-//                viewHodler.tvStatus.setText("部撤");
-//                break;
-//            case "6":
-//                viewHodler.tvStatus.setText("已撤");
-//                break;
-//            case "7":
-//                viewHodler.tvStatus.setText("部成");
-//                break;
-//            case "8":
-//                viewHodler.tvStatus.setText("已成");
-//                break;
-//            case "9":
-//                viewHodler.tvStatus.setText("废单");
-//                break;
-//            default:
-//                viewHodler.tvStatus.setText("--");
-//                break;
-//        }
+        viewHodler.tvTime.setText(bean.getInit_date());
+        viewHodler.tvDate.setText(bean.getReport_time());
+//        viewHodler.tvQuantity.setText(bean.getEntrust_status());
+        switch (bean.getEntrust_status()) {
+            case "0":
+                viewHodler.tvQuantity.setText("未报");
+                break;
+            case "1":
+                viewHodler.tvQuantity.setText("待报");
+                break;
+            case "2":
+                viewHodler.tvQuantity.setText("已报");
+                break;
+            case "3":
+                viewHodler.tvQuantity.setText("已报待撤");
+                break;
+            case "4":
+                viewHodler.tvQuantity.setText("部成待撤");
+                break;
+            case "5":
+                viewHodler.tvQuantity.setText("部撤");
+                break;
+            case "6":
+                viewHodler.tvQuantity.setText("已撤");
+                break;
+            case "7":
+                viewHodler.tvQuantity.setText("部成");
+                break;
+            case "8":
+                viewHodler.tvQuantity.setText("已成");
+                break;
+            case "9":
+                viewHodler.tvQuantity.setText("废单");
+                break;
+            default:
+                viewHodler.tvQuantity.setText("--");
+                break;
+        }
 
         if (bean.isShowRule()) {
             if (viewHodler.llContent.isSelected()) {

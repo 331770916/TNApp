@@ -14,6 +14,7 @@ import com.tpyzq.mobile.pangu.data.StockHolderInfoEntity;
 import com.tpyzq.mobile.pangu.data.StructuredFundEntity;
 import com.tpyzq.mobile.pangu.http.NetWorkUtil;
 import com.tpyzq.mobile.pangu.util.ConstantUtil;
+import com.tpyzq.mobile.pangu.util.Helper;
 import com.zhy.http.okhttp.callback.StringCallback;
 
 import org.json.JSONArray;
@@ -1633,8 +1634,10 @@ public class InterfaceCollection {
                             for (int i = 0; i < data.length(); i++) {
                                 EtfDataEntity bean = new EtfDataEntity();
                                 JSONObject obj = data.getJSONObject(i);
-                                bean.setInit_date(obj.getString("INIT_DATE"));
-                                bean.setCurr_time(obj.getString("CURR_TIME"));
+                                String init_date = Helper.formateDate1(obj.getString("INIT_DATE"));
+                                bean.setInit_date(init_date);
+                                String currn_time = Helper.getMyDateHMS(obj.getString("CURR_TIME"));
+                                bean.setReport_time(currn_time);
                                 bean.setStock_code(obj.getString("STOCK_CODE"));
                                 bean.setStock_name(obj.getString("STOCK_NAME"));
                                 bean.setStock_account(obj.getString("STOCK_ACCOUNT"));
@@ -1796,13 +1799,15 @@ public class InterfaceCollection {
                             for (int i = 0; i < data.length(); i++) {
                                 EtfDataEntity bean = new EtfDataEntity();
                                 JSONObject obj = data.getJSONObject(i);
-                                bean.setInit_date(obj.getString("INIT_DATE"));
+                                String init_date = Helper.formateDate1(obj.getString("INIT_DATE"));
+                                bean.setInit_date(init_date);
                                 bean.setEntrust_no(obj.getString("ENTRUST_NO"));
                                 bean.setStock_name(obj.getString("STOCK_NAME"));
                                 bean.setStock_code(obj.getString("STOCK_CODE"));
                                 bean.setEntrust_amount(obj.getString("ENTRUST_AMOUNT"));
                                 bean.setEntrust_status(obj.getString("ENTRUST_STATUS"));
-                                bean.setReport_time(obj.getString("REPORT_TIME"));
+                                String report = Helper.getMyDateHMS(obj.getString("REPORT_TIME"));
+                                bean.setReport_time(report);
                                 bean.setEntrust_status_name(obj.getString("ENTRUST_STATUS_NAME"));
                                 bean.setPrev_balance(obj.getString("PREV_BALANCE"));
                                 bean.setEntrust_bs(obj.getString("ENTRUST_BS"));
