@@ -1,10 +1,12 @@
 package com.tpyzq.mobile.pangu.activity.trade.stock;
+
 import android.content.Context;
 import android.support.v4.view.ViewPager;
 import android.view.View;
 import android.widget.TextView;
+
 import com.tpyzq.mobile.pangu.R;
-import com.tpyzq.mobile.pangu.activity.trade.view.FJEntrustDealQueryPager;
+import com.tpyzq.mobile.pangu.activity.trade.view.ETFQueryPager;
 import com.tpyzq.mobile.pangu.activity.trade.view.ScaleTransitionPagerTitleView;
 import com.tpyzq.mobile.pangu.adapter.trade.FJEntrustedDealAdapter;
 import com.tpyzq.mobile.pangu.base.BaseActivity;
@@ -23,33 +25,48 @@ import java.util.Arrays;
 import java.util.List;
 
 /**
- * Created by ltyhome on 23/06/2017.
- * Email: ltyhome@yahoo.com.hk
- * Describe: deal query 成交查询1
+ * Created by wangqi on 2017/7/3.
+ * ETF 申赎历史查询
  */
 
-public class FJDealQueryActivity  extends BaseActivity implements View.OnClickListener{
-    private FJEntrustDealQueryPager todayPager,oneWeekPager,inAMonthPager,threeWeekPager,customPager;
-    private String[] buy_vp = new String[]{"今日", "一周内", "一月内", "三月内","自定义"};
+public class ETFHistoryInquireActivity extends BaseActivity implements View.OnClickListener {
+    private ETFQueryPager todayPager, oneWeekPager, inAMonthPager, threeWeekPager, customPager;
+    private String[] buy_vp = new String[]{"今日", "一周内", "一月内", "三月内", "自定义"};
     private List<String> buy_vp_list = Arrays.asList(buy_vp);
     private List<BasePager> listBuy = new ArrayList<>();
-    private MagicIndicator magicIndicator;
+    private MagicIndicator capital_buy;
     private ViewPager viewPager;
-    private TextView title;
-
 
     @Override
     public void initView() {
         findViewById(R.id.ivCNFund_back).setOnClickListener(this);
-        title =(TextView)this.findViewById(R.id.fj_title);
-        title.setText("成交查询");
-        magicIndicator = (MagicIndicator)this.findViewById(R.id.capital_buy);
-        viewPager = (ViewPager)this.findViewById(R.id.fj_view);
+        ((TextView) findViewById(R.id.fj_title)).setText(getString(R.string.ETF_shenshu_History));
+        capital_buy = (MagicIndicator) findViewById(R.id.capital_buy);
+        viewPager = (ViewPager) findViewById(R.id.fj_view);
+
+    }
+
+    @Override
+    protected void onStart() {
+        super.onStart();
         setIndicatorListen();
     }
 
+    @Override
+    public int getLayoutId() {
+        return R.layout.activity_fj_entrus_query;
+    }
 
-    private void setIndicatorListen() {
+    @Override
+    public void onClick(View v) {
+        switch (v.getId()) {
+            case R.id.ivCNFund_back:
+                finish();
+                break;
+        }
+    }
+
+    private void setIndicatorListen(){
         CommonNavigator commonNavigator = new CommonNavigator(this);
         commonNavigator.setAdjustMode(true);
         commonNavigator.setAdapter(new CommonNavigatorAdapter() {
@@ -57,6 +74,7 @@ public class FJDealQueryActivity  extends BaseActivity implements View.OnClickLi
             public int getCount() {
                 return buy_vp_list == null ? 0 : buy_vp_list.size();
             }
+
             @Override
             public IPagerTitleView getTitleView(Context context, final int index) {
                 SimplePagerTitleView simplePagerTitleView = new ScaleTransitionPagerTitleView(context);
@@ -87,19 +105,22 @@ public class FJDealQueryActivity  extends BaseActivity implements View.OnClickLi
                 return 1.0f;
             }
         });
-        magicIndicator.setNavigator(commonNavigator);
-        ViewPagerHelper.bind(magicIndicator, viewPager);//TAG  DealTodayPager....
-        todayPager = new FJEntrustDealQueryPager(this,"DealTodayPager");
+
+        capital_buy.setNavigator(commonNavigator);
+        ViewPagerHelper.bind(capital_buy, viewPager);//TAG ETFTodayPager...
+        todayPager = new ETFQueryPager(this,"ETFQueryTodayPager");
         listBuy.add(todayPager);
-        oneWeekPager = new FJEntrustDealQueryPager(this,"DealOneWeekPager");
+        oneWeekPager = new ETFQueryPager(this, "ETFQueryOneWeekPager");
         listBuy.add(oneWeekPager);
-        inAMonthPager = new FJEntrustDealQueryPager(this,"DealInAMonthPager");
+        inAMonthPager = new ETFQueryPager(this, "ETFQueryInAMonthPager");
         listBuy.add(inAMonthPager);
-        threeWeekPager = new FJEntrustDealQueryPager(this,"DealThreeWeekPager");
+        threeWeekPager = new ETFQueryPager(this, "ETFQueryThreeWeekPager");
         listBuy.add(threeWeekPager);
-        customPager = new FJEntrustDealQueryPager(this,"DealCustomPager");
+        customPager = new ETFQueryPager(this, "ETFQueryCustomPager");
         listBuy.add(customPager);
-        viewPager.setAdapter(new FJEntrustedDealAdapter(listBuy,1));
+
+
+        viewPager.setAdapter(new FJEntrustedDealAdapter(listBuy));
         todayPager.initData();
         viewPager.setOnPageChangeListener(new ViewPager.OnPageChangeListener() {
             @Override
@@ -119,17 +140,6 @@ public class FJDealQueryActivity  extends BaseActivity implements View.OnClickLi
     }
 
     @Override
-    public void onClick(View v) {
-        finish();
-    }
-
-
-@Override
-    public int getLayoutId() {
-        return R.layout.activity_fj_entrus_query;
-    }
-
-    @Override
     public void destroy() {
         todayPager.destroy();
         todayPager = null;
@@ -138,7 +148,7 @@ public class FJDealQueryActivity  extends BaseActivity implements View.OnClickLi
         inAMonthPager.destroy();
         inAMonthPager = null;
         threeWeekPager.destroy();
-        threeWeekPager=null;
+        threeWeekPager = null;
         customPager.destroy();
         customPager = null;
     }

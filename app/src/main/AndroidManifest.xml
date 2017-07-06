@@ -16,6 +16,7 @@
     <uses-permission android:name="android.permission.WRITE_CONTACTS" />
     <uses-permission android:name="android.permission.WRITE_EXTERNAL_STORAGE" />
     <uses-permission android:name="android.permission.ACCESS_NETWORK_STATE" />
+    <uses-permission android:name="android.permission.ACCESS_NETWORK_STATE" />
     <uses-permission android:name="android.permission.BROADCAST_STICKY" />
     <uses-permission android:name="android.permission.ACCESS_WIFI_STATE" />
     <uses-permission android:name="android.permission.READ_EXTERNAL_STORAGE" />
@@ -334,6 +335,8 @@
         <activity android:name=".activity.trade.stock.BankBusinessIndexActivity" />
         <activity android:name=".activity.trade.stock.BanksBalanceQueryActivity" />
         <activity android:name=".activity.trade.stock.BanksTransferAccountsActivity" />
+        <activity android:name=".activity.trade.stock.ETFTrasactionQueryActivity" />
+        <activity android:name=".activity.trade.stock.ETFRevokeActivity" />
         <activity
             android:name=".activity.trade.stock.BuyAndSellActivity"
             android:windowSoftInputMode="adjustPan|stateAlwaysHidden" />
@@ -375,6 +378,11 @@
         <activity android:name=".activity.trade.stock.FJWithdrawOrderActivity" />
         <activity android:name=".activity.trade.stock.FJEntrustedQueryActivity" />
         <activity android:name=".activity.trade.stock.FJDealQueryActivity" />
+        <activity android:name=".activity.trade.stock.ETFNavigationBarActivity"/>
+        <activity android:name=".activity.trade.stock.ETFHistoryInquireActivity"/>
+        <activity android:name=".activity.trade.stock.ETFApplyforOrRedeemActivity"/>
+        <activity android:name=".activity.trade.stock.ETFStockQueryActivity" />
+        <activity android:name=".activity.trade.stock.ETFStockListActivity" />
 
         <!--投票 相关activity-->
         <activity android:name=".activity.trade.stock.NetworkVotingActivity" />

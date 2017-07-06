@@ -1,9 +1,9 @@
 package com.tpyzq.mobile.pangu.activity.trade.view;
+
 import android.app.Activity;
 import android.app.Dialog;
 import android.content.Context;
 import android.graphics.Color;
-import android.os.SystemClock;
 import android.text.TextUtils;
 import android.view.View;
 import android.widget.AbsListView;
@@ -15,15 +15,16 @@ import android.widget.TextView;
 
 import com.handmark.pulltorefresh.library.PullToRefreshBase;
 import com.handmark.pulltorefresh.library.PullToRefreshListView;
+import com.tpyzq.mobile.pangu.R;
 import com.tpyzq.mobile.pangu.adapter.trade.FJEntrustedDealListViewAdapter;
 import com.tpyzq.mobile.pangu.base.BasePager;
-import com.tpyzq.mobile.pangu.R;
 import com.tpyzq.mobile.pangu.base.InterfaceCollection;
 import com.tpyzq.mobile.pangu.data.ResultInfo;
 import com.tpyzq.mobile.pangu.data.StructuredFundEntity;
 import com.tpyzq.mobile.pangu.view.dialog.LoadingDialog;
 import com.tpyzq.mobile.pangu.view.dialog.MistakeDialog;
 import com.tpyzq.mobile.pangu.view.pickTime.TimePickerView;
+
 import java.util.Date;
 import java.util.List;
 
@@ -32,37 +33,36 @@ import java.util.List;
  * Email: ltyhome@yahoo.com.hk
  * Describe: entrust deal query 委托0 成交查询1
  */
-public class FJEntrustDealQueryPager extends BasePager implements InterfaceCollection.InterfaceCallback,FJEntrustedDealListViewAdapter.ScallCallback{
-    private TextView mtvStartTime,mtvFinishTime,fjInquire;
-    private String TAG,startDate,finishDate,position = "";
+public class FJEntrustDealQueryPager extends BasePager implements InterfaceCollection.InterfaceCallback, FJEntrustedDealListViewAdapter.ScallCallback {
+    private TextView mtvStartTime, mtvFinishTime, fjInquire;
+    private String TAG, startDate, finishDate, position = "";
     private FJEntrustedDealListViewAdapter mAdapter;
-    private TimePickerView startTime,finishTime;
+    private TimePickerView startTime, finishTime;
     private List<StructuredFundEntity> myList;
     private PullToRefreshListView listView;
-    private boolean isScallBottom,mIsClean;
-    private Dialog mistakeDialog,mDialog;
+    private boolean isScallBottom, mIsClean;
+    private Dialog mistakeDialog, mDialog;
     private LinearLayout fjTimepicker;
-    private RelativeLayout kong_null;
     private ImageView iv_isEmpty;
     private int refresh = 30;
+    private boolean isCustomRefresh = false;
 
-    public FJEntrustDealQueryPager(Context context,String params) {
-        super(context,params);
+    public FJEntrustDealQueryPager(Context context, String params) {
+        super(context, params);
         TAG = params;
     }
 
     @Override
     public void setView(String params) {
         listView = (PullToRefreshListView) rootView.findViewById(R.id.listview);
-        listView.setMode(PullToRefreshBase.Mode.PULL_FROM_START);
+        listView.setMode(PullToRefreshBase.Mode.BOTH);
         iv_isEmpty = (ImageView) rootView.findViewById(R.id.iv_isEmpty);
-        kong_null = (RelativeLayout) rootView.findViewById(R.id.FJEAMP_Kong_Null);
-        if("EntrustCustomPager".equals(params)||"DealCustomPager".equals(params)) {
-            fjTimepicker = (LinearLayout)rootView.findViewById(R.id.fjTimepicker);
+        if ("EntrustCustomPager".equals(params) || "DealCustomPager".equals(params)) {
+            fjTimepicker = (LinearLayout) rootView.findViewById(R.id.fjTimepicker);
             fjTimepicker.setVisibility(View.VISIBLE);
-            mtvStartTime = (TextView)rootView.findViewById(R.id.fjstartDate);
-            mtvFinishTime = (TextView)rootView.findViewById(R.id.fjfinishDate);
-            fjInquire = (TextView)rootView.findViewById(R.id.fjInquire);
+            mtvStartTime = (TextView) rootView.findViewById(R.id.fjstartDate);
+            mtvFinishTime = (TextView) rootView.findViewById(R.id.fjfinishDate);
+            fjInquire = (TextView) rootView.findViewById(R.id.fjInquire);
             fjInquire.setOnClickListener(new MyOnClickListenr());
             mtvStartTime.setText(helper.getCurDate());
             mtvStartTime.setTextColor(Color.parseColor("#368de7"));
@@ -119,10 +119,11 @@ public class FJEntrustDealQueryPager extends BasePager implements InterfaceColle
                         String str = helper.compareTo(startDate, finishDate);
                         int days = helper.daysBetween(startDate, finishDate);
                         if (str.equalsIgnoreCase(startDate)) {
-                            mistakeDialog =  MistakeDialog.showDialog("请选择正确日期,起始日期不能超过截止日期", (Activity) mContext);
+                            mistakeDialog = MistakeDialog.showDialog("请选择正确日期,起始日期不能超过截止日期", (Activity) mContext);
                         } else if (days > 90) {
                             mistakeDialog = MistakeDialog.showDialog("选择的日期间隔不能超过3个月", (Activity) mContext);
                         } else {
+                            isCustomRefresh = true;
                             mDialog.show();
                             mAdapter.notifyDataSetChanged();
                             refresh(position, "30", false);
@@ -138,27 +139,31 @@ public class FJEntrustDealQueryPager extends BasePager implements InterfaceColle
         if (mDialog != null)
             mDialog.dismiss();
         String code = info.getCode();
-        if("0".equals(code)){
-            if (!mIsClean&&myList!=null)
+        if ("0".equals(code)) {
+            if (!mIsClean && myList != null) {
                 myList.clear();
+                mAdapter.notifyDataSetChanged();
+            }
             Object object = info.getData();
-            if(object instanceof List){
-                myList = (List<StructuredFundEntity>)object;
-                if(myList.size()>0){
-                    position = myList.get(myList.size()-1).getPosition_str();
-                    if(mIsClean)
+            if (object instanceof List) {
+                myList = (List<StructuredFundEntity>) object;
+                if (myList.size() > 0) {
+                    if(myList.size()<30)
+                        listView.setMode(PullToRefreshBase.Mode.PULL_FROM_START);
+                    else
+                        listView.setMode(PullToRefreshBase.Mode.BOTH);
+                    position = myList.get(myList.size() - 1).getPosition_str();
+                    if (mIsClean)
                         refresh += 30;
                     mAdapter.setData(myList);
-                }else{
-                    helper.showToast(mContext," 暂无数据");
-                    kong_null.setVisibility(View.GONE);
+                } else {
+                    helper.showToast(mContext, " 暂无数据");
                 }
             }
-        }else if("-6".equals(code)){
+        } else if ("-6".equals(code)) {
             skip.startLogin(mContext);
-        }else{//-1,-2,-3情况下显示定义好信息
-            helper.showToast(mContext,info.getMsg());
-            kong_null.setVisibility(View.GONE);
+        } else {//-1,-2,-3情况下显示定义好信息
+            helper.showToast(mContext, info.getMsg());
         }
         listView.onRefreshComplete();
     }
@@ -170,7 +175,7 @@ public class FJEntrustDealQueryPager extends BasePager implements InterfaceColle
 
     @Override
     public void callScall() {//回调底部最后一个item点击时滚动
-        if(isScallBottom){
+        if (isScallBottom) {
             listView.post(new Runnable() {
                 @Override
                 public void run() {
@@ -182,54 +187,56 @@ public class FJEntrustDealQueryPager extends BasePager implements InterfaceColle
 
     @Override
     public void initData() {
-        if(mAdapter==null){
-            mAdapter = new FJEntrustedDealListViewAdapter(mContext,getType());
+        if (mAdapter == null) {
+            mAdapter = new FJEntrustedDealListViewAdapter(mContext, getType());
             mAdapter.setCallback(this);
             listView.setAdapter(mAdapter);
             listView.setEmptyView(iv_isEmpty);
-            if(!"EntrustCustomPager".equals(TAG)&&!"DealCustomPager".equals(TAG))
+            if (!"EntrustCustomPager".equals(TAG) && !"DealCustomPager".equals(TAG))
                 mDialog.show();
-            refresh("","30",false);
-            listView.setOnRefreshListener(new PullToRefreshBase.OnRefreshListener<ListView>(){
+            refresh("", "30", false);
+            listView.setOnRefreshListener(new PullToRefreshBase.OnRefreshListener<ListView>() {
                 @Override
                 public void onRefresh(PullToRefreshBase<ListView> refreshView) {
                     if (listView.isShownHeader()) {
                         listView.getLoadingLayoutProxy().setRefreshingLabel("正在刷新");
                         listView.getLoadingLayoutProxy().setPullLabel("下拉刷新数据");
                         listView.getLoadingLayoutProxy().setReleaseLabel("释放开始刷新");
-                        listView.post(new Runnable() {
-                            @Override
-                            public void run() {
-                                SystemClock.sleep(1500);
-                            }
-                        });
-                        refresh("",String.valueOf(refresh),false);
-                    }else if (listView.isShownFooter()){
+                        if ("EntrustCustomPager".equals(TAG) && !isCustomRefresh) {
+                                listView.onRefreshComplete();
+                        } else if ("DealCustomPager".equals(TAG) && !isCustomRefresh) {
+                            listView.onRefreshComplete();
+                        } else {
+                            refresh("", String.valueOf(refresh), false);
+                        }
+                    } else if (listView.isShownFooter()) {
                         listView.getLoadingLayoutProxy().setRefreshingLabel("正在刷新");
                         listView.getLoadingLayoutProxy().setPullLabel("上拉加载数据");
                         listView.getLoadingLayoutProxy().setReleaseLabel("释放开始刷新");
-                        listView.post(new Runnable() {
-                            @Override
-                            public void run() {
-                                SystemClock.sleep(1500);
-                            }
-                        });
-                        refresh(position,"30",true);
+                        if ("EntrustCustomPager".equals(TAG) && !isCustomRefresh) {
+                            listView.onRefreshComplete();
+                        } else if ("DealCustomPager".equals(TAG) && !isCustomRefresh) {
+                            listView.onRefreshComplete();
+                        } else {
+                            refresh(position, "30", true);
+                        }
+
+
                     }
                 }
             });
             listView.setOnScrollListener(new AbsListView.OnScrollListener() {
                 @Override
                 public void onScrollStateChanged(AbsListView view, int scrollState) {
-                    switch (scrollState){
+                    switch (scrollState) {
                         case SCROLL_STATE_IDLE:
-                            if(view.getLastVisiblePosition()==view.getCount()-1){
-                                View bottom = view.getChildAt(view.getLastVisiblePosition()-view.getFirstVisiblePosition());
-                                if(view.getHeight()>=bottom.getBottom())
+                            if (view.getLastVisiblePosition() == view.getCount() - 1) {
+                                View bottom = view.getChildAt(view.getLastVisiblePosition() - view.getFirstVisiblePosition());
+                                if (view.getHeight() >= bottom.getBottom())
                                     isScallBottom = true;
                                 else
                                     isScallBottom = false;
-                            }else
+                            } else
                                 isScallBottom = false;
                             break;
                     }
@@ -242,32 +249,32 @@ public class FJEntrustDealQueryPager extends BasePager implements InterfaceColle
         }
     }
 
-    public void refresh(String page,String num,boolean isClean){
-        switch (getType()){
+    public void refresh(String page, String num, boolean isClean) {
+        switch (getType()) {
             case 0://委托
-                if(TAG.equals("EntrustTodayPager")){
-                    ifc.queryTodayEntrust(mSession,page,num,"1",TAG,this);
-                }else if(TAG.equals("EntrustOneWeekPager")){
-                    ifc.queryHistoryEntrust(mSession,page,num,"1","","",TAG,this);
-                }else if(TAG.equals("EntrustInAMonthPager")){
-                    ifc.queryHistoryEntrust(mSession,page,num,"2","","",TAG,this);
-                }else if(TAG.equals("EntrustThreeWeekPager")){
-                    ifc.queryHistoryEntrust(mSession,page,num,"3","","",TAG,this);
-                }else if(TAG.equals("EntrustCustomPager")&&!TextUtils.isEmpty(startDate)&&!TextUtils.isEmpty(finishDate)){
-                    ifc.queryHistoryEntrust(mSession,page,num,"0",startDate,finishDate,TAG,this);
+                if (TAG.equals("EntrustTodayPager")) {
+                    ifc.queryTodayEntrust(mSession, page, num, "1", TAG, this);
+                } else if (TAG.equals("EntrustOneWeekPager")) {
+                    ifc.queryHistoryEntrust(mSession, page, num, "1", "", "", TAG, this);
+                } else if (TAG.equals("EntrustInAMonthPager")) {
+                    ifc.queryHistoryEntrust(mSession, page, num, "2", "", "", TAG, this);
+                } else if (TAG.equals("EntrustThreeWeekPager")) {
+                    ifc.queryHistoryEntrust(mSession, page, num, "3", "", "", TAG, this);
+                } else if (TAG.equals("EntrustCustomPager") && !TextUtils.isEmpty(startDate) && !TextUtils.isEmpty(finishDate)) {
+                    ifc.queryHistoryEntrust(mSession, page, num, "0", startDate, finishDate, TAG, this);
                 }
                 break;
             case 1://成交
-                if(TAG.equals("DealTodayPager")){
-                    ifc.queryTodayDeal(mSession,page,num,TAG,this);
-                }else if(TAG.equals("DealOneWeekPager")){
-                    ifc.queryHistoryDeal(mSession,page,num,"1","","",TAG,this);
-                }else if(TAG.equals("DealInAMonthPager")){
-                    ifc.queryHistoryDeal(mSession,page,num,"2","","",TAG,this);
-                }else if(TAG.equals("DealThreeWeekPager")){
-                    ifc.queryHistoryDeal(mSession,page,num,"3","","",TAG,this);
-                }else if(TAG.equals("DealCustomPager")&&!TextUtils.isEmpty(startDate)&&!TextUtils.isEmpty(finishDate)){
-                    ifc.queryHistoryDeal(mSession,page,num,"0",startDate,finishDate,TAG,this);
+                if (TAG.equals("DealTodayPager")) {
+                    ifc.queryTodayDeal(mSession, page, num, TAG, this);
+                } else if (TAG.equals("DealOneWeekPager")) {
+                    ifc.queryHistoryDeal(mSession, page, num, "1", "", "", TAG, this);
+                } else if (TAG.equals("DealInAMonthPager")) {
+                    ifc.queryHistoryDeal(mSession, page, num, "2", "", "", TAG, this);
+                } else if (TAG.equals("DealThreeWeekPager")) {
+                    ifc.queryHistoryDeal(mSession, page, num, "3", "", "", TAG, this);
+                } else if (TAG.equals("DealCustomPager") && !TextUtils.isEmpty(startDate) && !TextUtils.isEmpty(finishDate)) {
+                    ifc.queryHistoryDeal(mSession, page, num, "0", startDate, finishDate, TAG, this);
                 }
                 break;
         }
@@ -278,21 +285,19 @@ public class FJEntrustDealQueryPager extends BasePager implements InterfaceColle
     @Override
     public void destroy() {
         net.cancelSingleRequestByTag(TAG);
-        if(mistakeDialog!=null){
+        if (mistakeDialog != null) {
             mistakeDialog.dismiss();
             mistakeDialog = null;
         }
-        if(mDialog!=null){
+        if (mDialog != null) {
             mDialog.dismiss();
             mDialog = null;
         }
         mAdapter = null;
-        listView.removeAllViews();
         listView = null;
-        kong_null = null;
         iv_isEmpty = null;
         mtvStartTime = null;
-        mtvFinishTime =null;
+        mtvFinishTime = null;
         fjInquire = null;
         startDate = null;
         finishDate = null;

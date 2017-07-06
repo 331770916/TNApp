@@ -53,11 +53,8 @@
                     android:id="@+id/voteYes"
                     android:layout_width="match_parent"
                     android:layout_height="match_parent"
-                    android:background="@drawable/vote_textbg"
-                    android:clickable="true"
                     android:gravity="center"
                     android:text="@string/consent"
-                    android:textColor="@drawable/vote_textcolor"
                     android:textSize="@dimen/txtSize15" />
 
             </LinearLayout>
@@ -73,11 +70,8 @@
                     android:id="@+id/voteNo"
                     android:layout_width="match_parent"
                     android:layout_height="match_parent"
-                    android:background="@drawable/vote_textbg"
-                    android:clickable="true"
                     android:gravity="center"
                     android:text="反对"
-                    android:textColor="@drawable/vote_textcolor"
                     android:textSize="@dimen/txtSize15" />
 
             </LinearLayout>
@@ -93,11 +87,8 @@
                     android:id="@+id/voteAbstention"
                     android:layout_width="match_parent"
                     android:layout_height="match_parent"
-                    android:background="@drawable/vote_textbg"
-                    android:clickable="true"
                     android:gravity="center"
                     android:text="弃权"
-                    android:textColor="@drawable/vote_textcolor"
                     android:textSize="@dimen/txtSize15" />
 
             </LinearLayout>

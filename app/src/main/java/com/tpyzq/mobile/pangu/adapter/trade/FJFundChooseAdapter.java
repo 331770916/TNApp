@@ -9,6 +9,7 @@ import android.widget.ImageView;
 import android.widget.TextView;
 import com.tpyzq.mobile.pangu.R;
 import com.tpyzq.mobile.pangu.data.NetworkVotingEntity;
+import com.tpyzq.mobile.pangu.data.StockHolderInfoEntity;
 import com.tpyzq.mobile.pangu.data.StructuredFundEntity;
 
 import java.util.List;
@@ -21,7 +22,7 @@ import java.util.List;
 public class FJFundChooseAdapter extends BaseAdapter {
     private Context mContext;
     private List<StructuredFundEntity> mList_SFE;
-    private List<NetworkVotingEntity> mList_NFE;
+    private List<StockHolderInfoEntity> mList_NFE;
     private int mPoint;
     private int mTag;
 
@@ -36,7 +37,7 @@ public class FJFundChooseAdapter extends BaseAdapter {
                 this.mList_SFE = (List<StructuredFundEntity>) list;
                 break;
             case 1:
-                this.mList_NFE = (List<NetworkVotingEntity>) list;
+                this.mList_NFE = (List<StockHolderInfoEntity>) list;
                 break;
         }
 
@@ -95,7 +96,6 @@ public class FJFundChooseAdapter extends BaseAdapter {
             viewHolder.stockCode = (TextView) convertView.findViewById(R.id.tv_1);
             viewHolder.stockName = (TextView) convertView.findViewById(R.id.tv_2);
             viewHolder.ivDuiGou = (ImageView) convertView.findViewById(R.id.iv_3);
-
             switch (mTag){
                 case 0:
                     break;
@@ -107,27 +107,22 @@ public class FJFundChooseAdapter extends BaseAdapter {
         } else {
             viewHolder = (ViewHolder) convertView.getTag();
         }
-
         switch (mTag) {
             case 0:
                 viewHolder.stockCode.setText(mList_SFE.get(position).getStocken_code() + "");
                 viewHolder.stockName.setText(mList_SFE.get(position).getStoken_name() + "");
                 break;
             case 1:
-                viewHolder.stockCode.setText(mList_NFE.get(position).getStock_code());
-                viewHolder.stockName.setText(mList_NFE.get(position).getStock_name());
+                viewHolder.stockCode.setText(mList_NFE.get(position).getShareholderSCode());
+                viewHolder.stockName.setText(mList_NFE.get(position).getShareholderSName());
                 break;
         }
-
-
         if (mPoint == position) {
             viewHolder.ivDuiGou.setVisibility(View.VISIBLE);
             viewHolder.ivDuiGou.setImageResource(R.mipmap.duigou);
         } else {
             viewHolder.ivDuiGou.setVisibility(View.GONE);
         }
-
-
         return convertView;
     }
 

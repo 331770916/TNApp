@@ -276,7 +276,7 @@
     <!--item_vote_list.xml-->
     <style name="vote_layout_style">
         <item name="android:layout_width">match_parent</item>
-        <item name="android:layout_height">@dimen/size30</item>
+        <item name="android:layout_height">wrap_content</item>
         <item name="android:layout_marginLeft">@dimen/size12</item>
         <item name="android:layout_marginTop">@dimen/size10</item>
         <item name="android:orientation">horizontal</item>

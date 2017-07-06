@@ -32,17 +32,16 @@ import java.util.List;
  */
 
 public class VoteQueryActivity extends BaseActivity implements View.OnClickListener {
-    private VoteQueryPager  oneWeekPager, inAMonthPager, threeWeekPager, customPager;
-    private String[] buy_vp = new String[]{ "一周内", "一月内", "三月内", "自定义"};
+    private VoteQueryPager  todayPager,oneWeekPager, inAMonthPager, threeWeekPager, customPager;
+    private String[] buy_vp = new String[]{ "今日","一周内", "一月内", "三月内", "自定义"};
     private List<String> buy_vp_list = Arrays.asList(buy_vp);
     private List<BasePager> listBuy = new ArrayList<>();
-
     public static final int REQUSET = 2;
-    private int mPoint = -1;
-
     private TextView mShareholderCode_tv;
     private MagicIndicator magicIndicator;
     private ViewPager viewPager;
+    private String mMarket= "1";
+    private int mPostion;
 
     @Override
     public void initView() {
@@ -52,6 +51,7 @@ public class VoteQueryActivity extends BaseActivity implements View.OnClickListe
         viewPager = (ViewPager) findViewById(R.id.fj_view);
         magicIndicator.setOnClickListener(this);
         mShareholderCode_tv.setOnClickListener(this);
+        setIndicatorListen();
     }
 
     @Override
@@ -59,12 +59,6 @@ public class VoteQueryActivity extends BaseActivity implements View.OnClickListe
         return R.layout.activity_vote_query;
     }
 
-
-    @Override
-    protected void onStart() {
-        super.onStart();
-        setIndicatorListen();
-    }
 
     @Override
     public void onClick(View v) {
@@ -75,7 +69,6 @@ public class VoteQueryActivity extends BaseActivity implements View.OnClickListe
             case R.id.tvShareholderCode:
                 Intent intent =new Intent();
                 intent.setClass(this, FJFundChooseActivity.class);
-                intent.putExtra("point", mPoint);
                 intent.putExtra("tag",1);
                 startActivityForResult(intent, REQUSET);
                 break;
@@ -88,8 +81,11 @@ public class VoteQueryActivity extends BaseActivity implements View.OnClickListe
     protected void onActivityResult(int requestCode, int resultCode, Intent intent) {
         super.onActivityResult(requestCode, resultCode, intent);
         if (requestCode == REQUSET && resultCode == RESULT_OK) {
-            mPoint = intent.getIntExtra("point", -1);
+            mMarket = intent.getStringExtra("Market");
             mShareholderCode_tv.setText(intent.getStringExtra("Code"));
+            for (int i = 0;i<listBuy.size();i++)
+                ((VoteQueryPager) listBuy.get(i)).setmMarket(mMarket,mPostion);
+            viewPager.setCurrentItem(mPostion);
         }
     }
 
@@ -135,6 +131,8 @@ public class VoteQueryActivity extends BaseActivity implements View.OnClickListe
 
         magicIndicator.setNavigator(commonNavigator);
         ViewPagerHelper.bind(magicIndicator, viewPager);//TAG VoteQueryTodayPager...
+        todayPager = new VoteQueryPager(this,"VoteQueryTodayPager");
+        listBuy.add(todayPager);
         oneWeekPager = new VoteQueryPager(this, "VoteQueryOneWeekPager");
         listBuy.add(oneWeekPager);
         inAMonthPager = new VoteQueryPager(this, "VoteQueryInAMonthPager");
@@ -143,9 +141,8 @@ public class VoteQueryActivity extends BaseActivity implements View.OnClickListe
         listBuy.add(threeWeekPager);
         customPager = new VoteQueryPager(this, "VoteQueryCustomPager");
         listBuy.add(customPager);
-
         viewPager.setAdapter(new FJEntrustedDealAdapter(listBuy, 0));
-        oneWeekPager.initData();
+        todayPager.initData();
         viewPager.setOnPageChangeListener(new ViewPager.OnPageChangeListener() {
             @Override
             public void onPageScrolled(int position, float positionOffset, int positionOffsetPixels) {
@@ -153,6 +150,7 @@ public class VoteQueryActivity extends BaseActivity implements View.OnClickListe
 
             @Override
             public void onPageSelected(int position) {
+                mPostion=position;
                 listBuy.get(position).initData();
             }
 
@@ -165,6 +163,7 @@ public class VoteQueryActivity extends BaseActivity implements View.OnClickListe
 
     @Override
     public void destroy() {
+        todayPager.destroy();
         oneWeekPager.destroy();
         oneWeekPager = null;
         inAMonthPager.destroy();

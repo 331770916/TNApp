@@ -1,0 +1,167 @@
+<?xml version="1.0" encoding="utf-8"?>
+<LinearLayout xmlns:android="http://schemas.android.com/apk/res/android"
+    android:layout_width="match_parent"
+    android:layout_height="match_parent"
+    android:orientation="vertical">
+
+    <!--  ETF成分股查询   列表     详情 共用一个xml -->
+
+    <LinearLayout
+        android:id="@+id/ll_content"
+        android:layout_width="match_parent"
+        android:layout_height="@dimen/size53"
+        android:background="@color/white"
+        android:orientation="horizontal">
+
+        <TextView
+            android:id="@+id/tv_code"
+            android:layout_width="@dimen/size0"
+            android:layout_height="match_parent"
+            android:layout_weight="1"
+            android:gravity="center_vertical"
+            android:paddingLeft="@dimen/size20" />
+
+        <TextView
+            android:id="@+id/tv_name"
+            android:layout_width="@dimen/size0"
+            android:layout_height="match_parent"
+            android:layout_weight="1"
+            android:gravity="center" />
+
+        <TextView
+            android:id="@+id/tv_etf_code"
+            android:layout_width="@dimen/size0"
+            android:layout_height="match_parent"
+            android:layout_weight="1"
+            android:gravity="center|right"
+            android:paddingRight="@dimen/size20" />
+
+    </LinearLayout>
+
+    <LinearLayout
+        android:id="@+id/ll_isShow"
+        android:layout_width="match_parent"
+        android:layout_height="wrap_content"
+        android:layout_marginTop="@dimen/size5"
+        android:background="@color/dividerColor"
+        android:orientation="vertical">
+
+        <LinearLayout
+            android:layout_width="match_parent"
+            android:layout_height="wrap_content"
+            android:layout_marginTop="@dimen/size2"
+            android:orientation="horizontal">
+
+            <LinearLayout
+                android:layout_width="0dp"
+                android:layout_height="wrap_content"
+                android:layout_weight="1"
+                android:background="@color/backgroundColor"
+                android:orientation="horizontal"
+                android:padding="@dimen/size10">
+
+                <TextView
+                    android:layout_width="wrap_content"
+                    android:layout_height="wrap_content"
+                    android:paddingLeft="@dimen/size5"
+                    android:text="@string/etf_company_count"
+                    android:textColor="@color/text" />
+
+                <TextView
+                    android:id="@+id/tv1"
+                    android:text="00000"
+                    android:layout_width="wrap_content"
+                    android:layout_height="wrap_content"
+                    android:paddingLeft="@dimen/size10"
+                    android:textColor="@color/text" />
+            </LinearLayout>
+
+            <View
+                android:layout_width="@dimen/size1"
+                android:layout_height="0dp" />
+
+            <LinearLayout
+                android:layout_width="0dp"
+                android:layout_height="wrap_content"
+                android:layout_weight="1"
+                android:background="@color/backgroundColor"
+                android:padding="@dimen/size10">
+
+                <TextView
+                    android:layout_width="wrap_content"
+                    android:layout_height="wrap_content"
+                    android:layout_centerVertical="true"
+                    android:paddingLeft="@dimen/size5"
+                    android:text="@string/etf_ycbl"
+                    android:textColor="@color/text" />
+
+                <TextView
+                    android:id="@+id/tv2"
+                    android:text="00000"
+                    android:layout_width="wrap_content"
+                    android:layout_height="wrap_content"
+                    android:paddingLeft="@dimen/size10"
+                    android:textColor="@color/text" />
+            </LinearLayout>
+        </LinearLayout>
+
+
+        <LinearLayout
+            android:layout_width="match_parent"
+            android:layout_height="wrap_content"
+            android:layout_marginTop="@dimen/size2"
+            android:orientation="horizontal">
+
+            <LinearLayout
+                android:layout_width="0dp"
+                android:layout_height="wrap_content"
+                android:layout_weight="1"
+                android:background="@color/backgroundColor"
+                android:orientation="horizontal"
+                android:padding="@dimen/size10">
+
+                <TextView
+                    android:layout_width="wrap_content"
+                    android:layout_height="wrap_content"
+                    android:paddingLeft="@dimen/size5"
+                    android:text="@string/etf_tdbz"
+                    android:textColor="@color/text" />
+
+                <TextView
+                    android:text="00000"
+                    android:id="@+id/tv3"
+                    android:layout_width="wrap_content"
+                    android:layout_height="wrap_content"
+                    android:paddingLeft="@dimen/size10"
+                    android:textColor="@color/text" />
+            </LinearLayout>
+
+            <View
+                android:layout_width="@dimen/size5"
+                android:layout_height="0dp" />
+
+        </LinearLayout>
+
+        <LinearLayout
+            android:layout_width="match_parent"
+            android:layout_height="wrap_content"
+            android:layout_marginTop="@dimen/size2"
+            android:orientation="horizontal">
+
+
+        </LinearLayout>
+
+        <ImageView
+            android:id="@+id/iv_top"
+            android:layout_width="match_parent"
+            android:layout_height="@dimen/size40"
+            android:gravity="center"
+            android:scaleType="center"
+            android:src="@mipmap/zhankai" />
+
+    </LinearLayout>
+
+
+
+
+</LinearLayout>

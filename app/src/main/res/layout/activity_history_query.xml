@@ -4,6 +4,7 @@
     android:layout_height="match_parent"
     android:orientation="vertical">
 
+    <!--  ETF申赎历史查询   -->
     <RelativeLayout
         android:id="@+id/rl_top_bar"
         android:layout_width="match_parent"
@@ -12,41 +13,40 @@
         android:clipToPadding="true"
         android:fitsSystemWindows="true" />
 
-
     <RelativeLayout
         android:layout_width="match_parent"
         android:layout_height="@dimen/pickerview_topbar_height"
+        android:layout_below="@+id/AGRelativeLayout"
         android:background="@color/blue">
 
         <ImageView
-            android:id="@+id/ivCNFund_back"
+            android:id="@+id/iv_back"
             android:layout_width="wrap_content"
             android:layout_height="match_parent"
             android:layout_alignParentLeft="true"
-            android:paddingLeft="@dimen/size20"
-            android:paddingRight="@dimen/size20"
+            android:padding="@dimen/size10"
             android:src="@mipmap/back_btn" />
 
         <TextView
-            android:id="@+id/fj_title"
             android:layout_width="wrap_content"
             android:layout_height="wrap_content"
             android:layout_centerInParent="true"
+            android:text="@string/etf_history_query"
             android:textColor="@color/white"
             android:textSize="@dimen/pickerview_topbar_title_textsize" />
     </RelativeLayout>
 
+
     <com.tpyzq.mobile.pangu.view.magicindicator.MagicIndicator
-        android:id="@+id/capital_buy"
         android:layout_width="match_parent"
         android:layout_height="@dimen/size40"
         android:background="@color/white" />
 
     <android.support.v4.view.ViewPager
-        android:id="@+id/fj_view"
         android:layout_width="match_parent"
         android:layout_height="0dp"
         android:layout_weight="5"
         android:background="@color/backgroundColor" />
+
 
 </LinearLayout>

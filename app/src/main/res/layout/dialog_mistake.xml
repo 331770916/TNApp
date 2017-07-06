@@ -21,6 +21,8 @@
         android:layout_weight="1"
         android:gravity="center"
         android:text="sdfasf"
+        android:layout_marginLeft="@dimen/size10"
+        android:layout_marginRight="@dimen/size10"
         android:textColor="@color/black"
         android:layout_marginBottom="@dimen/size10"
         android:layout_gravity="center"/>

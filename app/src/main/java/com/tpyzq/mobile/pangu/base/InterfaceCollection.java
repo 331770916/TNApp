@@ -5,10 +5,12 @@ import android.text.TextUtils;
 import com.google.gson.Gson;
 import com.google.gson.reflect.TypeToken;
 import com.tpyzq.mobile.pangu.data.AssessConfirmEntity;
+import com.tpyzq.mobile.pangu.data.EtfDataEntity;
 import com.tpyzq.mobile.pangu.data.NetworkVotingEntity;
 import com.tpyzq.mobile.pangu.data.OTC_AffirmBean;
 import com.tpyzq.mobile.pangu.data.OTC_SubscriptionCommitBean;
 import com.tpyzq.mobile.pangu.data.ResultInfo;
+import com.tpyzq.mobile.pangu.data.StockHolderInfoEntity;
 import com.tpyzq.mobile.pangu.data.StructuredFundEntity;
 import com.tpyzq.mobile.pangu.http.NetWorkUtil;
 import com.tpyzq.mobile.pangu.util.ConstantUtil;
@@ -459,18 +461,6 @@ public class InterfaceCollection {
                             for (int i = 0; i < data.length(); i++) {
                                 StructuredFundEntity bean = new StructuredFundEntity();
                                 JSONObject obj = data.getJSONObject(i);
-//                                bean.setStoken_name(obj.getString("STOCK_NAME"));
-//                                bean.setStocken_code(obj.getString("STOCK_CODE"));
-//                                bean.setBusiness_name(obj.getString("BUSINESS_NAME"));
-//                                bean.setReport_time(obj.getString("REPORT_TIME"));
-//                                bean.setEntrust_amount(obj.getString("ENTRUST_AMOUNT"));
-//                                bean.setStock_account(obj.getString("STOCK_ACCOUNT"));
-//                                bean.setPosition_str(obj.getString("POSITION_STR"));
-//                                bean.setCurr_date(obj.getString("CURR_DATE"));
-//                                bean.setEntrust_no(obj.getString("ENTRUST_NO"));
-//                                bean.setEntrust_status(obj.getString("ENTRUST_STATUS"));
-//                                bean.setEntrust_balance(obj.getString("ENTRUST_BALANCE"));
-//                                bean.setEntrust_amount(obj.getString("BUSINESS_AMOUNT"));
                                 bean.setInit_date(obj.getString("INIT_DATE"));
                                 bean.setEntrust_no(obj.getString("ENTRUST_NO"));
                                 ses.add(bean);
@@ -782,6 +772,8 @@ public class InterfaceCollection {
                             for (int i = 0; i < data.length(); i++) {
                                 NetworkVotingEntity bean = new NetworkVotingEntity();
                                 JSONObject obj = data.getJSONObject(i);
+                                bean.setStock_account(obj.getString("STOCK_ACCOUNT"));
+                                bean.setExchange_type(obj.getString("EXCHANGE_TYPE"));
                                 bean.setMeeting_name(obj.getString("MEETING_NAME"));
                                 bean.setMeeting_seq(obj.getString("MEETING_SEQ"));
                                 bean.setCompany_name(obj.getString("COMPANY_NAME"));
@@ -848,20 +840,11 @@ public class InterfaceCollection {
                         info.setMsg(msg);
                         info.setTag(TAG);
                         if("0".equals(code)){
-                            List<NetworkVotingEntity> ses = new ArrayList<>();
+                            Map<String,List<NetworkVotingEntity>> map = new HashMap<>();
                             JSONArray data = jsonObject.getJSONArray("data");
-                            for (int i = 0; i < data.length(); i++) {
-                                NetworkVotingEntity bean = new NetworkVotingEntity();
-                                JSONObject obj = data.getJSONObject(i);
-                                bean.setInit_date(obj.getString("INIT_DATE"));
-                                bean.setVote_motion(obj.getString("VOTE_MOTION"));
-                                bean.setVote_info(obj.getString("VOTE_INFO"));
-                                bean.setVote_type(obj.getString("VOTE_TYPE"));
-                                bean.setVote_numcontrol(obj.getString("VOTE_NUMCONTROL"));
-                                bean.setMeeting_seq(obj.getString("MEETING_SEQ"));
-                                ses.add(bean);
-                            }
-                            info.setData(ses);
+                            map.put("0",parseJSONArray(data.getJSONArray(0)));
+                            map.put("1",parseJSONArray(data.getJSONArray(1)));
+                            info.setData(map);
                         }
                     } catch (JSONException e) {
                         info.setCode("-2");
@@ -875,17 +858,44 @@ public class InterfaceCollection {
     }
 
     /**
+     * 解析json数据
+     * @param array json数组
+     * @return List<NetworkVotingEntity>
+     * @throws JSONException
+     */
+    private List<NetworkVotingEntity> parseJSONArray(JSONArray array) throws JSONException{
+        List<NetworkVotingEntity> ses = new ArrayList<>();
+        NetworkVotingEntity bean;
+        for (int i = 0; i < array.length(); i++) {
+            JSONObject obj = array.getJSONObject(i);
+            String vt = obj.getString("VOTE_TYPE");
+            bean = new NetworkVotingEntity();
+            bean.setInit_date(obj.getString("INIT_DATE"));
+            bean.setVote_motion(obj.getString("VOTE_MOTION"));
+            bean.setVote_info(obj.getString("VOTE_INFO"));
+            bean.setVote_type(vt);
+            String list = obj.optString("LIST");
+            if(vt.equals("1")&&!TextUtils.isEmpty(list)){
+               JSONArray arr = new JSONArray(list);
+               bean.setList(parseJSONArray(arr));
+            }
+            bean.setEntrust_amount(obj.getString("VOTE_NUMCONTROL"));
+            bean.setMeeting_seq(obj.getString("MEETING_SEQ"));
+            ses.add(bean);
+        }
+        return ses;
+    }
+
+
+    /**
      * 300803
      * 提交投票
      * @param session token
-     * @param stock_code  股票代码
-     * @param entrust_amount  数量
-     * @param entrust_price 投票议案（序号）
-     * @param meeting_seq 股东大会编码
+     * @param list  投票实体列表
      * @param TAG tag
      * @param callback callback
      */
-    public void submitVoting(String session,String stock_code,String entrust_amount,String entrust_price,String meeting_seq,final String TAG,final InterfaceCallback callback){
+    public void submitVoting(String session,String stock_code,String exchage_type,String meeting_seq,List<NetworkVotingEntity> list,final String TAG,final InterfaceCallback callback){
         Map map1 = new HashMap<>();
         map1.put("funcid","300803");
         map1.put("token",session);
@@ -893,9 +903,17 @@ public class InterfaceCollection {
         map2.put("SEC_ID", "tpyzq");
         map2.put("FLAG", "true");
         map2.put("STOCK_CODE",stock_code);
-        map2.put("entrust_amount",entrust_amount);
-        map2.put("entrust_price",entrust_price);
-        map2.put("meeting_seq",meeting_seq);
+        map2.put("EXCHANGE_TYPE",exchage_type);
+        map2.put("MEETING_SEQ",stock_code);
+        List data = new ArrayList();
+        for (NetworkVotingEntity entity:list) {
+            Map map = new HashMap<>();
+            map.put("ENTRUST_AMOUNT",entity.getEntrust_amount());
+            map.put("ENTRUST_PRICE",entity.getVote_motion());
+            map.put("MEETING_SEQ",entity.getMeeting_seq());
+            data.add(map);
+        }
+        map2.put("LIST",data);
         map1.put("parms",map2);
         net.okHttpForPostString(TAG, ConstantUtil.URL_JY, map1, new StringCallback() {
             @Override
@@ -910,11 +928,11 @@ public class InterfaceCollection {
             @Override
             public void onResponse(String response, int id) {
                 ResultInfo info = new ResultInfo();
-                if(TextUtils.isEmpty(response)){
+                if (TextUtils.isEmpty(response)) {
                     info.setCode("-3");
                     info.setMsg(ConstantUtil.SERVICE_NO_DATA);
                     info.setTag(TAG);
-                }else{
+                } else {
                     try {
                         JSONObject jsonObject = new JSONObject(response);
                         String code = jsonObject.getString("code");
@@ -936,24 +954,101 @@ public class InterfaceCollection {
     /**
      * 300804
      * 历史网络投票结果查询
+     *
+     * @param session    token
+     * @param begin_date 起始日期
+     * @param end_date   到期日期
+     * @param TAG        tag
+     * @param callback   callback
+     */
+    public void queryHistoryNetworkVoting(String session, String his_type, String exchange_type,String position_str, String request_num, String begin_date, String end_date, final String TAG, final InterfaceCallback callback) {
+        Map map1 = new HashMap<>();
+        map1.put("funcid", "300804");
+        map1.put("token", session);
+        Map map2 = new HashMap<>();
+        map2.put("SEC_ID", "tpyzq");
+        map2.put("FLAG", "true");
+        map2.put("HIS_TYPE", his_type);
+        map2.put("POSITION_STR", position_str);
+        map2.put("REQUEST_NUM", request_num);
+        map2.put("EXCHANGE_TYPE",exchange_type);
+        map2.put("BEGIN_DATE", begin_date);
+        map2.put("END_DATE", end_date);
+        map1.put("parms", map2);
+        net.okHttpForPostString(TAG, ConstantUtil.URL_JY, map1, new StringCallback() {
+            @Override
+            public void onError(Call call, Exception e, int id) {
+                ResultInfo info = new ResultInfo();
+                info.setCode("-1");
+                info.setMsg(ConstantUtil.NETWORK_ERROR);
+                info.setTag(TAG);
+                callback.callResult(info);
+            }
+
+            @Override
+            public void onResponse(String response, int id) {
+                ResultInfo info = new ResultInfo();
+                if (TextUtils.isEmpty(response)) {
+                    info.setCode("-3");
+                    info.setMsg(ConstantUtil.SERVICE_NO_DATA);
+                    info.setTag(TAG);
+                } else {
+                    try {
+                        JSONObject jsonObject = new JSONObject(response);
+                        String code = jsonObject.getString("code");
+                        String msg = jsonObject.getString("msg");
+                        info.setCode(code);
+                        info.setMsg(msg);
+                        info.setTag(TAG);
+                        if ("0".equals(code)) {
+                            List<NetworkVotingEntity> ses = new ArrayList<>();
+                            JSONArray data = jsonObject.getJSONArray("data");
+                            for (int i = 0; i < data.length(); i++) {
+                                NetworkVotingEntity bean = new NetworkVotingEntity();
+                                JSONObject obj = data.getJSONObject(i);
+                                bean.setStock_code(obj.getString("STOCK_CODE"));
+                                bean.setBusiness_amount(obj.getString("BUSINESS_AMOUNT"));
+                                bean.setStatus(obj.getString("ENTRUST_STATUS"));
+                                bean.setStock_name(obj.getString("STOCK_NAME"));
+                                bean.setMeeting_seq(obj.getString("MEETING_SEQ"));
+                                bean.setInit_date(obj.getString("INIT_DATE"));
+                                bean.setEntrust_no(obj.getString("ENTRUST_NO"));
+                                bean.setVote_motion(obj.getString("VOTE_MOTION"));
+                                ses.add(bean);
+                            }
+                            info.setData(ses);
+                        }
+                    } catch (JSONException e) {
+                        info.setCode("-2");
+                        info.setMsg(ConstantUtil.JSON_ERROR);
+                        info.setTag(TAG);
+                    }
+                }
+                callback.callResult(info);
+            }
+        });
+    }
+
+    /**
+     * 300805
+     * 当日网络投票结果信息查询
      * @param session token
-     * @param begin_date  起始日期
-     * @param end_date 到期日期
+     * @param exchange_type 市场 1 上海 2深圳
+     * @param page 页码
+     * @param num 数量
      * @param TAG tag
      * @param callback callback
      */
-    public void queryHistoryNetworkVoting(String session,String his_type ,String position_str,String request_num,String begin_date,String end_date,final String TAG,final InterfaceCallback callback){
+    public void queryTodayVoting(String session,String exchange_type,String page,String num,final String TAG, final InterfaceCallback callback){
         Map map1 = new HashMap<>();
-        map1.put("funcid","300804");
+        map1.put("funcid","300805");
         map1.put("token",session);
         Map map2 = new HashMap<>();
         map2.put("SEC_ID", "tpyzq");
         map2.put("FLAG", "true");
-        map2.put("HIS_TYPE",his_type);
-        map2.put("POSITION_STR",position_str);
-        map2.put("REQUEST_NUM",request_num);
-        map2.put("BEGIN_DATE",begin_date);
-        map2.put("END_DATE",end_date);
+        map2.put("POSITION_STR",page);
+        map2.put("REQUEST_NUM",num);
+        map2.put("EXCHANGE_TYPE",exchange_type);
         map1.put("parms",map2);
         net.okHttpForPostString(TAG, ConstantUtil.URL_JY, map1, new StringCallback() {
             @Override
@@ -986,13 +1081,15 @@ public class InterfaceCollection {
                             for (int i = 0; i < data.length(); i++) {
                                 NetworkVotingEntity bean = new NetworkVotingEntity();
                                 JSONObject obj = data.getJSONObject(i);
-                                bean.setInit_date(obj.getString("INIT_DATE"));
                                 bean.setMeeting_seq(obj.getString("MEETING_SEQ"));
                                 bean.setStock_code(obj.getString("STOCK_CODE"));
-                                bean.setVote_motion(obj.getString("VOTE_MOTION"));
-                                bean.setBusiness_amount(obj.getString("BUSINESS_AMOUNT"));
+                                bean.setVote_motion(obj.getString("ENTRUST_PRICE"));
+                                bean.setStatus(obj.getString("ENTRUST_STATUS"));
+                                bean.setInit_date(obj.getString("ENTRUST_DATE"));
                                 bean.setStock_name(obj.getString("STOCK_NAME"));
-                                bean.setStatus(obj.getString("STATUS"));
+                                bean.setEntrust_amount(obj.getString("ENTRUST_AMOUNT"));
+                                bean.setPosition_str(obj.getString("POSITION_STR"));
+                                bean.setEntrust_no(obj.getString("ENTRUST_NO"));
                                 ses.add(bean);
                             }
                             info.setData(ses);
@@ -1007,6 +1104,72 @@ public class InterfaceCollection {
             }
         });
     }
+
+    /**
+     * 700070
+     * 查询股东资料
+     * @param mSession token
+     * @param TAG tag
+     * @param callback callback
+     */
+    public void queryStockInfo(String mSession,final String TAG, final InterfaceCallback callback){
+        HashMap map = new HashMap();
+        HashMap map1 = new HashMap();
+        map.put("funcid", "700070");
+        map.put("token", mSession);
+        map.put("parms", map1);
+        map1.put("SEC_ID", "tpyzq");
+        map1.put("FLAG", "true");
+        net.okHttpForPostString(TAG, ConstantUtil.URL_JY, map, new StringCallback() {
+            @Override
+            public void onError(Call call, Exception e, int i) {
+                ResultInfo info = new ResultInfo();
+                info.setCode("-1");
+                info.setMsg(ConstantUtil.NETWORK_ERROR);
+                info.setTag(TAG);
+                callback.callResult(info);
+            }
+
+            @Override
+            public void onResponse(String response, int id) {
+                ResultInfo info = new ResultInfo();
+                if(TextUtils.isEmpty(response)){
+                    info.setCode("-3");
+                    info.setMsg(ConstantUtil.SERVICE_NO_DATA);
+                    info.setTag(TAG);
+                }else{
+                    try {
+                        JSONObject jsonObject = new JSONObject(response);
+                        String code = jsonObject.getString("code");
+                        String msg = jsonObject.getString("msg");
+                        info.setCode(code);
+                        info.setMsg(msg);
+                        info.setTag(TAG);
+                        if("0".equals(code)){
+                            List<StockHolderInfoEntity> ses = new ArrayList<>();
+                            JSONArray data = jsonObject.getJSONArray("data");
+                            for (int i = 0; i < data.length(); i++) {
+                                StockHolderInfoEntity _bean = new StockHolderInfoEntity();
+                                JSONObject obj = data.getJSONObject(i);
+                                _bean.setCustomerCode(obj.getString("FUND_ACCOUNT"));    // 资金账号
+                                _bean.setAccountType(obj.getString("MARKET"));        //市场
+                                _bean.setShareholderSName(obj.getString("SECU_NAME"));//股票名称
+                                _bean.setShareholderSCode(obj.getString("SECU_CODE"));//股票代码
+                                ses.add(_bean);
+                            }
+                            info.setData(ses);
+                        }
+                    } catch (JSONException e) {
+                        info.setCode("-2");
+                        info.setMsg(ConstantUtil.JSON_ERROR);
+                        info.setTag(TAG);
+                    }
+                }
+                callback.callResult(info);
+            }
+        });
+    }
+
     /**
      * 331261
      * 产品适当性交易匹配查询
@@ -1273,24 +1436,551 @@ public class InterfaceCollection {
         });
     }
 
+    /**
+     * ETF认购申购赎回信息查询
+     * 300720
+     *
+     * @param token      token
+     * @param stock_code 证券代码
+     * @param TAG        tag
+     * @param callback   callBack
+     */
+    public void queryApplyfor(String token, String stock_code, final String TAG, final InterfaceCallback callback) {
+        Map map1 = new HashMap<>();
+        map1.put("funcid", "300720");
+        map1.put("token", token);
+        Map map2 = new HashMap<>();
+        map2.put("STOCK_CODE", stock_code);
+        map2.put("SEC_ID", "tpyzq");
+        map2.put("FLAG", "true");
+        map1.put("parms", map2);
+        net.okHttpForPostString(TAG, ConstantUtil.URL_JY, map1, new StringCallback() {
+            @Override
+            public void onError(Call call, Exception e, int id) {
+                ResultInfo info = new ResultInfo();
+                info.setCode("-1");
+                info.setMsg(e.getMessage());
+                callback.callResult(info);
+            }
 
-    public void getData(int size,final InterfaceCallback callback){
-        ResultInfo info = new ResultInfo();
-        info.setCode("0");
-        List<NetworkVotingEntity> ses = new ArrayList<>();
-        NetworkVotingEntity entity;
-        for (int i = 0; i < size; i++) {
-            entity = new NetworkVotingEntity();
-            entity.setMeeting_seq("证券分级");
-            entity.setStock_code("000888");
-            entity.setStatus("分级基金合并");
-            entity.setBusiness_amount("已报");
-            entity.setStock_name("分级基金合并");
-            entity.setInit_date("2017-09-18");
-            entity.setBusiness_amount("10000");
-            ses.add(entity);
-        }
-        info.setData(ses);
-        callback.callResult(info);
+            @Override
+            public void onResponse(String response, int id) {
+                ResultInfo info = new ResultInfo();
+                if (TextUtils.isEmpty(response)) {
+                    info.setCode("-3");
+                    info.setMsg(ConstantUtil.SERVICE_NO_DATA);
+                    info.setTag(TAG);
+                } else {
+                    try {
+                        JSONObject jsonObject = new JSONObject(response);
+                        String code = jsonObject.getString("code");
+                        String msg = jsonObject.getString("msg");
+                        info.setCode(code);
+                        info.setMsg(msg);
+                        info.setTag(TAG);
+                        if ("0".equals(code)) {
+                            List<EtfDataEntity> ses = new ArrayList<>();
+                            JSONArray data = jsonObject.getJSONArray("data");
+                            for (int i = 0; i < data.length(); i++) {
+                                EtfDataEntity bean = new EtfDataEntity();
+                                JSONObject obj = data.getJSONObject(i);
+                                bean.setExchange_type(obj.getString("EXCHANGE_TYPE"));
+                                bean.setStock_code(obj.getString("STOCK_CODE"));
+                                bean.setStock_name(obj.getString("STOCK_NAME"));
+                                bean.setStock_account(obj.getString("STOCK_ACCOUNT"));
+                                bean.setEnable_balance(obj.getString("ENABLE_BALANCE"));
+                                bean.setStock_max(obj.getString("STOCK_MAX"));
+                                bean.setCash_max(obj.getString("CASH_MAX"));
+                                bean.setAllot_max(obj.getString("ALLOT_MAX"));
+                                bean.setRedeem_max(obj.getString("REDEEM_MAX"));
+                                ses.add(bean);
+                            }
+                            info.setData(ses);
+                        }
+                    } catch (JSONException e) {
+                        info.setCode("-2");
+                        info.setMsg(ConstantUtil.JSON_ERROR);
+                        info.setTag(TAG);
+                    }
+                }
+                callback.callResult(info);
+            }
+        });
     }
+
+    /**
+     * 300734   300736    共用一个接口
+     * ETF申购	确认     ETF赎回
+     *
+     * @param token          token
+     * @param exchange_type  交易类别
+     * @param stock_code     证券代码
+     * @param entrust_amount 委托数量
+     * @param TAG            tag
+     * @param callback       callback
+     */
+    public void applyforDetermine(String funcid ,String token, String exchange_type, String stock_code,
+                                  String entrust_amount, final String TAG, final InterfaceCallback callback) {
+        Map map1 = new HashMap<>();
+        map1.put("funcid", funcid);
+        map1.put("token", token);
+        Map map2 = new HashMap<>();
+        map2.put("SEC_ID", "tpyzq");
+        map2.put("FLAG", "true");
+        map2.put("EXCHANGE_TYPE", exchange_type);
+        map2.put("STOCK_CODE", stock_code);
+        map2.put("ENTRUST_AMOUNT", entrust_amount);
+        map1.put("parms", map2);
+        net.okHttpForPostString(TAG, ConstantUtil.URL_JY, map1, new StringCallback() {
+            @Override
+            public void onError(Call call, Exception e, int id) {
+                ResultInfo info = new ResultInfo();
+                info.setCode("-1");
+                info.setMsg(e.getMessage());
+            }
+
+            @Override
+            public void onResponse(String response, int id) {
+                ResultInfo info = new ResultInfo();
+                if (TextUtils.isEmpty(response)) {
+                    info.setCode("-3");
+                    info.setMsg(ConstantUtil.SERVICE_NO_DATA);
+                    info.setTag(TAG);
+                } else {
+                    try {
+                        JSONObject jsonObject = new JSONObject(response);
+                        String code = jsonObject.getString("code");
+                        String msg = jsonObject.getString("msg");
+                        info.setCode(code);
+                        info.setMsg(msg);
+                        info.setTag(TAG);
+                        if ("0".equals(code)) {
+                            List<EtfDataEntity> ses = new ArrayList<>();
+                            JSONArray data = jsonObject.getJSONArray("data");
+                            for (int i = 0; i < data.length(); i++) {
+                                EtfDataEntity bean = new EtfDataEntity();
+                                JSONObject obj = data.getJSONObject(i);
+                                bean.setInit_date(obj.getString("INIT_DATE"));
+                                bean.setEntrust_no(obj.getString("ENTRUST_NO"));
+                                ses.add(bean);
+                            }
+                            info.setData(ses);
+                        }
+
+                    } catch (JSONException e) {
+                        info.setCode("-2");
+                        info.setMsg(ConstantUtil.JSON_ERROR);
+                        info.setTag(TAG);
+                    }
+                }
+                callback.callResult(info);
+            }
+        });
+    }
+
+    /**
+     * 300738
+     * ETF申赎委托查询  查询可撤委托   和全部
+     *
+     * @param token        token
+     * @param query_kind   查询控制值   0-查询全部委托；1-查询可撤委托;   0  今日查询传入0
+     * @param position_str 定位串   可不传值
+     * @param request_num  请求行数
+     * @param TAG          tag
+     * @param callback     callback
+     */
+    public void queryEntrust(String token, String query_kind, String position_str,
+                             String request_num, final String TAG, final InterfaceCallback callback) {
+        Map map1 = new HashMap<>();
+        map1.put("funcid", "300738");
+        map1.put("token", token);
+        Map map2 = new HashMap<>();
+        map2.put("SEC_ID", "tpyzq");
+        map2.put("FLAG", "true");
+        map2.put("QUERY_KIND", query_kind);
+        map2.put("POSITION_STR", position_str);
+        map2.put("REQUEST_NUM", request_num);
+        map1.put("parms", map2);
+
+        net.okHttpForPostString(TAG, ConstantUtil.URL_JY, map1, new StringCallback() {
+            @Override
+            public void onError(Call call, Exception e, int id) {
+                ResultInfo info = new ResultInfo();
+                info.setCode("-1");
+                info.setMsg(ConstantUtil.NETWORK_ERROR);
+                info.setTag(TAG);
+                callback.callResult(info);
+            }
+
+            @Override
+            public void onResponse(String response, int id) {
+                ResultInfo info = new ResultInfo();
+                if (TextUtils.isEmpty(response)) {
+                    info.setCode("-3");
+                    info.setMsg(ConstantUtil.SERVICE_NO_DATA);
+                    info.setTag(TAG);
+                } else {
+                    try {
+                        JSONObject jsonObject = new JSONObject(response);
+                        String code = jsonObject.getString("code");
+                        String msg = jsonObject.getString("msg");
+                        info.setCode(code);
+                        info.setMsg(msg);
+                        info.setTag(TAG);
+                        if ("0".equals(code)) {
+                            List<EtfDataEntity> ses = new ArrayList<>();
+                            JSONArray data = jsonObject.getJSONArray("data");
+                            for (int i = 0; i < data.length(); i++) {
+                                EtfDataEntity bean = new EtfDataEntity();
+                                JSONObject obj = data.getJSONObject(i);
+                                bean.setInit_date(obj.getString("INIT_DATE"));
+                                bean.setCurr_time(obj.getString("CURR_TIME"));
+                                bean.setStock_code(obj.getString("STOCK_CODE"));
+                                bean.setStock_name(obj.getString("STOCK_NAME"));
+                                bean.setStock_account(obj.getString("STOCK_ACCOUNT"));
+                                bean.setPrev_balance(obj.getString("PREV_BALANCE"));
+                                bean.setEntrust_bs(obj.getString("ENTRUST_BS"));
+                                bean.setEntrust_no(obj.getString("ENTRUST_NO"));
+                                bean.setEnable_balance(obj.getString("ENTRUST_BALANCE"));
+                                bean.setEntrust_amount(obj.getString("ENTRUST_AMOUNT"));
+                                bean.setEntrust_prop(obj.getString("ENTRUST_PROP"));
+                                bean.setEntrust_status(obj.getString("ENTRUST_STATUS"));
+                                bean.setPosition_str(obj.getString("POSITION_STR"));
+                                bean.setEntrust_status_name(obj.getString("ENTRUST_STATUS_NAME"));
+                                bean.setExchange_type_name(obj.getString("EXCHANGE_TYPE_NAME"));
+                                ses.add(bean);
+                            }
+                            info.setData(ses);
+                        }
+                    } catch (JSONException e) {
+                        info.setCode("-2");
+                        info.setMsg(ConstantUtil.JSON_ERROR);
+                        info.setTag(TAG);
+                    }
+                }
+                callback.callResult(info);
+
+
+            }
+        });
+    }
+
+    /**
+     * 300740
+     * ETF申赎撤单
+     *
+     * @param token         token
+     * @param exchange_type 交易类别
+     * @param entrust_no    委托编号
+     * @param stock_code    证券代码
+     * @param TAG           tag
+     * @param callback      callback
+     */
+    public void revokeOrder(String token, String exchange_type, String entrust_no,
+                            String stock_code, final String TAG, final InterfaceCallback callback) {
+        Map map1 = new HashMap<>();
+        map1.put("funcid", "300740");
+        map1.put("token", token);
+        Map map2 = new HashMap<>();
+        map2.put("SEC_ID", "tpyzq");
+        map2.put("FLAG", "true");
+        map2.put("EXCHANGE_TYPE", exchange_type);
+        map2.put("ENTRUST_NO", entrust_no);
+        map2.put("STOCK_CODE", stock_code);
+        map1.put("parms", map2);
+
+        net.okHttpForPostString(TAG, ConstantUtil.URL_JY, map1, new StringCallback() {
+            @Override
+            public void onError(Call call, Exception e, int id) {
+                ResultInfo info = new ResultInfo();
+                info.setCode("-1");
+                info.setMsg(ConstantUtil.NETWORK_ERROR);
+                info.setTag(TAG);
+                callback.callResult(info);
+            }
+
+            @Override
+            public void onResponse(String response, int id) {
+                ResultInfo info = new ResultInfo();
+                if (TextUtils.isEmpty(response)) {
+                    info.setCode("-3");
+                    info.setMsg(ConstantUtil.SERVICE_NO_DATA);
+                    info.setTag(TAG);
+                } else {
+                    try {
+                        JSONObject jsonObject = new JSONObject(response);
+                        String code = jsonObject.getString("code");
+                        String msg = jsonObject.getString("msg");
+                        info.setCode(code);
+                        info.setMsg(msg);
+                        info.setTag(TAG);
+                        if ("0".equals(code)) {
+                            List<EtfDataEntity> ses = new ArrayList<>();
+                            JSONArray data = jsonObject.getJSONArray("data");
+                            for (int i = 0; i < data.length(); i++) {
+                                EtfDataEntity bean = new EtfDataEntity();
+                                JSONObject obj = data.getJSONObject(i);
+                                bean.setInit_date(obj.getString("INIT_DATE"));
+                                bean.setEntrust_no(obj.getString("ENTRUST_NO"));
+                                ses.add(bean);
+                            }
+                            info.setData(ses);
+                        }
+
+                    } catch (JSONException e) {
+                        info.setCode("-2");
+                        info.setMsg(ConstantUtil.JSON_ERROR);
+                        info.setTag(TAG);
+                    }
+                }
+                callback.callResult(info);
+            }
+        });
+    }
+
+    /**
+     * 300748
+     * ETF申赎历史查询
+     *
+     * @param token        token
+     * @param begin_date   起始日期 N
+     * @param end_date     到期日期 N
+     * @param his_type     历史类型 0:自定义  1：一周内   2：一个月内 3：三个月内   Y
+     * @param position_str 定位串 N
+     * @param request_num  请求行数 Y
+     * @param TAG          tag
+     * @param callback     callback
+     */
+    public void queryHistory(String token, String begin_date, String end_date, String his_type,
+                             String position_str, String request_num, final String TAG, final InterfaceCallback callback) {
+        Map map1 = new HashMap<>();
+        map1.put("funcid", "300748");
+        map1.put("token", token);
+        Map map2 = new HashMap<>();
+        map2.put("SEC_ID", "tpyzq");
+        map2.put("FLAG", "true");
+        map2.put("BEGIN_DATE", begin_date);
+        map2.put("END_DATE", end_date);
+        map2.put("HIS_TYPE", his_type);
+        map2.put("POSITION_STR", position_str);
+        map2.put("REQUEST_NUM", request_num);
+        map1.put("parms", map2);
+        net.okHttpForPostString(TAG, ConstantUtil.URL_JY, map1, new StringCallback() {
+            @Override
+            public void onError(Call call, Exception e, int id) {
+                ResultInfo info = new ResultInfo();
+                info.setCode("-1");
+                info.setMsg(ConstantUtil.NETWORK_ERROR);
+                info.setTag(TAG);
+                callback.callResult(info);
+            }
+
+            @Override
+            public void onResponse(String response, int id) {
+                ResultInfo info = new ResultInfo();
+                if (TextUtils.isEmpty(response)) {
+                    info.setCode("-3");
+                    info.setMsg(ConstantUtil.SERVICE_NO_DATA);
+                    info.setTag(TAG);
+                } else {
+                    try {
+                        JSONObject jsonObject = new JSONObject(response);
+                        String code = jsonObject.getString("code");
+                        String msg = jsonObject.getString("msg");
+                        info.setCode(code);
+                        info.setMsg(msg);
+                        info.setTag(TAG);
+                        if ("0".equals(code)) {
+                            List<EtfDataEntity> ses = new ArrayList<>();
+                            JSONArray data = jsonObject.getJSONArray("data");
+                            for (int i = 0; i < data.length(); i++) {
+                                EtfDataEntity bean = new EtfDataEntity();
+                                JSONObject obj = data.getJSONObject(i);
+                                bean.setInit_date(obj.getString("INIT_DATE"));
+                                bean.setEntrust_no(obj.getString("ENTRUST_NO"));
+                                bean.setStock_name(obj.getString("STOCK_NAME"));
+                                bean.setStock_code(obj.getString("STOCK_CODE"));
+                                bean.setEntrust_amount(obj.getString("ENTRUST_AMOUNT"));
+                                bean.setEntrust_status(obj.getString("ENTRUST_STATUS"));
+                                bean.setReport_time(obj.getString("REPORT_TIME"));
+                                bean.setEntrust_status_name(obj.getString("ENTRUST_STATUS_NAME"));
+                                bean.setPrev_balance(obj.getString("PREV_BALANCE"));
+                                bean.setEntrust_bs(obj.getString("ENTRUST_BS"));
+                                bean.setEntrust_price(obj.getString("ENTRUST_PRICE"));
+                                bean.setStock_account(obj.getString("STOCK_ACCOUNT"));
+                                ses.add(bean);
+                            }
+                            info.setData(ses);
+                        }
+
+                    } catch (JSONException e) {
+                        info.setCode("-2");
+                        info.setMsg(ConstantUtil.JSON_ERROR);
+                        info.setTag(TAG);
+                    }
+                }
+                callback.callResult(info);
+            }
+        });
+    }
+
+    /**
+     * 300746
+     * ETF申赎成交查询
+     *
+     * @param token        token
+     * @param position_str 定位串   N
+     * @param request_num  请求行数  Y
+     * @param TAG          tag
+     * @param callback     callback
+     */
+    public void queryDeal(String token, final String position_str, String request_num, final String TAG, final InterfaceCallback callback) {
+        Map map1 = new HashMap<>();
+        map1.put("funcid", "300746");
+        map1.put("token", token);
+        Map map2 = new HashMap<>();
+        map2.put("SEC_ID", "tpyzq");
+        map2.put("FLAG", "true");
+        map2.put("POSITION_STR", position_str);
+        map2.put("REQUEST_NUM", request_num);
+        map1.put("parms", map2);
+        net.okHttpForPostString(TAG, ConstantUtil.URL_JY, map1, new StringCallback() {
+            @Override
+            public void onError(Call call, Exception e, int id) {
+                ResultInfo info = new ResultInfo();
+                info.setCode("-1");
+                info.setMsg(ConstantUtil.NETWORK_ERROR);
+                info.setTag(TAG);
+                callback.callResult(info);
+            }
+
+            @Override
+            public void onResponse(String response, int id) {
+                ResultInfo info = new ResultInfo();
+                if (TextUtils.isEmpty(response)) {
+                    info.setCode("-3");
+                    info.setMsg(ConstantUtil.SERVICE_NO_DATA);
+                    info.setTag(TAG);
+                } else {
+                    try {
+                        JSONObject jsonObject = new JSONObject(response);
+                        String code = jsonObject.getString("code");
+                        String msg = jsonObject.getString("msg");
+                        info.setCode(code);
+                        info.setMsg(msg);
+                        info.setTag(TAG);
+                        if ("0".equals(code)) {
+                            List<EtfDataEntity> ses = new ArrayList<>();
+                            JSONArray data = jsonObject.getJSONArray("data");
+                            for (int i = 0; i < data.length(); i++) {
+                                EtfDataEntity bean = new EtfDataEntity();
+                                JSONObject obj = data.getJSONObject(i);
+                                bean.setStock_code(obj.getString("STOCK_CODE"));//证券代码
+                                bean.setStock_name(obj.getString("STOCK_NAME"));//证券名称
+                                bean.setEntrust_bs(obj.optString("ENTRUST_BS"));//买卖方向
+                                bean.setReal_status(obj.getString("REAL_STATUS"));//状态
+                                bean.setReal_status_name(obj.getString("REAL_STATUS_NAME"));//状态名称
+                                bean.setBusiness_amount(obj.getString("BUSINESS_AMOUNT"));//成交数量
+                                bean.setBusiness_balance(obj.getString("BUSINESS_BALANCE"));//成交金额
+                                bean.setInit_date(obj.getString("INIT_DATE"));//交易时间
+                                bean.setCurr_time(obj.getString("CURR_TIME"));//委托时间
+                                bean.setEntrust_no(obj.getString("ENTRUST_NO"));//委托编号
+                                bean.setStock_account(obj.getString("STOCK_ACCOUNT"));//证券编号<股东代码>
+                                bean.setTrade_plat(obj.getString("TRADE_PLAT"));//交易平台<交易所名称>
+                                bean.setPosition_str(obj.getString("POSITION_STR_LONG"));//定位穿
+                                bean.setCbp_business_id(obj.getString("CBP_BUSINESS_ID"));//定位穿
+                                bean.setShowRule(false);
+                                ses.add(bean);
+                            }
+                            info.setData(ses);
+                        }
+                    } catch (Exception e) {
+                        info.setCode("-2");
+                        info.setMsg(ConstantUtil.JSON_ERROR);
+                        info.setTag(TAG);
+                    }
+                }
+                callback.callResult(info);
+            }
+        });
+    }
+
+    /**
+     * 300744
+     * ETF成分股
+     * @param session token 手机识别码
+     * @param stock_code 股票代码
+     * @param page 定位串
+     * @param num 请求行数
+     * @param TAG
+     * @param callback
+     */
+    public void constituentStock(String session,String stock_code,String page,String num,final String TAG, final InterfaceCallback callback){
+        Map map1 = new HashMap<>();
+        map1.put("funcid", "300744");
+        map1.put("token", session);
+        Map map2 = new HashMap<>();
+        map2.put("SEC_ID", "tpyzq");
+        map2.put("FLAG", "true");
+        map2.put("STOCK_CODE",stock_code);
+        map2.put("POSITION_STR", page);
+        map2.put("REQUEST_NUM", num);
+        map1.put("parms", map2);
+        net.okHttpForPostString(TAG, ConstantUtil.URL_JY, map1, new StringCallback() {
+            @Override
+            public void onError(Call call, Exception e, int id) {
+                ResultInfo info = new ResultInfo();
+                info.setCode("-1");
+                info.setMsg(ConstantUtil.NETWORK_ERROR);
+                info.setTag(TAG);
+                callback.callResult(info);
+            }
+
+            @Override
+            public void onResponse(String response, int id) {
+                ResultInfo info = new ResultInfo();
+                if (TextUtils.isEmpty(response)) {
+                    info.setCode("-3");
+                    info.setMsg(ConstantUtil.SERVICE_NO_DATA);
+                    info.setTag(TAG);
+                } else {
+                    try {
+                        JSONObject jsonObject = new JSONObject(response);
+                        String code = jsonObject.getString("code");
+                        String msg = jsonObject.getString("msg");
+                        info.setCode(code);
+                        info.setMsg(msg);
+                        info.setTag(TAG);
+                        if ("0".equals(code)) {
+                            List<EtfDataEntity> ses = new ArrayList<>();
+                            JSONArray data = jsonObject.getJSONArray("data");
+                            for (int i = 0; i < data.length(); i++) {
+                                EtfDataEntity bean = new EtfDataEntity();
+                                JSONObject obj = data.getJSONObject(i);
+                                bean.setStock_code(obj.getString("STOCK_CODE"));//证券代码
+                                bean.setComponent_code(obj.getString("COMPONENT_CODE"));//成份股代码
+                                bean.setStock_name(obj.getString("COMPONENT_NAME"));//成份股名称
+                                bean.setEnable_balance(obj.getString("REPLACE_BALANCE"));//替代金额
+                                bean.setEntrust_amount(obj.optString("COMPONENT_AMOUNT"));//成份股数量<单位数量>
+                                bean.setStock_max(obj.getString("REPLACE_RATIO"));//溢价比率
+                                bean.setCash_max(obj.getString("REPLACE_FLAG"));//替代标志
+                                bean.setAllot_max(obj.getString("REPLACE_FLAG_NAME"));//替代标志名称
+                                bean.setPosition_str(obj.getString("POSITION_STR"));//定位穿
+                                bean.setShowRule(false);
+                                ses.add(bean);
+                            }
+                            info.setData(ses);
+                        }
+                    } catch (Exception e) {
+                        info.setCode("-2");
+                        info.setMsg(ConstantUtil.JSON_ERROR);
+                        info.setTag(TAG);
+                    }
+                }
+                callback.callResult(info);
+            }
+        });
+    }
+
+
 }

@@ -49,14 +49,22 @@ public class TranMoreActivity extends BaseActivity implements AdapterView.OnItem
                 intent.putExtra("pageindex",TransactionLoginActivity.PAGE_INDEX_NIHUIGOU);
                 intent.setClass(this,ReverseRepoGuideActivity.class);
                 break;
-//            case 2:
-//                intent.putExtra("pageindex",TransactionLoginActivity.PAGE_INDEX_StructuredFundActivity);
-//                intent.setClass(this,StructuredFundActivity.class);
+            case 2:
+                intent.putExtra("pageindex",TransactionLoginActivity.PAGE_INDEX_StructuredFundActivity);
+                intent.setClass(this,StructuredFundActivity.class);
+                break;
+            case 3:
+                intent.putExtra("pageindex",TransactionLoginActivity.PAGE_INDEX_ETFNavigationBarActivity);
+                intent.setClass(this,ETFNavigationBarActivity.class);
+                break;
+            case 4:
+                intent.putExtra("pageindex",TransactionLoginActivity.PAGE_INDEX_NetworkVotingActivity);
+                intent.setClass(this,NetworkVotingActivity.class);
+                break;
+//            case 5:
+//
 //                break;
-//            case 3:
-//                intent.putExtra("pageindex",TransactionLoginActivity.PAGE_INDEX_NetworkVotingActivity);
-//                intent.setClass(this,NetworkVotingActivity.class);
-//                break;
+
         }
         startActivity(intent);
     }

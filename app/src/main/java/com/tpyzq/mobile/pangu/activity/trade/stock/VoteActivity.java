@@ -25,7 +25,7 @@ import java.util.List;
  * Describe:  网络投票界面
  */
 
-public class VoteActivity extends BaseActivity  implements InterfaceCollection.InterfaceCallback{
+public class VoteActivity extends BaseActivity  implements InterfaceCollection.InterfaceCallback,View.OnClickListener{
     private final String TAG = "VoteActivity";
     private List<NetworkVotingEntity> myList;
     private PullToRefreshListView listView;
@@ -44,6 +44,7 @@ public class VoteActivity extends BaseActivity  implements InterfaceCollection.I
         listView.setMode(PullToRefreshBase.Mode.PULL_FROM_START);
         iv_isEmpty = (ImageView) findViewById(R.id.iv_isEmpty);
         kong_null = (RelativeLayout)findViewById(R.id.VTEAMP_Kong_Null);
+        findViewById(R.id.detail_back).setOnClickListener(this);
         mDialog = LoadingDialog.initDialog(this, "正在查询...");
         mAdapter = new VoteAdapter(this);
         listView.setAdapter(mAdapter);
@@ -81,8 +82,13 @@ public class VoteActivity extends BaseActivity  implements InterfaceCollection.I
     }
 
     public void refresh(String page,String num,boolean isClean){
-        mInterface.queryNetworkVoting(mSession,"0",page,num,TAG,this);
+        mInterface.queryNetworkVoting(mSession,"",page,num,TAG,this);
         mIsClean = isClean;
+    }
+
+    @Override
+    public void onClick(View v) {
+        finish();
     }
 
     @Override
@@ -128,7 +134,6 @@ public class VoteActivity extends BaseActivity  implements InterfaceCollection.I
             mDialog = null;
         }
         mAdapter = null;
-        listView.removeAllViews();
         listView = null;
         kong_null = null;
         iv_isEmpty = null;
