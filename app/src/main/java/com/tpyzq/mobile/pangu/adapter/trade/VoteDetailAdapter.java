@@ -132,7 +132,7 @@ public class VoteDetailAdapter extends BaseAdapter {
         EditText etNum = new EditText(mContext);
         etNum.setBackgroundResource(R.mipmap.vote_et_style);
         etNum.setInputType(InputType.TYPE_CLASS_NUMBER);
-        lps.leftMargin = (int)mContext.getResources().getDimension(R.dimen.size31);
+        etlps.leftMargin = (int)mContext.getResources().getDimension(R.dimen.size31);
         ll.addView(etNum,etlps);
         etNum.addTextChangedListener(new TextWatcher() {
             @Override
