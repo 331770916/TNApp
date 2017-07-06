@@ -125,10 +125,10 @@ public class StructuredFundDialog extends BaseDialog implements View.OnClickList
             tv_2.setVisibility(View.GONE);
             tv_3.setText("股东代码：");
             tv_4.setText(mInput);
-            tv_5.setVisibility(View.GONE);
-            tv_6.setVisibility(View.GONE);
-            tv_7.setVisibility(View.GONE);
-            tv_8.setVisibility(View.GONE);
+            tv_5.setVisibility(View.INVISIBLE);
+            tv_6.setVisibility(View.INVISIBLE);
+            tv_7.setVisibility(View.INVISIBLE);
+            tv_8.setVisibility(View.INVISIBLE);
             tv_9.setVisibility(View.GONE);
             tv_10.setVisibility(View.GONE);
         }else if (ETFApplyforOrRedeemActivity.TAG.equals(mTAG)){   //  申购

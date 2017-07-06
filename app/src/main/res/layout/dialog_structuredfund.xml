@@ -1,6 +1,6 @@
-<RelativeLayout xmlns:android="http://schemas.android.com/apk/res/android"
-    android:layout_width="wrap_content"
-    android:layout_height="wrap_content"
+<LinearLayout xmlns:android="http://schemas.android.com/apk/res/android"
+    android:layout_width="match_parent"
+    android:layout_height="330dp"
     android:background="@color/white"
     android:orientation="vertical">
 
@@ -33,16 +33,17 @@
 
 
     <LinearLayout
-        android:layout_width="wrap_content"
-        android:layout_height="@dimen/size130"
-        android:layout_centerHorizontal="true"
-        android:layout_marginTop="@dimen/size80"
+        android:layout_width="match_parent"
+        android:layout_height="wrap_content"
+        android:layout_marginTop="@dimen/size40"
+        android:layout_marginBottom="@dimen/size20"
         android:orientation="vertical">
 
         <LinearLayout
             android:layout_width="wrap_content"
-            android:layout_height="0dp"
-            android:layout_weight="1">
+            android:layout_height="wrap_content"
+            android:layout_gravity="center_horizontal"
+            >
 
             <TextView
                 android:id="@+id/tv_1"
@@ -60,11 +61,12 @@
                 android:textColor="@color/black"
                 android:textSize="@dimen/txtSize14" />
         </LinearLayout>
-
         <LinearLayout
+            android:layout_marginTop="@dimen/size10"
             android:layout_width="wrap_content"
-            android:layout_height="0dp"
-            android:layout_weight="1">
+            android:layout_height="wrap_content"
+            android:layout_gravity="center_horizontal"
+            >
 
             <TextView
                 android:id="@+id/tv_3"
@@ -83,9 +85,11 @@
         </LinearLayout>
 
         <LinearLayout
+            android:layout_marginTop="@dimen/size10"
             android:layout_width="wrap_content"
-            android:layout_height="0dp"
-            android:layout_weight="1">
+            android:layout_height="wrap_content"
+            android:layout_gravity="center_horizontal"
+            >
 
             <TextView
                 android:id="@+id/tv_5"
@@ -104,10 +108,11 @@
         </LinearLayout>
 
         <LinearLayout
+            android:layout_marginTop="@dimen/size10"
             android:layout_width="wrap_content"
-            android:layout_height="0dp"
-            android:layout_weight="1">
-
+            android:layout_height="wrap_content"
+            android:layout_gravity="center_horizontal"
+            >
             <TextView
                 android:id="@+id/tv_7"
                 android:layout_width="wrap_content"
@@ -125,9 +130,11 @@
         </LinearLayout>
 
         <LinearLayout
+            android:layout_marginTop="@dimen/size10"
             android:layout_width="wrap_content"
-            android:layout_height="0dp"
-            android:layout_weight="1">
+            android:layout_height="wrap_content"
+            android:layout_gravity="center_horizontal"
+            >
 
             <TextView
                 android:id="@+id/tv_9"
@@ -152,11 +159,8 @@
         android:id="@+id/ll_bottom"
         android:layout_width="match_parent"
         android:layout_height="wrap_content"
-        android:layout_alignParentBottom="true"
         android:orientation="horizontal"
-        android:paddingBottom="@dimen/size20"
-        android:paddingLeft="@dimen/size20"
-        android:paddingRight="@dimen/size20">
+        android:padding="@dimen/size20">
 
         <Button
             android:id="@+id/bt_true"
@@ -177,4 +181,4 @@
             android:text="取消"
             android:textColor="@color/black" />
     </LinearLayout>
-</RelativeLayout>
+</LinearLayout>
