@@ -95,10 +95,10 @@
             app:ptrMode="both" />
 
         <ImageView
+            android:id="@+id/img_show"
             android:layout_width="match_parent"
             android:layout_height="match_parent"
             android:layout_centerInParent="true"
-            android:visibility="gone"
             android:scaleType="center"
             android:src="@mipmap/kong" />
     </RelativeLayout>

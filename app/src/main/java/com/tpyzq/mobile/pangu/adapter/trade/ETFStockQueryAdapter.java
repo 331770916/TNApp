@@ -65,6 +65,7 @@ public class ETFStockQueryAdapter extends BaseAdapter{
             viewHolder.tv1 = (TextView) convertView.findViewById(R.id.tv1);
             viewHolder.tv2 = (TextView) convertView.findViewById(R.id.tv2);
             viewHolder.tv3 = (TextView) convertView.findViewById(R.id.tv3);
+            viewHolder.ll_isShow = (LinearLayout) convertView.findViewById(R.id.ll_isShow);
             convertView.setTag(viewHolder);
         }else {
             viewHolder = (ViewHolder) convertView.getTag();
@@ -106,6 +107,7 @@ public class ETFStockQueryAdapter extends BaseAdapter{
             });
         } else {
             //成分股查询
+            viewHolder.ll_isShow.setVisibility(View.GONE);
             viewHolder.tv_code.setText(etfDataEntity.getStock_code());
             viewHolder.tv_name.setText(etfDataEntity.getStock_name());
             viewHolder.tv_etfcode.setText(etfDataEntity.getStock_code());
@@ -116,6 +118,6 @@ public class ETFStockQueryAdapter extends BaseAdapter{
     class ViewHolder {
         TextView tv_code,tv_name,tv_etfcode,tv1,tv2,tv3;
         ImageView iv_top;
-        LinearLayout fj_content;
+        LinearLayout fj_content,ll_isShow;
     }
 }
