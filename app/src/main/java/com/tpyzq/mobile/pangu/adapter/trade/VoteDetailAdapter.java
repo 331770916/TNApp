@@ -144,8 +144,10 @@ public class VoteDetailAdapter extends BaseAdapter {
                 String editString = s.toString();
                 if(!TextUtils.isEmpty(editString)&&!editString.startsWith("0"))
                     entity.setEntrust_no(editString);
-                else
-                    Helper.getInstance().showToast(mContext,"议案投票数必须为整数");
+                else {
+                    entity.setEntrust_no("");
+                    Helper.getInstance().showToast(mContext, "议案投票数必须为整数");
+                }
             }
         });
         return ll;
