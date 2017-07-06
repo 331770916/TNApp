@@ -1908,10 +1908,10 @@ public class InterfaceCollection {
     /**
      * 300744
      * ETF成分股
-     * @param session token
-     * @param stock_code
-     * @param page
-     * @param num
+     * @param session token 手机识别码
+     * @param stock_code 股票代码
+     * @param page 定位串
+     * @param num 请求行数
      * @param TAG
      * @param callback
      */

@@ -30,6 +30,7 @@
 
         <!--   -->
         <TextView
+            android:id="@+id/tv_title"
             android:layout_width="wrap_content"
             android:layout_height="wrap_content"
             android:layout_centerInParent="true"
@@ -48,6 +49,7 @@
         android:paddingRight="@dimen/size20">
 
         <TextView
+            android:id="@+id/tv_stock_code"
             android:layout_width="0dp"
             android:layout_height="wrap_content"
             android:layout_weight="1"
@@ -57,6 +59,7 @@
             android:textSize="@dimen/txtSize12" />
 
         <TextView
+            android:id="@+id/tv_stock_name"
             android:layout_width="0dp"
             android:layout_height="wrap_content"
             android:layout_weight="1"
@@ -66,6 +69,7 @@
             android:textSize="@dimen/txtSize12" />
 
         <TextView
+            android:id="@+id/tv_etf_code"
             android:layout_width="0dp"
             android:layout_height="wrap_content"
             android:layout_weight="1"
@@ -94,6 +98,7 @@
             android:layout_width="match_parent"
             android:layout_height="match_parent"
             android:layout_centerInParent="true"
+            android:visibility="gone"
             android:scaleType="center"
             android:src="@mipmap/kong" />
     </RelativeLayout>
