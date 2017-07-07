@@ -203,7 +203,7 @@ public class FJEntrustedDealListViewAdapter extends BaseAdapter implements View.
 
 
         viewHodler.tvTime.setText(Helper.getMyDateHMS(bean.getReport_time()));
-        viewHodler.tvDate.setText(bean.getCurr_date());
+        viewHodler.tvDate.setText(Helper.formateDate1(bean.getCurr_date()));
         if (bean.isShowRule()) {
             if (viewHodler.llContent.isSelected()) {
                 bean.setShowRule(false);
