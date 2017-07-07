@@ -2018,7 +2018,7 @@ public class InterfaceCollection {
     /**
      * 300742
      * ETF列表查询
-     * @param token  token
+     * @param session  token
      * @param position_str  定位串
      * @param request_num   num
      * @param TAG tag

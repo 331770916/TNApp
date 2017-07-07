@@ -6,6 +6,7 @@ import android.text.TextUtils;
 import android.view.View;
 import android.widget.Button;
 import android.widget.ImageView;
+import android.widget.LinearLayout;
 import android.widget.ListView;
 import android.widget.RelativeLayout;
 import android.widget.TextView;
@@ -45,6 +46,8 @@ public class VoteDetailActivity extends BaseActivity  implements InterfaceCollec
     private String mSession,meeting_seq="",company_code="",stock_account="",exchange_type="",stock_code="";
     private AutoListview accumulateList,unAccumulateList;
     public static final String TAG = "VoteDetailActivity";
+    public LinearLayout goneUnacc;
+    private TextView goneAcc;
     private NetworkVotingEntity entity;
     private Dialog mDialog,mistake;
     private ImageView back;
@@ -69,6 +72,8 @@ public class VoteDetailActivity extends BaseActivity  implements InterfaceCollec
         ((TextView)findViewById(R.id.voteTitleCode)).setText(stock_account);
         accumulateList  = (AutoListview) findViewById(R.id.accumulateList);
         accumulateList.setDivider(null);
+        goneAcc = (TextView)findViewById(R.id.vote_gone_acc);
+        goneUnacc = (LinearLayout)findViewById(R.id.vote_gone_unacc);
         accumulateAdapter = new VoteDetailAdapter(this);
         accumulateList.setAdapter(accumulateAdapter);
         unAccumulateList = (AutoListview) findViewById(R.id.unAccumulateList);
@@ -93,10 +98,20 @@ public class VoteDetailActivity extends BaseActivity  implements InterfaceCollec
                 if(object instanceof Map){
                     Map<String,List<NetworkVotingEntity>> map = (Map<String,List<NetworkVotingEntity>>)object;
                     if(map.size()>0){
-                        accumulate = map.get("1");
-                        accumulateAdapter.setData(accumulate);
                         unAccumulate = map.get("0");
-                        unAccumulateAdapter.setData(unAccumulate);
+                        if(unAccumulate.size()==0)
+                            goneUnacc.setVisibility(View.VISIBLE);
+                        else {
+                            goneUnacc.setVisibility(View.GONE);
+                            unAccumulateAdapter.setData(unAccumulate);
+                        }
+                        accumulate = map.get("1");
+                        if(accumulate.size()==0){
+                            goneAcc.setText("未查询到累积投票议案");
+                        }else{
+                            goneAcc.setText("注意：累积投票制选举，对于每个选举议案组，股东可投票总数＝股东持股数×当选人数");
+                            accumulateAdapter.setData(accumulate);
+                        }
                     }else
                         showToast(" 暂无数据");
                 }
