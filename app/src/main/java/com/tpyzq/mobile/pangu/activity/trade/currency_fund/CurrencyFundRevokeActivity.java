@@ -48,7 +48,7 @@ public class CurrencyFundRevokeActivity extends BaseActivity implements View.OnC
 
     @Override
     public void initView() {
-            //返回按钮
+        //返回按钮
         mListView = (PullToRefreshListView) findViewById(R.id.lv_currency);
         mListView.setMode(PullToRefreshBase.Mode.PULL_FROM_START);
         mListView.setEmptyView(findViewById(R.id.isEmpty));
@@ -72,7 +72,7 @@ public class CurrencyFundRevokeActivity extends BaseActivity implements View.OnC
 
             @Override
             public void onPullUpToRefresh(PullToRefreshBase<ListView> refreshView) {
-                    //不操作。
+                //不操作。
             }
         });
     }
@@ -84,8 +84,7 @@ public class CurrencyFundRevokeActivity extends BaseActivity implements View.OnC
         HashMap map1 = new HashMap();
         HashMap map2 = new HashMap();
         map2.put("SEC_ID","tpyzq");
-        map2.put("FLAG","false");
-        map2.put("FUND_ACCOUNT", UserUtil.capitalAccount);      //"120015079"
+        map2.put("FLAG","true");
         map2.put("ACTION_IN","1");
         map1.put("funcid","300444");
         map1.put("token",SpUtils.getString(this, "mSession", ""));

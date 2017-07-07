@@ -1,6 +1,6 @@
 <LinearLayout xmlns:android="http://schemas.android.com/apk/res/android"
     android:layout_width="match_parent"
-    android:layout_height="330dp"
+    android:layout_height="wrap_content"
     android:background="@color/white"
     android:orientation="vertical">
 
@@ -31,17 +31,26 @@
 
     </LinearLayout>
 
-
-    <TableLayout
+    <TextView
+        android:id="@+id/tv_0"
         android:layout_width="match_parent"
         android:layout_height="wrap_content"
-        android:layout_marginTop="@dimen/size40"
+        android:layout_marginTop="20dp"
+        android:gravity="center"
+        android:text=""
+        android:visibility="gone" />
+
+    <TableLayout
+        android:id="@+id/tableLayout"
+        android:layout_width="match_parent"
+        android:layout_height="wrap_content"
         android:layout_marginBottom="@dimen/size20"
+        android:layout_marginTop="@dimen/size40"
         android:orientation="vertical">
 
         <TableRow
-            android:gravity="center"
-            >
+            android:id="@+id/tableRow1"
+            android:gravity="center">
 
             <TextView
                 android:id="@+id/tv_1"
@@ -59,10 +68,11 @@
                 android:textColor="@color/black"
                 android:textSize="@dimen/txtSize14" />
         </TableRow>
+
         <TableRow
-            android:gravity="center"
+            android:id="@+id/tableRow2"
             android:layout_marginTop="@dimen/size10"
-            >
+            android:gravity="center">
 
             <TextView
                 android:id="@+id/tv_3"
@@ -81,9 +91,9 @@
         </TableRow>
 
         <TableRow
+            android:id="@+id/tableRow3"
             android:layout_marginTop="@dimen/size10"
-            android:gravity="center"
-            >
+            android:gravity="center">
 
             <TextView
                 android:id="@+id/tv_5"
@@ -102,9 +112,10 @@
         </TableRow>
 
         <TableRow
+            android:id="@+id/tableRow4"
             android:layout_marginTop="@dimen/size10"
-            android:gravity="center"
-            >
+            android:gravity="center">
+
             <TextView
                 android:id="@+id/tv_7"
                 android:layout_width="wrap_content"
@@ -122,9 +133,9 @@
         </TableRow>
 
         <TableRow
+            android:id="@+id/tableRow5"
             android:layout_marginTop="@dimen/size10"
-            android:gravity="center"
-            >
+            android:gravity="center">
 
             <TextView
                 android:id="@+id/tv_9"

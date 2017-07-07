@@ -4,7 +4,11 @@ import android.app.Activity;
 import android.content.Context;
 import android.graphics.drawable.Drawable;
 import android.view.View;
+import android.view.ViewGroup;
 import android.widget.ImageView;
+import android.widget.LinearLayout;
+import android.widget.TableLayout;
+import android.widget.TableRow;
 import android.widget.TextView;
 
 import com.moxun.tagcloudlib.view.Tag;
@@ -34,6 +38,7 @@ import java.util.List;
 public class StructuredFundDialog extends BaseDialog implements View.OnClickListener, InterfaceCollection.InterfaceCallback {
     private String mTAG;
     private TextView tv_title;
+    private TextView tv_0;
     private TextView tv_1;
     private TextView tv_2;
     private TextView tv_3;
@@ -53,6 +58,14 @@ public class StructuredFundDialog extends BaseDialog implements View.OnClickList
     private InterfaceCollection ifc;
     private String mSession;
 
+    private TableRow tR_1;
+    private TableRow tR_2;
+    private TableRow tR_3;
+    private TableRow tR_4;
+    private TableRow tR_5;
+    private TableLayout tableLayout;
+
+
     public StructuredFundDialog(Context context) {
         super(context);
     }
@@ -67,9 +80,11 @@ public class StructuredFundDialog extends BaseDialog implements View.OnClickList
 
     @Override
     public void setView() {
-
+        tableLayout = (TableLayout) findViewById(R.id.tableLayout);
         img_1 = (ImageView) findViewById(R.id.bank_img);
         tv_title = (TextView) findViewById(R.id.tv_title);
+        tv_title = (TextView) findViewById(R.id.tv_title);
+        tv_0 = (TextView) findViewById(R.id.tv_0);
         tv_1 = (TextView) findViewById(R.id.tv_1);
         tv_3 = (TextView) findViewById(R.id.tv_3);
         tv_7 = (TextView) findViewById(R.id.tv_7);
@@ -80,6 +95,15 @@ public class StructuredFundDialog extends BaseDialog implements View.OnClickList
         tv_6 = (TextView) findViewById(R.id.tv_6);
         tv_8 = (TextView) findViewById(R.id.tv_8);
         tv_10 = (TextView) findViewById(R.id.tv_10);
+
+
+        tR_1 = (TableRow) findViewById(R.id. tableRow1);
+        tR_2 = (TableRow) findViewById(R.id. tableRow2);
+        tR_3 = (TableRow) findViewById(R.id. tableRow3);
+        tR_4 = (TableRow) findViewById(R.id. tableRow4);
+        tR_5 = (TableRow) findViewById(R.id. tableRow5);
+
+
         findViewById(R.id.bt_true).setOnClickListener(this);
         findViewById(R.id.bt_false).setOnClickListener(this);
 
@@ -124,16 +148,24 @@ public class StructuredFundDialog extends BaseDialog implements View.OnClickList
         } else if (VoteDetailActivity.TAG.equals(mTAG)) {
             img_1.setImageResource(R.mipmap.vote_dialog_icon);
             tv_title.setText(R.string.voteDialogTitle);
-            tv_1.setText("共有" + mShare + "笔委托需要提交，请确认");
-            tv_2.setVisibility(View.GONE);
-            tv_3.setText("股东代码：");
-            tv_4.setText(mInput);
-            tv_5.setVisibility(View.INVISIBLE);
-            tv_6.setVisibility(View.INVISIBLE);
-            tv_7.setVisibility(View.INVISIBLE);
-            tv_8.setVisibility(View.INVISIBLE);
-            tv_9.setVisibility(View.GONE);
-            tv_10.setVisibility(View.GONE);
+
+            tv_0.setText("共有" + mShare + "笔委托需要提交，请确认");
+            tv_0.setVisibility(View.VISIBLE);
+
+            tv_1.setText("股东代码：");
+            tv_2.setText(mInput);
+            tR_2.setVisibility(View.GONE);
+
+
+            LinearLayout.LayoutParams layoutParams=new LinearLayout.LayoutParams(ViewGroup.LayoutParams.MATCH_PARENT, ViewGroup.LayoutParams.WRAP_CONTENT);
+            layoutParams.setMargins(0,Helper.dip2px(context,10),0,Helper.dip2px(context,20));
+            tableLayout.setLayoutParams(layoutParams);
+
+            tR_2.setVisibility(View.GONE);
+            tR_3.setVisibility(View.GONE);
+            tR_4.setVisibility(View.GONE);
+            tR_5.setVisibility(View.GONE);
+
         } else if (ETFApplyforOrRedeemActivity.TAG.equals(mTAG)) {   //  申购
             EtfDataEntity etfDataEntity = (EtfDataEntity) object;
             tv_title.setText("ETF申购");

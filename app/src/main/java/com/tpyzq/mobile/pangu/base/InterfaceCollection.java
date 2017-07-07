@@ -44,7 +44,7 @@ public class InterfaceCollection {
      * 构造方法
      */
     private InterfaceCollection (){
-       net = NetWorkUtil.getInstence();
+        net = NetWorkUtil.getInstence();
     }
 
     /**
@@ -55,8 +55,8 @@ public class InterfaceCollection {
     }
 
     public static final InterfaceCollection getInstance() {
-            return InterfaceHolder.INSTANCE;
-        }
+        return InterfaceHolder.INSTANCE;
+    }
 
     /**
      * 回调接口
@@ -150,7 +150,6 @@ public class InterfaceCollection {
         map2.put("SEC_ID", "tpyzq");
         map2.put("STOCK_CODE",stock_code);
         map1.put("parms",map2);
-       String A=new Gson().toJson(map1);
         net.okHttpForPostString(TAG, ConstantUtil.URL_JY, map1, new StringCallback() {
             @Override
             public void onError(Call call, Exception e, int id) {
@@ -1103,7 +1102,7 @@ public class InterfaceCollection {
                                 bean.setStatus(obj.getString("ENTRUST_STATUS"));
                                 bean.setInit_date(obj.getString("ENTRUST_DATE"));
                                 bean.setStock_name(obj.getString("STOCK_NAME"));
-                                bean.setEntrust_amount(obj.getString("ENTRUST_AMOUNT"));
+                                bean.setBusiness_amount(obj.getString("ENTRUST_AMOUNT"));
                                 bean.setPosition_str(obj.getString("POSITION_STR"));
                                 bean.setEntrust_no(obj.getString("ENTRUST_NO"));
                                 ses.add(bean);

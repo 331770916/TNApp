@@ -92,9 +92,8 @@ public class PositionTransactionPager extends BaseTransactionPager implements Ad
         HashMap map300130_1 = new HashMap();
         map300130_1.put("FLAG", true);
         map300130_1.put("SEC_ID", "tpyzq");
-        map300130_1.put("FUND_ACCOUNT", "610002680");
         map300130_1.put("KEY_STR", "");
-        map300130_1.put("REC_COUNT", 2);
+//        map300130_1.put("REC_COUNT", 2);
         map300130.put("parms", map300130_1);
         NetWorkUtil.getInstence().okHttpForPostString("", ConstantUtil.URL_JY, map300130, new StringCallback() {
             @Override

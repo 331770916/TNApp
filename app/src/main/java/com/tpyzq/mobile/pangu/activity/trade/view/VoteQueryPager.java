@@ -180,7 +180,11 @@ public class VoteQueryPager extends BasePager implements InterfaceCollection.Int
                         mListView.getLoadingLayoutProxy().setRefreshingLabel("正在刷新");
                         mListView.getLoadingLayoutProxy().setPullLabel("上拉加载数据");
                         mListView.getLoadingLayoutProxy().setReleaseLabel("释放开始刷新");
-                        refresh(position, "30", true);
+                        if ("VoteQueryCustomPager".equals(TAG) && !isCustomRefresh){
+                            mListView.onRefreshComplete();
+                        }else {
+                            refresh(position, "30", true);
+                        }
                     }
                 }
             });

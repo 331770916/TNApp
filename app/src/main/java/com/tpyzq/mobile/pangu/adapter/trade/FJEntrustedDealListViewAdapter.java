@@ -85,20 +85,20 @@ public class FJEntrustedDealListViewAdapter extends BaseAdapter implements View.
             switch (type) {
                 case 0:
                     viewHodler.tableGone.setVisibility(View.GONE);
-                    ((TextView) convertView.findViewById(R.id.fj_gonetv1)).setText("委托编号：");
-                    ((TextView) convertView.findViewById(R.id.fj_gonetv2)).setText("委托金额：");
-                    ((TextView) convertView.findViewById(R.id.fj_gonetv3)).setText("委托数量：");
-                    ((TextView) convertView.findViewById(R.id.fj_gonetv4)).setText("成交数量：");
+                    ((TextView) convertView.findViewById(R.id.fj_gonetv1)).setText("委托编号:");
+                    ((TextView) convertView.findViewById(R.id.fj_gonetv2)).setText("委托金额:");
+                    ((TextView) convertView.findViewById(R.id.fj_gonetv3)).setText("委托数量:");
+                    ((TextView) convertView.findViewById(R.id.fj_gonetv4)).setText("成交数量:");
                     break;
                 case 1:
                     viewHodler.tableGone.setVisibility(View.VISIBLE);
-                    ((TextView) convertView.findViewById(R.id.fj_gonetv1)).setText("委托数量：");
-                    ((TextView) convertView.findViewById(R.id.fj_gonetv2)).setText("成交金额：");
-                    ((TextView) convertView.findViewById(R.id.fj_gonetv3)).setText("委托金额：");
-                    ((TextView) convertView.findViewById(R.id.fj_gonetv4)).setText("发生日期：");
+                    ((TextView) convertView.findViewById(R.id.fj_gonetv1)).setText("委托数量:");
+                    ((TextView) convertView.findViewById(R.id.fj_gonetv2)).setText("成交金额:");
+                    ((TextView) convertView.findViewById(R.id.fj_gonetv3)).setText("委托金额:");
+                    ((TextView) convertView.findViewById(R.id.fj_gonetv4)).setText("发生日期:");
                     ((TextView) convertView.findViewById(R.id.fj_gonetv5)).setText("成交数量：");
-                    ((TextView) convertView.findViewById(R.id.fj_gonetv6)).setText("流水号：");
-                    ((TextView) convertView.findViewById(R.id.fj_gonetv7)).setText("成交价格：");
+                    ((TextView) convertView.findViewById(R.id.fj_gonetv6)).setText("流水号:");
+                    ((TextView) convertView.findViewById(R.id.fj_gonetv7)).setText("成交价格:");
                     viewHodler.tvGone5 = (TextView) convertView.findViewById(R.id.fj_gonetvcontent5);
                     viewHodler.tvGone6 = (TextView) convertView.findViewById(R.id.fj_gonetvcontent6);
                     viewHodler.tvGone7 = (TextView) convertView.findViewById(R.id.fj_gonetvcontent7);
@@ -203,7 +203,15 @@ public class FJEntrustedDealListViewAdapter extends BaseAdapter implements View.
 
 
         viewHodler.tvTime.setText(Helper.getMyDateHMS(bean.getReport_time()));
-        viewHodler.tvDate.setText(Helper.formateDate1(bean.getCurr_date()));
+        switch (type){
+            case 0:
+                viewHodler.tvDate.setText(Helper.formateDate1(bean.getCurr_date()));
+                break;
+            case 1:
+                viewHodler.tvDate.setText(Helper.formateDate1(bean.getInit_date()));
+                break;
+        }
+
         if (bean.isShowRule()) {
             if (viewHodler.llContent.isSelected()) {
                 bean.setShowRule(false);

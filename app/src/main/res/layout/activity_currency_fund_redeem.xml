@@ -60,7 +60,7 @@
         <EditText
             android:id="@+id/etRedeemFundCode"
             android:layout_width="match_parent"
-            android:layout_height="wrap_content"
+            android:layout_height="match_parent"
             android:layout_centerVertical="true"
             android:layout_toRightOf="@id/tvRedeemFundCode"
             android:layout_marginLeft="@dimen/size35"
@@ -110,14 +110,15 @@
         <EditText
             android:id="@+id/etRedeemFundAmount"
             android:layout_width="match_parent"
-            android:layout_height="wrap_content"
+            android:layout_height="match_parent"
             android:layout_centerVertical="true"
             android:layout_toRightOf="@id/tvRedeemFundAmount"
             android:layout_marginLeft="@dimen/size35"
             android:hint="@string/QingShuRuShuHuiFenE"
-            android:digits="0123456789."
+            android:maxLength="10"
+            android:inputType="numberDecimal"
             android:textColorHint="@color/text"
-            android:textSize="13sp"
+            android:textSize="@dimen/txtSize13"
             android:singleLine="true"
             android:background="@null"/>
 

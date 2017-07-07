@@ -17,26 +17,26 @@
 
     <!-- 头布局 -->
     <RelativeLayout
-    android:layout_width="match_parent"
-    android:layout_height="@dimen/pickerview_topbar_height"
-    android:background="@color/blue">
+        android:layout_width="match_parent"
+        android:layout_height="@dimen/pickerview_topbar_height"
+        android:background="@color/blue">
 
-    <ImageView
-        android:id="@+id/ivCurrencyFundSubscribe_back"
-        android:layout_width="wrap_content"
-        android:layout_height="match_parent"
-        android:layout_alignParentLeft="true"
-        android:padding="@dimen/size10"
-        android:src="@mipmap/back_btn" />
+        <ImageView
+            android:id="@+id/ivCurrencyFundSubscribe_back"
+            android:layout_width="wrap_content"
+            android:layout_height="match_parent"
+            android:layout_alignParentLeft="true"
+            android:padding="@dimen/size10"
+            android:src="@mipmap/back_btn" />
 
-    <TextView
-        android:layout_width="wrap_content"
-        android:layout_height="wrap_content"
-        android:layout_centerInParent="true"
-        android:text="@string/HuoBiJiJinShenGou"
-        android:textColor="@color/white"
-        android:textSize="@dimen/pickerview_topbar_title_textsize" />
-</RelativeLayout>
+        <TextView
+            android:layout_width="wrap_content"
+            android:layout_height="wrap_content"
+            android:layout_centerInParent="true"
+            android:text="@string/HuoBiJiJinShenGou"
+            android:textColor="@color/white"
+            android:textSize="@dimen/pickerview_topbar_title_textsize" />
+    </RelativeLayout>
 
     <!--分割线-->
     <TextView
@@ -59,7 +59,7 @@
         <EditText
             android:id="@+id/etFundCode"
             android:layout_width="match_parent"
-            android:layout_height="wrap_content"
+            android:layout_height="match_parent"
             android:layout_centerVertical="true"
             android:layout_toRightOf="@id/tvFundCode"
             android:layout_marginLeft="@dimen/size35"
@@ -109,13 +109,13 @@
         <EditText
             android:id="@+id/etFundAmount"
             android:layout_width="match_parent"
-            android:layout_height="wrap_content"
+            android:layout_height="match_parent"
             android:layout_centerVertical="true"
             android:layout_toRightOf="@id/tvFundAmount"
             android:layout_marginLeft="@dimen/size35"
             android:hint="@string/QingShuRuShenGouJinE"
-            android:maxLength="6"
-            android:digits="0123456789"
+            android:maxLength="10"
+            android:inputType="numberDecimal"
             android:textColorHint="@color/text"
             android:textSize="13sp"
             android:singleLine="true"
