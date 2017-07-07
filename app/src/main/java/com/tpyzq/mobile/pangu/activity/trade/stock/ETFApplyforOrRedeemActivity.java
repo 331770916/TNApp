@@ -124,7 +124,12 @@ public class ETFApplyforOrRedeemActivity extends BaseActivity implements TextWat
                     if (!this.isFinishing()) {
                         mDialog.show();
                     }
-                    InterfaceCollection.getInstance().queryApplyfor(token, s.toString().trim(), TAG, this);
+                    if ("Applyfor".equals(type)) { //  申购
+                        InterfaceCollection.getInstance().queryApplyfor(token, s.toString().trim(), TAG, this);
+                    }else {
+                        InterfaceCollection.getInstance().queryApplyfor(token, s.toString().trim(), TAG_SH, this);
+                    }
+
                     if (!mInputCount.getText().toString().trim().isEmpty()) {
                         btSubmit.setBackgroundResource(R.drawable.lonin);
                         btSubmit.setEnabled(true);
@@ -216,11 +221,7 @@ public class ETFApplyforOrRedeemActivity extends BaseActivity implements TextWat
             if ("0".equals(code)) {
                 List<EtfDataEntity> list = (List<EtfDataEntity>) info.getData();
                 etfDataEntity = list.get(0);
-                if ("Applyfor".equals(type)) {
-                    tv_upperlimit.setText("申购上限：" + etfDataEntity.getAllot_max());
-                } else {
-                    tv_upperlimit.setText("赎回上限：" + etfDataEntity.getRedeem_max());
-                }
+                tv_upperlimit.setText("申购上限：" + etfDataEntity.getAllot_max());
                 available_funds.setText(etfDataEntity.getEnable_balance());
                 etf_code.setText(etfDataEntity.getStock_name());
                 tv_shareholder.setText(etfDataEntity.getStock_account());
@@ -241,7 +242,7 @@ public class ETFApplyforOrRedeemActivity extends BaseActivity implements TextWat
             if ("0".equals(code)) {
                 List<EtfDataEntity> list = (List<EtfDataEntity>) info.getData();
                 etfDataEntity = list.get(0);
-                tv_upperlimit.setText(etfDataEntity.getAllot_max());
+                tv_upperlimit.setText("赎回上限：" + etfDataEntity.getRedeem_max());
                 available_funds.setText(etfDataEntity.getEnable_balance());
                 etf_code.setText(etfDataEntity.getStock_name());
                 tv_shareholder.setText(etfDataEntity.getStock_account());
