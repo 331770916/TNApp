@@ -48,6 +48,7 @@ public class FJFundGradingMergerActivity extends BaseActivity implements View.On
     private InterfaceCollection ifc;
     private StructuredFundEntity bean;
     private Dialog mDialog;
+    private StructuredFundDialog mStructuredFundDialog;
 
     @Override
     public void initView() {
@@ -62,6 +63,7 @@ public class FJFundGradingMergerActivity extends BaseActivity implements View.On
         mConfirm_but = (Button) findViewById(R.id.butConfirm);
 
         initMonitor();
+        mStructuredFundDialog = new StructuredFundDialog(this);
     }
 
     @Override
@@ -83,8 +85,8 @@ public class FJFundGradingMergerActivity extends BaseActivity implements View.On
                 startActivityForResult(intent, REQUSET);
                 break;
             case R.id.butConfirm:
-                StructuredFundDialog dialog = new StructuredFundDialog(this, TAG, this, bean, mAmount_et.getText().toString(), mInput_et.getText().toString());
-                dialog.show();
+                mStructuredFundDialog.setData(TAG, this, bean, mAmount_et.getText().toString(), mInput_et.getText().toString());
+                mStructuredFundDialog.show();
                 break;
         }
     }

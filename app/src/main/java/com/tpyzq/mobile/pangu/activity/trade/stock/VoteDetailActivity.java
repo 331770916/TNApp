@@ -38,22 +38,23 @@ import java.util.Map;
  * Describe:  网络投票详情界面
  */
 
-public class VoteDetailActivity extends BaseActivity  implements InterfaceCollection.InterfaceCallback,View.OnClickListener{
-    private VoteDetailAdapter accumulateAdapter,unAccumulateAdapter;
+public class VoteDetailActivity extends BaseActivity implements InterfaceCollection.InterfaceCallback, View.OnClickListener {
+    private VoteDetailAdapter accumulateAdapter, unAccumulateAdapter;
     //accumulate 1累积投票议案  unAccumulate 0非累积投票议案
-    private List<NetworkVotingEntity> accumulate,unAccumulate,submitList;
-    private String mSession,meeting_seq="",company_code="",stock_account="",exchange_type="",stock_code="";
-    private AutoListview accumulateList,unAccumulateList;
+    private List<NetworkVotingEntity> accumulate, unAccumulate, submitList;
+    private String mSession, meeting_seq = "", company_code = "", stock_account = "", exchange_type = "", stock_code = "";
+    private AutoListview accumulateList, unAccumulateList;
     public static final String TAG = "VoteDetailActivity";
     private NetworkVotingEntity entity;
-    private Dialog mDialog,mistake;
+    private Dialog mDialog, mistake;
     private ImageView back;
     private Button submit;
+    private StructuredFundDialog mStructuredFundDialog;
 
 
     @Override
     public void initView() {
-        if(getIntent()!=null) {
+        if (getIntent() != null) {
             meeting_seq = getIntent().getStringExtra("meeting_seq");
             company_code = getIntent().getStringExtra("company_code");
             stock_account = getIntent().getStringExtra("stock_account");
@@ -63,23 +64,24 @@ public class VoteDetailActivity extends BaseActivity  implements InterfaceCollec
         unAccumulate = new ArrayList<>();
         submitList = new ArrayList<>();
         mSession = SpUtils.getString(this, "mSession", "");
-        back = (ImageView)findViewById(R.id.detail_back);
+        back = (ImageView) findViewById(R.id.detail_back);
         back.setOnClickListener(this);
-        ((TextView)findViewById(R.id.voteTitleName)).setText(company_code);
-        ((TextView)findViewById(R.id.voteTitleCode)).setText(stock_account);
-        accumulateList  = (AutoListview) findViewById(R.id.accumulateList);
+        ((TextView) findViewById(R.id.voteTitleName)).setText(company_code);
+        ((TextView) findViewById(R.id.voteTitleCode)).setText(stock_account);
+        accumulateList = (AutoListview) findViewById(R.id.accumulateList);
         accumulateList.setDivider(null);
         accumulateAdapter = new VoteDetailAdapter(this);
         accumulateList.setAdapter(accumulateAdapter);
         unAccumulateList = (AutoListview) findViewById(R.id.unAccumulateList);
         unAccumulateList.setDivider(null);
-        submit = (Button)findViewById(R.id.voteSubmit);
+        submit = (Button) findViewById(R.id.voteSubmit);
         submit.setOnClickListener(this);
         unAccumulateAdapter = new VoteDetailAdapter(this);
         unAccumulateList.setAdapter(unAccumulateAdapter);
         mDialog = LoadingDialog.initDialog(this, "正在查询...");
         mDialog.show();
-        mInterface.queryProposal(mSession,meeting_seq,TAG+"query",this);
+        mInterface.queryProposal(mSession, meeting_seq, TAG + "query", this);
+        mStructuredFundDialog = new StructuredFundDialog(VoteDetailActivity.this);
     }
 
     @Override
@@ -87,80 +89,80 @@ public class VoteDetailActivity extends BaseActivity  implements InterfaceCollec
         if (mDialog != null)
             mDialog.dismiss();
         String code = info.getCode();
-        if("0".equals(code)){
+        if ("0".equals(code)) {
             Object object = info.getData();
-            if(info.getTag().equals(TAG+"query")){
-                if(object instanceof Map){
-                    Map<String,List<NetworkVotingEntity>> map = (Map<String,List<NetworkVotingEntity>>)object;
-                    if(map.size()>0){
+            if (info.getTag().equals(TAG + "query")) {
+                if (object instanceof Map) {
+                    Map<String, List<NetworkVotingEntity>> map = (Map<String, List<NetworkVotingEntity>>) object;
+                    if (map.size() > 0) {
                         accumulate = map.get("1");
                         accumulateAdapter.setData(accumulate);
                         unAccumulate = map.get("0");
                         unAccumulateAdapter.setData(unAccumulate);
-                    }else
+                    } else
                         showToast(" 暂无数据");
                 }
-            }else if(info.getTag().equals(TAG+"submit")){
+            } else if (info.getTag().equals(TAG + "submit")) {
                 showToast(info.getMsg());
             }
-        }else if("-6".equals(code)){
+        } else if ("-6".equals(code)) {
             skip.startLogin(this);
-        }else{//-1,-2,-3情况下显示定义好信息
+        } else {//-1,-2,-3情况下显示定义好信息
             showToast(info.getMsg());
         }
     }
 
     @Override
     public void onClick(View v) {
-        switch (v.getId()){
+        switch (v.getId()) {
             case R.id.detail_back:
                 finish();
                 break;
             case R.id.voteSubmit:
                 submitList.clear();
-                if(accumulate.size()>0){
-                    boolean canSubmit = false,isFirstNull=true;
-                    for (NetworkVotingEntity et:accumulate) {
+                if (accumulate.size() > 0) {
+                    boolean canSubmit = false, isFirstNull = true;
+                    for (NetworkVotingEntity et : accumulate) {
                         List<NetworkVotingEntity> subList = et.getList();
-                        if(subList.size()>0){
-                            for (NetworkVotingEntity ve:subList) {
-                                if(!TextUtils.isEmpty(ve.getEntrust_no())){
+                        if (subList.size() > 0) {
+                            for (NetworkVotingEntity ve : subList) {
+                                if (!TextUtils.isEmpty(ve.getEntrust_no())) {
                                     canSubmit = true;//有一个不为空就可以提交
                                     stock_code = ve.getStatus();
                                     submitList.add(ve);
                                 }
                             }
-                            if(!canSubmit&&isFirstNull){
+                            if (!canSubmit && isFirstNull) {
                                 entity = et;
                                 isFirstNull = false;
                             }
                         }
                     }
-                    if(!canSubmit&&entity!=null){
-                        String msg = "议案组：\""+ entity.getVote_info() + "(当选人数：" + entity.getList().size() + ")\"未表决，请表决后再提交!";
-                        mistake = MistakeDialog.showDialog( "提示",msg,false, this,null);
-                    }else{
-                        StructuredFundDialog dialog = new StructuredFundDialog(VoteDetailActivity.this, TAG, new StructuredFundDialog.Expression() {
+                    if (!canSubmit && entity != null) {
+                        String msg = "议案组：\"" + entity.getVote_info() + "(当选人数：" + entity.getList().size() + ")\"未表决，请表决后再提交!";
+                        mistake = MistakeDialog.showDialog("提示", msg, false, this, null);
+                    } else {
+                        mStructuredFundDialog.setData(TAG, new StructuredFundDialog.Expression() {
                             @Override
                             public void State() {
-                                if(unAccumulate.size()>0)
+                                if (unAccumulate.size() > 0)
                                     submitList.addAll(unAccumulate);
                                 mDialog.show();
-                                mInterface.submitVoting(mSession,stock_code,exchange_type,meeting_seq,submitList,TAG+"submit",VoteDetailActivity.this);
+                                mInterface.submitVoting(mSession, stock_code, exchange_type, meeting_seq, submitList, TAG + "submit", VoteDetailActivity.this);
                             }
-                        },null,String.valueOf(accumulate.size()+unAccumulate.size()),stock_account);
-                        dialog.show();
+                        }, null, String.valueOf(accumulate.size() + unAccumulate.size()), stock_account);
+                        mStructuredFundDialog.show();
                     }
-                }else{
+                } else {
                     stock_code = unAccumulate.get(0).getStatus();
-                    StructuredFundDialog dialog = new StructuredFundDialog(VoteDetailActivity.this, TAG, new StructuredFundDialog.Expression() {
+                    mStructuredFundDialog.setData(TAG, new StructuredFundDialog.Expression() {
                         @Override
                         public void State() {
                             mDialog.show();
-                            mInterface.submitVoting(mSession,stock_code,exchange_type,meeting_seq,unAccumulate,TAG+"submit",VoteDetailActivity.this);
+                            mInterface.submitVoting(mSession, stock_code, exchange_type, meeting_seq, unAccumulate, TAG + "submit", VoteDetailActivity.this);
                         }
-                    },null,String.valueOf(unAccumulate.size()),stock_account);
-                    dialog.show();
+                    }, null, String.valueOf(unAccumulate.size()), stock_account);
+                    mStructuredFundDialog.show();
                 }
                 break;
         }
@@ -174,11 +176,11 @@ public class VoteDetailActivity extends BaseActivity  implements InterfaceCollec
     @Override
     public void destroy() {
         net.cancelSingleRequest(TAG);
-        if(mDialog!=null){
+        if (mDialog != null) {
             mDialog.dismiss();
             mDialog = null;
         }
-        if(mistake!=null){
+        if (mistake != null) {
             mistake.dismiss();
             mistake = null;
         }
