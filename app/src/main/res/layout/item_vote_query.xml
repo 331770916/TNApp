@@ -5,6 +5,7 @@
     android:orientation="vertical">
 
     <LinearLayout
+        android:background="@color/white"
         android:id="@+id/fj_content"
         android:layout_width="match_parent"
         android:layout_height="@dimen/size55"
