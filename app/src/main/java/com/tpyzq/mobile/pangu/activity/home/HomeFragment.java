@@ -232,7 +232,6 @@ public class HomeFragment extends BaseFragment implements AdapterView.OnItemClic
         vp_carousel.init(image.length, new CarouselView.SimpleDraweeViewHandler() {
             @Override
             public void handle(final int index, SimpleDraweeView view) {
-                view.setScaleType(ImageView.ScaleType.FIT_XY);
                 Uri uri = Uri.parse("res:///"+image[index]);
                 view.setImageURI(uri);
 //                view.setImageResource(image[index]);
