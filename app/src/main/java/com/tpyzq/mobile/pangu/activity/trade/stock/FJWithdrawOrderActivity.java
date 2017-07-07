@@ -64,6 +64,8 @@ public class FJWithdrawOrderActivity extends BaseActivity implements AdapterView
                 if (mList!=null &&mList.size()>0){
                     String page = mList.get(mList.size()-1).getPosition_str();
                     requestData(page);
+                }else {
+                    mListView.onRefreshComplete();
                 }
 
             }
