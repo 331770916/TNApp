@@ -296,7 +296,7 @@ public class RiskEvaluationActivity extends BaseActivity implements View.OnClick
         NetWorkUtil.getInstence().okHttpForPostString(TAG, ConstantUtil.URL_JY, map, new StringCallback() {
             @Override
             public void onError(Call call, Exception e, int id) {
-                if (mloadingDialog != null) {
+                if (mloadingDialog != null&&!isFinishing()) {
                     mloadingDialog.dismiss();
                 }
                 LogHelper.e(TAG, e.toString());
@@ -311,7 +311,7 @@ public class RiskEvaluationActivity extends BaseActivity implements View.OnClick
 
                 //{"code":"0","msg":"(客户风险等级查询成功)","data":[{"IS_OUTOFDATE":"0","CORP_RISK_VAILD":"0","RISK_LEVEL_NAME":"积极型","CORP_BEGIN_DATE":"20170629","CORP_END_DATE":"20190628","CORP_RISK_LEVEL":"3"}]}
 
-                if (mloadingDialog != null) {
+                if (mloadingDialog != null&&!isFinishing()) {
                     mloadingDialog.dismiss();
                 }
                 try{
