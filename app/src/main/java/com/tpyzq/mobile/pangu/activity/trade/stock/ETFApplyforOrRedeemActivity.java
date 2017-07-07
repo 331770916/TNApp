@@ -215,7 +215,11 @@ public class ETFApplyforOrRedeemActivity extends BaseActivity implements TextWat
             if ("0".equals(code)) {
                 List<EtfDataEntity> list = (List<EtfDataEntity>) info.getData();
                 etfDataEntity = list.get(0);
-                tv_upperlimit.setText("申购上限：" + etfDataEntity.getAllot_max());
+                if ("Applyfor".equals(type)) {
+                    tv_upperlimit.setText("申购上限：" + etfDataEntity.getAllot_max());
+                } else {
+                    tv_upperlimit.setText("赎回上限：" + etfDataEntity.getRedeem_max());
+                }
                 available_funds.setText(etfDataEntity.getEnable_balance());
                 etf_code.setText(etfDataEntity.getStock_name());
                 tv_shareholder.setText(etfDataEntity.getStock_account());
