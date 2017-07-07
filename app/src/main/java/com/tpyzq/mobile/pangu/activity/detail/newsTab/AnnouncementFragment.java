@@ -147,10 +147,10 @@ public class AnnouncementFragment extends BaseDetailNewsPager implements View.On
                             if (item==null){
                                 continue;
                             }
-                            String title = item.getString(1);
-                            String source = item.getString(7);
-                            String time = item.getString(19);
-                            String msgId = item.getString(0);
+                            String title = item.optString(1);
+                            String source = item.optString(7);
+                            String time = item.optString(19);
+                            String msgId = item.optString(0);
                             try {
                                 SimpleDateFormat sdf1 = new SimpleDateFormat("yyyy-MM-dd HH:mm:ss");
                                 SimpleDateFormat sdf2 = new SimpleDateFormat("yyyy-MM-dd");

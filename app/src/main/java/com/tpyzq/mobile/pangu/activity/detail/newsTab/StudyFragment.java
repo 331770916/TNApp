@@ -146,11 +146,11 @@ public class StudyFragment extends BaseDetailNewsPager implements View.OnClickLi
                         if (data != null) {
                             for (int i = 0; i < data.length(); i++) {
                                 DetailNewsEntity bean = new DetailNewsEntity();
-                                JSONArray item = data.getJSONArray(i);
-                                String title = item.getString(1);
-                                String source = item.getString(7);
-                                String time = item.getString(19);
-                                String msgId = item.getString(0);
+                                JSONArray item = data.optJSONArray(i);
+                                String title = item.optString(1);
+                                String source = item.optString(7);
+                                String time = item.optString(19);
+                                String msgId = item.optString(0);
                                 try {
                                     SimpleDateFormat sdf1 = new SimpleDateFormat("yyyy-MM-dd HH:mm:ss");
                                     SimpleDateFormat sdf2 = new SimpleDateFormat("yyyy-MM-dd");

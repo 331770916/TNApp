@@ -39,7 +39,7 @@ import okhttp3.Call;
  */
 public class DetailAnnouncementListActivity extends BaseActivity implements View.OnClickListener {
 
-    private static String TAG ="DetailAnnouncementList";
+    private static String TAG ="DetailAnnouncementListActivity";
     private PullToRefreshListView mListView;
     private RelativeLayout rlDetailAnnouncement;
     private LinearLayout llAnnouncementJiaZai;

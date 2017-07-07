@@ -2734,7 +2734,9 @@ public class StockDetailActivity extends BaseActivity implements  View.OnClickLi
     private float getStrFloat(String value){
         float ret = 0;
         try{
-            ret = Float.parseFloat(value);
+            if(!"".equals(value) && null != value){
+                ret = Float.parseFloat(value);
+            }
         }catch (Exception e){
             e.printStackTrace();
         }

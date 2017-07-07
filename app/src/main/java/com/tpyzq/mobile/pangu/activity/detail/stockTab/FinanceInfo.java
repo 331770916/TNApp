@@ -114,9 +114,11 @@ public class FinanceInfo extends BaseStockDetailPager implements View.OnClickLis
                     String data = object.getString("data");
                     String msg = object.getString("msg");
                     JSONArray dataArray = new JSONArray(data);
-                    if (code.equals("0")) {
-                        StockFinanceEntity stockFinanceBean = new Gson().fromJson(dataArray.getString(0), StockFinanceEntity.class);
-                        setText(stockFinanceBean);
+                    if ("0".equals(code)) {
+                        if(null != dataArray && dataArray.length() > 0){
+                            StockFinanceEntity stockFinanceBean = new Gson().fromJson(dataArray.getString(0), StockFinanceEntity.class);
+                            setText(stockFinanceBean);
+                        }
                     } else {
 
                     }

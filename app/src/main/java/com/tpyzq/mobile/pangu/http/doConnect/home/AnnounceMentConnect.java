@@ -81,7 +81,7 @@ public class AnnounceMentConnect {
                             ArrayList<ArrayList<String>> itemsData = new ArrayList<ArrayList<String>>();
                             for(int i = 0 ;i < data.length();i++){
                                 ArrayList<String> subItems = new ArrayList<String>();
-                                JSONArray json = data.getJSONArray(i);
+                                JSONArray json = data.optJSONArray(i);
                                 for(int j = 0;j < json.length();j++){
                                     subItems.add(json.getString(j).toString());
                                 }
