@@ -11,7 +11,6 @@ import android.widget.ImageView;
 import android.widget.TextView;
 
 import com.tpyzq.mobile.pangu.R;
-import com.tpyzq.mobile.pangu.activity.trade.open_fund.SignActivity;
 import com.tpyzq.mobile.pangu.base.BaseActivity;
 import com.tpyzq.mobile.pangu.base.InterfaceCollection;
 import com.tpyzq.mobile.pangu.data.EtfDataEntity;
@@ -43,6 +42,7 @@ public class ETFApplyforOrRedeemActivity extends BaseActivity implements TextWat
     private Dialog mDialog;
     private EtfDataEntity etfDataEntity;
     private TextView title;
+    private StructuredFundDialog mStructuredFundDialog;
 
     @Override
     public void initView() {
@@ -58,6 +58,7 @@ public class ETFApplyforOrRedeemActivity extends BaseActivity implements TextWat
         tv_shareholder = (TextView) findViewById(R.id.tv_shareholder_code);
         getIntentPost();
         initEvent();
+        mStructuredFundDialog = new StructuredFundDialog(this);
     }
 
     private void initEvent() {
@@ -103,7 +104,7 @@ public class ETFApplyforOrRedeemActivity extends BaseActivity implements TextWat
         switch (getCurrentFocus().getId()) {
             case R.id.et_input_count:
                 String str = mInputCount.getText().toString().trim();
-                if(str.indexOf('0')==0){
+                if (str.indexOf('0') == 0) {
                     mInputCount.setText("");
                     Helper.getInstance().showToast(this, "首位不能为0");
                 }
@@ -123,7 +124,12 @@ public class ETFApplyforOrRedeemActivity extends BaseActivity implements TextWat
                     if (!this.isFinishing()) {
                         mDialog.show();
                     }
-                    InterfaceCollection.getInstance().queryApplyfor(token, s.toString().trim(), TAG, this);
+                    if ("Applyfor".equals(type)) { //  申购
+                        InterfaceCollection.getInstance().queryApplyfor(token, s.toString().trim(), TAG, this);
+                    }else {
+                        InterfaceCollection.getInstance().queryApplyfor(token, s.toString().trim(), TAG_SH, this);
+                    }
+
                     if (!mInputCount.getText().toString().trim().isEmpty()) {
                         btSubmit.setBackgroundResource(R.drawable.lonin);
                         btSubmit.setEnabled(true);
@@ -167,23 +173,23 @@ public class ETFApplyforOrRedeemActivity extends BaseActivity implements TextWat
                     //  请求申购
                     if (isJudge()) {
                         String count = mInputCount.getText().toString().trim();
-                        if (etfDataEntity==null){
+                        if (etfDataEntity == null) {
                             etfDataEntity = new EtfDataEntity();
                         }
                         etfDataEntity.setEntrust_amount(count);
-                        StructuredFundDialog dialog = new StructuredFundDialog(this, TAG, this, etfDataEntity, null, null);
-                        dialog.show();
+                        mStructuredFundDialog.setData(TAG, this, etfDataEntity, null, null);
+                        mStructuredFundDialog.show();
                     }
                 } else {
                     // 请求赎回
                     if (isJudge()) {
                         String count = mInputCount.getText().toString().trim();
-                        if (etfDataEntity==null){
+                        if (etfDataEntity == null) {
                             etfDataEntity = new EtfDataEntity();
                         }
                         etfDataEntity.setEntrust_amount(count);
-                        StructuredFundDialog dialog = new StructuredFundDialog(this, TAG_SH, this, etfDataEntity, null, null);
-                        dialog.show();
+                        mStructuredFundDialog.setData(TAG_SH, this, etfDataEntity, null, null);
+                        mStructuredFundDialog.show();
                     }
                 }
                 break;
@@ -236,7 +242,7 @@ public class ETFApplyforOrRedeemActivity extends BaseActivity implements TextWat
             if ("0".equals(code)) {
                 List<EtfDataEntity> list = (List<EtfDataEntity>) info.getData();
                 etfDataEntity = list.get(0);
-                tv_upperlimit.setText(etfDataEntity.getAllot_max());
+                tv_upperlimit.setText("赎回上限：" + etfDataEntity.getRedeem_max());
                 available_funds.setText(etfDataEntity.getEnable_balance());
                 etf_code.setText(etfDataEntity.getStock_name());
                 tv_shareholder.setText(etfDataEntity.getStock_account());

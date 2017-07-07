@@ -701,7 +701,7 @@ public class TransactionLoginActivity extends BaseActivity implements View.OnCli
             }
             Map map1 = new HashMap<>();
             map1.put("funcid", "300010");
-            map1.put("token", SpUtils.getString(this, mSession, ""));
+            map1.put("token", SpUtils.getString(this, "mSession", ""));
             Map map2 = new HashMap<>();
             map2.put("SEC_ID", "tpyzq");
             map2.put("LOGIN_CODE", mAccount.getText().toString().trim());//610002680     101000913 //用户账号
@@ -758,6 +758,7 @@ public class TransactionLoginActivity extends BaseActivity implements View.OnCli
                             SpUtils.putString(TransactionLoginActivity.this,"IS_OVERDUE",IS_OVERDUE);
                             SpUtils.putString(TransactionLoginActivity.this,"CORP_RISK_LEVEL",CORP_RISK_LEVEL);
                             SpUtils.putString(TransactionLoginActivity.this,"CORP_END_DATE",CORP_END_DATE);
+                            SpUtils.putString(TransactionLoginActivity.this,"mSession",mSession);
                             //第一次登录数据库交易账号无数据 添加到数据库
                             if (!DeviceUtil.getDeviceId(CustomApplication.getContext()).equalsIgnoreCase(OLD_TCC) && !android.os.Build.MODEL.equals(OLD_SRRC)) {//换手机登录
                                 getData(mAccount.getText().toString().trim(), "false",mSession);

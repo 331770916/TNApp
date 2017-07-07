@@ -53,14 +53,16 @@ public class StructuredFundDialog extends BaseDialog implements View.OnClickList
     private InterfaceCollection ifc;
     private String mSession;
 
-    public StructuredFundDialog(Context context, String tag, Expression expression, Object object, String share, String input) {
+    public StructuredFundDialog(Context context) {
         super(context);
+    }
+
+    public void setData(String tag, Expression expression, Object object, String share, String input) {
         this.mTAG = tag;
         this.mExpression = expression;
         this.object = object;
         this.mShare = share;
         this.mInput = input;
-
     }
 
     @Override
@@ -93,7 +95,7 @@ public class StructuredFundDialog extends BaseDialog implements View.OnClickList
         mSession = SpUtils.getString(context, "mSession", "");
         tv_5.setText(context.getString(R.string.securities_name) + "：");
         if (FJFundGradingMergerActivity.TAG.equals(mTAG)) {
-            StructuredFundEntity mStructuredFundEntity = (StructuredFundEntity)object;
+            StructuredFundEntity mStructuredFundEntity = (StructuredFundEntity) object;
             img_1.setImageResource(R.mipmap.structuredfund_merge);
             tv_title.setText(R.string.Gradingfundmerger);
             tv_2.setText(R.string.Gradingfundmerger);
@@ -102,7 +104,7 @@ public class StructuredFundDialog extends BaseDialog implements View.OnClickList
             tv_8.setText(mShare);
             tv_10.setText(mStructuredFundEntity.getStock_account());
         } else if (FJFundSplitActivity.TAG.equals(mTAG)) {
-            StructuredFundEntity mStructuredFundEntity = (StructuredFundEntity)object;
+            StructuredFundEntity mStructuredFundEntity = (StructuredFundEntity) object;
             img_1.setImageResource(R.mipmap.structuredfund_partition);
             tv_title.setText(R.string.FJFundSplitActivity);
             tv_2.setText(R.string.FJFundSplitActivity);
@@ -111,7 +113,7 @@ public class StructuredFundDialog extends BaseDialog implements View.OnClickList
             tv_8.setText(mShare);
             tv_10.setText(mStructuredFundEntity.getStock_account());
         } else if (FJWithdrawOrderActivity.TAG.equals(mTAG)) {
-            StructuredFundEntity mStructuredFundEntity = (StructuredFundEntity)object;
+            StructuredFundEntity mStructuredFundEntity = (StructuredFundEntity) object;
             img_1.setImageResource(R.mipmap.bank_img);
             tv_title.setText(R.string.IsRecall);
             tv_2.setText(mStructuredFundEntity.getBusiness_name());
@@ -119,10 +121,10 @@ public class StructuredFundDialog extends BaseDialog implements View.OnClickList
             tv_6.setText(mStructuredFundEntity.getStoken_name());
             tv_8.setText(mStructuredFundEntity.getEntrust_amount());
             tv_10.setText(mStructuredFundEntity.getStock_account());
-        }else if (VoteDetailActivity.TAG.equals(mTAG)){
+        } else if (VoteDetailActivity.TAG.equals(mTAG)) {
             img_1.setImageResource(R.mipmap.vote_dialog_icon);
             tv_title.setText(R.string.voteDialogTitle);
-            tv_1.setText("共有"+mShare+"笔委托需要提交，请确认");
+            tv_1.setText("共有" + mShare + "笔委托需要提交，请确认");
             tv_2.setVisibility(View.GONE);
             tv_3.setText("股东代码：");
             tv_4.setText(mInput);
@@ -132,8 +134,8 @@ public class StructuredFundDialog extends BaseDialog implements View.OnClickList
             tv_8.setVisibility(View.INVISIBLE);
             tv_9.setVisibility(View.GONE);
             tv_10.setVisibility(View.GONE);
-        }else if (ETFApplyforOrRedeemActivity.TAG.equals(mTAG)){   //  申购
-            EtfDataEntity etfDataEntity = (EtfDataEntity)object;
+        } else if (ETFApplyforOrRedeemActivity.TAG.equals(mTAG)) {   //  申购
+            EtfDataEntity etfDataEntity = (EtfDataEntity) object;
             tv_title.setText("ETF申购");
             tv_1.setText("操作类别:");
             tv_3.setText("ETF代码:");
@@ -145,8 +147,8 @@ public class StructuredFundDialog extends BaseDialog implements View.OnClickList
             tv_6.setText(etfDataEntity.getStock_name());
             tv_8.setText(etfDataEntity.getEntrust_amount());
             tv_10.setText(etfDataEntity.getStock_account());
-        }else if (ETFApplyforOrRedeemActivity.TAG_SH.equals(mTAG)){   //  赎回
-            EtfDataEntity etfDataEntity = (EtfDataEntity)object;
+        } else if (ETFApplyforOrRedeemActivity.TAG_SH.equals(mTAG)) {   //  赎回
+            EtfDataEntity etfDataEntity = (EtfDataEntity) object;
             tv_title.setText("ETF赎回");
             tv_1.setText("操作类别:");
             tv_3.setText("ETF代码:");
@@ -160,7 +162,7 @@ public class StructuredFundDialog extends BaseDialog implements View.OnClickList
             tv_10.setText(etfDataEntity.getStock_account());
             tv_8.setText(etfDataEntity.getStock_code());
         } else if (ETFRevokeActivity.TAG.equalsIgnoreCase(mTAG)) {
-            EtfDataEntity etfDataEntity = (EtfDataEntity)object;
+            EtfDataEntity etfDataEntity = (EtfDataEntity) object;
             tv_title.setText("ETF申赎撤单");
             tv_1.setText("操作类别:");
             tv_3.setText("ETF代码:");
@@ -182,22 +184,21 @@ public class StructuredFundDialog extends BaseDialog implements View.OnClickList
         switch (v.getId()) {
             case R.id.bt_true:
                 if (FJFundGradingMergerActivity.TAG.equals(mTAG)) {
-                    StructuredFundEntity mStructuredFundEntity = (StructuredFundEntity)object;
+                    StructuredFundEntity mStructuredFundEntity = (StructuredFundEntity) object;
                     ifc.mergerStructuredFund(mStructuredFundEntity.getExchange_type(), mStructuredFundEntity.getStock_account(), mInput, mShare, mSession, mTAG, this);
                 } else if (FJFundSplitActivity.TAG.equals(mTAG)) {
-                    StructuredFundEntity mStructuredFundEntity = (StructuredFundEntity)object;
+                    StructuredFundEntity mStructuredFundEntity = (StructuredFundEntity) object;
                     ifc.splitStructuredFund(mStructuredFundEntity.getExchange_type(), mStructuredFundEntity.getStock_account(), mInput, mShare, mSession, mTAG, this);
                 } else if (FJWithdrawOrderActivity.TAG.equals(mTAG)) {
-//                    Helper.getInstance().showToast(context, "撤销此委托成功");
                     mExpression.State();
                     dismiss();
-                }else if(VoteDetailActivity.TAG.equals(mTAG)){
+                } else if (VoteDetailActivity.TAG.equals(mTAG)) {
                     mExpression.State();
                     dismiss();
-                }else if (ETFApplyforOrRedeemActivity.TAG.equals(mTAG)){   //  申购
+                } else if (ETFApplyforOrRedeemActivity.TAG.equals(mTAG)) {   //  申购
                     mExpression.State();
                     dismiss();
-                }else if (ETFApplyforOrRedeemActivity.TAG_SH.equals(mTAG)){   //  赎回
+                } else if (ETFApplyforOrRedeemActivity.TAG_SH.equals(mTAG)) {   //  赎回
                     mExpression.State();
                     dismiss();
                 } else if (ETFRevokeActivity.TAG.equalsIgnoreCase(mTAG)) {
@@ -226,7 +227,7 @@ public class StructuredFundDialog extends BaseDialog implements View.OnClickList
             MistakeDialog.showDialog(info.getMsg(), (Activity) context, new MistakeDialog.MistakeDialgoListener() {
                 @Override
                 public void doPositive() {
-                   dismiss();
+                    dismiss();
                 }
             });
         }

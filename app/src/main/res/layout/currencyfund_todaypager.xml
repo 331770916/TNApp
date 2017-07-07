@@ -1,77 +1,80 @@
 <?xml version="1.0" encoding="utf-8"?>
 <LinearLayout xmlns:android="http://schemas.android.com/apk/res/android"
+    xmlns:app="http://schemas.android.com/apk/res-auto"
     android:layout_width="match_parent"
     android:layout_height="match_parent"
     android:orientation="vertical">
 
     <View
         android:layout_width="match_parent"
-        android:layout_height="@dimen/size5"
-        android:background="@color/lineColor" />
+        android:layout_height="@dimen/size10"
+        android:background="@color/bgColor" />
 
     <LinearLayout
+        android:visibility="gone"
         android:id="@+id/llZiDingYi"
         android:layout_width="match_parent"
-        android:layout_height="wrap_content"
-        android:background="@color/bgColor"
-        android:orientation="horizontal"
-        android:padding="@dimen/size10"
-        android:visibility="gone">
+        android:layout_height="@dimen/size35"
+        android:background="@color/white"
+        android:orientation="horizontal">
 
         <TextView
             android:id="@+id/tvZDYStartDate"
             android:layout_width="0dp"
             android:layout_height="wrap_content"
+            android:layout_marginLeft="@dimen/size23"
             android:layout_weight="1.5"
-            android:background="@drawable/shape_grey_rectangle_nor"
-            android:drawableLeft="@mipmap/rilihui"
+            android:drawableLeft="@mipmap/rililan"
             android:drawablePadding="@dimen/size10"
-            android:paddingBottom="@dimen/size10"
-            android:paddingTop="@dimen/size10"
+            android:drawableRight="@mipmap/sanjiao"
+            android:gravity="center|end"
+            android:paddingRight="@dimen/size13"
             android:text="2016-07-07"
             android:textColor="@color/hideTextColor"
             android:textSize="@dimen/txtSize12" />
 
+
         <TextView
             android:layout_width="0dp"
             android:layout_height="wrap_content"
-            android:layout_weight="0.5"
+            android:layout_gravity="center"
+            android:layout_weight="0.4"
             android:gravity="center"
-            android:padding="@dimen/size10"
             android:text="至"
             android:textColor="@color/black" />
+
 
         <TextView
             android:id="@+id/tvZDYEndDate"
             android:layout_width="0dp"
             android:layout_height="wrap_content"
-            android:layout_weight="1.5"
-            android:background="@drawable/shape_grey_rectangle_nor"
-            android:drawableLeft="@mipmap/rilihui"
-            android:drawablePadding="@dimen/size10"
-            android:paddingBottom="@dimen/size10"
-            android:paddingTop="@dimen/size10"
+            android:layout_gravity="center"
+            android:layout_weight="1"
+            android:drawableRight="@mipmap/sanjiao"
+            android:gravity="center"
             android:text="2016-07-07"
             android:textColor="@color/hideTextColor"
             android:textSize="@dimen/txtSize12" />
 
+
         <TextView
             android:id="@+id/tvZDYQueryBtn"
             android:layout_width="0dp"
-            android:layout_height="wrap_content"
+            android:layout_height="match_parent"
             android:layout_marginLeft="@dimen/size15"
             android:layout_weight="1"
             android:background="@color/calendarBtnColor"
             android:gravity="center"
-            android:paddingBottom="@dimen/size10"
-            android:paddingLeft="@dimen/size15"
-            android:paddingRight="@dimen/size15"
-            android:paddingTop="@dimen/size10"
             android:text="查询"
             android:textColor="@color/white" />
-
-
     </LinearLayout>
+
+    <View
+        android:id="@+id/llZiDingYiView"
+        android:visibility="gone"
+        android:layout_width="match_parent"
+        android:layout_height="@dimen/size10"
+        android:background="@color/bgColor" />
 
 
     <LinearLayout
@@ -121,9 +124,28 @@
         android:layout_height="@dimen/size1"
         android:background="@color/lineColor" />
 
-    <com.tpyzq.mobile.pangu.view.RefreshListView
-        android:id="@+id/rlRefresh"
+    <RelativeLayout
         android:layout_width="match_parent"
-        android:layout_height="match_parent" />
+        android:layout_height="match_parent">
+
+        <com.handmark.pulltorefresh.library.PullToRefreshListView
+            android:id="@+id/rlRefresh"
+            android:layout_width="match_parent"
+            android:layout_height="match_parent"
+            android:divider="@color/lineColor"
+            android:dividerHeight="@dimen/size0.5"
+            android:scrollbars="none"
+            app:ptrAnimationStyle="flip"
+            app:ptrMode="both" />
+
+        <ImageView
+            android:id="@+id/isEmpty"
+            android:layout_width="match_parent"
+            android:layout_height="match_parent"
+            android:layout_centerInParent="true"
+            android:scaleType="center"
+            android:src="@mipmap/kong" />
+    </RelativeLayout>
+
 
 </LinearLayout>
