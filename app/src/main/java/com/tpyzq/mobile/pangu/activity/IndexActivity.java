@@ -236,7 +236,7 @@ public class IndexActivity extends BaseActivity {
             default:
                 break;
         }
-        ft.commit();
+        ft.commitAllowingStateLoss();
     }
 
     private void hideAllFragments(FragmentTransaction ft) {
