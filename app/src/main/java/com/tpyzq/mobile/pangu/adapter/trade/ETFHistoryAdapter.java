@@ -61,7 +61,7 @@ public class ETFHistoryAdapter extends BaseAdapter implements View.OnClickListen
         ViewHodler viewHodler;
         if (convertView == null) {
             viewHodler = new ViewHodler();
-            convertView = LayoutInflater.from(context).inflate(R.layout.item_etf_revoke_order, null);
+            convertView = LayoutInflater.from(context).inflate(R.layout.item_etf_query_his, null);
             viewHodler.llContent = (LinearLayout) convertView.findViewById(R.id.fj_content);
             viewHodler.tvName = (TextView) convertView.findViewById(R.id.tv1);
             viewHodler.tvCode = (TextView) convertView.findViewById(R.id.tv2);

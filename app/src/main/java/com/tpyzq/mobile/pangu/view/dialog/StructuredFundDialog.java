@@ -169,10 +169,10 @@ public class StructuredFundDialog extends BaseDialog implements View.OnClickList
             tv_5.setText("ETF名称:");
             tv_7.setText("赎回份额:");
             tv_9.setText("股东代码:");
-            tv_2.setText(etfDataEntity.getExchange_type());
+            tv_2.setText("ETF申赎撤单");
             tv_4.setText(etfDataEntity.getStock_code());
             tv_6.setText(etfDataEntity.getStock_name());
-            tv_8.setText(etfDataEntity.getEntrust_balance());
+            tv_8.setText(etfDataEntity.getPrev_balance());
             tv_10.setText(etfDataEntity.getStock_account());
         }
     }
@@ -203,6 +203,7 @@ public class StructuredFundDialog extends BaseDialog implements View.OnClickList
                     dismiss();
                 } else if (ETFRevokeActivity.TAG.equalsIgnoreCase(mTAG)) {
                     mExpression.State();
+                    dismiss();
                 }
                 break;
             case R.id.bt_false:

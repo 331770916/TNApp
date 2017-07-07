@@ -59,30 +59,30 @@ public class ETFRevokeAdapter  extends BaseAdapter {
         final ViewHolder viewHolder;
         if (convertView == null) {
             viewHolder = new ViewHolder();
-            convertView = LayoutInflater.from(mContext).inflate(R.layout.item_etf_revoke_order, null);
-            viewHolder.tv1 = (TextView)convertView.findViewById(R.id.tv1);//证券名称
-            viewHolder.tv2 = (TextView)convertView.findViewById(R.id.tv2);//证券代码
-            viewHolder.tv3 = (TextView)convertView.findViewById(R.id.tv3);//委托代码
-            viewHolder.tv4 = (TextView)convertView.findViewById(R.id.tv4);//数量
-            viewHolder.tv5 = (TextView)convertView.findViewById(R.id.tv5);//金额
-            viewHolder.tv6 = (TextView)convertView.findViewById(R.id.tv6);//状态
-            viewHolder.tv7 = (TextView)convertView.findViewById(R.id.tv7);//类型
+            convertView = LayoutInflater.from(mContext).inflate(R.layout.item_etf_revoke, null);
+            viewHolder.tv_stock_name = (TextView)convertView.findViewById(R.id.tv_stock_name);//证券名称
+            viewHolder.tv_stock_code = (TextView)convertView.findViewById(R.id.tv_stock_code);//证券代码
+            viewHolder.tv_entrust_no = (TextView)convertView.findViewById(R.id.tv_entrust_no);//委托代码
+            viewHolder.tv_amount = (TextView)convertView.findViewById(R.id.tv_amount);//数量
+            viewHolder.tv_blance = (TextView)convertView.findViewById(R.id.tv_blance);//金额
+            viewHolder.tv_status = (TextView)convertView.findViewById(R.id.tv_status);//状态
+            viewHolder.tv_type = (TextView)convertView.findViewById(R.id.tv_type);//类型
             convertView.setTag(viewHolder);
         } else {
             viewHolder = (ViewHolder) convertView.getTag();
         }
         final EtfDataEntity etfDataEntity = mList.get(position);
-        viewHolder.tv1.setText(etfDataEntity.getStock_name());
-        viewHolder.tv2.setText(etfDataEntity.getStock_code());
-        viewHolder.tv3.setText(etfDataEntity.getEntrust_no());
-        viewHolder.tv4.setText(etfDataEntity.getEntrust_amount());
-        viewHolder.tv5.setText(etfDataEntity.getEntrust_balance());
-        viewHolder.tv6.setText(etfDataEntity.getEntrust_status_name());
-        viewHolder.tv7.setText(etfDataEntity.getEntrust_prop());
+        viewHolder.tv_stock_name.setText(etfDataEntity.getStock_name());
+        viewHolder.tv_stock_code.setText(etfDataEntity.getStock_code());
+        viewHolder.tv_entrust_no.setText(etfDataEntity.getEntrust_no());
+        viewHolder.tv_amount.setText(etfDataEntity.getEntrust_amount());
+        viewHolder.tv_blance.setText(etfDataEntity.getPrev_balance());
+        viewHolder.tv_status.setText(etfDataEntity.getEntrust_status_name());
+        viewHolder.tv_type.setText(etfDataEntity.getExchange_type_name());
         return convertView;
     }
 
     class ViewHolder {
-        TextView tv1,tv2,tv3,tv4,tv5,tv6,tv7;
+        TextView tv_stock_name, tv_stock_code, tv_entrust_no, tv_amount, tv_blance, tv_status, tv_type;
     }
 }
