@@ -192,7 +192,7 @@
 
     <TextView
         android:layout_width="match_parent"
-        android:layout_height="72dp"
+        android:layout_height="20dp"
         android:layout_below="@id/llQueDingQuXiao" />
 
 </RelativeLayout>

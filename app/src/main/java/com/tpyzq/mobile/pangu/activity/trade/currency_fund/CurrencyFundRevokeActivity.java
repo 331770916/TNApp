@@ -12,6 +12,8 @@ import android.widget.PopupWindow;
 
 import com.google.gson.Gson;
 import com.google.gson.reflect.TypeToken;
+import com.handmark.pulltorefresh.library.PullToRefreshBase;
+import com.handmark.pulltorefresh.library.PullToRefreshListView;
 import com.tpyzq.mobile.pangu.R;
 import com.tpyzq.mobile.pangu.activity.myself.login.TransactionLoginActivity;
 import com.tpyzq.mobile.pangu.activity.trade.view.FundRevokePopupWindow;
@@ -21,7 +23,9 @@ import com.tpyzq.mobile.pangu.data.CurrencyFundEntrustQueryTodayBean;
 import com.tpyzq.mobile.pangu.http.NetWorkUtil;
 import com.tpyzq.mobile.pangu.util.ConstantUtil;
 import com.tpyzq.mobile.pangu.util.Helper;
+import com.tpyzq.mobile.pangu.util.SpUtils;
 import com.tpyzq.mobile.pangu.util.panguutil.UserUtil;
+import com.tpyzq.mobile.pangu.view.pullrefreshrecyclerview.PullRefreshView;
 import com.zhy.http.okhttp.callback.StringCallback;
 
 import java.util.ArrayList;
@@ -34,51 +38,41 @@ import okhttp3.Call;
  * 刘泽鹏
  * 货币基金撤单  界面
  */
-public class CurrencyFundRevokeActivity extends BaseActivity implements View.OnClickListener,FundRevokePopupWindow.IClick {
+public class CurrencyFundRevokeActivity extends BaseActivity implements View.OnClickListener,FundRevokePopupWindow.IClick, AdapterView.OnItemClickListener {
 
     private String TAG = "CurrencyFundRevoke";
-    private ListView listView;
+    private PullToRefreshListView mListView;
     private ArrayList<HashMap<String,String>> list;
     private CurrencyFundRevokeAdapter adapter;
 
+
     @Override
     public void initView() {
-        this.findViewById(R.id.ivCurrencyFundRevoke_back).setOnClickListener(this);     //返回按钮
-        this.listView = (ListView) this.findViewById(R.id.lvCurrencyFundRevoke);        //listView
-        getData();                                                                         //获取数据源
+            //返回按钮
+        mListView = (PullToRefreshListView) findViewById(R.id.lv_currency);
+        mListView.setMode(PullToRefreshBase.Mode.PULL_FROM_START);
+        mListView.setEmptyView(findViewById(R.id.isEmpty));
         adapter = new CurrencyFundRevokeAdapter(this);
-//        adapter.setList(list);      //向适配器中添加数据
-        this.listView.setAdapter(adapter);      //适配
+        mListView.setAdapter(adapter);      //适配
+        list = new ArrayList<HashMap<String,String>>();
+        initEvent();
+        getData();
+    }
 
-        //添加listView的item 点击监听事件
-        this.listView.setOnItemClickListener(new AdapterView.OnItemClickListener() {
+    private void initEvent() {
+        findViewById(R.id.ivCurrencyFundRevoke_back).setOnClickListener(this);
+        mListView.setOnItemClickListener(this);
+        mListView.setOnRefreshListener(new PullToRefreshBase.OnRefreshListener2<ListView>() {
             @Override
-            public void onItemClick(AdapterView<?> parent, View view, int position, long id) {
-                HashMap<String, String> map = list.get(position);
-                //实例化PopupWindow
-                FundRevokePopupWindow popupWindow= new FundRevokePopupWindow(CurrencyFundRevokeActivity.this
-                        ,CurrencyFundRevokeActivity.this,map,position,CurrencyFundRevokeActivity.this);
-                popupWindow.setFocusable(true);     //获取焦点
-                ColorDrawable dw = new ColorDrawable(0xf0000000);     //0x60000000
-                popupWindow.setBackgroundDrawable(dw);      //设置背景颜色
-                popupWindow.setOutsideTouchable(true);
-                WindowManager.LayoutParams lp = getWindow().getAttributes();
-                lp.alpha = 0.7f;
-                getWindow().setAttributes(lp);
-                //消失的时候设置窗体背景变亮
-                popupWindow.setOnDismissListener(new PopupWindow.OnDismissListener() {
-                    @Override
-                    public void onDismiss() {
-                        WindowManager.LayoutParams lp = getWindow().getAttributes();
-                        lp.alpha = 1.0f;
-                        getWindow().setAttributes(lp);
-                    }
-                });
+            public void onPullDownToRefresh(PullToRefreshBase<ListView> refreshView) {
+                //  下拉
+                list.clear();
+                getData();
+            }
 
-                //显示窗口
-                popupWindow.showAtLocation(CurrencyFundRevokeActivity.this.findViewById(R.id.FundRevokeActivity),
-                        Gravity.BOTTOM | Gravity.CENTER_HORIZONTAL, 0, 0); //设置layout在PopupWindow中显示的位置
-
+            @Override
+            public void onPullUpToRefresh(PullToRefreshBase<ListView> refreshView) {
+                    //不操作。
             }
         });
     }
@@ -87,7 +81,6 @@ public class CurrencyFundRevokeActivity extends BaseActivity implements View.OnC
      * 获取数据
      */
     private void getData() {
-        list = new ArrayList<HashMap<String,String>>();
         HashMap map1 = new HashMap();
         HashMap map2 = new HashMap();
         map2.put("SEC_ID","tpyzq");
@@ -95,16 +88,18 @@ public class CurrencyFundRevokeActivity extends BaseActivity implements View.OnC
         map2.put("FUND_ACCOUNT", UserUtil.capitalAccount);      //"120015079"
         map2.put("ACTION_IN","1");
         map1.put("funcid","300444");
-        map1.put("token","");
+        map1.put("token",SpUtils.getString(this, "mSession", ""));
         map1.put("parms",map2);
         NetWorkUtil.getInstence().okHttpForPostString(TAG, ConstantUtil.URL_JY, map1, new StringCallback() {
             @Override
             public void onError(Call call, Exception e, int id) {
                 Helper.getInstance().showToast(CurrencyFundRevokeActivity.this,ConstantUtil.NETWORK_ERROR);
+                mListView.onRefreshComplete();
             }
 
             @Override
             public void onResponse(String response, int id) {
+                mListView.onRefreshComplete();
                 if(TextUtils.isEmpty(response)){
                     return;
                 }
@@ -195,5 +190,36 @@ public class CurrencyFundRevokeActivity extends BaseActivity implements View.OnC
     protected void onResume() {
         super.onResume();
         adapter.setList(list);
+    }
+
+    @Override
+    public void onItemClick(AdapterView<?> parent, View view, int position, long id) {
+
+        HashMap<String, String> map = list.get(position-1);
+        //实例化PopupWindow
+        FundRevokePopupWindow popupWindow= new FundRevokePopupWindow(CurrencyFundRevokeActivity.this
+                ,CurrencyFundRevokeActivity.this,map,position,CurrencyFundRevokeActivity.this);
+        popupWindow.setFocusable(true);     //获取焦点
+        ColorDrawable dw = new ColorDrawable(0xf0000000);     //0x60000000
+        popupWindow.setBackgroundDrawable(dw);      //设置背景颜色
+        popupWindow.setOutsideTouchable(true);
+        WindowManager.LayoutParams lp = getWindow().getAttributes();
+        lp.alpha = 0.7f;
+        getWindow().setAttributes(lp);
+        //消失的时候设置窗体背景变亮
+        popupWindow.setOnDismissListener(new PopupWindow.OnDismissListener() {
+            @Override
+            public void onDismiss() {
+                WindowManager.LayoutParams lp = getWindow().getAttributes();
+                lp.alpha = 1.0f;
+                getWindow().setAttributes(lp);
+            }
+        });
+
+        //显示窗口
+        popupWindow.showAtLocation(CurrencyFundRevokeActivity.this.findViewById(R.id.FundRevokeActivity),
+                Gravity.BOTTOM | Gravity.CENTER_HORIZONTAL, 0, 0); //设置layout在PopupWindow中显示的位置
+
+
     }
 }

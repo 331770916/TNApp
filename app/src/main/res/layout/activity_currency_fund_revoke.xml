@@ -3,6 +3,7 @@
     xmlns:tools="http://schemas.android.com/tools"
     android:layout_width="match_parent"
     android:layout_height="match_parent"
+    xmlns:app="http://schemas.android.com/apk/res-auto"
     android:orientation="vertical"
     android:id="@+id/FundRevokeActivity"
     tools:context="com.tpyzq.mobile.pangu.activity.trade.currency_fund.CurrencyFundRevokeActivity">
@@ -42,7 +43,7 @@
     <!--分割线-->
     <TextView
         android:layout_width="match_parent"
-        android:layout_height="@dimen/size10"
+        android:layout_height="@dimen/size1"
         android:background="@color/dividerColor"/>
 
     <LinearLayout
@@ -94,11 +95,27 @@
         android:layout_height="@dimen/size1"
         android:background="@color/text"/>
 
-    <ListView
-        android:id="@+id/lvCurrencyFundRevoke"
+    <RelativeLayout
         android:layout_width="match_parent"
-        android:layout_height="wrap_content">
+        android:layout_height="match_parent">
 
-    </ListView>
+        <com.handmark.pulltorefresh.library.PullToRefreshListView
+            android:id="@+id/lv_currency"
+            android:layout_width="match_parent"
+            android:layout_height="match_parent"
+            android:divider="@color/lineColor"
+            android:dividerHeight="@dimen/size0.5"
+            android:scrollbars="none"
+            app:ptrAnimationStyle="flip"
+            app:ptrMode="both" />
+
+        <ImageView
+            android:id="@+id/isEmpty"
+            android:layout_width="match_parent"
+            android:layout_height="match_parent"
+            android:layout_centerInParent="true"
+            android:scaleType="center"
+            android:src="@mipmap/kong" />
+    </RelativeLayout>
 
 </LinearLayout>
