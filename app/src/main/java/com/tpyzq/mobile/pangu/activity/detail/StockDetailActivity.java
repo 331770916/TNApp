@@ -2700,7 +2700,7 @@ public class StockDetailActivity extends BaseActivity implements  View.OnClickLi
             @Override
             public void onError(Call call, Exception e, int id) {
                 LogUtil.i("shareUpLoad:", e.toString());
-                if (loadingDialog!=null){
+                if (loadingDialog!=null&&!isFinishing()){
                     loadingDialog.dismiss();
                 }
             }
@@ -2713,17 +2713,19 @@ public class StockDetailActivity extends BaseActivity implements  View.OnClickLi
                     String code = jsonObject.getString("code");
                     if ("0".equals(code)) {
                         String url = jsonObject.optString("msg");
-                        loadingDialog.dismiss();
+                        if (!isFinishing()){
+                            loadingDialog.dismiss();
+                        }
                         shareDialog.setUrl(url);
                         if (!StockDetailActivity.this.isFinishing()){
                             shareDialog.show();
                         }
                     }else{
-                        if (loadingDialog != null) {
+                        if (loadingDialog != null&&!isFinishing()) {
                             loadingDialog.dismiss();
                         }
                     }
-                } catch (JSONException e) {
+                } catch (Exception e) {
                     e.printStackTrace();
                 }
             }

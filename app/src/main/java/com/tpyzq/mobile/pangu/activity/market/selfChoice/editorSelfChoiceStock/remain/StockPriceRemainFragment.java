@@ -39,7 +39,6 @@ import com.tpyzq.mobile.pangu.view.dialog.ResultDialog;
 import com.zhy.http.okhttp.callback.StringCallback;
 
 import org.json.JSONArray;
-import org.json.JSONException;
 import org.json.JSONObject;
 
 import java.text.DecimalFormat;
@@ -303,7 +302,7 @@ public class StockPriceRemainFragment extends BaseFragment implements  View.OnCl
                             mStockNumber = mStockNumber.substring(2, mStockNumber.length());
                             String content = mStockName + "\u2000" + mStockNumber;
                             mRemainSearchEdit.setText(content);
-                            mRemainSearchEdit.setSelection(content.length()-1);
+                            mRemainSearchEdit.setSelection(mRemainSearchEdit.getText().toString().length());
                             String _newPrice = beans.get(0).getNewPrice();
                             String  _zdf = mFormat2.format(beans.get(0).getPriceChangeRatio());
                             if ("0.0".equals(_newPrice)||"0".equals(_newPrice)) {

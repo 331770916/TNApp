@@ -127,7 +127,9 @@ public class StayPaymentAdapter extends BaseAdapter {
         String entrust_amount = map.get("entrust_amount");
         if (entrust_amount != null) {
             int i = entrust_amount.indexOf(".");
-            String substring = entrust_amount.substring(0, i);
+            String substring ="--";
+            if (i!=-1)
+                substring=entrust_amount.substring(0, i);
             holder.textViewS_num.setText(substring);  //申购数量
         }
 
@@ -135,7 +137,9 @@ public class StayPaymentAdapter extends BaseAdapter {
         String occur_amount = map.get("occur_amount");
         if (!TextUtils.isEmpty(occur_amount) && !"0".equals(occur_amount)) {
             int idx = occur_amount.lastIndexOf(".");//查找小数点的位置
-            String strNum = occur_amount.substring(0, idx);//截取从字符串开始到小数点位置的字符串，就是整数部分
+            String strNum ="--";
+            if (idx!=-1)
+                strNum=occur_amount.substring(0, idx);//截取从字符串开始到小数点位置的字符串，就是整数部分
             holder.textViewS_num2.setText(strNum);                 //中签数
         } else {
             holder.textViewS_num2.setText("0");
@@ -207,14 +211,18 @@ public class StayPaymentAdapter extends BaseAdapter {
             String format = format2.format(aDouble);
 
             int idx = occur_amount.lastIndexOf(".");//查找小数点的位置
-            String strNum = occur_amount.substring(0, idx);//截取从字符串开始到小数点位置的字符串，就是整数部分
+            String strNum ="--";
+            if (idx!=-1)
+                strNum=occur_amount.substring(0, idx);//截取从字符串开始到小数点位置的字符串，就是整数部分
             holder.tvZhongQianLv.setText(strNum + "(中签率" + format + "%" + ")");
 
 
         } else if (TextUtils.isEmpty(lotrateonline) && !TextUtils.isEmpty(occur_amount)) {
             if (!"0".equals(occur_amount)) {
                 int idx = occur_amount.lastIndexOf(".");//查找小数点的位置
-                String strNum = occur_amount.substring(0, idx);//截取从字符串开始到小数点位置的字符串，就是整数部分
+                String strNum ="--";
+                if (idx!=-1)
+                    occur_amount.substring(0, idx);//截取从字符串开始到小数点位置的字符串，就是整数部分
                 holder.tvZhongQianLv.setText(strNum + "(中签率" + "0.00" + "%" + ")");
             } else {
                 holder.tvZhongQianLv.setText("0" + "(中签率" + "0.00" + "%" + ")");
@@ -236,13 +244,18 @@ public class StayPaymentAdapter extends BaseAdapter {
         String listdate = map.get("listdate");
         if (!TextUtils.isEmpty(listdate)) {
             String replace1 = listdate.replace("-", ".");
-            String substring1 = replace1.substring(5, replace1.length());
+            String substring1 ="--";
+            if (replace1.length()>0)
+                replace1.substring(5, replace1.length());
             holder.textView_time4.setText(substring1);                                        //时间4
         }
 
         String business_amount = map.get("business_amount");
         if (!TextUtils.isEmpty(business_amount)) {
-            holder.tvPaiHaoShuLiangNum.setText(business_amount.substring(0, business_amount.indexOf(".")));  //配号数量
+            String substring ="--";
+            if (business_amount.contains("."))
+                business_amount.substring(0, business_amount.indexOf("."));
+            holder.tvPaiHaoShuLiangNum.setText(substring);  //配号数量
         } else {
             holder.tvPaiHaoShuLiangNum.setText("0");                     //配号数量
         }
