@@ -57,7 +57,7 @@
                     android:paddingBottom="@dimen/size15"
                     android:paddingTop="@dimen/size15"
                     android:scaleType="center"
-                    android:src="@mipmap/open_fenhongshezhi" />
+                    android:src="@mipmap/etf_sg" />
 
                 <LinearLayout
                     android:layout_width="0dp"
@@ -99,7 +99,7 @@
                     android:paddingBottom="@dimen/size15"
                     android:paddingTop="@dimen/size15"
                     android:scaleType="center"
-                    android:src="@mipmap/open_fenhongshezhi" />
+                    android:src="@mipmap/etf_sh" />
 
                 <LinearLayout
                     android:layout_width="0dp"
@@ -141,7 +141,7 @@
                     android:paddingBottom="@dimen/size15"
                     android:paddingTop="@dimen/size15"
                     android:scaleType="center"
-                    android:src="@mipmap/open_fenhongshezhi" />
+                    android:src="@mipmap/etf_shcd" />
 
                 <LinearLayout
                     android:layout_width="0dp"
@@ -183,7 +183,7 @@
                     android:paddingBottom="@dimen/size15"
                     android:paddingTop="@dimen/size15"
                     android:scaleType="center"
-                    android:src="@mipmap/open_fenhongshezhi" />
+                    android:src="@mipmap/etf_cjcx" />
 
                 <LinearLayout
                     android:layout_width="0dp"
@@ -224,7 +224,7 @@
                     android:paddingBottom="@dimen/size15"
                     android:paddingTop="@dimen/size15"
                     android:scaleType="center"
-                    android:src="@mipmap/open_fenhongshezhi" />
+                    android:src="@mipmap/etf_shlicx"  />
 
                 <LinearLayout
                     android:layout_width="0dp"
@@ -271,7 +271,7 @@
                     android:paddingBottom="@dimen/size15"
                     android:paddingTop="@dimen/size15"
                     android:scaleType="center"
-                    android:src="@mipmap/open_fenhongshezhi" />
+                    android:src="@mipmap/etf_cfgcx" />
 
                 <LinearLayout
                     android:layout_width="0dp"

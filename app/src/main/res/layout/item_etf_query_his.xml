@@ -22,7 +22,7 @@
             android:layout_width="0dp"
             android:layout_height="match_parent"
             android:layout_marginLeft="@dimen/size5"
-            android:layout_weight="1"
+            android:layout_weight="1.5"
             android:orientation="vertical">
 
             <TextView
@@ -56,18 +56,18 @@
 
             <TextView
                 android:id="@+id/tv4"
-                android:layout_width="wrap_content"
+                android:layout_width="match_parent"
                 android:layout_height="wrap_content"
-                android:layout_gravity="center"
+                android:gravity="right"
                 android:layout_marginTop="@dimen/size13"
                 android:textColor="@color/hushenTab_titleColor"
                 android:textSize="@dimen/txtSize13" />
 
             <TextView
                 android:id="@+id/tv5"
-                android:layout_width="wrap_content"
+                android:layout_width="match_parent"
                 android:layout_height="wrap_content"
-                android:layout_gravity="center"
+                android:gravity="right"
                 android:layout_marginBottom="@dimen/size12"
                 android:layout_marginTop="@dimen/size4"
                 android:textColor="@color/hushenTab_titleColor"
@@ -78,7 +78,7 @@
             android:layout_width="0dp"
             android:layout_height="match_parent"
             android:layout_marginRight="@dimen/size10"
-            android:layout_weight="1"
+            android:layout_weight="1.5"
             android:orientation="vertical">
 
             <TextView

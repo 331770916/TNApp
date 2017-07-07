@@ -17,7 +17,7 @@
             android:layout_width="0dp"
             android:layout_height="match_parent"
             android:layout_marginLeft="@dimen/size5"
-            android:layout_weight="1"
+            android:layout_weight="1.5"
             android:orientation="vertical">
 
             <TextView
@@ -51,7 +51,7 @@
 
             <TextView
                 android:id="@+id/tv_tranaction_num"
-                android:layout_width="wrap_content"
+                android:layout_width="match_parent"
                 android:layout_height="wrap_content"
                 android:layout_gravity="right"
                 android:layout_marginRight="@dimen/size21"
@@ -61,7 +61,7 @@
 
             <TextView
                 android:id="@+id/tv_transaction_status"
-                android:layout_width="wrap_content"
+                android:layout_width="match_parent"
                 android:layout_height="wrap_content"
                 android:layout_gravity="right"
                 android:layout_marginBottom="@dimen/size12"
@@ -74,7 +74,7 @@
         <LinearLayout
             android:layout_width="0dip"
             android:layout_height="match_parent"
-            android:layout_weight="1"
+            android:layout_weight="1.5"
             android:gravity="center"
             android:orientation="vertical">
 

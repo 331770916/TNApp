@@ -107,7 +107,7 @@ public class VoteDetailAdapter extends BaseAdapter {
                     tv7.setText(bean.getVote_info() + "(当选人数：" + list.size() + ")");
                     LinearLayout ll = (LinearLayout) convertView.findViewById(R.id.voteSubContent);
                     LayoutParams lp = new LayoutParams(-1,-2);
-                    lp.leftMargin = (int)mContext.getResources().getDimension(R.dimen.size45);
+                    lp.leftMargin = (int)mContext.getResources().getDimension(R.dimen.size85);
                     for (int i = 0; i < list.size(); i++)
                         ll.addView(getSubView(list.get(i)),lp);
                     break;
