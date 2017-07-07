@@ -174,8 +174,8 @@ public class DetailAnnouncementListActivity extends BaseActivity implements View
             @Override
             public void onError(Call call, Exception e, int id) {
                 LogUtil.i(TAG,e.toString());
-
-                dialog.dismiss();     //隐藏菊花
+                if (!isFinishing())
+                    dialog.dismiss();     //隐藏菊花
                 rlDetailAnnouncement.setBackgroundColor(ContextCompat.getColor(DetailAnnouncementListActivity.this,R.color.white));    //背景 为 白色
                 mListView.setVisibility(View.GONE);         //隐藏listView
                 llAnnouncementJiaZai.setVisibility(View.VISIBLE);    //显示 重新加载
@@ -183,7 +183,8 @@ public class DetailAnnouncementListActivity extends BaseActivity implements View
                     @Override
                     public void onClick(View v) {
                         llAnnouncementJiaZai.setVisibility(View.GONE);  //隐藏重新加载图片
-                        dialog.show();      //显示菊花
+                        if (!isFinishing())
+                            dialog.show();      //显示菊花
                         rlDetailAnnouncement.setVisibility(View.VISIBLE);//显示背景
 
                         rlDetailAnnouncement.setBackgroundColor(ContextCompat.getColor(DetailAnnouncementListActivity.this,R.color.dividerColor)); //设置为灰色
@@ -250,7 +251,8 @@ public class DetailAnnouncementListActivity extends BaseActivity implements View
                     e.printStackTrace();
                 }
 
-                dialog.dismiss();      //隐藏菊花
+                if (!isFinishing())
+                    dialog.dismiss();      //隐藏菊花
                 llAnnouncementJiaZai.setVisibility(View.GONE);       //隐藏重新加载
                 rlDetailAnnouncement.setBackgroundColor(ContextCompat.getColor(DetailAnnouncementListActivity.this,R.color.white));      //背景设置为白色
                 mListView.setVisibility(View.VISIBLE);      //请求到数据 展示 listView

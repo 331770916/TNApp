@@ -370,6 +370,7 @@ public class KeyboardUtil {
 
         @Override
         public void onKey(int primaryCode, int[] keyCodes) {
+            if (ed == null) return;
             Editable editable = ed.getText();
             int start = ed.getSelectionStart();
             if (primaryCode == Keyboard.KEYCODE_CANCEL) {// 收起
