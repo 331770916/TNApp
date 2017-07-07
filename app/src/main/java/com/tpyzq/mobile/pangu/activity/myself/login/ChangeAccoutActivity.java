@@ -274,6 +274,9 @@ public class ChangeAccoutActivity extends BaseActivity implements View.OnClickLi
 
         } else {
             UserUtil.Keyboard = "0";   //不启用sessionkey加密
+            UserEntity userEntity=new UserEntity();
+            userEntity.setKeyboard("false");
+            Db_PUB_USERS.UpdateKeyboard(userEntity);
             //数据更新
             UserUtil.refrushUserInfo();
             Intent intent = getIntent();

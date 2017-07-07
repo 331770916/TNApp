@@ -39,7 +39,7 @@ import java.util.List;
 
 public class ETFQueryPager extends BasePager implements InterfaceCollection.InterfaceCallback, ETFHistoryAdapter.ScallCallback {
     private TextView mtvStartTime, mtvFinishTime, fjInquire;
-    private String TAG, startDate, finishDate, position = "" ;
+    private String TAG, startDate, finishDate, position = "";
     private TimePickerView startTime, finishTime;
     private boolean isScallBottom, mIsClean;
     private boolean isCustomRefresh = false;
@@ -48,9 +48,10 @@ public class ETFQueryPager extends BasePager implements InterfaceCollection.Inte
     private ETFHistoryAdapter mAdapter;
     private ImageView iv_isEmpty;
     private int refresh = 30;
-    private String token ;
+    private String token;
 
     private List<EtfDataEntity> myList;
+
     public ETFQueryPager(Context context, String params) {
         super(context, params);
         this.TAG = params;
@@ -110,7 +111,6 @@ public class ETFQueryPager extends BasePager implements InterfaceCollection.Inte
     }
 
 
-
     class MyOnClickListenr implements View.OnClickListener {
 
         @Override
@@ -136,7 +136,7 @@ public class ETFQueryPager extends BasePager implements InterfaceCollection.Inte
                             isCustomRefresh = true;
                             mDialog.show();
                             mAdapter.notifyDataSetChanged();
-                            refresh(position, "30", false,startDate,finishDate);
+                            refresh(position, "30", false, startDate, finishDate);
                         }
                     }
                     break;
@@ -152,13 +152,14 @@ public class ETFQueryPager extends BasePager implements InterfaceCollection.Inte
         }
 
     }
+
     private void reuse() {
         mAdapter.setCallback(this);
         mListView.setAdapter(mAdapter);
         mListView.setEmptyView(iv_isEmpty);
         if (!"ETFQueryCustomPager".equals(TAG))
             mDialog.show();
-        refresh("", "30", false,"","");
+        refresh("", "30", false, "", "");
         mListView.setOnRefreshListener(new PullToRefreshBase.OnRefreshListener<ListView>() {
             @Override
             public void onRefresh(PullToRefreshBase<ListView> refreshView) {
@@ -173,10 +174,10 @@ public class ETFQueryPager extends BasePager implements InterfaceCollection.Inte
                             public void run() {
                                 mListView.onRefreshComplete();
                             }
-                        },500);
+                        }, 500);
 
                     } else {
-                        refresh("", String.valueOf(refresh), false,"","");
+                        refresh("", String.valueOf(refresh), false, "", "");
                     }
 
                 } else if (mListView.isShownFooter()) {
@@ -189,7 +190,7 @@ public class ETFQueryPager extends BasePager implements InterfaceCollection.Inte
                             SystemClock.sleep(1500);
                         }
                     });
-                    refresh(position, "30", true,"","");
+                    refresh(position, "30", true, "", "");
                 }
             }
         });
@@ -217,18 +218,18 @@ public class ETFQueryPager extends BasePager implements InterfaceCollection.Inte
         });
     }
 
-    public void refresh(String page, String num, boolean isClean,String begin_date,String end_date) {
+    public void refresh(String page, String num, boolean isClean, String begin_date, String end_date) {
 
-        if (TAG.equals("ETFQueryTodayPager")){
-                ifc.queryEntrust(token,"0",page,num,TAG,this);
-        }else if (TAG.equals("ETFQueryOneWeekPager")){
-                ifc.queryHistory(token,"","","1",page,num,TAG,this);
-        }else if (TAG.equals("ETFQueryInAMonthPager")){
-            ifc.queryHistory(token,"","","2",page,num,TAG,this);
-        }else if (TAG.equals("ETFQueryThreeWeekPager")){
-            ifc.queryHistory(token,"","","3",page,num,TAG,this);
-        }else if (TAG.equals("ETFQueryCustomPager")){
-            ifc.queryHistory(token,"","","0",page,num,TAG,this);
+        if (TAG.equals("ETFQueryTodayPager")) {
+            ifc.queryEntrust(token, "0", page, num, TAG, this);
+        } else if (TAG.equals("ETFQueryOneWeekPager")) {
+            ifc.queryHistory(token, "", "", "1", page, num, TAG, this);
+        } else if (TAG.equals("ETFQueryInAMonthPager")) {
+            ifc.queryHistory(token, "", "", "2", page, num, TAG, this);
+        } else if (TAG.equals("ETFQueryThreeWeekPager")) {
+            ifc.queryHistory(token, "", "", "3", page, num, TAG, this);
+        } else if (TAG.equals("ETFQueryCustomPager")) {
+            ifc.queryHistory(token, begin_date, end_date, "0", page, num, TAG, this);
         }
 
         mIsClean = isClean;
@@ -249,10 +250,14 @@ public class ETFQueryPager extends BasePager implements InterfaceCollection.Inte
 
     @Override
     public void callResult(ResultInfo info) {
+        if (mDialog != null)
+            mDialog.dismiss();
         String code = info.getCode();
         if ("0".equals(code)) {
-            if (!mIsClean && myList != null)
+            if (!mIsClean && myList != null) {
                 myList.clear();
+                mAdapter.notifyDataSetChanged();
+            }
             Object object = info.getData();
             if (object instanceof List) {
                 myList = (List<EtfDataEntity>) object;
@@ -267,16 +272,8 @@ public class ETFQueryPager extends BasePager implements InterfaceCollection.Inte
         } else {//-1,-2,-3情况下显示定义好信息
             helper.showToast(mContext, info.getMsg());
         }
+        mListView.onRefreshComplete();
 
-        mAdapter.notifyDataSetChanged();
-        mListView.postDelayed(new Runnable() {
-            @Override
-            public void run() {
-                mListView.onRefreshComplete();
-            }
-        },500);
-        if (mDialog != null)
-            mDialog.dismiss();
     }
 
     @Override

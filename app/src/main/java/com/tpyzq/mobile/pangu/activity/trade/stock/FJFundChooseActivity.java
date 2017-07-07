@@ -141,7 +141,7 @@ public class FJFundChooseActivity extends BaseActivity implements View.OnClickLi
     @Override
     public void callResult(ResultInfo info) {
         mDialog.dismiss();
-        if ("-1".equals(info.getCode()) || "-2".equals(info.getCode()) || "-3".equals(info.getCode())) {
+        if ("400".equals(info.getCode()) || "-2".equals(info.getCode()) || "-3".equals(info.getCode())) {
             Helper.getInstance().showToast(this, info.getMsg());
         } else if ("0".equals(info.getCode())) {
 

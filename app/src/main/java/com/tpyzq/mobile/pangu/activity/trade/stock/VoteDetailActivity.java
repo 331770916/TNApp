@@ -42,7 +42,7 @@ public class VoteDetailActivity extends BaseActivity  implements InterfaceCollec
     private VoteDetailAdapter accumulateAdapter,unAccumulateAdapter;
     //accumulate 1累积投票议案  unAccumulate 0非累积投票议案
     private List<NetworkVotingEntity> accumulate,unAccumulate,submitList;
-    private String mSession,meeting_seq="",company_code="",stock_account="",exchange_type="";
+    private String mSession,meeting_seq="",company_code="",stock_account="",exchange_type="",stock_code="";
     private AutoListview accumulateList,unAccumulateList;
     public static final String TAG = "VoteDetailActivity";
     private NetworkVotingEntity entity;
@@ -126,6 +126,7 @@ public class VoteDetailActivity extends BaseActivity  implements InterfaceCollec
                             for (NetworkVotingEntity ve:subList) {
                                 if(!TextUtils.isEmpty(ve.getEntrust_no())){
                                     canSubmit = true;//有一个不为空就可以提交
+                                    stock_code = ve.getStatus();
                                     submitList.add(ve);
                                 }
                             }
@@ -145,17 +146,18 @@ public class VoteDetailActivity extends BaseActivity  implements InterfaceCollec
                                 if(unAccumulate.size()>0)
                                     submitList.addAll(unAccumulate);
                                 mDialog.show();
-                                mInterface.submitVoting(mSession,company_code,exchange_type,meeting_seq,submitList,TAG+"submit",VoteDetailActivity.this);
+                                mInterface.submitVoting(mSession,stock_code,exchange_type,meeting_seq,submitList,TAG+"submit",VoteDetailActivity.this);
                             }
                         },null,String.valueOf(accumulate.size()+unAccumulate.size()),stock_account);
                         dialog.show();
                     }
                 }else{
+                    stock_code = unAccumulate.get(0).getStatus();
                     StructuredFundDialog dialog = new StructuredFundDialog(VoteDetailActivity.this, TAG, new StructuredFundDialog.Expression() {
                         @Override
                         public void State() {
                             mDialog.show();
-                            mInterface.submitVoting(mSession,company_code,exchange_type,meeting_seq,unAccumulate,TAG+"submit",VoteDetailActivity.this);
+                            mInterface.submitVoting(mSession,stock_code,exchange_type,meeting_seq,unAccumulate,TAG+"submit",VoteDetailActivity.this);
                         }
                     },null,String.valueOf(unAccumulate.size()),stock_account);
                     dialog.show();

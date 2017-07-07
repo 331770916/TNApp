@@ -115,7 +115,7 @@ public class ETFStockQueryAdapter extends BaseAdapter{
             viewHolder.ll_isShow.setVisibility(View.GONE);
             viewHolder.tv_code.setText(etfDataEntity.getStock_code());
             viewHolder.tv_name.setText(etfDataEntity.getStock_name());
-            viewHolder.tv_etfcode.setText(etfDataEntity.getStock_code());
+            viewHolder.tv_etfcode.setText(etfDataEntity.getComponent_code());
         }
         return convertView;
     }

@@ -62,8 +62,8 @@ public class ETFStockQueryActivity extends BaseActivity implements View.OnClickL
 
             @Override
             public void onPullUpToRefresh(PullToRefreshBase<ListView> refreshView) {
-                if (mList.size() > 0 && !mList.get(0).getPosition_str().isEmpty()) {
-                    String position = mList.get(0).getPosition_str();
+                if (mList!=null&& mList.size()>0) {
+                    String position = mList.get(mList.size()-1).getPosition_str();
                     requestData(position, "30");
                 }
 
@@ -75,7 +75,7 @@ public class ETFStockQueryActivity extends BaseActivity implements View.OnClickL
         if (!mDialog.isShowing())
             mDialog.show();
 
-        InterfaceCollection.getInstance().constituentStock(token, "", page, num, TAG, this);
+        InterfaceCollection.getInstance().constituentStockList(token,page,num,TAG,this);
     }
 
     @Override

@@ -17,6 +17,7 @@ import com.tpyzq.mobile.pangu.data.ResultInfo;
 import com.tpyzq.mobile.pangu.http.OkHttpUtil;
 import com.tpyzq.mobile.pangu.util.SpUtils;
 import com.tpyzq.mobile.pangu.view.dialog.LoadingDialog;
+import com.tpyzq.mobile.pangu.view.dialog.MistakeDialog;
 
 import java.util.ArrayList;
 
@@ -109,6 +110,17 @@ public class ETFStockListActivity extends BaseActivity {
                         adapter.setPoint(-1);
                     }
                     ArrayList<EtfDataEntity> tempList = (ArrayList<EtfDataEntity>) info.getData();
+                    /*if (null!=tempList&&tempList.size()>0) {
+                        position_str = tempList.get(0).getPosition_str();
+                    } else {
+                        position_str = "";
+                    }*/
+                    if (null!=tempList&&tempList.size()>0) {
+                        position_str = tempList.get(tempList.size()-1).getPosition_str();
+                    }
+                    mList.addAll(tempList);
+                    adapter.notifyDataSetChanged();
+                    lv.onRefreshComplete();
                     //判断是否取到整页数据
                     if (null==tempList||tempList.size()<PAGESIZE){
                         lv.setMode(PullToRefreshBase.Mode.PULL_FROM_START);
@@ -116,20 +128,14 @@ public class ETFStockListActivity extends BaseActivity {
                         lv.setMode(PullToRefreshBase.Mode.BOTH);
                     }
                     //
-                    /*if (null!=tempList&&tempList.size()>0) {
-                        position_str = tempList.get(0).getPosition_str();
-                    } else {
-                        position_str = "";
-                    }*/
-                    if (null!=tempList&&tempList.size()>0) {
-                        position_str = tempList.get(0).getPosition_str();
-                    }
-                    mList.addAll(tempList);
-                    adapter.notifyDataSetChanged();
                 } else {
-                    showToast(msg);
+                    lv.onRefreshComplete();
+                    //在初始化时如果网络失败只允许下拉
+                    if (isRefresh&&mList.size()==0) {
+                        lv.setMode(PullToRefreshBase.Mode.PULL_FROM_START);
+                    }
+                    MistakeDialog.showDialog(msg,ETFStockListActivity.this,null);
                 }
-                lv.onRefreshComplete();
                 if (null!=mDialog && mDialog.isShowing()) {
                     mDialog.dismiss();
                 }

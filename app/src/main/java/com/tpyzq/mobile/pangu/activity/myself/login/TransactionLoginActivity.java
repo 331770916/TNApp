@@ -1336,6 +1336,9 @@ public class TransactionLoginActivity extends BaseActivity implements View.OnCli
             showKeyboardWithHeader();
         } else {
             UserUtil.Keyboard = "0";
+            UserEntity userEntity=new UserEntity();
+            userEntity.setKeyboard("false");
+            Db_PUB_USERS.UpdateKeyboard(userEntity);
             //数据更新
             UserUtil.refrushUserInfo();
             //初始化控件显示

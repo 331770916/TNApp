@@ -269,14 +269,12 @@ public class VoteQueryPager extends BasePager implements InterfaceCollection.Int
                     if(mIsClean)
                         refresh += 30;
                     mAdapter.setData(myList);
-                } else {
-                    helper.showToast(mContext, " 暂无数据");
                 }
             }
         } else if ("-6".equals(code)) {
             skip.startLogin(mContext);
         } else {//-1,-2,-3情况下显示定义好信息
-            helper.showToast(mContext, info.getMsg());
+            mistakeDialog=MistakeDialog.showDialog("提示",info.getMsg(),false,(Activity) mContext,null);
         }
         mListView.onRefreshComplete();
     }

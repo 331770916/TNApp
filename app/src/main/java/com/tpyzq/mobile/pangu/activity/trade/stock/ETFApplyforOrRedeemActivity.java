@@ -11,6 +11,7 @@ import android.widget.ImageView;
 import android.widget.TextView;
 
 import com.tpyzq.mobile.pangu.R;
+import com.tpyzq.mobile.pangu.activity.trade.open_fund.SignActivity;
 import com.tpyzq.mobile.pangu.base.BaseActivity;
 import com.tpyzq.mobile.pangu.base.InterfaceCollection;
 import com.tpyzq.mobile.pangu.data.EtfDataEntity;
@@ -18,6 +19,7 @@ import com.tpyzq.mobile.pangu.data.ResultInfo;
 import com.tpyzq.mobile.pangu.util.Helper;
 import com.tpyzq.mobile.pangu.util.SpUtils;
 import com.tpyzq.mobile.pangu.view.dialog.LoadingDialog;
+import com.tpyzq.mobile.pangu.view.dialog.MistakeDialog;
 import com.tpyzq.mobile.pangu.view.dialog.StructuredFundDialog;
 
 import java.util.List;
@@ -225,7 +227,7 @@ public class ETFApplyforOrRedeemActivity extends BaseActivity implements TextWat
                 available_funds.setText("--");
                 etf_code.setText("--");
                 tv_shareholder.setText("--");
-                Helper.getInstance().showToast(this, info.getMsg());
+                MistakeDialog.showDialog(info.getMsg(), ETFApplyforOrRedeemActivity.this);
                 etfDataEntity = null;
 //                mInputCount.setEnabled(false);
             }
@@ -246,7 +248,7 @@ public class ETFApplyforOrRedeemActivity extends BaseActivity implements TextWat
                 available_funds.setText("--");
                 etf_code.setText("--");
                 tv_shareholder.setText("--");
-                Helper.getInstance().showToast(this, info.getMsg());
+                MistakeDialog.showDialog(info.getMsg(), ETFApplyforOrRedeemActivity.this);
                 etfDataEntity = null;
 //                mInputCount.setEnabled(false);
             }
@@ -266,7 +268,7 @@ public class ETFApplyforOrRedeemActivity extends BaseActivity implements TextWat
             } else if ("-6".equals(code)) {
                 skip.startLogin(this);
             } else {
-                Helper.getInstance().showToast(this, info.getMsg());
+                MistakeDialog.showDialog(info.getMsg(), ETFApplyforOrRedeemActivity.this);
             }
 
         } else if (TAG_REAEEM.equals(info.getTag())) {
@@ -285,7 +287,7 @@ public class ETFApplyforOrRedeemActivity extends BaseActivity implements TextWat
             } else if ("-6".equals(code)) {
                 skip.startLogin(this);
             } else {
-                Helper.getInstance().showToast(this, info.getMsg());
+                MistakeDialog.showDialog(info.getMsg(), ETFApplyforOrRedeemActivity.this);
             }
 
         }

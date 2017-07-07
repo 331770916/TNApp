@@ -36,6 +36,7 @@ public class ETFHistoryInquireActivity extends BaseActivity implements View.OnCl
     private List<BasePager> listBuy = new ArrayList<>();
     private MagicIndicator capital_buy;
     private ViewPager viewPager;
+    private boolean isTrue;
 
     @Override
     public void initView() {
@@ -43,12 +44,6 @@ public class ETFHistoryInquireActivity extends BaseActivity implements View.OnCl
         ((TextView) findViewById(R.id.fj_title)).setText(getString(R.string.ETF_shenshu_History));
         capital_buy = (MagicIndicator) findViewById(R.id.capital_buy);
         viewPager = (ViewPager) findViewById(R.id.fj_view);
-
-    }
-
-    @Override
-    protected void onStart() {
-        super.onStart();
         setIndicatorListen();
     }
 
@@ -66,7 +61,7 @@ public class ETFHistoryInquireActivity extends BaseActivity implements View.OnCl
         }
     }
 
-    private void setIndicatorListen(){
+    private void setIndicatorListen() {
         CommonNavigator commonNavigator = new CommonNavigator(this);
         commonNavigator.setAdjustMode(true);
         commonNavigator.setAdapter(new CommonNavigatorAdapter() {
@@ -108,7 +103,7 @@ public class ETFHistoryInquireActivity extends BaseActivity implements View.OnCl
 
         capital_buy.setNavigator(commonNavigator);
         ViewPagerHelper.bind(capital_buy, viewPager);//TAG ETFTodayPager...
-        todayPager = new ETFQueryPager(this,"ETFQueryTodayPager");
+        todayPager = new ETFQueryPager(this, "ETFQueryTodayPager");
         listBuy.add(todayPager);
         oneWeekPager = new ETFQueryPager(this, "ETFQueryOneWeekPager");
         listBuy.add(oneWeekPager);
