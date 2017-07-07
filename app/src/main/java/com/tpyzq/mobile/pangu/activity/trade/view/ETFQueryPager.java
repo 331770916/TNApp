@@ -263,8 +263,6 @@ public class ETFQueryPager extends BasePager implements InterfaceCollection.Inte
                 myList = (List<EtfDataEntity>) object;
                 if (myList.size() > 0) {
                     mAdapter.setData(myList);
-                } else {
-                    helper.showToast(mContext, " 暂无数据");
                 }
             }
         } else if ("-6".equals(code)) {
