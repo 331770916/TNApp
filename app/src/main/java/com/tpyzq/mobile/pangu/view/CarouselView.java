@@ -147,7 +147,7 @@ public class CarouselView extends ViewPager {
         SimpleDraweeView[] tvs = new SimpleDraweeView[size];
         for (int i = 0; i < tvs.length; i++) {
             tvs[i] = new SimpleDraweeView(getContext());
-            tvs[i].getHierarchy().setActualImageScaleType(ScalingUtils.ScaleType.FIT_CENTER);
+            tvs[i].getHierarchy().setActualImageScaleType(ScalingUtils.ScaleType.FIT_XY);
             ViewGroup.LayoutParams layoutParams = new ViewGroup.LayoutParams(ViewGroup.LayoutParams.MATCH_PARENT, ViewGroup.LayoutParams.MATCH_PARENT);
             tvs[i].setLayoutParams(layoutParams);
             simpleDraweeViews = tvs;

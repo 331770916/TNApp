@@ -60,6 +60,7 @@ public class FJFundSplitActivity extends BaseActivity implements View.OnClickLis
     private InterfaceCollection ifc;
     private StructuredFundEntity bean;
     private Dialog mDialog;
+    private StructuredFundDialog mStructuredFundDialog;
 
 
     @Override
@@ -78,6 +79,7 @@ public class FJFundSplitActivity extends BaseActivity implements View.OnClickLis
         TextView tvCnExpendableFund = (TextView) findViewById(R.id.tvCnExpendableFund);
         tvCnExpendableFund.setText("可拆数量");
         initMonitor();
+        mStructuredFundDialog = new StructuredFundDialog(this);
     }
 
 
@@ -101,8 +103,8 @@ public class FJFundSplitActivity extends BaseActivity implements View.OnClickLis
                 startActivityForResult(intent, REQUSET);
                 break;
             case R.id.butConfirm:
-                StructuredFundDialog dialog = new StructuredFundDialog(this, TAG, this, bean, mAmount_et.getText().toString(), mInput_et.getText().toString());
-                dialog.show();
+                mStructuredFundDialog.setData(TAG, this, bean, mAmount_et.getText().toString(), mInput_et.getText().toString());
+                mStructuredFundDialog.show();
                 break;
         }
     }

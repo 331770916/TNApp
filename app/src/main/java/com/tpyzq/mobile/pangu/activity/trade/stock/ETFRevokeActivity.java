@@ -27,7 +27,7 @@ import java.util.ArrayList;
  * 申赎撤单
  */
 
-public class ETFRevokeActivity extends BaseActivity implements  StructuredFundDialog.Expression {
+public class ETFRevokeActivity extends BaseActivity implements StructuredFundDialog.Expression {
     private ImageView iv_back;
     private PullToRefreshListView lv;
     private ImageView iv_null;
@@ -40,27 +40,29 @@ public class ETFRevokeActivity extends BaseActivity implements  StructuredFundDi
     private Dialog mDialog;//等待条
     private Dialog mSubDialog;//提交等待条
     public EtfDataEntity clickEntity;//点击的条目实体
+
     //    private boolean isMore = true;//是否还有更多
     @Override
     public void initView() {
         mSession = SpUtils.getString(this, "mSession", "");
-        iv_back = (ImageView)findViewById(R.id.iv_back);
+        iv_back = (ImageView) findViewById(R.id.iv_back);
         iv_back.setOnClickListener(new View.OnClickListener() {
             @Override
             public void onClick(View v) {
                 finish();
             }
         });
-        iv_null = (ImageView)findViewById(R.id.iv_null);
-        lv = (PullToRefreshListView)findViewById(R.id.lv);
+        iv_null = (ImageView) findViewById(R.id.iv_null);
+        lv = (PullToRefreshListView) findViewById(R.id.lv);
         lv.setEmptyView(iv_null);
         lv.setMode(PullToRefreshBase.Mode.BOTH);
+        final StructuredFundDialog dialog = new StructuredFundDialog(ETFRevokeActivity.this);
         lv.setOnItemClickListener(new AdapterView.OnItemClickListener() {
 
             @Override
             public void onItemClick(AdapterView<?> parent, View view, int position, long id) {
                 clickEntity = mList.get(position);
-                StructuredFundDialog dialog = new StructuredFundDialog(ETFRevokeActivity.this, TAG, ETFRevokeActivity.this, mList.get(position), null, null);
+                dialog.setData(TAG, ETFRevokeActivity.this, mList.get(position), null, null);
                 dialog.show();
             }
         });
@@ -93,14 +95,14 @@ public class ETFRevokeActivity extends BaseActivity implements  StructuredFundDi
     }
 
     private void initData(final boolean isRefresh) {
-        if (null!=mDialog && !mDialog.isShowing()) {
+        if (null != mDialog && !mDialog.isShowing()) {
             mDialog.show();
         }
         String tempposition_str = position_str;
         if (isRefresh) {
             tempposition_str = "";
         }
-        InterfaceCollection.getInstance().queryEntrust(mSession, "1",tempposition_str, PAGESIZE+"", TAG, new InterfaceCollection.InterfaceCallback() {
+        InterfaceCollection.getInstance().queryEntrust(mSession, "1", tempposition_str, PAGESIZE + "", TAG, new InterfaceCollection.InterfaceCallback() {
             @Override
             public void callResult(ResultInfo info) {
                 String code = info.getCode();
@@ -111,27 +113,27 @@ public class ETFRevokeActivity extends BaseActivity implements  StructuredFundDi
                     }
                     ArrayList<EtfDataEntity> tempList = (ArrayList<EtfDataEntity>) info.getData();
                     //获取定位串
-                    if (null!=tempList&&tempList.size()>0) {
-                        position_str = tempList.get(tempList.size()-1).getPosition_str();
+                    if (null != tempList && tempList.size() > 0) {
+                        position_str = tempList.get(tempList.size() - 1).getPosition_str();
                     }
                     mList.addAll(tempList);
                     adapter.notifyDataSetChanged();
                     lv.onRefreshComplete();
                     //判断是否取到整页数据
-                    if (null==tempList||tempList.size()<PAGESIZE&&lv.getMode()== PullToRefreshBase.Mode.BOTH){
+                    if (null == tempList || tempList.size() < PAGESIZE && lv.getMode() == PullToRefreshBase.Mode.BOTH) {
                         lv.setMode(PullToRefreshBase.Mode.PULL_FROM_START);
-                    } else if (null!=tempList||tempList.size()==PAGESIZE&&lv.getMode()== PullToRefreshBase.Mode.PULL_FROM_START){
+                    } else if (null != tempList || tempList.size() == PAGESIZE && lv.getMode() == PullToRefreshBase.Mode.PULL_FROM_START) {
                         lv.setMode(PullToRefreshBase.Mode.BOTH);
                     }
                 } else {
                     lv.onRefreshComplete();
                     //在初始化时如果网络失败只允许下拉
-                    if (isRefresh&&mList.size()==0) {
+                    if (isRefresh && mList.size() == 0) {
                         lv.setMode(PullToRefreshBase.Mode.PULL_FROM_START);
                     }
-                    MistakeDialog.showDialog(msg,ETFRevokeActivity.this,null);
+                    MistakeDialog.showDialog(msg, ETFRevokeActivity.this, null);
                 }
-                if (null!=mDialog && mDialog.isShowing()) {
+                if (null != mDialog && mDialog.isShowing()) {
                     mDialog.dismiss();
                 }
             }
@@ -149,7 +151,7 @@ public class ETFRevokeActivity extends BaseActivity implements  StructuredFundDi
             return;
         }
 
-        if (null!=mSubDialog && !mSubDialog.isShowing()) {
+        if (null != mSubDialog && !mSubDialog.isShowing()) {
             mSubDialog.show();
         }
         InterfaceCollection.getInstance().revokeOrder(mSession, clickEntity.getExchange_type(), clickEntity.getEntrust_no(), clickEntity.getStock_code(), TAG, new InterfaceCollection.InterfaceCallback() {
@@ -158,11 +160,11 @@ public class ETFRevokeActivity extends BaseActivity implements  StructuredFundDi
                 String code = info.getCode();
                 String msg = info.getMsg();
                 if ("0".equalsIgnoreCase(code)) {
-                    MistakeDialog.showDialog(msg,ETFRevokeActivity.this,null);
+                    MistakeDialog.showDialog(msg, ETFRevokeActivity.this, null);
                 } else {
-                    MistakeDialog.showDialog(msg,ETFRevokeActivity.this,null);
+                    MistakeDialog.showDialog(msg, ETFRevokeActivity.this, null);
                 }
-                if (null!=mSubDialog && mSubDialog.isShowing()) {
+                if (null != mSubDialog && mSubDialog.isShowing()) {
                     mSubDialog.dismiss();
                 }
             }
