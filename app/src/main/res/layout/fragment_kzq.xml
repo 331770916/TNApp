@@ -1,0 +1,70 @@
+<?xml version="1.0" encoding="utf-8"?>
+<LinearLayout xmlns:android="http://schemas.android.com/apk/res/android"
+    android:layout_width="match_parent"
+    android:layout_height="match_parent"
+    android:orientation="vertical">
+
+    <TextView
+        android:layout_width="wrap_content"
+        android:layout_height="wrap_content"
+        android:layout_marginLeft="@dimen/size20"
+        android:layout_marginTop="@dimen/size20"
+        android:layout_marginBottom="@dimen/size10"
+        android:text="请选择需要已开通创业板的深圳股东账户"
+        android:textColor="@color/texts" />
+
+    <LinearLayout
+        android:layout_width="match_parent"
+        android:layout_height="@dimen/size90"
+        android:background="@color/white"
+        android:orientation="horizontal">
+        <LinearLayout
+            android:layout_width="0dp"
+            android:layout_height="match_parent"
+            android:layout_weight="0.6"
+            android:background="@color/white"
+            android:orientation="vertical">
+
+            <TextView
+                android:id="@+id/tv_account"
+                android:layout_width="wrap_content"
+                android:layout_height="0dp"
+                android:layout_marginLeft="@dimen/size20"
+                android:layout_weight="1"
+                android:gravity="center_vertical"
+                android:text="0205" />
+
+            <TextView
+                android:id="@+id/tv_open_time"
+                android:layout_width="wrap_content"
+                android:layout_height="0dp"
+                android:layout_marginLeft="@dimen/size20"
+                android:layout_weight="1"
+                android:gravity="center_vertical"
+                android:text="开通时间:----" />
+        </LinearLayout>
+
+        <TextView
+            android:id="@+id/tv_status"
+            android:layout_width="0dp"
+            android:layout_height="wrap_content"
+            android:layout_gravity="center_vertical"
+            android:layout_weight="0.4"
+            android:gravity="right"
+            android:paddingRight="@dimen/size20"
+            android:text="可转签"
+            android:textColor="@color/blue3" />
+    </LinearLayout>
+
+    <Button
+        android:id="@+id/bt_next"
+        android:layout_width="match_parent"
+        android:layout_height="@dimen/size40"
+        android:layout_marginLeft="@dimen/size20"
+        android:layout_marginRight="@dimen/size20"
+        android:background="@drawable/button_login_pitchon"
+        android:gravity="center"
+        android:text="下一步"
+        android:layout_marginTop="@dimen/size100"
+        android:textColor="@color/white" />
+</LinearLayout>

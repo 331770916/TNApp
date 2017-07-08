@@ -14,8 +14,10 @@ import com.tpyzq.mobile.pangu.R;
 import com.tpyzq.mobile.pangu.activity.myself.handhall.AccountPowerActivity;
 import com.tpyzq.mobile.pangu.activity.myself.handhall.AgreementActivity;
 import com.tpyzq.mobile.pangu.activity.myself.handhall.AgreementSignActvity;
+import com.tpyzq.mobile.pangu.activity.myself.handhall.ChangeDepositBankActivity;
 import com.tpyzq.mobile.pangu.activity.myself.handhall.ChangePasswordActivity;
 import com.tpyzq.mobile.pangu.activity.myself.handhall.FrogetTransactionPwdActivity;
+import com.tpyzq.mobile.pangu.activity.myself.handhall.StartyUpBoardActivity;
 import com.tpyzq.mobile.pangu.activity.myself.handhall.PersonalDataActivity;
 import com.tpyzq.mobile.pangu.activity.myself.handhall.RiskEvaluationActivity;
 import com.tpyzq.mobile.pangu.activity.myself.handhall.StockHolderInfoActivity;
@@ -265,13 +267,13 @@ public class AccountPager extends BaseMySelfPager implements View.OnClickListene
                 mContext.startActivity(intent);
                 break;
             case R.id.tv_gem_sign:
-//                intent.setClass(mContext,StartyUpBoardActivity.class);
-//                mContext.startActivity(intent);
+                intent.setClass(mContext,StartyUpBoardActivity.class);
+                mContext.startActivity(intent);
                 break;
-//            case R.id.tv_three_bankdeposit:
-//                intent.setClass(mContext, ChangBank.class);
-//                mContext.startActivity(intent);
-//                break;
+            case R.id.tv_three_bankdeposit:
+                intent.setClass(mContext, ChangeDepositBankActivity.class);
+                mContext.startActivity(intent);
+                break;
             case R.id.tv_refresh_iccard:
                 intent.setClass(mContext, UpdateIdCodeValidityActivity.class);
                 mContext.startActivity(intent);

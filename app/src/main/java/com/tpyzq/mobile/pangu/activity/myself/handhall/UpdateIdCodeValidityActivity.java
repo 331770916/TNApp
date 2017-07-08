@@ -1,16 +1,11 @@
 package com.tpyzq.mobile.pangu.activity.myself.handhall;
 
-import android.app.ProgressDialog;
+import android.app.Dialog;
 import android.content.DialogInterface;
 import android.content.Intent;
-import android.os.Bundle;
-import android.os.Handler;
-import android.os.Message;
 import android.support.annotation.ColorRes;
 import android.support.v4.content.ContextCompat;
-import android.support.v7.app.AlertDialog;
 import android.text.TextUtils;
-import android.util.Log;
 import android.view.KeyEvent;
 import android.view.LayoutInflater;
 import android.view.View;
@@ -29,6 +24,8 @@ import com.tpyzq.mobile.pangu.http.NetWorkUtil;
 import com.tpyzq.mobile.pangu.http.OkHttpUtil;
 import com.tpyzq.mobile.pangu.util.ConstantUtil;
 import com.tpyzq.mobile.pangu.util.SpUtils;
+import com.tpyzq.mobile.pangu.view.dialog.CancelDialog;
+import com.tpyzq.mobile.pangu.view.dialog.LoadingDialog;
 import com.tpyzq.mobile.pangu.view.pickTime.TimePickerView;
 import com.zhy.http.okhttp.callback.StringCallback;
 
@@ -49,7 +46,7 @@ import okhttp3.Call;
 public class UpdateIdCodeValidityActivity extends BaseActivity implements DialogInterface.OnCancelListener, View.OnClickListener {
 
     private final String TAG = UpdateIdCodeValidityActivity.class.getSimpleName();
-    private ProgressDialog mProgressDialog;
+    private Dialog mProgressDialog;
     private LinearLayout   mParentLayout;
     private UpdateIdCodeValidityEntity mEntity;
     private TextView mRightBtn;
@@ -423,9 +420,11 @@ public class UpdateIdCodeValidityActivity extends BaseActivity implements Dialog
      * @param error_info
      */
     private void sessionFailed (String error_info) {
-        showMistackDialog(error_info, new DialogInterface.OnClickListener() {
+
+
+        showMistackDialog(error_info, new CancelDialog.PositiveClickListener() {
             @Override
-            public void onClick(DialogInterface dialog, int which) {
+            public void onPositiveClick() {
                 Intent intent = new Intent();
                 if (!Db_PUB_USERS.isRegister()) {
                     intent = new Intent(UpdateIdCodeValidityActivity.this, ShouJiZhuCeActivity.class);
@@ -442,6 +441,27 @@ public class UpdateIdCodeValidityActivity extends BaseActivity implements Dialog
                 finish();
             }
         });
+
+
+//        showMistackDialog(error_info, new DialogInterface.OnClickListener() {
+//            @Override
+//            public void onClick(DialogInterface dialog, int which) {
+//                Intent intent = new Intent();
+//                if (!Db_PUB_USERS.isRegister()) {
+//                    intent = new Intent(UpdateIdCodeValidityActivity.this, ShouJiZhuCeActivity.class);
+//                    UpdateIdCodeValidityActivity.this.startActivity(intent);
+//                } else if (!Db_PUB_USERS.islogin()) {
+//                    intent = new Intent();
+//                    intent.setClass(UpdateIdCodeValidityActivity.this, TransactionLoginActivity.class);
+//                    UpdateIdCodeValidityActivity.this.startActivity(intent);
+//                } else {
+//                    intent = new Intent();
+//                    intent.setClass(UpdateIdCodeValidityActivity.this, TransactionLoginActivity.class);
+//                    UpdateIdCodeValidityActivity.this.startActivity(intent);
+//                }
+//                finish();
+//            }
+//        });
     }
 
     /**
@@ -539,12 +559,20 @@ public class UpdateIdCodeValidityActivity extends BaseActivity implements Dialog
                 if (mProgressDialog != null && mProgressDialog.isShowing()) {
                     mProgressDialog.cancel();
                 }
-                showMistackDialog("网络异常", new DialogInterface.OnClickListener() {
+
+                showMistackDialog(ConstantUtil.NETWORK_ERROR, new CancelDialog.PositiveClickListener() {
                     @Override
-                    public void onClick(DialogInterface dialog, int which) {
+                    public void onPositiveClick() {
                         finish();
                     }
                 });
+
+//                showMistackDialog("网络异常", new DialogInterface.OnClickListener() {
+//                    @Override
+//                    public void onClick(DialogInterface dialog, int which) {
+//                        finish();
+//                    }
+//                });
             }
 
             @Override
@@ -554,12 +582,20 @@ public class UpdateIdCodeValidityActivity extends BaseActivity implements Dialog
                 }
 
                 if (TextUtils.isEmpty(response)) {
-                    showMistackDialog("网络数据返回为空", new DialogInterface.OnClickListener() {
+
+                    showMistackDialog(ConstantUtil.SERVICE_NO_DATA, new CancelDialog.PositiveClickListener() {
                         @Override
-                        public void onClick(DialogInterface dialog, int which) {
+                        public void onPositiveClick() {
                             finish();
                         }
                     });
+
+//                    showMistackDialog("网络数据返回为空", new DialogInterface.OnClickListener() {
+//                        @Override
+//                        public void onClick(DialogInterface dialog, int which) {
+//                            finish();
+//                        }
+//                    });
                     return;
                 }
 
@@ -571,12 +607,21 @@ public class UpdateIdCodeValidityActivity extends BaseActivity implements Dialog
                     String errorInfo = jsonObject.getString("error_info");
 
                     if (!"0".equals(error_no)) {
-                        showMistackDialog(errorInfo, new DialogInterface.OnClickListener() {
+
+
+                        showMistackDialog(errorInfo, new CancelDialog.PositiveClickListener() {
                             @Override
-                            public void onClick(DialogInterface dialog, int which) {
+                            public void onPositiveClick() {
                                 finish();
                             }
                         });
+
+//                        showMistackDialog(errorInfo, new DialogInterface.OnClickListener() {
+//                            @Override
+//                            public void onClick(DialogInterface dialog, int which) {
+//                                finish();
+//                            }
+//                        });
                         return;
                     }
 
@@ -589,18 +634,22 @@ public class UpdateIdCodeValidityActivity extends BaseActivity implements Dialog
     }
 
     private void initLoadDialog() {
-        mProgressDialog = new ProgressDialog(this);
+        mProgressDialog = LoadingDialog.initDialog(UpdateIdCodeValidityActivity.this, "正在加载...");
         mProgressDialog.setCanceledOnTouchOutside(false);
-        mProgressDialog.setMessage("正在加载...");
         mProgressDialog.setOnCancelListener(this);
         mProgressDialog.show();
     }
 
-    private void showMistackDialog(String errorMsg,  DialogInterface.OnClickListener onClickListener) {
-        AlertDialog alertDialog = new AlertDialog.Builder(UpdateIdCodeValidityActivity.this).create();
-        alertDialog.setMessage(errorMsg);
-        alertDialog.setCancelable(false);
-        alertDialog.setButton(AlertDialog.BUTTON_POSITIVE, "确定", onClickListener);
-        alertDialog.show();
+    private void showMistackDialog(String errorMsg, CancelDialog.PositiveClickListener listener) {
+        CancelDialog.cancleDialog(UpdateIdCodeValidityActivity.this, errorMsg, CancelDialog.NOT_BUY, listener, null);
     }
+
+//    private void showMistackDialog(String errorMsg,  DialogInterface.OnClickListener onClickListener) {
+//
+//        AlertDialog alertDialog = new AlertDialog.Builder(UpdateIdCodeValidityActivity.this).create();
+//        alertDialog.setMessage(errorMsg);
+//        alertDialog.setCancelable(false);
+//        alertDialog.setButton(AlertDialog.BUTTON_POSITIVE, "确定", onClickListener);
+//        alertDialog.show();
+//    }
 }

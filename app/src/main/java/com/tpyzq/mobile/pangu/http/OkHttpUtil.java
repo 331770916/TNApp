@@ -1,6 +1,7 @@
 package com.tpyzq.mobile.pangu.http;
 
 import com.google.gson.Gson;
+import com.tpyzq.mobile.pangu.http.doConnect.self.NetworkManager;
 import com.zhy.http.okhttp.OkHttpUtils;
 import com.zhy.http.okhttp.builder.GetBuilder;
 import com.zhy.http.okhttp.builder.PostFormBuilder;
@@ -143,4 +144,22 @@ public class OkHttpUtil {
         OkHttpUtils.getInstance().cancelTag(tag);
     }
 
+    /** 提交一个Gson字符串到服务器端自定义时常 */
+    public static void okHttpForPostStringTime (Object tag, String url, Object object,  Callback callback,int time) {
+        PostStringBuilder postStringBuilder =  OkHttpUtils.postString().url(url);
+        if (object == null) {
+            return;
+        }
+
+        postStringBuilder.content(new Gson().toJson(object)).tag(pairTag(tag)).build().readTimeOut(time).execute(callback);
+    }
+
+    private static String pairTag(Object originTag){
+        if (null==originTag)
+            return NetworkManager.getLatestActivityTag();
+        if (originTag instanceof String){
+            return originTag+"||"+NetworkManager.getLatestActivityTag();
+        }
+        return originTag.getClass().getName()+"||"+NetworkManager.getLatestActivityTag();
+    }
 }

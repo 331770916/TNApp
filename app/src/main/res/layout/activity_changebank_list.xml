@@ -1,0 +1,23 @@
+<?xml version="1.0" encoding="utf-8"?>
+<LinearLayout xmlns:android="http://schemas.android.com/apk/res/android"
+    android:orientation="vertical"
+    android:layout_width="match_parent"
+    android:layout_height="match_parent">
+
+    <RelativeLayout
+        android:layout_width="match_parent"
+        android:layout_height="@dimen/size25"
+        android:background="#368CE6"
+        android:clipToPadding="true"
+        android:id="@+id/rl_top_bar"
+        android:fitsSystemWindows="true" />
+
+    <include layout="@layout/updatepwd_top"
+        android:id="@+id/startVideTop" />
+
+    <ListView
+        android:id="@+id/changeBankListView"
+        android:layout_width="match_parent"
+        android:layout_height="match_parent"/>
+
+</LinearLayout>

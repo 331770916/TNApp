@@ -272,6 +272,11 @@
         <activity android:name=".activity.myself.handhall.VideoCheckResultActivity"/>
         <activity android:name=".activity.myself.handhall.UpdatePasswordActivity"/>
         <activity android:name=".activity.myself.handhall.RiskTestDetailActivity"/>
+        <activity android:name=".activity.myself.handhall.ChangeDepositBankActivity"/>
+        <activity android:name=".activity.myself.handhall.DoChangeDepositBankActivity"/>
+        <activity android:name=".activity.myself.handhall.ChangeDepositBankListActivity"/>
+        <activity android:name=".activity.myself.handhall.StartyUpBoardActivity"/>
+        <activity android:name=".activity.myself.handhall.ChooseRelationshipActivity"/>
 
 
 

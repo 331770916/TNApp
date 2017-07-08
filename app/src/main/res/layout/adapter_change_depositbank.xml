@@ -1,0 +1,54 @@
+<?xml version="1.0" encoding="utf-8"?>
+<RelativeLayout xmlns:android="http://schemas.android.com/apk/res/android"
+    android:id="@+id/ll_depositbankItem"
+    android:paddingBottom="@dimen/size10"
+    android:layout_width="match_parent"
+    android:layout_height="match_parent">
+
+
+        <TextView
+            android:id="@+id/account"
+            android:layout_width="wrap_content"
+            android:layout_height="wrap_content"
+            android:layout_centerVertical="true"
+            android:paddingLeft="@dimen/size38"
+            android:paddingTop="@dimen/size10" />
+
+        <RelativeLayout
+            android:layout_width="match_parent"
+            android:layout_height="wrap_content"
+            android:layout_alignParentBottom="true"
+            android:layout_marginBottom="@dimen/size30"
+            android:paddingLeft="@dimen/size38"
+            android:paddingRight="@dimen/size11">
+
+            <ImageView
+                android:id="@+id/state"
+                android:layout_width="wrap_content"
+                android:layout_height="wrap_content"
+                android:layout_centerVertical="true" />
+
+            <TextView
+                android:id="@+id/state_tv"
+                android:layout_width="wrap_content"
+                android:layout_height="wrap_content"
+                android:layout_centerVertical="true"
+                android:layout_toRightOf="@+id/state"
+                android:paddingLeft="@dimen/size5"
+                android:textSize="@dimen/txtSize12" />
+
+            <TextView
+                android:id="@+id/change"
+                android:layout_width="@dimen/size65"
+                android:layout_height="@dimen/size20"
+                android:layout_alignParentRight="true"
+                android:layout_centerVertical="true"
+                android:background="@drawable/bank_bule_rectangle"
+                android:gravity="center"
+                android:text="变更"
+                android:textColor="@color/blue2"
+                android:textSize="@dimen/txtSize12" />
+
+        </RelativeLayout>
+
+</RelativeLayout>

@@ -183,7 +183,6 @@
                 <LinearLayout
                     android:layout_width="wrap_content"
                     android:layout_height="25dp"
-                    android:visibility="gone"
                     android:orientation="horizontal">
 
                     <View
@@ -332,7 +331,6 @@
                         android:textSize="@dimen/txtSize12" />
                 </LinearLayout>
                 <LinearLayout
-                    android:visibility="gone"
                     android:layout_width="wrap_content"
                     android:layout_height="25dp"
                     android:orientation="horizontal">

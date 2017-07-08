@@ -30,9 +30,9 @@ public abstract class BaseFragment extends Fragment {
 
         View view = inflater.inflate(getFragmentLayoutId(), container, false);
         try {
-            initView(view);
             this.mContext = getContext();
             this.mActivity = getActivity();
+            initView(view);
             Field hostField = getClass().getSuperclass().getDeclaredField("mHost");
             hostField.setAccessible(true);
             mHost = (FragmentHostCallback) hostField.get(this);

@@ -90,6 +90,29 @@ public class PanguParameters {
         return map;
     }
 
+    public static Map<String, Integer> getBankBackground2() {
+        Map<String, Integer> map = new HashMap<>();
+        map.put("gfyh", R.mipmap.guangfa);
+        map.put("5555", R.mipmap.mingsheng);
+        map.put("payh", R.mipmap.pingan);
+        map.put("nbyh", R.mipmap.ningbo);
+        map.put("bjyh", R.mipmap.beijing);
+        map.put("hxyh", R.mipmap.huaxia);
+        map.put("3333", R.mipmap.jianshe);
+        map.put("2222", R.mipmap.nongye);
+        map.put("1111", R.mipmap.jiaotong);
+        map.put("7777", R.mipmap.zhongguo);
+        map.put("shyh", R.mipmap.shanghai);
+        map.put("yzcx", R.mipmap.youzheng);
+        map.put("6666", R.mipmap.guangda);
+        map.put("cmbc", R.mipmap.zhaoshang);
+        map.put("4444", R.mipmap.gongshang);
+        map.put("pfyh", R.mipmap.pufa);
+        map.put("9999", R.mipmap.yingye);
+        map.put("8888", R.mipmap.zhongxin);
+        return map;
+    }
+
     public static Map<String, Integer> getBankBgLogo() {
         Map<String, Integer> map = new HashMap<>();
         map.put("1", R.mipmap.bg_bank_jt_ic);

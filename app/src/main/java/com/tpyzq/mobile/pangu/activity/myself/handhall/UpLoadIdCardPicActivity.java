@@ -1,5 +1,6 @@
 package com.tpyzq.mobile.pangu.activity.myself.handhall;
 
+import android.app.Dialog;
 import android.app.ProgressDialog;
 import android.content.DialogInterface;
 import android.content.Intent;
@@ -26,6 +27,7 @@ import com.tpyzq.mobile.pangu.data.UpdateIdCodeValidityEntity;
 import com.tpyzq.mobile.pangu.http.OkHttpUtil;
 import com.tpyzq.mobile.pangu.util.ConstantUtil;
 import com.tpyzq.mobile.pangu.view.dialog.CancelDialog;
+import com.tpyzq.mobile.pangu.view.dialog.LoadingDialog;
 import com.zhy.http.okhttp.callback.StringCallback;
 
 import org.json.JSONObject;
@@ -48,7 +50,7 @@ public class UpLoadIdCardPicActivity extends BaseActivity implements View.OnClic
     public static final int BACK_REQUEST_IMAGE_CAPTURE = 2;
     private final String TAG = UpLoadIdCardPicActivity.class.getSimpleName();
 
-    private ProgressDialog mProgressDialog;
+    private Dialog mProgressDialog;
     private UpdateIdCodeValidityEntity mEntity;
     private TextView mUploadIdCardBtn;
     private TextView mFrontTvResult;
@@ -357,9 +359,9 @@ public class UpLoadIdCardPicActivity extends BaseActivity implements View.OnClic
                     mProgressDialog.cancel();
                 }
 
-                showMistackDialog("网络异常", new DialogInterface.OnClickListener() {
+                showMistackDialog(ConstantUtil.JSON_ERROR, new CancelDialog.PositiveClickListener() {
                     @Override
-                    public void onClick(DialogInterface dialog, int which) {
+                    public void onPositiveClick() {
                         finish();
                     }
                 });
@@ -372,12 +374,14 @@ public class UpLoadIdCardPicActivity extends BaseActivity implements View.OnClic
                 }
 
                 if (TextUtils.isEmpty(response)) {
-                    showMistackDialog("网络数据返回为空", new DialogInterface.OnClickListener() {
+
+                    showMistackDialog(ConstantUtil.SERVICE_NO_DATA, new CancelDialog.PositiveClickListener() {
                         @Override
-                        public void onClick(DialogInterface dialog, int which) {
+                        public void onPositiveClick() {
                             finish();
                         }
                     });
+
                     return;
                 }
 
@@ -389,20 +393,23 @@ public class UpLoadIdCardPicActivity extends BaseActivity implements View.OnClic
                     String errorInfo = jsonObject.getString("error_info");
 
                     if (!"0".equals(error_no)) {
-                        showMistackDialog(errorInfo, new DialogInterface.OnClickListener() {
+
+                        showMistackDialog(errorInfo, new CancelDialog.PositiveClickListener() {
                             @Override
-                            public void onClick(DialogInterface dialog, int which) {
+                            public void onPositiveClick() {
                                 finish();
                             }
                         });
+
                         return;
                     }
 
                 } catch (Exception e) {
                     e.printStackTrace();
-                    showMistackDialog("网络数据解析异常", new DialogInterface.OnClickListener() {
+
+                    showMistackDialog(ConstantUtil.JSON_ERROR, new CancelDialog.PositiveClickListener() {
                         @Override
-                        public void onClick(DialogInterface dialog, int which) {
+                        public void onPositiveClick() {
                             finish();
                         }
                     });
@@ -601,12 +608,15 @@ public class UpLoadIdCardPicActivity extends BaseActivity implements View.OnClic
                     String error_info = jsonObject.getString("error_info");
 
                     if ("0".equals(error_no)) {
-                        showMistackDialog("修改信息已提交审核，请耐心等待。", new DialogInterface.OnClickListener() {
+
+
+                        showMistackDialog("修改信息已提交审核，请耐心等待。", new CancelDialog.PositiveClickListener() {
                             @Override
-                            public void onClick(DialogInterface dialog, int which) {
+                            public void onPositiveClick() {
                                 finish();
                             }
                         });
+
                     } else {
                         showMistackDialog(error_info, null);
                     }
@@ -620,17 +630,22 @@ public class UpLoadIdCardPicActivity extends BaseActivity implements View.OnClic
     }
 
     private void initLoadDialog() {
-        mProgressDialog = new ProgressDialog(this);
+        mProgressDialog = LoadingDialog.initDialog(UpLoadIdCardPicActivity.this, "正在加载...");
         mProgressDialog.setCanceledOnTouchOutside(false);
-        mProgressDialog.setMessage("正在加载...");
         mProgressDialog.setOnCancelListener(this);
         mProgressDialog.show();
     }
 
-    private void showMistackDialog(String errorMsg,  DialogInterface.OnClickListener onClickListener) {
-        AlertDialog alertDialog = new AlertDialog.Builder(UpLoadIdCardPicActivity.this).create();
-        alertDialog.setMessage(errorMsg);
-        alertDialog.setCancelable(false);
-        alertDialog.setButton(AlertDialog.BUTTON_POSITIVE, "确定", onClickListener);
-        alertDialog.show();
-    }}
+    private void showMistackDialog(String errorMsg, CancelDialog.PositiveClickListener listener) {
+        CancelDialog.cancleDialog(UpLoadIdCardPicActivity.this, errorMsg, CancelDialog.NOT_BUY, listener, null);
+    }
+
+//    private void showMistackDialog(String errorMsg,  DialogInterface.OnClickListener onClickListener) {
+//        AlertDialog alertDialog = new AlertDialog.Builder(UpLoadIdCardPicActivity.this).create();
+//        alertDialog.setMessage(errorMsg);
+//        alertDialog.setCancelable(false);
+//        alertDialog.setButton(AlertDialog.BUTTON_POSITIVE, "确定", onClickListener);
+//        alertDialog.show();
+//    }
+
+}

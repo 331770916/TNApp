@@ -1,0 +1,46 @@
+<?xml version="1.0" encoding="utf-8"?>
+<LinearLayout xmlns:android="http://schemas.android.com/apk/res/android"
+    xmlns:tools="http://schemas.android.com/tools"
+    android:orientation="vertical"
+    android:layout_width="match_parent"
+    android:layout_height="match_parent"
+    android:clickable = "true">
+    <!--<TextView-->
+    <!--android:layout_width="wrap_content"-->
+    <!--android:layout_height="wrap_content"-->
+    <!--android:layout_marginLeft="@dimen/size30"-->
+    <!--android:layout_marginRight="@dimen/size30"-->
+    <!--android:layout_marginTop="@dimen/size30"-->
+    <!--android:layout_gravity="center_horizontal"-->
+    <!--android:text="如果您之前已有创业板，那么轻松一步，即可开通创业板，并立即使用！"-->
+    <!--android:id="@+id/textView" />-->
+
+    <!--<TextView-->
+    <!--android:layout_width="wrap_content"-->
+    <!--android:layout_height="wrap_content"-->
+    <!--android:layout_marginTop="@dimen/size20"-->
+    <!--android:layout_marginLeft="@dimen/size30"-->
+    <!--android:textColor="@color/orange1"-->
+    <!--android:text="办理时间:交易日9:00-16:00"-->
+    <!--android:textSize="@dimen/size13"-->
+    <!--/>-->
+    <!--<TextView-->
+    <!--android:layout_width="wrap_content"-->
+    <!--android:layout_height="wrap_content"-->
+    <!--android:text="查看创业板开通结果"-->
+    <!--android:textColor="@color/blue2"-->
+    <!--android:layout_marginTop="@dimen/size90"-->
+    <!--android:layout_marginLeft="@dimen/size30"-->
+    <!--/>-->
+    <!--<Button-->
+    <!--android:id="@+id/bt_wybl"-->
+    <!--android:layout_width="match_parent"-->
+    <!--android:background="@drawable/button_login_pitchon"-->
+    <!--android:text="我要办理"-->
+    <!--android:gravity="center"-->
+    <!--android:layout_marginTop="@dimen/size30"-->
+    <!--android:layout_marginLeft="@dimen/size20"-->
+    <!--android:layout_marginRight="@dimen/size20"-->
+    <!--android:textColor="@color/white"-->
+    <!--android:layout_height="@dimen/size40" />-->
+</LinearLayout>

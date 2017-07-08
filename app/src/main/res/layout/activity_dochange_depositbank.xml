@@ -1,0 +1,191 @@
+<?xml version="1.0" encoding="utf-8"?>
+<LinearLayout xmlns:android="http://schemas.android.com/apk/res/android"
+    android:id="@+id/rootLayout"
+    android:orientation="vertical"
+    android:background="@color/bgColor"
+    android:layout_width="match_parent"
+    android:layout_height="match_parent">
+
+    <RelativeLayout
+        android:layout_width="match_parent"
+        android:layout_height="@dimen/size25"
+        android:background="#368CE6"
+        android:clipToPadding="true"
+        android:id="@+id/rl_top_bar"
+        android:fitsSystemWindows="true" />
+
+    <include layout="@layout/updatepwd_top"
+        android:id="@+id/startVideTop" />
+
+    <TextView
+        android:id="@+id/tv_doChangeDepositHtml"
+        android:layout_width="match_parent"
+        android:paddingLeft="@dimen/size20"
+        android:paddingRight="@dimen/size20"
+        android:paddingTop="@dimen/size20"
+        android:background="#f3f9ff"
+        android:layout_height="wrap_content"/>
+
+    <LinearLayout
+        android:layout_marginTop="@dimen/size10"
+        android:layout_width="match_parent"
+        android:layout_height="wrap_content"
+        android:background="@color/white"
+        android:orientation="vertical">
+
+        <RelativeLayout
+            android:layout_width="match_parent"
+            android:layout_height="wrap_content">
+
+            <TextView
+                android:id="@+id/tv_ddbank"
+                android:layout_width="wrap_content"
+                android:layout_height="wrap_content"
+                android:padding="@dimen/size20"
+                android:gravity="center"
+                android:text="@string/ChangBank_tv7"
+                android:textColor="@color/textss"
+                android:textSize="@dimen/txtSize16" />
+
+
+            <TextView
+                android:id="@+id/tv_SelectBank"
+                android:layout_toRightOf="@id/tv_ddbank"
+                android:layout_width="wrap_content"
+                android:layout_height="wrap_content"
+                android:padding="@dimen/size20"
+                android:layout_alignParentRight="true"
+                android:drawablePadding="@dimen/size5"
+                android:drawableRight="@mipmap/fanhui"
+                android:gravity="right"
+                android:hint="@string/ChangBank_tv11"
+                android:textColor="@color/texts"
+                android:textSize="@dimen/txtSize16" />
+        </RelativeLayout>
+
+        <View
+            android:layout_width="match_parent"
+            android:layout_height="1px"
+            android:layout_marginLeft="@dimen/size20"
+            android:background="@color/bgColor" />
+
+        <RelativeLayout
+            android:layout_width="match_parent"
+            android:layout_height="wrap_content">
+
+            <TextView
+                android:id="@+id/tv_card"
+                android:layout_width="wrap_content"
+                android:layout_height="wrap_content"
+                android:padding="@dimen/size20"
+                android:gravity="center"
+                android:text="@string/ChangBank_tv8"
+                android:textColor="@color/textss"
+                android:textSize="@dimen/txtSize16" />
+
+
+            <EditText
+                android:id="@+id/account"
+                android:layout_width="match_parent"
+                android:layout_height="wrap_content"
+                android:layout_toRightOf="@+id/tv_card"
+                android:background="@null"
+                android:hint="@string/ChangBank_tv12"
+                android:padding="@dimen/size20"
+                android:numeric="integer"
+                android:singleLine="true"
+                android:textColor="@color/texts"
+                android:textSize="@dimen/txtSize16" />
+        </RelativeLayout>
+
+        <View
+            android:layout_width="match_parent"
+            android:layout_height="1px"
+            android:layout_marginLeft="@dimen/size20"
+            android:background="@color/bgColor" />
+
+        <RelativeLayout
+            android:id="@+id/RL_password"
+            android:layout_width="match_parent"
+            android:layout_height="wrap_content">
+
+            <TextView
+                android:id="@+id/tv_pwd"
+                android:layout_width="wrap_content"
+                android:layout_height="wrap_content"
+                android:padding="@dimen/size20"
+                android:gravity="center"
+                android:text="@string/ChangBank_tv9"
+                android:textColor="@color/textss"
+                android:textSize="@dimen/txtSize16" />
+
+
+            <com.tpyzq.mobile.pangu.util.keyboard.NoSoftInputEditText
+                android:id="@+id/password"
+                android:layout_width="match_parent"
+                android:layout_height="wrap_content"
+                android:padding="@dimen/size20"
+                android:layout_toRightOf="@+id/tv_pwd"
+                android:background="@null"
+                android:focusableInTouchMode="true"
+                android:hint="@string/ChangBank_tv10"
+                android:inputType="numberPassword"
+                android:maxLength="6"
+                android:numeric="integer"
+                android:paddingLeft="@dimen/size30"
+                android:singleLine="true"
+                android:textColor="@color/texts"
+                android:textSize="@dimen/txtSize16" />
+        </RelativeLayout>
+
+        <View
+            android:layout_width="match_parent"
+            android:layout_height="1px"
+            android:layout_marginLeft="@dimen/size20"
+            android:background="@color/bgColor" />
+
+    </LinearLayout>
+    <LinearLayout
+        android:id="@+id/pdfLayout"
+        android:layout_width="match_parent"
+        android:layout_height="wrap_content"
+        android:visibility="invisible"
+        android:padding="@dimen/size20"
+        android:orientation="horizontal">
+
+        <CheckBox
+            android:id="@+id/doChangeCheckbox"
+            android:layout_width="wrap_content"
+            android:layout_height="wrap_content"
+            android:button="@null"
+            android:background="@drawable/changebank_checkbg"/>
+
+        <TextView
+            android:layout_width="wrap_content"
+            android:layout_height="wrap_content"
+            android:layout_marginLeft="@dimen/size10"
+            android:text="我已阅读并同意签署"
+            android:textSize="@dimen/txtSize13"
+            android:textColor="@color/texts"/>
+
+        <TextView
+            android:id="@+id/tv_pdf"
+            android:layout_width="wrap_content"
+            android:layout_height="wrap_content"
+            android:layout_marginLeft="@dimen/size10"
+            android:textColor="@color/blue2"
+            android:textSize="@dimen/txtSize13" />
+
+    </LinearLayout>
+
+    <Button
+        android:id="@+id/btn_depository"
+        android:layout_width="match_parent"
+        android:layout_height="wrap_content"
+        android:layout_below="@+id/LinearLayout"
+        android:layout_margin="@dimen/size30"
+        android:background="@drawable/button_login_unchecked"
+        android:text="@string/ChangBank_tv13"
+        android:textColor="@color/white" />
+
+</LinearLayout>

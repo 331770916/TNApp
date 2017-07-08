@@ -1,0 +1,74 @@
+<?xml version="1.0" encoding="utf-8"?>
+<LinearLayout xmlns:android="http://schemas.android.com/apk/res/android"
+    android:layout_width="match_parent"
+    android:layout_height="match_parent"
+    android:background="@color/white"
+    android:orientation="vertical">
+
+    <RelativeLayout
+        android:layout_width="match_parent"
+        android:layout_height="@dimen/size30">
+
+        <TextView
+            android:layout_width="match_parent"
+            android:layout_height="wrap_content"
+            android:layout_centerInParent="true"
+            android:gravity="center_horizontal"
+            android:text="创业板市场投资风险揭示书"
+            android:textColor="@color/pickerview_topbar_title"
+            android:textSize="@dimen/txtSize14" />
+    </RelativeLayout>
+
+    <View
+        android:layout_width="match_parent"
+        android:layout_height="@dimen/size0.5"
+        android:background="@color/lineColor"/>
+
+    <com.github.barteksc.pdfviewer.PDFView
+        android:id="@+id/pdf_info"
+        android:layout_width="match_parent"
+        android:layout_height="0dp"
+        android:layout_weight="1" />
+
+    <LinearLayout
+        android:layout_width="match_parent"
+        android:layout_height="@dimen/size70"
+        android:background="@color/bgColor"
+        android:orientation="horizontal">
+
+        <CheckBox
+            android:id="@+id/cb_risk"
+            android:layout_width="wrap_content"
+            android:layout_height="wrap_content"
+            android:layout_marginLeft="@dimen/size30"
+            android:layout_gravity="center"
+            android:button="@null"
+            android:background="@drawable/changebank_checkbg"
+            android:checked="false"
+            android:gravity="center" />
+
+        <TextView
+            android:layout_width="wrap_content"
+            android:layout_height="wrap_content"
+            android:layout_gravity="center_vertical"
+            android:layout_marginRight="@dimen/size30"
+            android:paddingLeft="@dimen/size5"
+            android:text="我已充分阅读《创业版风险提示书》并知晓创业板市场风险投资" />
+    </LinearLayout>
+
+    <RelativeLayout
+        android:layout_width="match_parent"
+        android:layout_height="@dimen/size70">
+
+        <Button
+            android:id="@+id/bt_true"
+            android:layout_width="match_parent"
+            android:layout_height="@dimen/size40"
+            android:layout_centerInParent="true"
+            android:layout_marginLeft="@dimen/size20"
+            android:layout_marginRight="@dimen/size20"
+            android:background="@drawable/button_login_pitchon"
+            android:text="确定"
+            android:textColor="@color/white" />
+    </RelativeLayout>
+</LinearLayout>
