@@ -138,7 +138,7 @@ public class StructuredFundDialog extends BaseDialog implements View.OnClickList
             tv_10.setText(mStructuredFundEntity.getStock_account());
         } else if (FJWithdrawOrderActivity.TAG.equals(mTAG)) {
             StructuredFundEntity mStructuredFundEntity = (StructuredFundEntity) object;
-            img_1.setImageResource(R.mipmap.bank_img);
+            img_1.setImageResource(R.mipmap.chehui);
             tv_title.setText(R.string.IsRecall);
             tv_2.setText(mStructuredFundEntity.getBusiness_name());
             tv_4.setText(mStructuredFundEntity.getStocken_code());
@@ -151,6 +151,7 @@ public class StructuredFundDialog extends BaseDialog implements View.OnClickList
 
             tv_0.setText("共有" + mShare + "笔委托需要提交，请确认");
             tv_0.setVisibility(View.VISIBLE);
+            tv_0.setTextColor(getContext().getResources().getColor(R.color.hushenTab_titleColor));
 
             tv_1.setText("股东代码：");
             tv_2.setText(mInput);
@@ -168,6 +169,7 @@ public class StructuredFundDialog extends BaseDialog implements View.OnClickList
 
         } else if (ETFApplyforOrRedeemActivity.TAG.equals(mTAG)) {   //  申购
             EtfDataEntity etfDataEntity = (EtfDataEntity) object;
+            img_1.setImageResource(R.mipmap.jy_jijinshengou);
             tv_title.setText("ETF申购");
             tv_1.setText("操作类别:");
             tv_3.setText("ETF代码:");
@@ -181,6 +183,7 @@ public class StructuredFundDialog extends BaseDialog implements View.OnClickList
             tv_10.setText(etfDataEntity.getStock_account());
         } else if (ETFApplyforOrRedeemActivity.TAG_SH.equals(mTAG)) {   //  赎回
             EtfDataEntity etfDataEntity = (EtfDataEntity) object;
+            img_1.setImageResource(R.mipmap.jy_jijingouhui);
             tv_title.setText("ETF赎回");
             tv_1.setText("操作类别:");
             tv_3.setText("ETF代码:");
