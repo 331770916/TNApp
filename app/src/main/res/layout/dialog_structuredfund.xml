@@ -13,8 +13,8 @@
 
         <ImageView
             android:id="@+id/bank_img"
-            android:layout_width="@dimen/size13"
-            android:layout_height="@dimen/size12"
+            android:layout_width="@dimen/size18"
+            android:layout_height="@dimen/size18"
             android:src="@mipmap/bank_img" />
 
         <TextView
