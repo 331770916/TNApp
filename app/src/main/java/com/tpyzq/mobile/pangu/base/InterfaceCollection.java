@@ -2038,7 +2038,7 @@ public class InterfaceCollection {
             @Override
             public void onError(Call call, Exception e, int id) {
                 ResultInfo info = new ResultInfo();
-                info.setCode("-1");
+                info.setCode("400");
                 info.setMsg(ConstantUtil.NETWORK_ERROR);
                 info.setTag(TAG);
                 callback.callResult(info);
