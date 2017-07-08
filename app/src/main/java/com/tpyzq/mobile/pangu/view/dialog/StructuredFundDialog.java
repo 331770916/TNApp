@@ -192,7 +192,6 @@ public class StructuredFundDialog extends BaseDialog implements View.OnClickList
             tv_6.setText(etfDataEntity.getStock_name());
             tv_8.setText(etfDataEntity.getEntrust_amount());
             tv_10.setText(etfDataEntity.getStock_account());
-            tv_8.setText(etfDataEntity.getStock_code());
         } else if (ETFRevokeActivity.TAG.equalsIgnoreCase(mTAG)) {
             EtfDataEntity etfDataEntity = (EtfDataEntity) object;
             tv_title.setText("ETF申赎撤单");

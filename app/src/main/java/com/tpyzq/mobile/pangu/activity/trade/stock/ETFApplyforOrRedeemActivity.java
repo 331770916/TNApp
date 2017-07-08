@@ -3,6 +3,7 @@ package com.tpyzq.mobile.pangu.activity.trade.stock;
 import android.app.Dialog;
 import android.content.Intent;
 import android.text.Editable;
+import android.text.TextUtils;
 import android.text.TextWatcher;
 import android.view.View;
 import android.widget.Button;
@@ -149,7 +150,7 @@ public class ETFApplyforOrRedeemActivity extends BaseActivity implements TextWat
                 }
                 break;
             case R.id.et_input_count:
-                if (!s.toString().isEmpty() && mInputCode.getText().toString().length() == 6) {
+                if (!TextUtils.isEmpty(mInputCount.getText().toString().trim()) && mInputCode.getText().toString().length() == 6) {
                     btSubmit.setBackgroundResource(R.drawable.lonin);
                     btSubmit.setEnabled(true);
                 } else {
