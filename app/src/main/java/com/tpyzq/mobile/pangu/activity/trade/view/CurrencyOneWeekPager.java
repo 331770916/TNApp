@@ -12,13 +12,13 @@ import com.handmark.pulltorefresh.library.PullToRefreshBase;
 import com.handmark.pulltorefresh.library.PullToRefreshListView;
 import com.tpyzq.mobile.pangu.R;
 import com.tpyzq.mobile.pangu.activity.myself.login.TransactionLoginActivity;
+import com.tpyzq.mobile.pangu.activity.trade.BaseSearchPager;
 import com.tpyzq.mobile.pangu.adapter.trade.HBJJTodayPagerAdapter;
 import com.tpyzq.mobile.pangu.data.CurrencyFundEntrustThreeMonthBean;
 import com.tpyzq.mobile.pangu.http.NetWorkUtil;
 import com.tpyzq.mobile.pangu.util.ConstantUtil;
 import com.tpyzq.mobile.pangu.util.Helper;
 import com.tpyzq.mobile.pangu.util.SpUtils;
-import com.tpyzq.mobile.pangu.view.RefreshListView;
 import com.zhy.http.okhttp.callback.StringCallback;
 
 import java.util.ArrayList;
@@ -31,7 +31,7 @@ import okhttp3.Call;
  * 作者：刘泽鹏 on 2016/8/24 09:45
  * 一周
  */
-public class CurrencyOneWeekPager extends BasePager {
+public class CurrencyOneWeekPager extends BaseSearchPager {
 
     private String TAG = "OneWeekPager";
     private PullToRefreshListView mListView;

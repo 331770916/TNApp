@@ -3,9 +3,6 @@ package com.tpyzq.mobile.pangu.activity.trade.view;
 import android.app.Activity;
 import android.content.Context;
 import android.content.Intent;
-import android.os.Handler;
-import android.os.Message;
-import android.os.SystemClock;
 import android.text.TextUtils;
 import android.widget.ImageView;
 import android.widget.ListView;
@@ -15,16 +12,14 @@ import com.google.gson.reflect.TypeToken;
 import com.handmark.pulltorefresh.library.PullToRefreshBase;
 import com.handmark.pulltorefresh.library.PullToRefreshListView;
 import com.tpyzq.mobile.pangu.R;
-import com.tpyzq.mobile.pangu.activity.home.helper.HomeInfomationObsever;
 import com.tpyzq.mobile.pangu.activity.myself.login.TransactionLoginActivity;
+import com.tpyzq.mobile.pangu.activity.trade.BaseSearchPager;
 import com.tpyzq.mobile.pangu.adapter.trade.HBJJTodayPagerAdapter;
 import com.tpyzq.mobile.pangu.data.CurrencyFundEntrustQueryTodayBean;
 import com.tpyzq.mobile.pangu.http.NetWorkUtil;
-import com.tpyzq.mobile.pangu.log.LogUtil;
 import com.tpyzq.mobile.pangu.util.ConstantUtil;
 import com.tpyzq.mobile.pangu.util.Helper;
 import com.tpyzq.mobile.pangu.util.SpUtils;
-import com.tpyzq.mobile.pangu.view.RefreshListView;
 import com.tpyzq.mobile.pangu.view.dialog.MistakeDialog;
 import com.zhy.http.okhttp.callback.StringCallback;
 
@@ -38,7 +33,7 @@ import okhttp3.Call;
  * 作者：刘泽鹏 on 2016/8/23 15:02
  * 货币基金委托查询       今日
  */
-public class CurrencyTodayPager extends BasePager  {
+public class CurrencyTodayPager extends BaseSearchPager  {
 
 
     private String TAG = "TodayPager";

@@ -12,6 +12,7 @@ import com.handmark.pulltorefresh.library.PullToRefreshBase;
 import com.handmark.pulltorefresh.library.PullToRefreshListView;
 import com.tpyzq.mobile.pangu.R;
 import com.tpyzq.mobile.pangu.activity.myself.login.TransactionLoginActivity;
+import com.tpyzq.mobile.pangu.activity.trade.BaseSearchPager;
 import com.tpyzq.mobile.pangu.adapter.trade.HBJJTodayPagerAdapter;
 import com.tpyzq.mobile.pangu.data.CurrencyFundEntrustThreeMonthBean;
 import com.tpyzq.mobile.pangu.http.NetWorkUtil;
@@ -30,7 +31,7 @@ import okhttp3.Call;
  * 作者：刘泽鹏 on 2016/8/24 10:49
  * 三月
  */
-public class CurrencyThreeMonthPager extends BasePager {
+public class CurrencyThreeMonthPager extends BaseSearchPager {
 
     private String TAG = "ThreeMonthPager";
     private PullToRefreshListView mListView;

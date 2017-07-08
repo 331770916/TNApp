@@ -97,8 +97,8 @@ public class ShouJiVerificationActivity extends BaseActivity implements View.OnC
      * EditText的 监听事件
      */
     private void EditTextMonitor() {
-        time = new TimeCount(60000, 1000);
-        time1 = new TimeCount1(60000, 1000);
+        time = new TimeCount(120000, 1000);
+        time1 = new TimeCount1(120000, 1000);
         mSJYZ_ET.setOnClickListener(this);
         mSJYZCaptchabtn.setOnClickListener(this);
         mSoundtv.setOnClickListener(this);

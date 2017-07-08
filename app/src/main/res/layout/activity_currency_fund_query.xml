@@ -37,72 +37,11 @@
             android:textSize="@dimen/pickerview_topbar_title_textsize" />
     </RelativeLayout>
 
-    <RadioGroup
-        android:id="@+id/rgTime_choose"
+    <com.tpyzq.mobile.pangu.view.magicindicator.MagicIndicator
+        android:id="@+id/entrust_buy"
         android:layout_width="match_parent"
-        android:layout_height="@dimen/size40"
-        android:background="@color/white"
-        android:orientation="horizontal">
-
-        <RadioButton
-            android:id="@+id/rb_jinri"
-            style="@style/rbStyle"
-            android:layout_width="0dp"
-            android:layout_height="match_parent"
-            android:layout_marginLeft="@dimen/size5"
-            android:layout_marginRight="@dimen/size5"
-            android:drawableBottom="@drawable/shape_bule_line"
-            android:text="今日"
-            android:textColor="@drawable/text_bkcolor_bule_selector" />
-
-        <RadioButton
-            android:id="@+id/rb_yizhou"
-            style="@style/rbStyle"
-            android:layout_width="0dp"
-            android:layout_height="match_parent"
-            android:text="一周内"
-            android:textColor="@drawable/text_bkcolor_bule_selector" />
-
-        <RadioButton
-            android:id="@+id/rb_yiyue"
-            style="@style/rbStyle"
-            android:layout_width="0dp"
-            android:layout_height="match_parent"
-            android:text="一月内"
-            android:textColor="@drawable/text_bkcolor_bule_selector" />
-
-        <RadioButton
-            android:id="@+id/rb_sanyue"
-            style="@style/rbStyle"
-            android:layout_width="0dp"
-            android:layout_height="match_parent"
-            android:text="三月内"
-            android:textColor="@drawable/text_bkcolor_bule_selector" />
-
-
-        <RadioButton
-            android:id="@+id/rb_zidingyi"
-            style="@style/rbStyle"
-            android:layout_width="0dp"
-            android:layout_height="match_parent"
-            android:text="自定义"
-            android:textColor="@drawable/text_bkcolor_bule_selector" />
-
-
-    </RadioGroup>
-
-    <LinearLayout
-        android:layout_width="match_parent"
-        android:layout_height="wrap_content"
-        android:background="@color/white">
-
-        <ImageView
-            android:id="@+id/ivTab_buttom"
-            android:layout_width="@dimen/size50"
-            android:layout_height="@dimen/size3"
-            android:layout_marginLeft="@dimen/size18"
-            android:background="@color/blue" />
-    </LinearLayout>
+        android:layout_height="@dimen/size35"
+        android:background="@color/white" />
 
     <android.support.v4.view.ViewPager
         android:id="@+id/vpHBJJEntrustQuery"
@@ -110,6 +49,7 @@
         android:layout_height="0dp"
         android:layout_weight="5"
         android:background="@color/backgroundColor" />
+
 
     <!--NoScrollViewPager-->
 

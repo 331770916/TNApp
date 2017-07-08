@@ -1,24 +1,30 @@
 package com.tpyzq.mobile.pangu.activity.trade.currency_fund;
 
-import android.animation.ValueAnimator;
+import android.content.Context;
 import android.support.v4.view.ViewPager;
 import android.view.View;
-import android.widget.ImageView;
-import android.widget.RadioButton;
-import android.widget.RadioGroup;
 
 import com.tpyzq.mobile.pangu.R;
-import com.tpyzq.mobile.pangu.activity.trade.view.BasePager;
+import com.tpyzq.mobile.pangu.activity.trade.BaseSearchPager;
 import com.tpyzq.mobile.pangu.activity.trade.view.CurrencyOneMonthPager;
 import com.tpyzq.mobile.pangu.activity.trade.view.CurrencyOneWeekPager;
 import com.tpyzq.mobile.pangu.activity.trade.view.CurrencyThreeMonthPager;
 import com.tpyzq.mobile.pangu.activity.trade.view.CurrencyTodayPager;
 import com.tpyzq.mobile.pangu.activity.trade.view.CurrencyZiDingYiPager;
-import com.tpyzq.mobile.pangu.adapter.trade.HBJJQueryAdapter;
+import com.tpyzq.mobile.pangu.activity.trade.view.ScaleTransitionPagerTitleView;
+import com.tpyzq.mobile.pangu.adapter.trade.InquireVpAdapter;
 import com.tpyzq.mobile.pangu.base.BaseActivity;
-import com.tpyzq.mobile.pangu.util.TransitionUtils;
+import com.tpyzq.mobile.pangu.view.magicindicator.MagicIndicator;
+import com.tpyzq.mobile.pangu.view.magicindicator.ViewPagerHelper;
+import com.tpyzq.mobile.pangu.view.magicindicator.buildins.commonnavigator.CommonNavigator;
+import com.tpyzq.mobile.pangu.view.magicindicator.buildins.commonnavigator.abs.CommonNavigatorAdapter;
+import com.tpyzq.mobile.pangu.view.magicindicator.buildins.commonnavigator.abs.IPagerIndicator;
+import com.tpyzq.mobile.pangu.view.magicindicator.buildins.commonnavigator.abs.IPagerTitleView;
+import com.tpyzq.mobile.pangu.view.magicindicator.buildins.commonnavigator.indicators.LinePagerIndicator;
+import com.tpyzq.mobile.pangu.view.magicindicator.buildins.commonnavigator.titles.SimplePagerTitleView;
 
 import java.util.ArrayList;
+import java.util.Arrays;
 import java.util.List;
 
 
@@ -27,58 +33,37 @@ import java.util.List;
  * 货币基金委托查询界面
  */
 public class CurrencyFundQueryActivity extends BaseActivity implements View.OnClickListener {
-
-    private RadioButton[] dataChoose = new RadioButton[5];      //存储radioButton的集合
+    private static final String[] buy_vp = new String[]{"今日", "一周内", "一月内", "三月内", "自定义"};
+    private List<String> buy_vp_list = Arrays.asList(buy_vp);
+    private List<BaseSearchPager> pagers = new ArrayList<>();      //存储 View 的集合
+    private MagicIndicator entrust_buy;
     private ViewPager mViewPager;
-    private RadioGroup wt_choose;
-    private int[] wtId;
-    private int position = 0;
-    private ImageView wt_buttom;
-    private List<BasePager> pagers=new ArrayList<BasePager>();      //存储 View 的集合
 
     @Override
     public void initView() {
-        wtId = new int[]{R.id.rb_jinri, R.id.rb_yizhou, R.id.rb_yiyue, R.id.rb_sanyue,R.id.rb_zidingyi};
-
-        wt_choose = (RadioGroup) findViewById(R.id.rgTime_choose);      //radioGroup
-
-        //把radioButton 存入集合
-        dataChoose[0] = (RadioButton) findViewById(R.id.rb_jinri);
-        dataChoose[1] = (RadioButton) findViewById(R.id.rb_yizhou);
-        dataChoose[2]   = (RadioButton) findViewById(R.id.rb_yiyue);
-        dataChoose[3]  = (RadioButton) findViewById(R.id.rb_sanyue);
-        dataChoose[4]= (RadioButton) findViewById(R.id.rb_zidingyi);
-
+        entrust_buy = (MagicIndicator) findViewById(R.id.entrust_buy);
         mViewPager = (ViewPager) findViewById(R.id.vpHBJJEntrustQuery);
-        wt_buttom = (ImageView) findViewById(R.id.ivTab_buttom);            //下划线
         findViewById(R.id.ivHBJJWTCX_back).setOnClickListener(this);
         initData();
+        setIndicatorListen();
+    }
 
-
-
+    private void initData() {
         pagers.add(new CurrencyTodayPager(this));
         pagers.add(new CurrencyOneWeekPager(this));
         pagers.add(new CurrencyOneMonthPager(this));
         pagers.add(new CurrencyThreeMonthPager(this));
         pagers.add(new CurrencyZiDingYiPager(this));
+        mViewPager.setAdapter(new InquireVpAdapter(pagers));
 
-
-        mViewPager.setAdapter(new HBJJQueryAdapter(pagers));
-    }
-
-
-    private void initData() {
         mViewPager.setOnPageChangeListener(new ViewPager.OnPageChangeListener() {
             @Override
             public void onPageScrolled(int position, float positionOffset, int positionOffsetPixels) {
-                setRadioGroupListener();
             }
 
             @Override
             public void onPageSelected(int position) {
                 pagers.get(position);
-                dataChoose[position].setChecked(true);
-                intTabLine(position);
             }
 
             @Override
@@ -86,40 +71,59 @@ public class CurrencyFundQueryActivity extends BaseActivity implements View.OnCl
 
             }
         });
+
     }
 
 
-    private void setRadioGroupListener() {
-        wt_choose.setOnCheckedChangeListener(new RadioGroup.OnCheckedChangeListener() {
+    private void setIndicatorListen() {
+        CommonNavigator commonNavigator = new CommonNavigator(this);
+        commonNavigator.setAdjustMode(true);
+        commonNavigator.setAdapter(new CommonNavigatorAdapter() {
             @Override
-            public void onCheckedChanged(RadioGroup group, int checkedId) {
-                for (int i = 0; i < wtId.length; i++) {
-                    if (wtId[i] == checkedId) {
-                        mViewPager.setCurrentItem(i);
-                        break;
+            public int getCount() {
+                return buy_vp_list == null ? 0 : buy_vp_list.size();
+            }
+
+            @Override
+            public IPagerTitleView getTitleView(Context context, final int index) {
+                SimplePagerTitleView simplePagerTitleView = new ScaleTransitionPagerTitleView(context);
+                simplePagerTitleView.setText(buy_vp_list.get(index));
+                simplePagerTitleView.setTextSize(14);
+                simplePagerTitleView.setNormalColor(getResources().getColor(R.color.bkColor));
+                simplePagerTitleView.setSelectedColor(getResources().getColor(R.color.blue));
+                simplePagerTitleView.setText(buy_vp_list.get(index));
+                simplePagerTitleView.setOnClickListener(new View.OnClickListener() {
+                    @Override
+                    public void onClick(View v) {
+                        mViewPager.setCurrentItem(index);
                     }
+                });
+                return simplePagerTitleView;
+            }
+
+            @Override
+            public IPagerIndicator getIndicator(Context context) {
+                LinePagerIndicator linePagerIndicator = new LinePagerIndicator(context);
+                linePagerIndicator.setMode(LinePagerIndicator.MODE_WRAP_CONTENT);
+                linePagerIndicator.setColors(getResources().getColor(R.color.blue));
+                return linePagerIndicator;
+            }
+
+            @Override
+            public float getTitleWeight(Context context, int index) {
+                if (index == 0) {
+                    return 1.0f;
+                } else if (index == 1) {
+                    return 1.0f;
+                } else if (index == 2) {
+                    return 1.0f;
+                } else {
+                    return 1.0f;
                 }
             }
         });
-    }
-
-    /**
-     * RadioButton下部蓝色小横线平移属性动画
-     *
-     * @param i
-     */
-    private void intTabLine(int i) {
-        ValueAnimator animator = ValueAnimator.ofFloat(position, i * (wt_buttom.getWidth() + TransitionUtils.dp2px(22, this)));
-        animator.setTarget(wt_buttom);
-        animator.setDuration(200).start();
-        animator.addUpdateListener(new ValueAnimator.AnimatorUpdateListener() {
-            @Override
-            public void onAnimationUpdate(ValueAnimator animation) {
-                wt_buttom.setTranslationX((Float) animation.getAnimatedValue());
-            }
-
-        });
-        position = i * (wt_buttom.getWidth() + TransitionUtils.dp2px(24, this));
+        entrust_buy.setNavigator(commonNavigator);
+        ViewPagerHelper.bind(entrust_buy, mViewPager);
     }
 
 
@@ -130,7 +134,7 @@ public class CurrencyFundQueryActivity extends BaseActivity implements View.OnCl
 
     @Override
     public void onClick(View v) {
-        if (v.getId()==R.id.ivHBJJWTCX_back){
+        if (v.getId() == R.id.ivHBJJWTCX_back) {
             finish();
         }
     }
