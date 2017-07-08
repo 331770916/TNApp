@@ -99,69 +99,84 @@ public class VoteQueryAdapter extends BaseAdapter implements View.OnClickListene
         viewHodler.mStockCode.setText(bean.getStock_code());
         viewHodler.mEncode.setText(bean.getVote_motion());
         String statue = bean.getStatus();
-        switch (statue){
+        switch (statue) {
             case "0":
-                statue= "未报";
+                statue = "未报";
                 break;
             case "1":
-                statue= "待报";
+                statue = "待报";
                 break;
             case "2":
-                statue= "已报";
+                statue = "已报";
                 break;
             case "3":
-                statue= "已报待撤";
+                statue = "已报待撤";
                 break;
             case "4":
-                statue= "部成待撤";
+                statue = "部成待撤";
                 break;
             case "5":
-                statue= "部撤";
+                statue = "部撤";
                 break;
             case "6":
-                statue= "已撤";
+                statue = "已撤";
                 break;
             case "7":
-                statue= "部成";
+                statue = "部成";
                 break;
             case "8":
-                statue= "已成";
+                statue = "已成";
                 break;
             case "9":
-                statue= "废单";
+                statue = "废单";
                 break;
             case "A":
-                statue= "已报待改(港股)";
+                statue = "已报待改(港股)";
                 break;
             case "B":
-                statue= "预埋单撤单(港股)";
+                statue = "预埋单撤单(港股)";
                 break;
             case "C":
-                statue= "正报";
+                statue = "正报";
                 break;
             case "D":
-                statue= "撤废";
+                statue = "撤废";
                 break;
             case "E":
-                statue= "部成待改(港股)";
+                statue = "部成待改(港股)";
                 break;
             case "F":
-                statue= "预埋单废单(港股)";
+                statue = "预埋单废单(港股)";
                 break;
             case "G":
-                statue= "单腿成交";
+                statue = "单腿成交";
                 break;
             case "H":
-                statue= "待审核(港股)";
+                statue = "待审核(港股)";
                 break;
             case "J":
-                statue= "复核未通过(港股)";
+                statue = "复核未通过(港股)";
                 break;
             case "M":
-                statue= "Wait for Confirming";
+                statue = "Wait for Confirming";
                 break;
             case "U":
-                statue= "已确认待撤";
+                statue = "已确认待撤";
+                break;
+            case "V":
+                statue = "已确认";
+                break;
+            case "W":
+                statue = "待确认";
+                break;
+            case "X":
+                statue = "预成交";
+                break;
+            case "Y":
+                statue = "购回待确认";
+                break;
+            case "Z":
+                statue = "已购回";
                 break;
         }
         viewHodler.mStatus.setText(statue);
