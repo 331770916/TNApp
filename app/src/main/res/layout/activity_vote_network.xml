@@ -63,11 +63,10 @@
                     android:textStyle="bold" />
 
                 <TextView
+                    android:layout_marginLeft="@dimen/size210"
                     android:id="@+id/voteTitleName"
                     android:layout_width="wrap_content"
                     android:layout_height="match_parent"
-                    android:layout_alignParentRight="true"
-                    android:layout_marginRight="@dimen/size95"
                     android:gravity="center_vertical"
                     android:textSize="@dimen/txtSize15" />
 
@@ -94,11 +93,10 @@
                     android:textStyle="bold" />
 
                 <TextView
+                    android:layout_marginLeft="@dimen/size210"
                     android:id="@+id/voteTitleCode"
                     android:layout_width="wrap_content"
                     android:layout_height="match_parent"
-                    android:layout_alignParentRight="true"
-                    android:layout_marginRight="@dimen/size95"
                     android:gravity="center_vertical"
                     android:textSize="@dimen/txtSize15" />
 
@@ -138,7 +136,7 @@
             <LinearLayout
                 android:id="@+id/vote_gone_unacc"
                 android:layout_width="match_parent"
-                android:layout_height="@dimen/size14"
+                android:layout_height="wrap_content"
                 android:gravity="center"
                 android:visibility="gone">
 
