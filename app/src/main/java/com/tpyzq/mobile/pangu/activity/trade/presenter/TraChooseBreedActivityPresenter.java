@@ -184,7 +184,7 @@ public void getTraBreed() {
                     activity.setHuPager(hu_data);
                     activity.setSzPager(sz_data);
                 } else {
-                    ToastUtils.showShort(activity, "数据异常: " + type);
+//                    ToastUtils.showShort(activity, "数据异常: " + type);
                 }
             } catch (JSONException e) {
                 ToastUtils.showShort(activity, "数据解析异常");
