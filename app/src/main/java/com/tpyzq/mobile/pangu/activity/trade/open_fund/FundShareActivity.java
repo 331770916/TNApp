@@ -20,15 +20,22 @@ import com.tpyzq.mobile.pangu.data.FundShareEntity;
 import com.tpyzq.mobile.pangu.http.NetWorkUtil;
 import com.tpyzq.mobile.pangu.util.ColorUtils;
 import com.tpyzq.mobile.pangu.util.ConstantUtil;
+import com.tpyzq.mobile.pangu.util.Helper;
 import com.tpyzq.mobile.pangu.util.SpUtils;
 import com.tpyzq.mobile.pangu.util.ToastUtils;
+import com.tpyzq.mobile.pangu.view.dialog.MistakeDialog;
+import com.tpyzq.mobile.pangu.view.gridview.MyListView;
+import com.tpyzq.mobile.pangu.view.pullDownGroup.PullDownElasticImp;
+import com.tpyzq.mobile.pangu.view.pullDownGroup.PullDownScrollView;
 import com.zhy.http.okhttp.callback.StringCallback;
 
 import org.json.JSONArray;
 import org.json.JSONException;
 import org.json.JSONObject;
 
+import java.text.SimpleDateFormat;
 import java.util.ArrayList;
+import java.util.Date;
 import java.util.HashMap;
 import java.util.List;
 
@@ -38,7 +45,7 @@ import okhttp3.Call;
  * Created by zhangwenbo on 2016/10/9.
  * 基金份额
  */
-public class FundShareActivity extends BaseActivity implements View.OnClickListener {
+public class FundShareActivity extends BaseActivity implements View.OnClickListener, PullDownScrollView.RefreshListener {
 
     private TextView mMarketPriceTv;
     private TextView mEarnTv;
@@ -49,6 +56,7 @@ public class FundShareActivity extends BaseActivity implements View.OnClickListe
     private List<FundEntity> fundBeans;
     private ImageView iv_kong;
     private LinearLayout ll_content;
+    private PullDownScrollView mPullDownScrollView ;
 
     @Override
     public void initView() {
@@ -58,7 +66,8 @@ public class FundShareActivity extends BaseActivity implements View.OnClickListe
         mMarketPriceTv = (TextView) findViewById(R.id.fundshareMarketPrice);
         rl_view1 = (RelativeLayout) findViewById(R.id.rl_view1);
         rl_view2 = (RelativeLayout) findViewById(R.id.rl_view2);
-        ListView listView = (ListView) findViewById(R.id.fundshareListView);
+        mPullDownScrollView  = (PullDownScrollView) findViewById(R.id.svOtcShate);
+        MyListView listView = (MyListView) findViewById(R.id.fundshareListView);
         iv_kong = (ImageView) findViewById(R.id.iv_kong);
         ll_content = (LinearLayout) findViewById(R.id.ll_content);
         mAdapter = new FundShareAdapter(this);
@@ -66,7 +75,16 @@ public class FundShareActivity extends BaseActivity implements View.OnClickListe
         fundBeans = new ArrayList<FundEntity>();
         iv_kong.setVisibility(View.VISIBLE);
         ll_content.setVisibility(View.GONE);
+        initEvent();
         fundQuery();
+    }
+
+    /**
+     * 下拉刷新Listener
+     */
+    private void initEvent() {
+        mPullDownScrollView.setRefreshListener(this);
+        mPullDownScrollView.setPullDownElastic(new PullDownElasticImp(FundShareActivity.this));
     }
 
     /**
@@ -83,10 +101,13 @@ public class FundShareActivity extends BaseActivity implements View.OnClickListe
         NetWorkUtil.getInstence().okHttpForPostString("", ConstantUtil.URL_JY, map720260, new StringCallback() {
             @Override
             public void onError(Call call, Exception e, int id) {
+                mPullDownScrollView.finishRefresh("");
+                MistakeDialog.showDialog( "提示","网络错误，请检查网络",false, FundShareActivity.this,null).show();
             }
 
             @Override
             public void onResponse(String response, int id) {
+                setTitleTime();
                 if (TextUtils.isEmpty(response)) {
                     return;
                 }
@@ -175,4 +196,18 @@ public class FundShareActivity extends BaseActivity implements View.OnClickListe
     public int getLayoutId() {
         return R.layout.activity_fundshare;
     }
+
+
+    @Override
+    public void onRefresh(PullDownScrollView view) {
+        fundQuery();
+    }
+
+    public void setTitleTime(){
+        SimpleDateFormat format = new SimpleDateFormat("yyyy-MM-dd    hh:mm:ss");
+        String date=format.format(new java.util.Date());
+        mPullDownScrollView.finishRefresh("上次刷新时间:" + date);
+
+    }
+
 }
