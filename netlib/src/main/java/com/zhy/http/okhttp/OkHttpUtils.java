@@ -170,7 +170,7 @@ public class OkHttpUtils
             public void run()
             {
                 try {
-                    if (!(e instanceof IOException))
+                    if (!(e.getMessage().toLowerCase().contains("Cancel".toLowerCase())))
                         callback.onError(call, e, id);
                 } catch (Exception e) {
                     e.printStackTrace();
