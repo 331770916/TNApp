@@ -17,6 +17,7 @@ import com.tpyzq.mobile.pangu.adapter.myself.RiskEvaluationAdapter;
 import com.tpyzq.mobile.pangu.base.BaseActivity;
 import com.tpyzq.mobile.pangu.data.RiskTableEntity;
 import com.tpyzq.mobile.pangu.http.NetWorkUtil;
+import com.tpyzq.mobile.pangu.http.OkHttpUtil;
 import com.tpyzq.mobile.pangu.log.LogHelper;
 import com.tpyzq.mobile.pangu.util.ConstantUtil;
 import com.tpyzq.mobile.pangu.util.Helper;
@@ -670,5 +671,11 @@ public class RiskEvaluationActivity extends BaseActivity implements View.OnClick
             }
 
         });
+    }
+
+    @Override
+    protected void onDestroy() {
+        super.onDestroy();
+        OkHttpUtil.cancelSingleRequestByTag(TAG);
     }
 }
