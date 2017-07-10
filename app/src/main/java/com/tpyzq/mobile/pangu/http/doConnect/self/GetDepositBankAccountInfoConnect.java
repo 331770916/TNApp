@@ -420,6 +420,9 @@ public class GetDepositBankAccountInfoConnect {
 
                     if (!"0".equals(code)) {
                         if (iDoChangeDepBank != null) {
+                            if (TextUtils.isEmpty(msg)) {
+                                msg = "服务未返回错误信息";
+                            }
                             iDoChangeDepBank.error(msg);
                         }
                         return;
