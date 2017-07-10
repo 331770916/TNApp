@@ -205,7 +205,6 @@
                 <LinearLayout
                     android:layout_width="wrap_content"
                     android:layout_height="25dp"
-                    android:visibility="gone"
                     android:orientation="horizontal">
 
                     <View
@@ -355,7 +354,6 @@
                 <LinearLayout
                     android:layout_width="wrap_content"
                     android:layout_height="25dp"
-                    android:visibility="gone"
                     android:orientation="horizontal">
 
                     <View
