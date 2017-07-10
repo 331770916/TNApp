@@ -106,8 +106,6 @@ public class StockListAdapter extends BaseAdapter {
             } else {
                 viewHodler.turnoverPrice.setText(mBeans.get(position).getNewPrice());
             }
-
-
         }
 
 

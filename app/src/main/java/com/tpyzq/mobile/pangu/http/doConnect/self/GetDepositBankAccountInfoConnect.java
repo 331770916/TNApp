@@ -4,6 +4,7 @@ import android.text.TextUtils;
 import com.tpyzq.mobile.pangu.http.OkHttpUtil;
 import com.tpyzq.mobile.pangu.interfac.IChangeDepositBankResult;
 import com.tpyzq.mobile.pangu.util.ConstantUtil;
+import com.tpyzq.mobile.pangu.util.panguutil.UserUtil;
 import com.zhy.http.okhttp.callback.StringCallback;
 
 import org.json.JSONArray;
@@ -76,6 +77,9 @@ public class GetDepositBankAccountInfoConnect {
 
                     if (!"0".equals(code)) {
                         if (changeDepositBankResult != null) {
+                            if ("-1".equals(code)) {
+                                msg = "资金账户 " + "(" + UserUtil.capitalAccount + ")\n" + msg;
+                            }
                             changeDepositBankResult.error(msg);
                         }
                         return;

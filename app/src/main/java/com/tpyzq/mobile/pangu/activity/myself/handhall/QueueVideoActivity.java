@@ -1,9 +1,7 @@
 package com.tpyzq.mobile.pangu.activity.myself.handhall;
 
-import android.content.DialogInterface;
 import android.content.Intent;
 import android.support.v4.content.ContextCompat;
-import android.support.v7.app.AlertDialog;
 import android.text.SpannableString;
 import android.text.Spanned;
 import android.text.TextUtils;
@@ -341,11 +339,7 @@ public class QueueVideoActivity extends BaseActivity implements View.OnClickList
     }
 
 
-    private void showMistackDialog(String errorMsg,  DialogInterface.OnClickListener onClickListener) {
-        AlertDialog alertDialog = new AlertDialog.Builder(QueueVideoActivity.this).create();
-        alertDialog.setMessage(errorMsg);
-        alertDialog.setCancelable(false);
-        alertDialog.setButton(AlertDialog.BUTTON_POSITIVE, "确定", onClickListener);
-        alertDialog.show();
+    private void showMistackDialog(String errorMsg,  CancelDialog.PositiveClickListener onClickListener) {
+        CancelDialog.cancleDialog(QueueVideoActivity.this, errorMsg, onClickListener);
     }
 }

@@ -1,10 +1,10 @@
 package com.tpyzq.mobile.pangu.activity.myself.handhall;
 
+import android.app.Dialog;
 import android.app.ProgressDialog;
 import android.content.DialogInterface;
 import android.content.Intent;
 import android.support.v4.content.ContextCompat;
-import android.support.v7.app.AlertDialog;
 import android.text.Editable;
 import android.text.TextUtils;
 import android.text.TextWatcher;
@@ -19,6 +19,7 @@ import com.tpyzq.mobile.pangu.base.BaseActivity;
 import com.tpyzq.mobile.pangu.http.OkHttpUtil;
 import com.tpyzq.mobile.pangu.util.ConstantUtil;
 import com.tpyzq.mobile.pangu.view.dialog.CancelDialog;
+import com.tpyzq.mobile.pangu.view.dialog.LoadingDialog;
 import com.zhy.http.okhttp.callback.StringCallback;
 
 import org.json.JSONObject;
@@ -47,7 +48,7 @@ public class UpdatePasswordActivity extends BaseActivity implements View.OnClick
     private boolean confirmPasswrodIsNull;
 
     private boolean clickBackKey;//判断用户是否点击返回键取消网络请求
-    private ProgressDialog mProgressDialog;
+    private Dialog mProgressDialog;
 
     @Override
     public void initView() {
@@ -98,17 +99,17 @@ public class UpdatePasswordActivity extends BaseActivity implements View.OnClick
      * @return
      */
     private boolean checkPwd() {
-        if (TextUtils.isEmpty(mNewPasswrod.getText())) {
+        if (TextUtils.isEmpty(mNewPasswrod.getText().toString())) {
             Toast.makeText(this, "新密码不能为空", Toast.LENGTH_SHORT).show();
             return false;
         }
 
-        if (TextUtils.isEmpty(mConfirmPassword.getText())) {
+        if (TextUtils.isEmpty(mConfirmPassword.getText().toString())) {
             Toast.makeText(this, "确认密码不能为空", Toast.LENGTH_SHORT).show();
             return false;
         }
 
-        if (!mNewPasswrod.getText().equals(mConfirmPassword.getText())) {
+        if (!mNewPasswrod.getText().toString().equals(mConfirmPassword.getText().toString())) {
             Toast.makeText(this, "两次输入的密码不同，请重新输入", Toast.LENGTH_SHORT).show();
             return false;
         }
@@ -188,9 +189,9 @@ public class UpdatePasswordActivity extends BaseActivity implements View.OnClick
                     String errorInfo = jsonObject.getString("error_info");
 
                     if (!"0".equals(error_no)) {
-                        showMistackDialog(errorInfo, new DialogInterface.OnClickListener() {
+                        showMistackDialog(errorInfo, new CancelDialog.PositiveClickListener() {
                             @Override
-                            public void onClick(DialogInterface dialog, int which) {
+                            public void onPositiveClick() {
                                 finish();
                             }
                         });
@@ -325,7 +326,7 @@ public class UpdatePasswordActivity extends BaseActivity implements View.OnClick
 
         @Override
         public void afterTextChanged(Editable s) {
-            if (TextUtils.isEmpty(s)) {
+            if (!TextUtils.isEmpty(s)) {
                 settingNextBtn(flag, true);
             } else {
                 settingNextBtn(flag, false);
@@ -335,18 +336,13 @@ public class UpdatePasswordActivity extends BaseActivity implements View.OnClick
 
 
     private void initLoadDialog() {
-        mProgressDialog = new ProgressDialog(this);
+        mProgressDialog = LoadingDialog.initDialog(UpdatePasswordActivity.this, "正在加载...");
         mProgressDialog.setCanceledOnTouchOutside(false);
-        mProgressDialog.setMessage("正在加载...");
         mProgressDialog.setOnCancelListener(this);
         mProgressDialog.show();
     }
 
-    private void showMistackDialog(String errorMsg,  DialogInterface.OnClickListener onClickListener) {
-        AlertDialog alertDialog = new AlertDialog.Builder(UpdatePasswordActivity.this).create();
-        alertDialog.setMessage(errorMsg);
-        alertDialog.setCancelable(false);
-        alertDialog.setButton(AlertDialog.BUTTON_POSITIVE, "确定", onClickListener);
-        alertDialog.show();
+    private void showMistackDialog(String errorMsg,  CancelDialog.PositiveClickListener onClickListener) {
+        CancelDialog.cancleDialog(UpdatePasswordActivity.this, errorMsg, onClickListener);
     }
 }

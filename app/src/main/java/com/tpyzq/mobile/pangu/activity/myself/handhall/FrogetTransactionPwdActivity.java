@@ -1,5 +1,6 @@
 package com.tpyzq.mobile.pangu.activity.myself.handhall;
 
+import android.app.Dialog;
 import android.app.ProgressDialog;
 import android.content.DialogInterface;
 import android.content.Intent;
@@ -22,6 +23,8 @@ import com.tpyzq.mobile.pangu.base.BaseActivity;
 import com.tpyzq.mobile.pangu.data.UpdateIdCodeValidityEntity;
 import com.tpyzq.mobile.pangu.http.OkHttpUtil;
 import com.tpyzq.mobile.pangu.util.ConstantUtil;
+import com.tpyzq.mobile.pangu.view.dialog.CancelDialog;
+import com.tpyzq.mobile.pangu.view.dialog.LoadingDialog;
 import com.zhy.http.okhttp.callback.StringCallback;
 
 import org.json.JSONObject;
@@ -53,7 +56,7 @@ public class FrogetTransactionPwdActivity extends BaseActivity implements View.O
     private boolean  idCardIsNotNull;
 
     private boolean clickBackKey;//判断用户是否点击返回键取消网络请求
-    private ProgressDialog mProgressDialog;
+    private Dialog mProgressDialog;
 
     @Override
     public void initView() {
@@ -90,6 +93,10 @@ public class FrogetTransactionPwdActivity extends BaseActivity implements View.O
         mName.setText("李磊");
 
 //        getServerTime();
+
+//        mFundAccout.setText("680000101");
+//        mIdCard.setText("53220119701202xxxx");
+//        mName.setText("周琴钱");
     }
 
     @Override
@@ -253,9 +260,9 @@ public class FrogetTransactionPwdActivity extends BaseActivity implements View.O
                         ss.setSpan(new ForegroundColorSpan(ContextCompat.getColor(FrogetTransactionPwdActivity.this, R.color.calendarBtnColor)), str1.length(), (str1 + str2).length(), Spanned.SPAN_EXCLUSIVE_EXCLUSIVE);
                         ss.setSpan(new ForegroundColorSpan(ContextCompat.getColor(FrogetTransactionPwdActivity.this, R.color.hushenTab_titleColor)), (str1 + str2).length(), (str1 + str2 + str3).length(), Spanned.SPAN_EXCLUSIVE_EXCLUSIVE);
 
-                        showMistackDialog(ss.toString(), new DialogInterface.OnClickListener() {
+                        showMistackDialog(ss.toString(), new CancelDialog.PositiveClickListener() {
                             @Override
-                            public void onClick(DialogInterface dialog, int which) {
+                            public void onPositiveClick() {
                                 finish();
                             }
                         });
@@ -400,18 +407,20 @@ public class FrogetTransactionPwdActivity extends BaseActivity implements View.O
     }
 
     private void initLoadDialog() {
-        mProgressDialog = new ProgressDialog(this);
+        mProgressDialog = LoadingDialog.initDialog(FrogetTransactionPwdActivity.this, "正在加载...");
         mProgressDialog.setCanceledOnTouchOutside(false);
-        mProgressDialog.setMessage("正在加载...");
         mProgressDialog.setOnCancelListener(this);
         mProgressDialog.show();
     }
 
-    private void showMistackDialog(String errorMsg,  DialogInterface.OnClickListener onClickListener) {
-        AlertDialog alertDialog = new AlertDialog.Builder(FrogetTransactionPwdActivity.this).create();
-        alertDialog.setMessage(errorMsg);
-        alertDialog.setCancelable(false);
-        alertDialog.setButton(AlertDialog.BUTTON_POSITIVE, "确定", onClickListener);
-        alertDialog.show();
+    private void showMistackDialog(String errorMsg,  CancelDialog.PositiveClickListener onClickListener) {
+
+        CancelDialog.cancleDialog(FrogetTransactionPwdActivity.this, errorMsg, onClickListener);
+
+//        AlertDialog alertDialog = new AlertDialog.Builder(FrogetTransactionPwdActivity.this).create();
+//        alertDialog.setMessage(errorMsg);
+//        alertDialog.setCancelable(false);
+//        alertDialog.setButton(AlertDialog.BUTTON_POSITIVE, "确定", onClickListener);
+//        alertDialog.show();
     }
 }

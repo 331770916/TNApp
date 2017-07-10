@@ -1,5 +1,6 @@
 package com.tpyzq.mobile.pangu.activity.myself.handhall;
 
+import android.app.Dialog;
 import android.app.ProgressDialog;
 import android.content.DialogInterface;
 import android.content.Intent;
@@ -15,6 +16,7 @@ import com.tpyzq.mobile.pangu.data.UpdateIdCodeValidityEntity;
 import com.tpyzq.mobile.pangu.http.OkHttpUtil;
 import com.tpyzq.mobile.pangu.util.ConstantUtil;
 import com.tpyzq.mobile.pangu.view.dialog.CancelDialog;
+import com.tpyzq.mobile.pangu.view.dialog.LoadingDialog;
 import com.zhy.http.okhttp.callback.StringCallback;
 
 import org.json.JSONObject;
@@ -37,7 +39,7 @@ public class StartVideoActivity extends BaseActivity implements View.OnClickList
     private UpdateIdCodeValidityEntity mEntity;
 
     private boolean clickBackKey;//判断用户是否点击返回键取消网络请求
-    private ProgressDialog mProgressDialog;
+    private Dialog mProgressDialog;
 
     @Override
     public void initView() {
@@ -145,9 +147,9 @@ public class StartVideoActivity extends BaseActivity implements View.OnClickList
                     String errorInfo = jsonObject.getString("error_info");
 
                     if (!"0".equals(error_no)) {
-                        showMistackDialog(errorInfo, new DialogInterface.OnClickListener() {
+                        showMistackDialog(errorInfo, new CancelDialog.PositiveClickListener() {
                             @Override
-                            public void onClick(DialogInterface dialog, int which) {
+                            public void onPositiveClick() {
                                 finish();
                             }
                         });
@@ -226,18 +228,13 @@ public class StartVideoActivity extends BaseActivity implements View.OnClickList
     }
 
     private void initLoadDialog() {
-        mProgressDialog = new ProgressDialog(this);
+        mProgressDialog = LoadingDialog.initDialog(StartVideoActivity.this, "正在加载...");
         mProgressDialog.setCanceledOnTouchOutside(false);
-        mProgressDialog.setMessage("正在加载...");
         mProgressDialog.setOnCancelListener(this);
         mProgressDialog.show();
     }
 
-    private void showMistackDialog(String errorMsg,  DialogInterface.OnClickListener onClickListener) {
-        AlertDialog alertDialog = new AlertDialog.Builder(StartVideoActivity.this).create();
-        alertDialog.setMessage(errorMsg);
-        alertDialog.setCancelable(false);
-        alertDialog.setButton(AlertDialog.BUTTON_POSITIVE, "确定", onClickListener);
-        alertDialog.show();
+    private void showMistackDialog(String errorMsg,  CancelDialog.PositiveClickListener onClickListener) {
+        CancelDialog.cancleDialog(StartVideoActivity.this, errorMsg, onClickListener);
     }
 }

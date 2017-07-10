@@ -277,6 +277,7 @@
         <activity android:name=".activity.myself.handhall.ChangeDepositBankListActivity"/>
         <activity android:name=".activity.myself.handhall.StartyUpBoardActivity"/>
         <activity android:name=".activity.myself.handhall.ChooseRelationshipActivity"/>
+        <activity android:name=".activity.myself.handhall.VideoView"/>
 
 
 
