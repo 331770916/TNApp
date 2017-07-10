@@ -108,7 +108,6 @@ import java.util.Map;
 import okhttp3.Call;
 
 
-
 /**
  * Created by wangqi on 2016/8/24.
  * 交易登录
@@ -171,7 +170,7 @@ public class TransactionLoginActivity extends BaseActivity implements View.OnCli
     public static final int PAGE_INDEX_ReverseRepoGuideActivity = 48;//国债逆回购
     public static final int PAGE_INDEX_StructuredFundActivity = 49;//分级基金
     public static final int PAGE_INDEX_NetworkVotingActivity = 50;//网络投票
-    public static final  int PAGE_INDEX_ETFNavigationBarActivity = 51;//ETF
+    public static final int PAGE_INDEX_ETFNavigationBarActivity = 51;//ETF
 
     private static final String KEY_BOARD_INPUT_ENCRYPTED_FORMAT = "密码键盘输入加密数据:%s";
     //控件
@@ -624,7 +623,7 @@ public class TransactionLoginActivity extends BaseActivity implements View.OnCli
                 startActivity(intent);
                 break;
             case R.id.tvCaptcha:
-                if (!TransactionLoginActivity.this.isFinishing()  && isKeyboardDialog != null) {
+                if (!TransactionLoginActivity.this.isFinishing() && isKeyboardDialog != null) {
                     isKeyboardDialog.show();
                 }
                 toSecurityCode(isKeyboardDialog);
@@ -650,7 +649,7 @@ public class TransactionLoginActivity extends BaseActivity implements View.OnCli
                 try {
                     JSONObject json = new JSONObject(response);
                     JSONObject data = json.getJSONObject("data");
-                    ip =  data.getString("ip");
+                    ip = data.getString("ip");
                     toConnect();
                 } catch (JSONException e) {
                     toConnect();
@@ -756,17 +755,17 @@ public class TransactionLoginActivity extends BaseActivity implements View.OnCli
                                 mCommit.dismiss();
                             }
                             //存储风险测试结果 测评状态--测评等级--有效期结束日期
-                            SpUtils.putString(TransactionLoginActivity.this,"IS_OVERDUE",IS_OVERDUE);
-                            SpUtils.putString(TransactionLoginActivity.this,"CORP_RISK_LEVEL",CORP_RISK_LEVEL);
-                            SpUtils.putString(TransactionLoginActivity.this,"CORP_END_DATE",CORP_END_DATE);
-                            SpUtils.putString(TransactionLoginActivity.this,"mSession",mSession);
+                            SpUtils.putString(TransactionLoginActivity.this, "IS_OVERDUE", IS_OVERDUE);
+                            SpUtils.putString(TransactionLoginActivity.this, "CORP_RISK_LEVEL", CORP_RISK_LEVEL);
+                            SpUtils.putString(TransactionLoginActivity.this, "CORP_END_DATE", CORP_END_DATE);
+                            SpUtils.putString(TransactionLoginActivity.this, "mSession", mSession);
                             //第一次登录数据库交易账号无数据 添加到数据库
                             if (!DeviceUtil.getDeviceId(CustomApplication.getContext()).equalsIgnoreCase(OLD_TCC) && !android.os.Build.MODEL.equals(OLD_SRRC)) {//换手机登录
-                                getData(mAccount.getText().toString().trim(), "false",mSession);
+                                getData(mAccount.getText().toString().trim(), "false", mSession);
                                 LoginDialog.showDialog("您更换了登录设备，上次使用的设备型号是" + OLD_SRRC, TransactionLoginActivity.this, new MistakeDialog.MistakeDialgoListener() {
                                     @Override
                                     public void doPositive() {
-                                        if ("2".equalsIgnoreCase(IS_OVERDUE)||"3".equalsIgnoreCase(IS_OVERDUE)) {
+                                        if ("2".equalsIgnoreCase(IS_OVERDUE) || "3".equalsIgnoreCase(IS_OVERDUE)) {
                                             //未做或过期弹出风险评测dialog
                                             showCorpDialog();
                                         } else {
@@ -818,10 +817,10 @@ public class TransactionLoginActivity extends BaseActivity implements View.OnCli
      * 不显示弹框，绑定账号请求完成后关闭页面
      */
     private void showDialogOrSaveData() {
-        if ("2".equalsIgnoreCase(IS_OVERDUE)||"3".equalsIgnoreCase(IS_OVERDUE)) {
+        if ("2".equalsIgnoreCase(IS_OVERDUE) || "3".equalsIgnoreCase(IS_OVERDUE)) {
             //弹出风险评测dialog
             showCorpDialog();
-            getData(mAccount.getText().toString().trim(), "false",mSession);
+            getData(mAccount.getText().toString().trim(), "false", mSession);
         } else {
             getData(mAccount.getText().toString().trim(), "true", mSession);
         }
@@ -1056,10 +1055,11 @@ public class TransactionLoginActivity extends BaseActivity implements View.OnCli
         }
     }
 */
+
     /**
      * 新增绑定用户
      */
-    private void setAdded(final String isfinish,String session) {
+    private void setAdded(final String isfinish, String session) {
         HashMap map = new HashMap();
         HashMap map1 = new HashMap();
         map.put("funcid", "800104");
@@ -1125,19 +1125,23 @@ public class TransactionLoginActivity extends BaseActivity implements View.OnCli
         UserEntity userEntity = new UserEntity();
         String mAccount_Str = mAccount.getText().toString().trim();
         //查询资金账号
-        String tradescno = KeyEncryptionUtils.getInstance().localDecryptTradescno().get(0).getTradescno();
-        if (tradescno.contains(mAccount_Str)) {         //数据库数据是否包含 输入字段
-            if (!tradescno.contains(",")) {             //数据库数据是否包含","
-                tradescno = tradescno.replace(mAccount_Str, "");
-                KeyEncryptionUtils.getInstance().localEncryptTradescno(mAccount_Str + "," + tradescno);
-            } else {
-                tradescno = tradescno.replace(mAccount_Str + ",", "");
-                KeyEncryptionUtils.getInstance().localEncryptTradescno(mAccount_Str + "," + tradescno);
-            }
-        } else {
-            KeyEncryptionUtils.getInstance().localEncryptTradescno(mAccount_Str + "," + tradescno);
+        String mTradescno_str = "";
+        List<UserEntity> mTradescno = KeyEncryptionUtils.getInstance().localDecryptTradescno();
+        if (mTradescno.size() > 0) {
+            mTradescno_str = mTradescno.get(0).getTradescno();
         }
 
+        if (mTradescno_str.contains(mAccount_Str)) {         //数据库数据是否包含 输入字段
+            if (!mTradescno_str.contains(",")) {             //数据库数据是否包含","
+                mTradescno_str = mTradescno_str.replace(mAccount_Str, "");
+                KeyEncryptionUtils.getInstance().localEncryptTradescno(mAccount_Str + "," + mTradescno_str);
+            } else {
+                mTradescno_str = mTradescno_str.replace(mAccount_Str + ",", "");
+                KeyEncryptionUtils.getInstance().localEncryptTradescno(mAccount_Str + "," + mTradescno_str);
+            }
+        } else {
+            KeyEncryptionUtils.getInstance().localEncryptTradescno(mAccount_Str + "," + mTradescno_str);
+        }
         //修改是否登录
         userEntity.setIslogin("true");
         //修改资金账号
@@ -1155,7 +1159,7 @@ public class TransactionLoginActivity extends BaseActivity implements View.OnCli
     /**
      * 查询数据库账号判断
      */
-    private void getData(String data, String isfinish,String session) {
+    private void getData(String data, String isfinish, String session) {
         //查询资金账号
         List<UserEntity> userEntities = KeyEncryptionUtils.getInstance().localDecryptTradescno();
         StringBuilder sb = new StringBuilder();
@@ -1165,12 +1169,12 @@ public class TransactionLoginActivity extends BaseActivity implements View.OnCli
         }
         String Tradescno = sb.toString();
         if (TextUtils.isEmpty(Tradescno)) {
-            setAdded(isfinish,session);//绑定账号
+            setAdded(isfinish, session);//绑定账号
         } else {
             if (Tradescno.contains(data)) {
                 setData(isfinish);//修改数据库
             } else {
-                setAdded(isfinish,session);
+                setAdded(isfinish, session);
             }
         }
     }
@@ -1239,7 +1243,7 @@ public class TransactionLoginActivity extends BaseActivity implements View.OnCli
                             if (!TransactionLoginActivity.this.isFinishing()) {
                                 MutualAuthenticationDialog.showDialog("双向认证失败点击退出", TransactionLoginActivity.this);
                             }
-                        }else {
+                        } else {
                             if (!TransactionLoginActivity.this.isFinishing()) {
                                 MutualAuthenticationDialog.showDialog("系统异常", TransactionLoginActivity.this);
                             }
@@ -1311,7 +1315,7 @@ public class TransactionLoginActivity extends BaseActivity implements View.OnCli
     }
 
     private void initYN(boolean is) {
-        if (isKeyboardDialog!=null && isKeyboardDialog.isShowing()){
+        if (isKeyboardDialog != null && isKeyboardDialog.isShowing()) {
             isKeyboardDialog.dismiss();
         }
         if (is) {
@@ -1338,7 +1342,7 @@ public class TransactionLoginActivity extends BaseActivity implements View.OnCli
             showKeyboardWithHeader();
         } else {
             UserUtil.Keyboard = "0";
-            UserEntity userEntity=new UserEntity();
+            UserEntity userEntity = new UserEntity();
             userEntity.setKeyboard("false");
             Db_PUB_USERS.UpdateKeyboard(userEntity);
             //数据更新

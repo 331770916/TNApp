@@ -274,7 +274,7 @@ public class ChangeAccoutActivity extends BaseActivity implements View.OnClickLi
 
         } else {
             UserUtil.Keyboard = "0";   //不启用sessionkey加密
-            UserEntity userEntity=new UserEntity();
+            UserEntity userEntity = new UserEntity();
             userEntity.setKeyboard("false");
             Db_PUB_USERS.UpdateKeyboard(userEntity);
             //数据更新
@@ -521,16 +521,16 @@ public class ChangeAccoutActivity extends BaseActivity implements View.OnClickLi
                                 mCommit.dismiss();
                             }
                             //存储风险测试结果 测评状态--测评等级--有效期结束日期
-                            SpUtils.putString(ChangeAccoutActivity.this,"IS_OVERDUE",IS_OVERDUE);
-                            SpUtils.putString(ChangeAccoutActivity.this,"CORP_RISK_LEVEL",CORP_RISK_LEVEL);
-                            SpUtils.putString(ChangeAccoutActivity.this,"CORP_END_DATE",CORP_END_DATE);
+                            SpUtils.putString(ChangeAccoutActivity.this, "IS_OVERDUE", IS_OVERDUE);
+                            SpUtils.putString(ChangeAccoutActivity.this, "CORP_RISK_LEVEL", CORP_RISK_LEVEL);
+                            SpUtils.putString(ChangeAccoutActivity.this, "CORP_END_DATE", CORP_END_DATE);
                             //第一次登录数据库交易账号无数据 添加到数据库
                             if (!DeviceUtil.getDeviceId(CustomApplication.getContext()).equals(OLD_TCC) && !android.os.Build.MODEL.equals(OLD_SRRC)) {
-                                getData(mBDAccount.getText().toString().trim(), "false",mSession);
+                                getData(mBDAccount.getText().toString().trim(), "false", mSession);
                                 LoginDialog.showDialog("您更换了登录设备，上次使用的设备型号是" + OLD_SRRC, ChangeAccoutActivity.this, new MistakeDialog.MistakeDialgoListener() {
                                     @Override
                                     public void doPositive() {
-                                        if ("2".equalsIgnoreCase(IS_OVERDUE)||"3".equalsIgnoreCase(IS_OVERDUE)) {
+                                        if ("2".equalsIgnoreCase(IS_OVERDUE) || "3".equalsIgnoreCase(IS_OVERDUE)) {
                                             //弹出风险评测dialog
                                             showCorpDialog();
                                         } else {
@@ -575,19 +575,21 @@ public class ChangeAccoutActivity extends BaseActivity implements View.OnClickLi
             });
         }
     }
+
     /**
      * 显示弹框，绑定账号请求完成后不关闭页面
      * 不显示弹框，绑定账号请求完成后关闭页面
      */
     private void showDialogOrSaveData() {
-        if ("2".equalsIgnoreCase(IS_OVERDUE)||"3".equalsIgnoreCase(IS_OVERDUE)) {
+        if ("2".equalsIgnoreCase(IS_OVERDUE) || "3".equalsIgnoreCase(IS_OVERDUE)) {
             //弹出风险评测dialog
             showCorpDialog();
-            getData(mBDAccount.getText().toString().trim(), "false",mSession);
+            getData(mBDAccount.getText().toString().trim(), "false", mSession);
         } else {
             getData(mBDAccount.getText().toString().trim(), "true", mSession);
         }
     }
+
     /**
      * 弹出风险测评弹框
      */
@@ -604,37 +606,39 @@ public class ChangeAccoutActivity extends BaseActivity implements View.OnClickLi
             public void onPositiveClick() {
                 //现在测试按钮
                 isLoginSuc = false;
-                Intent intent = new Intent(ChangeAccoutActivity.this,RiskEvaluationActivity.class);
-                intent.putExtra("isLogin",true);
+                Intent intent = new Intent(ChangeAccoutActivity.this, RiskEvaluationActivity.class);
+                intent.putExtra("isLogin", true);
                 ChangeAccoutActivity.this.startActivity(intent);
                 finish();
             }
-            }, new CancelDialog.NagtiveClickListener() {
-                @Override
-                public void onNagtiveClick() {
-                    //以后再说
+        }, new CancelDialog.NagtiveClickListener() {
+            @Override
+            public void onNagtiveClick() {
+                //以后再说
                     /*isLoginSuc = false;
                     UserEntity userEntity=new UserEntity();
                     userEntity.setIslogin("false");
                     Db_PUB_USERS.UpdateIslogin(userEntity);*/
-                    finish();
+                finish();
             }
         });
     }
+
     /**
      * 是否需要返回业务类进行弹框操作
+     *
      * @return true需要 false不需要
      */
     private boolean isNeedShowCropDialog() {
         boolean flag = false;
         try {
-            String isDialogShow = SpUtils.getString(this,"ISDIALOGSHOW","");//测评状态 存储形式：日期
+            String isDialogShow = SpUtils.getString(this, "ISDIALOGSHOW", "");//测评状态 存储形式：日期
             //状态码--风险等级--到期日期 如：20160606--1--中等--20170606
 //            if (!TextUtils.isEmpty(isDialogShow)) {
             // TODO: 2017/6/26 确定返回日期的格式
             SimpleDateFormat sDateFormat = new SimpleDateFormat("yyyy-MM-dd");
             String date = sDateFormat.format(new java.util.Date());
-            SpUtils.putString(this,"ISDIALOGSHOW",date);
+            SpUtils.putString(this, "ISDIALOGSHOW", date);
             if (!date.equalsIgnoreCase(isDialogShow)) {
                 //今天是第一次登录了，返回业务类进行弹框
                 flag = true;
@@ -648,6 +652,7 @@ public class ChangeAccoutActivity extends BaseActivity implements View.OnClickLi
             return flag;
         }
     }
+
     /**
      * 请求验证码
      */
@@ -948,7 +953,7 @@ public class ChangeAccoutActivity extends BaseActivity implements View.OnClickLi
     /**
      * 新增绑定用户
      */
-    private void setAdded(final String isfinish,String session) {
+    private void setAdded(final String isfinish, String session) {
         HashMap map = new HashMap();
         HashMap map1 = new HashMap();
         map.put("funcid", "800104");
@@ -1018,17 +1023,22 @@ public class ChangeAccoutActivity extends BaseActivity implements View.OnClickLi
         String mAccount_Str = mBDAccount.getText().toString().trim();
 
         //查询资金账号
-        String tradescno = KeyEncryptionUtils.getInstance().localDecryptTradescno().get(0).getTradescno();
-        if (tradescno.contains(mAccount_Str)) {
-            if (!tradescno.contains(",")) {
-                tradescno = tradescno.replace(mAccount_Str, "");
-                KeyEncryptionUtils.getInstance().localEncryptTradescno(mAccount_Str + "," + tradescno);
+        List<UserEntity> mTradescno = KeyEncryptionUtils.getInstance().localDecryptTradescno();
+        String mTradescno_str= "";
+        if (mTradescno.size() > 0) {
+             mTradescno_str = mTradescno.get(0).getTradescno();
+        }
+
+        if (mTradescno_str.contains(mAccount_Str)) {
+            if (!mTradescno_str.contains(",")) {
+                mTradescno_str = mTradescno_str.replace(mAccount_Str, "");
+                KeyEncryptionUtils.getInstance().localEncryptTradescno(mAccount_Str + "," + mTradescno_str);
             } else {
-                tradescno = tradescno.replace(mAccount_Str + ",", "");
-                KeyEncryptionUtils.getInstance().localEncryptTradescno(mAccount_Str + "," + tradescno);
+                mTradescno_str = mTradescno_str.replace(mAccount_Str + ",", "");
+                KeyEncryptionUtils.getInstance().localEncryptTradescno(mAccount_Str + "," + mTradescno_str);
             }
         } else {
-            KeyEncryptionUtils.getInstance().localEncryptTradescno(mAccount_Str + "," + tradescno);
+            KeyEncryptionUtils.getInstance().localEncryptTradescno(mAccount_Str + "," + mTradescno_str);
         }
 
         //修改资金账号
@@ -1225,7 +1235,7 @@ public class ChangeAccoutActivity extends BaseActivity implements View.OnClickLi
     /**
      * 查询数据库账号判断
      */
-    private void getData(String data, String isfinish,String session) {
+    private void getData(String data, String isfinish, String session) {
         //查询资金账号
         List<UserEntity> userEntities = KeyEncryptionUtils.getInstance().localDecryptTradescno();
         StringBuilder sb = new StringBuilder();
@@ -1236,12 +1246,12 @@ public class ChangeAccoutActivity extends BaseActivity implements View.OnClickLi
 
         String Tradescno = sb.toString();
         if (TextUtils.isEmpty(Tradescno)) {
-            setAdded(isfinish,session);
+            setAdded(isfinish, session);
         } else {
             if (Tradescno.contains(data)) {
                 setData(isfinish);
             } else {
-                setAdded(isfinish,session);
+                setAdded(isfinish, session);
             }
         }
     }
