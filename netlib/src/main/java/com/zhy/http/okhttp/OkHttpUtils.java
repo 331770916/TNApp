@@ -191,11 +191,6 @@ public class OkHttpUtils
                     callback.onResponse(object, id);
                 } catch (Exception e) {
                     e.printStackTrace();
-                    try {
-                        callback.onError(call, e, id);
-                    } catch (Exception e1) {
-                        e1.printStackTrace();
-                    }
                 }
                 callback.onAfter(id);
             }
