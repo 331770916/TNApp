@@ -68,7 +68,6 @@ public class TakeAPositionActivity extends BaseActivity implements AdapterView.O
     private LinearLayout mBackground;
     private List<TakeAPositionEntity> beans;
     private ImageView iv_isEmpty;
-    private TextView mView;
     private AutoListview mCcListView;
     private RelativeLayout RelativeLayout_color_1, RelativeLayout_color_2;
     private PullDownScrollView mPullDownScrollView;
@@ -99,7 +98,7 @@ public class TakeAPositionActivity extends BaseActivity implements AdapterView.O
         mPullDownScrollView = (PullDownScrollView) findViewById(R.id.pullDownId);
         mPullDownScrollView.setRefreshListener(this);
         mPullDownScrollView.setPullDownElastic(new PullDownElasticImp(TakeAPositionActivity.this));
-        toConnect();
+        toConnect(false);
     }
 
 
@@ -119,8 +118,10 @@ public class TakeAPositionActivity extends BaseActivity implements AdapterView.O
             finish();
         }
     }
+
     JSONArray tempArray = null;
-    private void toConnect() {
+
+    private void toConnect(final boolean isClean) {
         String mSession = SpUtils.getString(this, "mSession", "");
         Map map = new HashMap();
         Map map2 = new HashMap();
@@ -136,11 +137,19 @@ public class TakeAPositionActivity extends BaseActivity implements AdapterView.O
             @Override
             public void onError(Call call, Exception e, int id) {
                 LogHelper.e(TAG, e.toString());
+                if (isClean){
+                    mExpandedMenuPos = -1;
+                    mPullDownScrollView.finishRefresh("上次刷新时间:" + new SimpleDateFormat("yyyy-MM-dd HH:mm:ss").format(new Date()));
+                }
                 ResultDialog.getInstance().showText("网络异常");
             }
 
             @Override
             public void onResponse(String response, int id) {
+                if (isClean){
+                    mExpandedMenuPos = -1;
+                    mPullDownScrollView.finishRefresh("上次刷新时间:" + new SimpleDateFormat("yyyy-MM-dd HH:mm:ss").format(new Date()));
+                }
                 if (TextUtils.isEmpty(response)) {
                     return;
                 }
@@ -226,12 +235,13 @@ public class TakeAPositionActivity extends BaseActivity implements AdapterView.O
             }
         });
     }
-    Handler saveMyHoldStkHandler = new Handler(){
+
+    Handler saveMyHoldStkHandler = new Handler() {
         @Override
         public void handleMessage(Message msg) {
             super.handleMessage(msg);
-            if(tempArray!=null){
-                try{
+            if (tempArray != null) {
+                try {
                     HOLD_SEQ.deleteAll();
                     ArrayList<StockInfoEntity> stockInfoEntities = new ArrayList<StockInfoEntity>();
                     for (int j = 0; j < tempArray.length(); j++) {
@@ -252,14 +262,6 @@ public class TakeAPositionActivity extends BaseActivity implements AdapterView.O
             }
         }
     };
-//    @Override
-//    protected void onStart() {
-//        super.onStart();
-//        if (beans.size() > 0 && beans != null) {
-//            beans.clear();
-//        }
-//        toConnect();
-//    }
 
     @Override
     public int getLayoutId() {
@@ -268,17 +270,7 @@ public class TakeAPositionActivity extends BaseActivity implements AdapterView.O
 
     @Override
     public void onRefresh(PullDownScrollView view) {
-        new Handler().postDelayed(new Runnable() {
-
-            @Override
-            public void run() {
-                DateFormat format1 = new SimpleDateFormat("yyyy-MM-dd HH:mm:ss");
-                String bDate = format1.format(new Date());
-                toConnect();
-//                mPullDownScrollView.finishRefresh("上次刷新时间:" + bDate);
-                mPullDownScrollView.finishRefresh("");
-            }
-        }, 2000);
+        toConnect(true);
     }
 
     class MyAdapter extends BaseAdapter {
