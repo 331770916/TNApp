@@ -9,11 +9,13 @@ import android.text.TextUtils;
 import android.view.LayoutInflater;
 import android.view.View;
 import android.view.ViewGroup;
+import android.widget.AbsListView;
 import android.widget.AdapterView;
 import android.widget.BaseAdapter;
 import android.widget.ImageView;
 import android.widget.LinearLayout;
 import android.widget.RelativeLayout;
+import android.widget.ScrollView;
 import android.widget.TextView;
 
 import com.tpyzq.mobile.pangu.R;
@@ -69,6 +71,7 @@ public class TakeAPositionActivity extends BaseActivity implements AdapterView.O
     private List<TakeAPositionEntity> beans;
     private ImageView iv_isEmpty;
     private AutoListview mCcListView;
+    private ScrollView scroll_view;
     private RelativeLayout RelativeLayout_color_1, RelativeLayout_color_2;
     private PullDownScrollView mPullDownScrollView;
 
@@ -78,7 +81,7 @@ public class TakeAPositionActivity extends BaseActivity implements AdapterView.O
         beans = new ArrayList<TakeAPositionEntity>();
         findViewById(R.id.detail_back).setOnClickListener(this);
         mBackground = (LinearLayout) findViewById(R.id.LL);
-
+        scroll_view = (ScrollView)findViewById(R.id.takeapostion_scroll);
         RelativeLayout_color_1 = (RelativeLayout) findViewById(R.id.rl_top_bar);
         RelativeLayout_color_2 = (RelativeLayout) findViewById(R.id.RelativeLayout_color_2);
         iv_isEmpty = (ImageView) findViewById(R.id.iv_isEmpty);
@@ -94,13 +97,11 @@ public class TakeAPositionActivity extends BaseActivity implements AdapterView.O
         mCcListView.setAdapter(adapter);
         mCcListView.setEmptyView(iv_isEmpty);
         mCcListView.setOnItemClickListener(this);
-
         mPullDownScrollView = (PullDownScrollView) findViewById(R.id.pullDownId);
         mPullDownScrollView.setRefreshListener(this);
         mPullDownScrollView.setPullDownElastic(new PullDownElasticImp(TakeAPositionActivity.this));
         toConnect(false);
     }
-
 
     @Override
     public void onItemClick(AdapterView<?> parent, View view, int position, long id) {
@@ -110,7 +111,17 @@ public class TakeAPositionActivity extends BaseActivity implements AdapterView.O
             mExpandedMenuPos = position;
         }
         adapter.notifyDataSetChanged();
+        if (beans.size()-1==position) {
+            scroll_view.post(new Runnable() {
+                @Override
+                public void run() {
+                    scroll_view.fullScroll(ScrollView.FOCUS_DOWN);
+                }
+            });
+        }
     }
+
+
 
     @Override
     public void onClick(View v) {
