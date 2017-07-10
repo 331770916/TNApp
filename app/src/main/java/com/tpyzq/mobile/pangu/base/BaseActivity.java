@@ -26,6 +26,8 @@ import android.widget.Toast;
 
 import com.tpyzq.mobile.pangu.R;
 import com.tpyzq.mobile.pangu.http.NetWorkUtil;
+import com.tpyzq.mobile.pangu.http.OkHttpUtil;
+import com.tpyzq.mobile.pangu.http.manager.NetworkManager;
 import com.tpyzq.mobile.pangu.util.panguutil.SkipUtils;
 
 import java.util.ArrayList;
@@ -71,6 +73,7 @@ public abstract class BaseActivity extends AppCompatActivity {
     @Override
     protected void onCreate(@Nullable Bundle savedInstanceState) {
         super.onCreate(savedInstanceState);
+        NetworkManager.addToStack(this);
 //        getWindow().setSoftInputMode(WindowManager.LayoutParams.SOFT_INPUT_ADJUST_PAN);
         setTheme(R.style.AppTheme);
         View rootView = View.inflate(this, getLayoutId(), null);
@@ -244,5 +247,7 @@ public abstract class BaseActivity extends AppCompatActivity {
     protected void onDestroy() {
         destroy();
         super.onDestroy();
+        NetworkManager.removeFromStack(this);
+        OkHttpUtil.cancelSingleRequestByTag(this.getClass().getName());
     }
 }
