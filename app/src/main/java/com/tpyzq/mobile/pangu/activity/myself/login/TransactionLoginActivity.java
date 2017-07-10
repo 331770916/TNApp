@@ -28,6 +28,7 @@ import com.tpyzq.mobile.pangu.activity.myself.handhall.AccountPowerActivity;
 import com.tpyzq.mobile.pangu.activity.myself.handhall.AgreementActivity;
 import com.tpyzq.mobile.pangu.activity.myself.handhall.AgreementSignActvity;
 import com.tpyzq.mobile.pangu.activity.myself.handhall.ChangePasswordActivity;
+import com.tpyzq.mobile.pangu.activity.myself.handhall.FrogetTransactionPwdActivity;
 import com.tpyzq.mobile.pangu.activity.myself.handhall.PersonalDataActivity;
 import com.tpyzq.mobile.pangu.activity.myself.handhall.RiskEvaluationActivity;
 import com.tpyzq.mobile.pangu.activity.myself.handhall.StockHolderInfoActivity;
@@ -221,7 +222,7 @@ public class TransactionLoginActivity extends BaseActivity implements View.OnCli
         findViewById(R.id.publish_back).setOnClickListener(this);
         TextView forgetpassword = (TextView) findViewById(R.id.forgetpassword);
         forgetpassword.setOnClickListener(this);
-        forgetpassword.setVisibility(View.GONE);
+        forgetpassword.setVisibility(View.VISIBLE);
 
         mCaptcha.setRawInputType(InputType.TYPE_CLASS_NUMBER);
         mCaptcha.setKeyListener(new DigitsKeyListener(false, false));
@@ -619,8 +620,8 @@ public class TransactionLoginActivity extends BaseActivity implements View.OnCli
                 mAccount.setText("");
                 break;
             case R.id.forgetpassword:
-//                intent.setClass(this, InputFoundInfoActivity.class);    //暂未合进来 ，注释
-//                startActivity(intent);
+                intent.setClass(this, FrogetTransactionPwdActivity.class);    //暂未合进来 ，注释
+                startActivity(intent);
                 break;
             case R.id.tvCaptcha:
                 if (!TransactionLoginActivity.this.isFinishing()  && isKeyboardDialog != null) {
