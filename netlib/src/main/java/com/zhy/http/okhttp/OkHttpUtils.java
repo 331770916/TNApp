@@ -170,7 +170,8 @@ public class OkHttpUtils
             public void run()
             {
                 try {
-                    callback.onError(call, e, id);
+                    if (!(e instanceof IOException))
+                        callback.onError(call, e, id);
                 } catch (Exception e) {
                     e.printStackTrace();
                 }
