@@ -277,7 +277,7 @@ public class UpdateIdCodeValidityActivity extends BaseActivity implements Dialog
                         return;
                     }
 
-                    if ("-1".equals(error_no)) {
+                    if (!"0".equals(error_no) && !"1".equals(error_no)) {
                         if (mProgressDialog != null && mProgressDialog.isShowing()) {
                             mProgressDialog.cancel();
                         }
