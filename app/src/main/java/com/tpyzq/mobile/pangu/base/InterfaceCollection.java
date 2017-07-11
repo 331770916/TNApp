@@ -1123,7 +1123,7 @@ public class InterfaceCollection {
     /**
      * 700070
      * 查询股东资料
-     * @param mSession token
+     * @param session session
      * @param TAG tag
      * @param callback callback
      */
@@ -1196,7 +1196,7 @@ public class InterfaceCollection {
      * @param session token
      * @param TAG tag
      */
-    public void queryProductSuitability(String session, String prodta_no, String prod_code, String fund_company, String fund_code, String TAG, final InterfaceCallback callback){
+    public void queryProductSuitability(String session, String prodta_no, String prod_code, String fund_company, String fund_code, final String TAG, final InterfaceCallback callback){
         session = SpUtils.getString(CustomApplication.getContext(),"mSession","");
         Map map1 = new HashMap<>();
         map1.put("funcid","331261");
@@ -1216,7 +1216,7 @@ public class InterfaceCollection {
             public void onError(Call call, Exception e, int id) {
                 ResultInfo info = new ResultInfo();
                 info.setCode("400");
-                info.setMsg(e.getMessage());
+                info.setMsg(ConstantUtil.NETWORK_ERROR);
                 callback.callResult(info);
             }
 
@@ -1254,8 +1254,9 @@ public class InterfaceCollection {
                         }
                     }
                 } catch (JSONException e) {
-                    info.setCode("400");
-                    info.setMsg(e.getMessage());
+                    info.setCode("-2");
+                    info.setMsg(ConstantUtil.JSON_ERROR);
+                    info.setTag(TAG);
                 }
                 callback.callResult(info);
             }
@@ -1287,7 +1288,7 @@ public class InterfaceCollection {
             public void onError(Call call, Exception e, int id) {
                 ResultInfo info = new ResultInfo();
                 info.setCode("400");
-                info.setMsg(e.getMessage());
+                info.setMsg(ConstantUtil.NETWORK_ERROR);
                 callback.callResult(info);
             }
 
@@ -1301,8 +1302,8 @@ public class InterfaceCollection {
                     info.setCode(code);
                     info.setMsg(msg);
                 } catch (JSONException e) {
-                    info.setCode("400");
-                    info.setMsg(e.getMessage());
+                    info.setCode("-2");
+                    info.setMsg(ConstantUtil.JSON_ERROR);
                 }
                 callback.callResult(info);
             }
@@ -1337,7 +1338,7 @@ public class InterfaceCollection {
             public void onError(Call call, Exception e, int id) {
                 ResultInfo info = new ResultInfo();
                 info.setCode("400");
-                info.setMsg(e.getMessage());
+                info.setMsg(ConstantUtil.NETWORK_ERROR);
                 callback.callResult(info);
             }
 
@@ -1419,7 +1420,7 @@ public class InterfaceCollection {
             public void onError(Call call, Exception e, int id) {
                 ResultInfo info = new ResultInfo();
                 info.setCode("400");
-                info.setMsg(e.getMessage());
+                info.setMsg(ConstantUtil.NETWORK_ERROR);
                 callback.callResult(info);
             }
 
@@ -1480,7 +1481,8 @@ public class InterfaceCollection {
             public void onError(Call call, Exception e, int id) {
                 ResultInfo info = new ResultInfo();
                 info.setCode("400");
-                info.setMsg(e.getMessage());
+                info.setTag(TAG);
+                info.setMsg(ConstantUtil.NETWORK_ERROR);
                 callback.callResult(info);
             }
 
@@ -1533,7 +1535,7 @@ public class InterfaceCollection {
      * 300734   300736    共用一个接口
      * ETF申购	确认     ETF赎回
      *
-     * @param token          token
+     * @param session          session
      * @param exchange_type  交易类别
      * @param stock_code     证券代码
      * @param entrust_amount 委托数量
@@ -1558,7 +1560,9 @@ public class InterfaceCollection {
             public void onError(Call call, Exception e, int id) {
                 ResultInfo info = new ResultInfo();
                 info.setCode("400");
-                info.setMsg(e.getMessage());
+                info.setMsg(ConstantUtil.NETWORK_ERROR);
+                info.setTag(TAG);
+                callback.callResult(info);
             }
 
             @Override
@@ -1604,7 +1608,7 @@ public class InterfaceCollection {
      * 300738
      * ETF申赎委托查询  查询可撤委托   和全部
      *
-     * @param token        token
+     * @param session        session
      * @param query_kind   查询控制值   0-查询全部委托；1-查询可撤委托;   0  今日查询传入0
      * @param position_str 定位串   可不传值
      * @param request_num  请求行数
@@ -1694,7 +1698,7 @@ public class InterfaceCollection {
      * 300740
      * ETF申赎撤单
      *
-     * @param token         token
+     * @param session         session
      * @param exchange_type 交易类别
      * @param entrust_no    委托编号
      * @param stock_code    证券代码
@@ -1768,7 +1772,7 @@ public class InterfaceCollection {
      * 300748
      * ETF申赎历史查询
      *
-     * @param token        token
+     * @param session        session
      * @param begin_date   起始日期 N
      * @param end_date     到期日期 N
      * @param his_type     历史类型 0:自定义  1：一周内   2：一个月内 3：三个月内   Y
@@ -1857,7 +1861,7 @@ public class InterfaceCollection {
      * 300746
      * ETF申赎成交查询
      *
-     * @param token        token
+     * @param session        session
      * @param position_str 定位串   N
      * @param request_num  请求行数  Y
      * @param TAG          tag

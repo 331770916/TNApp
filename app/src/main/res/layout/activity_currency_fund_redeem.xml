@@ -66,7 +66,7 @@
             android:layout_marginLeft="@dimen/size35"
             android:hint="@string/QingShuRuJiJinDaiMa"
             android:maxLength="6"
-            android:digits="0123456789abcdefjhigklmnopqrstuvwxyzABCDEFJHIGKLMNOPQRSTUVWXYZ"
+            android:inputType="number"
             android:textColorHint="@color/text"
             android:textSize="13sp"
             android:singleLine="true"

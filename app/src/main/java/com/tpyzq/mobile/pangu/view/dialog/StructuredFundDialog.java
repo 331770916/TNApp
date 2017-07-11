@@ -76,6 +76,7 @@ public class StructuredFundDialog extends BaseDialog implements View.OnClickList
         this.object = object;
         this.mShare = share;
         this.mInput = input;
+
     }
 
     @Override
@@ -218,9 +219,11 @@ public class StructuredFundDialog extends BaseDialog implements View.OnClickList
         switch (v.getId()) {
             case R.id.bt_true:
                 if (FJFundGradingMergerActivity.TAG.equals(mTAG)) {
+                    dismiss();
                     StructuredFundEntity mStructuredFundEntity = (StructuredFundEntity) object;
                     ifc.mergerStructuredFund(mStructuredFundEntity.getExchange_type(), mStructuredFundEntity.getStock_account(), mInput, mShare, mSession, mTAG, this);
                 } else if (FJFundSplitActivity.TAG.equals(mTAG)) {
+                    dismiss();
                     StructuredFundEntity mStructuredFundEntity = (StructuredFundEntity) object;
                     ifc.splitStructuredFund(mStructuredFundEntity.getExchange_type(), mStructuredFundEntity.getStock_account(), mInput, mShare, mSession, mTAG, this);
                 } else if (FJWithdrawOrderActivity.TAG.equals(mTAG)) {
@@ -254,17 +257,11 @@ public class StructuredFundDialog extends BaseDialog implements View.OnClickList
             bean.getMerge_amount();
             Helper.getInstance().showToast(context, "委托提交成功");
             mExpression.State();
-            dismiss();
         } else if ("400".equals(info.getCode()) || "-2".equals(info.getCode()) || "-3".equals(info.getCode())) {
             Helper.getInstance().showToast(context, info.getMsg());
         } else {
 //            Helper.getInstance().showToast(context, info.getMsg());
-            MistakeDialog.showDialog(info.getMsg(), (Activity) context, new MistakeDialog.MistakeDialgoListener() {
-                @Override
-                public void doPositive() {
-                    dismiss();
-                }
-            });
+            MistakeDialog.showDialog(info.getMsg(), (Activity) context);
         }
     }
 

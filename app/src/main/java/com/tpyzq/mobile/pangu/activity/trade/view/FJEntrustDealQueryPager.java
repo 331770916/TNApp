@@ -21,6 +21,7 @@ import com.tpyzq.mobile.pangu.base.BasePager;
 import com.tpyzq.mobile.pangu.base.InterfaceCollection;
 import com.tpyzq.mobile.pangu.data.ResultInfo;
 import com.tpyzq.mobile.pangu.data.StructuredFundEntity;
+import com.tpyzq.mobile.pangu.util.Helper;
 import com.tpyzq.mobile.pangu.view.dialog.LoadingDialog;
 import com.tpyzq.mobile.pangu.view.dialog.MistakeDialog;
 import com.tpyzq.mobile.pangu.view.pickTime.TimePickerView;
@@ -162,8 +163,10 @@ public class FJEntrustDealQueryPager extends BasePager implements InterfaceColle
             }
         } else if ("-6".equals(code)) {
             skip.startLogin(mContext);
-        } else {//-1,-2,-3情况下显示定义好信息
-            mistakeDialog = MistakeDialog.showDialog("提示",info.getMsg(),false,(Activity) mContext,null);
+        } else  if ("400".equals(info.getCode()) || "-2".equals(info.getCode()) || "-3".equals(info.getCode())) {   //  网络错误 解析错误 其他
+            Helper.getInstance().showToast(mContext, info.getMsg());
+        }else {   // 柜台错误信息
+            MistakeDialog.showDialog("提示",info.getMsg(),false,(Activity) mContext,null);
         }
         listView.onRefreshComplete();
     }

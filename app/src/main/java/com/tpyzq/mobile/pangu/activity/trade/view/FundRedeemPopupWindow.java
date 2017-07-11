@@ -14,6 +14,7 @@ import com.tpyzq.mobile.pangu.R;
 import com.tpyzq.mobile.pangu.activity.myself.login.TransactionLoginActivity;
 import com.tpyzq.mobile.pangu.http.NetWorkUtil;
 import com.tpyzq.mobile.pangu.util.ConstantUtil;
+import com.tpyzq.mobile.pangu.util.Helper;
 import com.tpyzq.mobile.pangu.view.dialog.MistakeDialog;
 import com.tpyzq.mobile.pangu.view.dialog.ResultDialog;
 import com.zhy.http.okhttp.callback.StringCallback;
@@ -111,7 +112,7 @@ public class FundRedeemPopupWindow extends PopupWindow implements View.OnClickLi
         NetWorkUtil.getInstence().okHttpForPostString(TAG, ConstantUtil.URL_JY, map1, new StringCallback() {
             @Override
             public void onError(Call call, Exception e, int id) {
-                e.toString();
+                Helper.getInstance().showToast(context,ConstantUtil.NETWORK_ERROR);
             }
 
             @Override

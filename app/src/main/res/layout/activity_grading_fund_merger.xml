@@ -89,6 +89,7 @@
                     android:layout_toLeftOf="@id/textView8"
                     android:layout_toRightOf="@id/tvCnFundCode"
                     android:background="@null"
+                    android:inputType="number"
                     android:gravity="center_vertical"
                     android:hint="@string/QingShuRuJiJinDaiMa"
                     android:maxLength="6"

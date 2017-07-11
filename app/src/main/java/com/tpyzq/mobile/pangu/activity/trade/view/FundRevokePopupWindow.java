@@ -14,6 +14,7 @@ import com.tpyzq.mobile.pangu.R;
 import com.tpyzq.mobile.pangu.activity.myself.login.TransactionLoginActivity;
 import com.tpyzq.mobile.pangu.http.NetWorkUtil;
 import com.tpyzq.mobile.pangu.util.ConstantUtil;
+import com.tpyzq.mobile.pangu.util.Helper;
 import com.tpyzq.mobile.pangu.util.SpUtils;
 import com.tpyzq.mobile.pangu.view.dialog.MistakeDialog;
 import com.tpyzq.mobile.pangu.view.dialog.ResultDialog;
@@ -102,54 +103,6 @@ public class FundRevokePopupWindow extends PopupWindow{
     }
 
 
-
-    /**
-     * 使用固定的资金账号登陆
-     *
-     */
-
-
-   /* private void login(){
-        Map map1 = new HashMap<>();
-        Map map2 = new HashMap<>();
-        map2.put("SEC_ID", "tpyzq");
-        map2.put("LOGIN_CODE", "120015079");//610002680     101000913 //用户账号
-        map2.put("USER_PWD", "111111");                       //密码
-        map1.put("funcid", "300010");
-        map1.put("token", "");
-        map1.put("parms", map2);
-        NetWorkUtil.getInstence().okHttpForPostString(TAG, FileUtil.URL_JY, map1, new StringCallback() {
-            @Override
-            public void onError(Call call, Exception e, int id) {
-
-            }
-
-            @Override
-            public void onResponse(String response, int id) {
-                Log.i(TAG,response);
-
-                if(TextUtils.isEmpty(response)){
-                    return;
-                }
-                Gson gson = new Gson();
-                Type type = new TypeToken<LogIn>() {}.getType();
-                LogIn bean = gson.fromJson(response, type);
-                String code = bean.getCode();
-                List<LogIn.DataBean> data = bean.getData();
-
-                if(code.equals("0") && data!=null){
-                    for(int i=0;i<data.size();i++){
-                        LogIn.DataBean dataBean = data.get(i);
-                        mSession = dataBean.getSESSION();
-                    }
-                }
-                commit(mSession);
-            }
-        });
-    }*/
-
-
-
     private void commit(String mSession) {
         HashMap map1 = new HashMap();
         HashMap map2 = new HashMap();
@@ -163,7 +116,7 @@ public class FundRevokePopupWindow extends PopupWindow{
         NetWorkUtil.getInstence().okHttpForPostString(TAG, ConstantUtil.URL_JY, map1, new StringCallback() {
             @Override
             public void onError(Call call, Exception e, int id) {
-
+                Helper.getInstance().showToast(context,ConstantUtil.NETWORK_ERROR);
             }
 
             @Override

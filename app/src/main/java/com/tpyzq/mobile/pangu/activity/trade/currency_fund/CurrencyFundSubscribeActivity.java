@@ -192,8 +192,7 @@ public class CurrencyFundSubscribeActivity extends BaseActivity implements View.
                         Intent intent = new Intent(CurrencyFundSubscribeActivity.this, TransactionLoginActivity.class);
                         CurrencyFundSubscribeActivity.this.startActivity(intent);
                         finish();
-                    }else
-                    if(msgCode.equals("0")&& data!=null){
+                    }else if(msgCode.equals("0")&& data!=null){
                         for(int i=0;i<data.size();i++){
                             map = new HashMap<String,String>();
                             FundSubscribeQueRenBean.DataBean dataBean = data.get(i);

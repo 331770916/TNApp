@@ -223,49 +223,46 @@ public class ETFApplyforOrRedeemActivity extends BaseActivity implements TextWat
             String code = info.getCode();
             if ("0".equals(code)) {
                 List<EtfDataEntity> list = (List<EtfDataEntity>) info.getData();
-                etfDataEntity = list.get(0);
-                tv_upperlimit.setText("申购上限：" + etfDataEntity.getAllot_max());
-                available_funds.setText(etfDataEntity.getEnable_balance());
-                etf_code.setText(etfDataEntity.getStock_name());
-                tv_shareholder.setText(etfDataEntity.getStock_account());
+                if (list!=null && list.size()>0){
+                    etfDataEntity = list.get(0);
+                    tv_upperlimit.setText("申购上限：" + etfDataEntity.getAllot_max());
+                    available_funds.setText(etfDataEntity.getEnable_balance());
+                    etf_code.setText(etfDataEntity.getStock_name());
+                    tv_shareholder.setText(etfDataEntity.getStock_account());
+                }
                 mInputCount.setEnabled(true);
             } else if ("-6".equals(code)) {
                 skip.startLogin(this);
-            } else {//-1,-2,-3情况下显示定义好信息
-                tv_upperlimit.setText("申购上限：--");
-                available_funds.setText("--");
-                etf_code.setText("--");
-                tv_shareholder.setText("--");
+            } else if ("400".equals(info.getCode()) || "-2".equals(info.getCode()) || "-3".equals(info.getCode())) {   //  网络错误 解析错误 其他
+                Helper.getInstance().showToast(this, info.getMsg());
+                setText();
+            }else {
+                setText();
                 MistakeDialog.showDialog(info.getMsg(), ETFApplyforOrRedeemActivity.this);
-                etfDataEntity = null;
-//                mInputCount.setEnabled(false);
             }
         } else if ("Redeem".equals(info.getTag())) {
             String code = info.getCode();
             if ("0".equals(code)) {
                 List<EtfDataEntity> list = (List<EtfDataEntity>) info.getData();
-                etfDataEntity = list.get(0);
-                tv_upperlimit.setText("赎回上限：" + etfDataEntity.getRedeem_max());
-                available_funds.setText(etfDataEntity.getEnable_balance());
-                etf_code.setText(etfDataEntity.getStock_name());
-                tv_shareholder.setText(etfDataEntity.getStock_account());
+                if (list!=null && list.size()>0){
+                    tv_upperlimit.setText("赎回上限：" + etfDataEntity.getRedeem_max());
+                    available_funds.setText(etfDataEntity.getEnable_balance());
+                    etf_code.setText(etfDataEntity.getStock_name());
+                    tv_shareholder.setText(etfDataEntity.getStock_account());
+                }
                 mInputCount.setEnabled(true);
             } else if ("-6".equals(code)) {
                 skip.startLogin(this);
-            } else {//-1,-2,-3情况下显示定义好信息
-                tv_upperlimit.setText("赎回上限：--");
-                available_funds.setText("--");
-                etf_code.setText("--");
-                tv_shareholder.setText("--");
+            }else if ("400".equals(info.getCode()) || "-2".equals(info.getCode()) || "-3".equals(info.getCode())) {   //  网络错误 解析错误 其他
+                Helper.getInstance().showToast(this, info.getMsg());
+                setText();
+            } else {
+                setText();
                 MistakeDialog.showDialog(info.getMsg(), ETFApplyforOrRedeemActivity.this);
-                etfDataEntity = null;
-//                mInputCount.setEnabled(false);
             }
         } else if (TAG_APPLYFOR.equals(info.getTag())) {
             String code = info.getCode();
             if ("0".equals(code)) {
-                List<EtfDataEntity> list = (List<EtfDataEntity>) info.getData();
-                etfDataEntity = list.get(0);
                 Helper.getInstance().showToast(this, info.getMsg());
                 mInputCode.setText("");
                 mInputCount.setText("");
@@ -273,33 +270,49 @@ public class ETFApplyforOrRedeemActivity extends BaseActivity implements TextWat
                 available_funds.setText("--");
                 etf_code.setText("--");
                 tv_shareholder.setText("--");
-
             } else if ("-6".equals(code)) {
                 skip.startLogin(this);
+            }else if ("400".equals(info.getCode()) || "-2".equals(info.getCode()) || "-3".equals(info.getCode())) {   //  网络错误 解析错误 其他
+                Helper.getInstance().showToast(this, info.getMsg());
+                setText();
             } else {
+                setText();
                 MistakeDialog.showDialog(info.getMsg(), ETFApplyforOrRedeemActivity.this);
             }
-
         } else if (TAG_REAEEM.equals(info.getTag())) {
             String code = info.getCode();
             if ("0".equals(code)) {
-                List<EtfDataEntity> list = (List<EtfDataEntity>) info.getData();
-                etfDataEntity = list.get(0);
                 Helper.getInstance().showToast(this, info.getMsg());
                 mInputCode.setText("");
                 mInputCount.setText("");
-                tv_upperlimit.setText("申购上限：--");
+                tv_upperlimit.setText("赎回上限：--");
                 available_funds.setText("--");
                 etf_code.setText("--");
                 tv_shareholder.setText("--");
-
             } else if ("-6".equals(code)) {
                 skip.startLogin(this);
+            }else if ("400".equals(info.getCode()) || "-2".equals(info.getCode()) || "-3".equals(info.getCode())) {   //  网络错误 解析错误 其他
+                Helper.getInstance().showToast(this, info.getMsg());
+                setText();
             } else {
+                setText();
                 MistakeDialog.showDialog(info.getMsg(), ETFApplyforOrRedeemActivity.this);
             }
 
         }
+
+    }
+
+    private void setText() {
+        if ("Applyfor".equals(type)){
+            tv_upperlimit.setText("申购上限：--");
+        }else {
+            tv_upperlimit.setText("赎回上限：--");
+        }
+        available_funds.setText("--");
+        etf_code.setText("--");
+        tv_shareholder.setText("--");
+        etfDataEntity = null;
 
     }
 

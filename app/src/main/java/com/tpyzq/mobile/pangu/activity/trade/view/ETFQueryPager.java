@@ -24,6 +24,7 @@ import com.tpyzq.mobile.pangu.base.InterfaceCollection;
 import com.tpyzq.mobile.pangu.data.EtfDataEntity;
 import com.tpyzq.mobile.pangu.data.NetworkVotingEntity;
 import com.tpyzq.mobile.pangu.data.ResultInfo;
+import com.tpyzq.mobile.pangu.util.Helper;
 import com.tpyzq.mobile.pangu.util.SpUtils;
 import com.tpyzq.mobile.pangu.view.dialog.LoadingDialog;
 import com.tpyzq.mobile.pangu.view.dialog.MistakeDialog;
@@ -267,8 +268,10 @@ public class ETFQueryPager extends BasePager implements InterfaceCollection.Inte
             }
         } else if ("-6".equals(code)) {
             skip.startLogin(mContext);
-        } else {//-1,-2,-3情况下显示定义好信息
-            helper.showToast(mContext, info.getMsg());
+        }else if ("400".equals(info.getCode()) || "-2".equals(info.getCode()) || "-3".equals(info.getCode())) {   //  网络错误 解析错误 其他
+            Helper.getInstance().showToast(mContext, info.getMsg());
+        } else{
+            MistakeDialog.showDialog("提示",info.getMsg(),false,(Activity) mContext,null);
         }
         mListView.onRefreshComplete();
 
