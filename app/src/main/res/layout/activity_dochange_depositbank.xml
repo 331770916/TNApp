@@ -105,7 +105,7 @@
             android:background="@color/bgColor" />
 
         <RelativeLayout
-            android:id="@+id/RL_password"
+            android:id="@+id/rl_password"
             android:layout_width="match_parent"
             android:layout_height="wrap_content">
 
@@ -129,7 +129,7 @@
                 android:background="@null"
                 android:focusableInTouchMode="true"
                 android:hint="@string/ChangBank_tv10"
-                android:inputType="numberPassword"
+                android:inputType="textPassword"
                 android:maxLength="6"
                 android:numeric="integer"
                 android:paddingLeft="@dimen/size30"

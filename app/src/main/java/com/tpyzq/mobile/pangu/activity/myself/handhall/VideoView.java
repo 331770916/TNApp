@@ -147,11 +147,18 @@ public class VideoView extends BaseActivity implements View.OnClickListener, Any
     @Override
     protected void onPause() {
         super.onPause();
-        bOnPaused = true;
-        mAnyChatCoreSDK.UserCameraControl(mRemoteId, 0);
-        mAnyChatCoreSDK.UserSpeakControl(mRemoteId, 0);
-        mAnyChatCoreSDK.UserCameraControl(-1, 0);
-        mAnyChatCoreSDK.UserSpeakControl(-1, 0);
+
+        new Handler().postDelayed(new Runnable() {
+            @Override
+            public void run() {
+                bOnPaused = true;
+                mAnyChatCoreSDK.UserCameraControl(mRemoteId, 0);
+                mAnyChatCoreSDK.UserSpeakControl(mRemoteId, 0);
+                mAnyChatCoreSDK.UserCameraControl(-1, 0);
+                mAnyChatCoreSDK.UserSpeakControl(-1, 0);
+            }
+        }, 2000);
+
     }
 
 

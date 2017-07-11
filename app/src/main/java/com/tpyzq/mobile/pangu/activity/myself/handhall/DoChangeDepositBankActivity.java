@@ -1,6 +1,7 @@
 package com.tpyzq.mobile.pangu.activity.myself.handhall;
 
 import android.app.Dialog;
+import android.content.Context;
 import android.content.DialogInterface;
 import android.content.Intent;
 import android.graphics.drawable.Drawable;
@@ -12,7 +13,10 @@ import android.text.Selection;
 import android.text.TextUtils;
 import android.text.TextWatcher;
 import android.view.KeyEvent;
+import android.view.MotionEvent;
 import android.view.View;
+import android.view.inputmethod.EditorInfo;
+import android.view.inputmethod.InputMethodManager;
 import android.widget.Button;
 import android.widget.CheckBox;
 import android.widget.CompoundButton;
@@ -52,7 +56,7 @@ import com.yzd.unikeysdk.UnikeyException;
 
 public class DoChangeDepositBankActivity extends BaseActivity implements View.OnClickListener,
         DialogInterface.OnCancelListener, CompoundButton.OnCheckedChangeListener,
-        PopKeyBody.ContentListener, OnInputDoneCallBack, GetDepositBankAccountInfoConnect.IDoChangeDepBank {
+        PopKeyBody.ContentListener, OnInputDoneCallBack, GetDepositBankAccountInfoConnect.IDoChangeDepBank, View.OnTouchListener {
 
     private final String TAG = DoChangeDepositBankActivity.class.getSimpleName();
     private final int REQUESTCODE = 600;
@@ -122,8 +126,8 @@ public class DoChangeDepositBankActivity extends BaseActivity implements View.On
         checkBox.setOnCheckedChangeListener(this);
 
         mPassWordEdit = (NoSoftInputEditText) findViewById(R.id.password);
+        mPassWordEdit.setOnTouchListener(this);
         mPassWordEdit.setInputType(InputType.TYPE_NULL);
-        mPassWordEdit.setOnClickListener(this);
         mBankNo = (EditText) findViewById(R.id.account);
 
         mPassWordEdit.addTextChangedListener(new PassWordTextWatcher());
@@ -230,14 +234,26 @@ public class DoChangeDepositBankActivity extends BaseActivity implements View.On
                     Toast.makeText(this, "协议为空", Toast.LENGTH_SHORT).show();
                 }
                 break;
-            case R.id.password:
-                showKeyBoard("请输入银行卡密码");
-                break;
             case R.id.btn_depository:
                 initLoadDialog();
                 mConnect.getNeedPassword(TAG, session, mBank_no, this);
                 break;
         }
+    }
+
+    @Override
+    public boolean onTouch(View v, MotionEvent event) {
+        switch (event.getAction()) {
+            case MotionEvent.ACTION_DOWN:
+                InputMethodManager imm = (InputMethodManager) DoChangeDepositBankActivity.this
+                        .getSystemService(Context.INPUT_METHOD_SERVICE);
+                imm.hideSoftInputFromWindow(DoChangeDepositBankActivity.this.getWindow().getDecorView().getWindowToken(), 0);
+                mPassWordEdit.setInputType(InputType.TYPE_NULL);
+                showKeyBoard("请输入银行卡密码");
+                break;
+        }
+
+        return true;
     }
 
     /**
@@ -391,6 +407,7 @@ public class DoChangeDepositBankActivity extends BaseActivity implements View.On
 
             if (mStup == BANK_PWDSTUP) {//还没有进行点击按钮的步骤
                 mInputPwd = num;
+                mPassWordEdit.setInputType(InputType.TYPE_CLASS_TEXT | InputType.TYPE_TEXT_VARIATION_PASSWORD);
                 mPassWordEdit.setText(num);
             } else {//需要输入原银行卡密码步骤
                 initLoadDialog();
