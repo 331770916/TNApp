@@ -170,6 +170,7 @@ public class ConstantUtil {
     public static String HOLD_DISAPPEAR = "false";    //不显示持仓
 
     public static boolean USERFUL_KEYBOARD = true;
+    public static boolean list_item_flag = true ; //    判断listview item 不能重复点击
 
 /////////////// SDcard文件存储位置相关/////////////////////////////////////////
 

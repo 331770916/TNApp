@@ -15,6 +15,7 @@ import com.tpyzq.mobile.pangu.base.InterfaceCollection;
 import com.tpyzq.mobile.pangu.data.EtfDataEntity;
 import com.tpyzq.mobile.pangu.data.ResultInfo;
 import com.tpyzq.mobile.pangu.http.OkHttpUtil;
+import com.tpyzq.mobile.pangu.util.ConstantUtil;
 import com.tpyzq.mobile.pangu.util.Helper;
 import com.tpyzq.mobile.pangu.util.SpUtils;
 import com.tpyzq.mobile.pangu.view.dialog.LoadingDialog;
@@ -63,9 +64,12 @@ public class ETFRevokeActivity extends BaseActivity implements StructuredFundDia
             @Override
             public void onItemClick(AdapterView<?> parent, View view, int position, long id) {
                 clickEntity = mList.get(position-1);
-                StructuredFundDialog dialog = new StructuredFundDialog(ETFRevokeActivity.this);
-                dialog.setData(TAG, ETFRevokeActivity.this, mList.get(position-1), null, null);
-                dialog.show();
+                if (ConstantUtil.list_item_flag) {
+                    StructuredFundDialog dialog = new StructuredFundDialog(ETFRevokeActivity.this);
+                    dialog.setData(TAG, ETFRevokeActivity.this, mList.get(position - 1), null, null);
+                    dialog.show();
+                    ConstantUtil.list_item_flag = false;
+                }
             }
         });
         mList = new ArrayList<EtfDataEntity>();

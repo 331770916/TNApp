@@ -16,6 +16,7 @@ import com.tpyzq.mobile.pangu.base.BaseActivity;
 import com.tpyzq.mobile.pangu.base.InterfaceCollection;
 import com.tpyzq.mobile.pangu.data.ResultInfo;
 import com.tpyzq.mobile.pangu.data.StructuredFundEntity;
+import com.tpyzq.mobile.pangu.util.ConstantUtil;
 import com.tpyzq.mobile.pangu.util.Helper;
 import com.tpyzq.mobile.pangu.util.SpUtils;
 import com.tpyzq.mobile.pangu.view.dialog.LoadingDialog;
@@ -118,9 +119,13 @@ public class FJWithdrawOrderActivity extends BaseActivity implements AdapterView
     public void onItemClick(AdapterView<?> parent, View view, int position, long id) {
         mPosition = position - 1;
         StructuredFundEntity entity = mList.get(position - 1);
-        mStructuredFundDialog = new StructuredFundDialog(this);
-        mStructuredFundDialog.setData(TAG, this, entity, null, null);
-        mStructuredFundDialog.show();
+        if (ConstantUtil.list_item_flag) {
+            mStructuredFundDialog = new StructuredFundDialog(this);
+            mStructuredFundDialog.setData(TAG, this, entity, null, null);
+            mStructuredFundDialog.show();
+
+            ConstantUtil.list_item_flag = false;
+        }
     }
 
     @Override

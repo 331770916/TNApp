@@ -24,6 +24,7 @@ import com.tpyzq.mobile.pangu.base.InterfaceCollection;
 import com.tpyzq.mobile.pangu.data.EtfDataEntity;
 import com.tpyzq.mobile.pangu.data.ResultInfo;
 import com.tpyzq.mobile.pangu.data.StructuredFundEntity;
+import com.tpyzq.mobile.pangu.util.ConstantUtil;
 import com.tpyzq.mobile.pangu.util.Helper;
 import com.tpyzq.mobile.pangu.util.SpUtils;
 
@@ -81,6 +82,7 @@ public class StructuredFundDialog extends BaseDialog implements View.OnClickList
 
     @Override
     public void setView() {
+        ConstantUtil.list_item_flag = true;
         tableLayout = (TableLayout) findViewById(R.id.tableLayout);
         img_1 = (ImageView) findViewById(R.id.bank_img);
         tv_title = (TextView) findViewById(R.id.tv_title);

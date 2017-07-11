@@ -84,9 +84,12 @@ public class FJFundGradingMergerActivity extends BaseActivity implements View.On
                 startActivityForResult(intent, REQUSET);
                 break;
             case R.id.butConfirm:
-                mStructuredFundDialog = new StructuredFundDialog(this);
-                mStructuredFundDialog.setData(TAG, this, bean, mAmount_et.getText().toString(), mInput_et.getText().toString());
-                mStructuredFundDialog.show();
+                if (ConstantUtil.list_item_flag) {
+                    mStructuredFundDialog = new StructuredFundDialog(this);
+                    mStructuredFundDialog.setData(TAG, this, bean, mAmount_et.getText().toString(), mInput_et.getText().toString());
+                    mStructuredFundDialog.show();
+                    ConstantUtil.list_item_flag = false;
+                }
                 break;
         }
     }
