@@ -218,6 +218,7 @@ public class StructuredFundDialog extends BaseDialog implements View.OnClickList
     @Override
     public void onClick(View v) {
         ifc = InterfaceCollection.getInstance();
+        ConstantUtil.list_item_flag = true;
         switch (v.getId()) {
             case R.id.bt_true:
                 if (FJFundGradingMergerActivity.TAG.equals(mTAG)) {

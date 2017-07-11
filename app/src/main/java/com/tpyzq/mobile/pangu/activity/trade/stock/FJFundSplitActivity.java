@@ -104,10 +104,10 @@ public class FJFundSplitActivity extends BaseActivity implements View.OnClickLis
                 break;
             case R.id.butConfirm:
                 if (ConstantUtil.list_item_flag) {
+                    ConstantUtil.list_item_flag = false;
                     mStructuredFundDialog = new StructuredFundDialog(this);
                     mStructuredFundDialog.setData(TAG, this, bean, mAmount_et.getText().toString(), mInput_et.getText().toString());
                     mStructuredFundDialog.show();
-                    ConstantUtil.list_item_flag = false;
                 }
                 break;
         }

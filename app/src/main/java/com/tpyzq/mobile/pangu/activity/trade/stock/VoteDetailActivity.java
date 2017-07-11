@@ -158,6 +158,7 @@ public class VoteDetailActivity extends BaseActivity implements InterfaceCollect
                         mistake = MistakeDialog.showDialog("提示", msg, false, this, null);
                     } else {
                         if (ConstantUtil.list_item_flag) {
+                            ConstantUtil.list_item_flag = false;
                             mStructuredFundDialog = new StructuredFundDialog(this);
                             mStructuredFundDialog.setData(TAG, new StructuredFundDialog.Expression() {
                                 @Override
@@ -169,11 +170,12 @@ public class VoteDetailActivity extends BaseActivity implements InterfaceCollect
                                 }
                             }, null, String.valueOf(accumulate.size() + unAccumulate.size()), stock_account);
                             mStructuredFundDialog.show();
-                            ConstantUtil.list_item_flag = false;
+
                         }
                     }
                 } else {
                     if (ConstantUtil.list_item_flag) {
+                        ConstantUtil.list_item_flag = false;
                         mStructuredFundDialog = new StructuredFundDialog(this);
                         stock_code = unAccumulate.get(0).getStatus();
                         mStructuredFundDialog.setData(TAG, new StructuredFundDialog.Expression() {
@@ -184,7 +186,6 @@ public class VoteDetailActivity extends BaseActivity implements InterfaceCollect
                             }
                         }, null, String.valueOf(unAccumulate.size()), stock_account);
                         mStructuredFundDialog.show();
-                        ConstantUtil.list_item_flag = false;
                     }
                 }
                 break;

@@ -65,10 +65,10 @@ public class ETFRevokeActivity extends BaseActivity implements StructuredFundDia
             public void onItemClick(AdapterView<?> parent, View view, int position, long id) {
                 clickEntity = mList.get(position-1);
                 if (ConstantUtil.list_item_flag) {
+                    ConstantUtil.list_item_flag = false;
                     StructuredFundDialog dialog = new StructuredFundDialog(ETFRevokeActivity.this);
                     dialog.setData(TAG, ETFRevokeActivity.this, mList.get(position - 1), null, null);
                     dialog.show();
-                    ConstantUtil.list_item_flag = false;
                 }
             }
         });

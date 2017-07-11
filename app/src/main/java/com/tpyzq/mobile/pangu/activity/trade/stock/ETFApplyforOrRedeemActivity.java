@@ -180,10 +180,10 @@ public class ETFApplyforOrRedeemActivity extends BaseActivity implements TextWat
                         }
                         etfDataEntity.setEntrust_amount(count);
                         if (ConstantUtil.list_item_flag) {
+                            ConstantUtil.list_item_flag = false;
                             mStructuredFundDialog = new StructuredFundDialog(this);
                             mStructuredFundDialog.setData(TAG, this, etfDataEntity, null, null);
                             mStructuredFundDialog.show();
-                            ConstantUtil.list_item_flag = false;
                         }
                     }
                 } else {
@@ -195,10 +195,11 @@ public class ETFApplyforOrRedeemActivity extends BaseActivity implements TextWat
                         }
                         etfDataEntity.setEntrust_amount(count);
                         if (ConstantUtil.list_item_flag) {
+                            ConstantUtil.list_item_flag = false;
                             mStructuredFundDialog = new StructuredFundDialog(this);
                             mStructuredFundDialog.setData(TAG_SH, this, etfDataEntity, null, null);
                             mStructuredFundDialog.show();
-                            ConstantUtil.list_item_flag = false;
+
                         }
                     }
                 }
