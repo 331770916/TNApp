@@ -71,7 +71,7 @@ public class FJWithdrawOrderActivity extends BaseActivity implements AdapterView
 
             }
         });
-        mStructuredFundDialog = new StructuredFundDialog(this);
+
     }
 
     /**
@@ -118,6 +118,7 @@ public class FJWithdrawOrderActivity extends BaseActivity implements AdapterView
     public void onItemClick(AdapterView<?> parent, View view, int position, long id) {
         mPosition = position - 1;
         StructuredFundEntity entity = mList.get(position - 1);
+        mStructuredFundDialog = new StructuredFundDialog(this);
         mStructuredFundDialog.setData(TAG, this, entity, null, null);
         mStructuredFundDialog.show();
     }

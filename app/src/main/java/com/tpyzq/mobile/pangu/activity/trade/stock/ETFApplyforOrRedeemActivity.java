@@ -59,7 +59,7 @@ public class ETFApplyforOrRedeemActivity extends BaseActivity implements TextWat
         tv_shareholder = (TextView) findViewById(R.id.tv_shareholder_code);
         getIntentPost();
         initEvent();
-        mStructuredFundDialog = new StructuredFundDialog(this);
+
     }
 
     private void initEvent() {
@@ -178,6 +178,7 @@ public class ETFApplyforOrRedeemActivity extends BaseActivity implements TextWat
                             etfDataEntity = new EtfDataEntity();
                         }
                         etfDataEntity.setEntrust_amount(count);
+                        mStructuredFundDialog = new StructuredFundDialog(this);
                         mStructuredFundDialog.setData(TAG, this, etfDataEntity, null, null);
                         mStructuredFundDialog.show();
                     }
@@ -189,6 +190,7 @@ public class ETFApplyforOrRedeemActivity extends BaseActivity implements TextWat
                             etfDataEntity = new EtfDataEntity();
                         }
                         etfDataEntity.setEntrust_amount(count);
+                        mStructuredFundDialog = new StructuredFundDialog(this);
                         mStructuredFundDialog.setData(TAG_SH, this, etfDataEntity, null, null);
                         mStructuredFundDialog.show();
                     }

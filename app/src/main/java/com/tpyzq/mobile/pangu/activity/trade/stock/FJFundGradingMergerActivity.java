@@ -63,7 +63,6 @@ public class FJFundGradingMergerActivity extends BaseActivity implements View.On
         mConfirm_but = (Button) findViewById(R.id.butConfirm);
 
         initMonitor();
-        mStructuredFundDialog = new StructuredFundDialog(this);
     }
 
     @Override
@@ -85,6 +84,7 @@ public class FJFundGradingMergerActivity extends BaseActivity implements View.On
                 startActivityForResult(intent, REQUSET);
                 break;
             case R.id.butConfirm:
+                mStructuredFundDialog = new StructuredFundDialog(this);
                 mStructuredFundDialog.setData(TAG, this, bean, mAmount_et.getText().toString(), mInput_et.getText().toString());
                 mStructuredFundDialog.show();
                 break;

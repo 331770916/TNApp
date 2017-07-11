@@ -56,12 +56,13 @@ public class ETFRevokeActivity extends BaseActivity implements StructuredFundDia
         lv = (PullToRefreshListView) findViewById(R.id.lv);
         lv.setEmptyView(iv_null);
         lv.setMode(PullToRefreshBase.Mode.BOTH);
-        final StructuredFundDialog dialog = new StructuredFundDialog(ETFRevokeActivity.this);
+
         lv.setOnItemClickListener(new AdapterView.OnItemClickListener() {
 
             @Override
             public void onItemClick(AdapterView<?> parent, View view, int position, long id) {
                 clickEntity = mList.get(position-1);
+                StructuredFundDialog dialog = new StructuredFundDialog(ETFRevokeActivity.this);
                 dialog.setData(TAG, ETFRevokeActivity.this, mList.get(position-1), null, null);
                 dialog.show();
             }

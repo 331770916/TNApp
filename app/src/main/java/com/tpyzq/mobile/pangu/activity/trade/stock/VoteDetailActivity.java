@@ -86,7 +86,6 @@ public class VoteDetailActivity extends BaseActivity  implements InterfaceCollec
         mDialog = LoadingDialog.initDialog(this, "正在查询...");
         mDialog.show();
         mInterface.queryProposal(mSession,meeting_seq,TAG+"query",this);
-        mStructuredFundDialog = new StructuredFundDialog(this);
     }
 
     @Override
@@ -133,6 +132,7 @@ public class VoteDetailActivity extends BaseActivity  implements InterfaceCollec
                 finish();
                 break;
             case R.id.voteSubmit:
+                mStructuredFundDialog = new StructuredFundDialog(this);
                 submitList.clear();
                 if(accumulate.size()>0){
                     boolean canSubmit = false,isFirstNull=true;
