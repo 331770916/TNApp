@@ -1,0 +1,51 @@
+<?xml version="1.0" encoding="utf-8"?>
+<LinearLayout xmlns:android="http://schemas.android.com/apk/res/android"
+    android:layout_width="match_parent"
+    android:layout_height="match_parent"
+    android:orientation="vertical">
+
+    <LinearLayout
+        android:layout_width="match_parent"
+        android:layout_height="@dimen/size116"
+        android:orientation="horizontal">
+
+
+        <ImageView
+            android:layout_width="@dimen/size120"
+            android:layout_height="@dimen/size90"
+            android:layout_marginBottom="@dimen/size15"
+            android:layout_marginTop="@dimen/size12"
+            android:background="@color/white" />
+
+        <RelativeLayout
+            android:layout_width="match_parent"
+            android:layout_height="match_parent"
+            android:layout_marginLeft="@dimen/size12">
+
+            <TextView
+                android:id="@+id/tv_title"
+                android:layout_width="match_parent"
+                android:layout_height="wrap_content"
+                android:layout_marginRight="@dimen/size15"
+                android:layout_marginTop="@dimen/size27"
+                android:maxLines="2"
+                android:textColor="@color/bkColor"
+                android:textSize="@dimen/txtSize15" />
+
+            <TextView
+                android:id="@+id/tv_time"
+                android:layout_width="wrap_content"
+                android:layout_height="wrap_content"
+                android:layout_below="@id/tv_title"
+                android:layout_marginBottom="@dimen/size27"
+                android:layout_marginTop="@dimen/size11"
+                android:lines="1"
+                android:textColor="@color/newStockTitle"
+                android:textSize="@dimen/txtSize12" />
+
+        </RelativeLayout>
+
+    </LinearLayout>
+
+
+</LinearLayout>
