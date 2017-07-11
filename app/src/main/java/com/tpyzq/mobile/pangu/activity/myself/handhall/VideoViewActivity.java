@@ -23,7 +23,7 @@ import com.tpyzq.mobile.pangu.base.BaseActivity;
  * Created by Administrator on 2017/6/23.
  */
 
-public class VideoView extends BaseActivity implements View.OnClickListener, AnyChatBaseEvent, AnyChatTextMsgEvent {
+public class VideoViewActivity extends BaseActivity implements View.OnClickListener, AnyChatBaseEvent, AnyChatTextMsgEvent {
 
 
     private final int UPDATEVIDEOBITDELAYMILLIS = 200; //监听音频视频的码率的间隔刷新时间（毫秒）
@@ -196,7 +196,7 @@ public class VideoView extends BaseActivity implements View.OnClickListener, Any
 
                 if (mFirstGetVideoBitrate) {
                     if (videoBitrate <= 0) {
-                        Toast.makeText(VideoView.this, "对方视频中断了!", Toast.LENGTH_SHORT).show();
+                        Toast.makeText(VideoViewActivity.this, "对方视频中断了!", Toast.LENGTH_SHORT).show();
                         // 重置下，如果对方退出了，有进去了的情况
                         mFirstGetVideoBitrate = false;
                     }
@@ -204,7 +204,7 @@ public class VideoView extends BaseActivity implements View.OnClickListener, Any
 
                 if (mFirstGetAudioBitrate) {
                     if (audioBitrate <= 0) {
-                        Toast.makeText(VideoView.this, "对方音频中断了!", Toast.LENGTH_SHORT).show();
+                        Toast.makeText(VideoViewActivity.this, "对方音频中断了!", Toast.LENGTH_SHORT).show();
                         // 重置下，如果对方退出了，有进去了的情况
                         mFirstGetAudioBitrate = false;
                     }
@@ -243,7 +243,7 @@ public class VideoView extends BaseActivity implements View.OnClickListener, Any
     public void OnAnyChatUserAtRoomMessage(int dwUserId, boolean bEnter) {
         if (!bEnter) {
             if (dwUserId == mRemoteId) {
-                Toast.makeText(VideoView.this, "对方已离开！", Toast.LENGTH_SHORT).show();
+                Toast.makeText(VideoViewActivity.this, "对方已离开！", Toast.LENGTH_SHORT).show();
                 mRemoteId = 0;
                 mAnyChatCoreSDK.UserCameraControl(dwUserId, 0);
                 mAnyChatCoreSDK.UserSpeakControl(dwUserId, 0);

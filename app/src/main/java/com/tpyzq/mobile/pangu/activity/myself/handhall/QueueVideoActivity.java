@@ -151,7 +151,7 @@ public class QueueVideoActivity extends BaseActivity implements View.OnClickList
     public void OnAnyChatEnterRoomMessage(int dwRoomId, int dwErrorCode) {
         if (dwErrorCode == 0) {
             Intent intent = new Intent();
-            intent.setClass(QueueVideoActivity.this, VideoView.class);
+            intent.setClass(QueueVideoActivity.this, VideoViewActivity.class);
             intent.putExtra("remoteId", mRemoteId);
             startActivityForResult(intent, REQUEST_CODE);
 
