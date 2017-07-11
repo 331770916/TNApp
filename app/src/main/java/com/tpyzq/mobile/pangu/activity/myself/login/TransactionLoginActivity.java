@@ -1406,14 +1406,19 @@ public class TransactionLoginActivity extends BaseActivity implements View.OnCli
                         if (mVERIFICATIONIMAGE != null && mVERIFICATIONIMAGE != "") {
                             mSecurityCode.setVisibility(View.VISIBLE);
                             Bitmap bitmap = Helper.base64ToBitmap(mVERIFICATIONIMAGE);
-                            mSecurityCode.setImageBitmap(bitmap);
+                            if (bitmap!=null){
+                                mSecurityCode.setImageBitmap(bitmap);
+                            }else {
+                                mCxaptcha.setVisibility(View.VISIBLE);
+                                mSecurityCode.setVisibility(View.GONE);
+                            }
                         }
                     } else {
                         mCxaptcha.setVisibility(View.VISIBLE);
                         mSecurityCode.setVisibility(View.GONE);
                         Helper.getInstance().showToast(TransactionLoginActivity.this, "验证码网络请求失败");
                     }
-                } catch (JSONException e) {
+                } catch (Exception e) {
                     e.printStackTrace();
                 }
             }

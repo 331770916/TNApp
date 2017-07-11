@@ -249,6 +249,9 @@ public class ChangeAccoutActivity extends BaseActivity implements View.OnClickLi
     }
 
     private void initYN(boolean is) {
+        if (isKeyboardDialog != null && isKeyboardDialog.isShowing()) {
+            isKeyboardDialog.dismiss();
+        }
         if (is) {
             UserUtil.Keyboard = "1";  //启用sessionkey加密
             //键盘插件URL
@@ -292,6 +295,8 @@ public class ChangeAccoutActivity extends BaseActivity implements View.OnClickLi
             inquireCertification();
 
         }
+        mBDAccount.setSelection(mBDAccount.getText().length());
+        mBDCaptcha.setSelection(mBDCaptcha.getText().length());
 
     }
 
@@ -312,8 +317,7 @@ public class ChangeAccoutActivity extends BaseActivity implements View.OnClickLi
         mBDSecurityCode.setOnClickListener(this);
         mBDPassword.setOnClickListener(this);
 
-        mBDAccount.setSelection(mBDAccount.getText().length());
-        mBDCaptcha.setSelection(mBDCaptcha.getText().length());
+
     }
 
 
@@ -690,10 +694,19 @@ public class ChangeAccoutActivity extends BaseActivity implements View.OnClickLi
                     mVERIFICATIONCODE = object.getString("VERIFICATIONCODE");
                     String mVERIFICATIONIMAGE = object.getString("VERIFICATIONIMAGE");
                     if (mCODE.equals("0")) {
-                        mBDSecurityCode.setVisibility(View.VISIBLE);
                         mCxaptcha.setVisibility(View.GONE);
-                        Bitmap bitmap = Helper.base64ToBitmap(mVERIFICATIONIMAGE);
-                        mBDSecurityCode.setImageBitmap(bitmap);
+                        if (mVERIFICATIONIMAGE != null && mVERIFICATIONIMAGE != "") {
+                            mBDSecurityCode.setVisibility(View.VISIBLE);
+                            Bitmap bitmap = Helper.base64ToBitmap(mVERIFICATIONIMAGE);
+                            if (bitmap != null) {
+                                mBDSecurityCode.setImageBitmap(bitmap);
+                            } else {
+                                mCxaptcha.setVisibility(View.VISIBLE);
+                                mBDSecurityCode.setVisibility(View.GONE);
+                            }
+                        }
+
+
                     } else {
                         mCxaptcha.setVisibility(View.VISIBLE);
                         mBDSecurityCode.setVisibility(View.GONE);
@@ -1024,9 +1037,9 @@ public class ChangeAccoutActivity extends BaseActivity implements View.OnClickLi
 
         //查询资金账号
         List<UserEntity> mTradescno = KeyEncryptionUtils.getInstance().localDecryptTradescno();
-        String mTradescno_str= "";
+        String mTradescno_str = "";
         if (mTradescno.size() > 0) {
-             mTradescno_str = mTradescno.get(0).getTradescno();
+            mTradescno_str = mTradescno.get(0).getTradescno();
         }
 
         if (mTradescno_str.contains(mAccount_Str)) {
