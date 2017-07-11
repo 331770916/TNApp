@@ -88,9 +88,9 @@ public class FrogetTransactionPwdActivity extends BaseActivity implements View.O
 
         mNextStupBtn.setOnClickListener(this);
 
-//        mFundAccout.setText("680000100");
-//        mIdCard.setText("372402197903190311");
-//        mName.setText("李磊");
+        mFundAccout.setText("680000100");
+        mIdCard.setText("372402197903190311");
+        mName.setText("李磊");
 
 //        getServerTime();
 
