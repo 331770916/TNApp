@@ -738,7 +738,7 @@ public class HomeFragment extends BaseFragment implements AdapterView.OnItemClic
             @Override
             public void onError(Call call, Exception e, int id) {
                 LogHelper.e(TAG, e.toString());
-                Helper.getInstance().showToast(CustomApplication.getContext(), "" + e.toString());
+                Helper.getInstance().showToast(getActivity(), "" + e.toString());
             }
 
             @Override

@@ -53,7 +53,7 @@ public class ETFNavigationBarActivity extends BaseActivity implements View.OnCli
             case R.id.Layout_4://申赎成交
                 intent.setClass(this,ETFTrasactionQueryActivity.class);
                 break;
-            case R.id.Layout_5://申赎历史
+            case R.id.Layout_5://申赎委托
                 intent.setClass(this,ETFHistoryInquireActivity.class);
                 break;
             case R.id.Layout_6://成分股

@@ -245,8 +245,8 @@ public class StayPaymentAdapter extends BaseAdapter {
         if (!TextUtils.isEmpty(listdate)) {
             String replace1 = listdate.replace("-", ".");
             String substring1 ="--";
-            if (replace1.length()>0)
-                replace1.substring(5, replace1.length());
+            if (replace1.length()>5)
+                substring1 = replace1.substring(5, replace1.length());
             holder.textView_time4.setText(substring1);                                        //时间4
         }
 

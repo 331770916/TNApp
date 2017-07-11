@@ -163,7 +163,46 @@
                     android:layout_marginRight="@dimen/size20"
                     android:src="@mipmap/youjiantou" />
             </LinearLayout>
+            <View
+                android:layout_width="match_parent"
+                android:layout_height="@dimen/size0.5"
+                android:layout_marginLeft="@dimen/size20"
+                android:background="@color/bgColor" />
 
+            <LinearLayout
+                android:id="@+id/Layout_5"
+                android:layout_width="match_parent"
+                android:layout_height="wrap_content"
+                android:orientation="horizontal">
+
+                <ImageView
+                    android:layout_width="50dp"
+                    android:layout_height="50dp"
+                    android:paddingBottom="@dimen/size15"
+                    android:paddingTop="@dimen/size15"
+                    android:scaleType="center"
+                    android:src="@mipmap/etf_shlicx"  />
+
+                <LinearLayout
+                    android:layout_width="0dp"
+                    android:layout_height="wrap_content"
+                    android:layout_gravity="center_vertical"
+                    android:layout_weight="1"
+                    android:orientation="vertical">
+
+                    <TextView
+                        android:layout_width="wrap_content"
+                        android:layout_height="wrap_content"
+                        android:text="@string/ETF_shenshu_History" />
+                </LinearLayout>
+
+                <ImageView
+                    android:layout_width="wrap_content"
+                    android:layout_height="wrap_content"
+                    android:layout_gravity="center_vertical"
+                    android:layout_marginRight="@dimen/size20"
+                    android:src="@mipmap/youjiantou" />
+            </LinearLayout>
 
             <View
                 android:layout_width="match_parent"
@@ -196,47 +235,6 @@
                         android:layout_width="wrap_content"
                         android:layout_height="wrap_content"
                         android:text="@string/ETF_shenshu_ClosingTheDeal" />
-                </LinearLayout>
-
-                <ImageView
-                    android:layout_width="wrap_content"
-                    android:layout_height="wrap_content"
-                    android:layout_gravity="center_vertical"
-                    android:layout_marginRight="@dimen/size20"
-                    android:src="@mipmap/youjiantou" />
-            </LinearLayout>
-
-            <View
-                android:layout_width="match_parent"
-                android:layout_height="@dimen/size0.5"
-                android:layout_marginLeft="@dimen/size20"
-                android:background="@color/bgColor" />
-
-            <LinearLayout
-                android:id="@+id/Layout_5"
-                android:layout_width="match_parent"
-                android:layout_height="wrap_content"
-                android:orientation="horizontal">
-
-                <ImageView
-                    android:layout_width="50dp"
-                    android:layout_height="50dp"
-                    android:paddingBottom="@dimen/size15"
-                    android:paddingTop="@dimen/size15"
-                    android:scaleType="center"
-                    android:src="@mipmap/etf_shlicx"  />
-
-                <LinearLayout
-                    android:layout_width="0dp"
-                    android:layout_height="wrap_content"
-                    android:layout_gravity="center_vertical"
-                    android:layout_weight="1"
-                    android:orientation="vertical">
-
-                    <TextView
-                        android:layout_width="wrap_content"
-                        android:layout_height="wrap_content"
-                        android:text="@string/ETF_shenshu_History" />
                 </LinearLayout>
 
                 <ImageView
