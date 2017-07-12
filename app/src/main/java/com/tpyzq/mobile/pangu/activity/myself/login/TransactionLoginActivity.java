@@ -749,7 +749,7 @@ public class TransactionLoginActivity extends BaseActivity implements View.OnCli
                             SpUtils.putString(TransactionLoginActivity.this, "CORP_END_DATE", CORP_END_DATE);
                             SpUtils.putString(TransactionLoginActivity.this, "mSession", mSession);
                             //第一次登录数据库交易账号无数据 添加到数据库
-                            if (!DeviceUtil.getDeviceId(CustomApplication.getContext()).equalsIgnoreCase(OLD_TCC) && !android.os.Build.MODEL.equals(OLD_SRRC)) {//换手机登录
+                            if (!"".equals(OLD_SRRC) && !DeviceUtil.getDeviceId(CustomApplication.getContext()).equalsIgnoreCase(OLD_TCC) && !android.os.Build.MODEL.equals(OLD_SRRC)) {//换手机登录
                                 getData(mAccount.getText().toString().trim(), "false", mSession);
                                 LoginDialog.showDialog("您更换了登录设备，上次使用的设备型号是" + OLD_SRRC, TransactionLoginActivity.this, new MistakeDialog.MistakeDialgoListener() {
                                     @Override
