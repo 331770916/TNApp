@@ -132,7 +132,7 @@
                     android:layout_toRightOf="@id/tvCnFundAmount"
                     android:background="@null"
                     android:gravity="center_vertical"
-                    android:hint="@string/QingShuRuShenGouJinE"
+                    android:hint="@string/input_mergershare_1"
                     android:inputType="numberDecimal"
                     android:singleLine="true"
                     android:textColor="@color/textss"

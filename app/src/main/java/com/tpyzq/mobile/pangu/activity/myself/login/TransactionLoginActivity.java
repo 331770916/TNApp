@@ -107,7 +107,6 @@ import java.util.Map;
 
 import okhttp3.Call;
 
-
 /**
  * Created by wangqi on 2016/8/24.
  * 交易登录
@@ -199,7 +198,6 @@ public class TransactionLoginActivity extends BaseActivity implements View.OnCli
     private Dialog mCommit;
     private Dialog mDownload;
     private Dialog mKeyboardRequest;
-    private TextView mCxaptcha;
     private String ip;
     private String IS_OVERDUE;
     private String CORP_RISK_LEVEL;
@@ -214,7 +212,6 @@ public class TransactionLoginActivity extends BaseActivity implements View.OnCli
         mPassword = (NoSoftInputEditText) findViewById(R.id.TradersPassword);     //交易密码_密
         mPasswordET = (EditText) findViewById(R.id.TradersPasswordET);            //交易密码_明
         mCloseIV = (ImageView) findViewById(R.id.CloseIV);
-        mCxaptcha = (TextView) findViewById(R.id.tvCaptcha);                      //重新获取验证码
         mCloseIV.setOnClickListener(this);
         findViewById(R.id.mKaihu).setOnClickListener(this);
         findViewById(R.id.Service).setOnClickListener(this);
@@ -486,7 +483,6 @@ public class TransactionLoginActivity extends BaseActivity implements View.OnCli
      */
     private void EditTextMonitor() {
         mLogin.setOnClickListener(this);
-        mCxaptcha.setOnClickListener(this);
         mSecurityCode.setOnClickListener(this);
         mAccount.addTextChangedListener(new MyTextWatcher());
         mPassword.addTextChangedListener(new MyTextWatcher());
@@ -622,13 +618,6 @@ public class TransactionLoginActivity extends BaseActivity implements View.OnCli
                 intent.setClass(this, FrogetTransactionPwdActivity.class);    //暂未合进来 ，注释
                 startActivity(intent);
                 break;
-            case R.id.tvCaptcha:
-                if (!TransactionLoginActivity.this.isFinishing() && isKeyboardDialog != null) {
-                    isKeyboardDialog.show();
-                }
-                toSecurityCode(isKeyboardDialog);
-
-                break;
         }
     }
 
@@ -760,7 +749,7 @@ public class TransactionLoginActivity extends BaseActivity implements View.OnCli
                             SpUtils.putString(TransactionLoginActivity.this, "CORP_END_DATE", CORP_END_DATE);
                             SpUtils.putString(TransactionLoginActivity.this, "mSession", mSession);
                             //第一次登录数据库交易账号无数据 添加到数据库
-                            if (!DeviceUtil.getDeviceId(CustomApplication.getContext()).equalsIgnoreCase(OLD_TCC) && !android.os.Build.MODEL.equals(OLD_SRRC)) {//换手机登录
+                            if (!"".equals(OLD_SRRC) && !DeviceUtil.getDeviceId(CustomApplication.getContext()).equalsIgnoreCase(OLD_TCC) && !android.os.Build.MODEL.equals(OLD_SRRC)) {//换手机登录
                                 getData(mAccount.getText().toString().trim(), "false", mSession);
                                 LoginDialog.showDialog("您更换了登录设备，上次使用的设备型号是" + OLD_SRRC, TransactionLoginActivity.this, new MistakeDialog.MistakeDialgoListener() {
                                     @Override
@@ -1270,8 +1259,6 @@ public class TransactionLoginActivity extends BaseActivity implements View.OnCli
             public void onError(Call call, Exception e, int id) {
                 LogHelper.e(TAG, e.toString());
                 isKeyboardDialog.dismiss();
-                userEntity.setKeyboard("false");
-                Db_PUB_USERS.UpdateKeyboard(userEntity);
                 initYN(false);
             }
 
@@ -1288,25 +1275,17 @@ public class TransactionLoginActivity extends BaseActivity implements View.OnCli
                     if ("0".equals(code)) {
                         String status = jsonObject.getString("status");
                         if ("2".equals(status)) {
-                            userEntity.setKeyboard("true");
-                            Db_PUB_USERS.UpdateKeyboard(userEntity);
                             initYN(true);
                         } else {
-                            userEntity.setKeyboard("false");
-                            Db_PUB_USERS.UpdateKeyboard(userEntity);
                             initYN(false);
                         }
                     } else {
-                        userEntity.setKeyboard("false");
-                        Db_PUB_USERS.UpdateKeyboard(userEntity);
                         initYN(false);
                     }
                 } catch (JSONException e) {
                     if (isKeyboardDialog != null) {
                         isKeyboardDialog.dismiss();
                     }
-                    userEntity.setKeyboard("false");
-                    Db_PUB_USERS.UpdateKeyboard(userEntity);
                     initYN(false);
                     e.printStackTrace();
                 }
@@ -1318,8 +1297,11 @@ public class TransactionLoginActivity extends BaseActivity implements View.OnCli
         if (isKeyboardDialog != null && isKeyboardDialog.isShowing()) {
             isKeyboardDialog.dismiss();
         }
+        UserEntity userEntity = new UserEntity();
         if (is) {
             UserUtil.Keyboard = "1";
+            userEntity.setKeyboard("true");
+            Db_PUB_USERS.UpdateKeyboard(userEntity);
             //键盘插件URL
             getUnikey();
             //数据更新
@@ -1342,7 +1324,6 @@ public class TransactionLoginActivity extends BaseActivity implements View.OnCli
             showKeyboardWithHeader();
         } else {
             UserUtil.Keyboard = "0";
-            UserEntity userEntity = new UserEntity();
             userEntity.setKeyboard("false");
             Db_PUB_USERS.UpdateKeyboard(userEntity);
             //数据更新
@@ -1383,8 +1364,7 @@ public class TransactionLoginActivity extends BaseActivity implements View.OnCli
                 if (dialog != null) {
                     dialog.dismiss();
                 }
-                mCxaptcha.setVisibility(View.VISIBLE);
-                mSecurityCode.setVisibility(View.GONE);
+                mSecurityCode.setImageResource(R.mipmap.ic_again);
                 Helper.getInstance().showToast(TransactionLoginActivity.this, "网络异常");
             }
 
@@ -1402,20 +1382,18 @@ public class TransactionLoginActivity extends BaseActivity implements View.OnCli
                     mVERIFICATIONCODE = object.getString("VERIFICATIONCODE");
                     String mVERIFICATIONIMAGE = object.getString("VERIFICATIONIMAGE");
                     if (mCODE.equals("0")) {
-                        mCxaptcha.setVisibility(View.GONE);
+
                         if (mVERIFICATIONIMAGE != null && mVERIFICATIONIMAGE != "") {
                             mSecurityCode.setVisibility(View.VISIBLE);
                             Bitmap bitmap = Helper.base64ToBitmap(mVERIFICATIONIMAGE);
                             if (bitmap!=null){
                                 mSecurityCode.setImageBitmap(bitmap);
                             }else {
-                                mCxaptcha.setVisibility(View.VISIBLE);
-                                mSecurityCode.setVisibility(View.GONE);
+                                mSecurityCode.setImageResource(R.mipmap.ic_again);
                             }
                         }
                     } else {
-                        mCxaptcha.setVisibility(View.VISIBLE);
-                        mSecurityCode.setVisibility(View.GONE);
+                        mSecurityCode.setImageResource(R.mipmap.ic_again);
                         Helper.getInstance().showToast(TransactionLoginActivity.this, "验证码网络请求失败");
                     }
                 } catch (Exception e) {
