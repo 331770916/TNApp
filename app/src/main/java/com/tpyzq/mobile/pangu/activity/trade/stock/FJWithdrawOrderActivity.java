@@ -120,10 +120,11 @@ public class FJWithdrawOrderActivity extends BaseActivity implements AdapterView
         mPosition = position - 1;
         StructuredFundEntity entity = mList.get(position - 1);
         if (ConstantUtil.list_item_flag) {
-            ConstantUtil.list_item_flag = false;
             mStructuredFundDialog = new StructuredFundDialog(this);
             mStructuredFundDialog.setData(TAG, this, entity, null, null);
+            ConstantUtil.list_item_flag = false;
             mStructuredFundDialog.show();
+
         }
     }
 
