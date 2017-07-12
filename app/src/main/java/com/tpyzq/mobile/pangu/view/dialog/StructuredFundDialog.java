@@ -128,6 +128,7 @@ public class StructuredFundDialog extends BaseDialog implements View.OnClickList
             tv_2.setText(R.string.Gradingfundmerger);
             tv_4.setText(mInput);
             tv_6.setText(mStructuredFundEntity.getStoken_name());
+            tv_7.setText(R.string.hbed);
             tv_8.setText(mShare);
             tv_10.setText(mStructuredFundEntity.getStock_account());
         } else if (FJFundSplitActivity.TAG.equals(mTAG)) {
@@ -137,6 +138,7 @@ public class StructuredFundDialog extends BaseDialog implements View.OnClickList
             tv_2.setText(R.string.FJFundSplitActivity);
             tv_4.setText(mInput);
             tv_6.setText(mStructuredFundEntity.getStoken_name());
+            tv_7.setText(R.string.fced);
             tv_8.setText(mShare);
             tv_10.setText(mStructuredFundEntity.getStock_account());
         } else if (FJWithdrawOrderActivity.TAG.equals(mTAG)) {

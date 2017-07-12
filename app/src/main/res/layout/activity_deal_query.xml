@@ -71,7 +71,7 @@
             android:layout_weight="1"
             android:gravity="center|end"
             android:paddingRight="@dimen/size3"
-            android:text="@string/etf_status_data"
+            android:text="@string/etf_date"
             android:textColor="@color/newStockTitle"
             android:textSize="@dimen/txtSize12" />
     </LinearLayout>

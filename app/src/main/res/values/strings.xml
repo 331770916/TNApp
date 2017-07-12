@@ -175,6 +175,8 @@
     <string name="mergershare">合并份额</string>
     <string name="input_fundID">请输入基金代码</string>
     <string name="input_mergershare">请输入份额</string>
+    <string name="input_mergershare_1">请输入合并份额</string>
+    <string name="input_mergershare_2">请输入分拆份额</string>
     <string name="choose_fund">选择基金</string>
     <string name="merge">合并</string>
     <string name="securities_code">证券代码</string>
@@ -201,6 +203,7 @@
     <string name="czlb">操作类别：</string>
     <string name="jjdm">基金代码：</string>
     <string name="fced">分拆份额：</string>
+    <string name="hbed">合并份额：</string>
 
 
     <!--OTC-->
@@ -781,6 +784,7 @@
     <string name="etf_attribute">属性</string>
     <string name="etf_wtl">成交数量/状态</string>
     <string name="etf_status_data">状态/日期</string>
+    <string name="etf_date">日期</string>
     <string name="etf_business_name">业务名称</string>
     <string name="etf_status_number">状态/成交量</string>
     <string name="etf_fdyy">废单原因</string>

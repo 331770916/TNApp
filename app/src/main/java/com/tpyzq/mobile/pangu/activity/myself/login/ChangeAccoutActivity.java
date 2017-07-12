@@ -154,7 +154,6 @@ public class ChangeAccoutActivity extends BaseActivity implements View.OnClickLi
     private Dialog mLoad;
     private Dialog mDownload;
     private Dialog mKeyboardRequest;
-    private TextView mCxaptcha;
     private String ip;
 
     @Override
@@ -170,7 +169,6 @@ public class ChangeAccoutActivity extends BaseActivity implements View.OnClickLi
         mCloseIV = (ImageView) findViewById(R.id.CloseIV);                  //清除
         mBDSecurityCode = (SimpleDraweeView) findViewById(R.id.BDSecurityCode);//验证码
 
-        mCxaptcha = (TextView) findViewById(R.id.tvCaptcha);//重新获取验证码
 
         isKeyboardDialog = LoadingDialog.initDialog(this, "加载中...");
         if (!ChangeAccoutActivity.this.isFinishing()) {
@@ -203,8 +201,6 @@ public class ChangeAccoutActivity extends BaseActivity implements View.OnClickLi
             public void onError(Call call, Exception e, int id) {
                 LogHelper.e(TAG, e.toString());
                 isKeyboardDialog.dismiss();
-                userEntity.setKeyboard("false");
-                Db_PUB_USERS.UpdateKeyboard(userEntity);
                 initYN(false);
             }
 
@@ -222,25 +218,19 @@ public class ChangeAccoutActivity extends BaseActivity implements View.OnClickLi
                     if ("0".equals(code)) {
                         String status = jsonObject.getString("status");
                         if ("2".equals(status)) {
-                            userEntity.setKeyboard("true");
-                            Db_PUB_USERS.UpdateKeyboard(userEntity);
                             initYN(true);
                         } else {
-                            userEntity.setKeyboard("false");
-                            Db_PUB_USERS.UpdateKeyboard(userEntity);
+
                             initYN(false);
                         }
                     } else {
-                        userEntity.setKeyboard("false");
-                        Db_PUB_USERS.UpdateKeyboard(userEntity);
+
                         initYN(false);
                     }
                 } catch (JSONException e) {
                     if (isKeyboardDialog != null) {
                         isKeyboardDialog.dismiss();
                     }
-                    userEntity.setKeyboard("false");
-                    Db_PUB_USERS.UpdateKeyboard(userEntity);
                     initYN(false);
                     e.printStackTrace();
                 }
@@ -252,13 +242,15 @@ public class ChangeAccoutActivity extends BaseActivity implements View.OnClickLi
         if (isKeyboardDialog != null && isKeyboardDialog.isShowing()) {
             isKeyboardDialog.dismiss();
         }
+        UserEntity userEntity = new UserEntity();
         if (is) {
             UserUtil.Keyboard = "1";  //启用sessionkey加密
+            userEntity.setKeyboard("true");
+            Db_PUB_USERS.UpdateKeyboard(userEntity);
             //键盘插件URL
             getUnikey();
             //数据更新
             UserUtil.refrushUserInfo();
-
             Intent intent = getIntent();
             if (intent != null) {
                 pageIndex = intent.getIntExtra("pageindex", 0);
@@ -277,7 +269,7 @@ public class ChangeAccoutActivity extends BaseActivity implements View.OnClickLi
 
         } else {
             UserUtil.Keyboard = "0";   //不启用sessionkey加密
-            UserEntity userEntity = new UserEntity();
+
             userEntity.setKeyboard("false");
             Db_PUB_USERS.UpdateKeyboard(userEntity);
             //数据更新
@@ -301,7 +293,6 @@ public class ChangeAccoutActivity extends BaseActivity implements View.OnClickLi
     }
 
     private void EditTextMonitor() {
-        mCxaptcha.setOnClickListener(this);
         mBindingbtn.setOnClickListener(this);
         mBDAccount.addTextChangedListener(new MyTextWatcher());
         mBDPassword.addTextChangedListener(new MyTextWatcher());
@@ -379,11 +370,7 @@ public class ChangeAccoutActivity extends BaseActivity implements View.OnClickLi
                     mBDCaptcha.setText("");
                 }
                 break;
-            case R.id.tvCaptcha:
-                if (!ChangeAccoutActivity.this.isFinishing() && isKeyboardDialog != null) {
-                    isKeyboardDialog.show();
-                }
-                toSecurityCode(isKeyboardDialog);
+
         }
     }
 
@@ -675,9 +662,8 @@ public class ChangeAccoutActivity extends BaseActivity implements View.OnClickLi
                 if (dialog != null) {
                     dialog.dismiss();
                 }
+                mBDSecurityCode.setImageResource(R.mipmap.ic_again);
                 Helper.getInstance().showToast(ChangeAccoutActivity.this, "网络器异常");
-                mCxaptcha.setVisibility(View.VISIBLE);
-                mBDSecurityCode.setVisibility(View.GONE);
             }
 
             @Override
@@ -694,22 +680,17 @@ public class ChangeAccoutActivity extends BaseActivity implements View.OnClickLi
                     mVERIFICATIONCODE = object.getString("VERIFICATIONCODE");
                     String mVERIFICATIONIMAGE = object.getString("VERIFICATIONIMAGE");
                     if (mCODE.equals("0")) {
-                        mCxaptcha.setVisibility(View.GONE);
                         if (mVERIFICATIONIMAGE != null && mVERIFICATIONIMAGE != "") {
                             mBDSecurityCode.setVisibility(View.VISIBLE);
                             Bitmap bitmap = Helper.base64ToBitmap(mVERIFICATIONIMAGE);
                             if (bitmap != null) {
                                 mBDSecurityCode.setImageBitmap(bitmap);
                             } else {
-                                mCxaptcha.setVisibility(View.VISIBLE);
-                                mBDSecurityCode.setVisibility(View.GONE);
+                                mBDSecurityCode.setImageResource(R.mipmap.ic_again);
                             }
                         }
-
-
                     } else {
-                        mCxaptcha.setVisibility(View.VISIBLE);
-                        mBDSecurityCode.setVisibility(View.GONE);
+                        mBDSecurityCode.setImageResource(R.mipmap.ic_again);
                         Helper.getInstance().showToast(ChangeAccoutActivity.this, "网络器异常");
                     }
                 } catch (JSONException e) {
