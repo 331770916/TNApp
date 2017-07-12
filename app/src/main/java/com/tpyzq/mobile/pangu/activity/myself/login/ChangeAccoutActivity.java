@@ -269,7 +269,6 @@ public class ChangeAccoutActivity extends BaseActivity implements View.OnClickLi
 
         } else {
             UserUtil.Keyboard = "0";   //不启用sessionkey加密
-
             userEntity.setKeyboard("false");
             Db_PUB_USERS.UpdateKeyboard(userEntity);
             //数据更新
@@ -516,7 +515,7 @@ public class ChangeAccoutActivity extends BaseActivity implements View.OnClickLi
                             SpUtils.putString(ChangeAccoutActivity.this, "CORP_RISK_LEVEL", CORP_RISK_LEVEL);
                             SpUtils.putString(ChangeAccoutActivity.this, "CORP_END_DATE", CORP_END_DATE);
                             //第一次登录数据库交易账号无数据 添加到数据库
-                            if (!DeviceUtil.getDeviceId(CustomApplication.getContext()).equals(OLD_TCC) && !android.os.Build.MODEL.equals(OLD_SRRC)) {
+                            if (!"".equals(OLD_SRRC) && !DeviceUtil.getDeviceId(CustomApplication.getContext()).equals(OLD_TCC) && !android.os.Build.MODEL.equals(OLD_SRRC)) {
                                 getData(mBDAccount.getText().toString().trim(), "false", mSession);
                                 LoginDialog.showDialog("您更换了登录设备，上次使用的设备型号是" + OLD_SRRC, ChangeAccoutActivity.this, new MistakeDialog.MistakeDialgoListener() {
                                     @Override
