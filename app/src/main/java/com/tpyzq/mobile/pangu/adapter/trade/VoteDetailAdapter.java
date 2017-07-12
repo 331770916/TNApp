@@ -15,6 +15,7 @@ import android.widget.LinearLayout;
 import android.widget.TextView;
 import com.tpyzq.mobile.pangu.R;
 import com.tpyzq.mobile.pangu.data.NetworkVotingEntity;
+import com.tpyzq.mobile.pangu.log.LogUtil;
 import com.tpyzq.mobile.pangu.util.Helper;
 
 import android.widget.LinearLayout.LayoutParams;
@@ -63,6 +64,7 @@ public class VoteDetailAdapter extends BaseAdapter {
     public View getView(int position, View convertView, ViewGroup parent) {
         final NetworkVotingEntity bean = mList.get(position);
         if(!TextUtils.isEmpty(bean.getVote_type())) {
+            bean.setEntrust_no("");
             switch (Integer.parseInt(bean.getVote_type())) {
                 case 0: //非累积投票制
                     convertView = layoutInflater.inflate(R.layout.item_vote_accumulate_proposal, parent, false);
@@ -130,7 +132,7 @@ public class VoteDetailAdapter extends BaseAdapter {
         tvContent.setText(entity.getVote_info());
         ll.addView(tvContent,lps);
         LayoutParams etlps = new LayoutParams((int)mContext.getResources().getDimension(R.dimen.size100),(int)mContext.getResources().getDimension(R.dimen.size40));
-        EditText etNum = new EditText(mContext);
+        final EditText etNum = new EditText(mContext);
         etNum.setBackgroundResource(R.mipmap.vote_et_style);
         etNum.setInputType(InputType.TYPE_CLASS_NUMBER);
         etlps.leftMargin = (int)mContext.getResources().getDimension(R.dimen.size31);
@@ -143,12 +145,16 @@ public class VoteDetailAdapter extends BaseAdapter {
             public void onTextChanged(CharSequence s, int start, int before, int count) {}
             @Override
             public void afterTextChanged(Editable s) {
-                String editString = s.toString();
-                if(!TextUtils.isEmpty(editString)&&!editString.startsWith("0"))
-                    entity.setEntrust_no(editString);
-                else {
-                    entity.setEntrust_no("");
-                    Helper.getInstance().showToast(mContext, "议案投票数必须为整数");
+                if (s.length() > 1 && s.charAt(0) == '0') {
+                    final Integer integer = Integer.valueOf(s.toString());
+                    etNum.setText(integer.toString());
+                    etNum.setSelection(integer.toString().length());
+                    etNum.postDelayed(new Runnable() {
+                        @Override
+                        public void run() {
+                            entity.setEntrust_no(integer.toString());
+                        }
+                    },800);
                 }
             }
         });

@@ -46,9 +46,13 @@ public class ConstantUtil {
 
     public static int CLEARED = 1;        //下拉刷新  清除数据源的 标识
     public static int NOCLEARED = -1;     //上拉加载  不清除数据源的 标识
-    public static final String NETWORK_ERROR = "网络连接异常";
+    public static final String NETWORK_ERROR = "网络异常";
+    public static final String NETWORK_ERROR_CODE = "400";
     public static final String SERVICE_NO_DATA = "服务未返回数据";
+    public static final String SERVICE_NO_DATA_CODE = "-3";
     public static final String JSON_ERROR = "服务数据解析异常";
+    public static final String JSON_ERROR_CODE ="-2";
+
 
     /**
      * 交易相关常量

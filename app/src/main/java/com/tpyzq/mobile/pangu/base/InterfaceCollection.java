@@ -85,7 +85,7 @@ public class InterfaceCollection {
             @Override
             public void onError(Call call, Exception e, int id) {
                 ResultInfo info = new ResultInfo();
-                info.setCode("400");
+                info.setCode(ConstantUtil.NETWORK_ERROR_CODE);
                 info.setMsg(ConstantUtil.NETWORK_ERROR);
                 info.setTag(TAG);
                 callback.callResult(info);
@@ -93,9 +93,9 @@ public class InterfaceCollection {
 
             @Override
             public void onResponse(String response, int id) {
-                ResultInfo info = new ResultInfo();
+                ResultInfo info = new ResultInfo(response);
                 if(TextUtils.isEmpty(response)){
-                    info.setCode("-3");
+                    info.setCode(ConstantUtil.SERVICE_NO_DATA_CODE);
                     info.setMsg(ConstantUtil.SERVICE_NO_DATA);
                     info.setTag(TAG);
                 }else {
@@ -120,7 +120,7 @@ public class InterfaceCollection {
                         }
 
                     } catch (JSONException e) {
-                        info.setCode("-2");
+                        info.setCode(ConstantUtil.JSON_ERROR_CODE);
                         info.setMsg(ConstantUtil.JSON_ERROR);
                         info.setTag(TAG);
                     }
@@ -154,7 +154,7 @@ public class InterfaceCollection {
             @Override
             public void onError(Call call, Exception e, int id) {
                 ResultInfo info = new ResultInfo();
-                info.setCode("400");
+                info.setCode(ConstantUtil.NETWORK_ERROR_CODE);
                 info.setMsg(ConstantUtil.NETWORK_ERROR);
                 info.setTag(TAG);
                 callback.callResult(info);
@@ -162,9 +162,9 @@ public class InterfaceCollection {
 
             @Override
             public void onResponse(String response, int id) {
-                ResultInfo info = new ResultInfo();
+                ResultInfo info = new ResultInfo(response);
                 if(TextUtils.isEmpty(response)){
-                    info.setCode("-3");
+                    info.setCode(ConstantUtil.SERVICE_NO_DATA_CODE);
                     info.setMsg(ConstantUtil.SERVICE_NO_DATA);
                     info.setTag(TAG);
                 }else{
@@ -192,7 +192,7 @@ public class InterfaceCollection {
                             info.setData(ses);
                         }
                     } catch (JSONException e) {
-                        info.setCode("-2");
+                        info.setCode(ConstantUtil.JSON_ERROR_CODE);
                         info.setMsg(ConstantUtil.JSON_ERROR);
                         info.setTag(TAG);
                     }
@@ -231,7 +231,7 @@ public class InterfaceCollection {
             @Override
             public void onError(Call call, Exception e, int id) {
                 ResultInfo info = new ResultInfo();
-                info.setCode("400");
+                info.setCode(ConstantUtil.NETWORK_ERROR_CODE);
                 info.setMsg(ConstantUtil.NETWORK_ERROR);
                 info.setTag(TAG);
                 callback.callResult(info);
@@ -239,9 +239,9 @@ public class InterfaceCollection {
 
             @Override
             public void onResponse(String response, int id) {
-                ResultInfo info = new ResultInfo();
+                ResultInfo info = new ResultInfo(response);
                 if(TextUtils.isEmpty(response)){
-                    info.setCode("-3");
+                    info.setCode(ConstantUtil.SERVICE_NO_DATA_CODE);
                     info.setMsg(ConstantUtil.SERVICE_NO_DATA);
                     info.setTag(TAG);
                 }else{
@@ -261,7 +261,7 @@ public class InterfaceCollection {
                             info.setData(bean);
                         }
                     } catch (JSONException e) {
-                        info.setCode("-2");
+                        info.setCode(ConstantUtil.JSON_ERROR_CODE);
                         info.setMsg(ConstantUtil.JSON_ERROR);
                         info.setTag(TAG);
                     }
@@ -299,7 +299,7 @@ public class InterfaceCollection {
             @Override
             public void onError(Call call, Exception e, int id) {
                 ResultInfo info = new ResultInfo();
-                info.setCode("400");
+                info.setCode(ConstantUtil.NETWORK_ERROR_CODE);
                 info.setMsg(ConstantUtil.NETWORK_ERROR);
                 info.setTag(TAG);
                 callback.callResult(info);
@@ -307,9 +307,9 @@ public class InterfaceCollection {
 
             @Override
             public void onResponse(String response, int id) {
-                ResultInfo info = new ResultInfo();
+                ResultInfo info = new ResultInfo(response);
                 if(TextUtils.isEmpty(response)){
-                    info.setCode("-3");
+                    info.setCode(ConstantUtil.SERVICE_NO_DATA_CODE);
                     info.setMsg(ConstantUtil.SERVICE_NO_DATA);
                     info.setTag(TAG);
                 }else{
@@ -329,7 +329,7 @@ public class InterfaceCollection {
                             info.setData(bean);
                         }
                     } catch (JSONException e) {
-                        info.setCode("-2");
+                        info.setCode(ConstantUtil.JSON_ERROR_CODE);
                         info.setMsg(ConstantUtil.JSON_ERROR);
                         info.setTag(TAG);
                     }
@@ -365,7 +365,7 @@ public class InterfaceCollection {
             @Override
             public void onError(Call call, Exception e, int id) {
                 ResultInfo info = new ResultInfo();
-                info.setCode("400");
+                info.setCode(ConstantUtil.NETWORK_ERROR_CODE);
                 info.setMsg(ConstantUtil.NETWORK_ERROR);
                 info.setTag(TAG);
                 callback.callResult(info);
@@ -373,9 +373,9 @@ public class InterfaceCollection {
 
             @Override
             public void onResponse(String response, int id) {
-                ResultInfo info = new ResultInfo();
+                ResultInfo info = new ResultInfo(response);
                 if(TextUtils.isEmpty(response)){
-                    info.setCode("-3");
+                    info.setCode(ConstantUtil.SERVICE_NO_DATA_CODE);
                     info.setMsg(ConstantUtil.SERVICE_NO_DATA);
                     info.setTag(TAG);
                 }else{
@@ -409,7 +409,7 @@ public class InterfaceCollection {
                             info.setData(ses);
                         }
                     } catch (JSONException e) {
-                        info.setCode("-2");
+                        info.setCode(ConstantUtil.JSON_ERROR_CODE);
                         info.setMsg(ConstantUtil.JSON_ERROR);
                         info.setTag(TAG);
                     }
@@ -440,7 +440,7 @@ public class InterfaceCollection {
             @Override
             public void onError(Call call, Exception e, int id) {
                 ResultInfo info = new ResultInfo();
-                info.setCode("400");
+                info.setCode(ConstantUtil.NETWORK_ERROR_CODE);
                 info.setMsg(ConstantUtil.NETWORK_ERROR);
                 info.setTag(TAG);
                 callback.callResult(info);
@@ -448,9 +448,9 @@ public class InterfaceCollection {
 
             @Override
             public void onResponse(String response, int id) {
-                ResultInfo info = new ResultInfo();
+                ResultInfo info = new ResultInfo(response);
                 if(TextUtils.isEmpty(response)){
-                    info.setCode("-3");
+                    info.setCode(ConstantUtil.SERVICE_NO_DATA_CODE);
                     info.setMsg(ConstantUtil.SERVICE_NO_DATA);
                     info.setTag(TAG);
                 }else{
@@ -474,7 +474,7 @@ public class InterfaceCollection {
                             info.setData(ses);
                         }
                     } catch (JSONException e) {
-                        info.setCode("-2");
+                        info.setCode(ConstantUtil.JSON_ERROR_CODE);
                         info.setMsg(ConstantUtil.JSON_ERROR);
                         info.setTag(TAG);
                     }
@@ -514,7 +514,7 @@ public class InterfaceCollection {
             @Override
             public void onError(Call call, Exception e, int id) {
                 ResultInfo info = new ResultInfo();
-                info.setCode("400");
+                info.setCode(ConstantUtil.NETWORK_ERROR_CODE);
                 info.setMsg(ConstantUtil.NETWORK_ERROR);
                 info.setTag(TAG);
                 callback.callResult(info);
@@ -522,9 +522,9 @@ public class InterfaceCollection {
 
             @Override
             public void onResponse(String response, int id) {
-                ResultInfo info = new ResultInfo();
+                ResultInfo info = new ResultInfo(response);
                 if(TextUtils.isEmpty(response)){
-                    info.setCode("-3");
+                    info.setCode(ConstantUtil.SERVICE_NO_DATA_CODE);
                     info.setMsg(ConstantUtil.SERVICE_NO_DATA);
                     info.setTag(TAG);
                 }else{
@@ -558,7 +558,7 @@ public class InterfaceCollection {
                             info.setData(ses);
                         }
                     } catch (JSONException e) {
-                        info.setCode("-2");
+                        info.setCode(ConstantUtil.JSON_ERROR_CODE);
                         info.setMsg(ConstantUtil.JSON_ERROR);
                         info.setTag(TAG);
                     }
@@ -592,7 +592,7 @@ public class InterfaceCollection {
             @Override
             public void onError(Call call, Exception e, int id) {
                 ResultInfo info = new ResultInfo();
-                info.setCode("400");
+                info.setCode(ConstantUtil.NETWORK_ERROR_CODE);
                 info.setMsg(ConstantUtil.NETWORK_ERROR);
                 info.setTag(TAG);
                 callback.callResult(info);
@@ -600,9 +600,9 @@ public class InterfaceCollection {
 
             @Override
             public void onResponse(String response, int id) {
-                ResultInfo info = new ResultInfo();
+                ResultInfo info = new ResultInfo(response);
                 if(TextUtils.isEmpty(response)){
-                    info.setCode("-3");
+                    info.setCode(ConstantUtil.SERVICE_NO_DATA_CODE);
                     info.setMsg(ConstantUtil.SERVICE_NO_DATA);
                     info.setTag(TAG);
                 }else{
@@ -633,7 +633,7 @@ public class InterfaceCollection {
                             info.setData(ses);
                         }
                     } catch (JSONException e) {
-                        info.setCode("-2");
+                        info.setCode(ConstantUtil.JSON_ERROR_CODE);
                         info.setMsg(ConstantUtil.JSON_ERROR);
                         info.setTag(TAG);
                     }
@@ -673,7 +673,7 @@ public class InterfaceCollection {
             @Override
             public void onError(Call call, Exception e, int id) {
                 ResultInfo info = new ResultInfo();
-                info.setCode("400");
+                info.setCode(ConstantUtil.NETWORK_ERROR_CODE);
                 info.setMsg(ConstantUtil.NETWORK_ERROR);
                 info.setTag(TAG);
                 callback.callResult(info);
@@ -681,9 +681,9 @@ public class InterfaceCollection {
 
             @Override
             public void onResponse(String response, int id) {
-                ResultInfo info = new ResultInfo();
+                ResultInfo info = new ResultInfo(response);
                 if(TextUtils.isEmpty(response)){
-                    info.setCode("-3");
+                    info.setCode(ConstantUtil.SERVICE_NO_DATA_CODE);
                     info.setMsg(ConstantUtil.SERVICE_NO_DATA);
                     info.setTag(TAG);
                 }else{
@@ -718,7 +718,7 @@ public class InterfaceCollection {
                             info.setData(ses);
                         }
                     } catch (JSONException e) {
-                        info.setCode("-2");
+                        info.setCode(ConstantUtil.JSON_ERROR_CODE);
                         info.setMsg(ConstantUtil.JSON_ERROR);
                         info.setTag(TAG);
                     }
@@ -755,7 +755,7 @@ public class InterfaceCollection {
             @Override
             public void onError(Call call, Exception e, int id) {
                 ResultInfo info = new ResultInfo();
-                info.setCode("400");
+                info.setCode(ConstantUtil.NETWORK_ERROR_CODE);
                 info.setMsg(ConstantUtil.NETWORK_ERROR);
                 info.setTag(TAG);
                 callback.callResult(info);
@@ -763,9 +763,9 @@ public class InterfaceCollection {
 
             @Override
             public void onResponse(String response, int id) {
-                ResultInfo info = new ResultInfo();
+                ResultInfo info = new ResultInfo(response);
                 if(TextUtils.isEmpty(response)){
-                    info.setCode("-3");
+                    info.setCode(ConstantUtil.SERVICE_NO_DATA_CODE);
                     info.setMsg(ConstantUtil.SERVICE_NO_DATA);
                     info.setTag(TAG);
                 }else{
@@ -797,7 +797,7 @@ public class InterfaceCollection {
                             info.setData(ses);
                         }
                     } catch (JSONException e) {
-                        info.setCode("-2");
+                        info.setCode(ConstantUtil.JSON_ERROR_CODE);
                         info.setMsg(ConstantUtil.JSON_ERROR);
                         info.setTag(TAG);
                     }
@@ -829,7 +829,7 @@ public class InterfaceCollection {
             @Override
             public void onError(Call call, Exception e, int id) {
                 ResultInfo info = new ResultInfo();
-                info.setCode("400");
+                info.setCode(ConstantUtil.NETWORK_ERROR_CODE);
                 info.setMsg(ConstantUtil.NETWORK_ERROR);
                 info.setTag(TAG);
                 callback.callResult(info);
@@ -837,9 +837,9 @@ public class InterfaceCollection {
 
             @Override
             public void onResponse(String response, int id) {
-                ResultInfo info = new ResultInfo();
+                ResultInfo info = new ResultInfo(response);
                 if(TextUtils.isEmpty(response)){
-                    info.setCode("-3");
+                    info.setCode(ConstantUtil.SERVICE_NO_DATA_CODE);
                     info.setMsg(ConstantUtil.SERVICE_NO_DATA);
                     info.setTag(TAG);
                 }else{
@@ -858,7 +858,7 @@ public class InterfaceCollection {
                             info.setData(map);
                         }
                     } catch (JSONException e) {
-                        info.setCode("-2");
+                        info.setCode(ConstantUtil.JSON_ERROR_CODE);
                         info.setMsg(ConstantUtil.JSON_ERROR);
                         info.setTag(TAG);
                     }
@@ -932,7 +932,7 @@ public class InterfaceCollection {
             @Override
             public void onError(Call call, Exception e, int id) {
                 ResultInfo info = new ResultInfo();
-                info.setCode("400");
+                info.setCode(ConstantUtil.NETWORK_ERROR_CODE);
                 info.setMsg(ConstantUtil.NETWORK_ERROR);
                 info.setTag(TAG);
                 callback.callResult(info);
@@ -940,9 +940,9 @@ public class InterfaceCollection {
 
             @Override
             public void onResponse(String response, int id) {
-                ResultInfo info = new ResultInfo();
+                ResultInfo info = new ResultInfo(response);
                 if (TextUtils.isEmpty(response)) {
-                    info.setCode("-3");
+                    info.setCode(ConstantUtil.SERVICE_NO_DATA_CODE);
                     info.setMsg(ConstantUtil.SERVICE_NO_DATA);
                     info.setTag(TAG);
                 } else {
@@ -954,7 +954,7 @@ public class InterfaceCollection {
                         info.setMsg(msg);
                         info.setTag(TAG);
                     } catch (JSONException e) {
-                        info.setCode("-2");
+                        info.setCode(ConstantUtil.JSON_ERROR_CODE);
                         info.setMsg(ConstantUtil.JSON_ERROR);
                         info.setTag(TAG);
                     }
@@ -993,7 +993,7 @@ public class InterfaceCollection {
             @Override
             public void onError(Call call, Exception e, int id) {
                 ResultInfo info = new ResultInfo();
-                info.setCode("400");
+                info.setCode(ConstantUtil.NETWORK_ERROR_CODE);
                 info.setMsg(ConstantUtil.NETWORK_ERROR);
                 info.setTag(TAG);
                 callback.callResult(info);
@@ -1001,9 +1001,9 @@ public class InterfaceCollection {
 
             @Override
             public void onResponse(String response, int id) {
-                ResultInfo info = new ResultInfo();
+                ResultInfo info = new ResultInfo(response);
                 if (TextUtils.isEmpty(response)) {
-                    info.setCode("-3");
+                    info.setCode(ConstantUtil.SERVICE_NO_DATA_CODE);
                     info.setMsg(ConstantUtil.SERVICE_NO_DATA);
                     info.setTag(TAG);
                 } else {
@@ -1033,7 +1033,7 @@ public class InterfaceCollection {
                             info.setData(ses);
                         }
                     } catch (JSONException e) {
-                        info.setCode("-2");
+                        info.setCode(ConstantUtil.JSON_ERROR_CODE);
                         info.setMsg(ConstantUtil.JSON_ERROR);
                         info.setTag(TAG);
                     }
@@ -1069,7 +1069,7 @@ public class InterfaceCollection {
             @Override
             public void onError(Call call, Exception e, int id) {
                 ResultInfo info = new ResultInfo();
-                info.setCode("400");
+                info.setCode(ConstantUtil.NETWORK_ERROR_CODE);
                 info.setMsg(ConstantUtil.NETWORK_ERROR);
                 info.setTag(TAG);
                 callback.callResult(info);
@@ -1077,9 +1077,9 @@ public class InterfaceCollection {
 
             @Override
             public void onResponse(String response, int id) {
-                ResultInfo info = new ResultInfo();
+                ResultInfo info = new ResultInfo(response);
                 if(TextUtils.isEmpty(response)){
-                    info.setCode("-3");
+                    info.setCode(ConstantUtil.SERVICE_NO_DATA_CODE);
                     info.setMsg(ConstantUtil.SERVICE_NO_DATA);
                     info.setTag(TAG);
                 }else{
@@ -1110,7 +1110,7 @@ public class InterfaceCollection {
                             info.setData(ses);
                         }
                     } catch (JSONException e) {
-                        info.setCode("-2");
+                        info.setCode(ConstantUtil.JSON_ERROR_CODE);
                         info.setMsg(ConstantUtil.JSON_ERROR);
                         info.setTag(TAG);
                     }
@@ -1140,7 +1140,7 @@ public class InterfaceCollection {
             @Override
             public void onError(Call call, Exception e, int i) {
                 ResultInfo info = new ResultInfo();
-                info.setCode("400");
+                info.setCode(ConstantUtil.NETWORK_ERROR_CODE);
                 info.setMsg(ConstantUtil.NETWORK_ERROR);
                 info.setTag(TAG);
                 callback.callResult(info);
@@ -1148,9 +1148,9 @@ public class InterfaceCollection {
 
             @Override
             public void onResponse(String response, int id) {
-                ResultInfo info = new ResultInfo();
+                ResultInfo info = new ResultInfo(response);
                 if(TextUtils.isEmpty(response)){
-                    info.setCode("-3");
+                    info.setCode(ConstantUtil.SERVICE_NO_DATA_CODE);
                     info.setMsg(ConstantUtil.SERVICE_NO_DATA);
                     info.setTag(TAG);
                 }else{
@@ -1176,7 +1176,7 @@ public class InterfaceCollection {
                             info.setData(ses);
                         }
                     } catch (JSONException e) {
-                        info.setCode("-2");
+                        info.setCode(ConstantUtil.JSON_ERROR_CODE);
                         info.setMsg(ConstantUtil.JSON_ERROR);
                         info.setTag(TAG);
                     }
@@ -1215,14 +1215,14 @@ public class InterfaceCollection {
             @Override
             public void onError(Call call, Exception e, int id) {
                 ResultInfo info = new ResultInfo();
-                info.setCode("400");
+                info.setCode(ConstantUtil.NETWORK_ERROR_CODE);
                 info.setMsg(ConstantUtil.NETWORK_ERROR);
                 callback.callResult(info);
             }
 
             @Override
             public void onResponse(String response, int id) {
-                ResultInfo info = new ResultInfo();
+                ResultInfo info = new ResultInfo(response);
                 try {
                     JSONObject jsonObject = new JSONObject(response);
                     String code = jsonObject.getString("code");
@@ -1254,7 +1254,7 @@ public class InterfaceCollection {
                         }
                     }
                 } catch (JSONException e) {
-                    info.setCode("-2");
+                    info.setCode(ConstantUtil.JSON_ERROR_CODE);
                     info.setMsg(ConstantUtil.JSON_ERROR);
                     info.setTag(TAG);
                 }
@@ -1287,14 +1287,14 @@ public class InterfaceCollection {
             @Override
             public void onError(Call call, Exception e, int id) {
                 ResultInfo info = new ResultInfo();
-                info.setCode("400");
+                info.setCode(ConstantUtil.NETWORK_ERROR_CODE);
                 info.setMsg(ConstantUtil.NETWORK_ERROR);
                 callback.callResult(info);
             }
 
             @Override
             public void onResponse(String response, int id) {
-                ResultInfo info = new ResultInfo();
+                ResultInfo info = new ResultInfo(response);
                 try {
                     JSONObject jsonObject = new JSONObject(response);
                     String code = jsonObject.getString("code");
@@ -1302,7 +1302,7 @@ public class InterfaceCollection {
                     info.setCode(code);
                     info.setMsg(msg);
                 } catch (JSONException e) {
-                    info.setCode("-2");
+                    info.setCode(ConstantUtil.JSON_ERROR_CODE);
                     info.setMsg(ConstantUtil.JSON_ERROR);
                 }
                 callback.callResult(info);
@@ -1333,11 +1333,11 @@ public class InterfaceCollection {
         map1.put("funcid","300512");
         map1.put("token",session);
         map1.put("parms",map2);
-        NetWorkUtil.getInstence().okHttpForPostString("300512", ConstantUtil.URL_JY, map1, new StringCallback() {
+        net.okHttpForPostString("300512", ConstantUtil.URL_JY, map1, new StringCallback() {
             @Override
             public void onError(Call call, Exception e, int id) {
                 ResultInfo info = new ResultInfo();
-                info.setCode("400");
+                info.setCode(ConstantUtil.NETWORK_ERROR_CODE);
                 info.setMsg(ConstantUtil.NETWORK_ERROR);
                 callback.callResult(info);
             }
@@ -1354,7 +1354,7 @@ public class InterfaceCollection {
                 String code = bean.getCode();
                 String msg = bean.getMsg();
                 List<OTC_AffirmBean.DataBean> data = bean.getData();
-                ResultInfo info = new ResultInfo();
+                ResultInfo info = new ResultInfo(response);
                 info.setCode(code);
                 info.setMsg("");
                 if(("0").equalsIgnoreCase(code) && data != null){
@@ -1415,11 +1415,11 @@ public class InterfaceCollection {
         map1.put("funcid",funcid);
         map1.put("token",session);
         map1.put("parms",map2);
-        NetWorkUtil.getInstence().okHttpForPostString("730201", ConstantUtil.URL_JY, map1, new StringCallback() {
+        net.okHttpForPostString("730201", ConstantUtil.URL_JY, map1, new StringCallback() {
             @Override
             public void onError(Call call, Exception e, int id) {
                 ResultInfo info = new ResultInfo();
-                info.setCode("400");
+                info.setCode(ConstantUtil.NETWORK_ERROR_CODE);
                 info.setMsg(ConstantUtil.NETWORK_ERROR);
                 callback.callResult(info);
             }
@@ -1434,25 +1434,10 @@ public class InterfaceCollection {
                 OTC_SubscriptionCommitBean bean = gson.fromJson(response, type);
                 String code = bean.getCode();
                 String msg = bean.getMsg();
-                ResultInfo info = new ResultInfo();
+                ResultInfo info = new ResultInfo(response);
                 info.setCode(code);
                 info.setMsg(msg);
                 callback.callResult(info);
-                /*if (code.equals("-6")) {
-                    Intent intent = new Intent(context, TransactionLoginActivity.class);
-                    context.startActivity(intent);
-                    dismiss();
-                    ((Activity)context).finish();
-                } else
-                if (code.equals("0")) {
-                    ResultDialog.getInstance().show("委托已提交", R.mipmap.duigou);
-                    dismiss();
-                    isOk.callBack(true);
-                }else {
-                    MistakeDialog.showDialog(msg, mActivity);
-                    dismiss();
-                    isOk.callBack(false);
-                }*/
             }
         });
     }
@@ -1480,7 +1465,7 @@ public class InterfaceCollection {
             @Override
             public void onError(Call call, Exception e, int id) {
                 ResultInfo info = new ResultInfo();
-                info.setCode("400");
+                info.setCode(ConstantUtil.NETWORK_ERROR_CODE);
                 info.setTag(TAG);
                 info.setMsg(ConstantUtil.NETWORK_ERROR);
                 callback.callResult(info);
@@ -1488,9 +1473,9 @@ public class InterfaceCollection {
 
             @Override
             public void onResponse(String response, int id) {
-                ResultInfo info = new ResultInfo();
+                ResultInfo info = new ResultInfo(response);
                 if (TextUtils.isEmpty(response)) {
-                    info.setCode("-3");
+                    info.setCode(ConstantUtil.SERVICE_NO_DATA_CODE);
                     info.setMsg(ConstantUtil.SERVICE_NO_DATA);
                     info.setTag(TAG);
                 } else {
@@ -1521,7 +1506,7 @@ public class InterfaceCollection {
                             info.setData(ses);
                         }
                     } catch (JSONException e) {
-                        info.setCode("-2");
+                        info.setCode(ConstantUtil.JSON_ERROR_CODE);
                         info.setMsg(ConstantUtil.JSON_ERROR);
                         info.setTag(TAG);
                     }
@@ -1559,7 +1544,7 @@ public class InterfaceCollection {
             @Override
             public void onError(Call call, Exception e, int id) {
                 ResultInfo info = new ResultInfo();
-                info.setCode("400");
+                info.setCode(ConstantUtil.NETWORK_ERROR_CODE);
                 info.setMsg(ConstantUtil.NETWORK_ERROR);
                 info.setTag(TAG);
                 callback.callResult(info);
@@ -1567,9 +1552,9 @@ public class InterfaceCollection {
 
             @Override
             public void onResponse(String response, int id) {
-                ResultInfo info = new ResultInfo();
+                ResultInfo info = new ResultInfo(response);
                 if (TextUtils.isEmpty(response)) {
-                    info.setCode("-3");
+                    info.setCode(ConstantUtil.SERVICE_NO_DATA_CODE);
                     info.setMsg(ConstantUtil.SERVICE_NO_DATA);
                     info.setTag(TAG);
                 } else {
@@ -1594,7 +1579,7 @@ public class InterfaceCollection {
                         }
 
                     } catch (JSONException e) {
-                        info.setCode("-2");
+                        info.setCode(ConstantUtil.JSON_ERROR_CODE);
                         info.setMsg(ConstantUtil.JSON_ERROR);
                         info.setTag(TAG);
                     }
@@ -1633,7 +1618,7 @@ public class InterfaceCollection {
             @Override
             public void onError(Call call, Exception e, int id) {
                 ResultInfo info = new ResultInfo();
-                info.setCode("400");
+                info.setCode(ConstantUtil.NETWORK_ERROR_CODE);
                 info.setMsg(ConstantUtil.NETWORK_ERROR);
                 info.setTag(TAG);
                 callback.callResult(info);
@@ -1643,7 +1628,7 @@ public class InterfaceCollection {
             public void onResponse(String response, int id) {
                 ResultInfo info = new ResultInfo();
                 if (TextUtils.isEmpty(response)) {
-                    info.setCode("-3");
+                    info.setCode(ConstantUtil.SERVICE_NO_DATA_CODE);
                     info.setMsg(ConstantUtil.SERVICE_NO_DATA);
                     info.setTag(TAG);
                 } else {
@@ -1682,7 +1667,7 @@ public class InterfaceCollection {
                             info.setData(ses);
                         }
                     } catch (JSONException e) {
-                        info.setCode("-2");
+                        info.setCode(ConstantUtil.JSON_ERROR_CODE);
                         info.setMsg(ConstantUtil.JSON_ERROR);
                         info.setTag(TAG);
                     }
@@ -1723,7 +1708,7 @@ public class InterfaceCollection {
             @Override
             public void onError(Call call, Exception e, int id) {
                 ResultInfo info = new ResultInfo();
-                info.setCode("400");
+                info.setCode(ConstantUtil.NETWORK_ERROR_CODE);
                 info.setMsg(ConstantUtil.NETWORK_ERROR);
                 info.setTag(TAG);
                 callback.callResult(info);
@@ -1731,9 +1716,9 @@ public class InterfaceCollection {
 
             @Override
             public void onResponse(String response, int id) {
-                ResultInfo info = new ResultInfo();
+                ResultInfo info = new ResultInfo(response);
                 if (TextUtils.isEmpty(response)) {
-                    info.setCode("-3");
+                    info.setCode(ConstantUtil.SERVICE_NO_DATA_CODE);
                     info.setMsg(ConstantUtil.SERVICE_NO_DATA);
                     info.setTag(TAG);
                 } else {
@@ -1758,7 +1743,7 @@ public class InterfaceCollection {
                         }
 
                     } catch (JSONException e) {
-                        info.setCode("-2");
+                        info.setCode(ConstantUtil.JSON_ERROR_CODE);
                         info.setMsg(ConstantUtil.JSON_ERROR);
                         info.setTag(TAG);
                     }
@@ -1800,7 +1785,7 @@ public class InterfaceCollection {
             @Override
             public void onError(Call call, Exception e, int id) {
                 ResultInfo info = new ResultInfo();
-                info.setCode("400");
+                info.setCode(ConstantUtil.NETWORK_ERROR_CODE);
                 info.setMsg(ConstantUtil.NETWORK_ERROR);
                 info.setTag(TAG);
                 callback.callResult(info);
@@ -1808,9 +1793,9 @@ public class InterfaceCollection {
 
             @Override
             public void onResponse(String response, int id) {
-                ResultInfo info = new ResultInfo();
+                ResultInfo info = new ResultInfo(response);
                 if (TextUtils.isEmpty(response)) {
-                    info.setCode("-3");
+                    info.setCode(ConstantUtil.SERVICE_NO_DATA_CODE);
                     info.setMsg(ConstantUtil.SERVICE_NO_DATA);
                     info.setTag(TAG);
                 } else {
@@ -1847,7 +1832,7 @@ public class InterfaceCollection {
                         }
 
                     } catch (JSONException e) {
-                        info.setCode("-2");
+                        info.setCode(ConstantUtil.JSON_ERROR_CODE);
                         info.setMsg(ConstantUtil.JSON_ERROR);
                         info.setTag(TAG);
                     }
@@ -1882,7 +1867,7 @@ public class InterfaceCollection {
             @Override
             public void onError(Call call, Exception e, int id) {
                 ResultInfo info = new ResultInfo();
-                info.setCode("400");
+                info.setCode(ConstantUtil.NETWORK_ERROR_CODE);
                 info.setMsg(ConstantUtil.NETWORK_ERROR);
                 info.setTag(TAG);
                 callback.callResult(info);
@@ -1890,9 +1875,9 @@ public class InterfaceCollection {
 
             @Override
             public void onResponse(String response, int id) {
-                ResultInfo info = new ResultInfo();
+                ResultInfo info = new ResultInfo(response);
                 if (TextUtils.isEmpty(response)) {
-                    info.setCode("-3");
+                    info.setCode(ConstantUtil.SERVICE_NO_DATA_CODE);
                     info.setMsg(ConstantUtil.SERVICE_NO_DATA);
                     info.setTag(TAG);
                 } else {
@@ -1929,7 +1914,7 @@ public class InterfaceCollection {
                             info.setData(ses);
                         }
                     } catch (Exception e) {
-                        info.setCode("-2");
+                        info.setCode(ConstantUtil.JSON_ERROR_CODE);
                         info.setMsg(ConstantUtil.JSON_ERROR);
                         info.setTag(TAG);
                     }
@@ -1965,7 +1950,7 @@ public class InterfaceCollection {
             @Override
             public void onError(Call call, Exception e, int id) {
                 ResultInfo info = new ResultInfo();
-                info.setCode("400");
+                info.setCode(ConstantUtil.NETWORK_ERROR_CODE);
                 info.setMsg(ConstantUtil.NETWORK_ERROR);
                 info.setTag(TAG);
                 callback.callResult(info);
@@ -1973,9 +1958,9 @@ public class InterfaceCollection {
 
             @Override
             public void onResponse(String response, int id) {
-                ResultInfo info = new ResultInfo();
+                ResultInfo info = new ResultInfo(response);
                 if (TextUtils.isEmpty(response)) {
-                    info.setCode("-3");
+                    info.setCode(ConstantUtil.SERVICE_NO_DATA_CODE);
                     info.setMsg(ConstantUtil.SERVICE_NO_DATA);
                     info.setTag(TAG);
                 } else {
@@ -2007,7 +1992,7 @@ public class InterfaceCollection {
                             info.setData(ses);
                         }
                     } catch (Exception e) {
-                        info.setCode("-2");
+                        info.setCode(ConstantUtil.JSON_ERROR_CODE);
                         info.setMsg(ConstantUtil.JSON_ERROR);
                         info.setTag(TAG);
                     }
@@ -2042,7 +2027,7 @@ public class InterfaceCollection {
             @Override
             public void onError(Call call, Exception e, int id) {
                 ResultInfo info = new ResultInfo();
-                info.setCode("400");
+                info.setCode(ConstantUtil.NETWORK_ERROR_CODE);
                 info.setMsg(ConstantUtil.NETWORK_ERROR);
                 info.setTag(TAG);
                 callback.callResult(info);
@@ -2050,9 +2035,9 @@ public class InterfaceCollection {
 
             @Override
             public void onResponse(String response, int id) {
-                ResultInfo info = new ResultInfo();
+                ResultInfo info = new ResultInfo(response);
                 if (TextUtils.isEmpty(response)) {
-                    info.setCode("-3");
+                    info.setCode(ConstantUtil.SERVICE_NO_DATA_CODE);
                     info.setMsg(ConstantUtil.SERVICE_NO_DATA);
                     info.setTag(TAG);
                 }else {
@@ -2078,7 +2063,7 @@ public class InterfaceCollection {
                             info.setData(ses);
                         }
                     } catch (Exception e) {
-                        info.setCode("-2");
+                        info.setCode(ConstantUtil.JSON_ERROR_CODE);
                         info.setMsg(ConstantUtil.JSON_ERROR);
                         info.setTag(TAG);
                     }

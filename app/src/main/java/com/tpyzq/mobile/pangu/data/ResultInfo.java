@@ -1,6 +1,7 @@
 package com.tpyzq.mobile.pangu.data;
 
 
+import com.tpyzq.mobile.pangu.log.LogUtil;
 
 /**
  * Created by ltyhome on 23/06/2017.
@@ -13,6 +14,12 @@ public class ResultInfo {
    private String msg;//信息
    private String tag;//标记
    private Object data;//数据
+   public ResultInfo(){
+   }
+
+    public ResultInfo(String info){
+       LogUtil.i(info);
+   }
 
    public String getCode(){
        return code;

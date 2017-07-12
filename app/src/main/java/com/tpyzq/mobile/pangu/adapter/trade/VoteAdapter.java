@@ -2,11 +2,13 @@ package com.tpyzq.mobile.pangu.adapter.trade;
 
 import android.content.Context;
 import android.content.Intent;
+import android.text.TextUtils;
 import android.view.LayoutInflater;
 import android.view.View;
 import android.view.ViewGroup;
 import android.widget.BaseAdapter;
 import android.widget.Button;
+import android.widget.LinearLayout;
 import android.widget.TextView;
 import com.tpyzq.mobile.pangu.R;
 import com.tpyzq.mobile.pangu.activity.trade.stock.VoteDetailActivity;
@@ -90,7 +92,10 @@ public class VoteAdapter extends BaseAdapter{
         viewHodler.tv5.setText(bean.getCompany_code());
         viewHodler.tv6.setText(bean.getBegin_date());
         viewHodler.tv7.setText(bean.getEnd_date());
-        viewHodler.tv8.setText(bean.getInit_date());
+        if(!TextUtils.isEmpty(bean.getInit_date())) {
+            viewHodler.tv8.setText(bean.getInit_date());
+        }else
+            viewHodler.tv8.setText("--");
         return convertView;
     }
 
