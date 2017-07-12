@@ -3,8 +3,12 @@ package com.tpyzq.mobile.pangu.activity.trade.otc_business;
 import android.text.TextUtils;
 import android.view.View;
 import android.widget.ImageView;
+import android.widget.LinearLayout;
+import android.widget.ScrollView;
 import android.widget.TextView;
 
+import com.handmark.pulltorefresh.library.PullToRefreshBase;
+import com.handmark.pulltorefresh.library.PullToRefreshScrollView;
 import com.tpyzq.mobile.pangu.R;
 import com.tpyzq.mobile.pangu.adapter.trade.OTCShareQueryAdapter;
 import com.tpyzq.mobile.pangu.base.BaseActivity;
@@ -27,6 +31,7 @@ import java.text.SimpleDateFormat;
 import java.util.ArrayList;
 import java.util.Date;
 import java.util.HashMap;
+import java.util.List;
 
 import okhttp3.Call;
 
@@ -34,37 +39,56 @@ import okhttp3.Call;
  * 刘泽鹏
  * OTC 份额查询界面
  */
-public class OTC_ShareActivity extends BaseActivity implements View.OnClickListener, PullDownScrollView.RefreshListener {
+public class OTC_ShareActivity extends BaseActivity implements View.OnClickListener{
 
     private String TAG = "OTC_ShareActivity";
-    private PullDownScrollView mPullRefreshScrollView;
+    private PullToRefreshScrollView mPullRefreshScrollView;
     private MyListView mListView;
     private ArrayList<OtcShareEntity> list;
     private OTCShareQueryAdapter adapter;
     private ImageView iv_ShareKong;             //空图片
     private TextView tvOtc_ShareMarketValue;   //市值
+    private LinearLayout linear_show;
 
     @Override
     public void initView() {
         iv_ShareKong = (ImageView) this.findViewById(R.id.iv_ShareKong);
+        linear_show = (LinearLayout) findViewById(R.id.ll_show);
         tvOtc_ShareMarketValue = (TextView) this.findViewById(R.id.tvOtc_ShareMarketValue);
+        mPullRefreshScrollView = (PullToRefreshScrollView) findViewById(R.id.svPullToRefresh);
         this.findViewById(R.id.ivOTC_ShareQueryBack).setOnClickListener(this);   //返回按钮
-        mPullRefreshScrollView = (PullDownScrollView) this.findViewById(R.id.svOtcShate);  //scrollView
         this.mListView = (MyListView) this.findViewById(R.id.lvShareQuery);        //listView
         getDate(false);                                                                 //获取数据源
         list = new ArrayList<OtcShareEntity>();
         adapter = new OTCShareQueryAdapter(OTC_ShareActivity.this);
         mListView.setFocusable(false);
         mListView.setAdapter(adapter);
+        initEvent();
 
-        mPullRefreshScrollView.setRefreshListener(this);
-        mPullRefreshScrollView.setPullDownElastic(new PullDownElasticImp(OTC_ShareActivity.this));
+    }
+
+    private void initEvent() {
+        mPullRefreshScrollView.setMode(PullToRefreshBase.Mode.PULL_FROM_START);
+        mPullRefreshScrollView.setOnRefreshListener(new PullToRefreshBase.OnRefreshListener2<ScrollView>() {
+            @Override
+            public void onPullDownToRefresh(PullToRefreshBase<ScrollView> refreshView) {
+                getDate(true);
+            }
+
+            @Override
+            public void onPullUpToRefresh(PullToRefreshBase<ScrollView> refreshView) {
+                //  不处理
+            }
+        });
     }
 
     /**
      * 获取数据源
      */
     private void getDate(final boolean isClean) {
+        if (isClean){   //
+            list.clear();
+        }
         String mSession = SpUtils.getString(this, "mSession", "");
         HashMap map1 = new HashMap();
         HashMap map2 = new HashMap();
@@ -76,20 +100,14 @@ public class OTC_ShareActivity extends BaseActivity implements View.OnClickListe
         NetWorkUtil.getInstence().okHttpForPostString(TAG, ConstantUtil.URL_JY, map1, new StringCallback() {
             @Override
             public void onError(Call call, Exception e, int id) {
-                LogUtil.i(TAG, e.toString());
-                if (isClean) {
-                    mPullRefreshScrollView.finishRefresh("上次刷新时间:" + new SimpleDateFormat("yyyy-MM-dd HH:mm:ss").format(new Date()));
-                }
-                mPullRefreshScrollView.setVisibility(View.GONE);        //请求失败  隐藏 scrollView
+                mPullRefreshScrollView.onRefreshComplete();
                 iv_ShareKong.setVisibility(View.VISIBLE);               //显示  空图片
                 Helper.getInstance().showToast(OTC_ShareActivity.this,ConstantUtil.NETWORK_ERROR);
             }
 
             @Override
             public void onResponse(String response, int id) {
-                if (isClean) {
-                    mPullRefreshScrollView.finishRefresh("上次刷新时间:" + new SimpleDateFormat("yyyy-MM-dd HH:mm:ss").format(new Date()));
-                }
+                mPullRefreshScrollView.onRefreshComplete();
                 if (TextUtils.isEmpty(response)) {
                     return;
                 }
@@ -99,16 +117,6 @@ public class OTC_ShareActivity extends BaseActivity implements View.OnClickListe
                     if ("0".equals(code)) {
                         JSONArray data = jsonObject.getJSONArray("data");
 
-                        if (data.length() == 0) {
-                            mPullRefreshScrollView.setVisibility(View.GONE);        //请求失败  隐藏 scrollView
-                            iv_ShareKong.setVisibility(View.VISIBLE);               //显示  空图片
-                        }
-                        if (isClean) {
-                            if (list != null && list.size() > 0) {
-                                list.clear();
-                            }
-                        }
-
                         for (int i = 0; i < data.length(); i++) {
                             JSONObject jsonObject1 = data.getJSONObject(i);
                             String otc_market_value = jsonObject1.getString("OTC_MARKET_VALUE"); //市值
@@ -116,8 +124,12 @@ public class OTC_ShareActivity extends BaseActivity implements View.OnClickListe
                             JSONArray otc_list = jsonObject1.getJSONArray("OTC_LIST");
 
                             if (otc_list.length() == 0) {
-                                mPullRefreshScrollView.setVisibility(View.GONE);        //请求失败  隐藏 scrollView
+//                                mPullRefreshScrollView.setVisibility(View.GONE);
                                 iv_ShareKong.setVisibility(View.VISIBLE);               //显示  空图片
+                                linear_show.setVisibility(View.GONE);
+                            }else {
+                                iv_ShareKong.setVisibility(View.GONE);               //显示  空图片
+                                linear_show.setVisibility(View.VISIBLE);
                             }
 
                             for (int j = 0; j < otc_list.length(); j++) {
@@ -140,6 +152,7 @@ public class OTC_ShareActivity extends BaseActivity implements View.OnClickListe
 
                     }
                     adapter.setList(list);      //添加数据
+
                 } catch (JSONException e) {
                     e.printStackTrace();
                 }
@@ -161,8 +174,4 @@ public class OTC_ShareActivity extends BaseActivity implements View.OnClickListe
         }
     }
 
-    @Override
-    public void onRefresh(PullDownScrollView view) {
-        getDate(true);
-    }
 }
