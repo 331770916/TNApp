@@ -1916,7 +1916,7 @@ public class InterfaceCollection {
                                 bean.setReal_status_name(obj.getString("REAL_STATUS_NAME"));//状态名称
                                 bean.setBusiness_amount(obj.getString("BUSINESS_AMOUNT"));//成交数量
                                 bean.setBusiness_balance(obj.getString("BUSINESS_BALANCE"));//成交金额
-                                bean.setInit_date(obj.getString("INIT_DATE"));//交易时间
+                                bean.setInit_date(Helper.formateDate1(obj.getString("INIT_DATE")));//交易时间
                                 bean.setCurr_time(obj.getString("CURR_TIME"));//委托时间
                                 bean.setEntrust_no(obj.getString("ENTRUST_NO"));//委托编号
                                 bean.setStock_account(obj.getString("STOCK_ACCOUNT"));//证券编号<股东代码>
