@@ -44,7 +44,6 @@ import com.tpyzq.mobile.pangu.util.SpUtils;
 import com.tpyzq.mobile.pangu.util.panguutil.BRutil;
 import com.tpyzq.mobile.pangu.util.panguutil.PanguParameters;
 import com.tpyzq.mobile.pangu.util.panguutil.UserUtil;
-import com.tpyzq.mobile.pangu.view.dialog.OpeningAnAccountDialog;
 
 import org.json.JSONArray;
 import org.json.JSONException;
@@ -457,8 +456,13 @@ public class HomeFragmentHelper implements HomeSubject {
             intent.setClass(activity, MoreActivity.class);
             activity.startActivity(intent);
         } else if (OPEN_USER.equals(title)) {
-            OpeningAnAccountDialog openingAnAccount = new OpeningAnAccountDialog(activity);
-            openingAnAccount.show();
+//            OpeningAnAccountDialog openingAnAccount = new OpeningAnAccountDialog(activity);
+//            openingAnAccount.show();
+           intent = new Intent();
+            intent.putExtra("type", 0);//开户 ，开户传此，
+            intent.putExtra("channel", ConstantUtil.OPEN_ACCOUNT_CHANNEL);// 开户id
+            intent.setClass(activity, com.cairh.app.sjkh.MainActivity.class);
+            activity.startActivity(intent);
         }else if (REVERSEREPO.equals(title)) {
             gotoPage(activity, TransactionLoginActivity.PAGE_INDEX_ReverseRepoGuideActivity, intent);
         }
