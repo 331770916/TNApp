@@ -5,11 +5,13 @@ import android.text.TextUtils;
 import android.view.View;
 import android.widget.ImageView;
 import android.widget.LinearLayout;
-import android.widget.ListView;
 import android.widget.RelativeLayout;
+import android.widget.ScrollView;
 import android.widget.TextView;
 
 import com.google.gson.Gson;
+import com.handmark.pulltorefresh.library.PullToRefreshBase;
+import com.handmark.pulltorefresh.library.PullToRefreshScrollView;
 import com.tpyzq.mobile.pangu.R;
 import com.tpyzq.mobile.pangu.activity.myself.login.TransactionLoginActivity;
 import com.tpyzq.mobile.pangu.adapter.trade.FundShareAdapter;
@@ -25,7 +27,6 @@ import com.tpyzq.mobile.pangu.util.SpUtils;
 import com.tpyzq.mobile.pangu.util.ToastUtils;
 import com.tpyzq.mobile.pangu.view.dialog.MistakeDialog;
 import com.tpyzq.mobile.pangu.view.gridview.MyListView;
-import com.tpyzq.mobile.pangu.view.pullDownGroup.PullDownElasticImp;
 import com.tpyzq.mobile.pangu.view.pullDownGroup.PullDownScrollView;
 import com.zhy.http.okhttp.callback.StringCallback;
 
@@ -33,9 +34,7 @@ import org.json.JSONArray;
 import org.json.JSONException;
 import org.json.JSONObject;
 
-import java.text.SimpleDateFormat;
 import java.util.ArrayList;
-import java.util.Date;
 import java.util.HashMap;
 import java.util.List;
 
@@ -45,7 +44,7 @@ import okhttp3.Call;
  * Created by zhangwenbo on 2016/10/9.
  * 基金份额
  */
-public class FundShareActivity extends BaseActivity implements View.OnClickListener, PullDownScrollView.RefreshListener {
+public class FundShareActivity extends BaseActivity implements View.OnClickListener {
 
     private TextView mMarketPriceTv;
     private TextView mEarnTv;
@@ -56,7 +55,8 @@ public class FundShareActivity extends BaseActivity implements View.OnClickListe
     private List<FundEntity> fundBeans;
     private ImageView iv_kong;
     private LinearLayout ll_content;
-    private PullDownScrollView mPullDownScrollView ;
+    private MyListView listView;
+    private PullToRefreshScrollView mPullToRefreshScrollView;
 
     @Override
     public void initView() {
@@ -66,8 +66,8 @@ public class FundShareActivity extends BaseActivity implements View.OnClickListe
         mMarketPriceTv = (TextView) findViewById(R.id.fundshareMarketPrice);
         rl_view1 = (RelativeLayout) findViewById(R.id.rl_view1);
         rl_view2 = (RelativeLayout) findViewById(R.id.rl_view2);
-        mPullDownScrollView  = (PullDownScrollView) findViewById(R.id.svOtcShate);
-        MyListView listView = (MyListView) findViewById(R.id.fundshareListView);
+        mPullToRefreshScrollView = (PullToRefreshScrollView) findViewById(R.id.svPullToRefresh);
+        listView = (MyListView) findViewById(R.id.fundshareListView);
         iv_kong = (ImageView) findViewById(R.id.iv_kong);
         ll_content = (LinearLayout) findViewById(R.id.ll_content);
         mAdapter = new FundShareAdapter(this);
@@ -83,8 +83,18 @@ public class FundShareActivity extends BaseActivity implements View.OnClickListe
      * 下拉刷新Listener
      */
     private void initEvent() {
-        mPullDownScrollView.setRefreshListener(this);
-        mPullDownScrollView.setPullDownElastic(new PullDownElasticImp(FundShareActivity.this));
+        mPullToRefreshScrollView.setMode(PullToRefreshBase.Mode.PULL_FROM_START);
+        mPullToRefreshScrollView.setOnRefreshListener(new PullToRefreshBase.OnRefreshListener2<ScrollView>() {
+            @Override
+            public void onPullDownToRefresh(PullToRefreshBase<ScrollView> refreshView) {
+                fundQuery();
+            }
+
+            @Override
+            public void onPullUpToRefresh(PullToRefreshBase<ScrollView> refreshView) {
+
+            }
+        });
     }
 
     /**
@@ -101,13 +111,13 @@ public class FundShareActivity extends BaseActivity implements View.OnClickListe
         NetWorkUtil.getInstence().okHttpForPostString("", ConstantUtil.URL_JY, map720260, new StringCallback() {
             @Override
             public void onError(Call call, Exception e, int id) {
-                mPullDownScrollView.finishRefresh("");
-                MistakeDialog.showDialog( "提示","网络错误，请检查网络",false, FundShareActivity.this,null).show();
+                mPullToRefreshScrollView.onRefreshComplete();
+                Helper.getInstance().showToast(FundShareActivity.this,ConstantUtil.NETWORK_ERROR);
             }
 
             @Override
             public void onResponse(String response, int id) {
-                setTitleTime();
+                mPullToRefreshScrollView.onRefreshComplete();
                 if (TextUtils.isEmpty(response)) {
                     return;
                 }
@@ -197,17 +207,5 @@ public class FundShareActivity extends BaseActivity implements View.OnClickListe
         return R.layout.activity_fundshare;
     }
 
-
-    @Override
-    public void onRefresh(PullDownScrollView view) {
-        fundQuery();
-    }
-
-    public void setTitleTime(){
-        SimpleDateFormat format = new SimpleDateFormat("yyyy-MM-dd    hh:mm:ss");
-        String date=format.format(new java.util.Date());
-        mPullDownScrollView.finishRefresh("上次刷新时间:" + date);
-
-    }
 
 }
