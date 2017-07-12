@@ -19,9 +19,11 @@ public class VideoCheckResultActivity extends BaseActivity implements View.OnCli
     private String mUserId;
     private String mFundAccount;
     private String mUser_biz_id;
+    private TextView tv_validate_status;
 
     @Override
     public void initView() {
+        tv_validate_status = (TextView) findViewById(R.id.tv_validate_status);
         findViewById(R.id.userIdBackBtn).setOnClickListener(this);
         TextView textView = (TextView) findViewById(R.id.toolbar_title);
         textView.setText("视频验证");
@@ -47,6 +49,7 @@ public class VideoCheckResultActivity extends BaseActivity implements View.OnCli
      */
     private void initSuccessTop() {
         ImageView imageView = (ImageView) findViewById(R.id.img_title_tag);
+        tv_validate_status.setText("审核成功");
         imageView.setImageResource(R.mipmap.video_check_success);
         findViewById(R.id.videoResultSuccess).setVisibility(View.VISIBLE);
         findViewById(R.id.videoCheckSuccess_Next).setOnClickListener(this);
@@ -58,7 +61,7 @@ public class VideoCheckResultActivity extends BaseActivity implements View.OnCli
     private void initFailedTop () {
         ImageView imageView = (ImageView) findViewById(R.id.img_title_tag);
         imageView.setImageResource(R.mipmap.video_check_failed);
-
+        tv_validate_status.setText("审核失败");
         findViewById(R.id.videoResultFailed).setVisibility(View.VISIBLE);
         findViewById(R.id.videoCheckFailed_restartCommite).setOnClickListener(this);
         findViewById(R.id.videoCheckFailed_out).setOnClickListener(this);
