@@ -35,6 +35,7 @@ import com.tpyzq.mobile.pangu.activity.myself.handhall.AccountPowerActivity;
 import com.tpyzq.mobile.pangu.activity.myself.handhall.AgreementActivity;
 import com.tpyzq.mobile.pangu.activity.myself.handhall.AgreementSignActvity;
 import com.tpyzq.mobile.pangu.activity.myself.handhall.ChangePasswordActivity;
+import com.tpyzq.mobile.pangu.activity.myself.handhall.PersonalDataActivity;
 import com.tpyzq.mobile.pangu.activity.myself.handhall.RiskEvaluationActivity;
 import com.tpyzq.mobile.pangu.activity.myself.handhall.StockHolderInfoActivity;
 import com.tpyzq.mobile.pangu.activity.trade.open_fund.FundInfoActivity;
@@ -1170,7 +1171,7 @@ public class ChangeAccoutActivity extends BaseActivity implements View.OnClickLi
                     intent.setClass(this, RiskEvaluationActivity.class);
                     break;
                 case TransactionLoginActivity.PAGE_INDEX_PersonalData://修改个人资料
-                    intent.setClass(this, PersonalData.class);
+                    intent.setClass(this, PersonalDataActivity.class);
                     break;
                 case TransactionLoginActivity.PAGE_INDEX_AgreementSigned://退市和风险警示协议签署
                     intent.setClass(this, AgreementSignActvity.class);

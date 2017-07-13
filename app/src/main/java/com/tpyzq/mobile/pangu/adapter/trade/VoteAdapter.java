@@ -13,6 +13,7 @@ import android.widget.TextView;
 import com.tpyzq.mobile.pangu.R;
 import com.tpyzq.mobile.pangu.activity.trade.stock.VoteDetailActivity;
 import com.tpyzq.mobile.pangu.data.NetworkVotingEntity;
+import com.tpyzq.mobile.pangu.util.Helper;
 
 import java.util.List;
 
@@ -90,10 +91,10 @@ public class VoteAdapter extends BaseAdapter{
         viewHodler.tv3.setText(bean.getMeeting_seq());
         viewHodler.tv4.setText(bean.getCompany_name());
         viewHodler.tv5.setText(bean.getCompany_code());
-        viewHodler.tv6.setText(bean.getBegin_date());
-        viewHodler.tv7.setText(bean.getEnd_date());
+        viewHodler.tv6.setText(Helper.formateDate1(bean.getBegin_date()));
+        viewHodler.tv7.setText(Helper.formateDate1(bean.getEnd_date()));
         if(!TextUtils.isEmpty(bean.getInit_date())) {
-            viewHodler.tv8.setText(bean.getInit_date());
+            viewHodler.tv8.setText(Helper.formateDate1(bean.getInit_date()));
         }else
             viewHodler.tv8.setText("--");
         return convertView;
