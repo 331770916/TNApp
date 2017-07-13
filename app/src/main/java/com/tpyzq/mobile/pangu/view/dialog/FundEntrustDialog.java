@@ -1,7 +1,6 @@
 package com.tpyzq.mobile.pangu.view.dialog;
 
 import android.content.Context;
-import android.text.TextUtils;
 import android.view.View;
 import android.widget.Button;
 import android.widget.RadioButton;
@@ -69,11 +68,11 @@ public class FundEntrustDialog extends BaseDialog implements View.OnClickListene
     public void initData() {
         bt_true.setOnClickListener(this);
         bt_false.setOnClickListener(this);
-        if (!TextUtils.isEmpty(stockcode) && stockcode.startsWith("SH")){
+        if (stockcode.startsWith("SH") || stockcode.startsWith("1")){
             rg_shenzheng.setVisibility(View.GONE);
             rg_shangzheng.setVisibility(View.VISIBLE);
             tv_title.setText("委托方式(上证)");
-        }else if (!TextUtils.isEmpty(stockcode) && stockcode.startsWith("SZ")){
+        }else if (stockcode.startsWith("SZ")|| stockcode.startsWith("2")){
             rg_shenzheng.setVisibility(View.VISIBLE);
             rg_shangzheng.setVisibility(View.GONE);
             tv_title.setText("委托方式(深证)");
