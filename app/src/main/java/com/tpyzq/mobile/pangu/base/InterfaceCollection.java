@@ -13,6 +13,7 @@ import com.tpyzq.mobile.pangu.data.ResultInfo;
 import com.tpyzq.mobile.pangu.data.StockHolderInfoEntity;
 import com.tpyzq.mobile.pangu.data.StructuredFundEntity;
 import com.tpyzq.mobile.pangu.http.NetWorkUtil;
+import com.tpyzq.mobile.pangu.http.OkHttpUtil;
 import com.tpyzq.mobile.pangu.util.ConstantUtil;
 import com.tpyzq.mobile.pangu.util.Helper;
 import com.tpyzq.mobile.pangu.util.SpUtils;
@@ -2068,12 +2069,9 @@ public class InterfaceCollection {
                         info.setTag(TAG);
                     }
                     callback.callResult(info);
-
                 }
-
             }
         });
-
 
     }
 

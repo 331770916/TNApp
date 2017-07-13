@@ -41,6 +41,7 @@ public class PanguParameters {
         map.put("热搜股票", R.mipmap.sy_jinriregu);
         map.put("开户", R.mipmap.open_user);
         map.put(HomeFragmentHelper.REVERSEREPO, R.mipmap.nihuigou);
+        map.put("牛掌柜", R.mipmap.nihuigou);
         return map;
     }
 

@@ -117,7 +117,7 @@ public class ETFStockQueryActivity extends BaseActivity implements View.OnClickL
     @Override
     public void onItemClick(AdapterView<?> parent, View view, int position, long id) {
         Intent intent = new Intent(this, ETFStockListActivity.class);
-        intent.putExtra("stock_no", mList.get(position - 1).getStock_code());
+        intent.putExtra("stock_no", mList.get(position - 1).getComponent_code());
         startActivity(intent);
     }
 }

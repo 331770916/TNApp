@@ -225,8 +225,8 @@ public class CurrencyZiDingYiPager extends BaseSearchPager implements TimePicker
                         CurrencyFundEntrustThreeMonthBean.DataBean dataBean = data.get(i);
                         map.put("tv_stockName", dataBean.getSECU_NAME());
                         map.put("tv_stockCode", dataBean.getSECU_CODE());
-                        map.put("tv_Data", dataBean.getORDER_DATE());
-                        map.put("tv_Time", dataBean.getORDER_TIME());
+                        map.put("tv_Data", Helper.formateDate1(dataBean.getORDER_DATE()));
+                        map.put("tv_Time",Helper.formateDate(dataBean.getORDER_TIME()));
                         map.put("tv_EntrustNumber", dataBean.getQTY());
                         map.put("tv_EntrustMoney", dataBean.getPRICE());
                         map.put("tv_type", dataBean.getBUSINESS_NAME());

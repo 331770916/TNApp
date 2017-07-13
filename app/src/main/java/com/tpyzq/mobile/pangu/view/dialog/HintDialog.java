@@ -2,6 +2,7 @@ package com.tpyzq.mobile.pangu.view.dialog;
 
 import android.content.Context;
 import android.view.View;
+import android.webkit.WebView;
 import android.widget.Button;
 import android.widget.TextView;
 
@@ -19,6 +20,7 @@ public class HintDialog extends BaseDialogCenter implements View.OnClickListener
     private Button but_yes;
     private String mtoken_Inform;
     private String mInform_push_time;
+    private WebView wv;
 
     public HintDialog(Context context, String token_Inform, String inform_push_time) {
         super(context);
@@ -29,13 +31,16 @@ public class HintDialog extends BaseDialogCenter implements View.OnClickListener
 
     @Override
     public void setView() {
-        tv_title = (TextView) findViewById(R.id.tv_title);
+        /*tv_title = (TextView) findViewById(R.id.tv_title);
         tv_info = (TextView) findViewById(R.id.tv_info);
 
 
         but_yes = (Button) findViewById(R.id.but_yes);
         tv_title.setText(mtoken_Inform);
-        tv_info.setText(mInform_push_time);
+        tv_info.setText(mInform_push_time);*/
+        but_yes = (Button) findViewById(R.id.but_yes);
+        wv = (WebView) findViewById(R.id.wv);
+        wv.loadData(mInform_push_time, "text/html; charset=UTF-8", null);
     }
 
     @Override
