@@ -12,6 +12,7 @@ import android.view.View;
 import android.widget.LinearLayout;
 import android.widget.RadioButton;
 import android.widget.TextView;
+import android.widget.Toast;
 
 import com.tpyzq.mobile.pangu.R;
 import com.tpyzq.mobile.pangu.activity.myself.login.ShouJiZhuCeActivity;
@@ -420,48 +421,20 @@ public class UpdateIdCodeValidityActivity extends BaseActivity implements Dialog
      * @param error_info
      */
     private void sessionFailed (String error_info) {
-
-
-        showMistackDialog(error_info, new CancelDialog.PositiveClickListener() {
-            @Override
-            public void onPositiveClick() {
-                Intent intent = new Intent();
-                if (!Db_PUB_USERS.isRegister()) {
-                    intent = new Intent(UpdateIdCodeValidityActivity.this, ShouJiZhuCeActivity.class);
-                    UpdateIdCodeValidityActivity.this.startActivity(intent);
-                } else if (!Db_PUB_USERS.islogin()) {
-                    intent = new Intent();
-                    intent.setClass(UpdateIdCodeValidityActivity.this, TransactionLoginActivity.class);
-                    UpdateIdCodeValidityActivity.this.startActivity(intent);
-                } else {
-                    intent = new Intent();
-                    intent.setClass(UpdateIdCodeValidityActivity.this, TransactionLoginActivity.class);
-                    UpdateIdCodeValidityActivity.this.startActivity(intent);
-                }
-                finish();
-            }
-        });
-
-
-//        showMistackDialog(error_info, new DialogInterface.OnClickListener() {
-//            @Override
-//            public void onClick(DialogInterface dialog, int which) {
-//                Intent intent = new Intent();
-//                if (!Db_PUB_USERS.isRegister()) {
-//                    intent = new Intent(UpdateIdCodeValidityActivity.this, ShouJiZhuCeActivity.class);
-//                    UpdateIdCodeValidityActivity.this.startActivity(intent);
-//                } else if (!Db_PUB_USERS.islogin()) {
-//                    intent = new Intent();
-//                    intent.setClass(UpdateIdCodeValidityActivity.this, TransactionLoginActivity.class);
-//                    UpdateIdCodeValidityActivity.this.startActivity(intent);
-//                } else {
-//                    intent = new Intent();
-//                    intent.setClass(UpdateIdCodeValidityActivity.this, TransactionLoginActivity.class);
-//                    UpdateIdCodeValidityActivity.this.startActivity(intent);
-//                }
-//                finish();
-//            }
-//        });
+        Intent intent = new Intent();
+        if (!Db_PUB_USERS.isRegister()) {
+            intent = new Intent(UpdateIdCodeValidityActivity.this, ShouJiZhuCeActivity.class);
+            UpdateIdCodeValidityActivity.this.startActivity(intent);
+        } else if (!Db_PUB_USERS.islogin()) {
+            intent = new Intent();
+            intent.setClass(UpdateIdCodeValidityActivity.this, TransactionLoginActivity.class);
+            UpdateIdCodeValidityActivity.this.startActivity(intent);
+        } else {
+            intent = new Intent();
+            intent.setClass(UpdateIdCodeValidityActivity.this, TransactionLoginActivity.class);
+            UpdateIdCodeValidityActivity.this.startActivity(intent);
+        }
+        finish();
     }
 
     /**
