@@ -9,7 +9,6 @@ import android.text.TextUtils;
 import android.view.LayoutInflater;
 import android.view.View;
 import android.view.ViewGroup;
-import android.widget.AbsListView;
 import android.widget.AdapterView;
 import android.widget.BaseAdapter;
 import android.widget.ImageView;
@@ -45,7 +44,6 @@ import org.json.JSONArray;
 import org.json.JSONException;
 import org.json.JSONObject;
 
-import java.text.DateFormat;
 import java.text.DecimalFormat;
 import java.text.SimpleDateFormat;
 import java.util.ArrayList;
@@ -392,10 +390,14 @@ public class TakeAPositionActivity extends BaseActivity implements AdapterView.O
             }
 
             String TransactionPositionsCurrentPrice = mSetText.get(position).getTransactionPositionsCurrentPrice();
-            if (!TextUtils.isEmpty(TransactionPositionsCurrentPrice) && !"0".equals(TransactionPositionsCurrentPrice)) {
-                viewHodler.takeapositionItem7.setText(TransitionUtils.string2doubleS3(TransactionPositionsCurrentPrice));
-            } else {
-                viewHodler.takeapositionItem7.setText(TransitionUtils.string2doubleS3("0.000"));
+            try {
+                if (!TextUtils.isEmpty(TransactionPositionsCurrentPrice) && !"0".equals(TransactionPositionsCurrentPrice)) {
+                    viewHodler.takeapositionItem7.setText(String.format("%.3f", Double.parseDouble(TransactionPositionsCurrentPrice)));
+                } else {
+                    viewHodler.takeapositionItem7.setText(TransitionUtils.string2doubleS3("0.000"));
+                }
+            } catch (Exception e) {
+                e.printStackTrace();
             }
 
             String TransactionPositionsCurrentPrice1 = mSetText.get(position).getTransactionPositionsCurrentPrice1();
