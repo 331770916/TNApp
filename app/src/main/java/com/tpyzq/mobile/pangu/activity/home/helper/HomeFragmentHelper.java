@@ -3,6 +3,7 @@ package com.tpyzq.mobile.pangu.activity.home.helper;
 import android.app.Activity;
 import android.content.Intent;
 import android.text.TextUtils;
+import android.widget.Toast;
 
 import com.tpyzq.mobile.pangu.activity.home.HomeFragment;
 import com.tpyzq.mobile.pangu.activity.home.MoreActivity;
@@ -465,6 +466,8 @@ public class HomeFragmentHelper implements HomeSubject {
             activity.startActivity(intent);
         }else if (REVERSEREPO.equals(title)) {
             gotoPage(activity, TransactionLoginActivity.PAGE_INDEX_ReverseRepoGuideActivity, intent);
+        } else if ("牛掌柜".equals(title)) {
+            Toast.makeText(activity, "进入牛掌柜", Toast.LENGTH_SHORT).show();
         }
     }
 

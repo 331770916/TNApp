@@ -172,6 +172,7 @@ public class MoreActivity extends BaseActivity implements View.OnClickListener {
 //        map.put("智选理财",R.mipmap.sy_zhixuanlicai);
         map.put("股市月账单",R.mipmap.sy_gushiyuezhangdan);
         map.put("国债逆回购", R.mipmap.nihuigou);
+        map.put("牛掌柜", R.mipmap.nihuigou);
         return map;
     }
 
