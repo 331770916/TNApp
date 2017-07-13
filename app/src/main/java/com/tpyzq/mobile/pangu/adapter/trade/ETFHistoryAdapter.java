@@ -113,8 +113,10 @@ public class ETFHistoryAdapter extends BaseAdapter implements View.OnClickListen
                 String entrust_bs = bean.getEntrust_bs();
                 if ("1".equals(entrust_bs)) {
                     viewHodler.tvGone4.setText("买");
-                } else {
+                } else if ("2".equals(entrust_bs)){
                     viewHodler.tvGone4.setText("卖");
+                } else {
+                    viewHodler.tvGone4.setText("--");
                 }
                 viewHodler.tvGone5.setText("--");
             }
