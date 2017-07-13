@@ -87,6 +87,8 @@ public class ETFApplyforOrRedeemActivity extends BaseActivity implements TextWat
             btSubmit.setText("赎  回");
             tv_upperlimit.setText("赎回上限：--");
         }
+        btSubmit.setEnabled(false);
+        mInputCount.setEnabled(false);
     }
 
     @Override
@@ -120,7 +122,7 @@ public class ETFApplyforOrRedeemActivity extends BaseActivity implements TextWat
     public void afterTextChanged(Editable s) {
         switch (getCurrentFocus().getId()) {
             case R.id.et_input_code:
-                if (s.length() == 6) {
+                if (mInputCode.getText().length() == 6) {
                     //  请求网络接口
                     mDialog = LoadingDialog.initDialog(this, "正在查询...");
                     if (!this.isFinishing()) {
@@ -131,7 +133,8 @@ public class ETFApplyforOrRedeemActivity extends BaseActivity implements TextWat
                     } else {
                         InterfaceCollection.getInstance().queryApplyfor(token, s.toString().trim(), TAG_SH, this);
                     }
-
+                    mInputCount.addTextChangedListener(this);
+                    mInputCount.setEnabled(true);
                     if (!mInputCount.getText().toString().trim().isEmpty()) {
                         btSubmit.setBackgroundResource(R.drawable.lonin);
                         btSubmit.setEnabled(true);
@@ -143,6 +146,9 @@ public class ETFApplyforOrRedeemActivity extends BaseActivity implements TextWat
                     } else {
                         tv_upperlimit.setText("赎回上限：--");
                     }
+                    mInputCount.removeTextChangedListener(this);
+                    mInputCount.setText("");
+                    mInputCount.setEnabled(false);
                     available_funds.setText("--");
                     etf_code.setText("--");
                     tv_shareholder.setText("--");
@@ -175,9 +181,11 @@ public class ETFApplyforOrRedeemActivity extends BaseActivity implements TextWat
                     //  请求申购
                     if (isJudge()) {
                         String count = mInputCount.getText().toString().trim();
+                        String code  = mInputCode.getText().toString().trim();
                         if (etfDataEntity == null) {
                             etfDataEntity = new EtfDataEntity();
                         }
+                        etfDataEntity.setStock_code(code);
                         etfDataEntity.setEntrust_amount(count);
                         if (ConstantUtil.list_item_flag) {
                             ConstantUtil.list_item_flag = false;
@@ -190,10 +198,12 @@ public class ETFApplyforOrRedeemActivity extends BaseActivity implements TextWat
                     // 请求赎回
                     if (isJudge()) {
                         String count = mInputCount.getText().toString().trim();
+                        String code  = mInputCode.getText().toString().trim();
                         if (etfDataEntity == null) {
                             etfDataEntity = new EtfDataEntity();
                         }
                         etfDataEntity.setEntrust_amount(count);
+                        etfDataEntity.setStock_code(code);
                         if (ConstantUtil.list_item_flag) {
                             ConstantUtil.list_item_flag = false;
                             mStructuredFundDialog = new StructuredFundDialog(this);
@@ -243,7 +253,7 @@ public class ETFApplyforOrRedeemActivity extends BaseActivity implements TextWat
                 skip.startLogin(this);
             } else if ("400".equals(info.getCode()) || "-2".equals(info.getCode()) || "-3".equals(info.getCode())) {   //  网络错误 解析错误 其他
                 Helper.getInstance().showToast(this, info.getMsg());
-                setText();
+//                setText();
             } else {
                 setText();
                 MistakeDialog.showDialog(info.getMsg(), ETFApplyforOrRedeemActivity.this);
@@ -253,6 +263,7 @@ public class ETFApplyforOrRedeemActivity extends BaseActivity implements TextWat
             if ("0".equals(code)) {
                 List<EtfDataEntity> list = (List<EtfDataEntity>) info.getData();
                 if (list != null && list.size() > 0) {
+                    etfDataEntity = list.get(0);
                     tv_upperlimit.setText("赎回上限：" + etfDataEntity.getRedeem_max());
                     available_funds.setText(etfDataEntity.getEnable_balance());
                     etf_code.setText(etfDataEntity.getStock_name());
@@ -263,7 +274,7 @@ public class ETFApplyforOrRedeemActivity extends BaseActivity implements TextWat
                 skip.startLogin(this);
             } else if ("400".equals(info.getCode()) || "-2".equals(info.getCode()) || "-3".equals(info.getCode())) {   //  网络错误 解析错误 其他
                 Helper.getInstance().showToast(this, info.getMsg());
-                setText();
+//                setText();
             } else {
                 setText();
                 MistakeDialog.showDialog(info.getMsg(), ETFApplyforOrRedeemActivity.this);
@@ -271,7 +282,7 @@ public class ETFApplyforOrRedeemActivity extends BaseActivity implements TextWat
         } else if (TAG_APPLYFOR.equals(info.getTag())) {
             String code = info.getCode();
             if ("0".equals(code)) {
-                Helper.getInstance().showToast(this, info.getMsg());
+                Helper.getInstance().showToast(this, "委托已提交");
                 mInputCode.setText("");
                 mInputCount.setText("");
                 tv_upperlimit.setText("申购上限：--");
@@ -282,15 +293,18 @@ public class ETFApplyforOrRedeemActivity extends BaseActivity implements TextWat
                 skip.startLogin(this);
             } else if ("400".equals(info.getCode()) || "-2".equals(info.getCode()) || "-3".equals(info.getCode())) {   //  网络错误 解析错误 其他
                 Helper.getInstance().showToast(this, info.getMsg());
-                setText();
             } else {
+                mInputCode.setFocusable(true);
+                mInputCount.setEnabled(false);
+                mInputCode.setText("");
+                mInputCount.setText("");
                 setText();
                 MistakeDialog.showDialog(info.getMsg(), ETFApplyforOrRedeemActivity.this);
             }
         } else if (TAG_REAEEM.equals(info.getTag())) {
             String code = info.getCode();
             if ("0".equals(code)) {
-                Helper.getInstance().showToast(this, info.getMsg());
+                Helper.getInstance().showToast(this, "委托已提交");
                 mInputCode.setText("");
                 mInputCount.setText("");
                 tv_upperlimit.setText("赎回上限：--");
@@ -301,8 +315,11 @@ public class ETFApplyforOrRedeemActivity extends BaseActivity implements TextWat
                 skip.startLogin(this);
             } else if ("400".equals(info.getCode()) || "-2".equals(info.getCode()) || "-3".equals(info.getCode())) {   //  网络错误 解析错误 其他
                 Helper.getInstance().showToast(this, info.getMsg());
-                setText();
             } else {
+                mInputCode.setFocusable(true);
+                mInputCount.setEnabled(false);
+                mInputCode.setText("");
+                mInputCount.setText("");
                 setText();
                 MistakeDialog.showDialog(info.getMsg(), ETFApplyforOrRedeemActivity.this);
             }

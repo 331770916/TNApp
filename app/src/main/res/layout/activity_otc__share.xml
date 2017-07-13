@@ -1,10 +1,11 @@
 <?xml version="1.0" encoding="utf-8"?>
-<RelativeLayout xmlns:android="http://schemas.android.com/apk/res/android"
+<LinearLayout xmlns:android="http://schemas.android.com/apk/res/android"
     xmlns:app="http://schemas.android.com/apk/res-auto"
     xmlns:tools="http://schemas.android.com/tools"
     android:layout_width="match_parent"
     android:layout_height="match_parent"
     android:background="@color/bgColor"
+    android:orientation="vertical"
     tools:context="com.tpyzq.mobile.pangu.activity.trade.otc_business.OTC_ShareActivity">
 
 
@@ -41,38 +42,24 @@
             android:textSize="@dimen/pickerview_topbar_title_textsize" />
     </RelativeLayout>
 
-    <ImageView
-        android:id="@+id/iv_ShareKong"
-        android:layout_width="wrap_content"
-        android:layout_height="wrap_content"
-        android:layout_centerInParent="true"
-        android:src="@mipmap/kong"
-        android:visibility="gone" />
 
-
-    <!--<com.handmark.pulltorefresh.library.PullToRefreshScrollView-->
-    <!--android:id="@+id/svOtcShate"-->
-    <!--android:layout_width="match_parent"-->
-    <!--android:layout_height="match_parent"-->
-    <!--android:layout_below="@id/rlOtc_ShareTitle"-->
-    <!--android:scrollbars="none"-->
-    <!--app:ptrAnimationStyle="flip"-->
-    <!--app:ptrMode="both">-->
-
-    <com.tpyzq.mobile.pangu.view.pullDownGroup.PullDownScrollView
-        android:id="@+id/svOtcShate"
+    <com.handmark.pulltorefresh.library.PullToRefreshScrollView
+        android:id="@+id/svPullToRefresh"
         android:layout_width="match_parent"
-        android:layout_height="wrap_content"
-        android:layout_below="@id/rlOtc_ShareTitle"
-        android:orientation="vertical">
+        android:layout_height="match_parent"
+        android:background="@color/white"
+        android:fillViewport="true"
+        android:scrollbars="none"
+        app:ptrAnimationStyle="flip"
+        app:ptrMode="both">
 
-        <ScrollView
+
+        <RelativeLayout
             android:layout_width="match_parent"
-            android:layout_height="match_parent"
-            android:scrollbars="none">
-
+            android:layout_height="match_parent">
 
             <LinearLayout
+                android:id="@+id/ll_show"
                 android:layout_width="match_parent"
                 android:layout_height="wrap_content"
                 android:orientation="vertical">
@@ -124,18 +111,18 @@
 
             </LinearLayout>
 
-        </ScrollView>
-    </com.tpyzq.mobile.pangu.view.pullDownGroup.PullDownScrollView>
+            <ImageView
+                android:id="@+id/iv_ShareKong"
+                android:layout_width="match_parent"
+                android:layout_height="match_parent"
+                android:layout_centerInParent="true"
+                android:scaleType="center"
+                android:src="@mipmap/kong"
+                android:visibility="gone" />
+
+        </RelativeLayout>
 
 
-    <!--<com.handmark.pulltorefresh.library.PullToRefreshListView-->
-    <!--android:id="@+id/lvShareQuery"-->
-    <!--android:layout_below="@id/rlOtc_ShareTitle"-->
-    <!--android:layout_width="match_parent"-->
-    <!--android:layout_height="match_parent"-->
-    <!--android:scrollbars="none"-->
-    <!--app:ptrAnimationStyle="flip"-->
-    <!--app:ptrMode="pullFromStart">-->
-    <!--</com.handmark.pulltorefresh.library.PullToRefreshListView>-->
+    </com.handmark.pulltorefresh.library.PullToRefreshScrollView>
 
-</RelativeLayout>
+</LinearLayout>

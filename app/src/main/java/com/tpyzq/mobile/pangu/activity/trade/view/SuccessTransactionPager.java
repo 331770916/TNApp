@@ -81,7 +81,7 @@ public class SuccessTransactionPager extends BaseTransactionPager {
 //      map300180_1.put("FUND_ACCOUNT","610002680");
 //      map300180_1.put("ACTION_IN","1");
         map300180_1.put("KEY_STR","");
-        map300180_1.put("REC_COUNT","5");
+        map300180_1.put("REC_COUNT","100");
         map300180.put("parms", map300180_1);
         NetWorkUtil.getInstence().okHttpForPostString("", ConstantUtil.URL_JY, map300180, new StringCallback() {
             @Override

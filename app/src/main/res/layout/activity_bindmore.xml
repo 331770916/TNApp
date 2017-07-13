@@ -82,7 +82,7 @@
 
         <RelativeLayout
             android:layout_width="match_parent"
-            android:layout_height="wrap_content"
+            android:layout_height="@dimen/size50"
             android:padding="@dimen/size15">
 
             <EditText
@@ -128,7 +128,7 @@
 
         <RelativeLayout
             android:layout_width="match_parent"
-            android:layout_height="wrap_content">
+            android:layout_height="@dimen/size50">
 
             <com.tpyzq.mobile.pangu.util.keyboard.NoSoftInputEditText
                 android:id="@+id/BDPassword"
@@ -171,10 +171,9 @@
 
         <RelativeLayout
             android:layout_width="match_parent"
-            android:layout_height="wrap_content">
+            android:layout_height="@dimen/size50">
 
             <EditText
-                android:numeric="integer"
                 android:id="@+id/BDCaptcha"
                 android:layout_width="match_parent"
                 android:layout_height="wrap_content"
@@ -183,38 +182,26 @@
                 android:drawablePadding="@dimen/size21"
                 android:hint="@string/HihiEditText3"
                 android:maxLength="4"
+                android:numeric="integer"
                 android:paddingBottom="@dimen/size15"
                 android:paddingLeft="@dimen/size40"
                 android:paddingTop="@dimen/size15"
                 android:singleLine="true" />
 
-
-            <TextView
-                android:id="@+id/tvCaptcha"
-                android:layout_width="@dimen/size120"
-                android:layout_height="wrap_content"
-                android:layout_alignParentRight="true"
-                android:layout_centerInParent="true"
-                android:layout_centerVertical="true"
-                android:layout_marginRight="@dimen/size12"
-                android:gravity="center"
-                android:padding="@dimen/size10"
-                android:text="@string/LoginText5"
-                android:textSize="@dimen/txtSize16"
-                android:visibility="visible" />
-
             <com.facebook.drawee.view.SimpleDraweeView
-                android:visibility="gone"
                 android:id="@+id/BDSecurityCode"
                 android:layout_width="@dimen/size120"
-                android:layout_height="wrap_content"
+                android:layout_height="match_parent"
                 android:layout_alignParentRight="true"
                 android:layout_centerInParent="true"
                 android:layout_centerVertical="true"
                 android:layout_marginRight="@dimen/size15"
+                android:visibility="visible"
                 fresco:actualImageScaleType="fitCenter"
                 fresco:failureImageScaleType="fitCenter"
-                fresco:placeholderImageScaleType="fitCenter" />
+                fresco:placeholderImage="@mipmap/ic_again"
+                fresco:placeholderImageScaleType="centerInside"
+                fresco:retryImage="@mipmap/ic_again" />
 
         </RelativeLayout>
 

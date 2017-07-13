@@ -56,7 +56,7 @@
                 android:layout_height="wrap_content"
                 android:layout_centerVertical="true"
                 android:layout_marginLeft="@dimen/size20"
-                android:text="ETF代码"
+                android:text="ETF 代码"
                 android:textColor="@color/hushenTab_titleColor"
                 android:textSize="@dimen/txtSize14" />
 

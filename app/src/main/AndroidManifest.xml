@@ -407,7 +407,7 @@
 
         <receiver android:name=".activity.market.selfChoice.childNews.SelfNewsReiver">
             <intent-filter>
-                <action android:name="com.tpyzq.self.mobile.pangu.modle.market.selfChoice.childNews.action" />
+                <action android:name="com.tpyzq.mobile.pangu.activity.market.selfChoice.action" />
             </intent-filter>
         </receiver>
         <service android:name=".activity.market.selfChoice.childNews.SelfNewsService" />

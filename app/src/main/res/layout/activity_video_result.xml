@@ -37,13 +37,14 @@
                     android:src="@mipmap/video_check_failed"
                     />
                 <TextView
+                    android:id="@+id/tv_validate_status"
                     android:layout_width="wrap_content"
                     android:layout_height="wrap_content"
                     android:textColor="@color/white"
                     android:layout_marginTop="@dimen/size10"
                     android:layout_marginBottom="@dimen/size30"
                     android:layout_gravity="center_horizontal"
-                    android:text="审核失败"/>
+                    android:text="--"/>
             </LinearLayout>
 
             <FrameLayout

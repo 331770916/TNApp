@@ -121,6 +121,7 @@ public class FJFundSplitActivity extends BaseActivity implements View.OnClickLis
         mTitle_tv.setText(getString(R.string.FJFundSplitActivity));
         mCnFundAmount_tv.setText("分拆份额");
         mConfirm_but.setText("分拆");
+        mAmount_et.setHint(getString(R.string.input_mergershare_2));
         mConfirm_but.setOnClickListener(this);
         mConfirm_but.setClickable(false);
         mInput_et.addTextChangedListener(new MyInputTextWatcher());

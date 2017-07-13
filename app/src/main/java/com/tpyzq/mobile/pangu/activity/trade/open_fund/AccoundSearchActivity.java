@@ -10,6 +10,8 @@ import android.widget.TextView;
 import android.widget.Toast;
 
 import com.google.gson.Gson;
+import com.handmark.pulltorefresh.library.PullToRefreshBase;
+import com.handmark.pulltorefresh.library.PullToRefreshListView;
 import com.tpyzq.mobile.pangu.R;
 import com.tpyzq.mobile.pangu.activity.myself.login.TransactionLoginActivity;
 import com.tpyzq.mobile.pangu.adapter.trade.AccoundSearchAdapter;
@@ -17,8 +19,10 @@ import com.tpyzq.mobile.pangu.base.BaseActivity;
 import com.tpyzq.mobile.pangu.data.FundAccountEntity;
 import com.tpyzq.mobile.pangu.http.NetWorkUtil;
 import com.tpyzq.mobile.pangu.util.ConstantUtil;
+import com.tpyzq.mobile.pangu.util.Helper;
 import com.tpyzq.mobile.pangu.util.SpUtils;
 import com.tpyzq.mobile.pangu.util.ToastUtils;
+import com.tpyzq.mobile.pangu.view.dialog.MistakeDialog;
 import com.zhy.http.okhttp.callback.StringCallback;
 
 import org.json.JSONArray;
@@ -35,12 +39,13 @@ import okhttp3.Call;
  * 基金查询界面
  */
 public class AccoundSearchActivity extends BaseActivity implements View.OnClickListener {
-    private ListView lv_accound_search;
+    private PullToRefreshListView lv_accound_search;
     private ImageView iv_back;
     private LinearLayout ll_fourtext;
     private TextView tv_text1, tv_text2, tv_text3, tv_text4;
     private List<FundAccountEntity> fundAccountBeans;
     private AccoundSearchAdapter accoundSearchAdapter;
+    private ImageView isEmpty;
 
     @Override
     public void initView() {
@@ -50,7 +55,8 @@ public class AccoundSearchActivity extends BaseActivity implements View.OnClickL
         tv_text2 = (TextView) ll_fourtext.findViewById(R.id.tv_text2);
         tv_text3 = (TextView) ll_fourtext.findViewById(R.id.tv_text3);
         tv_text4 = (TextView) ll_fourtext.findViewById(R.id.tv_text4);
-        lv_accound_search = (ListView) findViewById(R.id.lv_accound_search);
+        lv_accound_search = (PullToRefreshListView) findViewById(R.id.lv_accound_search);
+        isEmpty = (ImageView) findViewById(R.id.isEmpty);
         initData();
     }
 
@@ -58,18 +64,32 @@ public class AccoundSearchActivity extends BaseActivity implements View.OnClickL
         fundAccountBeans = new ArrayList<FundAccountEntity>();
         accoundSearchAdapter = new AccoundSearchAdapter(this);
         lv_accound_search.setAdapter(accoundSearchAdapter);
+        lv_accound_search.setEmptyView(isEmpty);
         iv_back.setOnClickListener(this);
         tv_text1.setText("开户日期");
         tv_text2.setText("基金账户");
         tv_text3.setText("基金公司/状态");
         tv_text4.setVisibility(View.GONE);
-        getFundData();
+        getFundData(false);
+        lv_accound_search.setMode(PullToRefreshBase.Mode.PULL_FROM_START);
+        lv_accound_search.setOnRefreshListener(new PullToRefreshBase.OnRefreshListener2<ListView>() {
+            @Override
+            public void onPullDownToRefresh(PullToRefreshBase<ListView> refreshView) {
+                getFundData(true);
+            }
+
+            @Override
+            public void onPullUpToRefresh(PullToRefreshBase<ListView> refreshView) {
+
+            }
+        });
+
     }
 
     /**
      * 获取基金数据
      */
-    private void getFundData() {
+    private void getFundData(final boolean isClean) {
         HashMap map300435 = new HashMap();
         map300435.put("funcid", "300435");
         map300435.put("token", SpUtils.getString(getApplication(), "mSession", null));
@@ -80,11 +100,13 @@ public class AccoundSearchActivity extends BaseActivity implements View.OnClickL
         NetWorkUtil.getInstence().okHttpForPostString("", ConstantUtil.URL_JY, map300435, new StringCallback() {
             @Override
             public void onError(Call call, Exception e, int id) {
-                Toast.makeText(AccoundSearchActivity.this, "网络访问失败", Toast.LENGTH_SHORT).show();
+                lv_accound_search.onRefreshComplete();
+                Helper.getInstance().showToast(AccoundSearchActivity.this,ConstantUtil.NETWORK_ERROR);
             }
 
             @Override
             public void onResponse(String response, int id) {
+                lv_accound_search.onRefreshComplete();
                 if (TextUtils.isEmpty(response)) {
                     return;
                 }
@@ -94,6 +116,9 @@ public class AccoundSearchActivity extends BaseActivity implements View.OnClickL
                     String data = object.getString("data");
                     String code = object.getString("code");
                     JSONArray jsonArray = new JSONArray(data);
+                    if (isClean){
+                        fundAccountBeans.clear();
+                    }
                     if ("0".equals(code)) {
                         for (int i = 0; i < jsonArray.length(); i++) {
                             FundAccountEntity fundAccountBean = new Gson().fromJson(jsonArray.getString(i), FundAccountEntity.class);
@@ -103,7 +128,7 @@ public class AccoundSearchActivity extends BaseActivity implements View.OnClickL
                     } else if ("-6".equals(code)) {
                         startActivity(new Intent(AccoundSearchActivity.this, TransactionLoginActivity.class));
                     } else {
-                        ToastUtils.showShort(AccoundSearchActivity.this, msg);
+                        MistakeDialog.showDialog(msg,AccoundSearchActivity.this);
                     }
                 } catch (JSONException e) {
                     e.printStackTrace();
