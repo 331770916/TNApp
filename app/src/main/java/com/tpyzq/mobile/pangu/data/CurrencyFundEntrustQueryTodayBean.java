@@ -85,6 +85,15 @@ public class CurrencyFundEntrustQueryTodayBean {
         private String ENTRUST_BS;
         private String ENTRUST_NO;
         private String SECU_NAME;
+        private String STATUS_NAME;
+
+        public String getSTATUS_NAME() {
+            return STATUS_NAME;
+        }
+
+        public void setSTATUS_NAME(String STATUS_NAME) {
+            this.STATUS_NAME = STATUS_NAME;
+        }
 
         public String getKEY_STR() {
             return KEY_STR;

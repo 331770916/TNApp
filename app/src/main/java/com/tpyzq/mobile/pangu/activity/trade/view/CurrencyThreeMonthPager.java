@@ -137,52 +137,12 @@ public class CurrencyThreeMonthPager extends BaseSearchPager {
                         map.put("tv_EntrustNumber", dataBean.getQTY());
                         map.put("tv_EntrustMoney", dataBean.getPRICE());
                         map.put("tv_type", dataBean.getBUSINESS_NAME());
-
-                        String entrust_status;
-                        if (dataBean.getENTRUST_STATUS().equals("0")) {
-                            entrust_status = "未报";
-                            map.put("tv_state", entrust_status);
-                        }
-                        if (dataBean.getENTRUST_STATUS().equals("1")) {
-                            entrust_status = "待报";
-                            map.put("tv_state", entrust_status);
-                        }
-                        if (dataBean.getENTRUST_STATUS().equals("2")) {
-                            entrust_status = "已报";
-                            map.put("tv_state", entrust_status);
-                        }
-                        if (dataBean.getENTRUST_STATUS().equals("3")) {
-                            entrust_status = "已报待撤";
-                            map.put("tv_state", entrust_status);
-                        }
-                        if (dataBean.getENTRUST_STATUS().equals("4")) {
-                            entrust_status = "部成待撤";
-                            map.put("tv_state", entrust_status);
-                        }
-                        if (dataBean.getENTRUST_STATUS().equals("6")) {
-                            entrust_status = "已撤";
-                            map.put("tv_state", entrust_status);
-                        }
-                        if (dataBean.getENTRUST_STATUS().equals("7")) {
-                            entrust_status = "部成";
-                            map.put("tv_state", entrust_status);
-                        }
-                        if (dataBean.getENTRUST_STATUS().equals("8")) {
-                            entrust_status = "已成";
-                            map.put("tv_state", entrust_status);
-                        }
-                        if (dataBean.getENTRUST_STATUS().equals("9")) {
-                            entrust_status = "废单";
-                            map.put("tv_state", entrust_status);
-                        }
-
+                        map.put("tv_state", dataBean.getSTATUS_NAME());
                         list.add(map);
                     }
+                    adapter.setList(list);
                 }
             }
         });
-
-        adapter.setList(list);
-
     }
 }
