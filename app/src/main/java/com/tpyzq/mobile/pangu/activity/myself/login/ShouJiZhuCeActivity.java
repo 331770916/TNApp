@@ -34,7 +34,6 @@ import com.tpyzq.mobile.pangu.http.doConnect.self.QuerySelfChoiceStockConnect;
 import com.tpyzq.mobile.pangu.http.doConnect.self.ToAddSelfChoiceStockConnect;
 import com.tpyzq.mobile.pangu.http.doConnect.self.ToQuerySelfChoiceStockConnect;
 import com.tpyzq.mobile.pangu.interfac.ICallbackResult;
-import com.tpyzq.mobile.pangu.log.LogHelper;
 import com.tpyzq.mobile.pangu.log.LogUtil;
 import com.tpyzq.mobile.pangu.util.ConstantUtil;
 import com.tpyzq.mobile.pangu.util.DeviceUtil;
@@ -55,7 +54,6 @@ import org.json.JSONObject;
 import java.util.ArrayList;
 import java.util.HashMap;
 import java.util.List;
-import java.util.Map;
 
 import okhttp3.Call;
 
@@ -540,7 +538,7 @@ public class ShouJiZhuCeActivity extends BaseActivity implements View.OnClickLis
                     if ("0".equals(code)) {
 //                        Helper.getInstance().showToast(ShouJiZhuCe.this,"发送短信成功");
                     } else {
-                        MistakeDialog.showDialog("验证码获取失败", ShouJiZhuCeActivity.this, new MistakeDialog.MistakeDialgoListener() {
+                        MistakeDialog.showDialog(jsonObject.opt("message"), ShouJiZhuCeActivity.this, new MistakeDialog.MistakeDialgoListener() {
                             @Override
                             public void doPositive() {
                                 time.cancel();
