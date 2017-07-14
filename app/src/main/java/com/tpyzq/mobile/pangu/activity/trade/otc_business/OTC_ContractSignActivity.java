@@ -382,7 +382,7 @@ public class OTC_ContractSignActivity extends BaseActivity implements View.OnCli
                         Intent intent2 = new Intent(OTC_ContractSignActivity.this, AgreementActivity.class);
                         OTC_ContractSignActivity.this.startActivity(intent2);
                     }else {
-                        HandoverDialog.showDialog(msg, OTC_ContractSignActivity.this);
+                        MistakeDialog.showDialog(msg, OTC_ContractSignActivity.this);
                     }
                 } catch (JSONException e) {
                     e.printStackTrace();

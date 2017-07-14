@@ -153,7 +153,7 @@ public class OTC_ElectronicContractActivity extends BaseActivity implements View
                                 intentBean.setInit_date(json.optString("INIT_DATE"));
                                 intentBean.setEcontract_id(json.optString("ECONTRACT_ID"));
                                 intentBean.setProdta_no_name(json.optString("PRODTA_NO_NAME"));
-                                intentBean.setStatus(json.optString("PROD_STATUS"));
+                                intentBean.setStatus(json.optString("ECONTRACT_STATUS"));
                                 list.add(intentBean);
                             }
                             adapter.setList(list);
