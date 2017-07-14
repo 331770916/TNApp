@@ -3,6 +3,7 @@ package com.tpyzq.mobile.pangu.activity.trade.open_fund;
 import android.content.Intent;
 import android.os.AsyncTask;
 import android.os.Bundle;
+import android.os.SystemClock;
 import android.text.TextUtils;
 import android.view.View;
 import android.widget.AdapterView;
@@ -84,15 +85,15 @@ public class OptionalFundActivity extends BaseActivity implements View.OnClickLi
         lv_fund.setOnRefreshListener(new PullToRefreshBase.OnRefreshListener2<ListView>() {
             @Override
             public void onPullDownToRefresh(PullToRefreshBase<ListView> refreshView) {
-
+                final String searchStr = et_search_fundcompany.getText().toString().trim();
                 new AsyncTask<Void, Void, Void>() {
                     @Override
                     protected Void doInBackground(Void... params) {
                         try {
                             Thread.sleep(1500);
                             fundSubsBeans.clear();
-                            fundQuery("", 0, false);
-                        } catch (InterruptedException e) {
+                            fundQuery(searchStr, 0, false);
+                        } catch (Exception e) {
                             e.printStackTrace();
                         }
                         return null;
