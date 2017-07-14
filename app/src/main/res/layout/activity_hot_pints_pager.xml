@@ -9,6 +9,8 @@
     android:orientation="vertical"
     android:background="@color/dividerColor"
     tools:context="com.tpyzq.mobile.pangu.activity.home.information.view.HotPintsPager">
+
+
     <!-- 重新加载的图片 -->
     <LinearLayout
         android:id="@+id/llHotJiaZai"
@@ -42,6 +44,8 @@
         android:layout_width="wrap_content"
         android:layout_height="wrap_content"
         android:layout_centerInParent="true"/>
+
+    <!--com.handmark.pulltorefresh.library.PullToRefreshScrollView-->
     <com.handmark.pulltorefresh.library.PullToRefreshScrollView
         android:id="@+id/svPullToRefresh"
         android:layout_width="match_parent"
@@ -56,16 +60,170 @@
             android:layout_height="match_parent"
             android:background="@color/white"
             android:orientation="vertical">
-            <includ
-                android:id="@+id/rlReftitle"
-                layout="@layout/item_news_reftitle"/>
+
+            <TextView
+                android:visibility="gone"
+                android:id="@+id/tvTouXian"
+                android:layout_width="match_parent"
+                android:layout_height="@dimen/size10"
+                android:background="@color/bgColor"/>
+
+            <RelativeLayout
+                android:visibility="gone"
+                android:id="@+id/rlJinRiZhongDa"
+                android:layout_width="match_parent"
+                android:layout_height="@dimen/size30">
+
+                <TextView
+                    android:layout_width="wrap_content"
+                    android:layout_height="wrap_content"
+                    android:text="今日重大事件"
+                    android:textSize="14sp"
+                    android:textStyle="bold"
+                    android:textColor="@color/textss"
+                    android:layout_centerVertical="true"
+                    android:layout_marginLeft="@dimen/size20"/>
+
+                <ImageView
+                    android:id="@+id/ivGengDuo"
+                    android:layout_width="wrap_content"
+                    android:layout_height="wrap_content"
+                    android:layout_centerVertical="true"
+                    android:layout_alignParentRight="true"
+                    android:layout_marginRight="@dimen/size20"
+                    android:src="@mipmap/more"/>
+
+                <TextView
+                    android:layout_width="wrap_content"
+                    android:layout_height="wrap_content"
+                    android:layout_centerVertical="true"
+                    android:layout_toLeftOf="@id/ivGengDuo"
+                    android:layout_marginRight="@dimen/size5"
+                    android:text="更多"
+                    android:textSize="12sp"
+                    android:textColor="@color/text"/>
+
+            </RelativeLayout>
+
+
+            <RelativeLayout
+                android:visibility="gone"
+                android:id="@+id/rlZhongDaDiYi"
+                android:layout_width="match_parent"
+                android:layout_height="wrap_content"
+                android:background="@color/reds">
+
+
+                <ImageView
+                    android:id="@+id/ivReOrZhong"
+                    android:layout_width="wrap_content"
+                    android:layout_height="wrap_content"
+                    android:layout_marginTop="@dimen/size25"
+                    android:layout_marginLeft="@dimen/size24"
+                    android:src="@mipmap/zhongda"/>
+
+                <TextView
+                    android:id="@+id/tvImportantEventTitle"
+                    android:layout_width="wrap_content"
+                    android:layout_height="wrap_content"
+                    android:layout_marginTop="@dimen/size23"
+                    android:layout_toRightOf="@id/ivReOrZhong"
+                    android:layout_marginLeft="@dimen/size5"
+                    android:layout_marginRight="@dimen/size27"
+                    android:textSize="18sp"
+                    android:textStyle="bold"
+                    android:lineSpacingExtra="1.5dp"
+                    android:textColor="@color/white"
+                    android:text=""/>
+
+
+                <TextView
+                    android:id="@+id/tvImportantEventDate"
+                    android:layout_width="wrap_content"
+                    android:layout_height="wrap_content"
+                    android:text=""
+                    android:textSize="11sp"
+                    android:textColor="@color/textDate"
+                    android:layout_alignLeft="@id/tvImportantEventTitle"
+                    android:layout_below="@id/tvImportantEventTitle"
+                    android:layout_marginTop="@dimen/size5"
+                    android:layout_marginBottom="@dimen/size25"/>
+
+            </RelativeLayout>
+
+            <com.tpyzq.mobile.pangu.view.gridview.MyGridView
+                android:id="@+id/gvHotPints"
+                android:layout_width="match_parent"
+                android:layout_height="wrap_content"
+                android:background="@color/text"
+                android:numColumns="2"
+                android:verticalSpacing="0.5dp"
+                android:horizontalSpacing="0.5dp"
+                android:scrollbars="none"
+                android:fadingEdge="none"
+                android:stretchMode="columnWidth"
+                android:listSelector="@color/lineColor">
+
+            </com.tpyzq.mobile.pangu.view.gridview.MyGridView>
+
+            <TextView
+                android:id="@+id/tvTouXian1"
+                android:visibility="gone"
+                android:layout_width="match_parent"
+                android:layout_height="@dimen/size10"
+                android:background="@color/bgColor"/>
+
+            <RelativeLayout
+                android:visibility="gone"
+                android:id="@+id/rlHotAnalysis"
+                android:layout_width="match_parent"
+                android:layout_height="@dimen/size40"
+                android:background="@color/white">
+
+                <TextView
+                    android:layout_width="wrap_content"
+                    android:layout_height="wrap_content"
+                    android:text="热点公告解析"
+                    android:textSize="14sp"
+                    android:textStyle="bold"
+                    android:textColor="@color/textss"
+                    android:layout_centerVertical="true"
+                    android:layout_marginLeft="@dimen/size20"/>
+
+                <ImageView
+                    android:id="@+id/ivMove"
+                    android:layout_width="wrap_content"
+                    android:layout_height="wrap_content"
+                    android:layout_centerVertical="true"
+                    android:layout_alignParentRight="true"
+                    android:layout_marginRight="@dimen/size20"
+                    android:src="@mipmap/more"/>
+
+                <TextView
+                    android:layout_width="wrap_content"
+                    android:layout_height="wrap_content"
+                    android:layout_centerVertical="true"
+                    android:layout_toLeftOf="@id/ivMove"
+                    android:layout_marginRight="@dimen/size5"
+                    android:text="更多"
+                    android:textSize="12sp"
+                    android:textColor="@color/text"/>
+
+            </RelativeLayout>
+
+            <TextView
+                android:layout_width="match_parent"
+                android:layout_height="0.3dp"
+                android:background="@color/lineColor"/>
+
             <com.tpyzq.mobile.pangu.view.gridview.MyListView
                 android:id="@+id/lvHotAnalysis"
-                android:layout_marginLeft="@dimen/size8"
                 android:layout_width="match_parent"
                 android:layout_height="wrap_content"
                 android:divider="@null">
+
             </com.tpyzq.mobile.pangu.view.gridview.MyListView>
+
         </LinearLayout>
 
     </com.handmark.pulltorefresh.library.PullToRefreshScrollView>
