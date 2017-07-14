@@ -30,6 +30,7 @@ import java.util.List;
 public class VoteDetailAdapter extends BaseAdapter {
     private List<NetworkVotingEntity> mList;
     private LayoutInflater layoutInflater;
+    private NetworkVotingEntity bean,subBean;
     private Context mContext;
 
     public VoteDetailAdapter(Context context) {
@@ -62,7 +63,7 @@ public class VoteDetailAdapter extends BaseAdapter {
 
     @Override
     public View getView(int position, View convertView, ViewGroup parent) {
-        final NetworkVotingEntity bean = mList.get(position);
+         bean = mList.get(position);
         if(!TextUtils.isEmpty(bean.getVote_type())) {
             bean.setEntrust_no("");
             switch (Integer.parseInt(bean.getVote_type())) {
@@ -110,26 +111,28 @@ public class VoteDetailAdapter extends BaseAdapter {
                     LinearLayout ll = (LinearLayout) convertView.findViewById(R.id.voteSubContent);
                     LayoutParams lp = new LayoutParams(-1,-2);
                     lp.leftMargin = (int)mContext.getResources().getDimension(R.dimen.size85);
-                    for (int i = 0; i < list.size(); i++)
-                        ll.addView(getSubView(list.get(i)),lp);
+                    for (int i = 0; i < list.size(); i++) {
+                        subBean = list.get(i);
+                        ll.addView(getSubView(), lp);
+                    }
                     break;
             }
         }
         return convertView;
     }
 
-    private LinearLayout getSubView(final NetworkVotingEntity entity){
+    private LinearLayout getSubView(){
         LinearLayout ll = new LinearLayout(mContext);
         ll.setOrientation(LinearLayout.HORIZONTAL);
         TextView tvTitle = new TextView(mContext);
         tvTitle.setTextColor(mContext.getResources().getColor(R.color.textss));
-        tvTitle.setText(entity.getVote_motion());
+        tvTitle.setText(subBean.getVote_motion());
         ll.addView(tvTitle);
         TextView tvContent = new TextView(mContext);
         tvContent.setTextColor(mContext.getResources().getColor(R.color.textss));
         LayoutParams lps = new LayoutParams(-2,-2);
         lps.leftMargin = (int)mContext.getResources().getDimension(R.dimen.size10);
-        tvContent.setText(entity.getVote_info());
+        tvContent.setText(subBean.getVote_info());
         ll.addView(tvContent,lps);
         LayoutParams etlps = new LayoutParams((int)mContext.getResources().getDimension(R.dimen.size100),(int)mContext.getResources().getDimension(R.dimen.size40));
         final EditText etNum = new EditText(mContext);
@@ -137,25 +140,14 @@ public class VoteDetailAdapter extends BaseAdapter {
         etNum.setInputType(InputType.TYPE_CLASS_NUMBER);
         etlps.leftMargin = (int)mContext.getResources().getDimension(R.dimen.size31);
         ll.addView(etNum,etlps);
-        etNum.addTextChangedListener(new TextWatcher() {
+        etNum.setOnFocusChangeListener(new View.OnFocusChangeListener() {
             @Override
-            public void beforeTextChanged(CharSequence s, int start, int count, int after) {
-            }
-            @Override
-            public void onTextChanged(CharSequence s, int start, int before, int count) {}
-            @Override
-            public void afterTextChanged(Editable s) {
-                if (s.length() > 1 && s.charAt(0) == '0') {
-                    final Integer integer = Integer.valueOf(s.toString());
-                    etNum.setText(integer.toString());
-                    etNum.setSelection(integer.toString().length());
-                    etNum.postDelayed(new Runnable() {
-                        @Override
-                        public void run() {
-                            entity.setEntrust_no(integer.toString());
-                        }
-                    },800);
-                }
+            public void onFocusChange(View v, boolean hasFocus) {
+                String s = etNum.getText().toString();
+                if(s.length()>1&&s.charAt(0)=='0'){
+                   subBean.setEntrust_no(Integer.valueOf(s.toString()).toString());
+                }else
+                    subBean.setEntrust_no(s);
             }
         });
         return ll;
