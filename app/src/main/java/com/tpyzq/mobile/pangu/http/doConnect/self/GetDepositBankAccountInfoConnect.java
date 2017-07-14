@@ -77,9 +77,6 @@ public class GetDepositBankAccountInfoConnect {
 
                     if (!"0".equals(code)) {
                         if (changeDepositBankResult != null) {
-                            if ("-1".equals(code)) {
-                                msg = "资金账户 " + "(" + UserUtil.capitalAccount + ")\n" + msg;
-                            }
                             changeDepositBankResult.error(msg);
                         }
                         return;
