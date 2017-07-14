@@ -249,6 +249,7 @@ public class DoChangeDepositBankActivity extends BaseActivity implements View.On
                         .getSystemService(Context.INPUT_METHOD_SERVICE);
                 imm.hideSoftInputFromWindow(DoChangeDepositBankActivity.this.getWindow().getDecorView().getWindowToken(), 0);
                 mPassWordEdit.setInputType(InputType.TYPE_NULL);
+                mPassWordEdit.setText("");
                 showKeyBoard("请输入银行卡密码");
                 break;
         }
@@ -317,6 +318,10 @@ public class DoChangeDepositBankActivity extends BaseActivity implements View.On
             mSelectBankTv.setText(BANK_NAME);
             mNewBankNo = BANK_NO;
 
+            mBankNo.setText("");
+            mPassWordEdit.setText("");
+
+            initLoadDialog();
             mConnect.getPdf(TAG, BANK_NO, this);
         }
     }
@@ -336,7 +341,12 @@ public class DoChangeDepositBankActivity extends BaseActivity implements View.On
 
     @Override
     public void error(String errorMsg) {
-        showMistackDialog(errorMsg, null);
+        showMistackDialog(errorMsg, new CancelDialog.PositiveClickListener() {
+            @Override
+            public void onPositiveClick() {
+                mPassWordEdit.setText("");
+            }
+        });
     }
 
     @Override
@@ -366,8 +376,8 @@ public class DoChangeDepositBankActivity extends BaseActivity implements View.On
 
     @Override
     public void needInputPassword(String bkcancelPwd_flag) {
-        mStup = OLD_BANK_PWDSTUP;
         if (bkcancelPwd_flag.equals("1")) {
+            mStup = OLD_BANK_PWDSTUP;
             //需要输入原银行卡密码
             showKeyBoard("请输入原银行卡密码");
         } else {
@@ -431,6 +441,8 @@ public class DoChangeDepositBankActivity extends BaseActivity implements View.On
 
             if (mStup == BANK_PWDSTUP) {
                 mInputPwd = s;
+                mPassWordEdit.setInputType(InputType.TYPE_CLASS_TEXT | InputType.TYPE_TEXT_VARIATION_PASSWORD);
+                mPassWordEdit.setText(mInputPwd);
             } else {
                 initLoadDialog();
                 String inputAccount = mBankNo.getText().toString().trim();
@@ -448,6 +460,7 @@ public class DoChangeDepositBankActivity extends BaseActivity implements View.On
                 tmp += "*";
             }
             inputPasswordView.setText(tmp);
+
         }
     }
 
