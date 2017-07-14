@@ -32,10 +32,10 @@ public class TransitionUtils {
     public static String string2doubleS(String s) {
         if (!s.equals("")) {
             DecimalFormat df = new DecimalFormat("######0.00");
-            double d = Double.parseDouble(s);
-//            BigDecimal b = new BigDecimal(d);
-//            double c = b.setScale(2, BigDecimal.ROUND_HALF_UP).doubleValue();
-            return df.format(d);
+//            double d = Double.parseDouble(s);
+            BigDecimal b = new BigDecimal(s);
+            double c = b.setScale(2, BigDecimal.ROUND_HALF_UP).doubleValue();
+            return df.format(c);
         } else {
             return "0.00";
         }
@@ -45,8 +45,8 @@ public class TransitionUtils {
     public static String s2d2(String s) {
         if (!s.equals("")) {
             DecimalFormat df = new DecimalFormat("######0.00");
-            double d = Double.parseDouble(s);
-            BigDecimal b = new BigDecimal(d);
+//            double d = Double.parseDouble(s);
+            BigDecimal b = new BigDecimal(s);
             double c = b.setScale(2, BigDecimal.ROUND_HALF_DOWN).doubleValue();
             return df.format(b);
         } else {
@@ -58,8 +58,8 @@ public class TransitionUtils {
     public static String s2d4(String s) {
         if (!TextUtils.isEmpty(s) && !"-".equals(s)) {
             DecimalFormat df = new DecimalFormat("######0.0000");
-            double d = Double.parseDouble(s);
-            BigDecimal b = new BigDecimal(d);
+//            double d = Double.parseDouble(s);
+            BigDecimal b = new BigDecimal(s);
             double c = b.setScale(4, BigDecimal.ROUND_HALF_UP).doubleValue();
             return df.format(c);
         } else {
@@ -71,8 +71,8 @@ public class TransitionUtils {
     public static String string2doubleS3(String s) {
         if (!s.equals("")) {
             DecimalFormat df = new DecimalFormat("######0.000");
-            double d = Double.parseDouble(s);
-            BigDecimal b = new BigDecimal(d);
+//            double d = Double.parseDouble(s);
+            BigDecimal b = new BigDecimal(s);
             double c = b.setScale(3, BigDecimal.ROUND_DOWN).doubleValue();
             return df.format(c);
         } else {
@@ -84,8 +84,8 @@ public class TransitionUtils {
     public static String string2double4(String s) {
         if (!s.equals("")) {
             DecimalFormat df = new DecimalFormat("######0.0000");
-            double d = Double.parseDouble(s);
-            BigDecimal b = new BigDecimal(d);
+//            double d = Double.parseDouble(s);
+            BigDecimal b = new BigDecimal(s);
             double c = b.setScale(4, BigDecimal.ROUND_HALF_DOWN).doubleValue();
             return df.format(c);
         } else {
@@ -97,8 +97,8 @@ public class TransitionUtils {
     public static String string2doubleS4(String s) {
         if (!s.equals("")) {
             DecimalFormat df = new DecimalFormat("######0");
-            double d = Double.parseDouble(s);
-            BigDecimal b = new BigDecimal(d);
+//            double d = Double.parseDouble(s);
+            BigDecimal b = new BigDecimal(s);
             double c = b.setScale(0, BigDecimal.ROUND_HALF_DOWN).doubleValue();
             return df.format(c);
         } else {

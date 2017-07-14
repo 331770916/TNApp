@@ -290,7 +290,7 @@ public class ReverseRepoActivity extends BaseActivity implements View.OnClickLis
                 startActivity(new Intent(this, ReferActivity.class));
                 break;
             case R.id.iv_add_sum:
-                if (!"----".equals(tv_price.getText().toString()) && amount < Integer.valueOf(tv_price.getText().toString())) {
+                if (Helper.isNumberDimc(tv_price.getText().toString()) && amount < Integer.valueOf(tv_price.getText().toString())) {
                     amount += addsub;
                     et_price.setText(amount + "");
                 } else {
