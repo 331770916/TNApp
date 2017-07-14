@@ -7,10 +7,12 @@ import android.view.View;
 import android.widget.AdapterView;
 import android.widget.FrameLayout;
 import android.widget.ListView;
+import android.widget.Toast;
 
 import com.tpyzq.mobile.pangu.R;
 import com.tpyzq.mobile.pangu.activity.home.information.NewsDetailActivity;
 import com.tpyzq.mobile.pangu.activity.market.BaseTabPager;
+import com.tpyzq.mobile.pangu.base.CustomApplication;
 import com.tpyzq.mobile.pangu.base.SimpleRemoteControl;
 import com.tpyzq.mobile.pangu.data.NewsInofEntity;
 import com.tpyzq.mobile.pangu.db.Db_HOME_INFO;
@@ -139,8 +141,10 @@ public class SelfChoiceNewsTab extends BaseTabPager implements
                 mLoadDialog.dismiss();
             }
             if (null == result ||result instanceof String) {
-                mKongLayout.setVisibility(View.VISIBLE);
-                MistakeDialog.showDialog(result, mActivity);
+                if (mEntities == null || mEntities.size() <= 0 ) {
+                    mKongLayout.setVisibility(View.VISIBLE);
+                }
+                Toast.makeText(CustomApplication.getContext(), (String)result, Toast.LENGTH_SHORT).show();
                 return;
             }
             ArrayList<NewsInofEntity> entities = (ArrayList<NewsInofEntity>) result;
