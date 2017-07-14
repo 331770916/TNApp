@@ -922,7 +922,7 @@ public class InterfaceCollection {
         List data = new ArrayList();
         for (NetworkVotingEntity entity:list) {
             Map map = new HashMap<>();
-            map.put("ENTRUST_AMOUNT",entity.getEntrust_amount());
+            map.put("ENTRUST_AMOUNT",entity.getEntrust_no());
             map.put("ENTRUST_PRICE",entity.getVote_motion());
             map.put("MEETING_SEQ",entity.getMeeting_seq());
             data.add(map);
@@ -1024,7 +1024,7 @@ public class InterfaceCollection {
                                 bean.setStock_code(obj.getString("STOCK_CODE"));
                                 bean.setBusiness_amount(obj.getString("BUSINESS_AMOUNT"));
                                 bean.setStatus(obj.getString("ENTRUST_STATUS"));
-                                bean.setEntrust_status_name("ENTRUST_STATUS_NAME");
+                                bean.setEntrust_status_name(obj.getString("ENTRUST_STATUS_NAME"));
                                 bean.setStock_name(obj.getString("STOCK_NAME"));
                                 bean.setMeeting_seq(obj.getString("MEETING_SEQ"));
                                 bean.setInit_date(obj.getString("INIT_DATE"));
@@ -1102,7 +1102,7 @@ public class InterfaceCollection {
                                 bean.setStock_code(obj.getString("STOCK_CODE"));
                                 bean.setVote_motion(obj.getString("ENTRUST_PRICE"));
                                 bean.setStatus(obj.getString("ENTRUST_STATUS"));
-                                bean.setEntrust_status_name("ENTRUST_STATUS_NAME");
+                                bean.setEntrust_status_name(obj.getString("ENTRUST_STATUS_NAME"));
                                 bean.setInit_date(obj.getString("ENTRUST_DATE"));
                                 bean.setStock_name(obj.getString("STOCK_NAME"));
                                 bean.setBusiness_amount(obj.getString("ENTRUST_AMOUNT"));

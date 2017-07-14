@@ -41,7 +41,7 @@ public class VoteActivity extends BaseActivity  implements InterfaceCollection.I
     public void initView() {
         mSession = SpUtils.getString(this, "mSession", "");
         listView = (PullToRefreshListView) findViewById(R.id.voteListview);
-        listView.setMode(PullToRefreshBase.Mode.PULL_FROM_START);
+        listView.setMode(PullToRefreshBase.Mode.BOTH);
         iv_isEmpty = (ImageView) findViewById(R.id.iv_isEmpty);
         kong_null = (RelativeLayout)findViewById(R.id.VTEAMP_Kong_Null);
         findViewById(R.id.detail_back).setOnClickListener(this);
@@ -91,6 +91,10 @@ public class VoteActivity extends BaseActivity  implements InterfaceCollection.I
             if(object instanceof List){
                 myList = (List<NetworkVotingEntity>)object;
                 if(myList.size()>0){
+                    if(myList.size()<30)
+                        listView.setMode(PullToRefreshBase.Mode.PULL_FROM_START);
+                    else
+                        listView.setMode(PullToRefreshBase.Mode.BOTH);
                     position = myList.get(myList.size()-1).getPosition_str();
                     if(mIsClean)
                         refresh += 30;

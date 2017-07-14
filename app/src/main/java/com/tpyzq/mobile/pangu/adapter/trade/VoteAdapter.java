@@ -25,7 +25,6 @@ import java.util.List;
 public class VoteAdapter extends BaseAdapter{
     private List<NetworkVotingEntity> mList;
     private LayoutInflater layoutInflater;
-    private NetworkVotingEntity bean;
     private Context mContext;
 
     public VoteAdapter(Context context) {
@@ -57,8 +56,9 @@ public class VoteAdapter extends BaseAdapter{
     }
 
     @Override
-    public View getView(int position, View convertView, ViewGroup parent) {
+    public View getView(int position,  View convertView, ViewGroup parent) {
         VoteAdapter.ViewHodler viewHodler;
+        final NetworkVotingEntity bean = mList.get(position);
         if (convertView == null) {
             viewHodler = new ViewHodler();
             convertView = layoutInflater.inflate(R.layout.item_vote_list, parent, false);
@@ -72,15 +72,15 @@ public class VoteAdapter extends BaseAdapter{
             viewHodler.tv7 = (TextView)convertView.findViewById(R.id.voteContent6);
             viewHodler.tv8 = (TextView)convertView.findViewById(R.id.voteContent7);
             convertView.setTag(viewHodler);
-        }else
+        }else {
             viewHodler = (ViewHodler) convertView.getTag();
-        bean = mList.get(position);
+        }
         viewHodler.button.setOnClickListener(new View.OnClickListener() {
             @Override
             public void onClick(View v) {
                 Intent intent = new Intent(mContext, VoteDetailActivity.class);
                 intent.putExtra("meeting_seq",bean.getMeeting_seq());//股东大会编码
-                intent.putExtra("company_code",bean.getCompany_code());//证卷代码
+                intent.putExtra("company_code", bean.getCompany_code());//stock_code入参
                 intent.putExtra("stock_account",bean.getStock_account());//股东代码
                 intent.putExtra("exchange_type",bean.getExchange_type());//市场
                 mContext.startActivity(intent);

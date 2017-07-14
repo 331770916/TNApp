@@ -30,7 +30,6 @@ import java.util.List;
 public class VoteDetailAdapter extends BaseAdapter {
     private List<NetworkVotingEntity> mList;
     private LayoutInflater layoutInflater;
-    private NetworkVotingEntity bean,subBean;
     private Context mContext;
 
     public VoteDetailAdapter(Context context) {
@@ -63,11 +62,11 @@ public class VoteDetailAdapter extends BaseAdapter {
 
     @Override
     public View getView(int position, View convertView, ViewGroup parent) {
-         bean = mList.get(position);
+        final NetworkVotingEntity bean = mList.get(position);
         if(!TextUtils.isEmpty(bean.getVote_type())) {
-            bean.setEntrust_no("");
             switch (Integer.parseInt(bean.getVote_type())) {
                 case 0: //非累积投票制
+                    bean.setEntrust_no("1");
                     convertView = layoutInflater.inflate(R.layout.item_vote_accumulate_proposal, parent, false);
                     TextView tv1 = (TextView) convertView.findViewById(R.id.voteMotion);
                     tv1.setText(bean.getVote_motion());
@@ -110,35 +109,39 @@ public class VoteDetailAdapter extends BaseAdapter {
                     tv7.setText(bean.getVote_info() + "(当选人数：" + list.size() + ")");
                     LinearLayout ll = (LinearLayout) convertView.findViewById(R.id.voteSubContent);
                     LayoutParams lp = new LayoutParams(-1,-2);
+                    lp.topMargin = (int)mContext.getResources().getDimension(R.dimen.size2);
                     lp.leftMargin = (int)mContext.getResources().getDimension(R.dimen.size85);
-                    for (int i = 0; i < list.size(); i++) {
-                        subBean = list.get(i);
-                        ll.addView(getSubView(), lp);
-                    }
+                    lp.rightMargin = (int)mContext.getResources().getDimension(R.dimen.size85);
+                    for (int i = 0; i < list.size(); i++)
+                        ll.addView(getSubView(list.get(i)), lp);
                     break;
             }
         }
         return convertView;
     }
 
-    private LinearLayout getSubView(){
+    private LinearLayout getSubView(final NetworkVotingEntity subBean){
         LinearLayout ll = new LinearLayout(mContext);
         ll.setOrientation(LinearLayout.HORIZONTAL);
         TextView tvTitle = new TextView(mContext);
         tvTitle.setTextColor(mContext.getResources().getColor(R.color.textss));
         tvTitle.setText(subBean.getVote_motion());
         ll.addView(tvTitle);
+
         TextView tvContent = new TextView(mContext);
         tvContent.setTextColor(mContext.getResources().getColor(R.color.textss));
-        LayoutParams lps = new LayoutParams(-2,-2);
+        LayoutParams lps = new LayoutParams((int)mContext.getResources().getDimension(R.dimen.size100),-2);
         lps.leftMargin = (int)mContext.getResources().getDimension(R.dimen.size10);
+        lps.weight = 1;
         tvContent.setText(subBean.getVote_info());
         ll.addView(tvContent,lps);
+
         LayoutParams etlps = new LayoutParams((int)mContext.getResources().getDimension(R.dimen.size100),(int)mContext.getResources().getDimension(R.dimen.size40));
         final EditText etNum = new EditText(mContext);
         etNum.setBackgroundResource(R.mipmap.vote_et_style);
         etNum.setInputType(InputType.TYPE_CLASS_NUMBER);
         etlps.leftMargin = (int)mContext.getResources().getDimension(R.dimen.size31);
+        etlps.weight = 1;
         ll.addView(etNum,etlps);
         etNum.setOnFocusChangeListener(new View.OnFocusChangeListener() {
             @Override
@@ -148,6 +151,27 @@ public class VoteDetailAdapter extends BaseAdapter {
                    subBean.setEntrust_no(Integer.valueOf(s.toString()).toString());
                 }else
                     subBean.setEntrust_no(s);
+            }
+        });
+        etNum.addTextChangedListener(new TextWatcher() {
+            @Override
+            public void beforeTextChanged(CharSequence s, int start, int count, int after) {
+            }
+
+            @Override
+            public void onTextChanged(CharSequence s, int start, int before, int count) {
+            }
+
+            @Override
+            public void afterTextChanged(Editable s) {
+                String str=s.toString();
+                if(s.length()>1&&s.charAt(0)=='0'){
+                    Integer integer = Integer.valueOf(s.toString());
+                    etNum.setText(integer.toString());
+                    etNum.setSelection(integer.toString().length());
+                    str = integer.toString();
+                }
+                subBean.setEntrust_no(str);
             }
         });
         return ll;
