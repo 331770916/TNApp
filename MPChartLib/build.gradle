@@ -41,7 +41,6 @@ dependencies {
     //compile fileTree(dir: 'libs', include: ['*.jar'])
     //compile 'com.android.support:support-v4:19.+'
     provided 'io.realm:realm-android:0.87.5'
-    annotationProcessor 'io.realm:realm-android:0.87.5'
     testCompile 'junit:junit:4.12'
     // "optional" dependency to realm-database API
 }
