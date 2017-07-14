@@ -23,11 +23,20 @@ public class NetworkVotingEntity {
     private String business_amount;   //成交数量<委托数量 TODO>
     private String stock_name;   //证券名称
     private String status;      //委托状态
+    private String entrust_status_name;//委托状态名称
     private String exchange_type; //市场
     private boolean isShowRule;             //控制子view是否显示
     private String entrust_amount;//累积投票和非累积投票 <委托状态名称 TODO>
     private String entrust_no;//委托编号
     private List<NetworkVotingEntity> list;
+
+    public String getEntrust_status_name() {
+        return entrust_status_name;
+    }
+
+    public void setEntrust_status_name(String entrust_status_name) {
+        this.entrust_status_name = entrust_status_name;
+    }
 
     public String getEntrust_no() {
         return entrust_no;
