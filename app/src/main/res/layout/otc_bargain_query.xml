@@ -132,7 +132,7 @@
             android:layout_height="wrap_content"
             android:layout_weight="1"
             android:gravity="center|end"
-            android:text="交金额/份额"
+            android:text="成交金额/份额"
             android:textColor="@color/newStockTitle"
             android:textSize="@dimen/txtSize12" />
     </LinearLayout>

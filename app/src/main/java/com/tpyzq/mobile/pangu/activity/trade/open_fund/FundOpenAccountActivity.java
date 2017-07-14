@@ -215,7 +215,7 @@ public class FundOpenAccountActivity extends BaseActivity implements View.OnClic
                 fund_open(fundBeans.get(point).company_code);
                 break;
             case R.id.tv_notice:
-                String path = Helper.getAppFileDirPath(CustomApplication.getContext()) + "pdf/fundOpenUser.pdf";
+                String path = "fundOpenUser.pdf";
                 intent = new Intent();
                 intent.setClass(FundOpenAccountActivity.this, PdfActivity.class);
                 intent.putExtra("filePath", path);
