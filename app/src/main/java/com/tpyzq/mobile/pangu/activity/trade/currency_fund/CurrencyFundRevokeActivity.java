@@ -121,7 +121,7 @@ public class CurrencyFundRevokeActivity extends BaseActivity implements View.OnC
                         map.put("tv_Data",dataBean.getORDER_DATE());            //日期
                         map.put("tv_Time",dataBean.getORDER_TIME());            //时间
                         map.put("tv_EntrustNumber",dataBean.getQTY());          //数量
-                        map.put("tv_EntrustMoney",dataBean.getPRICE());         //金额
+                        map.put("tv_EntrustMoney",dataBean.getORDER_AMT());         //金额
                         map.put("tv_type",dataBean.getBUSINESS_NAME());           //类型
                         map.put("tv_market",dataBean.getMARKET());           //市场
                         map.put("entrust_no",dataBean.getENTRUST_NO());      //委托编号

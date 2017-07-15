@@ -69,7 +69,7 @@
                 <TextView
                     android:layout_width="wrap_content"
                     android:layout_height="wrap_content"
-                    android:text="赎回金额:"
+                    android:text="赎回份额:"
                     android:textColor="@color/text"
                     android:textSize="15sp" />
                 <TextView
