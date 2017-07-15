@@ -184,6 +184,7 @@ public class InformActivity extends BaseActivity implements View.OnClickListener
                             bean.setTitle(list_Inform.getJSONObject(j).getString("TITLE"));
                             bean.setPush_time(list_Inform.getJSONObject(j).getString("PUSH_TIME"));
                             bean.setContene(list_Inform.getJSONObject(j).getString("CONTENE"));
+                            bean.setContenebrief(list_Inform.getJSONObject(j).getString("CONTENE_BRIEF"));
                             bean.setBizid(list_Inform.getJSONObject(j).getString("BIZID"));
 
                             list.add(bean);

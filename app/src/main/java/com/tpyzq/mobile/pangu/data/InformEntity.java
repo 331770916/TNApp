@@ -8,7 +8,8 @@ public class InformEntity {
     private String push_record_id;   //主键ID
     private String account;          //账户
     private String token;            //TOKEN
-    private String contene;          //内容
+    private String contene;          //内容带样式
+    private String contenebrief;          //内容
     private String objective;        //推送目的
     private String push_time;        //推送时间
     private String start;            //状态（ 苹果 1.成功 0失败）
@@ -47,6 +48,14 @@ public class InformEntity {
 
     public void setContene(String contene) {
         this.contene = contene;
+    }
+
+    public String getContenebrief() {
+        return contenebrief;
+    }
+
+    public void setContenebrief(String contenebrief) {
+        this.contenebrief = contenebrief;
     }
 
     public String getObjective() {
