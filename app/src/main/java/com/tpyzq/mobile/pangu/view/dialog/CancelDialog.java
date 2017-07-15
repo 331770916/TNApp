@@ -29,6 +29,7 @@ public class CancelDialog {
     public static final int RISK_EXPIRE = 2000;//风险评测已经到期
     public static final int RISK_NOT = 3000;//未做风险评测
     public static final int NOT_BUY = 4000; //不可购买提示
+    private static final int DELIST = 5000;//买卖界面的退市提醒
 
     public static void cancleDialog(final Activity activity, String message, int style, final PositiveClickListener positiveClickListener, final NagtiveClickListener nagtiveClickListener){
         final AlertDialog alertDialog = new AlertDialog.Builder(activity).create();
@@ -82,6 +83,14 @@ public class CancelDialog {
                 } else {
                     tv_message.setText(message);
                 }
+                break;
+            case DELIST:
+                LinearLayout.LayoutParams layoutParams2 = new LinearLayout.LayoutParams(ViewGroup.LayoutParams.MATCH_PARENT, ViewGroup.LayoutParams.WRAP_CONTENT);
+                int margin2 = Helper.dip2px(CustomApplication.getContext(), 20);
+                layoutParams2.setMargins(margin2, margin2, margin2, margin2);
+                tv_message.setLayoutParams(layoutParams2);
+                tv_message.setGravity(Gravity.LEFT);
+                tv_message.setText(message);
                 break;
             default:
                 LinearLayout.LayoutParams layoutParams1 = new LinearLayout.LayoutParams(ViewGroup.LayoutParams.MATCH_PARENT, ViewGroup.LayoutParams.WRAP_CONTENT);
