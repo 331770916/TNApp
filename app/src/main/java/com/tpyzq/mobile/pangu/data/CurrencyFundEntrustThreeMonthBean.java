@@ -86,6 +86,15 @@ public class CurrencyFundEntrustThreeMonthBean {
         private String SECU_NAME;
         private String STOCK_TYPE;
         private String STATUS_NAME;
+        private String ORDER_AMT;
+
+        public String getORDER_AMT() {
+            return ORDER_AMT;
+        }
+
+        public void setORDER_AMT(String ORDER_AMT) {
+            this.ORDER_AMT = ORDER_AMT;
+        }
 
         public String getSTATUS_NAME() {
             return STATUS_NAME;

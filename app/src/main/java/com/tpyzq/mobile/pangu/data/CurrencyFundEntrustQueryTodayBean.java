@@ -72,6 +72,7 @@ public class CurrencyFundEntrustQueryTodayBean {
         private String ENTRUST_STATUS;
         private String ORDER_TIME;
         private String MATCHED_PRICE;
+        private String ORDER_AMT;
         private String ENTRUST_PROP;
         private String MARKET;
         private String SECU_CODE;
@@ -86,6 +87,14 @@ public class CurrencyFundEntrustQueryTodayBean {
         private String ENTRUST_NO;
         private String SECU_NAME;
         private String STATUS_NAME;
+
+        public String getORDER_AMT() {
+            return ORDER_AMT;
+        }
+
+        public void setORDER_AMT(String ORDER_AMT) {
+            this.ORDER_AMT = ORDER_AMT;
+        }
 
         public String getSTATUS_NAME() {
             return STATUS_NAME;

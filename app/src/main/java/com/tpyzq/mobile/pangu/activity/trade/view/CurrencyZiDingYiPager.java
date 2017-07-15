@@ -228,7 +228,7 @@ public class CurrencyZiDingYiPager extends BaseSearchPager implements TimePicker
                         map.put("tv_Data", Helper.formateDate1(dataBean.getORDER_DATE()));
                         map.put("tv_Time",Helper.formateDate(dataBean.getORDER_TIME()));
                         map.put("tv_EntrustNumber", dataBean.getQTY());
-                        map.put("tv_EntrustMoney", dataBean.getPRICE());
+                        map.put("tv_EntrustMoney", dataBean.getORDER_AMT());
                         map.put("tv_type", dataBean.getBUSINESS_NAME());
                         map.put("tv_state", dataBean.getSTATUS_NAME());
                         list.add(map);
