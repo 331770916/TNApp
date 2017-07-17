@@ -122,7 +122,9 @@ public abstract class BaseActivity extends AppCompatActivity {
         mSearchEdit.setOnFocusChangeListener(new View.OnFocusChangeListener() {
             @Override
             public void onFocusChange(View v, boolean hasFocus) {
-                dissmissKeyboardUtil();
+                if (!hasFocus) {
+                    dissmissKeyboardUtil();
+                }
             }
         });
     }
