@@ -10,6 +10,7 @@ import android.view.View;
 import android.view.WindowManager;
 import android.widget.Button;
 import android.widget.EditText;
+import android.widget.LinearLayout;
 import android.widget.PopupWindow;
 import android.widget.TextView;
 
@@ -47,6 +48,7 @@ public class CurrencyFundRedeemActivity extends BaseActivity implements View.OnC
     private String session;
     private final int MAXNUM = 6; //股票代码输入框的最大值
     private HashMap<String,String> map;   //数据源
+    private LinearLayout ll_father;
 
     @Override
     public void initView() {
@@ -80,6 +82,8 @@ public class CurrencyFundRedeemActivity extends BaseActivity implements View.OnC
             }
         });
 
+        ll_father = (LinearLayout) this.findViewById(R.id.ll_father);                                         //键盘父布局
+        initMoveKeyBoard(ll_father, null,etRedeemFundCode);
         this.etRedeemFundAmount= (EditText) this.findViewById(R.id.etRedeemFundAmount);     //赎回份额 输入框
         this.etRedeemFundAmount.setFocusableInTouchMode(false);                               //初始化   使其失去焦点
         this.etRedeemFundAmount.addTextChangedListener(new TextWatcher() {                    //添加监听
