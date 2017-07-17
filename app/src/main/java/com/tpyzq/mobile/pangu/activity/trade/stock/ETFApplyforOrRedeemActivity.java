@@ -9,6 +9,7 @@ import android.view.View;
 import android.widget.Button;
 import android.widget.EditText;
 import android.widget.ImageView;
+import android.widget.LinearLayout;
 import android.widget.TextView;
 
 import com.tpyzq.mobile.pangu.R;
@@ -45,6 +46,7 @@ public class ETFApplyforOrRedeemActivity extends BaseActivity implements TextWat
     private EtfDataEntity etfDataEntity;
     private TextView title;
     private StructuredFundDialog mStructuredFundDialog;
+    private LinearLayout ll_father;
 
     @Override
     public void initView() {
@@ -58,6 +60,8 @@ public class ETFApplyforOrRedeemActivity extends BaseActivity implements TextWat
         available_funds = (TextView) findViewById(R.id.available_funds);
         title = (TextView) findViewById(R.id.tv_title);
         tv_shareholder = (TextView) findViewById(R.id.tv_shareholder_code);
+        ll_father = (LinearLayout) this.findViewById(R.id.ll_father);                                         //键盘父布局
+        initMoveKeyBoard(ll_father, null,mInputCode);
         getIntentPost();
         initEvent();
 
