@@ -55,9 +55,9 @@
             android:background="@null"
             android:drawableLeft="@mipmap/fangdajinghui"
             android:drawablePadding="@dimen/size5"
-            android:hint="请输入基金公司名称"
+            android:hint="请输入基金代码/基金名称/基金公司"
             android:paddingLeft="@dimen/size20"
-            android:textSize="@dimen/txtSize14" />
+            android:textSize="@dimen/txtSize12" />
 
         <Button
             android:id="@+id/bt_search"
