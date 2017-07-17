@@ -119,12 +119,12 @@ public abstract class BaseActivity extends AppCompatActivity {
         // monitor the finish or next Key
         mKeyBoardUtil.setInputOverListener(new InputOverListener());
         mSearchEdit.setOnTouchListener(new KeyboardTouchListener(mKeyBoardUtil, KeyboardUtil.INPUTTYPE_NUM_ABC, -1));
-//        mSearchEdit.setOnFocusChangeListener(new View.OnFocusChangeListener() {
-//            @Override
-//            public void onFocusChange(View v, boolean hasFocus) {
-//                dissmissKeyboardUtil();
-//            }
-//        });
+        mSearchEdit.setOnFocusChangeListener(new View.OnFocusChangeListener() {
+            @Override
+            public void onFocusChange(View v, boolean hasFocus) {
+                dissmissKeyboardUtil();
+            }
+        });
     }
 
     private void dissmissKeyboardUtil() {
