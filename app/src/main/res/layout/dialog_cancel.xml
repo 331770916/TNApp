@@ -25,6 +25,18 @@
         android:textColor="@color/home_grideItemColor"
         android:padding="@dimen/size10"
         android:text="您确定要退出吗？"/>
+    <TextView
+        android:id="@+id/tv_center_text"
+        android:visibility="gone"
+        android:layout_marginLeft="@dimen/size20"
+        android:layout_marginRight="@dimen/size20"
+        android:layout_width="match_parent"
+        android:layout_height="wrap_content"
+        android:textSize="@dimen/txtSize14"
+        android:gravity="center_horizontal"
+        android:textColor="@color/home_grideItemColor"
+        android:padding="@dimen/size10"
+        android:text="(如有疑问，请致电客服95397)"/>
 
     <View
         android:layout_width="match_parent"

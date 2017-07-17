@@ -37,6 +37,7 @@ public class CancelDialog {
         TextView positiveBtn = (TextView) view.findViewById(R.id.cancel_dialog_positiveBtn);
         TextView nagtiveBtn = (TextView) view.findViewById(R.id.cancel_dialog_nagtiveBtn);
         TextView tv_message = (TextView) view.findViewById(R.id.cancel_dialog_msg);
+        TextView tv_center_text = (TextView) view.findViewById(R.id.tv_center_text);
 
         switch (style) {
             case RISK_SOONEXPIRE:
@@ -46,6 +47,7 @@ public class CancelDialog {
                 tv_message.setText(Html.fromHtml("<html><body> <p>尊敬的客户：</p>" +
                         "<p style='text-indent:2em'>您的风险承受能力评估结果即将过期，到期<br/>日期为"+ message +"，请重新测评。</p>" +
                         "</body></html>"));
+                tv_center_text.setVisibility(View.GONE);
                 break;
             case RISK_EXPIRE:
                 positiveBtn.setText("现在测评");
@@ -54,6 +56,7 @@ public class CancelDialog {
                 tv_message.setText(Html.fromHtml("<html><body> <p>尊敬的客户：</p>" +
                         "<p style='text-indent:2em'>您的风险承受能力评估结果已过期，到期<br/>日期为"+ message +"，请重新测评。</p>" +
                         "</body></html>"));
+                tv_center_text.setVisibility(View.GONE);
                 break;
             case RISK_NOT:
                 positiveBtn.setText("现在测评");
@@ -64,6 +67,7 @@ public class CancelDialog {
                         "<p style=’text-indent:2em‘>根据投资者适当性管理规则，要求风险承受<br/>能力必须与产品相匹配。</p>" +
                         "<p style=‘text-indent:2em’>为了不影响您的投资交易，请及时进行投资<br/>者风险承受能力测评。</p>" +
                         "</body></html>"));
+                tv_center_text.setVisibility(View.GONE);
                 break;
             case NOT_BUY:
 
@@ -83,6 +87,7 @@ public class CancelDialog {
                 } else {
                     tv_message.setText(message);
                 }
+                tv_center_text.setVisibility(View.GONE);
                 break;
             case DELIST:
                 LinearLayout.LayoutParams layoutParams2 = new LinearLayout.LayoutParams(ViewGroup.LayoutParams.MATCH_PARENT, ViewGroup.LayoutParams.WRAP_CONTENT);
@@ -91,6 +96,7 @@ public class CancelDialog {
                 tv_message.setLayoutParams(layoutParams2);
                 tv_message.setGravity(Gravity.LEFT);
                 tv_message.setText(message);
+                tv_center_text.setVisibility(View.VISIBLE);
                 break;
             default:
                 LinearLayout.LayoutParams layoutParams1 = new LinearLayout.LayoutParams(ViewGroup.LayoutParams.MATCH_PARENT, ViewGroup.LayoutParams.WRAP_CONTENT);
@@ -99,6 +105,7 @@ public class CancelDialog {
                 tv_message.setLayoutParams(layoutParams1);
                 tv_message.setGravity(Gravity.CENTER);
                 tv_message.setText(message);
+                tv_center_text.setVisibility(View.GONE);
                 break;
         }
 
