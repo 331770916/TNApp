@@ -508,33 +508,11 @@ public class ChangeAccoutActivity extends BaseActivity implements View.OnClickLi
                         }
                         if ("0".equalsIgnoreCase(code_Str)) {
                             isLoginSuc = true;
-                            if (mCommit != null) {
-                                mCommit.dismiss();
-                            }
                             //存储风险测试结果 测评状态--测评等级--有效期结束日期
                             SpUtils.putString(ChangeAccoutActivity.this, "IS_OVERDUE", IS_OVERDUE);
                             SpUtils.putString(ChangeAccoutActivity.this, "CORP_RISK_LEVEL", CORP_RISK_LEVEL);
                             SpUtils.putString(ChangeAccoutActivity.this, "CORP_END_DATE", CORP_END_DATE);
-                            //第一次登录数据库交易账号无数据 添加到数据库
-                            if (!"".equals(OLD_SRRC) && !DeviceUtil.getDeviceId(CustomApplication.getContext()).equals(OLD_TCC) && !android.os.Build.MODEL.equals(OLD_SRRC)) {
-                                getData(mBDAccount.getText().toString().trim(), "false", mSession);
-                                LoginDialog.showDialog("您更换了登录设备，上次使用的设备型号是" + OLD_SRRC, ChangeAccoutActivity.this, new MistakeDialog.MistakeDialgoListener() {
-                                    @Override
-                                    public void doPositive() {
-                                        if ("2".equalsIgnoreCase(IS_OVERDUE) || "3".equalsIgnoreCase(IS_OVERDUE)) {
-                                            //弹出风险评测dialog
-                                            showCorpDialog();
-                                        } else {
-                                            finish();
-                                        }
-                                    }
-                                });
-                                SimpleDateFormat sDateFormat = new SimpleDateFormat("yyyy-MM-dd HH:mm:ss");
-                                final String date = sDateFormat.format(new java.util.Date());
-                                BRutil.menuLogIn(android.os.Build.VERSION.RELEASE, UserUtil.Mobile, DeviceUtil.getDeviceId(CustomApplication.getContext()), APPInfoUtils.getVersionName(ChangeAccoutActivity.this), ip, UserUtil.capitalAccount, date);
-                            } else {
-                                showDialogOrSaveData();
-                            }
+                            getData(mBDAccount.getText().toString().trim(), "false", mSession);
                         } else {
                             mBindingbtn.setFocusable(true);
                             toSecurityCode(null);
@@ -575,9 +553,12 @@ public class ChangeAccoutActivity extends BaseActivity implements View.OnClickLi
         if ("2".equalsIgnoreCase(IS_OVERDUE) || "3".equalsIgnoreCase(IS_OVERDUE)) {
             //弹出风险评测dialog
             showCorpDialog();
-            getData(mBDAccount.getText().toString().trim(), "false", mSession);
+
         } else {
-            getData(mBDAccount.getText().toString().trim(), "true", mSession);
+            if (mCommit.isShowing()) {
+                mCommit.dismiss();
+            }
+            finish();
         }
     }
 
@@ -585,6 +566,9 @@ public class ChangeAccoutActivity extends BaseActivity implements View.OnClickLi
      * 弹出风险测评弹框
      */
     private void showCorpDialog() {
+        if (mCommit != null) {
+            mCommit.dismiss();
+        }
         int style = 1000;
         if ("2".equalsIgnoreCase(IS_OVERDUE)) {
             //过期
@@ -944,6 +928,29 @@ public class ChangeAccoutActivity extends BaseActivity implements View.OnClickLi
         });
     }
 
+    private void LogInLogic() {
+        //第一次登录数据库交易账号无数据 添加到数据库
+        if (!"".equals(OLD_SRRC) && !DeviceUtil.getDeviceId(CustomApplication.getContext()).equalsIgnoreCase(OLD_TCC) && !android.os.Build.MODEL.equals(OLD_SRRC)) { //换手机登录
+            LoginDialog.showDialog("您更换了登录设备，上次使用的设备型号是" + OLD_SRRC, ChangeAccoutActivity.this, new MistakeDialog.MistakeDialgoListener() {
+                @Override
+                public void doPositive() {
+                    if ("2".equalsIgnoreCase(IS_OVERDUE) || "3".equalsIgnoreCase(IS_OVERDUE)) {
+                        //未做或过期弹出风险评测dialog
+                        showCorpDialog();
+                    } else {
+                        finish();
+                    }
+                }
+            });
+
+            SimpleDateFormat sDateFormat = new SimpleDateFormat("yyyy-MM-dd HH:mm:ss");
+            final String date = sDateFormat.format(new java.util.Date());
+            BRutil.menuLogIn(android.os.Build.VERSION.RELEASE, UserUtil.Mobile, DeviceUtil.getDeviceId(CustomApplication.getContext()), APPInfoUtils.getVersionName(ChangeAccoutActivity.this), ip, UserUtil.capitalAccount, date);
+        } else {//没有更换手机
+            showDialogOrSaveData();
+        }
+    }
+
     /**
      * 新增绑定用户
      */
@@ -973,6 +980,9 @@ public class ChangeAccoutActivity extends BaseActivity implements View.OnClickLi
 
             @Override
             public void onResponse(String response, int id) {
+                if (mCommit != null) {
+                    mCommit.dismiss();
+                }
                 if (TextUtils.isEmpty(response)) {
                     return;
                 }
@@ -990,10 +1000,6 @@ public class ChangeAccoutActivity extends BaseActivity implements View.OnClickLi
                         BRutil.menuLogIn(android.os.Build.VERSION.RELEASE, UserUtil.Mobile, DeviceUtil.getDeviceId(CustomApplication.getContext()), APPInfoUtils.getVersionName(ChangeAccoutActivity.this), ip, UserUtil.capitalAccount, date);
                     } else {
                         toSecurityCode(null);
-                        if (mCommit != null) {
-                            mCommit.dismiss();
-                        }
-
                         if (mBDPassword != null) {
                             mBDPassword.setText("");
                         } else if (mBDPasswordET != null) {
@@ -1013,6 +1019,7 @@ public class ChangeAccoutActivity extends BaseActivity implements View.OnClickLi
      * 修改数据库字段数据
      */
     private void setData(String isfinish) {
+
         UserEntity userEntity = new UserEntity();
         String mAccount_Str = mBDAccount.getText().toString().trim();
 
@@ -1041,14 +1048,7 @@ public class ChangeAccoutActivity extends BaseActivity implements View.OnClickLi
         //修改是否登录
         userEntity.setIslogin("true");
         Db_PUB_USERS.UpdateIslogin(userEntity);
-
-
-        if ("true".equals(isfinish)) {
-            if (mCommit.isShowing()) {
-                mCommit.dismiss();
-            }
-            finish();
-        }
+        LogInLogic();
     }
 
 

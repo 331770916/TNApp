@@ -740,35 +740,14 @@ public class TransactionLoginActivity extends BaseActivity implements View.OnCli
                         }
                         if ("0".equalsIgnoreCase(code_Str)) {             //登录成功
                             isLoginSuc = true;
-                            if (mCommit != null) {
-                                mCommit.dismiss();
-                            }
                             //存储风险测试结果 测评状态--测评等级--有效期结束日期
                             SpUtils.putString(TransactionLoginActivity.this, "IS_OVERDUE", IS_OVERDUE);
                             SpUtils.putString(TransactionLoginActivity.this, "CORP_RISK_LEVEL", CORP_RISK_LEVEL);
                             SpUtils.putString(TransactionLoginActivity.this, "CORP_END_DATE", CORP_END_DATE);
                             SpUtils.putString(TransactionLoginActivity.this, "mSession", mSession);
-                            //第一次登录数据库交易账号无数据 添加到数据库
-                            if (!"".equals(OLD_SRRC) && !DeviceUtil.getDeviceId(CustomApplication.getContext()).equalsIgnoreCase(OLD_TCC) && !android.os.Build.MODEL.equals(OLD_SRRC)) {//换手机登录
-                                getData(mAccount.getText().toString().trim(), "false", mSession);
-                                LoginDialog.showDialog("您更换了登录设备，上次使用的设备型号是" + OLD_SRRC, TransactionLoginActivity.this, new MistakeDialog.MistakeDialgoListener() {
-                                    @Override
-                                    public void doPositive() {
-                                        if ("2".equalsIgnoreCase(IS_OVERDUE) || "3".equalsIgnoreCase(IS_OVERDUE)) {
-                                            //未做或过期弹出风险评测dialog
-                                            showCorpDialog();
-                                        } else {
-                                            finish();
-                                        }
-                                    }
-                                });
 
-                                SimpleDateFormat sDateFormat = new SimpleDateFormat("yyyy-MM-dd HH:mm:ss");
-                                final String date = sDateFormat.format(new java.util.Date());
-                                BRutil.menuLogIn(android.os.Build.VERSION.RELEASE, UserUtil.Mobile, DeviceUtil.getDeviceId(CustomApplication.getContext()), APPInfoUtils.getVersionName(TransactionLoginActivity.this), ip, UserUtil.capitalAccount, date);
-                            } else {//没有更换手机
-                                showDialogOrSaveData();
-                            }
+                            getData(mAccount.getText().toString().trim(), "false", mSession);
+
                         } else {
                             toSecurityCode(null);
                             if ("密码键盘解密失败".equals(msg_Str)) {
@@ -801,24 +780,15 @@ public class TransactionLoginActivity extends BaseActivity implements View.OnCli
         }
     }
 
-    /**
-     * 显示弹框，绑定账号请求完成后不关闭页面
-     * 不显示弹框，绑定账号请求完成后关闭页面
-     */
-    private void showDialogOrSaveData() {
-        if ("2".equalsIgnoreCase(IS_OVERDUE) || "3".equalsIgnoreCase(IS_OVERDUE)) {
-            //弹出风险评测dialog
-            showCorpDialog();
-            getData(mAccount.getText().toString().trim(), "false", mSession);
-        } else {
-            getData(mAccount.getText().toString().trim(), "true", mSession);
-        }
-    }
+
 
     /**
      * 弹出风险测评弹框
      */
     private void showCorpDialog() {
+        if (mCommit != null) {
+            mCommit.dismiss();
+        }
         int style = 1000;
         if ("1".equalsIgnoreCase(IS_OVERDUE)) {
             //即将过期
@@ -1065,6 +1035,7 @@ public class TransactionLoginActivity extends BaseActivity implements View.OnCli
                 if (mCommit != null) {
                     mCommit.dismiss();
                 }
+
                 LogUtil.e(TAG, e.toString());
                 Helper.getInstance().showToast(TransactionLoginActivity.this, "网络异常");
                 mPassword.setText("");
@@ -1074,6 +1045,9 @@ public class TransactionLoginActivity extends BaseActivity implements View.OnCli
 
             @Override
             public void onResponse(String response, int id) {
+                if (mCommit != null) {
+                    mCommit.dismiss();
+                }
                 if (TextUtils.isEmpty(response)) {
                     return;
                 }
@@ -1087,10 +1061,6 @@ public class TransactionLoginActivity extends BaseActivity implements View.OnCli
                         setData(isfinish);                      //修改资金账号数据
                     } else {
                         toSecurityCode(null);
-                        if (mCommit != null) {
-                            mCommit.dismiss();
-                        }
-
                         mPassword.setText("");
                         mPasswordET.setText("");
                         mCaptcha.setText("");
@@ -1101,6 +1071,39 @@ public class TransactionLoginActivity extends BaseActivity implements View.OnCli
                 }
             }
         });
+    }
+
+
+    private void LogInLogic() {
+        //第一次登录数据库交易账号无数据 添加到数据库
+        if (!"".equals(OLD_SRRC) && !DeviceUtil.getDeviceId(CustomApplication.getContext()).equalsIgnoreCase(OLD_TCC) && !android.os.Build.MODEL.equals(OLD_SRRC)) { //换手机登录
+            LoginDialog.showDialog("您更换了登录设备，上次使用的设备型号是" + OLD_SRRC, TransactionLoginActivity.this, new MistakeDialog.MistakeDialgoListener() {
+                @Override
+                public void doPositive() {
+                    if ("2".equalsIgnoreCase(IS_OVERDUE) || "3".equalsIgnoreCase(IS_OVERDUE)) {
+                        //未做或过期弹出风险评测dialog
+                        showCorpDialog();
+                    } else {
+                        finish();
+                    }
+                }
+            });
+
+            SimpleDateFormat sDateFormat = new SimpleDateFormat("yyyy-MM-dd HH:mm:ss");
+            final String date = sDateFormat.format(new java.util.Date());
+            BRutil.menuLogIn(android.os.Build.VERSION.RELEASE, UserUtil.Mobile, DeviceUtil.getDeviceId(CustomApplication.getContext()), APPInfoUtils.getVersionName(TransactionLoginActivity.this), ip, UserUtil.capitalAccount, date);
+        } else { //没有更换手机
+            if ("2".equalsIgnoreCase(IS_OVERDUE) || "3".equalsIgnoreCase(IS_OVERDUE)) {
+                //弹出风险评测dialog
+                showCorpDialog();
+            } else {
+                if (mCommit.isShowing()) {
+                    mCommit.dismiss();
+                }
+                dismissDownload();
+                finish();
+            }
+        }
     }
 
 
@@ -1136,13 +1139,8 @@ public class TransactionLoginActivity extends BaseActivity implements View.OnCli
         //修改资金账号
         Db_PUB_USERS.UpdateIslogin(userEntity);
 
-        if ("true".equals(isfinish)) {
-            if (mCommit.isShowing()) {
-                mCommit.dismiss();
-            }
-            dismissDownload();
-            finish();
-        }
+        LogInLogic();
+
     }
 
     /**
@@ -1386,9 +1384,9 @@ public class TransactionLoginActivity extends BaseActivity implements View.OnCli
                         if (mVERIFICATIONIMAGE != null && mVERIFICATIONIMAGE != "") {
                             mSecurityCode.setVisibility(View.VISIBLE);
                             Bitmap bitmap = Helper.base64ToBitmap(mVERIFICATIONIMAGE);
-                            if (bitmap!=null){
+                            if (bitmap != null) {
                                 mSecurityCode.setImageBitmap(bitmap);
-                            }else {
+                            } else {
                                 mSecurityCode.setImageResource(R.mipmap.ic_again);
                             }
                         }
