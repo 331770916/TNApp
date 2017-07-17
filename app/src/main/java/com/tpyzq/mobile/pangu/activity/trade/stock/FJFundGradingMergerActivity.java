@@ -9,6 +9,7 @@ import android.view.KeyEvent;
 import android.view.View;
 import android.widget.Button;
 import android.widget.EditText;
+import android.widget.LinearLayout;
 import android.widget.TextView;
 
 import com.tpyzq.mobile.pangu.R;
@@ -49,6 +50,7 @@ public class FJFundGradingMergerActivity extends BaseActivity implements View.On
     private StructuredFundEntity bean;
     private Dialog mDialog;
     private StructuredFundDialog mStructuredFundDialog;
+    private LinearLayout ll_father;
 
     @Override
     public void initView() {
@@ -61,6 +63,8 @@ public class FJFundGradingMergerActivity extends BaseActivity implements View.On
         mStatements_tv = (TextView) findViewById(R.id.tvStatements);
         mCnExpendableFundValue_tv = (TextView) findViewById(R.id.tvCnExpendableFundValue);
         mConfirm_but = (Button) findViewById(R.id.butConfirm);
+        ll_father = (LinearLayout) this.findViewById(R.id.ll_father);                                         //键盘父布局
+        initMoveKeyBoard(ll_father, null,mInput_et);
 
         initMonitor();
     }
