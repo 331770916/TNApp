@@ -106,7 +106,7 @@ public class VoteActivity extends BaseActivity  implements InterfaceCollection.I
                     position = myList.get(myList.size()-1).getPosition_str();
                     mAdapter.setData(myList);
                 }else{
-                    if (!mIsClean) {//下拉刷新或者初始化时提示
+                    if (mIsClean) {//下拉刷新或者初始化时提示
                         showToast(" 暂无数据");
                     }
                     kong_null.setVisibility(View.GONE);
