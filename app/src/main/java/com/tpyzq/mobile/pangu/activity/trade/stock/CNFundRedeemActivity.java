@@ -7,6 +7,7 @@ import android.view.View;
 import android.view.inputmethod.EditorInfo;
 import android.widget.Button;
 import android.widget.EditText;
+import android.widget.LinearLayout;
 import android.widget.ScrollView;
 import android.widget.TextView;
 
@@ -44,6 +45,7 @@ public class CNFundRedeemActivity extends BaseActivity implements View.OnClickLi
     private TextView tvCnFundRedeemNameValue, tvCnFundRedeemNetValueValue, tvCnRedeemStockholderNumValue, tvCnRedeemExpendableFundValue = null;
     private KeyboardUtil mKeyBoardUtil;
     private ScrollView mScrollView;
+    private LinearLayout ll_father;
 
     @Override
     public void initView() {
@@ -58,6 +60,8 @@ public class CNFundRedeemActivity extends BaseActivity implements View.OnClickLi
         tvCnRedeemStockholderNumValue = (TextView) this.findViewById(R.id.tvCnRedeemStockholderNumValue);        //股东账号
         tvCnRedeemExpendableFundValue = (TextView) this.findViewById(R.id.tvCnRedeemExpendableFundValue);        //可用资金
 
+        ll_father = (LinearLayout) this.findViewById(R.id.ll_father);                                         //键盘父布局
+        initMoveKeyBoard(ll_father, null,etCnFundRedeemCode);
         etCnFundRedeemCode.setFocusableInTouchMode(true);           //初始化 获得焦点
 //        etCnFundRedeemCode.setInputType(EditorInfo.TYPE_CLASS_PHONE);       //调  数字键盘
         etCnFundRedeemCode.addTextChangedListener(new TextWatcher() {
