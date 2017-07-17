@@ -35,7 +35,7 @@ public class VoteDetailActivity extends BaseActivity  implements InterfaceCollec
     private VoteDetailAdapter accumulateAdapter,unAccumulateAdapter;
     //accumulate 1累积投票议案  unAccumulate 0非累积投票议案
     private List<NetworkVotingEntity> accumulate,unAccumulate,submitList;
-    private String mSession,meeting_seq="",company_code="",stock_account="",exchange_type="";
+    private String mSession,meeting_seq="",stock_account="",exchange_type="",en_fefcode ="";
     private AutoListview accumulateList,unAccumulateList;
     public static final String TAG = "VoteDetailActivity";
     public LinearLayout goneUnacc;
@@ -50,7 +50,6 @@ public class VoteDetailActivity extends BaseActivity  implements InterfaceCollec
     public void initView() {
         if(getIntent()!=null) {
             meeting_seq = getIntent().getStringExtra("meeting_seq");
-            company_code = getIntent().getStringExtra("company_code");
             stock_account = getIntent().getStringExtra("stock_account");
             exchange_type = getIntent().getStringExtra("exchange_type");
         }
@@ -60,7 +59,6 @@ public class VoteDetailActivity extends BaseActivity  implements InterfaceCollec
         mSession = SpUtils.getString(this, "mSession", "");
         back = (ImageView)findViewById(R.id.detail_back);
         back.setOnClickListener(this);
-        ((TextView)findViewById(R.id.voteTitleName)).setText(company_code);
         ((TextView)findViewById(R.id.voteTitleCode)).setText(stock_account);
         accumulateList  = (AutoListview) findViewById(R.id.accumulateList);
         accumulateList.setDivider(null);
@@ -96,6 +94,7 @@ public class VoteDetailActivity extends BaseActivity  implements InterfaceCollec
                         else {
                             goneUnacc.setVisibility(View.GONE);
                             unAccumulateAdapter.setData(unAccumulate);
+                            en_fefcode = unAccumulate.get(0).getStatus();
                         }
                         accumulate = map.get("1");
                         if(accumulate.size()==0){
@@ -103,7 +102,9 @@ public class VoteDetailActivity extends BaseActivity  implements InterfaceCollec
                         }else{
                             goneAcc.setText("注意：累积投票制选举，对于每个选举议案组，股东可投票总数＝股东持股数×当选人数");
                             accumulateAdapter.setData(accumulate);
+                            en_fefcode = accumulate.get(0).getStatus();
                         }
+                        ((TextView)findViewById(R.id.voteTitleName)).setText(en_fefcode);
                     }
                 }
             }else if(info.getTag().equals(TAG+"submit")){
@@ -133,7 +134,6 @@ public class VoteDetailActivity extends BaseActivity  implements InterfaceCollec
                         if(subList.size()>0){
                             for (NetworkVotingEntity ve:subList) {
                                 if(!TextUtils.isEmpty(ve.getEntrust_no())){
-                                    company_code = et.getStatus();
                                     temp.add(ve);
                                     submitList.add(ve);
                                 }
@@ -153,16 +153,16 @@ public class VoteDetailActivity extends BaseActivity  implements InterfaceCollec
                     } else {
                         if (ConstantUtil.list_item_flag) {
                             ConstantUtil.list_item_flag = false;
+                            if (unAccumulate.size() > 0)
+                                submitList.addAll(unAccumulate);
                             mStructuredFundDialog = new StructuredFundDialog(this);
                             mStructuredFundDialog.setData(TAG, new StructuredFundDialog.Expression() {
                                 @Override
                                 public void State() {
-                                    if (unAccumulate.size() > 0)
-                                        submitList.addAll(unAccumulate);
                                     mDialog.show();
-                                    mInterface.submitVoting(mSession, company_code, exchange_type, meeting_seq, submitList, TAG + "submit", VoteDetailActivity.this);
+                                    mInterface.submitVoting(mSession, en_fefcode, exchange_type, meeting_seq, submitList, TAG + "submit", VoteDetailActivity.this);
                                 }
-                            }, null, String.valueOf(accumulate.size() + unAccumulate.size()), stock_account);
+                            }, null, String.valueOf(submitList.size()), stock_account);
                             mStructuredFundDialog.show();
 
                         }
@@ -175,7 +175,7 @@ public class VoteDetailActivity extends BaseActivity  implements InterfaceCollec
                             @Override
                             public void State() {
                                 mDialog.show();
-                                mInterface.submitVoting(mSession, company_code, exchange_type, meeting_seq, unAccumulate, TAG + "submit", VoteDetailActivity.this);
+                                mInterface.submitVoting(mSession, en_fefcode, exchange_type, meeting_seq, unAccumulate, TAG + "submit", VoteDetailActivity.this);
                             }
                         }, null, String.valueOf(unAccumulate.size()), stock_account);
                         mStructuredFundDialog.show();

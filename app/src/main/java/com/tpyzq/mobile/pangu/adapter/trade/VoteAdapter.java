@@ -80,7 +80,6 @@ public class VoteAdapter extends BaseAdapter{
             public void onClick(View v) {
                 Intent intent = new Intent(mContext, VoteDetailActivity.class);
                 intent.putExtra("meeting_seq",bean.getMeeting_seq());//股东大会编码
-                intent.putExtra("company_code", bean.getCompany_code());//stock_code入参
                 intent.putExtra("stock_account",bean.getStock_account());//股东代码
                 intent.putExtra("exchange_type",bean.getExchange_type());//市场
                 mContext.startActivity(intent);

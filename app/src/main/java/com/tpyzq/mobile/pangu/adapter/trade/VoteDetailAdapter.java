@@ -66,7 +66,6 @@ public class VoteDetailAdapter extends BaseAdapter {
         if(!TextUtils.isEmpty(bean.getVote_type())) {
             switch (Integer.parseInt(bean.getVote_type())) {
                 case 0: //非累积投票制
-                    bean.setEntrust_no("1");
                     convertView = layoutInflater.inflate(R.layout.item_vote_accumulate_proposal, parent, false);
                     TextView tv1 = (TextView) convertView.findViewById(R.id.voteMotion);
                     tv1.setText(bean.getVote_motion());
@@ -109,9 +108,9 @@ public class VoteDetailAdapter extends BaseAdapter {
                     tv7.setText(bean.getVote_info() + "(当选人数：" + list.size() + ")");
                     LinearLayout ll = (LinearLayout) convertView.findViewById(R.id.voteSubContent);
                     LayoutParams lp = new LayoutParams(-1,-2);
-                    lp.topMargin = (int)mContext.getResources().getDimension(R.dimen.size2);
-                    lp.leftMargin = (int)mContext.getResources().getDimension(R.dimen.size85);
-                    lp.rightMargin = (int)mContext.getResources().getDimension(R.dimen.size85);
+                    lp.topMargin = (int)mContext.getResources().getDimension(R.dimen.size5);
+                    lp.leftMargin = (int)mContext.getResources().getDimension(R.dimen.size45);
+                    lp.rightMargin = (int)mContext.getResources().getDimension(R.dimen.size45);
                     for (int i = 0; i < list.size(); i++)
                         ll.addView(getSubView(list.get(i)), lp);
                     break;
@@ -130,17 +129,18 @@ public class VoteDetailAdapter extends BaseAdapter {
 
         TextView tvContent = new TextView(mContext);
         tvContent.setTextColor(mContext.getResources().getColor(R.color.textss));
-        LayoutParams lps = new LayoutParams((int)mContext.getResources().getDimension(R.dimen.size100),-2);
+        LayoutParams lps = new LayoutParams(-2,(int)mContext.getResources().getDimension(R.dimen.size80));
         lps.leftMargin = (int)mContext.getResources().getDimension(R.dimen.size10);
-        lps.weight = 1;
+        lps.weight = 2;
         tvContent.setText(subBean.getVote_info());
         ll.addView(tvContent,lps);
 
-        LayoutParams etlps = new LayoutParams((int)mContext.getResources().getDimension(R.dimen.size100),(int)mContext.getResources().getDimension(R.dimen.size40));
+        LayoutParams etlps = new LayoutParams((int)mContext.getResources().getDimension(R.dimen.size150),(int)mContext.getResources().getDimension(R.dimen.size40));
         final EditText etNum = new EditText(mContext);
         etNum.setBackgroundResource(R.mipmap.vote_et_style);
         etNum.setInputType(InputType.TYPE_CLASS_NUMBER);
-        etlps.leftMargin = (int)mContext.getResources().getDimension(R.dimen.size31);
+        etlps.leftMargin = (int)mContext.getResources().getDimension(R.dimen.size20);
+        etlps.topMargin =  (int)mContext.getResources().getDimension(R.dimen.size15);
         etlps.weight = 1;
         ll.addView(etNum,etlps);
         etNum.setOnFocusChangeListener(new View.OnFocusChangeListener() {
