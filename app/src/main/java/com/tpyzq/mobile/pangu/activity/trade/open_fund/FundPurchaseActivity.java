@@ -9,6 +9,7 @@ import android.view.View;
 import android.widget.Button;
 import android.widget.EditText;
 import android.widget.ImageView;
+import android.widget.LinearLayout;
 import android.widget.TextView;
 import android.widget.Toast;
 
@@ -74,6 +75,9 @@ public class FundPurchaseActivity extends BaseActivity implements View.OnClickLi
         et_fund_code = (EditText) findViewById(R.id.et_fund_code);
         et_fund_price = (EditText) findViewById(R.id.et_fund_price);
         bt_true = (Button) findViewById(R.id.bt_true);
+
+        LinearLayout rootLayout = (LinearLayout) findViewById(R.id.fundRootLayout);
+        initMoveKeyBoard(rootLayout, null,et_fund_code);
 
         initData();
     }
@@ -293,6 +297,7 @@ public class FundPurchaseActivity extends BaseActivity implements View.OnClickLi
     protected void onActivityResult(int requestCode, int resultCode, Intent data) {
         super.onActivityResult(requestCode, resultCode, data);
         if (requestCode == REQUEST && resultCode == RESULT_OK) {
+            dissmissKeyboardUtil();
             fundData = (FundSubsEntity) data.getSerializableExtra("data");
             et_fund_code.setText(fundData.FUND_CODE);
             getFundData(fundData.FUND_CODE, fundData.FUND_COMPANY_NAME);

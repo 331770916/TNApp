@@ -92,6 +92,8 @@ public class OTC_SubscriptionActivity extends BaseActivity implements View.OnCli
         bnOTC_SubscriptionQueDing = (Button) this.findViewById(R.id.bnOTC_SubscriptionQueDing);        //确定按钮
         bnOTC_SubscriptionQueDing.setOnClickListener(this);
 
+        LinearLayout rootLayout = (LinearLayout) findViewById(R.id.fundRootLayout);
+        initMoveKeyBoard(rootLayout, null,etOTC_ProductCode);
 
         etOTC_ProductCode.setFocusableInTouchMode(true);                                                 //初始化   使其获得焦点
         etOTC_ProductCode.addTextChangedListener(new TextWatcher() {                                     //添加监听
@@ -408,6 +410,7 @@ public class OTC_SubscriptionActivity extends BaseActivity implements View.OnCli
     protected void onActivityResult(int requestCode, int resultCode, Intent data) {
         super.onActivityResult(requestCode, resultCode, data);
         if (requestCode == OTC_SubscriptionActivity.REQUSET && resultCode == RESULT_OK) {//选择otc产品
+            dissmissKeyboardUtil();
             int position = data.getIntExtra("position", -1);
             etOTC_ProductCode.setFocusableInTouchMode(true);
             etOTC_ProductCode.setText(list.get(position).getStockCode());

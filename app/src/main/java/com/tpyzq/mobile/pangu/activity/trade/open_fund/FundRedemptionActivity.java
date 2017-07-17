@@ -9,6 +9,7 @@ import android.view.View;
 import android.widget.Button;
 import android.widget.EditText;
 import android.widget.ImageView;
+import android.widget.LinearLayout;
 import android.widget.TextView;
 import android.widget.Toast;
 
@@ -66,6 +67,11 @@ public class FundRedemptionActivity extends BaseActivity implements View.OnClick
         tv_redeem_sum = (TextView) findViewById(R.id.tv_redeem_sum);
         tv_redeem_min_sum = (TextView) findViewById(R.id.tv_redeem_min_sum);
         tv_fund_redeem_way = (TextView) findViewById(R.id.tv_fund_redeem_way);
+
+
+        LinearLayout rootLayout = (LinearLayout) findViewById(R.id.fundRootLayout);
+        initMoveKeyBoard(rootLayout, null,et_fund_code);
+
         setClearView();
         initData();
         fundQuery();
@@ -186,6 +192,7 @@ public class FundRedemptionActivity extends BaseActivity implements View.OnClick
     protected void onActivityResult(int requestCode, int resultCode, Intent intent) {
         super.onActivityResult(requestCode, resultCode, intent);
         if (requestCode == POSITION_REQUSET && resultCode == RESULT_OK) {
+            dissmissKeyboardUtil();
             point = intent.getIntExtra("point", -1);
             et_fund_code.setText(fundBeans.get(point).fund_code);
             getFundData(fundBeans.get(point).fund_code, fundBeans.get(point).fund_company);

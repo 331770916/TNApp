@@ -90,6 +90,9 @@ public class OTC_SubscribeActivity extends BaseActivity implements View.OnClickL
         tvOTC_SGProductJingZhiValue = (TextView) this.findViewById(R.id.tvOTC_SGProductJingZhiValue);           //产品净值
         tvOTC_SGExpendableCapitalValue = (TextView) this.findViewById(R.id.tvOTC_SGExpendableCapitalValue);    //可用资金
 
+        LinearLayout rootLayout = (LinearLayout) findViewById(R.id.fundRootLayout);
+        initMoveKeyBoard(rootLayout, null,etOTC_SGProductCode);
+
         tvOTC_ChooseOTCSGProduct.setOnClickListener(this);                                                        //选择OTC产品添加监听
         this.findViewById(R.id.ivOTC_Subscribe_back).setOnClickListener(this);                                    //返回按钮
         bnOTC_SubscribeQueDing = (Button) this.findViewById(R.id.bnOTC_SubscribeQueDing);                        //确定按钮
@@ -377,6 +380,7 @@ public class OTC_SubscribeActivity extends BaseActivity implements View.OnClickL
     protected void onActivityResult(int requestCode, int resultCode, Intent data) {
         super.onActivityResult(requestCode, resultCode, data);
         if (requestCode == OTC_SubscriptionActivity.REQUSET && resultCode == RESULT_OK) {
+            dissmissKeyboardUtil();
             int position = data.getIntExtra("position", -1);
             etOTC_SGProductCode.setFocusableInTouchMode(true);
             etOTC_SGProductCode.setText(list.get(position).getStockCode());

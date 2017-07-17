@@ -7,6 +7,7 @@ import android.text.TextWatcher;
 import android.view.View;
 import android.widget.Button;
 import android.widget.EditText;
+import android.widget.LinearLayout;
 import android.widget.ScrollView;
 import android.widget.TextView;
 
@@ -72,6 +73,8 @@ public class OTC_RedeemActivity extends BaseActivity implements View.OnClickList
         bnOTC_RedeemQueDing = (Button) this.findViewById(R.id.bnOTC_RedeemQueDing);                     //确定按钮
         bnOTC_RedeemQueDing.setOnClickListener(this);                                                     //添加监听
 
+        LinearLayout rootLayout = (LinearLayout) findViewById(R.id.fundRootLayout);
+        initMoveKeyBoard(rootLayout, null,etOTC_SHProductCode);
 
         if(prod_code != null && prod_code.length()>0){
             etOTC_SHProductCode.setText(prod_code);
@@ -326,6 +329,7 @@ public class OTC_RedeemActivity extends BaseActivity implements View.OnClickList
     protected void onActivityResult(int requestCode, int resultCode, Intent data) {
         super.onActivityResult(requestCode, resultCode, data);
         if (requestCode == OTC_SubscriptionActivity.REQUSET && resultCode == RESULT_OK) {
+            dissmissKeyboardUtil();
             int position = data.getIntExtra("position", -1);
             etOTC_SHProductCode.setFocusableInTouchMode(true);
             etOTC_SHProductCode.setText(list.get(position).getStockCode());

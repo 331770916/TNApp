@@ -9,9 +9,13 @@ import android.view.View;
 import android.widget.Button;
 import android.widget.EditText;
 import android.widget.ImageView;
+import android.widget.LinearLayout;
+import android.widget.ScrollView;
 import android.widget.TextView;
 import android.widget.Toast;
 
+import com.android.keyboardlibrary.KeyboardTouchListener;
+import com.android.keyboardlibrary.KeyboardUtil;
 import com.google.gson.Gson;
 import com.tpyzq.mobile.pangu.R;
 import com.tpyzq.mobile.pangu.activity.myself.handhall.RiskConfirmActivity;
@@ -72,6 +76,8 @@ public class FundSubsActivity extends BaseActivity implements View.OnClickListen
     private static int REQUESTCODE = 1001; //进入风险确认页面的请求码
     private static int REQAGREEMENTCODE = 1002; //进入签署协议页面的请求码
 
+    private KeyboardUtil mKeyBoardUtil;
+
     @Override
     public void initView() {
         iv_back = (ImageView) findViewById(R.id.iv_back);
@@ -83,9 +89,37 @@ public class FundSubsActivity extends BaseActivity implements View.OnClickListen
         tv_usable_money = (TextView) findViewById(R.id.tv_usable_money);
         bt_true = (Button) findViewById(R.id.bt_true);
         tv_choose_fund = (TextView) findViewById(R.id.tv_choose_fund);
+
+        LinearLayout rootLayout = (LinearLayout) findViewById(R.id.fundRootLayout);
+        initMoveKeyBoard(rootLayout, null,et_fund_code);
+
         initData();
         fundQuery();
     }
+
+
+    /**
+     * 初始化键盘
+     * @param rootLayout
+     */
+    private void initMoveKeyBoard(LinearLayout rootLayout, ScrollView scrollView) {
+        mKeyBoardUtil = new KeyboardUtil(this, rootLayout, scrollView);
+        mKeyBoardUtil.setOtherEdittext(et_fund_code);
+        // monitor the KeyBarod state
+//        mKeyBoardUtil.setKeyBoardStateChangeListener(new SearchActivity.KeyBoardStateListener());
+        // monitor the finish or next Key
+        mKeyBoardUtil.setInputOverListener(new InputOverListener());
+        et_fund_code.setOnTouchListener(new KeyboardTouchListener(mKeyBoardUtil, KeyboardUtil.INPUTTYPE_NUM_ABC, -1));
+    }
+
+    private class InputOverListener implements KeyboardUtil.InputFinishListener {
+
+        @Override
+        public void inputHasOver(int onclickType, EditText editText) {
+
+        }
+    }
+
 
     /**
      * 获取基金产品
@@ -341,6 +375,7 @@ public class FundSubsActivity extends BaseActivity implements View.OnClickListen
             public void afterTextChanged(Editable s) {
                 String fundcode = s.toString();
                 if (!TextUtils.isEmpty(fundcode) && s.length() == 6) {
+
                     getFundData(fundcode, "");
                     et_rengou_price.setText("");
                 } else {
@@ -426,6 +461,7 @@ public class FundSubsActivity extends BaseActivity implements View.OnClickListen
     protected void onActivityResult(int requestCode, int resultCode, Intent intent) {
         super.onActivityResult(requestCode, resultCode, intent);
         if (requestCode == REQUSET && resultCode == RESULT_OK) {//产品列表返回
+            dissmissKeyboardUtil();
             point = intent.getIntExtra("point", -1);
             et_fund_code.setText(fundSubsBeans.get(point).FUND_CODE);
             getFundData(fundSubsBeans.get(point).FUND_CODE, fundSubsBeans.get(point).FUND_COMPANY);
