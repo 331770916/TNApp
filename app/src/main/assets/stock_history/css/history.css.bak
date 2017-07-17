@@ -163,8 +163,8 @@ html, body {
 	color: #ffffff;
 	font-size: 18px;
 	text-align: center;
-	margin-top: 1%;
-	font-weight: 500;
+	margin-top: 6px;
+	font-weight: 200;
 }
 .page_bg {
     width: 100%;

@@ -43,20 +43,31 @@
             <p>您购买的<span id="hold_stock" class="blod-yellow"> 万科A(6000001)</span></p>
             <p>共持有<span id="hold-date" class="normal-yellow"> 236天</span></p>
         </div>
+        <div class="swiper-slide section_six page_bg">
+            <!--<img src="image/11.png" />-->
+            <p>交易排名<span id="transaction_ranking" class="blod-yellow"> 28</span></p>
+            <p>您共进行了<span id="trading_times" class="normal-yellow"> 543</span>&nbsp;次交易</p>
+        </div>
     </div>
 </div>
 <script>
 		$(function(){
+			
 			$(".page_bg").css({  "height": document.documentElement.clientHeight});
+			
 			//初始化swiper
 			var swiper = new Swiper('.swiper-container', {
 					direction: 'vertical'
 		    });
 		})
+			
+	    
+		    
 
 </script>
+
 <script type="text/javascript">
-            function replace(value1,value2,value3,value4,value5,value6,value7,value8){
+            function replace(value1,value2,value3,value4,value5,value6,value7,value8,value9,value10){
             document.getElementById("account_data").innerHTML = value1
             document.getElementById("first_stock").innerHTML = value2
             document.getElementById("win_stock").innerHTML = value3
@@ -65,12 +76,14 @@
             document.getElementById("lose_percent").innerHTML = value6
             document.getElementById("hold_stock").innerHTML = value7
             document.getElementById("hold-date").innerHTML = value8
+            document.getElementById("transaction_ranking").innerHTML = value9
+            document.getElementById("trading_times").innerHTML = value10
+
             }
             function click(value){
             document.getElementById("account_data").innerHTML = value
             }
-            replace('--','--','--','--','--','--','--','--天')
-
+            replace('--','--','--','--','--','--','--','--天','--','--')
 </script>
 </body>
 </html>

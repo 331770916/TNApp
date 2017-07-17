@@ -7,7 +7,6 @@ import android.view.View;
 import android.webkit.WebSettings;
 import android.widget.ImageView;
 
-import com.google.gson.Gson;
 import com.tpyzq.mobile.pangu.R;
 import com.tpyzq.mobile.pangu.activity.myself.login.TransactionLoginActivity;
 import com.tpyzq.mobile.pangu.base.BaseActivity;
@@ -74,22 +73,45 @@ public class StockRecallActivity extends BaseActivity implements View.OnClickLis
                 try {
                     JSONObject jsonObject = new JSONObject(response);
                     String msg = jsonObject.getString("MSG");
-                    String data = jsonObject.getString("DATA");
+                    JSONObject data = jsonObject.getJSONObject("DATA");
                     String code = jsonObject.getString("CODE");
                     if ("200".equals(code)) {
                         initData();
-                        final StockRecallEntity bean = new Gson().fromJson(data, StockRecallEntity.class);
+                        final StockRecallEntity bean = new StockRecallEntity();
+                        bean.open_date = data.getString("open_date");
+                        bean.first_stock_name = data.getString("first_stock_name");
+                        bean.first_stock_code = data.getString("first_stock_code");
+                        bean.most_profit_name = data.getString("most_profit_name");
+                        bean.most_profit_code = data.getString("most_profit_code");
+                        bean.most_profit_sum_profit = data.getString("most_profit_sum_profit");
+                        bean.most_loss_name = data.getString("most_loss_name");
+                        bean.most_loss_code = data.getString("most_loss_code");
+                        bean.most_loss_profit = data.getString("most_loss_profit");
+                        bean.most_hold_name = data.getString("most_hold_name");
+                        bean.most_hold_code = data.getString("most_hold_code");
+                        bean.most_hold_days = data.getInt("most_hold_days");
+                        bean.trade_sum_num = data.getInt("trade_sum_num");
+                        bean.trade_num_rank = data.getInt("trade_num_rank");
+
+
                         new Thread(new Runnable() {
                             @Override
                             public void run() {
                                 try {
                                     Thread.sleep(1000);
                                     runOnUiThread(new Runnable() {
+
+                                        private String mDate = "";
+
                                         @Override
                                         public void run() {
-                                            wb_stock_recall.loadUrl("javascript:replace('" + Helper.getMyDateYMD(bean.open_date) + "','" + bean.first_stock_name + "(" + bean.first_stock_code + ")" + "','" +
+                                            if (!TextUtils.isEmpty(bean.open_date) && !"--".equals(bean.open_date)) {
+                                                mDate = Helper.getMyDateYMD(bean.open_date);
+                                            }
+
+                                            wb_stock_recall.loadUrl("javascript:replace('" + mDate + "','" + bean.first_stock_name + "(" + bean.first_stock_code + ")" + "','" +
                                                     bean.most_profit_name + "(" + bean.most_profit_code + ")" + "','" + TransitionUtils.string2doubleS(bean.most_profit_sum_profit) + "','" + bean.most_loss_name + "(" + bean.most_loss_code + ")" + "','" +
-                                                    TransitionUtils.string2doubleS(bean.most_loss_profit) + "','" + bean.most_hold_name + "(" + bean.most_hold_code + ")" + "','" + bean.most_hold_days + "天" + "')");
+                                                    TransitionUtils.string2doubleS(bean.most_loss_profit) + "','" + bean.most_hold_name + "(" + bean.most_hold_code + ")" + "','" + bean.most_hold_days + "天" + "','" + bean.trade_num_rank + "','" + bean.trade_sum_num + "')");
                                         }
                                     });
                                 } catch (InterruptedException e) {
@@ -106,7 +128,6 @@ public class StockRecallActivity extends BaseActivity implements View.OnClickLis
                         wb_stock_recall.loadUrl(path);
                     }
                 } catch (JSONException e) {
-                    Helper.getInstance().showToast(StockRecallActivity.this, "网络异常");
                     e.printStackTrace();
                 }
             }
