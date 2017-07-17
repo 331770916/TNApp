@@ -123,7 +123,6 @@ public class ShouJiZhuCeActivity extends BaseActivity implements View.OnClickLis
         mSjNumber.addTextChangedListener(new MyTextWatcher());
         mImage_et.addTextChangedListener(new MyTextWatcher());
         mCaptchabtn_ET.addTextChangedListener(new MyTextWatcher());
-        mCaptchabtn.setClickable(false);
         mSjLogIn.setOnClickListener(this);
         mSjLogIn.setClickable(false);
         requestData();
@@ -175,17 +174,7 @@ public class ShouJiZhuCeActivity extends BaseActivity implements View.OnClickLis
         if (TextUtils.isEmpty(mSjNumber.getText().toString())) {
             mSjLogIn.setBackgroundResource(R.drawable.button_login_unchecked);
             mSjLogIn.setTextColor(Color.parseColor("#ffffffff"));
-
-            mCaptchabtn.setClickable(false);
-            mCaptchabtn.setTextColor(Color.parseColor("#87bd43"));
-            mCaptchabtn.setBackgroundResource(R.drawable.captcha_button_pitchon);
-
         } else if (TextUtils.isEmpty(mImage_et.getText().toString())) {
-
-            mCaptchabtn.setClickable(false);
-            mCaptchabtn.setTextColor(Color.parseColor("#87bd43"));
-            mCaptchabtn.setBackgroundResource(R.drawable.captcha_button_pitchon);
-
             mSjLogIn.setBackgroundResource(R.drawable.button_login_unchecked);
             mSjLogIn.setTextColor(Color.parseColor("#ffffffff"));
         } else if (TextUtils.isEmpty(mCaptchabtn_ET.getText().toString())) {
@@ -194,7 +183,6 @@ public class ShouJiZhuCeActivity extends BaseActivity implements View.OnClickLis
                 mCaptchabtn.setBackgroundResource(R.drawable.captcha_button_unchecked);
                 mCaptchabtn.setTextColor(Color.parseColor("#FFFFFF"));
             }
-
             mSjLogIn.setBackgroundResource(R.drawable.button_login_unchecked);
             mSjLogIn.setTextColor(Color.parseColor("#ffffffff"));
         } else if (!mCaptchabtnState) {
@@ -253,39 +241,27 @@ public class ShouJiZhuCeActivity extends BaseActivity implements View.OnClickLis
                 }
                 break;
             case R.id.Captchabtn://短信
-                mSoundtv.setClickable(false);
                 if (jNumber.equals("")) {
-                    mImage_et.setText("");
-                    ImageVerification();
                     Helper.getInstance().showToast(this, "请输入手机号");
                 } else if (mImage_str.equals("")) {
-                    mImage_et.setText("");
-                    ImageVerification();
                     Helper.getInstance().showToast(this, "请输入图片验证码");
                 } else if (!Helper.isMobileNO(jNumber)) {
-                    mImage_et.setText("");
-                    ImageVerification();
                     Helper.getInstance().showToast(this, "请输入正确的手机号");
                 } else {
+                    mSoundtv.setClickable(false);
                     mCaptchabtnState = true;
                     HTTPVerificationCode();
                 }
                 break;
             case R.id.Soundtv://语音
-                mCaptchabtn.setClickable(false);
                 if (jNumber.equals("")) {
-                    mImage_et.setText("");
-                    ImageVerification();
                     Helper.getInstance().showToast(this, "请输入手机号");
                 } else if (mImage_str.equals("")) {
-                    mImage_et.setText("");
-                    ImageVerification();
                     Helper.getInstance().showToast(this, "请输入图片验证码");
                 } else if (!Helper.isMobileNO(jNumber)) {
-                    mImage_et.setText("");
-                    ImageVerification();
                     Helper.getInstance().showToast(this, "请输入正确的手机号");
                 } else {
+                    mCaptchabtn.setClickable(false);
                     mCaptchabtnState = true;
                     HTTPVSound();
                 }
@@ -327,6 +303,9 @@ public class ShouJiZhuCeActivity extends BaseActivity implements View.OnClickLis
         NetWorkUtil.getInstence().okHttpForGet(TAG, ConstantUtil.SecurityIps + "/note/authAndRegister", map, new StringCallback() {
             @Override
             public void onError(Call call, Exception e, int id) {
+                if (mLoadingDialog != null) {
+                    mLoadingDialog.dismiss();
+                }
                 time.cancel();
                 time1.cancel();
                 mCaptchabtn.setText("重发短信");

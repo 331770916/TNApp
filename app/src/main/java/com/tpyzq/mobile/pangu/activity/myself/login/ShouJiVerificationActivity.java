@@ -159,15 +159,7 @@ public class ShouJiVerificationActivity extends BaseActivity implements View.OnC
         if (TextUtils.isEmpty(mSJYZNumber.getText().toString())) {
             mSJYZLogIn.setBackgroundResource(R.drawable.button_login_unchecked);
             mSJYZLogIn.setTextColor(Color.parseColor("#ffffffff"));
-            mSJYZCaptchabtn.setClickable(false);
-            mSJYZCaptchabtn.setTextColor(Color.parseColor("#87bd43"));
-            mSJYZCaptchabtn.setBackgroundResource(R.drawable.captcha_button_pitchon);
-
         } else if (TextUtils.isEmpty(mImage_et.getText().toString())) {
-            mSJYZCaptchabtn.setClickable(false);
-            mSJYZCaptchabtn.setTextColor(Color.parseColor("#87bd43"));
-            mSJYZCaptchabtn.setBackgroundResource(R.drawable.captcha_button_pitchon);
-
             mSJYZLogIn.setBackgroundResource(R.drawable.button_login_unchecked);
             mSJYZLogIn.setTextColor(Color.parseColor("#ffffffff"));
         } else if (TextUtils.isEmpty(mSJYZ_ET.getText().toString())) {
@@ -211,39 +203,27 @@ public class ShouJiVerificationActivity extends BaseActivity implements View.OnC
                 finish();
                 break;
             case R.id.SJYZCaptchabtn:       //短信
-                mSoundtv.setClickable(false);
                 if (SJYZNumber.equals("")) {
-                    mImage_et.setText("");
-                    ImageVerification();
                     Helper.getInstance().showToast(this, "请输入手机号");
                 } else if (mImage_str.equals("")) {
-                    mImage_et.setText("");
-                    ImageVerification();
                     Helper.getInstance().showToast(this, "请输入图片验证码");
                 } else if (!Helper.isMobileNO(SJYZNumber)) {
-                    mImage_et.setText("");
-                    ImageVerification();
                     Helper.getInstance().showToast(this, "请输入正确的手机号");
                 } else {
+                    mSoundtv.setClickable(false);
                     mCaptchabtnState = true;
                     HTTPVerificationCode();
                 }
                 break;
             case R.id.Soundtv://语音
-                mSJYZCaptchabtn.setClickable(false);
                 if (SJYZNumber.equals("")) {
-                    mImage_et.setText("");
-                    ImageVerification();
                     Helper.getInstance().showToast(this, "请输入手机号");
                 } else if (mImage_str.equals("")) {
-                    mImage_et.setText("");
-                    ImageVerification();
                     Helper.getInstance().showToast(this, "请输入图片验证码");
                 } else if (!Helper.isMobileNO(SJYZNumber)) {
-                    mImage_et.setText("");
-                    ImageVerification();
                     Helper.getInstance().showToast(this, "请输入正确的手机号");
                 } else {
+                    mSJYZCaptchabtn.setClickable(false);
                     mCaptchabtnState = true;
                     HTTPVSound();
                 }
