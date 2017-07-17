@@ -212,7 +212,7 @@ public class AccountPager extends BaseMySelfPager implements View.OnClickListene
                         tagCloudAdapter = new TagCloudAdapter(list, userHeaderListen);
                         tag_cloud.setAdapter(tagCloudAdapter);
                     } else {
-                        ToastUtils.showShort(mContext, type);
+                        ToastUtils.showShort(mContext, "头像信息获取失败");
                     }
                 } catch (JSONException e) {
                     e.printStackTrace();

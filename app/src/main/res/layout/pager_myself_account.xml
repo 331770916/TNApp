@@ -47,7 +47,7 @@
                 android:layout_below="@id/iv_title"
                 android:layout_centerHorizontal="true"
                 android:layout_marginTop="@dimen/size10"
-                android:text="登录交易账号"
+                android:text="登录资金账号"
                 android:textColor="@color/white" />
 
         </RelativeLayout>
