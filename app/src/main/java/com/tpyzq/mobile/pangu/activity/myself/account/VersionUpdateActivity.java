@@ -68,8 +68,15 @@ public class VersionUpdateActivity extends BaseActivity implements View.OnClickL
                     if ("0".equals(code)) {
                         String result = jsonObject.getString("result");
                         JSONObject joResult = new JSONObject(result);
-                        String versionNumber = joResult.getString("versionNumber");
-                        if (!APPInfoUtils.getVersionName(VersionUpdateActivity.this).equals(versionNumber)){
+                        String versionNumber = joResult.getString("versionNumber");  //版本号
+                        if (TextUtils.isEmpty(versionNumber)) {
+                            return;
+                        }
+                        String[] versionCode = versionNumber.split("\\.");
+                        String[] thisVersionCode = APPInfoUtils.getVersionName(VersionUpdateActivity.this).split("\\.");
+                        //如果 版本号  与  当前版本号 相同 删除安装包
+                        if (Double.parseDouble(versionCode[0]) > Double.parseDouble(thisVersionCode[0])) {
+//                        if (!APPInfoUtils.getVersionName(VersionUpdateActivity.this).equals(versionNumber)){
                             tv_update.setTextColor(ColorUtils.BLUE);
                             tv_update.setText("有更新版本，马上安装？");
                             tv_update.setClickable(true);
