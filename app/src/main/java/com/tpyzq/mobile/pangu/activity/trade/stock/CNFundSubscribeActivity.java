@@ -7,6 +7,7 @@ import android.view.View;
 import android.view.inputmethod.EditorInfo;
 import android.widget.Button;
 import android.widget.EditText;
+import android.widget.LinearLayout;
 import android.widget.ScrollView;
 import android.widget.TextView;
 
@@ -46,6 +47,7 @@ public class CNFundSubscribeActivity extends BaseActivity implements View.OnClic
     private HashMap<String, String> map;   //数据源
     private ScrollView mScrollView;
     private KeyboardUtil mKeyBoardUtil;
+    private LinearLayout ll_father;
 
     @Override
     public void initView() {
@@ -60,6 +62,8 @@ public class CNFundSubscribeActivity extends BaseActivity implements View.OnClic
         tvCnStockholderNumValue = (TextView) this.findViewById(R.id.tvCnStockholderNumValue);        //股东账号
         tvCnExpendableFundValue = (TextView) this.findViewById(R.id.tvCnExpendableFundValue);        //可用资金
 
+        ll_father = (LinearLayout) this.findViewById(R.id.ll_father);                                         //键盘父布局
+        initMoveKeyBoard(ll_father, null,etCnFundCode);
         etCnFundCode.setFocusableInTouchMode(true);             //初始化 获得焦点
         etCnFundAmount.setInputType(EditorInfo.TYPE_CLASS_PHONE);       //调  数字键盘
         etCnFundCode.addTextChangedListener(new TextWatcher() {
