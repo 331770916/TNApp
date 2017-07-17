@@ -36,6 +36,7 @@ public class VoteActivity extends BaseActivity  implements InterfaceCollection.I
     private boolean mIsClean;
     private Dialog mDialog;
     private int refresh = 30;
+    private boolean isRequest = true; //请求标志位
 
     @Override
     public void initView() {
@@ -52,6 +53,10 @@ public class VoteActivity extends BaseActivity  implements InterfaceCollection.I
         listView.setOnRefreshListener(new PullToRefreshBase.OnRefreshListener<ListView>(){
             @Override
             public void onRefresh(PullToRefreshBase<ListView> refreshView) {
+                if (isRequest) {
+                    return;
+                }
+                isRequest = true;
                 if (listView.isShownHeader()) {
                     listView.getLoadingLayoutProxy().setRefreshingLabel("正在刷新");
                     listView.getLoadingLayoutProxy().setPullLabel("下拉刷新数据");
@@ -91,26 +96,33 @@ public class VoteActivity extends BaseActivity  implements InterfaceCollection.I
             if(object instanceof List){
                 myList = (List<NetworkVotingEntity>)object;
                 if(myList.size()>0){
-                    if(myList.size()<30)
+                    if(myList.size()<30) {
+                        listView.onRefreshComplete();
                         listView.setMode(PullToRefreshBase.Mode.PULL_FROM_START);
-                    else
+                    } else {
+                        listView.onRefreshComplete();
                         listView.setMode(PullToRefreshBase.Mode.BOTH);
+                    }
                     position = myList.get(myList.size()-1).getPosition_str();
-                    if(mIsClean)
-                        refresh += 30;
                     mAdapter.setData(myList);
                 }else{
-                    showToast(" 暂无数据");
+                    if (!mIsClean) {//下拉刷新或者初始化时提示
+                        showToast(" 暂无数据");
+                    }
                     kong_null.setVisibility(View.GONE);
+                    listView.onRefreshComplete();
+                    listView.setMode(PullToRefreshBase.Mode.PULL_FROM_START);
                 }
             }
         }else if("-6".equals(code)){
             skip.startLogin(this);
+            listView.onRefreshComplete();
         }else{//-1,-2,-3情况下显示定义好信息
             showToast(info.getMsg());
             kong_null.setVisibility(View.GONE);
+            listView.onRefreshComplete();
         }
-        listView.onRefreshComplete();
+        isRequest = false;
     }
 
     @Override
