@@ -18,6 +18,7 @@ import com.tpyzq.mobile.pangu.interfac.ClearData;
 import com.tpyzq.mobile.pangu.log.LogUtil;
 import com.tpyzq.mobile.pangu.util.ConstantUtil;
 import com.tpyzq.mobile.pangu.util.SpUtils;
+import com.tpyzq.mobile.pangu.view.CentreToast;
 import com.zhy.http.okhttp.callback.StringCallback;
 
 import java.lang.reflect.Type;
@@ -129,7 +130,8 @@ public class CNFundRedeemDialog extends BaseDialog implements View.OnClickListen
                     dismiss();
                     ((Activity) context).finish();
                 } else if (code.equals("0")) {
-                    ResultDialog.getInstance().show("委托已提交", R.mipmap.duigou);
+//                    ResultDialog.getInstance().show("委托已提交", R.mipmap.duigou);
+                    CentreToast.showText(context,"委托已提交",true);
                     mclearData.clear();
                     dismiss();
                 } else {

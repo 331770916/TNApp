@@ -28,6 +28,7 @@ import com.tpyzq.mobile.pangu.util.ConstantUtil;
 import com.tpyzq.mobile.pangu.util.SpUtils;
 import com.tpyzq.mobile.pangu.util.ToastUtils;
 import com.tpyzq.mobile.pangu.util.panguutil.UserUtil;
+import com.tpyzq.mobile.pangu.view.CentreToast;
 import com.tpyzq.mobile.pangu.view.dialog.DownloadDocPdfDialog;
 import com.tpyzq.mobile.pangu.view.dialog.MistakeDialog;
 import com.tpyzq.mobile.pangu.view.gridview.MyListView;
@@ -600,7 +601,8 @@ public class AssessConfirmActivity extends BaseActivity implements View.OnClickL
 
     public void startFinish(String type) {
         if ("true".equals(flag)) {
-            ToastUtils.showShort(this, "委托已提交");
+//            ToastUtils.showShort(this, "委托已提交");
+            CentreToast.showText(this,"委托已提交",true);
             setResult(RESULT_OK, buyintent);
             finish();
         } else {

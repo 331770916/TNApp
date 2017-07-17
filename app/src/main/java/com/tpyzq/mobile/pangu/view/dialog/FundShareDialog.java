@@ -15,6 +15,7 @@ import com.tpyzq.mobile.pangu.http.NetWorkUtil;
 import com.tpyzq.mobile.pangu.util.ConstantUtil;
 import com.tpyzq.mobile.pangu.util.SpUtils;
 import com.tpyzq.mobile.pangu.util.ToastUtils;
+import com.tpyzq.mobile.pangu.view.CentreToast;
 import com.zhy.http.okhttp.callback.StringCallback;
 
 import org.json.JSONException;
@@ -91,7 +92,7 @@ public class FundShareDialog extends BaseDialog implements View.OnClickListener 
                     String data = object.getString("data");
                     String code = object.getString("code");
                     if ("0".equals(code)) {
-                        MistakeDialog.showDialog("委托已提交", (Activity) context);
+                        CentreToast.showText(context,"委托已提交",true);
                     } else if ("-6".equals(code)) {
                         context.startActivity(new Intent(context, TransactionLoginActivity.class));
                     } else {

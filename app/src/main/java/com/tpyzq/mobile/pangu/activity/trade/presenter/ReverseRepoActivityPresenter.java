@@ -13,6 +13,7 @@ import com.tpyzq.mobile.pangu.util.ConstantUtil;
 import com.tpyzq.mobile.pangu.util.SpUtils;
 import com.tpyzq.mobile.pangu.util.ToastUtils;
 import com.tpyzq.mobile.pangu.util.panguutil.JudgeStockUtils;
+import com.tpyzq.mobile.pangu.view.CentreToast;
 import com.tpyzq.mobile.pangu.view.dialog.MistakeDialog;
 import com.zhy.http.okhttp.callback.StringCallback;
 
@@ -173,7 +174,7 @@ public class ReverseRepoActivityPresenter {
                     if ("0".equals(code)) {
                         activity.setClearView();
                         getAmount(prodcode);
-                        ToastUtils.showShort(activity,"委托已提交");
+                        CentreToast.showText(activity,"委托已提交",true);
                     }else if ("-6".equals(code)){
                         activity.startActivity(new Intent(activity, TransactionLoginActivity.class));
                     } else{

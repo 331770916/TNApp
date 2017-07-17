@@ -37,6 +37,7 @@ import com.tpyzq.mobile.pangu.util.ConstantUtil;
 import com.tpyzq.mobile.pangu.util.Helper;
 import com.tpyzq.mobile.pangu.util.SpUtils;
 import com.tpyzq.mobile.pangu.util.panguutil.UserUtil;
+import com.tpyzq.mobile.pangu.view.CentreToast;
 import com.tpyzq.mobile.pangu.view.dialog.CancelDialog;
 import com.tpyzq.mobile.pangu.view.dialog.LoadingDialog;
 import com.tpyzq.mobile.pangu.view.dialog.MistakeDialog;
@@ -442,7 +443,8 @@ public class OTC_SubscribeActivity extends BaseActivity implements View.OnClickL
                     finish();
                 } else
                 if (("0").equalsIgnoreCase(code)) {
-                    ResultDialog.getInstance().show("委托已提交", R.mipmap.duigou);
+//                    ResultDialog.getInstance().show("委托已提交", R.mipmap.duigou);
+                    CentreToast.showText(OTC_SubscribeActivity.this,"委托已提交",true);
                     wipeData();
                 }else {
                     MistakeDialog.showDialog(msg, OTC_SubscribeActivity.this);

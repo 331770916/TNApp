@@ -20,6 +20,7 @@ import com.tpyzq.mobile.pangu.data.ResultInfo;
 import com.tpyzq.mobile.pangu.util.ConstantUtil;
 import com.tpyzq.mobile.pangu.util.Helper;
 import com.tpyzq.mobile.pangu.util.SpUtils;
+import com.tpyzq.mobile.pangu.view.CentreToast;
 import com.tpyzq.mobile.pangu.view.dialog.LoadingDialog;
 import com.tpyzq.mobile.pangu.view.dialog.MistakeDialog;
 import com.tpyzq.mobile.pangu.view.dialog.StructuredFundDialog;
@@ -286,7 +287,7 @@ public class ETFApplyforOrRedeemActivity extends BaseActivity implements TextWat
         } else if (TAG_APPLYFOR.equals(info.getTag())) {
             String code = info.getCode();
             if ("0".equals(code)) {
-                Helper.getInstance().showToast(this, "委托已提交");
+                CentreToast.showText(this,"委托已提交",true);
                 mInputCode.setText("");
                 mInputCount.setText("");
                 tv_upperlimit.setText("申购上限：--");
@@ -308,7 +309,8 @@ public class ETFApplyforOrRedeemActivity extends BaseActivity implements TextWat
         } else if (TAG_REAEEM.equals(info.getTag())) {
             String code = info.getCode();
             if ("0".equals(code)) {
-                Helper.getInstance().showToast(this, "委托已提交");
+//                Helper.getInstance().showToast(this, "委托已提交");
+                CentreToast.showText(this,"委托已提交",true);
                 mInputCode.setText("");
                 mInputCount.setText("");
                 tv_upperlimit.setText("赎回上限：--");

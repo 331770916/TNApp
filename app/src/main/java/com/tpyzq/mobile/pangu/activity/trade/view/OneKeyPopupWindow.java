@@ -21,6 +21,7 @@ import com.tpyzq.mobile.pangu.data.OneKeySubscribeItem;
 import com.tpyzq.mobile.pangu.http.NetWorkUtil;
 import com.tpyzq.mobile.pangu.util.ConstantUtil;
 import com.tpyzq.mobile.pangu.util.SpUtils;
+import com.tpyzq.mobile.pangu.view.CentreToast;
 import com.tpyzq.mobile.pangu.view.dialog.MistakeDialog;
 import com.tpyzq.mobile.pangu.view.dialog.ResultDialog;
 import com.zhy.http.okhttp.callback.StringCallback;
@@ -136,7 +137,8 @@ public class OneKeyPopupWindow extends PopupWindow implements View.OnClickListen
                     ((Activity)context).finish();
                 }else
                 if ("0".endsWith(code)) {
-                    ResultDialog.getInstance().show("委托已提交", R.mipmap.duigou);
+//                    ResultDialog.getInstance().show("委托已提交", R.mipmap.duigou);
+                    CentreToast.showText(context,"委托已提交",true);
                     dismiss();
                 }else {
                     MistakeDialog.showDialog(msg, mActivity);

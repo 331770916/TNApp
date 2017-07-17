@@ -20,6 +20,7 @@ import com.tpyzq.mobile.pangu.log.LogHelper;
 import com.tpyzq.mobile.pangu.util.ConstantUtil;
 import com.tpyzq.mobile.pangu.util.Helper;
 import com.tpyzq.mobile.pangu.util.SpUtils;
+import com.tpyzq.mobile.pangu.view.CentreToast;
 import com.tpyzq.mobile.pangu.view.dialog.MistakeDialog;
 import com.tpyzq.mobile.pangu.view.dialog.ResultDialog;
 import com.tpyzq.mobile.pangu.view.dialog.RevokeDialog;
@@ -200,7 +201,7 @@ public class RevokeActivity extends BaseActivity implements AdapterView.OnItemCl
     public void State() {
 //        beans.remove(state);
         beans.clear();
-        ResultDialog.getInstance().show("" + "委托已提交", R.mipmap.lc_success);
+        CentreToast.showText(this,"委托已提交",true);
         toConnect();
 //        adapter.notifyDataSetChanged();
     }

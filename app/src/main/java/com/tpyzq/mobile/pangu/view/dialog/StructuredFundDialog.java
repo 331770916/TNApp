@@ -2,7 +2,6 @@ package com.tpyzq.mobile.pangu.view.dialog;
 
 import android.app.Activity;
 import android.content.Context;
-import android.graphics.drawable.Drawable;
 import android.view.View;
 import android.view.ViewGroup;
 import android.widget.ImageView;
@@ -11,7 +10,6 @@ import android.widget.TableLayout;
 import android.widget.TableRow;
 import android.widget.TextView;
 
-import com.moxun.tagcloudlib.view.Tag;
 import com.tpyzq.mobile.pangu.R;
 import com.tpyzq.mobile.pangu.activity.trade.stock.ETFApplyforOrRedeemActivity;
 import com.tpyzq.mobile.pangu.activity.trade.stock.ETFRevokeActivity;
@@ -27,8 +25,7 @@ import com.tpyzq.mobile.pangu.data.StructuredFundEntity;
 import com.tpyzq.mobile.pangu.util.ConstantUtil;
 import com.tpyzq.mobile.pangu.util.Helper;
 import com.tpyzq.mobile.pangu.util.SpUtils;
-
-import java.util.List;
+import com.tpyzq.mobile.pangu.view.CentreToast;
 
 /**
  * Created by wangqi on 2017/6/23.
@@ -260,7 +257,8 @@ public class StructuredFundDialog extends BaseDialog implements View.OnClickList
             StructuredFundEntity bean = (StructuredFundEntity) info.getData();
             bean.getInit_date();
             bean.getMerge_amount();
-            Helper.getInstance().showToast(context, "委托提交成功");
+//            Helper.getInstance().showToast(context, "委托提交成功");
+            CentreToast.showText(context,"委托已提交",true);
             mExpression.State();
         } else if ("400".equals(info.getCode()) || "-2".equals(info.getCode()) || "-3".equals(info.getCode())) {
             Helper.getInstance().showToast(context, info.getMsg());

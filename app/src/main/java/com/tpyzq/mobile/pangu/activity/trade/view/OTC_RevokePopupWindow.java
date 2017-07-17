@@ -15,6 +15,7 @@ import com.tpyzq.mobile.pangu.activity.myself.login.TransactionLoginActivity;
 import com.tpyzq.mobile.pangu.http.NetWorkUtil;
 import com.tpyzq.mobile.pangu.util.ConstantUtil;
 import com.tpyzq.mobile.pangu.util.SpUtils;
+import com.tpyzq.mobile.pangu.view.CentreToast;
 import com.tpyzq.mobile.pangu.view.dialog.MistakeDialog;
 import com.tpyzq.mobile.pangu.view.dialog.ResultDialog;
 import com.zhy.http.okhttp.callback.StringCallback;
@@ -126,7 +127,8 @@ public class OTC_RevokePopupWindow extends PopupWindow implements View.OnClickLi
                         dismiss();
                         ((Activity)context).finish();
                     }else if(code.equals("0")){
-                        ResultDialog.getInstance().show("委托已提交", R.mipmap.duigou);
+//                        ResultDialog.getInstance().show("委托已提交", R.mipmap.duigou);
+                        CentreToast.showText(context,"委托已提交",true);
                         listener.callBack(position);
                     }else {
                         MistakeDialog.showDialog(res.optString("msg"), mActivity);

@@ -56,6 +56,7 @@ import com.tpyzq.mobile.pangu.util.ToastUtils;
 import com.tpyzq.mobile.pangu.util.TransitionUtils;
 import com.tpyzq.mobile.pangu.util.panguutil.JudgeStockUtils;
 import com.tpyzq.mobile.pangu.util.panguutil.UserUtil;
+import com.tpyzq.mobile.pangu.view.CentreToast;
 import com.tpyzq.mobile.pangu.view.dialog.CancelDialog;
 import com.tpyzq.mobile.pangu.view.dialog.CommissionedBuyAndSellDialog;
 import com.tpyzq.mobile.pangu.view.dialog.FundEntrustDialog;
@@ -454,24 +455,16 @@ public class BuyAndSellActivity extends BaseActivity implements View.OnClickList
         NetWorkUtil.getInstence().okHttpForGet(TAG, ConstantUtil.URL, map003, new StringCallback() {
             @Override
             public void onError(Call call, Exception e, int id) {
-                delist = "";
             }
 
             @Override
             public void onResponse(String response, int id) {
                 try {
                     if (TextUtils.isEmpty(response)) {
-                        delist = "";
                         return;
                     }
                     JSONArray object = new JSONArray(response);
                     JSONObject jsonObject = object.getJSONObject(0);
-                    delist = jsonObject.optString("message");
-//                    delist = "欣泰电气股票已于2017年7月17日进入退市整理板交易，退市整理期为30个交易曰，退市整理期届满的次—交易日将终止上市，请您关注投资风险，慎重参与退市股票交易。\n特別提醒您，根据欣泰电气先行賠付方案，退市整理期买入欣泰电气股票的投资者不属于先行赔付对象，产生的损失不会得到先行赔付基金的赔偿。";
-                    if (!TextUtils.isEmpty(delist)) {
-                        delist = "\u3000\u3000" + delist;
-                        delist = delist.replaceAll("\n", "\n\u3000\u3000");
-                    }
                     JSONArray jsArray = jsonObject.getJSONArray("data");
                     JSONArray jsArray_stock = jsArray.getJSONArray(0);
                     String closePrice = jsArray.getString(2);
@@ -1205,7 +1198,7 @@ public class BuyAndSellActivity extends BaseActivity implements View.OnClickList
                     String data = jsonObject.getString("data");
                     if ("0".equals(code)) {
                         clearView(true);
-                        ToastUtils.showShort(BuyAndSellActivity.this,"委托已提交");
+                        CentreToast.showText(BuyAndSellActivity.this,"委托已提交",true);
                     }else if ("-6".equals(code)){
                         startActivity(new Intent(BuyAndSellActivity.this, TransactionLoginActivity.class));
                         finish();

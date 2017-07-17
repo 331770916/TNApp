@@ -15,6 +15,7 @@ import com.tpyzq.mobile.pangu.activity.myself.login.TransactionLoginActivity;
 import com.tpyzq.mobile.pangu.http.NetWorkUtil;
 import com.tpyzq.mobile.pangu.util.ConstantUtil;
 import com.tpyzq.mobile.pangu.util.Helper;
+import com.tpyzq.mobile.pangu.view.CentreToast;
 import com.tpyzq.mobile.pangu.view.dialog.MistakeDialog;
 import com.tpyzq.mobile.pangu.view.dialog.ResultDialog;
 import com.zhy.http.okhttp.callback.StringCallback;
@@ -127,7 +128,7 @@ public class FundSubscribePopupWindow extends PopupWindow implements View.OnClic
                     JSONObject res = new JSONObject(response);
                     String code = res.optString("code");
                     if("0".equals(code)){
-                        ResultDialog.getInstance().show("委托已提交", R.mipmap.duigou);
+                        CentreToast.showText(context,"委托已提交",true);
                     }else if("-6".equals(code)){
                         Intent intent = new Intent(context, TransactionLoginActivity.class);
                         context.startActivity(intent);

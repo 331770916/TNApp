@@ -12,6 +12,7 @@ import com.tpyzq.mobile.pangu.base.BaseDialog;
 import com.tpyzq.mobile.pangu.http.NetWorkUtil;
 import com.tpyzq.mobile.pangu.util.ConstantUtil;
 import com.tpyzq.mobile.pangu.util.SpUtils;
+import com.tpyzq.mobile.pangu.view.CentreToast;
 import com.zhy.http.okhttp.callback.StringCallback;
 
 import org.json.JSONException;
@@ -110,7 +111,7 @@ public class FundWithDrawDialog extends BaseDialog implements View.OnClickListen
                     String data = jsonObject.getString("data");
 
                     if ("0".equals(code)) {
-                        ResultDialog.getInstance().show("委托已提交", R.mipmap.lc_success);
+                        CentreToast.showText(context,"委托已提交",true);
                         fundWithDrawListen.setClear();
                     } else {
                         MistakeDialog.showDialog(msg, (Activity) context);

@@ -16,6 +16,7 @@ import com.tpyzq.mobile.pangu.log.LogHelper;
 import com.tpyzq.mobile.pangu.util.ConstantUtil;
 import com.tpyzq.mobile.pangu.util.Helper;
 import com.tpyzq.mobile.pangu.util.SpUtils;
+import com.tpyzq.mobile.pangu.view.CentreToast;
 import com.zhy.http.okhttp.callback.StringCallback;
 
 import org.json.JSONArray;
@@ -101,7 +102,7 @@ public class RevokeDialog extends BaseDialog implements View.OnClickListener {
                                 data.getJSONObject(i).getString("ORDER_ID");
                             }
                         }
-                        ResultDialog.getInstance().show("" + "委托已提交", R.mipmap.lc_success);
+                        CentreToast.showText(context,"委托已提交",true);
                         expression.State();
 
                     } else if ("-6".equals(jsonObject.getString("code"))) {

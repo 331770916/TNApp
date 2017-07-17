@@ -25,6 +25,7 @@ import com.tpyzq.mobile.pangu.util.ConstantUtil;
 import com.tpyzq.mobile.pangu.util.Helper;
 import com.tpyzq.mobile.pangu.util.SpUtils;
 import com.tpyzq.mobile.pangu.util.ToastUtils;
+import com.tpyzq.mobile.pangu.view.CentreToast;
 import com.tpyzq.mobile.pangu.view.dialog.DownloadDocPdfDialog;
 import com.tpyzq.mobile.pangu.view.dialog.HandoverDialog;
 import com.tpyzq.mobile.pangu.view.dialog.MistakeDialog;
@@ -373,7 +374,7 @@ public class OTC_ContractSignActivity extends BaseActivity implements View.OnCli
                     String msg = jsonObject.optString("msg");
                     JSONArray data = jsonObject.optJSONArray("data");
                     if ("0".equals(code)){
-                        MistakeDialog.showDialog("委托已提交", OTC_ContractSignActivity.this);
+                        CentreToast.showText(OTC_ContractSignActivity.this,"委托已提交",true);
                     }else if ("-6".equals(code)){
                         Intent intent = new Intent(OTC_ContractSignActivity.this, TransactionLoginActivity.class);
                         OTC_ContractSignActivity.this.startActivity(intent);

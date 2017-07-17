@@ -24,6 +24,7 @@ import com.tpyzq.mobile.pangu.http.NetWorkUtil;
 import com.tpyzq.mobile.pangu.util.ConstantUtil;
 import com.tpyzq.mobile.pangu.util.SpUtils;
 import com.tpyzq.mobile.pangu.util.ToastUtils;
+import com.tpyzq.mobile.pangu.view.CentreToast;
 import com.tpyzq.mobile.pangu.view.dialog.FundRedemptionDialog;
 import com.zhy.http.okhttp.callback.StringCallback;
 
@@ -355,7 +356,7 @@ public class FundRedemptionActivity extends BaseActivity implements View.OnClick
                     String code = object.getString("code");
                     String msg = object.getString("msg");
                     if (("0").equals(code)) {
-                        ToastUtils.showShort(FundRedemptionActivity.this, "委托已提交");
+                        CentreToast.showText(FundRedemptionActivity.this,"委托已提交",true);
                         et_fund_sum.setText("");
                     } else if ("-6".equals(code)) {
                         startActivity(new Intent(FundRedemptionActivity.this, TransactionLoginActivity.class));
