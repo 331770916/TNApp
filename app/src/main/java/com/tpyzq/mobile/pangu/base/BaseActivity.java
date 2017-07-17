@@ -127,7 +127,7 @@ public abstract class BaseActivity extends AppCompatActivity {
         });
     }
 
-    private void dissmissKeyboardUtil() {
+    public void dissmissKeyboardUtil() {
         mKeyBoardUtil.hideAllKeyBoard();
     }
 

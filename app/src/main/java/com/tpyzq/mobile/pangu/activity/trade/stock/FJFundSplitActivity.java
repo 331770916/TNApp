@@ -146,6 +146,7 @@ public class FJFundSplitActivity extends BaseActivity implements View.OnClickLis
     protected void onActivityResult(int requestCode, int resultCode, Intent intent) {
         super.onActivityResult(requestCode, resultCode, intent);
         if (requestCode == REQUSET && resultCode == RESULT_OK) {
+            dissmissKeyboardUtil();
             mPoint = intent.getIntExtra("point", -1);
             mInput_et.setText(intent.getStringExtra("Code"));
             intent.getStringExtra("Market");
