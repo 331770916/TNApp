@@ -7,6 +7,7 @@ import android.view.View;
 import android.view.inputmethod.EditorInfo;
 import android.widget.Button;
 import android.widget.EditText;
+import android.widget.LinearLayout;
 import android.widget.TextView;
 
 import com.google.gson.Gson;
@@ -41,6 +42,7 @@ public class FundSubscriptionActivity extends BaseActivity implements View.OnCli
     private String mSession;
     private final int MAXNUM = 6; //股票代码输入框的最大值
     private HashMap<String, String> map;   //数据源
+    private LinearLayout ll_father;//键盘父布局
 
     @Override
     public void initView() {
@@ -48,6 +50,8 @@ public class FundSubscriptionActivity extends BaseActivity implements View.OnCli
         this.findViewById(R.id.ivFundSubscription_back).setOnClickListener(this);                     //返回按钮销毁界面
         OK = (Button) this.findViewById(R.id.tvCNFundSubscribeQueDing);                             //点击确定按钮
         etCNFundCode = (EditText) this.findViewById(R.id.etCNFundCode);                                //基金代码
+        ll_father = (LinearLayout) this.findViewById(R.id.ll_father);                                         //键盘父布局
+        initMoveKeyBoard(ll_father, null,etCNFundCode);
         etCNFundAmount = (EditText) this.findViewById(R.id.etCNFundAmount);                            //认购金额
         tvCNFundNameValue = (TextView) this.findViewById(R.id.tvCNFundNameValue);                     //基金名称
         tvCNStockholderNumValue = (TextView) this.findViewById(R.id.tvCNStockholderNumValue);        //股东账号

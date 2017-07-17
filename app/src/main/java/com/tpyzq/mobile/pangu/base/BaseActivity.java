@@ -17,16 +17,25 @@ import android.support.annotation.Nullable;
 import android.support.v4.app.ActivityCompat;
 import android.support.v4.content.ContextCompat;
 import android.support.v7.app.AppCompatActivity;
+import android.text.TextUtils;
+import android.util.Log;
 import android.view.Gravity;
 import android.view.View;
 import android.view.ViewGroup;
 import android.view.Window;
 import android.view.WindowManager;
+import android.widget.EditText;
+import android.widget.LinearLayout;
+import android.widget.ScrollView;
 import android.widget.Toast;
 
+import com.android.keyboardlibrary.KeyboardTouchListener;
+import com.android.keyboardlibrary.KeyboardUtil;
 import com.tpyzq.mobile.pangu.R;
 import com.tpyzq.mobile.pangu.http.NetWorkUtil;
 import com.tpyzq.mobile.pangu.http.OkHttpUtil;
+import com.tpyzq.mobile.pangu.http.doConnect.detail.GetSearchStockConnect;
+import com.tpyzq.mobile.pangu.http.doConnect.detail.ToGetSearchStockConnect;
 import com.tpyzq.mobile.pangu.http.manager.NetworkManager;
 import com.tpyzq.mobile.pangu.util.panguutil.SkipUtils;
 
@@ -69,6 +78,7 @@ public abstract class BaseActivity extends AppCompatActivity {
             Manifest.permission.READ_EXTERNAL_STORAGE,
             Manifest.permission.CALL_PHONE,
             Manifest.permission.GET_TASKS};
+    public KeyboardUtil mKeyBoardUtil;
 
     @Override
     protected void onCreate(@Nullable Bundle savedInstanceState) {
@@ -97,6 +107,44 @@ public abstract class BaseActivity extends AppCompatActivity {
                 ((ViewGroup)rootView).removeView(fitView);
         }
     }
+    /**
+     * 初始化键盘
+     * @param rootLayout
+     */
+    public void initMoveKeyBoard(LinearLayout rootLayout, ScrollView scrollView, EditText mSearchEdit) {
+        mKeyBoardUtil = new KeyboardUtil(this, rootLayout, scrollView);
+        mKeyBoardUtil.setOtherEdittext(mSearchEdit);
+        // monitor the KeyBarod state
+        mKeyBoardUtil.setKeyBoardStateChangeListener(new KeyBoardStateListener());
+        // monitor the finish or next Key
+        mKeyBoardUtil.setInputOverListener(new InputOverListener());
+        mSearchEdit.setOnTouchListener(new KeyboardTouchListener(mKeyBoardUtil, KeyboardUtil.INPUTTYPE_NUM_ABC, -1));
+//        mSearchEdit.setOnFocusChangeListener(new View.OnFocusChangeListener() {
+//            @Override
+//            public void onFocusChange(View v, boolean hasFocus) {
+//                dissmissKeyboardUtil();
+//            }
+//        });
+    }
+
+    private void dissmissKeyboardUtil() {
+        mKeyBoardUtil.hideAllKeyBoard();
+    }
+
+    public class KeyBoardStateListener implements KeyboardUtil.KeyBoardStateChangeListener {
+        @Override
+        public void KeyBoardStateChange(int state, EditText editText) {
+        }
+    }
+    public class InputOverListener implements KeyboardUtil.InputFinishListener{
+
+        @Override
+        public void inputHasOver(int onclickType, EditText editText) {
+            inputOver(onclickType, editText);
+        }
+    }
+
+    public void inputOver(int onclickType, EditText editText){};
 
     public abstract void initView();
 

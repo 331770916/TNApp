@@ -1,13 +1,16 @@
 <?xml version="1.0" encoding="utf-8"?>
-<LinearLayout xmlns:android="http://schemas.android.com/apk/res/android"
+<FrameLayout
+    xmlns:android="http://schemas.android.com/apk/res/android"
     xmlns:tools="http://schemas.android.com/tools"
-    android:id="@+id/FundSubscriptionActivity"
+    android:layout_width="match_parent"
+    android:layout_height="match_parent" >
+    <LinearLayout
+    android:id="@+id/root_view"
     android:layout_width="match_parent"
     android:layout_height="match_parent"
     android:background="@color/bgColor"
     android:orientation="vertical"
     tools:context="com.tpyzq.mobile.pangu.activity.trade.open_fund.FundSubscriptionActivity">
-
 
     <LinearLayout
         android:id="@+id/mKey"
@@ -259,3 +262,10 @@
         </RelativeLayout>
     </LinearLayout>
 </LinearLayout>
+    <LinearLayout
+        android:id="@+id/ll_father"
+        android:layout_width="match_parent"
+        android:layout_height="match_parent"
+        android:gravity="bottom"
+        android:orientation="vertical" />
+</FrameLayout>
