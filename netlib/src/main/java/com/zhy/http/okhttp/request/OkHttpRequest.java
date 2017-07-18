@@ -1,5 +1,8 @@
 package com.zhy.http.okhttp.request;
 
+import android.text.TextUtils;
+
+import com.zhy.http.okhttp.OkHttpUtils;
 import com.zhy.http.okhttp.callback.Callback;
 import com.zhy.http.okhttp.utils.Exceptions;
 
@@ -70,9 +73,8 @@ public abstract class OkHttpRequest
         RequestBody requestBody = buildRequestBody();
         RequestBody wrappedRequestBody = wrapRequestBody(requestBody, callback);
         Request request = buildRequest(wrappedRequestBody);
-        return request;
+        return TextUtils.isEmpty(OkHttpUtils.sUserAgent)?request:request.newBuilder().addHeader("user-agent", OkHttpUtils.sUserAgent).build();
     }
-
 
     protected void appendHeaders()
     {
@@ -83,6 +85,7 @@ public abstract class OkHttpRequest
         {
             headerBuilder.add(key, headers.get(key));
         }
+
         builder.headers(headerBuilder.build());
     }
 
