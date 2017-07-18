@@ -178,7 +178,7 @@
                 android:id="@+id/ll_version"
                 android:layout_width="match_parent"
                 android:layout_height="@dimen/size50"
-                android:layout_marginTop="@dimen/size1"
+                android:layout_marginTop="@dimen/size5"
                 android:background="@color/white"
                 android:orientation="horizontal">
 
@@ -206,7 +206,7 @@
                 android:id="@+id/ll_help_feedback"
                 android:layout_width="match_parent"
                 android:layout_height="@dimen/size50"
-                android:layout_marginTop="@dimen/size1"
+                android:layout_marginTop="@dimen/size5"
                 android:background="@color/white"
                 android:orientation="horizontal">
 

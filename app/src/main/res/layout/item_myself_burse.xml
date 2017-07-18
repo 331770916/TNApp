@@ -44,7 +44,7 @@
     <View
         android:layout_width="match_parent"
         android:layout_height="@dimen/size1"
-        android:background="@color/bgColor"
-        android:paddingLeft="@dimen/size20" />
+        android:background="@color/lineColor"
+        android:layout_marginLeft="@dimen/size20" />
 
 </LinearLayout>
