@@ -66,7 +66,8 @@ public class InformAdapter extends BaseAdapter {
         }
         viewHodler.textView1.setText(mList.get(position).getTitle());
         viewHodler.textView2.setText(mList.get(position).getPush_time());
-        viewHodler.textView3.setText(mList.get(position).getContenebrief());
+//        viewHodler.textView3.setText(mList.get(position).getContenebrief());
+        viewHodler.textView3.setText(mList.get(position).getContene());
         return convertView;
     }
 
