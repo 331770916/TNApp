@@ -1,5 +1,7 @@
 package com.zhy.http.okhttp;
 
+import android.util.Log;
+
 import com.zhy.http.okhttp.builder.GetBuilder;
 import com.zhy.http.okhttp.builder.HeadBuilder;
 import com.zhy.http.okhttp.builder.OtherRequestBuilder;
@@ -7,6 +9,7 @@ import com.zhy.http.okhttp.builder.PostFileBuilder;
 import com.zhy.http.okhttp.builder.PostFormBuilder;
 import com.zhy.http.okhttp.builder.PostStringBuilder;
 import com.zhy.http.okhttp.callback.Callback;
+import com.zhy.http.okhttp.request.PostStringRequest;
 import com.zhy.http.okhttp.request.RequestCall;
 import com.zhy.http.okhttp.utils.Platform;
 
@@ -112,8 +115,23 @@ public class OkHttpUtils
         return new OtherRequestBuilder(METHOD.PATCH);
     }
 
+    /**
+     * 生产环境 置为false
+     */
+    public static final  boolean DEBUG=false;
+
     public void execute(final RequestCall requestCall, Callback callback)
     {
+        if (DEBUG){
+            Log.d("OkHttp","===================================================");
+            if (requestCall.getOkHttpRequest() instanceof PostStringRequest)
+            Log.d("OkHttp",requestCall.getOkHttpRequest().url+"=======  startRequest"+((PostStringRequest) requestCall.getOkHttpRequest()).content);
+            else
+            Log.d("OkHttp",requestCall.getOkHttpRequest().url+"=======  startRequest");
+            Log.d("OkHttp","===================================================");
+        }
+
+
         if (callback == null)
             callback = Callback.CALLBACK_DEFAULT;
         final Callback finalCallback = callback;
@@ -124,6 +142,11 @@ public class OkHttpUtils
             @Override
             public void onFailure(Call call, final IOException e)
             {
+                if (DEBUG){
+                    Log.e("OkHttp","===================================================");
+                    Log.e("OkHttp",requestCall.getOkHttpRequest().url+"  onError "+(e==null?"":e.getMessage()));
+                    Log.e("OkHttp","===================================================");
+                }
                 sendFailResultCallback(call, e, finalCallback, id);
             }
 
@@ -145,6 +168,11 @@ public class OkHttpUtils
                     }
 
                     Object o = finalCallback.parseNetworkResponse(response, id);
+                    if (DEBUG){
+                        Log.d("OkHttp","===================================================");
+                        Log.d("OkHttp",requestCall.getOkHttpRequest().url+"======= onSuccess==="+o.toString());
+                        Log.d("OkHttp","===================================================");
+                    }
                     sendSuccessResultCallback(call,o, finalCallback, id);
                 } catch (Exception e)
                 {

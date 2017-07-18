@@ -14,7 +14,7 @@ import okhttp3.RequestBody;
  */
 public abstract class OkHttpRequest
 {
-    protected String url;
+    public String url;
     protected Object tag;
     protected Map<String, String> params;
     protected Map<String, String> headers;
