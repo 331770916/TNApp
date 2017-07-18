@@ -118,11 +118,11 @@ public class OkHttpUtils
     /**
      * 生产环境 置为false
      */
-    public static final  boolean DEBUG=true;
+    public static  boolean sDebug =false;
 
     public void execute(final RequestCall requestCall, Callback callback)
     {
-        if (DEBUG){
+        if (sDebug){
             Log.d("OkHttp","===================================================");
             if (requestCall.getOkHttpRequest() instanceof PostStringRequest)
             Log.d("OkHttp",requestCall.getOkHttpRequest().url+"=======  startRequest"+((PostStringRequest) requestCall.getOkHttpRequest()).content);
@@ -142,7 +142,7 @@ public class OkHttpUtils
             @Override
             public void onFailure(Call call, final IOException e)
             {
-                if (DEBUG){
+                if (sDebug){
                     Log.e("OkHttp","===================================================");
                     Log.e("OkHttp",requestCall.getOkHttpRequest().url+"  onError "+(e==null?"":e.getMessage()));
                     Log.e("OkHttp","===================================================");
@@ -168,7 +168,7 @@ public class OkHttpUtils
                     }
 
                     Object o = finalCallback.parseNetworkResponse(response, id);
-                    if (DEBUG){
+                    if (sDebug){
                         Log.d("OkHttp","===================================================");
                         Log.d("OkHttp",requestCall.getOkHttpRequest().url+"======= onSuccess==="+o.toString());
                         Log.d("OkHttp","===================================================");

@@ -82,6 +82,7 @@ public class CustomApplication extends MultiDexApplication {
         }
         //收集错误日志
         LogUtil.logInit(BuildConfig.DEBUG);
+        OkHttpUtils.sDebug =BuildConfig.DEBUG;
         LogCollector.setDebugMode(true);
         LogCollector.initLog(getApplicationContext());
         //初始化图片加载框架
