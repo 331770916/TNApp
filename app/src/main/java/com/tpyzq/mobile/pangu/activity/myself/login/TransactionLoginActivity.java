@@ -66,6 +66,7 @@ import com.tpyzq.mobile.pangu.data.UserEntity;
 import com.tpyzq.mobile.pangu.db.Db_PUB_USERS;
 import com.tpyzq.mobile.pangu.db.HOLD_SEQ;
 import com.tpyzq.mobile.pangu.http.NetWorkUtil;
+import com.tpyzq.mobile.pangu.http.OkHttpUtil;
 import com.tpyzq.mobile.pangu.log.LogHelper;
 import com.tpyzq.mobile.pangu.log.LogUtil;
 import com.tpyzq.mobile.pangu.util.ConstantUtil;
@@ -1073,6 +1074,11 @@ public class TransactionLoginActivity extends BaseActivity implements View.OnCli
         });
     }
 
+    @Override
+    public void onBackPressed() {
+        super.onBackPressed();
+        OkHttpUtil.cancelSingleRequestByTag(this.getClass().getName());
+    }
 
     private void LogInLogic() {
         //第一次登录数据库交易账号无数据 添加到数据库

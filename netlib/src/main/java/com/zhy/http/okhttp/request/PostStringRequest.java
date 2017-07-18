@@ -15,7 +15,7 @@ public class PostStringRequest extends OkHttpRequest
 {
     private static MediaType MEDIA_TYPE_PLAIN = MediaType.parse("text/plain;charset=utf-8");
 
-    private String content;
+    public String content;
     private MediaType mediaType;
 
 
