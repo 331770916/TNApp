@@ -248,6 +248,12 @@ public class OkHttpUtils
         }
     }
 
+    public static void setUserAgent(String userAgent) {
+        sUserAgent=userAgent;
+    }
+
+    public static String sUserAgent;
+
     public static class METHOD
     {
         public static final String HEAD = "HEAD";

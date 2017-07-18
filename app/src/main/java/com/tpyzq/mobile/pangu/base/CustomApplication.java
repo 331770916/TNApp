@@ -5,6 +5,7 @@ import android.app.Activity;
 import android.content.Context;
 import android.content.Intent;
 import android.content.IntentFilter;
+import android.os.Build;
 import android.support.multidex.MultiDex;
 import android.support.multidex.MultiDexApplication;
 import android.text.TextUtils;
@@ -95,11 +96,26 @@ public class CustomApplication extends MultiDexApplication {
                 .readTimeout(10000L, TimeUnit.MILLISECONDS)
                 .build();
         OkHttpUtils.initClient(client);
+        OkHttpUtils.setUserAgent(generateUserAgent());
         final IntentFilter homeFilter = new IntentFilter();
         homeFilter.addAction(Intent.ACTION_CLOSE_SYSTEM_DIALOGS);
         homeFilter.addAction(Intent.ACTION_SCREEN_ON);
         homeFilter.addAction(Intent.ACTION_SCREEN_OFF);
         homeFilter.addAction(Intent.ACTION_USER_PRESENT);
+    }
+
+    public static String generateUserAgent(){
+        //        user-agent   PanGu/1.7.4 (iPhone; iOS 10.3.2; Scale/3.00)
+
+        StringBuilder sb=new StringBuilder();
+        sb.append("PanGu/")
+                .append(BuildConfig.VERSION_NAME)
+                .append(" (Linux; Android ")
+                .append(Build.VERSION.RELEASE)
+                .append(";")
+                .append(Build.MODEL)
+                .append(")");
+        return sb.toString();
     }
 
     public static Context getContext() {
