@@ -2,6 +2,7 @@ package com.tpyzq.mobile.pangu.activity.myself.login;
 
 import android.app.Dialog;
 import android.content.Context;
+import android.content.DialogInterface;
 import android.content.Intent;
 import android.graphics.Bitmap;
 import android.graphics.drawable.ColorDrawable;
@@ -10,6 +11,7 @@ import android.text.Editable;
 import android.text.TextUtils;
 import android.text.TextWatcher;
 import android.util.Log;
+import android.view.KeyEvent;
 import android.view.LayoutInflater;
 import android.view.View;
 import android.view.WindowManager;
@@ -73,6 +75,7 @@ import com.tpyzq.mobile.pangu.data.UserEntity;
 import com.tpyzq.mobile.pangu.db.Db_PUB_USERS;
 import com.tpyzq.mobile.pangu.db.HOLD_SEQ;
 import com.tpyzq.mobile.pangu.http.NetWorkUtil;
+import com.tpyzq.mobile.pangu.http.OkHttpUtil;
 import com.tpyzq.mobile.pangu.log.LogHelper;
 import com.tpyzq.mobile.pangu.log.LogUtil;
 import com.tpyzq.mobile.pangu.util.ConstantUtil;
@@ -190,10 +193,29 @@ public class ChangeAccoutActivity extends BaseActivity implements View.OnClickLi
         }
         //账号监听处理
         EditTextMonitor();
+        LoadingDialog();
+
+    }
+    private void LoadingDialog(){
+        mCommit = LoadingDialog.initDialog(this, "正在提交...");
+
+        mCommit.setOnKeyListener(new DialogInterface.OnKeyListener() {
+            @Override
+            public boolean onKey(DialogInterface dialog, int keyCode, KeyEvent event) {
+                if (keyCode == KeyEvent.KEYCODE_BACK && event.getRepeatCount() == 0) {
+                    if (dialog != null) {
+                        if (mCommit.isShowing()) {
+                            dialog.dismiss();
+                            OkHttpUtil.cancelSingleRequestByTag(this.getClass().getName());
+                        }
+                    }
+                }
+                return false;
+            }
+        });
     }
 
     private void IsKeyboardRequestHttp() {
-        final UserEntity userEntity = new UserEntity();
         HashMap map = new HashMap();
         map.put("funcid", "400102");
 
@@ -351,7 +373,6 @@ public class ChangeAccoutActivity extends BaseActivity implements View.OnClickLi
                 toSecurityCode(isKeyboardDialog);
                 break;
             case R.id.Bindingbtn:
-                mCommit = LoadingDialog.initDialog(this, "正在提交...");
                 if (!ChangeAccoutActivity.this.isFinishing()) {
                     mCommit.show();
                 }
@@ -973,6 +994,8 @@ public class ChangeAccoutActivity extends BaseActivity implements View.OnClickLi
                 }
                 LogUtil.e(TAG, e.toString());
                 Helper.getInstance().showToast(ChangeAccoutActivity.this, "网络器异常");
+                isLoginSuc = false;
+                toSecurityCode(null);
                 mBDPassword.setText("");
                 mBDPasswordET.setText("");
                 mBDCaptcha.setText("");
@@ -999,12 +1022,10 @@ public class ChangeAccoutActivity extends BaseActivity implements View.OnClickLi
                         final String date = sDateFormat.format(new java.util.Date());
                         BRutil.menuLogIn(android.os.Build.VERSION.RELEASE, UserUtil.Mobile, DeviceUtil.getDeviceId(CustomApplication.getContext()), APPInfoUtils.getVersionName(ChangeAccoutActivity.this), ip, UserUtil.capitalAccount, date);
                     } else {
+                        isLoginSuc = false;
                         toSecurityCode(null);
-                        if (mBDPassword != null) {
-                            mBDPassword.setText("");
-                        } else if (mBDPasswordET != null) {
-                            mBDPasswordET.setText("");
-                        }
+                        mBDPassword.setText("");
+                        mBDPasswordET.setText("");
                         mBDCaptcha.setText("");
                         MistakeDialog.showDialog(msg_Str.toString(), ChangeAccoutActivity.this);
                     }
@@ -1422,6 +1443,11 @@ public class ChangeAccoutActivity extends BaseActivity implements View.OnClickLi
 
     }
 
+    @Override
+    public void onBackPressed() {
+        super.onBackPressed();
+        OkHttpUtil.cancelSingleRequestByTag(this.getClass().getName());
+    }
 
     @Override
     protected void onDestroy() {

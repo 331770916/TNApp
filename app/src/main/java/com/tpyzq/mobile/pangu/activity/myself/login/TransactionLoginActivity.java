@@ -1,6 +1,7 @@
 package com.tpyzq.mobile.pangu.activity.myself.login;
 
 import android.app.Dialog;
+import android.content.DialogInterface;
 import android.content.Intent;
 import android.graphics.Bitmap;
 import android.text.Editable;
@@ -8,6 +9,7 @@ import android.text.InputType;
 import android.text.TextUtils;
 import android.text.TextWatcher;
 import android.text.method.DigitsKeyListener;
+import android.view.KeyEvent;
 import android.view.View;
 import android.widget.Button;
 import android.widget.EditText;
@@ -66,6 +68,7 @@ import com.tpyzq.mobile.pangu.data.UserEntity;
 import com.tpyzq.mobile.pangu.db.Db_PUB_USERS;
 import com.tpyzq.mobile.pangu.db.HOLD_SEQ;
 import com.tpyzq.mobile.pangu.http.NetWorkUtil;
+import com.tpyzq.mobile.pangu.http.OkHttpUtil;
 import com.tpyzq.mobile.pangu.log.LogHelper;
 import com.tpyzq.mobile.pangu.log.LogUtil;
 import com.tpyzq.mobile.pangu.util.ConstantUtil;
@@ -227,6 +230,7 @@ public class TransactionLoginActivity extends BaseActivity implements View.OnCli
             isKeyboardDialog.show();
         }
 
+
         Exit = getIntent().getStringExtra("Exit");
         if (!"true".equals(Exit)) {
             UserEntity userEntity = new UserEntity();
@@ -244,8 +248,28 @@ public class TransactionLoginActivity extends BaseActivity implements View.OnCli
         }
         //账号监听处理
         EditTextMonitor();
+        LoadingDialog();
     }
 
+
+    private void LoadingDialog(){
+        mCommit = LoadingDialog.initDialog(this, "正在提交...");
+
+        mCommit.setOnKeyListener(new DialogInterface.OnKeyListener() {
+            @Override
+            public boolean onKey(DialogInterface dialog, int keyCode, KeyEvent event) {
+                if (keyCode == KeyEvent.KEYCODE_BACK && event.getRepeatCount() == 0) {
+                    if (dialog != null) {
+                        if (mCommit.isShowing()) {
+                            dialog.dismiss();
+                            OkHttpUtil.cancelSingleRequestByTag(this.getClass().getName());
+                        }
+                    }
+                }
+                return false;
+            }
+        });
+    }
 
     /**
      * 修改登录状态
@@ -580,7 +604,6 @@ public class TransactionLoginActivity extends BaseActivity implements View.OnCli
                 finish();
                 break;
             case R.id.Transaction_Login:
-                mCommit = LoadingDialog.initDialog(this, "正在提交...");
                 if (!TransactionLoginActivity.this.isFinishing()) {
                     mCommit.show();
                 }
@@ -779,7 +802,6 @@ public class TransactionLoginActivity extends BaseActivity implements View.OnCli
             });
         }
     }
-
 
 
     /**
@@ -1032,12 +1054,15 @@ public class TransactionLoginActivity extends BaseActivity implements View.OnCli
         NetWorkUtil.getInstence().okHttpForPostString(TAG, ConstantUtil.URL_JYBD, map, new StringCallback() {
             @Override
             public void onError(Call call, Exception e, int id) {
+
                 if (mCommit != null) {
                     mCommit.dismiss();
                 }
 
                 LogUtil.e(TAG, e.toString());
                 Helper.getInstance().showToast(TransactionLoginActivity.this, "网络异常");
+                isLoginSuc = false;
+                toSecurityCode(null);
                 mPassword.setText("");
                 mPasswordET.setText("");
                 mCaptcha.setText("");
@@ -1060,6 +1085,7 @@ public class TransactionLoginActivity extends BaseActivity implements View.OnCli
                         SpUtils.putString(CustomApplication.getContext(), ConstantUtil.APPEARHOLD, ConstantUtil.HOLD_DISAPPEAR);
                         setData(isfinish);                      //修改资金账号数据
                     } else {
+                        isLoginSuc = false;
                         toSecurityCode(null);
                         mPassword.setText("");
                         mPasswordET.setText("");
@@ -1072,6 +1098,7 @@ public class TransactionLoginActivity extends BaseActivity implements View.OnCli
             }
         });
     }
+
 
     private void LogInLogic() {
         //第一次登录数据库交易账号无数据 添加到数据库
