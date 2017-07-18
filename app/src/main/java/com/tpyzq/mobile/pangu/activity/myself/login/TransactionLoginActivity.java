@@ -259,9 +259,9 @@ public class TransactionLoginActivity extends BaseActivity implements View.OnCli
             @Override
             public boolean onKey(DialogInterface dialog, int keyCode, KeyEvent event) {
                 if (keyCode == KeyEvent.KEYCODE_BACK && event.getRepeatCount() == 0) {
-                    if (dialog != null) {
+                    if (mCommit != null) {
                         if (mCommit.isShowing()) {
-                            dialog.dismiss();
+                            mCommit.dismiss();
                             OkHttpUtil.cancelSingleRequestByTag(this.getClass().getName());
                         }
                     }
