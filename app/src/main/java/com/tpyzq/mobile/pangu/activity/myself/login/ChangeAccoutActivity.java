@@ -207,6 +207,12 @@ public class ChangeAccoutActivity extends BaseActivity implements View.OnClickLi
                         if (mCommit.isShowing()) {
                             mCommit.dismiss();
                             OkHttpUtil.cancelSingleRequestByTag(ChangeAccoutActivity.this.getClass().getName());
+
+                            isLoginSuc = false;
+                            toSecurityCode(null);
+                            mBDPassword.setText("");
+                            mBDPasswordET.setText("");
+                            mBDCaptcha.setText("");
                         }
                     }
                 }
