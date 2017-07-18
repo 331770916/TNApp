@@ -2,10 +2,16 @@ package com.tpyzq.mobile.pangu.view.dialog;
 
 import android.app.Activity;
 import android.content.Context;
+import android.graphics.Color;
 import android.os.Build;
 import android.support.v7.app.AlertDialog;
 import android.text.Html;
+import android.text.Spannable;
+import android.text.SpannableString;
+import android.text.TextPaint;
 import android.text.TextUtils;
+import android.text.method.LinkMovementMethod;
+import android.text.style.ClickableSpan;
 import android.view.Gravity;
 import android.view.LayoutInflater;
 import android.view.View;
@@ -97,6 +103,24 @@ public class CancelDialog {
                 tv_message.setGravity(Gravity.LEFT);
                 tv_message.setText(message);
                 tv_center_text.setVisibility(View.VISIBLE);
+                String msgData = "(如有疑问，请致电客服95397)";
+                SpannableString spanText = new SpannableString(msgData);
+                spanText.setSpan(new ClickableSpan() {
+                    @Override
+                    public void updateDrawState(TextPaint ds) {
+                        super.updateDrawState(ds);
+                        ds.setColor(Color.parseColor("#1C86EE"));
+                        ds.setUnderlineText(true);      //设置下划线
+                    }
+
+                    @Override
+                    public void onClick(View widget) {
+                        getPermission(activity);
+                    }
+                }, msgData.length() - 6, msgData.length() - 1, Spannable.SPAN_EXCLUSIVE_EXCLUSIVE);
+                tv_center_text.setHighlightColor(Color.TRANSPARENT); //设置点击后的颜色为透明，否则会一直出现高亮
+                tv_center_text.setText(spanText);
+                tv_center_text.setMovementMethod(LinkMovementMethod.getInstance());//开始响应点击事件
                 break;
             default:
                 LinearLayout.LayoutParams layoutParams1 = new LinearLayout.LayoutParams(ViewGroup.LayoutParams.MATCH_PARENT, ViewGroup.LayoutParams.WRAP_CONTENT);
@@ -108,8 +132,6 @@ public class CancelDialog {
                 tv_center_text.setVisibility(View.GONE);
                 break;
         }
-
-
         positiveBtn.setOnClickListener(new View.OnClickListener() {
             @Override
             public void onClick(View v) {
@@ -147,7 +169,15 @@ public class CancelDialog {
         alertDialog.setCancelable(false);
         alertDialog.show();
     }
-
+    private static void getPermission(Activity activity) {
+//        Intent intent = new Intent();
+//        intent.setAction(Intent.ACTION_CALL);
+//        intent.setData(Uri.parse("tel:" + activity.getResources().getString(R.string.dh)));
+//        activity.startActivity(intent);
+        if (activity == null || activity.isFinishing()) return;
+        ServiceDialog dialog = new ServiceDialog(activity);
+        dialog.show();
+    }
     public static void cancleDialog(final Activity activity, String message, final PositiveClickListener clickListener){
         cancleDialog(activity, message, -1, clickListener,null);
     }
