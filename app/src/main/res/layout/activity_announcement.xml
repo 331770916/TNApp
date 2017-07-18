@@ -75,13 +75,17 @@
                 android:layout_marginLeft="@dimen/size20"
                 android:background="@color/lineColor" />
 
-            <WebView
-                android:id="@+id/wv"
+            <TextView
+                android:id="@+id/contene_text"
                 android:layout_width="match_parent"
                 android:layout_height="wrap_content"
                 android:layout_marginTop="@dimen/size20"
+                android:lineSpacingExtra="1.3dp"
+                android:lineSpacingMultiplier="1.3"
                 android:paddingLeft="@dimen/size17"
-                android:paddingRight="@dimen/size15" />
+                android:paddingRight="@dimen/size15"
+                android:textColor="@color/gravy"
+                android:textSize="@dimen/txtSize16" />
         </LinearLayout>
     </ScrollView>
 </LinearLayout>
