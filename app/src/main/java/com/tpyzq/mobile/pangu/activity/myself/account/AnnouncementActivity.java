@@ -1,17 +1,10 @@
 package com.tpyzq.mobile.pangu.activity.myself.account;
 
-import android.os.Build;
-import android.text.Html;
 import android.text.TextUtils;
 import android.view.View;
-import android.view.ViewTreeObserver;
-import android.webkit.WebView;
-import android.webkit.WebViewClient;
 import android.widget.TextView;
 
 import com.tpyzq.mobile.pangu.R;
-import com.tpyzq.mobile.pangu.activity.trade.stock.BuyAndSellActivity;
-import com.tpyzq.mobile.pangu.activity.trade.view.StockPw;
 import com.tpyzq.mobile.pangu.base.BaseActivity;
 import com.tpyzq.mobile.pangu.http.NetWorkUtil;
 import com.tpyzq.mobile.pangu.log.LogUtil;
@@ -33,25 +26,16 @@ import okhttp3.Call;
  */
 public class AnnouncementActivity extends BaseActivity implements View.OnClickListener {
     private static final String TAG = "Announcement";
-    private TextView title_text, push_time_text;
-    private WebView mWebView;
+    private TextView title_text, push_time_text, contene_text;
     private String marked;
 
     @Override
     public void initView() {
         title_text = (TextView) findViewById(R.id.title_text);
         push_time_text = (TextView) findViewById(R.id.push_time_text);
-        mWebView = (WebView) findViewById(R.id.wv);
-        mWebView.setWebViewClient(new WebViewClient(){
-            @Override
-            public void onPageFinished(WebView view, String url) {
-                super.onPageFinished(view, url);
-                mWebView.setBackgroundColor(0); // 设置背景色
-//                mWebView.getBackground().setAlpha(0); // 设置填充透明度 范围：0-255
-            }
-        });
-
+        contene_text = (TextView) findViewById(R.id.contene_text);
         findViewById(R.id.ASpublish_back).setOnClickListener(this);
+
         initData();
     }
 
@@ -89,12 +73,7 @@ public class AnnouncementActivity extends BaseActivity implements View.OnClickLi
                     for (int i = 0; i < data.length(); i++) {
                         title_text.setText(data.getJSONObject(i).getString("TITLE"));
                         push_time_text.setText(data.getJSONObject(i).getString("PUSH_TIME"));
-                        /*String head = "<head>" +
-                                "<meta name=\"viewport\" content=\"width=device-width, initial-scale=1.0, user-scalable=no\"> "  +
-                                "</head>";
-                        String contene = "<html>" + head + "<body>" + data.getJSONObject(i).getString("CONTENE") + "</body></html>";*/
-                        String contene = data.getJSONObject(i).getString("CONTENE");
-                        mWebView.loadData(contene, "text/html; charset=UTF-8", null);
+                        contene_text.setText(data.getJSONObject(i).getString("CONTENE"));
                         String BIZID = data.getJSONObject(i).getString("BIZID");
                         if (!"true".equals(marked)) {
                             setConnect(BIZID);

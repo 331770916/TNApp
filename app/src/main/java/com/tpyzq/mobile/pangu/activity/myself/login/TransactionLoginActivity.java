@@ -263,6 +263,12 @@ public class TransactionLoginActivity extends BaseActivity implements View.OnCli
                         if (mCommit.isShowing()) {
                             mCommit.dismiss();
                             OkHttpUtil.cancelSingleRequestByTag(TransactionLoginActivity.this.getClass().getName());
+
+                            isLoginSuc = false;
+                            toSecurityCode(null);
+                            mPassword.setText("");
+                            mPasswordET.setText("");
+                            mCaptcha.setText("");
                         }
                     }
                 }

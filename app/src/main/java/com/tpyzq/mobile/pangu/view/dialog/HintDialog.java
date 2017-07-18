@@ -38,8 +38,10 @@ public class HintDialog extends BaseDialogCenter implements View.OnClickListener
         but_yes = (Button) findViewById(R.id.but_yes);
         tv_title.setText(mtoken_Inform);
         tv_info.setText(mInform_push_time);*/
+        tv_title = (TextView) findViewById(R.id.tv_title);
         but_yes = (Button) findViewById(R.id.but_yes);
         wv = (WebView) findViewById(R.id.wv);
+        tv_title.setText(mtoken_Inform);
         wv.loadData(mInform_push_time, "text/html; charset=UTF-8", null);
     }
 

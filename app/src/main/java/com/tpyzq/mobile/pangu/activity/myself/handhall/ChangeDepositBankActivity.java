@@ -27,6 +27,7 @@ import com.tpyzq.mobile.pangu.util.SpUtils;
 import com.tpyzq.mobile.pangu.util.keyboard.UsefulKeyBoard;
 import com.tpyzq.mobile.pangu.view.dialog.CancelDialog;
 import com.tpyzq.mobile.pangu.view.dialog.LoadingDialog;
+import com.tpyzq.mobile.pangu.view.dialog.MistakeDialog;
 import com.tpyzq.mobile.pangu.view.keybody.InputPasswordView;
 import com.tpyzq.mobile.pangu.view.keybody.PopKeyBody;
 import com.yzd.unikeysdk.OnInputDoneCallBack;
@@ -207,7 +208,7 @@ public class ChangeDepositBankActivity extends BaseActivity implements View.OnCl
     public void checkCloseAccount(String stauts, String error_info) {
         switch (stauts) {
             case "0":
-                CancelDialog.cancleDialog(ChangeDepositBankActivity.this, "允许存管销户，确认继续吗？", -1, new CancelDialog.PositiveClickListener() {
+                CancelDialog.cancleDialog(ChangeDepositBankActivity.this, "允许存管销户，确认继续吗？", CancelDialog.DELIST, new CancelDialog.PositiveClickListener() {
                     @Override
                     public void onPositiveClick() {
                         Intent intent = new Intent();
@@ -221,7 +222,7 @@ public class ChangeDepositBankActivity extends BaseActivity implements View.OnCl
                 }, null);
                 break;
             case "1":
-                CancelDialog.cancleDialog(ChangeDepositBankActivity.this, "因执行账户预销户处理，需待T+1日银行回报后才允许做销户处理，确定继续吗？", -1, new CancelDialog.PositiveClickListener() {
+                CancelDialog.cancleDialog(ChangeDepositBankActivity.this, "因执行账户预销户处理，需待T+1日银行回报后才允许做销户处理，确定继续吗？", CancelDialog.DELIST, new CancelDialog.PositiveClickListener() {
                     @Override
                     public void onPositiveClick() {
                         //弹资金密码（根据数据库里的存储）
@@ -231,7 +232,7 @@ public class ChangeDepositBankActivity extends BaseActivity implements View.OnCl
                 break;
             case "2":
             case "3":
-                CancelDialog.cancleDialog(ChangeDepositBankActivity.this, error_info, CancelDialog.NOT_BUY, null, null);
+                showMistackDialog(error_info, null);
                 break;
         }
     }
@@ -259,8 +260,10 @@ public class ChangeDepositBankActivity extends BaseActivity implements View.OnCl
         mProgressDialog.show();
     }
 
-    private void showMistackDialog(String errorMsg, CancelDialog.PositiveClickListener listener) {
-        CancelDialog.cancleDialog(ChangeDepositBankActivity.this, errorMsg, CancelDialog.NOT_BUY, listener, null);
+    private void showMistackDialog(String errorMsg, MistakeDialog.MistakeDialgoListener listener) {
+
+        MistakeDialog.showDialog(errorMsg, ChangeDepositBankActivity.this, listener);
+//        CancelDialog.cancleDialog(ChangeDepositBankActivity.this, errorMsg, CancelDialog.NOT_BUY, listener, null);
     }
 
     /**
