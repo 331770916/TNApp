@@ -118,7 +118,7 @@ public class OkHttpUtils
     /**
      * 生产环境 置为false
      */
-    public static final  boolean DEBUG=false;
+    public static final  boolean DEBUG=true;
 
     public void execute(final RequestCall requestCall, Callback callback)
     {
@@ -198,7 +198,7 @@ public class OkHttpUtils
             public void run()
             {
                 try {
-                    if (!(e.getMessage().toLowerCase().contains("Cancel".toLowerCase())))
+                    if (!(e.getMessage().toLowerCase().matches(".*(cancel|closed).*")))
                         callback.onError(call, e, id);
                 } catch (Exception e) {
                     e.printStackTrace();

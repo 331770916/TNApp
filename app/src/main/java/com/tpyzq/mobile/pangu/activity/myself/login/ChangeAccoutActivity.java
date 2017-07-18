@@ -80,6 +80,7 @@ import com.tpyzq.mobile.pangu.log.LogHelper;
 import com.tpyzq.mobile.pangu.log.LogUtil;
 import com.tpyzq.mobile.pangu.util.ConstantUtil;
 import com.tpyzq.mobile.pangu.util.DeviceUtil;
+import com.tpyzq.mobile.pangu.util.FileUtil;
 import com.tpyzq.mobile.pangu.util.Helper;
 import com.tpyzq.mobile.pangu.util.SpUtils;
 import com.tpyzq.mobile.pangu.util.ToastUtils;
@@ -507,7 +508,7 @@ public class ChangeAccoutActivity extends BaseActivity implements View.OnClickLi
                         mCommit.dismiss();
                     }
                     LogHelper.e(TAG, e.toString());
-                    ResultDialog.getInstance().showText("网络异常");
+                    Helper.getInstance().showToast(ChangeAccoutActivity.this, ConstantUtil.NETWORK_ERROR);
                     mBindingbtn.setFocusable(true);
                     mBDPassword.setText("");
                     mBDPasswordET.setText("");
@@ -999,7 +1000,7 @@ public class ChangeAccoutActivity extends BaseActivity implements View.OnClickLi
                     mCommit.dismiss();
                 }
                 LogUtil.e(TAG, e.toString());
-                Helper.getInstance().showToast(ChangeAccoutActivity.this, "网络器异常");
+                Helper.getInstance().showToast(ChangeAccoutActivity.this, ConstantUtil.NETWORK_ERROR);
                 isLoginSuc = false;
                 toSecurityCode(null);
                 mBDPassword.setText("");
@@ -1449,11 +1450,6 @@ public class ChangeAccoutActivity extends BaseActivity implements View.OnClickLi
 
     }
 
-    @Override
-    public void onBackPressed() {
-        super.onBackPressed();
-        OkHttpUtil.cancelSingleRequestByTag(this.getClass().getName());
-    }
 
     @Override
     protected void onDestroy() {
