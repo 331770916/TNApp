@@ -32,7 +32,6 @@
             android:id="@+id/lv_transaction"
             android:layout_width="match_parent"
             android:layout_height="wrap_content"
-            android:divider="@color/lineColor"
-            android:dividerHeight="@dimen/size0" />
+            android:divider="@null"/>
     </RelativeLayout>
 </LinearLayout>

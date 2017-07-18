@@ -35,7 +35,7 @@ public class CancelDialog {
     public static final int RISK_EXPIRE = 2000;//风险评测已经到期
     public static final int RISK_NOT = 3000;//未做风险评测
     public static final int NOT_BUY = 4000; //不可购买提示
-    private static final int DELIST = 5000;//买卖界面的退市提醒
+    public static final int DELIST = 5000;//买卖界面的退市提醒
 
     public static void cancleDialog(final Activity activity, String message, int style, final PositiveClickListener positiveClickListener, final NagtiveClickListener nagtiveClickListener){
         final AlertDialog alertDialog = new AlertDialog.Builder(activity).create();

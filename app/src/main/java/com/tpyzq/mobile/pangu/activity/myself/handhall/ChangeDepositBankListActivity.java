@@ -19,8 +19,8 @@ import com.tpyzq.mobile.pangu.db.Db_PUB_USERS;
 import com.tpyzq.mobile.pangu.http.OkHttpUtil;
 import com.tpyzq.mobile.pangu.util.ConstantUtil;
 import com.tpyzq.mobile.pangu.util.SpUtils;
-import com.tpyzq.mobile.pangu.view.dialog.CancelDialog;
 import com.tpyzq.mobile.pangu.view.dialog.LoadingDialog;
+import com.tpyzq.mobile.pangu.view.dialog.MistakeDialog;
 import com.zhy.http.okhttp.callback.StringCallback;
 
 import org.json.JSONArray;
@@ -122,8 +122,9 @@ public class ChangeDepositBankListActivity extends BaseActivity implements View.
         mProgressDialog.show();
     }
 
-    private void showMistackDialog(String errorMsg, CancelDialog.PositiveClickListener listener) {
-        CancelDialog.cancleDialog(ChangeDepositBankListActivity.this, errorMsg, CancelDialog.NOT_BUY, listener, null);
+    private void showMistackDialog(String errorMsg, MistakeDialog.MistakeDialgoListener listener) {
+        MistakeDialog.showDialog(errorMsg, ChangeDepositBankListActivity.this, listener);
+//        CancelDialog.cancleDialog(ChangeDepositBankListActivity.this, errorMsg, CancelDialog.NOT_BUY, listener, null);
     }
 
     private void getBankList() {
