@@ -406,7 +406,7 @@ public class TransactionLoginActivity extends BaseActivity implements View.OnCli
                     if (mDownload != null) {
                         mDownload.dismiss();
                     }
-                    Helper.getInstance().showToast(TransactionLoginActivity.this, "下载插件成功");
+//                    Helper.getInstance().showToast(TransactionLoginActivity.this, "下载插件成功");
                 } else {            //下载失败后的参数
                     if (mDownload != null) {
                         mDownload.dismiss();

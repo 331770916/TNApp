@@ -21,7 +21,6 @@ import android.widget.EditText;
 import android.widget.ImageView;
 import android.widget.ListView;
 import android.widget.PopupWindow;
-import android.widget.TextView;
 
 import com.facebook.drawee.view.SimpleDraweeView;
 import com.tpyzq.mobile.pangu.R;
@@ -107,7 +106,6 @@ import com.yzd.unikeysdk.UnikeyUrls;
 import com.zhy.http.okhttp.OkHttpUtils;
 import com.zhy.http.okhttp.callback.StringCallback;
 
-import org.bouncycastle.asn1.x509.sigi.PersonalData;
 import org.json.JSONArray;
 import org.json.JSONException;
 import org.json.JSONObject;
@@ -761,7 +759,7 @@ public class ChangeAccoutActivity extends BaseActivity implements View.OnClickLi
                     if (mDownload != null) {
                         mDownload.dismiss();
                     }
-                    ToastUtils.showShort(ChangeAccoutActivity.this, "下载插件成功");
+//                    ToastUtils.showShort(ChangeAccoutActivity.this, "下载插件成功");
                 } else {            //下载失败后的参数
                     if (mDownload != null) {
                         mDownload.dismiss();
