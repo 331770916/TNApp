@@ -1,114 +1,64 @@
 package com.tpyzq.mobile.pangu.activity.trade.open_fund;
 
+import android.app.Dialog;
+import android.content.DialogInterface;
 import android.content.Intent;
-import android.os.AsyncTask;
-import android.text.TextUtils;
+import android.view.KeyEvent;
 import android.view.View;
-import android.widget.Button;
 import android.widget.EditText;
-import android.widget.ImageView;
-import android.widget.LinearLayout;
-import android.widget.ListView;
-import android.widget.TextView;
 import android.widget.Toast;
 
-import com.google.gson.Gson;
 import com.handmark.pulltorefresh.library.PullToRefreshBase;
 import com.handmark.pulltorefresh.library.PullToRefreshListView;
 import com.tpyzq.mobile.pangu.R;
 import com.tpyzq.mobile.pangu.activity.myself.login.TransactionLoginActivity;
+import com.tpyzq.mobile.pangu.adapter.trade.FundInfoAdapter;
 import com.tpyzq.mobile.pangu.adapter.trade.OptionalFundAdapter;
 import com.tpyzq.mobile.pangu.base.BaseActivity;
+import com.tpyzq.mobile.pangu.base.CustomApplication;
 import com.tpyzq.mobile.pangu.data.FundSubsEntity;
-import com.tpyzq.mobile.pangu.http.NetWorkUtil;
-import com.tpyzq.mobile.pangu.util.ConstantUtil;
+import com.tpyzq.mobile.pangu.http.OkHttpUtil;
+import com.tpyzq.mobile.pangu.http.doConnect.trade.FundInoConnect;
 import com.tpyzq.mobile.pangu.util.SpUtils;
-import com.tpyzq.mobile.pangu.util.ToastUtils;
-import com.zhy.http.okhttp.callback.StringCallback;
-
-import org.json.JSONArray;
-import org.json.JSONException;
-import org.json.JSONObject;
-
+import com.tpyzq.mobile.pangu.view.dialog.LoadingDialog;
 import java.util.ArrayList;
-import java.util.HashMap;
 import java.util.List;
-
-import okhttp3.Call;
 
 /**
  * 基金信息
  */
-public class FundInfoActivity extends BaseActivity implements View.OnClickListener{
-    private EditText et_search_fundcompany;
-    private Button bt_search;
-    private ImageView iv_back;
-    private PullToRefreshListView lv_fund;
-    private LinearLayout ll_title;
-    private TextView tv_text1, tv_text2, tv_text3, tv_text4;
-    private OptionalFundAdapter optionalFundAdapter;
-    private List<FundSubsEntity> fundSubsBeans;
-    private FundSubsEntity fundSubsBean;
+public class FundInfoActivity extends BaseActivity implements View.OnClickListener,
+        DialogInterface.OnCancelListener, PullToRefreshBase.OnRefreshListener2, FundInoConnect.FundInfoConnectListener {
+    public static final String TAG = FundInfoActivity.class.getSimpleName();
+    private Dialog                  mProgressDialog;
+    private EditText                mSearchContent_et;
+    private PullToRefreshListView   mListView;
+    private FundInfoAdapter         mAdapter;
+    private ArrayList<FundSubsEntity>    mBeans;
+    private String mSession;
     private int position = 0;
+
+    private boolean clickBackKey;//判断用户是否点击返回键取消网络请求
+
+    private FundInoConnect mFundInoConnect = new FundInoConnect();
 
     @Override
     public void initView() {
-        iv_back = (ImageView) findViewById(R.id.iv_back);
-        et_search_fundcompany = (EditText) findViewById(R.id.et_search_fundcompany);
-        bt_search = (Button) findViewById(R.id.bt_search);
-        lv_fund = (PullToRefreshListView) findViewById(R.id.lv_fund);
-        ll_title = (LinearLayout) findViewById(R.id.ll_title);
-        tv_text1 = (TextView) ll_title.findViewById(R.id.tv_text1);
-        tv_text2 = (TextView) ll_title.findViewById(R.id.tv_text2);
-        tv_text3 = (TextView) ll_title.findViewById(R.id.tv_text3);
-        tv_text4 = (TextView) ll_title.findViewById(R.id.tv_text4);
-        initData();
-    }
+        findViewById(R.id.iv_back).setOnClickListener(this);
+        findViewById(R.id.bt_search).setOnClickListener(this);
 
-    private void initData() {
-        fundSubsBeans = new ArrayList<FundSubsEntity>();
-        optionalFundAdapter = new OptionalFundAdapter(this);
-        tv_text1.setText("名称");
-        tv_text2.setText("净值/最低投资");
-        tv_text3.setText("风险等级");
-        tv_text4.setText("状态");
-        iv_back.setOnClickListener(this);
-        bt_search.setOnClickListener(this);
-        fundQuery("", 0, false);
-        lv_fund.setAdapter(optionalFundAdapter);
+        mSearchContent_et = (EditText) findViewById(R.id.et_search_fundcompany);
+        mListView = (PullToRefreshListView) findViewById(R.id.lv_fund);
+        mAdapter = new FundInfoAdapter(this, true);
+        mListView.setAdapter(mAdapter);
+        mListView.setOnRefreshListener(this);
 
-        lv_fund.setOnRefreshListener(new PullToRefreshBase.OnRefreshListener2<ListView>() {
-            @Override
-            public void onPullDownToRefresh(PullToRefreshBase<ListView> refreshView) {
+        mBeans = new ArrayList<FundSubsEntity>();
 
-                new AsyncTask<Void, Void, Void>() {
-                    @Override
-                    protected Void doInBackground(Void... params) {
-                        try {
-                            Thread.sleep(1500);
-                            fundSubsBeans.clear();
-                            fundQuery("", 0, false);
-                        } catch (InterruptedException e) {
-                            e.printStackTrace();
-                        }
-                        return null;
-                    }
 
-                    @Override
-                    protected void onPostExecute(Void result) {
-                        super.onPostExecute(result);
-                        //将下拉视图收起
-                        lv_fund.onRefreshComplete();
-                    }
-                }.execute();
-            }
-
-            @Override
-            public void onPullUpToRefresh(PullToRefreshBase<ListView> refreshView) {
-                position++;
-                fundQuery(et_search_fundcompany.getText().toString(), position, false);
-            }
-        });
+        initLoadDialog();
+        mSession = SpUtils.getString(getApplication(), "mSession", null);
+        mFundInoConnect.fundQueryConnect("", 0, mSession, TAG, this);
     }
 
     @Override
@@ -118,67 +68,92 @@ public class FundInfoActivity extends BaseActivity implements View.OnClickListen
                 finish();
                 break;
             case R.id.bt_search:
-                fundSubsBeans.clear();
-                fundQuery(et_search_fundcompany.getText().toString(), 0, false);
+                mBeans.clear();
+                mFundInoConnect.fundQueryConnect(mSearchContent_et.getText().toString(), 0, mSession, TAG, this);
                 break;
         }
     }
 
-    /**
-     * 获取基金产品
-     */
-    private void fundQuery(String company_name, int i, final boolean flag) {
+    @Override
+    public void onCancel(DialogInterface dialog) {
+        if (clickBackKey) {
+            OkHttpUtil.cancelSingleRequestByTag(TAG);
+        }
+    }
 
-        HashMap map300441 = new HashMap();
-        map300441.put("funcid", "300441");
-        map300441.put("token", SpUtils.getString(getApplication(), "mSession", null));
-        HashMap map300441_1 = new HashMap();
-        map300441_1.put("SEC_ID", "tpyzq");
-        map300441_1.put("FUND_TYPE", "");
-//        map300441_1.put("FUND_CODE", "");
-        map300441_1.put("FUND_COMPANY_NAME", company_name);
-        map300441_1.put("PAGE_INDEX", i);
-        map300441_1.put("PAGE_SIZE", "20");
-        map300441_1.put("FLAG", "true");
-        map300441.put("parms", map300441_1);
-        NetWorkUtil.getInstence().okHttpForPostString("", ConstantUtil.URL_JY, map300441, new StringCallback() {
-            @Override
-            public void onError(Call call, Exception e, int id) {
-                Toast.makeText(FundInfoActivity.this, "网络访问失败", Toast.LENGTH_SHORT).show();
+    @Override
+    public boolean onKeyDown(int keyCode, KeyEvent event) {
+        if ((keyCode == KeyEvent.KEYCODE_BACK)) {
+            if (mProgressDialog != null && mProgressDialog.isShowing()) {
+                clickBackKey = true;
+                mProgressDialog.cancel();
+                return false;
+            } else {
+                return super.onKeyDown(keyCode, event);
             }
+        }else {
+            return super.onKeyDown(keyCode, event);
+        }
+    }
 
-            @Override
-            public void onResponse(String response, int id) {
-                if (TextUtils.isEmpty(response)) {
-                    return;
-                }
-                try {
-                    JSONObject object = new JSONObject(response);
-                    String msg = object.getString("msg");
-                    String data = object.getString("data");
-                    String code = object.getString("code");
-                    JSONArray jsonArray = new JSONArray(data);
-                    if ("0".equals(code)) {
-                        if (flag){
-                            fundSubsBeans.remove(fundSubsBeans.size()-1);
-                        }
-                        for (int i = 0; i < jsonArray.length(); i++) {
-                            fundSubsBean = new Gson().fromJson(jsonArray.getString(i), FundSubsEntity.class);
-                            fundSubsBeans.add(fundSubsBean);
-                        }
-                        optionalFundAdapter.setData(fundSubsBeans);
-                    } else if ("-6".equals(code)) {
-                        startActivity(new Intent(FundInfoActivity.this, TransactionLoginActivity.class));
-                    } else {
-                        ToastUtils.showShort(FundInfoActivity.this, msg);
-                    }
+    @Override
+    public void onPullDownToRefresh(PullToRefreshBase refreshView) {
+        if (position > 0) {
+            position--;
+            mFundInoConnect.fundQueryConnect(mSearchContent_et.getText().toString(), position, mSession, TAG, this);
+        } else {
+            mFundInoConnect.fundQueryConnect(mSearchContent_et.getText().toString(), 0, mSession, TAG, this);
+        }
 
-                } catch (JSONException e) {
-                    e.printStackTrace();
-                }
-                lv_fund.onRefreshComplete();
-            }
-        });
+    }
+
+    @Override
+    public void onPullUpToRefresh(PullToRefreshBase refreshView) {
+        position++;
+        mFundInoConnect.fundQueryConnect(mSearchContent_et.getText().toString(), position, mSession, TAG, this);
+    }
+
+
+    @Override
+    public void onRefreshComplete() {
+        mListView.onRefreshComplete();
+    }
+
+    @Override
+    public void sessionFailed() {
+        closeLoadDialog();
+        startActivity(new Intent(FundInfoActivity.this, TransactionLoginActivity.class));
+    }
+
+    @Override
+    public void getFundResult(ArrayList<FundSubsEntity> entities) {
+        closeLoadDialog();
+        mBeans = entities;
+        mAdapter.setDatas(mBeans);
+    }
+
+    @Override
+    public void showError(String error) {
+        closeLoadDialog();
+        showMistackDialog(error);
+    }
+
+    private void initLoadDialog() {
+        mProgressDialog = LoadingDialog.initDialog(FundInfoActivity.this, "正在加载...");
+        mProgressDialog.setCanceledOnTouchOutside(false);
+        mProgressDialog.setOnCancelListener(this);
+        mProgressDialog.show();
+    }
+
+    private void closeLoadDialog() {
+        if (mProgressDialog != null && mProgressDialog.isShowing()) {
+            mProgressDialog.dismiss();
+        }
+    }
+
+    private void showMistackDialog(String errorMsg) {
+        Toast.makeText(CustomApplication.getContext(), errorMsg, Toast.LENGTH_SHORT).show();
+//        MistakeDialog.showDialog(errorMsg, FundInfoActivity.this, listener);
     }
 
     @Override
