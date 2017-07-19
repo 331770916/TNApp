@@ -48,7 +48,6 @@
             android:layout_width="match_parent"
             android:layout_height="@dimen/size40"
             android:layout_marginBottom="@dimen/size10"
-            android:layout_marginTop="@dimen/size10"
             android:background="@color/white"
             android:orientation="horizontal">
 
@@ -81,19 +80,11 @@
             android:background="@color/white"
             android:orientation="vertical">
 
-            <include
-                android:id="@+id/ll_title"
-                layout="@layout/item_fourtext_header" />
-            <View
-                android:layout_width="match_parent"
-                android:layout_height="@dimen/size1"
-                android:background="@color/grey" />
             <com.handmark.pulltorefresh.library.PullToRefreshListView
                 android:id="@+id/lv_fund"
                 android:layout_width="match_parent"
                 android:layout_height="match_parent"
-                android:dividerHeight="0dp"
-                android:divider="@android:color/transparent"
+                android:divider="@null"
                 app:ptrAnimationStyle="flip"
                 app:ptrMode="both"
                 />

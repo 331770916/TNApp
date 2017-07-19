@@ -16,4 +16,5 @@ public class FundSubsEntity implements Serializable{
         public String RISK_RATING;
         public String FUND_VAL;
         public String OPEN_SHARE;
+        public String FUND_STATUS_NAME;
 }
