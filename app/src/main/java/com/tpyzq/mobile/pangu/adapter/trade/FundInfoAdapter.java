@@ -154,6 +154,7 @@ public class FundInfoAdapter extends BaseAdapter {
     private void initDiscriblayout(int position, LinearLayout layout) {
         layout.removeAllViews();
         String company = mEntitys.get(position).FUND_COMPANY_NAME;
+        String type = mEntitys.get(position).FEE_TYPE;
         String level = mEntitys.get(position).OFUND_RISKLEVEL_NAME;
         String status = mEntitys.get(position).FUND_STATUS_NAME;
 
@@ -167,6 +168,16 @@ public class FundInfoAdapter extends BaseAdapter {
             textView.setTextSize(10);
             textView.setBackgroundResource(R.drawable.bg_tv_fundinfo);
             textView.setText(company);
+            textView.setLayoutParams(layoutParams);
+            layout.addView(textView);
+        }
+
+        if (!TextUtils.isEmpty(type)) {
+            TextView textView = new TextView(mContext);
+            textView.setTextColor(ContextCompat.getColor(mContext, R.color.texts));
+            textView.setTextSize(10);
+            textView.setBackgroundResource(R.drawable.bg_tv_fundinfo);
+            textView.setText(type);
             textView.setLayoutParams(layoutParams);
             layout.addView(textView);
         }
