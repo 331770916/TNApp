@@ -83,18 +83,20 @@ public class StockHolder extends BaseStockDetailPager {
                 }
                 try {
                     JSONObject object = new JSONObject(response);
-                    String code = object.getString("code");
-                    String data = object.getString("data");
-                    String msg = object.getString("msg");
-                    if (code.equals("0")) {
+                    String code = object.optString("code");
+                    String data = object.optString("data");
+                    String msg = object.optString("msg");
+                    if ("0".equals(code)) {
                         JSONArray dataArray = new JSONArray(data);
-                        JSONObject dateObject = dataArray.getJSONObject(0);
-                        StockHolderEntity stockHolderBean = new StockHolderEntity();
-                        stockHolderBean.AFLOATS = dateObject.getString("AFLOATS");
-                        stockHolderBean.AVERAGEHOLDSUM = dateObject.getString("AVERAGEHOLDSUM");
-                        stockHolderBean.SHNUM = dateObject.getString("SHNUM");
-                        stockHolderBean.TOTALSHARES = dateObject.getString("TOTALSHARES");
-                        setText(stockHolderBean);
+                        if(null != dataArray && dataArray.length() > 0){
+                            JSONObject dateObject = dataArray.getJSONObject(0);
+                            StockHolderEntity stockHolderBean = new StockHolderEntity();
+                            stockHolderBean.AFLOATS = dateObject.getString("AFLOATS");
+                            stockHolderBean.AVERAGEHOLDSUM = dateObject.getString("AVERAGEHOLDSUM");
+                            stockHolderBean.SHNUM = dateObject.getString("SHNUM");
+                            stockHolderBean.TOTALSHARES = dateObject.getString("TOTALSHARES");
+                            setText(stockHolderBean);
+                        }
                     } else {
 
                     }
@@ -122,22 +124,24 @@ public class StockHolder extends BaseStockDetailPager {
                 LogUtil.e("十大股东", response);
                 try {
                     JSONObject object = new JSONObject(response);
-                    String code = object.getString("code");
-                    String data = object.getString("data");
-                    String msg = object.getString("msg");
+                    String code = object.optString("code");
+                    String data = object.optString("data");
+                    String msg = object.optString("msg");
                     JSONArray dataArray = new JSONArray(data);
-                    if (code.equals("0")) {
-                        for (int i = 0; i < dataArray.length(); i++) {
-                            JSONObject dataObejct = dataArray.getJSONObject(i);
-                            StockHolderTop10Entity stockHolderTop10Bean = new StockHolderTop10Entity();
-                            stockHolderTop10Bean.ENDDATE = dataObejct.getString("ENDDATE");
-                            stockHolderTop10Bean.HOLDSUMCHANGERATE = dataObejct.getString("HOLDSUMCHANGERATE");
-                            stockHolderTop10Bean.PCTOFTOTALSHARES = dataObejct.getString("PCTOFTOTALSHARES");
-                            stockHolderTop10Bean.SHLIST = dataObejct.getString("SHLIST");
-                            stockHolderTop10Bean.SHNO = dataObejct.getString("SHNO");
-                            stockHolderTop10Been.add(stockHolderTop10Bean);
+                    if ("0".equals(code)) {
+                        if(null != dataArray && dataArray.length() > 0){
+                            for (int i = 0; i < dataArray.length(); i++) {
+                                JSONObject dataObejct = dataArray.getJSONObject(i);
+                                StockHolderTop10Entity stockHolderTop10Bean = new StockHolderTop10Entity();
+                                stockHolderTop10Bean.ENDDATE = dataObejct.getString("ENDDATE");
+                                stockHolderTop10Bean.HOLDSUMCHANGERATE = dataObejct.getString("HOLDSUMCHANGERATE");
+                                stockHolderTop10Bean.PCTOFTOTALSHARES = dataObejct.getString("PCTOFTOTALSHARES");
+                                stockHolderTop10Bean.SHLIST = dataObejct.getString("SHLIST");
+                                stockHolderTop10Bean.SHNO = dataObejct.getString("SHNO");
+                                stockHolderTop10Been.add(stockHolderTop10Bean);
+                            }
+                            stockHolderAdapter.setStockHolderTop10Beans(stockHolderTop10Been);
                         }
-                        stockHolderAdapter.setStockHolderTop10Beans(stockHolderTop10Been);
                     } else {
 
                     }

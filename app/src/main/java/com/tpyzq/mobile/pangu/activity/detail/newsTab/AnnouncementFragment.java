@@ -138,9 +138,9 @@ public class AnnouncementFragment extends BaseDetailNewsPager implements View.On
 //                Log.i(TAG,response);
                 try {
                     JSONObject jsonObject = new JSONObject(response);
-                    String code = jsonObject.getString("code");
+                    String code = jsonObject.optString("code");
                     if("0".equals(code)){
-                        JSONArray data = jsonObject.getJSONArray("data");
+                        JSONArray data = jsonObject.optJSONArray("data");
                         for (int i = 0; i < data.length(); i++) {
                             DetailNewsEntity bean = new DetailNewsEntity();
                             JSONArray item = data.optJSONArray(i);

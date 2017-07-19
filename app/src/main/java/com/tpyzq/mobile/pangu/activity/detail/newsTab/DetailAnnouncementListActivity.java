@@ -221,12 +221,12 @@ public class DetailAnnouncementListActivity extends BaseActivity implements View
 
                 try {
                     JSONObject jsonObject = new JSONObject(response);
-                    String code = jsonObject.getString("code");
+                    String code = jsonObject.optString("code");
                     if("0".equals(code)){
-                        JSONArray data = jsonObject.getJSONArray("data");
+                        JSONArray data = jsonObject.optJSONArray("data");
                         for (int i = 0; i < data.length(); i++) {
                             DetailNewsEntity bean = new DetailNewsEntity();
-                            JSONArray item = data.getJSONArray(i);
+                            JSONArray item = data.optJSONArray(i);
                             String title = item.getString(1);
                             String source = item.getString(7);
                             String time = item.getString(19);

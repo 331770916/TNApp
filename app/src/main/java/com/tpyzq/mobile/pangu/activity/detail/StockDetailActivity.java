@@ -618,10 +618,10 @@ public class StockDetailActivity extends BaseActivity implements  View.OnClickLi
         int forwordFlag = EQUAL;//0  平  1 zhang  2 die
         if (!TextUtils.isEmpty(stockEntity.getNewPrice()) && !TextUtils.isEmpty(stockEntity.getClose())) {
             //涨跌
-//            float zdTv = Float.parseFloat(stockEntity.getNewPrice()) - Float.parseFloat(stockEntity.getClose());
-            BigDecimal new_price = new BigDecimal(stockEntity.getNewPrice());
-            BigDecimal close_price = new BigDecimal(stockEntity.getClose());
-            double zdTv = new_price.subtract(close_price).doubleValue();
+            float zdTv = Float.parseFloat(stockEntity.getNewPrice()) - Float.parseFloat(stockEntity.getClose());
+//            BigDecimal new_price = new BigDecimal(stockEntity.getNewPrice());
+//            BigDecimal close_price = new BigDecimal(stockEntity.getClose());
+//            double zdTv = new_price.subtract(close_price).doubleValue();
             String fuhao = "";
             if(zdTv>0){
                 fuhao = "+";
@@ -632,7 +632,8 @@ public class StockDetailActivity extends BaseActivity implements  View.OnClickLi
             mTopDiff.setText(fuhao+mFormat1.format(zdTv));
             //涨跌幅
 //            float zdfTv = zdTv / Float.parseFloat(stockEntity.getClose());
-            double zdfTv = zdTv / close_price.doubleValue();
+            float zdfTv = Helper.getDiffPercent(stockEntity.getNewPrice(),stockEntity.getClose());
+//            double zdfTv = zdTv / close_price.doubleValue();
             mTopRange.setText(fuhao+mFormat2.format(zdfTv));
             titleContent2 = landRangStr+"("+fuhao+mFormat1.format(zdTv)+" "+fuhao+mFormat2.format(zdfTv)+")";
 

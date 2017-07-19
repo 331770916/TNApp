@@ -443,6 +443,26 @@ public class Helper {
     }
 
     /**
+     * 获取涨跌幅
+     * @param a_price
+     * @param a_close
+     * @return
+     */
+    public static float getDiffPercent(String a_price,String a_close){
+        float result = 0;
+        try {
+            int price = Math.round(Float.parseFloat(a_price)*1000);
+            int close = Math.round(Float.parseFloat(a_close)*1000);
+            if(close==0){
+                return 0;
+            }
+            result = (float)(price-close)/close;
+        }catch (Exception e){
+        }
+        return  result;
+    }
+
+    /**
      * 涨跌幅
      *
      * @param close

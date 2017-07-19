@@ -7,7 +7,7 @@ import android.text.TextUtils;
  * 判断股票代码市场
  */
 public class JudgeStockUtils {
-    public static String HU_INDEX = "10";      //沪其他
+    public static String HU_INDEX = "10";      //沪指数
     public static String HU_A= "11";      //沪A
     public static String HU_B= "12";      //沪B
     public static String HU_BOND = "13";      //沪债券
