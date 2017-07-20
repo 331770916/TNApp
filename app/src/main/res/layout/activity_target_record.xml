@@ -1,0 +1,65 @@
+<?xml version="1.0" encoding="utf-8"?>
+<LinearLayout xmlns:android="http://schemas.android.com/apk/res/android"
+    android:orientation="vertical"
+    android:background="@color/bgColor"
+    android:layout_width="match_parent"
+    android:layout_height="match_parent">
+
+    <RelativeLayout
+        android:layout_width="match_parent"
+        android:layout_height="@dimen/size25"
+        android:background="#368CE6"
+        android:clipToPadding="true"
+        android:id="@+id/rl_top_bar"
+        android:fitsSystemWindows="true" />
+
+    <include layout="@layout/updatepwd_top"
+        android:id="@+id/startVideTop" />
+
+    <LinearLayout
+        android:layout_width="match_parent"
+        android:layout_height="@dimen/size40"
+        android:background="@color/white"
+        android:orientation="horizontal">
+
+        <TextView
+            android:layout_width="0dp"
+            android:layout_height="match_parent"
+            android:gravity="center_vertical"
+            android:textSize="@dimen/txtSize14"
+            android:textColor="@color/newStockTitle"
+            android:paddingLeft="@dimen/size20"
+            android:text="扣款日期"
+            android:layout_weight="1"/>
+
+        <TextView
+            android:layout_width="0dp"
+            android:layout_height="match_parent"
+            android:textSize="@dimen/txtSize14"
+            android:textColor="@color/newStockTitle"
+            android:gravity="center"
+            android:text="扣款金额"
+            android:layout_weight="1"/>
+
+        <TextView
+            android:layout_width="0dp"
+            android:layout_height="match_parent"
+            android:gravity="center_vertical|right"
+            android:paddingRight="@dimen/size20"
+            android:textSize="@dimen/txtSize14"
+            android:textColor="@color/newStockTitle"
+            android:text="处理状态"
+            android:layout_weight="1"/>
+
+    </LinearLayout>
+    <View
+        android:layout_width="match_parent"
+        android:layout_height="1px"
+        android:background="@color/lineColor"/>
+    <ListView
+        android:id="@+id/targetRecordLv"
+        android:layout_width="match_parent"
+        android:layout_height="match_parent"
+        android:divider="@null"/>
+
+</LinearLayout>

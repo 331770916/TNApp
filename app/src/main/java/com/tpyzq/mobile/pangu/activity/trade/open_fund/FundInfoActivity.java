@@ -5,6 +5,7 @@ import android.content.DialogInterface;
 import android.content.Intent;
 import android.view.KeyEvent;
 import android.view.View;
+import android.widget.AdapterView;
 import android.widget.EditText;
 import android.widget.Toast;
 
@@ -28,7 +29,8 @@ import java.util.List;
  * 基金信息
  */
 public class FundInfoActivity extends BaseActivity implements View.OnClickListener,
-        DialogInterface.OnCancelListener, PullToRefreshBase.OnRefreshListener2, FundInoConnect.FundInfoConnectListener {
+        DialogInterface.OnCancelListener, PullToRefreshBase.OnRefreshListener2,
+        FundInoConnect.FundInfoConnectListener, AdapterView.OnItemClickListener {
     public static final String TAG = FundInfoActivity.class.getSimpleName();
     private Dialog                  mProgressDialog;
     private EditText                mSearchContent_et;
@@ -52,6 +54,7 @@ public class FundInfoActivity extends BaseActivity implements View.OnClickListen
         mAdapter = new FundInfoAdapter(this, true);
         mListView.setAdapter(mAdapter);
         mListView.setOnRefreshListener(this);
+        mListView.setOnItemClickListener(this);
 
         mBeans = new ArrayList<FundSubsEntity>();
 
@@ -72,6 +75,13 @@ public class FundInfoActivity extends BaseActivity implements View.OnClickListen
                 mFundInoConnect.fundQueryConnect(mSearchContent_et.getText().toString(), 0, mSession, TAG, this);
                 break;
         }
+    }
+
+    @Override
+    public void onItemClick(AdapterView<?> parent, View view, int position, long id) {
+        Intent intent = new Intent();
+        intent.setClass(FundInfoActivity.this, TargetInvestmentRecordActivity.class);
+        startActivity(intent);
     }
 
     @Override
