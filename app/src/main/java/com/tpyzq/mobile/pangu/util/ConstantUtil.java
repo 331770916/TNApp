@@ -163,10 +163,8 @@ public class ConstantUtil {
         String URL_USERINFO = "";
         if ("com.tpyzq.self.mobile.pangu".equalsIgnoreCase(BuildConfig.APPLICATION_ID)) {
             URL_USERINFO = SJYZM + SIX_SERVLET;
-//            Log.e("ConstantUtil","生产包名：URL_USERINFO=="+URL_USERINFO);
         } else {
             URL_USERINFO = IP + SIX_SERVLET;
-//            Log.e("ConstantUtil","其它环境：URL_USERINFO=="+URL_USERINFO);
         }
         return URL_USERINFO;
     }
