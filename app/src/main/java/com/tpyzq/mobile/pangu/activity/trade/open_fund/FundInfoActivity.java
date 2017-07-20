@@ -51,7 +51,7 @@ public class FundInfoActivity extends BaseActivity implements View.OnClickListen
 
         mSearchContent_et = (EditText) findViewById(R.id.et_search_fundcompany);
         mListView = (PullToRefreshListView) findViewById(R.id.lv_fund);
-        mAdapter = new FundInfoAdapter(this, true);
+        mAdapter = new FundInfoAdapter(this, false);
         mListView.setAdapter(mAdapter);
         mListView.setOnRefreshListener(this);
         mListView.setOnItemClickListener(this);
@@ -79,9 +79,9 @@ public class FundInfoActivity extends BaseActivity implements View.OnClickListen
 
     @Override
     public void onItemClick(AdapterView<?> parent, View view, int position, long id) {
-        Intent intent = new Intent();
-        intent.setClass(FundInfoActivity.this, TargetInvestmentRecordActivity.class);
-        startActivity(intent);
+//        Intent intent = new Intent();
+//        intent.setClass(FundInfoActivity.this, TargetInvestmentRecordActivity.class);
+//        startActivity(intent);
     }
 
     @Override
