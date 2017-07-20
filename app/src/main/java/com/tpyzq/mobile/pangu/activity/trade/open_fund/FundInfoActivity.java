@@ -80,14 +80,14 @@ public class FundInfoActivity extends BaseActivity implements View.OnClickListen
         lv_fund.setOnRefreshListener(new PullToRefreshBase.OnRefreshListener2<ListView>() {
             @Override
             public void onPullDownToRefresh(PullToRefreshBase<ListView> refreshView) {
-
+                final String searchCode = et_search_fundcompany.getText().toString();
                 new AsyncTask<Void, Void, Void>() {
                     @Override
                     protected Void doInBackground(Void... params) {
                         try {
                             Thread.sleep(1500);
                             fundSubsBeans.clear();
-                            fundQuery("", 0, false);
+                            fundQuery(searchCode, 0, false);
                         } catch (InterruptedException e) {
                             e.printStackTrace();
                         }
