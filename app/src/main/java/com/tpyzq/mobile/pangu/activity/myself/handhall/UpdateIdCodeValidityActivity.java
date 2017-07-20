@@ -241,7 +241,7 @@ public class UpdateIdCodeValidityActivity extends BaseActivity implements Dialog
         params.put("token", token);
         map.put("params", params);
 
-        OkHttpUtil.okHttpForPostString(TAG, ConstantUtil.URL_USERINFO, map, new StringCallback() {
+        OkHttpUtil.okHttpForPostString(TAG, ConstantUtil.getURL_USERINFO(), map, new StringCallback() {
             @Override
             public void onError(Call call, Exception e, int id) {
                 if (mProgressDialog != null && mProgressDialog.isShowing()) {
@@ -466,7 +466,7 @@ public class UpdateIdCodeValidityActivity extends BaseActivity implements Dialog
         map1.put("cert_addr", cert_addr);//地址
         map.put("params", map1);
 
-        NetWorkUtil.getInstence().okHttpForPostString(TAG, ConstantUtil.URL_SFZYXQ, map, new StringCallback() {
+        NetWorkUtil.getInstence().okHttpForPostString(TAG, ConstantUtil.getURL_USERINFO(), map, new StringCallback() {
             @Override
             public void onError(Call call, Exception e, int id) {
                 e.printStackTrace();
@@ -525,7 +525,7 @@ public class UpdateIdCodeValidityActivity extends BaseActivity implements Dialog
         params.put("result_comment", "信息录入");
         map.put("params", params);
 
-        OkHttpUtil.okHttpForPostString(TAG, ConstantUtil.URL_USERINFO, map, new StringCallback() {
+        OkHttpUtil.okHttpForPostString(TAG, ConstantUtil.getURL_USERINFO(), map, new StringCallback() {
             @Override
             public void onError(Call call, Exception e, int id) {
                 e.printStackTrace();

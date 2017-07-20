@@ -118,7 +118,7 @@ public class StartVideoActivity extends BaseActivity implements View.OnClickList
         params.put("result_comment", "视频验证");
         map.put("params", params);
 
-        OkHttpUtil.okHttpForPostString(TAG, ConstantUtil.URL_USERINFO, map, new StringCallback() {
+        OkHttpUtil.okHttpForPostString(TAG, ConstantUtil.getURL_USERINFO(), map, new StringCallback() {
             @Override
             public void onError(Call call, Exception e, int id) {
                 e.printStackTrace();
@@ -179,7 +179,7 @@ public class StartVideoActivity extends BaseActivity implements View.OnClickList
         params.put("wtApplyId", "0");
         map.put("params", params);
 
-        OkHttpUtil.okHttpForPostString(TAG, ConstantUtil.URL_USERINFO, map, new StringCallback() {
+        OkHttpUtil.okHttpForPostString(TAG, ConstantUtil.getURL_USERINFO(), map, new StringCallback() {
             @Override
             public void onError(Call call, Exception e, int id) {
                 if (mProgressDialog != null && mProgressDialog.isShowing()) {
