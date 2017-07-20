@@ -294,6 +294,13 @@ public abstract class BaseActivity extends AppCompatActivity {
     }
 
     @Override
+    public void finish() {
+        super.finish();
+        NetworkManager.removeFromStack(this);
+        OkHttpUtil.cancelSingleRequestByTag(this.getClass().getName());
+    }
+
+    @Override
     protected void onDestroy() {
         destroy();
         super.onDestroy();
