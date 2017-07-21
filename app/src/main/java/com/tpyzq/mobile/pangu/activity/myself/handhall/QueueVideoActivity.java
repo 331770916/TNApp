@@ -228,7 +228,7 @@ public class QueueVideoActivity extends BaseActivity implements View.OnClickList
         params.put("rnd", "" + System.currentTimeMillis());
         map.put("params", params);
 
-        OkHttpUtil.okHttpForPostString(TAG, ConstantUtil.URL_USERINFO, map, new StringCallback() {
+        OkHttpUtil.okHttpForPostString(TAG, ConstantUtil.getURL_USERINFO(), map, new StringCallback() {
             @Override
             public void onError(Call call, Exception e, int id) {
                 e.printStackTrace();
@@ -325,7 +325,7 @@ public class QueueVideoActivity extends BaseActivity implements View.OnClickList
         Map<String,String> params = new HashMap<>();
         params.put("userId", userId);
         map.put("params", params);
-        OkHttpUtil.okHttpForPostString(TAG, ConstantUtil.URL_USERINFO, map, new StringCallback() {
+        OkHttpUtil.okHttpForPostString(TAG, ConstantUtil.getURL_USERINFO(), map, new StringCallback() {
             @Override
             public void onError(Call call, Exception e, int id) {
 

@@ -126,7 +126,7 @@ public class ChangePasswordActivity extends BaseActivity implements View.OnClick
                             ToastUtils.showShort(this, "新密码不能与原密码相同");
                             setTextView();
                         } else if (!mKeyboardInput_mNew.equals(mKeyboardInput_mAgainNew)) {
-                            ToastUtils.showShort(this, "俩次输入密码不一样");
+                            ToastUtils.showShort(this, "两次输入密码不一样");
                             setTextView();
                         } else {
                             int a = Helper.weakPwdCheck(mKeyboardInput_mNew);
@@ -154,7 +154,7 @@ public class ChangePasswordActivity extends BaseActivity implements View.OnClick
                         ToastUtils.showShort(this, "原密码跟新密码不一样");
                         setTextView();
                     } else if (!mNewET_str.equals(mAgainNewET_str)) {
-                        ToastUtils.showShort(this, "俩次输入密码不样");
+                        ToastUtils.showShort(this, "两次输入密码不样");
                         setTextView();
                     } else {
                         int a = Helper.weakPwdCheck(mNewET_str);

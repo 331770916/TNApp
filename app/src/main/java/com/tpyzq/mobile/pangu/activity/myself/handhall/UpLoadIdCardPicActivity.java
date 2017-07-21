@@ -350,7 +350,7 @@ public class UpLoadIdCardPicActivity extends BaseActivity implements View.OnClic
         params.put("result_comment", "证件上传");
         map.put("params", params);
 
-        OkHttpUtil.okHttpForPostString(TAG, ConstantUtil.URL_USERINFO, map, new StringCallback() {
+        OkHttpUtil.okHttpForPostString(TAG, ConstantUtil.getURL_USERINFO(), map, new StringCallback() {
             @Override
             public void onError(Call call, Exception e, int id) {
                 e.printStackTrace();
@@ -445,7 +445,7 @@ public class UpLoadIdCardPicActivity extends BaseActivity implements View.OnClic
         params.put("image_data", imageBase64);//通信
         map.put("params", params);
 
-        OkHttpUtil.okHttpForPostString(TAG, ConstantUtil.URL_USERINFO, map, new StringCallback() {
+        OkHttpUtil.okHttpForPostString(TAG, ConstantUtil.getURL_USERINFO(), map, new StringCallback() {
             @Override
             public void onError(Call call, Exception e, int id) {
                 e.printStackTrace();
@@ -518,7 +518,7 @@ public class UpLoadIdCardPicActivity extends BaseActivity implements View.OnClic
         map1.put("apply_status", 1);
         map1.put("result_comment", "");
         map.put("params", map1);
-        OkHttpUtil.okHttpForPostString(TAG, ConstantUtil.URL_SFZYXQ, map, new StringCallback() {
+        OkHttpUtil.okHttpForPostString(TAG, ConstantUtil.getURL_USERINFO(), map, new StringCallback() {
             @Override
             public void onError(Call call, Exception e, int id) {
                 e.printStackTrace();
@@ -579,7 +579,7 @@ public class UpLoadIdCardPicActivity extends BaseActivity implements View.OnClic
         map1.put("taskUrl", "/wtIdentityTask/");
         map.put("params", map1);
 
-        OkHttpUtil.okHttpForPostString(TAG, ConstantUtil.URL_SFZYXQ, map, new StringCallback() {
+        OkHttpUtil.okHttpForPostString(TAG, ConstantUtil.getURL_USERINFO(), map, new StringCallback() {
             @Override
             public void onError(Call call, Exception e, int id) {
                 e.printStackTrace();

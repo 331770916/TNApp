@@ -155,14 +155,22 @@ public class ConstantUtil {
     //热搜
     public static String URL_RS = IP + FIVE_RESOU;
 
+    //身份证有效期变更
+//    public static String URL_SFZYXQ = IP + SIX_SERVLET;
     //填写信息对应接口
-    public static String URL_USERINFO = IP + SIX_SERVLET;
+//    public static String URL_USERINFO = IP + SIX_SERVLET;
+    public static String getURL_USERINFO(){
+        String URL_USERINFO = "";
+        if ("com.tpyzq.self.mobile.pangu".equalsIgnoreCase(BuildConfig.APPLICATION_ID)) {
+            URL_USERINFO = SJYZM + SIX_SERVLET;
+        } else {
+            URL_USERINFO = IP + SIX_SERVLET;
+        }
+        return URL_USERINFO;
+    }
 
     //三存银行变更
     public static String URL_SCYHBG = SJYZM + ONE_SERVLET;
-
-    //身份证有效期变更
-    public static String URL_SFZYXQ = IP + SIX_SERVLET;
 
     //跟新下载
     public static String URL_UPDATE = IP + SEVEN_ZIXUN;
@@ -217,7 +225,7 @@ public class ConstantUtil {
         URL_FX = appip + THREE_SERVLET;
         URL_RS = appip + FIVE_RESOU;
         URL_SCYHBG = appip + ONE_SERVLET;
-        URL_SFZYXQ = appip + SIX_SERVLET;
+//        URL_SFZYXQ = appip + SIX_SERVLET;
         URL_UPDATE = appip + SEVEN_ZIXUN;
         //交易
         URL_JY = jyip + ONE_SERVLET;

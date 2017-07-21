@@ -1,40 +1,61 @@
 <?xml version="1.0" encoding="utf-8"?>
 <LinearLayout xmlns:android="http://schemas.android.com/apk/res/android"
     android:layout_width="match_parent"
-    android:layout_height="450dp"
+    android:layout_height="match_parent"
     android:orientation="vertical">
-    <LinearLayout android:layout_width="@dimen/size250"
-        android:layout_height="400dp"
+
+    <RelativeLayout
+        android:layout_width="@dimen/size250"
+        android:layout_height="wrap_content"
+        android:layout_gravity="center"
+        android:minHeight="400dp"
+        android:layout_marginTop="70dp"
         android:background="@mipmap/bg_notice"
-        android:layout_marginBottom="20dp"
-        android:orientation="vertical"
-        android:layout_gravity="center_horizontal">
+        android:layout_marginBottom="120dp"
+        android:orientation="vertical">
+
         <TextView
             android:id="@+id/tv_title"
             android:layout_width="match_parent"
             android:layout_height="wrap_content"
-            android:layout_marginTop="@dimen/size150"
             android:layout_marginLeft="@dimen/size20"
             android:layout_marginRight="@dimen/size20"
-            android:text="标题" />
-    <WebView
-        android:id="@+id/wv"
-        android:background="@color/blue"
-        android:layout_width="match_parent"
-        android:layout_height="@dimen/size150"
-        android:layout_marginTop="@dimen/size5"
-        android:layout_marginLeft="@dimen/size15"
-        android:layout_marginRight="@dimen/size15" />
+            android:layout_marginTop="@dimen/size160"
+            android:ellipsize="end"
+            android:maxLines="2"
+            android:text="" />
 
-    <Button
-        android:id="@+id/but_yes"
-        android:layout_width="@dimen/size200"
-        android:layout_height="@dimen/size40"
-        android:layout_gravity="center"
-        android:layout_marginTop="25dp"
-        android:background="@drawable/shape_blue_button"
-        android:text="哞~！"
-        android:textSize="@dimen/txtSize18"
-        android:textColor="@color/white" />
-        </LinearLayout>
+        <RelativeLayout
+            android:layout_below="@id/tv_title"
+            android:layout_width="@dimen/size250"
+            android:layout_height="220dp"
+            android:layout_gravity="center_horizontal"
+            android:orientation="vertical">
+
+            <Button
+                android:layout_centerHorizontal="true"
+                android:layout_alignParentBottom="true"
+                android:id="@+id/but_yes"
+                android:layout_width="@dimen/size200"
+                android:layout_height="@dimen/size40"
+                android:layout_gravity="center"
+                android:layout_marginTop="25dp"
+                android:background="@drawable/shape_blue_button"
+                android:text="哞~！"
+                android:layout_marginBottom="@dimen/size5"
+                android:textColor="@color/white"
+                android:textSize="@dimen/txtSize18" />
+
+            <WebView
+                android:layout_above="@id/but_yes"
+                android:id="@+id/wv"
+                android:layout_width="match_parent"
+                android:layout_height="@dimen/size150"
+                android:layout_marginLeft="@dimen/size15"
+                android:layout_marginRight="@dimen/size15"
+                android:layout_marginTop="@dimen/size8"
+                android:background="@color/blue" />
+
+        </RelativeLayout>
+    </RelativeLayout>
 </LinearLayout>

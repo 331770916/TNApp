@@ -71,6 +71,7 @@ public class AccountPowerActivity extends BaseActivity implements View.OnClickLi
         tv_hetong.setOnClickListener(this);
 //        tv_contacts = (TextView) findViewById(tv_contacts);
         tv_fengxian.setOnClickListener(this);
+        tv_identity.setOnClickListener(this);
     }
 
     private void getServer1() {
@@ -297,6 +298,9 @@ public class AccountPowerActivity extends BaseActivity implements View.OnClickLi
                 break;
             case R.id.tv_hetong:
                 startActivity(new Intent(AccountPowerActivity.this, AgreementActivity.class));
+                break;
+            case R.id.tv_identity:
+                startActivity(new Intent(AccountPowerActivity.this, UpdateIdCodeValidityActivity.class));
                 break;
         }
     }

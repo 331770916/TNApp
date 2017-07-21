@@ -9,6 +9,7 @@ import android.support.v4.view.ViewPager;
 import android.text.Editable;
 import android.text.TextUtils;
 import android.text.TextWatcher;
+import android.util.Log;
 import android.view.View;
 import android.view.ViewGroup;
 import android.view.ViewTreeObserver;
@@ -40,6 +41,7 @@ import com.tpyzq.mobile.pangu.activity.trade.view.SuccessTransactionPager;
 import com.tpyzq.mobile.pangu.adapter.trade.BuySellAdapter;
 import com.tpyzq.mobile.pangu.adapter.trade.StockVpAdapter;
 import com.tpyzq.mobile.pangu.base.BaseActivity;
+import com.tpyzq.mobile.pangu.base.CustomApplication;
 import com.tpyzq.mobile.pangu.data.AuthorizeEntity;
 import com.tpyzq.mobile.pangu.data.TimeShareEntity;
 import com.tpyzq.mobile.pangu.data.TransStockEntity;
@@ -70,12 +72,14 @@ import com.tpyzq.mobile.pangu.view.magicindicator.buildins.commonnavigator.abs.I
 import com.tpyzq.mobile.pangu.view.magicindicator.buildins.commonnavigator.indicators.LinePagerIndicator;
 import com.tpyzq.mobile.pangu.view.magicindicator.buildins.commonnavigator.titles.SimplePagerTitleView;
 import com.zhy.http.okhttp.callback.StringCallback;
+import com.zhy.http.okhttp.utils.Exceptions;
 
 import org.json.JSONArray;
 import org.json.JSONException;
 import org.json.JSONObject;
 
 import java.math.BigDecimal;
+import java.text.DecimalFormat;
 import java.util.ArrayList;
 import java.util.Arrays;
 import java.util.HashMap;
@@ -1054,7 +1058,7 @@ public class BuyAndSellActivity extends BaseActivity implements View.OnClickList
                     }
                 } else {
                     if (rb_buy.isChecked()){
-                        ToastUtils.showShort(BuyAndSellActivity.this, "请输入股票代码后进行操作");
+                        ToastUtils.showShort(BuyAndSellActivity.this, "请确认数量为有效数值");
                     }else {
                         rb_buy.setChecked(true);
                     }
@@ -1297,7 +1301,7 @@ public class BuyAndSellActivity extends BaseActivity implements View.OnClickList
      *
      * @param stockInfo
      */
-    private void searchNetStock(String stockInfo) {
+    private void searchNetStock(final String stockInfo) {
 
         timeCount.cancel();
 
@@ -1353,13 +1357,78 @@ public class BuyAndSellActivity extends BaseActivity implements View.OnClickList
                         if (null!=stockPw&&stockPw.isShowing()) {
                             stockPw.dismiss();
                         }
-                        Helper.getInstance().showToast(BuyAndSellActivity.this, "该股票不存在");
+//                        Helper.getInstance().showToast(BuyAndSellActivity.this, "该股票不存在");
+                        // TODO: 2017/7/20 调用333000接口 获取股票代码名称和最新价
+                        if (stockInfo.length()==6) {
+                            confirmCode(stockInfo);
+                        }
                     } else {
                         if (null!=stockPw&&stockPw.isShowing()) {
                             stockPw.dismiss();
                         }
                     }
                 } catch (JSONException e) {
+                    e.printStackTrace();
+                }
+            }
+        });
+    }
+
+    private void confirmCode(String stockInfo) {
+        Map map1 = new HashMap<>();
+        map1.put("funcid", "333000");
+        map1.put("token", SpUtils.getString(CustomApplication.getContext(), "mSession", ""));
+        Map map2 = new HashMap<>();
+        map2.put("SEC_ID", "tpyzq");
+        map2.put("FLAG", "true");
+        map2.put("STOCK_CODE", stockInfo);
+        map1.put("parms", map2);
+        NetWorkUtil.getInstence().okHttpForPostString(TAG, ConstantUtil.URL_JY, map1, new StringCallback() {
+            @Override
+            public void onError(Call call, Exception e, int id) {
+                Helper.getInstance().showToast(BuyAndSellActivity.this, ConstantUtil.NETWORK_ERROR);
+            }
+
+            @Override
+            public void onResponse(String response, int id) {
+                if (TextUtils.isEmpty(response)) {
+                    return;
+                }
+                try {
+                    JSONObject jsonObject = new JSONObject(response);
+                    String code = jsonObject.optString("code");
+                    String msg = jsonObject.optString("msg");
+                    if ("0".equals(code)) {
+                        JSONArray jsonArray = jsonObject.optJSONArray("data");
+                        jsonObject = jsonArray.optJSONObject(0);
+                        String EXCHANGE_TYPE = jsonObject.optString("EXCHANGE_TYPE");
+                        stockName = jsonObject.optString("STOCK_NAME");
+                        String g_code = jsonObject.optString("STOCK_CODE");
+                        String LAST_PRICE = jsonObject.optString("LAST_PRICE");
+                        /**
+                         * 柜台返回价格取2位小数，并且对6位股票代码转换为8位
+                         */
+                        DecimalFormat mFormat1 = new DecimalFormat("#0.00");
+                        LAST_PRICE = mFormat1.format(Double.parseDouble(LAST_PRICE));
+                        String market = "";
+                        if("1".equals(EXCHANGE_TYPE)){
+                            market = "SH";
+                            stockCode = Helper.getStockCode(g_code,"83");
+                        }else{
+                            market = "SZ";
+                            stockCode = Helper.getStockCode(g_code,"90");
+                        }
+                        isClearHeadData = false;
+                        et_price.setText(LAST_PRICE);
+                        String content = market + g_code;
+                        et_stock_code.setText(stockName + "  "+content);
+                        et_price.setEnabled(true);
+                        et_price.requestFocus();
+                        mKeyBoardUtil.hideAllKeyBoard();
+                    } else {
+                        Helper.getInstance().showToast(BuyAndSellActivity.this, msg);
+                    }
+                } catch (Exception e) {
                     e.printStackTrace();
                 }
             }

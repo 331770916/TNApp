@@ -160,7 +160,7 @@ public class UpdatePasswordActivity extends BaseActivity implements View.OnClick
         params.put("result_comment", node_name);
         map.put("params", params);
 
-        OkHttpUtil.okHttpForPostString(TAG, ConstantUtil.URL_USERINFO, map, new StringCallback() {
+        OkHttpUtil.okHttpForPostString(TAG, ConstantUtil.getURL_USERINFO(), map, new StringCallback() {
             @Override
             public void onError(Call call, Exception e, int id) {
                 e.printStackTrace();
@@ -232,7 +232,7 @@ public class UpdatePasswordActivity extends BaseActivity implements View.OnClick
 
         map.put("params", params);
 
-        OkHttpUtil.okHttpForPostString(TAG, ConstantUtil.URL_USERINFO, map, new StringCallback() {
+        OkHttpUtil.okHttpForPostString(TAG, ConstantUtil.getURL_USERINFO(), map, new StringCallback() {
             @Override
             public void onError(Call call, Exception e, int id) {
                 e.printStackTrace();

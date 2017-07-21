@@ -48,7 +48,7 @@ public class TransitionUtils {
 //            double d = Double.parseDouble(s);
             BigDecimal b = new BigDecimal(s);
             double c = b.setScale(2, BigDecimal.ROUND_HALF_DOWN).doubleValue();
-            return df.format(b);
+            return df.format(c);
         } else {
             return "0.00";
         }
