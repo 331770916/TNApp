@@ -44,11 +44,12 @@ public class WheelTime {
 		this.type = type;
 		setView(view);
 	}
-	public void setPicker(int year ,int month,int day){
-		this.setPicker(year, month, day, 0, 0);
+
+	public void setPicker(int year ,int month ,int day,int h,int m){
+		setPicker(year,month,day,h,m,0,0);
 	}
-	
-	public void setPicker(int year ,int month ,int day,int h,int m) {
+
+	public void setPicker(int year ,int month ,int day,int h,int m,int startDay,int endDay) {
 		// 添加大小月月份并将其转换为list,方便之后的判断
 		String[] months_big = { "1", "3", "5", "7", "8", "10", "12" };
 		String[] months_little = { "4", "6", "9", "11" };
@@ -71,22 +72,26 @@ public class WheelTime {
 
 		// 日
 		wv_day = (WheelView) view.findViewById(R.id.day);
-		// 判断大小月及是否闰年,用来确定"日"的数据
-		if (list_big.contains(String.valueOf(month + 1))) {
-			wv_day.setAdapter(new NumericWheelAdapter(1, 31));
-		} else if (list_little.contains(String.valueOf(month + 1))) {
-			wv_day.setAdapter(new NumericWheelAdapter(1, 30));
-		} else {
-			// 闰年
-			if ((year % 4 == 0 && year % 100 != 0) || year % 400 == 0)
-				wv_day.setAdapter(new NumericWheelAdapter(1, 29));
-			else
-				wv_day.setAdapter(new NumericWheelAdapter(1, 28));
+		if(this.type == TimePickerView.Type.DAY){
+			wv_day.setLabel("天");
+			wv_day.setAdapter(new NumericWheelAdapter(startDay,endDay));
+			wv_day.setCurrentItem(day);
+		}else{
+			// 判断大小月及是否闰年,用来确定"日"的数据
+			if (list_big.contains(String.valueOf(month + 1))) {
+				wv_day.setAdapter(new NumericWheelAdapter(1, 31));
+			} else if (list_little.contains(String.valueOf(month + 1))) {
+				wv_day.setAdapter(new NumericWheelAdapter(1, 30));
+			} else {
+				// 闰年
+				if ((year % 4 == 0 && year % 100 != 0) || year % 400 == 0)
+					wv_day.setAdapter(new NumericWheelAdapter(1, 29));
+				else
+					wv_day.setAdapter(new NumericWheelAdapter(1, 28));
+			}
+			wv_day.setLabel(context.getString(R.string.pickerview_day));
+			wv_day.setCurrentItem(day - 1);
 		}
-		wv_day.setLabel(context.getString(R.string.pickerview_day));
-		wv_day.setCurrentItem(day - 1);
-
-
         wv_hours = (WheelView)view.findViewById(R.id.hour);
 		wv_hours.setAdapter(new NumericWheelAdapter(0, 23));
 		wv_hours.setLabel(context.getString(R.string.pickerview_hours));// 添加文字
@@ -188,13 +193,19 @@ public class WheelTime {
             wv_day.setVisibility(View.GONE);
             wv_hours.setVisibility(View.GONE);
             wv_mins.setVisibility(View.GONE);
+        case DAY:
+			textSize = textSize * 4;
+			wv_year.setVisibility(View.GONE);
+			wv_month.setVisibility(View.GONE);
+			wv_hours.setVisibility(View.GONE);
+			wv_mins.setVisibility(View.GONE);
+			break;
 		}
 		wv_day.setTextSize(textSize);
 		wv_month.setTextSize(textSize);
 		wv_year.setTextSize(textSize);
 		wv_hours.setTextSize(textSize);
 		wv_mins.setTextSize(textSize);
-
 	}
 
 	/**
@@ -216,6 +227,13 @@ public class WheelTime {
 			.append(wv_hours.getCurrentItem()).append(":")
 			.append(wv_mins.getCurrentItem());
 		return sb.toString();
+	}
+
+	public int getDay(){
+		int day = 0;
+		if(this.type==TimePickerView.Type.DAY)
+			day = wv_day.getCurrentItem();
+		return day;
 	}
 
 	public View getView() {

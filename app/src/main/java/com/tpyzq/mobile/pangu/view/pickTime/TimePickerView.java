@@ -19,19 +19,19 @@ import java.util.Date;
  */
 public class TimePickerView extends BasePickerView implements View.OnClickListener {
     public enum Type {
-        ALL, YEAR_MONTH_DAY, HOURS_MINS, MONTH_DAY_HOUR_MIN , YEAR_MONTH
-    }// 四种选择模式，年月日时分，年月日，时分，月日时分
-
+        ALL, YEAR_MONTH_DAY, HOURS_MINS, MONTH_DAY_HOUR_MIN , YEAR_MONTH,DAY
+    }// 五种选择模式，年月日时分，年月日，时分，月日时分,日
     WheelTime wheelTime;
     private View btnSubmit, btnCancel;
     private TextView tvTitle;
     private static final String TAG_SUBMIT = "submit";
     private static final String TAG_CANCEL = "cancel";
     private OnTimeSelectListener timeSelectListener;
-
+    private OnDaySelectListener daySelectListener;
+    private Type mType;
     public TimePickerView(Context context, Type type) {
         super(context);
-
+        this.mType = type;
         LayoutInflater.from(context).inflate(R.layout.pickerview_time, contentContainer);
         // -----确定和取消按钮
         btnSubmit = findViewById(R.id.btnSubmit);
@@ -45,7 +45,6 @@ public class TimePickerView extends BasePickerView implements View.OnClickListen
         // ----时间转轮
         final View timepickerview = findViewById(R.id.timepicker);
         wheelTime = new WheelTime(timepickerview, type);
-
         //默认选中当前时间
         Calendar calendar = Calendar.getInstance();
         calendar.setTimeInMillis(System.currentTimeMillis());
@@ -55,18 +54,26 @@ public class TimePickerView extends BasePickerView implements View.OnClickListen
         int hours = calendar.get(Calendar.HOUR_OF_DAY);
         int minute = calendar.get(Calendar.MINUTE);
         wheelTime.setPicker(year, month, day, hours, minute);
-
     }
 
     /**
      * 设置可以选择的时间范围
      * 要在setTime之前调用才有效果
-     * @param startYear 开始年份
-     * @param endYear 结束年份
+     * @param startDay 开始日期
+     * @param endDay 结束日期
      */
-    public void setRange(int startYear, int endYear) {
-        wheelTime.setStartYear(startYear);
-        wheelTime.setEndYear(endYear);
+    public void setDay(int startDay,int endDay,int currentDay) {
+        Date date = new Date();
+        Calendar calendar = Calendar.getInstance();
+        if (date == null)
+            calendar.setTimeInMillis(System.currentTimeMillis());
+        else
+            calendar.setTime(date);
+        int year = calendar.get(Calendar.YEAR);
+        int month = calendar.get(Calendar.MONTH);
+        int hours = calendar.get(Calendar.HOUR_OF_DAY);
+        int minute = calendar.get(Calendar.MINUTE);
+        wheelTime.setPicker(year,month,currentDay,hours,minute,startDay,endDay);
     }
 
     /**
@@ -122,14 +129,17 @@ public class TimePickerView extends BasePickerView implements View.OnClickListen
             dismiss();
             return;
         } else {
-            if (timeSelectListener != null) {
-                try {
-                    Date date = WheelTime.dateFormat.parse(wheelTime.getTime());
-                    timeSelectListener.onTimeSelect(date);
-                } catch (ParseException e) {
-                    e.printStackTrace();
+                if(mType==Type.DAY&&daySelectListener!=null){
+                    int day = wheelTime.getDay();
+                    daySelectListener.onDaySelect(day);
+                }else if(timeSelectListener != null){
+                    try {
+                        Date date = WheelTime.dateFormat.parse(wheelTime.getTime());
+                        timeSelectListener.onTimeSelect(date);
+                    } catch (ParseException e) {
+                        e.printStackTrace();
+                    }
                 }
-            }
             dismiss();
             return;
         }
@@ -137,6 +147,14 @@ public class TimePickerView extends BasePickerView implements View.OnClickListen
 
     public interface OnTimeSelectListener {
         void onTimeSelect(Date date);
+    }
+
+    public interface OnDaySelectListener{
+        void onDaySelect(int day);
+    }
+
+    public void setOnDaySelectListener(OnDaySelectListener daySelectListener){
+        this.daySelectListener = daySelectListener;
     }
 
     public void setOnTimeSelectListener(OnTimeSelectListener timeSelectListener) {
