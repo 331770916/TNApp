@@ -7,6 +7,7 @@ import android.view.KeyEvent;
 import android.view.View;
 import android.widget.AdapterView;
 import android.widget.EditText;
+import android.widget.ImageView;
 import android.widget.Toast;
 
 import com.handmark.pulltorefresh.library.PullToRefreshBase;
@@ -46,12 +47,14 @@ public class FundInfoActivity extends BaseActivity implements View.OnClickListen
     public void initView() {
         findViewById(R.id.iv_back).setOnClickListener(this);
         findViewById(R.id.bt_search).setOnClickListener(this);
+        ImageView emptyIv = (ImageView) findViewById(R.id.emptyIv);
 
         mSearchContent_et = (EditText) findViewById(R.id.et_search_fundcompany);
         mListView = (PullToRefreshListView) findViewById(R.id.lv_fund);
         mAdapter = new FundInfoAdapter(this, false);
         mListView.setAdapter(mAdapter);
         mListView.setOnRefreshListener(this);
+        mListView.setEmptyView(emptyIv);
         mListView.setOnItemClickListener(this);
 
         mBeans = new ArrayList<FundSubsEntity>();
@@ -70,6 +73,7 @@ public class FundInfoActivity extends BaseActivity implements View.OnClickListen
                 break;
             case R.id.bt_search:
                 mBeans.clear();
+                mAdapter.setDatas(mBeans);
                 mFundInoConnect.fundQueryConnect(mSearchContent_et.getText().toString(), 0, mSession, TAG, this);
                 break;
         }

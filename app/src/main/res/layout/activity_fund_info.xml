@@ -88,6 +88,14 @@
                 app:ptrAnimationStyle="flip"
                 app:ptrMode="both"
                 />
+
+            <ImageView
+                android:id="@+id/emptyIv"
+                android:layout_width="wrap_content"
+                android:layout_height="wrap_content"
+                android:layout_gravity="center"
+                android:background="@mipmap/kong_bg"/>
+
         </LinearLayout>
     </LinearLayout>
 
@@ -98,6 +106,5 @@
         android:layout_gravity="bottom"
         android:gravity="bottom"
         android:orientation="vertical" />
-
 
 </FrameLayout>
