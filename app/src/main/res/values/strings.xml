@@ -484,6 +484,18 @@
     <string name="shurushuhuifene">输入赎回份额</string>
     <string name="xuanzeshuhuichulifangshi">选择赎回处理方式</string>
 
+    <!-- 基金定投 -->
+    <string name="fix_fund_list_title">基金定投</string>
+    <string name="fix_fund_list_title_add">添加</string>
+    <string name="fix_fund_list_null">暂无已定投基金</string>
+    <string name="fix_fund_list_click">点击添加</string>
+    <string name="fix_fund_list_bottom_add">添加定投</string>
+    <string name="fix_fund_item_money">每月定投</string>
+    <string name="fix_fund_item_accumulated">累计定投金额</string>
+    <string name="fix_fund_item_start">起始时间</string>
+    <string name="fix_fund_item_end">终止日期</string>
+    <string name="fix_fund_item_date">定投日</string>
+
     <!--电子签名约定书-->
     <string name="Agreement">电子签名约定书</string>
     <string name="consent">同意</string>

@@ -1,0 +1,27 @@
+<?xml version="1.0" encoding="utf-8"?>
+<LinearLayout xmlns:android="http://schemas.android.com/apk/res/android"
+    android:layout_width="match_parent"
+    android:layout_height="50dp"
+    android:gravity="center"
+    android:orientation="horizontal">
+    <LinearLayout
+        android:layout_width="wrap_content"
+        android:layout_height="50dp"
+        android:gravity="center"
+        android:paddingLeft="@dimen/size5"
+        android:paddingRight="@dimen/size5"
+        android:orientation="horizontal">
+        <ImageView
+            android:layout_width="@dimen/size30"
+            android:layout_height="@dimen/size30"
+            android:background="@mipmap/ic_gray"/>
+        <TextView
+            android:layout_width="wrap_content"
+            android:layout_height="wrap_content"
+            android:layout_gravity="center"
+            android:layout_marginLeft="@dimen/size12"
+            android:textSize="@dimen/txtSize16"
+            android:textColor="@color/hideTextColor"
+            android:text="@string/fix_fund_list_bottom_add"/>
+    </LinearLayout>
+</LinearLayout>

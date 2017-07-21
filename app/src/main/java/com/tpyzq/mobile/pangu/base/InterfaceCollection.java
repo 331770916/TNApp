@@ -6,6 +6,7 @@ import com.google.gson.Gson;
 import com.google.gson.reflect.TypeToken;
 import com.tpyzq.mobile.pangu.data.AssessConfirmEntity;
 import com.tpyzq.mobile.pangu.data.EtfDataEntity;
+import com.tpyzq.mobile.pangu.data.FixFundEntity;
 import com.tpyzq.mobile.pangu.data.InformationEntity;
 import com.tpyzq.mobile.pangu.data.NetworkVotingEntity;
 import com.tpyzq.mobile.pangu.data.OTC_AffirmBean;
@@ -2237,5 +2238,278 @@ public class InterfaceCollection {
 //        }
 //        return ses;
 //    }
+
+    //基金定投开始
+    /**
+     * 334008
+     * 定投新增
+     * @param FUND_COMPANY 基金公司  可空，默认为基金代码对应基金公司
+     * @param FUND_CODE    基金代码
+     * @param RATION_TYPE   定投期满类型 默认‘0’， 0设定结束日期   1累计金额上限   2累计成功次数
+     * @param BALANCE       发生金额
+     * @param START_DATE    开始日期
+     * @param END_DATE      到期日期
+     * @param EN_FUND_DATE  扣款允许日
+     */
+    public void addFixFund(String FUND_COMPANY, String FUND_CODE, String RATION_TYPE, String BALANCE,
+                           String START_DATE, String END_DATE, String EN_FUND_DATE, final String TAG, final InterfaceCallback callback) {
+        Map map1 = new HashMap<>();
+        map1.put("funcid", "334008");
+        map1.put("token", SpUtils.getString(CustomApplication.getContext(), "mSession", ""));
+        Map map2 = new HashMap<>();
+        map2.put("SEC_ID", "tpyzq");
+        map2.put("FLAG", "true");
+        map2.put("FUND_COMPANY", FUND_COMPANY);
+        map2.put("FUND_CODE", FUND_CODE);
+        map2.put("RATION_TYPE", RATION_TYPE);
+        map2.put("BALANCE", BALANCE);
+        map2.put("START_DATE", START_DATE);
+        map2.put("END_DATE", END_DATE);
+        map2.put("EN_FUND_DATE", EN_FUND_DATE);
+        map1.put("parms", map2);
+        net.okHttpForPostString(TAG, ConstantUtil.URL_JY, map1, new StringCallback() {
+            @Override
+            public void onError(Call call, Exception e, int id) {
+                ResultInfo info = new ResultInfo();
+                info.setCode(ConstantUtil.NETWORK_ERROR_CODE);
+                info.setMsg(ConstantUtil.NETWORK_ERROR);
+                info.setTag(TAG);
+                callback.callResult(info);
+            }
+
+            @Override
+            public void onResponse(String response, int id) {
+                ResultInfo info = new ResultInfo(response);
+                if (TextUtils.isEmpty(response)) {
+                    info.setCode(ConstantUtil.SERVICE_NO_DATA_CODE);
+                    info.setMsg(ConstantUtil.SERVICE_NO_DATA);
+                    info.setTag(TAG);
+                } else {
+                    try {
+                        JSONObject jsonObject = new JSONObject(response);
+                        String code = jsonObject.optString("MSG_CODE");
+                        String msg = jsonObject.optString("MSG_TEXT");
+                        info.setCode(code);
+                        info.setMsg(msg);
+                        info.setTag(TAG);
+                        if ("0".equals(code)) {
+                            info.setMsg("基金定投登记成功");
+                        }
+                    } catch (Exception e) {
+                        info.setCode(ConstantUtil.JSON_ERROR_CODE);
+                        info.setMsg(ConstantUtil.JSON_ERROR);
+                        info.setTag(TAG);
+                    }
+                    callback.callResult(info);
+                }
+            }
+        });
+    }
+
+    /**
+     * 334103
+     * 基金定投列表
+     * @param ALLOTNO 申请编号 传空为查询全部
+     */
+    public void getFixFundList(String ALLOTNO, final String TAG, final InterfaceCallback callback) {
+        Map map1 = new HashMap<>();
+        map1.put("funcid", "334103");
+        map1.put("token", SpUtils.getString(CustomApplication.getContext(), "mSession", ""));
+        Map map2 = new HashMap<>();
+        map2.put("SEC_ID", "tpyzq");
+        map2.put("FLAG", "true");
+        map2.put("ALLOTNO", ALLOTNO);
+        map1.put("parms", map2);
+        net.okHttpForPostString(TAG, ConstantUtil.URL_JY, map1, new StringCallback() {
+            @Override
+            public void onError(Call call, Exception e, int id) {
+                ResultInfo info = new ResultInfo();
+                info.setCode(ConstantUtil.NETWORK_ERROR_CODE);
+                info.setMsg(ConstantUtil.NETWORK_ERROR);
+                info.setTag(TAG);
+                callback.callResult(info);
+            }
+
+            @Override
+            public void onResponse(String response, int id) {
+                ResultInfo info = new ResultInfo(response);
+                if (TextUtils.isEmpty(response)) {
+                    info.setCode(ConstantUtil.SERVICE_NO_DATA_CODE);
+                    info.setMsg(ConstantUtil.SERVICE_NO_DATA);
+                    info.setTag(TAG);
+                } else {
+                    try {
+                        JSONObject jsonObject = new JSONObject(response);
+                        String code = jsonObject.optString("code");
+                        String msg = jsonObject.optString("msg");
+                        info.setCode(code);
+                        info.setMsg(msg);
+                        info.setTag(TAG);
+                        if ("0".equals(code)) {
+                            List<FixFundEntity> ses = new ArrayList<>();
+                            JSONArray data = jsonObject.optJSONArray("data");
+                            for (int i = 0; i < data.length(); i++) {
+                                FixFundEntity bean = new FixFundEntity();
+                                JSONObject obj = data.optJSONObject(i);
+                                bean.setFUND_CODE(obj.optString("FUND_CODE"));
+                                bean.setFUND_NAME(obj.optString("FUND_NAME"));
+                                bean.setBALANCE(obj.optString("BALANCE"));
+                                bean.setSEND_BALANCE(obj.optString("SEND_BALANCE"));
+                                bean.setEN_FUND_DATE(obj.optString("EN_FUND_DATE"));
+                                String END_DATE = obj.optString("END_DATE");
+                                END_DATE = Helper.formateDate1(END_DATE);
+                                bean.setEND_DATE(END_DATE);
+                                bean.setDEAL_DATE(obj.optString("DEAL_DATE"));
+                                bean.setALLOTNO(obj.optString("ALLOTNO"));
+                                bean.setDEAL_FLAG(obj.optString("DEAL_FLAG"));
+                                bean.setDEAL_FLAG_NAME(obj.optString("DEAL_FLAG_NAME"));
+                                String start_date = obj.optString("START_DATE");
+                                start_date = Helper.formateDate1(start_date);
+                                bean.setSTART_DATE(start_date);
+                                bean.setCURR_RATION_TIMES(obj.optString("CURR_RATION_TIMES"));
+                                bean.setPOSITION_STR(obj.optString("POSITION_STR"));
+                                ses.add(bean);
+                            }
+                            info.setData(ses);
+                        }
+                    } catch (Exception e) {
+                        info.setCode(ConstantUtil.JSON_ERROR_CODE);
+                        info.setMsg(ConstantUtil.JSON_ERROR);
+                        info.setTag(TAG);
+                    }
+                    callback.callResult(info);
+                }
+            }
+        });
+    }
+
+    /**
+     * * 334009
+     * 基金定投修改
+     * @param FUND_COMPANY 基金公司  N	可空，默认为基金代码对应基金公司
+     * @param FUND_CODE     基金代码
+     * @param BALANCE       发生金额
+     * @param START_DATE    开始日期
+     * @param END_DATE      结束日期
+     * @param EN_FUND_DATE  扣款日
+     * @param ALLOTNO       申请编码
+     * @param TAG
+     * @param callback
+     */
+    public void modifyFixFund(String FUND_COMPANY, String FUND_CODE, String BALANCE, String START_DATE,
+                               String END_DATE, String EN_FUND_DATE, String ALLOTNO, final String TAG, final InterfaceCallback callback) {
+        Map map1 = new HashMap<>();
+        map1.put("funcid", "334009");
+        map1.put("token", SpUtils.getString(CustomApplication.getContext(), "mSession", ""));
+        Map map2 = new HashMap<>();
+        map2.put("SEC_ID", "tpyzq");
+        map2.put("FLAG", "true");
+        map2.put("FUND_COMPANY", FUND_COMPANY);
+        map2.put("FUND_CODE", FUND_CODE);
+        map2.put("BALANCE", BALANCE);
+        map2.put("START_DATE", START_DATE);
+        map2.put("END_DATE", END_DATE);
+        map2.put("EN_FUND_DATE", EN_FUND_DATE);
+        map2.put("ALLOTNO", ALLOTNO);
+        map1.put("parms", map2);
+        net.okHttpForPostString(TAG, ConstantUtil.URL_JY, map1, new StringCallback() {
+            @Override
+            public void onError(Call call, Exception e, int id) {
+                ResultInfo info = new ResultInfo();
+                info.setCode(ConstantUtil.NETWORK_ERROR_CODE);
+                info.setMsg(ConstantUtil.NETWORK_ERROR);
+                info.setTag(TAG);
+                callback.callResult(info);
+            }
+
+            @Override
+            public void onResponse(String response, int id) {
+                ResultInfo info = new ResultInfo(response);
+                if (TextUtils.isEmpty(response)) {
+                    info.setCode(ConstantUtil.SERVICE_NO_DATA_CODE);
+                    info.setMsg(ConstantUtil.SERVICE_NO_DATA);
+                    info.setTag(TAG);
+                } else {
+                    try {
+                        JSONObject jsonObject = new JSONObject(response);
+                        String code = jsonObject.optString("MSG_CODE");
+                        String msg = jsonObject.optString("MSG_TEXT");
+                        info.setCode(code);
+                        info.setMsg(msg);
+                        info.setTag(TAG);
+
+                        if ("0".equals(code)) {
+                            info.setMsg("基金定投登记成功");
+                        }
+                    } catch (Exception e) {
+                        info.setCode(ConstantUtil.JSON_ERROR_CODE);
+                        info.setMsg(ConstantUtil.JSON_ERROR);
+                        info.setTag(TAG);
+                    }
+                    callback.callResult(info);
+                }
+            }
+        });
+    }
+
+    /**
+     * * 334010
+     * 基金定投修改
+     * @param FUND_CODE     基金代码
+     * @param ALLOTNO       申请编码
+     * @param TAG
+     * @param callback
+     */
+    public void revokeFixFund(String FUND_CODE, String ALLOTNO, final String TAG, final InterfaceCallback callback) {
+        Map map1 = new HashMap<>();
+        map1.put("funcid", "334010");
+        map1.put("token", SpUtils.getString(CustomApplication.getContext(), "mSession", ""));
+        Map map2 = new HashMap<>();
+        map2.put("SEC_ID", "tpyzq");
+        map2.put("FLAG", "true");
+        map2.put("FUND_CODE", FUND_CODE);
+        map2.put("ALLOTNO", ALLOTNO);
+        map1.put("parms", map2);
+        net.okHttpForPostString(TAG, ConstantUtil.URL_JY, map1, new StringCallback() {
+            @Override
+            public void onError(Call call, Exception e, int id) {
+                ResultInfo info = new ResultInfo();
+                info.setCode(ConstantUtil.NETWORK_ERROR_CODE);
+                info.setMsg(ConstantUtil.NETWORK_ERROR);
+                info.setTag(TAG);
+                callback.callResult(info);
+            }
+
+            @Override
+            public void onResponse(String response, int id) {
+                ResultInfo info = new ResultInfo(response);
+                if (TextUtils.isEmpty(response)) {
+                    info.setCode(ConstantUtil.SERVICE_NO_DATA_CODE);
+                    info.setMsg(ConstantUtil.SERVICE_NO_DATA);
+                    info.setTag(TAG);
+                } else {
+                    try {
+                        JSONObject jsonObject = new JSONObject(response);
+                        String code = jsonObject.optString("MSG_CODE");
+                        String msg = jsonObject.optString("MSG_TEXT");
+                        info.setCode(code);
+                        info.setMsg(msg);
+                        info.setTag(TAG);
+
+                        if ("0".equals(code)) {
+                            info.setMsg("基金定投撤销成功");
+                        }
+                    } catch (Exception e) {
+                        info.setCode(ConstantUtil.JSON_ERROR_CODE);
+                        info.setMsg(ConstantUtil.JSON_ERROR);
+                        info.setTag(TAG);
+                    }
+                    callback.callResult(info);
+                }
+            }
+        });
+    }
+
+
 
 }

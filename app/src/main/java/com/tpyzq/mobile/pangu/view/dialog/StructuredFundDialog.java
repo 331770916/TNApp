@@ -11,6 +11,7 @@ import android.widget.TableRow;
 import android.widget.TextView;
 
 import com.tpyzq.mobile.pangu.R;
+import com.tpyzq.mobile.pangu.activity.trade.open_fund.FixFundListActivity;
 import com.tpyzq.mobile.pangu.activity.trade.stock.ETFApplyforOrRedeemActivity;
 import com.tpyzq.mobile.pangu.activity.trade.stock.ETFRevokeActivity;
 import com.tpyzq.mobile.pangu.activity.trade.stock.FJFundGradingMergerActivity;
@@ -20,6 +21,7 @@ import com.tpyzq.mobile.pangu.activity.trade.stock.VoteDetailActivity;
 import com.tpyzq.mobile.pangu.base.BaseDialog;
 import com.tpyzq.mobile.pangu.base.InterfaceCollection;
 import com.tpyzq.mobile.pangu.data.EtfDataEntity;
+import com.tpyzq.mobile.pangu.data.FixFundEntity;
 import com.tpyzq.mobile.pangu.data.ResultInfo;
 import com.tpyzq.mobile.pangu.data.StructuredFundEntity;
 import com.tpyzq.mobile.pangu.util.ConstantUtil;
@@ -47,6 +49,8 @@ public class StructuredFundDialog extends BaseDialog implements View.OnClickList
     private TextView tv_8;
     private TextView tv_9;
     private TextView tv_10;
+    private TextView tv_11;
+    private TextView tv_12;
     private ImageView img_1;
 
     private Expression mExpression;
@@ -61,6 +65,7 @@ public class StructuredFundDialog extends BaseDialog implements View.OnClickList
     private TableRow tR_3;
     private TableRow tR_4;
     private TableRow tR_5;
+    private TableRow tR_6;
     private TableLayout tableLayout;
 
 
@@ -89,12 +94,14 @@ public class StructuredFundDialog extends BaseDialog implements View.OnClickList
         tv_3 = (TextView) findViewById(R.id.tv_3);
         tv_7 = (TextView) findViewById(R.id.tv_7);
         tv_9 = (TextView) findViewById(R.id.tv_9);
+        tv_11 = (TextView) findViewById(R.id.tv_11);
         tv_2 = (TextView) findViewById(R.id.tv_2);
         tv_4 = (TextView) findViewById(R.id.tv_4);
         tv_5 = (TextView) findViewById(R.id.tv_5);
         tv_6 = (TextView) findViewById(R.id.tv_6);
         tv_8 = (TextView) findViewById(R.id.tv_8);
         tv_10 = (TextView) findViewById(R.id.tv_10);
+        tv_12 = (TextView) findViewById(R.id.tv_12);
 
 
         tR_1 = (TableRow) findViewById(R.id. tableRow1);
@@ -102,6 +109,7 @@ public class StructuredFundDialog extends BaseDialog implements View.OnClickList
         tR_3 = (TableRow) findViewById(R.id. tableRow3);
         tR_4 = (TableRow) findViewById(R.id. tableRow4);
         tR_5 = (TableRow) findViewById(R.id. tableRow5);
+        tR_6 = (TableRow) findViewById(R.id. tableRow6);
 
 
         findViewById(R.id.bt_true).setOnClickListener(this);
@@ -128,6 +136,7 @@ public class StructuredFundDialog extends BaseDialog implements View.OnClickList
             tv_7.setText(R.string.hbed);
             tv_8.setText(mShare);
             tv_10.setText(mStructuredFundEntity.getStock_account());
+            tR_6.setVisibility(View.GONE);
         } else if (FJFundSplitActivity.TAG.equals(mTAG)) {
             StructuredFundEntity mStructuredFundEntity = (StructuredFundEntity) object;
             img_1.setImageResource(R.mipmap.structuredfund_partition);
@@ -138,6 +147,7 @@ public class StructuredFundDialog extends BaseDialog implements View.OnClickList
             tv_7.setText(R.string.fced);
             tv_8.setText(mShare);
             tv_10.setText(mStructuredFundEntity.getStock_account());
+            tR_6.setVisibility(View.GONE);
         } else if (FJWithdrawOrderActivity.TAG.equals(mTAG)) {
             StructuredFundEntity mStructuredFundEntity = (StructuredFundEntity) object;
             img_1.setImageResource(R.mipmap.chehui);
@@ -147,6 +157,7 @@ public class StructuredFundDialog extends BaseDialog implements View.OnClickList
             tv_6.setText(mStructuredFundEntity.getStoken_name());
             tv_8.setText(mStructuredFundEntity.getEntrust_amount());
             tv_10.setText(mStructuredFundEntity.getStock_account());
+            tR_6.setVisibility(View.GONE);
         } else if (VoteDetailActivity.TAG.equals(mTAG)) {
             img_1.setImageResource(R.mipmap.vote_dialog_icon);
             tv_title.setText(R.string.voteDialogTitle);
@@ -168,6 +179,7 @@ public class StructuredFundDialog extends BaseDialog implements View.OnClickList
             tR_3.setVisibility(View.GONE);
             tR_4.setVisibility(View.GONE);
             tR_5.setVisibility(View.GONE);
+            tR_6.setVisibility(View.GONE);
 
         } else if (ETFApplyforOrRedeemActivity.TAG.equals(mTAG)) {   //  申购
             EtfDataEntity etfDataEntity = (EtfDataEntity) object;
@@ -183,6 +195,7 @@ public class StructuredFundDialog extends BaseDialog implements View.OnClickList
             tv_6.setText(etfDataEntity.getStock_name());
             tv_8.setText(etfDataEntity.getEntrust_amount());
             tv_10.setText(etfDataEntity.getStock_account());
+            tR_6.setVisibility(View.GONE);
         } else if (ETFApplyforOrRedeemActivity.TAG_SH.equals(mTAG)) {   //  赎回
             EtfDataEntity etfDataEntity = (EtfDataEntity) object;
             img_1.setImageResource(R.mipmap.jy_jijingouhui);
@@ -197,6 +210,7 @@ public class StructuredFundDialog extends BaseDialog implements View.OnClickList
             tv_6.setText(etfDataEntity.getStock_name());
             tv_8.setText(etfDataEntity.getEntrust_amount());
             tv_10.setText(etfDataEntity.getStock_account());
+            tR_6.setVisibility(View.GONE);
         } else if (ETFRevokeActivity.TAG.equalsIgnoreCase(mTAG)) {
             EtfDataEntity etfDataEntity = (EtfDataEntity) object;
             tv_title.setText("ETF申赎撤单");
@@ -210,6 +224,22 @@ public class StructuredFundDialog extends BaseDialog implements View.OnClickList
             tv_6.setText(etfDataEntity.getStock_name());
             tv_8.setText(etfDataEntity.getPrev_balance());
             tv_10.setText(etfDataEntity.getStock_account());
+            tR_6.setVisibility(View.GONE);
+        } else if (FixFundListActivity.TAG.equalsIgnoreCase(mTAG)) {//基金定投撤单弹框
+            FixFundEntity fixFundEntity = (FixFundEntity) object;
+            tv_title.setText("定投撤销");
+            tv_1.setText("基金名称：");
+            tv_3.setText("基金代码：");
+            tv_5.setText("月扣款日：");
+            tv_7.setText("定投金额：");
+            tv_9.setText("开始日期：");
+            tv_11.setText("结束日期：");
+            tv_2.setText(fixFundEntity.getFUND_NAME());
+            tv_4.setText(fixFundEntity.getFUND_CODE());
+            tv_6.setText("每月"+fixFundEntity.getEN_FUND_DATE()+"日");
+            tv_8.setText(fixFundEntity.getBALANCE());
+            tv_10.setText(fixFundEntity.getSTART_DATE());
+            tv_12.setText(fixFundEntity.getEND_DATE());
         }
     }
 

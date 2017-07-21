@@ -1,0 +1,102 @@
+<?xml version="1.0" encoding="utf-8"?>
+<FrameLayout xmlns:android="http://schemas.android.com/apk/res/android"
+    xmlns:app="http://schemas.android.com/apk/res-auto"
+    android:layout_width="match_parent"
+    android:layout_height="match_parent"
+    android:orientation="vertical">
+    <LinearLayout android:layout_width="match_parent"
+        android:layout_height="match_parent"
+        android:background="@color/lineColor"
+        android:orientation="vertical">
+        <RelativeLayout
+            android:id="@+id/rl_top_bar"
+            android:layout_width="match_parent"
+            android:layout_height="@dimen/size25"
+            android:background="@color/blue"
+            android:clipToPadding="true"
+            android:fitsSystemWindows="true" />
+        <RelativeLayout
+            android:layout_width="match_parent"
+            android:layout_height="@dimen/pickerview_topbar_height"
+            android:layout_below="@+id/AGRelativeLayout"
+            android:background="@color/blue">
+
+            <ImageView
+                android:id="@+id/iv_back"
+                android:layout_width="wrap_content"
+                android:layout_height="match_parent"
+                android:layout_alignParentLeft="true"
+                android:paddingLeft="@dimen/size15"
+                android:paddingRight="@dimen/size20"
+                android:src="@mipmap/back_btn" />
+
+            <TextView
+                android:id="@+id/tv_title"
+                android:layout_width="wrap_content"
+                android:layout_height="wrap_content"
+                android:layout_centerInParent="true"
+                android:text="@string/fix_fund_list_title"
+                android:textColor="@color/white"
+                android:textSize="@dimen/txtSize18" />
+            <TextView
+                android:id="@+id/tv_title_click"
+                android:layout_width="wrap_content"
+                android:layout_height="wrap_content"
+                android:paddingTop="5dp"
+                android:paddingBottom="5dp"
+                android:paddingLeft="10dp"
+                android:paddingRight="10dp"
+                android:layout_alignParentRight="true"
+                android:layout_centerVertical="true"
+                android:text="@string/fix_fund_list_title_add"
+                android:textColor="@color/white"
+                android:textSize="@dimen/txtSize18" />
+        </RelativeLayout>
+        <com.handmark.pulltorefresh.library.PullToRefreshListView
+            android:id="@+id/lv"
+            android:layout_width="match_parent"
+            android:layout_height="match_parent"
+            android:divider="@color/lineColor"
+            android:background="@color/white"
+            android:dividerHeight="@dimen/size5"
+            android:scrollbars="none"
+            app:ptrAnimationStyle="flip"
+            android:visibility="visible"
+            app:ptrMode="both" />
+    </LinearLayout>
+
+    <!--没有内容展示页面-->
+    <RelativeLayout
+        android:id="@+id/rl_null"
+        android:layout_width="match_parent"
+        android:layout_height="match_parent"
+        android:gravity="center"
+        android:visibility="gone">
+        <ImageView
+            android:id="@+id/iv_add"
+            android:layout_width="@dimen/size45"
+            android:layout_height="@dimen/size45"
+            android:layout_centerHorizontal="true"
+            android:background="@mipmap/ic_gray"/>
+        <TextView
+            android:id="@+id/tv_null"
+            android:layout_below="@id/iv_add"
+            android:layout_width="wrap_content"
+            android:layout_height="wrap_content"
+            android:layout_marginTop="@dimen/size8"
+            android:layout_centerHorizontal="true"
+            android:textColor="#999999"
+            android:textSize="@dimen/txtSize16"
+            android:text="@string/fix_fund_list_null"/>
+        <TextView
+            android:id="@+id/tv_null_click"
+            android:layout_below="@id/tv_null"
+            android:layout_width="wrap_content"
+            android:layout_height="wrap_content"
+            android:layout_marginTop="@dimen/size4"
+            android:layout_centerHorizontal="true"
+            android:textColor="#368ce6"
+            android:textSize="@dimen/txtSize16"
+            android:text="@string/fix_fund_list_click"/>
+    </RelativeLayout>
+</FrameLayout>

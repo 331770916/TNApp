@@ -1,0 +1,296 @@
+<?xml version="1.0" encoding="utf-8"?>
+<LinearLayout xmlns:android="http://schemas.android.com/apk/res/android"
+    android:layout_width="match_parent"
+    android:layout_height="match_parent"
+    android:orientation="vertical"
+    android:paddingTop="@dimen/size22">
+
+    <LinearLayout
+        android:layout_width="match_parent"
+        android:layout_height="wrap_content"
+        android:paddingLeft="@dimen/size20"
+        android:paddingRight="@dimen/size20">
+
+        <TextView
+            android:id="@+id/tv_fund_name"
+            android:layout_width="wrap_content"
+            android:layout_height="match_parent"
+            android:text="南方新优享"
+            android:textColor="@color/black"
+            android:textSize="@dimen/size17" />
+
+        <TextView
+            android:id="@+id/tv_fund_code"
+            android:layout_width="wrap_content"
+            android:layout_height="wrap_content"
+            android:layout_marginLeft="@dimen/size10"
+            android:text="000527"
+            android:textColor="@color/texthint93"
+            android:textSize="@dimen/size17" />
+    </LinearLayout>
+
+    <LinearLayout
+        android:layout_width="match_parent"
+        android:layout_height="wrap_content"
+        android:layout_marginTop="@dimen/size20"
+        android:paddingLeft="@dimen/size20"
+        android:paddingRight="@dimen/size20">
+
+        <TextView
+            android:id="@+id/tv_accumulated_money"
+            android:layout_width="wrap_content"
+            android:layout_height="wrap_content"
+            android:text="1000000.00"
+            android:textColor="#e85757"
+            android:textSize="@dimen/size20" />
+
+        <TextView
+            android:id="@+id/tv_money"
+            android:layout_width="0dp"
+            android:layout_height="wrap_content"
+            android:layout_weight="1"
+            android:gravity="right"
+            android:text="1000.00"
+            android:textColor="@color/amageModelColor"
+            android:textSize="@dimen/size16" />
+    </LinearLayout>
+
+    <LinearLayout
+        android:layout_width="match_parent"
+        android:layout_height="wrap_content"
+        android:paddingLeft="@dimen/size20"
+        android:paddingRight="@dimen/size20">
+
+        <TextView
+            android:layout_width="wrap_content"
+            android:layout_height="wrap_content"
+            android:text="@string/fix_fund_item_accumulated"
+            android:textColor="@color/texthint93"
+            android:textSize="@dimen/size12" />
+
+        <TextView
+            android:layout_width="0dp"
+            android:layout_height="wrap_content"
+            android:layout_gravity="right"
+            android:layout_weight="1"
+            android:gravity="right"
+            android:text="@string/fix_fund_item_money"
+            android:textColor="@color/texthint93"
+            android:textSize="@dimen/size12" />
+    </LinearLayout>
+
+    <View
+        android:layout_width="match_parent"
+        android:layout_height="1dp"
+        android:layout_marginBottom="@dimen/size20"
+        android:layout_marginTop="@dimen/size20"
+        android:background="#e2e2e2"
+        android:layout_marginLeft="@dimen/size20"
+        android:layout_marginRight="@dimen/size20"/>
+
+    <LinearLayout
+        android:layout_width="match_parent"
+        android:layout_height="wrap_content"
+        android:paddingLeft="@dimen/size20"
+        android:paddingRight="@dimen/size20">
+
+        <TextView
+            android:layout_width="wrap_content"
+            android:layout_height="wrap_content"
+            android:text="@string/fix_fund_item_start"
+            android:textColor="#4a4a4a"
+            android:textSize="@dimen/txtSize14" />
+
+        <TextView
+            android:layout_width="0dp"
+            android:layout_height="wrap_content"
+            android:layout_weight="1"
+            android:gravity="center_horizontal"
+            android:text="@string/fix_fund_item_date"
+            android:textColor="#4a4a4a"
+            android:textSize="@dimen/txtSize14" />
+
+        <TextView
+            android:layout_width="wrap_content"
+            android:layout_height="wrap_content"
+            android:gravity="right"
+            android:text="@string/fix_fund_item_end"
+            android:textColor="#4a4a4a"
+            android:textSize="@dimen/txtSize14" />
+    </LinearLayout>
+
+    <LinearLayout
+        android:layout_width="match_parent"
+        android:layout_height="wrap_content"
+        android:layout_marginTop="@dimen/size8"
+        android:gravity="center_vertical"
+        android:paddingLeft="@dimen/size20"
+        android:paddingRight="@dimen/size20">
+
+        <LinearLayout
+            android:layout_width="@dimen/size13"
+            android:layout_height="@dimen/size8"
+            android:gravity="left">
+
+            <ImageView
+                android:layout_width="@dimen/size8"
+                android:layout_height="@dimen/size8"
+                android:background="@drawable/fix_start_oval" />
+        </LinearLayout>
+
+        <ImageView
+            android:layout_width="0dp"
+            android:layout_height="wrap_content"
+            android:layout_weight="1"
+            android:background="@mipmap/fix_lin" />
+
+        <LinearLayout
+            android:layout_width="8dp"
+            android:layout_height="wrap_content"
+            android:gravity="center_horizontal">
+            <ImageView
+                android:layout_width="2dp"
+                android:layout_height="8dp"
+                android:background="@drawable/fix_en_line" />
+        </LinearLayout>
+
+        <ImageView
+            android:layout_width="0dp"
+            android:layout_height="wrap_content"
+            android:layout_weight="1"
+            android:background="@mipmap/fix_lin" />
+
+        <LinearLayout
+            android:layout_width="@dimen/size13"
+            android:layout_height="@dimen/size8"
+            android:gravity="right">
+
+            <ImageView
+                android:layout_width="@dimen/size8"
+                android:layout_height="@dimen/size8"
+                android:background="@drawable/fix_start_oval" />
+        </LinearLayout>
+    </LinearLayout>
+
+    <LinearLayout
+        android:layout_width="match_parent"
+        android:layout_height="wrap_content"
+        android:layout_marginTop="@dimen/size11"
+        android:paddingLeft="@dimen/size20"
+        android:paddingRight="@dimen/size20">
+
+        <TextView
+            android:id="@+id/tv_start_date"
+            android:layout_width="wrap_content"
+            android:layout_height="wrap_content"
+            android:text="2017-07-21"
+            android:textColor="#4a4a4a"
+            android:textSize="@dimen/txtSize14" />
+
+        <TextView
+            android:id="@+id/tv_en_date"
+            android:layout_width="0dp"
+            android:layout_height="wrap_content"
+            android:layout_weight="1"
+            android:gravity="center_horizontal"
+            android:text="每月21日"
+            android:textColor="#4a4a4a"
+            android:textSize="@dimen/txtSize14" />
+
+        <TextView
+            android:id="@+id/tv_end_date"
+            android:layout_width="wrap_content"
+            android:layout_height="wrap_content"
+            android:gravity="right"
+            android:text="2018-06-21"
+            android:textColor="#4a4a4a"
+            android:textSize="@dimen/txtSize14" />
+    </LinearLayout>
+
+    <LinearLayout
+        android:layout_width="match_parent"
+        android:layout_height="@dimen/size45"
+        android:layout_marginBottom="@dimen/size16"
+        android:layout_marginTop="@dimen/size20"
+        android:orientation="horizontal">
+
+        <TextView
+            android:id="@+id/tv_modify"
+            android:layout_width="0dp"
+            android:layout_height="match_parent"
+            android:layout_weight="1"
+            android:gravity="center"
+            android:text="修改"
+            android:textStyle="bold"
+            android:textColor="@color/press_check"
+            android:textSize="@dimen/txtSize14" />
+
+        <View
+            android:layout_width="1dp"
+            android:layout_height="@dimen/size20"
+            android:layout_gravity="center_vertical"
+            android:background="#d3d3d3" />
+
+        <TextView
+            android:id="@+id/tv_revoke"
+            android:layout_width="0dp"
+            android:layout_height="match_parent"
+            android:layout_weight="1"
+            android:gravity="center"
+            android:text="撤销"
+            android:textStyle="bold"
+            android:textColor="@color/press_check"
+            android:textSize="@dimen/txtSize14" />
+
+        <View
+            android:layout_width="1dp"
+            android:layout_height="@dimen/size20"
+            android:layout_gravity="center_vertical"
+            android:background="#d3d3d3" />
+
+        <TextView
+            android:id="@+id/tv_history"
+            android:layout_width="0dp"
+            android:layout_height="match_parent"
+            android:layout_weight="1"
+            android:gravity="center"
+            android:text="定投记录"
+            android:textStyle="bold"
+            android:textColor="@color/press_check"
+            android:textSize="@dimen/txtSize14" />
+    </LinearLayout>
+
+    <LinearLayout
+        android:id="@+id/ll_bottom"
+        android:layout_width="match_parent"
+        android:layout_height="50dp"
+        android:gravity="center"
+        android:background="#F0F0F0"
+        android:orientation="horizontal"
+        android:visibility="gone">
+
+        <LinearLayout
+            android:id="@+id/ll_add"
+            android:layout_width="wrap_content"
+            android:layout_height="50dp"
+            android:gravity="center"
+            android:orientation="horizontal"
+            android:paddingLeft="@dimen/size5"
+            android:paddingRight="@dimen/size5">
+
+            <ImageView
+                android:layout_width="@dimen/size30"
+                android:layout_height="@dimen/size30"
+                android:background="@mipmap/ic_gray" />
+
+            <TextView
+                android:layout_width="wrap_content"
+                android:layout_height="wrap_content"
+                android:layout_gravity="center"
+                android:layout_marginLeft="@dimen/size12"
+                android:text="@string/fix_fund_list_bottom_add"
+                android:textColor="@color/hideTextColor"
+                android:textSize="@dimen/txtSize16" />
+        </LinearLayout>
+    </LinearLayout>
+</LinearLayout>

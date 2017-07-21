@@ -153,6 +153,27 @@
                 android:textColor="@color/black" />
         </TableRow>
 
+        <TableRow
+            android:id="@+id/tableRow6"
+            android:layout_marginTop="@dimen/size10"
+            android:gravity="center">
+
+            <TextView
+                android:id="@+id/tv_11"
+                android:layout_width="wrap_content"
+                android:layout_height="wrap_content"
+                android:text="股东代码："
+                android:textColor="@color/text" />
+
+            <TextView
+                android:id="@+id/tv_12"
+                android:layout_width="wrap_content"
+                android:layout_height="wrap_content"
+                android:layout_marginLeft="@dimen/size10"
+                android:text=""
+                android:textColor="@color/black" />
+        </TableRow>
+
 
     </TableLayout>
 
