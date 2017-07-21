@@ -63,6 +63,7 @@ public class ReverseRepoGuideActivityPresenter {
                     String data = object.getString("data");
                     String msg = object.getString("msg");
                     if ("0".equals(code)) {
+                        ReverseRepoGuideActivity.flag = false;
                         JSONArray jsonArray = new JSONArray(data);
                         UserMoneyEntity userMoneyBean = new Gson().fromJson(jsonArray.getString(0), UserMoneyEntity.class);
                         activity.setMoney(userMoneyBean.ENABLE_BALANCE);

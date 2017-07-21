@@ -6,6 +6,7 @@ import android.text.TextUtils;
 import com.google.gson.Gson;
 import com.tpyzq.mobile.pangu.activity.myself.login.TransactionLoginActivity;
 import com.tpyzq.mobile.pangu.activity.trade.stock.ReverseRepoActivity;
+import com.tpyzq.mobile.pangu.activity.trade.stock.ReverseRepoGuideActivity;
 import com.tpyzq.mobile.pangu.data.AuthorizeEntity;
 import com.tpyzq.mobile.pangu.data.TimeShareEntity;
 import com.tpyzq.mobile.pangu.http.NetWorkUtil;
@@ -172,6 +173,7 @@ public class ReverseRepoActivityPresenter {
                     String msg = jsonObject.getString("msg");
                     String data = jsonObject.getString("data");
                     if ("0".equals(code)) {
+                        ReverseRepoGuideActivity.flag = true;
                         activity.setClearView();
                         getAmount(prodcode);
                         CentreToast.showText(activity,"委托已提交",true);

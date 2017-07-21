@@ -21,11 +21,13 @@ import java.util.List;
  * 逆回购
  */
 public class ReverseRepoGuideActivity extends BaseActivity implements View.OnClickListener {
+    public static boolean flag = false;//是否有卖出成功
     private TextView tv_using_money;
     private ImageButton ib_search;
     private ImageButton ib_start;
     private ImageButton ib_backbill;
     private ImageView iv_back;
+
 
     ReverseRepoGuideActivityPresenter presenter;
 
@@ -46,6 +48,14 @@ public class ReverseRepoGuideActivity extends BaseActivity implements View.OnCli
         ib_backbill.setOnClickListener(this);
         presenter = new ReverseRepoGuideActivityPresenter(this);
         presenter.getUseMoney();
+    }
+
+    @Override
+    protected void onResume() {
+        super.onResume();
+        if(flag) {
+            presenter.getUseMoney();
+        }
     }
 
     @Override

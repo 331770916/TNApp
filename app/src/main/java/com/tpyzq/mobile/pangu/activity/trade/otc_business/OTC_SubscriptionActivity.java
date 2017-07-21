@@ -70,8 +70,6 @@ public class OTC_SubscriptionActivity extends BaseActivity implements View.OnCli
     private HashMap<String, String> map;
     private ArrayList<OTC_SubscriptionListEntity> list;                             //OTC产品列表的数据源
     private int point = -1;
-    private KeyboardUtil mKeyBoardUtil;
-    private ScrollView mScrollView;
     private Dialog submit;
     private String mSession ;
     private OTC_SubscriptionDialog dialog;
@@ -96,7 +94,9 @@ public class OTC_SubscriptionActivity extends BaseActivity implements View.OnCli
         LinearLayout rootLayout = (LinearLayout) findViewById(R.id.fundRootLayout);
         initMoveKeyBoard(rootLayout, null,etOTC_ProductCode);
 
-        etOTC_ProductCode.setFocusableInTouchMode(true);                                                 //初始化   使其获得焦点
+        etOTC_ProductCode.setFocusableInTouchMode(true);
+        //初始化   使其获得焦点
+        submit = LoadingDialog.initDialog(this, "正在提交...");
         etOTC_ProductCode.addTextChangedListener(new TextWatcher() {                                     //添加监听
             @Override
             public void beforeTextChanged(CharSequence s, int start, int count, int after) {
@@ -212,7 +212,6 @@ public class OTC_SubscriptionActivity extends BaseActivity implements View.OnCli
      * 获取确认信息
      */
     private void getAffirmMsg(final String mSession, final String stockCode) {
-        submit = LoadingDialog.initDialog(this, "正在提交...");
         submit.show();
         HashMap map1 = new HashMap();
         HashMap map2 = new HashMap();
@@ -242,6 +241,7 @@ public class OTC_SubscriptionActivity extends BaseActivity implements View.OnCli
                 String msg = bean.getMsg();
                 List<OTC_SubscriptionAffirmMsgBean.DataBean> data = bean.getData();
                 if (code.equals("-6")) {
+                    submit.dismiss();
                     Intent intent = new Intent(OTC_SubscriptionActivity.this, TransactionLoginActivity.class);
                     startActivity(intent);
                     OTC_SubscriptionActivity.this.finish();
@@ -311,11 +311,11 @@ public class OTC_SubscriptionActivity extends BaseActivity implements View.OnCli
 
             @Override
             public void onResponse(String response, int id) {
+                submit.dismiss();
                 if (TextUtils.isEmpty(response)) {
                     return;
                 }
                 try {
-                    submit.dismiss();
                     JSONObject jsonObject = new JSONObject(response);
                     String code = jsonObject.getString("code");
                     String type = jsonObject.getString("type");
