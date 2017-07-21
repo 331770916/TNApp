@@ -104,7 +104,18 @@
         android:paddingLeft="@dimen/size20"
         android:paddingRight="@dimen/size20">
 
+
         <Button
+            android:id="@+id/bt_false"
+            android:layout_width="0dp"
+            android:layout_height="@dimen/size50"
+            android:layout_weight="1"
+            android:background="@color/grey"
+            android:text="取消"
+            android:textColor="@color/black" />
+
+        <Button
+            android:layout_marginLeft="@dimen/size20"
             android:id="@+id/bt_true"
             android:layout_width="0dp"
             android:layout_height="@dimen/size50"
@@ -113,15 +124,6 @@
             android:text="确定"
             android:textColor="@color/white" />
 
-        <Button
-            android:id="@+id/bt_false"
-            android:layout_width="0dp"
-            android:layout_height="@dimen/size50"
-            android:layout_marginLeft="@dimen/size20"
-            android:layout_weight="1"
-            android:background="@color/grey"
-            android:text="取消"
-            android:textColor="@color/black" />
     </LinearLayout>
 
     <TextView

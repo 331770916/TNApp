@@ -76,46 +76,62 @@
         </LinearLayout>
     </LinearLayout>
 
-
-
-
     <LinearLayout
         android:layout_marginTop="@dimen/size10"
         android:layout_width="match_parent"
         android:layout_height="@dimen/size30"
         android:background="@color/white"
         android:gravity="center"
-        android:orientation="horizontal"
-        android:paddingLeft="@dimen/size20"
-        android:paddingRight="@dimen/size20">
+        android:orientation="horizontal">
 
-        <TextView
-            android:layout_width="0dp"
-            android:layout_height="wrap_content"
+        <LinearLayout
             android:layout_weight="1"
-            android:gravity="center|fill"
-            android:text="@string/entrust_name"
-            android:textColor="@color/newStockTitle"
-            android:textSize="@dimen/txtSize12" />
+            android:layout_width="@dimen/size0"
+            android:layout_height="match_parent">
 
-        <TextView
-            android:layout_width="0dp"
-            android:layout_height="wrap_content"
-            android:layout_weight="1"
-            android:gravity="center"
-            android:text="委托数量/状态"
-            android:textColor="@color/newStockTitle"
-            android:textSize="@dimen/txtSize12" />
+            <TextView
+                android:paddingLeft="@dimen/size20"
+                android:layout_width="match_parent"
+                android:layout_height="match_parent"
+                android:gravity="center|fill"
+                android:text="@string/entrust_name"
+                android:textColor="@color/newStockTitle"
+                android:textSize="@dimen/txtSize13" />
 
-        <TextView
-            android:layout_width="0dp"
-            android:layout_height="wrap_content"
+        </LinearLayout>
+
+        <LinearLayout
             android:layout_weight="1"
-            android:gravity="center|end"
-            android:paddingRight="@dimen/size3"
-            android:text="时间/日期"
-            android:textColor="@color/newStockTitle"
-            android:textSize="@dimen/txtSize12" />
+            android:layout_width="@dimen/size0"
+            android:layout_height="match_parent">
+
+            <TextView
+                android:paddingRight="@dimen/size30"
+                android:layout_width="match_parent"
+                android:layout_height="match_parent"
+                android:gravity="center|end"
+                android:text="委托数量/状态"
+                android:textColor="@color/newStockTitle"
+                android:textSize="@dimen/txtSize13" />
+
+        </LinearLayout>
+
+        <LinearLayout
+            android:layout_weight="1"
+            android:layout_width="@dimen/size0"
+            android:layout_height="match_parent">
+
+            <TextView
+                android:paddingRight="@dimen/size20"
+                android:layout_width="match_parent"
+                android:layout_height="match_parent"
+                android:gravity="center|end"
+                android:text="时间/日期"
+                android:textColor="@color/newStockTitle"
+                android:textSize="@dimen/txtSize13" />
+
+        </LinearLayout>
+
     </LinearLayout>
 
     <RelativeLayout

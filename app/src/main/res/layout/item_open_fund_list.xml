@@ -20,11 +20,12 @@
         android:layout_gravity="center_vertical"
         android:orientation="vertical">
         <TextView
+            android:textSize="@dimen/txtSize15"
+            android:textColor="@color/title_list"
             android:id="@+id/tv_item_title"
             android:layout_width="wrap_content"
             android:layout_height="wrap_content"
-            android:text="分红设置"
-            />
+            android:text="分红设置" />
         <TextView
             android:id="@+id/tv_item_content"
             android:layout_width="wrap_content"

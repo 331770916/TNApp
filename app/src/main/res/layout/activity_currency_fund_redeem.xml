@@ -29,7 +29,8 @@
             android:layout_width="wrap_content"
             android:layout_height="match_parent"
             android:layout_alignParentLeft="true"
-            android:padding="@dimen/size10"
+            android:paddingLeft="@dimen/size15"
+            android:paddingRight="@dimen/size20"
             android:src="@mipmap/back_btn" />
 
         <TextView
@@ -38,7 +39,7 @@
             android:layout_centerInParent="true"
             android:text="@string/HuoBiJiJinShuHui"
             android:textColor="@color/white"
-            android:textSize="@dimen/pickerview_topbar_title_textsize" />
+            android:textSize="@dimen/title_big_textsize" />
     </RelativeLayout>
 
     <!--分割线-->
@@ -57,7 +58,7 @@
             android:layout_centerVertical="true"
             android:layout_marginLeft="@dimen/size20"
             android:text="@string/JiJinDaiMa"
-            android:textSize="13sp"
+            android:textSize="@dimen/txtSize15"
             android:textStyle="bold"/>
         <EditText
             android:id="@+id/etRedeemFundCode"
@@ -70,7 +71,7 @@
             android:maxLength="6"
             android:inputType="number"
             android:textColorHint="@color/text"
-            android:textSize="13sp"
+            android:textSize="@dimen/txtSize14"
             android:singleLine="true"
             android:background="@null"/>
 
@@ -107,7 +108,7 @@
             android:layout_centerVertical="true"
             android:layout_marginLeft="@dimen/size20"
             android:text="@string/ShuHuiFenE"
-            android:textSize="13sp"
+            android:textSize="@dimen/txtSize15"
             android:textStyle="bold"/>
         <EditText
             android:id="@+id/etRedeemFundAmount"
@@ -120,7 +121,7 @@
             android:maxLength="10"
             android:inputType="numberDecimal"
             android:textColorHint="@color/text"
-            android:textSize="@dimen/txtSize13"
+            android:textSize="@dimen/txtSize14"
             android:singleLine="true"
             android:background="@null"/>
 
@@ -163,7 +164,7 @@
             android:layout_marginLeft="@dimen/size20"
             android:text="@string/JiJinMingCheng"
             android:textColor="@color/text"
-            android:textSize="13sp" />
+            android:textSize="@dimen/txtSize15" />
         <TextView
             android:id="@+id/tvRedeemFundNameValue"
             android:layout_width="wrap_content"
@@ -172,8 +173,8 @@
             android:layout_toRightOf="@id/tvRedeemFundName"
             android:layout_marginLeft="@dimen/size35"
             android:text=""
-            android:textColor="@color/text"
-            android:textSize="13sp" />
+            android:textColor="@color/title_list"
+            android:textSize="@dimen/txtSize14"/>
 
     </RelativeLayout>
 
@@ -190,7 +191,7 @@
             android:layout_marginLeft="@dimen/size20"
             android:text="@string/GuDongZhangHao"
             android:textColor="@color/text"
-            android:textSize="13sp" />
+            android:textSize="@dimen/txtSize15" />
         <TextView
             android:id="@+id/tvRedeemStockholderNumValue"
             android:layout_width="wrap_content"
@@ -199,8 +200,8 @@
             android:layout_toRightOf="@id/tvRedeemStockholderNum"
             android:layout_marginLeft="@dimen/size35"
             android:text=""
-            android:textColor="@color/text"
-            android:textSize="13sp" />
+            android:textColor="@color/title_list"
+            android:textSize="@dimen/txtSize14" />
 
     </RelativeLayout>
 
@@ -217,7 +218,7 @@
             android:layout_marginLeft="@dimen/size20"
             android:text="@string/KeYongZiJin"
             android:textColor="@color/text"
-            android:textSize="13sp" />
+            android:textSize="@dimen/txtSize15" />
         <TextView
             android:id="@+id/tvRedeemExpendableFundValue"
             android:layout_width="wrap_content"
@@ -226,8 +227,8 @@
             android:layout_toRightOf="@id/tvRedeemExpendableFund"
             android:layout_marginLeft="@dimen/size35"
             android:text=""
-            android:textColor="@color/text"
-            android:textSize="13sp" />
+            android:textColor="@color/title_list"
+            android:textSize="@dimen/txtSize14" />
 
     </RelativeLayout>
 

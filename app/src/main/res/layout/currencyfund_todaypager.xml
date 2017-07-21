@@ -86,6 +86,7 @@
         android:paddingTop="@dimen/size10">
 
         <TextView
+            android:textSize="@dimen/txtSize13"
             android:layout_width="0dp"
             android:layout_height="wrap_content"
             android:layout_weight="1"
@@ -94,6 +95,7 @@
             android:textColor="@color/newStockTitle" />
 
         <TextView
+            android:textSize="@dimen/txtSize13"
             android:layout_width="0dp"
             android:layout_height="wrap_content"
             android:layout_weight="1"
@@ -102,6 +104,7 @@
             android:textColor="@color/newStockTitle" />
 
         <TextView
+            android:textSize="@dimen/txtSize13"
             android:layout_width="0dp"
             android:layout_height="wrap_content"
             android:layout_weight="1"
@@ -111,6 +114,7 @@
 
 
         <TextView
+            android:textSize="@dimen/txtSize13"
             android:layout_width="0dp"
             android:layout_height="wrap_content"
             android:layout_weight="1"

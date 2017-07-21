@@ -279,10 +279,10 @@ public class FundPurchaseActivity extends BaseActivity implements View.OnClickLi
     private void clearView() {
         et_fund_code.setText("");
         et_fund_price.setText("");
-        tv_fund_name.setText("基金名称");
-        tv_fund_value.setText("基金净值");
-        tv_low_money.setText("个人最低投资");
-        tv_usable_money.setText("可用投资");
+        tv_fund_name.setText("");
+        tv_fund_value.setText("");
+        tv_low_money.setText("");
+        tv_usable_money.setText("");
         bt_true.setClickable(false);
         et_fund_price.setEnabled(false);
         bt_true.setBackgroundResource(R.drawable.button_login_unchecked);
@@ -361,10 +361,10 @@ public class FundPurchaseActivity extends BaseActivity implements View.OnClickLi
 
     private void setTextView(FundDataEntity fundDataBean) {
         et_fund_price.setEnabled(true);
-        tv_fund_name.setText("基金名称\t\t" + fundDataBean.data.get(0).FUND_NAME);
-        tv_fund_value.setText("基金净值\t\t" + fundDataBean.data.get(0).NAV);
-        tv_low_money.setText("个人最低投资\t\t" + fundDataBean.data.get(0).OPEN_SHARE + "\t元");
-        tv_usable_money.setText("可用投资\t\t" + fundDataBean.data.get(0).ENABLE_BALANCE + "\t元");
+        tv_fund_name.setText(fundDataBean.data.get(0).FUND_NAME);
+        tv_fund_value.setText(fundDataBean.data.get(0).NAV);
+        tv_low_money.setText(fundDataBean.data.get(0).OPEN_SHARE + "\t元");
+        tv_usable_money.setText(fundDataBean.data.get(0).ENABLE_BALANCE + "\t元");
     }
 
     @Override

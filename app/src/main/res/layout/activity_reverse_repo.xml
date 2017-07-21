@@ -29,7 +29,8 @@
                 android:layout_width="@dimen/size48"
                 android:layout_height="match_parent"
                 android:layout_centerVertical="true"
-                android:padding="@dimen/size10"
+                android:paddingLeft="@dimen/size15"
+                android:paddingRight="@dimen/size20"
                 android:scaleType="center"
                 android:src="@mipmap/back_btn"
                 tools:ignore="ContentDescription" />
@@ -42,7 +43,7 @@
                 android:layout_centerVertical="true"
                 android:text="----"
                 android:textColor="@color/white"
-                android:textSize="@dimen/pickerview_topbar_title_textsize" />
+                android:textSize="@dimen/title_big_textsize" />
         </RelativeLayout>
 
         <RelativeLayout

@@ -27,7 +27,8 @@
             android:layout_width="wrap_content"
             android:layout_height="match_parent"
             android:layout_alignParentLeft="true"
-            android:padding="@dimen/size10"
+            android:paddingLeft="@dimen/size15"
+            android:paddingRight="@dimen/size20"
             android:src="@mipmap/back_btn" />
 
         <TextView
@@ -36,7 +37,7 @@
             android:layout_centerInParent="true"
             android:text="@string/ChangNeiJiJin"
             android:textColor="@color/white"
-            android:textSize="@dimen/pickerview_topbar_title_textsize" />
+            android:textSize="@dimen/title_big_textsize" />
     </RelativeLayout>
 
 
@@ -94,8 +95,8 @@
                     android:layout_width="wrap_content"
                     android:layout_height="wrap_content"
                     android:text="@string/JiJinRenGou"
-                    android:textColor="@color/hushenTab_titleColor"
-                    android:textSize="@dimen/txtSize14" />
+                    android:textColor="@color/title_list"
+                    android:textSize="@dimen/txtSize15" />
 
             </LinearLayout>
 
@@ -148,8 +149,8 @@
                     android:layout_width="wrap_content"
                     android:layout_height="wrap_content"
                     android:text="@string/JiJinShenGou"
-                    android:textColor="@color/hushenTab_titleColor"
-                    android:textSize="@dimen/txtSize14" />
+                    android:textColor="@color/title_list"
+                    android:textSize="@dimen/txtSize15" />
 
             </LinearLayout>
 
@@ -202,8 +203,8 @@
                     android:layout_width="wrap_content"
                     android:layout_height="wrap_content"
                     android:text="@string/JiJinShuHui"
-                    android:textColor="@color/hushenTab_titleColor"
-                    android:textSize="@dimen/txtSize14" />
+                    android:textColor="@color/title_list"
+                    android:textSize="@dimen/txtSize15"  />
 
             </LinearLayout>
 
@@ -219,8 +220,8 @@
 
         <View
             android:layout_width="match_parent"
-            android:layout_height="@dimen/size0.5"
-            android:background="@color/lineColor" />
+            android:layout_height="match_parent"
+            android:background="@color/bgColor" />
     </LinearLayout>
 
 

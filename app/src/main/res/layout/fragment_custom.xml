@@ -87,7 +87,7 @@
             android:gravity="center"
             android:text="@string/mcgs"
             android:textColor="@color/newStockTitle"
-            android:textSize="@dimen/txtSize12" />
+            android:textSize="@dimen/txtSize13" />
 
         <TextView
             android:layout_width="0dp"
@@ -96,7 +96,7 @@
             android:gravity="center"
             android:text="@string/wtsj"
             android:textColor="@color/newStockTitle"
-            android:textSize="@dimen/txtSize12" />
+            android:textSize="@dimen/txtSize13" />
 
         <TextView
             android:layout_width="0dp"
@@ -105,7 +105,7 @@
             android:gravity="center"
             android:text="@string/wtcj"
             android:textColor="@color/newStockTitle"
-            android:textSize="@dimen/txtSize12" />
+            android:textSize="@dimen/txtSize13" />
 
 
         <TextView
@@ -115,7 +115,7 @@
             android:gravity="center"
             android:text="@string/mmzt"
             android:textColor="@color/newStockTitle"
-            android:textSize="@dimen/txtSize12" />
+            android:textSize="@dimen/txtSize13" />
     </LinearLayout>
 
     <View

@@ -8,14 +8,14 @@
     android:paddingTop="@dimen/size5">
 
     <LinearLayout
+
         android:id="@+id/LinearLayout"
         android:layout_width="match_parent"
         android:layout_height="wrap_content"
-        android:orientation="horizontal"
-        android:paddingLeft="@dimen/size20"
-        android:paddingRight="@dimen/size20">
+        android:orientation="horizontal">
 
         <TextView
+            android:paddingLeft="@dimen/size20"
             android:id="@+id/clinch_Date"
             android:layout_width="0dp"
             android:layout_height="wrap_content"
@@ -33,19 +33,21 @@
 
             <TextView
                 android:id="@+id/clinch_Name"
+                android:paddingRight="@dimen/size30"
                 android:layout_width="match_parent"
                 android:layout_height="wrap_content"
-                android:gravity="center"
+                android:gravity="center|end"
                 android:text="--"
                 android:textSize="@dimen/txtSize12" />
 
             <TextView
+                android:paddingRight="@dimen/size30"
                 android:id="@+id/clinch_Business"
                 android:layout_width="match_parent"
                 android:layout_height="wrap_content"
                 android:layout_alignLeft="@id/clinch_Name"
                 android:layout_below="@id/clinch_Name"
-                android:gravity="center"
+                android:gravity="center|end"
                 android:text="--"
                 android:textSize="@dimen/txtSize12"
                 android:visibility="visible" />
@@ -56,10 +58,10 @@
             android:layout_width="@dimen/size0"
             android:layout_height="wrap_content"
             android:layout_gravity="center"
-            android:layout_weight="1"
-            android:paddingRight="@dimen/size3">
+            android:layout_weight="1">
 
             <TextView
+                android:paddingRight="@dimen/size20"
                 android:id="@+id/clinch_Balance"
                 android:layout_width="match_parent"
                 android:layout_height="wrap_content"

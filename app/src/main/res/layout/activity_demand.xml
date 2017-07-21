@@ -17,7 +17,7 @@
     <!-- 头布局 -->
     <RelativeLayout
         android:layout_width="match_parent"
-        android:layout_height="wrap_content"
+        android:layout_height="@dimen/pickerview_topbar_height"
         android:background="@color/blue">
 
         <RadioGroup
@@ -33,6 +33,7 @@
                 android:button="@null"
                 android:checked="true"
                 android:clickable="true"
+                android:textSize="@dimen/title_big_textsize"
                 android:gravity="center"
                 android:padding="@dimen/size10"
                 android:text="@string/cxzy"
@@ -43,10 +44,11 @@
         <ImageView
             android:id="@+id/ivCNFund_back"
             android:layout_width="wrap_content"
-            android:layout_height="wrap_content"
+            android:layout_height="match_parent"
             android:layout_alignParentLeft="true"
             android:layout_gravity="center_vertical"
-            android:padding="@dimen/size10"
+            android:paddingLeft="@dimen/size15"
+            android:paddingRight="@dimen/size20"
             android:src="@mipmap/back_btn" />
     </RelativeLayout>
 
@@ -87,8 +89,8 @@
                     android:layout_width="wrap_content"
                     android:layout_height="wrap_content"
                     android:text="@string/wtcx"
-                    android:textColor="@color/hushenTab_titleColor"
-                    android:textSize="@dimen/txtSize14" />
+                    android:textColor="@color/title_list"
+                    android:textSize="@dimen/txtSize15" />
 
             </LinearLayout>
 
@@ -141,8 +143,8 @@
                     android:layout_width="wrap_content"
                     android:layout_height="wrap_content"
                     android:text="@string/cjcx"
-                    android:textColor="@color/hushenTab_titleColor"
-                    android:textSize="@dimen/txtSize14" />
+                    android:textColor="@color/title_list"
+                    android:textSize="@dimen/txtSize15" />
 
             </LinearLayout>
 
@@ -195,8 +197,8 @@
                     android:layout_width="wrap_content"
                     android:layout_height="wrap_content"
                     android:text="@string/zjlscx"
-                    android:textColor="@color/hushenTab_titleColor"
-                    android:textSize="@dimen/txtSize14" />
+                    android:textColor="@color/title_list"
+                    android:textSize="@dimen/txtSize15" />
 
             </LinearLayout>
 
@@ -249,8 +251,8 @@
                     android:layout_width="wrap_content"
                     android:layout_height="wrap_content"
                     android:text="@string/DeliveryOrder"
-                    android:textColor="@color/hushenTab_titleColor"
-                    android:textSize="@dimen/txtSize14" />
+                    android:textColor="@color/title_list"
+                    android:textSize="@dimen/txtSize15" />
 
             </LinearLayout>
 

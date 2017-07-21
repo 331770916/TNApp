@@ -28,7 +28,8 @@
                 android:id="@+id/banksTbackBtn"
                 android:layout_width="wrap_content"
                 android:layout_height="match_parent"
-                android:padding="@dimen/size10"
+                android:paddingLeft="@dimen/size15"
+                android:paddingRight="@dimen/size20"
                 android:src="@mipmap/back_btn" />
 
             <TextView
@@ -40,7 +41,7 @@
                 android:paddingTop="@dimen/size5"
                 android:text="@string/bankstransfer"
                 android:textColor="@color/white"
-                android:textSize="@dimen/pickerview_topbar_title_textsize" />
+                android:textSize="@dimen/title_big_textsize" />
 
             <ProgressBar
                 android:id="@+id/allotquery_progress"
@@ -74,6 +75,7 @@
                     android:layout_height="wrap_content"
                     android:layout_weight="1"
                     android:gravity="center"
+                    android:textSize="@dimen/txtSize13"
                     android:padding="@dimen/size10"
                     android:text="@string/banksTostock"
                     android:textColor="@color/white" />
@@ -84,6 +86,7 @@
                     android:layout_height="wrap_content"
                     android:layout_weight="1"
                     android:gravity="center"
+                    android:textSize="@dimen/txtSize13"
                     android:padding="@dimen/size10"
                     android:text="@string/stockTobanks"
                     android:textColor="@color/white" />
@@ -94,6 +97,7 @@
                     android:layout_height="wrap_content"
                     android:layout_weight="1"
                     android:gravity="center"
+                    android:textSize="@dimen/txtSize13"
                     android:padding="@dimen/size10"
                     android:text="@string/transferQuery"
                     android:textColor="@color/white" />

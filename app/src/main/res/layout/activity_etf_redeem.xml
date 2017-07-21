@@ -28,7 +28,7 @@
                 android:layout_width="wrap_content"
                 android:layout_height="match_parent"
                 android:layout_alignParentLeft="true"
-                android:paddingLeft="@dimen/size20"
+                android:paddingLeft="@dimen/size15"
                 android:paddingRight="@dimen/size20"
                 android:src="@mipmap/back_btn" />
 
@@ -37,9 +37,9 @@
                 android:layout_width="wrap_content"
                 android:layout_height="wrap_content"
                 android:layout_centerInParent="true"
-                android:text="ETF申购"
+                android:text="@string/etf_sg"
                 android:textColor="@color/white"
-                android:textSize="@dimen/pickerview_topbar_title_textsize" />
+                android:textSize="@dimen/title_big_textsize" />
         </RelativeLayout>
 
 
@@ -59,9 +59,9 @@
                     android:layout_height="wrap_content"
                     android:layout_centerVertical="true"
                     android:layout_marginLeft="@dimen/size20"
-                    android:text="ETF 代码"
+                    android:text="@string/etf_codes"
                     android:textColor="@color/hushenTab_titleColor"
-                    android:textSize="@dimen/txtSize14" />
+                    android:textSize="@dimen/txtSize15" />
 
                 <EditText
                     android:id="@+id/et_input_code"
@@ -71,8 +71,8 @@
                     android:layout_marginLeft="@dimen/size25"
                     android:layout_toRightOf="@id/tv_code"
                     android:background="@null"
-                   android:gravity="center_vertical"
-                    android:hint="输入代码"
+                    android:gravity="center_vertical"
+                    android:hint="@string/etf_input_code"
                     android:maxLength="6"
                     android:inputType="number"
                     android:singleLine="true"
@@ -100,9 +100,9 @@
                     android:layout_height="wrap_content"
                     android:layout_centerVertical="true"
                     android:layout_marginLeft="@dimen/size20"
-                    android:text="申购份额"
+                    android:text="@string/etf_sgfe"
                     android:textColor="@color/hushenTab_titleColor"
-                    android:textSize="@dimen/txtSize14" />
+                    android:textSize="@dimen/txtSize15" />
 
                 <TextView
                     android:id="@+id/tv_upperlimit"
@@ -129,7 +129,7 @@
                     android:layout_toRightOf="@id/tv_share"
                     android:background="@null"
                     android:gravity="center_vertical"
-                    android:hint="输入份额"
+                    android:hint="@string/etf_input_fe"
                     android:inputType="number"
                     android:maxLength="10"
                     android:singleLine="true"
@@ -162,9 +162,9 @@
                         android:layout_width="wrap_content"
                         android:layout_height="wrap_content"
                         android:layout_marginLeft="@dimen/size20"
-                        android:text="可用资金"
+                        android:text="@string/etf_kyzj"
                         android:textColor="@color/texts"
-                        android:textSize="@dimen/txtSize14" />
+                        android:textSize="@dimen/txtSize15" />
 
                     <TextView
                         android:id="@+id/available_funds"
@@ -172,7 +172,7 @@
                         android:layout_height="wrap_content"
                         android:layout_marginLeft="@dimen/size24"
                         android:text="--"
-                        android:textColor="@color/texts"
+                        android:textColor="@color/title_list"
                         android:textSize="@dimen/txtSize14" />
 
                 </LinearLayout>
@@ -187,9 +187,9 @@
                         android:layout_width="wrap_content"
                         android:layout_height="wrap_content"
                         android:layout_marginLeft="@dimen/size20"
-                        android:text="ETF 名称"
+                        android:text="@string/etf_name"
                         android:textColor="@color/texts"
-                        android:textSize="@dimen/txtSize14" />
+                        android:textSize="@dimen/txtSize15" />
 
                     <TextView
                         android:id="@+id/tv_etf_code"
@@ -197,7 +197,7 @@
                         android:layout_height="wrap_content"
                         android:layout_marginLeft="@dimen/size24"
                         android:text="--"
-                        android:textColor="@color/texts"
+                        android:textColor="@color/title_list"
                         android:textSize="@dimen/txtSize14" />
 
 
@@ -213,9 +213,9 @@
                         android:layout_width="wrap_content"
                         android:layout_height="wrap_content"
                         android:layout_marginLeft="@dimen/size20"
-                        android:text="股东代码"
+                        android:text="@string/etf_gddms"
                         android:textColor="@color/texts"
-                        android:textSize="@dimen/txtSize14" />
+                        android:textSize="@dimen/txtSize15" />
 
                     <TextView
                         android:id="@+id/tv_shareholder_code"
@@ -223,7 +223,7 @@
                         android:layout_height="wrap_content"
                         android:layout_marginLeft="@dimen/size24"
                         android:text="--"
-                        android:textColor="@color/texts"
+                        android:textColor="@color/title_list"
                         android:textSize="@dimen/txtSize14" />
                 </LinearLayout>
             </LinearLayout>
@@ -248,6 +248,7 @@
                 android:textSize="15sp" />
 
         </RelativeLayout>
+
 
     </LinearLayout>
     <LinearLayout

@@ -25,7 +25,7 @@
             android:layout_width="wrap_content"
             android:layout_height="match_parent"
             android:layout_alignParentLeft="true"
-            android:paddingLeft="@dimen/size20"
+            android:paddingLeft="@dimen/size15"
             android:paddingRight="@dimen/size20"
             android:src="@mipmap/back_btn" />
 
@@ -36,7 +36,7 @@
             android:layout_centerInParent="true"
             android:text="@string/Gradingfundmerger"
             android:textColor="@color/white"
-            android:textSize="@dimen/pickerview_topbar_title_textsize" />
+            android:textSize="@dimen/title_big_textsize" />
     </RelativeLayout>
 
 
@@ -44,7 +44,7 @@
         android:layout_width="match_parent"
         android:layout_height="wrap_content"
         android:orientation="vertical">
-        <!--分割线-->
+
         <View
             android:layout_width="match_parent"
             android:layout_height="@dimen/size10"
@@ -68,9 +68,10 @@
                     android:layout_marginLeft="@dimen/size20"
                     android:text="@string/JiJinDaiMa"
                     android:textColor="@color/hushenTab_titleColor"
-                    android:textSize="@dimen/txtSize14" />
+                    android:textSize="@dimen/txtSize15" />
 
                 <TextView
+                    android:textSize="@dimen/size14"
                     android:id="@+id/textView8"
                     android:layout_width="wrap_content"
                     android:layout_height="match_parent"
@@ -124,7 +125,7 @@
                     android:layout_marginLeft="@dimen/size20"
                     android:text="@string/mergershare"
                     android:textColor="@color/hushenTab_titleColor"
-                    android:textSize="@dimen/txtSize14" />
+                    android:textSize="@dimen/txtSize15" />
 
                 <EditText
                     android:id="@+id/amount_et"
@@ -144,20 +145,18 @@
 
             </RelativeLayout>
 
-            <!--分割线-->
             <View
                 android:layout_width="match_parent"
                 android:layout_height="@dimen/size0.5"
                 android:layout_marginLeft="@dimen/size20"
                 android:background="@color/stkDetailDividerColor" />
 
-            <!--分割上下-->
             <View
                 android:layout_width="match_parent"
                 android:layout_height="@dimen/size20"
                 android:background="@color/white" />
 
-            <!--基金名称-->
+
             <RelativeLayout
                 android:layout_width="match_parent"
                 android:layout_height="@dimen/size50">
@@ -170,7 +169,7 @@
                     android:layout_marginLeft="@dimen/size20"
                     android:text="@string/JiJinMingCheng"
                     android:textColor="@color/texts"
-                    android:textSize="@dimen/txtSize14" />
+                    android:textSize="@dimen/txtSize15" />
 
                 <TextView
                     android:id="@+id/tvCnFundNameValue"
@@ -180,7 +179,7 @@
                     android:layout_marginLeft="@dimen/size35"
                     android:layout_toRightOf="@id/tvCnFundName"
                     android:text="--"
-                    android:textColor="@color/texts"
+                    android:textColor="@color/title_list"
                     android:textSize="@dimen/txtSize14" />
 
             </RelativeLayout>
@@ -198,7 +197,7 @@
                     android:layout_marginLeft="@dimen/size20"
                     android:text="@string/shareholdercode"
                     android:textColor="@color/texts"
-                    android:textSize="@dimen/txtSize14" />
+                    android:textSize="@dimen/txtSize15" />
 
                 <TextView
                     android:id="@+id/tvCnFundNetValueValue"
@@ -208,7 +207,7 @@
                     android:layout_marginLeft="@dimen/size35"
                     android:layout_toRightOf="@id/tvCnFundNetValue"
                     android:text="--"
-                    android:textColor="@color/texts"
+                    android:textColor="@color/title_list"
                     android:textSize="@dimen/txtSize14" />
 
             </RelativeLayout>
@@ -225,7 +224,7 @@
                     android:layout_marginLeft="@dimen/size20"
                     android:text="@string/mergerstatus"
                     android:textColor="@color/texts"
-                    android:textSize="@dimen/txtSize14" />
+                    android:textSize="@dimen/txtSize15" />
 
                 <TextView
                     android:id="@+id/tvStatements"
@@ -235,13 +234,12 @@
                     android:layout_marginLeft="@dimen/size35"
                     android:layout_toRightOf="@id/tvCnStockholderNum"
                     android:text="--"
-                    android:textColor="@color/texts"
+                    android:textColor="@color/title_list"
                     android:textSize="@dimen/txtSize14" />
 
             </RelativeLayout>
 
 
-            <!--可用资金-->
             <RelativeLayout
                 android:layout_width="match_parent"
                 android:layout_height="@dimen/size50">
@@ -254,7 +252,7 @@
                     android:layout_marginLeft="@dimen/size20"
                     android:text="@string/mergerdata"
                     android:textColor="@color/texts"
-                    android:textSize="@dimen/txtSize14" />
+                    android:textSize="@dimen/txtSize15" />
 
                 <TextView
                     android:id="@+id/tvCnExpendableFundValue"
@@ -264,7 +262,7 @@
                     android:layout_marginLeft="@dimen/size35"
                     android:layout_toRightOf="@id/tvCnExpendableFund"
                     android:text="--"
-                    android:textColor="@color/texts"
+                    android:textColor="@color/title_list"
                     android:textSize="@dimen/txtSize14" />
 
             </RelativeLayout>
@@ -274,13 +272,13 @@
                 android:layout_height="@dimen/size20"
                 android:background="@color/white" />
         </LinearLayout>
-        <!--分割线-->
+
         <View
             android:layout_width="match_parent"
             android:layout_height="@dimen/size1"
             android:background="@color/dividerColor" />
 
-        <!--确定按钮-->
+
         <RelativeLayout
             android:layout_width="wrap_content"
             android:layout_height="wrap_content"

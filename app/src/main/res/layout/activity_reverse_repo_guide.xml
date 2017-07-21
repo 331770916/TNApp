@@ -21,15 +21,17 @@
             android:layout_width="wrap_content"
             android:layout_height="wrap_content"
             android:layout_centerInParent="true"
-            android:text="国债逆回购"
+            android:text="@string/gznhg"
             android:textColor="@color/white"
-            android:textSize="@dimen/pickerview_topbar_title_textsize" />
+            android:textSize="@dimen/title_big_textsize" />
 
         <ImageView
             android:id="@+id/iv_back"
-            android:layout_width="@dimen/size48"
+            android:layout_width="wrap_content"
             android:layout_height="match_parent"
             android:scaleType="center"
+            android:paddingLeft="@dimen/size15"
+            android:paddingRight="@dimen/size20"
             android:src="@mipmap/back_btn" />
     </RelativeLayout>
 

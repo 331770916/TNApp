@@ -136,6 +136,24 @@
             android:gravity="center">
 
             <TextView
+                android:id="@+id/tvCNQX"
+                android:layout_width="155dp"
+                android:layout_height="40dp"
+                android:background="@color/dividerColor"
+                android:clickable="true"
+                android:gravity="center"
+                android:text="取消"
+                android:textColor="@color/hushenTab_titleColor"
+                android:textSize="15sp" />
+        </LinearLayout>
+
+        <LinearLayout
+            android:layout_width="0dp"
+            android:layout_height="wrap_content"
+            android:layout_weight="1"
+            android:gravity="center">
+
+            <TextView
                 android:id="@+id/tvCNQD"
                 android:layout_width="155dp"
                 android:layout_height="40dp"
@@ -148,22 +166,5 @@
         </LinearLayout>
 
 
-        <LinearLayout
-            android:layout_width="0dp"
-            android:layout_height="wrap_content"
-            android:layout_weight="1"
-            android:gravity="center">
-
-            <TextView
-                android:id="@+id/tvCNQX"
-                android:layout_width="155dp"
-                android:layout_height="40dp"
-                android:background="@color/dividerColor"
-                android:clickable="true"
-                android:gravity="center"
-                android:text="取消"
-                android:textColor="@color/hushenTab_titleColor"
-                android:textSize="15sp" />
-        </LinearLayout>
     </LinearLayout>
 </RelativeLayout>

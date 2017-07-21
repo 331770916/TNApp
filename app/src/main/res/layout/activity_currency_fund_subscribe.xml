@@ -28,7 +28,8 @@
             android:layout_width="wrap_content"
             android:layout_height="match_parent"
             android:layout_alignParentLeft="true"
-            android:padding="@dimen/size10"
+            android:paddingLeft="@dimen/size15"
+            android:paddingRight="@dimen/size20"
             android:src="@mipmap/back_btn" />
 
         <TextView
@@ -37,7 +38,7 @@
             android:layout_centerInParent="true"
             android:text="@string/HuoBiJiJinShenGou"
             android:textColor="@color/white"
-            android:textSize="@dimen/pickerview_topbar_title_textsize" />
+            android:textSize="@dimen/title_big_textsize" />
     </RelativeLayout>
 
     <!--分割线-->
@@ -56,7 +57,7 @@
             android:layout_centerVertical="true"
             android:layout_marginLeft="@dimen/size20"
             android:text="@string/JiJinDaiMa"
-            android:textSize="13sp"
+            android:textSize="@dimen/txtSize15"
             android:textStyle="bold"/>
         <EditText
             android:id="@+id/etFundCode"
@@ -69,7 +70,7 @@
             android:maxLength="6"
             android:inputType="number"
             android:textColorHint="@color/text"
-            android:textSize="13sp"
+            android:textSize="@dimen/txtSize14"
             android:singleLine="true"
             android:background="@null"/>
 
@@ -106,7 +107,7 @@
             android:layout_centerVertical="true"
             android:layout_marginLeft="@dimen/size20"
             android:text="@string/ShenGouJinE"
-            android:textSize="13sp"
+            android:textSize="@dimen/txtSize15"
             android:textStyle="bold"/>
         <EditText
             android:id="@+id/etFundAmount"
@@ -119,7 +120,7 @@
             android:maxLength="10"
             android:inputType="numberDecimal"
             android:textColorHint="@color/text"
-            android:textSize="13sp"
+            android:textSize="@dimen/txtSize14"
             android:singleLine="true"
             android:background="@null"/>
 
@@ -162,7 +163,7 @@
             android:layout_marginLeft="@dimen/size20"
             android:text="@string/JiJinMingCheng"
             android:textColor="@color/text"
-            android:textSize="13sp" />
+            android:textSize="@dimen/txtSize15" />
         <TextView
             android:id="@+id/tvFundNameValue"
             android:layout_width="wrap_content"
@@ -171,8 +172,8 @@
             android:layout_toRightOf="@id/tvFundName"
             android:layout_marginLeft="@dimen/size35"
             android:text=""
-            android:textColor="@color/text"
-            android:textSize="13sp" />
+            android:textColor="@color/title_list"
+            android:textSize="@dimen/txtSize14" />
 
     </RelativeLayout>
 
@@ -189,7 +190,7 @@
             android:layout_marginLeft="@dimen/size20"
             android:text="@string/GuDongZhangHao"
             android:textColor="@color/text"
-            android:textSize="13sp" />
+            android:textSize="@dimen/txtSize15" />
         <TextView
             android:id="@+id/tvStockholderNumValue"
             android:layout_width="wrap_content"
@@ -198,8 +199,8 @@
             android:layout_toRightOf="@id/tvStockholderNum"
             android:layout_marginLeft="@dimen/size35"
             android:text=""
-            android:textColor="@color/text"
-            android:textSize="13sp" />
+            android:textColor="@color/title_list"
+            android:textSize="@dimen/txtSize14" />
 
     </RelativeLayout>
 
@@ -216,7 +217,7 @@
             android:layout_marginLeft="@dimen/size20"
             android:text="@string/KeYongZiJin"
             android:textColor="@color/text"
-            android:textSize="13sp" />
+            android:textSize="@dimen/txtSize15" />
         <TextView
             android:id="@+id/tvExpendableFundValue"
             android:layout_width="wrap_content"
@@ -225,8 +226,8 @@
             android:layout_toRightOf="@id/tvExpendableFund"
             android:layout_marginLeft="@dimen/size35"
             android:text=""
-            android:textColor="@color/text"
-            android:textSize="13sp" />
+            android:textColor="@color/title_list"
+            android:textSize="@dimen/txtSize14" />
 
     </RelativeLayout>
 

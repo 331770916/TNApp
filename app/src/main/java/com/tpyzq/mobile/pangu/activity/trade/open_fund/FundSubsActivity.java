@@ -35,6 +35,7 @@ import com.tpyzq.mobile.pangu.util.Helper;
 import com.tpyzq.mobile.pangu.util.SpUtils;
 import com.tpyzq.mobile.pangu.util.ToastUtils;
 import com.tpyzq.mobile.pangu.util.panguutil.UserUtil;
+import com.tpyzq.mobile.pangu.view.CentreToast;
 import com.tpyzq.mobile.pangu.view.dialog.CancelDialog;
 import com.tpyzq.mobile.pangu.view.dialog.FundSubsDialog;
 import com.tpyzq.mobile.pangu.view.dialog.MistakeDialog;
@@ -297,10 +298,10 @@ public class FundSubsActivity extends BaseActivity implements View.OnClickListen
     private void setTextView(FundDataEntity fundDataBean) {
         et_rengou_price.setEnabled(true);
         fundcode = fundDataBean.data.get(0).FUND_CODE;
-        tv_fund_name.setText("基金名称\t\t" + fundDataBean.data.get(0).FUND_NAME);
-        tv_netvalue.setText("基金净值\t\t" + fundDataBean.data.get(0).NAV);
-        tv_lowest_investment.setText("个人最低投资\t\t" + fundDataBean.data.get(0).OPEN_SHARE + "\t元");
-        tv_usable_money.setText("可用投资\t\t" + fundDataBean.data.get(0).ENABLE_BALANCE + "\t元");
+        tv_fund_name.setText(fundDataBean.data.get(0).FUND_NAME);
+        tv_netvalue.setText(fundDataBean.data.get(0).NAV);
+        tv_lowest_investment.setText(fundDataBean.data.get(0).OPEN_SHARE + "\t元");
+        tv_usable_money.setText(fundDataBean.data.get(0).ENABLE_BALANCE + "\t元");
     }
 
     /**
@@ -388,17 +389,18 @@ public class FundSubsActivity extends BaseActivity implements View.OnClickListen
     private void clearView() {
         et_fund_code.setText("");
         et_rengou_price.setText("");
-        tv_fund_name.setText("基金名称");
-        tv_netvalue.setText("基金净值");
-        tv_lowest_investment.setText("个人最低投资");
-        tv_usable_money.setText("可用投资");
+        tv_fund_name.setText("");
+        tv_netvalue.setText("");
+        tv_lowest_investment.setText("");
+        tv_usable_money.setText("");
         bt_true.setClickable(false);
         et_rengou_price.setEnabled(false);
         bt_true.setBackgroundResource(R.drawable.button_login_unchecked);
     }
 
     public void startFinish() {
-        ToastUtils.showShort(FundSubsActivity.this, "委托成功");
+//        ToastUtils.showShort(FundSubsActivity.this, "委托成功");
+        CentreToast.showText(this,"委托已提交",true);
         clearView();
     }
 

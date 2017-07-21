@@ -33,7 +33,8 @@
                 android:layout_height="wrap_content"
                 android:layout_alignParentLeft="true"
                 android:layout_centerVertical="true"
-                android:padding="@dimen/size10"
+                android:paddingLeft="@dimen/size15"
+                android:paddingRight="@dimen/size20"
                 android:src="@mipmap/back_btn"
                 tools:ignore="ContentDescription" />
 

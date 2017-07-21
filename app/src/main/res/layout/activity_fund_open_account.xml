@@ -24,7 +24,7 @@
             android:layout_centerInParent="true"
             android:text="基金开户"
             android:textColor="@color/white"
-            android:textSize="@dimen/pickerview_topbar_title_textsize" />
+            android:textSize="@dimen/title_big_textsize" />
 
         <ImageView
             android:id="@+id/iv_back"
@@ -32,7 +32,7 @@
             android:layout_height="match_parent"
             android:layout_alignParentLeft="true"
             android:layout_centerVertical="true"
-            android:paddingLeft="@dimen/size20"
+            android:paddingLeft="@dimen/size15"
             android:paddingRight="@dimen/size20"
             android:src="@mipmap/back_btn" />
     </RelativeLayout>
@@ -53,9 +53,10 @@
             android:textSize="@dimen/txtSize14" />
 
         <TextView
+            android:gravity="center"
             android:id="@+id/tv_fund_company"
             android:layout_width="wrap_content"
-            android:layout_height="wrap_content"
+            android:layout_height="match_parent"
             android:layout_gravity="center_vertical"
             android:layout_marginRight="@dimen/size20"
             android:drawablePadding="@dimen/size5"

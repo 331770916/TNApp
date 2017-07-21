@@ -23,7 +23,8 @@
             android:layout_width="wrap_content"
             android:layout_height="match_parent"
             android:layout_alignParentLeft="true"
-            android:padding="@dimen/size10"
+            android:paddingLeft="@dimen/size15"
+            android:paddingRight="@dimen/size20"
             android:src="@mipmap/back_btn" />
 
         <TextView
@@ -32,11 +33,12 @@
             android:layout_centerInParent="true"
             android:text="@string/HuoBiJiJin"
             android:textColor="@color/white"
-            android:textSize="@dimen/pickerview_topbar_title_textsize" />
+            android:textSize="@dimen/title_big_textsize" />
     </RelativeLayout>
 
     <!--申购-->
     <RelativeLayout
+        android:background="@color/white"
         android:id="@+id/rlFundSubscribe"
         android:layout_width="match_parent"
         android:layout_height="@dimen/size50">
@@ -48,6 +50,8 @@
             android:layout_marginLeft="@dimen/size12"
             android:src="@mipmap/huobijijinshengou"/>
         <TextView
+            android:textSize="@dimen/txtSize15"
+            android:textColor="@color/title_list"
             android:layout_width="wrap_content"
             android:layout_height="wrap_content"
             android:layout_centerVertical="true"
@@ -80,6 +84,7 @@
 
     <!--赎回-->
     <RelativeLayout
+        android:background="@color/white"
         android:id="@+id/rlFundRedeem"
         android:layout_width="match_parent"
         android:layout_height="@dimen/size50">
@@ -91,6 +96,8 @@
             android:layout_marginLeft="@dimen/size12"
             android:src="@mipmap/huobijijinshuhui"/>
         <TextView
+            android:textSize="@dimen/txtSize15"
+            android:textColor="@color/title_list"
             android:layout_width="wrap_content"
             android:layout_height="wrap_content"
             android:layout_centerVertical="true"
@@ -122,6 +129,7 @@
 
     <!--委托查询-->
     <RelativeLayout
+        android:background="@color/white"
         android:id="@+id/rlFundQuery"
         android:layout_width="match_parent"
         android:layout_height="@dimen/size50">
@@ -134,6 +142,8 @@
             android:layout_marginLeft="@dimen/size12"
             android:src="@mipmap/chaxunweituo"/>
         <TextView
+            android:textSize="@dimen/txtSize15"
+            android:textColor="@color/title_list"
             android:layout_width="wrap_content"
             android:layout_height="wrap_content"
             android:layout_centerVertical="true"
@@ -166,6 +176,7 @@
 
     <!--撤单-->
     <RelativeLayout
+        android:background="@color/white"
         android:id="@+id/rlFundRevoke"
         android:layout_width="match_parent"
         android:layout_height="@dimen/size50">
@@ -178,6 +189,8 @@
             android:layout_marginLeft="@dimen/size12"
             android:src="@mipmap/huobijijinchedasn"/>
         <TextView
+            android:textSize="@dimen/txtSize15"
+            android:textColor="@color/title_list"
             android:layout_width="wrap_content"
             android:layout_height="wrap_content"
             android:layout_centerVertical="true"

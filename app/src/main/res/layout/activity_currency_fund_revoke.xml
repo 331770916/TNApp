@@ -28,7 +28,8 @@
             android:layout_width="wrap_content"
             android:layout_height="match_parent"
             android:layout_alignParentLeft="true"
-            android:padding="@dimen/size10"
+            android:paddingLeft="@dimen/size15"
+            android:paddingRight="@dimen/size20"
             android:src="@mipmap/back_btn" />
 
         <TextView
@@ -37,7 +38,7 @@
             android:layout_centerInParent="true"
             android:text="@string/HuoBiJiCheDan"
             android:textColor="@color/white"
-            android:textSize="@dimen/pickerview_topbar_title_textsize" />
+            android:textSize="@dimen/title_big_textsize" />
     </RelativeLayout>
 
     <!--分割线-->
@@ -47,6 +48,7 @@
         android:background="@color/dividerColor"/>
 
     <LinearLayout
+        android:background="@color/white"
         android:layout_width="match_parent"
         android:layout_height="@dimen/size30"
         android:gravity="center_vertical"
@@ -59,7 +61,7 @@
             android:gravity="center"
             android:text="基金名称"
             android:textColor="@color/text"
-            android:textSize="13sp"/>
+            android:textSize="@dimen/txtSize13"/>
 
         <TextView
             android:layout_weight="1"
@@ -68,7 +70,7 @@
             android:gravity="center"
             android:text="委托时间"
             android:textColor="@color/text"
-            android:textSize="13sp"/>
+            android:textSize="@dimen/txtSize13"/>
 
         <TextView
             android:layout_weight="1"
@@ -77,7 +79,7 @@
             android:gravity="center"
             android:text="数量/金额"
             android:textColor="@color/text"
-            android:textSize="13sp"/>
+            android:textSize="@dimen/txtSize13"/>
 
         <TextView
             android:layout_weight="1"
@@ -86,7 +88,7 @@
             android:gravity="center"
             android:text="类型/状态"
             android:textColor="@color/text"
-            android:textSize="13sp"/>
+            android:textSize="@dimen/txtSize13"/>
 
     </LinearLayout>
 

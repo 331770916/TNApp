@@ -23,9 +23,9 @@
             android:layout_width="wrap_content"
             android:layout_height="wrap_content"
             android:layout_centerInParent="true"
-            android:text="投票查询"
+            android:text="@string/vote_query"
             android:textColor="@color/white"
-            android:textSize="@dimen/pickerview_topbar_title_textsize" />
+            android:textSize="@dimen/title_big_textsize" />
 
         <ImageView
             android:id="@+id/detail_back"
@@ -33,7 +33,7 @@
             android:layout_height="match_parent"
             android:layout_alignParentBottom="true"
             android:layout_alignParentLeft="true"
-            android:paddingLeft="@dimen/size20"
+            android:paddingLeft="@dimen/size15"
             android:paddingRight="@dimen/size20"
             android:src="@mipmap/back_btn" />
     </RelativeLayout>
@@ -60,7 +60,7 @@
             android:layout_alignParentRight="true"
             android:layout_marginRight="@dimen/size20"
             android:drawablePadding="@dimen/size14"
-            android:text="请选择股东代码"
+            android:text="@string/vote_choose_code"
             android:drawableRight="@mipmap/icon_right"
             android:gravity="center_vertical"
             android:textColor="@color/hushenTab_titleColor"

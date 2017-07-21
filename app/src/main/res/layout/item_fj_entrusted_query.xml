@@ -13,34 +13,36 @@
         <RelativeLayout
             android:layout_width="@dimen/size0"
             android:layout_height="wrap_content"
-            android:layout_weight="1.5">
+            android:layout_weight="1">
 
             <TextView
+                android:paddingLeft="@dimen/size20"
                 android:id="@+id/tv1"
                 android:textStyle="bold"
                 android:layout_width="match_parent"
                 android:layout_height="wrap_content"
                 android:layout_centerHorizontal="true"
                 android:layout_marginTop="@dimen/size12"
-                android:gravity="center|fill"
+                android:gravity="center|start"
                 android:textColor="@color/hushenTab_titleColor"
-                android:textSize="@dimen/txtSize13" />
+                android:textSize="@dimen/txtSize15" />
 
             <TextView
+                android:paddingLeft="@dimen/size20"
                 android:id="@+id/tv2"
                 android:layout_width="match_parent"
                 android:layout_height="wrap_content"
                 android:layout_alignLeft="@id/tv1"
                 android:layout_below="@id/tv1"
-                android:gravity="center|fill"
+                android:gravity="center|start"
                 android:textColor="@color/newStockTitle"
-                android:textSize="@dimen/txtSize13" />
+                android:textSize="@dimen/txtSize14" />
         </RelativeLayout>
 
         <RelativeLayout
             android:layout_width="@dimen/size0"
             android:layout_height="wrap_content"
-            android:layout_marginRight="@dimen/size20"
+            android:paddingRight="@dimen/size30"
             android:layout_marginTop="@dimen/size12"
             android:layout_weight="1"
             android:gravity="right">
@@ -54,7 +56,7 @@
                 android:layout_alignParentTop="true"
                 android:gravity="center|right"
                 android:textColor="@color/hushenTab_titleColor"
-                android:textSize="@dimen/txtSize13" />
+                android:textSize="@dimen/txtSize14" />
 
             <TextView
                 android:id="@+id/tv4"
@@ -63,7 +65,7 @@
                 android:layout_below="@id/tv3"
                 android:gravity="center|right"
                 android:textColor="@color/hushenTab_titleColor"
-                android:textSize="@dimen/txtSize13" />
+                android:textSize="@dimen/txtSize14" />
 
 
         </RelativeLayout>
@@ -72,7 +74,7 @@
             android:layout_width="@dimen/size0"
             android:layout_height="wrap_content"
             android:layout_marginTop="@dimen/size12"
-            android:layout_weight="2"
+            android:layout_weight="1"
             android:gravity="right">
 
             <TextView
@@ -83,9 +85,9 @@
                 android:layout_below="@+id/tv6"
                 android:gravity="center|right"
                 android:paddingLeft="@dimen/size5"
-                android:paddingRight="@dimen/size10"
+                android:paddingRight="@dimen/size20"
                 android:textColor="@color/hushenTab_titleColor"
-                android:textSize="@dimen/txtSize13" />
+                android:textSize="@dimen/txtSize14" />
 
             <TextView
                 android:id="@+id/tv6"
@@ -96,9 +98,9 @@
                 android:layout_alignParentTop="true"
                 android:gravity="center|right"
                 android:paddingLeft="@dimen/size5"
-                android:paddingRight="@dimen/size10"
+                android:paddingRight="@dimen/size20"
                 android:textColor="@color/hushenTab_titleColor"
-                android:textSize="@dimen/txtSize13" />
+                android:textSize="@dimen/txtSize14" />
         </RelativeLayout>
 
     </LinearLayout>

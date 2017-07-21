@@ -27,7 +27,7 @@
             android:layout_centerInParent="true"
             android:text="@string/ChiCang"
             android:textColor="@color/white"
-            android:textSize="@dimen/pickerview_topbar_title_textsize" />
+            android:textSize="@dimen/title_big_textsize" />
 
         <ImageView
             android:id="@+id/detail_back"
@@ -35,7 +35,7 @@
             android:layout_height="match_parent"
             android:layout_alignParentBottom="true"
             android:layout_alignParentLeft="true"
-            android:paddingLeft="@dimen/size20"
+            android:paddingLeft="@dimen/size15"
             android:paddingRight="@dimen/size20"
             android:src="@mipmap/back_btn" />
     </RelativeLayout>
@@ -224,47 +224,70 @@
                     android:layout_width="match_parent"
                     android:layout_height="@dimen/size30"
                     android:background="@color/white"
-                    android:orientation="horizontal"
-                    android:paddingLeft="@dimen/size15"
-                    android:paddingRight="@dimen/size15">
+                    android:orientation="horizontal">
 
-                    <TextView
-                        android:paddingLeft="@dimen/size4"
-                        android:layout_width="0dp"
-                        android:layout_height="wrap_content"
+                    <LinearLayout
                         android:layout_weight="1"
-                        android:gravity="center|fill"
-                        android:text="@string/mcsz"
-                        android:textColor="@color/newStockTitle"
-                        android:textSize="@dimen/txtSize12" />
+                        android:layout_width="@dimen/size0"
+                        android:layout_height="match_parent">
+                        <TextView
+                            android:paddingLeft="@dimen/size10"
+                            android:gravity="center_vertical|start"
+                            android:layout_width="match_parent"
+                            android:layout_height="match_parent"
+                            android:text="@string/mcsz"
+                            android:textColor="@color/newStockTitle"
+                            android:textSize="@dimen/txtSize12" />
+                    </LinearLayout>
 
-                    <TextView
-                        android:layout_width="0dp"
-                        android:layout_height="wrap_content"
+                    <LinearLayout
                         android:layout_weight="1"
-                        android:gravity="center"
-                        android:text="@string/yk"
-                        android:textColor="@color/newStockTitle"
-                        android:textSize="@dimen/txtSize12" />
+                        android:layout_width="@dimen/size0"
+                        android:layout_height="match_parent">
 
-                    <TextView
-                        android:layout_width="0dp"
-                        android:layout_height="wrap_content"
+                        <TextView
+                            android:paddingRight="@dimen/size20"
+                            android:gravity="center_vertical|end"
+                            android:layout_width="match_parent"
+                            android:layout_height="match_parent"
+                            android:text="@string/yk"
+                            android:textColor="@color/newStockTitle"
+                            android:textSize="@dimen/txtSize12" />
+
+                    </LinearLayout>
+
+                    <LinearLayout
                         android:layout_weight="1"
-                        android:gravity="center"
-                        android:text="@string/ccky"
-                        android:textColor="@color/newStockTitle"
-                        android:textSize="@dimen/txtSize12" />
+                        android:layout_width="@dimen/size0"
+                        android:layout_height="match_parent">
 
+                        <TextView
+                            android:paddingRight="@dimen/size20"
+                            android:gravity="center_vertical|end"
+                            android:layout_width="match_parent"
+                            android:layout_height="match_parent"
+                            android:text="@string/ccky"
+                            android:textColor="@color/newStockTitle"
+                            android:textSize="@dimen/txtSize12" />
 
-                    <TextView
-                        android:layout_width="0dp"
-                        android:layout_height="wrap_content"
+                    </LinearLayout>
+
+                    <LinearLayout
                         android:layout_weight="1"
-                        android:gravity="center|end"
-                        android:text="@string/xjcb"
-                        android:textColor="@color/newStockTitle"
-                        android:textSize="@dimen/txtSize12" />
+                        android:layout_width="@dimen/size0"
+                        android:layout_height="match_parent">
+
+                        <TextView
+                            android:paddingRight="@dimen/size10"
+                            android:gravity="center_vertical|end"
+                            android:layout_width="match_parent"
+                            android:layout_height="match_parent"
+                            android:text="@string/xjcb"
+                            android:textColor="@color/newStockTitle"
+                            android:textSize="@dimen/txtSize12" />
+
+                    </LinearLayout>
+
                 </LinearLayout>
 
 

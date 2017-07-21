@@ -26,14 +26,15 @@
             android:layout_width="wrap_content"
             android:layout_height="match_parent"
             android:layout_alignParentLeft="true"
-            android:padding="@dimen/size10"
+            android:paddingLeft="@dimen/size15"
+            android:paddingRight="@dimen/size20"
             android:src="@mipmap/back_btn" />
 
         <TextView
             android:layout_width="wrap_content"
             android:layout_height="wrap_content"
             android:layout_centerInParent="true"
-            android:text="ETF申赎撤单"
+            android:text="@string/etf_ssce"
             android:textColor="@color/white"
             android:textSize="@dimen/pickerview_topbar_title_textsize" />
     </RelativeLayout>
@@ -60,7 +61,7 @@
             android:gravity="center|fill"
             android:text="@string/entrust_name"
             android:textColor="@color/newStockTitle"
-            android:textSize="@dimen/txtSize12" />
+            android:textSize="@dimen/txtSize13" />
 
         <TextView
             android:layout_width="0dp"
@@ -69,7 +70,7 @@
             android:gravity="center"
             android:text="@string/etf_wtb_number"
             android:textColor="@color/newStockTitle"
-            android:textSize="@dimen/txtSize12" />
+            android:textSize="@dimen/txtSize13"/>
 
         <TextView
             android:layout_width="0dp"
@@ -78,7 +79,7 @@
             android:gravity="center"
             android:text="@string/etf_numbers_amount"
             android:textColor="@color/newStockTitle"
-            android:textSize="@dimen/txtSize12" />
+            android:textSize="@dimen/txtSize13" />
 
         <TextView
             android:layout_width="0dp"
@@ -88,7 +89,7 @@
             android:paddingRight="@dimen/size3"
             android:text="@string/etf_status_transaction"
             android:textColor="@color/newStockTitle"
-            android:textSize="@dimen/txtSize12" />
+            android:textSize="@dimen/txtSize13" />
     </LinearLayout>
 
     <View

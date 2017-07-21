@@ -31,7 +31,7 @@
             android:layout_centerInParent="true"
             android:text="@string/priceAllot"
             android:textColor="@color/white"
-            android:textSize="@dimen/pickerview_topbar_title_textsize" />
+            android:textSize="@dimen/title_big_textsize" />
     </RelativeLayout>
 
     <RelativeLayout

@@ -24,7 +24,8 @@
             android:layout_width="wrap_content"
             android:layout_height="match_parent"
             android:layout_alignParentLeft="true"
-            android:padding="@dimen/size10"
+            android:paddingLeft="@dimen/size15"
+            android:paddingRight="@dimen/size20"
             android:src="@mipmap/back_btn" />
 
         <TextView
@@ -34,7 +35,7 @@
             android:layout_centerInParent="true"
             android:text="@string/Revoke"
             android:textColor="@color/white"
-            android:textSize="@dimen/pickerview_topbar_title_textsize" />
+            android:textSize="@dimen/title_big_textsize" />
     </RelativeLayout>
 
     <LinearLayout
@@ -49,10 +50,11 @@
             android:layout_width="0dp"
             android:layout_height="wrap_content"
             android:layout_weight="1"
-            android:gravity="center"
+            android:gravity="center|start"
             android:text="@string/TextView1"
+            android:paddingLeft="@dimen/size10"
             android:textColor="@color/newStockTitle"
-            android:textSize="@dimen/size12" />
+            android:textSize="@dimen/txtSize13" />
 
         <TextView
             android:layout_width="0dp"
@@ -61,7 +63,7 @@
             android:gravity="center"
             android:text="@string/TextView2"
             android:textColor="@color/newStockTitle"
-            android:textSize="@dimen/size12" />
+            android:textSize="@dimen/txtSize13" />
 
         <TextView
             android:layout_width="0dp"
@@ -70,17 +72,18 @@
             android:gravity="center"
             android:text="@string/TextView3"
             android:textColor="@color/newStockTitle"
-            android:textSize="@dimen/size12" />
+            android:textSize="@dimen/txtSize13" />
 
 
         <TextView
             android:layout_width="0dp"
             android:layout_height="wrap_content"
             android:layout_weight="1"
-            android:gravity="center"
+            android:paddingRight="@dimen/size10"
+            android:gravity="center|end"
             android:text="@string/TextView4"
             android:textColor="@color/newStockTitle"
-            android:textSize="@dimen/size12" />
+            android:textSize="@dimen/txtSize13"/>
     </LinearLayout>
 
     <View

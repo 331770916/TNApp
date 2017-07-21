@@ -30,7 +30,7 @@
                 android:layout_centerInParent="true"
                 android:text="基金认购"
                 android:textColor="@color/white"
-                android:textSize="@dimen/pickerview_topbar_title_textsize" />
+                android:textSize="@dimen/title_big_textsize" />
 
             <ImageView
                 android:id="@+id/iv_back"
@@ -39,7 +39,7 @@
                 android:layout_alignParentLeft="true"
                 android:layout_centerVertical="true"
                 android:paddingLeft="@dimen/size15"
-                android:paddingRight="@dimen/size15"
+                android:paddingRight="@dimen/size20"
                 android:src="@mipmap/back_btn" />
         </RelativeLayout>
 
@@ -51,6 +51,8 @@
             android:orientation="horizontal">
 
             <TextView
+                android:textSize="@dimen/txtSize15"
+                android:textColor="@color/texts"
                 android:layout_width="wrap_content"
                 android:layout_height="wrap_content"
                 android:padding="@dimen/size15"
@@ -97,6 +99,8 @@
             android:background="@color/white">
 
             <TextView
+                android:textSize="@dimen/txtSize15"
+                android:textColor="@color/texts"
                 android:layout_width="wrap_content"
                 android:layout_height="wrap_content"
                 android:layout_gravity="center"
@@ -134,41 +138,103 @@
             android:paddingLeft="@dimen/size15"
             android:paddingTop="@dimen/size15">
 
-            <TextView
-                android:id="@+id/tv_fund_name"
-                android:layout_width="match_parent"
-                android:layout_height="0dp"
+            <LinearLayout
+                android:orientation="horizontal"
                 android:layout_weight="1"
-                android:gravity="center_vertical"
-                android:text="基金名称"
-                android:textColor="@color/text" />
+                android:layout_width="match_parent"
+                android:layout_height="@dimen/size0">
+                <TextView
+                    android:textSize="@dimen/txtSize15"
+                    android:layout_width="@dimen/size100"
+                    android:layout_height="match_parent"
+                    android:gravity="center_vertical"
+                    android:text="基金名称"
+                    android:textColor="@color/texts" />
 
-            <TextView
-                android:id="@+id/tv_netvalue"
-                android:layout_width="match_parent"
-                android:layout_height="0dp"
-                android:layout_weight="1"
-                android:gravity="center_vertical"
-                android:text="基金净值"
-                android:textColor="@color/text" />
+                <TextView
+                    android:textSize="@dimen/txtSize14"
+                    android:id="@+id/tv_fund_name"
+                    android:gravity="center_vertical"
+                    android:textColor="@color/title_list"
+                    android:layout_marginLeft="@dimen/size15"
+                    android:layout_width="wrap_content"
+                    android:layout_height="match_parent" />
 
-            <TextView
-                android:id="@+id/tv_lowest_investment"
-                android:layout_width="match_parent"
-                android:layout_height="0dp"
-                android:layout_weight="1"
-                android:gravity="center_vertical"
-                android:text="个人最低投资"
-                android:textColor="@color/text" />
+            </LinearLayout>
 
-            <TextView
-                android:id="@+id/tv_usable_money"
-                android:layout_width="match_parent"
-                android:layout_height="0dp"
+            <LinearLayout
+                android:orientation="horizontal"
                 android:layout_weight="1"
-                android:gravity="center_vertical"
-                android:text="可用资金"
-                android:textColor="@color/text" />
+                android:layout_width="match_parent"
+                android:layout_height="@dimen/size0">
+                <TextView
+                    android:textSize="@dimen/txtSize15"
+                    android:layout_width="@dimen/size100"
+                    android:layout_height="match_parent"
+                    android:gravity="center_vertical"
+                    android:text="基金净值"
+                    android:textColor="@color/texts" />
+
+                <TextView
+                    android:textSize="@dimen/txtSize14"
+                    android:id="@+id/tv_netvalue"
+                    android:gravity="center_vertical"
+                    android:textColor="@color/title_list"
+                    android:layout_marginLeft="@dimen/size15"
+                    android:layout_width="wrap_content"
+                    android:layout_height="match_parent" />
+
+
+            </LinearLayout>
+
+            <LinearLayout
+                android:orientation="horizontal"
+                android:layout_weight="1"
+                android:layout_width="match_parent"
+                android:layout_height="@dimen/size0">
+                <TextView
+                    android:textSize="@dimen/txtSize15"
+                    android:layout_width="@dimen/size100"
+                    android:layout_height="match_parent"
+                    android:gravity="center_vertical"
+                    android:text="个人最低投资"
+                    android:textColor="@color/texts" />
+
+                <TextView
+                    android:textSize="@dimen/txtSize14"
+                    android:id="@+id/tv_lowest_investment"
+                    android:gravity="center_vertical"
+                    android:textColor="@color/title_list"
+                    android:layout_marginLeft="@dimen/size15"
+                    android:layout_width="wrap_content"
+                    android:layout_height="match_parent" />
+
+            </LinearLayout>
+
+            <LinearLayout
+                android:orientation="horizontal"
+                android:layout_weight="1"
+                android:layout_width="match_parent"
+                android:layout_height="@dimen/size0">
+                <TextView
+                    android:textSize="@dimen/txtSize15"
+                    android:layout_width="@dimen/size100"
+                    android:layout_height="match_parent"
+                    android:gravity="center_vertical"
+                    android:text="可用资金"
+                    android:textColor="@color/texts" />
+
+                <TextView
+                    android:textSize="@dimen/txtSize14"
+                    android:id="@+id/tv_usable_money"
+                    android:gravity="center_vertical"
+                    android:textColor="@color/title_list"
+                    android:layout_marginLeft="@dimen/size15"
+                    android:layout_width="wrap_content"
+                    android:layout_height="match_parent" />
+
+            </LinearLayout>
+
         </LinearLayout>
 
         <Button

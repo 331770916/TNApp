@@ -1,8 +1,8 @@
 <?xml version="1.0" encoding="utf-8"?>
 <LinearLayout xmlns:android="http://schemas.android.com/apk/res/android"
+    xmlns:app="http://schemas.android.com/apk/res-auto"
     android:layout_width="match_parent"
     android:layout_height="match_parent"
-    xmlns:app="http://schemas.android.com/apk/res-auto"
     android:orientation="vertical">
 
     <!--   ETF申赎成交查询  -->
@@ -26,7 +26,8 @@
             android:layout_width="wrap_content"
             android:layout_height="match_parent"
             android:layout_alignParentLeft="true"
-            android:padding="@dimen/size10"
+            android:paddingLeft="@dimen/size15"
+            android:paddingRight="@dimen/size20"
             android:src="@mipmap/back_btn" />
 
         <TextView
@@ -35,7 +36,7 @@
             android:layout_centerInParent="true"
             android:text="@string/etf_ss_cj_query"
             android:textColor="@color/white"
-            android:textSize="@dimen/pickerview_topbar_title_textsize" />
+            android:textSize="@dimen/title_big_textsize" />
     </RelativeLayout>
 
     <LinearLayout
@@ -43,45 +44,62 @@
         android:layout_height="@dimen/size30"
         android:background="@color/white"
         android:gravity="center"
-        android:orientation="horizontal"
-        android:paddingLeft="@dimen/size20"
-        android:paddingRight="@dimen/size20">
+        android:orientation="horizontal">
 
-        <TextView
-            android:layout_width="0dp"
-            android:layout_height="wrap_content"
+        <LinearLayout
             android:layout_weight="1"
-            android:gravity="center|fill"
-            android:text="@string/entrust_name"
-            android:textColor="@color/newStockTitle"
-            android:textSize="@dimen/txtSize12" />
+            android:layout_width="@dimen/size0"
+            android:layout_height="match_parent">
 
-        <TextView
-            android:layout_width="0dp"
-            android:layout_height="wrap_content"
-            android:layout_weight="1"
-            android:gravity="center"
-            android:text="@string/etf_wtl"
-            android:textColor="@color/newStockTitle"
-            android:textSize="@dimen/txtSize12" />
+            <TextView
+                android:paddingLeft="@dimen/size20"
+                android:gravity="center_vertical|start"
+                android:layout_width="match_parent"
+                android:layout_height="match_parent"
+                android:text="@string/entrust_name"
+                android:textColor="@color/newStockTitle"
+                android:textSize="@dimen/txtSize13" />
 
-        <TextView
-            android:layout_width="0dp"
-            android:layout_height="wrap_content"
+        </LinearLayout>
+
+        <LinearLayout
             android:layout_weight="1"
-            android:gravity="center|end"
-            android:paddingRight="@dimen/size3"
-            android:text="@string/etf_date"
-            android:textColor="@color/newStockTitle"
-            android:textSize="@dimen/txtSize12" />
+            android:layout_width="@dimen/size0"
+            android:layout_height="match_parent">
+
+            <TextView
+                android:paddingRight="@dimen/size30"
+                android:gravity="center_vertical|end"
+                android:layout_width="match_parent"
+                android:layout_height="match_parent"
+                android:text="@string/etf_wtl"
+                android:textColor="@color/newStockTitle"
+                android:textSize="@dimen/txtSize13" />
+
+        </LinearLayout>
+
+        <LinearLayout
+            android:layout_weight="1"
+            android:layout_width="@dimen/size0"
+            android:layout_height="match_parent">
+
+            <TextView
+                android:paddingRight="@dimen/size20"
+                android:gravity="center_vertical|end"
+                android:layout_width="match_parent"
+                android:layout_height="match_parent"
+                android:text="@string/etf_date"
+                android:textColor="@color/newStockTitle"
+                android:textSize="@dimen/txtSize13" />
+
+        </LinearLayout>
+
     </LinearLayout>
+
     <View
-        android:background="@color/lineColor"
         android:layout_width="match_parent"
-        android:layout_height="@dimen/size0.5"/>
-
-
-
+        android:layout_height="@dimen/size0.5"
+        android:background="@color/lineColor" />
 
     <RelativeLayout
         android:layout_width="match_parent"
@@ -89,26 +107,23 @@
 
         <com.handmark.pulltorefresh.library.PullToRefreshListView
             android:id="@+id/lv"
-            app:ptrAnimationStyle="flip"
-            app:ptrMode="both"
             android:layout_width="match_parent"
             android:layout_height="match_parent"
             android:divider="@color/lineColor"
             android:dividerHeight="@dimen/size0.5"
-            android:scrollbars="none" />
+            android:scrollbars="none"
+            app:ptrAnimationStyle="flip"
+            app:ptrMode="both" />
 
         <ImageView
             android:id="@+id/iv_null"
             android:layout_width="match_parent"
             android:layout_height="match_parent"
             android:layout_centerInParent="true"
-            android:visibility="gone"
             android:scaleType="center"
-            android:src="@mipmap/kong" />
+            android:src="@mipmap/kong"
+            android:visibility="gone" />
     </RelativeLayout>
-
-
-
 
 
 </LinearLayout>

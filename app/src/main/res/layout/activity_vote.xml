@@ -23,9 +23,9 @@
             android:layout_width="wrap_content"
             android:layout_height="wrap_content"
             android:layout_centerInParent="true"
-            android:text="投票"
+            android:text="@string/vote_tp"
             android:textColor="@color/white"
-            android:textSize="@dimen/pickerview_topbar_title_textsize" />
+            android:textSize="@dimen/title_big_textsize" />
 
         <ImageView
             android:id="@+id/detail_back"
@@ -33,7 +33,7 @@
             android:layout_height="match_parent"
             android:layout_alignParentBottom="true"
             android:layout_alignParentLeft="true"
-            android:paddingLeft="@dimen/size20"
+            android:paddingLeft="@dimen/size15"
             android:paddingRight="@dimen/size20"
             android:src="@mipmap/back_btn" />
     </RelativeLayout>

@@ -2,8 +2,8 @@
 <RelativeLayout xmlns:android="http://schemas.android.com/apk/res/android"
     android:layout_width="wrap_content"
     android:layout_height="wrap_content"
-    android:paddingTop="@dimen/size15"
-    android:background="@color/white">
+    android:background="@color/white"
+    android:paddingTop="@dimen/size15">
 
     <!--标题-->
     <LinearLayout
@@ -152,6 +152,25 @@
             android:gravity="center">
 
             <TextView
+                android:id="@+id/tvCNRedeemQX"
+                android:layout_width="155dp"
+                android:layout_height="40dp"
+                android:background="@color/dividerColor"
+                android:clickable="true"
+                android:gravity="center"
+                android:text="取消"
+                android:textColor="@color/hushenTab_titleColor"
+                android:textSize="15sp" />
+
+        </LinearLayout>
+
+        <LinearLayout
+            android:layout_width="0dp"
+            android:layout_height="wrap_content"
+            android:layout_weight="1"
+            android:gravity="center">
+
+            <TextView
                 android:id="@+id/tvCNRedeemQD"
                 android:layout_width="155dp"
                 android:layout_height="40dp"
@@ -164,23 +183,5 @@
         </LinearLayout>
 
 
-        <LinearLayout
-            android:layout_width="0dp"
-            android:layout_height="wrap_content"
-            android:layout_weight="1"
-            android:gravity="center">
-
-            <TextView
-                android:id="@+id/tvCNRedeemQX"
-                android:layout_width="155dp"
-                android:layout_height="40dp"
-                android:background="@color/dividerColor"
-                android:clickable="true"
-                android:gravity="center"
-                android:text="取消"
-                android:textColor="@color/hushenTab_titleColor"
-                android:textSize="15sp" />
-
-        </LinearLayout>
     </LinearLayout>
 </RelativeLayout>

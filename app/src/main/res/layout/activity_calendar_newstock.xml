@@ -27,6 +27,8 @@
             android:layout_width="wrap_content"
             android:layout_height="wrap_content"
             android:layout_alignParentLeft="true"
+            android:paddingLeft="@dimen/size15"
+            android:paddingRight="@dimen/size20"
             android:background="@drawable/btn_back" />
 
         <TextView
@@ -36,7 +38,7 @@
             android:layout_centerInParent="true"
             android:text="@string/xgrl1"
             android:textColor="@color/white"
-            android:textSize="@dimen/txtSize20" />
+            android:textSize="@dimen/title_big_textsize" />
 
         <TextView
             android:id="@+id/publish_request"

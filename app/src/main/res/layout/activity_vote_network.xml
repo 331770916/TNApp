@@ -21,9 +21,9 @@
             android:layout_width="wrap_content"
             android:layout_height="wrap_content"
             android:layout_centerInParent="true"
-            android:text="网络投票"
+            android:text="@string/vote_inte"
             android:textColor="@color/white"
-            android:textSize="@dimen/pickerview_topbar_title_textsize" />
+            android:textSize="@dimen/title_big_textsize" />
 
         <ImageView
             android:id="@+id/detail_back"
@@ -31,7 +31,7 @@
             android:layout_height="match_parent"
             android:layout_alignParentBottom="true"
             android:layout_alignParentLeft="true"
-            android:paddingLeft="@dimen/size20"
+            android:paddingLeft="@dimen/size15"
             android:paddingRight="@dimen/size20"
             android:src="@mipmap/back_btn" />
     </RelativeLayout>
@@ -126,7 +126,7 @@
                     android:layout_width="wrap_content"
                     android:layout_height="wrap_content"
                     android:layout_marginLeft="@dimen/size16"
-                    android:text="非累积投票议案"
+                    android:text="@string/vote_fljya"
                     android:textColor="@color/blue3"
                     android:textSize="@dimen/txtSize15" />
 
@@ -143,7 +143,7 @@
                 <TextView
                     android:layout_width="wrap_content"
                     android:layout_height="wrap_content"
-                    android:text="未查询到非累积投票议案"
+                    android:text="@string/vote_not_fljya"
                     android:textColor="@color/newStockTitle"
                     android:textSize="@dimen/txtSize15" />
 
@@ -175,7 +175,7 @@
                     android:layout_width="wrap_content"
                     android:layout_height="wrap_content"
                     android:layout_marginLeft="@dimen/size16"
-                    android:text="累积投票议案"
+                    android:text="@string/vote_ljya"
                     android:textColor="@color/blue3"
                     android:textSize="@dimen/txtSize15" />
 
@@ -192,7 +192,7 @@
                     android:layout_width="wrap_content"
                     android:layout_height="wrap_content"
                     android:layout_marginLeft="@dimen/size20"
-                    android:text="注意：累积投票制选举，对于每个选举议案组，股东可投票总数＝股东持股数×当选人数"
+                    android:text="@string/vote_content"
                     android:textColor="@color/newStockTitle"
                     android:textSize="@dimen/txtSize15" />
 
@@ -210,7 +210,7 @@
                 android:layout_height="wrap_content"
                 android:layout_margin="@dimen/size16"
                 android:textColor="@color/white"
-                android:text="提   交"
+                android:text="@string/vote_commint"
                 android:gravity="center"
                 android:background="@mipmap/vote_submit_bg"/>
 

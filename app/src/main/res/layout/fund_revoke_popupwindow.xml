@@ -155,24 +155,6 @@
             android:layout_width="0dp"
             android:layout_height="wrap_content"
             android:gravity="center">
-            <Button
-                android:id="@+id/bnQueDing"
-                android:layout_width="155dp"
-                android:layout_height="40dp"
-                android:background="@color/blue"
-                android:clickable="true"
-                android:gravity="center"
-                android:text="确认"
-                android:textSize="15sp"
-                android:textColor="@color/white"/>
-        </LinearLayout>
-
-
-        <LinearLayout
-            android:layout_weight="1"
-            android:layout_width="0dp"
-            android:layout_height="wrap_content"
-            android:gravity="center">
 
             <Button
                 android:id="@+id/bnQuXiao"
@@ -186,6 +168,24 @@
                 android:textColor="@color/black"/>
 
         </LinearLayout>
+
+        <LinearLayout
+            android:layout_weight="1"
+            android:layout_width="0dp"
+            android:layout_height="wrap_content"
+            android:gravity="center">
+            <Button
+                android:id="@+id/bnQueDing"
+                android:layout_width="155dp"
+                android:layout_height="40dp"
+                android:background="@color/blue"
+                android:clickable="true"
+                android:gravity="center"
+                android:text="确认"
+                android:textSize="15sp"
+                android:textColor="@color/white"/>
+        </LinearLayout>
+
 
     </LinearLayout>
 

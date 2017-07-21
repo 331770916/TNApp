@@ -4,12 +4,6 @@
     android:layout_height="match_parent"
     android:orientation="vertical">
 
-    <!--  ETF申赎撤单 和
-     ETF申赎历史查询
-     共用一个布局
-      底部隐藏部分  -->
-
-
 
     <LinearLayout
         android:id="@+id/fj_content"
@@ -21,18 +15,17 @@
         <LinearLayout
             android:layout_width="0dp"
             android:layout_height="match_parent"
-            android:layout_marginLeft="@dimen/size5"
-            android:layout_weight="1.5"
+            android:layout_weight="1"
             android:orientation="vertical">
 
             <TextView
                 android:id="@+id/tv1"
                 android:layout_width="wrap_content"
                 android:layout_height="wrap_content"
-                android:layout_marginLeft="@dimen/size20"
+                android:paddingLeft="@dimen/size20"
                 android:layout_marginTop="@dimen/size12"
                 android:textColor="@color/hushenTab_titleColor"
-                android:textSize="@dimen/self_stockNameText"
+                android:textSize="@dimen/txtSize15"
                 android:textStyle="bold" />
 
             <TextView
@@ -40,11 +33,11 @@
                 android:layout_width="wrap_content"
                 android:layout_height="wrap_content"
                 android:layout_marginBottom="@dimen/size12"
-                android:layout_marginLeft="@dimen/size20"
+                android:paddingLeft="@dimen/size20"
                 android:layout_marginTop="@dimen/size4"
                 android:gravity="left"
                 android:textColor="@color/newStockTitle"
-                android:textSize="@dimen/self_stockNumberText" />
+                android:textSize="@dimen/txtSize14" />
         </LinearLayout>
 
 
@@ -56,51 +49,52 @@
 
             <TextView
                 android:id="@+id/tv4"
+                android:paddingRight="@dimen/size30"
                 android:layout_width="match_parent"
                 android:layout_height="wrap_content"
                 android:gravity="right"
                 android:layout_marginTop="@dimen/size13"
                 android:textColor="@color/hushenTab_titleColor"
-                android:textSize="@dimen/txtSize13" />
+                android:textSize="@dimen/txtSize14" />
 
             <TextView
                 android:id="@+id/tv5"
+                android:paddingRight="@dimen/size30"
                 android:layout_width="match_parent"
                 android:layout_height="wrap_content"
                 android:gravity="right"
-                android:layout_marginBottom="@dimen/size12"
                 android:layout_marginTop="@dimen/size4"
+                android:layout_marginBottom="@dimen/size12"
                 android:textColor="@color/hushenTab_titleColor"
-                android:textSize="@dimen/self_stockNumberText" />
+                android:textSize="@dimen/txtSize14" />
         </LinearLayout>
 
         <LinearLayout
             android:layout_width="0dp"
             android:layout_height="match_parent"
-            android:layout_marginRight="@dimen/size10"
-            android:layout_weight="1.5"
+            android:layout_weight="1"
             android:orientation="vertical">
 
             <TextView
                 android:id="@+id/tv6"
                 android:layout_width="wrap_content"
+                android:paddingRight="@dimen/size20"
                 android:layout_height="wrap_content"
                 android:layout_gravity="right"
-                android:layout_marginRight="@dimen/size21"
                 android:layout_marginTop="@dimen/size13"
                 android:textColor="@color/hushenTab_titleColor"
-                android:textSize="@dimen/txtSize13" />
+                android:textSize="@dimen/txtSize14" />
 
             <TextView
                 android:id="@+id/tv7"
                 android:layout_width="wrap_content"
                 android:layout_height="wrap_content"
                 android:layout_gravity="right"
-                android:layout_marginBottom="@dimen/size12"
-                android:layout_marginRight="@dimen/size21"
+                android:paddingRight="@dimen/size20"
                 android:layout_marginTop="@dimen/size4"
+                android:layout_marginBottom="@dimen/size12"
                 android:textColor="@color/hushenTab_titleColor"
-                android:textSize="@dimen/self_stockNumberText" />
+                android:textSize="@dimen/txtSize14" />
         </LinearLayout>
     </LinearLayout>
 
@@ -109,14 +103,14 @@
 
         android:layout_width="match_parent"
         android:layout_height="wrap_content"
-        android:layout_marginTop="@dimen/size5"
+        android:layout_marginTop="@dimen/size1"
         android:background="@color/dividerColor"
         android:orientation="vertical">
 
         <LinearLayout
             android:layout_width="match_parent"
             android:layout_height="wrap_content"
-            android:layout_marginTop="@dimen/size2"
+            android:layout_marginTop="@dimen/size1"
             android:orientation="horizontal">
 
             <LinearLayout
@@ -129,6 +123,7 @@
                 android:padding="@dimen/size10">
 
                 <TextView
+                    android:textSize="@dimen/txtSize12"
                     android:layout_width="wrap_content"
                     android:layout_height="wrap_content"
                     android:paddingLeft="@dimen/size5"
@@ -136,11 +131,12 @@
                     android:textColor="@color/text" />
 
                 <TextView
+                    android:textSize="@dimen/txtSize12"
                     android:id="@+id/ll_tv1"
                     android:layout_width="wrap_content"
                     android:layout_height="wrap_content"
                     android:paddingLeft="@dimen/size10"
-                    android:textColor="@color/text" />
+                    android:textColor="@color/textss" />
             </LinearLayout>
 
             <View
@@ -155,19 +151,21 @@
                 android:padding="@dimen/size10">
 
                 <TextView
+                    android:textSize="@dimen/txtSize12"
                     android:layout_width="wrap_content"
                     android:layout_height="wrap_content"
                     android:layout_centerVertical="true"
                     android:paddingLeft="@dimen/size5"
-                    android:text="冻结解冻金额:"
+                    android:text="@string/etf_djjdjes"
                     android:textColor="@color/text" />
 
                 <TextView
+                    android:textSize="@dimen/txtSize12"
                     android:id="@+id/ll_tv2"
                     android:layout_width="wrap_content"
                     android:layout_height="wrap_content"
                     android:paddingLeft="@dimen/size10"
-                    android:textColor="@color/text" />
+                    android:textColor="@color/textss" />
             </LinearLayout>
         </LinearLayout>
 
@@ -175,7 +173,7 @@
         <LinearLayout
             android:layout_width="match_parent"
             android:layout_height="wrap_content"
-            android:layout_marginTop="@dimen/size2"
+            android:layout_marginTop="@dimen/size1"
             android:orientation="horizontal">
 
             <LinearLayout
@@ -187,19 +185,20 @@
                 android:padding="@dimen/size10">
 
                 <TextView
+                    android:textSize="@dimen/txtSize12"
                     android:layout_width="wrap_content"
                     android:layout_height="wrap_content"
                     android:paddingLeft="@dimen/size5"
-                    android:text="委托属性:"
+                    android:text="@string/etf_wtsxs"
                     android:textColor="@color/text" />
 
                 <TextView
+                    android:textSize="@dimen/txtSize12"
                     android:id="@+id/ll_tv3"
-                    android:text="00000"
                     android:layout_width="wrap_content"
                     android:layout_height="wrap_content"
                     android:paddingLeft="@dimen/size10"
-                    android:textColor="@color/text" />
+                    android:textColor="@color/textss" />
             </LinearLayout>
 
             <View
@@ -215,19 +214,20 @@
                 android:padding="@dimen/size10">
 
                 <TextView
+                    android:textSize="@dimen/txtSize12"
                     android:layout_width="wrap_content"
                     android:layout_height="wrap_content"
                     android:paddingLeft="@dimen/size5"
-                    android:text="买卖方向:"
+                    android:text="@string/etf_mmfxs"
                     android:textColor="@color/text" />
 
                 <TextView
+                    android:textSize="@dimen/txtSize12"
                     android:id="@+id/ll_tv4"
-                    android:text="00000"
                     android:layout_width="wrap_content"
                     android:layout_height="wrap_content"
                     android:paddingLeft="@dimen/size10"
-                    android:textColor="@color/text" />
+                    android:textColor="@color/textss" />
             </LinearLayout>
 
 
@@ -237,7 +237,7 @@
         <LinearLayout
             android:layout_width="match_parent"
             android:layout_height="wrap_content"
-            android:layout_marginTop="@dimen/size2"
+            android:layout_marginTop="@dimen/size1"
             android:orientation="horizontal">
 
             <LinearLayout
@@ -249,19 +249,21 @@
                 android:padding="@dimen/size10">
 
                 <TextView
+                    android:textSize="@dimen/txtSize12"
                     android:layout_width="wrap_content"
                     android:layout_height="wrap_content"
                     android:paddingLeft="@dimen/size5"
-                    android:text="废单原因:"
+                    android:text="@string/etf_fdyys"
                     android:textColor="@color/text" />
 
                 <TextView
+                    android:textSize="@dimen/txtSize12"
                     android:id="@+id/ll_tv5"
                     android:text="--"
                     android:layout_width="wrap_content"
                     android:layout_height="wrap_content"
                     android:paddingLeft="@dimen/size10"
-                    android:textColor="@color/text" />
+                    android:textColor="@color/textss" />
             </LinearLayout>
 
             <View

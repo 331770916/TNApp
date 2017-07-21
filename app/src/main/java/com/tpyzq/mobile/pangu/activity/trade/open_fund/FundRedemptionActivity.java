@@ -254,18 +254,18 @@ public class FundRedemptionActivity extends BaseActivity implements View.OnClick
 
     private void setTextView() {
         et_fund_sum.setEnabled(true);
-        tv_fund_name.setText("基金名称\t\t" + fundDataBean.data.get(0).FUND_NAME);
-        tv_fund_value.setText("基金净值\t\t" + fundDataBean.data.get(0).NAV);
-        tv_redeem_sum.setText("可赎份额\t\t" + fundDataBean.data.get(0).ENABLE_CNT + "\t份");
-        tv_redeem_min_sum.setText("最低赎回份额\t\t" + fundDataBean.data.get(0).LEASE_CNT + "\t份");
+        tv_fund_name.setText(fundDataBean.data.get(0).FUND_NAME);
+        tv_fund_value.setText(fundDataBean.data.get(0).NAV);
+        tv_redeem_sum.setText(fundDataBean.data.get(0).ENABLE_CNT + "\t份");
+        tv_redeem_min_sum.setText(fundDataBean.data.get(0).LEASE_CNT + "\t份");
     }
     private void setClearView() {
         et_fund_sum.setEnabled(false);
         fundDataBean = new FundDataEntity();
-        tv_fund_name.setText("基金名称\t\t");
-        tv_fund_value.setText("基金净值\t\t");
-        tv_redeem_sum.setText("可赎份额\t\t");
-        tv_redeem_min_sum.setText("最低赎回份额\t\t");
+        tv_fund_name.setText("");
+        tv_fund_value.setText("");
+        tv_redeem_sum.setText("");
+        tv_redeem_min_sum.setText("");
     }
 
 

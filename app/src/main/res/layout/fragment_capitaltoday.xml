@@ -11,41 +11,58 @@
         android:background="@color/lineColor" />
 
     <LinearLayout
-        android:paddingLeft="@dimen/size20"
-        android:paddingRight="@dimen/size20"
         android:layout_width="match_parent"
         android:layout_height="@dimen/size30"
         android:background="@color/white"
         android:gravity="center"
         android:orientation="horizontal">
 
-        <TextView
-            android:layout_width="0dp"
-            android:layout_height="wrap_content"
-            android:layout_weight="1"
-            android:gravity="center|fill"
-            android:text="@string/cjriq"
-            android:textColor="@color/newStockTitle"
-            android:textSize="@dimen/txtSize12" />
+        <LinearLayout
+            android:layout_width="@dimen/size0"
+            android:layout_height="match_parent"
+            android:layout_weight="1">
 
-        <TextView
-            android:layout_width="0dp"
-            android:layout_height="wrap_content"
-            android:layout_weight="1"
-            android:gravity="center"
-            android:text="@string/ywcx"
-            android:textColor="@color/newStockTitle"
-            android:textSize="@dimen/txtSize12" />
+            <TextView
+                android:paddingLeft="@dimen/size20"
+                android:gravity="center|start"
+                android:layout_width="match_parent"
+                android:layout_height="match_parent"
+                android:text="@string/cjriq"
+                android:textColor="@color/newStockTitle"
+                android:textSize="@dimen/txtSize13" />
+        </LinearLayout>
 
-        <TextView
-            android:paddingRight="@dimen/size3"
-            android:layout_width="0dp"
-            android:layout_height="wrap_content"
-            android:layout_weight="1"
-            android:gravity="center|end"
-            android:text="@string/fsje"
-            android:textColor="@color/newStockTitle"
-            android:textSize="@dimen/txtSize12" />
+        <LinearLayout
+            android:layout_width="@dimen/size0"
+            android:layout_height="match_parent"
+            android:layout_weight="1">
+
+            <TextView
+                android:paddingRight="@dimen/size30"
+                android:gravity="center|end"
+                android:layout_width="match_parent"
+                android:layout_height="match_parent"
+                android:text="@string/ywcx"
+                android:textColor="@color/newStockTitle"
+                android:textSize="@dimen/txtSize13" />
+
+        </LinearLayout>
+
+        <LinearLayout
+            android:layout_width="@dimen/size0"
+            android:layout_height="match_parent"
+            android:layout_weight="1">
+
+            <TextView
+                android:paddingRight="@dimen/size20"
+                android:gravity="center|end"
+                android:layout_width="match_parent"
+                android:layout_height="match_parent"
+                android:text="@string/fsje"
+                android:textColor="@color/newStockTitle"
+                android:textSize="@dimen/txtSize13" />
+
+        </LinearLayout>
 
     </LinearLayout>
 
@@ -67,14 +84,14 @@
             android:dividerHeight="@dimen/size0.5"
             android:scrollbars="none"
             app:ptrAnimationStyle="flip"
-            app:ptrMode="both"  />
+            app:ptrMode="both" />
 
         <ImageView
             android:id="@+id/iv_isEmpty"
-            android:scaleType="center"
             android:layout_width="match_parent"
             android:layout_height="match_parent"
             android:layout_centerInParent="true"
+            android:scaleType="center"
             android:src="@mipmap/kong" />
     </RelativeLayout>
 </LinearLayout>

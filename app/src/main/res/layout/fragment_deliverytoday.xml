@@ -27,7 +27,7 @@
             android:gravity="center|fill"
             android:text="@string/cjriq"
             android:textColor="@color/newStockTitle"
-            android:textSize="@dimen/txtSize12" />
+            android:textSize="@dimen/txtSize13" />
 
         <TextView
             android:layout_width="0dp"
@@ -36,7 +36,7 @@
             android:gravity="center"
             android:text="@string/stockName"
             android:textColor="@color/newStockTitle"
-            android:textSize="@dimen/txtSize12" />
+            android:textSize="@dimen/txtSize13" />
 
         <TextView
             android:layout_width="0dp"
@@ -45,7 +45,7 @@
             android:gravity="center"
             android:text="@string/Deal"
             android:textColor="@color/newStockTitle"
-            android:textSize="@dimen/txtSize12" />
+            android:textSize="@dimen/txtSize13" />
 
 
         <TextView
@@ -55,7 +55,7 @@
             android:gravity="center|end"
             android:text="@string/cjye"
             android:textColor="@color/newStockTitle"
-            android:textSize="@dimen/txtSize12" />
+            android:textSize="@dimen/txtSize13" />
     </LinearLayout>
 
     <View

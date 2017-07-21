@@ -30,7 +30,8 @@
             android:layout_width="wrap_content"
             android:layout_height="match_parent"
             android:layout_alignParentLeft="true"
-            android:padding="@dimen/size10"
+            android:paddingLeft="@dimen/size15"
+            android:paddingRight="@dimen/size20"
             android:src="@mipmap/back_btn" />
 
         <TextView
@@ -39,7 +40,7 @@
             android:layout_centerInParent="true"
             android:text="@string/ChangNeiJiJinShuHui"
             android:textColor="@color/white"
-            android:textSize="@dimen/pickerview_topbar_title_textsize" />
+            android:textSize="@dimen/title_big_textsize" />
     </RelativeLayout>
 
     <LinearLayout
@@ -71,7 +72,7 @@
                     android:layout_marginLeft="@dimen/size20"
                     android:text="@string/JiJinDaiMa"
                     android:textColor="@color/hushenTab_titleColor"
-                    android:textSize="@dimen/txtSize14" />
+                    android:textSize="@dimen/txtSize15" />
 
                 <EditText
                     android:id="@+id/etCnFundRedeemCode"
@@ -110,7 +111,7 @@
                     android:layout_marginLeft="@dimen/size20"
                     android:text="赎回份额"
                     android:textColor="@color/hushenTab_titleColor"
-                    android:textSize="@dimen/txtSize14" />
+                    android:textSize="@dimen/txtSize15" />
 
                 <EditText
                     android:id="@+id/etCnFundRedeemAmount"
@@ -153,7 +154,7 @@
                     android:layout_marginLeft="@dimen/size20"
                     android:text="@string/JiJinMingCheng"
                     android:textColor="@color/texts"
-                    android:textSize="@dimen/txtSize14" />
+                    android:textSize="@dimen/txtSize15" />
 
                 <TextView
                     android:id="@+id/tvCnFundRedeemNameValue"
@@ -163,7 +164,7 @@
                     android:layout_marginLeft="@dimen/size35"
                     android:layout_toRightOf="@id/tvCnFundRedeemName"
                     android:text=""
-                    android:textColor="@color/texts"
+                    android:textColor="@color/title_list"
                     android:textSize="@dimen/txtSize14" />
 
             </RelativeLayout>
@@ -181,7 +182,7 @@
                     android:layout_marginLeft="@dimen/size20"
                     android:text="@string/ZiJinJingZhi"
                     android:textColor="@color/texts"
-                    android:textSize="@dimen/txtSize14" />
+                    android:textSize="@dimen/txtSize15" />
 
                 <TextView
                     android:id="@+id/tvCnFundRedeemNetValueValue"
@@ -191,7 +192,7 @@
                     android:layout_marginLeft="@dimen/size35"
                     android:layout_toRightOf="@id/tvCnFundRedeemNetValue"
                     android:text=""
-                    android:textColor="@color/texts"
+                    android:textColor="@color/title_list"
                     android:textSize="@dimen/txtSize14" />
 
             </RelativeLayout>
@@ -209,7 +210,7 @@
                     android:layout_marginLeft="@dimen/size20"
                     android:text="@string/GuDongZhangHao"
                     android:textColor="@color/texts"
-                    android:textSize="@dimen/txtSize14" />
+                    android:textSize="@dimen/txtSize15" />
 
                 <TextView
                     android:id="@+id/tvCnRedeemStockholderNumValue"
@@ -219,7 +220,7 @@
                     android:layout_marginLeft="@dimen/size35"
                     android:layout_toRightOf="@id/tvCnRedeemStockholderNum"
                     android:text=""
-                    android:textColor="@color/texts"
+                    android:textColor="@color/title_list"
                     android:textSize="@dimen/txtSize14" />
 
             </RelativeLayout>
@@ -238,7 +239,7 @@
                     android:layout_marginLeft="@dimen/size20"
                     android:text="@string/KeYongZiJin_1"
                     android:textColor="@color/texts"
-                    android:textSize="@dimen/txtSize14" />
+                    android:textSize="@dimen/txtSize15" />
 
                 <TextView
                     android:id="@+id/tvCnRedeemExpendableFundValue"
@@ -248,8 +249,8 @@
                     android:layout_marginLeft="@dimen/size35"
                     android:layout_toRightOf="@id/tvCnRedeemExpendableFund"
                     android:text=""
-                    android:textColor="@color/text"
-                    android:textSize="13sp" />
+                    android:textColor="@color/title_list"
+                    android:textSize="@dimen/txtSize14" />
 
             </RelativeLayout>
 

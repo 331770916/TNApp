@@ -165,46 +165,6 @@
     <string name="ChangNeiJiJinShenGou">场内基金申购</string>
     <string name="ChangNeiJiJinShuHui">场内基金赎回</string>
 
-    <!--分级基金合并-->
-    <string name="Gradingfundmerger">分级基金合并</string>
-    <string name="fund_name">基金名称</string>
-    <string name="mergerdata">可合数量</string>
-    <string name="mergerstatus">状态说明</string>
-    <string name="shareholdercode">股东代码</string>
-    <string name="fundID">基金代码</string>
-    <string name="mergershare">合并份额</string>
-    <string name="input_fundID">请输入基金代码</string>
-    <string name="input_mergershare">请输入份额</string>
-    <string name="input_mergershare_1">请输入合并份额</string>
-    <string name="input_mergershare_2">请输入分拆份额</string>
-    <string name="choose_fund">选择基金</string>
-    <string name="merge">合并</string>
-    <string name="securities_code">证券代码</string>
-    <string name="securities_name">证券名称</string>
-    <string name="entrust_name">名称/代码</string>
-    <string name="entrust_status">状态/业务</string>
-    <string name="entrust_time">时间/日期</string>
-
-    <string name="entru_number">委托数量：</string>
-    <string name="chenjiao">成交金额：</string>
-    <string name="entru_jine">委托金额：</string>
-    <string name="fasheng_riqi">发生日期：</string>
-    <string name="chengjiao_shuliao">成交数量：</string>
-    <string name="liuishuihao">流水号：</string>
-    <string name="chenjiaojiaoge">成交价格：</string>
-
-    <string name="wtbh">委托编号</string>
-    <string name="wtje">委托金额</string>
-    <string name="wtsl">委托数量</string>
-    <string name="cj_sl">成交数量</string>
-
-    <string name="FJFundSplitActivity">分级基金分拆</string>
-    <string name="IsRecall">是否撤回此委托</string>
-    <string name="czlb">操作类别：</string>
-    <string name="jjdm">基金代码：</string>
-    <string name="fced">分拆份额：</string>
-    <string name="hbed">合并份额：</string>
-
 
     <!--OTC-->
     <string name="OTC_rengou">OTC认购</string>
@@ -813,6 +773,75 @@
     <string name="etf_code">ETF代码</string>
     <string name="etf_jjname">基金名称</string>
     <string name="etf_jjdm">基金代码</string>
+    <string name="etf_sgfe">申购份额</string>
+    <string name="etf_input_fe">输入份额</string>
+    <string name="etf_sg">ETF申购</string>
+    <string name="etf_input_code">输入代码</string>
+    <string name="etf_kyzj">可用资金</string>
+    <string name="etf_name">ETF 名称</string>
+    <string name="etf_gddms">股东代码</string>
+    <string name="etf_codes">ETF 代码</string>
+    <string name="etf_ssce">ETF申赎撤单</string>
+    <string name="etf_djjdjes">冻结解冻金额:</string>
+    <string name="etf_wtsxs">委托属性:</string>
+    <string name="etf_mmfxs">买卖方向:</string>
+    <string name="etf_fdyys">废单原因:</string>
+
+
+
+    <!--分级基金合并-->
+    <string name="Gradingfundmerger">分级基金合并</string>
+    <string name="fund_name">基金名称</string>
+    <string name="mergerdata">可合数量</string>
+    <string name="mergerstatus">状态说明</string>
+    <string name="shareholdercode">股东代码</string>
+    <string name="fundID">基金代码</string>
+    <string name="mergershare">合并份额</string>
+    <string name="input_fundID">请输入基金代码</string>
+    <string name="input_mergershare">请输入份额</string>
+    <string name="input_mergershare_1">请输入合并份额</string>
+    <string name="input_mergershare_2">请输入分拆份额</string>
+    <string name="choose_fund">选择基金</string>
+    <string name="merge">合并</string>
+    <string name="securities_code">证券代码</string>
+    <string name="securities_name">证券名称</string>
+    <string name="entrust_name">名称/代码</string>
+    <string name="entrust_status">状态/业务</string>
+    <string name="entrust_time">时间/日期</string>
+
+    <string name="entru_number">委托数量：</string>
+    <string name="chenjiao">成交金额：</string>
+    <string name="entru_jine">委托金额：</string>
+    <string name="fasheng_riqi">发生日期：</string>
+    <string name="chengjiao_shuliao">成交数量：</string>
+    <string name="liuishuihao">流水号：</string>
+    <string name="chenjiaojiaoge">成交价格：</string>
+
+    <string name="wtbh">委托编号</string>
+    <string name="wtje">委托金额</string>
+    <string name="wtsl">委托数量</string>
+    <string name="cj_sl">成交数量</string>
+
+    <string name="FJFundSplitActivity">分级基金分拆</string>
+    <string name="IsRecall">是否撤回此委托</string>
+    <string name="czlb">操作类别：</string>
+    <string name="jjdm">基金代码：</string>
+    <string name="fced">分拆份额：</string>
+    <string name="hbed">合并份额：</string>
+    <string name="fj_status_name">状态/业务名称</string>
+    <string name="vote_tp">投票</string>
+    <string name="vote_inte">网络投票</string>
+    <string name="vote_commint">提 交</string>
+    <string name="vote_content">注意：累积投票制选举，对于每个选举议案组，股东可投票总数＝股东持股数×当选人数</string>
+    <string name="vote_fljya">非累积投票议案</string>
+    <string name="vote_not_fljya">未查询到非累积投票议案</string>
+    <string name="vote_ljya">累积投票议案</string>
+    <string name="vote_query">投票查询</string>
+    <string name="vote_choose_code">请选择股东代码</string>
+    <string name="fj_withdrew_order">分级基金撤单</string>
+    <string name="gznhg">国债逆回购</string>
+    <string name="choose_jypz">选择交易品种</string>
+    <string name="vote_net_tp">网络投票</string>
 
 
 </resources>

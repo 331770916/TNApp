@@ -21,6 +21,7 @@
             android:layout_width="wrap_content"
             android:layout_height="match_parent"
             android:padding="@dimen/size15"
+            android:paddingRight="@dimen/size20"
             android:src="@mipmap/back_btn"/>
 
         <TextView
@@ -28,7 +29,7 @@
             android:layout_height="wrap_content"
             android:textColor="@color/white"
             android:layout_centerInParent="true"
-            android:textSize="@dimen/pickerview_topbar_title_textsize"
+            android:textSize="@dimen/title_big_textsize"
             android:text="@string/balanceQuery"/>
     </RelativeLayout>
 

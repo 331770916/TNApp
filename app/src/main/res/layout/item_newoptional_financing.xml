@@ -83,6 +83,9 @@
             android:orientation="vertical">
 
             <TextView
+                android:paddingLeft="@dimen/size3"
+                android:paddingRight="@dimen/size3"
+                android:background="@drawable/text_bg"
                 android:textColor="@color/texts"
                 android:id="@+id/tv_text1"
                 android:layout_width="wrap_content"

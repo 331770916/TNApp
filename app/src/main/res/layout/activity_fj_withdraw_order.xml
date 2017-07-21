@@ -26,9 +26,9 @@
             android:layout_width="wrap_content"
             android:layout_height="wrap_content"
             android:layout_centerInParent="true"
-            android:text="分级基金撤单"
+            android:text="@string/fj_withdrew_order"
             android:textColor="@color/white"
-            android:textSize="@dimen/pickerview_topbar_title_textsize" />
+            android:textSize="@dimen/title_big_textsize" />
 
         <ImageView
             android:id="@+id/detail_back"
@@ -36,55 +36,65 @@
             android:layout_height="match_parent"
             android:layout_alignParentBottom="true"
             android:layout_alignParentLeft="true"
-            android:paddingLeft="@dimen/size20"
+            android:paddingLeft="@dimen/size15"
             android:paddingRight="@dimen/size20"
             android:src="@mipmap/back_btn" />
     </RelativeLayout>
 
-    <RelativeLayout
+    <LinearLayout
+        android:orientation="horizontal"
         android:layout_width="match_parent"
         android:layout_height="@dimen/size30"
-        android:background="@color/white"
-        android:paddingLeft="@dimen/size20"
-        android:paddingRight="@dimen/size20">
+        android:background="@color/white">
 
-        <TextView
-            android:layout_width="wrap_content"
-            android:layout_height="wrap_content"
-            android:layout_centerVertical="true"
-            android:gravity="center|fill"
-            android:text="@string/entrust_name"
-            android:textColor="@color/newStockTitle"
-            android:textSize="@dimen/txtSize12" />
+        <LinearLayout
+            android:layout_gravity="center_vertical"
+            android:layout_weight="1"
+            android:paddingLeft="@dimen/size20"
+            android:layout_width="@dimen/size0"
+            android:layout_height="match_parent">
+            <TextView
+                android:layout_width="match_parent"
+                android:layout_height="match_parent"
+                android:gravity="center|start"
+                android:text="@string/entrust_name"
+                android:textColor="@color/newStockTitle"
+                android:textSize="@dimen/txtSize13" />
 
-        <TextView
+        </LinearLayout>
 
-            android:id="@+id/textView29"
-            android:layout_width="wrap_content"
-            android:layout_height="wrap_content"
-            android:layout_alignParentEnd="true"
-            android:layout_alignParentRight="true"
-            android:layout_centerVertical="true"
-            android:gravity="center|end"
-            android:paddingRight="@dimen/size3"
-            android:text="@string/entrust_time"
-            android:textColor="@color/newStockTitle"
-            android:textSize="@dimen/txtSize12" />
+        <LinearLayout
+            android:layout_weight="1"
+            android:layout_width="@dimen/size0"
+            android:layout_height="match_parent">
 
-        <TextView
-            android:id="@+id/textView28"
-            android:layout_width="wrap_content"
-            android:layout_height="wrap_content"
-            android:layout_centerVertical="true"
-            android:layout_marginRight="@dimen/size81"
-            android:layout_toLeftOf="@+id/textView29"
-            android:layout_toStartOf="@+id/textView29"
-            android:gravity="center"
-            android:text="状态/业务名称"
-            android:textColor="@color/newStockTitle"
-            android:textSize="@dimen/txtSize12" />
+            <TextView
+                android:paddingRight="@dimen/size30"
+                android:gravity="center|end"
+                android:id="@+id/textView29"
+                android:layout_width="match_parent"
+                android:layout_height="match_parent"
+                android:text="@string/entrust_time"
+                android:textColor="@color/newStockTitle"
+                android:textSize="@dimen/txtSize13" />
 
-    </RelativeLayout>
+        </LinearLayout>
+
+        <LinearLayout
+            android:layout_weight="1"
+            android:layout_width="@dimen/size0"
+            android:layout_height="match_parent">
+            <TextView
+                android:paddingRight="@dimen/size20"
+                android:gravity="center|end"
+                android:layout_width="match_parent"
+                android:layout_height="match_parent"
+                android:text="@string/fj_status_name"
+                android:textColor="@color/newStockTitle"
+                android:textSize="@dimen/txtSize13" />
+        </LinearLayout>
+
+    </LinearLayout>
 
     <View
         android:layout_width="match_parent"
@@ -100,7 +110,6 @@
             android:id="@+id/mListView"
             android:layout_width="match_parent"
             android:layout_height="match_parent"
-            android:layout_marginLeft="@dimen/size20"
             android:divider="@color/lineColor"
             android:dividerHeight="@dimen/size0.5"
             android:scrollbars="none"

@@ -12,7 +12,7 @@
         android:gravity="center_vertical"
         android:text="证券名称"
         android:textSize="@dimen/txtSize12"
-        android:paddingLeft="20dp"
+        android:paddingLeft="@dimen/size10"
         android:textColor="@color/newStockTitle"
         />
     <TextView
@@ -40,9 +40,9 @@
         android:layout_width="0dp"
         android:layout_weight="1"
         android:layout_height="match_parent"
-        android:gravity="center"
+        android:gravity="center|right"
         android:text="最高/最低"
         android:textSize="@dimen/txtSize12"
-        android:padding="3dp"
+        android:paddingRight="@dimen/size10"
         android:textColor="@color/newStockTitle"/>
 </LinearLayout>

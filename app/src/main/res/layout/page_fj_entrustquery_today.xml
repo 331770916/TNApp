@@ -80,37 +80,60 @@
         android:layout_height="@dimen/size30"
         android:background="@color/white"
         android:gravity="center"
-        android:orientation="horizontal"
-        android:paddingLeft="@dimen/size20"
-        android:paddingRight="@dimen/size20">
+        android:orientation="horizontal">
 
-        <TextView
-            android:layout_width="0dp"
-            android:layout_height="wrap_content"
+        <LinearLayout
+            android:paddingLeft="@dimen/size20"
+            android:layout_gravity="center_vertical"
             android:layout_weight="1"
-            android:gravity="center|fill"
-            android:text="@string/entrust_name"
-            android:textColor="@color/newStockTitle"
-            android:textSize="@dimen/txtSize12" />
+            android:layout_width="@dimen/size0"
+            android:layout_height="match_parent">
+            <TextView
+                android:layout_width="0dp"
+                android:layout_height="match_parent"
+                android:layout_weight="1"
+                android:gravity="center|start"
+                android:text="@string/entrust_name"
+                android:textColor="@color/newStockTitle"
+                android:textSize="@dimen/txtSize13" />
 
-        <TextView
-            android:layout_width="0dp"
-            android:layout_height="wrap_content"
-            android:layout_weight="1"
-            android:gravity="center"
-            android:text="@string/entrust_status"
-            android:textColor="@color/newStockTitle"
-            android:textSize="@dimen/txtSize12" />
+        </LinearLayout>
 
-        <TextView
-            android:layout_width="0dp"
-            android:layout_height="wrap_content"
+        <LinearLayout
+            android:layout_gravity="center_vertical"
             android:layout_weight="1"
-            android:gravity="center|end"
-            android:paddingRight="@dimen/size3"
-            android:text="@string/entrust_time"
-            android:textColor="@color/newStockTitle"
-            android:textSize="@dimen/txtSize12" />
+            android:layout_width="@dimen/size0"
+            android:layout_height="match_parent">
+            <TextView
+                android:paddingRight="@dimen/size30"
+                android:layout_width="0dp"
+                android:layout_height="match_parent"
+                android:layout_weight="1"
+                android:gravity="center|end"
+                android:text="@string/entrust_status"
+                android:textColor="@color/newStockTitle"
+                android:textSize="@dimen/txtSize13" />
+
+        </LinearLayout>
+
+        <LinearLayout
+            android:paddingRight="@dimen/size20"
+            android:layout_gravity="center_vertical"
+            android:layout_weight="1"
+            android:layout_width="@dimen/size0"
+            android:layout_height="match_parent">
+
+            <TextView
+                android:layout_width="0dp"
+                android:layout_height="match_parent"
+                android:layout_weight="1"
+                android:gravity="center|end"
+                android:paddingRight="@dimen/size3"
+                android:text="@string/entrust_time"
+                android:textColor="@color/newStockTitle"
+                android:textSize="@dimen/txtSize13" />
+
+        </LinearLayout>
 
     </LinearLayout>
 

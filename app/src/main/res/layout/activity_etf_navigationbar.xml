@@ -23,7 +23,8 @@
             android:layout_width="wrap_content"
             android:layout_height="match_parent"
             android:layout_alignParentLeft="true"
-            android:padding="@dimen/size10"
+            android:paddingLeft="@dimen/size15"
+            android:paddingRight="@dimen/size20"
             android:src="@mipmap/back_btn" />
 
         <TextView
@@ -32,7 +33,7 @@
             android:layout_centerInParent="true"
             android:text="@string/ETFTitle"
             android:textColor="@color/white"
-            android:textSize="@dimen/pickerview_topbar_title_textsize" />
+            android:textSize="@dimen/title_big_textsize" />
     </RelativeLayout>
 
     <ScrollView
@@ -67,6 +68,8 @@
                     android:orientation="vertical">
 
                     <TextView
+                        android:textSize="@dimen/txtSize15"
+                        android:textColor="@color/title_list"
                         android:id="@+id/tv_item_title"
                         android:layout_width="wrap_content"
                         android:layout_height="wrap_content"
@@ -109,10 +112,12 @@
                     android:orientation="vertical">
 
                     <TextView
+                        android:textSize="@dimen/txtSize15"
+                        android:textColor="@color/title_list"
                         android:layout_width="wrap_content"
                         android:layout_height="wrap_content"
                         android:text="@string/ETF_shuhui" />
-                    />
+
                 </LinearLayout>
 
                 <ImageView
@@ -151,6 +156,8 @@
                     android:orientation="vertical">
 
                     <TextView
+                        android:textSize="@dimen/txtSize15"
+                        android:textColor="@color/title_list"
                         android:layout_width="wrap_content"
                         android:layout_height="wrap_content"
                         android:text="@string/ETF_shenshu_Revoke" />
@@ -191,6 +198,8 @@
                     android:orientation="vertical">
 
                     <TextView
+                        android:textSize="@dimen/txtSize15"
+                        android:textColor="@color/title_list"
                         android:layout_width="wrap_content"
                         android:layout_height="wrap_content"
                         android:text="@string/ETF_shenshu_History" />
@@ -232,6 +241,8 @@
                     android:orientation="vertical">
 
                     <TextView
+                        android:textSize="@dimen/txtSize15"
+                        android:textColor="@color/title_list"
                         android:layout_width="wrap_content"
                         android:layout_height="wrap_content"
                         android:text="@string/ETF_shenshu_ClosingTheDeal" />
@@ -279,6 +290,8 @@
                     android:orientation="vertical">
 
                     <TextView
+                        android:textSize="@dimen/txtSize15"
+                        android:textColor="@color/title_list"
                         android:layout_width="wrap_content"
                         android:layout_height="wrap_content"
                         android:text="@string/ETFConstituentStock" />

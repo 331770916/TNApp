@@ -23,7 +23,7 @@
                 android:layout_weight="1"
                 android:gravity="center_vertical"
                 android:text="@string/securities_code"
-                android:textSize="@dimen/txtSize13" />
+                android:textSize="@dimen/txtSize15" />
 
             <TextView
                 android:id="@+id/tv_2"
@@ -33,7 +33,7 @@
                 android:layout_weight="1"
                 android:gravity="center_vertical"
                 android:text="@string/securities_name"
-                android:textSize="@dimen/txtSize13" />
+                android:textSize="@dimen/txtSize15" />
 
 
         </LinearLayout>

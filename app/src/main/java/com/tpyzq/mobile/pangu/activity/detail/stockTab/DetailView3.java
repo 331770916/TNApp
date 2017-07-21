@@ -18,7 +18,9 @@ import com.tpyzq.mobile.pangu.view.magicindicator.buildins.commonnavigator.title
 
 import java.util.ArrayList;
 import java.util.Arrays;
+import java.util.HashMap;
 import java.util.List;
+import java.util.Map;
 
 /**
  * Created by 陈新宇 on 2016/10/26.
@@ -31,6 +33,8 @@ public class DetailView3 extends BaseStockDetailPager {
     private List<BaseStockDetailPager> listBuy;
     private FragmentContainerHelper mFragmentContainerHelper;
     private String stockCode;
+    private int position = 0 ;
+    private Map<Integer,Boolean> map = new HashMap<>();
 
     public DetailView3(Context context) {
         super(context);
@@ -50,12 +54,22 @@ public class DetailView3 extends BaseStockDetailPager {
         title = new String[]{"资金", "简况", "财务", "股东"};
         lTitle = Arrays.asList(title);
         listBuy = new ArrayList<>();
-        listBuy.add(new StockCapital(mContext));
+//        listBuy.add(new StockCapital(mContext));
+        listBuy.add(new CapitalWebView(mContext));
         listBuy.add(new SimpleInfo(mContext));
         listBuy.add(new FinanceInfo(mContext));
         listBuy.add(new StockHolder(mContext));
-        fl_view.addView(listBuy.get(0).rootView);
-        listBuy.get(0).initData(this.stockCode);
+        listBuy.get(0).initData(stockCode);
+        // 把当前布局都加入都FrameLayout 中  并添加标志位判断是否加载数据
+        map.put(0,true);
+        for (int i = 0; i < listBuy.size(); i++) {
+            fl_view.addView(listBuy.get(i).rootView);
+            if (i>0){
+                map.put(i,false);
+                fl_view.getChildAt(i).setVisibility(View.GONE);
+            }
+        }
+
         setIndicatorListen();
     }
 
@@ -82,10 +96,26 @@ public class DetailView3 extends BaseStockDetailPager {
                 simplePagerTitleView.setOnClickListener(new View.OnClickListener() {
                     @Override
                     public void onClick(View v) {
-                        fl_view.removeAllViews();
-                        mFragmentContainerHelper.handlePageSelected(index);
-                        fl_view.addView(listBuy.get(index).rootView);
-                        listBuy.get(index).initData(stockCode);
+//                        fl_view.removeAllViews();
+                        if (position==index){   // 点击当前选中选项卡
+                            fl_view.getChildAt(index).setVisibility(View.VISIBLE);
+                            mFragmentContainerHelper.handlePageSelected(index);
+                        }else {
+                            //   判断map集合中已经加载数据不再加载
+                            if (!map.get(index)){
+                                map.put(index,true);
+                                mFragmentContainerHelper.handlePageSelected(index);
+                                listBuy.get(index).initData(stockCode);
+                                fl_view.getChildAt(index).setVisibility(View.VISIBLE);
+                                fl_view.getChildAt(position).setVisibility(View.GONE);
+                            }else {
+                                // 切换当前选项卡
+                                mFragmentContainerHelper.handlePageSelected(index);
+                                fl_view.getChildAt(index).setVisibility(View.VISIBLE);
+                                fl_view.getChildAt(position).setVisibility(View.GONE);
+                            }
+                        }
+                        position = index;
                     }
                 });
                 return simplePagerTitleView;
