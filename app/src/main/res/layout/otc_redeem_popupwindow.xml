@@ -132,25 +132,6 @@
             android:gravity="center">
 
             <TextView
-                android:id="@+id/tvOTC_SHQD"
-                android:layout_width="155dp"
-                android:layout_height="40dp"
-                android:background="@color/blue"
-                android:clickable="true"
-                android:gravity="center"
-                android:text="确认"
-                android:textColor="@color/white"
-                android:textSize="15sp" />
-        </LinearLayout>
-
-
-        <LinearLayout
-            android:layout_width="0dp"
-            android:layout_height="wrap_content"
-            android:layout_weight="1"
-            android:gravity="center">
-
-            <TextView
                 android:id="@+id/tvOTC_SHQX"
                 android:layout_width="155dp"
                 android:layout_height="40dp"
@@ -162,6 +143,25 @@
                 android:textSize="15sp" />
 
         </LinearLayout>
+
+        <LinearLayout
+            android:layout_width="0dp"
+            android:layout_height="wrap_content"
+            android:layout_weight="1"
+            android:gravity="center">
+
+            <TextView
+                android:id="@+id/tvOTC_SHQD"
+                android:layout_width="155dp"
+                android:layout_height="40dp"
+                android:background="@color/blue"
+                android:clickable="true"
+                android:gravity="center"
+                android:text="确认"
+                android:textColor="@color/white"
+                android:textSize="15sp" />
+        </LinearLayout>
+
 
     </LinearLayout>
 

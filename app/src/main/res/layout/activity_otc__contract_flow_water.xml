@@ -28,7 +28,8 @@
             android:layout_width="wrap_content"
             android:layout_height="match_parent"
             android:layout_alignParentLeft="true"
-            android:padding="@dimen/size10"
+            android:paddingLeft="@dimen/size15"
+            android:paddingRight="@dimen/size20"
             android:src="@mipmap/back_btn" />
 
         <TextView
@@ -37,7 +38,7 @@
             android:layout_centerInParent="true"
             android:text="@string/OTC_dianzihetongliushui"
             android:textColor="@color/white"
-            android:textSize="@dimen/pickerview_topbar_title_textsize" />
+            android:textSize="@dimen/title_big_textsize" />
     </RelativeLayout>
 
     <LinearLayout
@@ -54,7 +55,7 @@
             android:layout_marginLeft="@dimen/size20"
             android:gravity="left"
             android:text="产品代码"
-            android:textSize="13sp"
+            android:textSize="@dimen/txtSize13"
             android:textColor="@color/text"/>
 
         <TextView
@@ -63,7 +64,7 @@
             android:layout_height="wrap_content"
             android:gravity="center"
             android:text="产品公司"
-            android:textSize="13sp"
+            android:textSize="@dimen/txtSize13"
             android:textColor="@color/text"/>
 
 
@@ -73,7 +74,7 @@
             android:layout_height="wrap_content"
             android:gravity="center"
             android:text="状态"
-            android:textSize="13sp"
+            android:textSize="@dimen/txtSize13"
             android:textColor="@color/text"/>
 
         <TextView
@@ -83,7 +84,7 @@
             android:paddingRight="@dimen/size20"
             android:gravity="right"
             android:text="发生日期"
-            android:textSize="13sp"
+            android:textSize="@dimen/txtSize13"
             android:textColor="@color/text"/>
 
     </LinearLayout>

@@ -31,7 +31,8 @@
                 android:layout_width="wrap_content"
                 android:layout_height="match_parent"
                 android:layout_alignParentLeft="true"
-                android:padding="@dimen/size10"
+                android:paddingLeft="@dimen/size15"
+                android:paddingRight="@dimen/size20"
                 android:src="@mipmap/back_btn" />
 
             <TextView
@@ -40,7 +41,7 @@
                 android:layout_centerInParent="true"
                 android:text="@string/OTC_shuhui"
                 android:textColor="@color/white"
-                android:textSize="@dimen/pickerview_topbar_title_textsize" />
+                android:textSize="@dimen/title_big_textsize" />
         </RelativeLayout>
 
         <!--分割线-->
@@ -67,7 +68,7 @@
                     android:layout_centerVertical="true"
                     android:layout_marginLeft="@dimen/size20"
                     android:text="@string/OTC_chanpindaima"
-                    android:textSize="@dimen/txtSize14" />
+                    android:textSize="@dimen/txtSize15" />
 
                 <EditText
                     android:id="@+id/etOTC_SHProductCode"
@@ -121,6 +122,7 @@
                 android:background="@color/white">
 
                 <TextView
+                    android:textSize="@dimen/txtSize15"
                     android:id="@+id/tvOTC_RedeemShare"
                     android:layout_width="wrap_content"
                     android:layout_height="wrap_content"
@@ -172,7 +174,7 @@
                     android:layout_marginLeft="@dimen/size20"
                     android:text="@string/OTC_chanpinmingcheng"
                     android:textColor="@color/text"
-                    android:textSize="@dimen/txtSize14" />
+                    android:textSize="@dimen/txtSize15" />
 
                 <TextView
                     android:id="@+id/tvOTC_SHProductNameValue"
@@ -182,7 +184,7 @@
                     android:layout_marginLeft="@dimen/size35"
                     android:layout_toRightOf="@id/tvOTC_SHProductName"
                     android:text=""
-                    android:textColor="@color/text"
+                    android:textColor="@color/title_list"
                     android:textSize="@dimen/txtSize14" />
 
             </RelativeLayout>
@@ -202,7 +204,7 @@
                     android:layout_marginLeft="@dimen/size20"
                     android:text="@string/OTC_chanpinjingzhi"
                     android:textColor="@color/text"
-                    android:textSize="@dimen/txtSize14" />
+                    android:textSize="@dimen/txtSize15" />
 
                 <TextView
                     android:id="@+id/tvOTC_SHProductJingZhiValue"
@@ -212,7 +214,7 @@
                     android:layout_marginLeft="@dimen/size35"
                     android:layout_toRightOf="@id/tvOTC_SHProductJingZhi"
                     android:text=""
-                    android:textColor="@color/text"
+                    android:textColor="@color/title_list"
                     android:textSize="@dimen/txtSize14" />
 
             </RelativeLayout>
@@ -232,7 +234,7 @@
                     android:layout_marginLeft="@dimen/size20"
                     android:text="可赎"
                     android:textColor="@color/text"
-                    android:textSize="@dimen/txtSize14" />
+                    android:textSize="@dimen/txtSize15" />
 
                 <TextView
                     android:id="@+id/tvOTC_SHExpendableCapitalValue"
@@ -242,7 +244,7 @@
                     android:layout_marginLeft="@dimen/size61"
                     android:layout_toRightOf="@id/tvOTC_SHExpendableCapital"
                     android:text=""
-                    android:textColor="@color/text"
+                    android:textColor="@color/title_list"
                     android:textSize="@dimen/txtSize14" />
 
             </RelativeLayout>

@@ -24,7 +24,7 @@
                 android:layout_width="wrap_content"
                 android:layout_height="wrap_content"
                 android:text="--"
-                android:textSize="@dimen/txtSize13"
+                android:textSize="@dimen/txtSize15"
                 android:ellipsize="end"
                 android:singleLine="true"
                 android:textColor="@color/black"
@@ -35,7 +35,7 @@
                 android:layout_height="wrap_content"
                 android:text="--"
                 android:textColor="@color/newStockTitle"
-                android:textSize="@dimen/txtSize12" />
+                android:textSize="@dimen/txtSize14" />
 
         </LinearLayout>
 
@@ -51,14 +51,14 @@
                 android:layout_width="wrap_content"
                 android:layout_height="wrap_content"
                 android:text="--"
-                android:textSize="@dimen/txtSize12" />
+                android:textSize="@dimen/txtSize14" />
 
             <TextView
                 android:id="@+id/tvRevokeTime"
                 android:layout_width="wrap_content"
                 android:layout_height="wrap_content"
                 android:text="--"
-                android:textSize="@dimen/txtSize12" />
+                android:textSize="@dimen/txtSize14" />
 
         </LinearLayout>
 
@@ -74,7 +74,7 @@
                 android:layout_width="wrap_content"
                 android:layout_height="wrap_content"
                 android:text="--"
-                android:textSize="@dimen/txtSize12"/>
+                android:textSize="@dimen/txtSize14"/>
 
         </LinearLayout>
 
@@ -91,15 +91,14 @@
                 android:id="@+id/tvRevokeType"
                 android:layout_width="wrap_content"
                 android:layout_height="wrap_content"
-
                 android:text="--"
-                android:textSize="@dimen/txtSize12"/>
+                android:textSize="@dimen/txtSize14"/>
             <TextView
                 android:id="@+id/tvRevokeState"
                 android:layout_width="wrap_content"
                 android:layout_height="wrap_content"
                 android:text="--"
-                android:textSize="@dimen/txtSize12"/>
+                android:textSize="@dimen/txtSize14"/>
 
         </LinearLayout>
 
