@@ -17,6 +17,8 @@ import android.widget.RelativeLayout;
 import android.widget.ScrollView;
 import android.widget.TextView;
 
+import com.handmark.pulltorefresh.library.PullToRefreshBase;
+import com.handmark.pulltorefresh.library.PullToRefreshScrollView;
 import com.tpyzq.mobile.pangu.R;
 import com.tpyzq.mobile.pangu.activity.detail.StockDetailActivity;
 import com.tpyzq.mobile.pangu.activity.myself.login.TransactionLoginActivity;
@@ -36,8 +38,6 @@ import com.tpyzq.mobile.pangu.util.TransitionUtils;
 import com.tpyzq.mobile.pangu.util.panguutil.AddPosition;
 import com.tpyzq.mobile.pangu.view.dialog.ResultDialog;
 import com.tpyzq.mobile.pangu.view.listview.AutoListview;
-import com.tpyzq.mobile.pangu.view.pullDownGroup.PullDownElasticImp;
-import com.tpyzq.mobile.pangu.view.pullDownGroup.PullDownScrollView;
 import com.zhy.http.okhttp.callback.StringCallback;
 
 import org.json.JSONArray;
@@ -45,9 +45,7 @@ import org.json.JSONException;
 import org.json.JSONObject;
 
 import java.text.DecimalFormat;
-import java.text.SimpleDateFormat;
 import java.util.ArrayList;
-import java.util.Date;
 import java.util.HashMap;
 import java.util.List;
 import java.util.Map;
@@ -59,7 +57,7 @@ import okhttp3.Call;
  * Created by wangqi on 2016/7/26.
  * 持仓  页面
  */
-public class TakeAPositionActivity extends BaseActivity implements AdapterView.OnItemClickListener, View.OnClickListener, PullDownScrollView.RefreshListener {
+public class TakeAPositionActivity extends BaseActivity implements AdapterView.OnItemClickListener, View.OnClickListener {
 
     private String TAG = "TakeAPositionActivity";
     private int mExpandedMenuPos = -1;
@@ -71,7 +69,8 @@ public class TakeAPositionActivity extends BaseActivity implements AdapterView.O
     private AutoListview mCcListView;
     private ScrollView scroll_view;
     private RelativeLayout RelativeLayout_color_1, RelativeLayout_color_2;
-    private PullDownScrollView mPullDownScrollView;
+
+    private PullToRefreshScrollView  mPullToRefreshScrollView;
 
     @Override
     public void initView() {
@@ -79,7 +78,8 @@ public class TakeAPositionActivity extends BaseActivity implements AdapterView.O
         beans = new ArrayList<TakeAPositionEntity>();
         findViewById(R.id.detail_back).setOnClickListener(this);
         mBackground = (LinearLayout) findViewById(R.id.LL);
-        scroll_view = (ScrollView)findViewById(R.id.takeapostion_scroll);
+//        scroll_view = (ScrollView)findViewById(R.id.takeapostion_scroll);
+        mPullToRefreshScrollView  = (PullToRefreshScrollView) findViewById(R.id.svPullToRefresh);
         RelativeLayout_color_1 = (RelativeLayout) findViewById(R.id.rl_top_bar);
         RelativeLayout_color_2 = (RelativeLayout) findViewById(R.id.RelativeLayout_color_2);
         iv_isEmpty = (ImageView) findViewById(R.id.iv_isEmpty);
@@ -88,17 +88,25 @@ public class TakeAPositionActivity extends BaseActivity implements AdapterView.O
         mSzAmount = (TextView) findViewById(R.id.szAmount);
         mKyAmount = (TextView) findViewById(R.id.kyAmount);
         mKqAmount = (TextView) findViewById(R.id.kqAmount);
-
         mCcListView = (AutoListview) findViewById(R.id.ccListView);
-
         adapter = new MyAdapter();
         mCcListView.setAdapter(adapter);
         mCcListView.setEmptyView(iv_isEmpty);
         mCcListView.setOnItemClickListener(this);
-        mPullDownScrollView = (PullDownScrollView) findViewById(R.id.pullDownId);
-        mPullDownScrollView.setRefreshListener(this);
-        mPullDownScrollView.setPullDownElastic(new PullDownElasticImp(TakeAPositionActivity.this));
         toConnect(false);
+        initEvent();
+    }
+
+    private void initEvent() {
+        mPullToRefreshScrollView.setFocusableInTouchMode(true);
+        scroll_view = mPullToRefreshScrollView.getRefreshableView();   // 获取当前PullToRefreshScrollView的子view
+        mPullToRefreshScrollView.setMode(PullToRefreshBase.Mode.PULL_FROM_START);
+        mPullToRefreshScrollView.setOnRefreshListener(new PullToRefreshBase.OnRefreshListener<ScrollView>() {
+            @Override
+            public void onRefresh(PullToRefreshBase<ScrollView> refreshView) {
+                toConnect(true);
+            }
+        });
     }
 
     @Override
@@ -145,19 +153,19 @@ public class TakeAPositionActivity extends BaseActivity implements AdapterView.O
         NetWorkUtil.getInstence().okHttpForPostString(TAG, ConstantUtil.URL_JY, map, new StringCallback() {
             @Override
             public void onError(Call call, Exception e, int id) {
+                mPullToRefreshScrollView.onRefreshComplete();
                 LogHelper.e(TAG, e.toString());
                 if (isClean){
                     mExpandedMenuPos = -1;
-                    mPullDownScrollView.finishRefresh("上次刷新时间:" + new SimpleDateFormat("yyyy-MM-dd HH:mm:ss").format(new Date()));
                 }
                 ResultDialog.getInstance().showText("网络异常");
             }
 
             @Override
             public void onResponse(String response, int id) {
+                mPullToRefreshScrollView.onRefreshComplete();
                 if (isClean){
                     mExpandedMenuPos = -1;
-                    mPullDownScrollView.finishRefresh("上次刷新时间:" + new SimpleDateFormat("yyyy-MM-dd HH:mm:ss").format(new Date()));
                 }
                 if (TextUtils.isEmpty(response)) {
                     return;
@@ -277,10 +285,6 @@ public class TakeAPositionActivity extends BaseActivity implements AdapterView.O
         return R.layout.activity_takeaposition;
     }
 
-    @Override
-    public void onRefresh(PullDownScrollView view) {
-        toConnect(true);
-    }
 
     class MyAdapter extends BaseAdapter {
         List<TakeAPositionEntity> mSetText;
