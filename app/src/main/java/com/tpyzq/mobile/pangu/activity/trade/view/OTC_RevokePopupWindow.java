@@ -24,6 +24,7 @@ import org.json.JSONException;
 import org.json.JSONObject;
 
 import java.util.HashMap;
+import java.util.Map;
 
 import okhttp3.Call;
 
@@ -38,13 +39,13 @@ public class OTC_RevokePopupWindow extends PopupWindow implements View.OnClickLi
     private View popupWindow;
     private TextView tvOTC_RevokeProductName,tvOTC_RevokeEntrustTime,tvOTC_RevokeState,
             tvOTC_RevokeNum,tvOTC_EnmtrustMoney=null;
-    private HashMap<String,String> map;
+    private Map<String,String> map;
     private String prod_code,prodta_no,allot_no;
     private int position;
     private PositionListener listener;
     private Activity mActivity;
 
-    public OTC_RevokePopupWindow(Context context, Activity activity, HashMap<String,String> map, final int position, final PositionListener listener) {
+    public OTC_RevokePopupWindow(Context context, Activity activity, Map<String,String> map, final int position, final PositionListener listener) {
         super(context);
         this.context=context;
         this.map = map;

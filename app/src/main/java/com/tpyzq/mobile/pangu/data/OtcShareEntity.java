@@ -7,13 +7,20 @@ package com.tpyzq.mobile.pangu.data;
 public class OtcShareEntity {
 
     String current_amount;   //份额
+    String market_value;     //市值
     String prod_name;        //股票名称
     String prod_code;        //股票代码
     String buy_date;         //购入日期
-    String prod_end_date;   //到期日期
-    boolean unFold;         //判断 是否展开
+    String prod_end_date;    //到期日期
+    boolean unFold;          //判断 是否展开
 
-    public OtcShareEntity() {
+
+    public String getMarket_value() {
+        return market_value;
+    }
+
+    public void setMarket_value(String market_value) {
+        this.market_value = market_value;
     }
 
     public boolean isUnFold() {

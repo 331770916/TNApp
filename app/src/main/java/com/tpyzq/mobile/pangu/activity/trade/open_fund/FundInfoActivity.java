@@ -13,6 +13,7 @@ import android.widget.Toast;
 import com.handmark.pulltorefresh.library.PullToRefreshBase;
 import com.handmark.pulltorefresh.library.PullToRefreshListView;
 import com.tpyzq.mobile.pangu.R;
+import com.tpyzq.mobile.pangu.activity.home.managerMoney.ManagerMoenyDetailActivity;
 import com.tpyzq.mobile.pangu.activity.myself.login.TransactionLoginActivity;
 import com.tpyzq.mobile.pangu.adapter.trade.FundInfoAdapter;
 import com.tpyzq.mobile.pangu.base.BaseActivity;
@@ -84,6 +85,11 @@ public class FundInfoActivity extends BaseActivity implements View.OnClickListen
 //        Intent intent = new Intent();
 //        intent.setClass(FundInfoActivity.this, TargetInvestmentRecordActivity.class);
 //        startActivity(intent);
+        Intent intent = new Intent();
+        intent.putExtra("productCode", mBeans.get(position).FUND_CODE);
+        intent.putExtra("TYPE", "1");
+        intent.setClass(FundInfoActivity.this, ManagerMoenyDetailActivity.class);
+        startActivity(intent);
     }
 
     @Override

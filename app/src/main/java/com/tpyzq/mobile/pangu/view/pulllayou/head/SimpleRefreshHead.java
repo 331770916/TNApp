@@ -34,13 +34,13 @@ public class SimpleRefreshHead implements IRefreshHead {
     private SpinKitView mSpinKit;
     private ImageView mIvArrow;
 
-    private int mHeadViewHeight = -1;
+    public int mHeadViewHeight = -1;
     private FooterAnimDrawable mAnimDrawable;
     private boolean mHasSprite;
 
-    private boolean mArrowDown = true;
-    private IPull iPull;
-    private boolean mReturningToRefresh;
+    public boolean mArrowDown = true;
+    public IPull iPull;
+    public boolean mReturningToRefresh;
 
     @Override
     public boolean isRefreshing() {

@@ -206,6 +206,8 @@ public class IndexActivity extends BaseActivity {
                 BRutil.menuSelect("z001");
                 break;
             case 1:
+                HintDialog hintdialog = new HintDialog(IndexActivity.this, "测试测试测试测试测试测试测试测试测试测试测试测试测试测试测试测试测试测试", "测试测试测试测试测试测试测试测试测试测试测试测试测试测试测试测试测试测试测试测试测试测试测试测试测试测试测试测试测试测试测试测试测试测试测试测试测试测试测试测试测试测试测试测试测试测试测试测试测试测试测试测试测试测试测试测试测试测试测试测试测试测试测试测试测试测试测试测试测试测试测试测试测试测试测试测试测试测试测试测试测试测试测试测试测试测试测试测试测试测试测试测试测试测试测试测试测试测试测试测试测试测试测试测试测试测试测试测试测试测试测试测试测试测试测试测试测试测试测试测试测试测试测试测试测试测试测试测试测试测试测试测试测试测试测试测试测试测试测试测试测试测试测试测试测试测试测试测试测试测试测试测试测试测试测试测试测试测试测试测试测试测试测试测试测试测试测试测试测试测试测试测试测试测试测试测试测试测试测试测试测试测试测试测试测试测试测试测试测试测试测试测试测试测试测试测试测试测试测试测试测试测试测试测试测试测试测试测试测试测试测试测试测试测试测试测试测试测试测试测试测试测试测试测试测试测试测试测试测试测试测试测试测试测试测试测试测试测试测试测试测试测试测试测试测试测试测试测试测试测试测试测试测试测试测试测试测试测试测试测试测试测试测试测试测试测试测试测试测试测试测试测试测试测试测试测试测试测试测试测试测试测试测试测试测试测试测试测试测试测试测试测试测试测试测试测试测试测试测试测试测试测试测试测试测试测试");
+                hintdialog.show();
                 if (tab_fragment[1] == null) {
                     tab_fragment[1] = new MarketFragment();
                     ft.add(R.id.fragmentLayout, tab_fragment[1]);
@@ -216,6 +218,8 @@ public class IndexActivity extends BaseActivity {
                 BRutil.menuSelect("z002");
                 break;
             case 2:
+                HintDialog hintdialog1 = new HintDialog(IndexActivity.this, "测试", "测试短文本");
+                hintdialog1.show();
                 if (tab_fragment[2] == null) {
                     tab_fragment[2] = new TradeFragment();
                     ft.add(R.id.fragmentLayout, tab_fragment[2]);
@@ -238,6 +242,7 @@ public class IndexActivity extends BaseActivity {
         }
         ft.commitAllowingStateLoss();
     }
+
 
     private void hideAllFragments(FragmentTransaction ft) {
         if (tab_fragment[0] != null) {

@@ -1,12 +1,10 @@
 <?xml version="1.0" encoding="utf-8"?>
 <LinearLayout xmlns:android="http://schemas.android.com/apk/res/android"
     xmlns:app="http://schemas.android.com/apk/res-auto"
-    xmlns:tools="http://schemas.android.com/tools"
     android:layout_width="match_parent"
     android:layout_height="match_parent"
     android:background="@color/bgColor"
-    android:orientation="vertical"
-    tools:context="com.tpyzq.mobile.pangu.activity.trade.otc_business.OTC_ShareActivity">
+    android:orientation="vertical">
 
 
     <RelativeLayout
@@ -18,111 +16,35 @@
         android:fitsSystemWindows="true" />
 
     <!--头布局-->
-    <RelativeLayout
-        android:id="@+id/rlOtc_ShareTitle"
+    <include
+        android:id="@+id/startVideTop"
+        layout="@layout/updatepwd_top" />
+
+    <FrameLayout
         android:layout_width="match_parent"
-        android:layout_height="@dimen/pickerview_topbar_height"
-        android:layout_below="@id/rl_top_bar"
-        android:background="@color/blue">
+        android:layout_height="match_parent">
 
         <ImageView
-            android:id="@+id/ivOTC_ShareQueryBack"
-            android:layout_width="wrap_content"
+            android:id="@+id/iv_ShareKong"
+            android:layout_width="match_parent"
             android:layout_height="match_parent"
-            android:layout_alignParentLeft="true"
-            android:padding="@dimen/size10"
-            android:src="@mipmap/back_btn" />
-
-        <TextView
-            android:layout_width="wrap_content"
-            android:layout_height="wrap_content"
             android:layout_centerInParent="true"
-            android:text="OTC份额"
-            android:textColor="@color/white"
-            android:textSize="@dimen/pickerview_topbar_title_textsize" />
-    </RelativeLayout>
+            android:scaleType="center"
+            android:src="@mipmap/kong"/>
 
-
-    <com.handmark.pulltorefresh.library.PullToRefreshScrollView
-        android:id="@+id/svPullToRefresh"
-        android:layout_width="match_parent"
-        android:layout_height="match_parent"
-        android:background="@color/white"
-        android:fillViewport="true"
-        android:scrollbars="none"
-        app:ptrAnimationStyle="flip"
-        app:ptrMode="both">
-
-
-        <RelativeLayout
+        <com.tpyzq.mobile.pangu.view.pulllayou.SimplePullLayout
+            android:id="@+id/id_swipe_ly"
+            app:hasFooter="false"
             android:layout_width="match_parent"
             android:layout_height="match_parent">
 
-            <LinearLayout
-                android:id="@+id/ll_show"
+            <android.support.v7.widget.RecyclerView
+                android:id="@+id/lvShareQuery"
                 android:layout_width="match_parent"
-                android:layout_height="wrap_content"
-                android:orientation="vertical">
+                android:layout_height="match_parent" />
 
-                <!--  上面的 市值 -->
-                <LinearLayout
-                    android:layout_width="match_parent"
-                    android:layout_height="@dimen/size130"
-                    android:background="@color/blue"
-                    android:gravity="center"
-                    android:orientation="vertical"
-                    android:paddingBottom="20dp">
+        </com.tpyzq.mobile.pangu.view.pulllayou.SimplePullLayout>
+    </FrameLayout>
 
-                    <TextView
-                        android:id="@+id/tvOtc_ShareMarketValue"
-                        android:layout_width="match_parent"
-                        android:layout_height="wrap_content"
-                        android:layout_gravity="center"
-                        android:gravity="center"
-                        android:textColor="@color/white"
-                        android:textSize="@dimen/txtSize24"
-                        android:textStyle="bold" />
-
-                    <TextView
-                        android:layout_width="match_parent"
-                        android:layout_height="wrap_content"
-                        android:layout_centerHorizontal="true"
-                        android:layout_gravity="center_horizontal"
-                        android:layout_marginTop="@dimen/size5"
-                        android:gravity="center"
-                        android:text="市值（元）"
-                        android:textColor="@color/white"
-                        android:textSize="@dimen/txtSize13" />
-
-                </LinearLayout>
-
-                <View
-                    android:layout_width="match_parent"
-                    android:layout_height="@dimen/size10"
-                    android:background="@color/bgColor" />
-
-                <com.tpyzq.mobile.pangu.view.gridview.MyListView
-                    android:id="@+id/lvShareQuery"
-                    android:layout_width="match_parent"
-                    android:layout_height="wrap_content"
-                    android:divider="@null"
-                    android:scrollbars="none" />
-
-
-            </LinearLayout>
-
-            <ImageView
-                android:id="@+id/iv_ShareKong"
-                android:layout_width="match_parent"
-                android:layout_height="match_parent"
-                android:layout_centerInParent="true"
-                android:scaleType="center"
-                android:src="@mipmap/kong"
-                android:visibility="gone" />
-
-        </RelativeLayout>
-
-
-    </com.handmark.pulltorefresh.library.PullToRefreshScrollView>
 
 </LinearLayout>

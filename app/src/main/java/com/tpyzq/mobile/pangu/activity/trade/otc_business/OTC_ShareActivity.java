@@ -1,164 +1,175 @@
 package com.tpyzq.mobile.pangu.activity.trade.otc_business;
 
-import android.text.TextUtils;
+import android.app.Dialog;
+import android.content.Context;
+import android.content.DialogInterface;
+import android.content.Intent;
+import android.graphics.Rect;
+import android.support.v7.widget.LinearLayoutManager;
+import android.support.v7.widget.RecyclerView;
+import android.view.KeyEvent;
 import android.view.View;
 import android.widget.ImageView;
-import android.widget.LinearLayout;
-import android.widget.ScrollView;
 import android.widget.TextView;
-
-import com.handmark.pulltorefresh.library.PullToRefreshBase;
-import com.handmark.pulltorefresh.library.PullToRefreshScrollView;
 import com.tpyzq.mobile.pangu.R;
-import com.tpyzq.mobile.pangu.adapter.trade.OTCShareQueryAdapter;
+import com.tpyzq.mobile.pangu.activity.myself.login.ShouJiZhuCeActivity;
+import com.tpyzq.mobile.pangu.activity.myself.login.TransactionLoginActivity;
+import com.tpyzq.mobile.pangu.adapter.trade.OTC_ShareAdapter;
 import com.tpyzq.mobile.pangu.base.BaseActivity;
 import com.tpyzq.mobile.pangu.data.OtcShareEntity;
-import com.tpyzq.mobile.pangu.http.NetWorkUtil;
-import com.tpyzq.mobile.pangu.log.LogUtil;
-import com.tpyzq.mobile.pangu.util.ConstantUtil;
-import com.tpyzq.mobile.pangu.util.Helper;
+import com.tpyzq.mobile.pangu.db.Db_PUB_USERS;
+import com.tpyzq.mobile.pangu.http.OkHttpUtil;
+import com.tpyzq.mobile.pangu.http.doConnect.trade.OTC_ShareConnect;
 import com.tpyzq.mobile.pangu.util.SpUtils;
-import com.tpyzq.mobile.pangu.view.gridview.MyListView;
-import com.tpyzq.mobile.pangu.view.pullDownGroup.PullDownElasticImp;
-import com.tpyzq.mobile.pangu.view.pullDownGroup.PullDownScrollView;
-import com.zhy.http.okhttp.callback.StringCallback;
+import com.tpyzq.mobile.pangu.view.dialog.LoadingDialog;
+import com.tpyzq.mobile.pangu.view.dialog.MistakeDialog;
+import com.tpyzq.mobile.pangu.view.pulllayou.SimplePullLayout;
+import com.tpyzq.mobile.pangu.view.pulllayou.base.BasePullLayout;
+import com.tpyzq.mobile.pangu.view.pulllayou.head.TainiuRefreshHead;
 
-import org.json.JSONArray;
-import org.json.JSONException;
-import org.json.JSONObject;
-
-import java.text.SimpleDateFormat;
 import java.util.ArrayList;
-import java.util.Date;
-import java.util.HashMap;
-import java.util.List;
-
-import okhttp3.Call;
 
 /**
  * 刘泽鹏
  * OTC 份额查询界面
  */
-public class OTC_ShareActivity extends BaseActivity implements View.OnClickListener{
+public class OTC_ShareActivity extends BaseActivity implements View.OnClickListener,
+        OTC_ShareConnect.OTC_ShareConnectInterface, BasePullLayout.OnPullCallBackListener,
+        DialogInterface.OnCancelListener, OTC_ShareAdapter.OtcShareClick {
 
-    private String TAG = "OTC_ShareActivity";
-    private PullToRefreshScrollView mPullRefreshScrollView;
-    private MyListView mListView;
-    private ArrayList<OtcShareEntity> list;
-    private OTCShareQueryAdapter adapter;
-    private ImageView iv_ShareKong;             //空图片
-    private TextView tvOtc_ShareMarketValue;   //市值
-    private LinearLayout linear_show;
+    private final String TAG = OTC_ShareActivity.class.getSimpleName();
+    private Dialog                  mProgressDialog;
+    private SimplePullLayout        mSimplePullLayout;
+    private OTC_ShareAdapter        mAdapter;
+    private String                  mSession;
+    private ImageView               mKong_iv;
+    private OTC_ShareConnect mConnect = new OTC_ShareConnect();
+    private boolean clickBackKey;//判断用户是否点击返回键取消网络请求
 
     @Override
     public void initView() {
-        iv_ShareKong = (ImageView) this.findViewById(R.id.iv_ShareKong);
-        linear_show = (LinearLayout) findViewById(R.id.ll_show);
-        tvOtc_ShareMarketValue = (TextView) this.findViewById(R.id.tvOtc_ShareMarketValue);
-        mPullRefreshScrollView = (PullToRefreshScrollView) findViewById(R.id.svPullToRefresh);
-        this.findViewById(R.id.ivOTC_ShareQueryBack).setOnClickListener(this);   //返回按钮
-        this.mListView = (MyListView) this.findViewById(R.id.lvShareQuery);        //listView
-        getDate(false);                                                                 //获取数据源
-        list = new ArrayList<OtcShareEntity>();
-        adapter = new OTCShareQueryAdapter(OTC_ShareActivity.this);
-        mListView.setFocusable(false);
-        mListView.setAdapter(adapter);
-        initEvent();
+
+        findViewById(R.id.userIdBackBtn).setOnClickListener(this);
+        TextView title = (TextView) findViewById(R.id.toolbar_title);
+        title.setText("OTC份额");
+
+
+        mSimplePullLayout = (SimplePullLayout) findViewById(R.id.id_swipe_ly);
+        mSimplePullLayout.attachHeadView(new TainiuRefreshHead());
+        RecyclerView recyclerView = (RecyclerView) findViewById(R.id.lvShareQuery);
+        recyclerView.setLayoutManager(new LinearLayoutManager(this));
+        recyclerView.addItemDecoration(new CustomDecoration(this));
+        mAdapter = new OTC_ShareAdapter(OTC_ShareActivity.this);
+        mKong_iv = (ImageView) this.findViewById(R.id.iv_ShareKong);
+        mKong_iv.setVisibility(View.GONE);
+        recyclerView.setAdapter(mAdapter);
+
+        mAdapter.setClick(this);
+
+        mSimplePullLayout.setOnPullListener(this);
+        mSession = SpUtils.getString(this, "mSession", "");
+        initLoadDialog();
+        mConnect.toOtcShareConnect(TAG, mSession, this);
 
     }
 
-    private void initEvent() {
-        mPullRefreshScrollView.setMode(PullToRefreshBase.Mode.PULL_FROM_START);
-        mPullRefreshScrollView.setOnRefreshListener(new PullToRefreshBase.OnRefreshListener2<ScrollView>() {
-            @Override
-            public void onPullDownToRefresh(PullToRefreshBase<ScrollView> refreshView) {
-                getDate(true);
-            }
-
-            @Override
-            public void onPullUpToRefresh(PullToRefreshBase<ScrollView> refreshView) {
-                //  不处理
-            }
-        });
-    }
-
-    /**
-     * 获取数据源
-     */
-    private void getDate(final boolean isClean) {
-        if (isClean){   //
-            list.clear();
+    @Override
+    public void onCancel(DialogInterface dialog) {
+        if (clickBackKey) {
+            OkHttpUtil.cancelSingleRequestByTag(TAG);
         }
-        String mSession = SpUtils.getString(this, "mSession", "");
-        HashMap map1 = new HashMap();
-        HashMap map2 = new HashMap();
-        map2.put("FLAG", "true");
-        map2.put("SEC_ID", "tpyzq");
-        map1.put("funcid", "300501");
-        map1.put("token", mSession);
-        map1.put("parms", map2);
-        NetWorkUtil.getInstence().okHttpForPostString(TAG, ConstantUtil.URL_JY, map1, new StringCallback() {
-            @Override
-            public void onError(Call call, Exception e, int id) {
-                mPullRefreshScrollView.onRefreshComplete();
-                iv_ShareKong.setVisibility(View.VISIBLE);               //显示  空图片
-                Helper.getInstance().showToast(OTC_ShareActivity.this,ConstantUtil.NETWORK_ERROR);
+    }
+
+    @Override
+    public void onClick(int position) {
+//        Intent intent = new Intent();
+//        intent.setClass(OTC_ShareActivity.this, OTC_RedeemActivity.class);
+//        intent.putExtra("prod_code",prod_code);
+//        startActivity(intent);
+    }
+
+    @Override
+    public void onClick(View v) {
+        switch (v.getId()) {
+            case R.id.userIdBackBtn:
+                finish();
+                break;
+        }
+    }
+
+    @Override
+    public void onRefresh() {
+        mConnect.toOtcShareConnect(TAG, mSession, this);
+    }
+
+    @Override
+    public void onLoad() {
+        //不处理
+    }
+
+    @Override
+    public void closeRefresh() {
+        mSimplePullLayout.finishPull();
+    }
+
+    @Override
+    public void connectError(String error) {
+        MistakeDialog.showDialog(error, OTC_ShareActivity.this);
+    }
+
+    @Override
+    public void connectNoData() {
+        ArrayList<OtcShareEntity> list = new ArrayList<OtcShareEntity>();
+        mKong_iv.setVisibility(View.VISIBLE);
+        mAdapter.setDatas(list);
+    }
+
+    @Override
+    public void connectSuccess(ArrayList<OtcShareEntity> datas) {
+        mKong_iv.setVisibility(View.GONE);
+        mAdapter.setDatas(datas);
+    }
+
+    @Override
+    public void sessionFaild() {
+        Intent intent = new Intent();
+        if (!Db_PUB_USERS.isRegister()) {
+            intent = new Intent(OTC_ShareActivity.this, ShouJiZhuCeActivity.class);
+        } else if (!Db_PUB_USERS.islogin()) {
+            intent.setClass(OTC_ShareActivity.this, TransactionLoginActivity.class);
+        } else {
+            intent.setClass(OTC_ShareActivity.this, TransactionLoginActivity.class);
+        }
+        startActivity(intent);
+    }
+
+    @Override
+    public void cloasLoading() {
+        if (mProgressDialog != null && mProgressDialog.isShowing()) {
+            mProgressDialog.dismiss();
+        }
+    }
+
+    private void initLoadDialog() {
+        mProgressDialog = LoadingDialog.initDialog(OTC_ShareActivity.this, "正在加载...");
+        mProgressDialog.setCanceledOnTouchOutside(false);
+        mProgressDialog.setOnCancelListener(this);
+        mProgressDialog.show();
+    }
+
+    @Override
+    public boolean onKeyDown(int keyCode, KeyEvent event) {
+        if ((keyCode == KeyEvent.KEYCODE_BACK)) {
+            if (mProgressDialog != null && mProgressDialog.isShowing()) {
+                clickBackKey = true;
+                mProgressDialog.cancel();
+                return false;
+            } else {
+                return super.onKeyDown(keyCode, event);
             }
-
-            @Override
-            public void onResponse(String response, int id) {
-                mPullRefreshScrollView.onRefreshComplete();
-                if (TextUtils.isEmpty(response)) {
-                    return;
-                }
-                try {
-                    JSONObject jsonObject = new JSONObject(response);
-                    String code = jsonObject.getString("code");
-                    if ("0".equals(code)) {
-                        JSONArray data = jsonObject.getJSONArray("data");
-
-                        for (int i = 0; i < data.length(); i++) {
-                            JSONObject jsonObject1 = data.getJSONObject(i);
-                            String otc_market_value = jsonObject1.getString("OTC_MARKET_VALUE"); //市值
-                            tvOtc_ShareMarketValue.setText(otc_market_value);                   //给 市值 赋值
-                            JSONArray otc_list = jsonObject1.getJSONArray("OTC_LIST");
-
-                            if (otc_list.length() == 0) {
-//                                mPullRefreshScrollView.setVisibility(View.GONE);
-                                iv_ShareKong.setVisibility(View.VISIBLE);               //显示  空图片
-                                linear_show.setVisibility(View.GONE);
-                            }else {
-                                iv_ShareKong.setVisibility(View.GONE);               //显示  空图片
-                                linear_show.setVisibility(View.VISIBLE);
-                            }
-
-                            for (int j = 0; j < otc_list.length(); j++) {
-                                OtcShareEntity otcShareIntentBean = new OtcShareEntity();
-                                JSONObject item = otc_list.getJSONObject(j);
-                                String current_amount = item.getString("CURRENT_AMOUNT");
-                                String prod_name = item.getString("PROD_NAME");
-                                String prod_code = item.getString("PROD_CODE");
-                                String buy_date = item.getString("BUY_DATE");
-//                                String prod_end_date = item.getString("PROD_END_DATE");
-                                otcShareIntentBean.setCurrent_amount(current_amount);//份额
-                                otcShareIntentBean.setProd_name(prod_name);         //股票名称
-                                otcShareIntentBean.setProd_code(prod_code);         //股票代码
-                                otcShareIntentBean.setBuy_date(buy_date);           //购入日期
-//                                otcShareIntentBean.setProd_end_date(prod_end_date);//到期日期
-                                otcShareIntentBean.setUnFold(false);
-                                list.add(otcShareIntentBean);
-                            }
-                        }
-
-                    }
-                    adapter.setList(list);      //添加数据
-
-                } catch (JSONException e) {
-                    e.printStackTrace();
-                }
-
-            }
-        });
+        }else {
+            return super.onKeyDown(keyCode, event);
+        }
     }
 
     @Override
@@ -166,11 +177,18 @@ public class OTC_ShareActivity extends BaseActivity implements View.OnClickListe
         return R.layout.activity_otc__share;
     }
 
+    private class CustomDecoration extends RecyclerView.ItemDecoration{
+        private int dividerHeight;
 
-    @Override
-    public void onClick(View v) {
-        if (v.getId() == R.id.ivOTC_ShareQueryBack) {
-            this.finish();                                                  //点击返回按钮销毁当前activity
+
+        public CustomDecoration(Context context) {
+            dividerHeight = context.getResources().getDimensionPixelSize(R.dimen.size5);
+        }
+
+        @Override
+        public void getItemOffsets(Rect outRect, View view, RecyclerView parent, RecyclerView.State state) {
+            super.getItemOffsets(outRect, view, parent, state);
+            outRect.bottom = dividerHeight;
         }
     }
 

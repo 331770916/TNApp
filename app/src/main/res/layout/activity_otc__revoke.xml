@@ -1,12 +1,11 @@
 <?xml version="1.0" encoding="utf-8"?>
-<RelativeLayout xmlns:android="http://schemas.android.com/apk/res/android"
-    xmlns:tools="http://schemas.android.com/tools"
+<LinearLayout xmlns:android="http://schemas.android.com/apk/res/android"
     xmlns:app="http://schemas.android.com/apk/res-auto"
+    android:id="@+id/otc_revokeParent"
     android:layout_width="match_parent"
     android:layout_height="match_parent"
-    android:id="@+id/OTC_RevokeActivity"
     android:background="@color/bgColor"
-    tools:context="com.tpyzq.mobile.pangu.activity.trade.otc_business.OTC_RevokeActivity">
+    android:orientation="vertical">
 
 
     <RelativeLayout
@@ -18,36 +17,15 @@
         android:fitsSystemWindows="true" />
 
     <!--头布局-->
-    <RelativeLayout
-        android:id="@+id/rlOtcCheDan"
-        android:layout_below="@id/rl_top_bar"
-        android:layout_width="match_parent"
-        android:layout_height="@dimen/pickerview_topbar_height"
-        android:background="@color/blue">
-
-        <ImageView
-            android:id="@+id/ivOTC_RevokeBack"
-            android:layout_width="wrap_content"
-            android:layout_height="match_parent"
-            android:layout_alignParentLeft="true"
-            android:padding="@dimen/size10"
-            android:src="@mipmap/back_btn" />
-
-        <TextView
-            android:layout_width="wrap_content"
-            android:layout_height="wrap_content"
-            android:layout_centerInParent="true"
-            android:text="OTC撤单"
-            android:textColor="@color/white"
-            android:textSize="@dimen/pickerview_topbar_title_textsize" />
-    </RelativeLayout>
+    <!--头布局-->
+    <include
+        android:id="@+id/startVideTop"
+        layout="@layout/updatepwd_top" />
 
     <!--title-->
     <LinearLayout
         android:paddingRight="10dp"
         android:paddingLeft="@dimen/size10"
-        android:id="@+id/llOtcCheDanTitle"
-        android:layout_below="@id/rlOtcCheDan"
         android:background="@color/white"
         android:layout_width="match_parent"
         android:layout_height="@dimen/size30"
@@ -93,32 +71,35 @@
     </LinearLayout>
 
     <!--分割线-->
-    <TextView
-        android:id="@+id/tvOtcCheDanFenGe"
-        android:layout_below="@id/llOtcCheDanTitle"
+    <View
         android:layout_width="match_parent"
-        android:layout_height="@dimen/size0.5"
-        android:background="@color/dividerColor"/>
+        android:layout_height="1px"
+        android:background="@color/lineColor"/>
 
-    <com.handmark.pulltorefresh.library.PullToRefreshListView
-        android:id="@+id/lvRevoke"
-        android:layout_below="@id/tvOtcCheDanFenGe"
+    <FrameLayout
         android:layout_width="match_parent"
-        android:layout_height="match_parent"
-        android:scrollbars="none"
-        android:divider="@null"
-        app:ptrAnimationStyle="flip"
-        app:ptrMode="pullFromStart">
+        android:layout_height="match_parent">
 
-    </com.handmark.pulltorefresh.library.PullToRefreshListView>
+        <ImageView
+            android:id="@+id/iv_RevokeKong"
+            android:layout_width="match_parent"
+            android:layout_height="match_parent"
+            android:layout_centerInParent="true"
+            android:scaleType="center"
+            android:src="@mipmap/kong"/>
 
-    <ImageView
-        android:scaleType="center"
-        android:id="@+id/ivOtcCheDanKong"
-        android:layout_width="match_parent"
-        android:layout_height="match_parent"
-        android:layout_centerInParent="true"
-        android:visibility="gone"
-        android:src="@mipmap/kong"/>
+        <com.tpyzq.mobile.pangu.view.pulllayou.SimplePullLayout
+            android:id="@+id/id_swipe_ly"
+            app:hasFooter="false"
+            android:layout_width="match_parent"
+            android:layout_height="match_parent">
 
-</RelativeLayout>
+            <android.support.v7.widget.RecyclerView
+                android:id="@+id/lvRevoke"
+                android:layout_width="match_parent"
+                android:layout_height="match_parent" />
+
+        </com.tpyzq.mobile.pangu.view.pulllayou.SimplePullLayout>
+    </FrameLayout>
+
+</LinearLayout>

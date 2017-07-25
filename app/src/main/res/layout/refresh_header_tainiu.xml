@@ -1,0 +1,50 @@
+<LinearLayout xmlns:android="http://schemas.android.com/apk/res/android"
+    android:layout_width="match_parent"
+    android:layout_height="wrap_content"
+    android:orientation="horizontal"
+    android:layout_marginTop="15dp">
+
+    <RelativeLayout
+        android:layout_width="@dimen/size30"
+        android:layout_height="@dimen/size30"
+        android:layout_marginLeft="@dimen/size20">
+        <ImageView
+            android:id="@+id/arrow"
+            android:layout_width="wrap_content"
+            android:layout_height="wrap_content"
+            android:layout_alignParentRight="true"
+            android:background="@android:color/transparent"
+            android:src="@drawable/cow" />
+    </RelativeLayout>
+
+    <RelativeLayout
+        android:layout_width="wrap_content"
+        android:layout_height="30dp">
+
+        <TextView
+            android:id="@+id/description"
+            android:layout_width="wrap_content"
+            android:layout_height="wrap_content"
+            android:layout_centerVertical="true"
+            android:text="下拉可以刷新"
+            android:textColor="@color/texts"
+            android:padding="@dimen/size5"
+            android:textSize="@dimen/txtSize12" />
+
+    </RelativeLayout>
+
+    <RelativeLayout
+        android:layout_width="wrap_content"
+        android:layout_height="30dp">
+        <TextView
+            android:textColor="@color/texts"
+            android:id="@+id/updated_at"
+            android:layout_centerVertical="true"
+            android:layout_alignParentLeft="true"
+            android:padding="@dimen/size5"
+            android:layout_width="wrap_content"
+            android:layout_height="wrap_content"
+            android:textSize="@dimen/txtSize12" />
+    </RelativeLayout>
+
+</LinearLayout>
