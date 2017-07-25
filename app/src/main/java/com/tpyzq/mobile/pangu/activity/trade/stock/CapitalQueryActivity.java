@@ -24,7 +24,9 @@ import com.tpyzq.mobile.pangu.view.magicindicator.buildins.commonnavigator.title
 
 import java.util.ArrayList;
 import java.util.Arrays;
+import java.util.HashMap;
 import java.util.List;
+import java.util.Map;
 
 /**
  * Created by wangqi on 2016/8/3.
@@ -36,9 +38,11 @@ public class CapitalQueryActivity extends BaseActivity implements View.OnClickLi
     private List<String> buy_vp_list = Arrays.asList(buy_vp);
     private List<BaseSearchPager> listBuy = new ArrayList<>();
     private MagicIndicator capital_buy;
+    private Map<Integer,Boolean> map ;
 
     @Override
     public void initView() {
+        map = new HashMap<>();
         findViewById(R.id.publish_detail_back).setOnClickListener(this);
         mZjViewPager = (ViewPager) findViewById(R.id.zj_view);
         capital_buy = (MagicIndicator) findViewById(R.id.capital_buy);
@@ -98,10 +102,16 @@ public class CapitalQueryActivity extends BaseActivity implements View.OnClickLi
 
 
     private void initData() {
-        listBuy.add(new MoneyOneWeekPager(this));
+        MoneyOneWeekPager moneyOneWeekPager = new MoneyOneWeekPager(this);
+        moneyOneWeekPager.initData();            //  第一个数据默认加载
+        listBuy.add(moneyOneWeekPager);
         listBuy.add(new MoneyInAMonthPager(this));
         listBuy.add(new MoneyThreeWeekPager(this));
         listBuy.add(new MoneyCustomPager(this));
+        map.put(0,true);
+        for (int i = 1; i < listBuy.size(); i++) {
+            map.put(i,false);
+        }
         mZjViewPager.setAdapter(new InquireVpAdapter(listBuy));
 
         //底部Viewpager切换监听器
@@ -111,7 +121,13 @@ public class CapitalQueryActivity extends BaseActivity implements View.OnClickLi
             }
             @Override
             public void onPageSelected(int position) {
-                listBuy.get(position);
+                if (!map.get(position)){
+                    map.put(position,true);
+                    listBuy.get(position);
+                    listBuy.get(position).initData();
+                }else {
+                    listBuy.get(position);
+                }
             }
             @Override
             public void onPageScrollStateChanged(int state) {

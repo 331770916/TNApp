@@ -25,7 +25,9 @@ import com.tpyzq.mobile.pangu.view.magicindicator.buildins.commonnavigator.title
 
 import java.util.ArrayList;
 import java.util.Arrays;
+import java.util.HashMap;
 import java.util.List;
+import java.util.Map;
 
 /**
  * Created by wangqi on 2016/8/9.
@@ -37,6 +39,7 @@ public class DeliveryOrderActivity extends BaseActivity implements View.OnClickL
     private List<String> buy_vp_list = Arrays.asList(buy_vp);
     private ViewPager mDeliveryOrderViewPager;
     private List<BaseSearchPager> pagers = new ArrayList<>();
+    private Map<Integer,Boolean> isLoad = new HashMap<>();
 
     @Override
     public void initView() {
@@ -48,12 +51,17 @@ public class DeliveryOrderActivity extends BaseActivity implements View.OnClickL
     }
 
     private void initData() {
-        pagers.add(new DeliveryTodayPager(this));
+        DeliveryTodayPager deliveryTodayPager = new DeliveryTodayPager(this);
+        deliveryTodayPager.initData();  // 初始化第一个page数据
+        pagers.add(deliveryTodayPager);
         pagers.add(new DeliveryOneWeekPager(this));
         pagers.add(new DeliveryInAMonthPager(this));
         pagers.add(new DeliveryThreeWeekPager(this));
         pagers.add(new DeliveryCustomPager(this));
-
+        isLoad.put(0,true);
+        for (int i = 1; i < pagers.size(); i++) {
+            isLoad.put(i,false);
+        }
         mDeliveryOrderViewPager.setAdapter(new InquireVpAdapter(pagers));
 
         mDeliveryOrderViewPager.setOnPageChangeListener(new ViewPager.OnPageChangeListener() {
@@ -63,8 +71,13 @@ public class DeliveryOrderActivity extends BaseActivity implements View.OnClickL
 
             @Override
             public void onPageSelected(int position) {
-                pagers.get(position);
-
+                if (!isLoad.get(position)){
+                    isLoad.put(position,true);
+                    pagers.get(position);
+                    pagers.get(position).initData();
+                }else {
+                    pagers.get(position);
+                }
             }
 
             @Override

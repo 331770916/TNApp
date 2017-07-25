@@ -59,6 +59,11 @@ public class EntrustTodayPager extends BaseSearchPager {
         mTodayListView.setMode(PullToRefreshBase.Mode.PULL_FROM_START);
         iv_isEmpty = (ImageView) rootView.findViewById(R.id.iv_isEmpty);
         kong_null = (RelativeLayout) rootView.findViewById(R.id.EAMP_Kong_Null);
+        mBeans = new ArrayList<>();
+        mAapter = new EntrustListViewAdapter(mContext);
+        mTodayListView.setAdapter(mAapter);
+        mTodayListView.setEmptyView(iv_isEmpty);
+        Update();
     }
 
 
@@ -69,13 +74,10 @@ public class EntrustTodayPager extends BaseSearchPager {
 
     @Override
     public void initData() {
-        mBeans = new ArrayList<>();
         toConnect();
-        Update();
-        mAapter = new EntrustListViewAdapter(mContext);
-        mTodayListView.setAdapter(mAapter);
-        mTodayListView.setEmptyView(iv_isEmpty);
     }
+
+
 
     private void toConnect() {
         String mSession = SpUtils.getString(mContext, "mSession", "");

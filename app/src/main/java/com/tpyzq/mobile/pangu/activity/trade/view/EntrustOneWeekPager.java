@@ -57,16 +57,16 @@ public class EntrustOneWeekPager extends BaseSearchPager {
         mOneWeekListView = (PullToRefreshListView) rootView.findViewById(R.id.TodayListView);
         iv_isEmpty = (ImageView) rootView.findViewById(R.id.iv_isEmpty);
         kong_null = (RelativeLayout) rootView.findViewById(R.id.EAMP_Kong_Null);
+        mBeans = new ArrayList<>();
+        mAdapter = new EntrustListViewAdapter(mContext);
+        mOneWeekListView.setAdapter(mAdapter);
+        mOneWeekListView.setEmptyView(iv_isEmpty);
+        Update();
     }
 
     @Override
     public void initData() {
-        mBeans = new ArrayList<>();
         toConnect("", "30", false);
-        Update();
-        mAdapter = new EntrustListViewAdapter(mContext);
-        mOneWeekListView.setAdapter(mAdapter);
-        mOneWeekListView.setEmptyView(iv_isEmpty);
     }
 
     private void toConnect(String i, final String j, final boolean flag) {

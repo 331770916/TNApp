@@ -13,6 +13,8 @@ import android.widget.TextView;
 import android.widget.Toast;
 
 import com.google.gson.Gson;
+import com.handmark.pulltorefresh.library.PullToRefreshBase;
+import com.handmark.pulltorefresh.library.PullToRefreshListView;
 import com.tpyzq.mobile.pangu.R;
 import com.tpyzq.mobile.pangu.activity.trade.BaseTransactionPager;
 import com.tpyzq.mobile.pangu.adapter.trade.PositionAdapter;
@@ -54,21 +56,25 @@ public class PositionTransactionPager extends BaseTransactionPager implements Ad
     LinearLayout ll_fourtext;
     TextView tv_text1, tv_text2, tv_text3, tv_text4;
     ImageView tv_empty;
-    ListView lv_transaction;
+    PullToRefreshListView lv_transaction;
 
     @Override
     public void initData() {
-        tv_text1.setText("名称/市值");
-        tv_text2.setText("盈亏/比例");
-        tv_text3.setText("持仓/可用");
-        tv_text4.setText("现价/成本");
-        datas = new ArrayList<PositionEntity>();
-        positionAdapter = new PositionAdapter(mContext);
-        lv_transaction.setAdapter(positionAdapter);
+//        getSecuritiesPositions(0, 1);
+    }
+
+    private void initEvent() {
+        lv_transaction.setMode(PullToRefreshBase.Mode.PULL_FROM_START);
         lv_transaction.setEmptyView(tv_empty);
         lv_transaction.setOnItemClickListener(this);
-        getSecuritiesPositions(0, 1);
+        lv_transaction.setOnRefreshListener(new PullToRefreshBase.OnRefreshListener<ListView>() {
+            @Override
+            public void onRefresh(PullToRefreshBase<ListView> refreshView) {
+                getSecuritiesPositions(0, 1);
+            }
+        });
     }
+
     // 设置持仓刷新
     public void setRefresh(){
         getSecuritiesPositions(0, 1);
@@ -80,9 +86,16 @@ public class PositionTransactionPager extends BaseTransactionPager implements Ad
         tv_text2 = (TextView) ll_fourtext.findViewById(R.id.tv_text2);
         tv_text3 = (TextView) ll_fourtext.findViewById(R.id.tv_text3);
         tv_text4 = (TextView) ll_fourtext.findViewById(R.id.tv_text4);
-        lv_transaction = (ListView) rootView.findViewById(R.id.lv_transaction);
+        lv_transaction = (PullToRefreshListView) rootView.findViewById(R.id.lv_transaction);
         tv_empty = (ImageView) rootView.findViewById(R.id.tv_empty);
-
+        tv_text1.setText("名称/市值");
+        tv_text2.setText("盈亏/比例");
+        tv_text3.setText("持仓/可用");
+        tv_text4.setText("现价/成本");
+        datas = new ArrayList<PositionEntity>();
+        positionAdapter = new PositionAdapter(mContext);
+        lv_transaction.setAdapter(positionAdapter);
+        initEvent();
     }
 
     private void getSecuritiesPositions(int from, int to) {
@@ -99,10 +112,12 @@ public class PositionTransactionPager extends BaseTransactionPager implements Ad
             @Override
             public void onError(Call call, Exception e, int id) {
                 Toast.makeText(mContext, "网络访问失败", Toast.LENGTH_SHORT).show();
+                lv_transaction.onRefreshComplete();
             }
 
             @Override
             public void onResponse(String response, int id) {
+                lv_transaction.onRefreshComplete();
                 if (TextUtils.isEmpty(response)) {
                     return;
                 }
@@ -165,8 +180,8 @@ public class PositionTransactionPager extends BaseTransactionPager implements Ad
 
     @Override
     public void onItemClick(AdapterView<?> parent, View view, int position, long id) {
-        String stockCode = datas.get(position).SECU_CODE;
-        String market = datas.get(position).MARKET;
+        String stockCode = datas.get(position-1).SECU_CODE;
+        String market = datas.get(position-1).MARKET;
         if ("2".equals(market)){
             stockCode = Helper.getStockCode(stockCode,"90");
         }else if ("1".equals(market)){

@@ -78,16 +78,6 @@ public class MoneyCustomPager extends BaseSearchPager {
         mZjInquire = (TextView) rootView.findViewById(R.id.CapitalInquire);
         iv_isEmpty = (ImageView) rootView.findViewById(R.id.iv_isEmpty);
         kong_null = (RelativeLayout) rootView.findViewById(R.id.Kong_Null);
-    }
-
-
-    @Override
-    public int getLayoutId() {
-        return R.layout.fragment_capitalcustom;
-    }
-
-    @Override
-    public void initData() {
         mZjStartDate.setText(Helper.getCurDate().toString());
         mZjFinishDate.setText(Helper.getCurDate().toString());
 
@@ -98,12 +88,23 @@ public class MoneyCustomPager extends BaseSearchPager {
         mAdapter = new MoneyAdapter(mContext);
         toStartDate();
         toFinishDate();
+        Update();
         mAdapter.setData(-1);
         mZjTodayListView.setAdapter(mAdapter);
         mZjTodayListView.setEmptyView(iv_isEmpty);
-
         mZjStartDate.setTextColor(Color.parseColor("#368de7"));
         mZjFinishDate.setTextColor(Color.parseColor("#368de7"));
+    }
+
+
+    @Override
+    public int getLayoutId() {
+        return R.layout.fragment_capitalcustom;
+    }
+
+    @Override
+    public void initData() {
+
     }
 
     private void toConnect(final String i, String j, final boolean flag) {
@@ -229,7 +230,6 @@ public class MoneyCustomPager extends BaseSearchPager {
                             beans.clear();
                             mAdapter.notifyDataSetChanged();
                             toConnect("", "30", false);
-                            Update();
                         }
                     }
 

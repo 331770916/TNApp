@@ -77,15 +77,6 @@ public class ClinchCustomPager extends BaseSearchPager {
         mInquire = (TextView) rootView.findViewById(R.id.ClinchInquire);
         iv_isEmpty = (ImageView) rootView.findViewById(R.id.iv_isEmpty);
         kong_null = (RelativeLayout) rootView.findViewById(R.id.CCP_Kong_Null);
-    }
-
-    @Override
-    public int getLayoutId() {
-        return R.layout.fragment_clinchcustom;
-    }
-
-    @Override
-    public void initData() {
         mStartpvTime.setText(Helper.getCurDate().toString());
         mFinishpvTime.setText(Helper.getCurDate().toString());
 
@@ -101,7 +92,17 @@ public class ClinchCustomPager extends BaseSearchPager {
 
         mStartpvTime.setTextColor(Color.parseColor("#368de7"));
         mFinishpvTime.setTextColor(Color.parseColor("#368de7"));
+        Update();
 
+    }
+
+    @Override
+    public int getLayoutId() {
+        return R.layout.fragment_clinchcustom;
+    }
+
+    @Override
+    public void initData() {
     }
 
     private void toConnect(String i, String j, final boolean flag) {
@@ -267,7 +268,6 @@ public class ClinchCustomPager extends BaseSearchPager {
                             beans.clear();
                             mAdapter.notifyDataSetChanged();
                             toConnect(position, "30", false);
-                            Update();
                         }
                     }
                     break;

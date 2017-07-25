@@ -151,6 +151,10 @@ public class BuyAndSellActivity extends BaseActivity implements View.OnClickList
     private String stockName = "";
     private boolean isClearHeadData = true;//是否清头部数据，用于修改股票代码
     private String delist = "";//股票退市提示信息
+    private Map<Integer,Boolean> buy = new HashMap<>();  // 买界面标记当前界面数据刷新
+    private Map<Integer,Boolean> sell = new HashMap<>(); // 卖界面标记当前界面数据刷新
+    private FreeStockTransactionPager freeStockTransactionPager ;
+    private PositionTransactionPager positionTransactionPager;
 
     @Override
     public void initView() {
@@ -257,8 +261,8 @@ public class BuyAndSellActivity extends BaseActivity implements View.OnClickList
         psell = new RadioGroup.LayoutParams(0, ViewGroup.LayoutParams.MATCH_PARENT);
         transStockBeen = new ArrayList<TransStockEntity>();
         timeShareData = new TimeShareEntity();
-        FreeStockTransactionPager freeStockTransactionPager = new FreeStockTransactionPager(this, stockCodeCallBack);
-        PositionTransactionPager positionTransactionPager = new PositionTransactionPager(this, stockCodeCallBack);
+         freeStockTransactionPager = new FreeStockTransactionPager(this, stockCodeCallBack);
+         positionTransactionPager = new PositionTransactionPager(this, stockCodeCallBack);
         EntrustTransactionPager entrustTransactionPager = new EntrustTransactionPager(this);
         SuccessTransactionPager successTransactionPager = new SuccessTransactionPager(this);
         listBuy.add(freeStockTransactionPager);
@@ -308,12 +312,23 @@ public class BuyAndSellActivity extends BaseActivity implements View.OnClickList
         et_num.addTextChangedListener(stockNumWatch);
         intent = getIntent();
         refresh("");
+        buy.put(0,true);         // 买第一个界面默认加载
+        for (int i = 1; i < listBuy.size(); i++) {
+            buy.put(i,false);
+        }
+        sell.put(0,true);      // 卖第一个界面默认加载
+        for (int i = 1; i < listSell.size(); i++) {
+            sell.put(i,false);
+        }
         final String istatus = intent.getStringExtra("status");
         final String istockcode = intent.getStringExtra("stockcode");
         if (!TextUtils.isEmpty(istatus) && "买".equals(istatus)) {
             rb_buy.setChecked(true);        //初始化
+            freeStockTransactionPager.setRefresh();
+
         } else if (!TextUtils.isEmpty(istatus) && "卖".equals(istatus)) {
             rb_sell.setChecked(true);        //初始化
+            positionTransactionPager.setRefresh();
         } else {
             rb_buy.setChecked(true);        //初始化
         }
@@ -338,9 +353,15 @@ public class BuyAndSellActivity extends BaseActivity implements View.OnClickList
             @Override
             public void onPageSelected(int position) {
                 if (rb_buy.isChecked()) {
-                    listBuy.get(position).setRefresh();
+                    if (!buy.get(position)){
+                        buy.put(position,true);
+                        listBuy.get(position).setRefresh();
+                    }
                 } else if (rb_sell.isChecked()) {
-                    listSell.get(position).setRefresh();
+                    if (!sell.get(position)){
+                        sell.put(position,true);
+                        listSell.get(position).setRefresh();
+                    }
                 }
             }
 
@@ -954,6 +975,7 @@ public class BuyAndSellActivity extends BaseActivity implements View.OnClickList
                 case R.id.rg_buysell:
                     switch (checkedId) {
                         case R.id.rb_buy:
+                            freeStockTransactionPager.setRefresh();
                             vp_view.setCurrentItem(0);
                             pbuy.weight = 4;
                             bt_buy.setLayoutParams(pbuy);
@@ -973,6 +995,7 @@ public class BuyAndSellActivity extends BaseActivity implements View.OnClickList
                             iv_depute_way.setText("限价委托");
                             break;
                         case R.id.rb_sell:
+                            positionTransactionPager.setRefresh();
                             vp_view.setCurrentItem(0);
                             psell.weight = 4;
                             psell.setMargins(TransitionUtils.dp2px(5, BuyAndSellActivity.this), 0, 0, 0);
@@ -982,6 +1005,7 @@ public class BuyAndSellActivity extends BaseActivity implements View.OnClickList
                             tv_max_buysell.setText("最大可卖:");
                             vp_view.setAdapter(new StockVpAdapter(listSell));
                             transactiontype = "卖";
+
                             setIndicatorListen(sell_vp_ist);
                             if (!TextUtils.isEmpty(stockCode)) {
 //                                getHeaderView(stockCode);

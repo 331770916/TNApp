@@ -59,6 +59,12 @@ public class MoneyInAMonthPager extends BaseSearchPager {
         mZjTodayListView = (PullToRefreshListView) rootView.findViewById(R.id.ZjTodayListView);
         iv_isEmpty = (ImageView) rootView.findViewById(R.id.iv_isEmpty);
         kong_null = (RelativeLayout) rootView.findViewById(R.id.MWP_Kong_Null);
+        beans = new ArrayList<>();
+        Update();
+        mAdapter = new MoneyAdapter(mContext);
+        mAdapter.setData(-1);
+        mZjTodayListView.setAdapter(mAdapter);
+        mZjTodayListView.setEmptyView(iv_isEmpty);
     }
 
     @Override
@@ -68,13 +74,7 @@ public class MoneyInAMonthPager extends BaseSearchPager {
 
     @Override
     public void initData() {
-        beans = new ArrayList<>();
         toConnect("", "30", false);
-        Update();
-        mAdapter = new MoneyAdapter(mContext);
-        mAdapter.setData(-1);
-        mZjTodayListView.setAdapter(mAdapter);
-        mZjTodayListView.setEmptyView(iv_isEmpty);
     }
 
 

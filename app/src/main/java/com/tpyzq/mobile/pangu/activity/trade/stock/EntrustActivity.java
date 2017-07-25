@@ -25,7 +25,9 @@ import com.tpyzq.mobile.pangu.view.magicindicator.buildins.commonnavigator.title
 
 import java.util.ArrayList;
 import java.util.Arrays;
+import java.util.HashMap;
 import java.util.List;
+import java.util.Map;
 
 /**
  * Created by wangqi on 2016/7/28.
@@ -37,9 +39,11 @@ public class EntrustActivity extends BaseActivity implements View.OnClickListene
     private List<String> buy_vp_list = Arrays.asList(buy_vp);
     private List<BaseSearchPager> listBuy = new ArrayList<>();
     private MagicIndicator entrust_buy;
+    private Map<Integer ,Boolean> map ;
 
     @Override
     public void initView() {
+        map = new HashMap<>();
         mWtViewPager = (ViewPager) findViewById(R.id.wt_view);
         entrust_buy = (MagicIndicator) findViewById(R.id.entrust_buy);
         findViewById(R.id.publish_detail_back).setOnClickListener(this);
@@ -49,11 +53,17 @@ public class EntrustActivity extends BaseActivity implements View.OnClickListene
 
 
     private void initData() {
-        listBuy.add(new EntrustTodayPager(this));
+        EntrustTodayPager entrustTodayPager = new EntrustTodayPager(this);
+        entrustTodayPager.initData();   // 默认添加第一个界面数据
+        listBuy.add(entrustTodayPager);
         listBuy.add(new EntrustOneWeekPager(this));
         listBuy.add(new EntrustInAMonthPager(this));
         listBuy.add(new EntrustThreeWeekPager(this));
         listBuy.add(new EntrustCustomPager(this));
+        map.put(0,true);               // 设置当前第一个数据已经加载
+        for (int i = 1; i < listBuy.size(); i++) {
+            map.put(i,false);
+        }
         mWtViewPager.setAdapter(new InquireVpAdapter(listBuy));
 
         mWtViewPager.setOnPageChangeListener(new ViewPager.OnPageChangeListener() {
@@ -63,7 +73,14 @@ public class EntrustActivity extends BaseActivity implements View.OnClickListene
 
             @Override
             public void onPageSelected(int position) {
-                listBuy.get(position);
+                if (!map.get(position)){    //ViewPage 滑动加载未加载数据 。 加载过默认不加载
+                    map.put(position,true);
+                    listBuy.get(position);
+                    listBuy.get(position).initData();
+                }else {
+                    listBuy.get(position);
+                }
+
             }
 
             @Override

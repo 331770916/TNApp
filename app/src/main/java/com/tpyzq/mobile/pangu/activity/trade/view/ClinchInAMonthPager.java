@@ -57,6 +57,11 @@ public class ClinchInAMonthPager extends BaseSearchPager {
         mClinchListView = (PullToRefreshListView) rootView.findViewById(R.id.ClinchListView);
         iv_isEmpty = (ImageView) rootView.findViewById(R.id.iv_isEmpty);
         kong_null = (RelativeLayout) rootView.findViewById(R.id.CCP_Kong_Null_1);
+        beans = new ArrayList<>();
+        Update();
+        mAdapter = new ClinchADealAdapter(mContext);
+        mClinchListView.setAdapter(mAdapter);
+        mClinchListView.setEmptyView(iv_isEmpty);
     }
 
     @Override
@@ -66,12 +71,7 @@ public class ClinchInAMonthPager extends BaseSearchPager {
 
     @Override
     public void initData() {
-        beans = new ArrayList<>();
         toConnect("", "30", false);
-        Update();
-        mAdapter = new ClinchADealAdapter(mContext);
-        mClinchListView.setAdapter(mAdapter);
-        mClinchListView.setEmptyView(iv_isEmpty);
     }
 
 

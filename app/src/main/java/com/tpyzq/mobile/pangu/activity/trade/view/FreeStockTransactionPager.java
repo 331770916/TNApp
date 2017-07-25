@@ -10,6 +10,8 @@ import android.widget.ListView;
 import android.widget.TextView;
 
 import com.google.gson.Gson;
+import com.handmark.pulltorefresh.library.PullToRefreshBase;
+import com.handmark.pulltorefresh.library.PullToRefreshListView;
 import com.tpyzq.mobile.pangu.R;
 import com.tpyzq.mobile.pangu.activity.trade.BaseTransactionPager;
 import com.tpyzq.mobile.pangu.adapter.trade.FreeStockAdapter;
@@ -48,25 +50,29 @@ public class FreeStockTransactionPager extends BaseTransactionPager implements A
 
     LinearLayout ll_fourtext;
     TextView tv_text1, tv_text2, tv_text3, tv_text4;
-    ListView lv_transaction;
+    PullToRefreshListView lv_transaction;
     ImageView tv_empty;
     List<OptionalStockEntity> optionalStockBeen;
     FreeStockAdapter freeStockAdapter;
 
     @Override
     public void initData() {
-        tv_text1.setText("证券名称");
-        tv_text2.setText("现价");
-        tv_text3.setText("涨跌幅/额");
-        tv_text4.setText("最高/最低");
+//        getListData();
+    }
 
-        optionalStockBeen = new ArrayList<OptionalStockEntity>();
-        freeStockAdapter = new FreeStockAdapter(mContext);
-        lv_transaction.setAdapter(freeStockAdapter);
+    private void initEvent() {
+        lv_transaction.setMode(PullToRefreshBase.Mode.PULL_FROM_START);
         lv_transaction.setEmptyView(tv_empty);
         lv_transaction.setOnItemClickListener(this);
-        getListData();
+        lv_transaction.setOnRefreshListener(new PullToRefreshBase.OnRefreshListener<ListView>() {
+            @Override
+            public void onRefresh(PullToRefreshBase<ListView> refreshView) {
+                getListData();
+            }
+        });
+
     }
+
     public void setRefresh(){
         getListData();
     }
@@ -77,8 +83,17 @@ public class FreeStockTransactionPager extends BaseTransactionPager implements A
         tv_text2 = (TextView) ll_fourtext.findViewById(R.id.tv_text2);
         tv_text3 = (TextView) ll_fourtext.findViewById(R.id.tv_text3);
         tv_text4 = (TextView) ll_fourtext.findViewById(R.id.tv_text4);
-        lv_transaction = (ListView) rootView.findViewById(R.id.lv_transaction);
+        lv_transaction = (PullToRefreshListView) rootView.findViewById(R.id.lv_transaction);
         tv_empty = (ImageView) rootView.findViewById(R.id.tv_empty);
+        tv_text1.setText("证券名称");
+        tv_text2.setText("现价");
+        tv_text3.setText("涨跌幅/额");
+        tv_text4.setText("最高/最低");
+
+        optionalStockBeen = new ArrayList<OptionalStockEntity>();
+        freeStockAdapter = new FreeStockAdapter(mContext);
+        lv_transaction.setAdapter(freeStockAdapter);
+        initEvent();
     }
 
     /**
@@ -115,12 +130,12 @@ public class FreeStockTransactionPager extends BaseTransactionPager implements A
         NetWorkUtil.getInstence().okHttpForGet("", ConstantUtil.URL, map, new StringCallback() {
             @Override
             public void onError(Call call, Exception e, int id) {
-
+                lv_transaction.onRefreshComplete();
             }
 
             @Override
             public void onResponse(String response, int id) {
-//                LogHelper.e("FreeStockTransactionPager","response:"+response);
+                lv_transaction.onRefreshComplete();
                 if (TextUtils.isEmpty(response)) {
                     return;
                 }
@@ -138,9 +153,9 @@ public class FreeStockTransactionPager extends BaseTransactionPager implements A
                         JSONArray jaData = new JSONArray(data);
                         optionalStockBeen.clear();
                         if(count==1){
-                                OptionalStockEntity optionalStockBean = new OptionalStockEntity();
-                                parseArrayList(optionalStockBean,jaData);
-                                optionalStockBeen.add(optionalStockBean);
+                            OptionalStockEntity optionalStockBean = new OptionalStockEntity();
+                            parseArrayList(optionalStockBean,jaData);
+                            optionalStockBeen.add(optionalStockBean);
                         }else{
                             int len = jaData.length();
                             for (int i = 0; i < len; i++) {
@@ -188,6 +203,6 @@ public class FreeStockTransactionPager extends BaseTransactionPager implements A
 
     @Override
     public void onItemClick(AdapterView<?> parent, View view, int position, long id) {
-        stockCodeCallBack.setStockCode(optionalStockBeen.get(position).stockCode);
+        stockCodeCallBack.setStockCode(optionalStockBeen.get(position-1).stockCode);
     }
 }

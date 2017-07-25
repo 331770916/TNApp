@@ -13,7 +13,7 @@ public abstract class BaseSearchPager {
         this.mContext = context;
         rootView = initView();
         setView();
-        initData();
+//        initData();
     }
     /**
      * 子类创建布局，必须实现
@@ -31,6 +31,7 @@ public abstract class BaseSearchPager {
     public void initData(){
 
     }
+
     public abstract void setView();
     public abstract int getLayoutId();
 

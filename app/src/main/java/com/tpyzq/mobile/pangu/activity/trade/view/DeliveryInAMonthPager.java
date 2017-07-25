@@ -58,6 +58,12 @@ public class DeliveryInAMonthPager extends BaseSearchPager {
         mInAMonthListView = (PullToRefreshListView) rootView.findViewById(R.id.DeliveryTodayListView);
         iv_isEmpty = (ImageView) rootView.findViewById(R.id.iv_isEmpty);
         kong_null = (RelativeLayout) rootView.findViewById(R.id.DP_Kong_Null);
+        beans = new ArrayList<>();
+        toConnect("", "30", false);
+        mListViewAdapter = new DeliveryListViewAdapter(mContext);
+        mListViewAdapter.setData(-1);
+        mInAMonthListView.setAdapter(mListViewAdapter);
+        mInAMonthListView.setEmptyView(iv_isEmpty);
     }
 
     @Override
@@ -68,13 +74,7 @@ public class DeliveryInAMonthPager extends BaseSearchPager {
 
     @Override
     public void initData() {
-        beans = new ArrayList<>();
-        toConnect("", "30", false);
         Update();
-        mListViewAdapter = new DeliveryListViewAdapter(mContext);
-        mListViewAdapter.setData(-1);
-        mInAMonthListView.setAdapter(mListViewAdapter);
-        mInAMonthListView.setEmptyView(iv_isEmpty);
     }
 
 

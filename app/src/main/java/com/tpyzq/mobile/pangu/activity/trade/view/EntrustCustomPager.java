@@ -79,25 +79,26 @@ public class EntrustCustomPager extends BaseSearchPager {
         mWtListView = (PullToRefreshListView) rootView.findViewById(R.id.EntrustListView);
         iv_isEmpty = (ImageView) rootView.findViewById(R.id.iv_isEmpty);
         kong_null = (RelativeLayout) rootView.findViewById(R.id.EAMP_Kong_Null);
-    }
-
-
-    @Override
-    public void initData() {
         mWtStartDate.setText(Helper.getCurDate().toString());
         mWtfinishDate.setText(Helper.getCurDate().toString());
         mBeans = new ArrayList<>();
         mWtStartDate.setOnClickListener(new MyOnClickListenr());
         mWtfinishDate.setOnClickListener(new MyOnClickListenr());
         mWtInquire.setOnClickListener(new MyOnClickListenr());
-        toStartDate();
-        toFinishDate();
         mAdapter = new EntrustListViewAdapter(mContext);
         mWtListView.setAdapter(mAdapter);
         mWtListView.setEmptyView(iv_isEmpty);
-
         mWtStartDate.setTextColor(Color.parseColor("#368de7"));
         mWtfinishDate.setTextColor(Color.parseColor("#368de7"));
+        toStartDate();
+        toFinishDate();
+        Update();
+
+    }
+
+
+    @Override
+    public void initData() {
     }
 
     /**
@@ -284,7 +285,6 @@ public class EntrustCustomPager extends BaseSearchPager {
                             mBeans.clear();
                             mAdapter.notifyDataSetChanged();
                             toConnect("", "30", false);
-                            Update();
                         }
                     }
                     break;

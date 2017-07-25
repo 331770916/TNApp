@@ -77,6 +77,23 @@ public class DeliveryCustomPager extends BaseSearchPager {
         mCustomListView = (PullToRefreshListView) rootView.findViewById(R.id.DeliveryListView);
         iv_isEmpty = (ImageView) rootView.findViewById(R.id.iv_isEmpty);
         kong_null = (RelativeLayout) rootView.findViewById(R.id.DP_Kong_Null_1);
+        mJgStartDate.setText(Helper.getCurDate().toString());
+        mJgfinishDate.setText(Helper.getCurDate().toString());
+
+        mJgStartDate.setOnClickListener(new MyOnClickListenr());
+        mJgfinishDate.setOnClickListener(new MyOnClickListenr());
+        mJginquire.setOnClickListener(new MyOnClickListenr());
+        beans = new ArrayList<>();
+        toStartDate();
+        toFinishDate();
+        Update();
+        mAdapter = new DeliveryListViewAdapter(mContext);
+        mAdapter.setData(-1);
+        mCustomListView.setAdapter(mAdapter);
+        mCustomListView.setEmptyView(iv_isEmpty);
+
+        mJgStartDate.setTextColor(Color.parseColor("#368de7"));
+        mJgfinishDate.setTextColor(Color.parseColor("#368de7"));
     }
 
     @Override
@@ -87,22 +104,7 @@ public class DeliveryCustomPager extends BaseSearchPager {
 
     @Override
     public void initData() {
-        mJgStartDate.setText(Helper.getCurDate().toString());
-        mJgfinishDate.setText(Helper.getCurDate().toString());
 
-        mJgStartDate.setOnClickListener(new MyOnClickListenr());
-        mJgfinishDate.setOnClickListener(new MyOnClickListenr());
-        mJginquire.setOnClickListener(new MyOnClickListenr());
-        beans = new ArrayList<>();
-        toStartDate();
-        toFinishDate();
-        mAdapter = new DeliveryListViewAdapter(mContext);
-        mAdapter.setData(-1);
-        mCustomListView.setAdapter(mAdapter);
-        mCustomListView.setEmptyView(iv_isEmpty);
-
-        mJgStartDate.setTextColor(Color.parseColor("#368de7"));
-        mJgfinishDate.setTextColor(Color.parseColor("#368de7"));
     }
 
 
@@ -234,7 +236,6 @@ public class DeliveryCustomPager extends BaseSearchPager {
                             beans.clear();
                             mAdapter.notifyDataSetChanged();
                             toConnect("", "30", false);
-                            Update();
                         }
                     }
                     break;

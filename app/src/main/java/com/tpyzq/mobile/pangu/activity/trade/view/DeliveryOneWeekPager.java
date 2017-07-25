@@ -58,6 +58,12 @@ public class DeliveryOneWeekPager extends BaseSearchPager {
         mOneWeeListView = (PullToRefreshListView) rootView.findViewById(R.id.DeliveryTodayListView);
         iv_isEmpty = (ImageView) rootView.findViewById(R.id.iv_isEmpty);
         kong_null = (RelativeLayout) rootView.findViewById(R.id.DP_Kong_Null);
+        beans = new ArrayList<>();
+        Update();
+        mListViewAdapter = new DeliveryListViewAdapter(mContext);
+        mListViewAdapter.setData(-1);
+        mOneWeeListView.setAdapter(mListViewAdapter);
+        mOneWeeListView.setEmptyView(iv_isEmpty);
     }
 
     @Override
@@ -68,13 +74,7 @@ public class DeliveryOneWeekPager extends BaseSearchPager {
 
     @Override
     public void initData() {
-        beans = new ArrayList<>();
         toConnect("", "30", false);
-        Update();
-        mListViewAdapter = new DeliveryListViewAdapter(mContext);
-        mListViewAdapter.setData(-1);
-        mOneWeeListView.setAdapter(mListViewAdapter);
-        mOneWeeListView.setEmptyView(iv_isEmpty);
     }
 
 

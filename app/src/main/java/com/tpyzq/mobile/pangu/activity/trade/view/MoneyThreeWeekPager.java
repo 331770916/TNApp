@@ -58,6 +58,12 @@ public class MoneyThreeWeekPager extends BaseSearchPager {
         mZjTodayListView = (PullToRefreshListView) rootView.findViewById(R.id.ZjTodayListView);
         iv_isEmpty = (ImageView) rootView.findViewById(R.id.iv_isEmpty);
         kong_null = (RelativeLayout) rootView.findViewById(R.id.MWP_Kong_Null);
+        beans = new ArrayList<>();
+        mAdapter = new MoneyAdapter(mContext);
+        mAdapter.setData(-1);
+        Update();
+        mZjTodayListView.setAdapter(mAdapter);
+        mZjTodayListView.setEmptyView(iv_isEmpty);
     }
 
     @Override
@@ -67,13 +73,7 @@ public class MoneyThreeWeekPager extends BaseSearchPager {
 
     @Override
     public void initData() {
-        beans = new ArrayList<>();
-        mAdapter = new MoneyAdapter(mContext);
-        mAdapter.setData(-1);
         toConnect("", "30", false);
-        Update();
-        mZjTodayListView.setAdapter(mAdapter);
-        mZjTodayListView.setEmptyView(iv_isEmpty);
     }
 
     private void toConnect(String i, String j, final boolean flag) {

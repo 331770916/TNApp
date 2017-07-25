@@ -11,6 +11,8 @@ import android.widget.TextView;
 import android.widget.Toast;
 
 import com.google.gson.Gson;
+import com.handmark.pulltorefresh.library.PullToRefreshBase;
+import com.handmark.pulltorefresh.library.PullToRefreshListView;
 import com.tpyzq.mobile.pangu.R;
 import com.tpyzq.mobile.pangu.activity.trade.BaseTransactionPager;
 import com.tpyzq.mobile.pangu.adapter.trade.EquitiesWithdrawAdapter;
@@ -43,15 +45,57 @@ public class EntrustTransactionPager extends BaseTransactionPager {
     LinearLayout ll_fourtext;
     TextView tv_text1, tv_text2, tv_text3, tv_text4;
     ImageView tv_empty;
-    ListView lv_transaction;
+    PullToRefreshListView lv_transaction;
     EquitiesWithdrawAdapter equitiesWithdrawAdapter;
     List<EquitiesWithDrawEntity> equitiesWithDrawBeans;
 
     @Override
     public void initData() {
+//        getSecuritiesPositions();
+    }
+
+    private void initEvent() {
+        lv_transaction.setMode(PullToRefreshBase.Mode.PULL_FROM_START);
+        lv_transaction.setEmptyView(tv_empty);
+        lv_transaction.setOnItemClickListener(new AdapterView.OnItemClickListener() {
+            @Override
+            public void onItemClick(AdapterView<?> parent, View view, int position, long id) {
+                String name = equitiesWithDrawBeans.get(position - 1).SECU_NAME;
+                String titm = equitiesWithDrawBeans.get(position - 1).ORDER_TIME;
+                String price = equitiesWithDrawBeans.get(position - 1).PRICE;
+                String withdrawnQty = equitiesWithDrawBeans.get(position - 1).QTY;
+                String entrustBs = equitiesWithDrawBeans.get(position - 1).ENTRUST_BS;
+                String entrusNo = equitiesWithDrawBeans.get(position - 1).ENTRUST_NO;
+                RevokeDialog revokeDialog = new RevokeDialog(mContext, name, titm, price, withdrawnQty, entrustBs, entrusNo, expression);
+                revokeDialog.show();
+            }
+        });
+        lv_transaction.setOnRefreshListener(new PullToRefreshBase.OnRefreshListener<ListView>() {
+            @Override
+            public void onRefresh(PullToRefreshBase<ListView> refreshView) {
+                getSecuritiesPositions();
+            }
+        });
+    }
+
+    public void setRefresh() {
+        getSecuritiesPositions();
+    }
+
+    RevokeDialog.Expression expression;
+
+    @Override
+    public void setView() {
+        ll_fourtext = (LinearLayout) rootView.findViewById(R.id.ll_fourtext);
+        tv_text1 = (TextView) ll_fourtext.findViewById(R.id.tv_text1);
+        tv_text2 = (TextView) ll_fourtext.findViewById(R.id.tv_text2);
+        tv_text3 = (TextView) ll_fourtext.findViewById(R.id.tv_text3);
+        tv_text4 = (TextView) ll_fourtext.findViewById(R.id.tv_text4);
+        lv_transaction = (PullToRefreshListView) rootView.findViewById(R.id.lv_transaction);
+        tv_empty = (ImageView) rootView.findViewById(R.id.tv_empty);
         expression = new RevokeDialog.Expression() {
             @Override
-            public void State( ) {
+            public void State() {
                 getSecuritiesPositions();
             }
         };
@@ -62,36 +106,7 @@ public class EntrustTransactionPager extends BaseTransactionPager {
         tv_text4.setText("状态/买卖");
         equitiesWithdrawAdapter = new EquitiesWithdrawAdapter(mContext);
         lv_transaction.setAdapter(equitiesWithdrawAdapter);
-        lv_transaction.setEmptyView(tv_empty);
-        lv_transaction.setOnItemClickListener(new AdapterView.OnItemClickListener() {
-            @Override
-            public void onItemClick(AdapterView<?> parent, View view, int position, long id) {
-                String name = equitiesWithDrawBeans.get(position).SECU_NAME;
-                String titm = equitiesWithDrawBeans.get(position).ORDER_TIME;
-                String price = equitiesWithDrawBeans.get(position).PRICE;
-                String withdrawnQty = equitiesWithDrawBeans.get(position).QTY;
-                String entrustBs = equitiesWithDrawBeans.get(position).ENTRUST_BS;
-                String entrusNo = equitiesWithDrawBeans.get(position).ENTRUST_NO;
-                RevokeDialog revokeDialog = new RevokeDialog(mContext, name, titm, price, withdrawnQty, entrustBs, entrusNo, expression);
-                revokeDialog.show();
-            }
-        });
-        getSecuritiesPositions();
-    }
-    public void setRefresh(){
-        getSecuritiesPositions();
-    }
-    RevokeDialog.Expression expression;
-
-    @Override
-    public void setView() {
-        ll_fourtext = (LinearLayout) rootView.findViewById(R.id.ll_fourtext);
-        tv_text1 = (TextView) ll_fourtext.findViewById(R.id.tv_text1);
-        tv_text2 = (TextView) ll_fourtext.findViewById(R.id.tv_text2);
-        tv_text3 = (TextView) ll_fourtext.findViewById(R.id.tv_text3);
-        tv_text4 = (TextView) ll_fourtext.findViewById(R.id.tv_text4);
-        lv_transaction = (ListView) rootView.findViewById(R.id.lv_transaction);
-        tv_empty = (ImageView) rootView.findViewById(R.id.tv_empty);
+        initEvent();
     }
 
     private void getSecuritiesPositions() {
@@ -108,10 +123,12 @@ public class EntrustTransactionPager extends BaseTransactionPager {
             @Override
             public void onError(Call call, Exception e, int id) {
                 Toast.makeText(mContext, "网络访问失败", Toast.LENGTH_SHORT).show();
+                lv_transaction.onRefreshComplete();
             }
 
             @Override
             public void onResponse(String response, int id) {
+                lv_transaction.onRefreshComplete();
                 if (TextUtils.isEmpty(response)) {
                     return;
                 }

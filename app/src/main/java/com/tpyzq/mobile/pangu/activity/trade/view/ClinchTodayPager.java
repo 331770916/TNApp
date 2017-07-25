@@ -61,6 +61,11 @@ public class ClinchTodayPager extends BaseSearchPager {
         mClinchListView = (PullToRefreshListView) rootView.findViewById(R.id.ClinchListView);
         iv_isEmpty = (ImageView) rootView.findViewById(R.id.iv_isEmpty);
         kong_null = (RelativeLayout) rootView.findViewById(R.id.CCP_Kong_Null_1);
+        beans = new ArrayList<ClinchDealEntity>();
+        Update();
+        mAdapter = new ClinchADealAdapter(mContext);
+        mClinchListView.setAdapter(mAdapter);
+        mClinchListView.setEmptyView(iv_isEmpty);
     }
 
     @Override
@@ -70,13 +75,7 @@ public class ClinchTodayPager extends BaseSearchPager {
 
     @Override
     public void initData() {
-        beans = new ArrayList<ClinchDealEntity>();
         toConnect("", "30", false);
-        Update();
-        mAdapter = new ClinchADealAdapter(mContext);
-        mClinchListView.setAdapter(mAdapter);
-        mClinchListView.setEmptyView(iv_isEmpty);
-
     }
 
     private void toConnect(String i, String j, final boolean flag) {

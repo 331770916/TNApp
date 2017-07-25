@@ -25,7 +25,9 @@ import com.tpyzq.mobile.pangu.view.magicindicator.buildins.commonnavigator.title
 
 import java.util.ArrayList;
 import java.util.Arrays;
+import java.util.HashMap;
 import java.util.List;
+import java.util.Map;
 
 /**
  * Created by wangqi on 2016/8/2.
@@ -37,9 +39,11 @@ public class ClinchDealActivity extends BaseActivity implements View.OnClickList
     private List<String> buy_vp_list = Arrays.asList(buy_vp);
     private List<BaseSearchPager> listBuy = new ArrayList<>();
     private MagicIndicator clinchl_buy;
+    private Map<Integer,Boolean> map ;
 
     @Override
     public void initView() {
+        map = new HashMap<>();
         findViewById(R.id.publish_detail_back).setOnClickListener(this);
         clinchl_buy = (MagicIndicator) findViewById(R.id.clinchl_buy);
         mDeliveryOrderViewPager = (ViewPager) findViewById(R.id.cj_view);
@@ -48,11 +52,17 @@ public class ClinchDealActivity extends BaseActivity implements View.OnClickList
     }
 
     private void initData() {
-        listBuy.add(new ClinchTodayPager(this));
+        ClinchTodayPager clinchTodayPager = new ClinchTodayPager(this);
+        clinchTodayPager.initData();
+        listBuy.add(clinchTodayPager);
         listBuy.add(new ClinchOneWeekPager(this));
         listBuy.add(new ClinchInAMonthPager(this));
         listBuy.add(new ClinchThreeWeekPager(this));
         listBuy.add(new ClinchCustomPager(this));
+        map.put(0,true);
+        for (int i = 1; i < listBuy.size(); i++) {
+            map.put(i,false);
+        }
         mDeliveryOrderViewPager.setAdapter(new InquireVpAdapter(listBuy));
 
         mDeliveryOrderViewPager.setOnPageChangeListener(new ViewPager.OnPageChangeListener() {
@@ -62,7 +72,13 @@ public class ClinchDealActivity extends BaseActivity implements View.OnClickList
 
             @Override
             public void onPageSelected(int position) {
-                listBuy.get(position);
+                if (!map.get(position)){
+                    map.put(position,true);
+                    listBuy.get(position).initData();
+                }else {
+                    listBuy.get(position);
+                }
+
             }
 
             @Override

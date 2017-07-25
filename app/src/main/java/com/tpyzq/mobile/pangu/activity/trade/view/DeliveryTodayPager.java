@@ -61,6 +61,14 @@ public class DeliveryTodayPager extends BaseSearchPager {
         mDeliveryTodayListView = (PullToRefreshListView) rootView.findViewById(R.id.DeliveryTodayListView);
         iv_isEmpty = (ImageView) rootView.findViewById(R.id.iv_isEmpty);
         kong_null = (RelativeLayout) rootView.findViewById(R.id.DP_Kong_Null);
+        beans = new ArrayList<>();
+        Update();
+        mListViewAdapter = new DeliveryListViewAdapter(mContext);
+        mListViewAdapter.setData(-1);
+        mListViewAdapter.setData(beans);
+        mDeliveryTodayListView.setAdapter(mListViewAdapter);
+        mDeliveryTodayListView.setEmptyView(iv_isEmpty);
+        kong_null = (RelativeLayout) rootView.findViewById(R.id.DP_Kong_Null);
     }
 
     @Override
@@ -71,15 +79,7 @@ public class DeliveryTodayPager extends BaseSearchPager {
 
     @Override
     public void initData() {
-        beans = new ArrayList<>();
         toConnect("", "30", false);
-        Update();
-        mListViewAdapter = new DeliveryListViewAdapter(mContext);
-        mListViewAdapter.setData(-1);
-        mListViewAdapter.setData(beans);
-        mDeliveryTodayListView.setAdapter(mListViewAdapter);
-        mDeliveryTodayListView.setEmptyView(iv_isEmpty);
-        kong_null = (RelativeLayout) rootView.findViewById(R.id.DP_Kong_Null);
     }
 
 

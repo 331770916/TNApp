@@ -2,6 +2,7 @@
 <LinearLayout xmlns:android="http://schemas.android.com/apk/res/android"
     android:layout_width="match_parent"
     android:layout_height="match_parent"
+    xmlns:app="http://schemas.android.com/apk/res-auto"
     android:background="@color/white"
     android:orientation="vertical">
 
@@ -16,22 +17,23 @@
 
     <RelativeLayout
         android:layout_width="match_parent"
-        android:layout_height="0dp"
-        android:layout_weight="1"
-        >
+        android:layout_height="match_parent">
         <ImageView
             android:id="@+id/tv_empty"
-            android:layout_width="wrap_content"
-            android:layout_height="wrap_content"
+            android:layout_width="match_parent"
+            android:layout_height="match_parent"
             android:layout_centerInParent="true"
             android:src="@mipmap/kong"
-            android:scaleX="0.5"
-            android:scaleY="0.5"
+            android:scaleType="center"
             />
-        <ListView
+        <com.handmark.pulltorefresh.library.PullToRefreshListView
             android:id="@+id/lv_transaction"
             android:layout_width="match_parent"
-            android:layout_height="wrap_content"
-            android:divider="@null"/>
+            android:layout_height="match_parent"
+            android:divider="@color/lineColor"
+            android:dividerHeight="@dimen/size0.5"
+            android:scrollbars="none"
+            app:ptrAnimationStyle="flip"
+            app:ptrMode="both" />
     </RelativeLayout>
 </LinearLayout>
