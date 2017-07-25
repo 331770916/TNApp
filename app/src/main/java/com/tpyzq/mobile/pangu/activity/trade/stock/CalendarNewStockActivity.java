@@ -87,8 +87,9 @@ public class CalendarNewStockActivity extends BaseActivity implements View.OnCli
         }
 
         if (null != mEntity.getData() && mEntity.getData().size() > 0) {
-            for (NewStockEnitiy.DataBeanToday _bean : mEntity.getData()) {
-                try {
+
+            try {
+                for (NewStockEnitiy.DataBeanToday _bean : mEntity.getData()) {
                     SimpleDateFormat sdf = new SimpleDateFormat("yyyy-MM-dd");
                     Date date = sdf.parse(_bean.getONLINESTARTDATE());
                     CalendarDay calendarDay = CalendarDay.from(date);
@@ -98,50 +99,50 @@ public class CalendarNewStockActivity extends BaseActivity implements View.OnCli
                     if ("N".equalsIgnoreCase(_bean.getISTODAY())) {
                         falg = true;
                     }
-
-                } catch (Exception e) {
-                    e.printStackTrace();
-                    LogHelper.e(TAG, e.toString());
                 }
-            }
 
 
-            mCalendarView.setRectListener(new IgetRectListener() {
-                @Override
-                public void getRectBound(int bottom, int left, int right, int top) {
-                    LogHelper.i(TAG, "bottom: --->" + bottom + "left: --->" +  left + "right ---->" +  right + "top---->" + top);
+                mCalendarView.setRectListener(new IgetRectListener() {
+                    @Override
+                    public void getRectBound(int bottom, int left, int right, int top) {
+                        LogHelper.i(TAG, "bottom: --->" + bottom + "left: --->" +  left + "right ---->" +  right + "top---->" + top);
 
 //                    int _radius = ((bottom + top) / 2) - ((bottom + top) / 8);
-                    int _radius = ((bottom + top) / 2);
-                    if (radius != _radius) {
-                        mCalendarView.addDecorator(new CalendarDecorator(ContextCompat.getColor(CustomApplication.getContext(), R.color.orange), _radius - 2, calendarDays));
+                        int _radius = ((bottom + top) / 2);
+                        if (radius != _radius) {
+                            mCalendarView.addDecorator(new CalendarDecorator(ContextCompat.getColor(CustomApplication.getContext(), R.color.orange), _radius - 2, calendarDays));
+                        }
+                        radius = _radius;
+
                     }
-                    radius = _radius;
+                });
 
+
+                mCalendarView.setSelectedDate(calendarDays.get(0));
+                mPublishTv.setText(getSelectedDatesString() + "发行");
+
+                if (mEntity != null && mEntity.getData() != null && mEntity.getData().size() > 0) {
+                    mAdapterDatas = disposeDatas(calendarDays.get(0), mEntity.getData());
+                    mAdapter.setDatas(mAdapterDatas);
                 }
-            });
 
 
-            mCalendarView.setSelectedDate(calendarDays.get(0));
-            mPublishTv.setText(getSelectedDatesString() + "发行");
-
-            if (mEntity != null && mEntity.getData() != null && mEntity.getData().size() > 0) {
-                mAdapterDatas = disposeDatas(calendarDays.get(0), mEntity.getData());
-                mAdapter.setDatas(mAdapterDatas);
+                if (falg) {
+                    mNewBtn.setClickable(true);
+                    mNewBtn.setFocusable(true);
+                    mNewBtn.setFilterTouchesWhenObscured(true);
+                    mNewBtn.setBackgroundDrawable(ContextCompat.getDrawable(CustomApplication.getContext(), R.drawable.one_new_btnbg));
+                } else {
+                    mNewBtn.setClickable(false);
+                    mNewBtn.setFocusable(false);
+                    mNewBtn.setFilterTouchesWhenObscured(false);
+                    mNewBtn.setBackgroundDrawable(ContextCompat.getDrawable(CustomApplication.getContext(), R.drawable.one_new_disbtnbg));
+                }
+            } catch (Exception e) {
+                e.printStackTrace();
             }
 
 
-            if (falg) {
-                mNewBtn.setClickable(true);
-                mNewBtn.setFocusable(true);
-                mNewBtn.setFilterTouchesWhenObscured(true);
-                mNewBtn.setBackgroundDrawable(ContextCompat.getDrawable(CustomApplication.getContext(), R.drawable.one_new_btnbg));
-            } else {
-                mNewBtn.setClickable(false);
-                mNewBtn.setFocusable(false);
-                mNewBtn.setFilterTouchesWhenObscured(false);
-                mNewBtn.setBackgroundDrawable(ContextCompat.getDrawable(CustomApplication.getContext(), R.drawable.one_new_disbtnbg));
-            }
         } else {
             try {
                 SimpleDateFormat sdf = new SimpleDateFormat("yyyy-MM-dd");

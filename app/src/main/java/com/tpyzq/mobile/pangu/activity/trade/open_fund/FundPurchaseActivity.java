@@ -108,9 +108,10 @@ public class FundPurchaseActivity extends BaseActivity implements View.OnClickLi
                 if (!TextUtils.isEmpty(fundcode) && s.length() == 6) {
                     getFundData(fundcode, "");
                     et_fund_price.setText("");
+                    et_fund_price.setEnabled(true);
                 } else {
-                    bt_true.setClickable(false);
-                    bt_true.setBackgroundResource(R.drawable.button_login_unchecked);
+                    fundData = new FundSubsEntity();
+                    clearView(false);
                 }
             }
         });
@@ -127,6 +128,10 @@ public class FundPurchaseActivity extends BaseActivity implements View.OnClickLi
                 finish();
                 break;
             case R.id.bt_true:
+                if (null == fundData)
+                    fundData =new FundSubsEntity();
+
+                fundData.FUND_CODE = et_fund_code.getText().toString();
                 if (Helper.getInstance().isNeedShowRiskDialog()) {
                     Helper.getInstance().showCorpDialog(this, new CancelDialog.PositiveClickListener() {
                         @Override
@@ -156,7 +161,13 @@ public class FundPurchaseActivity extends BaseActivity implements View.OnClickLi
         @Override
         public void setEntrust(String price, String fund_company, String fund_code) {
 //            buy_shengou(price, fund_company, fund_code);
-            InterfaceCollection.getInstance().queryProductSuitability(mSession, "", "", fundData.FUND_COMPANY, fundData.FUND_CODE, "331261", new InterfaceCollection.InterfaceCallback() {
+            String mFund_company = "";
+            String mFund_code = "";
+            if (null != fundData) {
+                mFund_company = fundData.FUND_COMPANY;
+                mFund_code = fundData.FUND_CODE;
+            }
+            InterfaceCollection.getInstance().queryProductSuitability(mSession, "", "", mFund_company, mFund_code, "331261", new InterfaceCollection.InterfaceCallback() {
                 @Override
                 public void callResult(ResultInfo info) {
                     String code = info.getCode();
@@ -239,7 +250,7 @@ public class FundPurchaseActivity extends BaseActivity implements View.OnClickLi
                         subsStatusBean = new Gson().fromJson(response, SubsStatusEntity.class);
                         //判断是否跳转风险评测界面
 //                        if (!TextUtils.isEmpty(subsStatusBean.data.get(0).IS_ABLE) && "0".equals(subsStatusBean.data.get(0).IS_ABLE)) {
-                        if ("0".equalsIgnoreCase(subsStatusBean.data.get(0).IS_OPEN)&&"1".equalsIgnoreCase(subsStatusBean.data.get(0).IS_AGREEMENT)) {
+                        if ("0".equalsIgnoreCase(subsStatusBean.data.get(0).IS_OPEN) && "1".equalsIgnoreCase(subsStatusBean.data.get(0).IS_AGREEMENT)) {
                             startFinish();
                         } else {
                             assessConfirmBean = new AssessConfirmEntity();
@@ -276,8 +287,10 @@ public class FundPurchaseActivity extends BaseActivity implements View.OnClickLi
         });
     }
 
-    private void clearView() {
-        et_fund_code.setText("");
+    private void clearView(boolean is) {
+        if (is){
+            et_fund_code.setText("");
+        }
         et_fund_price.setText("");
         tv_fund_name.setText("");
         tv_fund_value.setText("");
@@ -290,7 +303,7 @@ public class FundPurchaseActivity extends BaseActivity implements View.OnClickLi
 
     private void startFinish() {
         ToastUtils.showShort(FundPurchaseActivity.this, "委托成功");
-        clearView();
+        clearView(true);
     }
 
     @Override
@@ -328,7 +341,7 @@ public class FundPurchaseActivity extends BaseActivity implements View.OnClickLi
         NetWorkUtil.getInstence().okHttpForPostString("", ConstantUtil.URL_JY, map300431, new StringCallback() {
             @Override
             public void onError(Call call, Exception e, int id) {
-                Toast.makeText(FundPurchaseActivity.this, "网络访问失败", Toast.LENGTH_SHORT).show();
+                Helper.getInstance().showToast(FundPurchaseActivity.this, ConstantUtil.NETWORK_ERROR);
             }
 
             @Override
@@ -348,7 +361,7 @@ public class FundPurchaseActivity extends BaseActivity implements View.OnClickLi
                         fundData.FUND_COMPANY = fundDataBean.data.get(0).FUND_COMPANY;
                         fundData.FUND_NAME = fundDataBean.data.get(0).FUND_NAME;
                     } else {
-                        clearView();
+
                         ToastUtils.showShort(FundPurchaseActivity.this, msg);
 //                        startActivity(new Intent(FundSubsActivity.this, TransactionLoginActivity.class));
                     }
@@ -360,7 +373,6 @@ public class FundPurchaseActivity extends BaseActivity implements View.OnClickLi
     }
 
     private void setTextView(FundDataEntity fundDataBean) {
-        et_fund_price.setEnabled(true);
         tv_fund_name.setText(fundDataBean.data.get(0).FUND_NAME);
         tv_fund_value.setText(fundDataBean.data.get(0).NAV);
         tv_low_money.setText(fundDataBean.data.get(0).OPEN_SHARE + "\t元");

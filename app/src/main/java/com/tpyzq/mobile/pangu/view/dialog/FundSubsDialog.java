@@ -1,6 +1,7 @@
 package com.tpyzq.mobile.pangu.view.dialog;
 
 import android.content.Context;
+import android.text.TextUtils;
 import android.view.View;
 import android.widget.Button;
 import android.widget.TextView;
@@ -24,6 +25,7 @@ public class FundSubsDialog extends BaseDialog implements View.OnClickListener {
     private String code;
     private SubsStatusEntity subsStatusBean;
     private FundSubsActivity.FundSubsListen fundSubsListen;
+
     public FundSubsDialog(Context context, FundDataEntity fundDataBean, String price, FundSubsActivity.FundSubsListen fundSubsListen) {
         super(context);
         this.fundDataBean = fundDataBean;
@@ -49,19 +51,24 @@ public class FundSubsDialog extends BaseDialog implements View.OnClickListener {
     public void initData() {
         bt_true.setOnClickListener(this);
         bt_false.setOnClickListener(this);
-        tv_fund_name.setText(fundDataBean.data.get(0).FUND_NAME);
-        tv_fund_code.setText(fundDataBean.data.get(0).FUND_CODE);
+        if (null != fundDataBean && null != fundDataBean.data && fundDataBean.data.size() > 0) {
+            tv_fund_name.setText(fundDataBean.data.get(0).FUND_NAME);
+            tv_fund_code.setText(fundDataBean.data.get(0).FUND_CODE);
+        }
         tv_fund_price.setText(price);
 
     }
-
 
 
     @Override
     public void onClick(View v) {
         switch (v.getId()) {
             case R.id.bt_true:
-                fundSubsListen.setBuy(price,fundDataBean.data.get(0).FUND_COMPANY);
+                if (null != fundDataBean && null != fundDataBean.data && fundDataBean.data.size() > 0) {
+                    fundSubsListen.setBuy(price, fundDataBean.data.get(0).FUND_COMPANY);
+                } else {
+                    fundSubsListen.setBuy(price, "");
+                }
                 dismiss();
                 break;
 

@@ -1,6 +1,7 @@
 package com.tpyzq.mobile.pangu.data;
 
 import java.io.Serializable;
+import java.util.ArrayList;
 import java.util.List;
 
 /**
@@ -11,9 +12,10 @@ public class FundDataEntity implements Serializable {
     public String msg;
     public String code;
     public List<Data> data;
-
+    public Data getData(){
+        return new Data();
+    }
     public class Data  implements Serializable {
-
         public String NAV;
         public String OPER_TYPE;
         public String FUND_CODE;

@@ -12,7 +12,6 @@ import android.widget.ImageView;
 import android.widget.LinearLayout;
 import android.widget.ScrollView;
 import android.widget.TextView;
-import android.widget.Toast;
 
 import com.android.keyboardlibrary.KeyboardTouchListener;
 import com.android.keyboardlibrary.KeyboardUtil;
@@ -25,8 +24,6 @@ import com.tpyzq.mobile.pangu.base.BaseActivity;
 import com.tpyzq.mobile.pangu.base.InterfaceCollection;
 import com.tpyzq.mobile.pangu.data.AssessConfirmEntity;
 import com.tpyzq.mobile.pangu.data.FundDataEntity;
-import com.tpyzq.mobile.pangu.data.FundEntity;
-import com.tpyzq.mobile.pangu.data.FundSubsEntity;
 import com.tpyzq.mobile.pangu.data.ResultInfo;
 import com.tpyzq.mobile.pangu.data.SubsStatusEntity;
 import com.tpyzq.mobile.pangu.http.NetWorkUtil;
@@ -41,14 +38,11 @@ import com.tpyzq.mobile.pangu.view.dialog.FundSubsDialog;
 import com.tpyzq.mobile.pangu.view.dialog.MistakeDialog;
 import com.zhy.http.okhttp.callback.StringCallback;
 
-import org.json.JSONArray;
 import org.json.JSONException;
 import org.json.JSONObject;
 
-import java.io.Serializable;
 import java.util.ArrayList;
 import java.util.HashMap;
-import java.util.List;
 
 import okhttp3.Call;
 
@@ -61,12 +55,10 @@ public class FundSubsActivity extends BaseActivity implements View.OnClickListen
     private EditText et_fund_code/* 输入基金代码 */, et_rengou_price/* 输入认购金额 */;
     private TextView tv_fund_name/* 基金名称 */, tv_netvalue/* 基金净值 */, tv_lowest_investment/* 个人最低投资 */, tv_usable_money/* 可用资金 */, tv_choose_fund/* 选择基金产品 */;
     private Button bt_true/* 确定按钮 */;
-    private List<FundSubsEntity> fundSubsBeans;
     private FundDataEntity fundDataBean;
     private ImageView iv_back;//退出
     public static final int REQUSET = 1;//进入产品列表和签署协议界面
     public int point = -1;
-    private List<FundEntity> fundBeans;
     private SubsStatusEntity subsStatusBean;
     private AssessConfirmEntity assessConfirmBean;
     private String fundcode;
@@ -90,7 +82,7 @@ public class FundSubsActivity extends BaseActivity implements View.OnClickListen
         tv_choose_fund = (TextView) findViewById(R.id.tv_choose_fund);
 
         LinearLayout rootLayout = (LinearLayout) findViewById(R.id.fundRootLayout);
-        initMoveKeyBoard(rootLayout, null,et_fund_code);
+        initMoveKeyBoard(rootLayout, null, et_fund_code);
 
         initData();
 
@@ -99,6 +91,7 @@ public class FundSubsActivity extends BaseActivity implements View.OnClickListen
 
     /**
      * 初始化键盘
+     *
      * @param rootLayout
      */
     private void initMoveKeyBoard(LinearLayout rootLayout, ScrollView scrollView) {
@@ -137,7 +130,7 @@ public class FundSubsActivity extends BaseActivity implements View.OnClickListen
         NetWorkUtil.getInstence().okHttpForPostString("", ConstantUtil.URL_JY, map300431, new StringCallback() {
             @Override
             public void onError(Call call, Exception e, int id) {
-                Helper.getInstance().showToast(FundSubsActivity.this,ConstantUtil.NETWORK_ERROR);
+                Helper.getInstance().showToast(FundSubsActivity.this, ConstantUtil.NETWORK_ERROR);
             }
 
             @Override
@@ -155,7 +148,6 @@ public class FundSubsActivity extends BaseActivity implements View.OnClickListen
                     } else if ("-6".equals(code)) {
                         startActivity(new Intent(FundSubsActivity.this, TransactionLoginActivity.class));
                     } else {
-                        clearView();
                         ToastUtils.showShort(FundSubsActivity.this, msg);
                     }
                 } catch (JSONException e) {
@@ -203,7 +195,7 @@ public class FundSubsActivity extends BaseActivity implements View.OnClickListen
                         subsStatusBean = new Gson().fromJson(response, SubsStatusEntity.class);
                         //判断是否跳转风险评测界面
 //                        if (!TextUtils.isEmpty(subsStatusBean.data.get(0).IS_ABLE) && "0".equals(subsStatusBean.data.get(0).IS_ABLE)) {
-                        if ("0".equalsIgnoreCase(subsStatusBean.data.get(0).IS_OPEN)&&"1".equalsIgnoreCase(subsStatusBean.data.get(0).IS_AGREEMENT)) {
+                        if ("0".equalsIgnoreCase(subsStatusBean.data.get(0).IS_OPEN) && "1".equalsIgnoreCase(subsStatusBean.data.get(0).IS_AGREEMENT)) {
                             startFinish();
                         } else {
                             assessConfirmBean = new AssessConfirmEntity();
@@ -231,7 +223,7 @@ public class FundSubsActivity extends BaseActivity implements View.OnClickListen
                     } else {
                         subsStatusBean = new Gson().fromJson(response, SubsStatusEntity.class);
 //                        ToastUtils.showShort(FundSubsActivity.this, msg);
-                        MistakeDialog.showDialog(msg,FundSubsActivity.this);
+                        MistakeDialog.showDialog(msg, FundSubsActivity.this);
                     }
 
                 } catch (JSONException e) {
@@ -242,7 +234,6 @@ public class FundSubsActivity extends BaseActivity implements View.OnClickListen
     }
 
     private void setTextView(FundDataEntity fundDataBean) {
-        et_rengou_price.setEnabled(true);
         fundcode = fundDataBean.data.get(0).FUND_CODE;
         tv_fund_name.setText(fundDataBean.data.get(0).FUND_NAME);
         tv_netvalue.setText(fundDataBean.data.get(0).NAV);
@@ -262,19 +253,26 @@ public class FundSubsActivity extends BaseActivity implements View.OnClickListen
         bt_true.setBackgroundResource(R.drawable.button_login_unchecked);
         et_rengou_price.addTextChangedListener(new PriceWatch());
 
-        fundBeans = new ArrayList<FundEntity>();
+
         session = SpUtils.getString(this, "mSession", null);
         fundSubsListen = new FundSubsListen() {
+            String mFund_company = "";
+            String mFund_code = "";
+
             @Override
             public void setBuy(String price, String fund_company) {
-                InterfaceCollection.getInstance().queryProductSuitability(session, "", "", fundDataBean.data.get(0).FUND_COMPANY, fundDataBean.data.get(0).FUND_CODE, "331261", new InterfaceCollection.InterfaceCallback() {
+                if (null != fundDataBean && null != fundDataBean.data && fundDataBean.data.size() > 0) {
+                    mFund_company = fundDataBean.data.get(0).FUND_COMPANY;
+                    mFund_code = fundDataBean.data.get(0).FUND_CODE;
+                }
+                InterfaceCollection.getInstance().queryProductSuitability(session, "", "", mFund_company, mFund_code, "331261", new InterfaceCollection.InterfaceCallback() {
                     @Override
                     public void callResult(ResultInfo info) {
                         String code = info.getCode();
                         String msg = info.getMsg();
-                        HashMap<String,String> resultMap = null;
+                        HashMap<String, String> resultMap = null;
                         if ("0".equalsIgnoreCase(code)) {
-                            resultMap = (HashMap<String,String>)info.getData();
+                            resultMap = (HashMap<String, String>) info.getData();
                             if (null == resultMap) {
                                 MistakeDialog.showDialog("数据异常", FundSubsActivity.this, null);
                                 return;
@@ -285,8 +283,9 @@ public class FundSubsActivity extends BaseActivity implements View.OnClickListen
                                 //尊敬的客户:\n       根据证监会《证券期货投资者适当性管理办法》，您购买的产品在购买过程中需要通过录音录像进行确认，请到营业部办理
                                 CancelDialog.cancleDialog(FundSubsActivity.this, "", 4000, new CancelDialog.PositiveClickListener() {
                                     @Override
-                                    public void onPositiveClick() {}
-                                },null);
+                                    public void onPositiveClick() {
+                                    }
+                                }, null);
                                 return;
                             }
 //                            else {
@@ -298,7 +297,7 @@ public class FundSubsActivity extends BaseActivity implements View.OnClickListen
 //                            }
                             //跳转到适用性页面
                             Intent intent = new Intent(FundSubsActivity.this, RiskConfirmActivity.class);
-                            intent.putExtra("resultMap",resultMap);
+                            intent.putExtra("resultMap", resultMap);
                             FundSubsActivity.this.startActivityForResult(intent, REQUESTCODE);
                         } else {
                             MistakeDialog.showDialog(msg, FundSubsActivity.this, null);
@@ -316,6 +315,7 @@ public class FundSubsActivity extends BaseActivity implements View.OnClickListen
             @Override
             public void onTextChanged(CharSequence s, int start, int before, int count) {
 
+
             }
 
             @Override
@@ -325,15 +325,20 @@ public class FundSubsActivity extends BaseActivity implements View.OnClickListen
 
                     getFundData(fundcode, "");
                     et_rengou_price.setText("");
+                    et_rengou_price.setEnabled(true);
                 } else {
-                    bt_true.setClickable(false);
-                    bt_true.setBackgroundResource(R.drawable.button_login_unchecked);
+                    if(fundDataBean!=null)
+                        fundDataBean.data = null;
+                    clearView(false);
                 }
             }
         });
     }
-    private void clearView() {
-        et_fund_code.setText("");
+
+    private void clearView(boolean is) {
+        if (is) {
+            et_fund_code.setText("");
+        }
         et_rengou_price.setText("");
         tv_fund_name.setText("");
         tv_netvalue.setText("");
@@ -346,8 +351,8 @@ public class FundSubsActivity extends BaseActivity implements View.OnClickListen
 
     public void startFinish() {
 //        ToastUtils.showShort(FundSubsActivity.this, "委托成功");
-        CentreToast.showText(this,"委托已提交",true);
-        clearView();
+        CentreToast.showText(this, "委托已提交", true);
+        clearView(true);
     }
 
 
@@ -378,6 +383,21 @@ public class FundSubsActivity extends BaseActivity implements View.OnClickListen
                 startActivityForResult(intent, REQUSET);
                 break;
             case R.id.bt_true:
+                String code = et_fund_code.getText().toString();
+                if (null == fundDataBean){
+                    fundDataBean = new FundDataEntity();
+                    fundDataBean.data =new ArrayList();
+                    FundDataEntity.Data data = fundDataBean.getData();
+                    data.FUND_CODE = code;
+                    fundDataBean.data.add(data);
+                }else{
+                    fundDataBean.data =new ArrayList();
+                    FundDataEntity.Data data = fundDataBean.getData();
+                    data.FUND_CODE = code;
+                    data.FUND_NAME = tv_fund_name.getText().toString();
+                    fundDataBean.data.add(data);
+                }
+
                 if (Helper.getInstance().isNeedShowRiskDialog()) {
                     Helper.getInstance().showCorpDialog(this, new CancelDialog.PositiveClickListener() {
                         @Override
@@ -411,13 +431,13 @@ public class FundSubsActivity extends BaseActivity implements View.OnClickListen
             dissmissKeyboardUtil();
             point = intent.getIntExtra("point", -1);
             et_fund_code.setText(intent.getStringExtra("FUND_CODE"));
-            getFundData(intent.getStringExtra("FUND_CODE"),intent.getStringExtra("FUND_COMPANY"));
+            getFundData(intent.getStringExtra("FUND_CODE"), intent.getStringExtra("FUND_COMPANY"));
         }
         if (requestCode == REQAGREEMENTCODE && resultCode == RESULT_OK) {//签署协议页面返回
             et_rengou_price.setText("");
         }
         if (requestCode == REQUESTCODE && resultCode == RESULT_OK) {//风险同意书签署返回
-            buy_rengou(et_rengou_price.getText().toString().trim(),fundDataBean.data.get(0).FUND_COMPANY);
+            buy_rengou(et_rengou_price.getText().toString().trim(), fundDataBean.data.get(0).FUND_COMPANY);
         }
     }
 

@@ -51,8 +51,10 @@ public class FundPurchaseDialog extends BaseDialog implements View.OnClickListen
         bt_false.setOnClickListener(this);
         tv_title.setText("基金申购");
         tv_fund_priceway.setText("申购金额:");
-        tv_fund_name.setText(fundData.FUND_NAME);
-        tv_fund_code.setText(fundData.FUND_CODE);
+        if (null != fundData) {
+            tv_fund_name.setText(fundData.FUND_NAME);
+            tv_fund_code.setText(fundData.FUND_CODE);
+        }
         tv_fund_price.setText(price);
     }
 
@@ -61,7 +63,12 @@ public class FundPurchaseDialog extends BaseDialog implements View.OnClickListen
     public void onClick(View v) {
         switch (v.getId()) {
             case R.id.bt_true:
-                fundPurchaseListen.setEntrust(price,fundData.FUND_COMPANY,fundData.FUND_CODE);
+                if (null != fundData){
+                    fundPurchaseListen.setEntrust(price,fundData.FUND_COMPANY,fundData.FUND_CODE);
+                }else {
+                    fundPurchaseListen.setEntrust(price,"","");
+                }
+
                 dismiss();
                 break;
 
