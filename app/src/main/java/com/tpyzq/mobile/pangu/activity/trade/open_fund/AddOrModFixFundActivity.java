@@ -54,6 +54,7 @@ public class AddOrModFixFundActivity extends BaseActivity implements View.OnClic
     private TimePickerView choosStartDate;
     private TimePickerView choosEndDate;
     private TimePickerView choosEnDate;
+    private String currentDate;
 
     @Override
     public void initView() {
@@ -75,6 +76,7 @@ public class AddOrModFixFundActivity extends BaseActivity implements View.OnClic
     }
 
     private void initData() {
+        currentDate = Helper.getCurDate();
         position = getIntent().getIntExtra("position",-1);//position不为-1表示为修改
         if (position != -1) {
             fixFundEntity = (FixFundEntity)getIntent().getSerializableExtra("fixFundEntity");
@@ -94,9 +96,12 @@ public class AddOrModFixFundActivity extends BaseActivity implements View.OnClic
             InterfaceCollection.getInstance().getFundData(fixFundEntity.getFUND_CODE(), fixFundEntity.getFUND_COMPANY(),TAG_REQUEST_FUND,this);
         } else {
             tv_title.setText(getResources().getString(R.string.add_fund));
-            tv_start_date.setText(Helper.getCurDate());
-            tv_end_date.setText(Helper.getCurDate());
+            tv_start_date.setText(currentDate);
+            tv_end_date.setText(currentDate);
             fixFundEntity = new FixFundEntity();
+            fixFundEntity.setEN_FUND_DATE("1");
+            fixFundEntity.setSTART_DATE(currentDate);
+            fixFundEntity.setEND_DATE(currentDate);
         }
         tv_en_date.setOnClickListener(this);
         tv_start_date.setOnClickListener(this);
@@ -114,7 +119,9 @@ public class AddOrModFixFundActivity extends BaseActivity implements View.OnClic
 
             @Override
             public void onTimeSelect(Date date) {
-                tv_dest.setText(simpleDateFormat.format(date));
+                String chooseTime = simpleDateFormat.format(date);
+                fixFundEntity.setSTART_DATE(chooseTime);
+                tv_dest.setText(chooseTime);
             }
         });
         choosEndDate = new TimePickerView(this, TimePickerView.Type.YEAR_MONTH_DAY);
@@ -126,7 +133,9 @@ public class AddOrModFixFundActivity extends BaseActivity implements View.OnClic
 
             @Override
             public void onTimeSelect(Date date) {
-                tv_dest.setText(simpleDateFormat.format(date));
+                String chooseTime = simpleDateFormat.format(date);
+                fixFundEntity.setEND_DATE(chooseTime);
+                tv_dest.setText(chooseTime);
             }
         });
 
@@ -138,6 +147,7 @@ public class AddOrModFixFundActivity extends BaseActivity implements View.OnClic
         choosEnDate.setOnDaySelectListener(new TimePickerView.OnDaySelectListener() {
             @Override
             public void onDaySelect(int day) {
+                fixFundEntity.setEN_FUND_DATE(day+"");
                 tv_dest.setText(day+"日");
             }
         });
@@ -158,12 +168,7 @@ public class AddOrModFixFundActivity extends BaseActivity implements View.OnClic
                 if (!TextUtils.isEmpty(fundcode) && s.length() == 6) {
                     InterfaceCollection.getInstance().getFundData(et_input_code.getText().toString(), "",TAG_REQUEST_FUND,AddOrModFixFundActivity.this);
                 }
-                tv_fund_name.setText("--");
-                tv_fund_jz.setText("--");
-                et_input_branch.setText("");
-                tv_start_date.setText(Helper.getCurDate());
-                tv_end_date.setText(Helper.getCurDate());
-                tv_en_date.setText("1日");
+                clearView(false);
             }
         });
 
@@ -198,16 +203,20 @@ public class AddOrModFixFundActivity extends BaseActivity implements View.OnClic
                     CentreToast.showText(this,"请输入定投金额");
                     break;
                 }
+                if (null!=mRevokeDialog && !mRevokeDialog.isShowing()){
+                    mRevokeDialog.show();
+                }
+                fixFundEntity.setBALANCE(balance);
                 if (position == -1){//新增
                     InterfaceCollection.getInstance().addFixFund(fixFundEntity.getFUND_COMPANY(),
                             fixFundEntity.getFUND_CODE(),"0", balance,
-                            Helper.getInstance().getMyDate(tv_start_date.getText().toString()),Helper.getInstance().getMyDate(tv_end_date.getText().toString()),
-                            tv_en_date.getText().toString(),TAG_SUBMIT,this);
+                            Helper.getInstance().getMyDate(fixFundEntity.getSTART_DATE()),Helper.getInstance().getMyDate(fixFundEntity.getEND_DATE()),
+                            fixFundEntity.getEN_FUND_DATE(),TAG_SUBMIT,this);
                 } else {//修改
                     InterfaceCollection.getInstance().modifyFixFund(fixFundEntity.getFUND_COMPANY(),
                             fixFundEntity.getFUND_CODE(), balance,
-                            Helper.getInstance().getMyDate(tv_start_date.getText().toString()),Helper.getInstance().getMyDate(tv_end_date.getText().toString()),
-                            tv_en_date.getText().toString(),fixFundEntity.getALLOTNO(),TAG_SUBMIT,this);
+                            Helper.getInstance().getMyDate(fixFundEntity.getSTART_DATE()),Helper.getInstance().getMyDate(fixFundEntity.getEND_DATE()),
+                            fixFundEntity.getEN_FUND_DATE(),fixFundEntity.getALLOTNO(),TAG_SUBMIT,this);
                 }
                 break;
             case R.id.iv_back:
@@ -236,18 +245,14 @@ public class AddOrModFixFundActivity extends BaseActivity implements View.OnClic
                     fixFundEntity.setFUND_NAME(fundDataBean.data.get(0).FUND_NAME);
                     fixFundEntity.setFUND_COMPANY(fundDataBean.data.get(0).FUND_COMPANY);
                 } else {
-                    clearView();
-                    CentreToast.showText(AddOrModFixFundActivity.this,msg, false);
+                    clearView(true);
+                    MistakeDialog.showDialog(msg,this,null);
                 }
                 break;
             case TAG_MODIFY:
                 if ("0".equalsIgnoreCase(code)) {
                     CentreToast.showText(this, msg);
                     Intent modifyIntent= new Intent();
-                    fixFundEntity.setSTART_DATE(tv_start_date.getText().toString());
-                    fixFundEntity.setEN_FUND_DATE(tv_en_date.getText().toString());
-                    fixFundEntity.setEND_DATE(tv_end_date.getText().toString());
-                    fixFundEntity.setBALANCE(et_input_branch.getText().toString());
                     modifyIntent.putExtra("fixFundEntity",fixFundEntity);
                     modifyIntent.putExtra("position",position);
                     setResult(RESULT_OK, modifyIntent);
@@ -260,10 +265,6 @@ public class AddOrModFixFundActivity extends BaseActivity implements View.OnClic
                 if ("0".equalsIgnoreCase(code)) {
                     CentreToast.showText(this, msg);
                     Intent submitIntent = new Intent();
-                    fixFundEntity.setSTART_DATE(tv_start_date.getText().toString());
-                    fixFundEntity.setEN_FUND_DATE(tv_en_date.getText().toString());
-                    fixFundEntity.setEND_DATE(tv_end_date.getText().toString());
-                    fixFundEntity.setBALANCE(et_input_branch.getText().toString());
                     fixFundEntity.setSEND_BALANCE("0");
                     fixFundEntity.setDEAL_FLAG("0");
                     fixFundEntity.setDEAL_FLAG_NAME("未处理");
@@ -278,15 +279,20 @@ public class AddOrModFixFundActivity extends BaseActivity implements View.OnClic
         }
     }
 
-    private void clearView() {
+    private void clearView(boolean isAllClear) {
         tv_fund_name.setText("--");
         tv_fund_jz.setText("--");
-        tv_branch_enable.setText("--");
-        et_input_code.setText("");
         tv_en_date.setText("1日");
-        tv_start_date.setText(Helper.getCurDate());
-        tv_en_date.setText(Helper.getCurDate());
+        tv_start_date.setText(currentDate);
+        tv_en_date.setText(currentDate);
         et_input_branch.setText("");
+        fixFundEntity.setSTART_DATE(currentDate);
+        fixFundEntity.setEND_DATE(currentDate);
+        fixFundEntity.setEN_FUND_DATE("1");
+        if (isAllClear) {
+            tv_branch_enable.setText("--");
+            et_input_code.setText("");
+        }
     }
 
     private void setTextView(FundDataEntity fundDataBean) {
