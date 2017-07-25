@@ -1,10 +1,10 @@
 <?xml version="1.0" encoding="utf-8"?>
 <RelativeLayout xmlns:android="http://schemas.android.com/apk/res/android"
-    xmlns:fresco="http://schemas.android.com/apk/res-auto"
-    android:layout_width="match_parent"
-    android:layout_height="match_parent"
-    android:background="@color/bgColor"
-    android:orientation="vertical">
+                xmlns:fresco="http://schemas.android.com/apk/res-auto"
+                android:layout_width="match_parent"
+                android:layout_height="match_parent"
+                android:background="@color/bgColor"
+                android:orientation="vertical">
 
     <RelativeLayout
         android:id="@+id/rl_top_bar"
@@ -97,21 +97,19 @@
                     android:layout_width="wrap_content"
                     android:layout_height="wrap_content"
                     android:layout_centerVertical="true"
-                    android:layout_toLeftOf="@+id/Change"
+                    android:layout_toLeftOf="@+id/ZhangIV"
                     android:src="@mipmap/guanbi" />
 
-
-                <TextView
-                    android:id="@+id/Change"
+                <ImageView
+                    android:id="@+id/ZhangIV"
+                    android:layout_marginRight="@dimen/size15"
                     android:layout_width="wrap_content"
                     android:layout_height="wrap_content"
                     android:layout_alignParentRight="true"
                     android:layout_centerInParent="true"
-                    android:paddingRight="@dimen/size15"
-                    android:text="@string/LoginText3"
-                    android:textColor="@color/blue"
-                    android:textSize="@dimen/txtSize16"
-                    android:visibility="visible" />
+                    android:padding="@dimen/size6"
+                    android:src="@mipmap/zhangkaixia" />
+
             </RelativeLayout>
 
             <View

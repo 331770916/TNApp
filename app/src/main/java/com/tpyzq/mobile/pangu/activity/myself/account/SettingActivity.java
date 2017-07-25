@@ -19,8 +19,6 @@ import com.tpyzq.mobile.pangu.db.Db_PUB_USERS;
 import com.tpyzq.mobile.pangu.util.panguutil.APPInfoUtils;
 import com.tpyzq.mobile.pangu.util.panguutil.UserUtil;
 
-import static com.tpyzq.mobile.pangu.R.string.BindMore;
-
 
 /**
  * 设置页面
@@ -167,7 +165,7 @@ public class SettingActivity extends BaseActivity implements View.OnClickListene
                         }else {
                             intent.setClass(SettingActivity.this, ChangeAccoutActivity.class);
                         }
-                        intent.putExtra("Exit","true");
+                        intent.putExtra("EXIT",true);
                     } else {
                             intent.setClass(SettingActivity.this, ShouJiVerificationActivity.class);
                     }

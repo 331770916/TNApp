@@ -135,12 +135,12 @@ public class GetSearchStockConnect {
                                 StockInfoEntity tempBean = Db_PUB_STOCKLIST.queryStockFromID(_bean.getStockNumber());
                                 if (tempBean != null) {
                                     _bean.setSelfChoicStock(true);
-                                    if (!TextUtils.isEmpty(tempBean.getIsHoldStock())) {
+
+                                    if ((tempBean.getStock_flag()&2) == 2) {
                                         _bean.setIsHoldStock("true");
+                                        _bean.setApperHoldStock("true");
                                     }
-                                    if (!TextUtils.isEmpty(tempBean.getApperHoldStock())) {
-                                        _bean.setApperHoldStock(tempBean.getApperHoldStock());
-                                    }
+
                                 } else {
                                     _bean.setSelfChoicStock(false);
                                 }

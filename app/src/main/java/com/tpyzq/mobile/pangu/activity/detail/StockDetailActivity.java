@@ -52,6 +52,7 @@ import com.tpyzq.mobile.pangu.db.Db_PUB_OPTIONALHISTORYSTOCK;
 import com.tpyzq.mobile.pangu.db.Db_PUB_SEARCHHISTORYSTOCK;
 import com.tpyzq.mobile.pangu.db.Db_PUB_STOCKLIST;
 import com.tpyzq.mobile.pangu.db.Db_PUB_USERS;
+import com.tpyzq.mobile.pangu.db.StockTable;
 import com.tpyzq.mobile.pangu.http.NetWorkUtil;
 import com.tpyzq.mobile.pangu.http.doConnect.self.AddSelfChoiceStockConnect;
 import com.tpyzq.mobile.pangu.http.doConnect.self.DeleteSelfChoiceStockConnect;
@@ -950,6 +951,7 @@ public class StockDetailActivity extends BaseActivity implements  View.OnClickLi
 //                                } else
                                 if("0".equals(code)){
                                     StockInfoEntity stockInfoEntity = Db_PUB_STOCKLIST.queryStockFromID(stkCode);
+                                    stockInfoEntity.setStock_flag(StockTable.STOCK_HISTORY_OPTIONAL);
                                     Db_PUB_SEARCHHISTORYSTOCK.addOneData(stockInfoEntity);
                                     Db_PUB_STOCKLIST.deleteStockFromID(stkCode);
                                     Db_HOME_INFO.deleteOneSelfNewsData(stkCode);//删除自选股新闻
@@ -973,6 +975,7 @@ public class StockDetailActivity extends BaseActivity implements  View.OnClickLi
                     simpleRemoteControl.startConnect();
                 } else {
                     StockInfoEntity stockInfoEntity = Db_PUB_STOCKLIST.queryStockFromID(stkCode);
+                    stockInfoEntity.setStock_flag(StockTable.STOCK_HISTORY_OPTIONAL);
                     Db_PUB_SEARCHHISTORYSTOCK.addOneData(stockInfoEntity);
                     Db_PUB_STOCKLIST.deleteStockFromID(stkCode);
                     Db_HOME_INFO.deleteOneSelfNewsData(stkCode);//删除自选股新闻
@@ -997,6 +1000,7 @@ public class StockDetailActivity extends BaseActivity implements  View.OnClickLi
                             StockInfoEntity _bean = new StockInfoEntity();
                             _bean.setStockNumber(stkCode);
                             _bean.setStockName(stkName);
+                            _bean.setStock_flag(StockTable.STOCK_OPTIONAL);
                             if (dialog != null) {
                                 dialog.dismiss();
                             }
@@ -1014,20 +1018,18 @@ public class StockDetailActivity extends BaseActivity implements  View.OnClickLi
                             } catch (Exception e) {
                                 e.printStackTrace();
                             }
+
                             boolean isNotFull = Db_PUB_STOCKLIST.addOneStockListData(_bean);
                             if (!isNotFull) {
                                 Helper.getInstance().showToast(CustomApplication.getContext(), "自选股超出50条上线，请删除再添加");
                                 return;
+                            } else {
+                                Db_PUB_SEARCHHISTORYSTOCK.deleteFromID(stkCode);
+                                SelfStockHelper.sendUpdateSelfChoiceBrodcast(CustomApplication.getContext(), stkCode);
+                                SelfChoiceStockTempData.getInstance().setSelfchoicestockTempValue(stkCode, stkName);
                             }
 
-                            SelfStockHelper.sendUpdateSelfChoiceBrodcast(CustomApplication.getContext(), stkCode);
 
-//                            StockInfoEntity tempBean = Db_PUB_SEARCHHISTORYSTOCK.queryFromID(stkCode);
-//                            if (tempBean != null) {
-//                                Db_PUB_SEARCHHISTORYSTOCK.deleteFromID(stkCode);
-//                            }
-
-                            SelfChoiceStockTempData.getInstance().setSelfchoicestockTempValue(stkCode, stkName);
                             isMyStock = true;
                             setBottomTools(false);
 
@@ -1039,21 +1041,19 @@ public class StockDetailActivity extends BaseActivity implements  View.OnClickLi
                     StockInfoEntity _bean = new StockInfoEntity();
                     _bean.setStockNumber(stkCode);
                     _bean.setStockName(stkName);
+                    _bean.setStock_flag(StockTable.STOCK_OPTIONAL);
                     boolean isNotFull = Db_PUB_STOCKLIST.addOneStockListData(_bean);
                     if (!isNotFull) {
                         if(isShow) {
                             Helper.getInstance().showToast(CustomApplication.getContext(), "自选股超出50条上线，请删除再添加");
                         }
                         return;
+                    } else {
+                        Db_PUB_SEARCHHISTORYSTOCK.deleteFromID(stkCode);
+                        SelfStockHelper.sendUpdateSelfChoiceBrodcast(CustomApplication.getContext(), stkCode);
+                        SelfChoiceStockTempData.getInstance().setSelfchoicestockTempValue(stkCode, stkName);
                     }
-//                    Db_PUB_STOCKLIST.addOneStockListData(_bean);
-                    SelfStockHelper.sendUpdateSelfChoiceBrodcast(CustomApplication.getContext(), stkCode);
 
-//                    StockInfoEntity tempBean = Db_PUB_SEARCHHISTORYSTOCK.queryFromID(stkCode);
-//                    if (tempBean != null) {
-//                        Db_PUB_SEARCHHISTORYSTOCK.deleteFromID(stkCode);
-//                    }
-                    SelfChoiceStockTempData.getInstance().setSelfchoicestockTempValue(stkCode, stkName);
                     isMyStock = true;
                     setBottomTools(false);
                 }

@@ -16,6 +16,7 @@ import com.tpyzq.mobile.pangu.data.StockInfoEntity;
 import com.tpyzq.mobile.pangu.data.UserEntity;
 import com.tpyzq.mobile.pangu.db.Db_PUB_STOCKLIST;
 import com.tpyzq.mobile.pangu.db.Db_PUB_USERS;
+import com.tpyzq.mobile.pangu.db.StockTable;
 import com.tpyzq.mobile.pangu.http.OkHttpUtil;
 import com.tpyzq.mobile.pangu.http.doConnect.self.QuerySelfChoiceStockConnect;
 import com.tpyzq.mobile.pangu.http.doConnect.self.ToQuerySelfChoiceStockConnect;
@@ -98,6 +99,8 @@ public class LuncherActivity extends BaseActivity implements ICallbackResult {
             SimpleRemoteControl mSimpleRemoteControl = new SimpleRemoteControl(LuncherActivity.this);
             mSimpleRemoteControl.setCommand(new ToQuerySelfChoiceStockConnect(new QuerySelfChoiceStockConnect(TAG, "", UserUtil.capitalAccount, UserUtil.userId)));
             mSimpleRemoteControl.startConnect();
+        } else {
+            Db_PUB_STOCKLIST.initUnregistData();
         }
         getWelcomeView(mView);
     }
@@ -172,6 +175,7 @@ public class LuncherActivity extends BaseActivity implements ICallbackResult {
             if (stockInfoEntities != null && stockInfoEntities.size() > 0) {
                 for (StockInfoEntity stockInfoEntity : stockInfoEntities) {
 
+                    stockInfoEntity.setStock_flag(StockTable.STOCK_OPTIONAL);
                     Db_PUB_STOCKLIST.addOneStockListData(stockInfoEntity);
                 }
             }

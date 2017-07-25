@@ -17,6 +17,7 @@ import com.tpyzq.mobile.pangu.data.StockInfoEntity;
 import com.tpyzq.mobile.pangu.db.Db_PUB_STOCKLIST;
 import com.tpyzq.mobile.pangu.db.Db_PUB_USERS;
 import com.tpyzq.mobile.pangu.db.HOLD_SEQ;
+import com.tpyzq.mobile.pangu.db.StockTable;
 import com.tpyzq.mobile.pangu.http.doConnect.self.AddSelfChoiceStockConnect;
 import com.tpyzq.mobile.pangu.http.doConnect.self.HoldCloudConnect;
 import com.tpyzq.mobile.pangu.http.doConnect.self.ToAddSelfChoiceStockConnect;
@@ -150,6 +151,7 @@ public class SelfChoiceDefaultTab extends BaseTabPager implements View.OnClickLi
                 }
 
                 for (int i = 0; i < stockInfoEntities.size(); i++) {
+                    stockInfoEntities.get(i).setStock_flag(StockTable.STOCK_OPTIONAL);
                     Db_PUB_STOCKLIST.addOneStockListData(stockInfoEntities.get(i));
 
                     if (i == stockInfoEntities.size() -1) {

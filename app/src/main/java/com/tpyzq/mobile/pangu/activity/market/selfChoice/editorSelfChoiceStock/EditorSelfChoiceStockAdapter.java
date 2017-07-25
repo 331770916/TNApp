@@ -13,7 +13,10 @@ import android.widget.TextView;
 import com.tpyzq.mobile.pangu.R;
 import com.tpyzq.mobile.pangu.base.CustomApplication;
 import com.tpyzq.mobile.pangu.data.StockInfoEntity;
+import com.tpyzq.mobile.pangu.db.StockTable;
+import com.tpyzq.mobile.pangu.util.ConstantUtil;
 import com.tpyzq.mobile.pangu.util.Helper;
+import com.tpyzq.mobile.pangu.util.SpUtils;
 
 import java.util.ArrayList;
 
@@ -25,7 +28,6 @@ import java.util.ArrayList;
 public class EditorSelfChoiceStockAdapter extends BaseAdapter {
 
     private ArrayList<StockInfoEntity> mData;
-    private String mAppearHold;
     private RemainCallback mRemainCallback;
     private UpdateEditorSelfChoiceData mUpdateEditorSelfChoiceData;
 
@@ -85,7 +87,8 @@ public class EditorSelfChoiceStockAdapter extends BaseAdapter {
         ImageView hotIv = (ImageView) convertView.findViewById(R.id.editChoice_HotIc);
         hotIv.setVisibility(View.GONE);
 
-        if ("true".equals(mAppearHold) && "true".equals(mData.get(position).getStockholdon())) {
+        String appearHold = SpUtils.getString(CustomApplication.getContext(),ConstantUtil.APPEARHOLD, ConstantUtil.HOLD_DISAPPEAR);
+        if ((mData.get(position).getStock_flag()& StockTable.STOCK_HOLD)==StockTable.STOCK_HOLD && "true".equals(appearHold)) {
             holdIv.setVisibility(View.VISIBLE);
         }
 

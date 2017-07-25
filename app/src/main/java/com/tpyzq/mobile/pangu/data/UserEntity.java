@@ -56,6 +56,16 @@ public class UserEntity implements Parcelable {
     private String Legitimacy;          //合法性
     private String Keyboard;            //键盘
     private String RegisterID;            //注册标识ID
+    private String refreshTime;         //刷新时间
+
+    public String getRefreshTime() {
+        return refreshTime;
+    }
+
+    public void setRefreshTime(String refreshTime) {
+        this.refreshTime = refreshTime;
+    }
+
     @Override
     public int describeContents() {
         return 0;

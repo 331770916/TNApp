@@ -58,23 +58,23 @@ public class KeyEncryptionUtils {
      * @param data
      */
     public static void localEncryptMobile(String data) {
-        try {
-            if (!TextUtils.isEmpty(data)) {
-                UserEntity userEntity = new UserEntity();
-                String Newdata = UniKey.getInstance().localEncrypt(data);
-                if (!TextUtils.isEmpty(Newdata)) {
-                    userEntity.setMobile(Newdata);
-                    Db_PUB_USERS.UpdateMobile(userEntity);
-                } else {
-//                    Helper.getInstance().showToast(CustomApplication.getContext(), "加密之后的数据为空，可能导致后面的操作异常");
-                }
-            } else {
-//                Helper.getInstance().showToast(CustomApplication.getContext(), "进行加密的数据为空，可能导致后面的操作异常");
-            }
-        } catch (UnikeyException e) {
-            e.printStackTrace();
-
-        }
+//        try {
+//            if (!TextUtils.isEmpty(data)) {
+        UserEntity userEntity = new UserEntity();
+//                String Newdata = UniKey.getInstance().localEncrypt(data);
+//                if (!TextUtils.isEmpty(Newdata)) {
+        userEntity.setMobile(data);
+        Db_PUB_USERS.UpdateMobile(userEntity);
+//                } else {
+////                    Helper.getInstance().showToast(CustomApplication.getContext(), "加密之后的数据为空，可能导致后面的操作异常");
+//                }
+//            } else {
+////                Helper.getInstance().showToast(CustomApplication.getContext(), "进行加密的数据为空，可能导致后面的操作异常");
+//            }
+//        } catch (UnikeyException e) {
+//            e.printStackTrace();
+//
+//        }
 
     }
 
@@ -85,27 +85,23 @@ public class KeyEncryptionUtils {
      * @return
      */
     public static String localDecryptMobile() {
-        String Mobile_JM = "";
+        return localDecryptMobile(Db_PUB_USERS.queryingMobile());
+    }
+
+    public static String localDecryptMobile(String mobile) {
+        if (TextUtils.isEmpty(mobile)) {
+            return "";
+        }
         try {
-            String Mobile = Db_PUB_USERS.queryingMobile();
-            if (!TextUtils.isEmpty(Mobile)) {
-                if (Helper.isMobileNO(Mobile) && Helper.isNumbers(Mobile)) {
-                    Mobile_JM = Mobile;
-                } else {
-                    String mobile = UniKey.getInstance().localDecrypt(Mobile);
-                    if (!TextUtils.isEmpty(mobile)) {
-                        Mobile_JM = mobile;
-                    } else {
-//                        Helper.getInstance().showToast(CustomApplication.getContext(), "解密后的数据为空，可能导致后面的操作异常");
-                    }
-                }
-            } else {
-//                Helper.getInstance().showToast(CustomApplication.getContext(), "从数据库读取的密文数据为空，可能导致后面的操作异常");
+            if (Helper.isMobileNO(mobile) && Helper.isNumbers(mobile)) {
+                return mobile;
             }
+            mobile = UniKey.getInstance().localDecrypt(mobile);
+            return TextUtils.isEmpty(mobile)?"":mobile;
         } catch (UnikeyException e) {
             e.printStackTrace();
         }
-        return Mobile_JM;
+        return "";
     }
 
     /**
@@ -114,22 +110,22 @@ public class KeyEncryptionUtils {
      * @param data
      */
     public static void localEncryptTradescno(String data) {
-        try {
-            if (!TextUtils.isEmpty(data)) {
-                UserEntity userEntity = new UserEntity();
-                String Newdata = UniKey.getInstance().localEncrypt(data);
-                if (!TextUtils.isEmpty(Newdata)) {
-                    userEntity.setTradescno(Newdata);
-                    Db_PUB_USERS.UpdateTradescno(userEntity);
-                } else {
+//        try {
+//            if (!TextUtils.isEmpty(data)) {
+        UserEntity userEntity = new UserEntity();
+//                String Newdata = UniKey.getInstance().localEncrypt(data);
+//                if (!TextUtils.isEmpty(Newdata)) {
+        userEntity.setTradescno(data);
+        Db_PUB_USERS.UpdateTradescno(userEntity);
+//                } else {
 //                    Helper.getInstance().showToast(CustomApplication.getContext(), "加密之后的数据为空，可能导致后面的操作异常");
-                }
-            } else {
+//    }
+//            } else {
 //                Helper.getInstance().showToast(CustomApplication.getContext(), "进行加密的数据为空，可能导致后面的操作异常");
-            }
-        } catch (UnikeyException e) {
-            e.printStackTrace();
-        }
+//            }
+//        } catch (UnikeyException e) {
+//            e.printStackTrace();
+//        }
     }
 
     /**
@@ -138,11 +134,13 @@ public class KeyEncryptionUtils {
      * @return
      */
     public static List<UserEntity> localDecryptTradescno() {
-        List<UserEntity> newlist = null;
+        return localDecryptTradescno(Db_PUB_USERS.queryingTradescno());
+    }
+
+    public static List<UserEntity> localDecryptTradescno(List<UserEntity> list) {
+        List<UserEntity> newlist =  new ArrayList<>();
         try {
-            newlist = new ArrayList<>();
             UserEntity userEntity = new UserEntity();
-            List<UserEntity> list = Db_PUB_USERS.queryingTradescno();
             if (list != null && list.size() > 0) {
                 StringBuilder sb = new StringBuilder();
                 for (int i = 0; i < list.size(); i++) {
@@ -153,33 +151,28 @@ public class KeyEncryptionUtils {
                         if (Newdata.contains(",")) {
 
                             String[] accounts = Newdata.split(",");
+                            newlist.add(userEntity);
                             for (int j = 0; j < accounts.length; j++) {
-
 
                                 if (accounts[j].length() <= 9 && Helper.isNumbers(accounts[j])) {
 
                                     sb.append(accounts[j]).append(",").toString();
 
-                                    userEntity.setTradescno(sb.toString());
-                                    newlist.add(userEntity);
                                 }
                             }
+                            userEntity.setTradescno(sb.toString());
 
                         } else {
                             String newdata = UniKey.getInstance().localDecrypt(Newdata);
                             if (!TextUtils.isEmpty(newdata)) {
                                 userEntity.setTradescno(newdata);
                                 newlist.add(userEntity);
-                            } else {
-//                                Helper.getInstance().showToast(CustomApplication.getContext(), "加密之后的数据为空，可能导致后面的操作异常");
                             }
                         }
                     } else {
                         newlist = list;
                     }
                 }
-            } else {
-//                Helper.getInstance().showToast(CustomApplication.getContext(), "从数据库读取的密文数据为空，可能导致后面的操作异常");
             }
         } catch (UnikeyException e) {
             e.printStackTrace();
