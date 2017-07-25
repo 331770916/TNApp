@@ -270,6 +270,8 @@ public class StructuredFundDialog extends BaseDialog implements View.OnClickList
                 } else if (ETFApplyforOrRedeemActivity.TAG_SH.equals(mTAG)) {   //  赎回
                     mExpression.State();
                     dismiss();
+                } else if (FixFundListActivity.TAG.equalsIgnoreCase(mTAG)) {//基金定投撤单弹框
+                    mExpression.State();
                 } else if (ETFRevokeActivity.TAG.equalsIgnoreCase(mTAG)) {
                     mExpression.State();
                     dismiss();

@@ -13,6 +13,7 @@ public class FixFundEntity implements Serializable {
     private String FUND_COMPANY;//基金公司
     private String BALANCE;//发生金额
     private String SEND_BALANCE;//共申购金额
+    private String FUND_VAL;//基金净值
     private String EN_FUND_DATE;//扣款允许日
     private String END_DATE;//到期日期
     private String DEAL_DATE;//处理日期
@@ -134,6 +135,15 @@ public class FixFundEntity implements Serializable {
     public void setCURR_RATION_TIMES(String CURR_RATION_TIMES) {
         this.CURR_RATION_TIMES = CURR_RATION_TIMES;
     }
+
+    public String getFUND_VAL() {
+        return FUND_VAL;
+    }
+
+    public void setFUND_VAL(String FUND_VAL) {
+        this.FUND_VAL = FUND_VAL;
+    }
+
 
 
     public FixFundEntity(String FUND_CODE, String FUND_NAME, String BALANCE, String SEND_BALANCE, String EN_FUND_DATE, String END_DATE, String DEAL_DATE, String ALLOTNO, String DEAL_FLAG, String DEAL_FLAG_NAME, String START_DATE, String CURR_RATION_TIMES) {

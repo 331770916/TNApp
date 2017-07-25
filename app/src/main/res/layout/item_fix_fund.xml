@@ -241,7 +241,7 @@
             android:textStyle="bold"
             android:textColor="@color/press_check"
             android:textSize="@dimen/txtSize14" />
-
+<!--
         <View
             android:layout_width="1dp"
             android:layout_height="@dimen/size20"
@@ -257,7 +257,7 @@
             android:text="定投记录"
             android:textStyle="bold"
             android:textColor="@color/press_check"
-            android:textSize="@dimen/txtSize14" />
+            android:textSize="@dimen/txtSize14" />-->
     </LinearLayout>
 
     <LinearLayout
@@ -281,7 +281,7 @@
             <ImageView
                 android:layout_width="@dimen/size30"
                 android:layout_height="@dimen/size30"
-                android:background="@mipmap/ic_gray" />
+                android:background="@mipmap/list_add" />
 
             <TextView
                 android:layout_width="wrap_content"

@@ -79,7 +79,7 @@ public class FixFundAdapter extends BaseListAdapter {
             viewHolder.tv_end_date = (TextView)convertView.findViewById(R.id.tv_end_date);//终止日期
             viewHolder.tv_modify = (TextView)convertView.findViewById(R.id.tv_modify);//修改
             viewHolder.tv_revoke = (TextView)convertView.findViewById(R.id.tv_revoke);//撤销
-            viewHolder.tv_history = (TextView)convertView.findViewById(R.id.tv_history);//定投记录
+//            viewHolder.tv_history = (TextView)convertView.findViewById(R.id.tv_history);//定投记录
             viewHolder.ll_bottom = (LinearLayout) convertView.findViewById(R.id.ll_bottom);//底部添加定投条目
             viewHolder.ll_add = (LinearLayout) convertView.findViewById(R.id.ll_add);//底部添加定投点击条目
             convertView.setTag(viewHolder);
@@ -103,19 +103,14 @@ public class FixFundAdapter extends BaseListAdapter {
             @Override
             public void onClick(View v) {
                 CentreToast.showText(mContext,"跳转修改页面");
+                itemOnClickListener.onItemClick(TAG_MODIFY, position);
             }
         });
-        viewHolder.tv_modify.setOnClickListener(new View.OnClickListener() {
+        viewHolder.tv_revoke.setOnClickListener(new View.OnClickListener() {
             @Override
             public void onClick(View v) {
                 if (null!=itemOnClickListener)
                     itemOnClickListener.onItemClick(TAG_REVOKE, position);
-            }
-        });
-        viewHolder.tv_modify.setOnClickListener(new View.OnClickListener() {
-            @Override
-            public void onClick(View v) {
-                CentreToast.showText(mContext,"跳转定投记录页面");
             }
         });
         viewHolder.ll_add.setOnClickListener(new View.OnClickListener() {

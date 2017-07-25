@@ -11,6 +11,7 @@ import android.widget.TextView;
 import com.handmark.pulltorefresh.library.PullToRefreshBase;
 import com.handmark.pulltorefresh.library.PullToRefreshListView;
 import com.tpyzq.mobile.pangu.R;
+import com.tpyzq.mobile.pangu.activity.trade.stock.ETFStockListActivity;
 import com.tpyzq.mobile.pangu.adapter.trade.FixFundAdapter;
 import com.tpyzq.mobile.pangu.base.BaseActivity;
 import com.tpyzq.mobile.pangu.base.InterfaceCollection;
@@ -34,7 +35,8 @@ public class FixFundListActivity extends BaseActivity implements View.OnClickLis
     private static final String TAG_LIST = "LIST";//请求数据
     private static final String TAG_LIST_FIRST = "LIST_FIRST";//进入页面第一次请求
     public static final String TAG_REVOKE = "REVOKE";//请求数据
-    private static int REQUEST_MODIFY = 1000001;
+    private static int REQUEST_MODIFY = 10001;
+    private static int REQUEST_ADD = 1002;
     private TextView tv_title_click;
     private ImageView iv_back;
     private PullToRefreshListView lv;
@@ -102,7 +104,12 @@ public class FixFundListActivity extends BaseActivity implements View.OnClickLis
 
     @Override
     public void onClick(View v) {
-
+        switch (v.getId()) {
+            case R.id.tv_title_click:
+                Intent intent = new Intent(this, AddOrModFixFundActivity.class);
+                startActivityForResult(intent,REQUEST_ADD);
+                break;
+        }
     }
 
     @Override
@@ -147,6 +154,7 @@ public class FixFundListActivity extends BaseActivity implements View.OnClickLis
                     fixFundAdapter.setData(mList,true);
                 }
             } else if ("-6".equalsIgnoreCase(code)) {
+                skip.startLogin(FixFundListActivity.this);
                 lv.onRefreshComplete();
             } else {
                 lv.onRefreshComplete();
@@ -183,8 +191,12 @@ public class FixFundListActivity extends BaseActivity implements View.OnClickLis
         else if (TAG_REVOKE.equalsIgnoreCase(tag)) {//撤销
             if ("0".equalsIgnoreCase(code)) {
                 CentreToast.showText(this, msg, true);
+                mList.remove(position);
+                fixFundAdapter.notifyDataSetChanged();
+                mStructuredFundDialog.dismiss();
+                mStructuredFundDialog = null;
             } else if ("-6".equalsIgnoreCase(code)) {
-
+                skip.startLogin(FixFundListActivity.this);
             } else {
                 CentreToast.showText(this, msg, false);
             }
@@ -241,7 +253,20 @@ public class FixFundListActivity extends BaseActivity implements View.OnClickLis
     protected void onActivityResult(int requestCode, int resultCode, Intent data) {
         super.onActivityResult(requestCode, resultCode, data);
         if (requestCode == REQUEST_MODIFY && resultCode == RESULT_OK) {
-            int postion = data.getIntExtra("position",-1);
+            FixFundEntity fixFundEntity = (FixFundEntity) data.getSerializableExtra("fixFundEntity");
+            mList.set(position,fixFundEntity);
+            fixFundAdapter.notifyDataSetChanged();
+        }
+        if (requestCode == REQUEST_ADD && resultCode == RESULT_OK) {
+            FixFundEntity fixFundEntity = (FixFundEntity) data.getSerializableExtra("fixFundEntity");
+            ArrayList<FixFundEntity> tempList = new ArrayList<>();
+            tempList.addAll(mList);
+            mList.clear();
+            mList.add(0, fixFundEntity);
+            mList.addAll(tempList);
+            fixFundAdapter.notifyDataSetChanged();
+            tempList.clear();
+            tempList = null;
         }
     }
 }
