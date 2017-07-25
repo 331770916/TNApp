@@ -4,9 +4,11 @@ import android.text.TextUtils;
 
 import com.google.gson.Gson;
 import com.google.gson.reflect.TypeToken;
+import com.tpyzq.mobile.pangu.activity.trade.open_fund.AddOrModFixFundActivity;
 import com.tpyzq.mobile.pangu.data.AssessConfirmEntity;
 import com.tpyzq.mobile.pangu.data.EtfDataEntity;
 import com.tpyzq.mobile.pangu.data.FixFundEntity;
+import com.tpyzq.mobile.pangu.data.FundDataEntity;
 import com.tpyzq.mobile.pangu.data.InformationEntity;
 import com.tpyzq.mobile.pangu.data.NetworkVotingEntity;
 import com.tpyzq.mobile.pangu.data.OTC_AffirmBean;
@@ -18,10 +20,13 @@ import com.tpyzq.mobile.pangu.http.NetWorkUtil;
 import com.tpyzq.mobile.pangu.util.ConstantUtil;
 import com.tpyzq.mobile.pangu.util.Helper;
 import com.tpyzq.mobile.pangu.util.SpUtils;
+import com.tpyzq.mobile.pangu.view.CentreToast;
 import com.zhy.http.okhttp.callback.StringCallback;
+
 import org.json.JSONArray;
 import org.json.JSONException;
 import org.json.JSONObject;
+
 import java.lang.reflect.Type;
 import java.util.ArrayList;
 import java.util.HashMap;
@@ -933,7 +938,7 @@ public class InterfaceCollection {
         List data = new ArrayList();
         for (NetworkVotingEntity entity : list) {
             Map map = new HashMap<>();
-            map.put("ENTRUST_AMOUNT", entity.getEntrust_no()==null?"1":entity.getEntrust_no());
+            map.put("ENTRUST_AMOUNT", entity.getEntrust_no() == null ? "1" : entity.getEntrust_no());
             map.put("ENTRUST_PRICE", entity.getVote_motion());
             map.put("MEETING_SEQ", entity.getMeeting_seq());
             data.add(map);
@@ -2240,16 +2245,18 @@ public class InterfaceCollection {
 //    }
 
     //基金定投开始
+
     /**
      * 334008
      * 定投新增
+     *
      * @param FUND_COMPANY 基金公司  可空，默认为基金代码对应基金公司
      * @param FUND_CODE    基金代码
-     * @param RATION_TYPE   定投期满类型 默认‘0’， 0设定结束日期   1累计金额上限   2累计成功次数
-     * @param BALANCE       发生金额
-     * @param START_DATE    开始日期
-     * @param END_DATE      到期日期
-     * @param EN_FUND_DATE  扣款允许日
+     * @param RATION_TYPE  定投期满类型 默认‘0’， 0设定结束日期   1累计金额上限   2累计成功次数
+     * @param BALANCE      发生金额
+     * @param START_DATE   开始日期
+     * @param END_DATE     到期日期
+     * @param EN_FUND_DATE 扣款允许日
      */
     public void addFixFund(String FUND_COMPANY, String FUND_CODE, String RATION_TYPE, String BALANCE,
                            String START_DATE, String END_DATE, String EN_FUND_DATE, final String TAG, final InterfaceCallback callback) {
@@ -2287,8 +2294,8 @@ public class InterfaceCollection {
                 } else {
                     try {
                         JSONObject jsonObject = new JSONObject(response);
-                        String code = jsonObject.optString("MSG_CODE");
-                        String msg = jsonObject.optString("MSG_TEXT");
+                        String code = jsonObject.optString("code");
+                        String msg = jsonObject.optString("msg");
                         info.setCode(code);
                         info.setMsg(msg);
                         info.setTag(TAG);
@@ -2309,11 +2316,12 @@ public class InterfaceCollection {
     /**
      * 334103
      * 基金定投列表
+     *
      * @param ALLOTNO 申请编号 传空为查询全部
      */
     public void getFixFundList(String ALLOTNO, final String TAG, final InterfaceCallback callback) {
         Map map1 = new HashMap<>();
-        map1.put("funcid", "334103");
+        map1.put("funcid", "734103");
         map1.put("token", SpUtils.getString(CustomApplication.getContext(), "mSession", ""));
         Map map2 = new HashMap<>();
         map2.put("SEC_ID", "tpyzq");
@@ -2368,6 +2376,7 @@ public class InterfaceCollection {
                                 bean.setSTART_DATE(start_date);
                                 bean.setCURR_RATION_TIMES(obj.optString("CURR_RATION_TIMES"));
                                 bean.setPOSITION_STR(obj.optString("POSITION_STR"));
+                                bean.setFUND_VAL(obj.optString("FUND_VAL"));
                                 ses.add(bean);
                             }
                             info.setData(ses);
@@ -2386,18 +2395,19 @@ public class InterfaceCollection {
     /**
      * * 334009
      * 基金定投修改
+     *
      * @param FUND_COMPANY 基金公司  N	可空，默认为基金代码对应基金公司
-     * @param FUND_CODE     基金代码
-     * @param BALANCE       发生金额
-     * @param START_DATE    开始日期
-     * @param END_DATE      结束日期
-     * @param EN_FUND_DATE  扣款日
-     * @param ALLOTNO       申请编码
+     * @param FUND_CODE    基金代码
+     * @param BALANCE      发生金额
+     * @param START_DATE   开始日期
+     * @param END_DATE     结束日期
+     * @param EN_FUND_DATE 扣款日
+     * @param ALLOTNO      申请编码
      * @param TAG
      * @param callback
      */
     public void modifyFixFund(String FUND_COMPANY, String FUND_CODE, String BALANCE, String START_DATE,
-                               String END_DATE, String EN_FUND_DATE, String ALLOTNO, final String TAG, final InterfaceCallback callback) {
+                              String END_DATE, String EN_FUND_DATE, String ALLOTNO, final String TAG, final InterfaceCallback callback) {
         Map map1 = new HashMap<>();
         map1.put("funcid", "334009");
         map1.put("token", SpUtils.getString(CustomApplication.getContext(), "mSession", ""));
@@ -2432,8 +2442,8 @@ public class InterfaceCollection {
                 } else {
                     try {
                         JSONObject jsonObject = new JSONObject(response);
-                        String code = jsonObject.optString("MSG_CODE");
-                        String msg = jsonObject.optString("MSG_TEXT");
+                        String code = jsonObject.optString("code");
+                        String msg = jsonObject.optString("msg");
                         info.setCode(code);
                         info.setMsg(msg);
                         info.setTag(TAG);
@@ -2455,8 +2465,9 @@ public class InterfaceCollection {
     /**
      * * 334010
      * 基金定投修改
-     * @param FUND_CODE     基金代码
-     * @param ALLOTNO       申请编码
+     *
+     * @param FUND_CODE 基金代码
+     * @param ALLOTNO   申请编码
      * @param TAG
      * @param callback
      */
@@ -2490,8 +2501,8 @@ public class InterfaceCollection {
                 } else {
                     try {
                         JSONObject jsonObject = new JSONObject(response);
-                        String code = jsonObject.optString("MSG_CODE");
-                        String msg = jsonObject.optString("MSG_TEXT");
+                        String code = jsonObject.optString("code");
+                        String msg = jsonObject.optString("msg");
                         info.setCode(code);
                         info.setMsg(msg);
                         info.setTag(TAG);
@@ -2511,5 +2522,56 @@ public class InterfaceCollection {
     }
 
 
+    public void getFundData(String fundcode, String fundcompany, final String TAG, final InterfaceCallback callback) {
+        HashMap map300431 = new HashMap();
+        map300431.put("funcid", "300431");
+        map300431.put("token", SpUtils.getString(CustomApplication.getContext(), "mSession", ""));
+        HashMap map300431_1 = new HashMap();
+        map300431_1.put("SEC_ID", "tpyzq");
+        map300431_1.put("FLAG", "true");
+        map300431_1.put("FUND_CODE", fundcode);
+        map300431_1.put("FUND_COMPANY", fundcompany);
+        map300431_1.put("OPER_TYPE", "0");
+        map300431.put("parms", map300431_1);
+        NetWorkUtil.getInstence().okHttpForPostString("", ConstantUtil.URL_JY, map300431, new StringCallback() {
+            @Override
+            public void onError(Call call, Exception e, int id) {
+                ResultInfo info = new ResultInfo();
+                info.setCode(ConstantUtil.NETWORK_ERROR_CODE);
+                info.setMsg(ConstantUtil.NETWORK_ERROR);
+                info.setTag(TAG);
+                callback.callResult(info);
+            }
+
+            @Override
+            public void onResponse(String response, int id) {
+                ResultInfo info = new ResultInfo();
+                try {
+                    if (TextUtils.isEmpty(response)) {
+                        info.setCode(ConstantUtil.SERVICE_NO_DATA_CODE);
+                        info.setMsg(ConstantUtil.SERVICE_NO_DATA);
+                        info.setTag(TAG);
+                    } else {
+                        JSONObject object = new JSONObject(response);
+                        String code = object.getString("code");
+                        String msg = object.getString("msg");
+                        info.setCode(code);
+                        info.setMsg(msg);
+                        info.setTag(TAG);
+                        if (code.equals("0")) {
+                            FundDataEntity fundDataBean = new Gson().fromJson(response, FundDataEntity.class);
+                            info.setData(fundDataBean);
+                        }
+                    }
+                } catch (JSONException e) {
+                    e.printStackTrace();
+                    info.setCode(ConstantUtil.JSON_ERROR_CODE);
+                    info.setMsg(ConstantUtil.JSON_ERROR);
+                } finally {
+                    callback.callResult(info);
+                }
+            }
+        });
+    }
 
 }

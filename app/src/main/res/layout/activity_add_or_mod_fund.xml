@@ -1,0 +1,326 @@
+<?xml version="1.0" encoding="utf-8"?>
+<FrameLayout xmlns:android="http://schemas.android.com/apk/res/android"
+    xmlns:tools="http://schemas.android.com/tools"
+    android:layout_width="match_parent"
+    android:layout_height="match_parent">
+    <LinearLayout android:layout_width="match_parent"
+        android:layout_height="match_parent"
+        android:background="@color/bgColor"
+        android:orientation="vertical">
+        <RelativeLayout
+            android:id="@+id/rl_top_bar"
+            android:layout_width="match_parent"
+            android:layout_height="@dimen/size25"
+            android:background="@color/blue"
+            android:clipToPadding="true"
+            android:fitsSystemWindows="true" />
+
+        <RelativeLayout
+            android:layout_width="match_parent"
+            android:layout_height="@dimen/pickerview_topbar_height"
+            android:layout_below="@+id/AGRelativeLayout"
+            android:background="@color/blue">
+
+            <ImageView
+                android:id="@+id/iv_back"
+                android:layout_width="wrap_content"
+                android:layout_height="match_parent"
+                android:layout_alignParentLeft="true"
+                android:paddingLeft="@dimen/size15"
+                android:paddingRight="@dimen/size20"
+                android:src="@mipmap/back_btn" />
+
+            <TextView
+                android:id="@+id/tv_title"
+                android:layout_width="wrap_content"
+                android:layout_height="wrap_content"
+                android:layout_centerInParent="true"
+                android:textColor="@color/white"
+                android:textSize="@dimen/txtSize18" />
+        </RelativeLayout>
+
+
+        <LinearLayout
+            android:layout_width="match_parent"
+            android:layout_height="wrap_content"
+            android:background="@color/white"
+            android:orientation="vertical">
+
+            <LinearLayout
+                android:layout_width="match_parent"
+                android:layout_height="@dimen/size56">
+
+                <TextView
+                    android:id="@+id/tv_code"
+                    android:layout_width="wrap_content"
+                    android:layout_height="wrap_content"
+                    android:layout_marginLeft="@dimen/size20"
+                    android:text="@string/jjdm"
+                    android:textColor="@color/texts"
+                    android:textSize="@dimen/txtSize15" />
+
+                <EditText
+                    android:id="@+id/et_input_code"
+                    android:layout_width="0dp"
+                    android:layout_weight="1"
+                    android:layout_height="match_parent"
+                    android:background="@null"
+                    android:gravity="center_vertical"
+                    android:hint="@string/QingShuRuJiJinDaiMa"
+                    android:maxLength="6"
+                    android:inputType="number"
+                    android:layout_marginLeft="@dimen/size25"
+                    android:singleLine="true"
+                    android:textColor="@color/hushenTab_titleColor"
+                    android:textColorHint="@color/texts"
+                    android:textSize="@dimen/txtSize14" />
+                <TextView
+                    android:id="@+id/tv_choose_fund"
+                    android:layout_width="wrap_content"
+                    android:layout_height="wrap_content"
+                    android:layout_gravity="center"
+                    android:padding="@dimen/size15"
+                    android:drawablePadding="@dimen/size5"
+                    android:drawableRight="@mipmap/icon_right"
+                    android:text="选择基金产品"
+                    android:textColor="@color/text"
+                    android:textSize="@dimen/txtSize14" />
+
+            </LinearLayout>
+
+            <View
+                android:layout_width="match_parent"
+                android:layout_height="@dimen/size0.5"
+                android:layout_marginLeft="@dimen/size20"
+                android:layout_marginRight="@dimen/size20"
+                android:background="@color/stkDetailDividerColor" />
+
+
+            <LinearLayout
+                android:layout_width="match_parent"
+                android:layout_height="@dimen/size42">
+
+                <TextView
+                    android:id="@+id/tv_share"
+                    android:layout_width="wrap_content"
+                    android:layout_height="wrap_content"
+                    android:layout_marginLeft="@dimen/size20"
+                    android:text="@string/fix_sgfe"
+                    android:textColor="@color/texts"
+                    android:textSize="@dimen/txtSize15" />
+
+                <TextView
+                    android:id="@+id/tv_fund_name"
+                    android:layout_width="wrap_content"
+                    android:layout_height="match_parent"
+                    android:layout_marginLeft="@dimen/size25"
+                    android:gravity="center_vertical"
+                    android:hint="--"
+                    android:singleLine="true"
+                    android:textColor="@color/hushenTab_titleColor"
+                    android:textColorHint="@color/texts"
+                    android:textSize="@dimen/txtSize14" />
+
+
+
+            </LinearLayout>
+
+            <LinearLayout
+                android:layout_width="match_parent"
+                android:layout_height="@dimen/size42">
+
+                <TextView
+                    android:layout_width="wrap_content"
+                    android:layout_height="wrap_content"
+                    android:layout_centerVertical="true"
+                    android:layout_marginLeft="@dimen/size20"
+                    android:text="@string/jjjz"
+                    android:textColor="@color/texts"
+                    android:textSize="@dimen/txtSize15" />
+
+                <TextView
+                    android:id="@+id/tv_fund_jz"
+                    android:layout_width="wrap_content"
+                    android:layout_height="match_parent"
+                    android:layout_marginLeft="@dimen/size25"
+                    android:gravity="center_vertical"
+                    android:hint="--"
+                    android:singleLine="true"
+                    android:textColor="@color/hushenTab_titleColor"
+                    android:textColorHint="@color/texts"
+                    android:textSize="@dimen/txtSize14" />
+
+
+            </LinearLayout>
+
+            <View
+                android:layout_width="match_parent"
+                android:layout_height="@dimen/size10"
+                android:background="@color/bgColor" />
+
+            <LinearLayout
+                android:layout_width="match_parent"
+                android:layout_height="wrap_content"
+                android:orientation="vertical">
+
+                <LinearLayout
+                    android:layout_width="match_parent"
+                    android:layout_height="@dimen/size56"
+                    android:gravity="center_vertical"
+                    android:orientation="horizontal">
+
+                    <TextView
+                        android:layout_width="wrap_content"
+                        android:layout_height="wrap_content"
+                        android:layout_marginLeft="@dimen/size20"
+                        android:text="@string/fix_fund_en_date"
+                        android:textColor="@color/texts"
+                        android:textSize="@dimen/txtSize15" />
+
+                    <TextView
+                        android:id="@+id/tv_en_date"
+                        android:layout_width="match_parent"
+                        android:layout_height="wrap_content"
+                        android:layout_marginLeft="@dimen/size24"
+                        android:text="@string/fix_fund_end_date_def"
+                        android:textColor="@color/color_4a4a4a"
+                        android:textSize="@dimen/txtSize14" />
+
+                </LinearLayout>
+                <View
+                    android:layout_width="match_parent"
+                    android:layout_height="@dimen/size0.5"
+                    android:layout_marginLeft="@dimen/size20"
+                    android:layout_marginRight="@dimen/size20"
+                    android:background="@color/stkDetailDividerColor" />
+                <LinearLayout
+                    android:layout_width="match_parent"
+                    android:layout_height="@dimen/size56"
+                    android:gravity="center_vertical"
+                    android:orientation="horizontal">
+
+                    <TextView
+                        android:layout_width="wrap_content"
+                        android:layout_height="wrap_content"
+                        android:layout_marginLeft="@dimen/size20"
+                        android:text="@string/fix_fund_start_date"
+                        android:textColor="@color/texts"
+                        android:textSize="@dimen/txtSize15" />
+
+                    <TextView
+                        android:id="@+id/tv_start_date"
+                        android:layout_width="match_parent"
+                        android:layout_height="wrap_content"
+                        android:layout_marginLeft="@dimen/size24"
+                        android:textColor="@color/color_4a4a4a"
+                        android:textSize="@dimen/txtSize14" />
+
+
+                </LinearLayout>
+                <View
+                    android:layout_width="match_parent"
+                    android:layout_height="@dimen/size0.5"
+                    android:layout_marginLeft="@dimen/size20"
+                    android:layout_marginRight="@dimen/size20"
+                    android:background="@color/stkDetailDividerColor" />
+                <LinearLayout
+                    android:layout_width="match_parent"
+                    android:layout_height="@dimen/size56"
+                    android:gravity="center_vertical"
+                    android:orientation="horizontal">
+
+                    <TextView
+                        android:layout_width="wrap_content"
+                        android:layout_height="wrap_content"
+                        android:layout_marginLeft="@dimen/size20"
+                        android:text="@string/fix_fund_end_date"
+                        android:textColor="@color/texts"
+                        android:textSize="@dimen/txtSize15" />
+
+                    <TextView
+                        android:id="@+id/tv_end_date"
+                        android:layout_width="match_parent"
+                        android:layout_height="wrap_content"
+                        android:layout_marginLeft="@dimen/size24"
+                        android:textColor="@color/color_4a4a4a"
+                        android:textSize="@dimen/txtSize14" />
+                </LinearLayout>
+
+                <View
+                    android:layout_width="match_parent"
+                    android:layout_height="@dimen/size10"
+                    android:background="@color/bgColor" />
+                <LinearLayout
+                    android:layout_width="match_parent"
+                    android:layout_height="@dimen/size56"
+                    android:gravity="center_vertical"
+                    android:orientation="horizontal">
+
+                    <TextView
+                        android:layout_width="wrap_content"
+                        android:layout_height="wrap_content"
+                        android:layout_marginLeft="@dimen/size20"
+                        android:text="@string/fix_fund_balance"
+                        android:textColor="@color/texts"
+                        android:textSize="@dimen/txtSize15" />
+
+                    <EditText
+                        android:id="@+id/et_input_branch"
+                        android:layout_width="0dp"
+                        android:layout_weight="1"
+                        android:layout_height="match_parent"
+                        android:background="@null"
+                        android:gravity="center_vertical"
+                        android:hint="@string/fix_fund_balance_hint"
+                        android:maxLength="6"
+                        android:inputType="number"
+                        android:layout_marginLeft="@dimen/size25"
+                        android:singleLine="true"
+                        android:textColor="@color/hushenTab_titleColor"
+                        android:textColorHint="@color/texts"
+                        android:textSize="@dimen/txtSize14" />
+                    <TextView
+                        android:id="@+id/tv_branch_enable"
+                        android:layout_width="wrap_content"
+                        android:layout_height="wrap_content"
+                        android:layout_gravity="center"
+                        android:padding="@dimen/size15"
+                        android:drawablePadding="@dimen/size5"
+                        android:text="@string/fix_fund_balance_enable"
+                        android:textColor="@color/text"
+                        android:textSize="@dimen/txtSize14" />
+                </LinearLayout>
+
+            </LinearLayout>
+
+        </LinearLayout>
+
+        <RelativeLayout
+            android:layout_width="wrap_content"
+            android:layout_height="match_parent"
+            android:layout_gravity="center_horizontal">
+
+            <Button
+                android:id="@+id/bt_commint"
+                android:layout_width="match_parent"
+                android:layout_height="@dimen/size45"
+                android:layout_marginTop="@dimen/size21"
+                android:layout_alignParentBottom="true"
+                android:background="@color/calendarBtnColor"
+                android:clickable="true"
+                android:gravity="center"
+                android:text="确 定"
+                android:textColor="@color/white"
+                android:textSize="@dimen/txtSize16" />
+
+        </RelativeLayout>
+
+
+    </LinearLayout>
+    <LinearLayout
+        android:id="@+id/ll_father"
+        android:layout_width="match_parent"
+        android:layout_height="match_parent"
+        android:gravity="bottom"
+        android:orientation="vertical" />
+</FrameLayout>

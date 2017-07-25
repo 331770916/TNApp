@@ -95,7 +95,7 @@
             android:layout_marginTop="@dimen/size20"
             android:button="@drawable/mybg"
             android:paddingLeft="@dimen/size5"
-            android:text="开通基金账户"
+            android:text="我已仔细阅读并同意签署以上各项协议"
             android:textSize="@dimen/txtSize12" />
     </LinearLayout>
 

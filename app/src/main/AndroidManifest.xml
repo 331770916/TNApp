@@ -308,6 +308,7 @@
         <activity android:name=".activity.trade.open_fund.ShareWayActivity" />
         <activity android:name=".activity.trade.open_fund.SignActivity" />
         <activity android:name=".activity.trade.open_fund.FixFundListActivity" />
+        <activity android:name=".activity.trade.open_fund.AddOrModFixFundActivity" />
         <activity android:name=".activity.trade.open_fund.TargetInvestmentRecordActivity"/>
 
         <!-- otc 业务相关activity -->

@@ -9,12 +9,8 @@ import android.widget.LinearLayout;
 import android.widget.TextView;
 
 import com.tpyzq.mobile.pangu.R;
-import com.tpyzq.mobile.pangu.base.InterfaceCollection;
-import com.tpyzq.mobile.pangu.data.EtfDataEntity;
+import com.tpyzq.mobile.pangu.base.BaseListAdapter;
 import com.tpyzq.mobile.pangu.data.FixFundEntity;
-import com.tpyzq.mobile.pangu.data.ResultInfo;
-import com.tpyzq.mobile.pangu.util.ConstantUtil;
-import com.tpyzq.mobile.pangu.util.Helper;
 import com.tpyzq.mobile.pangu.view.CentreToast;
 
 import java.util.ArrayList;
@@ -24,18 +20,12 @@ import java.util.ArrayList;
  * 申赎撤单适配器
  */
 
-public class FixFundAdapter extends BaseAdapter {
+public class FixFundAdapter extends BaseListAdapter {
+    public static final int TAG_REVOKE = 1000001;
+    public static final int TAG_MODIFY = 1000002;
     private Context mContext;
     private ArrayList<FixFundEntity> mList;
     private boolean isAll = false;
-    //撤销点击回调
-    private ItemOnClickListener itemOnClickListener;
-    public interface ItemOnClickListener{
-        void onRevokeClick(int position);
-    }
-    public void setItemOnClickListener(ItemOnClickListener itemOnClickListener) {
-        this.itemOnClickListener = itemOnClickListener;
-    }
     public FixFundAdapter(Context context, ArrayList<FixFundEntity> mList) {
         this.mContext = context;
         this.mList = mList;
@@ -89,7 +79,7 @@ public class FixFundAdapter extends BaseAdapter {
             viewHolder.tv_end_date = (TextView)convertView.findViewById(R.id.tv_end_date);//终止日期
             viewHolder.tv_modify = (TextView)convertView.findViewById(R.id.tv_modify);//修改
             viewHolder.tv_revoke = (TextView)convertView.findViewById(R.id.tv_revoke);//撤销
-            viewHolder.tv_history = (TextView)convertView.findViewById(R.id.tv_history);//定投记录
+//            viewHolder.tv_history = (TextView)convertView.findViewById(R.id.tv_history);//定投记录
             viewHolder.ll_bottom = (LinearLayout) convertView.findViewById(R.id.ll_bottom);//底部添加定投条目
             viewHolder.ll_add = (LinearLayout) convertView.findViewById(R.id.ll_add);//底部添加定投点击条目
             convertView.setTag(viewHolder);
@@ -113,25 +103,21 @@ public class FixFundAdapter extends BaseAdapter {
             @Override
             public void onClick(View v) {
                 CentreToast.showText(mContext,"跳转修改页面");
+                itemOnClickListener.onItemClick(TAG_MODIFY, position);
             }
         });
-        viewHolder.tv_modify.setOnClickListener(new View.OnClickListener() {
+        viewHolder.tv_revoke.setOnClickListener(new View.OnClickListener() {
             @Override
             public void onClick(View v) {
                 if (null!=itemOnClickListener)
-                    itemOnClickListener.onRevokeClick(position);
-            }
-        });
-        viewHolder.tv_modify.setOnClickListener(new View.OnClickListener() {
-            @Override
-            public void onClick(View v) {
-                CentreToast.showText(mContext,"跳转定投记录页面");
+                    itemOnClickListener.onItemClick(TAG_REVOKE, position);
             }
         });
         viewHolder.ll_add.setOnClickListener(new View.OnClickListener() {
             @Override
             public void onClick(View v) {
-                CentreToast.showText(mContext,"跳转新建定投页面");
+                if (null!=itemOnClickListener)
+                    itemOnClickListener.onItemClick(TAG_MODIFY, position);
             }
         });
         return convertView;

@@ -10,6 +10,7 @@ import com.tpyzq.mobile.pangu.base.SimpleRemoteControl;
 import com.tpyzq.mobile.pangu.data.StockInfoEntity;
 import com.tpyzq.mobile.pangu.db.Db_PUB_STOCKLIST;
 import com.tpyzq.mobile.pangu.db.Db_PUB_USERS;
+import com.tpyzq.mobile.pangu.db.StockTable;
 import com.tpyzq.mobile.pangu.http.doConnect.self.AddSelfChoiceStockConnect;
 import com.tpyzq.mobile.pangu.http.doConnect.self.ToAddSelfChoiceStockConnect;
 import com.tpyzq.mobile.pangu.interfac.ICallbackResult;
@@ -135,6 +136,7 @@ public class SelfStockHelper {
                     entity.setStockNumber(stockNumber);
                 }
                 BRutil.doListenAddOrRemoveSelfStock(stockNumber, entity.getStockName(), BRutil.ACTIONADDSELFSTOCK, "0");
+                entity.setStock_flag(StockTable.STOCK_OPTIONAL);
                 Db_PUB_STOCKLIST.addOneStockListData(entity);
                 if (!TextUtils.isEmpty(entity.getStockNumber())) {
                     sbNumber.append(entity.getStockNumber()).append(",");
@@ -194,6 +196,7 @@ public class SelfStockHelper {
 
                 totalcount = totalcount + 1;
                 BRutil.doListenAddOrRemoveSelfStock(entity.getStockNumber(), entity.getStockName(), BRutil.ACTIONADDSELFSTOCK, "0");
+                entity.setStock_flag(StockTable.STOCK_OPTIONAL);
                 Db_PUB_STOCKLIST.addOneStockListData(entity);
 
             }

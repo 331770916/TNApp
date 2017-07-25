@@ -17,6 +17,7 @@ import com.tpyzq.mobile.pangu.data.StockInfoEntity;
 import com.tpyzq.mobile.pangu.db.Db_PUB_SEARCHHISTORYSTOCK;
 import com.tpyzq.mobile.pangu.db.Db_PUB_STOCKLIST;
 import com.tpyzq.mobile.pangu.db.Db_PUB_USERS;
+import com.tpyzq.mobile.pangu.db.StockTable;
 import com.tpyzq.mobile.pangu.http.doConnect.self.AddSelfChoiceStockConnect;
 import com.tpyzq.mobile.pangu.http.doConnect.self.ToAddSelfChoiceStockConnect;
 import com.tpyzq.mobile.pangu.interfac.ICallbackResult;
@@ -100,13 +101,11 @@ public class HistoryChoiceAdapter extends BaseAdapter {
         viewHolder.stockName.setText(mDatas.get(position).getStockName());
 
 
-        if (!TextUtils.isEmpty(mDatas.get(position).getStockholdon())) {
-            String appearHold = SpUtils.getString(CustomApplication.getContext(), ConstantUtil.APPEARHOLD, "false");
-            if ("true".equals(mDatas.get(position).getStockholdon()) && "true".equals(appearHold)) {
-                viewHolder.holdIv.setVisibility(View.VISIBLE);
-            } else {
-                viewHolder.holdIv.setVisibility(View.GONE);
-            }
+        String appearHold = SpUtils.getString(CustomApplication.getContext(), ConstantUtil.APPEARHOLD, "false");
+        if ((mDatas.get(position).getStock_flag() & StockTable.STOCK_HOLD) == StockTable.STOCK_HOLD  && "true".equals(appearHold)) {
+            viewHolder.holdIv.setVisibility(View.VISIBLE);
+        } else {
+            viewHolder.holdIv.setVisibility(View.GONE);
         }
 
         if (mDatas.get(position).getIsSelfChoiceStock()) {
@@ -177,6 +176,8 @@ public class HistoryChoiceAdapter extends BaseAdapter {
                         } catch (Exception e) {
                             e.printStackTrace();
                         }
+
+                        mDatas.get(position).setStock_flag(StockTable.STOCK_OPTIONAL);
                         boolean tag1 = Db_PUB_STOCKLIST.addOneStockListData(mDatas.get(position));
                         if (tag1) {
                             Db_PUB_SEARCHHISTORYSTOCK.deleteFromID(stockNumber);
@@ -195,6 +196,7 @@ public class HistoryChoiceAdapter extends BaseAdapter {
 
             } else {
 
+                mDatas.get(position).setStock_flag(StockTable.STOCK_OPTIONAL);
                 boolean tag1 = Db_PUB_STOCKLIST.addOneStockListData(mDatas.get(position));
 
                 if (tag1) {

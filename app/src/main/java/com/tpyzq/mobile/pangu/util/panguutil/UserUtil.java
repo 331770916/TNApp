@@ -1,6 +1,8 @@
 package com.tpyzq.mobile.pangu.util.panguutil;
 
 
+import android.text.TextUtils;
+
 import com.tpyzq.mobile.pangu.data.UserEntity;
 import com.tpyzq.mobile.pangu.db.Db_PUB_USERS;
 import com.tpyzq.mobile.pangu.util.keyboard.KeyEncryptionUtils;
@@ -31,7 +33,7 @@ public class UserUtil {
             account = list.get(0).getTradescno();
         }
 
-        if (account.contains(",")) {
+        if (!TextUtils.isEmpty(account)&&account.contains(",")) {
 
             String[] accounts = account.split(",");
 

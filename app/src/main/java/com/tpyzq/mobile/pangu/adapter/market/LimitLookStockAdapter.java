@@ -18,6 +18,7 @@ import com.tpyzq.mobile.pangu.db.Db_HOME_INFO;
 import com.tpyzq.mobile.pangu.db.Db_PUB_SEARCHHISTORYSTOCK;
 import com.tpyzq.mobile.pangu.db.Db_PUB_STOCKLIST;
 import com.tpyzq.mobile.pangu.db.Db_PUB_USERS;
+import com.tpyzq.mobile.pangu.db.StockTable;
 import com.tpyzq.mobile.pangu.http.doConnect.self.AddSelfChoiceStockConnect;
 import com.tpyzq.mobile.pangu.http.doConnect.self.DeleteSelfChoiceStockConnect;
 import com.tpyzq.mobile.pangu.http.doConnect.self.ToAddSelfChoiceStockConnect;
@@ -111,13 +112,11 @@ public class LimitLookStockAdapter extends BaseAdapter {
             viewHolder.stockName.setText(mDatas.get(position).getStockName());
         }
 
-        if (!TextUtils.isEmpty(mDatas.get(position).getIsHoldStock())) {
-            String appearHold = SpUtils.getString(CustomApplication.getContext(), ConstantUtil.APPEARHOLD, "false");
-            if (!TextUtils.isEmpty(mDatas.get(position).getApperHoldStock()) && "true".equals(mDatas.get(position).getStockholdon()) && "true".equals(appearHold)) {
-                viewHolder.holdIv.setVisibility(View.VISIBLE);
-            } else {
-                viewHolder.holdIv.setVisibility(View.GONE);
-            }
+        String appearHold = SpUtils.getString(CustomApplication.getContext(), ConstantUtil.APPEARHOLD, "false");
+        if ((mDatas.get(position).getStock_flag() & StockTable.STOCK_HOLD) == StockTable.STOCK_HOLD && "true".equals(appearHold)) {
+            viewHolder.holdIv.setVisibility(View.VISIBLE);
+        } else {
+            viewHolder.holdIv.setVisibility(View.GONE);
         }
 
         if (mDatas.get(position).getIsSelfChoiceStock()) {
@@ -172,6 +171,7 @@ public class LimitLookStockAdapter extends BaseAdapter {
                                         if(tag1){
                                             Db_HOME_INFO.deleteOneSelfNewsData(stockNumber);
                                             mDatas.get(position).setSelfChoicStock(false);
+                                            mDatas.get(position).setStock_flag(StockTable.STOCK_HISTORY_OPTIONAL);
                                             Db_PUB_SEARCHHISTORYSTOCK.addOneData(mDatas.get(position));
                                             SelfChoiceStockTempData.getInstance().removeSelfchoicestockTempValue(stockNumber);
                                             viewHolder.operationIv.setImageResource(R.mipmap.search_add);
@@ -192,6 +192,7 @@ public class LimitLookStockAdapter extends BaseAdapter {
                         if (tag1) {
                             Db_HOME_INFO.deleteOneSelfNewsData(stockNumber);
                             mDatas.get(position).setSelfChoicStock(false);
+                            mDatas.get(position).setStock_flag(StockTable.STOCK_HISTORY_OPTIONAL);
                             Db_PUB_SEARCHHISTORYSTOCK.addOneData(mDatas.get(position));
                             SelfChoiceStockTempData.getInstance().removeSelfchoicestockTempValue(stockNumber);
                             viewHolder.operationIv.setImageResource(R.mipmap.search_add);
@@ -226,6 +227,7 @@ public class LimitLookStockAdapter extends BaseAdapter {
                                 } catch (Exception e) {
                                     e.printStackTrace();
                                 }
+                                mDatas.get(position).setStock_flag(StockTable.STOCK_OPTIONAL);
                                 boolean tag1 = Db_PUB_STOCKLIST.addOneStockListData(mDatas.get(position));
                                 if (tag1) {
                                     SelfStockHelper.sendUpdateSelfChoiceBrodcast(CustomApplication.getContext(), mDatas.get(position).getStockNumber());
@@ -245,6 +247,7 @@ public class LimitLookStockAdapter extends BaseAdapter {
                         simpleRemoteControl.setCommand(new ToAddSelfChoiceStockConnect(new AddSelfChoiceStockConnect(TAG, "", UserUtil.capitalAccount, stockNumber, UserUtil.userId, stockName, price)));
                         simpleRemoteControl.startConnect();
                     } else {
+                        mDatas.get(position).setStock_flag(StockTable.STOCK_OPTIONAL);
                         boolean tag1 = Db_PUB_STOCKLIST.addOneStockListData(mDatas.get(position));
                         if (tag1) {
                             SelfStockHelper.sendUpdateSelfChoiceBrodcast(CustomApplication.getContext(), mDatas.get(position).getStockNumber());

@@ -20,6 +20,7 @@ import com.tpyzq.mobile.pangu.base.CustomApplication;
 import com.tpyzq.mobile.pangu.data.StockDetailEntity;
 import com.tpyzq.mobile.pangu.data.StockInfoEntity;
 import com.tpyzq.mobile.pangu.db.Db_PUB_STOCKLIST;
+import com.tpyzq.mobile.pangu.db.StockTable;
 import com.tpyzq.mobile.pangu.http.NetWorkUtil;
 import com.tpyzq.mobile.pangu.log.LogHelper;
 import com.tpyzq.mobile.pangu.log.LogUtil;
@@ -509,11 +510,13 @@ public class SelfChoiceQuotationTab extends BaseTabPager implements View.OnClick
                         String stkCode = itemJson.optString(0);
                         _beanT= new StockInfoEntity();//mStockData.get(i);
                         _beanT.setStockNumber(stkCode);
+
 //                        LogHelper.e(TAG,"mHolsJson.contains :"+mHolsJson.contains(stkCode));
                         if (mHolsJson.contains(stkCode)) {
                             _beanT.setApperHoldStock("true");
                             _beanT.setIsHoldStock("ture");
                             _beanT.setStockholdon("true");
+                            _beanT.setStock_flag(StockTable.STOCK_HOLD);
                         }
                         if("20399300".equals(stkCode)){
                             k=i;
@@ -688,7 +691,7 @@ public class SelfChoiceQuotationTab extends BaseTabPager implements View.OnClick
                 _entity.setClose("0.0");
                 _entity.setPriceChangeRatio(0);
                 _entity.setUpAndDownValue(0);
-                if ("true".equals(_entity.getStockholdon())) {
+                if ((_entity.getStock_flag()&StockTable.STOCK_HOLD) == StockTable.STOCK_HOLD) {
                     sb.append(_entity.getStockNumber()).append(",");
                 }
             }

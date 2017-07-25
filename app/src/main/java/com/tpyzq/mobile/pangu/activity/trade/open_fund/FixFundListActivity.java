@@ -1,6 +1,7 @@
 package com.tpyzq.mobile.pangu.activity.trade.open_fund;
 
 import android.app.Dialog;
+import android.content.Intent;
 import android.view.View;
 import android.widget.ImageView;
 import android.widget.ListView;
@@ -10,9 +11,11 @@ import android.widget.TextView;
 import com.handmark.pulltorefresh.library.PullToRefreshBase;
 import com.handmark.pulltorefresh.library.PullToRefreshListView;
 import com.tpyzq.mobile.pangu.R;
+import com.tpyzq.mobile.pangu.activity.trade.stock.ETFStockListActivity;
 import com.tpyzq.mobile.pangu.adapter.trade.FixFundAdapter;
 import com.tpyzq.mobile.pangu.base.BaseActivity;
 import com.tpyzq.mobile.pangu.base.InterfaceCollection;
+import com.tpyzq.mobile.pangu.base.ItemOnClickListener;
 import com.tpyzq.mobile.pangu.data.FixFundEntity;
 import com.tpyzq.mobile.pangu.data.ResultInfo;
 import com.tpyzq.mobile.pangu.util.ConstantUtil;
@@ -27,11 +30,13 @@ import java.util.ArrayList;
  * Created by lx on 2017/7/19.
  */
 
-public class FixFundListActivity extends BaseActivity implements View.OnClickListener,InterfaceCollection.InterfaceCallback, FixFundAdapter.ItemOnClickListener, StructuredFundDialog.Expression {
+public class FixFundListActivity extends BaseActivity implements View.OnClickListener,InterfaceCollection.InterfaceCallback, ItemOnClickListener, StructuredFundDialog.Expression {
     public static final String TAG = "FixFundListActivity";//请求数据
     private static final String TAG_LIST = "LIST";//请求数据
     private static final String TAG_LIST_FIRST = "LIST_FIRST";//进入页面第一次请求
-    private static final String TAG_REVOKE = "REVOKE";//请求数据
+    public static final String TAG_REVOKE = "REVOKE";//请求数据
+    private static int REQUEST_MODIFY = 10001;
+    private static int REQUEST_ADD = 1002;
     private TextView tv_title_click;
     private ImageView iv_back;
     private PullToRefreshListView lv;
@@ -99,7 +104,12 @@ public class FixFundListActivity extends BaseActivity implements View.OnClickLis
 
     @Override
     public void onClick(View v) {
-
+        switch (v.getId()) {
+            case R.id.tv_title_click:
+                Intent intent = new Intent(this, AddOrModFixFundActivity.class);
+                startActivityForResult(intent,REQUEST_ADD);
+                break;
+        }
     }
 
     @Override
@@ -144,6 +154,7 @@ public class FixFundListActivity extends BaseActivity implements View.OnClickLis
                     fixFundAdapter.setData(mList,true);
                 }
             } else if ("-6".equalsIgnoreCase(code)) {
+                skip.startLogin(FixFundListActivity.this);
                 lv.onRefreshComplete();
             } else {
                 lv.onRefreshComplete();
@@ -180,8 +191,12 @@ public class FixFundListActivity extends BaseActivity implements View.OnClickLis
         else if (TAG_REVOKE.equalsIgnoreCase(tag)) {//撤销
             if ("0".equalsIgnoreCase(code)) {
                 CentreToast.showText(this, msg, true);
+                mList.remove(position);
+                fixFundAdapter.notifyDataSetChanged();
+                mStructuredFundDialog.dismiss();
+                mStructuredFundDialog = null;
             } else if ("-6".equalsIgnoreCase(code)) {
-
+                skip.startLogin(FixFundListActivity.this);
             } else {
                 CentreToast.showText(this, msg, false);
             }
@@ -198,15 +213,26 @@ public class FixFundListActivity extends BaseActivity implements View.OnClickLis
 
     //适配器中点击撤销的回调
     @Override
-    public void onRevokeClick(int position) {
+    public void onItemClick(int type, int position) {
         this.position = position;
-        FixFundEntity fixFundEntity = mList.get(position);
-        if (ConstantUtil.list_item_flag) {
-            ConstantUtil.list_item_flag = false;
-            mStructuredFundDialog = new StructuredFundDialog(this);
-            mStructuredFundDialog.setData(TAG, this, fixFundEntity, null, null);
-            mStructuredFundDialog.show();
+        switch (type) {
+            case FixFundAdapter.TAG_REVOKE:
+                FixFundEntity fixFundEntity = mList.get(position);
+                if (ConstantUtil.list_item_flag) {
+                    ConstantUtil.list_item_flag = false;
+                    mStructuredFundDialog = new StructuredFundDialog(this);
+                    mStructuredFundDialog.setData(TAG, this, fixFundEntity, null, null);
+                    mStructuredFundDialog.show();
+                }
+                break;
+            case FixFundAdapter.TAG_MODIFY:
+                Intent intent = new Intent(this, AddOrModFixFundActivity.class);
+                intent.putExtra("position", position);
+                intent.putExtra("fixFundEntity",mList.get(position));
+                startActivityForResult(intent,REQUEST_MODIFY);
+                break;
         }
+
         /*if (null != mRevokeDialog && !mRevokeDialog.isShowing()) {
             mRevokeDialog.show();
         }
@@ -221,5 +247,26 @@ public class FixFundListActivity extends BaseActivity implements View.OnClickLis
         }
         FixFundEntity fixFundEntity = mList.get(position);
         InterfaceCollection.getInstance().revokeFixFund(fixFundEntity.getFUND_CODE(), fixFundEntity.getALLOTNO(),TAG_REVOKE,FixFundListActivity.this);
+    }
+
+    @Override
+    protected void onActivityResult(int requestCode, int resultCode, Intent data) {
+        super.onActivityResult(requestCode, resultCode, data);
+        if (requestCode == REQUEST_MODIFY && resultCode == RESULT_OK) {
+            FixFundEntity fixFundEntity = (FixFundEntity) data.getSerializableExtra("fixFundEntity");
+            mList.set(position,fixFundEntity);
+            fixFundAdapter.notifyDataSetChanged();
+        }
+        if (requestCode == REQUEST_ADD && resultCode == RESULT_OK) {
+            FixFundEntity fixFundEntity = (FixFundEntity) data.getSerializableExtra("fixFundEntity");
+            ArrayList<FixFundEntity> tempList = new ArrayList<>();
+            tempList.addAll(mList);
+            mList.clear();
+            mList.add(0, fixFundEntity);
+            mList.addAll(tempList);
+            fixFundAdapter.notifyDataSetChanged();
+            tempList.clear();
+            tempList = null;
+        }
     }
 }

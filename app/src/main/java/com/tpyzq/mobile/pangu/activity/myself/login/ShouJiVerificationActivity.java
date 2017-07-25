@@ -444,7 +444,7 @@ public class ShouJiVerificationActivity extends BaseActivity implements View.OnC
         map.put("phone", mSJYZNumber.getText().toString().trim());
         map.put("user_account", UserUtil.userId);
         map.put("user_type", KeyEncryptionUtils.getInstance().Typescno());
-        map.put("equipment",DeviceUtil.getDeviceId(CustomApplication.getContext()));
+        map.put("equipment", DeviceUtil.getDeviceId(CustomApplication.getContext()));
         map.put("auth",mSJYZ_ET.getText().toString());
 
         NetWorkUtil.getInstence().okHttpForGet("", ConstantUtil.SecurityIps + "/note/WXBinding", map, new StringCallback() {

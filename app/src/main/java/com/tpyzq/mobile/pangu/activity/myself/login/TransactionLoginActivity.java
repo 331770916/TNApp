@@ -1,20 +1,27 @@
 package com.tpyzq.mobile.pangu.activity.myself.login;
 
 import android.app.Dialog;
+import android.content.Context;
 import android.content.DialogInterface;
 import android.content.Intent;
 import android.graphics.Bitmap;
+import android.graphics.drawable.ColorDrawable;
+import android.os.Handler;
+import android.os.Message;
 import android.text.Editable;
-import android.text.InputType;
 import android.text.TextUtils;
 import android.text.TextWatcher;
-import android.text.method.DigitsKeyListener;
 import android.view.KeyEvent;
+import android.view.LayoutInflater;
+import android.view.MotionEvent;
 import android.view.View;
+import android.view.WindowManager;
+import android.widget.AdapterView;
 import android.widget.Button;
 import android.widget.EditText;
 import android.widget.ImageView;
-import android.widget.TextView;
+import android.widget.ListView;
+import android.widget.PopupWindow;
 
 import com.facebook.drawee.view.SimpleDraweeView;
 import com.tpyzq.mobile.pangu.R;
@@ -62,30 +69,43 @@ import com.tpyzq.mobile.pangu.activity.trade.stock.ReverseRepoGuideActivity;
 import com.tpyzq.mobile.pangu.activity.trade.stock.RevokeActivity;
 import com.tpyzq.mobile.pangu.activity.trade.stock.TakeAPositionActivity;
 import com.tpyzq.mobile.pangu.activity.trade.stock.TranMoreActivity;
+import com.tpyzq.mobile.pangu.adapter.myself.PopupWindowAdapter;
 import com.tpyzq.mobile.pangu.base.BaseActivity;
 import com.tpyzq.mobile.pangu.base.CustomApplication;
+import com.tpyzq.mobile.pangu.base.SimpleRemoteControl;
 import com.tpyzq.mobile.pangu.data.UserEntity;
 import com.tpyzq.mobile.pangu.db.Db_PUB_USERS;
 import com.tpyzq.mobile.pangu.db.HOLD_SEQ;
-import com.tpyzq.mobile.pangu.http.NetWorkUtil;
 import com.tpyzq.mobile.pangu.http.OkHttpUtil;
-import com.tpyzq.mobile.pangu.log.LogHelper;
+import com.tpyzq.mobile.pangu.http.doConnect.login.AddUserConnect;
+import com.tpyzq.mobile.pangu.http.doConnect.login.KeyBoardConnect;
+import com.tpyzq.mobile.pangu.http.doConnect.login.KeyBoardTypeConnect;
+import com.tpyzq.mobile.pangu.http.doConnect.login.LogInConnect;
+import com.tpyzq.mobile.pangu.http.doConnect.login.SecurityCodeConnect;
+import com.tpyzq.mobile.pangu.http.doConnect.login.ToAddUser;
+import com.tpyzq.mobile.pangu.http.doConnect.login.ToKeyBoard;
+import com.tpyzq.mobile.pangu.http.doConnect.login.ToKeyBoardType;
+import com.tpyzq.mobile.pangu.http.doConnect.login.ToLogIn;
+import com.tpyzq.mobile.pangu.http.doConnect.login.ToSecurityCode;
+import com.tpyzq.mobile.pangu.interfac.ICallbackResult;
 import com.tpyzq.mobile.pangu.log.LogUtil;
 import com.tpyzq.mobile.pangu.util.ConstantUtil;
 import com.tpyzq.mobile.pangu.util.DeviceUtil;
 import com.tpyzq.mobile.pangu.util.Helper;
 import com.tpyzq.mobile.pangu.util.SpUtils;
 import com.tpyzq.mobile.pangu.util.ToastUtils;
+import com.tpyzq.mobile.pangu.util.TransitionUtils;
 import com.tpyzq.mobile.pangu.util.keyboard.Constants;
 import com.tpyzq.mobile.pangu.util.keyboard.HandleResponse;
 import com.tpyzq.mobile.pangu.util.keyboard.KeyEncryptionUtils;
-import com.tpyzq.mobile.pangu.util.keyboard.NoSoftInputEditText;
+import com.tpyzq.mobile.pangu.util.keyboard.PasswordKeyboardUtils;
 import com.tpyzq.mobile.pangu.util.keyboard.ResponseInterface;
 import com.tpyzq.mobile.pangu.util.panguutil.APPInfoUtils;
 import com.tpyzq.mobile.pangu.util.panguutil.BRutil;
 import com.tpyzq.mobile.pangu.util.panguutil.UserUtil;
 import com.tpyzq.mobile.pangu.view.dialog.CancelDialog;
 import com.tpyzq.mobile.pangu.view.dialog.CertificationDialog;
+import com.tpyzq.mobile.pangu.view.dialog.CustomDialog;
 import com.tpyzq.mobile.pangu.view.dialog.LoadingDialog;
 import com.tpyzq.mobile.pangu.view.dialog.LoginDialog;
 import com.tpyzq.mobile.pangu.view.dialog.MistakeDialog;
@@ -104,18 +124,18 @@ import org.json.JSONException;
 import org.json.JSONObject;
 
 import java.text.SimpleDateFormat;
-import java.util.HashMap;
+import java.util.ArrayList;
 import java.util.List;
-import java.util.Map;
 
 import okhttp3.Call;
+
 
 /**
  * Created by wangqi on 2016/8/24.
  * 交易登录
  */
 
-public class TransactionLoginActivity extends BaseActivity implements View.OnClickListener {
+public class TransactionLoginActivity extends BaseActivity implements ICallbackResult, View.OnClickListener, Handler.Callback {
     private String TAG = "TransactionLoginActivity";
 
     public static final int PAGE_INDEX_BUY_SELL = 1;//买卖交易
@@ -173,655 +193,120 @@ public class TransactionLoginActivity extends BaseActivity implements View.OnCli
     public static final int PAGE_INDEX_StructuredFundActivity = 49;//分级基金
     public static final int PAGE_INDEX_NetworkVotingActivity = 50;//网络投票
     public static final int PAGE_INDEX_ETFNavigationBarActivity = 51;//ETF
-
     private static final String KEY_BOARD_INPUT_ENCRYPTED_FORMAT = "密码键盘输入加密数据:%s";
-    //控件
-    private EditText mAccount, mCaptcha, mPasswordET;
-    private NoSoftInputEditText mPassword;
-    private Button mLogin;
-    private SimpleDraweeView mSecurityCode;
-    //数据
-    private String mVERIFICATIONCODE;
-    private String mKeyboardInput;
-    private String OLD_TCC, OLD_SRRC, mSession;
-    //记录状态
-    String passwordFormat;
-    //插件
-    private String diviceId;
-    private UnikeyUrls unikeyUrls;
-    private int pageIndex = 0;
-    private ImageView mCloseIV;
-    private String mFirst;
 
-    private boolean isLoginSuc = false;
-    private boolean isHttp;
-    private String Exit;
-    private Dialog isKeyboardDialog;
-    private Dialog mLoad;
-    private Dialog mCommit;
-    private Dialog mDownload;
-    private Dialog mKeyboardRequest;
-    private String ip;
+    //接口数据
+    private String OLD_SRRC, OLD_TCC;
     private String IS_OVERDUE;
     private String CORP_RISK_LEVEL;
     private String CORP_END_DATE;
 
+    private SimpleRemoteControl simpleRemoteControl;
+    private EditText mAccount_et;
+    private EditText mCaptcha_et;
+    private ImageView mClose_iv;
+    //    private TextView mCxaptcha_tv;
+    private Button mLogin_but;
+    private EditText mPassword_et;
+    private ImageView mZhang_iv;
+    private SimpleDraweeView mSecurityCode;
+
+    private String mVerificationcode = "";
+
+    private String diviceId;
+    private UnikeyUrls unikeyUrls;
+    private PasswordKeyboard passwordKeyboard;
+    private String mKeyboardInput;
+
+    private CustomDialog.Builder mBuilder;
+
+
+    private UserEntity mUserEntity;
+
+
+    private String LOADING = "加载中...";
+    private String DOWNLOAD = "下载插件中...";
+    private String ISCOMMIT = "正在提交...";
+
+    private String passwordFormat;
+
+    private boolean isLoginSuc = false;
+    private boolean mExit;
+    private boolean isHttp;
+    private int mMarkbit = 0;
+    private int pageIndex = 0;
+    private boolean isKeyStatusControl = false;
+
+
+    private Handler handler = new Handler(this);
+    private String mSession;
+    private String mIp;
+    private Dialog mCommit;
+
+    DialogInterface.OnKeyListener onKeyListener = new DialogInterface.OnKeyListener() {
+        @Override
+        public boolean onKey(DialogInterface dialog, int keyCode, KeyEvent event) {
+            if (keyCode == KeyEvent.KEYCODE_BACK && event.getRepeatCount() == 0) {
+                if (mBuilder.dialog != null && mBuilder.dialog.isShowing())
+                    mBuilder.dialog.dismiss();
+                if (mCommit != null && mCommit.isShowing())
+                    mCommit.dismiss();
+                OkHttpUtil.cancelSingleRequestByTag(TransactionLoginActivity.this.getClass().getName());
+
+                isLoginSuc = false;
+                toSecurityCode();
+//                        mPassword.setText("");
+                mPassword_et.setText("");
+                mCaptcha_et.setText("");
+                mPassword_et.requestFocus();
+                handler.sendEmptyMessage(0);
+                showKeyboardWithHeader();
+            }
+            return false;
+        }
+    };
+
     @Override
     public void initView() {
-        mAccount = (EditText) findViewById(R.id.FundsAccount);                    //资金账号
-        mCaptcha = (EditText) findViewById(R.id.Captcha);                         //填写验证码
-        mSecurityCode = (SimpleDraweeView) findViewById(R.id.SecurityCode);       //验证码
-        mLogin = (Button) findViewById(R.id.Transaction_Login);                   //登录
-        mPassword = (NoSoftInputEditText) findViewById(R.id.TradersPassword);     //交易密码_密
-        mPasswordET = (EditText) findViewById(R.id.TradersPasswordET);            //交易密码_明
-        mCloseIV = (ImageView) findViewById(R.id.CloseIV);
-        mCloseIV.setOnClickListener(this);
+        mCommit = LoadingDialog.initDialog(this, "正在提交...");
+        mBuilder = new CustomDialog.Builder(TransactionLoginActivity.this);
+        mBuilder.create();
+
+        mCommit.setOnKeyListener(onKeyListener);
+        mBuilder.dialog.setOnKeyListener(onKeyListener);
+
+        simpleRemoteControl = new SimpleRemoteControl(this);
+        //资金账号
+        mAccount_et = (EditText) findViewById(R.id.FundsAccount);
+        //填写验证码
+        mCaptcha_et = (EditText) findViewById(R.id.Captcha);
+        //删除
+        mClose_iv = (ImageView) findViewById(R.id.CloseIV);
+        //登录
+        mLogin_but = (Button) findViewById(R.id.Transaction_Login);
+        //交易密码_明
+        mPassword_et = (EditText) findViewById(R.id.TradersPasswordET);
+        //验证码
+        mSecurityCode = (SimpleDraweeView) findViewById(R.id.SecurityCode);
+        //更换资金帐号
+        mZhang_iv = (ImageView) findViewById(R.id.ZhangIV);
+
+
+        findViewById(R.id.forgetpassword).setOnClickListener(this);              //忘记密码
         findViewById(R.id.mKaihu).setOnClickListener(this);
         findViewById(R.id.Service).setOnClickListener(this);
         findViewById(R.id.publish_back).setOnClickListener(this);
-        TextView forgetpassword = (TextView) findViewById(R.id.forgetpassword);
-        forgetpassword.setOnClickListener(this);
-        forgetpassword.setVisibility(View.VISIBLE);
 
-        mCaptcha.setRawInputType(InputType.TYPE_CLASS_NUMBER);
-        mCaptcha.setKeyListener(new DigitsKeyListener(false, false));
-        isKeyboardDialog = LoadingDialog.initDialog(this, "加载中...");
-        if (!TransactionLoginActivity.this.isFinishing()) {
-            isKeyboardDialog.show();
-        }
-
-
-        Exit = getIntent().getStringExtra("Exit");
-        if (!"true".equals(Exit)) {
-            UserEntity userEntity = new UserEntity();
-            userEntity.setIslogin("false");
-            Db_PUB_USERS.UpdateIslogin(userEntity);
-        }
-
-        //验证码请求
-        toSecurityCode(null);
-        mFirst = SpUtils.getString(this, "First", "");
-        if (ConstantUtil.USERFUL_KEYBOARD) {
-            IsKeyboardRequestHttp();
-        } else {
-            initYN(false);
-        }
-        //账号监听处理
-        EditTextMonitor();
-        LoadingDialog();
+        getIntentData();
+        initLogic();
     }
 
-
-    private void LoadingDialog(){
-        mCommit = LoadingDialog.initDialog(this, "正在提交...");
-
-        mCommit.setOnKeyListener(new DialogInterface.OnKeyListener() {
-            @Override
-            public boolean onKey(DialogInterface dialog, int keyCode, KeyEvent event) {
-                if (keyCode == KeyEvent.KEYCODE_BACK && event.getRepeatCount() == 0) {
-                    if (mCommit != null) {
-                        if (mCommit.isShowing()) {
-                            mCommit.dismiss();
-                            OkHttpUtil.cancelSingleRequestByTag(TransactionLoginActivity.this.getClass().getName());
-
-                            isLoginSuc = false;
-                            toSecurityCode(null);
-                            mPassword.setText("");
-                            mPasswordET.setText("");
-                            mCaptcha.setText("");
-                        }
-                    }
-                }
-                return false;
-            }
-        });
-    }
-
-    /**
-     * 修改登录状态
-     */
-    private void setIslogin() {
-        if (Db_PUB_USERS.islogin() == true) {
-
-            UserEntity userEntity = new UserEntity();
-            //修改是否登录
-            userEntity.setIslogin("false");
-            Db_PUB_USERS.UpdateIslogin(userEntity);
-        }
-    }
-
-
-    /**
-     * 初始化控件的显示
-     */
-    private void initTextViewVisibility() {
-        if ("".equalsIgnoreCase(mFirst)) {
-            TextView mChange = (TextView) findViewById(R.id.Change);
-            mChange.setVisibility(View.INVISIBLE);
-        } else {
-            TextView mChange = (TextView) findViewById(R.id.Change);
-            mChange.setOnClickListener(this);
-            mChange.setVisibility(View.VISIBLE);
-        }
-    }
-
-    /**
-     * 查询加密键盘是否显示
-     * 初始化TextView数据处理
-     */
-    private void inquireCertification() {
-        if ("false".equals(Db_PUB_USERS.queryingKeyboard())) {
-            setPassEdit(false);
-        } else {
-            setPassEdit(true);
-        }
-        //TextView 数据处理
-        if (UserUtil.capitalAccount != null) {
-            mAccount.setText(UserUtil.capitalAccount);
-
-        } else {
-            mAccount.setHint("请输入账号");
-        }
-        if (mCaptcha.getText().toString().trim() != null && !mCaptcha.getText().toString().trim().equals("")) {
-            mCaptcha.setHint("请输入验证码");
-        } else {
-            mCaptcha.setHint("请输入验证码");
-        }
-        if (!TextUtils.isEmpty(mAccount.getText().toString().trim()) && !TextUtils.isEmpty(UserUtil.capitalAccount)) {
-            mCloseIV.setVisibility(View.VISIBLE);
-        } else {
-            mCloseIV.setVisibility(View.GONE);
-        }
-    }
-
-    /**
-     * 判断是否密码键盘还是普通键盘处理
-     *
-     * @param flag true 密文  false 明文
-     */
-    private void setPassEdit(Boolean flag) {
-        if (flag) {
-            mPasswordET.setVisibility(View.GONE);
-            mPassword.setVisibility(View.VISIBLE);
-            passwordFormat = "1";
-        } else {
-            mPasswordET.setVisibility(View.VISIBLE);
-            mPassword.setVisibility(View.GONE);
-            passwordFormat = "0";
-        }
-    }
-
-    /**
-     * 初始化密码键盘
-     */
-    private void getUnikey() {
-        diviceId = DeviceUtil.getDeviceId(CustomApplication.getContext());
-        try {
-            //初始化加密键盘
-            unikeyUrls = new UnikeyUrls(Constants.APPLY_PLUGIN, Constants.GET_CHALLEAGE, Constants.GET_BIT_AUTH_DATA, Constants.CHECK_BIT_AUTH_DATA, Constants.VERIFY_APP, Constants.CONFIRM_APPLY_PLUGIN_FORMAT);
-        } catch (UnikeyException e) {
-            ToastUtils.showShort(TransactionLoginActivity.this, e.toString());
-            e.printStackTrace();
-        }
-    }
-
-    /**
-     * 获取加密键盘
-     */
-    private void getKeyBoard() {
-        try {
-            UniKey.getInstance().init(CustomApplication.getContext(), unikeyUrls, diviceId);
-            //获取加密键盘插件是否存在
-            boolean pluginExist = UniKey.getInstance().isPluginExist();
-            if (!pluginExist) {     //如果不存在
-                HandleResponse.HandleResponseHelper(getPluginDownloadReqHandler(), Constants.APPLY_PLUGIN_REQ);
-            } else {                //如果存在
-                biAuthBtnClick();       //双向认证
-            }
-        } catch (UnikeyException e) {
-            e.printStackTrace();
-        }
-    }
-
-    /**
-     * 下载插件回调
-     *
-     * @return
-     */
-    private ResponseInterface getPluginDownloadReqHandler() {
-        mDownload = LoadingDialog.initDialog(this, "下载双向认证安全插件...");
-        if (!TransactionLoginActivity.this.isFinishing()) {
-            mDownload.show();
-        }
-
-        return new ResponseInterface() {
-            @Override
-            public void onGetResponse(Object response) {
-                //初始化用户对象修改数据库
-                UserEntity userEntity = new UserEntity();
-                if (response instanceof Boolean && (Boolean) response) {        //如果回调对象是boolean类型 且为true
-                    userEntity.setPlugins("true");
-                    Db_PUB_USERS.UpdatePlugins(userEntity);
-                    biAuthBtnClick();
-                    if (mDownload != null) {
-                        mDownload.dismiss();
-                    }
-//                    Helper.getInstance().showToast(TransactionLoginActivity.this, "下载插件成功");
-                } else {            //下载失败后的参数
-                    if (mDownload != null) {
-                        mDownload.dismiss();
-                    }
-                    if (!TransactionLoginActivity.this.isFinishing()) {
-                        //重复下载提示
-                        CertificationDialog.showDialog("提示信息", "安全插件加载失败，为了您的安全考虑希望您重下载。", "重新下载", "取消", TransactionLoginActivity.this, new CertificationDialog.PositiveCliceListener() {
-                            @Override
-                            public void positiveClick(View v) {
-                                HandleResponse.HandleResponseHelper(getPluginDownloadReqHandler(), Constants.APPLY_PLUGIN_REQ);
-                            }
-                        }, new CertificationDialog.CancleClickListener() {
-                            @Override
-                            public void cancleClick(View v) {
-                                isHttp = false;
-                                KeyboardRequestHttp(isHttp);
-                            }
-                        });
-                    }
-                    userEntity.setPlugins("false");
-                    Db_PUB_USERS.UpdatePlugins(userEntity);
-                }
-            }
-        };
-    }
-
-
-    /**
-     * 双向认证
-     */
-    private void biAuthBtnClick() {
-        HandleResponse.HandleResponseHelper(BiAuthFirstInterface(), Constants.Bi_AUTH_FIRST_REQ);
-    }
-
-    /**
-     * 双向认证回调
-     *
-     * @return
-     */
-    private ResponseInterface BiAuthFirstInterface() {
-        mLoad = LoadingDialog.initDialog(this, "加载中...");
-        if (!TransactionLoginActivity.this.isFinishing()) {
-            mLoad.show();
-        }
-        return new ResponseInterface() {
-            @Override
-            public void onGetResponse(Object response) {
-                UserEntity userEntity = new UserEntity();
-                if (response == null) {
-                    if (mLoad != null) {
-                        mLoad.dismiss();
-                    }
-                    userEntity.setCertification("false");
-                    Db_PUB_USERS.UpdateCertification(userEntity);
-                    return;
-                }
-                if (mLoad != null) {
-                    mLoad.dismiss();
-                }
-                String authData = String.valueOf(response);
-                if ("true".equals(authData)) {
-                    userEntity.setCertification("true");
-                    Db_PUB_USERS.UpdateCertification(userEntity);
-                    setPassEdit(true);          //改变键盘
-                } else if (authData.contains("-2146959355")) {
-                    if (!TransactionLoginActivity.this.isFinishing()) {
-                        CertificationDialog.showDialog("提示信息", "双向认证网络异常", "重新请求", "取消", TransactionLoginActivity.this, new CertificationDialog.PositiveCliceListener() {
-                            @Override
-                            public void positiveClick(View v) {
-                                biAuthBtnClick();
-                            }
-                        }, new CertificationDialog.CancleClickListener() {
-                            @Override
-                            public void cancleClick(View v) {
-                                isHttp = true;
-                                KeyboardRequestHttp(isHttp);
-                            }
-                        });
-                    }
-
-                } else {
-                    if (!TransactionLoginActivity.this.isFinishing()) {
-                        CertificationDialog.showDialog("提示信息", "双向认证网络异常", "重新请求", "取消", TransactionLoginActivity.this, new CertificationDialog.PositiveCliceListener() {
-                            @Override
-                            public void positiveClick(View v) {
-                                biAuthBtnClick();
-                            }
-                        }, new CertificationDialog.CancleClickListener() {
-                            @Override
-                            public void cancleClick(View v) {
-                                isHttp = true;
-                                KeyboardRequestHttp(isHttp);
-                            }
-                        });
-                    }
-                }
-            }
-        };
-    }
-
-
-    /**
-     * 账号密码 的监听
-     */
-    private void EditTextMonitor() {
-        mLogin.setOnClickListener(this);
-        mSecurityCode.setOnClickListener(this);
-        mAccount.addTextChangedListener(new MyTextWatcher());
-        mPassword.addTextChangedListener(new MyTextWatcher());
-        mPasswordET.addTextChangedListener(new MyTextWatcher());
-        mCaptcha.addTextChangedListener(new MyTextWatcher());
-
-
-    }
-
-    /**
-     * Button 显示状态
-     */
-    private void initButtonshow() {
-        if (mAccount.getText().toString().equals("")) {
-            mLogin.setEnabled(false);
-            mLogin.setBackgroundResource(R.drawable.button_login_unchecked);
-        } else if (mPassword.getText().toString().equals("") && mPasswordET.getText().toString().equals("")) {
-            mLogin.setEnabled(false);
-            mLogin.setBackgroundResource(R.drawable.button_login_unchecked);
-        } else if (mCaptcha.getText().toString().equals("")) {
-            mLogin.setEnabled(false);
-            mLogin.setBackgroundResource(R.drawable.button_login_unchecked);
-        } else {
-            mLogin.setEnabled(true);
-            mLogin.setBackgroundResource(R.drawable.button_login_pitchon);
-        }
-    }
-
-    /**
-     * 键盘插件数据获取
-     */
-    private void showKeyboardWithHeader() {
-        try {
-            PasswordKeyboard passwordKeyboard = UniKey.getInstance().getPasswordKeyboard(this, new OnInputDoneCallBack() {
-                @Override
-                public void getInputEncrypted(String s) {
-                    mKeyboardInput = s;
-//                    getPasswrod( Base64.encodeToString(s.getBytes(),0));
-//                    getPasswrod(s);
-                }
-
-                @Override
-                public void getCharNum(int i) {
-                    //显示当前用户已经输入的字符串个数
-                    String s = "";
-                    for (int a = 0; a < i; a++) {
-                        s += "*";
-                    }
-                    mPassword.setText(s);
-                    mPassword.setSelection(mPassword.getText().length());
-                }
-            }, 6, true, "custom_keyboard_view");
-            mPassword.setPasswordKeyboard(passwordKeyboard);
-
-        } catch (UnikeyException e) {
-            Helper.getInstance().showToast(TransactionLoginActivity.this, "弹出密码键盘失败：" + Integer.toHexString(e.getNumber()));
-        }
-    }
-
-    @Override
-    public int getLayoutId() {
-        return R.layout.activity_transaction_login_first;
-    }
-
-
-    /**
-     * ＩＤ　点击事件
-     *
-     * @param v
-     */
-    @Override
-    public void onClick(View v) {
-        Intent intent = new Intent();
-        switch (v.getId()) {
-            case R.id.publish_back:
-                if (!"true".equals(Exit)) {
-                    UserEntity userEntity = new UserEntity();
-                    userEntity.setIslogin("false");
-                    Db_PUB_USERS.UpdateIslogin(userEntity);
-                    setResult(RESULT_OK);
-                }
-                finish();
-                break;
-            case R.id.Service:
-                intent.setClass(this, HotlineActivity.class);
-                startActivity(intent);
-                break;
-            case R.id.Change:
-                intent.setClass(this, ChangeAccoutActivity.class);
-                Intent intent_data = getIntent();
-                intent.putExtras(intent_data);
-                intent.putExtra("pageindex", pageIndex);
-                intent.putExtra("Exit", Exit);
-                startActivity(intent);
-                finish();
-                break;
-            case R.id.Transaction_Login:
-                if (!TransactionLoginActivity.this.isFinishing()) {
-                    mCommit.show();
-                }
-                setIslogin();       //修改交易登录状态
-                //显示Dialog
-                if (mCaptcha.getText().toString().trim().equalsIgnoreCase(mVERIFICATIONCODE)) {
-                    mLogin.setFocusable(false);
-                    getIPtoLogin();    //交易登录
-                    return;
-                } else {
-                    if (mCommit != null) {
-                        mCommit.dismiss();
-                    }
-                    Helper.getInstance().showToast(TransactionLoginActivity.this, "验证码错误");
-                    toSecurityCode(null);
-                    mPassword.setText("");
-                    mPasswordET.setText("");
-                    mCaptcha.setText("");
-                }
-                break;
-            case R.id.SecurityCode:
-                if (!TransactionLoginActivity.this.isFinishing() && isKeyboardDialog != null) {
-                    isKeyboardDialog.show();
-                }
-                toSecurityCode(isKeyboardDialog);           //验证码
-                break;
-            case R.id.mKaihu:
-                OpeningAnAccountDialog openingAnAccount = new OpeningAnAccountDialog(this);
-                openingAnAccount.show();
-                break;
-            case R.id.CloseIV:
-                mAccount.setText("");
-                break;
-            case R.id.forgetpassword:
-                intent.setClass(this, FrogetTransactionPwdActivity.class);    //暂未合进来 ，注释
-                startActivity(intent);
-                break;
-        }
-    }
-
-    private void getIPtoLogin() {
-        OkHttpUtils.get().url("http://ip.taobao.com/service/getIpInfo.php?ip=myip")
-                .build().execute(new StringCallback() {
-            @Override
-            public void onError(Call call, Exception e, int id) {
-                toConnect();
-            }
-
-            @Override
-            public void onResponse(String response, int id) {
-                if (TextUtils.isEmpty(response)) {
-                    toConnect();
-                    return;
-                }
-                try {
-                    JSONObject json = new JSONObject(response);
-                    JSONObject data = json.getJSONObject("data");
-                    ip = data.getString("ip");
-                    toConnect();
-                } catch (JSONException e) {
-                    toConnect();
-                    e.printStackTrace();
-                }
-            }
-        });
-    }
-
-    /**
-     * 登录网络请求
-     */
-    private void toConnect() {
-        if (TextUtils.isEmpty(UserUtil.Mobile)) {
-            MistakeDialog.showDialog("登录入参异常", this, new MistakeDialog.MistakeDialgoListener() {
-                @Override
-                public void doPositive() {
-                    UserEntity userEntity = new UserEntity();
-                    userEntity.setMobile("");
-                    userEntity.setIsregister("");
-                    userEntity.setScno("");
-                    userEntity.setTypescno("");
-                    userEntity.setRegisterID("");
-                    userEntity.setIslogin("");
-
-
-                    Db_PUB_USERS.UpdateMobile(userEntity);
-                    Db_PUB_USERS.UpdateIsregister(userEntity);
-                    Db_PUB_USERS.UpdateScno(userEntity);
-                    Db_PUB_USERS.UpdateTypescno(userEntity);
-                    Db_PUB_USERS.UpdateRegister(userEntity);
-                    Db_PUB_USERS.UpdateIslogin(userEntity);
-                    dismissDownload();
-                    finish();
-                }
-            });
-        } else {
-            isLoginSuc = false;
-            String unikey = "0";
-            try {
-                unikey = UniKey.getInstance().getUnikeyId();
-            } catch (UnikeyException e) {
-                e.printStackTrace();
-            }
-            if (passwordFormat.equals("0")) {
-                mKeyboardInput = mPasswordET.getText().toString().trim();
-            } else {
-                mKeyboardInput = mKeyboardInput;
-            }
-            Map map1 = new HashMap<>();
-            map1.put("funcid", "300010");
-            map1.put("token", SpUtils.getString(this, "mSession", ""));
-            Map map2 = new HashMap<>();
-            map2.put("SEC_ID", "tpyzq");
-            map2.put("LOGIN_CODE", mAccount.getText().toString().trim());//610002680     101000913 //用户账号
-            map2.put("USER_PWD", mKeyboardInput);                       //密码
-            map2.put("PWD_TYPE", passwordFormat); //密码类型 0：明文 1：密文
-            map2.put("MOBILE", DeviceUtil.getDeviceId(CustomApplication.getContext()));                       //绑定UNIKEYID的手机号
-            map2.put("UNIKEYID", unikey);                       //UNIKEY插件ID
-            map2.put("APP_TYPE", "1");                       //手机类型 0：ios        1：android
-            map2.put("TCC", DeviceUtil.getDeviceId(CustomApplication.getContext()));
-            map2.put("SRRC", android.os.Build.MODEL);
-            map2.put("OP_STATION", "Android" + "," + UserUtil.Mobile + "," + DeviceUtil.getDeviceId(CustomApplication.getContext()) + "," + APPInfoUtils.getVersionName(this));
-            map2.put("APP_ID", ConstantUtil.APP_ID);
-            map1.put("parms", map2);
-
-            NetWorkUtil.getInstence().okHttpForPostString(TAG, ConstantUtil.URL_JY, map1, new StringCallback() {
-                @Override
-                public void onError(Call call, Exception e, int id) {
-                    if (mCommit != null) {
-                        mCommit.dismiss();
-                    }
-                    LogHelper.e(TAG, e.toString());
-                    Helper.getInstance().showToast(TransactionLoginActivity.this, "网络异常");
-                    mPassword.setText("");
-                    mPasswordET.setText("");
-                    mCaptcha.setText("");
-                    mLogin.setFocusable(true);
-                }
-
-                @Override
-                public void onResponse(String response, int id) {
-                    if (TextUtils.isEmpty(response)) {
-                        return;
-                    }
-                    try {
-                        JSONObject jsonObj = new JSONObject(response);
-                        String code_Str = jsonObj.optString("code");
-                        String msg_Str = jsonObj.optString("msg");
-                        JSONArray data = jsonObj.optJSONArray("data");
-                        for (int i = 0; i < data.length(); i++) {
-                            JSONObject Session = (JSONObject) data.get(i);
-                            mSession = Session.optString("SESSION");
-                            OLD_SRRC = Session.optString("OLD_SRRC");
-                            OLD_TCC = Session.optString("OLD_TCC");
-                            IS_OVERDUE = Session.optString("IS_OVERDUE");//风险评测状态 0正常 1即将过期 2过期 3未做
-                            CORP_RISK_LEVEL = Session.optString("CORP_RISK_LEVEL");//客户当前风险承受等级
-                            CORP_END_DATE = Session.optString("CORP_END_DATE");//风险测评有效期到期时间
-                        }
-                        if ("0".equalsIgnoreCase(code_Str)) {             //登录成功
-                            isLoginSuc = true;
-                            //存储风险测试结果 测评状态--测评等级--有效期结束日期
-                            SpUtils.putString(TransactionLoginActivity.this, "IS_OVERDUE", IS_OVERDUE);
-                            SpUtils.putString(TransactionLoginActivity.this, "CORP_RISK_LEVEL", CORP_RISK_LEVEL);
-                            SpUtils.putString(TransactionLoginActivity.this, "CORP_END_DATE", CORP_END_DATE);
-                            SpUtils.putString(TransactionLoginActivity.this, "mSession", mSession);
-
-                            getData(mAccount.getText().toString().trim(), "false", mSession);
-
-                        } else {
-                            toSecurityCode(null);
-                            if ("密码键盘解密失败".equals(msg_Str)) {
-                                if (mCommit != null) {
-                                    mCommit.dismiss();
-                                }
-                                mPassword.setText("");
-                                mPasswordET.setText("");
-                                mCaptcha.setText("");
-
-                                Helper.getInstance().showToast(TransactionLoginActivity.this, msg_Str.toString() + ",请重新输入");
-//                                isHttp = true;
-//                                KeyboardRequestHttp(isHttp);
-                            } else {
-                                if (mCommit != null) {
-                                    mCommit.dismiss();
-                                }
-                                mPassword.setText("");
-                                mPasswordET.setText("");
-                                mCaptcha.setText("");
-                                MistakeDialog.showDialog(msg_Str.toString(), TransactionLoginActivity.this);
-                                mLogin.setFocusable(true);
-                            }
-                        }
-                    } catch (JSONException e) {
-                        e.printStackTrace();
-                    }
-                }
-            });
-        }
-    }
-
-
-    /**
-     * 弹出风险测评弹框
-     */
     private void showCorpDialog() {
-        if (mCommit != null) {
-            mCommit.dismiss();
-        }
+//        if (mCommit != null) {
+//            mCommit.dismiss();
+//        }
         int style = 1000;
-        if ("1".equalsIgnoreCase(IS_OVERDUE)) {
-            //即将过期
-            style = 1000;
-        } else if ("2".equalsIgnoreCase(IS_OVERDUE)) {
+        if ("2".equalsIgnoreCase(IS_OVERDUE)) {
             //过期
             style = 2000;
         } else {//3的情况  未做
@@ -841,13 +326,803 @@ public class TransactionLoginActivity extends BaseActivity implements View.OnCli
             @Override
             public void onNagtiveClick() {
                 //以后再说
-                /*isLoginSuc = false;
-                UserEntity userEntity=new UserEntity();
-                userEntity.setIslogin("false");
-                Db_PUB_USERS.UpdateIslogin(userEntity);*/
+                    /*isLoginSuc = false;
+                    UserEntity userEntity=new UserEntity();
+                    userEntity.setIslogin("false");
+                    Db_PUB_USERS.UpdateIslogin(userEntity);*/
                 finish();
             }
         });
+    }
+
+    private void showDialogOrSaveData() {
+        if ("2".equalsIgnoreCase(IS_OVERDUE) || "3".equalsIgnoreCase(IS_OVERDUE)) {
+            //弹出风险评测dialog
+            showCorpDialog();
+
+        } else {
+//            if (mCommit.isShowing()) {
+//                mCommit.dismiss();
+//            }
+            finish();
+        }
+    }
+
+
+    @Override
+    public int getLayoutId() {
+        return R.layout.activity_transaction_login_first;
+    }
+
+    private void getIntentData() {
+        Intent intent = getIntent();
+        if (intent != null) {
+            pageIndex = intent.getIntExtra("pageindex", 0);
+        }
+        mExit = getIntent().getBooleanExtra("EXIT", false);
+    }
+
+
+    private void initLogic() {
+        mUserEntity = new UserEntity();
+        inquireCertification();
+        initTextViewVisibility();
+        control();
+        KeyListener();
+        monitor();
+        mAccount_et.setSelection(mAccount_et.getText().length());
+        mCaptcha_et.setSelection(mCaptcha_et.getText().length());
+        //验证码请求
+        toSecurityCode();
+        IsKeyboardRequestHttp();
+        HttpIP();
+    }
+
+
+    //初始化的数据展示
+    private void inquireCertification() {
+        if (!mExit) {
+            mUserEntity.setIslogin("false");
+            Db_PUB_USERS.UpdateIslogin(mUserEntity);
+            SpUtils.putString(TransactionLoginActivity.this, "mSession", "");
+        }
+
+        mAccount_et.setHint("请输入账号");
+        if (!TextUtils.isEmpty(UserUtil.capitalAccount)) {
+            mAccount_et.setText(UserUtil.capitalAccount);
+            mPassword_et.setFocusable(true);
+            mPassword_et.setFocusableInTouchMode(true);
+            mPassword_et.requestFocus();
+        } else {
+            mAccount_et.setFocusable(true);
+            mAccount_et.setFocusableInTouchMode(true);
+            mAccount_et.requestFocus();
+        }
+
+        if (!TextUtils.isEmpty(mCaptcha_et.getText().toString().trim()) && !mCaptcha_et.getText().toString().trim().equals("")) {
+            mCaptcha_et.setHint("请输入验证码");
+        } else {
+            mCaptcha_et.setHint("请输入验证码");
+        }
+    }
+
+    //删除控件展示
+    private void control() {
+        if (!TextUtils.isEmpty(mAccount_et.getText().toString().trim()) && !TextUtils.isEmpty(UserUtil.capitalAccount)) {
+            mClose_iv.setVisibility(View.VISIBLE);
+        } else {
+            mClose_iv.setVisibility(View.GONE);
+        }
+    }
+
+    //初始化点击事件
+    private void monitor() {
+        mClose_iv.setOnClickListener(this);
+        mLogin_but.setOnClickListener(this);
+//        mCxaptcha_tv.setOnClickListener(this);
+        mLogin_but.setClickable(false);
+
+        mAccount_et.addTextChangedListener(new MyTextWatcher());
+        mPassword_et.addTextChangedListener(new MyTextWatcher());
+        mCaptcha_et.addTextChangedListener(new MyTextWatcher());
+        mSecurityCode.setOnClickListener(this);
+
+    }
+
+    //获取外网IP地址
+    private void HttpIP() {
+        OkHttpUtils.get().url("http://ip.taobao.com/service/getIpInfo.php?ip=myip")
+                .build().execute(new StringCallback() {
+            @Override
+            public void onError(Call call, Exception e, int id) {
+            }
+
+            @Override
+            public void onResponse(String response, int id) {
+                if (TextUtils.isEmpty(response)) {
+                    return;
+                }
+                try {
+                    JSONObject json = new JSONObject(response);
+                    JSONObject data = json.getJSONObject("data");
+                    mIp = data.getString("ip");
+                } catch (JSONException e) {
+                    e.printStackTrace();
+                }
+            }
+        });
+    }
+
+    //密码输入框点击逻辑
+    private void KeyListener() {
+        mPassword_et.setOnTouchListener(new View.OnTouchListener() {
+            @Override
+            public boolean onTouch(View v, MotionEvent event) {
+                if (event.getAction() == MotionEvent.ACTION_UP) {
+
+                    if (mMarkbit == 0) {
+
+                        if (!isKeyStatusControl) {
+                            mBuilder.setTitle(LOADING);
+                            mBuilder.create().show();
+                        }
+                        mMarkbit = 1;
+                    }
+                    if (mMarkbit == 1) {
+                        mMarkbit = 1;
+                        if ("1".equals(passwordFormat)) {
+                            mPassword_et.setFocusable(true);
+                            handler.sendEmptyMessage(0);
+                            showKeyboardWithHeader();
+                        }
+                    }
+                }
+
+                return false;
+            }
+        });
+    }
+
+    //网络请求图片验证码
+    private void toSecurityCode() {
+        mBuilder.setTitle(LOADING);
+        mBuilder.create().show();
+        simpleRemoteControl.setCommand(new ToSecurityCode(new SecurityCodeConnect(this, TAG)));
+        simpleRemoteControl.startConnect();
+    }
+
+    //网络请求键盘状态
+    private void IsKeyboardRequestHttp() {
+        simpleRemoteControl.setCommand(new ToKeyBoard(new KeyBoardConnect(this, TAG)));
+        simpleRemoteControl.startConnect();
+    }
+
+    //网络请求键盘是否可以不实用加密
+    private void IsKeyBoardTypeHttp() {
+        mBuilder.setTitle(LOADING);
+        mBuilder.create().show();
+        simpleRemoteControl.setCommand(new ToKeyBoardType(new KeyBoardTypeConnect(this, TAG)));
+        simpleRemoteControl.startConnect();
+    }
+
+    //网络请求交易登录
+    private void toLogInConnect() {
+
+        if (TextUtils.isEmpty(UserUtil.Mobile)) {
+            MistakeDialog.showDialog("登录入参异常", this, new MistakeDialog.MistakeDialgoListener() {
+                @Override
+                public void doPositive() {
+                    UserEntity userEntity = new UserEntity();
+                    userEntity.setMobile("");
+                    userEntity.setIsregister("");
+                    userEntity.setScno("");
+                    userEntity.setTypescno("");
+                    userEntity.setRegisterID("");
+                    userEntity.setIslogin("");
+
+
+                    Db_PUB_USERS.UpdateMobile(userEntity);
+                    Db_PUB_USERS.UpdateIsregister(userEntity);
+                    Db_PUB_USERS.UpdateScno(userEntity);
+                    Db_PUB_USERS.UpdateTypescno(userEntity);
+                    Db_PUB_USERS.UpdateRegister(userEntity);
+                    Db_PUB_USERS.UpdateIslogin(userEntity);
+
+                    finish();
+                }
+            });
+        } else {
+            isLoginSuc = false;
+            mBuilder.setTitle(ISCOMMIT);
+            mBuilder.create().show();
+            String unikey = "0";
+            try {
+                unikey = UniKey.getInstance().getUnikeyId();
+            } catch (UnikeyException e) {
+                e.printStackTrace();
+            }
+            if ("0".equals(passwordFormat)) {
+                mKeyboardInput = mPassword_et.getText().toString();
+            } else {
+                mKeyboardInput = mKeyboardInput;
+            }
+            simpleRemoteControl.setCommand(new ToLogIn(new LogInConnect(this, TAG, unikey, passwordFormat, mAccount_et.getText().toString(), mKeyboardInput)));
+            simpleRemoteControl.startConnect();
+        }
+    }
+
+
+
+
+    private void LogInLogic() {
+        //第一次登录数据库交易账号无数据 添加到数据库
+        if (!"".equals(OLD_SRRC) && !DeviceUtil.getDeviceId(CustomApplication.getContext()).equalsIgnoreCase(OLD_TCC) && !android.os.Build.MODEL.equals(OLD_SRRC)) { //换手机登录
+            LoginDialog.showDialog("您更换了登录设备，上次使用的设备型号是" + OLD_SRRC, TransactionLoginActivity.this, new MistakeDialog.MistakeDialgoListener() {
+                @Override
+                public void doPositive() {
+                    if ("2".equalsIgnoreCase(IS_OVERDUE) || "3".equalsIgnoreCase(IS_OVERDUE)) {
+                        //未做或过期弹出风险评测dialog
+                        showCorpDialog();
+                    } else {
+                        finish();
+                    }
+                }
+            });
+            Gather();
+        } else {//没有更换手机
+            showDialogOrSaveData();
+            Gather();
+        }
+    }
+
+    //网络请求绑定资金账号
+    private void addAccountData() {
+        mBuilder.setTitle(LOADING);
+        mBuilder.create().show();
+        simpleRemoteControl.setCommand(new ToAddUser(new AddUserConnect(this, TAG, mAccount_et.getText().toString())));
+        simpleRemoteControl.startConnect();
+    }
+
+
+
+    @Override
+    public void getResult(Object result, String tag) {
+        if (KeyBoardConnect.TAG.equals(tag)) {
+            isKeyStatusControl = true;
+            if (mBuilder.dialog.isShowing())
+                mBuilder.dialog.dismiss();
+            if (result instanceof Boolean) {
+                if ((Boolean) result) {
+                    mUserEntity.setKeyboard("true");
+                    UserUtil.Keyboard = "1";
+                } else {
+                    mUserEntity.setKeyboard("false");
+                    UserUtil.Keyboard = "0";
+                }
+                Db_PUB_USERS.UpdateKeyboard(mUserEntity);
+                if (ConstantUtil.USERFUL_KEYBOARD) {
+                    initKeyBoard((Boolean) result);
+                } else {
+                    initKeyBoard(false);
+                }
+            }
+        } else if (KeyBoardTypeConnect.TAG.equals(tag)) {
+            if (mBuilder.dialog.isShowing())
+                mBuilder.dialog.dismiss();
+            if (result instanceof Boolean) {
+                if ((Boolean) result) {
+                    mUserEntity.setKeyboard("false");
+                    mUserEntity.setCertification("false");
+                    Db_PUB_USERS.UpdateKeyboard(mUserEntity);
+                    Db_PUB_USERS.UpdateCertification(mUserEntity);
+                    setPassEdit();
+                } else {
+                    if (isHttp) {
+                        if (!TransactionLoginActivity.this.isFinishing()) {
+                            MutualAuthenticationDialog.showDialog("双向认证失败点击退出", TransactionLoginActivity.this);
+                        }
+                    } else {
+                        if (!TransactionLoginActivity.this.isFinishing()) {
+                            MutualAuthenticationDialog.showDialog("系统异常", TransactionLoginActivity.this);
+                        }
+                    }
+                }
+            }
+        } else if (SecurityCodeConnect.TAG.equals(tag)) {
+            mBuilder.dialog.dismiss();
+            if (result instanceof String && SecurityCodeConnect.MSG.equals(result)) {
+                mSecurityCode.setImageResource(R.mipmap.ic_again);
+                Helper.getInstance().showToast(TransactionLoginActivity.this, result.toString());
+            } else if (result instanceof String && ConstantUtil.NETWORK_ERROR.equals(result)) {
+                mSecurityCode.setImageResource(R.mipmap.ic_again);
+                Helper.getInstance().showToast(TransactionLoginActivity.this, ConstantUtil.NETWORK_ERROR);
+            } else {
+                try {
+                    JSONObject jsonObject = (JSONObject) result;
+                    mVerificationcode = jsonObject.getString("VERIFICATIONCODE");
+                    Bitmap bitmap = Helper.base64ToBitmap(jsonObject.getString("VERIFICATIONIMAGE"));
+                    if (bitmap != null && bitmap.equals(bitmap)) {
+                        mSecurityCode.setVisibility(View.VISIBLE);
+                        mSecurityCode.setImageBitmap(bitmap);
+                        mSecurityCode.setAspectRatio(3.2f);
+                    } else {
+                        mSecurityCode.setImageResource(R.mipmap.ic_again);
+                    }
+                } catch (JSONException e) {
+                    e.printStackTrace();
+                }
+            }
+        } else if (LogInConnect.TAG.equals(tag)) {
+            mBuilder.dialog.dismiss();
+            if (result instanceof String) {
+                if (ConstantUtil.NETWORK_ERROR.equals(result)) {
+                    Helper.getInstance().showToast(TransactionLoginActivity.this, result.toString());
+                    mPassword_et.setText("");
+                    mCaptcha_et.setText("");
+                } else if (LogInConnect.MSG.equals(tag)) {
+                    Helper.getInstance().showToast(TransactionLoginActivity.this, result.toString() + ",请重新输入");
+                    mPassword_et.setText("");
+                    mCaptcha_et.setText("");
+                } else {
+                    mPassword_et.setText("");
+                    mCaptcha_et.setText("");
+                    MistakeDialog.showDialog(result, TransactionLoginActivity.this);
+                }
+                return;
+            }
+            isLoginSuc = true;
+            JSONArray result_ary = (JSONArray) result;
+            for (int i = 0; i < result_ary.length(); i++) {
+                try {
+                    mSession = result_ary.getJSONObject(i).getString("SESSION");
+                    OLD_SRRC = result_ary.getJSONObject(i).getString("OLD_SRRC");
+                    OLD_TCC = result_ary.getJSONObject(i).getString("OLD_TCC");
+
+                    JSONObject Session = (JSONObject) result_ary.get(i);
+                    IS_OVERDUE = Session.optString("IS_OVERDUE");//风险评测状态 0正常 1即将过期 2过期 3未做
+                    CORP_RISK_LEVEL = Session.optString("CORP_RISK_LEVEL");//客户当前风险承受等级
+                    CORP_END_DATE = Session.optString("CORP_END_DATE");//风险测评有效期到期时间
+
+                    getAccountData();
+
+                } catch (JSONException e) {
+                    e.printStackTrace();
+                }
+            }
+        } else if (AddUserConnect.TAG.equals(tag)) {
+
+            if (result instanceof String) {
+                mBuilder.dialog.dismiss();
+                if (ConstantUtil.NETWORK_ERROR.equals(result)) {
+                    isLoginSuc = false;
+                    Helper.getInstance().showToast(TransactionLoginActivity.this, result.toString());
+                    mPassword_et.setText("");
+                    mCaptcha_et.setText("");
+                } else if ("0".equals(result)) {
+                    HOLD_SEQ.deleteAll();
+                    SpUtils.putString(CustomApplication.getContext(), ConstantUtil.APPEARHOLD, ConstantUtil.HOLD_DISAPPEAR);
+                    setAccountData();                      //修改资金账号数据
+
+                } else {
+                    isLoginSuc = false;
+                    MistakeDialog.showDialog(result.toString(), TransactionLoginActivity.this);
+                    mPassword_et.setText("");
+                    mCaptcha_et.setText("");
+                }
+            }
+        }
+    }
+
+    //判断 在数据库是否存在 资金账号
+    private void getAccountData() {
+        //查询资金账号
+        List<UserEntity> list = KeyEncryptionUtils.getInstance().localDecryptTradescno();
+        StringBuilder sb = new StringBuilder();
+        if (list != null && list.size() > 0) {
+            for (int i = 0; i < list.size(); i++) {
+                sb.append(list.get(i).getTradescno()).append(",");
+            }
+        }
+        String mTradescno = sb.toString();
+        if (TextUtils.isEmpty(mTradescno)) {
+            addAccountData();
+        } else {
+            if (mTradescno.contains(mAccount_et.getText().toString())) {
+                setAccountData();
+            } else {
+                addAccountData();
+            }
+        }
+    }
+
+    //博睿埋点
+    private void Gather() {
+        SimpleDateFormat mDateFormat = new SimpleDateFormat("yyyy-MM-dd HH:mm:ss");
+        String date = mDateFormat.format(new java.util.Date());
+        BRutil.menuLogIn(android.os.Build.VERSION.RELEASE, UserUtil.Mobile, DeviceUtil.getDeviceId(CustomApplication.getContext()), APPInfoUtils.getVersionName(TransactionLoginActivity.this), mIp, UserUtil.capitalAccount, date);
+    }
+
+
+    @Override
+    public void onClick(View v) {
+        Intent intent = new Intent();
+        switch (v.getId()) {
+            case R.id.publish_back:
+                if (!mExit) {
+                    setResult(RESULT_OK);
+                }
+                finish();
+                break;
+            case R.id.forgetpassword:       //忘记密码
+                intent.setClass(this, FrogetTransactionPwdActivity.class);    //暂未合进来 ，注释
+                startActivity(intent);
+                break;
+            case R.id.mKaihu:                //开户
+                OpeningAnAccountDialog openingAnAccount = new OpeningAnAccountDialog(this);
+                openingAnAccount.show();
+                break;
+            case R.id.Service:              //客服
+                intent.setClass(this, HotlineActivity.class);
+                startActivity(intent);
+                break;
+            case R.id.CloseIV:             //删除
+                mAccount_et.setText("");
+                break;
+            case R.id.SecurityCode:        //验证码
+                toSecurityCode();
+                break;
+            case R.id.ZhangIV:             //绑定并更换帐号界面
+                showPopupWindow();
+
+                break;
+            case R.id.Transaction_Login:  //登录
+                mLogin_but.setClickable(false);
+                if (mCaptcha_et.getText().toString().trim().equalsIgnoreCase(mVerificationcode)) {
+                    toLogInConnect();
+                } else {
+                    Helper.getInstance().showToast(TransactionLoginActivity.this, "验证码错误");
+                    toSecurityCode();
+                    mPassword_et.setText("");
+                    mCaptcha_et.setText("");
+                }
+                break;
+        }
+    }
+
+
+
+    /**
+     * 弹出 绑定资金账号ListView列表
+     */
+    private void showPopupWindow() {
+        View view = LayoutInflater.from(this).inflate(R.layout.popupwindow_listview, null);
+        ListView mPWListView = (ListView) view.findViewById(R.id.PopupWindowListView);
+
+        //查询资金账号
+        List<UserEntity> userEntities = KeyEncryptionUtils.getInstance().localDecryptTradescno();
+        final List<String> list = new ArrayList<>();
+        String[] s = userEntities.get(0).getTradescno().split(",");
+        if ("".equals(s[0])) {
+
+        } else {
+            for (int i = 0; i < s.length; i++) {
+                list.add(s[i]);
+            }
+        }
+        //弹出 资金账号列表
+        PopupWindowAdapter adapter = new PopupWindowAdapter(this);
+        adapter.setData(list);
+        mPWListView.setAdapter(adapter);
+        mPWListView.setEmptyView(view.findViewById(R.id.tv_null));
+        // 创建一个PopuWidow对象
+        final PopupWindow popupWindow = new PopupWindow(view, TransitionUtils.dp2px(290, this), TransitionUtils.dp2px(150, this), true);
+        // 使其聚集
+        popupWindow.setFocusable(true);
+        // 设置允许在外点击消失
+        popupWindow.setOutsideTouchable(true);
+        // 这个是为了点击“返回Back”也能使其消失，并且并不会影响你的背景
+        popupWindow.setBackgroundDrawable(new ColorDrawable(0xf0ffffff));
+        WindowManager windowManager = (WindowManager) getSystemService(Context.WINDOW_SERVICE);
+        int xPos = windowManager.getDefaultDisplay().getWidth() / 2
+                - popupWindow.getWidth() / 2;
+        popupWindow.showAsDropDown(mAccount_et, TransitionUtils.dp2px(60, this), TransitionUtils.dp2px(15, this));
+        mPWListView.setOnItemClickListener(new AdapterView.OnItemClickListener() {
+            @Override
+            public void onItemClick(AdapterView<?> parent, View view, int position, long id) {
+                if (popupWindow != null) {
+                    mAccount_et.addTextChangedListener(new MyTextWatcher());
+                    mAccount_et.setText(list.get(position));
+                    mAccount_et.setSelection(list.get(position).length());
+                    popupWindow.dismiss();
+                }
+            }
+        });
+    }
+
+    @Override
+    public boolean handleMessage(Message msg) {
+        if (msg.what == 0) {
+            PasswordKeyboardUtils.hideSoftKeyboard(mAccount_et, TransactionLoginActivity.this);
+            PasswordKeyboardUtils.hideSoftKeyboard(mPassword_et, TransactionLoginActivity.this);
+            PasswordKeyboardUtils.hideSoftKeyboard(mCaptcha_et, TransactionLoginActivity.this);
+        } else if (msg.what == 1) {
+            if ("0".equals(UserUtil.Keyboard)) {
+//                PasswordKeyboardUtils.showSoftKeyboar(mPassword_et, TransactionLoginActivity.this);
+            } else {
+                showKeyboardWithHeader();
+            }
+
+
+        }
+        return true;
+    }
+
+    private void initKeyBoard(boolean status) {
+        if (status) {
+            getUnikey();
+            if (PasswordKeyboardUtils.getKeyBoard(unikeyUrls, diviceId)) {
+                biAuthBtnClick();       //双向认证
+            } else {
+                Lomboz();               //下载插件
+            }
+            setPassEdit();
+            KeyListener();
+            if (!TextUtils.isEmpty(mAccount_et.getText().toString())) {
+                showKeyboardWithHeader();
+            }
+        } else {
+            setPassEdit();
+            handler.sendEmptyMessage(1);
+        }
+
+    }
+
+    //修改数据库资金账号并且修改登录状态
+    private void setAccountData() {
+
+        SpUtils.putString(TransactionLoginActivity.this, "mSession", mSession);
+
+        String mAccount_Str = mAccount_et.getText().toString().trim();
+        //查询资金账号
+        List<UserEntity> list = KeyEncryptionUtils.getInstance().localDecryptTradescno();
+        String tradescno = "";
+        if (list.size() > 0) {
+            tradescno = list.get(0).getTradescno();
+        }
+
+        if (!TextUtils.isEmpty(tradescno) && tradescno.contains(mAccount_Str)) {         //数据库数据是否包含 输入字段
+            if (!tradescno.contains(",")) {             //数据库数据是否包含","
+                tradescno = tradescno.replace(mAccount_Str, "");
+                KeyEncryptionUtils.getInstance().localEncryptTradescno(mAccount_Str + "," + tradescno);
+            } else {
+                tradescno = tradescno.replace(mAccount_Str + ",", "");
+                KeyEncryptionUtils.getInstance().localEncryptTradescno(mAccount_Str + "," + tradescno);
+            }
+        } else {
+            KeyEncryptionUtils.getInstance().localEncryptTradescno(mAccount_Str + "," + tradescno);
+        }
+
+        //修改是否登录
+        mUserEntity.setIslogin("true");
+        //修改资金账号
+        Db_PUB_USERS.UpdateIslogin(mUserEntity);
+
+        LogInLogic();
+
+    }
+
+
+    /**
+     * 插件下载
+     */
+    private void Lomboz() {
+        mBuilder.dialog.dismiss();
+        mBuilder.setTitle(DOWNLOAD);
+        mBuilder.create().show();
+        HandleResponse.HandleResponseHelper(getPluginDownloadReqHandler(), Constants.APPLY_PLUGIN_REQ);
+    }
+
+    /**
+     * 双向认证
+     */
+    private void biAuthBtnClick() {
+        mBuilder.dialog.dismiss();
+        mBuilder.setTitle(LOADING);
+        mBuilder.create().show();
+        HandleResponse.HandleResponseHelper(BiAuthFirstInterface(), Constants.Bi_AUTH_FIRST_REQ);
+    }
+
+
+    /**
+     * 初始化密码键盘
+     */
+    private void getUnikey() {
+        diviceId = DeviceUtil.getDeviceId(CustomApplication.getContext());
+        try {
+            //初始化加密键盘
+            unikeyUrls = new UnikeyUrls(Constants.APPLY_PLUGIN, Constants.GET_CHALLEAGE, Constants.GET_BIT_AUTH_DATA, Constants.CHECK_BIT_AUTH_DATA, Constants.VERIFY_APP, Constants.CONFIRM_APPLY_PLUGIN_FORMAT);
+        } catch (UnikeyException e) {
+            ToastUtils.showShort(this, e.toString());
+            e.printStackTrace();
+        }
+    }
+
+    /**
+     * 下载插件回调
+     *
+     * @return
+     */
+    private ResponseInterface getPluginDownloadReqHandler() {
+        return new ResponseInterface() {
+            @Override
+            public void onGetResponse(Object response) {
+                //初始化用户对象修改数据库
+                UserEntity userEntity = new UserEntity();
+                if (response instanceof Boolean && (Boolean) response) {        //如果回调对象是boolean类型 且为true
+                    userEntity.setPlugins("true");
+                    Db_PUB_USERS.UpdatePlugins(userEntity);
+                    biAuthBtnClick();
+                    Helper.getInstance().showToast(TransactionLoginActivity.this, "下载插件成功");
+                } else {            //下载失败后的参数
+                    mBuilder.dialog.dismiss();
+                    if (!TransactionLoginActivity.this.isFinishing()) {
+                        //重复下载提示
+                        CertificationDialog.showDialog("提示信息", "安全插件加载失败，为了您的安全考虑希望您重下载。", "重新下载", "取消", TransactionLoginActivity.this, new CertificationDialog.PositiveCliceListener() {
+                            @Override
+                            public void positiveClick(View v) {
+                                Lomboz();
+                            }
+                        }, new CertificationDialog.CancleClickListener() {
+                            @Override
+                            public void cancleClick(View v) {
+                                isHttp = true;
+                                IsKeyBoardTypeHttp();
+                            }
+                        });
+                    }
+                    userEntity.setPlugins("false");
+                    Db_PUB_USERS.UpdatePlugins(userEntity);
+                }
+            }
+        };
+    }
+
+
+    /**
+     * 双向认证回调
+     *
+     * @return
+     */
+    private ResponseInterface BiAuthFirstInterface() {
+        mBuilder.dialog.dismiss();
+        return new ResponseInterface() {
+            @Override
+            public void onGetResponse(Object response) {
+                if (response == null) {
+                    mUserEntity.setCertification("false");
+                    Db_PUB_USERS.UpdateCertification(mUserEntity);
+                    return;
+                }
+                String authData = String.valueOf(response);
+                if ("true".equals(authData)) {
+                    mUserEntity.setCertification("true");
+                    Db_PUB_USERS.UpdateCertification(mUserEntity);
+                    setPassEdit();
+                } else {
+                    if (!TransactionLoginActivity.this.isFinishing()) {
+                        CertificationDialog.showDialog("提示信息", "双向认证网络异常", "重新请求", "取消", TransactionLoginActivity.this, new CertificationDialog.PositiveCliceListener() {
+                            @Override
+                            public void positiveClick(View v) {
+                                biAuthBtnClick();
+                            }
+                        }, new CertificationDialog.CancleClickListener() {
+                            @Override
+                            public void cancleClick(View v) {
+                                isHttp = true;
+                                IsKeyBoardTypeHttp();
+                            }
+                        });
+                    }
+                }
+            }
+        };
+    }
+
+    /**
+     * 键盘插件数据获取
+     */
+    private void showKeyboardWithHeader() {
+
+        try {
+            //显示当前用户已经输入的字符串个数
+            passwordKeyboard = UniKey.getInstance().getPasswordKeyboard(this, new OnInputDoneCallBack() {
+                @Override
+                public void getInputEncrypted(String s) {
+                    mKeyboardInput = s;
+                }
+
+                @Override
+                public void getCharNum(int i) {
+                    //显示当前用户已经输入的字符串个数
+                    LogUtil.d(TAG, "num:" + i);
+                    String s = "";
+                    for (int a = 0; a < i; a++) {
+                        s += "*";
+                    }
+                    mPassword_et.setText(s);
+                    mPassword_et.setSelection(mPassword_et.getText().length());
+                }
+            }, 6, true, "custom_keyboard_view");
+            passwordKeyboard.show();
+        } catch (UnikeyException e) {
+            Helper.getInstance().showToast(TransactionLoginActivity.this, "弹出密码键盘失败：" + Integer.toHexString(e.getNumber()));
+        }
+    }
+
+    /**
+     * 判断是否密码键盘还是普通键盘处理
+     *
+     * @param : 1 密文  0 明文
+     */
+    private void setPassEdit() {
+        UserUtil.refrushUserInfo();
+        if ("0".equals(UserUtil.Keyboard)) {
+            mPassword_et.setVisibility(View.VISIBLE);
+            passwordFormat = "0";
+        } else {
+            mPassword_et.setVisibility(View.VISIBLE);
+            passwordFormat = "1";
+        }
+    }
+
+    /**
+     * 初始化控件的显示
+     */
+    private void initTextViewVisibility() {
+        if (TextUtils.isEmpty(UserUtil.capitalAccount)) {
+            mZhang_iv.setVisibility(View.INVISIBLE);
+        } else {
+            mZhang_iv.setOnClickListener(this);
+            mZhang_iv.setVisibility(View.VISIBLE);
+        }
+    }
+
+    /**
+     * ImagVie 状态
+     */
+    public void initImageViewshow() {
+        if (TextUtils.isEmpty(mAccount_et.getText().toString().trim())) {
+            if (TextUtils.isEmpty(mAccount_et.getText().toString().trim())) {
+                mClose_iv.setVisibility(View.GONE);
+            } else {
+                mClose_iv.setVisibility(View.GONE);
+            }
+        } else {
+            if (TextUtils.isEmpty(mAccount_et.getText().toString().trim())) {
+                mClose_iv.setVisibility(View.GONE);
+            } else {
+                mClose_iv.setVisibility(View.VISIBLE);
+            }
+        }
+    }
+
+    /**
+     * Button 显示状态
+     */
+    private void initButtonshow() {
+        if (mAccount_et.getText().toString().equals("")) {
+            mLogin_but.setClickable(false);
+            mLogin_but.setBackgroundResource(R.drawable.button_login_unchecked);
+        } else if (mPassword_et.getText().toString().equals("")) {
+            mLogin_but.setClickable(false);
+            mLogin_but.setBackgroundResource(R.drawable.button_login_unchecked);
+        } else if (mCaptcha_et.getText().toString().equals("")) {
+            mLogin_but.setClickable(false);
+            mLogin_but.setBackgroundResource(R.drawable.button_login_unchecked);
+        } else {
+            mLogin_but.setClickable(true);
+            mLogin_but.setBackgroundResource(R.drawable.button_login_pitchon);
+        }
     }
 
     @Override
@@ -1013,427 +1288,6 @@ public class TransactionLoginActivity extends BaseActivity implements View.OnCli
         }
 
     }
-    /**
-     * 是否需要返回业务类进行弹框操作
-     * @return true需要 false不需要
-     */
-/*
-    private boolean isNeedShowCropDialog() {
-        boolean flag = false;
-        try {
-            String isDialogShow = SpUtils.getString(this,"ISDIALOGSHOW","");//测评状态 存储形式：日期
-            //状态码--风险等级--到期日期 如：20160606--1--中等--20170606
-//            if (!TextUtils.isEmpty(isDialogShow)) {
-                // TODO: 2017/6/26 确定返回日期的格式
-                SimpleDateFormat sDateFormat = new SimpleDateFormat("yyyy-MM-dd");
-                String date = sDateFormat.format(new java.util.Date());
-                SpUtils.putString(this,"ISDIALOGSHOW",date);
-                if (!date.equalsIgnoreCase(isDialogShow)) {
-                    //今天是第一次登录了，返回业务类进行弹框
-                    flag = true;
-                }
-//            } else {
-//                flag = true;
-//            }
-        } catch (Exception e) {
-            e.printStackTrace();
-        } finally {
-            return flag;
-        }
-    }
-*/
-
-    /**
-     * 新增绑定用户
-     */
-    private void setAdded(final String isfinish, String session) {
-        HashMap map = new HashMap();
-        HashMap map1 = new HashMap();
-        map.put("funcid", "800104");
-        map.put("token", session);
-        map.put("parms", map1);
-        map1.put("type", "1");
-        map1.put("account", mAccount.getText().toString().trim());
-        map1.put("user_type", KeyEncryptionUtils.getInstance().Typescno());
-        map1.put("user_account", UserUtil.userId);
-
-        NetWorkUtil.getInstence().okHttpForPostString(TAG, ConstantUtil.URL_JYBD, map, new StringCallback() {
-            @Override
-            public void onError(Call call, Exception e, int id) {
-
-                if (mCommit != null) {
-                    mCommit.dismiss();
-                }
-
-                LogUtil.e(TAG, e.toString());
-                Helper.getInstance().showToast(TransactionLoginActivity.this, "网络异常");
-                isLoginSuc = false;
-                toSecurityCode(null);
-                mPassword.setText("");
-                mPasswordET.setText("");
-                mCaptcha.setText("");
-            }
-
-            @Override
-            public void onResponse(String response, int id) {
-                if (mCommit != null) {
-                    mCommit.dismiss();
-                }
-                if (TextUtils.isEmpty(response)) {
-                    return;
-                }
-                try {
-                    JSONObject jsonObj = new JSONObject(response);
-                    String code_Str = jsonObj.getString("code");
-                    String msg_Str = jsonObj.getString("msg");
-                    if ("0".equals(code_Str)) {         //新增绑定 成功
-                        HOLD_SEQ.deleteAll();
-                        SpUtils.putString(CustomApplication.getContext(), ConstantUtil.APPEARHOLD, ConstantUtil.HOLD_DISAPPEAR);
-                        setData(isfinish);                      //修改资金账号数据
-                    } else {
-                        isLoginSuc = false;
-                        toSecurityCode(null);
-                        mPassword.setText("");
-                        mPasswordET.setText("");
-                        mCaptcha.setText("");
-                        MistakeDialog.showDialog(msg_Str.toString(), TransactionLoginActivity.this);
-                    }
-                } catch (JSONException e) {
-                    e.printStackTrace();
-                }
-            }
-        });
-    }
-
-
-    private void LogInLogic() {
-        //第一次登录数据库交易账号无数据 添加到数据库
-        if (!"".equals(OLD_SRRC) && !DeviceUtil.getDeviceId(CustomApplication.getContext()).equalsIgnoreCase(OLD_TCC) && !android.os.Build.MODEL.equals(OLD_SRRC)) { //换手机登录
-            LoginDialog.showDialog("您更换了登录设备，上次使用的设备型号是" + OLD_SRRC, TransactionLoginActivity.this, new MistakeDialog.MistakeDialgoListener() {
-                @Override
-                public void doPositive() {
-                    if ("2".equalsIgnoreCase(IS_OVERDUE) || "3".equalsIgnoreCase(IS_OVERDUE)) {
-                        //未做或过期弹出风险评测dialog
-                        showCorpDialog();
-                    } else {
-                        finish();
-                    }
-                }
-            });
-
-            SimpleDateFormat sDateFormat = new SimpleDateFormat("yyyy-MM-dd HH:mm:ss");
-            final String date = sDateFormat.format(new java.util.Date());
-            BRutil.menuLogIn(android.os.Build.VERSION.RELEASE, UserUtil.Mobile, DeviceUtil.getDeviceId(CustomApplication.getContext()), APPInfoUtils.getVersionName(TransactionLoginActivity.this), ip, UserUtil.capitalAccount, date);
-        } else { //没有更换手机
-            if ("2".equalsIgnoreCase(IS_OVERDUE) || "3".equalsIgnoreCase(IS_OVERDUE)) {
-                //弹出风险评测dialog
-                showCorpDialog();
-            } else {
-                if (mCommit.isShowing()) {
-                    mCommit.dismiss();
-                }
-                dismissDownload();
-                finish();
-            }
-        }
-    }
-
-
-    /**
-     * 修改数据库字段数据
-     */
-    private void setData(String isfinish) {
-        SpUtils.putString(TransactionLoginActivity.this, "mSession", mSession);
-        SpUtils.putString(TransactionLoginActivity.this, "First", "1");
-
-        UserEntity userEntity = new UserEntity();
-        String mAccount_Str = mAccount.getText().toString().trim();
-        //查询资金账号
-        String mTradescno_str = "";
-        List<UserEntity> mTradescno = KeyEncryptionUtils.getInstance().localDecryptTradescno();
-        if (mTradescno.size() > 0) {
-            mTradescno_str = mTradescno.get(0).getTradescno();
-        }
-
-        if (mTradescno_str.contains(mAccount_Str)) {         //数据库数据是否包含 输入字段
-            if (!mTradescno_str.contains(",")) {             //数据库数据是否包含","
-                mTradescno_str = mTradescno_str.replace(mAccount_Str, "");
-                KeyEncryptionUtils.getInstance().localEncryptTradescno(mAccount_Str + "," + mTradescno_str);
-            } else {
-                mTradescno_str = mTradescno_str.replace(mAccount_Str + ",", "");
-                KeyEncryptionUtils.getInstance().localEncryptTradescno(mAccount_Str + "," + mTradescno_str);
-            }
-        } else {
-            KeyEncryptionUtils.getInstance().localEncryptTradescno(mAccount_Str + "," + mTradescno_str);
-        }
-        //修改是否登录
-        userEntity.setIslogin("true");
-        //修改资金账号
-        Db_PUB_USERS.UpdateIslogin(userEntity);
-
-        LogInLogic();
-
-    }
-
-    /**
-     * 查询数据库账号判断
-     */
-    private void getData(String data, String isfinish, String session) {
-        //查询资金账号
-        List<UserEntity> userEntities = KeyEncryptionUtils.getInstance().localDecryptTradescno();
-        StringBuilder sb = new StringBuilder();
-        for (int i = 0; i < userEntities.size(); i++) {
-            String Tradescno = userEntities.get(i).getTradescno();
-            sb.append(Tradescno).append(",");
-        }
-        String Tradescno = sb.toString();
-        if (TextUtils.isEmpty(Tradescno)) {
-            setAdded(isfinish, session);//绑定账号
-        } else {
-            if (Tradescno.contains(data)) {
-                setData(isfinish);//修改数据库
-            } else {
-                setAdded(isfinish, session);
-            }
-        }
-    }
-
-
-    /**
-     * 请求键盘 明文  密文
-     */
-    private void KeyboardRequestHttp(final boolean isHttp) {
-        mKeyboardRequest = LoadingDialog.initDialog(this, "加载中...");
-        if (!TransactionLoginActivity.this.isFinishing()) {
-            mKeyboardRequest.show();
-        }
-        HashMap map = new HashMap();
-        map.put("funcid", "400102");
-
-        NetWorkUtil.getInstence().okHttpForPostString(TAG, ConstantUtil.URL_SXRZ, map, new StringCallback() {
-            @Override
-            public void onError(Call call, Exception e, int id) {
-                LogHelper.e(TAG, e.toString());
-                if (mCommit != null) {
-                    mCommit.dismiss();
-                }
-                MutualAuthenticationDialog.showDialog("双向认证失败点击退出", TransactionLoginActivity.this);
-            }
-
-            @Override
-            public void onResponse(String response, int id) {
-                mKeyboardRequest.dismiss();
-                if (TextUtils.isEmpty(response)) {
-                    return;
-                }
-                try {
-                    JSONObject jsonObject = new JSONObject(response);
-                    String code = jsonObject.getString("code");
-                    String msg = jsonObject.getString("msg");
-                    final UserEntity userEntity = new UserEntity();
-                    if (code.equals("0")) {
-                        mCaptcha.setText("");
-                        if (mCommit != null) {
-                            mCommit.dismiss();
-                        }
-                        String status = jsonObject.getString("status");
-                        if ("1".equals(status)) {
-                            setPassEdit(false);
-                            userEntity.setKeyboard("false");
-                            userEntity.setCertification("false");
-                            Db_PUB_USERS.UpdateKeyboard(userEntity);
-                            Db_PUB_USERS.UpdateCertification(userEntity);
-                        } else {
-                            if (isHttp == true) {
-                                if (!TransactionLoginActivity.this.isFinishing()) {
-                                    MutualAuthenticationDialog.showDialog("双向认证失败点击退出", TransactionLoginActivity.this);
-                                }
-                            } else {
-                                if (!TransactionLoginActivity.this.isFinishing()) {
-                                    MutualAuthenticationDialog.showDialog("系统异常", TransactionLoginActivity.this);
-                                }
-                            }
-                        }
-                    } else {
-                        if (mCommit != null) {
-                            mCommit.dismiss();
-                        }
-                        if (isHttp == true) {
-                            if (!TransactionLoginActivity.this.isFinishing()) {
-                                MutualAuthenticationDialog.showDialog("双向认证失败点击退出", TransactionLoginActivity.this);
-                            }
-                        } else {
-                            if (!TransactionLoginActivity.this.isFinishing()) {
-                                MutualAuthenticationDialog.showDialog("系统异常", TransactionLoginActivity.this);
-                            }
-                        }
-                    }
-                } catch (JSONException e) {
-                    e.printStackTrace();
-                }
-            }
-        });
-    }
-
-
-    /**
-     * 键盘 明文  密文
-     */
-    private void IsKeyboardRequestHttp() {
-        final UserEntity userEntity = new UserEntity();
-        HashMap map = new HashMap();
-        map.put("funcid", "400102");
-
-        NetWorkUtil.getInstence().okHttpForPostString(TAG, ConstantUtil.URL_SXRZ, map, new StringCallback() {
-            @Override
-            public void onError(Call call, Exception e, int id) {
-                LogHelper.e(TAG, e.toString());
-                isKeyboardDialog.dismiss();
-                initYN(false);
-            }
-
-            @Override
-            public void onResponse(String response, int id) {
-                if (TextUtils.isEmpty(response)) {
-                    return;
-                }
-                try {
-                    isKeyboardDialog.dismiss();
-                    JSONObject jsonObject = new JSONObject(response);
-                    String code = jsonObject.getString("code");
-                    String msg = jsonObject.getString("msg");
-                    if ("0".equals(code)) {
-                        String status = jsonObject.getString("status");
-                        if ("2".equals(status)) {
-                            initYN(true);
-                        } else {
-                            initYN(false);
-                        }
-                    } else {
-                        initYN(false);
-                    }
-                } catch (JSONException e) {
-                    if (isKeyboardDialog != null) {
-                        isKeyboardDialog.dismiss();
-                    }
-                    initYN(false);
-                    e.printStackTrace();
-                }
-            }
-        });
-    }
-
-    private void initYN(boolean is) {
-        if (isKeyboardDialog != null && isKeyboardDialog.isShowing()) {
-            isKeyboardDialog.dismiss();
-        }
-        UserEntity userEntity = new UserEntity();
-        if (is) {
-            UserUtil.Keyboard = "1";
-            userEntity.setKeyboard("true");
-            Db_PUB_USERS.UpdateKeyboard(userEntity);
-            //键盘插件URL
-            getUnikey();
-            //数据更新
-            UserUtil.refrushUserInfo();
-            //初始化控件显示
-            initTextViewVisibility();
-            Intent intent = getIntent();
-            if (intent != null) {
-                pageIndex = intent.getIntExtra("pageindex", 0);
-            }
-            Exit = getIntent().getStringExtra("Exit");
-            if (!"true".equals(Exit)) {
-                SpUtils.putString(TransactionLoginActivity.this, "mSession", "");
-            }
-            //判断插件是否存在
-            getKeyBoard();
-            //查询加密键盘是否显示
-            inquireCertification();
-            //插件键盘数据
-            showKeyboardWithHeader();
-        } else {
-            UserUtil.Keyboard = "0";
-            userEntity.setKeyboard("false");
-            Db_PUB_USERS.UpdateKeyboard(userEntity);
-            //数据更新
-            UserUtil.refrushUserInfo();
-            //初始化控件显示
-            initTextViewVisibility();
-            Intent intent = getIntent();
-            if (intent != null) {
-                pageIndex = intent.getIntExtra("pageindex", 0);
-            }
-            Exit = getIntent().getStringExtra("Exit");
-            if (!"true".equals(Exit)) {
-                SpUtils.putString(TransactionLoginActivity.this, "mSession", "");
-            }
-            //查询加密键盘是否显示
-            inquireCertification();
-        }
-        mAccount.setSelection(mAccount.getText().length());
-        mCaptcha.setSelection(mCaptcha.getText().length());
-    }
-
-
-    /**
-     * 请求验证码
-     */
-    private void toSecurityCode(final Dialog dialog) {
-        HashMap map = new HashMap();
-        HashMap map1 = new HashMap();
-        map.put("FUNCTIONCODE ", "HQING002");
-        map.put("parms", map1);
-        map1.put("limit", "");
-        map1.put("offset ", "");
-        map1.put("tag ", "");
-        NetWorkUtil.getInstence().okHttpForPostString(TAG, ConstantUtil.URL_JYYZM, map, new StringCallback() {
-            @Override
-            public void onError(Call call, Exception e, int id) {
-                LogHelper.e(TAG, e.toString());
-                if (dialog != null) {
-                    dialog.dismiss();
-                }
-                mSecurityCode.setImageResource(R.mipmap.ic_again);
-                Helper.getInstance().showToast(TransactionLoginActivity.this, "网络异常");
-            }
-
-            @Override
-            public void onResponse(String response, int id) {
-                if (dialog != null) {
-                    dialog.dismiss();
-                }
-                if (TextUtils.isEmpty(response)) {
-                    return;
-                }
-                try {
-                    JSONObject object = new JSONObject(response);
-                    String mCODE = object.getString("CODE");
-                    mVERIFICATIONCODE = object.getString("VERIFICATIONCODE");
-                    String mVERIFICATIONIMAGE = object.getString("VERIFICATIONIMAGE");
-                    if (mCODE.equals("0")) {
-
-                        if (mVERIFICATIONIMAGE != null && mVERIFICATIONIMAGE != "") {
-                            mSecurityCode.setVisibility(View.VISIBLE);
-                            Bitmap bitmap = Helper.base64ToBitmap(mVERIFICATIONIMAGE);
-                            if (bitmap != null) {
-                                mSecurityCode.setImageBitmap(bitmap);
-                            } else {
-                                mSecurityCode.setImageResource(R.mipmap.ic_again);
-                            }
-                        }
-                    } else {
-                        mSecurityCode.setImageResource(R.mipmap.ic_again);
-                        Helper.getInstance().showToast(TransactionLoginActivity.this, "验证码网络请求失败");
-                    }
-                } catch (Exception e) {
-                    e.printStackTrace();
-                }
-            }
-        });
-        mSecurityCode.setAspectRatio(3.2f);
-    }
-
 
     /**
      * EditText 内容监听
@@ -1445,61 +1299,20 @@ public class TransactionLoginActivity extends BaseActivity implements View.OnCli
 
         @Override
         public void onTextChanged(CharSequence s, int start, int before, int count) {
-            if (before == 0) {
-                initButtonshow();
-                initImageViewshow();
-            } else {
-                initButtonshow();
-                initImageViewshow();
-            }
         }
 
         @Override
         public void afterTextChanged(Editable s) {
-
+            initButtonshow();
+            initImageViewshow();
         }
     }
 
-    /**
-     * ImagVie 状态
-     */
-    public void initImageViewshow() {
-        if (TextUtils.isEmpty(mAccount.getText().toString().trim())) {
-            if ("".equalsIgnoreCase(mFirst)) {
-                mCloseIV.setVisibility(View.GONE);
-            } else {
-                mCloseIV.setVisibility(View.GONE);
-            }
-        } else {
-            if ("".equalsIgnoreCase(mFirst)) {
-                mCloseIV.setVisibility(View.GONE);
-            } else {
-                mCloseIV.setVisibility(View.VISIBLE);
-            }
-        }
-    }
 
     @Override
     protected void onDestroy() {
-        dismissDownload();
+        if (mBuilder!=null&&mBuilder.dialog!=null&&mBuilder.dialog.isShowing())
+            mBuilder.dialog.dismiss();
         super.onDestroy();
-    }
-
-    private void dismissDownload() {
-        if (isKeyboardDialog != null) {
-            isKeyboardDialog.dismiss();
-        }
-        if (mDownload != null) {
-            mDownload.dismiss();
-        }
-        if (mLoad != null) {
-            mLoad.dismiss();
-        }
-        if (mCommit != null) {
-            mCommit.dismiss();
-        }
-        if (mKeyboardRequest != null) {
-            mKeyboardRequest.dismiss();
-        }
     }
 }

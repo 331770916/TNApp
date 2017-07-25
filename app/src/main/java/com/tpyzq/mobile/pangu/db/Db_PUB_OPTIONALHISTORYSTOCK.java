@@ -2,20 +2,23 @@ package com.tpyzq.mobile.pangu.db;
 
 import android.database.Cursor;
 import android.database.sqlite.SQLiteDatabase;
-import android.util.Log;
 
 import com.tpyzq.mobile.pangu.data.StockInfoEntity;
+import com.tpyzq.mobile.pangu.db.util.CloseUtils;
+import com.tpyzq.mobile.pangu.db.util.CursorUtils;
 import com.tpyzq.mobile.pangu.log.LogUtil;
-import com.tpyzq.mobile.pangu.util.DbUtil;
 import com.tpyzq.mobile.pangu.util.Helper;
 
 import java.util.ArrayList;
 
 /**
  * Created by 刘泽鹏 on 2016/7/21.
+ *
+ * 重构 - huwwds@gmail.com on 2017/06/23
+ *
  * 最近浏览过的股票数据库表
  */
-public class Db_PUB_OPTIONALHISTORYSTOCK {
+public class Db_PUB_OPTIONALHISTORYSTOCK extends StockTable {
     private static final String TAG = "OPTIONALHISTORYSTOCK";
 
 
@@ -24,13 +27,12 @@ public class Db_PUB_OPTIONALHISTORYSTOCK {
      * @return
      */
     public static int getLookStockListCount() {
-        StringBuilder sql = new StringBuilder("select * from PUB_OPTIONALHISTORYSTOCK");
+        StringBuilder sql = new StringBuilder("select * from STOCK where STOCK_FLAG&"+ STOCK_BROWSE_NEARBY +"="+ STOCK_BROWSE_NEARBY);
         int count = 0;
 
-        SQLiteDatabase db = null;
+        SQLiteDatabase db =getDatabase();
         Cursor c = null;
         try {
-            db = DbUtil.getInstance().getDB();
             c = db.rawQuery(sql.toString(), null);
             if (c == null || !c.moveToFirst()) {
                 return 0;
@@ -39,9 +41,7 @@ public class Db_PUB_OPTIONALHISTORYSTOCK {
         } catch (Exception e) {
             e.printStackTrace();
         } finally {
-            if (db != null) {
-                db.close();
-            }
+            CloseUtils.close(c);
         }
 
         return count;
@@ -52,58 +52,40 @@ public class Db_PUB_OPTIONALHISTORYSTOCK {
      */
     public static void addOneData(String stockName, String stockCode){
         StockInfoEntity sie = queryFromID(stockCode);
-        SQLiteDatabase db = null;
+        SQLiteDatabase db = getDatabase();
         try{
-            StringBuilder sql = new StringBuilder();
+            String sql;
             if(sie==null){
                 int count = getLookStockListCount();
                 if (count >= 30) {
                     ArrayList<StockInfoEntity> entities = queryAllDatasByDesc();
-                    String stockNumber = entities.get(entities.size() -1).getStockNumber() ;
-                    deleteFromID(stockNumber);
+                    if (entities!=null&&entities.size()>0){
+                        String stockNumber = entities.get(entities.size() -1).getStockNumber() ;
+                        deleteFromID(stockNumber);
+                    }
                 }
-
-                sql.append("insert into PUB_OPTIONALHISTORYSTOCK (STOCKCODE ,NAME,DATE) VALUES (")
-                        .append(Helper.getSafeString(stockCode)).append(",")
-                        .append(Helper.getSafeString(stockName)).append(",")
-                        .append(System.currentTimeMillis()+"").append(")");
-            }else{
-                sql.append("update PUB_OPTIONALHISTORYSTOCK SET NAME=")
-                        .append(Helper.getSafeString(stockName)).append(",DATE='")
-                        .append(System.currentTimeMillis())
-                        .append("' where STOCKCODE=").append(Helper.getSafeString(stockCode));
-//                String sql = "update PUB_OPTIONALHISTORYSTOCK SET NAME="+Helper.getSafeString(stockName)+",DATE='"+System.currentTimeMillis()+"'" +
-//                        " where STOCKCODE="+Helper.getSafeString(stockCode);
+                sql="insert into STOCK(STOCK_CODE,STOCK_NAME,CREATE_TIME,STOCK_FLAG) values("+ Helper.getSafeString(stockCode)+","+ Helper.getSafeString(stockName)+","+System.currentTimeMillis()+","+ STOCK_BROWSE_NEARBY +")";
+            }else{//已经存在
+                sql="update STOCK set STOCK_NAME="+ Helper.getSafeString(stockName)+",STOCK_CODE="+ Helper.getSafeString(stockCode)+",CREATE_TIME="+System.currentTimeMillis()+",STOCK_FLAG=STOCK_FLAG|"+ STOCK_BROWSE_NEARBY+" where STOCK_CODE="+ Helper.getSafeString(stockCode);
             }
-            db = DbUtil.getInstance().getDB();
-            db.execSQL(sql.toString());
+            db.execSQL(sql);
         }catch (Exception e){
-            LogUtil.e("--------------");
             e.printStackTrace();
-        }finally {
-            if (db != null) {
-                db.close();
-            }
         }
     }
     public static void updateStockNameByCode(String stockName, String stockCode){
         SQLiteDatabase db = null;
         try{
-            String sql = "update PUB_OPTIONALHISTORYSTOCK SET NAME="+Helper.getSafeString(stockName)+
-                        " where STOCKCODE="+Helper.getSafeString(stockCode);
-            db = DbUtil.getInstance().getDB();
+            String sql = "update STOCK SET STOCK_NAME="+ Helper.getSafeString(stockName)+
+                        " where STOCK_CODE="+ Helper.getSafeString(stockCode);
+            db = getDatabase();
             db.execSQL(sql);
-            sql = "update PUB_STOCKLIST set "
-                    + "NAME = " +  Helper.getSafeString(stockName)
-                    +" where STOCKCODE  = " + Helper.getSafeString(stockCode);
+            sql = "update STOCK set "
+                    + "STOCK_NAME = " +  Helper.getSafeString(stockName)
+                    +" where STOCK_CODE  = " + Helper.getSafeString(stockCode);
             db.execSQL(sql);
         }catch (Exception e){
-            LogUtil.e("--------------");
             e.printStackTrace();
-        }finally {
-            if (db != null) {
-                db.close();
-            }
         }
     }
     /**
@@ -111,27 +93,25 @@ public class Db_PUB_OPTIONALHISTORYSTOCK {
      * @return
      */
     public static ArrayList<StockInfoEntity> queryAllDatasByDesc() {
-        String sql = "SELECT * FROM PUB_OPTIONALHISTORYSTOCK order by DATE desc";
+        String sql = "SELECT * FROM STOCK where STOCK_FLAG&"+ STOCK_BROWSE_NEARBY +"="+ STOCK_BROWSE_NEARBY +" order by CREATE_TIME desc";
 
-        SQLiteDatabase db = DbUtil.getInstance().getDB();
+        SQLiteDatabase db = getDatabase();
         Cursor c = null;
         ArrayList<StockInfoEntity> entitiys = new ArrayList<>();
 
         try {
-            c = db.rawQuery(sql.toString(), null);
+            c = db.rawQuery(sql, null);
             if (c == null || !c.moveToFirst()) {
-                LogUtil.e("eeeeeeeeeeeeeeeeeee");
                 return null;
             }
             do {
                 StockInfoEntity entitiy = new StockInfoEntity();
-                entitiy.setStockNumber(c.getString(c.getColumnIndexOrThrow("STOCKCODE")));
-                entitiy.setStockName(c.getString(c.getColumnIndexOrThrow("NAME")));
-                entitiy.setHot(c.getString(c.getColumnIndexOrThrow("HOT")));
-                entitiy.setHold(c.getString(c.getColumnIndexOrThrow("HOLD")));
-                entitiy.setSeeDate(c.getString(c.getColumnIndexOrThrow("DATE")));
+                entitiy.setStockNumber(c.getString(c.getColumnIndexOrThrow("STOCK_CODE")));
+                entitiy.setStockName(c.getString(c.getColumnIndexOrThrow("STOCK_NAME")));
+                entitiy.setStock_flag(c.getInt(c.getColumnIndexOrThrow("STOCK_FLAG")));
+                entitiy.setSeeDate(c.getString(c.getColumnIndexOrThrow("CREATE_TIME")));
+                entitiy.setHold(((CursorUtils.getInt(c,"STOCK_FLAG")& STOCK_HOLD)== STOCK_HOLD)+"");
                 entitiys.add(entitiy);
-//                LogHelper.e("DB historyViewStock:",entitiy.getStockNumber()+","+entitiy.getStockName()+","+entitiy.getSeeDate());
             } while (c.moveToNext());
         } catch (Exception e) {
             e.printStackTrace();
@@ -140,9 +120,7 @@ public class Db_PUB_OPTIONALHISTORYSTOCK {
             if (c != null) {
                 c.close();
             }
-            if (db != null) {
-                db.close();
-            }
+
         }
         return entitiys;
     }
@@ -153,21 +131,20 @@ public class Db_PUB_OPTIONALHISTORYSTOCK {
      * @return
      */
     public static StockInfoEntity queryFromID(String stockCode) {
-        String sql = "SELECT * FROM PUB_OPTIONALHISTORYSTOCK WHERE STOCKCODE =" + Helper.getSafeString(stockCode);
+        String sql = "SELECT * FROM STOCK WHERE STOCK_CODE =" + Helper.getSafeString(stockCode);
 
-        SQLiteDatabase db = DbUtil.getInstance().getDB();
+        SQLiteDatabase db = getDatabase();
         Cursor c = null;
         StockInfoEntity entitiy = new StockInfoEntity();
         try {
-            c = db.rawQuery(sql.toString(), null);
+            c = db.rawQuery(sql, null);
             if (c == null || !c.moveToFirst()) {
                 return null;
             }
-            entitiy.setStockNumber(c.getString(c.getColumnIndexOrThrow("STOCKCODE")));
-            entitiy.setStockName(c.getString(c.getColumnIndexOrThrow("NAME")));
-            entitiy.setHot(c.getString(c.getColumnIndexOrThrow("HOT")));
-            entitiy.setHold(c.getString(c.getColumnIndexOrThrow("HOLD")));
-            entitiy.setSeeDate(c.getString(c.getColumnIndexOrThrow("DATE")));
+            entitiy.setStockNumber(c.getString(c.getColumnIndexOrThrow("STOCK_CODE")));
+            entitiy.setStockName(c.getString(c.getColumnIndexOrThrow("STOCK_NAME")));
+            entitiy.setHold(((CursorUtils.getInt(c,"STOCK_FLAG")& STOCK_BROWSE_NEARBY)== STOCK_BROWSE_NEARBY)+"");
+            entitiy.setSeeDate(c.getString(c.getColumnIndexOrThrow("CREATE_TIME")));
 
         } catch (Exception e) {
             e.printStackTrace();
@@ -176,9 +153,7 @@ public class Db_PUB_OPTIONALHISTORYSTOCK {
             if (c != null) {
                 c.close();
             }
-            if (db != null) {
-                db.close();
-            }
+
         }
 
         return entitiy;
@@ -188,18 +163,12 @@ public class Db_PUB_OPTIONALHISTORYSTOCK {
      * 删除所有数据
      */
     public static void deleteAllDatas() {
-        String sql = "DELETE FROM PUB_OPTIONALHISTORYSTOCK";
-        SQLiteDatabase db = null;
+        SQLiteDatabase db = getDatabase();
         try {
-            db = DbUtil.getInstance().getDB();
-            db.execSQL(sql.toString());
+            db.execSQL("DELETE FROM STOCK WHERE STOCK_FLAG="+ STOCK_BROWSE_NEARBY);
+            db.execSQL("update STOCK set STOCK_FLAG=STOCK_FLAG-"+ STOCK_BROWSE_NEARBY +" where STOCK_FLAG&"+ STOCK_BROWSE_NEARBY +"="+ STOCK_BROWSE_NEARBY);
         } catch (Exception e) {
             e.printStackTrace();
-            Log.v(TAG, e.toString());
-        } finally {
-            if (db != null) {
-                db.close();
-            }
         }
     }
 
@@ -207,19 +176,12 @@ public class Db_PUB_OPTIONALHISTORYSTOCK {
      * 根据主键删除数据
      */
     public static void deleteFromID(String stockCode) {
-        String sql = "DELETE FROM PUB_OPTIONALHISTORYSTOCK WHERE STOCKCODE = "+ Helper.getSafeString(stockCode);
-
-        SQLiteDatabase db = null;
+        SQLiteDatabase db = getDatabase();
         try {
-            db = DbUtil.getInstance().getDB();
-            db.execSQL(sql.toString());
+            db.execSQL("DELETE FROM STOCK WHERE STOCK_FLAG="+ STOCK_BROWSE_NEARBY +" and STOCK_CODE = "+ Helper.getSafeString(stockCode));
+            db.execSQL("update STOCK set STOCK_FLAG=STOCK_FLAG-"+ STOCK_BROWSE_NEARBY +" where STOCK_FLAG&"+ STOCK_BROWSE_NEARBY +"="+ STOCK_BROWSE_NEARBY +" and STOCK_CODE="+ Helper.getSafeString(stockCode));
         } catch (Exception e) {
             e.printStackTrace();
-            Log.v(TAG, e.toString());
-        } finally {
-//            if (db != null) {
-//                db.close();
-//            }
         }
     }
 }

@@ -118,6 +118,16 @@ public class StockInfoEntity implements Parcelable {
     private String curprice;
     private String read;
 
+    private int stock_flag;
+
+    public int getStock_flag() {
+        return stock_flag;
+    }
+
+    public void setStock_flag(int stock_flag) {
+        this.stock_flag = stock_flag;
+    }
+
     public String getMKT_VAL() {
         return MKT_VAL;
     }

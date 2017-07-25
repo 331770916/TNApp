@@ -24,6 +24,7 @@ import com.tpyzq.mobile.pangu.db.Db_PUB_SEARCHHISTORYSTOCK;
 import com.tpyzq.mobile.pangu.db.Db_PUB_STOCKLIST;
 import com.tpyzq.mobile.pangu.db.Db_PUB_USERS;
 import com.tpyzq.mobile.pangu.db.HOLD_SEQ;
+import com.tpyzq.mobile.pangu.db.StockTable;
 import com.tpyzq.mobile.pangu.http.doConnect.self.AddSelfChoiceStockConnect;
 import com.tpyzq.mobile.pangu.http.doConnect.self.ArraySelfChoiceStockConnect;
 import com.tpyzq.mobile.pangu.http.doConnect.self.DeleteSelfChoiceStockConnect;
@@ -36,7 +37,6 @@ import com.tpyzq.mobile.pangu.interfac.ICallbackResult;
 import com.tpyzq.mobile.pangu.util.ConstantUtil;
 import com.tpyzq.mobile.pangu.util.Helper;
 import com.tpyzq.mobile.pangu.util.SpUtils;
-import com.tpyzq.mobile.pangu.util.panguutil.SelfChoiceStockTempData;
 import com.tpyzq.mobile.pangu.util.panguutil.SelfStockHelper;
 import com.tpyzq.mobile.pangu.util.panguutil.UserUtil;
 import com.tpyzq.mobile.pangu.view.dialog.LoadingDialog;
@@ -173,20 +173,18 @@ public class EditorSelfChoiceStockActivity extends BaseActivity implements ICall
             String msg = map.get("msg");
 
             if ("0".equals(code1)) {
-                Db_PUB_STOCKLIST.deleteAllStocListkDatas();
                 if (mRemoveBeans != null && mRemoveBeans.size() > 0) {
                     for (StockInfoEntity removeBean : mRemoveBeans) {
                         removeBean.setSelfChoicStock(false);
-                        Db_HOME_INFO.deleteOneSelfNewsData(removeBean.getStockNumber());
-                        Db_PUB_SEARCHHISTORYSTOCK.addOneData(removeBean);
-                        SelfChoiceStockTempData.getInstance().removeSelfchoicestockTempValue(removeBean.getStockNumber());
+                        boolean tag1 = Db_PUB_STOCKLIST.deleteStockFromID(removeBean.getStockNumber());
+                        if (tag1) {
+                            Db_HOME_INFO.deleteOneSelfNewsData(removeBean.getStockNumber());
+                            removeBean.setStock_flag(StockTable.STOCK_HISTORY_OPTIONAL);
+                            Db_PUB_SEARCHHISTORYSTOCK.addOneData(removeBean);
+                        }
                     }
                 }
-                if (mDatas != null && mDatas.size() > 0) {
-                    for (int i = mDatas.size() - 1; i >= 0; i--) {
-                        Db_PUB_STOCKLIST.addOneStockListData(mDatas.get(i));
-                    }
-                }
+
                 mDatas = null;
                 Intent intent = new Intent();
                 intent.putExtra("finish", "finish");
@@ -247,6 +245,7 @@ public class EditorSelfChoiceStockActivity extends BaseActivity implements ICall
                 }
 
                 for (int i = 0; i < stockInfoEntities.size(); i++) {
+                    stockInfoEntities.get(i).setStock_flag(StockTable.STOCK_OPTIONAL);
                     Db_PUB_STOCKLIST.addOneStockListData(stockInfoEntities.get(i));
 
                     if (i == stockInfoEntities.size() -1) {
@@ -294,13 +293,17 @@ public class EditorSelfChoiceStockActivity extends BaseActivity implements ICall
             }
             String msg = String.valueOf(result);
             if (msg.contains("成功")) {
-                Db_PUB_STOCKLIST.deleteAllStocListkDatas();
-                Db_HOME_INFO.deleteAllSelfNewsDatas();
+
                 if (mRemoveBeans != null && mRemoveBeans.size() > 0) {
                     for (StockInfoEntity removeBean : mRemoveBeans) {
                         removeBean.setSelfChoicStock(false);
-                        Db_HOME_INFO.deleteOneSelfNewsData(removeBean.getStockNumber());
-                        Db_PUB_SEARCHHISTORYSTOCK.addOneData(removeBean);
+
+                        boolean tag1 = Db_PUB_STOCKLIST.deleteStockFromID(removeBean.getStockNumber());
+                        if (tag1) {
+                            Db_HOME_INFO.deleteOneSelfNewsData(removeBean.getStockNumber());
+                            removeBean.setStock_flag(StockTable.STOCK_HISTORY_OPTIONAL);
+                            Db_PUB_SEARCHHISTORYSTOCK.addOneData(removeBean);
+                        }
                     }
                 }
                 ResultDialog.getInstance().show("删除成功", R.mipmap.lc_success);
@@ -358,17 +361,15 @@ public class EditorSelfChoiceStockActivity extends BaseActivity implements ICall
                         mSimpleRemoteControl.startConnect();
                     }
                 } else {
-                    Db_PUB_STOCKLIST.deleteAllStocListkDatas();
                     if (mRemoveBeans != null && mRemoveBeans.size() > 0) {
                         for (StockInfoEntity removeBean : mRemoveBeans) {
                             removeBean.setSelfChoicStock(false);
-                            Db_PUB_SEARCHHISTORYSTOCK.addOneData(removeBean);
-                            Db_HOME_INFO.deleteOneSelfNewsData(removeBean.getStockNumber());
-                        }
-                    }
-                    if (mDatas != null && mDatas.size() > 0) {
-                        for (int i = mDatas.size() -1; i >= 0; i--) {
-                            Db_PUB_STOCKLIST.addOneStockListData(mDatas.get(i));
+                            boolean tag1 = Db_PUB_STOCKLIST.deleteStockFromID(removeBean.getStockNumber());
+                            if (tag1) {
+                                Db_HOME_INFO.deleteOneSelfNewsData(removeBean.getStockNumber());
+                                removeBean.setStock_flag(StockTable.STOCK_HISTORY_OPTIONAL);
+                                Db_PUB_SEARCHHISTORYSTOCK.addOneData(removeBean);
+                            }
                         }
                     }
 

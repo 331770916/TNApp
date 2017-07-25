@@ -1,5 +1,6 @@
 package com.tpyzq.mobile.pangu.activity.trade.open_fund;
 
+import android.app.Dialog;
 import android.content.Intent;
 import android.text.TextUtils;
 import android.view.View;
@@ -10,6 +11,8 @@ import android.widget.ListView;
 import android.widget.TextView;
 
 import com.google.gson.Gson;
+import com.handmark.pulltorefresh.library.PullToRefreshBase;
+import com.handmark.pulltorefresh.library.PullToRefreshListView;
 import com.tpyzq.mobile.pangu.R;
 import com.tpyzq.mobile.pangu.activity.myself.login.TransactionLoginActivity;
 import com.tpyzq.mobile.pangu.adapter.trade.ContractAdapter;
@@ -17,8 +20,10 @@ import com.tpyzq.mobile.pangu.base.BaseActivity;
 import com.tpyzq.mobile.pangu.data.ContractEntity;
 import com.tpyzq.mobile.pangu.http.NetWorkUtil;
 import com.tpyzq.mobile.pangu.util.ConstantUtil;
+import com.tpyzq.mobile.pangu.util.Helper;
 import com.tpyzq.mobile.pangu.util.SpUtils;
 import com.tpyzq.mobile.pangu.util.ToastUtils;
+import com.tpyzq.mobile.pangu.view.dialog.LoadingDialog;
 import com.zhy.http.okhttp.callback.StringCallback;
 
 import org.json.JSONArray;
@@ -35,13 +40,14 @@ import okhttp3.Call;
  * 基金电子合同签署
  */
 public class FundContractSignActivity extends BaseActivity implements View.OnClickListener, AdapterView.OnItemClickListener {
-    private ListView lv_accound_search;
+    private PullToRefreshListView lv_accound_search;
     private ImageView iv_back;
     private ImageView iv_kong;
     private LinearLayout ll_fourtext;
     private TextView tv_text1, tv_text2, tv_text3, tv_text4;
     private List<ContractEntity> contractBeans;
     private ContractAdapter contractAdapter;
+    private Dialog mDialog;
 
     @Override
     public void initView() {
@@ -52,11 +58,13 @@ public class FundContractSignActivity extends BaseActivity implements View.OnCli
         tv_text2 = (TextView) ll_fourtext.findViewById(R.id.tv_text2);
         tv_text3 = (TextView) ll_fourtext.findViewById(R.id.tv_text3);
         tv_text4 = (TextView) ll_fourtext.findViewById(R.id.tv_text4);
-        lv_accound_search = (ListView) findViewById(R.id.lv_accound_search);
+        lv_accound_search = (PullToRefreshListView) findViewById(R.id.lv_accound_search);
         initData();
     }
 
     private void initData() {
+        mDialog = LoadingDialog.initDialog(this, "加载中...");
+        lv_accound_search.setMode(PullToRefreshBase.Mode.PULL_FROM_START);
         contractBeans = new ArrayList<ContractEntity>();
         contractAdapter = new ContractAdapter(this);
         lv_accound_search.setAdapter(contractAdapter);
@@ -67,6 +75,19 @@ public class FundContractSignActivity extends BaseActivity implements View.OnCli
         tv_text3.setText("产品公司");
         tv_text4.setVisibility(View.GONE);
         lv_accound_search.setOnItemClickListener(this);
+
+        lv_accound_search.setOnRefreshListener(new PullToRefreshBase.OnRefreshListener2<ListView>() {
+            @Override
+            public void onPullDownToRefresh(PullToRefreshBase<ListView> refreshView) {
+                getFundData();
+            }
+
+            @Override
+            public void onPullUpToRefresh(PullToRefreshBase<ListView> refreshView) {
+
+
+            }
+        });
         getFundData();
     }
 
@@ -74,6 +95,9 @@ public class FundContractSignActivity extends BaseActivity implements View.OnCli
      * 获取基金数据
      */
     private void getFundData() {
+        if (mDialog != null && !this.isFinishing()) {
+            mDialog.show();
+        }
         HashMap map300437 = new HashMap();
         map300437.put("funcid", "300437");
         map300437.put("token", SpUtils.getString(getApplication(), "mSession", null));
@@ -86,10 +110,15 @@ public class FundContractSignActivity extends BaseActivity implements View.OnCli
         NetWorkUtil.getInstence().okHttpForPostString("", ConstantUtil.URL_JY, map300437, new StringCallback() {
             @Override
             public void onError(Call call, Exception e, int id) {
+                mDialog.dismiss();
+                lv_accound_search.onRefreshComplete();
+                Helper.getInstance().showToast(FundContractSignActivity.this,ConstantUtil.NETWORK_ERROR);
             }
 
             @Override
             public void onResponse(String response, int id) {
+                mDialog.dismiss();
+                lv_accound_search.onRefreshComplete();
                 if (TextUtils.isEmpty(response)) {
                     return;
                 }

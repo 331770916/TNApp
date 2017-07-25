@@ -20,6 +20,7 @@ import com.tpyzq.mobile.pangu.db.Db_HOME_INFO;
 import com.tpyzq.mobile.pangu.db.Db_PUB_SEARCHHISTORYSTOCK;
 import com.tpyzq.mobile.pangu.db.Db_PUB_STOCKLIST;
 import com.tpyzq.mobile.pangu.db.Db_PUB_USERS;
+import com.tpyzq.mobile.pangu.db.StockTable;
 import com.tpyzq.mobile.pangu.http.doConnect.self.AddSelfChoiceStockConnect;
 import com.tpyzq.mobile.pangu.http.doConnect.self.DeleteSelfChoiceStockConnect;
 import com.tpyzq.mobile.pangu.http.doConnect.self.ToAddSelfChoiceStockConnect;
@@ -207,6 +208,7 @@ public class HotSearchAdapter extends BaseAdapter {
                                         Db_HOME_INFO.deleteOneSelfNewsData(stockNumber);
 
                                         mList.get(position).setSelfChoicStock(false);
+                                        mList.get(position).setStock_flag(StockTable.STOCK_HISTORY_OPTIONAL);
                                         Db_PUB_SEARCHHISTORYSTOCK.addOneData(mList.get(position));
                                         SelfChoiceStockTempData.getInstance().removeSelfchoicestockTempValue(stockNumber);
                                         imageitem2.setImageResource(R.mipmap.search_add);
@@ -227,6 +229,7 @@ public class HotSearchAdapter extends BaseAdapter {
                         boolean tag1 = Db_PUB_STOCKLIST.deleteStockFromID(stockNumber);
                         Db_HOME_INFO.deleteOneSelfNewsData(stockNumber);
                         mList.get(position).setSelfChoicStock(false);
+                        mList.get(position).setStock_flag(StockTable.STOCK_HISTORY_OPTIONAL);
                         Db_PUB_SEARCHHISTORYSTOCK.addOneData(mList.get(position));
                         SelfChoiceStockTempData.getInstance().removeSelfchoicestockTempValue(stockNumber);
                         imageitem2.setImageResource(R.mipmap.search_add);
@@ -263,6 +266,7 @@ public class HotSearchAdapter extends BaseAdapter {
                                     return;
                                 }
 
+                                mList.get(position).setStock_flag(StockTable.STOCK_OPTIONAL);
                                 boolean tag1 = Db_PUB_STOCKLIST.addOneStockListData(mList.get(position));
 
                                 SelfStockHelper.sendUpdateSelfChoiceBrodcast(CustomApplication.getContext(), mList.get(position).getStockNumber());
@@ -283,6 +287,7 @@ public class HotSearchAdapter extends BaseAdapter {
                         simpleRemoteControl.setCommand(new ToAddSelfChoiceStockConnect(new AddSelfChoiceStockConnect(TAG, "", UserUtil.capitalAccount, stockNumber, UserUtil.userId, stockName, price)));
                         simpleRemoteControl.startConnect();
                     } else {
+                        mList.get(position).setStock_flag(StockTable.STOCK_OPTIONAL);
                         boolean tag1 = Db_PUB_STOCKLIST.addOneStockListData(mList.get(position));
                         SelfStockHelper.sendUpdateSelfChoiceBrodcast(CustomApplication.getContext(), mList.get(position).getStockNumber());
                         StockInfoEntity tempBean = Db_PUB_SEARCHHISTORYSTOCK.queryFromID(stockNumber);

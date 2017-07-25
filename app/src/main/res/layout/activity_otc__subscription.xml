@@ -31,7 +31,8 @@
                 android:layout_width="wrap_content"
                 android:layout_height="match_parent"
                 android:layout_alignParentLeft="true"
-                android:padding="@dimen/size10"
+                android:paddingLeft="@dimen/size15"
+                android:paddingRight="@dimen/size20"
                 android:src="@mipmap/back_btn" />
 
             <TextView
@@ -40,7 +41,7 @@
                 android:layout_centerInParent="true"
                 android:text="@string/OTC_rengou"
                 android:textColor="@color/white"
-                android:textSize="@dimen/pickerview_topbar_title_textsize" />
+                android:textSize="@dimen/title_big_textsize" />
         </RelativeLayout>
 
 
@@ -63,6 +64,7 @@
                 android:background="@color/white">
 
                 <TextView
+                    android:textSize="@dimen/txtSize15"
                     android:id="@+id/tvOTC_ProductCode"
                     android:layout_width="wrap_content"
                     android:layout_height="wrap_content"
@@ -122,6 +124,7 @@
                 android:background="@color/white">
 
                 <TextView
+                    android:textSize="@dimen/txtSize15"
                     android:id="@+id/tvOTC_SubscriptionMoney"
                     android:layout_width="wrap_content"
                     android:layout_height="wrap_content"
@@ -173,7 +176,7 @@
                     android:layout_marginLeft="@dimen/size20"
                     android:text="@string/OTC_chanpinmingcheng"
                     android:textColor="@color/text"
-                    android:textSize="@dimen/size14" />
+                    android:textSize="@dimen/txtSize15" />
 
                 <TextView
                     android:id="@+id/tvOTC_ProductNameValue"
@@ -183,8 +186,8 @@
                     android:layout_marginLeft="@dimen/size35"
                     android:layout_toRightOf="@id/tvOTC_ProductName"
                     android:text=""
-                    android:textColor="@color/text"
-                    android:textSize="@dimen/size14" />
+                    android:textColor="@color/title_list"
+                    android:textSize="@dimen/txtSize14" />
 
             </RelativeLayout>
 
@@ -203,7 +206,7 @@
                     android:layout_marginLeft="@dimen/size20"
                     android:text="@string/OTC_chanpinjingzhi"
                     android:textColor="@color/text"
-                    android:textSize="@dimen/size14" />
+                    android:textSize="@dimen/txtSize15" />
 
                 <TextView
                     android:id="@+id/tvOTC_ProductJingZhiValue"
@@ -213,8 +216,8 @@
                     android:layout_marginLeft="@dimen/size35"
                     android:layout_toRightOf="@id/tvOTC_ProductJingZhi"
                     android:text=""
-                    android:textColor="@color/text"
-                    android:textSize="@dimen/size14" />
+                    android:textColor="@color/title_list"
+                    android:textSize="@dimen/txtSize14" />
 
             </RelativeLayout>
 
@@ -233,7 +236,7 @@
                     android:layout_marginLeft="@dimen/size20"
                     android:text="@string/OTC_keyongzijin"
                     android:textColor="@color/text"
-                    android:textSize="@dimen/size14" />
+                    android:textSize="@dimen/txtSize15" />
 
                 <TextView
                     android:id="@+id/tvOTC_ExpendableCapitalValue"
@@ -243,8 +246,8 @@
                     android:layout_marginLeft="@dimen/size35"
                     android:layout_toRightOf="@id/tvOTC_ExpendableCapital"
                     android:text=""
-                    android:textColor="@color/text"
-                    android:textSize="@dimen/size14" />
+                    android:textColor="@color/title_list"
+                    android:textSize="@dimen/txtSize14" />
 
             </RelativeLayout>
 

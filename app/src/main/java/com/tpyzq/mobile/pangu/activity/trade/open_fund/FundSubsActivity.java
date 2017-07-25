@@ -62,12 +62,10 @@ public class FundSubsActivity extends BaseActivity implements View.OnClickListen
     private TextView tv_fund_name/* 基金名称 */, tv_netvalue/* 基金净值 */, tv_lowest_investment/* 个人最低投资 */, tv_usable_money/* 可用资金 */, tv_choose_fund/* 选择基金产品 */;
     private Button bt_true/* 确定按钮 */;
     private List<FundSubsEntity> fundSubsBeans;
-    private FundSubsEntity fundSubsBean;
     private FundDataEntity fundDataBean;
     private ImageView iv_back;//退出
     public static final int REQUSET = 1;//进入产品列表和签署协议界面
     public int point = -1;
-    private FundEntity fundBean;
     private List<FundEntity> fundBeans;
     private SubsStatusEntity subsStatusBean;
     private AssessConfirmEntity assessConfirmBean;
@@ -95,7 +93,7 @@ public class FundSubsActivity extends BaseActivity implements View.OnClickListen
         initMoveKeyBoard(rootLayout, null,et_fund_code);
 
         initData();
-        fundQuery();
+
     }
 
 
@@ -123,58 +121,6 @@ public class FundSubsActivity extends BaseActivity implements View.OnClickListen
 
 
     /**
-     * 获取基金产品
-     */
-    private void fundQuery() {
-        HashMap map300441 = new HashMap();
-        map300441.put("funcid", "300441");
-        map300441.put("token", SpUtils.getString(getApplication(), "mSession", null));
-        HashMap map300441_1 = new HashMap();
-        map300441_1.put("SEC_ID", "tpyzq");
-        map300441_1.put("FUND_TYPE", "1");
-        map300441_1.put("FLAG", "true");
-        map300441.put("parms", map300441_1);
-        NetWorkUtil.getInstence().okHttpForPostString("", ConstantUtil.URL_JY, map300441, new StringCallback() {
-            @Override
-            public void onError(Call call, Exception e, int id) {
-            }
-
-            @Override
-            public void onResponse(String response, int id) {
-                if (TextUtils.isEmpty(response)) {
-                    return;
-                }
-                try {
-                    JSONObject object = new JSONObject(response);
-                    String msg = object.getString("msg");
-                    String data = object.getString("data");
-                    String code = object.getString("code");
-                    if ("0".equals(code)) {
-                        JSONArray jsonArray = new JSONArray(data);
-                        for (int i = 0; i < jsonArray.length(); i++) {
-                            fundSubsBean = new Gson().fromJson(jsonArray.getString(i), FundSubsEntity.class);
-                            fundSubsBeans.add(fundSubsBean);
-                        }
-                        for (int i = 0; i < fundSubsBeans.size(); i++) {
-                            fundBean = new FundEntity();
-                            fundBean.fund_code = fundSubsBeans.get(i).FUND_CODE;
-                            fundBean.fund_name = fundSubsBeans.get(i).FUND_NAME;
-                            fundBean.fund_company = fundSubsBeans.get(i).FUND_COMPANY;
-                            fundBeans.add(fundBean);
-                        }
-                    } else if ("-6".equals(code)) {
-                        startActivity(new Intent(FundSubsActivity.this, TransactionLoginActivity.class));
-                    } else {
-                        ToastUtils.showShort(FundSubsActivity.this, msg);
-                    }
-                } catch (JSONException e) {
-                    e.printStackTrace();
-                }
-            }
-        });
-    }
-
-    /**
      * 获取基金数据
      */
     private void getFundData(String fundcode, String fundcompany) {
@@ -191,7 +137,7 @@ public class FundSubsActivity extends BaseActivity implements View.OnClickListen
         NetWorkUtil.getInstence().okHttpForPostString("", ConstantUtil.URL_JY, map300431, new StringCallback() {
             @Override
             public void onError(Call call, Exception e, int id) {
-                Toast.makeText(FundSubsActivity.this, "网络访问失败", Toast.LENGTH_SHORT).show();
+                Helper.getInstance().showToast(FundSubsActivity.this,ConstantUtil.NETWORK_ERROR);
             }
 
             @Override
@@ -315,7 +261,7 @@ public class FundSubsActivity extends BaseActivity implements View.OnClickListen
         et_rengou_price.setEnabled(false);
         bt_true.setBackgroundResource(R.drawable.button_login_unchecked);
         et_rengou_price.addTextChangedListener(new PriceWatch());
-        fundSubsBeans = new ArrayList<FundSubsEntity>();
+
         fundBeans = new ArrayList<FundEntity>();
         session = SpUtils.getString(this, "mSession", null);
         fundSubsListen = new FundSubsListen() {
@@ -427,7 +373,6 @@ public class FundSubsActivity extends BaseActivity implements View.OnClickListen
             case R.id.tv_choose_fund:
                 intent.setClass(this, FundProductActivity.class);
                 Bundle bundle = new Bundle();
-                bundle.putSerializable("fundbean", (Serializable) fundBeans);
                 bundle.putInt("point", point);
                 intent.putExtras(bundle);
                 startActivityForResult(intent, REQUSET);
@@ -465,8 +410,8 @@ public class FundSubsActivity extends BaseActivity implements View.OnClickListen
         if (requestCode == REQUSET && resultCode == RESULT_OK) {//产品列表返回
             dissmissKeyboardUtil();
             point = intent.getIntExtra("point", -1);
-            et_fund_code.setText(fundSubsBeans.get(point).FUND_CODE);
-            getFundData(fundSubsBeans.get(point).FUND_CODE, fundSubsBeans.get(point).FUND_COMPANY);
+            et_fund_code.setText(intent.getStringExtra("FUND_CODE"));
+            getFundData(intent.getStringExtra("FUND_CODE"),intent.getStringExtra("FUND_COMPANY"));
         }
         if (requestCode == REQAGREEMENTCODE && resultCode == RESULT_OK) {//签署协议页面返回
             et_rengou_price.setText("");

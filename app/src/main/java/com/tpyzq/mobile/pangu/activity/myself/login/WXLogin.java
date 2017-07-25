@@ -15,6 +15,7 @@ import com.tpyzq.mobile.pangu.db.Db_PUB_SEARCHHISTORYSTOCK;
 import com.tpyzq.mobile.pangu.db.Db_PUB_STOCKLIST;
 import com.tpyzq.mobile.pangu.db.Db_PUB_USERS;
 import com.tpyzq.mobile.pangu.db.HOLD_SEQ;
+import com.tpyzq.mobile.pangu.db.StockTable;
 import com.tpyzq.mobile.pangu.http.NetWorkUtil;
 import com.tpyzq.mobile.pangu.http.doConnect.self.AddSelfChoiceStockConnect;
 import com.tpyzq.mobile.pangu.http.doConnect.self.QuerySelfChoiceStockConnect;
@@ -321,6 +322,7 @@ public class WXLogin implements ICallbackResult {
 
                 if (stockInfoEntities != null && stockInfoEntities.size() > 0) {
                     for (StockInfoEntity stockInfoEntity : stockInfoEntities) {
+                        stockInfoEntity.setStock_flag(StockTable.STOCK_OPTIONAL);
                         Db_PUB_STOCKLIST.addOneStockListData(stockInfoEntity);
                         SelfStockHelper.sendUpdateSelfChoiceBrodcast((Activity) mContext, stockInfoEntity.getStockNumber());
                     }

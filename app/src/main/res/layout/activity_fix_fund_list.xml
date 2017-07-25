@@ -77,7 +77,7 @@
             android:layout_width="@dimen/size45"
             android:layout_height="@dimen/size45"
             android:layout_centerHorizontal="true"
-            android:background="@mipmap/ic_gray"/>
+            android:background="@mipmap/null_add"/>
         <TextView
             android:id="@+id/tv_null"
             android:layout_below="@id/iv_add"

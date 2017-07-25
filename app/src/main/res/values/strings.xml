@@ -444,18 +444,6 @@
     <string name="shurushuhuifene">输入赎回份额</string>
     <string name="xuanzeshuhuichulifangshi">选择赎回处理方式</string>
 
-    <!-- 基金定投 -->
-    <string name="fix_fund_list_title">基金定投</string>
-    <string name="fix_fund_list_title_add">添加</string>
-    <string name="fix_fund_list_null">暂无已定投基金</string>
-    <string name="fix_fund_list_click">点击添加</string>
-    <string name="fix_fund_list_bottom_add">添加定投</string>
-    <string name="fix_fund_item_money">每月定投</string>
-    <string name="fix_fund_item_accumulated">累计定投金额</string>
-    <string name="fix_fund_item_start">起始时间</string>
-    <string name="fix_fund_item_end">终止日期</string>
-    <string name="fix_fund_item_date">定投日</string>
-
     <!--电子签名约定书-->
     <string name="Agreement">电子签名约定书</string>
     <string name="consent">同意</string>
@@ -842,6 +830,27 @@
     <string name="gznhg">国债逆回购</string>
     <string name="choose_jypz">选择交易品种</string>
     <string name="vote_net_tp">网络投票</string>
-
+    <!-- 基金定投 -->
+    <string name="fix_fund_list_title">基金定投</string>
+    <string name="fix_fund_list_title_add">添加</string>
+    <string name="fix_fund_list_null">暂无已定投基金</string>
+    <string name="fix_fund_list_click">点击添加</string>
+    <string name="fix_fund_list_bottom_add">添加定投</string>
+    <string name="fix_fund_item_money">每月定投</string>
+    <string name="fix_fund_item_accumulated">累计定投金额</string>
+    <string name="fix_fund_item_start">起始时间</string>
+    <string name="fix_fund_item_end">终止日期</string>
+    <string name="fix_fund_item_date">定投日</string>
+    <string name="fix_fund_balance_enable">可用资金：--</string>
+    <string name="fix_fund_balance_hint">请输入定投金额</string>
+    <string name="fix_fund_balance">定投金额：</string>
+    <string name="fix_fund_end_date">结束日期：</string>
+    <string name="fix_fund_start_date">开始日期：</string>
+    <string name="fix_fund_end_date_def">1日</string>
+    <string name="fix_fund_en_date">月定投日：</string>
+    <string name="jjjz">基金净值：</string>
+    <string name="fix_sgfe">基金名称：</string>
+    <string name="modify_fund">定投修改</string>
+    <string name="add_fund">新增定投</string>
 
 </resources>

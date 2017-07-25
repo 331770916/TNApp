@@ -23,7 +23,6 @@ import com.tpyzq.mobile.pangu.interfac.ICallbackResult;
 import com.tpyzq.mobile.pangu.log.LogHelper;
 import com.tpyzq.mobile.pangu.log.LogUtil;
 import com.tpyzq.mobile.pangu.view.dialog.LoadingDialog;
-import com.tpyzq.mobile.pangu.view.dialog.MistakeDialog;
 import com.tpyzq.mobile.pangu.view.pulllayou.PullLayout;
 
 import java.util.ArrayList;
@@ -97,6 +96,9 @@ public class SelfChoiceNewsTab extends BaseTabPager implements
         if (mSimpleRemoteControl != null && count > 0) {
             mSimpleRemoteControl.setCommand(new ToSelfChoiceStockNews(new SelfChoiceStockNews(TAG, pagerNum, null)));
             mSimpleRemoteControl.startConnect();
+        } else {
+            mEntities.clear();
+            mSelfNewsAdapter.setDatas(mEntities);
         }
     }
 

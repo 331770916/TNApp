@@ -37,6 +37,7 @@ import com.tpyzq.mobile.pangu.data.StockInfoEntity;
 import com.tpyzq.mobile.pangu.db.Db_PUB_STOCKLIST;
 import com.tpyzq.mobile.pangu.db.Db_PUB_USERS;
 import com.tpyzq.mobile.pangu.db.HOLD_SEQ;
+import com.tpyzq.mobile.pangu.db.StockTable;
 import com.tpyzq.mobile.pangu.http.doConnect.detail.GetSearchStockConnect;
 import com.tpyzq.mobile.pangu.http.doConnect.detail.ToGetSearchStockConnect;
 import com.tpyzq.mobile.pangu.http.doConnect.self.AddSelfChoiceStockConnect;
@@ -197,6 +198,7 @@ public class SearchActivity extends BaseActivity implements View.OnClickListener
                     Helper.getInstance().showToast(CustomApplication.getContext(), "导入持仓自选股数据库失败");
                 }
                 for (int i = 0; i < stockInfoEntities.size(); i++) {
+                    stockInfoEntities.get(i).setStock_flag(StockTable.STOCK_OPTIONAL);
                     Db_PUB_STOCKLIST.addOneStockListData(stockInfoEntities.get(i));
                     if (i == stockInfoEntities.size() -1) {
                         sbCode.append(stockInfoEntities.get(i).getStockNumber());
@@ -235,10 +237,16 @@ public class SearchActivity extends BaseActivity implements View.OnClickListener
 
             } else  {
                 mBeans = (ArrayList<StockInfoEntity>) result;
+
                 mNoSearchText.setVisibility(View.GONE);
                 if (mBeans == null || mBeans.size() <= 0) {
                     return;
                 }
+
+                for (StockInfoEntity entity : mBeans) {
+                    entity.setStock_flag(StockTable.STOCK_OPTIONAL);
+                }
+
                 if (!TextUtils.isEmpty(mBeans.get(0).getTotalCount())) {
                     mNetTotalCount = Integer.parseInt(mBeans.get(0).getTotalCount());
                 }
