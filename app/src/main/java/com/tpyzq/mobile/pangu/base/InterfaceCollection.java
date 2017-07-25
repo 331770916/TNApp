@@ -4,9 +4,11 @@ import android.text.TextUtils;
 
 import com.google.gson.Gson;
 import com.google.gson.reflect.TypeToken;
+import com.tpyzq.mobile.pangu.activity.trade.open_fund.AddOrModFixFundActivity;
 import com.tpyzq.mobile.pangu.data.AssessConfirmEntity;
 import com.tpyzq.mobile.pangu.data.EtfDataEntity;
 import com.tpyzq.mobile.pangu.data.FixFundEntity;
+import com.tpyzq.mobile.pangu.data.FundDataEntity;
 import com.tpyzq.mobile.pangu.data.InformationEntity;
 import com.tpyzq.mobile.pangu.data.NetworkVotingEntity;
 import com.tpyzq.mobile.pangu.data.OTC_AffirmBean;
@@ -18,6 +20,7 @@ import com.tpyzq.mobile.pangu.http.NetWorkUtil;
 import com.tpyzq.mobile.pangu.util.ConstantUtil;
 import com.tpyzq.mobile.pangu.util.Helper;
 import com.tpyzq.mobile.pangu.util.SpUtils;
+import com.tpyzq.mobile.pangu.view.CentreToast;
 import com.zhy.http.okhttp.callback.StringCallback;
 import org.json.JSONArray;
 import org.json.JSONException;
@@ -2490,8 +2493,8 @@ public class InterfaceCollection {
                 } else {
                     try {
                         JSONObject jsonObject = new JSONObject(response);
-                        String code = jsonObject.optString("MSG_CODE");
-                        String msg = jsonObject.optString("MSG_TEXT");
+                        String code = jsonObject.optString("code");
+                        String msg = jsonObject.optString("msg");
                         info.setCode(code);
                         info.setMsg(msg);
                         info.setTag(TAG);
@@ -2511,5 +2514,52 @@ public class InterfaceCollection {
     }
 
 
+    public void getFundData(String fundcode, String fundcompany, final String TAG, final InterfaceCallback callback) {
+        HashMap map300431 = new HashMap();
+        map300431.put("funcid", "300431");
+        map300431.put("token", SpUtils.getString(CustomApplication.getContext(), "mSession", ""));
+        HashMap map300431_1 = new HashMap();
+        map300431_1.put("SEC_ID", "tpyzq");
+        map300431_1.put("FLAG", "true");
+        map300431_1.put("FUND_CODE", fundcode);
+        map300431_1.put("FUND_COMPANY", fundcompany);
+        map300431_1.put("OPER_TYPE", "0");
+        map300431.put("parms", map300431_1);
+        NetWorkUtil.getInstence().okHttpForPostString("", ConstantUtil.URL_JY, map300431, new StringCallback() {
+            @Override
+            public void onError(Call call, Exception e, int id) {
+                ResultInfo info = new ResultInfo();
+                info.setCode(ConstantUtil.NETWORK_ERROR_CODE);
+                info.setMsg(ConstantUtil.NETWORK_ERROR);
+                info.setTag(TAG);
+                callback.callResult(info);
+            }
+
+            @Override
+            public void onResponse(String response, int id) {
+                ResultInfo info = new ResultInfo(response);
+                if (TextUtils.isEmpty(response)) {
+                    info.setCode(ConstantUtil.SERVICE_NO_DATA_CODE);
+                    info.setMsg(ConstantUtil.SERVICE_NO_DATA);
+                    info.setTag(TAG);
+                } else {
+                    try {
+                        JSONObject object = new JSONObject(response);
+                        String code = object.getString("code");
+                        String msg = object.getString("msg");
+                        info.setCode(code);
+                        info.setMsg(msg);
+                        info.setTag(TAG);
+                        if (code.equals("0")) {
+                            FundDataEntity fundDataBean = new Gson().fromJson(response, FundDataEntity.class);
+                            info.setData(fundDataBean);
+                        }
+                    } catch (JSONException e) {
+                        e.printStackTrace();
+                    }
+                }
+            }
+        });
+    }
 
 }

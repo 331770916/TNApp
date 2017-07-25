@@ -9,12 +9,8 @@ import android.widget.LinearLayout;
 import android.widget.TextView;
 
 import com.tpyzq.mobile.pangu.R;
-import com.tpyzq.mobile.pangu.base.InterfaceCollection;
-import com.tpyzq.mobile.pangu.data.EtfDataEntity;
+import com.tpyzq.mobile.pangu.base.BaseListAdapter;
 import com.tpyzq.mobile.pangu.data.FixFundEntity;
-import com.tpyzq.mobile.pangu.data.ResultInfo;
-import com.tpyzq.mobile.pangu.util.ConstantUtil;
-import com.tpyzq.mobile.pangu.util.Helper;
 import com.tpyzq.mobile.pangu.view.CentreToast;
 
 import java.util.ArrayList;
@@ -24,18 +20,12 @@ import java.util.ArrayList;
  * 申赎撤单适配器
  */
 
-public class FixFundAdapter extends BaseAdapter {
+public class FixFundAdapter extends BaseListAdapter {
+    public static final int TAG_REVOKE = 1000001;
+    public static final int TAG_MODIFY = 1000002;
     private Context mContext;
     private ArrayList<FixFundEntity> mList;
     private boolean isAll = false;
-    //撤销点击回调
-    private ItemOnClickListener itemOnClickListener;
-    public interface ItemOnClickListener{
-        void onRevokeClick(int position);
-    }
-    public void setItemOnClickListener(ItemOnClickListener itemOnClickListener) {
-        this.itemOnClickListener = itemOnClickListener;
-    }
     public FixFundAdapter(Context context, ArrayList<FixFundEntity> mList) {
         this.mContext = context;
         this.mList = mList;
@@ -119,7 +109,7 @@ public class FixFundAdapter extends BaseAdapter {
             @Override
             public void onClick(View v) {
                 if (null!=itemOnClickListener)
-                    itemOnClickListener.onRevokeClick(position);
+                    itemOnClickListener.onItemClick(TAG_REVOKE, position);
             }
         });
         viewHolder.tv_modify.setOnClickListener(new View.OnClickListener() {
@@ -131,7 +121,8 @@ public class FixFundAdapter extends BaseAdapter {
         viewHolder.ll_add.setOnClickListener(new View.OnClickListener() {
             @Override
             public void onClick(View v) {
-                CentreToast.showText(mContext,"跳转新建定投页面");
+                if (null!=itemOnClickListener)
+                    itemOnClickListener.onItemClick(TAG_MODIFY, position);
             }
         });
         return convertView;

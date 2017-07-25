@@ -10,6 +10,7 @@ import java.io.Serializable;
 public class FixFundEntity implements Serializable {
     private String FUND_CODE;//基金代码
     private String FUND_NAME;//基金名称
+    private String FUND_COMPANY;//基金公司
     private String BALANCE;//发生金额
     private String SEND_BALANCE;//共申购金额
     private String EN_FUND_DATE;//扣款允许日
@@ -21,6 +22,14 @@ public class FixFundEntity implements Serializable {
     private String START_DATE;//开始日期
     private String CURR_RATION_TIMES;//累计期数
     private String POSITION_STR;//定位串
+
+    public String getFUND_COMPANY() {
+        return FUND_COMPANY;
+    }
+
+    public void setFUND_COMPANY(String FUND_COMPANY) {
+        this.FUND_COMPANY = FUND_COMPANY;
+    }
 
     public String getPOSITION_STR() {
         return POSITION_STR;
