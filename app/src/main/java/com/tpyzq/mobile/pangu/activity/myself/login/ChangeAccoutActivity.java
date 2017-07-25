@@ -1426,24 +1426,12 @@ public class ChangeAccoutActivity extends BaseActivity implements View.OnClickLi
 
         @Override
         public void onTextChanged(CharSequence s, int start, int before, int count) {
-
-            if (s.equals("")) {
-                initButtonshow();
-            } else {
-                initButtonshow();
-            }
-            if (start == 0) {
-                initImageViewshow();
-                initButtonshow();
-            } else {
-                initImageViewshow();
-                initButtonshow();
-            }
         }
 
         @Override
         public void afterTextChanged(Editable s) {
-
+            initImageViewshow();
+            initButtonshow();
         }
 
     }

@@ -30,6 +30,7 @@ public class FundProductAdapter extends BaseAdapter {
 
     public void setData(List<FundEntity> fundBeens) {
         this.fundBeens = fundBeens;
+        notifyDataSetChanged();
     }
 
     public void setWay(String[] way) {

@@ -2,16 +2,17 @@
 <LinearLayout xmlns:android="http://schemas.android.com/apk/res/android"
     android:layout_width="match_parent"
     android:layout_height="match_parent"
-    android:orientation="vertical"
+    xmlns:app="http://schemas.android.com/apk/res-auto"
     android:background="@color/white"
-    >
+    android:orientation="vertical">
+
     <RelativeLayout
+        android:id="@+id/rl_top_bar"
         android:layout_width="match_parent"
         android:layout_height="@dimen/size25"
         android:background="@color/blue"
         android:clipToPadding="true"
-        android:id="@+id/rl_top_bar"
-		android:fitsSystemWindows="true" />
+        android:fitsSystemWindows="true" />
 
     <RelativeLayout
         android:layout_width="match_parent"
@@ -37,33 +38,41 @@
             android:paddingRight="@dimen/size20"
             android:src="@mipmap/back_btn" />
     </RelativeLayout>
-    <include android:id="@+id/ll_fourtext" layout="@layout/item_fourtext_header"/>
+
+    <include
+        android:id="@+id/ll_fourtext"
+        layout="@layout/item_fourtext_header" />
+
     <ImageView
         android:layout_width="match_parent"
         android:layout_height="@dimen/size0.5"
         android:background="@color/white"
         android:src="@color/grey" />
+
     <RelativeLayout
         android:layout_width="match_parent"
         android:layout_height="wrap_content"
-        android:background="@color/white"
-        >
-        <ListView
+        android:background="@color/white">
+
+        <com.handmark.pulltorefresh.library.PullToRefreshListView
             android:id="@+id/lv_accound_search"
             android:layout_width="match_parent"
-            android:layout_height="wrap_content"
-            android:divider="@color/white"
-            android:dividerHeight="0dp" />
+            android:layout_height="match_parent"
+            android:divider="@color/lineColor"
+            android:dividerHeight="@dimen/size0.5"
+            android:scrollbars="none"
+            app:ptrAnimationStyle="flip"
+            app:ptrMode="both" />
+
         <ImageView
             android:id="@+id/iv_kong"
             android:layout_width="match_parent"
             android:layout_height="match_parent"
-            android:src="@mipmap/kong"
             android:scaleType="center"
-            android:visibility="gone"
             android:scaleX="0.9"
             android:scaleY="0.9"
-            />
+            android:src="@mipmap/kong"
+            android:visibility="visible" />
     </RelativeLayout>
 
 </LinearLayout>

@@ -22,6 +22,7 @@ import com.tpyzq.mobile.pangu.data.FundEntity;
 import com.tpyzq.mobile.pangu.data.FundRedemptionEntity;
 import com.tpyzq.mobile.pangu.http.NetWorkUtil;
 import com.tpyzq.mobile.pangu.util.ConstantUtil;
+import com.tpyzq.mobile.pangu.util.Helper;
 import com.tpyzq.mobile.pangu.util.SpUtils;
 import com.tpyzq.mobile.pangu.util.ToastUtils;
 import com.tpyzq.mobile.pangu.view.CentreToast;
@@ -49,10 +50,10 @@ public class FundRedemptionActivity extends BaseActivity implements View.OnClick
     TextView tv_choose_fund;
     EditText et_fund_code   /*基金代码*/, et_fund_sum/*赎回份额*/;
     TextView tv_fund_name, tv_fund_value, tv_redeem_sum, tv_redeem_min_sum, tv_fund_redeem_way;
-    List<FundEntity> fundBeans;
+
     FundDataEntity fundDataBean;
     public int point = -1;
-    public int way = 1;
+    public int way = -1;
     public static final int POSITION_REQUSET = 1;
     public static final int HUGE_REQUSET = 2;
 
@@ -75,11 +76,10 @@ public class FundRedemptionActivity extends BaseActivity implements View.OnClick
 
         setClearView();
         initData();
-        fundQuery();
     }
 
     private void initData() {
-        fundBeans = new ArrayList<FundEntity>();
+
         iv_back.setOnClickListener(this);
         tv_choose_fund.setOnClickListener(this);
         tv_fund_redeem_way.setOnClickListener(this);
@@ -140,54 +140,7 @@ public class FundRedemptionActivity extends BaseActivity implements View.OnClick
         });
     }
 
-    /**
-     * 获取基金份额
-     */
-    private void fundQuery() {
-        HashMap map720260 = new HashMap();
-        map720260.put("funcid", "720260");
-        map720260.put("token", SpUtils.getString(getApplication(), "mSession", null));
-        HashMap map720260_1 = new HashMap();
-        map720260_1.put("SEC_ID", "tpyzq");
-        map720260_1.put("FLAG", "true");
-        map720260.put("parms", map720260_1);
-        NetWorkUtil.getInstence().okHttpForPostString("", ConstantUtil.URL_JY, map720260, new StringCallback() {
-            @Override
-            public void onError(Call call, Exception e, int id) {
-                Toast.makeText(FundRedemptionActivity.this, "网络访问失败", Toast.LENGTH_SHORT).show();
-            }
 
-            @Override
-            public void onResponse(String response, int id) {
-                if (TextUtils.isEmpty(response)) {
-                    return;
-                }
-                try {
-                    JSONObject object = new JSONObject(response);
-                    String msg = object.getString("msg");
-                    String data = object.getString("data");
-                    String code = object.getString("code");
-                    if ("0".equals(code)) {
-                        JSONArray jsonArray = new JSONArray(data);
-                        FundRedemptionEntity fundRedemptionBean = new Gson().fromJson(jsonArray.getString(0), FundRedemptionEntity.class);
-                        for (int i = 0; i < fundRedemptionBean.RESULT_LIST.size(); i++) {
-                            FundEntity fundBean = new FundEntity();
-                            fundBean.fund_code = fundRedemptionBean.RESULT_LIST.get(i).FUND_CODE;
-                            fundBean.fund_company = fundRedemptionBean.RESULT_LIST.get(i).FUND_COMPANY_CODE;
-                            fundBean.fund_name = fundRedemptionBean.RESULT_LIST.get(i).FUND_NAME;
-                            fundBeans.add(fundBean);
-                        }
-                    } else if ("-6".equals(code)) {
-                        startActivity(new Intent(FundRedemptionActivity.this, TransactionLoginActivity.class));
-                    } else {
-                        ToastUtils.showShort(FundRedemptionActivity.this, msg);
-                    }
-                } catch (JSONException e) {
-                    e.printStackTrace();
-                }
-            }
-        });
-    }
 
     @Override
     protected void onActivityResult(int requestCode, int resultCode, Intent intent) {
@@ -195,8 +148,8 @@ public class FundRedemptionActivity extends BaseActivity implements View.OnClick
         if (requestCode == POSITION_REQUSET && resultCode == RESULT_OK) {
             dissmissKeyboardUtil();
             point = intent.getIntExtra("point", -1);
-            et_fund_code.setText(fundBeans.get(point).fund_code);
-            getFundData(fundBeans.get(point).fund_code, fundBeans.get(point).fund_company);
+            et_fund_code.setText(intent.getStringExtra("fund_code"));
+            getFundData(intent.getStringExtra("fund_code"), intent.getStringExtra("fund_company"));
         } else if (requestCode == HUGE_REQUSET && resultCode == RESULT_OK) {
             way = intent.getIntExtra("way", -1);
             if (way == 0) {
@@ -224,7 +177,7 @@ public class FundRedemptionActivity extends BaseActivity implements View.OnClick
         NetWorkUtil.getInstence().okHttpForPostString("", ConstantUtil.URL_JY, map300431, new StringCallback() {
             @Override
             public void onError(Call call, Exception e, int id) {
-                Toast.makeText(FundRedemptionActivity.this, "网络访问失败", Toast.LENGTH_SHORT).show();
+                Helper.getInstance().showToast(FundRedemptionActivity.this,ConstantUtil.NETWORK_ERROR);
             }
 
             @Override
@@ -283,7 +236,6 @@ public class FundRedemptionActivity extends BaseActivity implements View.OnClick
                 intent = new Intent();
                 intent.setClass(this, PositionFundActivity.class);
                 bundle = new Bundle();
-                bundle.putSerializable("fundbean", (Serializable) fundBeans);
                 bundle.putInt("point", point);
                 intent.putExtras(bundle);
                 startActivityForResult(intent, POSITION_REQUSET);

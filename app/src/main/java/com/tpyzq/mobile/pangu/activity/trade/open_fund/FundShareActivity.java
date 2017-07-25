@@ -73,8 +73,8 @@ public class FundShareActivity extends BaseActivity implements View.OnClickListe
         mAdapter = new FundShareAdapter(this);
         listView.setAdapter(mAdapter);
         fundBeans = new ArrayList<FundEntity>();
-        iv_kong.setVisibility(View.VISIBLE);
-        ll_content.setVisibility(View.GONE);
+
+        ll_content.setVisibility(View.VISIBLE);
         initEvent();
         fundQuery();
     }
@@ -112,6 +112,8 @@ public class FundShareActivity extends BaseActivity implements View.OnClickListe
             @Override
             public void onError(Call call, Exception e, int id) {
                 mPullToRefreshScrollView.onRefreshComplete();
+                iv_kong.setVisibility(View.VISIBLE);
+                ll_content.setVisibility(View.GONE);
                 Helper.getInstance().showToast(FundShareActivity.this,ConstantUtil.NETWORK_ERROR);
             }
 
@@ -143,7 +145,7 @@ public class FundShareActivity extends BaseActivity implements View.OnClickListe
                             rl_view2.setBackgroundColor(ColorUtils.RED);
                         }
                         mAvailableTv.setText("可用资金\n" + fundRedemptionBean.AVAILABLE);
-
+                        ll_content.setVisibility(View.VISIBLE);
                         mAdapter.setDatas(setData(fundRedemptionBean));
                     } else if ("-6".equals(code)) {
                         startActivity(new Intent(FundShareActivity.this, TransactionLoginActivity.class));
@@ -181,14 +183,6 @@ public class FundShareActivity extends BaseActivity implements View.OnClickListe
             entity.setCostPrice(fundRedemptionBean.RESULT_LIST.get(i).OF_COST_PRICE);
             entity.setUnfold(false);
             datas.add(entity);
-        }
-
-        if (datas != null && datas.size() > 0) {
-            iv_kong.setVisibility(View.GONE);
-            ll_content.setVisibility(View.VISIBLE);
-        }else {
-            iv_kong.setVisibility(View.VISIBLE);
-            ll_content.setVisibility(View.GONE);
         }
         return datas;
     }
