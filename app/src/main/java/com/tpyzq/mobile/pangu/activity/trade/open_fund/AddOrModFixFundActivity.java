@@ -284,7 +284,7 @@ public class AddOrModFixFundActivity extends BaseActivity implements View.OnClic
         tv_fund_jz.setText("--");
         tv_en_date.setText("1日");
         tv_start_date.setText(currentDate);
-        tv_en_date.setText(currentDate);
+        tv_end_date.setText(currentDate);
         et_input_branch.setText("");
         fixFundEntity.setSTART_DATE(currentDate);
         fixFundEntity.setEND_DATE(currentDate);
