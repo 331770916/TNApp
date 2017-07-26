@@ -1,6 +1,7 @@
 package com.tpyzq.mobile.pangu.base;
 
 import android.text.TextUtils;
+import android.util.ArrayMap;
 
 import com.google.gson.Gson;
 import com.google.gson.reflect.TypeToken;
@@ -2102,147 +2103,154 @@ public class InterfaceCollection {
 
     }
 
-//    /**
-//     * 1.7.1 要闻
-//     *
-//     * @param limit 条数
-//     * @param page  页码
-//     * @param level 级别
-//     */
-//    public void queryImportant(String limit, String page, String level, final String TAG, final InterfaceCallback callback) {
-//        Map map1 = new HashMap<>();
-//        map1.put("limit", limit);
-//        map1.put("page", page);
-//        map1.put("level", level);
-//        parseInformation(ConstantUtil.URL_IMPORTANT,map1,TAG,callback);
-//    }
-//
-//    /**
-//     * 1.7.2 直播
-//     *
-//     * @param daysno 返回历史几天的数据
-//     * @param option 1=包含历史数据 2=不包含历史数据
-//     * @param limit  页数
-//     * @param page   页码
-//     */
-//    public void queryStreaming(String daysno, String option, String limit, String page, final String TAG, final InterfaceCallback callback) {
-//        Map map1 = new HashMap<>();
-//        map1.put("daysno", daysno);
-//        map1.put("option", option);
-//        map1.put("limit", limit);
-//        map1.put("page", page);
-//        parseInformation(ConstantUtil.URL_STREAMING,map1,TAG,callback);
-//    }
-//
-//    /**
-//     * 1.7.3 查询栏目信息列表
-//     *
-//     * @param classno 栏目id
-//     * @param limit
-//     * @param page
-//     */
-//    public void queryHkstocks(String classno, String limit, String page, final String TAG, final InterfaceCallback callback) {
-//        Map map1 = new HashMap<>();
-//        map1.put("classno", classno);
-//        map1.put("limit", limit);
-//        map1.put("page", page);
-//        parseInformation(ConstantUtil.URL_HKSTOCKS,map1,TAG,callback);
-//    }
-//
-//    /**
-//     * 1.7.4 信息详情
-//     * @param newsno 信息id
-//     */
-//    public void queryDetail(String newsno,String TAG,InterfaceCallback callback) {
-//        Map map1 = new HashMap<>();
-//        map1.put("newsno", newsno);
-//        parseInformation(ConstantUtil.URL_DETAIL,map1,TAG,callback);
-//    }
-//
-//    /**
-//     * 1.7.5 栏目list
-//     */
-//    public void queryClasslist(String TAG,InterfaceCallback callback){
-//        parseInformation(ConstantUtil.URL_CLASSLIST,new HashMap<>(),TAG,callback);
-//    }
-//
-//    /**
-//     * 解析资讯实体
-//     * @param TAG
-//     * @param callback
-//     * @return
-//     */
-//    private void parseInformation(String url, Map map,final String TAG, final InterfaceCallback callback) {
-//        net.okHttpForPostString(TAG, url, map, new StringCallback() {
-//            @Override
-//            public void onError(Call call, Exception e, int id) {
-//                ResultInfo info = new ResultInfo();
-//                info.setCode(ConstantUtil.NETWORK_ERROR_CODE);
-//                info.setMsg(ConstantUtil.NETWORK_ERROR);
-//                info.setTag(TAG);
-//                callback.callResult(info);
-//            }
-//
-//            @Override
-//            public void onResponse(String response, int id) {
-//                ResultInfo info = new ResultInfo(response);
-//                if (TextUtils.isEmpty(response)) {
-//                    info.setCode(ConstantUtil.SERVICE_NO_DATA_CODE);
-//                    info.setMsg(ConstantUtil.SERVICE_NO_DATA);
-//                    info.setTag(TAG);
-//                } else {
-//                    try {
-//                        JSONObject jsonObject = new JSONObject(response);
-//                        String code = jsonObject.optString("code");
-//                        String msg = jsonObject.optString("type");
-//                        info.setCode(code);
-//                        info.setMsg(msg);
-//                        info.setTag(TAG);
-//                        if ("0".equals(code))
-//                            info.setData(parseInformationArray(jsonObject.optJSONArray("message")));
-//                    } catch (Exception e) {
-//                        info.setCode(ConstantUtil.JSON_ERROR_CODE);
-//                        info.setMsg(ConstantUtil.JSON_ERROR);
-//                        info.setTag(TAG);
-//                    }
-//                    callback.callResult(info);
-//                }
-//            }
-//        });
-//    }
-//
-//    /**
-//     * 解析json数据
-//     * @param array json数组
-//     * @return List<NetworkVotingEntity>
-//     * @throws JSONException
-//     */
-//    private List<InformationEntity> parseInformationArray(JSONArray array) throws JSONException{
-//        List<InformationEntity> ses = new ArrayList<>();
-//        InformationEntity bean;
-//        for (int i = 0; i < array.length(); i++) {
-//            JSONObject obj = array.optJSONObject(i);
-//            bean = new InformationEntity();
-//            bean.setNewsno(obj.optString("newsno"));
-//            bean.setTitle(obj.optString("title"));
-//            bean.setDigest(obj.optString("digest"));
-//            bean.setTime(obj.optString("time"));
-//            bean.setImage_url(obj.optString("image_url"));
-//            bean.setDate(obj.optString("date"));
-//            bean.setContent(obj.optString("content"));
-//            bean.setSource(obj.optString("source"));
-//            bean.setStatement(obj.optString("statement"));
-//            bean.setLabelno(obj.optString("labelno"));
-//            bean.setLabelname(obj.optString("labelname"));
-//            bean.setClassno(obj.optString("classno"));
-//            bean.setClassname(obj.optString("classname"));
-//            JSONArray label = obj.optJSONArray("label");
-//            if(label!=null&&label.length()>0)
-//                bean.setList(parseInformationArray(label));
-//            ses.add(bean);
-//        }
-//        return ses;
-//    }
+    /**
+     * 1.7.1 要闻
+     *
+     * @param limit 条数
+     * @param page  页码
+     * @param level 级别
+     */
+    public void queryImportant(String limit, String page, String level, final String TAG, final InterfaceCallback callback) {
+        Map map1 = new HashMap<>();
+        map1.put("limit", limit);
+        map1.put("page", page);
+        map1.put("level", level);
+        parseInformation(ConstantUtil.URL_IMPORTANT,map1,TAG,callback,"");
+    }
+
+    /**
+     * 1.7.2 直播
+     *
+     * @param daysno 返回历史几天的数据
+     * @param option 1=包含历史数据 2=不包含历史数据
+     * @param limit  页数
+     * @param page   页码
+     */
+    public void queryStreaming(String daysno, String option, String limit, String page, final String TAG, final InterfaceCallback callback) {
+        Map map1 = new HashMap<>();
+        map1.put("daysno", daysno);
+        map1.put("option", option);
+        map1.put("limit", limit);
+        map1.put("page", page);
+        parseInformation(ConstantUtil.URL_STREAMING,map1,TAG,callback,"queryStreaming");
+    }
+
+    /**
+     * 1.7.3 查询栏目信息列表
+     *
+     * @param classno 栏目id
+     * @param limit
+     * @param page
+     */
+    public void queryHkstocks(String classno, String limit, String page, final String TAG, final InterfaceCallback callback) {
+        Map map1 = new HashMap<>();
+        map1.put("classno", classno);
+        map1.put("limit", limit);
+        map1.put("page", page);
+        parseInformation(ConstantUtil.URL_HKSTOCKS,map1,TAG,callback,"");
+    }
+
+    /**
+     * 1.7.4 信息详情
+     * @param newsno 信息id
+     */
+    public void queryDetail(String newsno,String TAG,InterfaceCallback callback) {
+        Map map1 = new HashMap<>();
+        map1.put("newsno", newsno);
+        parseInformation(ConstantUtil.URL_DETAIL,map1,TAG,callback,"queryDetail");
+    }
+
+    /**
+     * 1.7.5 栏目list
+     */
+    public void queryClasslist(String TAG,InterfaceCallback callback){
+        parseInformation(ConstantUtil.URL_CLASSLIST,new HashMap(),TAG,callback,"");
+    }
+
+    /**
+     * 解析资讯实体
+     * @param TAG
+     * @param callback
+     * @return
+     */
+    private void parseInformation(String url, Map map,final String TAG, final InterfaceCallback callback,final String type) {
+        net.okHttpForGet(TAG, url, map, new StringCallback() {
+            @Override
+            public void onError(Call call, Exception e, int id) {
+                ResultInfo info = new ResultInfo();
+                info.setCode(ConstantUtil.NETWORK_ERROR_CODE);
+                info.setMsg(ConstantUtil.NETWORK_ERROR);
+                info.setTag(TAG);
+                callback.callResult(info);
+            }
+
+            @Override
+            public void onResponse(String response, int id) {
+                ResultInfo info = new ResultInfo(response);
+                if (TextUtils.isEmpty(response)) {
+                    info.setCode(ConstantUtil.SERVICE_NO_DATA_CODE);
+                    info.setMsg(ConstantUtil.SERVICE_NO_DATA);
+                    info.setTag(TAG);
+                } else {
+                    try {
+                        JSONObject jsonObject = new JSONObject(response);
+                        String code = jsonObject.optString("code");
+                        String msg = jsonObject.optString("message");
+                        info.setCode(code);
+                        info.setMsg(msg);
+                        info.setTag(TAG);
+                        if ("200".equals(code))
+                            info.setData(parseInformationArray(jsonObject.optJSONArray("data"),type));
+                    } catch (Exception e) {
+                        info.setCode(ConstantUtil.JSON_ERROR_CODE);
+                        info.setMsg(ConstantUtil.JSON_ERROR);
+                        info.setTag(TAG);
+                    }
+                    callback.callResult(info);
+                }
+            }
+        });
+    }
+
+    /**
+     * 解析json数据
+     * @param array json数组
+     * @return List<NetworkVotingEntity>
+     * @throws JSONException
+     */
+    private List<InformationEntity> parseInformationArray(JSONArray array,String type) throws JSONException{
+        List<InformationEntity> ses = new ArrayList<>();
+        for (int i = 0; i < array.length(); i++) {
+            if(type.equals("queryStreaming")){
+                JSONArray a1 = array.getJSONArray(i);
+                for (int j = 0;j< a1.length();j++)
+                    parseJSONObject(ses,a1.optJSONObject(j),type);
+            }else
+                parseJSONObject(ses,array.optJSONObject(i),type);
+        }
+        return ses;
+    }
+
+    public void parseJSONObject(List<InformationEntity> ses,JSONObject obj,String type) throws JSONException{
+        InformationEntity bean = new InformationEntity();
+        bean.setNewsno(obj.optString("newsno"));
+        bean.setTitle(obj.optString("title"));
+        bean.setDigest(obj.optString("digest"));
+        bean.setTime(obj.optString("time"));
+        bean.setImage_url(obj.optString("image"));
+        bean.setDate(obj.optString("date"));
+        bean.setContent(obj.optString("content"));
+        bean.setSource(obj.optString("source"));
+        bean.setStatement(obj.optString("statement"));
+        bean.setLabelno(obj.optString("labelno"));
+        bean.setLabelname(obj.optString("labelname"));
+        bean.setClassno(obj.optString("classno"));
+        bean.setClassname(obj.optString("classname"));
+        JSONArray label = obj.optJSONArray("label");
+        if(label!=null&&label.length()>0)
+            bean.setList(parseInformationArray(label,type));
+        ses.add(bean);
+    }
 
     //基金定投开始
 

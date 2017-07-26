@@ -409,6 +409,7 @@
                 android:layout_width="match_parent"
                 android:layout_height="@dimen/size30"
                 android:gravity="center"
+                android:visibility="gone"
                 android:orientation="horizontal">
 
                 <TextView
@@ -459,6 +460,7 @@
                 android:id="@+id/tvDetailListView"
                 android:layout_width="match_parent"
                 android:orientation="vertical"
+                android:visibility="gone"
                 android:layout_height="wrap_content"/>
 
             <!-- 一键自选 -->
@@ -467,6 +469,7 @@
                 android:layout_width="match_parent"
                 android:layout_height="@dimen/size67"
                 android:gravity="center"
+                android:visibility="gone"
                 android:orientation="horizontal">
 
                 <ImageView

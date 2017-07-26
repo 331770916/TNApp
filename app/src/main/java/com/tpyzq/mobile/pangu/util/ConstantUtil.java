@@ -184,6 +184,18 @@ public class ConstantUtil {
     public static boolean USERFUL_KEYBOARD = true;
     public static boolean list_item_flag = true ; //    判断listview item 不能重复点击
 
+    //1.7.1要闻
+    public static String URL_IMPORTANT = IP + "/news/important";
+    //1.7.2直播
+    public static String URL_STREAMING = IP + "/news/streaming";
+    //1.7.3 查询栏目信息列表
+    public static String URL_HKSTOCKS = IP + "/news/hkstocks";
+    //1.7.4 信息详情
+    public static String URL_DETAIL = IP + "/news/detail";
+    //1.7.5 栏目list
+    public static String URL_CLASSLIST = IP + "/news/classlist";
+    public static final String DEFAULT_NUM = "30";//默认请求数据条数
+    public static final String ZIXUN_NUM = "10";//默认请求数据条数
 /////////////// SDcard文件存储位置相关/////////////////////////////////////////
 
     /**

@@ -1,166 +1,161 @@
 package com.tpyzq.mobile.pangu.data;
 
-import android.os.Parcel;
-import android.os.Parcelable;
+import java.util.List;
 
 /**
  * Created by zhangwenbo on 2016/9/17.
  * 资讯实体类
  */
-public class InformationEntity implements Parcelable {
+public class InformationEntity {
+    //1.7.1要闻
+    //1.7.3查询栏目信息列表
+    private String newsno;//信息id
+    private String title;//标题
+    private String digest;//摘要
+    private String time;//时间
+    private String image_url;//图片地址
+    //1.7.2直播
+    private String date;//日期
+    //1.7.4信息详情
+    private String content;//内容
+    private String source;//来源
+    private String statement;//声明
+    private String labelno;//标签id
+    private String labelname;//标签名称
+    //1.7.5栏目list
+    private String classno;//id
+    private String classname;//栏目名称
+    private List<InformationEntity> list;
 
-    private String publishTime;             //资讯发布时间
-    private String publishTitle;            //资讯发布标题
-    private String publishBreviaryContent;  //资讯列表缩略内容
-    private String publishAboutStock;       //资讯相关股票
-    private String newsId;                  //新闻id
-
-
-    private long time;                       //long 类型的时间值
-    private int type;                        //资讯重大事件列表类型 判断的字段
-    private String tname;                    //资讯 热点公告解析详情界面     上面的状态   如  获补贴
-    private String prob;                     //资讯 热点公告解析详情界面    的  百分比
-    private String days;                     //资讯 热点公告解析   建议持有天数
-    private String state;                     //资讯 热点公告解析   webView 中展示的数据
-    private String stockcode;                //资讯 热点公告解析   股票代码
-    private String price;                    //资讯热点公告解析    里面的最新价格
-
-
-    public String getNewsId() {
-        return newsId;
+    public String getNewsno() {
+        return newsno;
     }
 
-    public void setNewsId(String newsId) {
-        this.newsId = newsId;
+    public void setNewsno(String newsno) {
+        this.newsno = newsno;
     }
 
-    public String getPrice() {
-        return price;
+    public String getTitle() {
+        return title;
     }
 
-    public void setPrice(String price) {
-        this.price = price;
+    public void setTitle(String title) {
+        this.title = title;
     }
 
-    public String getTname() {
-        return tname;
+    public String getDigest() {
+        return digest;
     }
 
-    public void setTname(String tname) {
-        this.tname = tname;
+    public void setDigest(String digest) {
+        this.digest = digest;
     }
 
-    public String getProb() {
-        return prob;
-    }
-
-    public void setProb(String prob) {
-        this.prob = prob;
-    }
-
-    public String getState() {
-        return state;
-    }
-
-    public void setState(String state) {
-        this.state = state;
-    }
-
-    public String getDays() {
-        return days;
-    }
-
-    public void setDays(String days) {
-        this.days = days;
-    }
-
-    public String getStockcode() {
-        return stockcode;
-    }
-
-    public void setStockcode(String stockcode) {
-        this.stockcode = stockcode;
-    }
-
-    public long getTime() {
+    public String getTime() {
         return time;
     }
 
-    public void setTime(long time) {
+    public void setTime(String time) {
         this.time = time;
     }
 
-    public int getType() {
-        return type;
+    public String getImage_url() {
+        return image_url;
     }
 
-    public void setType(int type) {
-        this.type = type;
+    public void setImage_url(String image_url) {
+        this.image_url = image_url;
     }
 
-    public String getPublishTime() {
-        return publishTime;
+    public String getDate() {
+        return date;
     }
 
-    public void setPublishTime(String publishTime) {
-        this.publishTime = publishTime;
+    public void setDate(String date) {
+        this.date = date;
     }
 
-    public String getPublishTitle() {
-        return publishTitle;
+    public String getContent() {
+        return content;
     }
 
-    public void setPublishTitle(String publishTitle) {
-        this.publishTitle = publishTitle;
+    public void setContent(String content) {
+        this.content = content;
     }
 
-    public String getPublishBreviaryContent() {
-        return publishBreviaryContent;
+    public String getSource() {
+        return source;
     }
 
-    public void setPublishBreviaryContent(String publishBreviaryContent) {
-        this.publishBreviaryContent = publishBreviaryContent;
+    public void setSource(String source) {
+        this.source = source;
     }
 
-    public String getPublishAboutStock() {
-        return publishAboutStock;
+    public String getStatement() {
+        return statement;
     }
 
-    public void setPublishAboutStock(String publishAboutStock) {
-        this.publishAboutStock = publishAboutStock;
+    public void setStatement(String statement) {
+        this.statement = statement;
+    }
+
+    public String getLabelno() {
+        return labelno;
+    }
+
+    public void setLabelno(String labelno) {
+        this.labelno = labelno;
+    }
+
+    public String getLabelname() {
+        return labelname;
+    }
+
+    public void setLabelname(String labelname) {
+        this.labelname = labelname;
+    }
+
+    public String getClassno() {
+        return classno;
+    }
+
+    public void setClassno(String classno) {
+        this.classno = classno;
+    }
+
+    public String getClassname() {
+        return classname;
+    }
+
+    public void setClassname(String classname) {
+        this.classname = classname;
+    }
+
+    public List<InformationEntity> getList() {
+        return list;
+    }
+
+    public void setList(List<InformationEntity> list) {
+        this.list = list;
     }
 
     @Override
-    public int describeContents() {
-        return 0;
+    public String toString() {
+        return "InformationEntity{" +
+                "newsno='" + newsno + '\'' +
+                ", title='" + title + '\'' +
+                ", digest='" + digest + '\'' +
+                ", time='" + time + '\'' +
+                ", image_url='" + image_url + '\'' +
+                ", data='" + date + '\'' +
+                ", content='" + content + '\'' +
+                ", source='" + source + '\'' +
+                ", statement='" + statement + '\'' +
+                ", labelno='" + labelno + '\'' +
+                ", labelname='" + labelname + '\'' +
+                ", classno='" + classno + '\'' +
+                ", classname='" + classname + '\'' +
+                ", list=" + list +
+                '}';
     }
-
-    @Override
-    public void writeToParcel(Parcel dest, int flags) {
-        dest.writeString(publishTime);
-        dest.writeString(publishTitle);
-        dest.writeString(publishBreviaryContent);
-        dest.writeString(publishAboutStock);
-        dest.writeString(newsId);
-    }
-
-    public static final Creator<InformationEntity> CREATOR = new Creator<InformationEntity>(){
-        @Override
-        public InformationEntity createFromParcel(Parcel source) {
-            InformationEntity informationEntity = new InformationEntity();
-            informationEntity.publishTime = source.readString();
-            informationEntity.publishTitle = source.readString();
-            informationEntity.publishBreviaryContent = source.readString();
-            informationEntity.publishAboutStock = source.readString();
-            informationEntity.newsId = source.readString();
-
-            return informationEntity;
-        }
-
-        @Override
-        public InformationEntity[] newArray(int size) {
-            return new InformationEntity[size];
-        }
-    };
-
 }

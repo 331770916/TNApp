@@ -13,7 +13,7 @@ import com.handmark.pulltorefresh.library.PullToRefreshBase;
 import com.handmark.pulltorefresh.library.PullToRefreshListView;
 import com.tpyzq.mobile.pangu.R;
 import com.tpyzq.mobile.pangu.activity.home.information.NewsDetailActivity;
-import com.tpyzq.mobile.pangu.activity.home.information.adapter.SopCastAdapter;
+import com.tpyzq.mobile.pangu.activity.home.information.adapter.ZxTabAdapter;
 import com.tpyzq.mobile.pangu.base.BasePager;
 import com.tpyzq.mobile.pangu.base.InterfaceCollection;
 import com.tpyzq.mobile.pangu.data.InformationEntity;
@@ -25,40 +25,40 @@ import java.util.List;
 import static com.tpyzq.mobile.pangu.util.ConstantUtil.ZIXUN_NUM;
 
 /**
- * 作者：刘泽鹏 on 2016/9/17 15:55
- * 直播模块  首页
+ * 作者：刘泽鹏 on 2016/9/18 10:55
+ * 房地产模块
  */
-public class SopCastPager extends BasePager implements InterfaceCollection.InterfaceCallback{
-    private PullToRefreshListView mListView;
-    private SopCastAdapter adapter;
-    private ArrayList<InformationEntity> list;
-    private int count = 1;
-    private ProgressBar pb_SopCastPager;            //菊花
-    private RelativeLayout rlSopCast;               //包裹整个布局的  RelativeLayout
-    private LinearLayout llSopCastJiaZai;          //内容为空的   图片
-    private boolean isFirst = true;
+public class ListPager extends BasePager implements InterfaceCollection.InterfaceCallback{
     private String classno;
-
-    public SopCastPager(Context context,String params) {
-        super(context,params);
+    private PullToRefreshListView mListView;
+    private ZxTabAdapter adapter;
+    private ArrayList<InformationEntity> list;
+    private int mIndex = 1;     //分页加载数据  的  标记
+    private ProgressBar pb_Pager;
+    private RelativeLayout rl_Pager;
+    private LinearLayout llChongXinJiaZai;               //内容为空的   图片
+    private boolean isFirst = true;
+    public ListPager(Context context,String param) {
+        super(context,param);
     }
 
     @Override
-    public int getLayoutId() {
-        return R.layout.sopcast_pager;
+    public void initData() {
+        if(isFirst) {
+            ifc.queryHkstocks(classno, ZIXUN_NUM, String.valueOf(mIndex), classno, this);
+            isFirst = false;
+        }
     }
 
     @Override
     public void setView(String params) {
         this.classno = params;
-        mListView = (PullToRefreshListView) rootView.findViewById(R.id.lvSopCast);
-        mListView.setVisibility(View.GONE);         //初始化隐藏 listView
-        pb_SopCastPager = (ProgressBar) rootView.findViewById(R.id.pb_SopCastPager);    //显示菊花
-        rlSopCast = (RelativeLayout) rootView.findViewById(R.id.rlSopCast);              //初始化  背景为灰色
-        llSopCastJiaZai = (LinearLayout) rootView.findViewById(R.id.llSopCastJiaZai);
-        count = 0;
-        list = new ArrayList();
-        adapter = new SopCastAdapter(mContext);         //实例化适配器
+        mListView = (PullToRefreshListView) rootView.findViewById(R.id.lvFinancial);
+        pb_Pager = (ProgressBar) rootView.findViewById(R.id.pb_Pager);
+        rl_Pager = (RelativeLayout) rootView.findViewById(R.id.rl_Pager);
+        llChongXinJiaZai = (LinearLayout) rootView.findViewById(R.id.llChongXinJiaZai);
+        list = new ArrayList<>();
+        adapter = new ZxTabAdapter(mContext);
         mListView.setAdapter(adapter);
         mListView.setOnItemClickListener(new AdapterView.OnItemClickListener() {
             @Override
@@ -66,11 +66,11 @@ public class SopCastPager extends BasePager implements InterfaceCollection.Inter
                 Intent intent = new Intent();
                 intent.setClass(mContext, NewsDetailActivity.class);
                 InformationEntity informationBean = list.get(position - 1);
-                String requestId = informationBean.getNewsno();
-                intent.putExtra("requestId", requestId);
+                intent.putExtra("requestId", informationBean.getNewsno());
                 mContext.startActivity(intent);
             }
         });
+        //下拉刷新
         mListView.setOnRefreshListener(new PullToRefreshBase.OnRefreshListener<ListView>() {
             @Override
             public void onRefresh(PullToRefreshBase<ListView> refreshView) {
@@ -80,58 +80,52 @@ public class SopCastPager extends BasePager implements InterfaceCollection.Inter
                     mListView.getLoadingLayoutProxy().setRefreshingLabel("正在刷新");
                     mListView.getLoadingLayoutProxy().setPullLabel("下拉刷新数据");
                     mListView.getLoadingLayoutProxy().setReleaseLabel("释放开始刷新");
-                    count = 1;
-                    ifc.queryStreaming("30","2",ZIXUN_NUM,String.valueOf(count),classno,SopCastPager.this);
+                    mIndex = 1;
+                    ifc.queryHkstocks(classno,ZIXUN_NUM,String.valueOf(mIndex),classno,ListPager.this);
                 } else if (refreshView.isShownFooter()) {
-                    //判断尾布局是否可见，如果可见执行上拉加载更多
-                    //设置尾布局样式文字
                     mListView.getLoadingLayoutProxy().setRefreshingLabel("正在加载");
                     mListView.getLoadingLayoutProxy().setPullLabel("上拉加载更多");
                     mListView.getLoadingLayoutProxy().setReleaseLabel("释放开始加载");
-                    count ++ ;
-                    ifc.queryStreaming("3","2",ZIXUN_NUM,String.valueOf(count),classno,SopCastPager.this);
+                    mIndex ++;
+                    ifc.queryHkstocks(classno,ZIXUN_NUM,String.valueOf(mIndex),classno,ListPager.this);
                 }
             }
         });
     }
 
     @Override
-    public void initData() {
-        if(isFirst) {
-            ifc.queryStreaming("3", "2", ZIXUN_NUM, String.valueOf(count), classno, this);
-            isFirst = false;
-        }
-    }
-
-
-    @Override
     public void callResult(ResultInfo info) {
-        pb_SopCastPager.setVisibility(View.GONE);       //隐藏 菊花
-        rlSopCast.setBackgroundColor(ContextCompat.getColor(mContext, R.color.white));   //背景设置为白色
+        pb_Pager.setVisibility(View.GONE);
+        rl_Pager.setBackgroundColor(ContextCompat.getColor(mContext, R.color.white));
         if(info.getCode().equals("200")){
             Object obj = info.getData();
             if(obj!=null&&obj instanceof List){
-                mListView.setVisibility(View.VISIBLE);          //显示 listView
                 list = (ArrayList<InformationEntity>)obj;
                 adapter.setList(list);
                 mListView.onRefreshComplete();
             }
         }else{
-            mListView.setVisibility(View.GONE);     //隐藏listView
-            llSopCastJiaZai.setVisibility(View.VISIBLE);       //当请求失败的时候  显示重新加载图片
-            llSopCastJiaZai.setOnClickListener(new View.OnClickListener() {
+            llChongXinJiaZai.setVisibility(View.VISIBLE);       //当请求失败的时候  显示重新加载图片
+            llChongXinJiaZai.setOnClickListener(new View.OnClickListener() {
                 @Override
                 public void onClick(View v) {       //点击图片重新请求数据
-                    llSopCastJiaZai.setVisibility(View.GONE);  //隐藏重新加载图片
-                    pb_SopCastPager.setVisibility(View.VISIBLE);      //显示菊花
-                    rlSopCast.setVisibility(View.VISIBLE);//显示背景
-                    rlSopCast.setBackgroundColor(ContextCompat.getColor(mContext, R.color.dividerColor)); //设置为灰色
-                    count = 1;
-                    ifc.queryStreaming("3","2",ZIXUN_NUM,String.valueOf(count),classno,SopCastPager.this);
+                    llChongXinJiaZai.setVisibility(View.GONE);  //隐藏重新加载图片
+                    pb_Pager.setVisibility(View.VISIBLE);      //显示菊花
+                    rl_Pager.setVisibility(View.VISIBLE);//显示背景
+                    rl_Pager.setBackgroundColor(ContextCompat.getColor(mContext, R.color.dividerColor)); //设置为灰色
+                    isFirst = true;
+                    mIndex = 1;
+                    ifc.queryHkstocks(classno,ZIXUN_NUM,String.valueOf(mIndex),classno,ListPager.this);
                 }
             });
         }
     }
+
+    @Override
+    public int getLayoutId() {
+        return R.layout.financial_pager;
+    }
+
 
     @Override
     public void destroy() {

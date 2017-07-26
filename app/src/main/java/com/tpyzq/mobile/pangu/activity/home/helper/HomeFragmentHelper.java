@@ -132,57 +132,8 @@ public class HomeFragmentHelper implements HomeSubject {
         return dataSourceList;
     }
 
-//    public ArrayList<NewsInofEntity> formateSelfNewsJson(ArrayList<String> infos) {
-//
-//        ArrayList<NewsInofEntity> newsInofEntities = new ArrayList<>();
-//        if (infos == null || infos.size() <= 0) {
-//            return newsInofEntities;
-//        }
-//
-//        //王琦写
-//        for (String json : infos) {
-//
-//            try {
-//                JSONObject jsonObject = new JSONObject(json);
-//                ArrayList<NewsInofEntity> list = new ArrayList<NewsInofEntity>();
-//                if ("200".equals(jsonObject.getString("code"))) {
-//                    JSONArray message = jsonObject.getJSONArray("message");
-//                    if (message != null && message.length() > 0) {
-//                        for (int i = 0; i < message.length(); i++) {
-//                            NewsInofEntity _bean = new NewsInofEntity();
-//                            if (i < 10) {
-//                                _bean.setAuth(message.getJSONObject(i).getString("auth"));  // 作者
-//                                _bean.setDt(message.getJSONObject(i).getLong("dt"));         //时间
-//                                _bean.setId(message.getJSONObject(i).getString("id"));      //id
-//                                _bean.setSum(message.getJSONObject(i).getString("sum").replace("#&#", ""));    //内容
-//                                String title = message.getJSONObject(i).getString("title"); //内容标题
-//                                _bean.setTitle(title.replace("#&#", ""));
-//
-//                                JSONArray relateList = message.getJSONObject(i).getJSONArray("relateList");
-//                                if (relateList != null && relateList.length() > 0) {
-//                                    for (int j = 0; j < relateList.length(); j++) {
-//                                        _bean.setComp(relateList.getJSONObject(j).getString("comp"));    //股票名称
-//                                        _bean.setTick(relateList.getJSONObject(j).getString("tick"));    //股票代码
-//                                    }
-//                                }
-//                            }
-//                            list.add(_bean);
-//
-//                            newsInofEntities = list;
-//                        }
-//                    }
-//                }
-//            } catch (JSONException e) {
-//            }
-//
-//        }
-//
-//
-//        return newsInofEntities;
-//    }
     public  ArrayList<InformationEntity> getInfoListfromJson(String json,int count) throws JSONException{
-        ArrayList<InformationEntity> informationEntities = new ArrayList<InformationEntity>();
-//        try {
+        ArrayList<InformationEntity> informationEntities = new ArrayList<>();
             JSONObject jsonObject = new JSONObject(json);
             if("200".equals(jsonObject.optString("code"))){
                 JSONArray message = jsonObject.getJSONArray("message");
@@ -191,151 +142,14 @@ public class HomeFragmentHelper implements HomeSubject {
                     for (int i = 0; i < length; i++) {
                         InformationEntity bean = new InformationEntity();
                         JSONObject data = message.getJSONObject(i);
-                        bean.setNewsId(data.optString("id"));
-                        bean.setPublishTime(Helper.getTimeByTimeC(data.optString("dt")));
-                        bean.setPublishTitle(data.optString("title"));
-                        //股票名称需要进行处理
-                        JSONArray stocks = data.getJSONArray("stocks");
-                        StringBuilder sb = new StringBuilder();
-                        if(stocks != null && stocks.length() > 0){
-                            for(int j  = 0;j < stocks.length();j++){
-                                if(j < 2 ){
-                                    sb.append(stocks.getJSONObject(j).optString("name")).append(" ");
-                                }
-                            }
-                        }
-                        String aboutStock = sb.toString();
-                        if(!TextUtils.isEmpty(aboutStock)){
-                            bean.setPublishAboutStock(aboutStock);
-                        }else {
-                            bean.setPublishAboutStock("无");
-                        }
+                        //.....解析存储的数据
                         informationEntities.add(bean);
                     }
                 }
             }
-//        }catch (JSONException e){
-//            e.printStackTrace();
-//        }
         return  informationEntities;
     }
-    public ArrayList<InformationEntity> formateInfoJson(ArrayList<String> infos) {
-        ArrayList<InformationEntity> informationEntities = new ArrayList<InformationEntity>();
 
-//        for (String json : infos) {
-//
-//            ObjectMapper objectMapper = JacksonMapper.getInstance();
-//            try {
-//                Map<String, Object> responseValues = objectMapper.readValue(json, new HashMap<String, Object>().getClass());
-//
-//                String code = "";
-//                if (null != responseValues.get("code")) {
-//                    code = String.valueOf(responseValues.get("code"));
-//                }
-//
-//                String type = "";
-//
-//                if (null != responseValues.get("type")) {
-//                    type = String.valueOf(responseValues.get("type"));
-//                }
-//
-//                if ("SUCCESS".equals(type)) {
-//                    Db_HOME_INFO.deleteAll();
-//                    Db_HOME_INFO.addOneHomeInfo(json);
-//                }
-//
-//                List<Object> message = new ArrayList<Object>();
-//
-//                if (null != responseValues.get("message")) {
-//                    message = (List<Object>) responseValues.get("message");
-//                }
-//
-//                if (message != null && message.size() > 0) {
-//
-//                    for (Object object : message) {
-//                        InformationEntity entity = new InformationEntity();
-//                        Map<String, Object> items = (Map<String, Object>) object;
-//
-//                        String _id = "";
-//                        if (null != items.get("id")) {
-//                            _id = String.valueOf(items.get("id"));
-//                        }
-//
-//                        String dt = "";
-//                        if (null != items.get("dt")) {
-//                            dt = String.valueOf(items.get("dt"));
-//                        }
-//
-//                        String title = "";
-//                        if (null != items.get("title")) {
-//                            title = String.valueOf(items.get("title"));
-//                        }
-//
-//                        String auth = "";
-//                        if (null != items.get("auth")) {
-//                            auth = String.valueOf(items.get("auth"));
-//                        }
-//
-//                        String pos = "";
-//                        if (null != items.get("pos")) {
-//                            pos = String.valueOf(items.get("pos"));
-//                        }
-//
-//                        entity.setNewsId(_id);
-//                        entity.setPublishTitle(title);
-//                        entity.setPublishTime(Helper.getTimeByTimeC(dt));
-//
-//                        List<Map<String, Object>> stocks = new ArrayList<Map<String, Object>>();
-//                        Object subObj = items.get("stocks");
-//                        if (null != items.get("stocks") && subObj instanceof List) {
-//                            stocks = (List<Map<String, Object>>) items.get("stocks");
-//
-//                            StringBuilder sb = new StringBuilder();
-//
-//                            int tempNum = 0;
-//                            for (Map<String, Object> subItem : stocks) {
-//
-//                                String _code = "";
-//
-//                                if (null != subItem.get("code")) {
-//                                    _code = String.valueOf(subItem.get("code"));
-//                                }
-//
-//                                String name = "";
-//                                if (null != subItem.get("name")) {
-//                                    tempNum = tempNum + 1;
-//                                    name = String.valueOf(subItem.get("name"));
-//                                    if (tempNum <= 2) {
-//                                        sb.append(name + "\u2000");
-//                                    }
-//                                }
-//
-//                                String tick = "";
-//
-//                                if (null != subItem.get("tick")) {
-//                                    tick = String.valueOf(subItem.get("tick"));
-//                                }
-//                            }
-//
-//                            String aboutStock = sb.toString();
-//
-//                            if (!TextUtils.isEmpty(aboutStock)) {
-//                                entity.setPublishAboutStock(aboutStock);
-//                            } else {
-//                                entity.setPublishAboutStock("无");
-//                            }
-//                            informationEntities.add(entity);
-//                        }
-//                    }
-//                }
-//
-//            } catch (Exception e) {
-//                e.printStackTrace();
-//            }
-//        }
-
-        return informationEntities;
-    }
 
     public void gotoPager(String title, Activity activity, HomeFragment.JumpPageListener jumpPageListener, Object object) {
         Intent intent = new Intent();

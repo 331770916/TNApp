@@ -7,25 +7,15 @@ import android.graphics.Color;
 import android.support.v4.view.ViewPager;
 import android.text.TextUtils;
 import android.view.View;
-
 import com.tpyzq.mobile.pangu.R;
 import com.tpyzq.mobile.pangu.activity.home.information.adapter.InfoPagerAdapter;
-import com.tpyzq.mobile.pangu.activity.home.information.view.BaseInfoPager;
-import com.tpyzq.mobile.pangu.activity.home.information.view.CommercePager;
-import com.tpyzq.mobile.pangu.activity.home.information.view.ConsumePager;
-import com.tpyzq.mobile.pangu.activity.home.information.view.EnergyPager;
-import com.tpyzq.mobile.pangu.activity.home.information.view.FinancialPager;
 import com.tpyzq.mobile.pangu.activity.home.information.view.HotPintsPager;
-import com.tpyzq.mobile.pangu.activity.home.information.view.IndustryPager;
-import com.tpyzq.mobile.pangu.activity.home.information.view.InformationPager;
-import com.tpyzq.mobile.pangu.activity.home.information.view.MaterialsPager;
-import com.tpyzq.mobile.pangu.activity.home.information.view.MedicalPager;
-import com.tpyzq.mobile.pangu.activity.home.information.view.PublicUtilitiesPager;
-import com.tpyzq.mobile.pangu.activity.home.information.view.RealtyPager;
 import com.tpyzq.mobile.pangu.activity.home.information.view.SopCastPager;
-import com.tpyzq.mobile.pangu.activity.home.information.view.TelecomPager;
 import com.tpyzq.mobile.pangu.base.BaseActivity;
-import com.tpyzq.mobile.pangu.http.NetWorkUtil;
+import com.tpyzq.mobile.pangu.base.BasePager;
+import com.tpyzq.mobile.pangu.base.InterfaceCollection;
+import com.tpyzq.mobile.pangu.data.InformationEntity;
+import com.tpyzq.mobile.pangu.data.ResultInfo;
 import com.tpyzq.mobile.pangu.util.ColorUtils;
 import com.tpyzq.mobile.pangu.util.SpUtils;
 import com.tpyzq.mobile.pangu.view.magicindicator.MagicIndicator;
@@ -39,89 +29,42 @@ import com.tpyzq.mobile.pangu.view.magicindicator.buildins.commonnavigator.title
 import com.tpyzq.mobile.pangu.view.magicindicator.buildins.commonnavigator.titles.SimplePagerTitleView;
 
 import java.util.ArrayList;
+import java.util.Arrays;
 import java.util.List;
 
 /**
  * 资讯首页
  * 修改MagicIndicator 控件预加载方式，以及资讯栏目的编辑保存   by   longfeng
  */
-public class InformationHomeActivity extends BaseActivity implements View.OnClickListener{
+public class InformationHomeActivity extends BaseActivity implements View.OnClickListener,InterfaceCollection.InterfaceCallback{
     private static final String TAG = "InformationHomeActivity";
-    private int point = 0;
     private MagicIndicator mi_info;
     private ViewPager mViewPager;
-    private ArrayList<String> mTitleList ;            //显示页卡标题集合
-    private List<BaseInfoPager> mViewList ;   //页卡视图集合
+    private ArrayList<String> mTitleList,mClassNoList ;            //显示页卡标题集合
     private ArrayList<String> listTab;                              //页卡Tab的数据源，可编辑选中条数
-    private ArrayList<String> fragmentList;                         //Fragment的名称集合
     private int INFOMATION = 5;
-    private int more;
     private int currentItem ;
-
+    private String currentTitle;
     private SimplePagerTitleView sptv;
     private CommonNavigator commonNavigator;
     private CommonNavigatorAdapter commonNavigatorAdapter;
-    //pager
-    HotPintsPager hotPintsPager = null;                     //热点
+    HotPintsPager hotPintsPager = null;                     //要闻
     SopCastPager sopCastPager = null;                       //直播
-    FinancialPager financialPager = null;                   //金融业
-    RealtyPager realtyPager = null;                         //房地产
-    InformationPager informationPager = null;               //信息技术
-    TelecomPager telecomPager = null;                       //电信
-    MedicalPager medicalPager = null;                       //医疗
-    IndustryPager industryPager = null;                     //工业
-    EnergyPager energyPager = null;                         //能源
-    PublicUtilitiesPager publicUtilitiesPager = null;      //公共事业
-    ConsumePager consumePager = null;                       //消费
-    MaterialsPager materialsPager = null;                   //原材料
-    CommercePager commercePager = null;                     //商贸
     InfoPagerAdapter tabAdapter;
 
     @Override
     public void initView() {
-        more = getIntent().getIntExtra("more", -1);
         currentItem = getIntent().getIntExtra("currentItem", 0);
+        mInterface.queryClasslist(TAG,this);
         this.findViewById(R.id.ivInformationHome_back).setOnClickListener(this);        //返回按钮
         this.findViewById(R.id.ivCompile).setOnClickListener(this);                      //编辑按钮
         mi_info = (MagicIndicator) findViewById(R.id.mi_info);
         mViewPager = (ViewPager) this.findViewById(R.id.vpStoryHome);
         commonNavigator = new CommonNavigator(this);
         mTitleList = new ArrayList<>();
-        mViewList = new ArrayList<BaseInfoPager>();
-        listTab = new ArrayList<String>();
-        getTabList();
-        addData();
-
-//        hotPintsPager = new HotPintsPager(this);
-//        sopCastPager = new SopCastPager(this);
-//        financialPager = new FinancialPager(this);
-//        realtyPager = new RealtyPager(this);
-//        informationPager = new InformationPager(this);
-//        telecomPager = new TelecomPager(this);
-//        medicalPager = new MedicalPager(this);
-//        industryPager = new IndustryPager(this);
-//        energyPager = new EnergyPager(this);
-//        publicUtilitiesPager = new PublicUtilitiesPager(this);
-//        consumePager = new ConsumePager(this);
-//        materialsPager = new MaterialsPager(this);
-//        commercePager = new CommercePager(this);
-
-//        mViewList.add(hotPintsPager);
-//        mViewList.add(sopCastPager);
-//        mViewList.add(financialPager);
-//        mViewList.add(realtyPager);
-//        mViewList.add(informationPager);
-//        mViewList.add(telecomPager);
-//        mViewList.add(medicalPager);
-//        mViewList.add(industryPager);
-//        mViewList.add(energyPager);
-//        mViewList.add(publicUtilitiesPager);
-//        mViewList.add(consumePager);
-//        mViewList.add(materialsPager);
-//        mViewList.add(commercePager);
-
+        mClassNoList = new ArrayList<>();
+        listTab = new ArrayList<>();
         tabAdapter = new InfoPagerAdapter(mTitleList,this);   //初始化适配器
-        tabAdapter.setBaseInfoPager(mViewList);
         mViewPager.setAdapter(tabAdapter);                   //适配
         mViewPager.setCurrentItem(currentItem);
         ViewPager.OnPageChangeListener pc = new ViewPager.OnPageChangeListener() {
@@ -131,7 +74,9 @@ public class InformationHomeActivity extends BaseActivity implements View.OnClic
             }
             @Override
             public void onPageSelected(int position) {
-//                mViewList.get(position).initData();
+                currentItem = position;
+                currentTitle = tabAdapter.getPageTitle(position).toString();
+                tabAdapter.getPager(currentTitle).initData();
             }
 
             @Override
@@ -142,6 +87,30 @@ public class InformationHomeActivity extends BaseActivity implements View.OnClic
         mViewPager.addOnPageChangeListener(pc);
         initMagicIndicator();
     }
+
+
+    @Override
+    public void callResult(ResultInfo info) {
+        if(info.getCode().equals("200")){
+            Object obj = info.getData();
+            if(obj!=null&&obj instanceof List){
+                List<InformationEntity> list = new ArrayList<>();
+                InformationEntity yw = new InformationEntity();
+                yw.setClassname("要闻");
+                yw.setClassno("1");
+                list.add(yw);
+                InformationEntity zb = new InformationEntity();
+                zb.setClassname("直播");
+                zb.setClassno("2");
+                list.add(zb);
+                list.addAll((List)obj);
+                if(list.size()>0)
+                    putTabList(list);
+            }
+        }else
+            getTabList();
+    }
+
 
     private void initMagicIndicator() {
         commonNavigatorAdapter = new CommonNavigatorAdapter() {
@@ -165,6 +134,8 @@ public class InformationHomeActivity extends BaseActivity implements View.OnClic
                         } else {
                             return;
                         }
+                        currentItem = index;
+                        currentTitle = mTitleList.get(index);
                         mViewPager.setCurrentItem(index);
                     }
                 });
@@ -179,55 +150,100 @@ public class InformationHomeActivity extends BaseActivity implements View.OnClic
             }
         };
         commonNavigator.setSkimOver(true);
-
         commonNavigator.setAdapter(commonNavigatorAdapter);
         mi_info.setNavigator(commonNavigator);
         mi_info.onPageSelected(currentItem);
         ViewPagerHelper.bind(mi_info, mViewPager);
     }
 
-    private void getTabList() {
-        String sortTab = SpUtils.getString(this, "sortTab", "");
-        if (TextUtils.isEmpty(sortTab)) {
-            listTab.add("热点");
-            listTab.add("要闻直播");
-            listTab.add("金融业");
-            listTab.add("房地产业");
-            listTab.add("信息技术");
-            listTab.add("电信");
-            listTab.add("医疗");
-            listTab.add("工业");
-            listTab.add("能源");
-            listTab.add("公共事业");
-            listTab.add("消费");
-            listTab.add("原材料");
-            listTab.add("商贸");
-        }else{
-            listTab.clear();
-            String[] title = sortTab.split(",");
-            for (int i = 0; i < title.length; i++) {
-                listTab.add(title[i]);
+    private void putTabList(List<InformationEntity> list) {
+        listTab.clear();
+        mClassNoList.clear();
+        String sortTab = SpUtils.getString(this,"sortTab","");
+        StringBuffer sb = new StringBuffer();
+        if(!TextUtils.isEmpty(sortTab)){
+            List<String> tabs = Arrays.asList(sortTab.split(","));
+            for (InformationEntity entity:list) {
+                if(tabs.contains(entity.getClassname())){//列表中包含列名
+                    if(TextUtils.isEmpty(SpUtils.getString(this,entity.getClassname(),"")))
+                        SpUtils.putString(this,entity.getClassname(),entity.getClassno());
+                }else
+                    SpUtils.putString(this,entity.getClassname(),entity.getClassno());
+                listTab.add(entity.getClassname());
+                mClassNoList.add(entity.getClassno());
+                sb.append(entity.getClassname()).append(",");
             }
+            String mSortTab = sb.substring(0,sb.length()-1);
+            if(!sortTab.equals(mSortTab)) {//存储列表和返回列表不相等
+                SpUtils.putString(this, "sortTab", mSortTab);
+                List<String> mTabs = Arrays.asList(mSortTab.split(","));
+                for (String tab:tabs){
+                     if(!mTabs.contains(tab))
+                        SpUtils.removeKey(this,tab);
+                }
+            }
+        }else{
+            for (InformationEntity entity:list) {
+                SpUtils.putString(this,entity.getClassname(),entity.getClassno());
+                listTab.add(entity.getClassname());
+                mClassNoList.add(entity.getClassno());
+                sb.append(entity.getClassname()).append(",");
+            }
+            SpUtils.putString(this, "sortTab", sb.substring(0,sb.length()-1));
         }
+        sortTab = SpUtils.getString(this,"sortTab","");
+        List<String> tabs = Arrays.asList(sortTab.split(","));
+        for (int i = 0; i< tabs.size();i++) {
+            if(currentItem==i)
+                currentTitle = tabs.get(i);
+        }
+        addData();
+    }
+
+    private void getTabList(){
+        String sortTab = SpUtils.getString(this, "sortTab", "");
+        listTab.clear();
+        mClassNoList.clear();
+        currentTitle = SpUtils.getString(this,"currentTitle","");
+        String[] title = sortTab.split(",");
+        for (int i = 0; i < title.length; i++) {
+            if(title[i].equals(currentTitle))
+                currentItem = i;
+            listTab.add(title[i]);
+            mClassNoList.add(SpUtils.getString(this,title[i],""));
+        }
+        addData();
     }
 
     private void addData() {
-        String zixuntab = SpUtils.getString(this, "ziXunTab", "");       //获取  选中的Tab 的名称
+        String zixuntab = SpUtils.getString(this, "ziXunTab", "");      //获取  选中的Tab 的名称
         if (TextUtils.isEmpty(zixuntab)) {
             mTitleList.addAll(listTab);
+            commonNavigator.setAdjustMode(false);
+            commonNavigator.notifyDataSetChanged();
+            tabAdapter.setClassNoList(mClassNoList);
+            mViewPager.setCurrentItem(currentItem);
             return;
         }
         mTitleList.clear();
+        mClassNoList.clear();
         String[] title = zixuntab.split(",");
         for (int i = 0; i < title.length; i++) {
+            if(title[i].equals(currentTitle))
+                currentItem = i;
             mTitleList.add(title[i]);
+            mClassNoList.add(SpUtils.getString(this,title[i],""));
         }
         if(mTitleList.size() < 5){
             commonNavigator.setAdjustMode(true);
         }else{
             commonNavigator.setAdjustMode(false);
         }
+        commonNavigator.notifyDataSetChanged();
+        tabAdapter.setClassNoList(mClassNoList);
+        mViewPager.setCurrentItem(currentItem);
     }
+
 
     @Override
     public void onClick(View v) {
@@ -236,6 +252,7 @@ public class InformationHomeActivity extends BaseActivity implements View.OnClic
                 this.finish();
                 break;
             case R.id.ivCompile:                     //点击跳转编辑  Tab  界面
+                SpUtils.putString(this,"currentTitle",currentTitle);
                 Intent intent = new Intent();
                 intent.setClass(this, CompileTabActivity.class);
                 intent.putStringArrayListExtra("listTab", listTab);
@@ -248,38 +265,21 @@ public class InformationHomeActivity extends BaseActivity implements View.OnClic
     @Override
     protected void onActivityResult(int requestCode, int resultCode, Intent intent) {
         super.onActivityResult(requestCode, resultCode, intent);
-        if (requestCode == INFOMATION && resultCode == RESULT_OK) {
-            point = intent.getIntExtra("point", 0);
-//            String zixuntab = SpUtils.getString(this, "ziXunTab", "");       //获取  选中的Tab 的名称
-//            mTitleList.clear();
-//            String[] title = zixuntab.split(",");
-//            for (int i = 0; i < title.length; i++) {
-//                mTitleList.add(title[i]);
-//            }
+        if (requestCode == INFOMATION && resultCode == RESULT_OK)
             getTabList();
-            addData();
-            commonNavigator.notifyDataSetChanged();
-            tabAdapter.notifyDataSetChanged();
-            mViewPager.setCurrentItem(currentItem);
-        }
     }
 
     @Override
     protected void onDestroy() {
         super.onDestroy();
-        NetWorkUtil.cancelSingleRequestByTag(HotPintsPager.TAG);
-        NetWorkUtil.cancelSingleRequestByTag(SopCastPager.TAG);
-        NetWorkUtil.cancelSingleRequestByTag(FinancialPager.TAG);
-        NetWorkUtil.cancelSingleRequestByTag(RealtyPager.TAG);
-        NetWorkUtil.cancelSingleRequestByTag(InformationPager.TAG);
-        NetWorkUtil.cancelSingleRequestByTag(TelecomPager.TAG);
-        NetWorkUtil.cancelSingleRequestByTag(MedicalPager.TAG);
-        NetWorkUtil.cancelSingleRequestByTag(IndustryPager.TAG);
-        NetWorkUtil.cancelSingleRequestByTag(EnergyPager.TAG);
-        NetWorkUtil.cancelSingleRequestByTag(PublicUtilitiesPager.TAG);
-        NetWorkUtil.cancelSingleRequestByTag(ConsumePager.TAG);
-        NetWorkUtil.cancelSingleRequestByTag(MaterialsPager.TAG);
-        NetWorkUtil.cancelSingleRequestByTag(CommercePager.TAG);
+        if(hotPintsPager!=null){
+            hotPintsPager.destroy();
+            hotPintsPager = null;
+        }
+        if(sopCastPager!=null){
+            sopCastPager.destroy();
+            sopCastPager = null;
+        }
     }
 
     @Override

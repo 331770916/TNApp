@@ -68,6 +68,16 @@ public class SpUtils {
 		editor.putInt(key, value).commit();
 	}
 
+	//移除值
+	public static void removeKey(Context context,String key){
+		if (sharedPreferences == null) {
+			sharedPreferences = context.getSharedPreferences(config, Context.MODE_PRIVATE);
+			editor = sharedPreferences.edit();
+		}
+		editor.remove(key).commit();
+	}
+
+
 	// 取int值
 	public static int getInt(Context context, String key,int defValue) {
 		if (sharedPreferences == null) {

@@ -6,9 +6,8 @@ import android.view.View;
 import android.view.ViewGroup;
 import android.widget.BaseAdapter;
 import android.widget.TextView;
-
 import com.tpyzq.mobile.pangu.R;
-import com.tpyzq.mobile.pangu.data.InformationBean;
+import com.tpyzq.mobile.pangu.data.InformationEntity;
 
 import java.util.ArrayList;
 
@@ -20,13 +19,13 @@ import java.util.ArrayList;
 public class NewsDetailListAdapter extends BaseAdapter {
 
     private Context context;
-    private ArrayList<InformationBean> list;
+    private ArrayList<InformationEntity> list;
 
     public NewsDetailListAdapter(Context context) {
         this.context = context;
     }
 
-    public void setList(ArrayList<InformationBean> list){
+    public void setList(ArrayList<InformationEntity> list){
         this.list = list;
         notifyDataSetChanged();
     }
@@ -67,10 +66,10 @@ public class NewsDetailListAdapter extends BaseAdapter {
             viewHolder = (ViewHolder) convertView.getTag();
         }
 
-        InformationBean informationBean = list.get(position);
-        viewHolder.tvNewsDetailTitle.setText(informationBean.getPublishTitle());
-        viewHolder.tvNewsDetailTime.setText(informationBean.getTimes());
-        viewHolder.tvNewsDetailLaiYuanVolue.setText("暂无数据");
+        InformationEntity informationBean = list.get(position);
+        viewHolder.tvNewsDetailTitle.setText(informationBean.getTitle());
+        viewHolder.tvNewsDetailTime.setText(informationBean.getTime());
+        viewHolder.tvNewsDetailLaiYuanVolue.setText(informationBean.getSource());
 
         return convertView;
     }

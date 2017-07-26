@@ -10,12 +10,13 @@
         android:orientation="horizontal">
 
 
-        <ImageView
+        <com.facebook.drawee.view.SimpleDraweeView
+            android:id="@+id/iv_image"
             android:layout_width="@dimen/size120"
             android:layout_height="@dimen/size90"
             android:layout_marginBottom="@dimen/size15"
             android:layout_marginTop="@dimen/size12"
-            android:background="@color/white" />
+            android:background="@mipmap/news_default_sbg" />
 
         <RelativeLayout
             android:layout_width="match_parent"
@@ -29,6 +30,8 @@
                 android:layout_marginRight="@dimen/size15"
                 android:layout_marginTop="@dimen/size27"
                 android:maxLines="2"
+                android:maxEms="25"
+                android:ellipsize="end"
                 android:textColor="@color/bkColor"
                 android:textSize="@dimen/txtSize15" />
 

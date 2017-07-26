@@ -1,31 +1,34 @@
 package com.tpyzq.mobile.pangu.adapter.home;
 
 import android.app.Activity;
-import android.text.TextUtils;
+import android.graphics.Bitmap;
 import android.view.LayoutInflater;
 import android.view.View;
 import android.view.ViewGroup;
 import android.widget.BaseAdapter;
 import android.widget.TextView;
 
+import com.facebook.drawee.view.SimpleDraweeView;
 import com.tpyzq.mobile.pangu.R;
 import com.tpyzq.mobile.pangu.base.CustomApplication;
 import com.tpyzq.mobile.pangu.data.InformationEntity;
-
+import com.tpyzq.mobile.pangu.util.Helper;
 import java.util.ArrayList;
-
-
+import java.util.HashMap;
+import java.util.Map;
+import java.util.concurrent.ExecutorService;
+import java.util.concurrent.Executors;
 
 /**
  * Created by wangqi on 2017/2/13.
  * 首页资讯 Adapter
  */
 
-public class NewHomeInformationAdapter extends BaseAdapter {
+public class NewHomeInformationAdapter extends BaseAdapter{
 
     private ArrayList<InformationEntity> mDatas;
+    private ViewHolder viewHolder = null;
     private Activity mActivity;
-    private View mview;
 
     public NewHomeInformationAdapter(Activity activity) {
         mActivity = activity;
@@ -41,17 +44,14 @@ public class NewHomeInformationAdapter extends BaseAdapter {
         if (mDatas != null && mDatas.size() > 0) {
             return mDatas.size();
         }
-
         return 0;
     }
 
     @Override
     public Object getItem(int position) {
-
         if (mDatas != null && mDatas.size() > 0) {
             return mDatas.get(position);
         }
-
         return null;
     }
 
@@ -63,51 +63,26 @@ public class NewHomeInformationAdapter extends BaseAdapter {
 
     @Override
     public View getView(int position, View convertView, ViewGroup parent) {
-
-        ViewHolder viewHolder = null;
-
         if (convertView == null) {
             viewHolder = new ViewHolder();
-            convertView = LayoutInflater.from(CustomApplication.getContext()).inflate(R.layout.adapter_item_newhomeinformation, null);
-            viewHolder.title = (TextView) convertView.findViewById(R.id.homeInfomationTitle2);
-            viewHolder.date = (TextView) convertView.findViewById(R.id.homeInfomationDate2);
-            viewHolder.aboutStock = (TextView) convertView.findViewById(R.id.fromNews2);
-            mview = convertView.findViewById(R.id.mview);
+            convertView = LayoutInflater.from(CustomApplication.getContext()).inflate(R.layout.item_news_refcontent, null);
+            viewHolder.image = (SimpleDraweeView) convertView.findViewById(R.id.iv_image);
+            viewHolder.title = (TextView)convertView.findViewById(R.id.tv_title);
+            viewHolder.time =  (TextView)convertView.findViewById(R.id.tv_time);
             convertView.setTag(viewHolder);
         } else {
             viewHolder = (ViewHolder) convertView.getTag();
         }
-
-        viewHolder.title.setText(null);
-        viewHolder.date.setText(null);
-        viewHolder.aboutStock.setText(null);
-
-        if (!TextUtils.isEmpty(mDatas.get(position).getPublishTitle())) {
-            viewHolder.title.setText(mDatas.get(position).getPublishTitle());
-        }
-
-        if (!TextUtils.isEmpty(mDatas.get(position).getPublishTime())) {
-            viewHolder.date.setText(mDatas.get(position).getPublishTime());
-        }
-
-        if (!TextUtils.isEmpty(mDatas.get(position).getPublishAboutStock())) {
-            viewHolder.aboutStock.setText(mDatas.get(position).getPublishAboutStock());
-        }
-
-
-        if (position == mDatas.size() - 1) {
-            mview.setVisibility(View.GONE);
-        } else {
-            mview.setVisibility(View.VISIBLE);
-        }
-
+        final InformationEntity info = mDatas.get(position);
+        viewHolder.image.setImageURI(info.getImage_url());
+        viewHolder.title.setText(info.getTitle()+" | "+info.getDigest());
+        viewHolder.time.setText(Helper.getCurDate()+" "+info.getTime());
         return convertView;
     }
 
     private class ViewHolder {
+        SimpleDraweeView image;
         TextView title;
-        TextView date;
-        TextView aboutStock;
-
+        TextView time;
     }
 }

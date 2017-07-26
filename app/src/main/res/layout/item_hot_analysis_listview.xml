@@ -11,46 +11,6 @@
         android:layout_marginTop="@dimen/size13"
         android:layout_marginBottom="@dimen/size13">
 
-        <!--<LinearLayout
-            android:id="@+id/llTianShu"
-            android:layout_width="@dimen/size63"
-            android:layout_height="@dimen/size49"
-            android:orientation="vertical"
-            android:gravity="center"
-            android:layout_centerVertical="true"
-            android:layout_marginLeft="@dimen/size20"
-            android:background="@color/redd">
-
-            <LinearLayout
-                android:layout_width="wrap_content"
-                android:layout_height="wrap_content"
-                android:orientation="vertical"
-                android:gravity="center">
-
-                <TextView
-                    android:layout_width="wrap_content"
-                    android:layout_height="wrap_content"
-                    android:text="建议持有"
-                    android:textSize="12sp"
-                    android:textColor="@color/white"/>
-
-                <TextView
-                    android:layout_width="match_parent"
-                    android:layout_height="@dimen/size3" />
-
-                <TextView
-                    android:id="@+id/tvDays"
-                    android:layout_width="wrap_content"
-                    android:layout_height="wrap_content"
-                    android:text="10天"
-                    android:textSize="16sp"
-                    android:textColor="@color/white"/>
-
-            </LinearLayout>
-
-        </LinearLayout>-->
-
-
         <LinearLayout
             android:layout_width="match_parent"
             android:layout_height="wrap_content"

@@ -34,20 +34,20 @@ import com.tpyzq.mobile.pangu.adapter.home.NewHomeInformationAdapter;
 import com.tpyzq.mobile.pangu.adapter.home.NewOptionalFinancingAdapter;
 import com.tpyzq.mobile.pangu.base.BaseFragment;
 import com.tpyzq.mobile.pangu.base.CustomApplication;
+import com.tpyzq.mobile.pangu.base.InterfaceCollection;
 import com.tpyzq.mobile.pangu.base.SimpleRemoteControl;
 import com.tpyzq.mobile.pangu.data.InformationEntity;
 import com.tpyzq.mobile.pangu.data.MyHomePageEntity;
 import com.tpyzq.mobile.pangu.data.NewOptionalFinancingEntity;
+import com.tpyzq.mobile.pangu.data.ResultInfo;
 import com.tpyzq.mobile.pangu.data.StockDetailEntity;
 import com.tpyzq.mobile.pangu.data.StockInfoEntity;
 import com.tpyzq.mobile.pangu.db.Db_HOME_INFO;
 import com.tpyzq.mobile.pangu.db.Db_PUB_USERS;
 import com.tpyzq.mobile.pangu.http.NetWorkUtil;
 import com.tpyzq.mobile.pangu.http.doConnect.home.GetHomeBanderConnect;
-import com.tpyzq.mobile.pangu.http.doConnect.home.GetHomeInfoConnect;
 import com.tpyzq.mobile.pangu.http.doConnect.home.GetOptionalFinancingConnect;
 import com.tpyzq.mobile.pangu.http.doConnect.home.ToGetHomeBanderConnect;
-import com.tpyzq.mobile.pangu.http.doConnect.home.ToGetHomeInfoConnect;
 import com.tpyzq.mobile.pangu.http.doConnect.home.ToOptionalFinancingConnect;
 import com.tpyzq.mobile.pangu.http.doConnect.home.ToTwentyFourHoursHotSearch;
 import com.tpyzq.mobile.pangu.http.doConnect.home.TwentyFourHoursHotSearchConnect;
@@ -87,7 +87,7 @@ import okhttp3.Call;
  */
 public class HomeFragment extends BaseFragment implements AdapterView.OnItemClickListener,
         ICallbackResult, MyScrollView.OnScrollListener,
-        CustomApplication.GetMessageListenr, View.OnClickListener, HomeInfomationSubject {
+        CustomApplication.GetMessageListenr, View.OnClickListener, HomeInfomationSubject,InterfaceCollection.InterfaceCallback {
 
     private static final String TAG = "HomeFragment";
     private JumpPageListener mJumpPageListener; //页面跳转监听
@@ -214,6 +214,20 @@ public class HomeFragment extends BaseFragment implements AdapterView.OnItemClic
         initData();
     }
 
+    @Override
+    public void callResult(ResultInfo info) {
+        if(info.getCode().equals("200")){
+            if(info.getTag().equals("GetImportant")){
+                mInformationEntities = (ArrayList<InformationEntity>)info.getData();
+                mNewslistView.setVisibility(View.VISIBLE);
+                mAdapter.setDatas(mInformationEntities);
+            }
+        }else{
+            headView.setVisibility(View.GONE);
+            mNewslistView.setVisibility(View.GONE);
+        }
+    }
+
     private void initCarouseView() {
         points = new ArrayList<>();
         for (int i = 0; i < image.length; i++) {
@@ -249,12 +263,6 @@ public class HomeFragment extends BaseFragment implements AdapterView.OnItemClic
                                 intent.setClass(getActivity(), AdvertActivity.class);
                                 startActivity(intent);
                                 break;
-//                            case 2:
-//                                if (mJumpPageListener != null) {
-//                                    intent.setClass(getActivity(), LovingHeartActivity.class);
-//                                    getActivity().startActivity(intent);
-//                                }
-//                                break;
                             case 2:
                                 BRutil.menuSelect("N004");
                                 intent.setClass(getActivity(), InformationHomeActivity.class);
@@ -280,13 +288,15 @@ public class HomeFragment extends BaseFragment implements AdapterView.OnItemClic
 
     public void initData() {
         getFinaceConnect(simpleRemoteControl);  //请求稳赢数据
-        getInfoConnect(simpleRemoteControl);     //请求资讯数据
+        //请求资讯数据 1级30条
+        InterfaceCollection.getInstance().queryImportant("3","1","3","GetImportant",this);
         getHotConnect(simpleRemoteControl);      //请求热搜数据
         getNews(simpleRemoteControl);            //请求消息
         if (mInformationEntities == null || mInformationEntities.size() <= 0) {
             getInfoListByDb();     //从数据库获取资讯数据
         }
     }
+
 
     //产品预约列表
     private void initProductReservation() {
@@ -382,8 +392,8 @@ public class HomeFragment extends BaseFragment implements AdapterView.OnItemClic
             public void onItemClick(AdapterView<?> parent, View view, int position, long id) {
                 Intent intent = new Intent(getActivity(), NewsDetailActivity.class);
 
-                if (!TextUtils.isEmpty(mInformationEntities.get(position).getNewsId())) {
-                    intent.putExtra("requestId", mInformationEntities.get(position).getNewsId());
+                if (!TextUtils.isEmpty(mInformationEntities.get(position).getNewsno())) {
+                    intent.putExtra("requestId", mInformationEntities.get(position).getNewsno());
                 }
                 getActivity().startActivity(intent);
             }
@@ -541,10 +551,6 @@ public class HomeFragment extends BaseFragment implements AdapterView.OnItemClic
         mJumpPageListener = listener;
     }
 
-    private void getInfoConnect(SimpleRemoteControl simpleRemoteControl) {
-        simpleRemoteControl.setCommand(new ToGetHomeInfoConnect(new GetHomeInfoConnect(TAG, zx_num)));
-        simpleRemoteControl.startConnect();
-    }
 
     private void initGridView() {
         ArrayList<Map<String, Object>> dataSourceList = new ArrayList<>();
@@ -642,17 +648,7 @@ public class HomeFragment extends BaseFragment implements AdapterView.OnItemClic
         if (result instanceof String) {
 //            MistakeDialog.showDialog("网络异常", getActivity());
             return;
-        } else if ("GetHomeInfoConnect".equals(tag)) {
-            mInformationEntities = (ArrayList<InformationEntity>) result;
-            if (mInformationEntities == null || mInformationEntities.size() <= 0) {
-                headView.setVisibility(View.GONE);
-                mNewslistView.setVisibility(View.GONE);
-                return;
-            } else {
-                mNewslistView.setVisibility(View.VISIBLE);
-                mAdapter.setDatas(mInformationEntities);
-            }
-        } else if ("TwentyFourHoursHotSearchConnect".equals(tag)) {
+        }  else if ("TwentyFourHoursHotSearchConnect".equals(tag)) {
             ArrayList<StockInfoEntity> entities = (ArrayList<StockInfoEntity>) result;   //返回结果可能存在多条，但只展示5条
             if (entities == null || entities.size() <= 0) {
                 hotListView.setVisibility(View.GONE);

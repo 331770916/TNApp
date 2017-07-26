@@ -2,55 +2,49 @@
 <LinearLayout xmlns:android="http://schemas.android.com/apk/res/android"
     android:layout_width="match_parent"
     android:layout_height="wrap_content"
-    android:layout_marginTop="@dimen/size3"
     android:orientation="vertical">
     <TextView
         android:id="@+id/tvReftitle"
         android:layout_width="match_parent"
         android:layout_height="wrap_content"
-        android:layout_marginRight="@dimen/size12"/>
-    <ImageView
-        android:id="@+id/ivReftitle"
-        android:layout_width="match_parent"
-        android:layout_height="wrap_content"
-        android:background="@mipmap/news_default_bbg"
-        android:layout_marginRight="@dimen/size8"
+        android:textSize="@dimen/txtSize18"
+        android:layout_marginLeft="@dimen/size12"
+        android:textStyle="bold"
+        android:singleLine="true"
         />
+    <FrameLayout
+        android:layout_width="match_parent"
+        android:layout_height="@dimen/size270"
+        android:layout_marginTop="@dimen/size5"
+        android:layout_marginBottom="@dimen/size5"
+        android:layout_marginRight="@dimen/size10"
+        android:layout_marginLeft="@dimen/size10">
+        <com.tpyzq.mobile.pangu.view.CarouselView
+            android:id="@+id/ivReftitle"
+            android:layout_width="match_parent"
+            android:layout_height="match_parent"
+            />
+    </FrameLayout>
     <RelativeLayout
         android:layout_width="match_parent"
         android:layout_height="wrap_content"
+        android:layout_gravity="bottom"
         android:layout_marginTop="@dimen/size4"
-        android:layout_marginRight="@dimen/size8"
         android:layout_marginBottom="@dimen/size12">
         <TextView
             android:id="@+id/tvReftime"
             android:layout_width="wrap_content"
             android:layout_height="wrap_content"
             android:layout_centerVertical="true"
-            android:layout_marginRight="@dimen/size12"/>
+            android:layout_marginLeft="@dimen/size12"/>
         <LinearLayout
+            android:id="@+id/ll_point"
+            android:layout_marginRight="@dimen/size10"
             android:layout_alignParentRight="true"
-            android:layout_width="@dimen/size40"
-            android:layout_height="wrap_content"
+            android:layout_width="wrap_content"
+            android:layout_height="@dimen/size2"
             android:layout_alignBottom="@id/tvReftime"
             android:orientation="horizontal">
-            <View
-                android:id="@+id/vRef1"
-                android:layout_width="@dimen/size12"
-                android:layout_height="@dimen/size1"
-                android:background="@color/blue"/>
-            <View
-                android:id="@+id/vRef2"
-                android:layout_width="@dimen/size12"
-                android:layout_height="@dimen/size1"
-                android:layout_marginLeft="@dimen/size2"
-                android:background="@color/blue"/>
-            <View
-                android:id="@+id/vRef3"
-                android:layout_width="@dimen/size12"
-                android:layout_height="@dimen/size1"
-                android:layout_marginLeft="@dimen/size2"
-                android:background="@color/blue"/>
         </LinearLayout>
     </RelativeLayout>
 </LinearLayout>

@@ -7,9 +7,8 @@ import android.view.ViewGroup;
 import android.widget.BaseAdapter;
 import android.widget.RelativeLayout;
 import android.widget.TextView;
-
 import com.tpyzq.mobile.pangu.R;
-import com.tpyzq.mobile.pangu.data.InformationBean;
+import com.tpyzq.mobile.pangu.data.InformationEntity;
 
 import java.util.ArrayList;
 
@@ -21,13 +20,13 @@ import java.util.ArrayList;
 public class ZxTabAdapter extends BaseAdapter {
 
     private Context context;
-    private ArrayList<InformationBean> list;
+    private ArrayList<InformationEntity> list;
 
     public ZxTabAdapter(Context context) {
         this.context = context;
     }
 
-    public void setList(ArrayList<InformationBean> list){
+    public void setList(ArrayList<InformationEntity> list){
         this.list = list;
         notifyDataSetChanged();
     }
@@ -69,9 +68,9 @@ public class ZxTabAdapter extends BaseAdapter {
             viewHolder = (ViewHolder) convertView.getTag();
         }
 
-        InformationBean informationBean = list.get(position);
-        viewHolder.tvTabTitle.setText(informationBean.getPublishTitle());
-        viewHolder.tvTabDate.setText(informationBean.getTimes());
+        InformationEntity informationBean = list.get(position);
+        viewHolder.tvTabTitle.setText(informationBean.getTitle());
+        viewHolder.tvTabDate.setText(informationBean.getTime());
 
 
         return convertView;
