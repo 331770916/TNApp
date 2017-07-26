@@ -24,19 +24,27 @@
         android:layout_width="match_parent"
         android:layout_height="wrap_content"
         android:layout_below="@id/tvSopCastTouXian">
-
-        <com.handmark.pulltorefresh.library.PullToRefreshListView
-            android:id="@+id/lvSopCast"
+        <FrameLayout
             android:layout_width="match_parent"
-            android:layout_height="match_parent"
-            android:layout_marginTop="@dimen/size28"
+            android:layout_height="match_parent">
+            <com.handmark.pulltorefresh.library.PullToRefreshListView
+                android:id="@+id/lvSopCast"
+                android:layout_width="match_parent"
+                android:layout_height="match_parent"
+                android:layout_marginTop="@dimen/size28"
 
-            android:divider="@null"
-            android:scrollbars="none"
-            app:ptrAnimationStyle="flip"
-            app:ptrMode="both" />
-
-
+                android:divider="@null"
+                android:scrollbars="none"
+                app:ptrAnimationStyle="flip"
+                app:ptrMode="both" />
+            <ImageView
+                android:id="@+id/goTop"
+                android:layout_gravity="bottom|right"
+                android:layout_margin="@dimen/size20"
+                android:layout_width="wrap_content"
+                android:layout_height="wrap_content"
+                android:src="@mipmap/gobacktop"/>
+        </FrameLayout>
         <!-- 重新加载的图片 -->
         <LinearLayout
             android:id="@+id/llSopCastJiaZai"

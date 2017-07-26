@@ -5,6 +5,7 @@ import android.content.Intent;
 import android.support.v4.content.ContextCompat;
 import android.view.View;
 import android.widget.AdapterView;
+import android.widget.ImageView;
 import android.widget.LinearLayout;
 import android.widget.ListView;
 import android.widget.ProgressBar;
@@ -28,7 +29,7 @@ import static com.tpyzq.mobile.pangu.util.ConstantUtil.ZIXUN_NUM;
  * 作者：刘泽鹏 on 2016/9/17 15:55
  * 直播模块  首页
  */
-public class SopCastPager extends BasePager implements InterfaceCollection.InterfaceCallback{
+public class SopCastPager extends BasePager implements InterfaceCollection.InterfaceCallback,View.OnClickListener{
     private PullToRefreshListView mListView;
     private SopCastAdapter adapter;
     private ArrayList<InformationEntity> list;
@@ -56,6 +57,7 @@ public class SopCastPager extends BasePager implements InterfaceCollection.Inter
         pb_SopCastPager = (ProgressBar) rootView.findViewById(R.id.pb_SopCastPager);    //显示菊花
         rlSopCast = (RelativeLayout) rootView.findViewById(R.id.rlSopCast);              //初始化  背景为灰色
         llSopCastJiaZai = (LinearLayout) rootView.findViewById(R.id.llSopCastJiaZai);
+        rootView.findViewById(R.id.goTop).setOnClickListener(this);
         count = 0;
         list = new ArrayList();
         adapter = new SopCastAdapter(mContext);         //实例化适配器
@@ -103,6 +105,10 @@ public class SopCastPager extends BasePager implements InterfaceCollection.Inter
         }
     }
 
+    @Override
+    public void onClick(View v) {
+        mListView.getRefreshableView().smoothScrollToPosition(0);
+    }
 
     @Override
     public void callResult(ResultInfo info) {

@@ -7,6 +7,7 @@ import android.support.v4.content.ContextCompat;
 import android.view.View;
 import android.webkit.WebView;
 import android.widget.FrameLayout;
+import android.widget.ImageView;
 import android.widget.LinearLayout;
 import android.widget.ScrollView;
 import android.widget.TextView;
@@ -51,7 +52,7 @@ public class NewsDetailActivity extends BaseActivity implements View.OnClickList
 
     private static final String TAG = "NewsDetail";
     private PullToRefreshScrollView mPullRefreshScrollView;
-    private TextView tvNewsTitle, tvLaiYuanName, tvLaiYuanDate, tv_tags,
+    private TextView tvNewsTitle, tvLaiYuanName, tvLaiYuanDate, tv_tags,tvStatement,
             tvShangYou, tvZhongJian, tvXiaYou, tvOneKeyXuan; //标题 ,来源,来源时间,标签,上游，中间，下游,一键自选
     private WebView myWebView;                                             //webView
     private FlowLayout myFlowLayout;                                      //标签
@@ -70,6 +71,10 @@ public class NewsDetailActivity extends BaseActivity implements View.OnClickList
     private LinearLayout llXiangGuanTitle, llListViewTitle;      //相关行业上面的  title , listView 上面的title
     private TextView tvListViewFenGe, tvChaKanQuanBu;           // listView 上面的分割线 , 查看全部
     private ShareDialog shareDialog ;
+    private ImageView ivDetailA;
+    private int textSize = 14;
+    private String textData,newSum;
+
     @Override
     public void initView() {
         requestId = getIntent().getStringExtra("requestId");
@@ -78,9 +83,13 @@ public class NewsDetailActivity extends BaseActivity implements View.OnClickList
         }
         this.findViewById(R.id.ivNewsDetail_back).setOnClickListener(this);         //详情页返回按钮
         this.findViewById(R.id.ivDetailFenXiang).setOnClickListener(this);         //详情页分享按钮
+        ivDetailA = (ImageView) this.findViewById(R.id.ivDetailA);//字体变大变小
+        ivDetailA.setOnClickListener(this);
         mPullRefreshScrollView = (PullToRefreshScrollView) this.findViewById(R.id.svNewsDetail);
+        tvLaiYuanName = (TextView)this.findViewById(R.id.tvLaiYuanName);
+        tvStatement = (TextView)this.findViewById(R.id.tvStatement);
         tvNewsTitle = (TextView) this.findViewById(R.id.tvNewsTitle);              //标题
-        tvChaKanQuanBu = (TextView) this.findViewById(R.id.tvChaKanQuanBu);         //查看全部
+//        tvChaKanQuanBu = (TextView) this.findViewById(R.id.tvChaKanQuanBu);         //查看全部
         tvLaiYuanDate = (TextView) this.findViewById(R.id.tvLaiYuanDate);         //发布时间
         tvShangYou = (TextView) this.findViewById(R.id.tvShangYou);                 //上游
         tvZhongJian = (TextView) this.findViewById(R.id.tvZhongJian);               //中间
@@ -95,7 +104,7 @@ public class NewsDetailActivity extends BaseActivity implements View.OnClickList
         llListViewTitle = (LinearLayout) this.findViewById(R.id.llListViewTitle); //listView 上面的title
         tvDetailListView = (SimulateListView) this.findViewById(R.id.tvDetailListView);            //展示相关股票的  listView
         mPullRefreshScrollView.scrollTo(0, 0);
-        tvChaKanQuanBu.setOnClickListener(this);
+//        tvChaKanQuanBu.setOnClickListener(this);
         llDetailYiJianZiXuan.setOnClickListener(this);          //一键自选点击事件
         llNewDetailJiaZai = (LinearLayout) this.findViewById(R.id.llNewDetailJiaZai);   //重新加载图片
         llNewDetailJiaZai.setVisibility(View.GONE);     //初始化  隐藏
@@ -152,67 +161,79 @@ public class NewsDetailActivity extends BaseActivity implements View.OnClickList
                 tvNewsTitle.setText(entity.getTitle());
                 //来源时间赋值
                 tvLaiYuanDate.setText(entity.getTime());
+                tvLaiYuanName.setText("来源："+entity.getSource());
+                tvStatement.setText(entity.getStatement());
                 /**
                  * webView 的数据
                  */
-                String newSum = entity.getContent().replaceAll("\n", "<br>");
-                StringBuffer sb = new StringBuffer();
-                sb.append("<!DOCTYPE html>\n" +
-                        "<html>\n" +
-                        "<head><meta charset=\\\"UTF-8\\\"<title></title></head>\n" +
-                        "<body>\n" +
-                        "<div style=\"width: 96%;margin-left: 2%;padding:25px 0 0px;text-align:justify;letter-spacing: 0.6px;text-justify:inter-ideograph;line-height: 24px;color:#4c4c4c;font-size: 16px;\">");
-                sb.append(newSum);
-                sb.append("</div>\n" +
-                        "</body></html>");
+                newSum = entity.getContent().replaceAll("\n", "<br>");
                 myWebView.getSettings().setDefaultTextEncodingName("utf-8");
                 myWebView.getSettings().setJavaScriptEnabled(true);
                 myWebView.removeJavascriptInterface("searchBoxJavaBridge_");
                 myWebView.removeJavascriptInterface("accessibility");
                 myWebView.removeJavascriptInterface("accessibilityTraversal");
                 myWebView.getSettings().setSavePassword(false);
-                myWebView.loadDataWithBaseURL("file://", sb.toString(), "text/html", "utf-8", "");
+                reload();
+
 
                 /**
                  * 给行业标签赋值
                  */
                 tags = entity.getList();
-                LinearLayout linearLayout;
-                //标签的  颜色
-                int[] tagss = {R.drawable.tag01, R.drawable.tag02, R.drawable.tag03, R.drawable.tag04,
-                        R.drawable.tag05, R.drawable.tag06, R.drawable.tag07, R.drawable.tag08};
-                int point = 0;      //设置循环的变量
+                if(tags!=null&&tags.size()>0){
+                    LinearLayout linearLayout;
+                    //标签的  颜色
+                    int[] tagss = {R.drawable.tag01, R.drawable.tag02, R.drawable.tag03, R.drawable.tag04,
+                            R.drawable.tag05, R.drawable.tag06, R.drawable.tag07, R.drawable.tag08};
+                    int point = 0;      //设置循环的变量
 
-                for (int i = 0; i < tags.size(); i++) {
+                    for (int i = 0; i < tags.size(); i++) {
 
-                    linearLayout = new LinearLayout(this);
-                    tv_tags = new TextView(this);
-                    tv_tags.setText(tags.get(i).getLabelname());       //给标签赋值
-                    tv_tags.setTextSize(13);            //设置字体大小
-                    tv_tags.setTextColor(ContextCompat.getColor(this, R.color.white));       //设置字体颜色
-                    tv_tags.setBackgroundResource(tagss[point]);                             //设置背景
+                        linearLayout = new LinearLayout(this);
+                        tv_tags = new TextView(this);
+                        tv_tags.setText(tags.get(i).getLabelname());       //给标签赋值
+                        tv_tags.setTextSize(13);            //设置字体大小
+                        tv_tags.setTextColor(ContextCompat.getColor(this, R.color.white));       //设置字体颜色
+                        tv_tags.setBackgroundResource(tagss[point]);                             //设置背景
 
-                    //让背景循环起来
-                    point++;
-                    if (point > 7) {
-                        point = 0;
+                        //让背景循环起来
+                        point++;
+                        if (point > 7) {
+                            point = 0;
+                        }
+                        //设置边距
+                        tv_tags.setPadding(TransitionUtils.dp2px(5, this), TransitionUtils.dp2px(3, this),
+                                TransitionUtils.dp2px(5, this), TransitionUtils.dp2px(3, this));
+
+                        setNewsDetailsTagClick(tv_tags, tv_tags.getText().toString());      //设置标签监听
+
+                        linearLayout.setPadding(TransitionUtils.dp2px(10, this), 0, 0, TransitionUtils.dp2px(10, this));
+                        linearLayout.setLayoutParams(layoutParams);     //设置模式
+                        linearLayout.addView(tv_tags);                  //添加标签
+                        myFlowLayout.addView(linearLayout);
                     }
-                    //设置边距
-                    tv_tags.setPadding(TransitionUtils.dp2px(5, this), TransitionUtils.dp2px(3, this),
-                            TransitionUtils.dp2px(5, this), TransitionUtils.dp2px(3, this));
-
-                    setNewsDetailsTagClick(tv_tags, tv_tags.getText().toString());      //设置标签监听
-
-                    linearLayout.setPadding(TransitionUtils.dp2px(10, this), 0, 0, TransitionUtils.dp2px(10, this));
-                    linearLayout.setLayoutParams(layoutParams);     //设置模式
-                    linearLayout.addView(tv_tags);                  //添加标签
-                    myFlowLayout.addView(linearLayout);
-                }
+                }else
+                    this.findViewById(R.id.flagLayout).setVisibility(View.GONE);
                 mPullRefreshScrollView.onRefreshComplete();
             }
         }
     }
 
+
+    public void reload(){
+        StringBuffer sb = new StringBuffer();
+        sb.append("<!DOCTYPE html>\n" +
+                "<html>\n" +
+                "<head><meta charset=\\\"UTF-8\\\"<title></title></head>\n" +
+                "<body>\n" +
+                "<div style=\"width: 96%;margin-left: 2%;padding:25px 0 0px;text-align:justify;letter-spacing: 0.6px;text-justify:inter-ideograph;line-height: 24px;color:#4c4c4c;font-size: ");
+        sb.append(String.valueOf(textSize)).append("px;\">");
+        sb.append(newSum);
+        sb.append("</div>\n" +
+                "</body></html>");
+        textData = sb.toString();
+        myWebView.loadDataWithBaseURL("file://", textData, "text/html", "utf-8", "");
+    }
 
 
     /**
@@ -249,6 +270,20 @@ public class NewsDetailActivity extends BaseActivity implements View.OnClickList
                 loadingDialog.show();       //显示菊花
                 getShare();
                 break;
+            case R.id.ivDetailA:
+                switch (textSize){
+                    case 14:
+                        textSize = 18;
+                        ivDetailA.setImageResource(R.mipmap.textsizesubtract);
+                        reload();
+                        break;
+                    case 18:
+                        textSize = 14;
+                        ivDetailA.setImageResource(R.mipmap.textsizeplus);
+                        reload();
+                        break;
+                }
+                break;
             case R.id.llDetailYiJianZiXuan:     //一键 自选
                 SelfStockHelper.oneTimiceAddSelfChoice(TAG, "", beans, new OneTimiceAddSelfChoiceListener() {
                     @Override
@@ -256,13 +291,6 @@ public class NewsDetailActivity extends BaseActivity implements View.OnClickList
                         SelfStockHelper.explanOneTimiceAddSelfChoiceResult(NewsDetailActivity.this, result);
                     }
                 });
-                break;
-            case R.id.tvChaKanQuanBu:       //查看全部
-                String url = entity.getSource();
-                Intent intent = new Intent();
-                intent.setClass(this, NewsDetailMoreActivity.class);
-                intent.putExtra("url", url);
-                startActivity(intent);
                 break;
         }
     }

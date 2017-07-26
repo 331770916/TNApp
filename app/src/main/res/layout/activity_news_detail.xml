@@ -39,7 +39,6 @@
             android:textColor="@color/white"
             android:textSize="@dimen/pickerview_topbar_title_textsize" />
 
-
         <ImageView
             android:id="@+id/ivDetailFenXiang"
             android:layout_width="wrap_content"
@@ -48,7 +47,14 @@
             android:layout_centerVertical="true"
             android:padding="@dimen/size10"
             android:src="@mipmap/fushifenxiang" />
-
+        <ImageView
+            android:id="@+id/ivDetailA"
+            android:layout_width="wrap_content"
+            android:layout_height="wrap_content"
+            android:layout_toLeftOf="@id/ivDetailFenXiang"
+            android:layout_centerVertical="true"
+            android:padding="@dimen/size10"
+            android:src="@mipmap/textsizeplus" />
     </RelativeLayout>
 
     <!-- 重新加载的图片 -->
@@ -118,12 +124,11 @@
                     android:layout_marginBottom="@dimen/size20"
                     android:layout_marginTop="@dimen/size10">
 
-                    <!--<TextView
-                        android:id="@+id/tvLaiYuan"
+                    <TextView
+                        android:id="@+id/tvLaiYuanDate"
                         android:layout_width="wrap_content"
                         android:layout_height="wrap_content"
                         android:layout_marginLeft="@dimen/size20"
-                        android:text="来源："
                         android:textSize="13sp"
                         android:textColor="@color/text"/>
 
@@ -131,22 +136,10 @@
                         android:id="@+id/tvLaiYuanName"
                         android:layout_width="wrap_content"
                         android:layout_height="wrap_content"
-                        android:layout_toRightOf="@id/tvLaiYuan"
-                        android:layout_marginLeft="@dimen/size3"
-                        android:text=""
+                        android:layout_marginLeft="@dimen/size154"
+                        android:layout_toRightOf="@id/tvLaiYuanDate"
                         android:textSize="13sp"
-                        android:textColor="@color/text"/>-->
-
-                    <TextView
-                        android:id="@+id/tvLaiYuanDate"
-                        android:layout_width="wrap_content"
-                        android:layout_height="wrap_content"
-
-                        android:layout_marginLeft="@dimen/size20"
-                        android:text=""
-                        android:textColor="@color/text"
-                        android:textSize="13sp" />
-
+                        android:textColor="@color/text"/>
                 </RelativeLayout>
 
             </RelativeLayout>
@@ -162,35 +155,8 @@
                 android:layout_width="match_parent"
                 android:layout_height="wrap_content"/>
 
-            <TextView
-                android:id="@+id/tvChaKanQuanBu"
-                android:layout_width="wrap_content"
-                android:layout_height="wrap_content"
-                android:layout_marginBottom="@dimen/size13"
-                android:layout_marginLeft="@dimen/size13"
-                android:layout_marginRight="@dimen/size13"
-                android:padding="@dimen/size2"
-                android:text="查看全文"
-                android:textColor="@color/blue"
-                android:textSize="14sp" />
-
-            <RelativeLayout
-                android:layout_width="match_parent"
-                android:layout_height="@dimen/size30"
-                android:background="@color/bgColor">
-
-                <TextView
-                    android:layout_width="wrap_content"
-                    android:layout_height="wrap_content"
-                    android:layout_centerVertical="true"
-                    android:layout_marginLeft="@dimen/size20"
-                    android:text="资讯分析"
-                    android:textColor="@color/textss"
-                    android:textSize="14sp" />
-
-            </RelativeLayout>
-
             <LinearLayout
+                android:id="@+id/flagLayout"
                 android:layout_width="match_parent"
                 android:layout_height="@dimen/size50"
                 android:layout_marginBottom="@dimen/size10"
@@ -401,6 +367,7 @@
                 android:id="@+id/tvListViewFenGe"
                 android:layout_width="match_parent"
                 android:layout_height="@dimen/size10"
+                android:visibility="gone"
                 android:background="@color/bgColor" />
 
             <!-- ListView 标题 -->
@@ -492,6 +459,7 @@
             </LinearLayout>
 
             <TextView
+                android:id="@+id/tvStatement"
                 android:layout_width="match_parent"
                 android:layout_height="@dimen/size50"
                 android:text="@string/XW_text"
