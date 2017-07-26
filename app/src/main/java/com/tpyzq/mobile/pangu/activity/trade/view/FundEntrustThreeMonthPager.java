@@ -74,6 +74,7 @@ public class FundEntrustThreeMonthPager extends BaseTransactionPager {
         tv_text3.setText("委托金额/份额");
         tv_text4.setText("业务类型/状态");
         lv_transaction.setAdapter(fundEntrustTodayAdapter);
+        lv_transaction.setEmptyView(tv_empty);
         Update();
     }
 
