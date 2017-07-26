@@ -76,8 +76,12 @@ public class CurrencyFundRedeemActivity extends BaseActivity implements View.OnC
 //                        etRedeemFundCode.setFocusableInTouchMode(false);
 //                        login(s.toString());
                         getMsg(s.toString());
+                        etRedeemFundAmount.setFocusableInTouchMode(true);
                     }else if(s.length()==0){
                         etRedeemFundAmount.setFocusableInTouchMode(false);                          //使其失去焦点
+                    }else {
+                        etRedeemFundAmount.setText("");
+                        map = null ;
                     }
             }
         });
@@ -126,7 +130,13 @@ public class CurrencyFundRedeemActivity extends BaseActivity implements View.OnC
     public void onClick(View v) {
         switch (v.getId()){
             case R.id.tvCurrencyRedeemQueDing:   //确定
-
+                if (map==null){
+                    map = new HashMap<String, String>();
+                    map.put("exchange_type","");
+                    map.put("stock_name","");    // 防止弹窗数据借用借用上一个数据
+                    map.put("stock_account","");
+                    map.put("session",session);
+                }
                 String fundAmount = etRedeemFundAmount.getText().toString();       //获取输入的申购金额
                 String stockCode = etRedeemFundCode.getText().toString();          //获取输入的 基金代码
 
@@ -246,7 +256,6 @@ public class CurrencyFundRedeemActivity extends BaseActivity implements View.OnC
                         tvRedeemFundNameValue.setText(stock_name);           //基金名称
                         tvRedeemStockholderNumValue.setText(stock_account);    //股东账号
                         tvRedeemExpendableFundValue.setText(enable_amount);   //可用份额
-                        etRedeemFundAmount.setFocusableInTouchMode(true);
                     }
                 }else {
                     MistakeDialog.showDialog(bean.getMsg(),CurrencyFundRedeemActivity.this);

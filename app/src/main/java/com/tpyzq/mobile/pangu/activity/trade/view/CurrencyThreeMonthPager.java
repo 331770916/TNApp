@@ -49,19 +49,8 @@ public class CurrencyThreeMonthPager extends BaseSearchPager {
     public void setView() {
         mListView = (PullToRefreshListView) rootView.findViewById(R.id.rlRefresh);
         isEmpty = (ImageView) rootView.findViewById(R.id.isEmpty);
-    }
-
-    @Override
-    public int getLayoutId() {
-        return R.layout.currencyfund_todaypager;
-    }
-
-    @Override
-    public void initData() {
-        super.initData();
         list = new ArrayList<HashMap<String, String>>();
         adapter = new HBJJTodayPagerAdapter(mContext);
-        refresh("", "30", false);
         mListView.setAdapter(adapter);
         mListView.setEmptyView(isEmpty);
 
@@ -79,6 +68,16 @@ public class CurrencyThreeMonthPager extends BaseSearchPager {
                 refresh(position, "30", true);
             }
         });
+    }
+
+    @Override
+    public int getLayoutId() {
+        return R.layout.currencyfund_todaypager;
+    }
+
+    @Override
+    public void initData() {
+        refresh("", "30", false);
     }
 
 

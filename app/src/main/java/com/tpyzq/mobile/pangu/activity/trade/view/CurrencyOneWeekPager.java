@@ -24,6 +24,7 @@ import com.zhy.http.okhttp.callback.StringCallback;
 import java.util.ArrayList;
 import java.util.HashMap;
 import java.util.List;
+import java.util.Map;
 
 import okhttp3.Call;
 
@@ -49,19 +50,8 @@ public class CurrencyOneWeekPager extends BaseSearchPager {
     public void setView() {
         mListView = (PullToRefreshListView) rootView.findViewById(R.id.rlRefresh);
         isEmpty = (ImageView) rootView.findViewById(R.id.isEmpty);
-    }
-
-    @Override
-    public int getLayoutId() {
-        return R.layout.currencyfund_todaypager;
-    }
-
-    @Override
-    public void initData() {
-        super.initData();
         list = new ArrayList<HashMap<String, String>>();
         adapter = new HBJJTodayPagerAdapter(mContext);
-        refresh("", "30", false);
         mListView.setAdapter(adapter);
         mListView.setEmptyView(isEmpty);
 
@@ -78,6 +68,16 @@ public class CurrencyOneWeekPager extends BaseSearchPager {
                 refresh(position, "30", true);
             }
         });
+    }
+
+    @Override
+    public int getLayoutId() {
+        return R.layout.currencyfund_todaypager;
+    }
+
+    @Override
+    public void initData() {
+        refresh("", "30", false);
     }
 
 

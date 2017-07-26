@@ -76,8 +76,12 @@ public class CurrencyFundSubscribeActivity extends BaseActivity implements View.
                 if (s.length() == MAXNUM) {                                        //当输入的基金代码为6位数时请求数据
 //                    login(s.toString());
                     getMsg(s.toString());//511880
+                    etFundAmount.setFocusableInTouchMode(true);
                 }else if(s.length()==0){
                     etFundAmount.setFocusableInTouchMode(false);                          //使其失去焦点
+                }else {
+                    etFundAmount.setText("");
+                    map = null;
                 }
             }
         });
@@ -128,6 +132,13 @@ public class CurrencyFundSubscribeActivity extends BaseActivity implements View.
         switch (v.getId()) {
             case R.id.tvCurrencySubscribeQueDing:   //确定
 
+                if (map==null){             // 如果没有请求到数据
+                    map = new HashMap<>();
+                    map.put("stock_name","");
+                    map.put("stock_account","");
+                    map.put("exchange_type","");
+                    map.put("mSession",mSession);
+                }
                 String fundAmount = etFundAmount.getText().toString();       //获取输入的申购金额
                 String stockCode = etFundCode.getText().toString();          //获取输入的 基金代码
                 //实例化PopupWindow
@@ -213,7 +224,6 @@ public class CurrencyFundSubscribeActivity extends BaseActivity implements View.
                             map.put("enable_amount",enable_amount);
                             map.put("exchange_type",exchange_type);
                             map.put("mSession",mSession);
-                            etFundAmount.setFocusableInTouchMode(true);
                         }
                     }else {
                         MistakeDialog.showDialog(bean.getMsg(),CurrencyFundSubscribeActivity.this);
