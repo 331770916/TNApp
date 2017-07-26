@@ -271,6 +271,8 @@ public class AddOrModFixFundActivity extends BaseActivity implements View.OnClic
 
     @Override
     public void State() {
+        mStructuredFundDialog.dismiss();
+        mStructuredFundDialog = null;
         if (null!=mRevokeDialog && !mRevokeDialog.isShowing()){
             mRevokeDialog.show();
         }
