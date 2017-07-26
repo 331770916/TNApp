@@ -24,8 +24,8 @@ public class DataUtils {
             {R.mipmap.jy_jijinfene, R.mipmap.jy_jijinrengou, R.mipmap.jy_jijinshengou, R.mipmap.jy_jijingouhui, R.mipmap.jy_jijinchedan, R.mipmap.jy_chaxun, R.mipmap.otc_zhanghu, R.mipmap.jy_dianzihetong}};
 
 
-    public static String[] open_fund_name = {"委托查询", "历史成交", "分红设置", "基金转换", "基金账户查询", "基金电子合同签署"};
-    public static int[] open_fund_icon = {R.mipmap.open_weituochaxun, R.mipmap.open_lishichengjiao, R.mipmap.open_fenhongshezhi, R.mipmap.open_jijinzhuanhuan, R.mipmap.open_jijinzhanghuchaxun, R.mipmap.open_jijindianzihetongqianshu};
+    public static String[] open_fund_name = {"委托查询", "历史成交", "分红设置", "基金转换", "基金账户查询", "基金电子合同签署","基金定投"};
+    public static int[] open_fund_icon = {R.mipmap.open_weituochaxun, R.mipmap.open_lishichengjiao, R.mipmap.open_fenhongshezhi, R.mipmap.open_jijinzhuanhuan, R.mipmap.open_jijinzhanghuchaxun, R.mipmap.open_jijindianzihetongqianshu,R.mipmap.icon_fix_fund};
 
     public static String[] stock_morelist_name = {"场内基金", "国债逆回购","盘后分级基金","ETF","网络投票","货币基金"};//
     public static int[] stock_morelist_icon = {R.mipmap.cnjj, R.mipmap.gznhg,R.mipmap.item_panhou,R.mipmap.etf,R.mipmap.vote_toupiao,R.mipmap.hbjj};//

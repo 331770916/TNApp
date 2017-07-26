@@ -109,6 +109,9 @@ public class FixFundListActivity extends BaseActivity implements View.OnClickLis
                 Intent intent = new Intent(this, AddOrModFixFundActivity.class);
                 startActivityForResult(intent,REQUEST_ADD);
                 break;
+            case R.id.iv_back:
+                finish();
+                break;
         }
     }
 

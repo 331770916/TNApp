@@ -63,6 +63,11 @@ public class OpenFundActivity extends BaseActivity implements View.OnClickListen
                         intent.setClass(OpenFundActivity.this, FundContractSignActivity.class);
                         startActivity(intent);
                         break;
+                    case 6:
+                        intent = new Intent();
+                        intent.setClass(OpenFundActivity.this, FixFundListActivity.class);
+                        startActivity(intent);
+                        break;
                 }
             }
         });

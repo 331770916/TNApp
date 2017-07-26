@@ -1134,6 +1134,21 @@ public class Helper {
         return num;
     }
 
+    /**
+     * 获取当前日期下一年的前一天
+     * @param date
+     * @return
+     */
+    public static String getNextYear(Date date,String dateStyle) {
+        Calendar ca = Calendar.getInstance();// 得到一个Calendar的实例
+        ca.setTime(date);
+        ca.add(Calendar.YEAR, 1); // 年份加1
+//        ca.add(Calendar.MONTH, -1);// 月份减1
+        ca.add(Calendar.DATE, -1);// 日期减1
+        Date resultDate = ca.getTime(); // 结果
+        SimpleDateFormat sdf = new SimpleDateFormat(dateStyle);
+        return sdf.format(resultDate);
+    }
 
     /**
      * 转换日期格式(yyyyMMdd)
