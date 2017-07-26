@@ -67,6 +67,21 @@ public class FundHistoryCustomPager extends BaseTransactionPager implements View
 
     @Override
     public void initData() {
+    }
+
+    @Override
+    public void setView() {
+        ll_fourtext = (LinearLayout) rootView.findViewById(R.id.ll_fourtext);
+        ll_search = (LinearLayout) rootView.findViewById(R.id.ll_search);
+        tv_search = (TextView) rootView.findViewById(R.id.tv_search);
+        tv_start_data = (TextView) rootView.findViewById(R.id.tv_start_data);
+        tv_end_data = (TextView) rootView.findViewById(R.id.tv_end_data);
+        tv_text1 = (TextView) ll_fourtext.findViewById(R.id.tv_text1);
+        tv_text2 = (TextView) ll_fourtext.findViewById(R.id.tv_text2);
+        tv_text3 = (TextView) ll_fourtext.findViewById(R.id.tv_text3);
+        tv_text4 = (TextView) ll_fourtext.findViewById(R.id.tv_text4);
+        lv_transaction = (PullToRefreshListView) rootView.findViewById(R.id.lv_transaction);
+        tv_empty = (ImageView) rootView.findViewById(R.id.tv_empty);
         mDialog = LoadingDialog.initDialog((Activity) mContext, "加载中...");
         fundHistoryThreeBeen = new ArrayList<>();
         fundHistoryAdapter = new FundHistoryAdapter(mContext);
@@ -88,18 +103,8 @@ public class FundHistoryCustomPager extends BaseTransactionPager implements View
     }
 
     @Override
-    public void setView() {
-        ll_fourtext = (LinearLayout) rootView.findViewById(R.id.ll_fourtext);
-        ll_search = (LinearLayout) rootView.findViewById(R.id.ll_search);
-        tv_search = (TextView) rootView.findViewById(R.id.tv_search);
-        tv_start_data = (TextView) rootView.findViewById(R.id.tv_start_data);
-        tv_end_data = (TextView) rootView.findViewById(R.id.tv_end_data);
-        tv_text1 = (TextView) ll_fourtext.findViewById(R.id.tv_text1);
-        tv_text2 = (TextView) ll_fourtext.findViewById(R.id.tv_text2);
-        tv_text3 = (TextView) ll_fourtext.findViewById(R.id.tv_text3);
-        tv_text4 = (TextView) ll_fourtext.findViewById(R.id.tv_text4);
-        lv_transaction = (PullToRefreshListView) rootView.findViewById(R.id.lv_transaction);
-        tv_empty = (ImageView) rootView.findViewById(R.id.tv_empty);
+    public void setRefresh() {
+
     }
 
     /**

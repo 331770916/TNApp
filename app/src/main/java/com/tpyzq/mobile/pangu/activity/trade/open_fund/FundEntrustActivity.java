@@ -27,7 +27,9 @@ import com.tpyzq.mobile.pangu.view.magicindicator.buildins.commonnavigator.title
 
 import java.util.ArrayList;
 import java.util.Arrays;
+import java.util.HashMap;
 import java.util.List;
+import java.util.Map;
 
 /**
  * 基金委托
@@ -39,6 +41,7 @@ public class FundEntrustActivity extends BaseActivity implements View.OnClickLis
     private static final String[] buy_vp = new String[]{"今日", "一周内", "一月内", "三月内", "自定义"};
     private List<String> buy_vp_list = Arrays.asList(buy_vp);
     private List<BaseTransactionPager> listBuy = new ArrayList<>();
+    private Map<Integer,Boolean> isLoading = new HashMap<>();
 
     @Override
     public void initView() {
@@ -51,18 +54,47 @@ public class FundEntrustActivity extends BaseActivity implements View.OnClickLis
 
     private void initData() {
         iv_back.setOnClickListener(this);
-        listBuy.add(new FundEntrustTodayPager(this));
+        FundEntrustTodayPager entrustTodayPager = new FundEntrustTodayPager(this);   // 初始化第一个界面数据
+        entrustTodayPager.setRefresh();
+        isLoading.put(0,true);
+        listBuy.add(entrustTodayPager);
         listBuy.add(new FundEntrustWeekPager(this));
         listBuy.add(new FundEntrustMonthPager(this));
         listBuy.add(new FundEntrustThreeMonthPager(this));
         listBuy.add(new FundEntrustCustomPager(this));
         vp_view.setAdapter(new StockVpAdapter(listBuy));
+        for (int i = 1; i < listBuy.size(); i++) {
+            isLoading.put(i,false);
+        }
     }
 
     /**
      * 设置底部页签切换监听器
      */
     private void setIndicatorListen() {
+        vp_view.addOnPageChangeListener(new ViewPager.OnPageChangeListener() {   // 添加viewPager 监听 实现数据第一次加载
+            @Override
+            public void onPageScrolled(int position, float positionOffset, int positionOffsetPixels) {
+
+            }
+
+            @Override
+            public void onPageSelected(int position) {
+                if (!isLoading.get(position)){
+                    isLoading.put(position,true);
+                    listBuy.get(position).setRefresh();
+                    listBuy.get(position);
+                }else {
+                    listBuy.get(position);
+                }
+            }
+
+            @Override
+            public void onPageScrollStateChanged(int state) {
+
+            }
+        });
+
         CommonNavigator commonNavigator = new CommonNavigator(this);
         commonNavigator.setAdjustMode(true);
         commonNavigator.setAdapter(new CommonNavigatorAdapter() {

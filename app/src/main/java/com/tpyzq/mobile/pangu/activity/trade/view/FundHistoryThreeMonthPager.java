@@ -53,16 +53,7 @@ public class FundHistoryThreeMonthPager extends BaseTransactionPager {
 
     @Override
     public void initData() {
-        fundHistoryThreeBeen = new ArrayList<>();
-        fundHistoryAdapter = new FundHistoryAdapter(mContext);
-        tv_text1.setText("名称");
-        tv_text2.setText("成交日期");
-        tv_text3.setText("业务名称");
-        tv_text4.setText("成交金额/份额");
-        lv_transaction.setAdapter(fundHistoryAdapter);
-        lv_transaction.setEmptyView(tv_empty);
-        Update();
-        fundQuery("", true);
+
     }
 
     @Override
@@ -74,6 +65,20 @@ public class FundHistoryThreeMonthPager extends BaseTransactionPager {
         tv_text4 = (TextView) ll_fourtext.findViewById(R.id.tv_text4);
         lv_transaction = (PullToRefreshListView) rootView.findViewById(R.id.lv_transaction);
         tv_empty = (ImageView) rootView.findViewById(R.id.tv_empty);
+        fundHistoryThreeBeen = new ArrayList<>();
+        fundHistoryAdapter = new FundHistoryAdapter(mContext);
+        tv_text1.setText("名称");
+        tv_text2.setText("成交日期");
+        tv_text3.setText("业务名称");
+        tv_text4.setText("成交金额/份额");
+        lv_transaction.setAdapter(fundHistoryAdapter);
+        lv_transaction.setEmptyView(tv_empty);
+        Update();
+    }
+
+    @Override
+    public void setRefresh() {
+        fundQuery("", true);
     }
 
     /**
