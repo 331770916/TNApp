@@ -82,7 +82,9 @@ public class CNFundSubscribeActivity extends BaseActivity implements View.OnClic
                 if (s.length() == MAXNUM) {                                        //当输入的基金代码为6位数时请求数据
 //                    login(s.toString());
                     getMsg(s.toString());//511880
+                    etCnFundAmount.setFocusableInTouchMode(true);
                 } else if (s.length() > 0 && s.length() < MAXNUM) {
+                    etCnFundAmount.setFocusableInTouchMode(false);
                     //给产品名称，净值，可用资金赋值
                     tvCnFundNameValue.setText("");              //基金名称
                     tvCnFundNetValueValue.setText("");                 //资金净值
@@ -142,7 +144,10 @@ public class CNFundSubscribeActivity extends BaseActivity implements View.OnClic
                 String stockCode = etCnFundCode.getText().toString().trim();          //获取输入的 基金代码
                 String stockName = tvCnFundNameValue.getText().toString().trim();                 //股票名称
                 String stockAccount = tvCnStockholderNumValue.getText().toString().trim();      //股东账号
-                String exchangeType = map.get("exchange_type");             //市场
+                String exchangeType = "";
+                if (map!=null){
+                    exchangeType = map.get("exchange_type");             //市场
+                }
                 //实例化PopupWindow
                 CNFundSubscribeDialog dialog = new CNFundSubscribeDialog(this, stockName, stockCode, stockAccount, commitMoney, stockNav, exchangeType, this, this);
                 dialog.show();
@@ -206,10 +211,9 @@ public class CNFundSubscribeActivity extends BaseActivity implements View.OnClic
                         map.put("enable_amount", enable_amount);
                         map.put("enable_balance", enable_balance);
                         map.put("nav", nav);
-                        etCnFundAmount.setFocusableInTouchMode(true);
                     }
                 } else {
-                    MistakeDialog.showDialog("该基金不存在",CNFundSubscribeActivity.this);
+                    MistakeDialog.showDialog(bean.getMsg(),CNFundSubscribeActivity.this);
                 }
             }
         });

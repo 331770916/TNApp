@@ -259,8 +259,8 @@ public class TransactionLoginActivity extends BaseActivity implements ICallbackR
                 mPassword_et.setText("");
                 mCaptcha_et.setText("");
                 mPassword_et.requestFocus();
-                handler.sendEmptyMessage(0);
-                showKeyboardWithHeader();
+//                handler.sendEmptyMessage(0);
+//                showKeyboardWithHeader();
             }
             return false;
         }
@@ -767,6 +767,7 @@ public class TransactionLoginActivity extends BaseActivity implements ICallbackR
                 break;
             case R.id.CloseIV:             //删除
                 mAccount_et.setText("");
+                PasswordKeyboardUtils.showSoftKeyboar(mAccount_et, TransactionLoginActivity.this);
                 break;
             case R.id.SecurityCode:        //验证码
                 toSecurityCode();

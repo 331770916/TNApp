@@ -163,7 +163,7 @@ public class SettingActivity extends BaseActivity implements View.OnClickListene
                         if ("未登录".equals(tv_now_fund_account.getText().toString())){
                             intent.setClass(SettingActivity.this, TransactionLoginActivity.class);
                         }else {
-                            intent.setClass(SettingActivity.this, ChangeAccoutActivity.class);
+                            intent.setClass(SettingActivity.this, TransactionLoginActivity.class);
                         }
                         intent.putExtra("EXIT",true);
                     } else {

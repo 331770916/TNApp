@@ -22,6 +22,7 @@ import com.tpyzq.mobile.pangu.interfac.ClearData;
 import com.tpyzq.mobile.pangu.util.ConstantUtil;
 import com.tpyzq.mobile.pangu.util.SpUtils;
 import com.tpyzq.mobile.pangu.view.dialog.CNFundRedeemDialog;
+import com.tpyzq.mobile.pangu.view.dialog.MistakeDialog;
 import com.tpyzq.mobile.pangu.view.dialog.ResultDialog;
 import com.zhy.http.okhttp.callback.StringCallback;
 
@@ -80,16 +81,20 @@ public class CNFundRedeemActivity extends BaseActivity implements View.OnClickLi
                 if (s.length() == MAXNUM) {                                        //当输入的基金代码为6位数时请求数据
 
                     getMsg(s.toString());//511880
-
+                    etCnFundRedeemAmount.setFocusableInTouchMode(true);   //  当输入六位都可以输入金额
                 } else if (s.length() > 0 && s.length() < MAXNUM) {
-
+                    if (map== null){    //  处理当前没有数据返回
+                        map = new HashMap<String, String>();
+                    }
+                    map.put("stock_name","");    // 防止弹窗数据借用借用上一个数据
+                    map.put("stock_account","");
                     //给产品名称，净值，可用资金赋值
                     tvCnFundRedeemNameValue.setText("");                //基金名称
                     tvCnFundRedeemNetValueValue.setText("");                  //资金净值
                     tvCnRedeemStockholderNumValue.setText("");      //股东账号
                     tvCnRedeemExpendableFundValue.setText("");      //可用份额
                     etCnFundRedeemAmount.setText("");
-
+                    etCnFundRedeemAmount.setFocusableInTouchMode(false);
                 } else if (s.length() == 0) {
 
                     etCnFundRedeemAmount.setFocusableInTouchMode(false);                          //使其失去焦点
@@ -208,10 +213,10 @@ public class CNFundRedeemActivity extends BaseActivity implements View.OnClickLi
                         map.put("enable_amount", enable_amount);
                         map.put("enable_balance", enable_balance);
                         map.put("nav", nav);
-                        etCnFundRedeemAmount.setFocusableInTouchMode(true);
                     }
                 } else {
-                    ResultDialog.getInstance().showText(bean.getMsg());
+                    MistakeDialog.showDialog(bean.getMsg(), CNFundRedeemActivity.this);
+
                 }
             }
         });

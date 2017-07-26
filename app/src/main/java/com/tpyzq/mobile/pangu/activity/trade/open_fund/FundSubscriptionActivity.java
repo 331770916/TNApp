@@ -20,6 +20,7 @@ import com.tpyzq.mobile.pangu.interfac.ClearData;
 import com.tpyzq.mobile.pangu.util.ConstantUtil;
 import com.tpyzq.mobile.pangu.util.SpUtils;
 import com.tpyzq.mobile.pangu.view.dialog.FundSubscriptionDialog;
+import com.tpyzq.mobile.pangu.view.dialog.MistakeDialog;
 import com.tpyzq.mobile.pangu.view.dialog.ResultDialog;
 import com.zhy.http.okhttp.callback.StringCallback;
 
@@ -59,6 +60,7 @@ public class FundSubscriptionActivity extends BaseActivity implements View.OnCli
 
         etCNFundCode.setFocusableInTouchMode(true);         //初始化获取焦点
 //        etCNFundCode.setInputType(EditorInfo.TYPE_CLASS_PHONE);       //调  数字键盘
+//        setEditTextInhibitInputSpeChat(etCNFundCode);
         etCNFundCode.addTextChangedListener(new TextWatcher() {
             @Override
             public void beforeTextChanged(CharSequence s, int start, int count, int after) {
@@ -75,11 +77,18 @@ public class FundSubscriptionActivity extends BaseActivity implements View.OnCli
                 if (s.length() == MAXNUM) {                                        //当输入的基金代码为6位数时请求数据
 //                    login(s.toString());
                     getMsg(s.toString());//511880
+                    etCNFundAmount.setFocusableInTouchMode(true);
                 } else if (s.length() > 0 && s.length() < MAXNUM) {
                     //给产品名称，净值，可用资金赋值
+                    if (map== null){    //  处理当前没有数据返回
+                        map = new HashMap<String, String>();
+                    }
+                    map.put("stock_name","");    // 防止弹窗数据借用借用上一个数据
+                    map.put("stock_account","");
                     tvCNFundNameValue.setText("");
                     tvCNStockholderNumValue.setText("");
                     tvCNExpendableFundValue.setText("");
+                    etCNFundAmount.setFocusableInTouchMode(false);
                     etCNFundAmount.setText("");
                 } else if (s.length() == 0) {
                     etCNFundAmount.setFocusableInTouchMode(false);                          //使其失去焦点
@@ -192,10 +201,9 @@ public class FundSubscriptionActivity extends BaseActivity implements View.OnCli
                         map.put("enable_amount", enable_amount);
                         map.put("enable_balance", enable_balance);
                         map.put("nav", nav);
-                        etCNFundAmount.setFocusableInTouchMode(true);
                     }
                 } else {
-                    ResultDialog.getInstance().showText(bean.getMsg());
+                    MistakeDialog.showDialog(bean.getMsg(),FundSubscriptionActivity.this);
                 }
             }
         });
