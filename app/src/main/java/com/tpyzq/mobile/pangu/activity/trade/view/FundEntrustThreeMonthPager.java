@@ -55,15 +55,7 @@ public class FundEntrustThreeMonthPager extends BaseTransactionPager {
 
     @Override
     public void initData() {
-        entrustThreeBeen = new ArrayList<EntrustThreeEntity>();
-        fundEntrustTodayAdapter = new FundEntrustTodayAdapter(mContext);
-        tv_text1.setText("名称");
-        tv_text2.setText("委托时间");
-        tv_text3.setText("委托金额/份额");
-        tv_text4.setText("业务类型/状态");
-        lv_transaction.setAdapter(fundEntrustTodayAdapter);
-        Update();
-        fundQuery("", false);
+
     }
 
     @Override
@@ -75,6 +67,20 @@ public class FundEntrustThreeMonthPager extends BaseTransactionPager {
         tv_text4 = (TextView) ll_fourtext.findViewById(R.id.tv_text4);
         lv_transaction = (PullToRefreshListView) rootView.findViewById(R.id.lv_transaction);
         tv_empty = (ImageView) rootView.findViewById(R.id.tv_empty);
+        entrustThreeBeen = new ArrayList<EntrustThreeEntity>();
+        fundEntrustTodayAdapter = new FundEntrustTodayAdapter(mContext);
+        tv_text1.setText("名称");
+        tv_text2.setText("委托时间");
+        tv_text3.setText("委托金额/份额");
+        tv_text4.setText("业务类型/状态");
+        lv_transaction.setAdapter(fundEntrustTodayAdapter);
+        lv_transaction.setEmptyView(tv_empty);
+        Update();
+    }
+
+    @Override
+    public void setRefresh() {
+        fundQuery("", false);
     }
 
     /**

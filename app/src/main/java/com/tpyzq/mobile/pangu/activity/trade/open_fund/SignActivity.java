@@ -278,8 +278,8 @@ public class SignActivity extends BaseActivity implements View.OnClickListener, 
                 String path = Helper.getAppFileDirPath(CustomApplication.getContext()) + "pdf/fundOpenUser.pdf";
                 Intent intent = new Intent();
                 intent.setClass(SignActivity.this, PdfActivity.class);
-                intent.putExtra("flag", 1);
-                intent.putExtra("filePath", path);
+                intent.putExtra("flag", 0);
+                intent.putExtra("filePath", "fundOpenUser.pdf");
                 intent.putExtra("fileName", "基金投资人权益须知");
                 startActivity(intent);
                 break;

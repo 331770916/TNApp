@@ -71,6 +71,8 @@ public class PositionFundActivity extends BaseActivity {
                 Intent intent = new Intent();
                 intent.putExtra("point",position);
                 intent.putExtra("fund_code",fundBeans.get(position).fund_code);
+                intent.putExtra("fund_nav",fundBeans.get(position).fund_nav);
+                intent.putExtra("fund_share",fundBeans.get(position).fund_share);
                 intent.putExtra("fund_company",fundBeans.get(position).fund_company);
                 setResult(RESULT_OK,intent);
                 finish();
@@ -113,6 +115,8 @@ public class PositionFundActivity extends BaseActivity {
                             fundBean.fund_code = fundRedemptionBean.RESULT_LIST.get(i).FUND_CODE;
                             fundBean.fund_company = fundRedemptionBean.RESULT_LIST.get(i).FUND_COMPANY_CODE;
                             fundBean.fund_name = fundRedemptionBean.RESULT_LIST.get(i).FUND_NAME;
+                            fundBean.fund_nav = fundRedemptionBean.RESULT_LIST.get(i).NAV;
+                            fundBean.fund_share = fundRedemptionBean.RESULT_LIST.get(i).CURRENT_SHARE;
                             fundBeans.add(fundBean);
                         }
                         fundProductAdapter.setData(fundBeans);

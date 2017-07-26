@@ -1,16 +1,22 @@
 package com.tpyzq.mobile.pangu.activity.trade.open_fund;
 
 import com.tpyzq.mobile.pangu.R;
+import com.tpyzq.mobile.pangu.activity.myself.handhall.RiskConfirmActivity;
+import com.tpyzq.mobile.pangu.activity.myself.handhall.RiskEvaluationActivity;
 import com.tpyzq.mobile.pangu.base.BaseActivity;
 import com.tpyzq.mobile.pangu.base.InterfaceCollection;
 import com.tpyzq.mobile.pangu.data.FixFundEntity;
 import com.tpyzq.mobile.pangu.data.FundDataEntity;
 import com.tpyzq.mobile.pangu.data.FundSubsEntity;
 import com.tpyzq.mobile.pangu.data.ResultInfo;
+import com.tpyzq.mobile.pangu.util.ConstantUtil;
 import com.tpyzq.mobile.pangu.util.Helper;
 import com.tpyzq.mobile.pangu.view.CentreToast;
+import com.tpyzq.mobile.pangu.view.dialog.CancelDialog;
+import com.tpyzq.mobile.pangu.view.dialog.FundPurchaseDialog;
 import com.tpyzq.mobile.pangu.view.dialog.LoadingDialog;
 import com.tpyzq.mobile.pangu.view.dialog.MistakeDialog;
+import com.tpyzq.mobile.pangu.view.dialog.StructuredFundDialog;
 import com.tpyzq.mobile.pangu.view.pickTime.TimePickerView;
 
 import android.app.Dialog;
@@ -26,17 +32,20 @@ import android.widget.TextView;
 
 import java.text.SimpleDateFormat;
 import java.util.Date;
+import java.util.HashMap;
 
 /**
  * 增加修改定投
  * Created by lx on 2017/7/21.
  */
 
-public class AddOrModFixFundActivity extends BaseActivity implements View.OnClickListener,InterfaceCollection.InterfaceCallback {
+public class AddOrModFixFundActivity extends BaseActivity implements View.OnClickListener, StructuredFundDialog.Expression, InterfaceCollection.InterfaceCallback {
 
-    private static final String TAG_REQUEST_FUND = "queryfund";
+    public static final String TAG_REQUEST_FUND = "queryfund";
     private static final String TAG_SUBMIT= "submit";
     private static final String TAG_MODIFY= "modify";
+    private static int REQEST_CHOOSE = 10001;
+    private static final int REQUEST_RISK = 10002;
     private ImageView iv_back;
     private TextView tv_title;
     private EditText et_input_code;
@@ -46,7 +55,6 @@ public class AddOrModFixFundActivity extends BaseActivity implements View.OnClic
     private EditText et_input_branch;
     private Button bt_commint;
     private TextView tv_dest;//时间选择器点击完成复制的TextView
-    private static int REQEST_CHOOSE = 10001;
     private Dialog mRevokeDialog;
     private Dialog mDialog;
 
@@ -55,6 +63,7 @@ public class AddOrModFixFundActivity extends BaseActivity implements View.OnClic
     private TimePickerView choosEndDate;
     private TimePickerView choosEnDate;
     private String currentDate;
+    private StructuredFundDialog mStructuredFundDialog;
 
     @Override
     public void initView() {
@@ -97,11 +106,11 @@ public class AddOrModFixFundActivity extends BaseActivity implements View.OnClic
         } else {
             tv_title.setText(getResources().getString(R.string.add_fund));
             tv_start_date.setText(currentDate);
-            tv_end_date.setText(currentDate);
+            tv_end_date.setText(Helper.getInstance().getNextYear(new Date(),"yyyy-MM-dd"));
             fixFundEntity = new FixFundEntity();
             fixFundEntity.setEN_FUND_DATE("1");
             fixFundEntity.setSTART_DATE(currentDate);
-            fixFundEntity.setEND_DATE(currentDate);
+            fixFundEntity.setEND_DATE(Helper.getInstance().getNextYear(new Date(),"yyyyMMdd"));
         }
         tv_en_date.setOnClickListener(this);
         tv_start_date.setOnClickListener(this);
@@ -147,8 +156,8 @@ public class AddOrModFixFundActivity extends BaseActivity implements View.OnClic
         choosEnDate.setOnDaySelectListener(new TimePickerView.OnDaySelectListener() {
             @Override
             public void onDaySelect(int day) {
-                fixFundEntity.setEN_FUND_DATE(day+"");
-                tv_dest.setText(day+"日");
+                fixFundEntity.setEN_FUND_DATE(day+1+"");
+                tv_dest.setText(day+1+"日");
             }
         });
         et_input_code.addTextChangedListener(new TextWatcher() {
@@ -198,25 +207,41 @@ public class AddOrModFixFundActivity extends BaseActivity implements View.OnClic
                 startActivityForResult(new Intent(this, OptionalFundActivity.class), REQEST_CHOOSE);
                 break;
             case R.id.bt_commint:
-                String balance = et_input_branch.getText().toString().trim();
+                final String balance = et_input_branch.getText().toString().trim();
                 if (TextUtils.isEmpty(balance)) {
                     CentreToast.showText(this,"请输入定投金额");
                     break;
                 }
-                if (null!=mRevokeDialog && !mRevokeDialog.isShowing()){
-                    mRevokeDialog.show();
-                }
                 fixFundEntity.setBALANCE(balance);
-                if (position == -1){//新增
-                    InterfaceCollection.getInstance().addFixFund(fixFundEntity.getFUND_COMPANY(),
-                            fixFundEntity.getFUND_CODE(),"0", balance,
-                            Helper.getInstance().getMyDate(fixFundEntity.getSTART_DATE()),Helper.getInstance().getMyDate(fixFundEntity.getEND_DATE()),
-                            fixFundEntity.getEN_FUND_DATE(),TAG_SUBMIT,this);
+                if (position == -1) {//新增
+                    if (Helper.getInstance().isNeedShowRiskDialog()) {//判断风险评测
+                        if (null!=mRevokeDialog && mRevokeDialog.isShowing()){
+                            mRevokeDialog.dismiss();
+                        }
+                        Helper.getInstance().showCorpDialog(this, new CancelDialog.PositiveClickListener() {
+                            @Override
+                            public void onPositiveClick() {
+                                Intent intent = new Intent(AddOrModFixFundActivity.this, RiskEvaluationActivity.class);
+                                intent.putExtra("isLogin", true);
+                                AddOrModFixFundActivity.this.startActivity(intent);
+                            }
+                        }, new CancelDialog.NagtiveClickListener() {
+                            @Override
+                            public void onNagtiveClick() {
+                                showDialog();
+                            }
+                        });
+                    } else {
+                        showDialog();
+                    }
                 } else {//修改
+                    if (null!=mRevokeDialog && !mRevokeDialog.isShowing()){
+                        mRevokeDialog.show();
+                    }
                     InterfaceCollection.getInstance().modifyFixFund(fixFundEntity.getFUND_COMPANY(),
                             fixFundEntity.getFUND_CODE(), balance,
-                            Helper.getInstance().getMyDate(fixFundEntity.getSTART_DATE()),Helper.getInstance().getMyDate(fixFundEntity.getEND_DATE()),
-                            fixFundEntity.getEN_FUND_DATE(),fixFundEntity.getALLOTNO(),TAG_SUBMIT,this);
+                            Helper.getInstance().getMyDate(fixFundEntity.getSTART_DATE()), Helper.getInstance().getMyDate(fixFundEntity.getEND_DATE()),
+                            fixFundEntity.getEN_FUND_DATE(), fixFundEntity.getALLOTNO(), TAG_SUBMIT, this);
                 }
                 break;
             case R.id.iv_back:
@@ -224,6 +249,77 @@ public class AddOrModFixFundActivity extends BaseActivity implements View.OnClic
                 break;
         }
     }
+    private void showDialog() {
+        if (ConstantUtil.list_item_flag) {
+            ConstantUtil.list_item_flag = false;
+            mStructuredFundDialog = new StructuredFundDialog(this);
+            mStructuredFundDialog.setData(TAG_REQUEST_FUND, this, fixFundEntity, "定投登记", null);
+            mStructuredFundDialog.show();
+        }
+    }
+
+    private void addFixFund() {
+        if (null!=mRevokeDialog && !mRevokeDialog.isShowing()){
+            mRevokeDialog.show();
+        }
+        InterfaceCollection.getInstance().addFixFund(fixFundEntity.getFUND_COMPANY(),
+                fixFundEntity.getFUND_CODE(), "0", fixFundEntity.getBALANCE(),
+                Helper.getInstance().getMyDate(fixFundEntity.getSTART_DATE()),
+                Helper.getInstance().getMyDate(fixFundEntity.getEND_DATE()),
+                fixFundEntity.getEN_FUND_DATE(), TAG_SUBMIT, this);
+    }
+
+    @Override
+    public void State() {
+        mStructuredFundDialog.dismiss();
+        mStructuredFundDialog = null;
+        if (null!=mRevokeDialog && !mRevokeDialog.isShowing()){
+            mRevokeDialog.show();
+        }
+        InterfaceCollection.getInstance().queryProductSuitability("", "", "",
+                fixFundEntity.getFUND_COMPANY(), fixFundEntity.getFUND_CODE(), "331261", new InterfaceCollection.InterfaceCallback() {
+                    @Override
+                    public void callResult(ResultInfo info) {
+                        if (null!=mRevokeDialog && mRevokeDialog.isShowing()){
+                            mRevokeDialog.dismiss();
+                        }
+                        String code = info.getCode();
+                        String msg = info.getMsg();
+                        HashMap<String,String> resultMap = null;
+                        if ("0".equalsIgnoreCase(code)) {
+                            resultMap = (HashMap<String,String>)info.getData();
+                            if (null == resultMap) {
+                                MistakeDialog.showDialog("数据异常", AddOrModFixFundActivity.this, null);
+                                return;
+                            }
+                            //弹框逻辑
+                            //是否可以委托
+                            if ("0".equalsIgnoreCase(resultMap.get("ENABLE_FLAG"))) {//不可委托
+                                //尊敬的客户:\n       根据证监会《证券期货投资者适当性管理办法》，您购买的产品在购买过程中需要通过录音录像进行确认，请到营业部办理
+                                CancelDialog.cancleDialog(AddOrModFixFundActivity.this, "", 4000, new CancelDialog.PositiveClickListener() {
+                                    @Override
+                                    public void onPositiveClick() {}
+                                },null);
+                                return;
+                            }
+//                        else {
+//                            //可以委托 判断是否需要视频录制
+//                            if ("1".equalsIgnoreCase(resultMap.get("NEED_VIDEO_FLAG"))) {
+//                                CancelDialog.cancleDialog(FundPurchaseActivity.this,"尊敬的客户:\n根据证监会《证券期货投资者适当性管理办法》，您购买的产品在购买过程中需要通过录音录像进行确认，请到营业部办理",4000,null,null);
+//                                return;
+//                            }
+//                        }
+                            //跳转到适用性页面
+                            Intent intent = new Intent(AddOrModFixFundActivity.this, RiskConfirmActivity.class);
+                            intent.putExtra("resultMap",resultMap);
+                            AddOrModFixFundActivity.this.startActivityForResult(intent, REQUEST_RISK);
+                        } else {
+                            MistakeDialog.showDialog(msg, AddOrModFixFundActivity.this, null);
+                        }
+                    }
+                });
+
+        }
 
     @Override
     public void callResult(ResultInfo info) {
@@ -284,7 +380,7 @@ public class AddOrModFixFundActivity extends BaseActivity implements View.OnClic
         tv_fund_jz.setText("--");
         tv_en_date.setText("1日");
         tv_start_date.setText(currentDate);
-        tv_end_date.setText(currentDate);
+        tv_end_date.setText(Helper.getInstance().getNextYear(new Date(),"yyyy-MM-dd"));
         et_input_branch.setText("");
         fixFundEntity.setSTART_DATE(currentDate);
         fixFundEntity.setEND_DATE(currentDate);
@@ -307,6 +403,12 @@ public class AddOrModFixFundActivity extends BaseActivity implements View.OnClic
         if (requestCode == REQEST_CHOOSE && resultCode == RESULT_OK) {
             FundSubsEntity fundData = (FundSubsEntity) data.getSerializableExtra("data");
             et_input_code.setText(fundData.FUND_CODE);
+        }
+        /*if (requestCode == REQAGREEMENTCODE && resultCode == RESULT_OK) {//签署协议页面返回
+            et_fund_price.setText("");
+        }*/
+        if (requestCode == REQUEST_RISK && resultCode == RESULT_OK) {//风险同意书签署返回
+            addFixFund();
         }
     }
 }

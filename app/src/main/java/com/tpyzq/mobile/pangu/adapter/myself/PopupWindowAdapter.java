@@ -1,6 +1,7 @@
 package com.tpyzq.mobile.pangu.adapter.myself;
 
 import android.content.Context;
+import android.text.TextUtils;
 import android.view.LayoutInflater;
 import android.view.View;
 import android.view.ViewGroup;
@@ -9,6 +10,9 @@ import android.widget.ImageView;
 import android.widget.TextView;
 
 import com.tpyzq.mobile.pangu.R;
+import com.tpyzq.mobile.pangu.data.UserEntity;
+import com.tpyzq.mobile.pangu.db.Db_PUB_USERS;
+import com.tpyzq.mobile.pangu.util.panguutil.UserUtil;
 
 import java.util.List;
 
@@ -64,11 +68,16 @@ public class PopupWindowAdapter extends BaseAdapter {
         }
         viewHolder.ItemAccount.setText(mList.get(position));
 
+        if (mList.get(position).equals(UserUtil.capitalAccount)){
+            viewHolder.ItemDelete.setVisibility(View.INVISIBLE);
+        }
         viewHolder.ItemDelete.setOnClickListener(new View.OnClickListener() {
             @Override
             public void onClick(View v) {
+                if (mList.size() <= position || position < 0)
+                    return;
+                Db_PUB_USERS.delTradeId(mList.get(position));
                 mList.remove(position);
-
                 notifyDataSetChanged();
             }
         });

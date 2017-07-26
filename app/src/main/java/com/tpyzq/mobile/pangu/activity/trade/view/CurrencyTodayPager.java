@@ -51,19 +51,8 @@ public class CurrencyTodayPager extends BaseSearchPager  {
     public void setView() {
         mListView = (PullToRefreshListView) rootView.findViewById(R.id.rlRefresh);
         isEmpty = (ImageView) rootView.findViewById(R.id.isEmpty);
-    }
-
-    @Override
-    public int getLayoutId() {
-        return R.layout.currencyfund_todaypager;
-    }
-
-    @Override
-    public void initData() {
-        super.initData();
         mListView.setMode(PullToRefreshBase.Mode.PULL_FROM_START);
         adapter = new HBJJTodayPagerAdapter(mContext);
-        getData();
         mListView.setAdapter(adapter);
         mListView.setEmptyView(isEmpty);
 
@@ -80,6 +69,17 @@ public class CurrencyTodayPager extends BaseSearchPager  {
                 //  下拉
             }
         });
+
+    }
+
+    @Override
+    public int getLayoutId() {
+        return R.layout.currencyfund_todaypager;
+    }
+
+    @Override
+    public void initData() {
+        getData();
     }
 
 

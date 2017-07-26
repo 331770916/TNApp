@@ -11,8 +11,8 @@
         android:layout_centerHorizontal="true"
         android:layout_marginTop="@dimen/size20"
         android:drawableLeft="@mipmap/chehui"
-        android:text="是否撤回此委托"
         android:gravity="center"
+        android:text="是否撤回此委托"
         android:textColor="@color/black"
         android:textSize="@dimen/txtSize16"
         android:textStyle="bold" />
@@ -108,6 +108,7 @@
                 android:text=""
                 android:textColor="@color/black" />
         </LinearLayout>
+
         <LinearLayout
             android:layout_width="wrap_content"
             android:layout_height="0dp"
@@ -140,22 +141,21 @@
         android:paddingRight="@dimen/size20">
 
         <Button
-            android:id="@+id/bt_true"
+            android:id="@+id/bt_false"
             android:layout_width="0dp"
             android:layout_height="@dimen/size50"
             android:layout_weight="1"
-            android:background="@color/blue"
-            android:text="确定"
-            android:textColor="@color/white" />
+            android:background="@color/grey"
+            android:text="取消" />
 
         <Button
-            android:id="@+id/bt_false"
+            android:id="@+id/bt_true"
             android:layout_width="0dp"
             android:layout_height="@dimen/size50"
             android:layout_marginLeft="@dimen/size20"
             android:layout_weight="1"
-            android:background="@color/grey"
-            android:text="取消"
-            android:textColor="@color/black" />
+            android:background="@color/blue"
+            android:text="确定"
+            android:textColor="@color/white" />
     </LinearLayout>
 </RelativeLayout>

@@ -11,6 +11,7 @@ import android.widget.TableRow;
 import android.widget.TextView;
 
 import com.tpyzq.mobile.pangu.R;
+import com.tpyzq.mobile.pangu.activity.trade.open_fund.AddOrModFixFundActivity;
 import com.tpyzq.mobile.pangu.activity.trade.open_fund.FixFundListActivity;
 import com.tpyzq.mobile.pangu.activity.trade.stock.ETFApplyforOrRedeemActivity;
 import com.tpyzq.mobile.pangu.activity.trade.stock.ETFRevokeActivity;
@@ -240,6 +241,22 @@ public class StructuredFundDialog extends BaseDialog implements View.OnClickList
             tv_8.setText(fixFundEntity.getBALANCE());
             tv_10.setText(fixFundEntity.getSTART_DATE());
             tv_12.setText(fixFundEntity.getEND_DATE());
+        } else if (AddOrModFixFundActivity.TAG_REQUEST_FUND.equalsIgnoreCase(mTAG)) {//定投基金增加或修改
+            FixFundEntity fixFundEntity = (FixFundEntity) object;
+            tv_title.setText(mShare);
+            img_1.setImageResource(R.mipmap.icon_fix_fund);
+            tv_1.setText("基金名称：");
+            tv_3.setText("基金代码：");
+            tv_5.setText("月扣款日：");
+            tv_7.setText("定投金额：");
+            tv_9.setText("开始日期：");
+            tv_11.setText("结束日期：");
+            tv_2.setText(fixFundEntity.getFUND_NAME());
+            tv_4.setText(fixFundEntity.getFUND_CODE());
+            tv_6.setText("每月"+fixFundEntity.getEN_FUND_DATE()+"日");
+            tv_8.setText(fixFundEntity.getBALANCE());
+            tv_10.setText(fixFundEntity.getSTART_DATE());
+            tv_12.setText(fixFundEntity.getEND_DATE());
         }
     }
 
@@ -273,6 +290,9 @@ public class StructuredFundDialog extends BaseDialog implements View.OnClickList
                 } else if (FixFundListActivity.TAG.equalsIgnoreCase(mTAG)) {//基金定投撤单弹框
                     mExpression.State();
                 } else if (ETFRevokeActivity.TAG.equalsIgnoreCase(mTAG)) {
+                    mExpression.State();
+                    dismiss();
+                } else if (AddOrModFixFundActivity.TAG_REQUEST_FUND.equalsIgnoreCase(mTAG)) {
                     mExpression.State();
                     dismiss();
                 }

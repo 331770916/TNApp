@@ -11,8 +11,8 @@
         android:layout_centerHorizontal="true"
         android:layout_marginTop="@dimen/size20"
         android:drawableLeft="@mipmap/update_tishi"
-        android:text="提示"
         android:gravity="center"
+        android:text="提示"
         android:textColor="@color/black"
         android:textSize="@dimen/txtSize16"
         android:textStyle="bold" />
@@ -21,9 +21,9 @@
         android:id="@+id/tv_content"
         android:layout_width="wrap_content"
         android:layout_height="wrap_content"
-        android:text="确认基金分红设置 ？"
         android:layout_centerInParent="true"
-        android:paddingBottom="@dimen/size20"/>
+        android:paddingBottom="@dimen/size20"
+        android:text="确认基金分红设置 ？" />
 
     <LinearLayout
         android:id="@+id/ll_bottom"
@@ -31,29 +31,29 @@
         android:layout_height="wrap_content"
         android:layout_alignParentBottom="true"
         android:orientation="horizontal"
+        android:paddingBottom="@dimen/size20"
         android:paddingLeft="@dimen/size20"
-        android:paddingRight="@dimen/size20"
-        android:paddingBottom="@dimen/size20">
-
-        <Button
-            android:id="@+id/bt_true"
-            android:layout_width="0dp"
-            android:layout_height="@dimen/size50"
-            android:layout_weight="1"
-            android:background="@color/blue"
-            android:text="确认"
-            android:textSize="@dimen/txtSize14"
-            android:textColor="@color/white" />
+        android:paddingRight="@dimen/size20">
 
         <Button
             android:id="@+id/bt_false"
             android:layout_width="0dp"
             android:layout_height="@dimen/size50"
-            android:layout_marginLeft="@dimen/size20"
             android:layout_weight="1"
             android:background="@color/grey"
             android:text="取消"
-            android:textSize="@dimen/txtSize14"
-            android:textColor="@color/black" />
+            android:textColor="@color/black"
+            android:textSize="@dimen/txtSize14" />
+
+        <Button
+            android:id="@+id/bt_true"
+            android:layout_width="0dp"
+            android:layout_height="@dimen/size50"
+            android:layout_marginLeft="@dimen/size20"
+            android:layout_weight="1"
+            android:background="@color/blue"
+            android:text="确认"
+            android:textColor="@color/white"
+            android:textSize="@dimen/txtSize14" />
     </LinearLayout>
 </RelativeLayout>

@@ -171,15 +171,15 @@ public class FundContractSignActivity extends BaseActivity implements View.OnCli
 
     @Override
     public void onItemClick(AdapterView<?> parent, View view, int position, long id) {
-        String IS_SIGN = contractBeans.get(position).IS_SIGN;
+        String IS_SIGN = contractBeans.get(position-1).IS_SIGN;
         Intent intent = new Intent();
         if ("0".equals(IS_SIGN)){
             intent.setClass(this,FlowActivity.class);
-            intent.putExtra("sign",contractBeans.get(position));
+            intent.putExtra("sign",contractBeans.get(position-1));
             startActivity(intent);
         }else {
             intent.setClass(this,SignActivity.class);
-            intent.putExtra("sign",contractBeans.get(position));
+            intent.putExtra("sign",contractBeans.get(position-1));
             startActivityForResult(intent,0);
         }
     }

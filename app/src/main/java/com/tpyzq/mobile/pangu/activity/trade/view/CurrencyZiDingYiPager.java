@@ -85,16 +85,6 @@ public class CurrencyZiDingYiPager extends BaseSearchPager implements TimePicker
         mListView = (PullToRefreshListView) rootView.findViewById(R.id.rlRefresh);
         isEmpty = (ImageView) rootView.findViewById(R.id.isEmpty);
         mDialog = LoadingDialog.initDialog((Activity) mContext, "加载中...");
-    }
-
-    @Override
-    public int getLayoutId() {
-        return R.layout.currencyfund_todaypager;
-    }
-
-    @Override
-    public void initData() {
-        super.initData();
         list = new ArrayList<HashMap<String, String>>();
         adapter = new HBJJTodayPagerAdapter(mContext);
         mListView.setAdapter(adapter);
@@ -113,6 +103,16 @@ public class CurrencyZiDingYiPager extends BaseSearchPager implements TimePicker
                 refresh(position, "30", true);
             }
         });
+    }
+
+    @Override
+    public int getLayoutId() {
+        return R.layout.currencyfund_todaypager;
+    }
+
+    @Override
+    public void initData() {
+
     }
 
 

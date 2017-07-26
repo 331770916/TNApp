@@ -23,6 +23,7 @@ import com.tpyzq.mobile.pangu.data.FundRedemptionEntity;
 import com.tpyzq.mobile.pangu.http.NetWorkUtil;
 import com.tpyzq.mobile.pangu.log.LogUtil;
 import com.tpyzq.mobile.pangu.util.ConstantUtil;
+import com.tpyzq.mobile.pangu.util.Helper;
 import com.tpyzq.mobile.pangu.util.SpUtils;
 import com.tpyzq.mobile.pangu.util.ToastUtils;
 import com.tpyzq.mobile.pangu.view.dialog.FundChangeDialog;
@@ -111,8 +112,6 @@ public class FundChangeActivity extends BaseActivity implements View.OnClickList
             fundChange(fundcode, fundcompany);
             fundQuery(fundcode,fundcompany);
             tv_choose_shareway.setClickable(true);
-        }else {
-            fundQuery("","");
         }
     }
 
@@ -189,7 +188,7 @@ public class FundChangeActivity extends BaseActivity implements View.OnClickList
         NetWorkUtil.getInstence().okHttpForPostString("", ConstantUtil.URL_JY, map300443, new StringCallback() {
             @Override
             public void onError(Call call, Exception e, int id) {
-                Toast.makeText(FundChangeActivity.this, "网络访问失败", Toast.LENGTH_SHORT).show();
+                Helper.getInstance().showToast(FundChangeActivity.this,ConstantUtil.NETWORK_ERROR);
             }
 
             @Override
@@ -226,11 +225,12 @@ public class FundChangeActivity extends BaseActivity implements View.OnClickList
         super.onActivityResult(requestCode, resultCode, intent);
         if (requestCode == POSITION_REQUSET && resultCode == RESULT_OK) {
             point = intent.getIntExtra("point", -1);
-            tv_fund_code1.setText(fundBeans.get(point).fund_code);
+            tv_fund_code1.setText(intent.getStringExtra("fund_code"));
+
             ll_output.setVisibility(View.VISIBLE);
-            tv_output_nav.setText("转出净值:\t\t\t" + fundBeans.get(point).fund_nav);
-            tv_output_share.setText("可转份额:\t\t\t" + fundBeans.get(point).fund_share);
-            fundChange(fundBeans.get(point).fund_code, fundBeans.get(point).fund_company);
+            tv_output_nav.setText("转出净值:\t\t\t" + intent.getStringExtra("fund_nav"));
+            tv_output_share.setText("可转份额:\t\t\t" + intent.getStringExtra("fund_share"));
+            fundChange(intent.getStringExtra("fund_code"),intent.getStringExtra("fund_company"));
             tv_choose_shareway.setClickable(true);
 
         } else if (requestCode == POSITION_REQUSET2 && resultCode == RESULT_OK) {
@@ -257,7 +257,6 @@ public class FundChangeActivity extends BaseActivity implements View.OnClickList
                 intent = new Intent();
                 intent.setClass(FundChangeActivity.this, PositionFundActivity.class);
                 bundle = new Bundle();
-                bundle.putSerializable("fundbean", (Serializable) fundBeans);
                 bundle.putInt("point", point);
                 intent.putExtras(bundle);
                 startActivityForResult(intent, POSITION_REQUSET);

@@ -21,6 +21,7 @@ import com.tpyzq.mobile.pangu.data.ResultInfo;
 import com.tpyzq.mobile.pangu.util.ConstantUtil;
 import com.tpyzq.mobile.pangu.view.CentreToast;
 import com.tpyzq.mobile.pangu.view.dialog.LoadingDialog;
+import com.tpyzq.mobile.pangu.view.dialog.MistakeDialog;
 import com.tpyzq.mobile.pangu.view.dialog.StructuredFundDialog;
 
 import java.util.ArrayList;
@@ -109,6 +110,9 @@ public class FixFundListActivity extends BaseActivity implements View.OnClickLis
                 Intent intent = new Intent(this, AddOrModFixFundActivity.class);
                 startActivityForResult(intent,REQUEST_ADD);
                 break;
+            case R.id.iv_back:
+                finish();
+                break;
         }
     }
 
@@ -193,12 +197,10 @@ public class FixFundListActivity extends BaseActivity implements View.OnClickLis
                 CentreToast.showText(this, msg, true);
                 mList.remove(position);
                 fixFundAdapter.notifyDataSetChanged();
-                mStructuredFundDialog.dismiss();
-                mStructuredFundDialog = null;
             } else if ("-6".equalsIgnoreCase(code)) {
                 skip.startLogin(FixFundListActivity.this);
             } else {
-                CentreToast.showText(this, msg, false);
+                MistakeDialog.showDialog(msg, this, null);
             }
             lv.onRefreshComplete();
         }
@@ -242,6 +244,8 @@ public class FixFundListActivity extends BaseActivity implements View.OnClickLis
     //弹框点击确定回调函数
     @Override
     public void State() {
+        mStructuredFundDialog.dismiss();
+        mStructuredFundDialog = null;
         if (null != mRevokeDialog && !mRevokeDialog.isShowing()) {
             mRevokeDialog.show();
         }

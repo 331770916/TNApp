@@ -90,6 +90,9 @@ public class FJFundGradingMergerActivity extends BaseActivity implements View.On
             case R.id.butConfirm:
                 if (ConstantUtil.list_item_flag) {
                     ConstantUtil.list_item_flag = false;
+                    if (bean==null){
+                        bean = new StructuredFundEntity();
+                    }
                     mStructuredFundDialog = new StructuredFundDialog(this);
                     mStructuredFundDialog.setData(TAG, this, bean, mAmount_et.getText().toString(), mInput_et.getText().toString());
                     mStructuredFundDialog.show();
@@ -123,7 +126,7 @@ public class FJFundGradingMergerActivity extends BaseActivity implements View.On
     @Override
     protected void onActivityResult(int requestCode, int resultCode, Intent intent) {
         super.onActivityResult(requestCode, resultCode, intent);
-        if (requestCode == REQUSET && resultCode == RESULT_OK) {
+        if (requestCode == REQUSET && resultCode == RESULT_OK) {  // 选择基金返回值
             dissmissKeyboardUtil();
             mPoint = intent.getIntExtra("point", -1);
             mInput_et.setText(intent.getStringExtra("Code"));
@@ -139,7 +142,6 @@ public class FJFundGradingMergerActivity extends BaseActivity implements View.On
     public void callResult(ResultInfo info) {
         mDialog.dismiss();
         if ("0".equals(info.getCode())) {
-            mAmount_et.setEnabled(true);
             List<StructuredFundEntity> list = (List<StructuredFundEntity>) info.getData();
             bean = list.get(0);
             mCnFundNameValue_tv.setText(bean.getStoken_name());
@@ -158,7 +160,6 @@ public class FJFundGradingMergerActivity extends BaseActivity implements View.On
             MistakeDialog.showDialog(info.getMsg(), this, new MistakeDialog.MistakeDialgoListener() {
                 @Override
                 public void doPositive() {
-                    mInput_et.setText("");
                     factoryReset();
                 }
             });
@@ -168,6 +169,7 @@ public class FJFundGradingMergerActivity extends BaseActivity implements View.On
     @Override
     public void State() {
         mInput_et.setText("");
+        mAmount_et.setText("");
         factoryReset();
     }
 
@@ -197,8 +199,12 @@ public class FJFundGradingMergerActivity extends BaseActivity implements View.On
         @Override
         public void afterTextChanged(Editable s) {
             if (s.length() == MAXNUM) {
+                mAmount_et.setEnabled(true);
                 getAffirmMsg(s.toString());
             } else {
+                bean = null;
+                mAmount_et.setEnabled(false);
+                mAmount_et.setText("");
                 factoryReset();
             }
         }
@@ -231,11 +237,9 @@ public class FJFundGradingMergerActivity extends BaseActivity implements View.On
 
     //清空数据
     private void factoryReset() {
-        mAmount_et.setEnabled(false);
         mCnFundNameValue_tv.setText("--");
         mCnFundNetValueValue_tv.setText("--");
         mStatements_tv.setText("--");
         mCnExpendableFundValue_tv.setText("--");
-        mAmount_et.setText("");
     }
 }

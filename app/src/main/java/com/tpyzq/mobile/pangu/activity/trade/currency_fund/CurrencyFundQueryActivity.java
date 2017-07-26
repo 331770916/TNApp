@@ -25,7 +25,9 @@ import com.tpyzq.mobile.pangu.view.magicindicator.buildins.commonnavigator.title
 
 import java.util.ArrayList;
 import java.util.Arrays;
+import java.util.HashMap;
 import java.util.List;
+import java.util.Map;
 
 
 /**
@@ -38,6 +40,7 @@ public class CurrencyFundQueryActivity extends BaseActivity implements View.OnCl
     private List<BaseSearchPager> pagers = new ArrayList<>();      //存储 View 的集合
     private MagicIndicator entrust_buy;
     private ViewPager mViewPager;
+    private Map<Integer,Boolean> map = new HashMap<>();
 
     @Override
     public void initView() {
@@ -49,11 +52,17 @@ public class CurrencyFundQueryActivity extends BaseActivity implements View.OnCl
     }
 
     private void initData() {
-        pagers.add(new CurrencyTodayPager(this));
+        CurrencyTodayPager currencyTodayPager = new CurrencyTodayPager(this);
+        currencyTodayPager.initData();
+        pagers.add(currencyTodayPager);
         pagers.add(new CurrencyOneWeekPager(this));
         pagers.add(new CurrencyOneMonthPager(this));
         pagers.add(new CurrencyThreeMonthPager(this));
         pagers.add(new CurrencyZiDingYiPager(this));
+        map.put(0,true);
+        for (int i = 1; i < pagers.size(); i++) {
+            map.put(i,false);
+        }
         mViewPager.setAdapter(new InquireVpAdapter(pagers));
 
         mViewPager.setOnPageChangeListener(new ViewPager.OnPageChangeListener() {
@@ -63,7 +72,13 @@ public class CurrencyFundQueryActivity extends BaseActivity implements View.OnCl
 
             @Override
             public void onPageSelected(int position) {
-                pagers.get(position);
+                if (!map.get(position)){
+                    map.put(position,true);
+                    pagers.get(position).initData();
+                    pagers.get(position);
+                }else {
+                    pagers.get(position);
+                }
             }
 
             @Override
