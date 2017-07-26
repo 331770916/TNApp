@@ -27,6 +27,7 @@ import com.tpyzq.mobile.pangu.util.SpUtils;
 import com.tpyzq.mobile.pangu.util.ToastUtils;
 import com.tpyzq.mobile.pangu.view.CentreToast;
 import com.tpyzq.mobile.pangu.view.dialog.FundRedemptionDialog;
+import com.tpyzq.mobile.pangu.view.dialog.MistakeDialog;
 import com.zhy.http.okhttp.callback.StringCallback;
 
 import org.json.JSONArray;
@@ -72,7 +73,7 @@ public class FundRedemptionActivity extends BaseActivity implements View.OnClick
 
 
         LinearLayout rootLayout = (LinearLayout) findViewById(R.id.fundRootLayout);
-        initMoveKeyBoard(rootLayout, null,et_fund_code);
+        initMoveKeyBoard(rootLayout, null, et_fund_code);
 
         setClearView();
         initData();
@@ -108,9 +109,10 @@ public class FundRedemptionActivity extends BaseActivity implements View.OnClick
             public void afterTextChanged(Editable s) {
                 String fund_code = s.toString();
                 et_fund_sum.setText("");
-                if (fund_code.length() == 6){
+                if (fund_code.length() == 6) {
+                    et_fund_sum.setEnabled(true);
                     getFundData(fund_code, "");
-                }else {
+                } else {
                     setClearView();
                 }
             }
@@ -129,17 +131,16 @@ public class FundRedemptionActivity extends BaseActivity implements View.OnClick
             @Override
             public void afterTextChanged(Editable s) {
                 String sum = s.toString();
-                if (!TextUtils.isEmpty(sum)){
+                if (!TextUtils.isEmpty(sum)) {
                     bt_true.setClickable(true);
                     bt_true.setBackgroundResource(R.drawable.button_login_pitchon);
-                }else {
+                } else {
                     bt_true.setClickable(false);
                     bt_true.setBackgroundResource(R.drawable.button_login_unchecked);
                 }
             }
         });
     }
-
 
 
     @Override
@@ -177,7 +178,7 @@ public class FundRedemptionActivity extends BaseActivity implements View.OnClick
         NetWorkUtil.getInstence().okHttpForPostString("", ConstantUtil.URL_JY, map300431, new StringCallback() {
             @Override
             public void onError(Call call, Exception e, int id) {
-                Helper.getInstance().showToast(FundRedemptionActivity.this,ConstantUtil.NETWORK_ERROR);
+                Helper.getInstance().showToast(FundRedemptionActivity.this, ConstantUtil.NETWORK_ERROR);
             }
 
             @Override
@@ -195,7 +196,6 @@ public class FundRedemptionActivity extends BaseActivity implements View.OnClick
                     } else if ("-6".equals(code)) {
                         startActivity(new Intent(FundRedemptionActivity.this, TransactionLoginActivity.class));
                     } else {
-                        et_fund_code.setText("");
                         ToastUtils.showShort(FundRedemptionActivity.this, msg);
                     }
                 } catch (JSONException e) {
@@ -212,6 +212,7 @@ public class FundRedemptionActivity extends BaseActivity implements View.OnClick
         tv_redeem_sum.setText(fundDataBean.data.get(0).ENABLE_CNT + "\t份");
         tv_redeem_min_sum.setText(fundDataBean.data.get(0).LEASE_CNT + "\t份");
     }
+
     private void setClearView() {
         et_fund_sum.setEnabled(false);
         fundDataBean = new FundDataEntity();
@@ -249,13 +250,14 @@ public class FundRedemptionActivity extends BaseActivity implements View.OnClick
                 startActivityForResult(intent, HUGE_REQUSET);
                 break;
             case R.id.bt_true:
+                String fundname = "";
                 String fundcode = et_fund_code.getText().toString();
-                if (fundDataBean.data != null && fundDataBean.data.size() > 0) {
-                    String fundname = fundDataBean.data.get(0).FUND_NAME;
-                    String sum = et_fund_sum.getText().toString();
-                    FundRedemptionDialog fundRedemptionDialog = new FundRedemptionDialog(FundRedemptionActivity.this, fundname, fundcode, sum, fundRecall);
-                    fundRedemptionDialog.show();
+                if (null != fundDataBean && null != fundDataBean.data && fundDataBean.data.size() > 0) {
+                    fundname = fundDataBean.data.get(0).FUND_NAME;
                 }
+                String sum = et_fund_sum.getText().toString();
+                FundRedemptionDialog fundRedemptionDialog = new FundRedemptionDialog(FundRedemptionActivity.this, fundname, fundcode, sum, fundRecall);
+                fundRedemptionDialog.show();
                 break;
             case R.id.iv_back:
                 finish();
@@ -269,7 +271,7 @@ public class FundRedemptionActivity extends BaseActivity implements View.OnClick
             String fundcode = et_fund_code.getText().toString();
             String fundcompany = et_fund_code.getText().toString();
             String sum = et_fund_sum.getText().toString();
-            getFundBack(fundcode,fundcompany,sum);
+            getFundBack(fundcode, fundcompany, sum);
         }
     };
 
@@ -308,12 +310,12 @@ public class FundRedemptionActivity extends BaseActivity implements View.OnClick
                     String code = object.getString("code");
                     String msg = object.getString("msg");
                     if (("0").equals(code)) {
-                        CentreToast.showText(FundRedemptionActivity.this,"委托已提交",true);
+                        CentreToast.showText(FundRedemptionActivity.this, "委托已提交", true);
                         et_fund_sum.setText("");
                     } else if ("-6".equals(code)) {
                         startActivity(new Intent(FundRedemptionActivity.this, TransactionLoginActivity.class));
                     } else {
-                        ToastUtils.showShort(FundRedemptionActivity.this, msg);
+                        MistakeDialog.showDialog(msg,FundRedemptionActivity.this);
                     }
                 } catch (JSONException e) {
                     e.printStackTrace();
