@@ -23,7 +23,7 @@
             android:layout_weight="1">
 
             <TextView
-                android:paddingLeft="@dimen/size20"
+                android:paddingLeft="@dimen/size10"
                 android:gravity="center|start"
                 android:layout_width="match_parent"
                 android:layout_height="match_parent"
@@ -54,7 +54,7 @@
             android:layout_weight="1">
 
             <TextView
-                android:paddingRight="@dimen/size20"
+                android:paddingRight="@dimen/size10"
                 android:gravity="center|end"
                 android:layout_width="match_parent"
                 android:layout_height="match_parent"

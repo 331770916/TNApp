@@ -7,14 +7,15 @@
     android:background="@color/white"
     android:orientation="vertical">
 
+
     <LinearLayout
         android:id="@+id/LinearLayout"
         android:layout_width="match_parent"
         android:layout_height="wrap_content"
         android:orientation="horizontal"
         android:paddingBottom="@dimen/size5"
-        android:paddingLeft="@dimen/size20"
-        android:paddingRight="@dimen/size15"
+        android:paddingLeft="@dimen/size10"
+        android:paddingRight="@dimen/size10"
         android:paddingTop="@dimen/size5">
 
         <RelativeLayout
@@ -27,7 +28,7 @@
                 android:id="@+id/delivery_Date"
                 android:layout_width="match_parent"
                 android:layout_height="wrap_content"
-                android:gravity="center|fill"
+                android:gravity="center|start"
                 android:paddingRight="@dimen/size5"
                 android:text="--"
                 android:textSize="@dimen/txtSize13" />
@@ -67,12 +68,13 @@
             android:paddingLeft="@dimen/size2">
 
             <TextView
+                android:paddingRight="@dimen/size20"
                 android:id="@+id/delivery_Money"
                 android:layout_width="match_parent"
                 android:layout_height="wrap_content"
                 android:layout_alignParentRight="true"
                 android:layout_centerHorizontal="true"
-                android:gravity="center"
+                android:gravity="center|end"
                 android:text="--"
                 android:textSize="@dimen/txtSize13" />
 
@@ -107,7 +109,7 @@
         <LinearLayout
             android:layout_width="match_parent"
             android:layout_height="wrap_content"
-            android:layout_marginTop="@dimen/size2"
+            android:layout_marginTop="@dimen/size1"
             android:orientation="horizontal">
 
             <LinearLayout
@@ -135,7 +137,7 @@
             </LinearLayout>
 
             <View
-                android:layout_width="@dimen/size5"
+                android:layout_width="@dimen/size1"
                 android:layout_height="0dp" />
 
             <LinearLayout
@@ -167,7 +169,7 @@
         <LinearLayout
             android:layout_width="match_parent"
             android:layout_height="wrap_content"
-            android:layout_marginTop="@dimen/size2"
+            android:layout_marginTop="@dimen/size1"
             android:orientation="horizontal">
 
             <LinearLayout
@@ -195,7 +197,7 @@
             </LinearLayout>
 
             <View
-                android:layout_width="@dimen/size5"
+                android:layout_width="@dimen/size1"
                 android:layout_height="0dp" />
 
             <LinearLayout
@@ -227,7 +229,7 @@
         <LinearLayout
             android:layout_width="match_parent"
             android:layout_height="wrap_content"
-            android:layout_marginTop="@dimen/size2"
+            android:layout_marginTop="@dimen/size1"
             android:orientation="horizontal">
 
             <LinearLayout
@@ -254,7 +256,7 @@
             </LinearLayout>
 
             <View
-                android:layout_width="@dimen/size5"
+                android:layout_width="@dimen/size1"
                 android:layout_height="0dp" />
 
             <LinearLayout
@@ -285,7 +287,7 @@
         <LinearLayout
             android:layout_width="match_parent"
             android:layout_height="wrap_content"
-            android:layout_marginTop="@dimen/size2"
+            android:layout_marginTop="@dimen/size1"
             android:orientation="horizontal">
 
             <LinearLayout
@@ -312,7 +314,7 @@
             </LinearLayout>
 
             <View
-                android:layout_width="@dimen/size5"
+                android:layout_width="@dimen/size1"
                 android:layout_height="0dp" />
 
             <LinearLayout

@@ -15,7 +15,7 @@
         android:orientation="horizontal">
 
         <TextView
-            android:paddingLeft="@dimen/size20"
+            android:paddingLeft="@dimen/size10"
             android:id="@+id/clinch_Date"
             android:layout_width="0dp"
             android:layout_height="wrap_content"
@@ -61,7 +61,7 @@
             android:layout_weight="1">
 
             <TextView
-                android:paddingRight="@dimen/size20"
+                android:paddingRight="@dimen/size10"
                 android:id="@+id/clinch_Balance"
                 android:layout_width="match_parent"
                 android:layout_height="wrap_content"
