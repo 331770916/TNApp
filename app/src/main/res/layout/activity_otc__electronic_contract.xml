@@ -1,12 +1,10 @@
 <?xml version="1.0" encoding="utf-8"?>
-<RelativeLayout xmlns:android="http://schemas.android.com/apk/res/android"
-    xmlns:tools="http://schemas.android.com/tools"
+<LinearLayout xmlns:android="http://schemas.android.com/apk/res/android"
     xmlns:app="http://schemas.android.com/apk/res-auto"
     android:layout_width="match_parent"
     android:layout_height="match_parent"
     android:orientation="vertical"
-    android:background="@color/bgColor"
-    tools:context="com.tpyzq.mobile.pangu.activity.trade.otc_business.OTC_ElectronicContractActivity">
+    android:background="@color/bgColor">
 
     <RelativeLayout
         android:id="@+id/rl_top_bar"
@@ -16,51 +14,34 @@
         android:clipToPadding="true"
         android:fitsSystemWindows="true" />
 
-    <!-- 头布局 -->
-    <RelativeLayout
-        android:id="@+id/OtcElectronicTitle"
-        android:layout_below="@+id/rl_top_bar"
+    <!--头布局-->
+    <include
+        android:id="@+id/startVideTop"
+        layout="@layout/updatepwd_top" />
+
+    <FrameLayout
         android:layout_width="match_parent"
-        android:layout_height="@dimen/pickerview_topbar_height"
-        android:background="@color/blue">
+        android:layout_height="match_parent">
 
         <ImageView
-            android:id="@+id/ivOTC_ElectronicContract_back"
-            android:layout_width="wrap_content"
+            android:id="@+id/iv_Kong"
+            android:layout_width="match_parent"
             android:layout_height="match_parent"
-            android:layout_alignParentLeft="true"
-            android:paddingLeft="@dimen/size15"
-            android:paddingRight="@dimen/size20"
-            android:src="@mipmap/back_btn" />
-
-        <TextView
-            android:layout_width="wrap_content"
-            android:layout_height="wrap_content"
             android:layout_centerInParent="true"
-            android:text="@string/OTC_dianzihetongchaxun"
-            android:textColor="@color/white"
-            android:textSize="@dimen/title_big_textsize" />
-    </RelativeLayout>
+            android:scaleType="center"
+            android:src="@mipmap/kong"/>
 
-    <com.handmark.pulltorefresh.library.PullToRefreshListView
-        android:id="@+id/lvElectronicContract"
-        android:layout_below="@id/OtcElectronicTitle"
-        android:layout_width="match_parent"
-        android:layout_height="match_parent"
-        app:ptrAnimationStyle="flip"
-        app:ptrMode="pullFromStart"
-        android:scrollbars="none"
-        android:divider="@null"
-        android:layout_marginBottom="@dimen/size10">
+        <com.tpyzq.mobile.pangu.view.pulllayou.SimplePullLayout
+            android:id="@+id/id_swipe_ly"
+            android:layout_width="match_parent"
+            android:layout_height="match_parent">
 
-    </com.handmark.pulltorefresh.library.PullToRefreshListView>
+            <android.support.v7.widget.RecyclerView
+                android:id="@+id/lvElectronicContract"
+                android:layout_width="match_parent"
+                android:layout_height="match_parent" />
 
-    <ImageView
-        android:id="@+id/ivOtcElectronicKong"
-        android:layout_width="wrap_content"
-        android:layout_height="wrap_content"
-        android:layout_centerInParent="true"
-        android:visibility="gone"
-        android:src="@mipmap/kong"/>
+        </com.tpyzq.mobile.pangu.view.pulllayou.SimplePullLayout>
+    </FrameLayout>
 
-</RelativeLayout>
+</LinearLayout>

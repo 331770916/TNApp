@@ -1,31 +1,20 @@
 package com.tpyzq.mobile.pangu.activity.trade.otc_business;
 
-import android.content.Context;
-import android.graphics.Color;
+import android.support.design.widget.TabLayout;
+import android.support.v4.app.Fragment;
 import android.support.v4.view.ViewPager;
+import android.view.KeyEvent;
 import android.view.View;
-
+import android.widget.TextView;
 import com.tpyzq.mobile.pangu.R;
-import com.tpyzq.mobile.pangu.activity.trade.view.BasePager;
-import com.tpyzq.mobile.pangu.activity.trade.view.OTC_EntrustCustom;
-import com.tpyzq.mobile.pangu.activity.trade.view.OTC_EntrustOneMonth;
-import com.tpyzq.mobile.pangu.activity.trade.view.OTC_EntrustOneWeek;
-import com.tpyzq.mobile.pangu.activity.trade.view.OTC_EntrustThreeMonth;
-import com.tpyzq.mobile.pangu.activity.trade.view.OTC_EntrustToday;
-import com.tpyzq.mobile.pangu.activity.trade.view.ScaleTransitionPagerTitleView;
+import com.tpyzq.mobile.pangu.activity.trade.view.OTC_BargainCustom;
+import com.tpyzq.mobile.pangu.activity.trade.view.OTC_BargainOneMonth;
+import com.tpyzq.mobile.pangu.activity.trade.view.OTC_BargainOneWeek;
+import com.tpyzq.mobile.pangu.activity.trade.view.OTC_BargainThreeMonth;
+import com.tpyzq.mobile.pangu.activity.trade.view.OTC_BargainToday;
 import com.tpyzq.mobile.pangu.adapter.trade.OtcQueryAdapter;
 import com.tpyzq.mobile.pangu.base.BaseActivity;
-import com.tpyzq.mobile.pangu.view.magicindicator.MagicIndicator;
-import com.tpyzq.mobile.pangu.view.magicindicator.ViewPagerHelper;
-import com.tpyzq.mobile.pangu.view.magicindicator.buildins.commonnavigator.CommonNavigator;
-import com.tpyzq.mobile.pangu.view.magicindicator.buildins.commonnavigator.abs.CommonNavigatorAdapter;
-import com.tpyzq.mobile.pangu.view.magicindicator.buildins.commonnavigator.abs.IPagerIndicator;
-import com.tpyzq.mobile.pangu.view.magicindicator.buildins.commonnavigator.abs.IPagerTitleView;
-import com.tpyzq.mobile.pangu.view.magicindicator.buildins.commonnavigator.indicators.LinePagerIndicator;
-import com.tpyzq.mobile.pangu.view.magicindicator.buildins.commonnavigator.titles.SimplePagerTitleView;
-
 import java.util.ArrayList;
-import java.util.Arrays;
 import java.util.List;
 
 /**
@@ -34,121 +23,85 @@ import java.util.List;
  */
 public class OTC_EntrustQueryActivity extends BaseActivity implements View.OnClickListener {
 
-    private MagicIndicator mi_OtcEntrustQuery;      //title
-    private static final String[] entrustQuery_tab = new String[]{"今日", "一周内", "一月内", "三月内", "自定义"};
-    private List<String> entrustQuery_tab_list;       //存储标题的 集合
-    private ViewPager mViewPager;
-    private List<BasePager> pagers=new ArrayList<BasePager>();
-    private OtcQueryAdapter adapter;
+    private OTC_BargainToday        mOTC_BargainToday;
+    private OTC_BargainOneWeek      mOTC_BargainOneWeek;
+    private OTC_BargainOneMonth     mOTC_BargainOneMonth;
+    private OTC_BargainThreeMonth   mOTC_BargainThreeMonth;
+    private OTC_BargainCustom       mOTC_BargainCustom;
 
     @Override
     public void initView() {
 
-        mi_OtcEntrustQuery = (MagicIndicator) this.findViewById(R.id.mi_OtcEntrustQuery);
-        mViewPager = (ViewPager) findViewById(R.id.vpOTCEntrustQuery);
-        findViewById(R.id.ivOTC_EntrustQueryBack).setOnClickListener(this);
+        findViewById(R.id.userIdBackBtn).setOnClickListener(this);
+        TextView title = (TextView) findViewById(R.id.toolbar_title);
+        title.setText("委托查询");
 
-        initData();
-        setIndicatorListen();
-    }
+        mOTC_BargainToday.type = mOTC_BargainToday.ENTRUST_TYPE;
+        ViewPager viewPager = (ViewPager) findViewById(R.id.vpOTCEntrustQuery);
+        mOTC_BargainToday = new OTC_BargainToday();
+        mOTC_BargainOneWeek = new OTC_BargainOneWeek();
+        mOTC_BargainOneMonth = new OTC_BargainOneMonth();
+        mOTC_BargainThreeMonth = new OTC_BargainThreeMonth();
+        mOTC_BargainCustom = new OTC_BargainCustom();
 
-    private void initData() {
-        entrustQuery_tab_list = Arrays.asList(entrustQuery_tab);
+        List<Fragment> pagers = new ArrayList<>();
+        pagers.add(mOTC_BargainToday);
+        pagers.add(mOTC_BargainOneWeek);
+        pagers.add(mOTC_BargainOneMonth);
+        pagers.add(mOTC_BargainThreeMonth);
+        pagers.add(mOTC_BargainCustom);
 
-        pagers.add(new OTC_EntrustToday(this));
-        pagers.add(new OTC_EntrustOneWeek(this));
-        pagers.add(new OTC_EntrustOneMonth(this));
-        pagers.add(new OTC_EntrustThreeMonth(this));
-        pagers.add(new OTC_EntrustCustom(this));
+        OtcQueryAdapter adapter = new OtcQueryAdapter(getSupportFragmentManager(), pagers);
+        viewPager.setAdapter(adapter);
 
-        adapter = new OtcQueryAdapter(pagers);
-        mViewPager.setAdapter(adapter);
+        String[] bargainQuery_tab = {"今日", "一周内", "一月内", "三月内", "自定义"};
+        TabLayout tabLayout = (TabLayout) findViewById(R.id.entrustTablayout);
+        for (String tabTitle : bargainQuery_tab) {
+            tabLayout.addTab(tabLayout.newTab().setText(tabTitle));
+        }
 
-        mViewPager.setOnPageChangeListener(new ViewPager.OnPageChangeListener() {
-            @Override
-            public void onPageScrolled(int position, float positionOffset, int positionOffsetPixels) {
-
-            }
-
-            @Override
-            public void onPageSelected(int position) {
-                pagers.get(position);
-            }
-
-            @Override
-            public void onPageScrollStateChanged(int state) {
-
-            }
-        });
-
-    }
-
-    /**
-     * 设置底部页签切换监听器
-     */
-    private void setIndicatorListen() {
-        CommonNavigator commonNavigator = new CommonNavigator(this);
-        commonNavigator.setAdjustMode(true);
-        commonNavigator.setAdapter(new CommonNavigatorAdapter() {
-            @Override
-            public int getCount() {
-                return entrustQuery_tab_list == null ? 0 : entrustQuery_tab_list.size();
-            }
-
-            @Override
-            public IPagerTitleView getTitleView(Context context, final int index) {
-                SimplePagerTitleView simplePagerTitleView = new ScaleTransitionPagerTitleView(context);
-                simplePagerTitleView.setText(entrustQuery_tab_list.get(index));
-                simplePagerTitleView.setTextSize(14);
-                simplePagerTitleView.setNormalColor(Color.BLACK);
-                simplePagerTitleView.setSelectedColor(OTC_EntrustQueryActivity.this.getResources().getColor(R.color.blue));
-                simplePagerTitleView.setText(entrustQuery_tab_list.get(index));
-                simplePagerTitleView.setOnClickListener(new View.OnClickListener() {
-                    @Override
-                    public void onClick(View v) {
-                        mViewPager.setCurrentItem(index);
-                    }
-                });
-                return simplePagerTitleView;
-            }
-
-            @Override
-            public IPagerIndicator getIndicator(Context context) {
-                LinePagerIndicator linePagerIndicator = new LinePagerIndicator(context);
-                linePagerIndicator.setMode(LinePagerIndicator.MODE_WRAP_CONTENT);
-                linePagerIndicator.setColors(OTC_EntrustQueryActivity.this.getResources().getColor(R.color.blue));
-                return linePagerIndicator;
-            }
-
-            @Override
-            public float getTitleWeight(Context context, int index) {
-                if (index == 0) {
-                    return 1.0f;
-                } else if (index == 1) {
-                    return 1.0f;
-                } else if (index == 2) {
-                    return 1.0f;
-                } else {
-                    return 1.0f;
-                }
-            }
-        });
-        mi_OtcEntrustQuery.setNavigator(commonNavigator);
-        ViewPagerHelper.bind(mi_OtcEntrustQuery, mViewPager);
+        tabLayout.setupWithViewPager(viewPager);
+        tabLayout.setTabMode(TabLayout.MODE_FIXED);
     }
 
 
     @Override
-    public int getLayoutId() {
-        return R.layout.activity_otc__entrust_query;
+    public boolean onKeyDown(int keyCode, KeyEvent event) {
+        boolean onkeyflag = super.onKeyDown(keyCode, event);
+        if (mOTC_BargainToday != null) {
+            onkeyflag = mOTC_BargainToday.onKeyDown(keyCode, event);
+        }
+
+        if (mOTC_BargainOneWeek != null) {
+            onkeyflag = mOTC_BargainOneWeek.onKeyDown(keyCode, event);
+        }
+
+        if (mOTC_BargainOneMonth != null) {
+            onkeyflag =  mOTC_BargainOneMonth.onKeyDown(keyCode, event);
+        }
+
+        if (mOTC_BargainThreeMonth != null) {
+            onkeyflag = mOTC_BargainThreeMonth.onKeyDown(keyCode, event);
+        }
+
+        if (mOTC_BargainCustom != null) {
+            onkeyflag = mOTC_BargainCustom.onKeyDown(keyCode, event);
+        }
+
+        return onkeyflag;
     }
 
     @Override
     public void onClick(View v) {
         switch (v.getId()){
-            case R.id.ivOTC_EntrustQueryBack:
+            case R.id.userIdBackBtn:
                 finish();
                 break;
         }
+    }
+
+    @Override
+    public int getLayoutId() {
+        return R.layout.activity_otc__entrust_query;
     }
 }

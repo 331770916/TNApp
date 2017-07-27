@@ -1,144 +1,136 @@
 <?xml version="1.0" encoding="utf-8"?>
 <LinearLayout xmlns:android="http://schemas.android.com/apk/res/android"
     android:layout_width="match_parent"
-    android:layout_height="match_parent"
+    android:layout_height="wrap_content"
     android:background="@color/white"
-    android:orientation="vertical">
+    android:gravity="center_vertical"
+    android:orientation="horizontal"
+    android:paddingBottom="@dimen/size10"
+    android:paddingLeft="@dimen/size20"
+    android:paddingRight="@dimen/size10"
+    android:paddingTop="@dimen/size10">
 
-    <LinearLayout
-        android:layout_width="match_parent"
-        android:layout_height="@dimen/size50"
-        android:layout_marginBottom="@dimen/size5"
-        android:layout_marginTop="@dimen/size5"
-        android:gravity="center"
-        android:orientation="horizontal"
-        android:paddingLeft="@dimen/size24"
-        android:paddingRight="@dimen/size10">
+    <RelativeLayout
+        android:layout_width="@dimen/size0"
+        android:layout_height="wrap_content"
+        android:layout_weight="1">
 
-
-        <RelativeLayout
-            android:layout_width="@dimen/size0"
+        <TextView
+            android:id="@+id/tv_OTCEntrustTodayStockName"
+            android:layout_width="match_parent"
             android:layout_height="wrap_content"
-            android:layout_weight="1">
+            android:layout_centerHorizontal="true"
+            android:ellipsize="end"
+            android:gravity="center|fill"
+            android:singleLine="true"
+            android:text="--"
+            android:textColor="@color/hushenTab_titleColor"
+            android:textSize="@dimen/txtSize13"
+            android:textStyle="bold" />
 
-            <TextView
-                android:id="@+id/tv_OTCEntrustTodayStockName"
-                android:layout_width="match_parent"
-                android:layout_height="wrap_content"
-                android:layout_centerHorizontal="true"
-                android:ellipsize="end"
-                android:gravity="center|fill"
-                android:singleLine="true"
-                android:text="--"
-                android:textColor="@color/hushenTab_titleColor"
-                android:textSize="@dimen/txtSize13"
-                android:textStyle="bold" />
-
-            <TextView
-                android:id="@+id/tv_OTCEntrustTodaystockCode"
-                android:layout_width="match_parent"
-                android:layout_height="wrap_content"
-                android:layout_alignLeft="@id/tv_OTCEntrustTodayStockName"
-                android:layout_below="@id/tv_OTCEntrustTodayStockName"
-                android:gravity="center|fill"
-                android:text="--"
-                android:textColor="@color/newStockTitle"
-                android:textSize="@dimen/txtSize12" />
-        </RelativeLayout>
-
-        <RelativeLayout
-            android:layout_width="@dimen/size0"
+        <TextView
+            android:id="@+id/tv_OTCEntrustTodaystockCode"
+            android:layout_width="match_parent"
             android:layout_height="wrap_content"
-            android:layout_weight="1">
+            android:layout_alignLeft="@id/tv_OTCEntrustTodayStockName"
+            android:layout_below="@id/tv_OTCEntrustTodayStockName"
+            android:gravity="center|fill"
+            android:text="--"
+            android:textColor="@color/newStockTitle"
+            android:textSize="@dimen/txtSize12" />
+    </RelativeLayout>
 
-            <TextView
-                android:id="@+id/tv_OTCEntrustTodayData"
-                android:layout_width="match_parent"
-                android:layout_height="wrap_content"
-                android:layout_centerHorizontal="true"
-                android:gravity="center"
-                android:text="--"
-                android:textColor="@color/hushenTab_titleColor"
-                android:textSize="@dimen/txtSize13" />
+    <RelativeLayout
+        android:layout_width="@dimen/size0"
+        android:layout_height="wrap_content"
+        android:layout_weight="1">
 
-            <TextView
-                android:id="@+id/tv_OTCEntrustTodayTime"
-                android:layout_width="match_parent"
-                android:layout_height="wrap_content"
-                android:layout_alignLeft="@id/tv_OTCEntrustTodayData"
-                android:layout_below="@id/tv_OTCEntrustTodayData"
-                android:gravity="center"
-                android:text="--"
-                android:textColor="@color/hushenTab_titleColor"
-                android:textSize="@dimen/txtSize13" />
-        </RelativeLayout>
-
-        <RelativeLayout
-            android:layout_width="@dimen/size0"
+        <TextView
+            android:id="@+id/tv_OTCEntrustTodayData"
+            android:layout_width="match_parent"
             android:layout_height="wrap_content"
-            android:layout_weight="1">
+            android:layout_centerHorizontal="true"
+            android:gravity="center"
+            android:text="--"
+            android:textColor="@color/hushenTab_titleColor"
+            android:textSize="@dimen/txtSize13" />
 
-            <TextView
-                android:id="@+id/tv_OTCEntrustTodayNumber"
-                android:layout_width="match_parent"
-                android:layout_height="wrap_content"
-                android:layout_alignLeft="@+id/tv_OTCEntrustTodayMoney"
-                android:layout_below="@+id/tv_OTCEntrustTodayMoney"
-                android:gravity="center"
-                android:paddingLeft="@dimen/size5"
-                android:paddingRight="@dimen/size10"
-                android:text="--"
-                android:textColor="@color/hushenTab_titleColor"
-                android:textSize="@dimen/txtSize13" />
-
-            <TextView
-                android:id="@+id/tv_OTCEntrustTodayMoney"
-                android:layout_width="match_parent"
-                android:layout_height="wrap_content"
-                android:layout_alignParentLeft="true"
-                android:layout_alignParentStart="true"
-                android:layout_alignParentTop="true"
-                android:gravity="center"
-                android:paddingLeft="@dimen/size5"
-                android:paddingRight="@dimen/size10"
-                android:text="--"
-                android:textColor="@color/hushenTab_titleColor"
-                android:textSize="@dimen/txtSize13" />
-        </RelativeLayout>
-
-        <RelativeLayout
-            android:layout_width="@dimen/size0"
+        <TextView
+            android:id="@+id/tv_OTCEntrustTodayTime"
+            android:layout_width="match_parent"
             android:layout_height="wrap_content"
-            android:layout_weight="1"
-            android:paddingRight="@dimen/size5">
+            android:layout_alignLeft="@id/tv_OTCEntrustTodayData"
+            android:layout_below="@id/tv_OTCEntrustTodayData"
+            android:gravity="center"
+            android:text="--"
+            android:textColor="@color/hushenTab_titleColor"
+            android:textSize="@dimen/txtSize13" />
+    </RelativeLayout>
 
-            <TextView
-                android:id="@+id/tv_OTCEntrustTodayType"
-                android:layout_width="match_parent"
-                android:layout_height="wrap_content"
-                android:layout_alignParentRight="true"
-                android:layout_centerHorizontal="true"
-                android:ellipsize="end"
-                android:gravity="center|end"
-                android:maxLines="1"
-                android:text="--"
-                android:textColor="@color/hushenTab_titleColor"
-                android:textSize="@dimen/txtSize13" />
+    <RelativeLayout
+        android:layout_width="@dimen/size0"
+        android:layout_height="wrap_content"
+        android:layout_weight="1">
 
-            <TextView
+        <TextView
+            android:id="@+id/tv_OTCEntrustTodayNumber"
+            android:layout_width="match_parent"
+            android:layout_height="wrap_content"
+            android:layout_alignLeft="@+id/tv_OTCEntrustTodayMoney"
+            android:layout_below="@+id/tv_OTCEntrustTodayMoney"
+            android:gravity="center"
+            android:paddingLeft="@dimen/size5"
+            android:paddingRight="@dimen/size10"
+            android:text="--"
+            android:textColor="@color/hushenTab_titleColor"
+            android:textSize="@dimen/txtSize13" />
 
-                android:id="@+id/tv_OTCEntrustTodayState"
-                android:layout_width="match_parent"
-                android:layout_height="wrap_content"
-                android:layout_alignParentRight="true"
-                android:layout_below="@id/tv_OTCEntrustTodayType"
-                android:ellipsize="end"
-                android:gravity="center|end"
-                android:maxLines="1"
-                android:text="--"
-                android:textColor="@color/hushenTab_titleColor"
-                android:textSize="@dimen/txtSize13" />
-        </RelativeLayout>
+        <TextView
+            android:id="@+id/tv_OTCEntrustTodayMoney"
+            android:layout_width="match_parent"
+            android:layout_height="wrap_content"
+            android:layout_alignParentLeft="true"
+            android:layout_alignParentStart="true"
+            android:layout_alignParentTop="true"
+            android:gravity="center"
+            android:paddingLeft="@dimen/size5"
+            android:paddingRight="@dimen/size10"
+            android:text="--"
+            android:textColor="@color/hushenTab_titleColor"
+            android:textSize="@dimen/txtSize13" />
+    </RelativeLayout>
 
-    </LinearLayout>
+    <RelativeLayout
+        android:layout_width="@dimen/size0"
+        android:layout_height="wrap_content"
+        android:layout_weight="1"
+        android:paddingRight="@dimen/size5">
+
+        <TextView
+            android:id="@+id/tv_OTCEntrustTodayType"
+            android:layout_width="match_parent"
+            android:layout_height="wrap_content"
+            android:layout_alignParentRight="true"
+            android:layout_centerHorizontal="true"
+            android:ellipsize="end"
+            android:gravity="center|end"
+            android:maxLines="1"
+            android:text="--"
+            android:textColor="@color/hushenTab_titleColor"
+            android:textSize="@dimen/txtSize13" />
+
+        <TextView
+            android:id="@+id/tv_OTCEntrustTodayState"
+            android:layout_width="match_parent"
+            android:layout_height="wrap_content"
+            android:layout_alignParentRight="true"
+            android:layout_below="@id/tv_OTCEntrustTodayType"
+            android:ellipsize="end"
+            android:gravity="center|end"
+            android:maxLines="1"
+            android:text="--"
+            android:textColor="@color/hushenTab_titleColor"
+            android:textSize="@dimen/txtSize13" />
+    </RelativeLayout>
+
 </LinearLayout>

@@ -1,16 +1,14 @@
 package com.tpyzq.mobile.pangu.adapter.trade;
 
 import android.content.Context;
-import android.content.Intent;
+import android.support.v7.widget.RecyclerView;
 import android.view.LayoutInflater;
 import android.view.View;
 import android.view.ViewGroup;
-import android.widget.BaseAdapter;
+import android.widget.RelativeLayout;
 import android.widget.TextView;
 
 import com.tpyzq.mobile.pangu.R;
-import com.tpyzq.mobile.pangu.activity.trade.otc_business.OTC_ContractFlowWaterActivity;
-import com.tpyzq.mobile.pangu.activity.trade.otc_business.OTC_ContractSignActivity;
 import com.tpyzq.mobile.pangu.data.OTC_ElectronicContractEntity;
 
 import java.util.ArrayList;
@@ -18,97 +16,96 @@ import java.util.ArrayList;
 /**
  * 作者：刘泽鹏 on 2016/9/5 15:18
  */
-public class OTC_ElectronicContractAdapter extends BaseAdapter {
+public class OTC_ElectronicContractAdapter extends RecyclerView.Adapter<RecyclerView.ViewHolder> {
 
-    private Context context;
-    private ArrayList<OTC_ElectronicContractEntity> list;
+    private Context mContext;
+    private ArrayList<OTC_ElectronicContractEntity> mDatas;
+    private OnItemClickListener mOnItemClickListener;
 
     public OTC_ElectronicContractAdapter(Context context) {
-        this.context = context;
+        mContext = context;
     }
 
-    public void setList(ArrayList<OTC_ElectronicContractEntity> list){
-        this.list = list;
+    public void setOnItemClickListener (OnItemClickListener listener) {
+        mOnItemClickListener = listener;
+    }
+
+    public void setList(ArrayList<OTC_ElectronicContractEntity> datas){
+        mDatas = datas;
         notifyDataSetChanged();
     }
 
     @Override
-    public int getCount() {
-        if(list != null && list.size()>0 ){
-            return list.size();
+    public int getItemCount() {
+
+        if (mDatas != null && mDatas.size() > 0) {
+            return mDatas.size();
         }
+
         return 0;
     }
 
     @Override
-    public Object getItem(int position) {
-        if(list != null && list.size()>0 ){
-            return list.get(position);
-        }
-        return null;
+    public RecyclerView.ViewHolder onCreateViewHolder(ViewGroup parent, int viewType) {
+        View view = LayoutInflater.from(mContext).inflate(R.layout.item_electronic_contract, parent, false);
+        ViewHolder viewHolder = new ViewHolder(view);
+        return viewHolder;
     }
 
-    @Override
-    public long getItemId(int position) {
-        return 0;
-    }
 
     @Override
-    public View getView(final int position, View convertView, ViewGroup parent) {
-        ViewHolder viewHolder;
-        if(convertView == null){
-            viewHolder = new ViewHolder();
-            convertView = LayoutInflater.from(context).inflate(R.layout.item_electronic_contract,null);
-            viewHolder.tvProductContractName = (TextView) convertView.findViewById(R.id.tvProductContractName);
-            viewHolder.tvProductContractCode = (TextView) convertView.findViewById(R.id.tvProductContractCode);
-            viewHolder.tvDianJi = (TextView) convertView.findViewById(R.id.tvDianJi);
-            convertView.setTag(viewHolder);
-        }else {
-            viewHolder = (ViewHolder) convertView.getTag();
-        }
+    public void onBindViewHolder(RecyclerView.ViewHolder holder, final int position) {
+        final OTC_ElectronicContractEntity intentBean = mDatas.get(position);
+        ViewHolder viewHolder = (ViewHolder)holder;
 
-        OTC_ElectronicContractEntity intentBean = list.get(position);
         viewHolder.tvProductContractName.setText(intentBean.getProd_name());
         viewHolder.tvProductContractCode.setText(intentBean.getProd_code());
 
         String is_sign = intentBean.getIs_sign();
         if(is_sign.equals("0")){
             viewHolder.tvDianJi.setText("已签约");
-            viewHolder.tvDianJi.setTextColor(context.getResources().getColor(R.color.blue));
+            viewHolder.tvDianJi.setTextColor(mContext.getResources().getColor(R.color.blue));
         }else if(is_sign.equals("1")){
             viewHolder.tvDianJi.setText("点击签约");
-            viewHolder.tvDianJi.setTextColor(context.getResources().getColor(R.color.orange1));
+            viewHolder.tvDianJi.setTextColor(mContext.getResources().getColor(R.color.orange1));
         }
-        viewHolder.tvDianJi.setOnClickListener(new View.OnClickListener() {
+
+        viewHolder.mLayout.setOnClickListener(new View.OnClickListener() {
             @Override
             public void onClick(View v) {
-                OTC_ElectronicContractEntity intentBean = list.get(position);
-                ArrayList<OTC_ElectronicContractEntity> listBean = new ArrayList<OTC_ElectronicContractEntity>();
-                listBean.add(intentBean);
-                String is_sign = intentBean.getIs_sign();
-                String prod_name = intentBean.getProd_name();
-                String prod_code = intentBean.getProd_code();
-                Intent intent = new Intent();
-                if(is_sign.equals("1")){
-                    intent.setClass(context,OTC_ContractSignActivity.class);
-                    intent.putExtra("list",listBean);
-                    context.startActivity(intent);
-                }else if(is_sign.equals("0")){
-                    intent.setClass(context,OTC_ContractFlowWaterActivity.class);
-                    intent.putExtra("list",listBean);
-                    context.startActivity(intent);
+                if (mOnItemClickListener != null) {
+                    mOnItemClickListener.onItemClick(intentBean);
                 }
             }
         });
 
-        return convertView;
+        viewHolder.tvDianJi.setOnClickListener(new View.OnClickListener() {
+            @Override
+            public void onClick(View v) {
+                if (mOnItemClickListener != null) {
+                    mOnItemClickListener.onItemClick(intentBean);
+                }
+            }
+        });
     }
 
-
-
-    class ViewHolder{
+    class ViewHolder extends RecyclerView.ViewHolder {
         TextView tvProductContractName;         //产品名称
         TextView tvProductContractCode;         //产品代码
         TextView tvDianJi;                       //点击签约
+        RelativeLayout mLayout;
+
+        public ViewHolder(View itemView) {
+            super(itemView);
+
+            tvProductContractName = (TextView) itemView.findViewById(R.id.tvProductContractName);
+            tvProductContractCode = (TextView) itemView.findViewById(R.id.tvProductContractCode);
+            tvDianJi = (TextView) itemView.findViewById(R.id.tvDianJi);
+            mLayout = (RelativeLayout) itemView.findViewById(R.id.item_electronicLayout);
+        }
+    }
+
+    public interface OnItemClickListener {
+        public void onItemClick(OTC_ElectronicContractEntity electronicContractEntity);
     }
 }

@@ -1,144 +1,154 @@
 package com.tpyzq.mobile.pangu.activity.trade.otc_business;
 
+import android.app.Dialog;
+import android.content.DialogInterface;
 import android.content.Intent;
-import android.text.TextUtils;
+import android.support.v7.widget.LinearLayoutManager;
+import android.support.v7.widget.RecyclerView;
+import android.view.KeyEvent;
 import android.view.View;
 import android.widget.ImageView;
-import android.widget.ListView;
+import android.widget.TextView;
 
 import com.tpyzq.mobile.pangu.R;
+import com.tpyzq.mobile.pangu.activity.myself.login.ShouJiZhuCeActivity;
 import com.tpyzq.mobile.pangu.activity.myself.login.TransactionLoginActivity;
 import com.tpyzq.mobile.pangu.adapter.trade.OTC_AccountQueryAdapter;
 import com.tpyzq.mobile.pangu.base.BaseActivity;
-import com.tpyzq.mobile.pangu.http.NetWorkUtil;
-import com.tpyzq.mobile.pangu.util.ConstantUtil;
+import com.tpyzq.mobile.pangu.db.Db_PUB_USERS;
+import com.tpyzq.mobile.pangu.http.OkHttpUtil;
+import com.tpyzq.mobile.pangu.http.doConnect.trade.OTC_AccountConnect;
 import com.tpyzq.mobile.pangu.util.SpUtils;
-import com.tpyzq.mobile.pangu.view.dialog.ResultDialog;
-import com.zhy.http.okhttp.callback.StringCallback;
-
-import org.json.JSONArray;
-import org.json.JSONException;
-import org.json.JSONObject;
-
+import com.tpyzq.mobile.pangu.view.dialog.LoadingDialog;
+import com.tpyzq.mobile.pangu.view.dialog.MistakeDialog;
+import com.tpyzq.mobile.pangu.view.itemdecoration.LinearDividerItemDecoration;
+import com.tpyzq.mobile.pangu.view.pulllayou.SimplePullLayout;
+import com.tpyzq.mobile.pangu.view.pulllayou.base.BasePullLayout;
+import com.tpyzq.mobile.pangu.view.pulllayou.head.TainiuRefreshHead;
 import java.util.ArrayList;
-import java.util.HashMap;
-
-import okhttp3.Call;
+import java.util.Map;
 
 /**
  * OTC 账户查询 页面
  */
-public class OTC_AccountQueryActivity extends BaseActivity implements View.OnClickListener{
+public class OTC_AccountQueryActivity extends BaseActivity implements View.OnClickListener,
+        BasePullLayout.OnPullCallBackListener, DialogInterface.OnCancelListener,
+        OTC_AccountConnect.OTC_AccountConnectListener {
 
-    private static final String TAG = "OTC_AccountQuery";
-    private ListView mListView=null;
-    private OTC_AccountQueryAdapter adapter;
-    private ArrayList<HashMap<String,String>> list;
-    private ImageView ivOTC_AccountQueryKong;       //空图片
+    private static final String TAG = OTC_AccountQueryActivity.class.getSimpleName();
+    private OTC_AccountQueryAdapter mAdapter;
+    private ImageView               ivKong;
+    private Dialog                  mProgressDialog;
+    private SimplePullLayout        mSimplePullLayout;
+    private String                  mSession;
+    private OTC_AccountConnect mOTC_AccountConnect = new OTC_AccountConnect();
+    private boolean clickBackKey;//判断用户是否点击返回键取消网络请求
 
     @Override
     public void initView() {
-        ivOTC_AccountQueryKong = (ImageView) this.findViewById(R.id.ivOTC_AccountQueryKong);
-        this.findViewById(R.id.ivOTC_AccountQuery_back).setOnClickListener(this);
-        mListView = (ListView) this.findViewById(R.id.lvOTC_AccountQuery);
-        adapter = new OTC_AccountQueryAdapter(this);
-        list = new ArrayList<HashMap<String,String>>();
-        getAccountlist();           //获取账户数据
-        mListView.setAdapter(adapter);
+        findViewById(R.id.userIdBackBtn).setOnClickListener(this);
+        TextView title = (TextView) findViewById(R.id.toolbar_title);
+        title.setText("OTC账户");
+
+        ivKong = (ImageView) this.findViewById(R.id.iv_Kong);
+        ivKong.setVisibility(View.GONE);
+        mSimplePullLayout = (SimplePullLayout) findViewById(R.id.id_swipe_ly);
+        mSimplePullLayout.attachHeadView(new TainiuRefreshHead());
+        mSimplePullLayout.setPullUpEnable(false);
+
+        RecyclerView recyclerView = (RecyclerView) findViewById(R.id.lvOTC_AccountQuery);
+        recyclerView.setLayoutManager(new LinearLayoutManager(this));
+        recyclerView.addItemDecoration(new LinearDividerItemDecoration(this, LinearDividerItemDecoration.LINEAR_DIVIDER_VERTICAL));
+        mAdapter = new OTC_AccountQueryAdapter(this);
+        recyclerView.setAdapter(mAdapter);
+
+        mSimplePullLayout.setOnPullListener(this);
+        mSession = SpUtils.getString(this, "mSession", "");
+
+        initLoadDialog();
+        mOTC_AccountConnect.toOtcAccountConnect(TAG, mSession, this);
     }
 
-    /**
-     * 获取账户数据
-     */
-    private void getAccountlist() {
-        String mSession = SpUtils.getString(this, "mSession", "");
-        HashMap map1 = new HashMap();
-        HashMap map2 = new HashMap();
-        map2.put("FLAG","true");
-        map2.put("SEC_ID","tpyzq");
-        map1.put("funcid","300506");
-        map1.put("token",mSession);
-        map1.put("parms",map2);
-        NetWorkUtil.getInstence().okHttpForPostString(TAG, ConstantUtil.URL_JY, map1, new StringCallback() {
-            @Override
-            public void onError(Call call, Exception e, int id) {
-                ResultDialog.getInstance().showText("网络异常");
-            }
+    @Override
+    public void onRefresh() {
+        mOTC_AccountConnect.toOtcAccountConnect(TAG, mSession, this);
+    }
 
-            @Override
-            public void onResponse(String response, int id) {
-                if (TextUtils.isEmpty(response)) {
-                    return;
-                }
-                try{
-                    JSONObject res = new JSONObject(response);
-                    String code = res.optString("code");
-                    if (code.equals("-6")) {
-                        Intent intent = new Intent(OTC_AccountQueryActivity.this, TransactionLoginActivity.class);
-                        OTC_AccountQueryActivity.this.startActivity(intent);
-                        OTC_AccountQueryActivity.this.finish();
-                    }else if("0".equals(code)){
-                        JSONArray jsonArray = res.getJSONArray("data");
-                        if(null != jsonArray && jsonArray.length() > 0){
-                            for(int i = 0;i < jsonArray.length();i++){
-                                HashMap<String,String> map = new HashMap<String, String>();
-                                JSONObject json = jsonArray.getJSONObject(i);
-                                map.put("open_date",json.optString("OPEN_DATE"));
-                                map.put("secum_account",json.optString("SECUM_ACCOUNT"));
-                                map.put("prodta_no",json.optString("PRODTA_NO"));
-                                map.put("prodholder_status",json.optString("STATUS_NAME"));
-                                list.add(map);
-                            }
-                        }else {
-                            ivOTC_AccountQueryKong.setVisibility(View.VISIBLE);
-                        }
-                    }else {
-                        ResultDialog.getInstance().showText(res.optString("msg"));
-                    }
-                }catch (JSONException e){
-                    e.printStackTrace();
-                }
-                if(list.size()>0){
-                    ivOTC_AccountQueryKong.setVisibility(View.GONE);
-                }
-                adapter.setList(list);
-                /**
-                Gson gson = new Gson();
-                Type type = new TypeToken<OTC_AccountQueryListBean>() {}.getType();
-                OTC_AccountQueryListBean bean = gson.fromJson(response, type);
-                String code = bean.getCode();
-                List<OTC_AccountQueryListBean.DataBean> data = bean.getData();
-                if (code.equals("-6")) {
-                    Intent intent = new Intent(OTC_AccountQueryActivity.this, TransactionLoginActivity.class);
-                    OTC_AccountQueryActivity.this.startActivity(intent);
-                    OTC_AccountQueryActivity.this.finish();
-                }else
-                if(data.size() == 0){
-                    ivOTC_AccountQueryKong.setVisibility(View.VISIBLE);
-                }else
-                if(code.equals("0") && data != null){
-                    for(int i=0;i<data.size();i++){
-                        HashMap<String,String> map = new HashMap<String, String>();
-                        OTC_AccountQueryListBean.DataBean dataBean = data.get(i);
-                        String open_date = dataBean.getOPEN_DATE();                     //开户时间
-                        String secum_account = dataBean.getSECUM_ACCOUNT();             //账户
-                        String prodta_no = dataBean.getPRODTA_NO();                     //公司
-//                        String prodholder_status = dataBean.getPRODHOLDER_STATUS();     //状态
-                        String status_name = dataBean.getSTATUS_NAME();                 //状态
-                        map.put("open_date",open_date);
-                        map.put("secum_account",secum_account);
-                        map.put("prodta_no",prodta_no);
-                        map.put("prodholder_status",status_name);
-                        list.add(map);
-                    }
-                }
-                if(list.size()>0){
-                    ivOTC_AccountQueryKong.setVisibility(View.GONE);
-                }
-                adapter.setList(list);
-                */
+    @Override
+    public void onLoad() {
+
+    }
+
+    @Override
+    public void connectError(String error) {
+        MistakeDialog.showDialog(error, OTC_AccountQueryActivity.this);
+    }
+
+    @Override
+    public void closeRefresh() {
+        mSimplePullLayout.finishPull();
+    }
+
+    @Override
+    public void sessionFaild() {
+        Intent intent = new Intent();
+        if (!Db_PUB_USERS.isRegister()) {
+            intent = new Intent(OTC_AccountQueryActivity.this, ShouJiZhuCeActivity.class);
+        } else if (!Db_PUB_USERS.islogin()) {
+            intent.setClass(OTC_AccountQueryActivity.this, TransactionLoginActivity.class);
+        } else {
+            intent.setClass(OTC_AccountQueryActivity.this, TransactionLoginActivity.class);
+        }
+        startActivity(intent);
+    }
+
+    @Override
+    public void connectNoData() {
+        ArrayList<Map<String, String>> list = new ArrayList<>();
+        ivKong.setVisibility(View.VISIBLE);
+        mAdapter.setDatas(list);
+    }
+
+    @Override
+    public void connectSuccess(ArrayList<Map<String, String>> datas) {
+        ivKong.setVisibility(View.GONE);
+        mAdapter.setDatas(datas);
+    }
+
+    @Override
+    public void cloasLoading() {
+        if (mProgressDialog != null && mProgressDialog.isShowing()) {
+            mProgressDialog.dismiss();
+        }
+    }
+
+    @Override
+    public void onCancel(DialogInterface dialog) {
+        if (clickBackKey) {
+            OkHttpUtil.cancelSingleRequestByTag(TAG);
+        }
+    }
+
+    private void initLoadDialog() {
+        mProgressDialog = LoadingDialog.initDialog(OTC_AccountQueryActivity.this, "正在加载...");
+        mProgressDialog.setCanceledOnTouchOutside(false);
+        mProgressDialog.setOnCancelListener(this);
+        mProgressDialog.show();
+    }
+
+    @Override
+    public boolean onKeyDown(int keyCode, KeyEvent event) {
+        if ((keyCode == KeyEvent.KEYCODE_BACK)) {
+            if (mProgressDialog != null && mProgressDialog.isShowing()) {
+                clickBackKey = true;
+                mProgressDialog.cancel();
+                return false;
+            } else {
+                return super.onKeyDown(keyCode, event);
             }
-        });
+        }else {
+            return super.onKeyDown(keyCode, event);
+        }
     }
 
     @Override
@@ -148,8 +158,10 @@ public class OTC_AccountQueryActivity extends BaseActivity implements View.OnCli
 
     @Override
     public void onClick(View v) {
-        if(v.getId()==R.id.ivOTC_AccountQuery_back){
-            finish();
+        switch (v.getId()) {
+            case R.id.userIdBackBtn:
+                finish();
+                break;
         }
     }
 }

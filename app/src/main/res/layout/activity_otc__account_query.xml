@@ -1,11 +1,10 @@
 <?xml version="1.0" encoding="utf-8"?>
-<RelativeLayout xmlns:android="http://schemas.android.com/apk/res/android"
-    xmlns:tools="http://schemas.android.com/tools"
+<LinearLayout xmlns:android="http://schemas.android.com/apk/res/android"
+    xmlns:app="http://schemas.android.com/apk/res-auto"
     android:layout_width="match_parent"
     android:layout_height="match_parent"
     android:orientation="vertical"
-    android:background="@color/bgColor"
-    tools:context="com.tpyzq.mobile.pangu.activity.trade.otc_business.OTC_AccountQueryActivity">
+    android:background="@color/bgColor">
 
     <RelativeLayout
         android:id="@+id/rl_top_bar"
@@ -15,38 +14,16 @@
         android:clipToPadding="true"
         android:fitsSystemWindows="true" />
 
-    <!-- 头布局 -->
-    <RelativeLayout
-        android:id="@+id/llOTCAccountQuery"
-        android:layout_below="@id/rl_top_bar"
-        android:layout_width="match_parent"
-        android:layout_height="@dimen/pickerview_topbar_height"
-        android:background="@color/blue">
-
-        <ImageView
-            android:id="@+id/ivOTC_AccountQuery_back"
-            android:layout_width="wrap_content"
-            android:layout_height="match_parent"
-            android:layout_alignParentLeft="true"
-            android:paddingLeft="@dimen/size15"
-            android:paddingRight="@dimen/size20"
-            android:src="@mipmap/back_btn" />
-
-        <TextView
-            android:layout_width="wrap_content"
-            android:layout_height="wrap_content"
-            android:layout_centerInParent="true"
-            android:text="@string/OTC_zhanghu"
-            android:textColor="@color/white"
-            android:textSize="@dimen/title_big_textsize" />
-    </RelativeLayout>
+    <!--头布局-->
+    <include
+        android:id="@+id/startVideTop"
+        layout="@layout/updatepwd_top" />
 
     <!--title-->
     <LinearLayout
         android:paddingLeft="@dimen/size12"
         android:paddingRight="@dimen/size12"
         android:id="@+id/OTCAccountQueryTitle"
-        android:layout_below="@id/llOTCAccountQuery"
         android:layout_width="match_parent"
         android:background="@color/white"
         android:layout_height="@dimen/size30"
@@ -82,28 +59,34 @@
     </LinearLayout>
 
     <!--分割线-->
-    <TextView
-        android:id="@+id/tvOTCAccountQueryFenGe"
-        android:layout_below="@id/OTCAccountQueryTitle"
+    <View
         android:layout_width="match_parent"
-        android:layout_height="@dimen/size0.5"
+        android:layout_height="0.5dp"
         android:background="@color/lineColor"/>
 
-    <ListView
-        android:id="@+id/lvOTC_AccountQuery"
-        android:layout_below="@id/tvOTCAccountQueryFenGe"
+    <FrameLayout
         android:layout_width="match_parent"
-        android:layout_height="match_parent"
-        android:divider="@null">
+        android:layout_height="match_parent">
 
-    </ListView>
+        <ImageView
+            android:id="@+id/iv_Kong"
+            android:layout_width="match_parent"
+            android:layout_height="match_parent"
+            android:layout_centerInParent="true"
+            android:scaleType="center"
+            android:src="@mipmap/kong"/>
 
-    <ImageView
-        android:id="@+id/ivOTC_AccountQueryKong"
-        android:layout_width="wrap_content"
-        android:layout_height="wrap_content"
-        android:layout_centerInParent="true"
-        android:visibility="gone"
-        android:src="@mipmap/kong"/>
+        <com.tpyzq.mobile.pangu.view.pulllayou.SimplePullLayout
+            android:id="@+id/id_swipe_ly"
+            android:layout_width="match_parent"
+            android:layout_height="match_parent">
 
-</RelativeLayout>
+            <android.support.v7.widget.RecyclerView
+                android:id="@+id/lvOTC_AccountQuery"
+                android:layout_width="match_parent"
+                android:layout_height="match_parent" />
+
+        </com.tpyzq.mobile.pangu.view.pulllayou.SimplePullLayout>
+    </FrameLayout>
+
+</LinearLayout>

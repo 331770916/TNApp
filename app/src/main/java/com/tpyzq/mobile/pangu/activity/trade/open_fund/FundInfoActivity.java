@@ -88,6 +88,7 @@ public class FundInfoActivity extends BaseActivity implements View.OnClickListen
         Intent intent = new Intent();
         intent.putExtra("productCode", mBeans.get(position).FUND_CODE);
         intent.putExtra("TYPE", "1");
+        intent.putExtra("prod_type", "2");
         intent.setClass(FundInfoActivity.this, ManagerMoenyDetailActivity.class);
         startActivity(intent);
     }

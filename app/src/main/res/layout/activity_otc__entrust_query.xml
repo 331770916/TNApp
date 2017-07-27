@@ -1,10 +1,10 @@
 <?xml version="1.0" encoding="utf-8"?>
-<RelativeLayout xmlns:android="http://schemas.android.com/apk/res/android"
-    xmlns:tools="http://schemas.android.com/tools"
+<LinearLayout xmlns:android="http://schemas.android.com/apk/res/android"
+    xmlns:app="http://schemas.android.com/apk/res-auto"
+    android:orientation="vertical"
     android:layout_width="match_parent"
     android:layout_height="match_parent"
-    android:background="@color/bgColor"
-    tools:context="com.tpyzq.mobile.pangu.activity.trade.otc_business.OTC_EntrustQueryActivity">
+    android:background="@color/bgColor">
 
     <RelativeLayout
         android:id="@+id/rl_top_bar"
@@ -15,67 +15,29 @@
         android:fitsSystemWindows="true" />
 
     <!--头布局-->
-    <RelativeLayout
-        android:id="@+id/rlOtcEntrustQuery"
-        android:layout_below="@id/rl_top_bar"
+    <!--头布局-->
+    <include
+        android:id="@+id/startVideTop"
+        layout="@layout/updatepwd_top" />
+
+    <android.support.design.widget.TabLayout
+        android:id="@+id/entrustTablayout"
         android:layout_width="match_parent"
-        android:layout_height="@dimen/pickerview_topbar_height"
-        android:background="@color/blue">
+        android:layout_height="@dimen/size40"
+        android:background="@color/white"
+        app:tabSelectedTextColor="@color/blue"
+        app:tabTextColor="@color/hushenTab_titleColor"
+        app:tabIndicatorColor="@color/blue"
+        app:tabIndicatorHeight="2dp"/>
+    <View
+        android:layout_width="match_parent"
+        android:layout_height="1px"
+        android:background="@color/lineColor"/>
 
-        <ImageView
-            android:id="@+id/ivOTC_EntrustQueryBack"
-            android:layout_width="wrap_content"
-            android:layout_height="match_parent"
-            android:layout_alignParentLeft="true"
-            android:paddingLeft="@dimen/size15"
-            android:paddingRight="@dimen/size20"
-            android:src="@mipmap/back_btn" />
-
-        <TextView
-            android:layout_width="wrap_content"
-            android:layout_height="wrap_content"
-            android:layout_centerInParent="true"
-            android:text="委托查询"
-            android:textColor="@color/white"
-            android:textSize="@dimen/title_big_textsize" />
-    </RelativeLayout>
-
-    <LinearLayout
+    <android.support.v4.view.ViewPager
+        android:id="@+id/vpOTCEntrustQuery"
         android:layout_width="match_parent"
         android:layout_height="match_parent"
-        android:layout_below="@id/rlOtcEntrustQuery"
-        android:orientation="vertical">
+        android:background="@color/backgroundColor" />
 
-        <LinearLayout
-            android:id="@+id/llrlOtcEntrustQueryTitle"
-            android:layout_width="match_parent"
-            android:layout_height="wrap_content"
-            android:background="@color/white"
-            android:orientation="vertical">
-            <com.tpyzq.mobile.pangu.view.magicindicator.MagicIndicator
-                android:id="@+id/mi_OtcEntrustQuery"
-                android:layout_width="match_parent"
-                android:layout_height="@dimen/size35"
-                android:background="@color/white"/>
-            <View
-                android:layout_width="match_parent"
-                android:layout_height="@dimen/size0.5"
-                android:background="@color/lineColor"/>
-        </LinearLayout>
-        <!--<com.tpyzq.self.mobile.pangu.view.dealviewpager.NoScrollViewPager
-            android:id="@+id/vpOTCEntrustQuery"
-            android:layout_width="match_parent"
-            android:layout_height="0dp"
-            android:layout_weight="6"
-            android:background="@color/backgroundColor" />-->
-
-        <android.support.v4.view.ViewPager
-            android:id="@+id/vpOTCEntrustQuery"
-            android:layout_width="match_parent"
-            android:layout_height="0dp"
-            android:layout_weight="6"
-            android:background="@color/backgroundColor" />
-
-    </LinearLayout>
-
-</RelativeLayout>
+</LinearLayout>

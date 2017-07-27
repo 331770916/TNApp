@@ -88,10 +88,8 @@
 
 
     <LinearLayout
-        android:id="@+id/llOTCBargainTitle"
         android:layout_width="match_parent"
         android:layout_height="@dimen/size30"
-        android:layout_below="@id/ll_OTCBargainZiDingYi"
         android:background="@color/white"
         android:gravity="center"
         android:orientation="horizontal"
@@ -99,6 +97,7 @@
         android:paddingRight="@dimen/size15">
 
         <TextView
+            android:id="@+id/otc_bargainTitle1"
             android:layout_width="0dp"
             android:layout_height="wrap_content"
             android:layout_weight="1"
@@ -109,6 +108,7 @@
             android:textSize="@dimen/txtSize12" />
 
         <TextView
+            android:id="@+id/otc_bargainTitle2"
             android:layout_width="0dp"
             android:layout_height="wrap_content"
             android:layout_weight="1"
@@ -118,6 +118,7 @@
             android:textSize="@dimen/txtSize12" />
 
         <TextView
+            android:id="@+id/otc_bargainTitle3"
             android:layout_width="0dp"
             android:layout_height="wrap_content"
             android:layout_weight="1"
@@ -128,45 +129,44 @@
 
 
         <TextView
+            android:id="@+id/otc_bargainTitle4"
             android:layout_width="0dp"
             android:layout_height="wrap_content"
             android:layout_weight="1"
             android:gravity="center|end"
-            android:text="成交金额/份额"
+            android:text="金额/份额"
             android:textColor="@color/newStockTitle"
             android:textSize="@dimen/txtSize12" />
     </LinearLayout>
 
     <View
-        android:id="@+id/OTCBargainFenGe"
         android:layout_width="match_parent"
-        android:layout_height="@dimen/size0.5"
-        android:layout_below="@+id/llOTCBargainTitle"
+        android:layout_height="1px"
         android:background="@color/lineColor" />
 
-    <RelativeLayout
+    <FrameLayout
         android:layout_width="match_parent"
-        android:layout_height="wrap_content"
-        android:layout_below="@+id/OTCBargainFenGe">
-
-        <com.handmark.pulltorefresh.library.PullToRefreshListView
-            android:id="@+id/rl_OTCBargainRefresh"
-            android:layout_width="match_parent"
-            android:layout_height="match_parent"
-            android:scrollbars="none"
-            app:ptrAnimationStyle="flip"
-            app:ptrMode="pullFromStart" />
-
+        android:layout_height="match_parent">
 
         <ImageView
-            android:id="@+id/OTCBargainKong"
+            android:id="@+id/iv_Kong"
             android:layout_width="match_parent"
             android:layout_height="match_parent"
             android:layout_centerInParent="true"
             android:scaleType="center"
-            android:src="@mipmap/kong"
-            android:visibility="gone" />
+            android:src="@mipmap/kong"/>
 
-    </RelativeLayout>
+        <com.tpyzq.mobile.pangu.view.pulllayou.SimplePullLayout
+            android:id="@+id/id_swipe_ly"
+            android:layout_width="match_parent"
+            android:layout_height="match_parent">
+
+            <android.support.v7.widget.RecyclerView
+                android:id="@+id/lvShareQuery"
+                android:layout_width="match_parent"
+                android:layout_height="match_parent" />
+
+        </com.tpyzq.mobile.pangu.view.pulllayou.SimplePullLayout>
+    </FrameLayout>
 
 </LinearLayout>
