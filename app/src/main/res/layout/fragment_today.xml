@@ -18,11 +18,11 @@
         android:orientation="horizontal">
 
         <TextView
-            android:paddingRight="@dimen/size3"
+            android:paddingLeft="@dimen/size10"
             android:layout_width="0dp"
             android:layout_height="wrap_content"
             android:layout_weight="1"
-            android:gravity="center"
+            android:gravity="center|start"
             android:text="@string/mcgs"
             android:textColor="@color/newStockTitle"
             android:textSize="@dimen/txtSize13" />
@@ -37,17 +37,18 @@
             android:textSize="@dimen/txtSize13" />
 
         <TextView
+            android:paddingRight="@dimen/size20"
             android:layout_width="0dp"
             android:layout_height="wrap_content"
             android:layout_weight="1"
-            android:gravity="center"
+            android:gravity="center|end"
             android:text="@string/wtcj"
             android:textColor="@color/newStockTitle"
             android:textSize="@dimen/txtSize13" />
 
 
         <TextView
-            android:paddingRight="@dimen/size16"
+            android:paddingRight="@dimen/size10"
             android:layout_width="0dp"
             android:layout_height="wrap_content"
             android:layout_weight="1"

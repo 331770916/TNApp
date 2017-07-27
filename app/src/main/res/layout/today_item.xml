@@ -5,14 +5,14 @@
     android:background="@color/white"
     android:orientation="vertical">
 
+
     <LinearLayout
         android:gravity="center"
         android:layout_width="match_parent"
         android:layout_height="@dimen/size50"
         android:layout_marginBottom="@dimen/size5"
         android:layout_marginTop="@dimen/size5"
-        android:orientation="horizontal"
-        android:paddingLeft="@dimen/size5">
+        android:orientation="horizontal">
 
 
         <RelativeLayout
@@ -26,7 +26,7 @@
                 android:layout_height="wrap_content"
                 android:layout_centerHorizontal="true"
                 android:gravity="center|fill"
-                android:paddingLeft="@dimen/size14"
+                android:paddingLeft="@dimen/size10"
                 android:text="--"
                 android:textSize="@dimen/txtSize12" />
 
@@ -37,7 +37,7 @@
                 android:layout_alignLeft="@id/Today_Name"
                 android:layout_below="@id/Today_Name"
                 android:gravity="center|fill"
-                android:paddingLeft="@dimen/size14"
+                android:paddingLeft="@dimen/size10"
                 android:text="--"
                 android:textColor="@color/newStockTitle"
                 android:textSize="@dimen/txtSize12" />
@@ -81,9 +81,8 @@
                 android:layout_height="wrap_content"
                 android:layout_alignLeft="@+id/Today_Entrust"
                 android:layout_below="@+id/Today_Entrust"
-                android:gravity="center"
-                android:paddingLeft="@dimen/size5"
-                android:paddingRight="@dimen/size10"
+                android:gravity="center|end"
+                android:paddingRight="@dimen/size20"
                 android:text="--"
                 android:textColor="@color/hushenTab_titleColor"
                 android:textSize="@dimen/txtSize12" />
@@ -95,9 +94,8 @@
                 android:layout_alignParentLeft="true"
                 android:layout_alignParentStart="true"
                 android:layout_alignParentTop="true"
-                android:gravity="center"
-                android:paddingLeft="@dimen/size5"
-                android:paddingRight="@dimen/size10"
+                android:gravity="center|end"
+                android:paddingRight="@dimen/size20"
                 android:text="--"
                 android:textColor="@color/hushenTab_titleColor"
                 android:textSize="@dimen/txtSize12" />
@@ -107,8 +105,7 @@
             android:layout_width="@dimen/size0"
             android:layout_height="wrap_content"
             android:layout_weight="1"
-            android:paddingLeft="@dimen/size20"
-            android:paddingRight="@dimen/size15">
+            android:paddingRight="@dimen/size10">
 
             <TextView
                 android:id="@+id/Today_Transaction"
