@@ -13,12 +13,13 @@
         android:weightSum="4">
 
         <TextView
+            android:paddingLeft="@dimen/size10"
             android:textSize="@dimen/txtSize14"
             android:id="@+id/codeconference"
             android:layout_width="0dp"
             android:layout_height="match_parent"
             android:layout_weight="1"
-            android:gravity="center"
+            android:gravity="center|start"
             android:textColor="@color/hushenTab_titleColor" />
 
         <TextView
@@ -40,12 +41,13 @@
             android:textColor="@color/hushenTab_titleColor" />
 
         <TextView
+            android:paddingRight="@dimen/size10"
             android:textSize="@dimen/txtSize14"
             android:id="@+id/status"
             android:layout_width="0dp"
             android:layout_height="match_parent"
             android:layout_weight="1"
-            android:gravity="center"
+            android:gravity="center|end"
             android:textColor="@color/hushenTab_titleColor" />
 
     </LinearLayout>
