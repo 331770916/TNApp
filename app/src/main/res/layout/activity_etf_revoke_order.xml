@@ -51,8 +51,8 @@
         android:background="@color/white"
         android:gravity="center"
         android:orientation="horizontal"
-        android:paddingLeft="@dimen/size20"
-        android:paddingRight="@dimen/size20">
+        android:paddingLeft="@dimen/size10"
+        android:paddingRight="@dimen/size10">
 
         <TextView
             android:layout_width="0dp"

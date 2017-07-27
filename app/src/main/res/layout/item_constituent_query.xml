@@ -23,7 +23,7 @@
                 android:layout_width="match_parent"
                 android:layout_height="match_parent"
                 android:gravity="center|start"
-                android:paddingLeft="@dimen/size20"
+                android:paddingLeft="@dimen/size10"
                 android:textSize="@dimen/txtSize15" />
 
         </LinearLayout>
@@ -53,7 +53,7 @@
                 android:layout_width="match_parent"
                 android:layout_height="match_parent"
                 android:gravity="center|end"
-                android:paddingRight="@dimen/size20"
+                android:paddingRight="@dimen/size10"
                 android:textSize="@dimen/txtSize15" />
 
         </LinearLayout>

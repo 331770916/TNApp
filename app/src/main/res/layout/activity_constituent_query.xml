@@ -53,7 +53,7 @@
             android:layout_height="match_parent">
 
             <TextView
-                android:paddingLeft="@dimen/size20"
+                android:paddingLeft="@dimen/size10"
                 android:gravity="center|start"
                 android:id="@+id/tv_stock_code"
                 android:layout_width="match_parent"
@@ -86,7 +86,7 @@
             android:layout_width="@dimen/size0"
             android:layout_height="match_parent">
             <TextView
-                android:paddingRight="@dimen/size20"
+                android:paddingRight="@dimen/size10"
                 android:gravity="center|end"
                 android:id="@+id/tv_etf_code"
                 android:layout_width="match_parent"

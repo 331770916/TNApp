@@ -20,23 +20,25 @@
             android:orientation="vertical">
 
             <TextView
-                android:paddingLeft="@dimen/size20"
+                android:paddingLeft="@dimen/size10"
                 android:id="@+id/tv_name"
                 android:layout_width="wrap_content"
                 android:layout_height="wrap_content"
                 android:layout_marginTop="@dimen/size12"
                 android:textColor="@color/hushenTab_titleColor"
                 android:textSize="@dimen/txtSize15"
-                android:textStyle="bold" />
+                android:textStyle="bold"
+                android:text="@string/headAdd"/>
 
             <TextView
-                android:paddingLeft="@dimen/size20"
+                android:paddingLeft="@dimen/size10"
                 android:id="@+id/tv_code"
                 android:layout_width="wrap_content"
                 android:layout_height="wrap_content"
                 android:layout_marginBottom="@dimen/size12"
                 android:layout_marginTop="@dimen/size4"
                 android:gravity="left"
+                android:text="@string/headAdd"
                 android:textColor="@color/newStockTitle"
                 android:textSize="@dimen/txtSize14" />
         </LinearLayout>
@@ -53,6 +55,7 @@
                 android:layout_width="match_parent"
                 android:layout_height="wrap_content"
                 android:layout_marginTop="@dimen/size13"
+                android:text="@string/headAdd"
                 android:gravity="center_vertical|end"
                 android:textColor="@color/hushenTab_titleColor"
                 android:textSize="@dimen/txtSize14" />
@@ -62,6 +65,7 @@
                 android:id="@+id/tv_transaction_status"
                 android:layout_width="match_parent"
                 android:layout_height="wrap_content"
+                android:text="@string/headAdd"
                 android:layout_marginBottom="@dimen/size12"
                 android:gravity="center_vertical|end"
                 android:layout_marginTop="@dimen/size4"
@@ -77,7 +81,8 @@
             android:orientation="vertical">
 
             <TextView
-                android:paddingRight="@dimen/size20"
+                android:paddingRight="@dimen/size10"
+                android:text="@string/headAdd"
                 android:id="@+id/tv_date"
                 android:layout_width="match_parent"
                 android:layout_height="wrap_content"

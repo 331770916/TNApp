@@ -52,7 +52,7 @@
             android:layout_height="match_parent">
 
             <TextView
-                android:paddingLeft="@dimen/size20"
+                android:paddingLeft="@dimen/size10"
                 android:gravity="center_vertical|start"
                 android:layout_width="match_parent"
                 android:layout_height="match_parent"
@@ -84,7 +84,7 @@
             android:layout_height="match_parent">
 
             <TextView
-                android:paddingRight="@dimen/size20"
+                android:paddingRight="@dimen/size10"
                 android:gravity="center_vertical|end"
                 android:layout_width="match_parent"
                 android:layout_height="match_parent"

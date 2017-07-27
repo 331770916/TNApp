@@ -24,6 +24,7 @@
                 android:textColor="@color/hushenTab_titleColor"
                 android:textStyle="bold"
                 android:textSize="@dimen/txtSize15"
+                android:text="asdasdasdas"
                 />
             <TextView
                 android:paddingLeft="@dimen/size10"
@@ -34,6 +35,7 @@
                 android:textColor="@color/newStockTitle"
                 android:layout_marginBottom="@dimen/size12"
                 android:textSize="@dimen/txtSize14"
+                android:text="asdasdasdas"
                 android:gravity="left"/>
         </LinearLayout>
         <LinearLayout
@@ -50,6 +52,7 @@
                 android:textColor="@color/hushenTab_titleColor"
                 android:textSize="@dimen/txtSize14"
                 android:layout_gravity="right"
+                android:text="asdasdasdas"
                 />
             <TextView
                 android:paddingRight="@dimen/size30"
@@ -60,6 +63,7 @@
                 android:textColor="@color/hushenTab_titleColor"
                 android:layout_marginBottom="@dimen/size12"
                 android:textSize="@dimen/txtSize14"
+                android:text="asdasdasdas"
                 android:layout_gravity="right"
                 />
         </LinearLayout>
@@ -76,6 +80,7 @@
                 android:layout_marginRight="@dimen/size10"
                 android:textColor="@color/hushenTab_titleColor"
                 android:textSize="@dimen/txtSize14"
+                android:text="asdasdasdas"
                 android:layout_gravity="right"
                 />
             <TextView
@@ -87,6 +92,7 @@
                 android:textColor="@color/hushenTab_titleColor"
                 android:layout_marginBottom="@dimen/size12"
                 android:textSize="@dimen/txtSize14"
+                android:text="asdasdasdas"
                 android:layout_gravity="right"
                 />
         </LinearLayout>
