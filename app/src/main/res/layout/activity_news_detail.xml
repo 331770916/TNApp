@@ -13,7 +13,8 @@
         android:layout_height="@dimen/size25"
         android:background="@color/blue"
         android:clipToPadding="true"
-        android:fitsSystemWindows="true" />
+        android:fitsSystemWindows="true"/>
+
 
     <!-- 头布局 -->
     <RelativeLayout
@@ -136,9 +137,10 @@
                         android:id="@+id/tvLaiYuanName"
                         android:layout_width="wrap_content"
                         android:layout_height="wrap_content"
-                        android:layout_marginLeft="@dimen/size154"
+                        android:layout_marginLeft="@dimen/size140"
                         android:layout_toRightOf="@id/tvLaiYuanDate"
                         android:textSize="13sp"
+                        android:singleLine="true"
                         android:textColor="@color/text"/>
                 </RelativeLayout>
 

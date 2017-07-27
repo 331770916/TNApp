@@ -9,6 +9,7 @@ import android.view.ViewGroup;
 
 import com.facebook.drawee.drawable.ScalingUtils;
 import com.facebook.drawee.view.SimpleDraweeView;
+import com.tpyzq.mobile.pangu.R;
 
 import java.util.concurrent.Executors;
 import java.util.concurrent.ScheduledExecutorService;
@@ -83,15 +84,19 @@ public class CarouselView extends ViewPager {
         }
     }
 
+    public void init(int size, final SimpleDraweeViewHandler handler){
+        init(size,handler,0);
+    }
+
     /**
      * 初始化轮播图
      * @param size  轮播图片个数
      * @param handler   回调
      */
-    public void init(int size, final SimpleDraweeViewHandler handler) {
+    public void init(int size, final SimpleDraweeViewHandler handler,final int bg) {
         this.origSize = size;
         int fitSize = initSize(size);
-        initSimpleDraweeViews(fitSize);
+        initSimpleDraweeViews(fitSize,bg);
 
         this.setAdapter(new PagerAdapter() {
             @Override
@@ -143,10 +148,11 @@ public class CarouselView extends ViewPager {
         this.setCurrentItem(currentItem);
     }
 
-    private void initSimpleDraweeViews(int size) {
+    private void initSimpleDraweeViews(int size,int bg) {
         SimpleDraweeView[] tvs = new SimpleDraweeView[size];
         for (int i = 0; i < tvs.length; i++) {
             tvs[i] = new SimpleDraweeView(getContext());
+            tvs[i].setImageResource(bg);
             tvs[i].getHierarchy().setActualImageScaleType(ScalingUtils.ScaleType.FIT_XY);
             ViewGroup.LayoutParams layoutParams = new ViewGroup.LayoutParams(ViewGroup.LayoutParams.MATCH_PARENT, ViewGroup.LayoutParams.MATCH_PARENT);
             tvs[i].setLayoutParams(layoutParams);

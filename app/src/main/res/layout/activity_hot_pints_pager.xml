@@ -49,9 +49,6 @@
             android:layout_height="match_parent"
             android:layout_margin="@dimen/size5"
             android:orientation="vertical">
-            <include
-                android:id="@+id/reftitle"
-                layout="@layout/item_news_reftitle"/>
             <RelativeLayout
                 android:id="@+id/FJEAMP_Kong_Null"
                 android:layout_width="match_parent"

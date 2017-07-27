@@ -37,13 +37,19 @@
                 android:scrollbars="none"
                 app:ptrAnimationStyle="flip"
                 app:ptrMode="both" />
-            <ImageView
+            <RelativeLayout
                 android:id="@+id/goTop"
+                android:layout_width="@dimen/size100"
+                android:layout_height="@dimen/size100"
                 android:layout_gravity="bottom|right"
-                android:layout_margin="@dimen/size20"
-                android:layout_width="wrap_content"
-                android:layout_height="wrap_content"
-                android:src="@mipmap/gobacktop"/>
+                >
+                <ImageView
+                    android:layout_centerInParent="true"
+                    android:layout_margin="@dimen/size20"
+                    android:layout_width="wrap_content"
+                    android:layout_height="wrap_content"
+                    android:src="@mipmap/gobacktop"/>
+            </RelativeLayout>
         </FrameLayout>
         <!-- 重新加载的图片 -->
         <LinearLayout

@@ -141,7 +141,6 @@ public class HomeFragment extends BaseFragment implements AdapterView.OnItemClic
     private ImageView mMiddleImageView; //中间图片
     private TextView mTopTextView; //上推时显示应用标题
 
-    private View headView;
     private SimpleRemoteControl simpleRemoteControl;
     private PullRefreshView mPullDownScrollView;
     private ArrayList<HomeInfomationObsever> mOberservers;
@@ -223,7 +222,6 @@ public class HomeFragment extends BaseFragment implements AdapterView.OnItemClic
                 mAdapter.setDatas(mInformationEntities);
             }
         }else{
-            headView.setVisibility(View.GONE);
             mNewslistView.setVisibility(View.GONE);
         }
     }
@@ -380,21 +378,17 @@ public class HomeFragment extends BaseFragment implements AdapterView.OnItemClic
     //资讯列表
     private void initNewsListView(View view) {
         LinearLayout ll = (LinearLayout) view.findViewById(R.id.ll_homeInfoListLayout);
-
         mAdapter = new NewHomeInformationAdapter(getActivity());
-        headView = LayoutInflater.from(CustomApplication.getContext()).inflate(R.layout.home_item_head, null);
+        View headView = LayoutInflater.from(CustomApplication.getContext()).inflate(R.layout.home_item_head, null);
         headView.findViewById(R.id.homeInfoHeadLayout).setOnClickListener(this);
         ll.addView(headView, 0);
-
         mNewslistView.setAdapter(mAdapter);
         mNewslistView.setOnItemClickListener(new AdapterView.OnItemClickListener() {
             @Override
             public void onItemClick(AdapterView<?> parent, View view, int position, long id) {
                 Intent intent = new Intent(getActivity(), NewsDetailActivity.class);
-
-                if (!TextUtils.isEmpty(mInformationEntities.get(position).getNewsno())) {
+                if (!TextUtils.isEmpty(mInformationEntities.get(position).getNewsno()))
                     intent.putExtra("requestId", mInformationEntities.get(position).getNewsno());
-                }
                 getActivity().startActivity(intent);
             }
         });
@@ -473,8 +467,7 @@ public class HomeFragment extends BaseFragment implements AdapterView.OnItemClic
                 break;
             case R.id.homeInfoHeadLayout:
                 intent.setClass(getActivity(), InformationHomeActivity.class);
-                intent.putExtra("more", 1);
-                intent.putExtra("currentItem", 1);
+                intent.putExtra("currentItem", 0);
                 startActivity(intent);
                 BRutil.menuSelect("N004");
                 break;

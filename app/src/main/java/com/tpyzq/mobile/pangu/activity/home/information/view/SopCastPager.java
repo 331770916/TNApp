@@ -5,7 +5,6 @@ import android.content.Intent;
 import android.support.v4.content.ContextCompat;
 import android.view.View;
 import android.widget.AdapterView;
-import android.widget.ImageView;
 import android.widget.LinearLayout;
 import android.widget.ListView;
 import android.widget.ProgressBar;
@@ -19,7 +18,6 @@ import com.tpyzq.mobile.pangu.base.BasePager;
 import com.tpyzq.mobile.pangu.base.InterfaceCollection;
 import com.tpyzq.mobile.pangu.data.InformationEntity;
 import com.tpyzq.mobile.pangu.data.ResultInfo;
-import com.tpyzq.mobile.pangu.util.ConstantUtil;
 import java.util.ArrayList;
 import java.util.List;
 
@@ -58,7 +56,6 @@ public class SopCastPager extends BasePager implements InterfaceCollection.Inter
         rlSopCast = (RelativeLayout) rootView.findViewById(R.id.rlSopCast);              //初始化  背景为灰色
         llSopCastJiaZai = (LinearLayout) rootView.findViewById(R.id.llSopCastJiaZai);
         rootView.findViewById(R.id.goTop).setOnClickListener(this);
-        count = 0;
         list = new ArrayList();
         adapter = new SopCastAdapter(mContext);         //实例化适配器
         mListView.setAdapter(adapter);
@@ -83,6 +80,8 @@ public class SopCastPager extends BasePager implements InterfaceCollection.Inter
                     mListView.getLoadingLayoutProxy().setPullLabel("下拉刷新数据");
                     mListView.getLoadingLayoutProxy().setReleaseLabel("释放开始刷新");
                     count = 1;
+                    list.clear();
+                    adapter.setCurrentDay(null);
                     ifc.queryStreaming("30","2",ZIXUN_NUM,String.valueOf(count),classno,SopCastPager.this);
                 } else if (refreshView.isShownFooter()) {
                     //判断尾布局是否可见，如果可见执行上拉加载更多
@@ -108,6 +107,7 @@ public class SopCastPager extends BasePager implements InterfaceCollection.Inter
     @Override
     public void onClick(View v) {
         mListView.getRefreshableView().smoothScrollToPosition(0);
+        adapter.notifyDataSetInvalidated();
     }
 
     @Override
@@ -118,7 +118,10 @@ public class SopCastPager extends BasePager implements InterfaceCollection.Inter
             Object obj = info.getData();
             if(obj!=null&&obj instanceof List){
                 mListView.setVisibility(View.VISIBLE);          //显示 listView
-                list = (ArrayList<InformationEntity>)obj;
+                if(count==1)
+                    list = (ArrayList<InformationEntity>)obj;
+                else
+                    list.addAll((ArrayList<InformationEntity>)obj);
                 adapter.setList(list);
                 mListView.onRefreshComplete();
             }
@@ -133,6 +136,7 @@ public class SopCastPager extends BasePager implements InterfaceCollection.Inter
                     rlSopCast.setVisibility(View.VISIBLE);//显示背景
                     rlSopCast.setBackgroundColor(ContextCompat.getColor(mContext, R.color.dividerColor)); //设置为灰色
                     count = 1;
+                    list.clear();
                     ifc.queryStreaming("3","2",ZIXUN_NUM,String.valueOf(count),classno,SopCastPager.this);
                 }
             });

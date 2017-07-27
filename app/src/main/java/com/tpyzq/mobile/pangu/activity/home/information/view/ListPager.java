@@ -81,6 +81,7 @@ public class ListPager extends BasePager implements InterfaceCollection.Interfac
                     mListView.getLoadingLayoutProxy().setPullLabel("下拉刷新数据");
                     mListView.getLoadingLayoutProxy().setReleaseLabel("释放开始刷新");
                     mIndex = 1;
+                    list.clear();
                     ifc.queryHkstocks(classno,ZIXUN_NUM,String.valueOf(mIndex),classno,ListPager.this);
                 } else if (refreshView.isShownFooter()) {
                     mListView.getLoadingLayoutProxy().setRefreshingLabel("正在加载");
@@ -100,7 +101,10 @@ public class ListPager extends BasePager implements InterfaceCollection.Interfac
         if(info.getCode().equals("200")){
             Object obj = info.getData();
             if(obj!=null&&obj instanceof List){
-                list = (ArrayList<InformationEntity>)obj;
+                if(mIndex==1)
+                    list = (ArrayList<InformationEntity>)obj;
+                else
+                    list.addAll((ArrayList<InformationEntity>)obj);
                 adapter.setList(list);
                 mListView.onRefreshComplete();
             }
@@ -115,6 +119,7 @@ public class ListPager extends BasePager implements InterfaceCollection.Interfac
                     rl_Pager.setBackgroundColor(ContextCompat.getColor(mContext, R.color.dividerColor)); //设置为灰色
                     isFirst = true;
                     mIndex = 1;
+                    list.clear();
                     ifc.queryHkstocks(classno,ZIXUN_NUM,String.valueOf(mIndex),classno,ListPager.this);
                 }
             });

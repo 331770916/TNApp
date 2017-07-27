@@ -100,6 +100,7 @@
                             android:orientation="vertical">
 
                             <com.tpyzq.mobile.pangu.view.gridview.MyListView
+                                android:paddingLeft="@dimen/size10"
                                 android:id="@+id/homeListView"
                                 android:layout_width="match_parent"
                                 android:layout_height="match_parent"

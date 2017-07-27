@@ -3,8 +3,10 @@ package com.tpyzq.mobile.pangu.activity.home.information.view;
 import android.app.Activity;
 import android.content.Context;
 import android.content.Intent;
+import android.graphics.Matrix;
 import android.support.v4.content.ContextCompat;
 import android.text.TextUtils;
+import android.view.LayoutInflater;
 import android.view.View;
 import android.widget.AdapterView;
 import android.widget.LinearLayout;
@@ -22,7 +24,6 @@ import com.tpyzq.mobile.pangu.base.BasePager;
 import com.tpyzq.mobile.pangu.base.InterfaceCollection;
 import com.tpyzq.mobile.pangu.data.InformationEntity;
 import com.tpyzq.mobile.pangu.data.ResultInfo;
-import com.tpyzq.mobile.pangu.util.ConstantUtil;
 import com.tpyzq.mobile.pangu.util.Helper;
 import com.tpyzq.mobile.pangu.view.CarouselView;
 import java.util.ArrayList;
@@ -37,7 +38,6 @@ public class HotPintsPager extends BasePager implements View.OnClickListener,Int
     private PullToRefreshListView refreshListView;
     private NewHomeInformationAdapter mListViewAdapter;             //listView 适配器
     private ArrayList<InformationEntity> leve4,leve1;                    //存储  重大事件数据的  集合
-    private LinearLayout hotLayout;
     private ProgressBar pb_HotPager;          //菊花
     private RelativeLayout rlHot;
     private LinearLayout llHotJiaZai,ll_point;
@@ -62,15 +62,16 @@ public class HotPintsPager extends BasePager implements View.OnClickListener,Int
         this.classno = params;
         leve4 = new ArrayList<>();
         leve1 = new ArrayList<>();
-        hotLayout = (LinearLayout) rootView.findViewById(R.id.reftitle);
-        carouselView = (CarouselView)hotLayout.findViewById(R.id.ivReftitle);
-        tvTitle = (TextView) hotLayout.findViewById(R.id.tvReftitle);
-        tvTime = (TextView)hotLayout.findViewById(R.id. tvReftime);
-        ll_point = (LinearLayout)hotLayout.findViewById(R.id.ll_point);
         refreshListView = (PullToRefreshListView)rootView.findViewById(R.id.listview);
         rlHot = (RelativeLayout) rootView.findViewById(R.id.rlHot);     //包裹所有布局的 RelativeLayout  默认为灰色
         llHotJiaZai = (LinearLayout) rootView.findViewById(R.id.llHotJiaZai);
         pb_HotPager = (ProgressBar) rootView.findViewById(R.id.pb_HotPager);    //初始化  默认显示菊花
+        LinearLayout hotLayout = (LinearLayout)LayoutInflater.from(mContext).inflate(R.layout.item_news_reftitle,null);
+        carouselView = (CarouselView)hotLayout.findViewById(R.id.ivReftitle);
+        tvTitle = (TextView) hotLayout.findViewById(R.id.tvReftitle);
+        tvTime = (TextView)hotLayout.findViewById(R.id. tvReftime);
+        ll_point = (LinearLayout)hotLayout.findViewById(R.id.ll_point);
+        refreshListView.getRefreshableView().addHeaderView(hotLayout);
         refreshListView.setMode(PullToRefreshBase.Mode.BOTH);
         refreshListView.setOnRefreshListener(new PullToRefreshBase.OnRefreshListener<ListView>() {
             @Override
@@ -81,6 +82,8 @@ public class HotPintsPager extends BasePager implements View.OnClickListener,Int
                     refreshListView.getLoadingLayoutProxy().setReleaseLabel("释放开始刷新");
                     pb_HotPager.setVisibility(View.VISIBLE);
                     page = 1;
+                    leve1.clear();
+                    ifc.queryImportant("3","1","4","GetImportant4",HotPintsPager.this);
                     ifc.queryImportant(ZIXUN_NUM,page+"","3","GetImportant1",HotPintsPager.this);
                 }else if(refreshView.isShownFooter()){
                     refreshListView.getLoadingLayoutProxy().setRefreshingLabel("正在刷新");
@@ -88,6 +91,7 @@ public class HotPintsPager extends BasePager implements View.OnClickListener,Int
                     refreshListView.getLoadingLayoutProxy().setReleaseLabel("释放开始刷新");
                     pb_HotPager.setVisibility(View.VISIBLE);
                     page ++;
+                    ifc.queryImportant("3","1","4","GetImportant4",HotPintsPager.this);
                     ifc.queryImportant(ZIXUN_NUM,page+"","3","GetImportant1",HotPintsPager.this);
                 }
             }
@@ -104,11 +108,12 @@ public class HotPintsPager extends BasePager implements View.OnClickListener,Int
                 mContext.startActivity(intent);
             }
         });
+        initCarouseView(3);
     }
 
-    private void initCarouseView() {
+    private void initCarouseView(final int size) {
         points = new ArrayList<>();
-        for (int i = 0; i < leve4.size(); i++) {
+        for (int i = 0; i < size; i++) {
             View view = new View(mContext);
             LinearLayout.LayoutParams vParams = new LinearLayout.LayoutParams(40, -2);
             vParams.setMargins(2, 0, 10, 0);
@@ -121,20 +126,22 @@ public class HotPintsPager extends BasePager implements View.OnClickListener,Int
             points.add(view);
             ll_point.addView(view);
         }
-        carouselView.init(leve4.size(), new CarouselView.SimpleDraweeViewHandler() {
+        carouselView.init(size, new CarouselView.SimpleDraweeViewHandler() {
             @Override
             public void handle(final int index,final SimpleDraweeView view) {
-                final InformationEntity entity = leve4.get(index);
-                tvTitle.setText(entity.getTitle());
-                tvTime.setText(Helper.getCurDate()+" "+entity.getTime());
-                view.setImageURI(entity.getImage_url());
-                view.setOnClickListener(new View.OnClickListener() {
+                if(leve4.size()==size){
+                    final InformationEntity entity = leve4.get(index);
+                    tvTitle.setText(entity.getTitle());
+                    tvTime.setText(Helper.getCurDate()+" "+entity.getTime());
+                    view.setImageURI(entity.getImage_url());
+                    view.setOnClickListener(new View.OnClickListener() {
                         @Override
                         public void onClick(View v) {
-                    Intent intent = new Intent(mContext,NewsDetailActivity.class);
-                    intent.putExtra("id", entity.getNewsno());
-                    mContext.startActivity(intent);}
-            });
+                            Intent intent = new Intent(mContext,NewsDetailActivity.class);
+                            intent.putExtra("requestId", entity.getNewsno());
+                            mContext.startActivity(intent);}
+                    });
+                }
             }
 
             @Override
@@ -147,12 +154,12 @@ public class HotPintsPager extends BasePager implements View.OnClickListener,Int
                     }
                 }
             }
-        });
+        },R.mipmap.news_default_bbg);
     }
 
     public void initData() {
        if(isFirst){
-           ifc.queryImportant("3",page+"","4","GetImportant4",this);
+           ifc.queryImportant("3","1","4","GetImportant4",this);
            ifc.queryImportant(ZIXUN_NUM,page+"","3","GetImportant1",this);
            isFirst = false;
        }
@@ -169,10 +176,12 @@ public class HotPintsPager extends BasePager implements View.OnClickListener,Int
                 switch (info.getTag()){
                     case "GetImportant4":
                         leve4 = (ArrayList<InformationEntity>)obj;
-                        initCarouseView();
                         break;
                     case "GetImportant1":
-                        leve1 = (ArrayList<InformationEntity>)obj;
+                        if(page==1)
+                            leve1 = (ArrayList<InformationEntity>)obj;
+                        else
+                            leve1.addAll((ArrayList<InformationEntity>)obj);
                         mListViewAdapter.setDatas(leve1);
                         refreshListView.onRefreshComplete();
                         break;

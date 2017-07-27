@@ -12,7 +12,6 @@ import com.tpyzq.mobile.pangu.activity.home.information.adapter.InfoPagerAdapter
 import com.tpyzq.mobile.pangu.activity.home.information.view.HotPintsPager;
 import com.tpyzq.mobile.pangu.activity.home.information.view.SopCastPager;
 import com.tpyzq.mobile.pangu.base.BaseActivity;
-import com.tpyzq.mobile.pangu.base.BasePager;
 import com.tpyzq.mobile.pangu.base.InterfaceCollection;
 import com.tpyzq.mobile.pangu.data.InformationEntity;
 import com.tpyzq.mobile.pangu.data.ResultInfo;
@@ -242,6 +241,7 @@ public class InformationHomeActivity extends BaseActivity implements View.OnClic
         commonNavigator.notifyDataSetChanged();
         tabAdapter.setClassNoList(mClassNoList);
         mViewPager.setCurrentItem(currentItem);
+        tabAdapter.getPager(currentTitle).initData();
     }
 
 
