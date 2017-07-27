@@ -6,6 +6,7 @@ import android.text.TextUtils;
 import com.tpyzq.mobile.pangu.base.CustomApplication;
 import com.tpyzq.mobile.pangu.http.NetWorkUtil;
 import com.tpyzq.mobile.pangu.interfac.ICallbackResult;
+import com.tpyzq.mobile.pangu.log.LogHelper;
 import com.tpyzq.mobile.pangu.util.ConstantUtil;
 import com.tpyzq.mobile.pangu.util.DeviceUtil;
 import com.tpyzq.mobile.pangu.util.SpUtils;
@@ -97,11 +98,13 @@ public class LogInConnect {
         NetWorkUtil.getInstence().okHttpForPostString(mContext, ConstantUtil.URL_JY, map1, new StringCallback() {
             @Override
             public void onError(Call call, Exception e, int id) {
+                LogHelper.e("TransactionLoginActivity  +++++  登录失败",e.toString());
                 mICallbackResult.getResult(ConstantUtil.NETWORK_ERROR, TAG);
             }
 
             @Override
             public void onResponse(String response, int id) {
+                LogHelper.e("TransactionLoginActivity  +++++  登录成功",response.toString());
                 if (TextUtils.isEmpty(response)) {
                     return;
                 }

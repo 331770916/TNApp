@@ -194,8 +194,8 @@ public class ChangeAccoutActivity extends BaseActivity implements ICallbackResul
                 mPassword_et.setText("");
                 mCaptcha_et.setText("");
                 mPassword_et.requestFocus();
-                handler.sendEmptyMessage(0);
-                showKeyboardWithHeader();
+//                handler.sendEmptyMessage(0);
+//                showKeyboardWithHeader();
 
             }
             return false;
@@ -242,7 +242,6 @@ public class ChangeAccoutActivity extends BaseActivity implements ICallbackResul
         Intent intent = getIntent();
         if (intent != null) {
             pageIndex = intent.getIntExtra("pageindex", 0);
-            newintent = intent.getExtras();
         }
         mExit = getIntent().getBooleanExtra("EXIT", false);
 
@@ -485,6 +484,11 @@ public class ChangeAccoutActivity extends BaseActivity implements ICallbackResul
             case R.id.Bindingbtn:         //登录
                 mLogin_but.setClickable(false);
                 if (mCaptcha_et.getText().toString().trim().equalsIgnoreCase(mVerificationcode)) {
+
+                    mUserEntity.setIslogin("false");
+                    Db_PUB_USERS.UpdateIslogin(mUserEntity);
+                    SpUtils.putString(ChangeAccoutActivity.this, "mSession", "");
+
                     toLogInConnect();
                 } else {
                     Helper.getInstance().showToast(ChangeAccoutActivity.this, "验证码错误");

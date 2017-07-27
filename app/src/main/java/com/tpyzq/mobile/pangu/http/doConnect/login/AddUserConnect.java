@@ -5,6 +5,7 @@ import android.text.TextUtils;
 
 import com.tpyzq.mobile.pangu.http.NetWorkUtil;
 import com.tpyzq.mobile.pangu.interfac.ICallbackResult;
+import com.tpyzq.mobile.pangu.log.LogHelper;
 import com.tpyzq.mobile.pangu.util.ConstantUtil;
 import com.tpyzq.mobile.pangu.util.SpUtils;
 import com.tpyzq.mobile.pangu.util.keyboard.KeyEncryptionUtils;
@@ -57,11 +58,13 @@ public class AddUserConnect {
         NetWorkUtil.getInstence().okHttpForPostString(mContext, ConstantUtil.URL_JYBD, map, new StringCallback() {
             @Override
             public void onError(Call call, Exception e, int id) {
+                LogHelper.e("TransactionLoginActivity  +++++  绑定失败",e.toString());
                 mCallbackResult.getResult(ConstantUtil.NETWORK_ERROR, TAG);
             }
 
             @Override
             public void onResponse(String response, int id) {
+                LogHelper.e("TransactionLoginActivity  +++++  绑定成功",response.toString());
                 if (TextUtils.isEmpty(response)) {
                     return;
                 }

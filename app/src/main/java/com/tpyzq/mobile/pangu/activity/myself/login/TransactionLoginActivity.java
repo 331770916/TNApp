@@ -552,8 +552,6 @@ public class TransactionLoginActivity extends BaseActivity implements ICallbackR
     }
 
 
-
-
     private void LogInLogic() {
         //第一次登录数据库交易账号无数据 添加到数据库
         if (!"".equals(OLD_SRRC) && !DeviceUtil.getDeviceId(CustomApplication.getContext()).equalsIgnoreCase(OLD_TCC) && !android.os.Build.MODEL.equals(OLD_SRRC)) { //换手机登录
@@ -582,7 +580,6 @@ public class TransactionLoginActivity extends BaseActivity implements ICallbackR
         simpleRemoteControl.setCommand(new ToAddUser(new AddUserConnect(this, TAG, mAccount_et.getText().toString())));
         simpleRemoteControl.startConnect();
     }
-
 
 
     @Override
@@ -779,6 +776,11 @@ public class TransactionLoginActivity extends BaseActivity implements ICallbackR
             case R.id.Transaction_Login:  //登录
                 mLogin_but.setClickable(false);
                 if (mCaptcha_et.getText().toString().trim().equalsIgnoreCase(mVerificationcode)) {
+
+                    mUserEntity.setIslogin("false");
+                    Db_PUB_USERS.UpdateIslogin(mUserEntity);
+                    SpUtils.putString(TransactionLoginActivity.this, "mSession", "");
+
                     toLogInConnect();
                 } else {
                     Helper.getInstance().showToast(TransactionLoginActivity.this, "验证码错误");
@@ -1312,7 +1314,7 @@ public class TransactionLoginActivity extends BaseActivity implements ICallbackR
 
     @Override
     protected void onDestroy() {
-        if (mBuilder!=null&&mBuilder.dialog!=null&&mBuilder.dialog.isShowing())
+        if (mBuilder != null && mBuilder.dialog != null && mBuilder.dialog.isShowing())
             mBuilder.dialog.dismiss();
         super.onDestroy();
     }
