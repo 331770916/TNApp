@@ -83,7 +83,7 @@
         android:orientation="horizontal">
 
         <LinearLayout
-            android:paddingLeft="@dimen/size20"
+            android:paddingLeft="@dimen/size10"
             android:layout_gravity="center_vertical"
             android:layout_weight="1"
             android:layout_width="@dimen/size0"
@@ -117,7 +117,7 @@
         </LinearLayout>
 
         <LinearLayout
-            android:paddingRight="@dimen/size20"
+            android:paddingRight="@dimen/size10"
             android:layout_gravity="center_vertical"
             android:layout_weight="1"
             android:layout_width="@dimen/size0"

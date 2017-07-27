@@ -16,7 +16,7 @@
             android:layout_weight="1"
             android:orientation="vertical">
             <TextView
-                android:paddingLeft="@dimen/size20"
+                android:paddingLeft="@dimen/size10"
                 android:id="@+id/fjtv_name"
                 android:layout_width="wrap_content"
                 android:layout_height="wrap_content"
@@ -26,7 +26,7 @@
                 android:textSize="@dimen/txtSize15"
                 />
             <TextView
-                android:paddingLeft="@dimen/size20"
+                android:paddingLeft="@dimen/size10"
                 android:id="@+id/fjtv_code"
                 android:layout_width="wrap_content"
                 android:layout_height="wrap_content"
@@ -73,7 +73,7 @@
                 android:layout_width="wrap_content"
                 android:layout_height="wrap_content"
                 android:layout_marginTop="@dimen/size13"
-                android:layout_marginRight="@dimen/size20"
+                android:layout_marginRight="@dimen/size10"
                 android:textColor="@color/hushenTab_titleColor"
                 android:textSize="@dimen/txtSize14"
                 android:layout_gravity="right"
@@ -83,7 +83,7 @@
                 android:layout_width="wrap_content"
                 android:layout_height="wrap_content"
                 android:layout_marginTop="@dimen/size4"
-                android:layout_marginRight="@dimen/size20"
+                android:layout_marginRight="@dimen/size10"
                 android:textColor="@color/hushenTab_titleColor"
                 android:layout_marginBottom="@dimen/size12"
                 android:textSize="@dimen/txtSize14"

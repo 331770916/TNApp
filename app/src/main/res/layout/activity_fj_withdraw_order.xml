@@ -50,7 +50,7 @@
         <LinearLayout
             android:layout_gravity="center_vertical"
             android:layout_weight="1"
-            android:paddingLeft="@dimen/size20"
+            android:paddingLeft="@dimen/size10"
             android:layout_width="@dimen/size0"
             android:layout_height="match_parent">
             <TextView
@@ -85,7 +85,7 @@
             android:layout_width="@dimen/size0"
             android:layout_height="match_parent">
             <TextView
-                android:paddingRight="@dimen/size20"
+                android:paddingRight="@dimen/size10"
                 android:gravity="center|end"
                 android:layout_width="match_parent"
                 android:layout_height="match_parent"
