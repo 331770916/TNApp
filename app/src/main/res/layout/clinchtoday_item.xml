@@ -20,26 +20,26 @@
             android:layout_weight="1">
 
             <TextView
-                android:paddingLeft="@dimen/size22"
+                android:paddingLeft="@dimen/size10"
                 android:id="@+id/clinch_Name"
                 android:layout_width="match_parent"
                 android:layout_height="wrap_content"
                 android:layout_centerHorizontal="true"
-                android:gravity="center|fill"
+                android:gravity="center|start"
                 android:text="--"
                 android:textColor="@color/hushenTab_titleColor"
-                android:textSize="@dimen/txtSize14" />
+                android:textSize="@dimen/txtSize15" />
 
             <TextView
+                android:paddingLeft="@dimen/size10"
                 android:id="@+id/clinch_Num"
-                android:paddingLeft="@dimen/size22"
                 android:layout_width="match_parent"
                 android:layout_height="wrap_content"
                 android:layout_alignLeft="@id/clinch_Name"
                 android:layout_below="@id/clinch_Name"
-                android:gravity="center|fill"
+                android:gravity="center|start"
                 android:text="--"
-                android:textSize="@dimen/txtSize12"
+                android:textSize="@dimen/txtSize14"
                 android:textColor="@color/colorMyGray"/>
         </RelativeLayout>
 
@@ -55,7 +55,7 @@
                 android:layout_centerHorizontal="true"
                 android:gravity="center"
                 android:text="--"
-                android:textSize="@dimen/txtSize12" />
+                android:textSize="@dimen/txtSize14" />
 
             <TextView
                 android:id="@+id/clinch_Time"
@@ -65,7 +65,7 @@
                 android:layout_below="@id/clinch_Date"
                 android:gravity="center"
                 android:text="--"
-                android:textSize="@dimen/txtSize12" />
+                android:textSize="@dimen/txtSize14" />
         </RelativeLayout>
 
         <RelativeLayout
@@ -75,17 +75,17 @@
             android:layout_weight="1">
 
             <TextView
-                android:paddingLeft="@dimen/size10"
+                android:paddingLeft="@dimen/size20"
                 android:id="@+id/clinch_Entrust"
                 android:layout_width="match_parent"
                 android:layout_height="wrap_content"
                 android:layout_centerHorizontal="true"
                 android:gravity="center"
                 android:text="--"
-                android:textSize="@dimen/txtSize12" />
+                android:textSize="@dimen/txtSize14" />
 
             <TextView
-                android:paddingLeft="@dimen/size10"
+                android:paddingLeft="@dimen/size20"
                 android:id="@+id/clinch_Succeed"
                 android:layout_width="match_parent"
                 android:layout_height="wrap_content"
@@ -93,12 +93,12 @@
                 android:layout_below="@id/clinch_Entrust"
                 android:gravity="center"
                 android:text="--"
-                android:textSize="@dimen/txtSize12" />
+                android:textSize="@dimen/txtSize14" />
         </RelativeLayout>
 
 
         <TextView
-            android:paddingRight="@dimen/size15"
+            android:paddingRight="@dimen/size10"
             android:layout_gravity="center_vertical"
             android:id="@+id/clinch_Transaction"
             android:layout_width="0dp"
@@ -107,7 +107,7 @@
             android:gravity="center|end"
             android:layout_weight="1"
             android:text="--"
-            android:textSize="@dimen/txtSize12" />
+            android:textSize="@dimen/txtSize14" />
     </LinearLayout>
 
 

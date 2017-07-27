@@ -28,7 +28,7 @@
                 android:gravity="center|fill"
                 android:paddingLeft="@dimen/size10"
                 android:text="--"
-                android:textSize="@dimen/txtSize12" />
+                android:textSize="@dimen/txtSize15" />
 
             <TextView
                 android:id="@+id/Today_Num"
@@ -40,7 +40,7 @@
                 android:paddingLeft="@dimen/size10"
                 android:text="--"
                 android:textColor="@color/newStockTitle"
-                android:textSize="@dimen/txtSize12" />
+                android:textSize="@dimen/txtSize14" />
         </RelativeLayout>
 
         <RelativeLayout
@@ -56,7 +56,7 @@
                 android:gravity="center"
                 android:text="--"
                 android:textColor="@color/hushenTab_titleColor"
-                android:textSize="@dimen/txtSize12" />
+                android:textSize="@dimen/txtSize14" />
 
             <TextView
                 android:id="@+id/Today_Time"
@@ -67,7 +67,7 @@
                 android:gravity="center"
                 android:text="--"
                 android:textColor="@color/hushenTab_titleColor"
-                android:textSize="@dimen/txtSize12" />
+                android:textSize="@dimen/txtSize14" />
         </RelativeLayout>
 
         <RelativeLayout
@@ -85,7 +85,7 @@
                 android:paddingRight="@dimen/size20"
                 android:text="--"
                 android:textColor="@color/hushenTab_titleColor"
-                android:textSize="@dimen/txtSize12" />
+                android:textSize="@dimen/txtSize14" />
 
             <TextView
                 android:id="@+id/Today_Entrust"
@@ -98,7 +98,7 @@
                 android:paddingRight="@dimen/size20"
                 android:text="--"
                 android:textColor="@color/hushenTab_titleColor"
-                android:textSize="@dimen/txtSize12" />
+                android:textSize="@dimen/txtSize14" />
         </RelativeLayout>
 
         <RelativeLayout
@@ -115,7 +115,7 @@
                 android:layout_centerHorizontal="true"
                 android:text="--"
                 android:textColor="@color/hushenTab_titleColor"
-                android:textSize="@dimen/txtSize12" />
+                android:textSize="@dimen/txtSize14" />
 
             <TextView
 
@@ -127,7 +127,7 @@
                 android:gravity="center|end"
                 android:text="--"
                 android:textColor="@color/hushenTab_titleColor"
-                android:textSize="@dimen/txtSize12" />
+                android:textSize="@dimen/txtSize14" />
         </RelativeLayout>
 
     </LinearLayout>

@@ -72,8 +72,8 @@
         android:layout_height="@dimen/size10"
         android:background="@color/bgColor" />
 
+
     <LinearLayout
-        android:paddingLeft="@dimen/size14"
         android:gravity="center"
         android:layout_width="match_parent"
         android:layout_height="@dimen/size30"
@@ -81,11 +81,11 @@
         android:orientation="horizontal">
 
         <TextView
-            android:paddingRight="@dimen/size22"
+            android:paddingLeft="@dimen/size10"
             android:layout_width="0dp"
             android:layout_height="wrap_content"
             android:layout_weight="1"
-            android:gravity="center"
+            android:gravity="center|start"
             android:text="@string/mcjg"
             android:textColor="@color/newStockTitle"
             android:textSize="@dimen/txtSize13" />
@@ -101,21 +101,23 @@
             android:textSize="@dimen/txtSize13" />
 
         <TextView
+            android:paddingRight="@dimen/size20"
             android:layout_width="0dp"
             android:layout_height="wrap_content"
             android:layout_weight="1"
-            android:gravity="center"
+            android:gravity="center|end"
             android:text="@string/mmsl"
             android:textColor="@color/newStockTitle"
             android:textSize="@dimen/txtSize13" />
 
 
         <TextView
+            android:paddingRight="@dimen/size10"
             android:layout_width="0dp"
             android:layout_height="wrap_content"
             android:layout_weight="1"
-            android:gravity="center"
-            android:paddingLeft="@dimen/size32"
+            android:gravity="center|end"
+            android:paddingLeft="@dimen/size31"
             android:text="@string/je"
             android:textColor="@color/newStockTitle"
             android:textSize="@dimen/txtSize13" />
