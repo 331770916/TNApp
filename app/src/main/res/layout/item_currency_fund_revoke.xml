@@ -4,6 +4,7 @@
     android:layout_height="wrap_content"
     android:orientation="vertical">
 
+
     <LinearLayout
         android:layout_width="match_parent"
         android:layout_height="55dp"
@@ -12,11 +13,12 @@
 
         <!--名称-->
         <LinearLayout
+            android:paddingLeft="@dimen/size10"
             android:layout_weight="1"
             android:layout_width="0dp"
             android:layout_height="wrap_content"
             android:orientation="vertical"
-            android:gravity="center">
+            android:gravity="center|start">
             <TextView
                 android:id="@+id/tvGuPiaoMingCheng"
                 android:layout_width="wrap_content"
@@ -30,7 +32,7 @@
                 android:layout_width="wrap_content"
                 android:layout_height="wrap_content"
                 android:text="--"
-                android:textSize="11sp"
+                android:textSize="@dimen/txtSize14"
                 android:textColor="@color/text" />
 
         </LinearLayout>
@@ -47,58 +49,60 @@
                 android:layout_width="wrap_content"
                 android:layout_height="wrap_content"
                 android:text="--"
-                android:textSize="11sp" />
+                android:textSize="@dimen/txtSize14" />
             <TextView
                 android:id="@+id/tvShiJian"
                 android:layout_width="wrap_content"
                 android:layout_height="wrap_content"
                 android:text="--"
-                android:textSize="11sp" />
+                android:textSize="@dimen/txtSize14" />
 
         </LinearLayout>
 
         <!--数量-->
         <LinearLayout
+            android:paddingRight="@dimen/size20"
             android:layout_weight="1"
             android:layout_width="0dp"
             android:layout_height="wrap_content"
             android:orientation="vertical"
-            android:gravity="center">
+            android:gravity="center|end">
             <TextView
                 android:id="@+id/tvShuLiang"
                 android:layout_width="wrap_content"
                 android:layout_height="wrap_content"
                 android:text="--"
-                android:textSize="11sp"/>
+                android:textSize="@dimen/txtSize14"/>
             <TextView
                 android:id="@+id/tvJinE"
                 android:layout_width="wrap_content"
                 android:layout_height="wrap_content"
                 android:text="--"
-                android:textSize="11sp"/>
+                android:textSize="@dimen/txtSize14"/>
 
         </LinearLayout>
 
 
         <!--类型-->
         <LinearLayout
+            android:paddingRight="@dimen/size10"
             android:layout_weight="1"
             android:layout_width="0dp"
             android:layout_height="wrap_content"
             android:orientation="vertical"
-            android:gravity="center">
+            android:gravity="center|end">
             <TextView
                 android:id="@+id/tvLeiXing"
                 android:layout_width="wrap_content"
                 android:layout_height="wrap_content"
                 android:text="--"
-                android:textSize="11sp"/>
+                android:textSize="@dimen/txtSize14"/>
             <TextView
                 android:id="@+id/tvZhuangTai"
                 android:layout_width="wrap_content"
                 android:layout_height="wrap_content"
                 android:text="--"
-                android:textSize="11sp"/>
+                android:textSize="@dimen/txtSize14"/>
 
         </LinearLayout>
 

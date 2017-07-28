@@ -55,10 +55,11 @@
         android:orientation="horizontal">
 
         <TextView
+            android:paddingLeft="@dimen/size10"
             android:layout_weight="1"
             android:layout_width="0dp"
             android:layout_height="wrap_content"
-            android:gravity="center"
+            android:gravity="center|start"
             android:text="基金名称"
             android:textColor="@color/text"
             android:textSize="@dimen/txtSize13"/>
@@ -73,19 +74,21 @@
             android:textSize="@dimen/txtSize13"/>
 
         <TextView
+            android:paddingRight="@dimen/size20"
             android:layout_weight="1"
             android:layout_width="0dp"
             android:layout_height="wrap_content"
-            android:gravity="center"
+            android:gravity="center|end"
             android:text="数量/金额"
             android:textColor="@color/text"
             android:textSize="@dimen/txtSize13"/>
 
         <TextView
+            android:paddingRight="@dimen/size10"
             android:layout_weight="1"
             android:layout_width="0dp"
             android:layout_height="wrap_content"
-            android:gravity="center"
+            android:gravity="center|end"
             android:text="类型/状态"
             android:textColor="@color/text"
             android:textSize="@dimen/txtSize13"/>
