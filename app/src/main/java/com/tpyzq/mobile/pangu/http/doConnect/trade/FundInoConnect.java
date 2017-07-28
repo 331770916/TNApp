@@ -112,6 +112,7 @@ public class FundInoConnect {
                         String type = jsonObject.optString("OFUND_TYPE");// 类型
                         String level = jsonObject.optString("OFUND_RISKLEVEL_NAME");//风险等级
                         String status = jsonObject.optString("FUND_STATUS_NAME");//状态
+                        String ofundType = jsonObject.optString("OFUND_TYPE");
 
 
                         entity.FUND_NAME = fundname;
@@ -121,7 +122,8 @@ public class FundInoConnect {
                         entity.FUND_COMPANY_NAME = company_name;
                         entity.OFUND_RISKLEVEL_NAME = level;
                         entity.FUND_STATUS_NAME = status;
-                        entity.FEE_TYPE = type;
+                        entity.FUND_TYPE = type;
+                        entity.OFUND_TYPE = ofundType;
                         entities.add(entity);
                     }
 

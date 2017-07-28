@@ -2,6 +2,7 @@ package com.tpyzq.mobile.pangu.activity.myself.handhall;
 
 import android.app.Dialog;
 import android.app.ProgressDialog;
+import android.content.Context;
 import android.content.DialogInterface;
 import android.content.Intent;
 import android.graphics.Bitmap;
@@ -16,8 +17,10 @@ import android.text.Spanned;
 import android.text.TextUtils;
 import android.text.style.ForegroundColorSpan;
 import android.util.Base64;
+import android.util.Log;
 import android.view.KeyEvent;
 import android.view.View;
+import android.view.WindowManager;
 import android.widget.ImageView;
 import android.widget.TextView;
 
@@ -26,13 +29,18 @@ import com.tpyzq.mobile.pangu.base.BaseActivity;
 import com.tpyzq.mobile.pangu.data.UpdateIdCodeValidityEntity;
 import com.tpyzq.mobile.pangu.http.OkHttpUtil;
 import com.tpyzq.mobile.pangu.util.ConstantUtil;
+import com.tpyzq.mobile.pangu.util.Helper;
 import com.tpyzq.mobile.pangu.view.dialog.CancelDialog;
 import com.tpyzq.mobile.pangu.view.dialog.LoadingDialog;
 import com.zhy.http.okhttp.callback.StringCallback;
 
 import org.json.JSONObject;
 
+import java.io.ByteArrayInputStream;
 import java.io.ByteArrayOutputStream;
+import java.io.File;
+import java.io.FileNotFoundException;
+import java.io.FileOutputStream;
 import java.io.IOException;
 import java.util.HashMap;
 import java.util.Map;
@@ -207,32 +215,51 @@ public class UpLoadIdCardPicActivity extends BaseActivity implements View.OnClic
      * @return
      */
     private Bitmap revitionBitmapSize(int size, Bitmap bitmap) {
-
+        int maxLength = 1024 * 1024; // 预定的图片最大内存，单位byte
         Bitmap decodePic = null;
-
+        // 压缩大小
         try {
             ByteArrayOutputStream baos = new ByteArrayOutputStream();
             bitmap.compress(Bitmap.CompressFormat.PNG, 100, baos);
-            if( baos.toByteArray().length / 1024>1024) {//判断如果图片大于1M,进行压缩避免在生成图片（BitmapFactory.decodeStream）时溢出
-                baos.reset();//重置baos即清空baos
-                bitmap.compress(Bitmap.CompressFormat.PNG, 50, baos);//这里压缩50%，把压缩后的数据存放到baos中
+            int quality = 100;
+
+            while (baos.toByteArray().length > maxLength) { // 循环判断，大于继续压缩
+                quality -= 10;// 每次都减少10
+                baos.reset();// 重置baos即清空baos
+                bitmap.compress(Bitmap.CompressFormat.PNG, quality, baos);//PNG 压缩options%
             }
+
+
+            // 压缩尺寸
+            ByteArrayInputStream bais = new ByteArrayInputStream(baos.toByteArray());
             BitmapFactory.Options options = new BitmapFactory.Options();
             //开始读入图片，此时把options.inJustDecodeBounds 设回true了
             options.inJustDecodeBounds = true;
-            decodePic = BitmapFactory.decodeByteArray(baos.toByteArray(), 0, baos.toByteArray().length, options);
-            int i = 0;
-            while (true) {
-                if ((options.outWidth >> i <= size)&& (options.outHeight >> i <= size)) {
-                    options.inSampleSize = (int) Math.pow(2.0D, i);
-                    options.inJustDecodeBounds = false;
-                    decodePic = BitmapFactory.decodeByteArray(baos.toByteArray(), 0, baos.toByteArray().length, options);
-                    break;
-                }
+            decodePic = BitmapFactory.decodeStream(bais, null, options);// 加载图片(只得到图片大小)
 
-                i += 1;
-            }
+            int screenWidth = Helper.getScreenWidth(this);
+            int screenHeight = Helper.getScreenHeight(this);
+            // 获取屏幕大小，按比例压缩
 
+            int scaleX = options.outWidth / screenWidth; // X轴缩放比例(图片宽度/屏幕宽度)
+            int scaleY = options.outHeight / screenHeight; // Y轴缩放比例
+            int scale = scaleX > scaleY ? scaleX : scaleY; // 图片的缩放比例(X和Y哪个大选哪个)
+            options.inJustDecodeBounds = false; // 修改选项, 不只解码边界
+            options.inSampleSize = scale > 1 ? scale : 1; // 修改选项, 加载图片时的缩放比例
+            bais.reset();
+            decodePic = BitmapFactory.decodeStream(bais, null, options);
+
+//            int i = 0;
+//            while (true) {
+//                if ((options.outWidth >> i <= size)&& (options.outHeight >> i <= size)) {
+//                    options.inSampleSize = (int) Math.pow(2.0D, i);
+//                    options.inJustDecodeBounds = false;
+//                    decodePic = BitmapFactory.decodeByteArray(baos.toByteArray(), 0, baos.toByteArray().length, options);
+//                    break;
+//                }
+//
+//                i += 1;
+//            }
 
             if (decodePic != null) {
                 int picWidth = decodePic.getWidth();
@@ -259,6 +286,20 @@ public class UpLoadIdCardPicActivity extends BaseActivity implements View.OnClic
 
         return decodePic;
 
+    }
+
+    //计算图片的缩放值
+    private int calculateInSampleSize(BitmapFactory.Options options,int reqWidth, int reqHeight) {
+        final int height = options.outHeight;
+        final int width = options.outWidth;
+        int inSampleSize = 1;
+
+        if (height > reqHeight || width > reqWidth) {
+            final int heightRatio = Math.round((float) height/ (float) reqHeight);
+            final int widthRatio = Math.round((float) width / (float) reqWidth);
+            inSampleSize = heightRatio < widthRatio ? heightRatio : widthRatio;
+        }
+        return inSampleSize;
     }
 
     /**

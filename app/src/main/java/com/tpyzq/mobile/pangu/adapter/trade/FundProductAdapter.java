@@ -15,7 +15,7 @@ import java.util.List;
 
 
 /**
- * Created by zhangwenbo on 2016/8/12.
+ * Created by 刘泽鹏 on 2016/8/12.
  * 基金产品的列表的Adapter
  */
 public class FundProductAdapter extends BaseAdapter {

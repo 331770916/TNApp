@@ -34,6 +34,7 @@ public class FundInfoAdapter extends BaseAdapter {
 
     private Context mContext;
     private boolean isShowDeatil;
+    private DetailClickListener mListener;
     private ArrayList<FundSubsEntity> mEntitys;
     public FundInfoAdapter (Context context, boolean isShowDeatil) {
         mContext = context;
@@ -43,6 +44,10 @@ public class FundInfoAdapter extends BaseAdapter {
     public void setDatas(ArrayList<FundSubsEntity> entitys) {
         mEntitys = entitys;
         notifyDataSetChanged();
+    }
+
+    public void setDetailClickListener(DetailClickListener listener) {
+        mListener = listener;
     }
 
     @Override
@@ -67,7 +72,7 @@ public class FundInfoAdapter extends BaseAdapter {
     }
 
     @Override
-    public View getView(int position, View convertView, ViewGroup parent) {
+    public View getView(final int position, View convertView, ViewGroup parent) {
         ViewHodler viewHodler = null;
         if (convertView == null) {
             viewHodler = new ViewHodler();
@@ -89,6 +94,15 @@ public class FundInfoAdapter extends BaseAdapter {
         } else {
             viewHodler.mDetailTv.setVisibility(View.GONE);
         }
+
+        viewHodler.mDetailTv.setOnClickListener(new View.OnClickListener() {
+            @Override
+            public void onClick(View v) {
+                if (mListener != null) {
+                    mListener.detailClick(mEntitys.get(position));
+                }
+            }
+        });
 
         initVal(position, viewHodler.mFundVal);
         initOpenShare(position, viewHodler.mOpenShare);
@@ -154,7 +168,7 @@ public class FundInfoAdapter extends BaseAdapter {
     private void initDiscriblayout(int position, LinearLayout layout) {
         layout.removeAllViews();
         String company = mEntitys.get(position).FUND_COMPANY_NAME;
-        String type = mEntitys.get(position).FEE_TYPE;
+        String type = mEntitys.get(position).FUND_TYPE;
         String level = mEntitys.get(position).OFUND_RISKLEVEL_NAME;
         String status = mEntitys.get(position).FUND_STATUS_NAME;
 
@@ -244,5 +258,9 @@ public class FundInfoAdapter extends BaseAdapter {
         TextView mOpenShare;
         LinearLayout mDiscrbLayout;
 
+    }
+
+    public interface DetailClickListener {
+        public void detailClick(FundSubsEntity entity);
     }
 }
