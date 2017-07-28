@@ -1188,9 +1188,9 @@ public class BuyAndSellActivity extends BaseActivity implements View.OnClickList
         HashMap map300140_1 = new HashMap();
         map300140_1.put("SEC_ID", encryptBySessionKey("tpyzq"));
         String market_code = "";
-        if (code.startsWith("SZ")) {
+        if (code.startsWith("2")) {
             market_code = "2";
-        } else if (code.startsWith("SH")) {
+        } else if (code.startsWith("1")) {
             market_code = "1";
         }
         map300140_1.put("MARKET", encryptBySessionKey(market_code));
@@ -1247,9 +1247,9 @@ public class BuyAndSellActivity extends BaseActivity implements View.OnClickList
         HashMap map300140_1 = new HashMap();
         map300140_1.put("SEC_ID", encryptBySessionKey("tpyzq"));
         String market_code = "";
-        if (code.startsWith("SZ")) {
+        if (code.startsWith("2")) {
             market_code = "2";
-        } else if (code.startsWith("SH")) {
+        } else if (code.startsWith("1")) {
             market_code = "1";
         }
         map300140_1.put("MARKET", encryptBySessionKey(market_code));
