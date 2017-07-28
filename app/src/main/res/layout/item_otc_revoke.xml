@@ -6,7 +6,9 @@
     android:orientation="vertical"
     android:background="@color/white">
 
+
     <LinearLayout
+        android:paddingRight="@dimen/size10"
         android:layout_width="match_parent"
         android:layout_height="55dp"
         android:orientation="horizontal"
@@ -69,7 +71,8 @@
             android:layout_width="0dp"
             android:layout_height="wrap_content"
             android:orientation="vertical"
-            android:gravity="center">
+            android:paddingRight="@dimen/size20"
+            android:gravity="center|end">
             <TextView
                 android:id="@+id/tvRevokeMoney"
                 android:layout_width="wrap_content"
@@ -86,7 +89,6 @@
             android:layout_width="0dp"
             android:layout_height="wrap_content"
             android:orientation="vertical"
-            android:paddingRight="@dimen/size10"
             android:gravity="right">
             <TextView
                 android:id="@+id/tvRevokeType"
