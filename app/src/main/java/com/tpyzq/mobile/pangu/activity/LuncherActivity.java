@@ -100,7 +100,7 @@ public class LuncherActivity extends BaseActivity implements ICallbackResult {
             mSimpleRemoteControl.setCommand(new ToQuerySelfChoiceStockConnect(new QuerySelfChoiceStockConnect(TAG, "", UserUtil.capitalAccount, UserUtil.userId)));
             mSimpleRemoteControl.startConnect();
         } else {
-            Db_PUB_STOCKLIST.initUnregistData();
+            Db_PUB_STOCKLIST.initUnregisterData();
         }
         getWelcomeView(mView);
     }

@@ -114,7 +114,7 @@ public class Db_PUB_SEARCHHISTORYSTOCK extends StockTable {
                 StockInfoEntity entitiy = new StockInfoEntity();
                 entitiy.setStockNumber(c.getString(c.getColumnIndexOrThrow("STOCK_CODE")));
                 entitiy.setStockName(c.getString(c.getColumnIndexOrThrow("STOCK_NAME")));
-                entitiy.setHold(((CursorUtils.getInt(c,"STOCK_FLAG")& STOCK_BROWSE_NEARBY)== STOCK_BROWSE_NEARBY)+"");
+                entitiy.setHold(((CursorUtils.getInt(c,"STOCK_FLAG")& STOCK_HOLD)== STOCK_HOLD)+"");
                 entitiy.setSeeDate(c.getString(c.getColumnIndexOrThrow("CREATE_TIME")));
                 entitiys.add(entitiy);
             } while (c.moveToNext());
@@ -146,9 +146,9 @@ public class Db_PUB_SEARCHHISTORYSTOCK extends StockTable {
                 entitiy.setStockNumber(c.getString(c.getColumnIndexOrThrow("STOCK_CODE")));
                 entitiy.setStockName(c.getString(c.getColumnIndexOrThrow("STOCK_NAME")));
                 entitiy.setStock_flag(c.getInt(c.getColumnIndexOrThrow("STOCK_FLAG")));
-                entitiy.setHold(((CursorUtils.getInt(c,"STOCK_FLAG")& STOCK_BROWSE_NEARBY)== STOCK_BROWSE_NEARBY)+"");
+                entitiy.setHold(((CursorUtils.getInt(c,"STOCK_FLAG")& STOCK_HOLD)== STOCK_HOLD)+"");
                 entitiy.setSeeDate(c.getString(c.getColumnIndexOrThrow("CREATE_TIME")));
-                entitiy.setStockholdon(((CursorUtils.getInt(c,"STOCK_FLAG")& STOCK_BROWSE_NEARBY)== STOCK_BROWSE_NEARBY)+"");
+                entitiy.setStockholdon(((CursorUtils.getInt(c,"STOCK_FLAG")& STOCK_HOLD)== STOCK_HOLD)+"");
                 entitiys.add(entitiy);
             } while (c.moveToNext());
 
@@ -179,9 +179,9 @@ public class Db_PUB_SEARCHHISTORYSTOCK extends StockTable {
                 entitiy.setStockNumber(c.getString(c.getColumnIndexOrThrow("STOCK_CODE")));
                 entitiy.setStockName(c.getString(c.getColumnIndexOrThrow("STOCK_NAME")));
                 entitiy.setStock_flag(c.getInt(c.getColumnIndexOrThrow("STOCK_FLAG")));
-                entitiy.setHold(((CursorUtils.getInt(c,"STOCK_FLAG")& STOCK_BROWSE_NEARBY)== STOCK_BROWSE_NEARBY)+"");
+                entitiy.setHold(((CursorUtils.getInt(c,"STOCK_FLAG")& STOCK_HOLD)== STOCK_HOLD)+"");
                 entitiy.setSeeDate(c.getString(c.getColumnIndexOrThrow("CREATE_TIME")));
-                entitiy.setStockholdon(((CursorUtils.getInt(c,"STOCK_FLAG")& STOCK_BROWSE_NEARBY)== STOCK_BROWSE_NEARBY)+"");
+                entitiy.setStockholdon(((CursorUtils.getInt(c,"STOCK_FLAG")& STOCK_HOLD)== STOCK_HOLD)+"");
                 entitiys.add(entitiy);
             } while (c.moveToNext());
 
@@ -214,7 +214,7 @@ public class Db_PUB_SEARCHHISTORYSTOCK extends StockTable {
             }
             entitiy.setStockNumber(c.getString(c.getColumnIndexOrThrow("STOCK_CODE")));
             entitiy.setStockName(c.getString(c.getColumnIndexOrThrow("STOCK_NAME")));
-            entitiy.setHold(((CursorUtils.getInt(c,"STOCK_FLAG")& STOCK_BROWSE_NEARBY)== STOCK_BROWSE_NEARBY)+"");
+            entitiy.setHold(((CursorUtils.getInt(c,"STOCK_FLAG")& STOCK_HOLD)== STOCK_HOLD)+"");
             entitiy.setSeeDate(c.getString(c.getColumnIndexOrThrow("CREATE_TIME")));
 
         } catch (Exception e) {

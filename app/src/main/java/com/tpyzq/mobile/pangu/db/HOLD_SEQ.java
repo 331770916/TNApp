@@ -23,7 +23,7 @@ public class HOLD_SEQ extends StockTable {
 
     public static String getHoldCodes() {
 
-        String sql = "select * from STOCK where stock_flag&" + STOCK_OPTIONAL + "=" + STOCK_OPTIONAL;
+        String sql = "select * from STOCK where stock_flag&" + STOCK_HOLD + "=" + STOCK_HOLD;
         SQLiteDatabase db = getDatabase();
         Cursor c = null;
         String codes = "";
@@ -108,7 +108,7 @@ public class HOLD_SEQ extends StockTable {
 
         boolean flag = false;
 
-        String sql = "select * from STOCK where STOCK_CODE = " + Helper.getSafeString(code);
+        String sql = "select * from STOCK where STOCK_CODE = " + Helper.getSafeString(code)+" and STOCK_FLAG&"+STOCK_HOLD+">0";
         SQLiteDatabase db =getDatabase();
         Cursor c = null;
         String strCode ;

@@ -49,6 +49,7 @@ public class Db_PUB_USERS extends BaseTable {
             String certification = CursorUtils.getString(c, "CERTIFICATION");
             String plugins = CursorUtils.getString(c, "PLUGINS");
             String refresh_time = CursorUtils.getString(c, "REFRESH_TIME");
+            String is_init_unregister_data = CursorUtils.getString(c, "IS_INIT_UNREGISTER_DATA");
 
             entity.setIsregister(StringUtils.isAllEmpty(register_account,mobile_num)?"1":"0");
             entity.setUserId(id);
@@ -64,6 +65,7 @@ public class Db_PUB_USERS extends BaseTable {
             entity.setCertification(certification);
             entity.setPlugins(plugins);
             entity.setRefreshTime(refresh_time);
+            entity.setIsInitUnregisterData(is_init_unregister_data);
         } catch (Exception e) {
             e.printStackTrace();
         }finally {
@@ -395,5 +397,11 @@ public class Db_PUB_USERS extends BaseTable {
         contentValues.put("REFRESH_TIME",entity.getRefreshTime());
 
         getDatabase().update("USER",contentValues,"ID=?",new String[]{userId});
+    }
+
+    public static void updateInitUnregisterData(String s) {
+        ContentValues contentValues=new ContentValues();
+        contentValues.put("IS_INIT_UNREGISTER_DATA",s);
+        getDatabase().update("USER",contentValues,"ID=1",null);
     }
 }

@@ -57,6 +57,15 @@ public class UserEntity implements Parcelable {
     private String Keyboard;            //键盘
     private String RegisterID;            //注册标识ID
     private String refreshTime;         //刷新时间
+    private String isInitUnregisterData;//0 未初始化 , 1 已初始化
+
+    public String getIsInitUnregisterData() {
+        return isInitUnregisterData;
+    }
+
+    public void setIsInitUnregisterData(String isInitUnregisterData) {
+        this.isInitUnregisterData = isInitUnregisterData;
+    }
 
     public String getRefreshTime() {
         return refreshTime;

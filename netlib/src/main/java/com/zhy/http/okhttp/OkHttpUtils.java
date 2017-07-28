@@ -1,5 +1,6 @@
 package com.zhy.http.okhttp;
 
+import android.text.TextUtils;
 import android.util.Log;
 
 import com.zhy.http.okhttp.builder.GetBuilder;
@@ -198,7 +199,7 @@ public class OkHttpUtils
             public void run()
             {
                 try {
-                    if (!(e.getMessage().toLowerCase().matches(".*(cancel|closed).*")))
+                    if (!(e!=null&&!TextUtils.isEmpty(e.getMessage())&&e.getMessage().toLowerCase().matches(".*(cancel|closed).*")))
                         callback.onError(call, e, id);
                 } catch (Exception e) {
                     e.printStackTrace();

@@ -143,7 +143,7 @@ public class Db_PUB_OPTIONALHISTORYSTOCK extends StockTable {
             }
             entitiy.setStockNumber(c.getString(c.getColumnIndexOrThrow("STOCK_CODE")));
             entitiy.setStockName(c.getString(c.getColumnIndexOrThrow("STOCK_NAME")));
-            entitiy.setHold(((CursorUtils.getInt(c,"STOCK_FLAG")& STOCK_BROWSE_NEARBY)== STOCK_BROWSE_NEARBY)+"");
+            entitiy.setHold(((CursorUtils.getInt(c,"STOCK_FLAG")& STOCK_HOLD)== STOCK_HOLD)+"");
             entitiy.setSeeDate(c.getString(c.getColumnIndexOrThrow("CREATE_TIME")));
 
         } catch (Exception e) {
