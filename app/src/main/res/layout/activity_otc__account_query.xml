@@ -21,8 +21,6 @@
 
     <!--title-->
     <LinearLayout
-        android:paddingLeft="@dimen/size12"
-        android:paddingRight="@dimen/size12"
         android:id="@+id/OTCAccountQueryTitle"
         android:layout_width="match_parent"
         android:background="@color/white"
@@ -30,6 +28,7 @@
         android:gravity="center">
 
         <TextView
+            android:paddingLeft="@dimen/size10"
             android:layout_weight="1"
             android:layout_width="0dp"
             android:layout_height="wrap_content"
@@ -39,15 +38,17 @@
             android:textColor="@color/text"/>
 
         <TextView
-            android:layout_weight="1"
+            android:paddingRight="@dimen/size30"
+            android:layout_weight="1.2"
             android:layout_width="0dp"
             android:layout_height="wrap_content"
-            android:gravity="center"
+            android:gravity="center|right"
             android:text="账户"
             android:textSize="@dimen/txtSize13"
             android:textColor="@color/text"/>
 
         <TextView
+            android:paddingRight="@dimen/size10"
             android:layout_weight="1"
             android:layout_width="0dp"
             android:layout_height="wrap_content"

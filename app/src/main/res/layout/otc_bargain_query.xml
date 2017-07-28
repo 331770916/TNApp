@@ -92,20 +92,18 @@
         android:layout_height="@dimen/size30"
         android:background="@color/white"
         android:gravity="center"
-        android:orientation="horizontal"
-        android:paddingLeft="@dimen/size20"
-        android:paddingRight="@dimen/size15">
+        android:orientation="horizontal">
 
         <TextView
+            android:paddingLeft="@dimen/size10"
             android:id="@+id/otc_bargainTitle1"
             android:layout_width="0dp"
             android:layout_height="wrap_content"
             android:layout_weight="1"
-            android:gravity="center|fill"
-            android:paddingLeft="@dimen/size4"
+            android:gravity="center|start"
             android:text="名称"
             android:textColor="@color/newStockTitle"
-            android:textSize="@dimen/txtSize12" />
+            android:textSize="@dimen/txtSize13" />
 
         <TextView
             android:id="@+id/otc_bargainTitle2"
@@ -115,20 +113,22 @@
             android:gravity="center"
             android:text="成交日期"
             android:textColor="@color/newStockTitle"
-            android:textSize="@dimen/txtSize12" />
+            android:textSize="@dimen/txtSize13" />
 
         <TextView
+            android:paddingRight="@dimen/size20"
             android:id="@+id/otc_bargainTitle3"
             android:layout_width="0dp"
             android:layout_height="wrap_content"
             android:layout_weight="1"
-            android:gravity="center"
+            android:gravity="center|end"
             android:text="业务名称"
             android:textColor="@color/newStockTitle"
-            android:textSize="@dimen/txtSize12" />
+            android:textSize="@dimen/txtSize13" />
 
 
         <TextView
+            android:paddingRight="@dimen/size10"
             android:id="@+id/otc_bargainTitle4"
             android:layout_width="0dp"
             android:layout_height="wrap_content"
@@ -136,7 +136,7 @@
             android:gravity="center|end"
             android:text="金额/份额"
             android:textColor="@color/newStockTitle"
-            android:textSize="@dimen/txtSize12" />
+            android:textSize="@dimen/txtSize13" />
     </LinearLayout>
 
     <View

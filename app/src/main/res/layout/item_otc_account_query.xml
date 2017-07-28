@@ -5,6 +5,7 @@
     android:background="@color/white"
     android:orientation="vertical">
 
+
     <LinearLayout
         android:layout_width="match_parent"
         android:layout_height="55dp"
@@ -17,17 +18,17 @@
             android:layout_height="wrap_content"
             android:layout_weight="1"
             android:gravity="left"
-            android:orientation="vertical"
-            android:paddingLeft="@dimen/size12">
+            android:orientation="vertical">
 
             <TextView
+                android:paddingLeft="@dimen/size10"
                 android:id="@+id/tvOTC_OpenDate"
                 android:layout_width="wrap_content"
                 android:layout_height="wrap_content"
                 android:singleLine="true"
                 android:text="--"
                 android:textColor="@color/hushenTab_titleColor"
-                android:textSize="12sp" />
+                android:textSize="@dimen/txtSize14" />
 
         </LinearLayout>
 
@@ -36,17 +37,18 @@
         <LinearLayout
             android:layout_width="0dp"
             android:layout_height="wrap_content"
-            android:layout_weight="1"
-            android:gravity="center"
+            android:layout_weight="1.2"
             android:orientation="vertical">
 
             <TextView
+                android:paddingRight="@dimen/size30"
+                android:gravity="center|end"
                 android:id="@+id/tvOTC_Account"
-                android:layout_width="wrap_content"
-                android:layout_height="wrap_content"
+                android:layout_width="match_parent"
+                android:layout_height="match_parent"
                 android:text="--"
                 android:textColor="@color/hushenTab_titleColor"
-                android:textSize="@dimen/txtSize12" />
+                android:textSize="@dimen/txtSize14" />
 
         </LinearLayout>
 
@@ -57,24 +59,25 @@
             android:layout_height="wrap_content"
             android:layout_weight="1"
             android:gravity="right"
-            android:orientation="vertical"
-            android:paddingRight="@dimen/size12">
+            android:orientation="vertical">
 
             <TextView
+                android:paddingRight="@dimen/size10"
                 android:id="@+id/tvOTC_company"
                 android:layout_width="wrap_content"
                 android:layout_height="wrap_content"
                 android:text="--"
                 android:textColor="@color/hushenTab_titleColor"
-                android:textSize="@dimen/txtSize12" />
+                android:textSize="@dimen/txtSize14" />
 
             <TextView
+                android:paddingRight="@dimen/size10"
                 android:id="@+id/tvOTC_AccountState"
                 android:layout_width="wrap_content"
                 android:layout_height="wrap_content"
                 android:text="--"
                 android:textColor="@color/hushenTab_titleColor"
-                android:textSize="@dimen/txtSize12" />
+                android:textSize="@dimen/txtSize14" />
 
         </LinearLayout>
 

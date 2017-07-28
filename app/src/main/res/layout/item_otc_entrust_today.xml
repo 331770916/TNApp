@@ -6,8 +6,6 @@
     android:gravity="center_vertical"
     android:orientation="horizontal"
     android:paddingBottom="@dimen/size10"
-    android:paddingLeft="@dimen/size20"
-    android:paddingRight="@dimen/size10"
     android:paddingTop="@dimen/size10">
 
     <RelativeLayout
@@ -16,6 +14,7 @@
         android:layout_weight="1">
 
         <TextView
+            android:paddingLeft="@dimen/size10"
             android:id="@+id/tv_OTCEntrustTodayStockName"
             android:layout_width="match_parent"
             android:layout_height="wrap_content"
@@ -25,10 +24,11 @@
             android:singleLine="true"
             android:text="--"
             android:textColor="@color/hushenTab_titleColor"
-            android:textSize="@dimen/txtSize13"
+            android:textSize="@dimen/txtSize15"
             android:textStyle="bold" />
 
         <TextView
+            android:paddingLeft="@dimen/size10"
             android:id="@+id/tv_OTCEntrustTodaystockCode"
             android:layout_width="match_parent"
             android:layout_height="wrap_content"
@@ -37,7 +37,7 @@
             android:gravity="center|fill"
             android:text="--"
             android:textColor="@color/newStockTitle"
-            android:textSize="@dimen/txtSize12" />
+            android:textSize="@dimen/txtSize14" />
     </RelativeLayout>
 
     <RelativeLayout
@@ -53,7 +53,7 @@
             android:gravity="center"
             android:text="--"
             android:textColor="@color/hushenTab_titleColor"
-            android:textSize="@dimen/txtSize13" />
+            android:textSize="@dimen/txtSize14" />
 
         <TextView
             android:id="@+id/tv_OTCEntrustTodayTime"
@@ -64,7 +64,7 @@
             android:gravity="center"
             android:text="--"
             android:textColor="@color/hushenTab_titleColor"
-            android:textSize="@dimen/txtSize13" />
+            android:textSize="@dimen/txtSize14" />
     </RelativeLayout>
 
     <RelativeLayout
@@ -78,12 +78,11 @@
             android:layout_height="wrap_content"
             android:layout_alignLeft="@+id/tv_OTCEntrustTodayMoney"
             android:layout_below="@+id/tv_OTCEntrustTodayMoney"
-            android:gravity="center"
-            android:paddingLeft="@dimen/size5"
-            android:paddingRight="@dimen/size10"
+            android:gravity="center|end"
+            android:paddingRight="@dimen/size20"
             android:text="--"
             android:textColor="@color/hushenTab_titleColor"
-            android:textSize="@dimen/txtSize13" />
+            android:textSize="@dimen/txtSize14" />
 
         <TextView
             android:id="@+id/tv_OTCEntrustTodayMoney"
@@ -92,21 +91,20 @@
             android:layout_alignParentLeft="true"
             android:layout_alignParentStart="true"
             android:layout_alignParentTop="true"
-            android:gravity="center"
-            android:paddingLeft="@dimen/size5"
-            android:paddingRight="@dimen/size10"
+            android:gravity="center|end"
+            android:paddingRight="@dimen/size20"
             android:text="--"
             android:textColor="@color/hushenTab_titleColor"
-            android:textSize="@dimen/txtSize13" />
+            android:textSize="@dimen/txtSize14" />
     </RelativeLayout>
 
     <RelativeLayout
         android:layout_width="@dimen/size0"
         android:layout_height="wrap_content"
-        android:layout_weight="1"
-        android:paddingRight="@dimen/size5">
+        android:layout_weight="1">
 
         <TextView
+            android:paddingRight="@dimen/size10"
             android:id="@+id/tv_OTCEntrustTodayType"
             android:layout_width="match_parent"
             android:layout_height="wrap_content"
@@ -117,9 +115,10 @@
             android:maxLines="1"
             android:text="--"
             android:textColor="@color/hushenTab_titleColor"
-            android:textSize="@dimen/txtSize13" />
+            android:textSize="@dimen/txtSize14" />
 
         <TextView
+            android:paddingRight="@dimen/size10"
             android:id="@+id/tv_OTCEntrustTodayState"
             android:layout_width="match_parent"
             android:layout_height="wrap_content"
@@ -130,7 +129,7 @@
             android:maxLines="1"
             android:text="--"
             android:textColor="@color/hushenTab_titleColor"
-            android:textSize="@dimen/txtSize13" />
+            android:textSize="@dimen/txtSize14" />
     </RelativeLayout>
 
 </LinearLayout>
