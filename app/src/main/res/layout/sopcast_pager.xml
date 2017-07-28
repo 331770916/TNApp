@@ -27,16 +27,23 @@
         <FrameLayout
             android:layout_width="match_parent"
             android:layout_height="match_parent">
-            <com.handmark.pulltorefresh.library.PullToRefreshListView
-                android:id="@+id/lvSopCast"
+            <LinearLayout
                 android:layout_width="match_parent"
                 android:layout_height="match_parent"
-                android:layout_marginTop="@dimen/size28"
-
-                android:divider="@null"
-                android:scrollbars="none"
-                app:ptrAnimationStyle="flip"
-                app:ptrMode="both" />
+                android:orientation="vertical">
+                <include
+                    android:id="@+id/itemSopcast"
+                    layout="@layout/item_sopcast_pager"/>
+                <com.handmark.pulltorefresh.library.PullToRefreshListView
+                    android:id="@+id/lvSopCast"
+                    android:layout_width="match_parent"
+                    android:layout_height="match_parent"
+                    android:layout_marginTop="@dimen/size3"
+                    android:divider="@null"
+                    android:scrollbars="none"
+                    app:ptrAnimationStyle="flip"
+                    app:ptrMode="both" />
+            </LinearLayout>
             <RelativeLayout
                 android:id="@+id/goTop"
                 android:layout_width="@dimen/size100"

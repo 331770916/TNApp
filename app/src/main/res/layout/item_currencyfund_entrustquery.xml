@@ -11,6 +11,7 @@
         android:gravity="center">
 
         <LinearLayout
+            android:paddingLeft="@dimen/size10"
             android:layout_width="0dp"
             android:layout_height="wrap_content"
             android:layout_weight="1"
@@ -22,21 +23,21 @@
                 android:layout_width="match_parent"
                 android:layout_height="0dp"
                 android:layout_weight="1"
-                android:gravity="center"
+                android:gravity="center|start"
                 android:text="--"
                 android:textStyle="bold"
                 android:textColor="@color/bkColor"
-                android:textSize="15sp" />
+                android:textSize="@dimen/txtSize15" />
 
             <TextView
                 android:id="@+id/tv_HBJJWTstockCode"
                 android:layout_width="match_parent"
                 android:layout_height="0dp"
                 android:layout_weight="1"
-                android:gravity="center"
+                android:gravity="center|start"
                 android:text="--"
                 android:textColor="@color/bkColor"
-                android:textSize="11sp" />
+                android:textSize="@dimen/txtSize14" />
         </LinearLayout>
 
         <LinearLayout
@@ -54,7 +55,7 @@
                 android:gravity="center"
                 android:text="--"
                 android:textColor="@color/bkColor"
-                android:textSize="11sp" />
+                android:textSize="@dimen/txtSize14" />
 
             <TextView
                 android:id="@+id/tv_HBJJWTTime"
@@ -64,11 +65,12 @@
                 android:gravity="center"
                 android:text="--"
                 android:textColor="@color/bkColor"
-                android:textSize="11sp" />
+                android:textSize="@dimen/txtSize14" />
         </LinearLayout>
 
 
         <LinearLayout
+            android:paddingRight="@dimen/size20"
             android:layout_width="0dp"
             android:layout_height="wrap_content"
             android:layout_weight="1"
@@ -80,23 +82,24 @@
                 android:layout_width="match_parent"
                 android:layout_height="0dp"
                 android:layout_weight="1"
-                android:gravity="center"
+                android:gravity="center|end"
                 android:text="--"
                 android:textColor="@color/bkColor"
-                android:textSize="11sp" />
+                android:textSize="@dimen/txtSize14" />
 
             <TextView
                 android:id="@+id/tv_HBJJWTEntrustMoney"
                 android:layout_width="match_parent"
                 android:layout_height="0dp"
                 android:layout_weight="1"
-                android:gravity="center"
+                android:gravity="center|end"
                 android:text="--"
                 android:textColor="@color/bkColor"
-                android:textSize="11sp" />
+                android:textSize="@dimen/txtSize14" />
         </LinearLayout>
 
         <LinearLayout
+            android:paddingRight="@dimen/size10"
             android:layout_width="0dp"
             android:layout_height="wrap_content"
             android:layout_weight="1"
@@ -108,20 +111,20 @@
                 android:layout_width="match_parent"
                 android:layout_height="0dp"
                 android:layout_weight="1"
-                android:gravity="center"
+                android:gravity="center|end"
                 android:text="--"
                 android:textColor="@color/bkColor"
-                android:textSize="11sp" />
+                android:textSize="@dimen/txtSize14" />
 
             <TextView
                 android:id="@+id/tv_HBJJWTstate"
                 android:layout_width="match_parent"
                 android:layout_height="0dp"
                 android:layout_weight="1"
-                android:gravity="center"
+                android:gravity="center|end"
                 android:text="--"
                 android:textColor="@color/bkColor"
-                android:textSize="11sp" />
+                android:textSize="@dimen/txtSize14" />
         </LinearLayout>
 
     </LinearLayout>

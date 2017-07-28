@@ -1,18 +1,13 @@
 package com.tpyzq.mobile.pangu.activity.home.information.adapter;
 
 import android.content.Context;
-import android.text.TextUtils;
 import android.view.LayoutInflater;
 import android.view.View;
 import android.view.ViewGroup;
 import android.widget.BaseAdapter;
-import android.widget.ImageView;
-import android.widget.RelativeLayout;
 import android.widget.TextView;
 import com.tpyzq.mobile.pangu.R;
 import com.tpyzq.mobile.pangu.data.InformationEntity;
-import com.tpyzq.mobile.pangu.util.Helper;
-
 import java.text.SimpleDateFormat;
 import java.util.ArrayList;
 import java.util.Calendar;
@@ -25,20 +20,20 @@ public class SopCastAdapter extends BaseAdapter {
     private static SimpleDateFormat sf = new SimpleDateFormat("yyyy-MM-dd");
     private Context context;
     private ArrayList<InformationEntity> list;
+    private TextView tvDay,tvDate;
     private String currentDay;
 
     public SopCastAdapter(Context context) {
         this.context = context;
     }
 
-    public void setList(ArrayList<InformationEntity> list){
+    public void setList(ArrayList<InformationEntity> list,TextView tv1,TextView tv2){
         this.list=list;
+        this.tvDay = tv1;
+        this.tvDate = tv2;
         notifyDataSetChanged();
     }
 
-    public void setCurrentDay(String currentDay) {
-        this.currentDay = currentDay;
-    }
 
     @Override
     public int getCount() {
@@ -67,9 +62,9 @@ public class SopCastAdapter extends BaseAdapter {
         if(convertView == null){
             viewHolder = new ViewHolder();
             convertView = LayoutInflater.from(context).inflate(R.layout.item_sopcast_pager,null);
-            viewHolder.rlTop = (RelativeLayout)convertView.findViewById(R.id.rlTop);
-            viewHolder.tvDay = (TextView) convertView.findViewById(R.id.tvDay);
-            viewHolder.tvDate = (TextView) convertView.findViewById(R.id.tvDate);
+            convertView.findViewById(R.id.rlTop).setVisibility(View.GONE);
+            convertView.findViewById(R.id.rlLeft).setVisibility(View.VISIBLE);
+            convertView.findViewById(R.id.rlRight).setVisibility(View.VISIBLE);
             viewHolder.tvTime = (TextView) convertView.findViewById(R.id.tvTime);
             viewHolder.tvTitle = (TextView) convertView.findViewById(R.id.tvTitle);
             viewHolder.tvContent = (TextView) convertView.findViewById(R.id.tvContent);
@@ -79,22 +74,14 @@ public class SopCastAdapter extends BaseAdapter {
         }
         InformationEntity informationBean = list.get(position);
         String date = informationBean.getDate();                    //日期
-        if(TextUtils.isEmpty(currentDay)){
-            currentDay = date;
-            viewHolder.rlTop.setVisibility(View.VISIBLE);
-        }else{
-            if(date.equals(currentDay))
-                viewHolder.rlTop.setVisibility(View.GONE);
-            else {
-                viewHolder.rlTop.setVisibility(View.VISIBLE);
-                currentDay = date;
-            }
-        }
+        currentDay = date;
+        if(tvDay!=null)
+            tvDay.setText(getWeekOfDate(getDate(currentDay)));
+        if(tvDate!=null)
+            tvDate.setText(currentDay);
         String times = informationBean.getTime();                  //时间
         String title = informationBean.getTitle();    //标题
         String content = informationBean.getDigest();
-        viewHolder.tvDay.setText(getWeekOfDate(getDate(date)));
-        viewHolder.tvDate.setText(date);
         viewHolder.tvTime.setText(times);
         viewHolder.tvTitle.setText(title);
         viewHolder.tvContent.setText(content);
@@ -119,9 +106,6 @@ public class SopCastAdapter extends BaseAdapter {
     }
 
     class ViewHolder{
-        RelativeLayout rlTop;
-        TextView tvDay;
-        TextView tvDate;
         TextView tvTime;
         TextView tvTitle;
         TextView tvContent;

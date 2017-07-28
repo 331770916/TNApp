@@ -86,11 +86,12 @@
         android:paddingTop="@dimen/size10">
 
         <TextView
+            android:paddingLeft="@dimen/size10"
             android:textSize="@dimen/txtSize13"
             android:layout_width="0dp"
             android:layout_height="wrap_content"
             android:layout_weight="1"
-            android:gravity="center"
+            android:gravity="center|start"
             android:text="基金名称"
             android:textColor="@color/newStockTitle" />
 
@@ -104,21 +105,23 @@
             android:textColor="@color/newStockTitle" />
 
         <TextView
+            android:paddingRight="@dimen/size20"
             android:textSize="@dimen/txtSize13"
             android:layout_width="0dp"
             android:layout_height="wrap_content"
             android:layout_weight="1"
-            android:gravity="center"
+            android:gravity="center|end"
             android:text="数量/金额"
             android:textColor="@color/newStockTitle" />
 
 
         <TextView
+            android:paddingRight="@dimen/size10"
             android:textSize="@dimen/txtSize13"
             android:layout_width="0dp"
             android:layout_height="wrap_content"
             android:layout_weight="1"
-            android:gravity="center"
+            android:gravity="center|end"
             android:text="类型/状态"
             android:textColor="@color/newStockTitle" />
     </LinearLayout>

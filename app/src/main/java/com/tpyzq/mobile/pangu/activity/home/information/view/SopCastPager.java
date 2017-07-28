@@ -3,12 +3,16 @@ package com.tpyzq.mobile.pangu.activity.home.information.view;
 import android.content.Context;
 import android.content.Intent;
 import android.support.v4.content.ContextCompat;
+import android.text.TextUtils;
+import android.view.LayoutInflater;
 import android.view.View;
 import android.widget.AdapterView;
 import android.widget.LinearLayout;
 import android.widget.ListView;
 import android.widget.ProgressBar;
 import android.widget.RelativeLayout;
+import android.widget.TextView;
+
 import com.handmark.pulltorefresh.library.PullToRefreshBase;
 import com.handmark.pulltorefresh.library.PullToRefreshListView;
 import com.tpyzq.mobile.pangu.R;
@@ -35,6 +39,7 @@ public class SopCastPager extends BasePager implements InterfaceCollection.Inter
     private ProgressBar pb_SopCastPager;            //菊花
     private RelativeLayout rlSopCast;               //包裹整个布局的  RelativeLayout
     private LinearLayout llSopCastJiaZai;          //内容为空的   图片
+    private TextView tvDay,tvDate;
     private boolean isFirst = true;
     private String classno;
 
@@ -52,6 +57,9 @@ public class SopCastPager extends BasePager implements InterfaceCollection.Inter
         this.classno = params;
         mListView = (PullToRefreshListView) rootView.findViewById(R.id.lvSopCast);
         mListView.setVisibility(View.GONE);         //初始化隐藏 listView
+        View rl = rootView.findViewById(R.id.itemSopcast);
+        tvDay = (TextView) rl.findViewById(R.id.tvDay);
+        tvDate = (TextView) rl.findViewById(R.id.tvDate);
         pb_SopCastPager = (ProgressBar) rootView.findViewById(R.id.pb_SopCastPager);    //显示菊花
         rlSopCast = (RelativeLayout) rootView.findViewById(R.id.rlSopCast);              //初始化  背景为灰色
         llSopCastJiaZai = (LinearLayout) rootView.findViewById(R.id.llSopCastJiaZai);
@@ -81,7 +89,6 @@ public class SopCastPager extends BasePager implements InterfaceCollection.Inter
                     mListView.getLoadingLayoutProxy().setReleaseLabel("释放开始刷新");
                     count = 1;
                     list.clear();
-                    adapter.setCurrentDay(null);
                     ifc.queryStreaming("30","2",ZIXUN_NUM,String.valueOf(count),classno,SopCastPager.this);
                 } else if (refreshView.isShownFooter()) {
                     //判断尾布局是否可见，如果可见执行上拉加载更多
@@ -105,10 +112,11 @@ public class SopCastPager extends BasePager implements InterfaceCollection.Inter
     }
 
     @Override
-    public void onClick(View v) {
+    public void onClick(final View v) {
         mListView.getRefreshableView().smoothScrollToPosition(0);
-        adapter.notifyDataSetInvalidated();
+        adapter.setList(list,tvDay,tvDate);
     }
+
 
     @Override
     public void callResult(ResultInfo info) {
@@ -122,7 +130,7 @@ public class SopCastPager extends BasePager implements InterfaceCollection.Inter
                     list = (ArrayList<InformationEntity>)obj;
                 else
                     list.addAll((ArrayList<InformationEntity>)obj);
-                adapter.setList(list);
+                adapter.setList(list,tvDay,tvDate);
                 mListView.onRefreshComplete();
             }
         }else{
