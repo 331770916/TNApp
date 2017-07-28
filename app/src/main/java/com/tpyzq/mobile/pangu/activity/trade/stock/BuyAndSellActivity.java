@@ -150,7 +150,9 @@ public class BuyAndSellActivity extends BaseActivity implements View.OnClickList
     private final String TAG = BuyAndSellActivity.class.getSimpleName();
     private String stockName = "";
     private boolean isClearHeadData = true;//是否清头部数据，用于修改股票代码
+    private boolean isSearchAgin = true;//是否再次查询，searchStock返回-5时，走柜台；再次点击还会走搜索
     private String delist = "";//股票退市提示信息
+    private boolean isChangeSearchStatus = true;
 
     @Override
     public void initView() {
@@ -703,6 +705,11 @@ public class BuyAndSellActivity extends BaseActivity implements View.OnClickList
         public void beforeTextChanged(CharSequence s, int start, int count, int after) {
             //股票代码输入6位之后，修改编辑框文字，清空头部信息
             if (s.length() == 6){
+                if (isChangeSearchStatus&&!isSearchAgin) {
+                    isSearchAgin = true;
+                } else {
+                    isChangeSearchStatus = true;
+                }
                 if (isClearHeadData) {//请求头部数据返回设置编辑框不清空头部数据
                     clearView(false);
                 } else {
@@ -723,7 +730,7 @@ public class BuyAndSellActivity extends BaseActivity implements View.OnClickList
             if(!Helper.isNumeric(code)){
                 Len = 2;
             }
-            if(code.length() >= Len){
+            if(code.length() >= Len&&isSearchAgin){
                 searchNetStock(code);
             }
 //            switch (code.length()) {
@@ -1008,6 +1015,7 @@ public class BuyAndSellActivity extends BaseActivity implements View.OnClickList
         String stocknum = et_num.getText().toString();
         switch (v.getId()) {
             case R.id.iv_delete:
+                isSearchAgin = true;
                 clearView(true);
                 break;
             case R.id.iv_sub_price:
@@ -1024,7 +1032,8 @@ public class BuyAndSellActivity extends BaseActivity implements View.OnClickList
                 break;
             case R.id.iv_add_sum:
                 String tvSumText = tv_sum.getText().toString();
-                if (!TextUtils.isEmpty(tvSumText) && Helper.isDecimal(tvSumText) && amount < Integer.valueOf(tvSumText)) {
+//                if (!TextUtils.isEmpty(tvSumText) && Helper.isDecimal(tvSumText) && amount < Integer.valueOf(tvSumText)) {
+                if (!TextUtils.isEmpty(tvSumText) && Helper.isDecimal(tvSumText)) {
                     amount += 100;
                     et_num.setText(amount + "");
                 } else {
@@ -1321,6 +1330,9 @@ public class BuyAndSellActivity extends BaseActivity implements View.OnClickList
             @Override
             public void onError(Call call, Exception e, int id) {
                 LogHelper.e("BuyAndSellActivity", e.toString());
+                if (stockInfo.length()==6) {
+                    confirmCode(stockInfo);
+                }
             }
 
             @Override
@@ -1366,6 +1378,9 @@ public class BuyAndSellActivity extends BaseActivity implements View.OnClickList
                         if (null!=stockPw&&stockPw.isShowing()) {
                             stockPw.dismiss();
                         }
+                        if (stockInfo.length()==6) {
+                            confirmCode(stockInfo);
+                        }
                     }
                 } catch (JSONException e) {
                     e.printStackTrace();
@@ -1395,6 +1410,7 @@ public class BuyAndSellActivity extends BaseActivity implements View.OnClickList
                     return;
                 }
                 try {
+                    isSearchAgin = false;
                     JSONObject jsonObject = new JSONObject(response);
                     String code = jsonObject.optString("code");
                     String msg = jsonObject.optString("msg");
@@ -1421,10 +1437,45 @@ public class BuyAndSellActivity extends BaseActivity implements View.OnClickList
                         isClearHeadData = false;
                         et_price.setText(LAST_PRICE);
                         String content = market + g_code;
+                        isChangeSearchStatus = false;
                         et_stock_code.setText(stockName + "  "+content);
                         et_price.setEnabled(true);
                         et_price.requestFocus();
                         mKeyBoardUtil.hideAllKeyBoard();
+
+                        String closePrice = jsonObject.optString("CLOSE_PRICE");
+                        if (TextUtils.isEmpty(closePrice)) {
+                            closePrice = "0.00";
+                        }
+                        timeShareData.mClosePrice = Float.parseFloat(closePrice);
+
+                        price_sell[0] = fundPirce(stockCode,jsonObject.optString("SALE_PRICE1"));
+                        price_sell[1] = fundPirce(stockCode,jsonObject.optString("SALE_PRICE2"));
+                        price_sell[2] = fundPirce(stockCode,jsonObject.optString("SALE_PRICE3"));
+                        price_sell[3] = fundPirce(stockCode,jsonObject.optString("SALE_PRICE4"));
+                        price_sell[4] = fundPirce(stockCode,jsonObject.optString("SALE_PRICE5"));
+                        sum_sell[0] = fundPirce(stockCode,jsonObject.optString("SALE_AMOUNT1"));
+                        sum_sell[1] = fundPirce(stockCode,jsonObject.optString("SALE_AMOUNT2"));
+                        sum_sell[2] = fundPirce(stockCode,jsonObject.optString("SALE_AMOUNT3"));
+                        sum_sell[3] = fundPirce(stockCode,jsonObject.optString("SALE_AMOUNT4"));
+                        sum_sell[4] = fundPirce(stockCode,jsonObject.optString("SALE_AMOUNT5"));
+                        price_buy[0] = fundPirce(stockCode,jsonObject.optString("BUY_PRICE1"));
+                        price_buy[1] = fundPirce(stockCode,jsonObject.optString("BUY_PRICE2"));
+                        price_buy[2] = fundPirce(stockCode,jsonObject.optString("BUY_PRICE3"));
+                        price_buy[3] = fundPirce(stockCode,jsonObject.optString("BUY_PRICE4"));
+                        price_buy[4] = fundPirce(stockCode,jsonObject.optString("BUY_PRICE5"));
+                        sum_buy[0] = fundPirce(stockCode,jsonObject.optString("SALE_AMOUNT1"));
+                        sum_buy[1] = fundPirce(stockCode,jsonObject.optString("SALE_AMOUNT2"));
+                        sum_buy[2] = fundPirce(stockCode,jsonObject.optString("SALE_AMOUNT3"));
+                        sum_buy[3] = fundPirce(stockCode,jsonObject.optString("SALE_AMOUNT4"));
+                        sum_buy[4] = fundPirce(stockCode,jsonObject.optString("SALE_AMOUNT5"));
+                        sellAdapter.setYesterdayPrice(closePrice, stockCode);
+                        buyAdapter.setYesterdayPrice(closePrice, stockCode);
+
+                        String down = string2doubleS(TransitionUtils.string2double(closePrice) * 0.9 + "");
+                        String up = string2doubleS(TransitionUtils.string2double(closePrice) * 1.1 + "");
+                        tv_drop.setText("跌停:" + down);
+                        tv_rise.setText("涨停:" + up);
                     } else {
                         Helper.getInstance().showToast(BuyAndSellActivity.this, msg);
                     }
