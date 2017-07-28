@@ -68,7 +68,6 @@ public class OTC_SubscriptionActivity extends BaseActivity implements View.OnCli
     private TextView tvOTC_ChooseOTCProduct, tvOTC_ProductNameValue, tvOTC_ProductJingZhiValue, tvOTC_ExpendableCapitalValue = null;                              //OTC产品选择按钮，产品名称，净值，可用资金
     private Button bnOTC_SubscriptionQueDing;
     private HashMap<String, String> map;
-    private ArrayList<OTC_SubscriptionListEntity> list;                             //OTC产品列表的数据源
     private int point = -1;
     private Dialog submit;
     private String mSession ;
@@ -79,7 +78,6 @@ public class OTC_SubscriptionActivity extends BaseActivity implements View.OnCli
     @Override
     public void initView() {
         mSession = SpUtils.getString(this, "mSession", "");                                  //获取seesion
-        getListMsg(mSession);                                                                               //初始化获取OTC产品列表信息
         this.etOTC_ProductCode = (EditText) this.findViewById(R.id.etOTC_ProductCode);
         this.etOTC_SubscriptionMoney = (EditText) this.findViewById(R.id.etOTC_SubscriptionMoney);
         this.tvOTC_ChooseOTCProduct = (TextView) this.findViewById(R.id.tvOTC_ChooseOTCProduct);
@@ -110,13 +108,18 @@ public class OTC_SubscriptionActivity extends BaseActivity implements View.OnCli
 
             @Override
             public void afterTextChanged(Editable s) {
-                if (s.length() == MAXNUM) {                                        //当输入的代码为6位数时请求数据
-                    getAffirmMsg(mSession, s.toString());                            //根据输入的代码获取确认信息
+                if (s.length() == MAXNUM) {
+                    etOTC_SubscriptionMoney.setFocusableInTouchMode(true); //当输入的代码为6位数时请求数据
+                    getAffirmMsg(mSession, s.toString());
+                    //根据输入的代码获取确认信息
                 } else if (s.length() > 0 && s.length() < MAXNUM) {
+                    etOTC_SubscriptionMoney.setFocusableInTouchMode(false);
+                    etOTC_SubscriptionMoney.setText("");
                     //给产品名称，净值，可用资金赋值
                     tvOTC_ProductNameValue.setText("");
                     tvOTC_ProductJingZhiValue.setText("");
                     tvOTC_ExpendableCapitalValue.setText("");
+                    map = null;
                 } else if (s.length() == 0) {
                     etOTC_SubscriptionMoney.setFocusableInTouchMode(false);      //当代码输入框内容为空时，使金额输入框失去焦点
                 }
@@ -155,58 +158,7 @@ public class OTC_SubscriptionActivity extends BaseActivity implements View.OnCli
 
     }
 
-    /**
-     * 获取产品列表信息
-     */
-    private void getListMsg(String mSession) {
-        list = new ArrayList<OTC_SubscriptionListEntity>();
-        HashMap map1 = new HashMap();
-        HashMap map2 = new HashMap();
-        map2.put("OPR_TYPE", "2");
-        map2.put("FLAG", "true");
-        map2.put("SEC_ID", "tpyzq");
-        map1.put("funcid", "300502");
-        map1.put("token", mSession);
-        map1.put("parms", map2);
-        NetWorkUtil.getInstence().okHttpForPostString(TAG, ConstantUtil.URL_JY, map1, new StringCallback() {
-            @Override
-            public void onError(Call call, Exception e, int id) {
-                LogUtil.i(TAG, e.toString());
-            }
 
-            @Override
-            public void onResponse(String response, int id) {
-                if (TextUtils.isEmpty(response)) {
-                    return;
-                }
-                Gson gson = new Gson();
-                Type type = new TypeToken<OTC_SubscriptionListMasBean>() {
-                }.getType();
-                OTC_SubscriptionListMasBean bean = gson.fromJson(response, type);
-                String code = bean.getCode();
-                List<OTC_SubscriptionListMasBean.DataBean> data = bean.getData();
-                if (code.equals("-6")) {
-                    Intent intent = new Intent(OTC_SubscriptionActivity.this, TransactionLoginActivity.class);
-                    startActivity(intent);
-                    OTC_SubscriptionActivity.this.finish();
-                } else if (code.equals("0") && data != null) {
-                    for (int i = 0; i < data.size(); i++) {
-                        OTC_SubscriptionListMasBean.DataBean dataBean = data.get(i);
-                        String prod_name = dataBean.getPROD_NAME();     //产品名称
-                        String prod_code = dataBean.getPROD_CODE();     //产品代码
-                        OTC_SubscriptionListEntity listIntent = new OTC_SubscriptionListEntity();
-                        listIntent.setStockName(prod_name);
-                        listIntent.setStockCode(prod_code);
-                        listIntent.setFlag(false);
-                        list.add(listIntent);
-                    }
-                } else {
-                    ResultDialog.getInstance().showText("网络异常");
-                }
-            }
-        });
-
-    }
 
     /**
      * 获取确认信息
@@ -377,14 +329,17 @@ public class OTC_SubscriptionActivity extends BaseActivity implements View.OnCli
 
                 Intent intent = new Intent();
                 intent.setClass(this, OTC_ProductActivity.class);
-                intent.putExtra("list", list);
-                intent.putExtra("point", point);
                 startActivityForResult(intent, REQUSET);
                 break;
             case R.id.bnOTC_SubscriptionQueDing:        //点击确定 弹出 确认信息窗口
                 String SubscriptionMoney = etOTC_SubscriptionMoney.getText().toString();       //获取输入的认购金额
                 String stockCode = etOTC_ProductCode.getText().toString();          //获取输入的 输入代码
+                if (map==null){
+                    map = new HashMap<>();
+                    map.put("prod_name","");
+                }
                 dialog = new OTC_SubscriptionDialog(this,"OTC认购", map.get("prod_name"), SubscriptionMoney, stockCode, this);
+
                 if (Helper.getInstance().isNeedShowRiskDialog()) {
                     Helper.getInstance().showCorpDialog(this, new CancelDialog.PositiveClickListener() {
                         @Override
@@ -412,9 +367,8 @@ public class OTC_SubscriptionActivity extends BaseActivity implements View.OnCli
         super.onActivityResult(requestCode, resultCode, data);
         if (requestCode == OTC_SubscriptionActivity.REQUSET && resultCode == RESULT_OK) {//选择otc产品
             dissmissKeyboardUtil();
-            int position = data.getIntExtra("position", -1);
             etOTC_ProductCode.setFocusableInTouchMode(true);
-            etOTC_ProductCode.setText(list.get(position).getStockCode());
+            etOTC_ProductCode.setText(data.getStringExtra("getStockCode"));
             point = data.getIntExtra("position", -1);
             etOTC_ProductCode.setSelection(etOTC_ProductCode.getText().length());
         }
@@ -539,7 +493,7 @@ public class OTC_SubscriptionActivity extends BaseActivity implements View.OnCli
      * 清空数据
      */
     private void wipeData() {
-        etOTC_ProductCode.setText("");
+//        etOTC_ProductCode.setText("");
         etOTC_SubscriptionMoney.setText("");
         tvOTC_ProductNameValue.setText("");
         tvOTC_ProductJingZhiValue.setText("");

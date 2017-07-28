@@ -67,9 +67,7 @@ public class OTC_SubscribeActivity extends BaseActivity implements View.OnClickL
     private EditText etOTC_SGProductCode, etOTC_SubscribeMoney;
     private TextView tvOTC_ChooseOTCSGProduct, tvOTC_SGProductNameValue, tvOTC_SGProductJingZhiValue, tvOTC_SGExpendableCapitalValue;
     private Button bnOTC_SubscribeQueDing;
-    private ArrayList<OTC_SubscribeEntity> list;
     private HashMap<String, String> map;
-    private int point = -1;
     private KeyboardUtil mKeyBoardUtil;
     private ScrollView mScrollView;
     private Dialog submit;
@@ -81,9 +79,7 @@ public class OTC_SubscribeActivity extends BaseActivity implements View.OnClickL
 
     @Override
     public void initView() {
-        mSession = SpUtils.getString(this, "mSession", "");
-        list = new ArrayList<OTC_SubscribeEntity>();
-        getProductList(mSession);                                                                                    //初始化获取产品列表信息
+        mSession = SpUtils.getString(this, "mSession", "");                                                                //初始化获取产品列表信息
         etOTC_SGProductCode = (EditText) this.findViewById(R.id.etOTC_SGProductCode);                             //产品代码输入框
         etOTC_SubscribeMoney = (EditText) this.findViewById(R.id.etOTC_SubscribeMoney);                           //申购金额输入框
         tvOTC_ChooseOTCSGProduct = (TextView) this.findViewById(R.id.tvOTC_ChooseOTCSGProduct);                  //选择OTC产品按钮
@@ -115,8 +111,11 @@ public class OTC_SubscribeActivity extends BaseActivity implements View.OnClickL
             public void afterTextChanged(Editable s) {
                 if (s.length() == MAXNUM) {                                                           //当输入的代码为6位数时请求数据
                     getAffirmMsg(mSession, s.toString());                                              //根据输入的代码获取确认信息
+                    etOTC_SubscribeMoney.setFocusableInTouchMode(true);
                 } else if (s.length() > 0 && s.length() < MAXNUM) {
-                    //给产品名称，净值，可用资金赋值
+                    //给产品名称，净值，
+                    map =null;
+                    etOTC_SubscribeMoney.setFocusableInTouchMode(false);
                     tvOTC_SGProductNameValue.setText("");
                     tvOTC_SGProductJingZhiValue.setText("");
                     tvOTC_SGExpendableCapitalValue.setText("");
@@ -153,58 +152,6 @@ public class OTC_SubscribeActivity extends BaseActivity implements View.OnClickL
         bnOTC_SubscribeQueDing.setEnabled(false);                                                   //初始化使确定按钮不可点击
         bnOTC_SubscribeQueDing.setBackgroundResource(R.drawable.lonin4);                            //初始化使其颜色为灰色
 
-    }
-
-    /**
-     * 网络获取OTC产品列表信息
-     */
-    private void getProductList(String mSession) {
-        HashMap map1 = new HashMap();
-        HashMap map2 = new HashMap();
-        map2.put("OPR_TYPE", "1");
-        map2.put("FLAG", "true");
-        map2.put("SEC_ID", "tpyzq");
-        map1.put("funcid", "300502");
-        map1.put("token", mSession);
-        map1.put("parms", map2);
-        NetWorkUtil.getInstence().okHttpForPostString(TAG, ConstantUtil.URL_JY, map1, new StringCallback() {
-            @Override
-            public void onError(Call call, Exception e, int id) {
-
-            }
-
-            @Override
-            public void onResponse(String response, int id) {
-                if (TextUtils.isEmpty(response)) {
-                    return;
-                }
-
-                Gson gson = new Gson();
-                Type type = new TypeToken<OTC_SubscribeListBean>() {
-                }.getType();
-                OTC_SubscribeListBean bean = gson.fromJson(response, type);
-                String code = bean.getCode();
-                List<OTC_SubscribeListBean.DataBean> data = bean.getData();
-                if (code.equals("-6")) {
-                    Intent intent = new Intent(OTC_SubscribeActivity.this, TransactionLoginActivity.class);
-                    startActivity(intent);
-                    OTC_SubscribeActivity.this.finish();
-                } else if (code.equals("0") && data != null) {
-                    for (int i = 0; i < data.size(); i++) {
-                        OTC_SubscribeListBean.DataBean dataBean = data.get(i);
-                        String prod_name = dataBean.getPROD_NAME();         //产品名称
-                        String prod_code = dataBean.getPROD_CODE();         //产品代码
-                        OTC_SubscribeEntity intentBean = new OTC_SubscribeEntity();
-                        intentBean.setStcokName(prod_name);
-                        intentBean.setStockCode(prod_code);
-                        intentBean.setFlag(false);
-                        list.add(intentBean);
-                    }
-                } else {
-                    ResultDialog.getInstance().showText("网络异常");
-                }
-            }
-        });
     }
 
 
@@ -342,7 +289,7 @@ public class OTC_SubscribeActivity extends BaseActivity implements View.OnClickL
                                             }
                                         });
                                     } else {
-                                        setFocus(false);
+                                        setFocus(true);
                                         bnOTC_SubscribeQueDing.setText("已售罄");
                                         bnOTC_SubscribeQueDing.setBackgroundResource(R.drawable.lonin4);                //背景灰色
                                     }
@@ -382,10 +329,8 @@ public class OTC_SubscribeActivity extends BaseActivity implements View.OnClickL
         super.onActivityResult(requestCode, resultCode, data);
         if (requestCode == OTC_SubscriptionActivity.REQUSET && resultCode == RESULT_OK) {
             dissmissKeyboardUtil();
-            int position = data.getIntExtra("position", -1);
             etOTC_SGProductCode.setFocusableInTouchMode(true);
-            etOTC_SGProductCode.setText(list.get(position).getStockCode());
-            point = data.getIntExtra("position", -1);
+            etOTC_SGProductCode.setText(data.getStringExtra("getStockCode"));
             etOTC_SGProductCode.setSelection(etOTC_SGProductCode.getText().length());
         }
         if (requestCode == REQAGREEMENTCODE && resultCode == RESULT_OK) {//签署协议成功返回
@@ -470,13 +415,15 @@ public class OTC_SubscribeActivity extends BaseActivity implements View.OnClickL
                 break;
             case R.id.tvOTC_ChooseOTCSGProduct:                 //跳转 选择OTC产品界面
                 Intent intent = new Intent(this, OTC_SubscribeProductActivity.class);
-                intent.putExtra("list", list);
-                intent.putExtra("point", point);
                 startActivityForResult(intent, REQUSET);
                 break;
             case R.id.bnOTC_SubscribeQueDing:                   //点击弹出申购确认信息
                 String SubscriptionMoney = etOTC_SubscribeMoney.getText().toString();       //获取输入的认购金额
                 String stockCode = etOTC_SGProductCode.getText().toString();          //获取输入的 输入代码
+                if (map==null){
+                    map =new HashMap<>();
+                    map.put("prodta_no","");
+                }
                 //实例化PopupWindow
                 dialog = new OTC_SubscriptionDialog(this,"OTC申购",map.get("prodta_no"),SubscriptionMoney, stockCode, this);
                 if (Helper.getInstance().isNeedShowRiskDialog()) {
@@ -542,6 +489,9 @@ public class OTC_SubscribeActivity extends BaseActivity implements View.OnClickL
                 }
             }
         });
+        if (null!=dialog&&dialog.isShowing()){
+            dialog.dismiss();
+        }
     }
 
 
@@ -549,12 +499,10 @@ public class OTC_SubscribeActivity extends BaseActivity implements View.OnClickL
      * 清空数据
      */
     private void wipeData() {
-        etOTC_SGProductCode.setText("");
         etOTC_SubscribeMoney.setText("");
         tvOTC_SGProductNameValue.setText("");
         tvOTC_SGProductJingZhiValue.setText("");
         tvOTC_SGExpendableCapitalValue.setText("");
-        point=-1;
     }
 
     private void setFocus(Boolean isFocus){
