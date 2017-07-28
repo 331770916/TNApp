@@ -869,9 +869,10 @@ public class TransactionLoginActivity extends BaseActivity implements ICallbackR
                 Lomboz();               //下载插件
             }
             setPassEdit();
-            KeyListener();
+//            KeyListener();
             if (!TextUtils.isEmpty(mAccount_et.getText().toString())) {
-                showKeyboardWithHeader();
+                mAccount_et.requestFocus();
+//                showKeyboardWithHeader();
             }
         } else {
             setPassEdit();

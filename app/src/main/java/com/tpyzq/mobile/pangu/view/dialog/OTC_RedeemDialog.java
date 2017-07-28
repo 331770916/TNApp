@@ -70,7 +70,9 @@ public class OTC_RedeemDialog extends BaseDialog implements View.OnClickListener
 
     @Override
     public void initData() {
-        tvOTC_SHChanPinMingCheng.setText(map.get("prod_name"));
+        if (!TextUtils.isEmpty(map.get("prod_name"))) {
+            tvOTC_SHChanPinMingCheng.setText(map.get("prod_name"));
+        }
         tvOTC_SHChanPinDaiMa.setText(stockCode);
         tvOTC_SHShenGouFenE.setText(RedeemShare);
 
@@ -137,28 +139,6 @@ public class OTC_RedeemDialog extends BaseDialog implements View.OnClickListener
                 }catch (JSONException e){
                     e.printStackTrace();
                 }
-                /*
-                Gson gson = new Gson();
-                Type type = new TypeToken<OTC_RedeemCommit>() {}.getType();
-                OTC_RedeemCommit bean = gson.fromJson(response, type);
-                String code = bean.getCode();
-                String msg = bean.getMsg();
-                if (code.equals("-6")) {
-                    Intent intent = new Intent(context, TransactionLoginActivity.class);
-                    context.startActivity(intent);
-                    dismiss();
-                    ((Activity)context).finish();
-                } else
-                if (code.equals("0")) {
-                    ResultDialog.getInstance().show("委托已提交", R.mipmap.duigou);
-                    isOk.callBack(true);
-                    dismiss();
-                } else {
-                    MistakeDialog.showDialog(msg, mActivity);
-                    isOk.callBack(false);
-                    dismiss();
-                }
-                 */
             }
         });
     }

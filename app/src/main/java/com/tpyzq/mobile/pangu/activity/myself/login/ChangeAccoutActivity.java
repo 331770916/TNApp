@@ -774,9 +774,10 @@ public class ChangeAccoutActivity extends BaseActivity implements ICallbackResul
                 Lomboz();               //下载插件
             }
             setPassEdit();
-            KeyListener();
+//            KeyListener();
             if (!TextUtils.isEmpty(mAccount_et.getText().toString())) {
-                showKeyboardWithHeader();
+//                showKeyboardWithHeader();
+                mAccount_et.requestFocus();
             }
         } else {
             setPassEdit();

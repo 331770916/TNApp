@@ -47,7 +47,6 @@ public class OTC_RedeemActivity extends BaseActivity implements View.OnClickList
     private TextView tvOTC_ChooseOTCSHProduct, tvOTC_SHProductNameValue,
             tvOTC_SHProductJingZhiValue, tvOTC_SHExpendableCapitalValue;
     private Button bnOTC_RedeemQueDing;
-    private ArrayList<OTC_RedeemEntity> list;
     private HashMap<String, String> map;
     private int point = -1;
     private KeyboardUtil mKeyBoardUtil;
@@ -59,8 +58,6 @@ public class OTC_RedeemActivity extends BaseActivity implements View.OnClickList
         String prod_code = intent.getStringExtra("prod_code");//从 份额页面传过来的  赎回 股票代码
 
         final String mSession = SpUtils.getString(this, "mSession", "");
-        list = new ArrayList<OTC_RedeemEntity>();
-        getProductList(mSession);
         etOTC_SHProductCode = (EditText) this.findViewById(R.id.etOTC_SHProductCode);                    //产品代码输入框
         etOTC_RedeemShare = (EditText) this.findViewById(R.id.etOTC_RedeemShare);                        //赎回份额输入框
         tvOTC_ChooseOTCSHProduct = (TextView) this.findViewById(R.id.tvOTC_ChooseOTCSHProduct);         //选择持仓OTC按钮
@@ -96,14 +93,16 @@ public class OTC_RedeemActivity extends BaseActivity implements View.OnClickList
             @Override
             public void afterTextChanged(Editable s) {
                 if (s.length() == MAXNUM) {                                                           //当输入的代码为6位数时请求数据
+                    etOTC_RedeemShare.setFocusableInTouchMode(true);
                     getAffirmMsg(mSession, s.toString());                                              //根据输入的代码获取确认信息
-                } else if (s.length() > 0 && s.length() < MAXNUM) {
+                } else {
+                    map = null;
+                    etOTC_RedeemShare.setFocusableInTouchMode(false);
                     //给产品名称，净值，可用资金赋值
+                    etOTC_RedeemShare.setText("");
                     tvOTC_SHProductNameValue.setText("");
                     tvOTC_SHProductJingZhiValue.setText("");
                     tvOTC_SHExpendableCapitalValue.setText("");
-                } else if (s.length() == 0) {
-                    etOTC_RedeemShare.setFocusableInTouchMode(false);                            //当代码输入框内容为空时，使金额输入框失去焦点
                 }
             }
         });
@@ -138,86 +137,7 @@ public class OTC_RedeemActivity extends BaseActivity implements View.OnClickList
     }
 
 
-    /**
-     * 网络获取OTC持仓列表信息
-     */
-    private void getProductList(String mSession) {
-        HashMap map1 = new HashMap();
-        HashMap map2 = new HashMap();
-        map2.put("FLAG", "true");
-        map2.put("SEC_ID", "tpyzq");
-        map1.put("funcid", "300501");
-        map1.put("token", mSession);
-        map1.put("parms", map2);
-        NetWorkUtil.getInstence().okHttpForPostString(TAG, ConstantUtil.URL_JY, map1, new StringCallback() {
-            @Override
-            public void onError(Call call, Exception e, int id) {
 
-            }
-
-            @Override
-            public void onResponse(String response, int id) {
-//                Log.i(TAG, response);
-                if (TextUtils.isEmpty(response)) {
-                    return;
-                }
-                /*Gson gson = new Gson();
-                Type type = new TypeToken<OTC_ChiCangListBean>() {}.getType();
-                OTC_ChiCangListBean bean = gson.fromJson(response, type);
-                String code = bean.getCode();
-                List<OTC_ChiCangListBean.DataBean> data = bean.getData();
-                if (code.equals("-6")) {
-                    Intent intent = new Intent(OTC_RedeemActivity.this, TransactionLoginActivity.class);
-                    startActivity(intent);
-                    OTC_RedeemActivity.this.finish();
-                } else
-                if (code.equals("0") && data != null) {
-                    for (int i = 0; i < data.size(); i++) {
-                        OTC_ChiCangListBean.DataBean dataBean = data.get(i);
-                        String prod_name = dataBean.getPROD_NAME();         //产品名称
-                        String prod_code = dataBean.getPROD_CODE();         //产品代码
-                        OTC_RedeemIntentBean intentBean = new OTC_RedeemIntentBean();
-                        intentBean.setStockName(prod_name);
-                        intentBean.setStockCode(prod_code);
-                        intentBean.setFlag(false);
-                        list.add(intentBean);
-                    }
-                }*/
-
-                try {
-                    JSONObject jsonObject = new JSONObject(response);
-                    String code = jsonObject.getString("code");
-                    if ("-6".equals(code)) {
-                        Intent intent = new Intent(OTC_RedeemActivity.this, TransactionLoginActivity.class);
-                        startActivity(intent);
-                        OTC_RedeemActivity.this.finish();
-                    } else if ("0".equals(code)) {
-                        JSONArray data = jsonObject.getJSONArray("data");
-                        for (int i = 0; i < data.length(); i++) {
-                            JSONObject jsonObject1 = data.getJSONObject(i);
-                            String otc_market_value = jsonObject1.getString("OTC_MARKET_VALUE"); //市值
-                            JSONArray otc_list = jsonObject1.getJSONArray("OTC_LIST");
-                            for (int j = 0; j < otc_list.length(); j++) {
-                                JSONObject item = otc_list.getJSONObject(j);
-                                String prod_name = item.getString("PROD_NAME");
-                                String prod_code = item.getString("PROD_CODE");
-                                OTC_RedeemEntity intentBean = new OTC_RedeemEntity();
-                                intentBean.setStockName(prod_name);
-                                intentBean.setStockCode(prod_code);
-                                intentBean.setFlag(false);
-                                list.add(intentBean);
-                            }
-                        }
-
-                    } else {
-                        ResultDialog.getInstance().showText("网络异常");
-                    }
-                } catch (JSONException e) {
-                    e.printStackTrace();
-                }
-            }
-        });
-    }
 
 
     /**
@@ -245,43 +165,6 @@ public class OTC_RedeemActivity extends BaseActivity implements View.OnClickList
                 if (TextUtils.isEmpty(response)) {
                     return;
                 }
-                /*Gson gson = new Gson();
-                Type type = new TypeToken<OTC_RedeemAffirmMsgBean>() {}.getType();
-                OTC_RedeemAffirmMsgBean bean = gson.fromJson(response, type);
-                String code = bean.getCode();
-                String msg = bean.getMsg();
-                List<OTC_RedeemAffirmMsgBean.DataBean> data = bean.getData();
-                if (code.equals("-6")) {
-                    Intent intent = new Intent(OTC_RedeemActivity.this, TransactionLoginActivity.class);
-                    startActivity(intent);
-                    OTC_RedeemActivity.this.finish();
-                } else
-                if (code.equals("0") && data != null) {
-                    for (int i = 0; i < data.size(); i++) {
-                        map = new HashMap<String, String>();
-                        OTC_RedeemAffirmMsgBean.DataBean dataBean = data.get(i);
-                        String prod_name = dataBean.getPROD_NAME();                //产品名称
-                        String prodta_no = dataBean.getPRODTA_NO();                //产品TA编号
-                        String last_price = dataBean.getLAST_PRICE();              //产品净值
-                        String enable_amount = dataBean.getENABLE_AMOUNT();        //可赎
-
-                        //给产品名称，净值，可用资金赋值
-                        tvOTC_SHProductNameValue.setText(prod_name);
-                        tvOTC_SHProductJingZhiValue.setText(last_price);
-                        tvOTC_SHExpendableCapitalValue.setText(enable_amount);
-
-                        map.put("prod_name", prod_name);
-                        map.put("prodta_no", prodta_no);
-                    }
-                    etOTC_RedeemShare.setFocusableInTouchMode(true);          //数据请求完毕 使认购金额输入框获取焦点
-                } else {
-                    //给产品名称，净值，可用资金赋值
-                    tvOTC_SHProductNameValue.setText("");
-                    tvOTC_SHProductJingZhiValue.setText("");
-                    tvOTC_SHExpendableCapitalValue.setText("");
-                }*/
-
-
                 try {
                     JSONObject jsonObject = new JSONObject(response);
                     String code = jsonObject.getString("code");
@@ -332,7 +215,7 @@ public class OTC_RedeemActivity extends BaseActivity implements View.OnClickList
             dissmissKeyboardUtil();
             int position = data.getIntExtra("position", -1);
             etOTC_SHProductCode.setFocusableInTouchMode(true);
-            etOTC_SHProductCode.setText(list.get(position).getStockCode());
+            etOTC_SHProductCode.setText(data.getStringExtra("stockcode"));
             point = data.getIntExtra("position", -1);
             etOTC_SHProductCode.setSelection(etOTC_SHProductCode.getText().length());
         }
@@ -351,12 +234,12 @@ public class OTC_RedeemActivity extends BaseActivity implements View.OnClickList
                 break;
             case R.id.tvOTC_ChooseOTCSHProduct:                 //跳转 选择OTC产品界面
                 Intent intent = new Intent(this, OTC_ChiCangActivity.class);
-                intent.putExtra("list", list);
                 intent.putExtra("point", point);
                 startActivityForResult(intent, REQUSET);
                 break;
             case R.id.bnOTC_RedeemQueDing:                      //点击弹出赎回确认信息
-
+                if (map == null)
+                    map = new HashMap<>();
                 String RedeemShare = etOTC_RedeemShare.getText().toString();       //获取输入的赎回份额
                 String stockCode = etOTC_SHProductCode.getText().toString();          //获取输入的 输入代码
                 //实例化PopupWindow
