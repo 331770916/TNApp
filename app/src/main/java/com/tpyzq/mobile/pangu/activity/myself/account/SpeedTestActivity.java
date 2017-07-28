@@ -10,6 +10,7 @@ import android.widget.ListView;
 import com.tpyzq.mobile.pangu.R;
 import com.tpyzq.mobile.pangu.adapter.myself.SpeedTestAdapter;
 import com.tpyzq.mobile.pangu.base.BaseActivity;
+import com.tpyzq.mobile.pangu.base.InterfaceCollection;
 import com.tpyzq.mobile.pangu.data.SpeedTestEntity;
 import com.tpyzq.mobile.pangu.http.NetWorkUtil;
 import com.tpyzq.mobile.pangu.util.ConstantUtil;
@@ -80,6 +81,27 @@ public class SpeedTestActivity extends BaseActivity implements View.OnClickListe
     }
 
     private void getData() {
+        try{
+            JSONObject jsonObj = new JSONObject(ConstantUtil.SITE_JSON);
+            jsonObj = jsonObj.optJSONObject("message");
+            HashMap hashMap = InterfaceCollection.getInstance().parseSites(jsonObj);
+            String[] tradeArr=(String[])hashMap.get("trade");
+            SpeedTestEntity speedTestEntity;
+            for (int i=0;i<tradeArr.length;i++) {
+                String[] arr = tradeArr[i].split("^^^");
+                speedTestEntity = new SpeedTestEntity();
+                speedTestEntity.version_name = arr[0];
+                speedTestEntity.version_ip = arr[1];
+                speedTestBeen.add(speedTestEntity);
+            }
+            setSite();
+        }catch (Exception e){
+
+        }
+    }
+
+/*
+    private void getData() {
         HashMap map800125 = new HashMap();
         map800125.put("FUNCTIONCODE", "HQLNG107");
         map800125.put("TOKEN", "");
@@ -148,6 +170,7 @@ public class SpeedTestActivity extends BaseActivity implements View.OnClickListe
         });
 
     }
+*/
 
     private void setSite() {
         for (int i = 0; i < speedTestBeen.size(); i++) {

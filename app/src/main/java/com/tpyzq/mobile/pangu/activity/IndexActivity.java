@@ -1,6 +1,10 @@
 package com.tpyzq.mobile.pangu.activity;
 
 import android.app.Dialog;
+import android.content.BroadcastReceiver;
+import android.content.Context;
+import android.content.Intent;
+import android.content.IntentFilter;
 import android.content.res.Configuration;
 import android.os.Bundle;
 import android.support.v4.app.Fragment;
@@ -8,6 +12,7 @@ import android.support.v4.app.FragmentManager;
 import android.support.v4.app.FragmentTransaction;
 import android.text.TextUtils;
 import android.widget.RadioGroup;
+import android.widget.Toast;
 
 import com.tpyzq.mobile.pangu.R;
 import com.tpyzq.mobile.pangu.activity.home.HomeFragment;
@@ -18,6 +23,7 @@ import com.tpyzq.mobile.pangu.base.BaseActivity;
 import com.tpyzq.mobile.pangu.base.CustomApplication;
 import com.tpyzq.mobile.pangu.http.NetWorkUtil;
 import com.tpyzq.mobile.pangu.log.LogUtil;
+import com.tpyzq.mobile.pangu.service.GetConfigService;
 import com.tpyzq.mobile.pangu.util.ConstantUtil;
 import com.tpyzq.mobile.pangu.util.SpUtils;
 import com.tpyzq.mobile.pangu.util.panguutil.APPInfoUtils;
@@ -25,6 +31,7 @@ import com.tpyzq.mobile.pangu.util.panguutil.BRutil;
 import com.tpyzq.mobile.pangu.util.panguutil.UserUtil;
 import com.tpyzq.mobile.pangu.view.dialog.ExitDialog;
 import com.tpyzq.mobile.pangu.view.dialog.HintDialog;
+import com.tpyzq.mobile.pangu.view.dialog.MistakeDialog;
 import com.tpyzq.mobile.pangu.view.dialog.VersionDialog;
 import com.tpyzq.mobile.pangu.view.radiobutton.MyRadioButton;
 import com.zhy.http.okhttp.callback.StringCallback;
@@ -35,6 +42,7 @@ import org.json.JSONObject;
 
 import java.util.HashMap;
 
+import io.realm.annotations.Index;
 import okhttp3.Call;
 
 
@@ -56,7 +64,15 @@ public class IndexActivity extends BaseActivity {
 
     @Override
     public void initView() {
+        //注册广播
+        IntentFilter filter=new IntentFilter();
+        filter.addAction("com.pangu.showdialog");
+        BroadcastReceiver broadcastReceiver=new SitesChangeRecever();
+        registerReceiver(broadcastReceiver, filter);
         CustomApplication.getInstance().addActivity(this);
+        //开启站点服务
+        Intent serviceIntent = new Intent(this, GetConfigService.class);
+        startService(serviceIntent);
         for (Fragment frag:tab_fragment) {
             if (frag!=null){
                 tab_fragment=new Fragment[4];
@@ -274,7 +290,6 @@ public class IndexActivity extends BaseActivity {
         dialog = new ExitDialog(this);
         dialog.show();
     }
-
     @Override
     protected void onResume() {
         super.onResume();
@@ -362,5 +377,14 @@ public class IndexActivity extends BaseActivity {
     @Override
     protected void onRestoreInstanceState(Bundle savedInstanceState) {
         super.onRestoreInstanceState(savedInstanceState);
+    }
+
+    class SitesChangeRecever extends BroadcastReceiver {
+        @Override
+        public void onReceive(Context context, Intent intent) {
+            if ("com.pangu.showdialog".equalsIgnoreCase(intent.getAction())) {
+                MistakeDialog.showDialog("服务器异常", IndexActivity.this,null);
+            }
+        }
     }
 }

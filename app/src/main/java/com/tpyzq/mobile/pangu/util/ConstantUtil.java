@@ -82,6 +82,9 @@ public class ConstantUtil {
 
     public static String NINE_VALIDATION = "/note/sendVoice";     //发送语音
 
+
+    public static String GET_SITES = "/note/getPath";     //获取站点
+
 //    public static boolean auto_flag = false;
     public static String status = BuildConfig.status;
     public static String IP = BuildConfig.IP;  //行情 IP
@@ -183,6 +186,12 @@ public class ConstantUtil {
 
     public static boolean USERFUL_KEYBOARD = true;
     public static boolean list_item_flag = true ; //    判断listview item 不能重复点击
+
+    public static String bjUrl = "http://106.120.112.246:8082";//北京行情地址 测试
+    public static String kmUrl = "http://tnhq.tpyzq.com";//昆明行情地址  灰度
+    public static String registerUrl = "";
+
+    public static String SITE_JSON = "{\"message\": {\"register\": \"http://10.42.220.119:8082\",\"hq\": [{\"name\": \"测试站点\",\"url\":\"http://106.120.112.246:8082\"},{\"name\": \"灰度站点\",\"url\": \"http://tnhq.tpyzq.com\"}],\"trade\": [{\"name\": \"测试站点\",\"url\": \"http://106.120.112.246:8081\"},{\"name\": \"灰度站点\",\"url\": \"https://tn.tpyzq.com\"}]},\"code\": \"0\",\"type\": \"success\"}";
 
 /////////////// SDcard文件存储位置相关/////////////////////////////////////////
 

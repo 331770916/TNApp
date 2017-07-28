@@ -10,6 +10,7 @@ import com.tpyzq.mobile.pangu.R;
 import com.tpyzq.mobile.pangu.adapter.myself.SpeedTestAdapter;
 import com.tpyzq.mobile.pangu.base.BaseActivity;
 import com.tpyzq.mobile.pangu.base.CustomApplication;
+import com.tpyzq.mobile.pangu.base.InterfaceCollection;
 import com.tpyzq.mobile.pangu.data.SpeedTestEntity;
 import com.tpyzq.mobile.pangu.data.UserEntity;
 import com.tpyzq.mobile.pangu.db.Db_PUB_USERS;
@@ -112,8 +113,30 @@ public class SpeedJYActivity extends BaseActivity implements View.OnClickListene
                 break;
         }
     }
-
     private void getData() {
+        try{
+            JSONObject jsonObj = new JSONObject(ConstantUtil.SITE_JSON);
+            jsonObj = jsonObj.optJSONObject("message");
+            HashMap hashMap = InterfaceCollection.getInstance().parseSites(jsonObj);
+            String[] hqArr=(String[])hashMap.get("trade");
+            SpeedTestEntity speedTestEntity;
+            for (int i=0;i<hqArr.length;i++) {
+                String[] arr = hqArr[i].split("^^^");
+                speedTestEntity = new SpeedTestEntity();
+                speedTestEntity.version_name = arr[0];
+                speedTestEntity.version_ip = arr[1];
+                mDatas.add(speedTestEntity);
+            }
+            mListView.setAdapter(new SpeedTestAdapter(SpeedJYActivity.this, mDatas, speedCallBack));
+
+            mSureBtn.setClickable(true);
+            mSureBtn.setFocusable(true);
+            mSureBtn.setBackgroundResource(R.color.blue);
+        }catch (Exception e){
+
+        }
+    }
+  /*  private void getData() {
         HashMap map800125 = new HashMap();
         map800125.put("FUNCTIONCODE", "HQLNG107");
         map800125.put("TOKEN", "");
@@ -188,7 +211,7 @@ public class SpeedJYActivity extends BaseActivity implements View.OnClickListene
                 }
             }
         });
-    }
+    }*/
 
     @Override
     protected void onDestroy() {
