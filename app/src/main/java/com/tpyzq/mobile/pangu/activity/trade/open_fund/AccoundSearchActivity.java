@@ -41,8 +41,7 @@ import okhttp3.Call;
 public class AccoundSearchActivity extends BaseActivity implements View.OnClickListener {
     private PullToRefreshListView lv_accound_search;
     private ImageView iv_back;
-    private LinearLayout ll_fourtext;
-    private TextView tv_text1, tv_text2, tv_text3, tv_text4;
+    private TextView tv_text1, tv_text2, tv_text3;
     private List<FundAccountEntity> fundAccountBeans;
     private AccoundSearchAdapter accoundSearchAdapter;
     private ImageView isEmpty;
@@ -50,11 +49,9 @@ public class AccoundSearchActivity extends BaseActivity implements View.OnClickL
     @Override
     public void initView() {
         iv_back = (ImageView) findViewById(R.id.iv_back);
-        ll_fourtext = (LinearLayout) findViewById(R.id.ll_fourtext);
-        tv_text1 = (TextView) ll_fourtext.findViewById(R.id.tv_text1);
-        tv_text2 = (TextView) ll_fourtext.findViewById(R.id.tv_text2);
-        tv_text3 = (TextView) ll_fourtext.findViewById(R.id.tv_text3);
-        tv_text4 = (TextView) ll_fourtext.findViewById(R.id.tv_text4);
+        tv_text1 = (TextView) findViewById(R.id.tv_text1);
+        tv_text2 = (TextView) findViewById(R.id.tv_text2);
+        tv_text3 = (TextView) findViewById(R.id.tv_text3);
         lv_accound_search = (PullToRefreshListView) findViewById(R.id.lv_accound_search);
         isEmpty = (ImageView) findViewById(R.id.isEmpty);
         initData();
@@ -69,7 +66,6 @@ public class AccoundSearchActivity extends BaseActivity implements View.OnClickL
         tv_text1.setText("开户日期");
         tv_text2.setText("基金账户");
         tv_text3.setText("基金公司/状态");
-        tv_text4.setVisibility(View.GONE);
         getFundData(false);
         lv_accound_search.setMode(PullToRefreshBase.Mode.PULL_FROM_START);
         lv_accound_search.setOnRefreshListener(new PullToRefreshBase.OnRefreshListener2<ListView>() {

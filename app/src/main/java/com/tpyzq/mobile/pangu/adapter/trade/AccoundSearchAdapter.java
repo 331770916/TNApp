@@ -54,23 +54,15 @@ public class AccoundSearchAdapter extends BaseAdapter {
         ViewHolder holder = null;
         if (convertView == null) {
             holder = new ViewHolder();
-            convertView = LayoutInflater.from(context).inflate(R.layout.item_transaction_8text, null);
+            convertView = LayoutInflater.from(context).inflate(R.layout.item_fund_contract_sign, null);
             holder.tv_text1 = (TextView) convertView.findViewById(R.id.tv_text1);
-            holder.tv_text2 = (TextView) convertView.findViewById(R.id.tv_text2);
             holder.tv_text3 = (TextView) convertView.findViewById(R.id.tv_text3);
-            holder.tv_text4 = (TextView) convertView.findViewById(R.id.tv_text4);
             holder.tv_text5 = (TextView) convertView.findViewById(R.id.tv_text5);
             holder.tv_text6 = (TextView) convertView.findViewById(R.id.tv_text6);
-            holder.tv_text7 = (TextView) convertView.findViewById(R.id.tv_text7);
-            holder.tv_text8 = (TextView) convertView.findViewById(R.id.tv_text8);
-            holder.ll_4 = (LinearLayout) convertView.findViewById(R.id.ll_4);
             convertView.setTag(holder);
         } else {
             holder = (ViewHolder) convertView.getTag();
         }
-        holder.tv_text2.setVisibility(View.GONE);
-        holder.tv_text4.setVisibility(View.GONE);
-        holder.ll_4.setVisibility(View.GONE);
         holder.tv_text1.setTextAppearance(context, R.style.text_base);
         holder.tv_text1.setText(Helper.getMyDateY_M_D(fundAccountBeans.get(position).OPEN_DATE));
         holder.tv_text3.setText(fundAccountBeans.get(position).TRANS_ACCOUNT);
@@ -83,13 +75,8 @@ public class AccoundSearchAdapter extends BaseAdapter {
 
     class ViewHolder {
         public TextView tv_text1;
-        public TextView tv_text2;
         public TextView tv_text3;
-        public TextView tv_text4;
         public TextView tv_text5;
         public TextView tv_text6;
-        public TextView tv_text7;
-        public TextView tv_text8;
-        public LinearLayout ll_4;
     }
 }
