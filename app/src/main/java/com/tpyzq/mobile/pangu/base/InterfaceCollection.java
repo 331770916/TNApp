@@ -2267,15 +2267,18 @@ public class InterfaceCollection {
                         info.setMsg(ConstantUtil.SERVICE_NO_DATA);
                         info.setTag(TAG);
                     } else {
-//                        SpUtils.putString(CustomApplication.getContext(),"site_json",response);
-//                        ConstantUtil.GET_SITES = response;
                         jsonObj = new JSONObject(response);
                         code = jsonObj.optString("code");
                         type = jsonObj.optString("type");
                         info.setCode(code);
                         info.setMsg(type);
+                        info.setTag(TAG);
                         if ("0".equalsIgnoreCase(code)) {
                             jsonObj = jsonObj.optJSONObject("message");
+                            SpUtils.putString(CustomApplication.getContext(),"site_json",response);
+                            ConstantUtil.SITE_JSON = response;
+                            ConstantUtil.registerServerUrl = jsonObj.optString("register-httpServer");
+                            ConstantUtil.registerNoteUrl = jsonObj.optString("register-note");
                             HashMap resultMap = parseSites(jsonObj);
                             info.setData(resultMap);
                         }
@@ -2312,7 +2315,7 @@ public class InterfaceCollection {
             strs = new String[jsonArr.length()];
             for (int i=0;i<jsonArr.length();i++){
                 subJsonObj = jsonArr.optJSONObject(i);
-                strs[i] = subJsonObj.optString("name")+"^^^"+subJsonObj.optString("url");
+                strs[i] = subJsonObj.optString("name")+"|"+subJsonObj.optString("url");
             }
             resultMap.put("trade",strs);
 
@@ -2321,7 +2324,7 @@ public class InterfaceCollection {
             strs = new String[jsonArr.length()];
             for (int i=0;i<jsonArr.length();i++){
                 subJsonObj = jsonArr.optJSONObject(i);
-                strs[i] = subJsonObj.optString("name")+"^^^"+subJsonObj.optString("url");
+                strs[i] = subJsonObj.optString("name")+"|"+subJsonObj.optString("url");
             }
             resultMap.put("hq",strs);
 

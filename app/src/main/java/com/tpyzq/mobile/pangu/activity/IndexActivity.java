@@ -41,8 +41,6 @@ import org.json.JSONException;
 import org.json.JSONObject;
 
 import java.util.HashMap;
-
-import io.realm.annotations.Index;
 import okhttp3.Call;
 
 

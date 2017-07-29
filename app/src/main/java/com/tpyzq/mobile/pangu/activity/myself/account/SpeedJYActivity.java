@@ -67,8 +67,8 @@ public class SpeedJYActivity extends BaseActivity implements View.OnClickListene
     }
 
     private void initData() {
-        mLoadingDialog = LoadingDialog.initDialog(this, "正在加载...");
-        mLoadingDialog.show();
+        /*mLoadingDialog = LoadingDialog.initDialog(this, "正在加载...");
+        mLoadingDialog.show();*/
 
         String ip = SpUtils.getString(this, "jy_ip", null);
         if (TextUtils.isEmpty(ip)) {
@@ -121,7 +121,7 @@ public class SpeedJYActivity extends BaseActivity implements View.OnClickListene
             String[] hqArr=(String[])hashMap.get("trade");
             SpeedTestEntity speedTestEntity;
             for (int i=0;i<hqArr.length;i++) {
-                String[] arr = hqArr[i].split("^^^");
+                String[] arr = hqArr[i].split("\\|");
                 speedTestEntity = new SpeedTestEntity();
                 speedTestEntity.version_name = arr[0];
                 speedTestEntity.version_ip = arr[1];

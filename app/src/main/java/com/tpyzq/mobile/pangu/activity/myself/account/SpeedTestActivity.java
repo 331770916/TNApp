@@ -85,10 +85,10 @@ public class SpeedTestActivity extends BaseActivity implements View.OnClickListe
             JSONObject jsonObj = new JSONObject(ConstantUtil.SITE_JSON);
             jsonObj = jsonObj.optJSONObject("message");
             HashMap hashMap = InterfaceCollection.getInstance().parseSites(jsonObj);
-            String[] tradeArr=(String[])hashMap.get("trade");
+            String[] tradeArr=(String[])hashMap.get("hq");
             SpeedTestEntity speedTestEntity;
             for (int i=0;i<tradeArr.length;i++) {
-                String[] arr = tradeArr[i].split("^^^");
+                String[] arr = tradeArr[i].split("\\|");
                 speedTestEntity = new SpeedTestEntity();
                 speedTestEntity.version_name = arr[0];
                 speedTestEntity.version_ip = arr[1];

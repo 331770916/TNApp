@@ -411,6 +411,7 @@
             </intent-filter>
         </receiver>
         <service android:name=".activity.market.selfChoice.childNews.SelfNewsService" />
+        <service android:name=".service.GetConfigService" />
     </application>
 
 </manifest>

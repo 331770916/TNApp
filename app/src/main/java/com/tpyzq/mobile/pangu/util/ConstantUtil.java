@@ -88,6 +88,8 @@ public class ConstantUtil {
 //    public static boolean auto_flag = false;
     public static String status = BuildConfig.status;
     public static String IP = BuildConfig.IP;  //行情 IP
+    public static String registerServerUrl = IP;
+    public static String registerNoteUrl=IP;
     public static String SJYZM = BuildConfig.SJYZM;   //交易 IP
     public static String BORY = BuildConfig.BORY;   //博瑞url
     public static String BORY_APPID = BuildConfig.BORY_APPID; //博瑞id
@@ -98,7 +100,7 @@ public class ConstantUtil {
 
     public static final String OPEN_ACCOUNT_CHANNEL = "tainiuapp"; //开户id
     //新股
-    public static String URL_NEW = IP + ONE_SERVLET;
+    public static String URL_NEW = registerServerUrl + ONE_SERVLET;
     //行情
     public static String URL = IP + TWO_SERVLET;
     //资讯
@@ -108,7 +110,7 @@ public class ConstantUtil {
 
     public static String URL_BIGDATA = IP + THREE_SERVLET;
     //资讯 故事
-    public static String URL_ZX_GS = IP + ONE_SERVLET;
+    public static String URL_ZX_GS = registerServerUrl + ONE_SERVLET;
     //交易 & 分级基金信息查询
     public static String URL_JY = SJYZM + ONE_SERVLET;
 
@@ -116,36 +118,36 @@ public class ConstantUtil {
     public static String URL_YZM = IP + FOUR_SERVLET;
 
     //手机注册
-    public static String URL_SJLI = IP + ONE_SERVLET;
+    public static String URL_SJLI = registerServerUrl + ONE_SERVLET;
 //    public static String URL_SJLI = IPS + ONE_SERVLET;
 
 
     //手机验证
-    public static String URL_SJYZM = SecurityIps + SEVEN_YZ;
+    public static String URL_SJYZM = registerNoteUrl + SEVEN_YZ;
 //    public static String URL_SJYZM = IPS + THREE_SERVLET;
-    public static String URL_VALIDATION = SecurityIps + EIGHT_VALIDATION;    //手机验证
+    public static String URL_VALIDATION = registerNoteUrl + EIGHT_VALIDATION;    //手机验证
     //语音验证
-    public static String URL_YY = SecurityIps + NINE_VALIDATION;
+    public static String URL_YY = registerNoteUrl + NINE_VALIDATION;
 
     //交易登录验证码
     public static String URL_JYYZM = SJYZM + FOUR_SHOUJI;
 
     //交易用户绑定
-    public static String URL_JYBD = IP + ONE_SERVLET;
+    public static String URL_JYBD = registerServerUrl + ONE_SERVLET;
 
     //自选股
-    public static String URL_SELFCHOICENET = IP + ONE_SERVLET;
+    public static String URL_SELFCHOICENET = registerServerUrl + ONE_SERVLET;
 
     //查询产品信息
 
-    public static String ULR_MANAGEMONEY = IP + ONE_SERVLET;
+    public static String ULR_MANAGEMONEY = registerServerUrl + ONE_SERVLET;
 
     public static String URL_MANAGEMONEY2 = IP + FIVE_SERVLET;
 
-    public static String URL_SXRZ = IP + ONE_SERVLET;
+    public static String URL_SXRZ = registerServerUrl + ONE_SERVLET;
 
     //手机注册绑定
-    public static String URL_SJZCBD = IP + ONE_SERVLET;
+    public static String URL_SJZCBD = registerServerUrl + ONE_SERVLET;
 //    public static String URL_SJZCBD = IPS + ONE_SERVLET;
 
     //H5
@@ -187,11 +189,15 @@ public class ConstantUtil {
     public static boolean USERFUL_KEYBOARD = true;
     public static boolean list_item_flag = true ; //    判断listview item 不能重复点击
 
-    public static String bjUrl = "http://106.120.112.246:8082";//北京行情地址 测试
-    public static String kmUrl = "http://tnhq.tpyzq.com";//昆明行情地址  灰度
-    public static String registerUrl = "";
+//    //生产 北京或昆明
+//    public static String bjUrl = "http://bj-tnhq.tpyzq.com";//北京行情地址 测试
+//    public static String kmUrl = "http://km-tnhq.tpyzq.com";//昆明行情地址  灰度
+    //测试或灰度
+    public static String bjUrl = "https://test-tnhq.tpyzq.com";//北京行情地址 测试
+    public static String kmUrl = "https://tnhq.tpyzq.com";//昆明行情地址  灰度
+    public static String currentUrl = "https://test-tnhq.tpyzq.com";//昆明行情地址  灰度
 
-    public static String SITE_JSON = "{\"message\": {\"register\": \"http://10.42.220.119:8082\",\"hq\": [{\"name\": \"测试站点\",\"url\":\"http://106.120.112.246:8082\"},{\"name\": \"灰度站点\",\"url\": \"http://tnhq.tpyzq.com\"}],\"trade\": [{\"name\": \"测试站点\",\"url\": \"http://106.120.112.246:8081\"},{\"name\": \"灰度站点\",\"url\": \"https://tn.tpyzq.com\"}]},\"code\": \"0\",\"type\": \"success\"}";
+    public static String SITE_JSON = "{\"message\":{\"register-httpServer\":\"http://tnhq.tpyzq.com\",\"hq\":[{\"name\":\"测试站点\",\"url\":\"http://test-tnhq.tpyzq.com:8082\"},{\"name\":\"灰度站点\",\"url\":\"http://tnhq.tpyzq.com\"}],\"register-note\":\"https://tnhq.tpyzq.com\",\"trade\":[{\"name\":\"测试站点\",\"url\":\"http://106.120.112.246:8081\"},{\"name\":\"灰度站点\",\"url\":\"https://tnhq.tpyzq.com\"}]},\"code\":\"0\",\"type\":\"success\"}";
 
 /////////////// SDcard文件存储位置相关/////////////////////////////////////////
 
@@ -221,19 +227,19 @@ public class ConstantUtil {
         } else {
             jyip = SJYZM;
         }
-        URL_NEW = appip + ONE_SERVLET;
+//        URL_NEW = appip + ONE_SERVLET;
         URL = appip + TWO_SERVLET;
         URL_BIGDATA = appip + THREE_SERVLET;
-        URL_ZX_GS = appip + ONE_SERVLET;
+//        URL_ZX_GS = appip + ONE_SERVLET;
         URL_YZM = appip + FOUR_SERVLET;
-        URL_JYBD = appip + ONE_SERVLET;
-        URL_SELFCHOICENET = appip + ONE_SERVLET;
-        ULR_MANAGEMONEY = appip + ONE_SERVLET;
+//        URL_JYBD = appip + ONE_SERVLET;
+//        URL_SELFCHOICENET = appip + ONE_SERVLET;
+//        ULR_MANAGEMONEY = appip + ONE_SERVLET;
         URL_MANAGEMONEY2 = appip + FIVE_SERVLET;
-        URL_SXRZ = appip + ONE_SERVLET;
+//        URL_SXRZ = appip + ONE_SERVLET;
         URL_FX = appip + THREE_SERVLET;
         URL_RS = appip + FIVE_RESOU;
-        URL_SCYHBG = appip + ONE_SERVLET;
+//        URL_SCYHBG = appip + ONE_SERVLET;
 //        URL_SFZYXQ = appip + SIX_SERVLET;
         URL_UPDATE = appip + SEVEN_ZIXUN;
         //交易

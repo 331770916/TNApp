@@ -37,7 +37,7 @@ public class GetConfigService extends Service implements InterfaceCollection.Int
         try {
             //首先使用本地选择站点请求站点列表 如果成功继续执行业务，
             // 如果失败，调用其它站点获取站点信息找到可用站点弹框提示并切换，如果都不可用，弹框提示
-            InterfaceCollection.getInstance().getSites(ConstantUtil.IP+ConstantUtil.GET_SITES,TAG_REQUEST_CURRENT,this);
+            InterfaceCollection.getInstance().getSites(ConstantUtil.bjUrl+ConstantUtil.GET_SITES,TAG_REQUEST_CURRENT,this);
         } catch (Exception e) {
 
         }
@@ -51,12 +51,12 @@ public class GetConfigService extends Service implements InterfaceCollection.Int
                 stopSelf();
             } else {
                 String url;
-                if (ConstantUtil.IP.equalsIgnoreCase(ConstantUtil.bjUrl)) {
-                    url = ConstantUtil.kmUrl;
-                } else {
-                    url = ConstantUtil.bjUrl;
-                }
-                InterfaceCollection.getInstance().getSites(url+ConstantUtil.GET_SITES,TAG_REQUEST_OTHER,this);
+//                if (ConstantUtil.IP.equalsIgnoreCase(ConstantUtil.bjUrl)) {
+//                    url = ConstantUtil.kmUrl;
+//                } else {
+//                    url = ConstantUtil.bjUrl;
+//                }
+                InterfaceCollection.getInstance().getSites(ConstantUtil.kmUrl+ConstantUtil.GET_SITES,TAG_REQUEST_OTHER,this);
             }
         } else if (TAG_REQUEST_OTHER.equalsIgnoreCase(info.getTag())){
             if ("0".equalsIgnoreCase(info.getCode())){
@@ -70,24 +70,19 @@ public class GetConfigService extends Service implements InterfaceCollection.Int
                     sendAllErrorBrocast();
                 } else if (hqArr.length == 1){
                     //只有一个可用
-                    SpUtils.putString(CustomApplication.getContext(), "market_ip", hqArr[0].split("^^^")[1]);
-                    ConstantUtil.IP = hqArr[0].split("^^^")[1];
+                    SpUtils.putString(CustomApplication.getContext(), "market_ip", hqArr[0].split("\\|")[1]);
+                    ConstantUtil.IP = hqArr[0].split("\\|")[1];
                     // 判断交易用哪个
                    if (tradeArr.length == 1){
                         //只有一个可用
-                        SpUtils.putString(CustomApplication.getContext(), "jy_ip", tradeArr[0].split("^^^")[1]);
-                        ConstantUtil.SJYZM = tradeArr[0].split("^^^")[1];
+                        SpUtils.putString(CustomApplication.getContext(), "jy_ip", tradeArr[0].split("\\|")[1]);
+                        ConstantUtil.SJYZM = tradeArr[0].split("\\|")[1];
                     }
                 } else if (hqArr.length == 2){
                     //都可用不变
                 }
             } else {
-                if (count == maxRequstCount-1) {//所有站点均不可用
-                    sendAllErrorBrocast();
-                }else {
-                    count++;
-                    InterfaceCollection.getInstance().getSites(hqs[count].split("^^^")[1] + ConstantUtil.GET_SITES, TAG_REQUEST_OTHER, this);
-                }
+                sendAllErrorBrocast();
             }
         }
     }

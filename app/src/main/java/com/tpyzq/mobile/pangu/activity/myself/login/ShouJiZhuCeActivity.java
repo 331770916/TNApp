@@ -137,7 +137,7 @@ public class ShouJiZhuCeActivity extends BaseActivity implements View.OnClickLis
 
         HashMap map = new HashMap();
         map.put("equipment", DeviceUtil.getDeviceId(CustomApplication.getContext()));
-        NetWorkUtil.getInstence().okHttpForGet(TAG, ConstantUtil.SecurityIps + "/note/getImage", map, new StringCallback() {
+        NetWorkUtil.getInstence().okHttpForGet(TAG, ConstantUtil.registerNoteUrl + "/note/getImage", map, new StringCallback() {
             @Override
             public void onError(Call call, Exception e, int id) {
                 Helper.getInstance().showToast(ShouJiZhuCeActivity.this, ConstantUtil.NETWORK_ERROR);
@@ -300,7 +300,7 @@ public class ShouJiZhuCeActivity extends BaseActivity implements View.OnClickLis
         map.put("user_type", "1");//账户类型，1：手机，2：qq，3：微信
 
 
-        NetWorkUtil.getInstence().okHttpForGet(TAG, ConstantUtil.SecurityIps + "/note/authAndRegister", map, new StringCallback() {
+        NetWorkUtil.getInstence().okHttpForGet(TAG, ConstantUtil.registerNoteUrl + "/note/authAndRegister", map, new StringCallback() {
             @Override
             public void onError(Call call, Exception e, int id) {
                 if (mLoadingDialog != null) {
@@ -491,7 +491,7 @@ public class ShouJiZhuCeActivity extends BaseActivity implements View.OnClickLis
         map.put("phone", mSjNumber.getText().toString().trim());
         map.put("auth", mImage_et.getText().toString().trim());
 
-        NetWorkUtil.getInstence().okHttpForGet(TAG, ConstantUtil.SecurityIps + "/note/imgAuthSms", map, new StringCallback() {
+        NetWorkUtil.getInstence().okHttpForGet(TAG, ConstantUtil.registerNoteUrl + "/note/imgAuthSms", map, new StringCallback() {
             @Override
             public void onError(Call call, Exception e, int id) {
                 LogUtil.e("手机短信", e.toString());
@@ -549,7 +549,7 @@ public class ShouJiZhuCeActivity extends BaseActivity implements View.OnClickLis
         map.put("phone", mSjNumber.getText().toString().trim());
         map.put("auth", mImage_et.getText().toString().trim());
 
-        NetWorkUtil.getInstence().okHttpForGet(TAG, ConstantUtil.SecurityIps + "/note/imgAuthVoice?=&=&=", map, new StringCallback() {
+        NetWorkUtil.getInstence().okHttpForGet(TAG, ConstantUtil.registerNoteUrl + "/note/imgAuthVoice?=&=&=", map, new StringCallback() {
             @Override
             public void onError(Call call, Exception e, int id) {
                 LogUtil.e(TAG, e.toString());
