@@ -9,8 +9,8 @@ android {
 //        applicationId "com.tpyzq.self.mobile.pangu"
         minSdkVersion 15
         targetSdkVersion 22
-        versionCode 1
-        versionName "1.7.6"
+        versionCode 20170729
+        versionName "1.1.4"
 
         multiDexEnabled = true
 
@@ -48,7 +48,7 @@ android {
     productFlavors {
         km_online{
             applicationId "com.tpyzq.self.mobile.pangu"
-            buildConfigField "String", "IP", '"http://km-tnhq.tpyzq.com"'
+            buildConfigField "String", "IP", '"http://newkm-tnhq.tpyzq.com"'
             buildConfigField "String", "SJYZM", '"https://km-tn.tpyzq.com"'
             buildConfigField "String", "BORY", '"https://bj-apm.tpyzq.com/config/"'
             buildConfigField "String", "BORY_APPID", '"3951f553-a63c-4d9e-9896-5f28ce2926f3"'
@@ -56,6 +56,12 @@ android {
             buildConfigField "String", "SecurityIps", '"https://km-tnhq.tpyzq.com"'
             buildConfigField "String", "SecurityIp", '"http://km-tnhq.tpyzq.com"'
             buildConfigField "String", "status", '"生产"'
+            buildConfigField "String", "registerServerUrl", '"http://bj-tnyw.tpyzq.com"'
+            buildConfigField "String", "registerNoteUrl", '"https://bj-tnyw.tpyzq.com"'
+            buildConfigField "String", "bjUrl", '"https://bj-tnhq.tpyzq.com/note/getPath"'
+            buildConfigField "String", "kmUrl", '"https://newkm-tnhq.tpyzq.com/note/getPath"'
+            buildConfigField "String", "currentUrl", '"https://newkm-tnhq.tpyzq.com/note/getPath"'
+            resValue "string", "site_json", "site_json_online"
             manifestPlaceholders = [appicon:"@mipmap/icon_logo"]
         }
         evironment_test{
@@ -68,6 +74,12 @@ android {
             buildConfigField "String", "SecurityIps", '"http://106.120.112.246:8082"'
             buildConfigField "String", "SecurityIp", '"http://106.120.112.246:8082"'
             buildConfigField "String", "status", '"测试"'
+            buildConfigField "String", "registerServerUrl", '"https://test-tnhq.tpyzq.com"'
+            buildConfigField "String", "registerNoteUrl", '"https://test-tnhq.tpyzq.com"'
+            buildConfigField "String", "bjUrl", '"https://test-tnhq.tpyzq.com/note/getPath"'
+            buildConfigField "String", "kmUrl", '"https://tnhq.tpyzq.com/note/getPath"'
+            buildConfigField "String", "currentUrl", '"https://test-tnhq.tpyzq.com/note/getPath"'
+            resValue "string", "site_json", "site_json_gray"
             manifestPlaceholders = [appicon:"@mipmap/icon_test"]
         }
         bj_online{
@@ -80,6 +92,12 @@ android {
             buildConfigField "String", "SecurityIps", '"https://bj-tnhq.tpyzq.com"'
             buildConfigField "String", "SecurityIp", '"http://bj-tnhq.tpyzq.com"'
             buildConfigField "String", "status", '"生产"'
+            buildConfigField "String", "registerServerUrl", '"http://bj-tnyw.tpyzq.com"'
+            buildConfigField "String", "registerNoteUrl", '"https://bj-tnyw.tpyzq.com"'
+            buildConfigField "String", "bjUrl", '"https://bj-tnhq.tpyzq.com/note/getPath"'
+            buildConfigField "String", "kmUrl", '"https://newkm-tnhq.tpyzq.com/note/getPath"'
+            buildConfigField "String", "currentUrl", '"https://bj-tnhq.tpyzq.com/note/getPath"'
+            resValue "string", "site_json", "site_json_online"
             manifestPlaceholders = [appicon:"@mipmap/icon_logo"]
         }
         gray{
@@ -92,6 +110,12 @@ android {
             buildConfigField "String", "SecurityIps", '"https://tnhq.tpyzq.com"'
             buildConfigField "String", "SecurityIp", '"http://tnhq.tpyzq.com"'
             buildConfigField "String", "status", '"灰度"'
+            buildConfigField "String", "registerServerUrl", '"http://tnhq.tpyzq.com"'
+            buildConfigField "String", "registerNoteUrl", '"http://tnhq.tpyzq.com"'
+            buildConfigField "String", "bjUrl", '"https://test-tnhq.tpyzq.com/note/getPath"'
+            buildConfigField "String", "kmUrl", '"https://tnhq.tpyzq.com/note/getPath"'
+            buildConfigField "String", "currentUrl", '"https://tnhq.tpyzq.com/note/getPath"'
+            resValue "string", "site_json", "site_json_gray"
             manifestPlaceholders = [appicon:"@mipmap/ic_gray"]
         }
     }

@@ -801,6 +801,7 @@
     <string name="etf_code">ETF代码</string>
     <string name="etf_jjname">基金名称</string>
     <string name="etf_jjdm">基金代码</string>
-
+    <string name="site_json_gray">{"message":{"register-httpServer":"http://tnhq.tpyzq.com","hq":[{"name":"测试站点","url":"http://test-tnhq.tpyzq.com:8082"},{"name":"灰度站点","url":"http://tnhq.tpyzq.com"}],"register-note":"https://tnhq.tpyzq.com","trade":[{"name":"测试站点","url":"http://106.120.112.246:8081"},{"name":"灰度站点","url":"https://tnhq.tpyzq.com"}]},"code":"0","type":"success"}</string>
+    <string name="site_json_online">{"message":{"register-httpServer":"http://tnhq.tpyzq.com","hq":[{"name":"北京站点","url":"http://bj-tnhq.tpyzq.com"},{"name":"昆明站点","url":"http://newkm-tnhq.tpyzq.com"}],"register-note":"https://tnhq.tpyzq.com","trade":[{"name":"北京站点","url":"https://bj-tn.tpyzq.com"},{"name":"昆明站点","url":"https://km-tn.tpyzq.com"}]},"code":"0","type":"success"}</string>
 
 </resources>

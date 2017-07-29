@@ -78,6 +78,8 @@ public class CustomApplication extends MultiDexApplication {
         String site_json = SpUtils.getString(CustomApplication.getContext(),"site_json","");
         if (!TextUtils.isEmpty(site_json)) {
             ConstantUtil.SITE_JSON = site_json;
+        } else {
+            ConstantUtil.SITE_JSON = ConstantUtil.setSiteJson();
         }
         String ip = SpUtils.getString(mContext, "market_ip", null);
         String jy_ip = SpUtils.getString(mContext, "jy_ip", null);

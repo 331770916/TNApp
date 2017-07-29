@@ -47,7 +47,7 @@ public class GetConfigService extends Service implements InterfaceCollection.Int
         //首先使用本地选择站点请求站点列表 如果成功继续执行业务，
         // 如果失败，调用其它站点获取站点信息找到可用站点弹框提示并切换，如果都不可用，弹框提示
         if (Helper.isNetWorked()) {
-            InterfaceCollection.getInstance().getSites(ConstantUtil.currentUrl + ConstantUtil.GET_SITES, TAG_REQUEST_CURRENT, this);
+            InterfaceCollection.getInstance().getSites(ConstantUtil.currentUrl, TAG_REQUEST_CURRENT, this);
         } else {
             Thread.sleep(1000);
             if (count <= 2) {
@@ -66,7 +66,7 @@ public class GetConfigService extends Service implements InterfaceCollection.Int
                 stopSelf();
             } else {
                 String url = getUrl();
-                InterfaceCollection.getInstance().getSites(url+ConstantUtil.GET_SITES,TAG_REQUEST_OTHER,this);
+                InterfaceCollection.getInstance().getSites(url,TAG_REQUEST_OTHER,this);
             }
         } else if (TAG_REQUEST_OTHER.equalsIgnoreCase(info.getTag())){
             if ("0".equalsIgnoreCase(info.getCode())){

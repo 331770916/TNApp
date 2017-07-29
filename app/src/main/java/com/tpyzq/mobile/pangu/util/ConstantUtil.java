@@ -1,12 +1,16 @@
 package com.tpyzq.mobile.pangu.util;
 
 import android.content.Context;
+import android.os.Build;
 import android.text.TextUtils;
 
 
 import com.tpyzq.mobile.pangu.BuildConfig;
+import com.tpyzq.mobile.pangu.R;
+import com.tpyzq.mobile.pangu.base.CustomApplication;
 
 import java.io.File;
+import java.util.HashMap;
 
 /**
  * 业务常量文件
@@ -83,13 +87,13 @@ public class ConstantUtil {
     public static String NINE_VALIDATION = "/note/sendVoice";     //发送语音
 
 
-    public static String GET_SITES = "/note/getPath";     //获取站点
+    public static String GET_SITES = "";     //获取站点
 
 //    public static boolean auto_flag = false;
     public static String status = BuildConfig.status;
     public static String IP = BuildConfig.IP;  //行情 IP
-    public static String registerServerUrl = IP;
-    public static String registerNoteUrl=IP;
+    public static String registerServerUrl = BuildConfig.registerServerUrl;//默认注册地址
+    public static String registerNoteUrl=BuildConfig.registerNoteUrl;
     public static String SJYZM = BuildConfig.SJYZM;   //交易 IP
     public static String BORY = BuildConfig.BORY;   //博瑞url
     public static String BORY_APPID = BuildConfig.BORY_APPID; //博瑞id
@@ -190,14 +194,29 @@ public class ConstantUtil {
     public static boolean list_item_flag = true ; //    判断listview item 不能重复点击
 
 //    //生产 北京或昆明
-//    public static String bjUrl = "http://bj-tnhq.tpyzq.com";//北京行情地址 测试
-//    public static String kmUrl = "http://km-tnhq.tpyzq.com";//昆明行情地址  灰度
+    public static String bjUrl = BuildConfig.bjUrl;//北京行情地址 测试
+    public static String kmUrl = BuildConfig.kmUrl;//昆明行情地址  灰度
+    public static String currentUrl = BuildConfig.currentUrl;//昆明行情地址  灰度
     //测试或灰度
-    public static String bjUrl = "https://test-tnhq.tpyzq.com";//北京行情地址 测试
-    public static String kmUrl = "https://tnhq.tpyzq.com";//昆明行情地址  灰度
-    public static String currentUrl = "https://test-tnhq.tpyzq.com";//昆明行情地址  灰度
+//    public static String bjUrl = BuildConfig.bjUrl;//北京行情地址 测试
+//    public static String kmUrl = BuildConfig.kmUrl;//昆明行情地址  灰度
+//    public static String currentUrl = BuildConfig.currentUrl;//昆明行情地址  灰度
 
-    public static String SITE_JSON = "{\"message\":{\"register-httpServer\":\"http://tnhq.tpyzq.com\",\"hq\":[{\"name\":\"测试站点\",\"url\":\"http://test-tnhq.tpyzq.com:8082\"},{\"name\":\"灰度站点\",\"url\":\"http://tnhq.tpyzq.com\"}],\"register-note\":\"https://tnhq.tpyzq.com\",\"trade\":[{\"name\":\"测试站点\",\"url\":\"http://106.120.112.246:8081\"},{\"name\":\"灰度站点\",\"url\":\"https://tnhq.tpyzq.com\"}]},\"code\":\"0\",\"type\":\"success\"}";
+    public static String SITE_JSON ;
+
+    public static String setSiteJson() {
+        String url = "";
+        try {
+            Context context = CustomApplication.getContext();
+            String resValueStr = context.getResources().getString(R.string.site_json);
+            int id = context.getResources().getIdentifier(resValueStr, "string", context.getPackageName());
+            url = context.getResources().getString(id);
+        } catch (Exception e) {
+            e.printStackTrace();
+        } finally {
+            return url;
+        }
+    }
 
 /////////////// SDcard文件存储位置相关/////////////////////////////////////////
 
