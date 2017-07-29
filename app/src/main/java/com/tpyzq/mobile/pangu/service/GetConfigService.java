@@ -9,12 +9,14 @@ import com.tpyzq.mobile.pangu.base.CustomApplication;
 import com.tpyzq.mobile.pangu.base.InterfaceCollection;
 import com.tpyzq.mobile.pangu.data.ResultInfo;
 import com.tpyzq.mobile.pangu.util.ConstantUtil;
+import com.tpyzq.mobile.pangu.util.Helper;
 import com.tpyzq.mobile.pangu.util.SpUtils;
 
 import java.util.HashMap;
 
 /**
- * Created by 33920_000 on 2017/7/28.
+ * 获取站点列表
+ * Created by lx 2017/7/28.
  */
 
 public class GetConfigService extends Service implements InterfaceCollection.InterfaceCallback {
@@ -35,13 +37,26 @@ public class GetConfigService extends Service implements InterfaceCollection.Int
     public void onCreate() {
         super.onCreate();
         try {
-            //首先使用本地选择站点请求站点列表 如果成功继续执行业务，
-            // 如果失败，调用其它站点获取站点信息找到可用站点弹框提示并切换，如果都不可用，弹框提示
-            InterfaceCollection.getInstance().getSites(ConstantUtil.bjUrl+ConstantUtil.GET_SITES,TAG_REQUEST_CURRENT,this);
+            doConnect();
         } catch (Exception e) {
-
+            e.printStackTrace();
         }
+    }
 
+    private void doConnect() throws InterruptedException {
+        //首先使用本地选择站点请求站点列表 如果成功继续执行业务，
+        // 如果失败，调用其它站点获取站点信息找到可用站点弹框提示并切换，如果都不可用，弹框提示
+        if (Helper.isNetWorked()) {
+            InterfaceCollection.getInstance().getSites(ConstantUtil.currentUrl + ConstantUtil.GET_SITES, TAG_REQUEST_CURRENT, this);
+        } else {
+            Thread.sleep(1000);
+            if (count <= 2) {
+                doConnect();
+                count++;
+            } else {
+                stopSelf();
+            }
+        }
     }
 
     @Override
@@ -50,13 +65,8 @@ public class GetConfigService extends Service implements InterfaceCollection.Int
             if ("0".equalsIgnoreCase(info.getCode())) {
                 stopSelf();
             } else {
-                String url;
-//                if (ConstantUtil.IP.equalsIgnoreCase(ConstantUtil.bjUrl)) {
-//                    url = ConstantUtil.kmUrl;
-//                } else {
-//                    url = ConstantUtil.bjUrl;
-//                }
-                InterfaceCollection.getInstance().getSites(ConstantUtil.kmUrl+ConstantUtil.GET_SITES,TAG_REQUEST_OTHER,this);
+                String url = getUrl();
+                InterfaceCollection.getInstance().getSites(url+ConstantUtil.GET_SITES,TAG_REQUEST_OTHER,this);
             }
         } else if (TAG_REQUEST_OTHER.equalsIgnoreCase(info.getTag())){
             if ("0".equalsIgnoreCase(info.getCode())){
@@ -69,6 +79,7 @@ public class GetConfigService extends Service implements InterfaceCollection.Int
                     //都不可用
                     sendAllErrorBrocast();
                 } else if (hqArr.length == 1){
+                    ConstantUtil.currentUrl = getUrl();
                     //只有一个可用
                     SpUtils.putString(CustomApplication.getContext(), "market_ip", hqArr[0].split("\\|")[1]);
                     ConstantUtil.IP = hqArr[0].split("\\|")[1];
@@ -85,6 +96,16 @@ public class GetConfigService extends Service implements InterfaceCollection.Int
                 sendAllErrorBrocast();
             }
         }
+    }
+
+    private String getUrl() {
+        String url;
+        if (ConstantUtil.currentUrl.equalsIgnoreCase(ConstantUtil.bjUrl)) {
+            url = ConstantUtil.kmUrl;
+        } else {
+            url = ConstantUtil.bjUrl;
+        }
+        return url;
     }
 
     private void sendAllErrorBrocast() {
