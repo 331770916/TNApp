@@ -70,7 +70,7 @@ public class SpeedTestActivity extends BaseActivity implements View.OnClickListe
         if (TextUtils.isEmpty(ip)) {
             SpUtils.putString(this, "market_ip", ConstantUtil.IP);
         }
-        loadingDialog = LoadingDialog.initDialog(this, "正在加载...");
+//        loadingDialog = LoadingDialog.initDialog(this, "正在加载...");
         speedTestBeen = new ArrayList<SpeedTestEntity>();
         speedTestAdapter = new SpeedTestAdapter(this, speedTestBeen, speedCallBack);
         iv_back.setOnClickListener(this);
@@ -87,6 +87,8 @@ public class SpeedTestActivity extends BaseActivity implements View.OnClickListe
             HashMap hashMap = InterfaceCollection.getInstance().parseSites(jsonObj);
             String[] tradeArr=(String[])hashMap.get("hq");
             SpeedTestEntity speedTestEntity;
+            if (null!=speedTestBeen)
+                speedTestBeen.clear();
             for (int i=0;i<tradeArr.length;i++) {
                 String[] arr = tradeArr[i].split("\\|");
                 speedTestEntity = new SpeedTestEntity();
@@ -267,7 +269,6 @@ public class SpeedTestActivity extends BaseActivity implements View.OnClickListe
                 finish();
                 break;
             case R.id.bt_speedtest:
-                loadingDialog.show();
                 setClear();
                 getData();
                 break;
