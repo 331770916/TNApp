@@ -188,6 +188,6 @@ public class FreeStockTransactionPager extends BaseTransactionPager implements A
 
     @Override
     public void onItemClick(AdapterView<?> parent, View view, int position, long id) {
-        stockCodeCallBack.setStockCode(optionalStockBeen.get(position).stockCode);
+        stockCodeCallBack.setStockCode(optionalStockBeen.get(position).stockName,optionalStockBeen.get(position).stockCode);
     }
 }
