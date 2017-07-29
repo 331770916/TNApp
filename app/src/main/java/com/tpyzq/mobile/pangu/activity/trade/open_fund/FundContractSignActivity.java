@@ -43,7 +43,6 @@ public class FundContractSignActivity extends BaseActivity implements View.OnCli
     private PullToRefreshListView lv_accound_search;
     private ImageView iv_back;
     private ImageView iv_kong;
-    private LinearLayout ll_fourtext;
     private TextView tv_text1, tv_text2, tv_text3, tv_text4;
     private List<ContractEntity> contractBeans;
     private ContractAdapter contractAdapter;
@@ -53,11 +52,9 @@ public class FundContractSignActivity extends BaseActivity implements View.OnCli
     public void initView() {
         iv_back = (ImageView) findViewById(R.id.iv_back);
         iv_kong = (ImageView) findViewById(R.id.iv_kong);
-        ll_fourtext = (LinearLayout) findViewById(R.id.ll_fourtext);
-        tv_text1 = (TextView) ll_fourtext.findViewById(R.id.tv_text1);
-        tv_text2 = (TextView) ll_fourtext.findViewById(R.id.tv_text2);
-        tv_text3 = (TextView) ll_fourtext.findViewById(R.id.tv_text3);
-        tv_text4 = (TextView) ll_fourtext.findViewById(R.id.tv_text4);
+        tv_text1 = (TextView) findViewById(R.id.tv_text1);
+        tv_text2 = (TextView) findViewById(R.id.tv_text2);
+        tv_text3 = (TextView) findViewById(R.id.tv_text3);
         lv_accound_search = (PullToRefreshListView) findViewById(R.id.lv_accound_search);
         initData();
     }
@@ -73,7 +70,6 @@ public class FundContractSignActivity extends BaseActivity implements View.OnCli
         tv_text1.setText("产品名称");
         tv_text2.setText("代码/状态");
         tv_text3.setText("产品公司");
-        tv_text4.setVisibility(View.GONE);
         lv_accound_search.setOnItemClickListener(this);
 
         lv_accound_search.setOnRefreshListener(new PullToRefreshBase.OnRefreshListener2<ListView>() {
