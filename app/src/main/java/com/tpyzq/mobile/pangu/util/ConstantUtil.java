@@ -86,9 +86,6 @@ public class ConstantUtil {
 
     public static String NINE_VALIDATION = "/note/sendVoice";     //发送语音
 
-
-    public static String GET_SITES = "";     //获取站点
-
 //    public static boolean auto_flag = false;
     public static String status = BuildConfig.status;
     public static String IP = BuildConfig.IP;  //行情 IP
@@ -103,8 +100,12 @@ public class ConstantUtil {
 
 
     public static final String OPEN_ACCOUNT_CHANNEL = "tainiuapp"; //开户id
-    //新股
-    public static String URL_NEW = registerServerUrl + ONE_SERVLET;
+    //
+//    public static String URL_NEW = registerServerUrl + ONE_SERVLET;
+    //资讯 故事 手机注册 交易用户绑定 自选股 查询产品信息 新股
+    public static String getURL_NEW(){
+        return registerServerUrl + ONE_SERVLET;
+    }
     //行情
     public static String URL = IP + TWO_SERVLET;
     //资讯
@@ -114,7 +115,7 @@ public class ConstantUtil {
 
     public static String URL_BIGDATA = IP + THREE_SERVLET;
     //资讯 故事
-    public static String URL_ZX_GS = registerServerUrl + ONE_SERVLET;
+//    public static String URL_ZX_GS = registerServerUrl + ONE_SERVLET;
     //交易 & 分级基金信息查询
     public static String URL_JY = SJYZM + ONE_SERVLET;
 
@@ -122,7 +123,7 @@ public class ConstantUtil {
     public static String URL_YZM = IP + FOUR_SERVLET;
 
     //手机注册
-    public static String URL_SJLI = registerServerUrl + ONE_SERVLET;
+//    public static String URL_SJLI = registerServerUrl + ONE_SERVLET;
 //    public static String URL_SJLI = IPS + ONE_SERVLET;
 
 
@@ -137,21 +138,21 @@ public class ConstantUtil {
     public static String URL_JYYZM = SJYZM + FOUR_SHOUJI;
 
     //交易用户绑定
-    public static String URL_JYBD = registerServerUrl + ONE_SERVLET;
+//    public static String URL_JYBD = registerServerUrl + ONE_SERVLET;
 
     //自选股
-    public static String URL_SELFCHOICENET = registerServerUrl + ONE_SERVLET;
+//    public static String URL_SELFCHOICENET = registerServerUrl + ONE_SERVLET;
 
     //查询产品信息
 
-    public static String ULR_MANAGEMONEY = registerServerUrl + ONE_SERVLET;
+//    public static String ULR_MANAGEMONEY = registerServerUrl + ONE_SERVLET;
 
     public static String URL_MANAGEMONEY2 = IP + FIVE_SERVLET;
 
-    public static String URL_SXRZ = registerServerUrl + ONE_SERVLET;
+//    public static String URL_SXRZ = registerServerUrl + ONE_SERVLET;
 
     //手机注册绑定
-    public static String URL_SJZCBD = registerServerUrl + ONE_SERVLET;
+//    public static String URL_SJZCBD = registerServerUrl + ONE_SERVLET;
 //    public static String URL_SJZCBD = IPS + ONE_SERVLET;
 
     //H5

@@ -1057,7 +1057,7 @@ public class TransactionLoginActivity extends BaseActivity implements View.OnCli
         map1.put("user_type", KeyEncryptionUtils.getInstance().Typescno());
         map1.put("user_account", UserUtil.userId);
 
-        NetWorkUtil.getInstence().okHttpForPostString(TAG, ConstantUtil.URL_JYBD, map, new StringCallback() {
+        NetWorkUtil.getInstence().okHttpForPostString(TAG, ConstantUtil.getURL_NEW(), map, new StringCallback() {
             @Override
             public void onError(Call call, Exception e, int id) {
 
@@ -1210,7 +1210,7 @@ public class TransactionLoginActivity extends BaseActivity implements View.OnCli
         HashMap map = new HashMap();
         map.put("funcid", "400102");
 
-        NetWorkUtil.getInstence().okHttpForPostString(TAG, ConstantUtil.URL_SXRZ, map, new StringCallback() {
+        NetWorkUtil.getInstence().okHttpForPostString(TAG, ConstantUtil.getURL_NEW(), map, new StringCallback() {
             @Override
             public void onError(Call call, Exception e, int id) {
                 LogHelper.e(TAG, e.toString());
@@ -1284,7 +1284,7 @@ public class TransactionLoginActivity extends BaseActivity implements View.OnCli
         HashMap map = new HashMap();
         map.put("funcid", "400102");
 
-        NetWorkUtil.getInstence().okHttpForPostString(TAG, ConstantUtil.URL_SXRZ, map, new StringCallback() {
+        NetWorkUtil.getInstence().okHttpForPostString(TAG, ConstantUtil.getURL_NEW(), map, new StringCallback() {
             @Override
             public void onError(Call call, Exception e, int id) {
                 LogHelper.e(TAG, e.toString());

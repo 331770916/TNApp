@@ -71,7 +71,7 @@ public class StockHolder extends BaseStockDetailPager {
         HashMap map100202_1 = new HashMap();
         map100202_1.put("secucode", stockcode);
         map100202.put("parms", map100202_1);
-        NetWorkUtil.getInstence().okHttpForPostString("", ConstantUtil.URL_NEW, map100202, new StringCallback() {
+        NetWorkUtil.getInstence().okHttpForPostString("", ConstantUtil.getURL_NEW(), map100202, new StringCallback() {
             @Override
             public void onError(Call call, Exception e, int id) {
             }
@@ -109,7 +109,7 @@ public class StockHolder extends BaseStockDetailPager {
         HashMap map100203_1 = new HashMap();
         map100203_1.put("secucode", stockcode);
         map100203.put("parms", map100203_1);
-        NetWorkUtil.getInstence().okHttpForPostString("", ConstantUtil.URL_NEW, map100203, new StringCallback() {
+        NetWorkUtil.getInstence().okHttpForPostString("", ConstantUtil.getURL_NEW(), map100203, new StringCallback() {
             @Override
             public void onError(Call call, Exception e, int id) {
             }

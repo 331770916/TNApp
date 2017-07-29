@@ -121,7 +121,7 @@ public class IndexActivity extends BaseActivity {
         map2.put("2", newshare_push_time);
         map2.put("3", inform_push_time);
 
-        NetWorkUtil.getInstence().okHttpForPostString(this, ConstantUtil.URL_ZX_GS, map, new StringCallback() {
+        NetWorkUtil.getInstence().okHttpForPostString(this, ConstantUtil.getURL_NEW(), map, new StringCallback() {
             private String mInform_push_time;
             private String token_inform;
             @Override
@@ -304,7 +304,7 @@ public class IndexActivity extends BaseActivity {
         map400101.put("funcid", "400101");
         map400101.put("token", "");
         map400101.put("parms", map400101_1);
-        NetWorkUtil.getInstence().okHttpForPostString("", ConstantUtil.URL_SXRZ, map400101, new StringCallback() {
+        NetWorkUtil.getInstence().okHttpForPostString("", ConstantUtil.getURL_NEW(), map400101, new StringCallback() {
             @Override
             public void onError(Call call, Exception e, int id) {
             }
@@ -381,7 +381,7 @@ public class IndexActivity extends BaseActivity {
         @Override
         public void onReceive(Context context, Intent intent) {
             if ("com.pangu.showdialog".equalsIgnoreCase(intent.getAction())) {
-                MistakeDialog.showDialog("服务器异常", IndexActivity.this,null);
+                MistakeDialog.showDialog("获取可用行情站点失败\r\n", IndexActivity.this,null);
             }
         }
     }

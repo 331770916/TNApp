@@ -51,7 +51,7 @@ public class VersionUpdateActivity extends BaseActivity implements View.OnClickL
         HashMap map400101_1 = new HashMap();
         map400101_1.put("versionType", "2");
         map400101.put("parms", map400101_1);
-        NetWorkUtil.getInstence().okHttpForPostString("", ConstantUtil.URL_SXRZ, map400101, new StringCallback() {
+        NetWorkUtil.getInstence().okHttpForPostString("", ConstantUtil.getURL_NEW(), map400101, new StringCallback() {
             @Override
             public void onError(Call call, Exception e, int id) {
             }

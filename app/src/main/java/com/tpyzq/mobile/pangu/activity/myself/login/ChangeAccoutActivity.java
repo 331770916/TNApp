@@ -226,7 +226,7 @@ public class ChangeAccoutActivity extends BaseActivity implements View.OnClickLi
         HashMap map = new HashMap();
         map.put("funcid", "400102");
 
-        NetWorkUtil.getInstence().okHttpForPostString(TAG, ConstantUtil.URL_SXRZ, map, new StringCallback() {
+        NetWorkUtil.getInstence().okHttpForPostString(TAG, ConstantUtil.getURL_NEW(), map, new StringCallback() {
             @Override
             public void onError(Call call, Exception e, int id) {
                 LogHelper.e(TAG, e.toString());
@@ -882,7 +882,7 @@ public class ChangeAccoutActivity extends BaseActivity implements View.OnClickLi
         HashMap map = new HashMap();
         map.put("funcid", "400102");
 
-        NetWorkUtil.getInstence().okHttpForPostString(TAG, ConstantUtil.URL_SXRZ, map, new StringCallback() {
+        NetWorkUtil.getInstence().okHttpForPostString(TAG, ConstantUtil.getURL_NEW(), map, new StringCallback() {
             @Override
             public void onError(Call call, Exception e, int id) {
                 if (mCommit != null) {
@@ -993,7 +993,7 @@ public class ChangeAccoutActivity extends BaseActivity implements View.OnClickLi
         map1.put("user_type", KeyEncryptionUtils.getInstance().Typescno());
         map1.put("user_account", UserUtil.userId);
 
-        NetWorkUtil.getInstence().okHttpForPostString(TAG, ConstantUtil.URL_JYBD, map, new StringCallback() {
+        NetWorkUtil.getInstence().okHttpForPostString(TAG, ConstantUtil.getURL_NEW(), map, new StringCallback() {
             @Override
             public void onError(Call call, Exception e, int id) {
                 if (mCommit != null) {

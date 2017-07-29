@@ -47,7 +47,7 @@ public class GetHomeBanderConnect {
         map.put("state", "");
         params.put("parms", map);
 
-        NetWorkUtil.getInstence().okHttpForPostString(mHttpTAG, ConstantUtil.URL_NEW, params, new StringCallback() {
+        NetWorkUtil.getInstence().okHttpForPostString(mHttpTAG, ConstantUtil.getURL_NEW(), params, new StringCallback() {
             @Override
             public void onError(Call call, Exception e, int id) {
                 LogHelper.e(TAG, e.toString());

@@ -393,7 +393,7 @@ public class GetDepositBankAccountInfoConnect {
         hashMap.put("bankflag", bankNo);
         map.put("parms", hashMap);
 
-        OkHttpUtil.okHttpForPostString(tag, ConstantUtil.URL_ZX_GS, map, new StringCallback() {
+        OkHttpUtil.okHttpForPostString(tag, ConstantUtil.getURL_NEW(), map, new StringCallback() {
             @Override
             public void onError(Call call, Exception e, int id) {
                 e.printStackTrace();

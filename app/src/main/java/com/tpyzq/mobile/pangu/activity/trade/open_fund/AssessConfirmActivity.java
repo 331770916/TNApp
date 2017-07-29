@@ -283,7 +283,7 @@ public class AssessConfirmActivity extends BaseActivity implements View.OnClickL
         HashMap map100237_1 = new HashMap();
         map100237_1.put("prodcode", code);
         map100237.put("parms", map100237_1);
-        NetWorkUtil.getInstence().okHttpForPostString("", ConstantUtil.URL_NEW, map100237, new StringCallback() {
+        NetWorkUtil.getInstence().okHttpForPostString("", ConstantUtil.getURL_NEW(), map100237, new StringCallback() {
             @Override
             public void onError(Call call, Exception e, int id) {
                 MistakeDialog.showDialog("暂无数据", AssessConfirmActivity.this, error_back);

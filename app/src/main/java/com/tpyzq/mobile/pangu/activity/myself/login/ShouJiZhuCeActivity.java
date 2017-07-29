@@ -606,7 +606,7 @@ public class ShouJiZhuCeActivity extends BaseActivity implements View.OnClickLis
                 mLoadingDialog.dismiss();
             }
             if (result instanceof String) {
-                MistakeDialog.showDialog("导入自选股异常" + result.toString(), ShouJiZhuCeActivity.this, new MistakeDialog.MistakeDialgoListener() {
+                MistakeDialog.showDialog(result.toString(), ShouJiZhuCeActivity.this, new MistakeDialog.MistakeDialgoListener() {
                     @Override
                     public void doPositive() {
 

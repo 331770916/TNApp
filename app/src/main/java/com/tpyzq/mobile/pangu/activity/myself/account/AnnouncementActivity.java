@@ -55,7 +55,7 @@ public class AnnouncementActivity extends BaseActivity implements View.OnClickLi
         map.put("parms", map1);
         map1.put("BIZID", bizid);
 
-        NetWorkUtil.getInstence().okHttpForPostString(TAG, ConstantUtil.URL_ZX_GS, map, new StringCallback() {
+        NetWorkUtil.getInstence().okHttpForPostString(TAG, ConstantUtil.getURL_NEW(), map, new StringCallback() {
             @Override
             public void onError(Call call, Exception e, int id) {
                 LogUtil.e(TAG, e.toString());
@@ -116,7 +116,7 @@ public class AnnouncementActivity extends BaseActivity implements View.OnClickLi
         map.put("token", "");
         map.put("parms", map1);
         map1.put("BIZID", connect);
-        NetWorkUtil.getInstence().okHttpForPostString(TAG, ConstantUtil.URL_ZX_GS, map, new StringCallback() {
+        NetWorkUtil.getInstence().okHttpForPostString(TAG, ConstantUtil.getURL_NEW(), map, new StringCallback() {
             @Override
             public void onError(Call call, Exception e, int id) {
                 LogUtil.e(TAG, e.toString());

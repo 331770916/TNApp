@@ -94,7 +94,7 @@ public class AnnouncementFragment extends BaseDetailNewsPager implements View.On
         map1.put("funcid","900103");
         map1.put("token","");
         map1.put("parms",map2);
-        NetWorkUtil.getInstence().okHttpForPostString(TAG, ConstantUtil.URL_ZX_GS, map1, new StringCallback() {
+        NetWorkUtil.getInstence().okHttpForPostString(TAG, ConstantUtil.getURL_NEW(), map1, new StringCallback() {
             @Override
             public void onError(Call call, Exception e, int id) {
                 pb_Announcement_Pager.setVisibility(View.GONE);      //隐藏菊花

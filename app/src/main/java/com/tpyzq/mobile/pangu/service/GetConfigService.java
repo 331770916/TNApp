@@ -49,7 +49,7 @@ public class GetConfigService extends Service implements InterfaceCollection.Int
         if (Helper.isNetWorked()) {
             InterfaceCollection.getInstance().getSites(ConstantUtil.currentUrl, TAG_REQUEST_CURRENT, this);
         } else {
-            Thread.sleep(1000);
+            Thread.sleep(500);
             if (count <= 2) {
                 doConnect();
                 count++;
@@ -89,6 +89,7 @@ public class GetConfigService extends Service implements InterfaceCollection.Int
                         SpUtils.putString(CustomApplication.getContext(), "jy_ip", tradeArr[0].split("\\|")[1]);
                         ConstantUtil.SJYZM = tradeArr[0].split("\\|")[1];
                     }
+                    ConstantUtil.setUrl(ConstantUtil.IP,ConstantUtil.SJYZM);
                 } else if (hqArr.length == 2){
                     //都可用不变
                 }

@@ -77,7 +77,7 @@ public class SubscribeHistoryFragment extends BaseFragment implements PullDownSc
         map5.put("funcid", "100221");
         map5.put("token", mSession);
         map5.put("parms", map6);
-        NetWorkUtil.getInstence().okHttpForPostString(TAG, ConstantUtil.URL_NEW, map5, new StringCallback() {
+        NetWorkUtil.getInstence().okHttpForPostString(TAG, ConstantUtil.getURL_NEW(), map5, new StringCallback() {
             @Override
             public void onError(Call call, Exception e, int id) {
                 e.toString();
