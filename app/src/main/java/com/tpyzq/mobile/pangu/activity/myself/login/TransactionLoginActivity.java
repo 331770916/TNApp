@@ -691,20 +691,26 @@ public class TransactionLoginActivity extends BaseActivity implements ICallbackR
             if (result instanceof String) {
                 mBuilder.dialog.dismiss();
                 if (ConstantUtil.NETWORK_ERROR.equals(result)) {
-                    isLoginSuc = false;
-                    Helper.getInstance().showToast(TransactionLoginActivity.this, result.toString());
-                    mPassword_et.setText("");
-                    mCaptcha_et.setText("");
+                    isLoginSuc = true;
+//                    Helper.getInstance().showToast(TransactionLoginActivity.this, result.toString());
+//                    mPassword_et.setText("");
+//                    mCaptcha_et.setText("");
+                    HOLD_SEQ.deleteAll();
+                    SpUtils.putString(CustomApplication.getContext(), ConstantUtil.APPEARHOLD, ConstantUtil.HOLD_DISAPPEAR);
+                    setAccountData();                      //修改资金账号数据                //修改资金账号数据
                 } else if ("0".equals(result)) {
                     HOLD_SEQ.deleteAll();
                     SpUtils.putString(CustomApplication.getContext(), ConstantUtil.APPEARHOLD, ConstantUtil.HOLD_DISAPPEAR);
                     setAccountData();                      //修改资金账号数据
 
                 } else {
-                    isLoginSuc = false;
-                    MistakeDialog.showDialog(result.toString(), TransactionLoginActivity.this);
-                    mPassword_et.setText("");
-                    mCaptcha_et.setText("");
+                    isLoginSuc = true;
+//                    MistakeDialog.showDialog(result.toString(), TransactionLoginActivity.this);
+//                    mPassword_et.setText("");
+//                    mCaptcha_et.setText("");
+                    HOLD_SEQ.deleteAll();
+                    SpUtils.putString(CustomApplication.getContext(), ConstantUtil.APPEARHOLD, ConstantUtil.HOLD_DISAPPEAR);
+                    setAccountData();                      //修改资金账号数据
                 }
             }
         }
