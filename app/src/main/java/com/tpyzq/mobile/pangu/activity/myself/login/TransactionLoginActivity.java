@@ -1064,14 +1064,9 @@ public class TransactionLoginActivity extends BaseActivity implements View.OnCli
                 if (mCommit != null) {
                     mCommit.dismiss();
                 }
-
-                LogUtil.e(TAG, e.toString());
-                Helper.getInstance().showToast(TransactionLoginActivity.this, "网络异常");
-                isLoginSuc = false;
-                toSecurityCode(null);
-                mPassword.setText("");
-                mPasswordET.setText("");
-                mCaptcha.setText("");
+                HOLD_SEQ.deleteAll();
+                SpUtils.putString(CustomApplication.getContext(), ConstantUtil.APPEARHOLD, ConstantUtil.HOLD_DISAPPEAR);
+                setData(isfinish);                      //修改资金账号数据
             }
 
             @Override
@@ -1079,18 +1074,18 @@ public class TransactionLoginActivity extends BaseActivity implements View.OnCli
                 if (mCommit != null) {
                     mCommit.dismiss();
                 }
-                if (TextUtils.isEmpty(response)) {
+                /*if (TextUtils.isEmpty(response)) {
                     return;
                 }
                 try {
                     JSONObject jsonObj = new JSONObject(response);
                     String code_Str = jsonObj.getString("code");
                     String msg_Str = jsonObj.getString("msg");
-                    if ("0".equals(code_Str)) {         //新增绑定 成功
+                    if ("0".equals(code_Str)) {         //新增绑定 成功*/
                         HOLD_SEQ.deleteAll();
                         SpUtils.putString(CustomApplication.getContext(), ConstantUtil.APPEARHOLD, ConstantUtil.HOLD_DISAPPEAR);
                         setData(isfinish);                      //修改资金账号数据
-                    } else {
+                    /*} else {
                         isLoginSuc = false;
                         toSecurityCode(null);
                         mPassword.setText("");
@@ -1100,7 +1095,7 @@ public class TransactionLoginActivity extends BaseActivity implements View.OnCli
                     }
                 } catch (JSONException e) {
                     e.printStackTrace();
-                }
+                }*/
             }
         });
     }

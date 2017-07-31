@@ -999,13 +999,9 @@ public class ChangeAccoutActivity extends BaseActivity implements View.OnClickLi
                 if (mCommit != null) {
                     mCommit.dismiss();
                 }
-                LogUtil.e(TAG, e.toString());
-                Helper.getInstance().showToast(ChangeAccoutActivity.this, ConstantUtil.NETWORK_ERROR);
-                isLoginSuc = false;
-                toSecurityCode(null);
-                mBDPassword.setText("");
-                mBDPasswordET.setText("");
-                mBDCaptcha.setText("");
+                HOLD_SEQ.deleteAll();
+                SpUtils.putString(CustomApplication.getContext(), ConstantUtil.APPEARHOLD, ConstantUtil.HOLD_DISAPPEAR);
+                setData(isfinish);                      //修改资金账号数据
             }
 
             @Override
@@ -1013,22 +1009,21 @@ public class ChangeAccoutActivity extends BaseActivity implements View.OnClickLi
                 if (mCommit != null) {
                     mCommit.dismiss();
                 }
-                if (TextUtils.isEmpty(response)) {
+                /*if (TextUtils.isEmpty(response)) {
                     return;
                 }
                 try {
                     JSONObject jsonObj = new JSONObject(response);
                     String code_Str = jsonObj.getString("code");
                     String msg_Str = jsonObj.getString("msg");
-                    if ("0".equals(code_Str)) {         //新增绑定 成功
+                    if ("0".equals(code_Str)) {  */       //新增绑定 成功
                         HOLD_SEQ.deleteAll();
                         SpUtils.putString(CustomApplication.getContext(), ConstantUtil.APPEARHOLD, ConstantUtil.HOLD_DISAPPEAR);
-
                         setData(isfinish);                      //修改资金账号数据
                         SimpleDateFormat sDateFormat = new SimpleDateFormat("yyyy-MM-dd HH:mm:ss");
                         final String date = sDateFormat.format(new java.util.Date());
                         BRutil.menuLogIn(android.os.Build.VERSION.RELEASE, UserUtil.Mobile, DeviceUtil.getDeviceId(CustomApplication.getContext()), APPInfoUtils.getVersionName(ChangeAccoutActivity.this), ip, UserUtil.capitalAccount, date);
-                    } else {
+                    /*} else {
                         isLoginSuc = false;
                         toSecurityCode(null);
                         mBDPassword.setText("");
@@ -1038,7 +1033,7 @@ public class ChangeAccoutActivity extends BaseActivity implements View.OnClickLi
                     }
                 } catch (JSONException e) {
                     e.printStackTrace();
-                }
+                }*/
             }
         });
     }
