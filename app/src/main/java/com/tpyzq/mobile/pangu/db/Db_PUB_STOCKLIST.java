@@ -25,7 +25,7 @@ public class Db_PUB_STOCKLIST extends StockTable {
         if("1".equals(Db_PUB_USERS.entity.getIsInitUnregisterData()))return;
         for (int i = 0; i < StockEnum.values().length; i++) {
             ContentValues contentValues = new ContentValues();
-            contentValues.put("STOCK_FLAG", DEFAULT_STOCK_OPTIONAL);
+            contentValues.put("STOCK_FLAG", STOCK_OPTIONAL);
             contentValues.put("STOCK_CODE", StockEnum.values()[i].getCode());
             contentValues.put("STOCK_NAME", StockEnum.values()[i].getName());
             contentValues.put("CREATE_TIME", System.currentTimeMillis());
