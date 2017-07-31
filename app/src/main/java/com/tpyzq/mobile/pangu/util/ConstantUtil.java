@@ -196,6 +196,18 @@ public class ConstantUtil {
     public static String URL_CLASSLIST = IP + "/news/classlist";
     public static final String DEFAULT_NUM = "30";//默认请求数据条数
     public static final String ZIXUN_NUM = "10";//默认请求数据条数
+
+    //新的URL路径
+    //手机图片验证码
+    public static String  URL_HANDSE_PICTURE = SecurityIps + "/note/getImage";
+    //手机短信验证码
+    public static String  URL_HANDSE_SMS = SecurityIps + "/note/imgAuthSms";
+    //手机语音验证码
+    public static String  URL_HANDSE_SPEECH = SecurityIps + "/note/imgAuthVoice?=&=&=";
+    //手机注册
+    public static String  URL_HANDSE_REGISTER = SecurityIps + "/note/authAndRegister";
+    //手机绑定手机号
+    public static String  URL_HANDSE_BINDING = SecurityIps + "/note/WXBinding";
 /////////////// SDcard文件存储位置相关/////////////////////////////////////////
 
     /**
