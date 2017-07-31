@@ -247,7 +247,7 @@ public class UpdateIdCodeValidityActivity extends BaseActivity implements Dialog
                 if (mProgressDialog != null && mProgressDialog.isShowing()) {
                     mProgressDialog.cancel();
                 }
-                showMistackDialog("网络异常", null);
+                showMistackDialog(ConstantUtil.NETWORK_ERROR, null);
 
             }
 
