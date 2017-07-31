@@ -8,7 +8,9 @@ import android.content.Intent;
 import android.graphics.Bitmap;
 import android.graphics.BitmapFactory;
 import android.graphics.Matrix;
+import android.net.Uri;
 import android.os.Bundle;
+import android.os.Environment;
 import android.provider.MediaStore;
 import android.support.v4.content.ContextCompat;
 import android.support.v7.app.AlertDialog;
@@ -17,6 +19,7 @@ import android.text.Spanned;
 import android.text.TextUtils;
 import android.text.style.ForegroundColorSpan;
 import android.util.Base64;
+import android.util.DisplayMetrics;
 import android.util.Log;
 import android.view.KeyEvent;
 import android.view.View;
@@ -36,9 +39,11 @@ import com.zhy.http.okhttp.callback.StringCallback;
 
 import org.json.JSONObject;
 
+import java.io.BufferedInputStream;
 import java.io.ByteArrayInputStream;
 import java.io.ByteArrayOutputStream;
 import java.io.File;
+import java.io.FileInputStream;
 import java.io.FileNotFoundException;
 import java.io.FileOutputStream;
 import java.io.IOException;
@@ -140,9 +145,29 @@ public class UpLoadIdCardPicActivity extends BaseActivity implements View.OnClic
 
     private void dispatchTakePictureIntent(int IDCARD_TAG) {
         Intent takePictureIntent = new Intent(MediaStore.ACTION_IMAGE_CAPTURE);
+
+        String path = "";
+        if (IDCARD_TAG == FRONT_REQUEST_IMAGE_CAPTURE) {
+            path = frontPicPath();
+        } else {
+            path = backPicPath();
+        }
+
+        Uri uri = Uri.fromFile(new File(path));
+        //为拍摄的图片指定一个存储的路径
+        takePictureIntent.putExtra(MediaStore.EXTRA_OUTPUT, uri);
+
         if (takePictureIntent.resolveActivity(getPackageManager()) != null) {
             startActivityForResult(takePictureIntent, IDCARD_TAG);
         }
+    }
+
+    private String frontPicPath() {
+        return Environment.getExternalStorageDirectory().getPath() + "/front.png";
+    }
+
+    private String backPicPath() {
+        return Environment.getExternalStorageDirectory().getPath() + "/back.png";
     }
 
     /**
@@ -175,24 +200,32 @@ public class UpLoadIdCardPicActivity extends BaseActivity implements View.OnClic
     @Override
     protected void onActivityResult(int requestCode, int resultCode, Intent data) {
         if (resultCode == RESULT_OK) {
-            Bundle extras = data.getExtras();
-            Bitmap imageBitmap = revitionBitmapSize(1000, (Bitmap) extras.get("data"));
-            boolean bitmapIsNull = false;
-            String imageNo = "";
-            if (requestCode == FRONT_REQUEST_IMAGE_CAPTURE) {
-                imageNo = "6A";
-                bitmapIsNull = imageBitmap == null ? true : setImageBitmap(mFrontImg, imageBitmap);
-            } else if (requestCode == BACK_REQUEST_IMAGE_CAPTURE) {
-                imageNo = "6B";
-                bitmapIsNull = imageBitmap == null ? true : setImageBitmap(mBackImg, imageBitmap);
-            }
 
-            if (bitmapIsNull) {
-                showMistackDialog("生成图片失败", null);
-            } else {
-                initLoadDialog();
-                String imageBase64 = bitmapToBase64(imageBitmap);
-                uploadPic(imageBase64, biz_unit_id, imageNo, requestCode, resultCode);
+            try {
+
+                boolean bitmapIsNull = false;
+                Bitmap imageBitmap = null;
+                String imageNo = "";
+                if (requestCode == FRONT_REQUEST_IMAGE_CAPTURE) {
+                    imageNo = "6A";
+                    imageBitmap = revitionBitmapSize(frontPicPath(), 1000);
+
+                    bitmapIsNull = imageBitmap == null ? true : setImageBitmap(mFrontImg, imageBitmap);
+                } else if (requestCode == BACK_REQUEST_IMAGE_CAPTURE) {
+                    imageNo = "6B";
+                    imageBitmap = revitionBitmapSize(backPicPath(), 1000);
+                    bitmapIsNull = imageBitmap == null ? true : setImageBitmap(mBackImg, imageBitmap);
+                }
+
+                if (bitmapIsNull) {
+                    showMistackDialog("生成图片失败", null);
+                } else {
+                    initLoadDialog();
+                    String imageBase64 = bitmapToBase64(imageBitmap);
+                    uploadPic(imageBase64, biz_unit_id, imageNo, requestCode, resultCode);
+                }
+            } catch (Exception e) {
+                e.printStackTrace();
             }
         }
     }
@@ -208,99 +241,76 @@ public class UpLoadIdCardPicActivity extends BaseActivity implements View.OnClic
         return false;
     }
 
-    /**
-     * 图片处理
-     * @param size
-     * @param bitmap
-     * @return
-     */
-    private Bitmap revitionBitmapSize(int size, Bitmap bitmap) {
-        int maxLength = 1024 * 1024; // 预定的图片最大内存，单位byte
-        Bitmap decodePic = null;
-        // 压缩大小
-        try {
-            ByteArrayOutputStream baos = new ByteArrayOutputStream();
-            bitmap.compress(Bitmap.CompressFormat.PNG, 100, baos);
-            int quality = 100;
-
-            while (baos.toByteArray().length > maxLength) { // 循环判断，大于继续压缩
-                quality -= 10;// 每次都减少10
-                baos.reset();// 重置baos即清空baos
-                bitmap.compress(Bitmap.CompressFormat.PNG, quality, baos);//PNG 压缩options%
+    private  Bitmap revitionBitmapSize(String path, int size) throws IOException {
+        BufferedInputStream in = new BufferedInputStream(new FileInputStream(new File(path)));
+        BitmapFactory.Options options = new BitmapFactory.Options();
+        options.inJustDecodeBounds = true;
+        BitmapFactory.decodeStream(in, null, options);
+        in.close();
+        int i = 0;
+        Bitmap bitmap = null;
+        while (true) {
+            if ((options.outWidth >> i <= size)&& (options.outHeight >> i <= size)) {
+                in = new BufferedInputStream(new FileInputStream(new File(path)));
+                options.inSampleSize = (int) Math.pow(2.0D, i);
+                options.inJustDecodeBounds = false;
+                bitmap = BitmapFactory.decodeStream(in, null, options);
+                break;
             }
 
-
-            // 压缩尺寸
-            ByteArrayInputStream bais = new ByteArrayInputStream(baos.toByteArray());
-            BitmapFactory.Options options = new BitmapFactory.Options();
-            //开始读入图片，此时把options.inJustDecodeBounds 设回true了
-            options.inJustDecodeBounds = true;
-            decodePic = BitmapFactory.decodeStream(bais, null, options);// 加载图片(只得到图片大小)
-
-            int screenWidth = Helper.getScreenWidth(this);
-            int screenHeight = Helper.getScreenHeight(this);
-            // 获取屏幕大小，按比例压缩
-
-            int scaleX = options.outWidth / screenWidth; // X轴缩放比例(图片宽度/屏幕宽度)
-            int scaleY = options.outHeight / screenHeight; // Y轴缩放比例
-            int scale = scaleX > scaleY ? scaleX : scaleY; // 图片的缩放比例(X和Y哪个大选哪个)
-            options.inJustDecodeBounds = false; // 修改选项, 不只解码边界
-            options.inSampleSize = scale > 1 ? scale : 1; // 修改选项, 加载图片时的缩放比例
-            bais.reset();
-            decodePic = BitmapFactory.decodeStream(bais, null, options);
-
-//            int i = 0;
-//            while (true) {
-//                if ((options.outWidth >> i <= size)&& (options.outHeight >> i <= size)) {
-//                    options.inSampleSize = (int) Math.pow(2.0D, i);
-//                    options.inJustDecodeBounds = false;
-//                    decodePic = BitmapFactory.decodeByteArray(baos.toByteArray(), 0, baos.toByteArray().length, options);
-//                    break;
-//                }
-//
-//                i += 1;
-//            }
-
-            if (decodePic != null) {
-                int picWidth = decodePic.getWidth();
-                int picHeight = decodePic.getHeight();
-
-                if (picWidth < picHeight) {
-                    Matrix matrix = new Matrix();
-                    matrix.postScale(1f, 1f);
-                    matrix.postRotate(90, (float) picWidth , (float) picHeight );
-
-                    Bitmap decodePic2 = Bitmap.createBitmap(decodePic, 0, 0, picWidth, picHeight, matrix, true);
+            i += 1;
+        }
 
 
-                    if (decodePic != decodePic2) {
-                        decodePic.recycle(); // Android开发网再次提示Bitmap操作完应该显示的释放
-                        decodePic = decodePic2;
-                    }
+        if (bitmap != null) {
+            int picWidth = bitmap.getWidth();
+            int picHeight = bitmap.getHeight();
 
+            if (picWidth < picHeight) {
+                Matrix matrix = new Matrix();
+                matrix.postScale(1f, 1f);
+                matrix.postRotate(90, (float) picWidth, (float) picHeight);
+
+                Bitmap decodePic2 = Bitmap.createBitmap(bitmap, 0, 0, picWidth, picHeight, matrix, true);
+
+
+                if (bitmap != decodePic2) {
+                    bitmap.recycle(); // Android开发网再次提示Bitmap操作完应该显示的释放
+                    bitmap = decodePic2;
                 }
             }
-        } catch (Exception e) {
+
+//            saveBitmap(bitmap);
+        }
+
+        return bitmap;
+    }
+
+    private void saveBitmap(Bitmap bitmap) throws IOException
+    {
+        File file = new File(frontPicPath());
+        if(file.exists()){
+            file.delete();
+        }
+        FileOutputStream out;
+        try{
+            out = new FileOutputStream(file);
+            if(bitmap.compress(Bitmap.CompressFormat.PNG, 100, out))
+            {
+                out.flush();
+                out.close();
+            }
+        }
+        catch (FileNotFoundException e)
+        {
             e.printStackTrace();
         }
-
-        return decodePic;
-
-    }
-
-    //计算图片的缩放值
-    private int calculateInSampleSize(BitmapFactory.Options options,int reqWidth, int reqHeight) {
-        final int height = options.outHeight;
-        final int width = options.outWidth;
-        int inSampleSize = 1;
-
-        if (height > reqHeight || width > reqWidth) {
-            final int heightRatio = Math.round((float) height/ (float) reqHeight);
-            final int widthRatio = Math.round((float) width / (float) reqWidth);
-            inSampleSize = heightRatio < widthRatio ? heightRatio : widthRatio;
+        catch (IOException e)
+        {
+            e.printStackTrace();
         }
-        return inSampleSize;
     }
+
 
     /**
      * bitmap转base64
