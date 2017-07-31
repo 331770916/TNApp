@@ -400,8 +400,12 @@ public class Db_PUB_USERS extends BaseTable {
     }
 
     public static void updateInitUnregisterData(String s) {
-        ContentValues contentValues=new ContentValues();
-        contentValues.put("IS_INIT_UNREGISTER_DATA",s);
-        getDatabase().update("USER",contentValues,"ID=1",null);
+        try {
+            ContentValues contentValues=new ContentValues();
+            contentValues.put("IS_INIT_UNREGISTER_DATA",s);
+            getDatabase().update("USER",contentValues,"ID=1",null);
+        } catch (Exception e) {
+            e.printStackTrace();
+        }
     }
 }

@@ -16,4 +16,6 @@ public class StockTable extends BaseTable {
     public static final int STOCK_HISTORY_OPTIONAL =4;
     //最近浏览
     public static final int STOCK_BROWSE_NEARBY =8;
+    //默认自选股
+    public static final int DEFAULT_STOCK_OPTIONAL=16;
 }
