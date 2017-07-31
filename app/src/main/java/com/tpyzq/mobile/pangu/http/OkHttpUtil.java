@@ -32,6 +32,8 @@ import java.util.Map;
  */
 public class OkHttpUtil {
 
+    public static final String NO_TAG="no_tag";
+
     /** okhttp的一般get请求 */
     public static void OkHttpForGet (Object tag, String url, Map <String, String> params, Callback callback) {
         GetBuilder getBuilder = OkHttpUtils.get().url(url);
@@ -154,6 +156,9 @@ public class OkHttpUtil {
     }
 
     private static String pairTag(Object originTag){
+        if (NO_TAG.equals(originTag)){
+            return "";
+        }
         if (null==originTag)
             return NetworkManager.getLatestActivityTag();
         if (originTag instanceof String){
@@ -161,5 +166,6 @@ public class OkHttpUtil {
         }
         return originTag.getClass().getName()+"||"+NetworkManager.getLatestActivityTag();
     }
+
 
 }
