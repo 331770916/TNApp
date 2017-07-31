@@ -378,7 +378,6 @@ public class BuyAndSellActivity extends BaseActivity implements View.OnClickList
         et_num.setText("");
         getHeaderView(refreshcode);
         priceflag = true;
-        priceflag = true;
         timeCount.start();
     }
 
@@ -1018,14 +1017,17 @@ public class BuyAndSellActivity extends BaseActivity implements View.OnClickList
             case R.id.iv_sub_price:
                 price -= 0.01;
                 et_price.setText(string2doubleS(price + ""));
+                et_price.setSelection(et_price.getText().length());
                 break;
             case R.id.iv_add_price:
                 price += 0.01;
                 et_price.setText(string2doubleS(price + ""));
+                et_price.setSelection(et_price.getText().length());
                 break;
             case R.id.iv_sub_sum:
                 amount -= 100;
                 et_num.setText(amount + "");
+                et_num.setSelection(et_num.getText().length());
                 break;
             case R.id.iv_add_sum:
                 String tvSumText = tv_sum.getText().toString();
@@ -1033,6 +1035,7 @@ public class BuyAndSellActivity extends BaseActivity implements View.OnClickList
                 if (!TextUtils.isEmpty(tvSumText) && Helper.isDecimal(tvSumText)) {
                     amount += 100;
                     et_num.setText(amount + "");
+                    et_num.setSelection(et_num.getText().length());
                 } else {
                     if(rb_buy.isChecked()){
                         ToastUtils.showShort(this, "请确认可买数量为有效数值");
