@@ -536,11 +536,11 @@ public class BuyAndSellActivity extends BaseActivity implements View.OnClickList
                         }
                     }
 //                    et_price.setEnabled(true);
-                    et_price.requestFocus();
+//                    et_price.requestFocus();
                     if (!TextUtils.isEmpty(price+"")) {
-                        et_price.setSelection((price+"").length());
+                        et_price.setSelection(et_price.getText().length());
                     }
-                    mKeyBoardUtil.hideAllKeyBoard();
+                    mKeyBoardUtil.hideKeyboardLayout();
                 } catch (JSONException e) {
                     e.printStackTrace();
                 } finally {
