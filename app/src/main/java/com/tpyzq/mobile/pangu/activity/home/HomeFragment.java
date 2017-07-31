@@ -150,6 +150,7 @@ public class HomeFragment extends BaseFragment implements AdapterView.OnItemClic
     private String count_count;
     private long startRefreshTime;
     private long endRefreshTime;
+    private View headView;
 
 
     @Override
@@ -216,6 +217,7 @@ public class HomeFragment extends BaseFragment implements AdapterView.OnItemClic
     @Override
     public void callResult(ResultInfo info) {
         if(info.getCode().equals("200")){
+            headView.setVisibility(View.VISIBLE);
             if(info.getTag().equals("GetImportant")){
                 mInformationEntities = (ArrayList<InformationEntity>)info.getData();
                 mNewslistView.setVisibility(View.VISIBLE);
@@ -223,6 +225,7 @@ public class HomeFragment extends BaseFragment implements AdapterView.OnItemClic
             }
         }else{
             mNewslistView.setVisibility(View.GONE);
+            headView.setVisibility(View.GONE);
         }
     }
 
@@ -379,8 +382,8 @@ public class HomeFragment extends BaseFragment implements AdapterView.OnItemClic
     private void initNewsListView(View view) {
         LinearLayout ll = (LinearLayout) view.findViewById(R.id.ll_homeInfoListLayout);
         mAdapter = new NewHomeInformationAdapter(getActivity());
-        View headView = LayoutInflater.from(CustomApplication.getContext()).inflate(R.layout.home_item_head, null);
-        headView.findViewById(R.id.homeInfoHeadLayout).setOnClickListener(this);
+        headView = LayoutInflater.from(CustomApplication.getContext()).inflate(R.layout.home_item_head, null);
+        headView.setOnClickListener(this);
         ll.addView(headView, 0);
         mNewslistView.setAdapter(mAdapter);
         mNewslistView.setOnItemClickListener(new AdapterView.OnItemClickListener() {

@@ -46,7 +46,6 @@ public class HotPintsPager extends BasePager implements View.OnClickListener,Int
     private ArrayList<View> points;
     private boolean isFirst = true;
     public int page =1;
-    public  String classno;
 
     public HotPintsPager(Context context,String params) {
         super(context,params);
@@ -59,7 +58,6 @@ public class HotPintsPager extends BasePager implements View.OnClickListener,Int
 
     @Override
     public void setView(final String params) {
-        this.classno = params;
         leve4 = new ArrayList<>();
         leve1 = new ArrayList<>();
         refreshListView = (PullToRefreshListView)rootView.findViewById(R.id.listview);
@@ -183,7 +181,6 @@ public class HotPintsPager extends BasePager implements View.OnClickListener,Int
                         else
                             leve1.addAll((ArrayList<InformationEntity>)obj);
                         mListViewAdapter.setDatas(leve1);
-                        refreshListView.onRefreshComplete();
                         break;
                 }
             }
@@ -193,6 +190,7 @@ public class HotPintsPager extends BasePager implements View.OnClickListener,Int
             llHotJiaZai.setVisibility(View.VISIBLE);       //当请求失败的时候  显示重新加载图片
             llHotJiaZai.setOnClickListener(this);
         }
+        refreshListView.onRefreshComplete();
     }
 
     @Override
