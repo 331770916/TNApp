@@ -184,6 +184,7 @@ public class BuyAndSellActivity extends BaseActivity implements View.OnClickList
         et_stock_code = (EditText) findViewById(R.id.et_stock_code);
         et_price = (EditText) findViewById(R.id.et_price);
         et_num = (EditText) findViewById(R.id.et_num);
+        et_num.requestFocus();
 //        tv_stock_name = (TextView) findViewById(R.id.tv_stock_name);
         vp_view = (ViewPager) findViewById(R.id.vp_view);
         tv_drop = (TextView) findViewById(R.id.tv_drop);

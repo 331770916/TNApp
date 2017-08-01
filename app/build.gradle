@@ -66,7 +66,7 @@ android {
         }
         evironment_test{
             applicationId "com.tpyzq.test.mobile.pangu"
-            buildConfigField "String", "IP", '"https://test-tnhq.tpyzq.com"'
+            buildConfigField "String", "IP", '"https://test-tnhq.tpyzq.com:8082"'
             buildConfigField "String", "SJYZM", '"http://106.120.112.246:8081"'
             buildConfigField "String", "BORY", '"https://123.127.198.52:443/config"'
             buildConfigField "String", "BORY_APPID", '"95f7a69e-db11-40a4-b242-6be2b396a0ee"'
@@ -74,8 +74,8 @@ android {
             buildConfigField "String", "SecurityIps", '"http://106.120.112.246:8082"'
             buildConfigField "String", "SecurityIp", '"http://106.120.112.246:8082"'
             buildConfigField "String", "status", '"测试"'
-            buildConfigField "String", "registerServerUrl", '"https://test-tnhq.tpyzq.com"'
-            buildConfigField "String", "registerNoteUrl", '"https://test-tnhq.tpyzq.com"'
+            buildConfigField "String", "registerServerUrl", '"https://test-tnyw.tpyzq.com/"'
+            buildConfigField "String", "registerNoteUrl", '"https://test-tnyw.tpyzq.com/"'
             buildConfigField "String", "bjUrl", '"https://test-tnhq.tpyzq.com/note/getPath"'
             buildConfigField "String", "kmUrl", '"https://tnhq.tpyzq.com/note/getPath"'
             buildConfigField "String", "currentUrl", '"https://test-tnhq.tpyzq.com/note/getPath"'
@@ -104,14 +104,14 @@ android {
             applicationId "com.tpyzq.gary.mobile.pangu"
             buildConfigField "String", "IP", '"http://tnhq.tpyzq.com"'
             buildConfigField "String", "SJYZM", '"https://tn.tpyzq.com"'
-            buildConfigField "String", "BORY", '"https://apm.tpyzq.com/config"'
+            buildConfigField "String", "BORY", '"https://apm.tpyzq.com/config/"'
             buildConfigField "String", "BORY_APPID", '"ae41fc21-a00c-4263-a7e7-b8a017aebcdf"'
             buildConfigField "String", "APP_ID", '"479a67630d2a36996b6aa485f80a4560abefcb91"'
             buildConfigField "String", "SecurityIps", '"https://tnhq.tpyzq.com"'
             buildConfigField "String", "SecurityIp", '"http://tnhq.tpyzq.com"'
             buildConfigField "String", "status", '"灰度"'
-            buildConfigField "String", "registerServerUrl", '"http://tnhq.tpyzq.com"'
-            buildConfigField "String", "registerNoteUrl", '"http://tnhq.tpyzq.com"'
+            buildConfigField "String", "registerServerUrl", '"https://tnyw.tpyzq.com"'
+            buildConfigField "String", "registerNoteUrl", '"https://tnyw.tpyzq.com"'
             buildConfigField "String", "bjUrl", '"https://test-tnhq.tpyzq.com/note/getPath"'
             buildConfigField "String", "kmUrl", '"https://tnhq.tpyzq.com/note/getPath"'
             buildConfigField "String", "currentUrl", '"https://tnhq.tpyzq.com/note/getPath"'
