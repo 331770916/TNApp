@@ -62,6 +62,7 @@ public class PositionFundActivity extends BaseActivity {
         Bundle bundle = data.getExtras();
         final int point = bundle.getInt("point");
         fundProductAdapter = new FundProductAdapter(this);
+
         fundProductAdapter.setPoint(point);
         lv_fund_product.setAdapter(fundProductAdapter);
         lv_fund_product.setEmptyView(iv_kong);

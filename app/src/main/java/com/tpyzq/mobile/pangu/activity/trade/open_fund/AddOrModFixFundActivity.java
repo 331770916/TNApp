@@ -34,6 +34,9 @@ import java.text.SimpleDateFormat;
 import java.util.Date;
 import java.util.HashMap;
 
+import static com.tpyzq.mobile.pangu.activity.trade.open_fund.FundInfoActivity.IS_SHOW;
+import static com.tpyzq.mobile.pangu.activity.trade.open_fund.FundInfoActivity.ITEM_CLICK;
+
 /**
  * 增加修改定投
  * Created by lx on 2017/7/21.
@@ -204,7 +207,12 @@ public class AddOrModFixFundActivity extends BaseActivity implements View.OnClic
                 choosEndDate.show();
                 break;
             case R.id.tv_choose_fund:
-                startActivityForResult(new Intent(this, OptionalFundActivity.class), REQEST_CHOOSE);
+                Intent intent = new Intent();
+                intent.setClass(this, FundInfoActivity.class);
+                intent.putExtra(IS_SHOW, true);
+                intent.putExtra(ITEM_CLICK, true);
+                intent.putExtra("type", "1");
+                startActivityForResult(intent, REQEST_CHOOSE);
                 break;
             case R.id.bt_commint:
                 final String balance = et_input_branch.getText().toString().trim();
