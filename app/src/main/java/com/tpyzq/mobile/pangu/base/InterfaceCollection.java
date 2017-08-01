@@ -2266,8 +2266,8 @@ public class InterfaceCollection {
      * @param END_DATE     到期日期
      * @param EN_FUND_DATE 扣款允许日
      */
-    public void addFixFund(String FUND_COMPANY, String FUND_CODE, String RATION_TYPE, String BALANCE,
-                           String START_DATE, String END_DATE, String EN_FUND_DATE, final String TAG, final InterfaceCallback callback) {
+    public void addFixFund(final String FUND_COMPANY, final String FUND_CODE, String RATION_TYPE, final String BALANCE,
+                           final String START_DATE, final String END_DATE, final String EN_FUND_DATE, final String TAG, final InterfaceCallback callback) {
         Map map1 = new HashMap<>();
         map1.put("funcid", "334008");
         map1.put("token", SpUtils.getString(CustomApplication.getContext(), "mSession", ""));
@@ -2281,6 +2281,9 @@ public class InterfaceCollection {
         map2.put("START_DATE", START_DATE);
         map2.put("END_DATE", END_DATE);
         map2.put("EN_FUND_DATE", EN_FUND_DATE);
+//        map2.put("DO_OPEN", DO_OPEN);   //是否需要开户
+//        map2.put("DO_CONTRACT", DO_CONTRACT);   //是否需要签署协议 如果DO_PRE_CONDITION传1的话以上两个字段不传
+        map2.put("DO_PRE_CONDITION", "1");
         map1.put("parms", map2);
         net.okHttpForPostString(TAG, ConstantUtil.URL_JY, map1, new StringCallback() {
             @Override
@@ -2309,6 +2312,25 @@ public class InterfaceCollection {
                         info.setTag(TAG);
                         if ("0".equals(code)) {
                             info.setMsg("基金定投登记成功");
+                            JSONArray jsonArr = jsonObject.optJSONArray("data");
+                            AssessConfirmEntity assessConfirmBean = new AssessConfirmEntity();
+                            if (null!=jsonArr && jsonArr.length()>0) {
+                                jsonObject = jsonArr.getJSONObject(0);
+                                assessConfirmBean.productcode = FUND_CODE;
+                                assessConfirmBean.productcompany = FUND_COMPANY;
+                                assessConfirmBean.productprice = BALANCE;//复用
+                                assessConfirmBean.type = "0";//基金定投
+                                assessConfirmBean.IS_ABLE = jsonObject.optString("IS_ABLE");
+                                assessConfirmBean.IS_AGREEMENT = jsonObject.optString("IS_AGREEMENT");
+                                assessConfirmBean.IS_OPEN = jsonObject.optString("IS_OPEN");
+                                assessConfirmBean.IS_VALIB_RISK_LEVEL = jsonObject.optString("IS_VALIB_RISK_LEVEL");
+                                assessConfirmBean.OFRISK_FLAG = jsonObject.optString("OFRISK_FLAG");
+                                assessConfirmBean.OFUND_RISKLEVEL_NAME = jsonObject.optString("OFUND_RISKLEVEL_NAME");
+                                assessConfirmBean.RISK_RATING = START_DATE;
+                                assessConfirmBean.RISK_LEVEL = END_DATE;
+                                assessConfirmBean.RISK_LEVEL_NAME = EN_FUND_DATE;
+                            }
+                            info.setData(assessConfirmBean);
                         }
                     } catch (Exception e) {
                         info.setCode(ConstantUtil.JSON_ERROR_CODE);
