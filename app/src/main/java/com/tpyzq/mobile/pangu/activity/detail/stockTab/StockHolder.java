@@ -127,6 +127,7 @@ public class StockHolder extends BaseStockDetailPager {
                     String msg = object.getString("msg");
                     JSONArray dataArray = new JSONArray(data);
                     if (code.equals("0")) {
+                        stockHolderTop10Been.clear();
                         for (int i = 0; i < dataArray.length(); i++) {
                             JSONObject dataObejct = dataArray.getJSONObject(i);
                             StockHolderTop10Entity stockHolderTop10Bean = new StockHolderTop10Entity();
