@@ -258,7 +258,8 @@ public class HomeFragment extends BaseFragment implements AdapterView.OnItemClic
                         switch (index) {
                             case 0:
                                 BRutil.menuSelect("N022");
-                                intent.setClass(getActivity(), HotSellActivity.class);
+//                                intent.setClass(getActivity(), HotSellActivity.class);
+                                intent.setClass(getActivity(), OptionalFinancingActivity.class);
                                 getActivity().startActivity(intent);
                                 break;
                             case 1:
