@@ -97,6 +97,13 @@ public class SelfChoiceNewsTab extends BaseTabPager implements
         if (mSimpleRemoteControl != null && count > 0) {
             mSimpleRemoteControl.setCommand(new ToSelfChoiceStockNews(new SelfChoiceStockNews(TAG, pagerNum, null)));
             mSimpleRemoteControl.startConnect();
+        } else {
+            mEntities.clear();
+            mSelfNewsAdapter.setDatas(mEntities);
+            if (null!=mPullLayout) {
+                mPullLayout.finishPull();
+            }
+            mKongLayout.setVisibility(View.VISIBLE);
         }
     }
 
