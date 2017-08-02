@@ -1,10 +1,13 @@
 package com.tpyzq.mobile.pangu.activity.trade.open_fund;
 
 import com.tpyzq.mobile.pangu.R;
+import com.tpyzq.mobile.pangu.activity.myself.handhall.AgreementActivity;
 import com.tpyzq.mobile.pangu.activity.myself.handhall.RiskConfirmActivity;
 import com.tpyzq.mobile.pangu.activity.myself.handhall.RiskEvaluationActivity;
+import com.tpyzq.mobile.pangu.activity.myself.login.TransactionLoginActivity;
 import com.tpyzq.mobile.pangu.base.BaseActivity;
 import com.tpyzq.mobile.pangu.base.InterfaceCollection;
+import com.tpyzq.mobile.pangu.data.AssessConfirmEntity;
 import com.tpyzq.mobile.pangu.data.FixFundEntity;
 import com.tpyzq.mobile.pangu.data.FundDataEntity;
 import com.tpyzq.mobile.pangu.data.FundSubsEntity;
@@ -34,6 +37,10 @@ import java.text.SimpleDateFormat;
 import java.util.Date;
 import java.util.HashMap;
 
+import static com.tpyzq.mobile.pangu.activity.trade.open_fund.FundInfoActivity.IS_SHOW;
+import static com.tpyzq.mobile.pangu.activity.trade.open_fund.FundInfoActivity.ITEM_CLICK;
+import static com.tpyzq.mobile.pangu.activity.trade.open_fund.FundInfoActivity.LIST_TYPE;
+
 /**
  * 增加修改定投
  * Created by lx on 2017/7/21.
@@ -42,10 +49,11 @@ import java.util.HashMap;
 public class AddOrModFixFundActivity extends BaseActivity implements View.OnClickListener, StructuredFundDialog.Expression, InterfaceCollection.InterfaceCallback {
 
     public static final String TAG_REQUEST_FUND = "queryfund";
-    private static final String TAG_SUBMIT= "submit";
-    private static final String TAG_MODIFY= "modify";
+    public static final String TAG_SUBMIT= "submit";
+    public static final String TAG_MODIFY= "modify";
     private static int REQEST_CHOOSE = 10001;
     private static final int REQUEST_RISK = 10002;
+    private static final int REQAGREEMENTCODE = 10003;
     private ImageView iv_back;
     private TextView tv_title;
     private EditText et_input_code;
@@ -204,7 +212,12 @@ public class AddOrModFixFundActivity extends BaseActivity implements View.OnClic
                 choosEndDate.show();
                 break;
             case R.id.tv_choose_fund:
-                startActivityForResult(new Intent(this, OptionalFundActivity.class), REQEST_CHOOSE);
+                Intent intent = new Intent();
+                intent.setClass(this, FundInfoActivity.class);
+                intent.putExtra(IS_SHOW, true);
+                intent.putExtra(ITEM_CLICK, true);
+                intent.putExtra(LIST_TYPE, "3");
+                startActivityForResult(intent, REQEST_CHOOSE);
                 break;
             case R.id.bt_commint:
                 final String balance = et_input_branch.getText().toString().trim();
@@ -235,13 +248,7 @@ public class AddOrModFixFundActivity extends BaseActivity implements View.OnClic
                         showDialog();
                     }
                 } else {//修改
-                    if (null!=mRevokeDialog && !mRevokeDialog.isShowing()){
-                        mRevokeDialog.show();
-                    }
-                    InterfaceCollection.getInstance().modifyFixFund(fixFundEntity.getFUND_COMPANY(),
-                            fixFundEntity.getFUND_CODE(), balance,
-                            Helper.getInstance().getMyDate(fixFundEntity.getSTART_DATE()), Helper.getInstance().getMyDate(fixFundEntity.getEND_DATE()),
-                            fixFundEntity.getEN_FUND_DATE(), fixFundEntity.getALLOTNO(), TAG_SUBMIT, this);
+                    showDialog();
                 }
                 break;
             case R.id.iv_back:
@@ -276,32 +283,34 @@ public class AddOrModFixFundActivity extends BaseActivity implements View.OnClic
         if (null!=mRevokeDialog && !mRevokeDialog.isShowing()){
             mRevokeDialog.show();
         }
-        InterfaceCollection.getInstance().queryProductSuitability("", "", "",
-                fixFundEntity.getFUND_COMPANY(), fixFundEntity.getFUND_CODE(), "331261", new InterfaceCollection.InterfaceCallback() {
-                    @Override
-                    public void callResult(ResultInfo info) {
-                        if (null!=mRevokeDialog && mRevokeDialog.isShowing()){
-                            mRevokeDialog.dismiss();
-                        }
-                        String code = info.getCode();
-                        String msg = info.getMsg();
-                        HashMap<String,String> resultMap = null;
-                        if ("0".equalsIgnoreCase(code)) {
-                            resultMap = (HashMap<String,String>)info.getData();
-                            if (null == resultMap) {
-                                MistakeDialog.showDialog("数据异常", AddOrModFixFundActivity.this, null);
-                                return;
+        if (position == -1) {
+            InterfaceCollection.getInstance().queryProductSuitability("", "", "",
+                    fixFundEntity.getFUND_COMPANY(), fixFundEntity.getFUND_CODE(), "331261", new InterfaceCollection.InterfaceCallback() {
+                        @Override
+                        public void callResult(ResultInfo info) {
+                            if (null != mRevokeDialog && mRevokeDialog.isShowing()) {
+                                mRevokeDialog.dismiss();
                             }
-                            //弹框逻辑
-                            //是否可以委托
-                            if ("0".equalsIgnoreCase(resultMap.get("ENABLE_FLAG"))) {//不可委托
-                                //尊敬的客户:\n       根据证监会《证券期货投资者适当性管理办法》，您购买的产品在购买过程中需要通过录音录像进行确认，请到营业部办理
-                                CancelDialog.cancleDialog(AddOrModFixFundActivity.this, "", 4000, new CancelDialog.PositiveClickListener() {
-                                    @Override
-                                    public void onPositiveClick() {}
-                                },null);
-                                return;
-                            }
+                            String code = info.getCode();
+                            String msg = info.getMsg();
+                            HashMap<String, String> resultMap = null;
+                            if ("0".equalsIgnoreCase(code)) {
+                                resultMap = (HashMap<String, String>) info.getData();
+                                if (null == resultMap) {
+                                    MistakeDialog.showDialog("数据异常", AddOrModFixFundActivity.this, null);
+                                    return;
+                                }
+                                //弹框逻辑
+                                //是否可以委托
+                                if ("0".equalsIgnoreCase(resultMap.get("ENABLE_FLAG"))) {//不可委托
+                                    //尊敬的客户:\n       根据证监会《证券期货投资者适当性管理办法》，您购买的产品在购买过程中需要通过录音录像进行确认，请到营业部办理
+                                    CancelDialog.cancleDialog(AddOrModFixFundActivity.this, "", 4000, new CancelDialog.PositiveClickListener() {
+                                        @Override
+                                        public void onPositiveClick() {
+                                        }
+                                    }, null);
+                                    return;
+                                }
 //                        else {
 //                            //可以委托 判断是否需要视频录制
 //                            if ("1".equalsIgnoreCase(resultMap.get("NEED_VIDEO_FLAG"))) {
@@ -309,17 +318,26 @@ public class AddOrModFixFundActivity extends BaseActivity implements View.OnClic
 //                                return;
 //                            }
 //                        }
-                            //跳转到适用性页面
-                            Intent intent = new Intent(AddOrModFixFundActivity.this, RiskConfirmActivity.class);
-                            intent.putExtra("resultMap",resultMap);
-                            AddOrModFixFundActivity.this.startActivityForResult(intent, REQUEST_RISK);
-                        } else {
-                            MistakeDialog.showDialog(msg, AddOrModFixFundActivity.this, null);
+                                //跳转到适用性页面
+                                Intent intent = new Intent(AddOrModFixFundActivity.this, RiskConfirmActivity.class);
+                                intent.putExtra("resultMap", resultMap);
+                                AddOrModFixFundActivity.this.startActivityForResult(intent, REQUEST_RISK);
+                            } else {
+                                MistakeDialog.showDialog(msg, AddOrModFixFundActivity.this, null);
+                            }
                         }
-                    }
-                });
-
+                    });
+        } else {
+            String balance = et_input_branch.getText().toString().trim();
+            if (null!=mRevokeDialog && !mRevokeDialog.isShowing()){
+                mRevokeDialog.show();
+            }
+            InterfaceCollection.getInstance().modifyFixFund(fixFundEntity.getFUND_COMPANY(),
+                    fixFundEntity.getFUND_CODE(), balance,
+                    Helper.getInstance().getMyDate(fixFundEntity.getSTART_DATE()), Helper.getInstance().getMyDate(fixFundEntity.getEND_DATE()),
+                    fixFundEntity.getEN_FUND_DATE(), fixFundEntity.getALLOTNO(), TAG_SUBMIT, this);
         }
+    }
 
     @Override
     public void callResult(ResultInfo info) {
@@ -347,11 +365,13 @@ public class AddOrModFixFundActivity extends BaseActivity implements View.OnClic
                 break;
             case TAG_MODIFY:
                 if ("0".equalsIgnoreCase(code)) {
-                    CentreToast.showText(this, msg);
+                    /*CentreToast.showText(this, msg);
                     Intent modifyIntent= new Intent();
                     modifyIntent.putExtra("fixFundEntity",fixFundEntity);
                     modifyIntent.putExtra("position",position);
                     setResult(RESULT_OK, modifyIntent);
+                    finish();*/
+                    CentreToast.showText(this, msg);
                     finish();
                 } else {
                     MistakeDialog.showDialog(msg,this,null);
@@ -359,17 +379,34 @@ public class AddOrModFixFundActivity extends BaseActivity implements View.OnClic
                 break;
             case TAG_SUBMIT:
                 if ("0".equalsIgnoreCase(code)) {
-                    CentreToast.showText(this, msg);
-                    Intent submitIntent = new Intent();
-                    fixFundEntity.setSEND_BALANCE("0");
-                    fixFundEntity.setDEAL_FLAG("0");
-                    fixFundEntity.setDEAL_FLAG_NAME("未处理");
-                    submitIntent.putExtra("fixFundEntity",fixFundEntity);
-                    submitIntent.putExtra("position",position);
-                    setResult(RESULT_OK,submitIntent);
-                    finish();
+                    AssessConfirmEntity assessConfirmEntity = (AssessConfirmEntity)info.getData();
+                    if ("0".equalsIgnoreCase(assessConfirmEntity.IS_ABLE)) {
+                        CentreToast.showText(this, msg);
+                        finish();
+                        /*CentreToast.showText(this, msg);
+                        Intent submitIntent = new Intent();
+                        fixFundEntity.setSEND_BALANCE("0");
+                        fixFundEntity.setDEAL_FLAG("0");
+                        fixFundEntity.setDEAL_FLAG_NAME("未处理");
+                        submitIntent.putExtra("fixFundEntity",fixFundEntity);
+                        submitIntent.putExtra("position",position);
+                        setResult(RESULT_OK,submitIntent);
+                        finish();*/
+                    } else {
+                        if ("1".equalsIgnoreCase(assessConfirmEntity.IS_OPEN) || "0".equalsIgnoreCase(assessConfirmEntity.IS_AGREEMENT)){
+                            Intent intent = new Intent();
+                            intent.setClass(AddOrModFixFundActivity.this, AssessConfirmActivity.class);
+                            intent.putExtra("transaction", "true");
+                            intent.putExtra("assessConfirm", assessConfirmEntity);
+                            startActivityForResult(intent, REQAGREEMENTCODE);
+                        }
+                    }
+                } else if ("-6".equalsIgnoreCase(code)) {
+                    startActivity(new Intent(AddOrModFixFundActivity.this, TransactionLoginActivity.class));
+                }  else if ("400".equalsIgnoreCase(code)) {
+                    startActivity(new Intent(AddOrModFixFundActivity.this, AgreementActivity.class));
                 } else {
-                    MistakeDialog.showDialog(msg,this,null);
+                    MistakeDialog.showDialog(msg, AddOrModFixFundActivity.this, null);
                 }
                 break;
         }
@@ -404,9 +441,9 @@ public class AddOrModFixFundActivity extends BaseActivity implements View.OnClic
             FundSubsEntity fundData = (FundSubsEntity) data.getSerializableExtra("data");
             et_input_code.setText(fundData.FUND_CODE);
         }
-        /*if (requestCode == REQAGREEMENTCODE && resultCode == RESULT_OK) {//签署协议页面返回
-            et_fund_price.setText("");
-        }*/
+        if (requestCode == REQAGREEMENTCODE && resultCode == RESULT_OK) {//签署协议页面返回
+            et_input_branch.setText("");
+        }
         if (requestCode == REQUEST_RISK && resultCode == RESULT_OK) {//风险同意书签署返回
             addFixFund();
         }

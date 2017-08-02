@@ -118,18 +118,31 @@ public class ManagerMoenyDetailActivity extends BaseActivity implements View.OnC
 
         Intent intent = getIntent();
 
-        String productCode = intent.getStringExtra("productCode");
         mPersent = intent.getStringExtra("prod_nhsy");
-        mDangerousLeavel = intent.getStringExtra("ofund_risklevel_name");
-        mStartBuyPrice = intent.getStringExtra("prod_qgje");
         schema_id = intent.getStringExtra("schema_id");
         prod_code = intent.getStringExtra("prod_code");
+        mStartBuyPrice = intent.getStringExtra("prod_qgje");
+        String productCode = intent.getStringExtra("productCode");
+        mDangerousLeavel = intent.getStringExtra("ofund_risklevel_name");
         if (!TextUtils.isEmpty(mPersent) && "-".equals(mPersent)) {
             mPersent = "0.0%";
         }
         mProductType = intent.getStringExtra("TYPE");
         mProdType = intent.getStringExtra("prod_type");
-        LogUtil.e("-----------"+mProductType);
+
+        String target = intent.getStringExtra("target");//来自基金信息跳转
+        if ("fundInfoTarget".equals(target)) {
+            mBuyBtn.setVisibility(View.GONE);
+            findViewById(R.id.managerDetailTargetLayout).setVisibility(View.VISIBLE);
+            findViewById(R.id.targetTouBtn).setOnClickListener(this);
+            findViewById(R.id.targetBuyBtn).setOnClickListener(this);
+
+            if ("0".equals(mProdType)) {
+                findViewById(R.id.targetTouBtn).setVisibility(View.GONE);
+            }
+        }
+
+
         if (!TextUtils.isEmpty(productCode) && !TextUtils.isEmpty(mProductType)) {
             SimpleRemoteControl simpleRemoteControl = new SimpleRemoteControl(this);
             if ("3".equals(mProductType)) {
@@ -140,9 +153,7 @@ public class ManagerMoenyDetailActivity extends BaseActivity implements View.OnC
                 simpleRemoteControl.setCommand(new ToGetProductInfoConnect(new GetProductInfoConnect(TAG, "", productCode, mProductType)));
                 simpleRemoteControl.startConnect();
             }
-
         }
-
 
         //二期用  别删
 //        String type = getProductType(intent);

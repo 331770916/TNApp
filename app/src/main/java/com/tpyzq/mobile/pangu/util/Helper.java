@@ -20,13 +20,12 @@ import android.view.WindowManager;
 import android.view.inputmethod.InputMethodManager;
 import android.widget.EditText;
 import android.widget.Toast;
-
 import com.tpyzq.mobile.pangu.base.CustomApplication;
+import com.tpyzq.mobile.pangu.data.InformationEntity;
 import com.tpyzq.mobile.pangu.data.StockInfoEntity;
 import com.tpyzq.mobile.pangu.db.Db_PUB_USERS;
 import com.tpyzq.mobile.pangu.log.LogHelper;
 import com.tpyzq.mobile.pangu.view.dialog.CancelDialog;
-
 import org.apache.http.util.EncodingUtils;
 
 import java.io.File;
@@ -44,7 +43,9 @@ import java.util.ArrayList;
 import java.util.Calendar;
 import java.util.Collections;
 import java.util.Date;
+import java.util.HashMap;
 import java.util.List;
+import java.util.Map;
 import java.util.regex.Matcher;
 import java.util.regex.Pattern;
 
@@ -59,6 +60,19 @@ public class Helper {
     private static long oneTime = 0;
     private static long towTime = 0;
     public static final String TAG = "Helper";
+
+    public static List<Map<String,String>> covertLoopModel(List<InformationEntity> list){
+        List<Map<String,String>> data = new ArrayList<>();
+        for (InformationEntity entity:list) {
+            Map<String,String> model = new HashMap();
+            model.put("id",entity.getNewsno());
+            model.put("title",entity.getTitle());
+            model.put("time",Helper.getCurDate()+" "+entity.getTime());
+            model.put("url",entity.getImage_url());
+            data.add(model);
+        }
+        return data;
+    }
 
     public static int getTime(){
         int time;
@@ -1846,5 +1860,4 @@ public class Helper {
         }
         CancelDialog.cancleDialog(activity, CORP_END_DATE, style, listener,nagtiveClickListener);
     }
-
 }

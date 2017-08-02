@@ -131,7 +131,6 @@ public class SopCastPager extends BasePager implements InterfaceCollection.Inter
                 else
                     list.addAll((ArrayList<InformationEntity>)obj);
                 adapter.setList(list,tvDay,tvDate);
-                mListView.onRefreshComplete();
             }
         }else{
             mListView.setVisibility(View.GONE);     //隐藏listView
@@ -149,6 +148,7 @@ public class SopCastPager extends BasePager implements InterfaceCollection.Inter
                 }
             });
         }
+        mListView.onRefreshComplete();
     }
 
     @Override

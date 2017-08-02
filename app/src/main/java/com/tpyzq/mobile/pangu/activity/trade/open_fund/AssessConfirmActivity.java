@@ -20,8 +20,10 @@ import com.tpyzq.mobile.pangu.activity.home.managerMoney.BuyResultActivity;
 import com.tpyzq.mobile.pangu.activity.myself.handhall.AgreementActivity;
 import com.tpyzq.mobile.pangu.activity.myself.login.TransactionLoginActivity;
 import com.tpyzq.mobile.pangu.base.BaseActivity;
+import com.tpyzq.mobile.pangu.base.InterfaceCollection;
 import com.tpyzq.mobile.pangu.data.AssessConfirmEntity;
 import com.tpyzq.mobile.pangu.data.PdfEntity;
+import com.tpyzq.mobile.pangu.data.ResultInfo;
 import com.tpyzq.mobile.pangu.http.NetWorkUtil;
 import com.tpyzq.mobile.pangu.util.ColorUtils;
 import com.tpyzq.mobile.pangu.util.ConstantUtil;
@@ -51,7 +53,7 @@ import static com.umeng.socialize.Config.dialog;
 /**
  * 协议签署界面
  */
-public class AssessConfirmActivity extends BaseActivity implements View.OnClickListener {
+public class AssessConfirmActivity extends BaseActivity implements View.OnClickListener, InterfaceCollection.InterfaceCallback {
     private String TAG = "AssessConfirmActivity";
     private Button bt_continue_buy;
     private AssessConfirmEntity assessConfirmBean;
@@ -176,6 +178,7 @@ public class AssessConfirmActivity extends BaseActivity implements View.OnClickL
             IS_OPEN = "1";
         }
         switch (assessConfirmBean.type) {
+            case "0"://基金定投
             case "1":
             case "2":
                 if ("0".equals(assessConfirmBean.IS_AGREEMENT)) {
@@ -354,6 +357,11 @@ public class AssessConfirmActivity extends BaseActivity implements View.OnClickL
         switch (v.getId()) {
             case R.id.bt_continue_buy:
                 switch (assessConfirmBean.type) {
+                    case "0":
+                        InterfaceCollection.getInstance().addFixFund(assessConfirmBean.productcompany,
+                                assessConfirmBean.productcode,"0",assessConfirmBean.productprice,
+                                assessConfirmBean.RISK_RATING,assessConfirmBean.RISK_LEVEL,assessConfirmBean.RISK_LEVEL_NAME,AddOrModFixFundActivity.TAG_SUBMIT,this);
+                        break;
                     case "1":
                         fund_rengou();
                         break;
@@ -438,6 +446,13 @@ public class AssessConfirmActivity extends BaseActivity implements View.OnClickL
         @Override
         public void doPositive() {
             setResult(RESULT_OK);
+            finish();
+        }
+    };
+    MistakeDialog.MistakeDialgoListener wrong_back = new MistakeDialog.MistakeDialgoListener() {
+        @Override
+        public void doPositive() {
+            setResult(RESULT_CANCELED);
             finish();
         }
     };
@@ -614,6 +629,34 @@ public class AssessConfirmActivity extends BaseActivity implements View.OnClickL
             intent.setClass(this, BuyResultActivity.class);
             startActivity(intent);
             finish();
+        }
+    }
+
+    @Override
+    public void callResult(ResultInfo info) {
+        String code = info.getCode();
+        String tag = info.getTag();
+        String msg = info.getMsg();
+        switch (tag) {
+            case AddOrModFixFundActivity.TAG_SUBMIT:
+                if ("0".equalsIgnoreCase(code)) {
+                    AssessConfirmEntity assessConfirmEntity = (AssessConfirmEntity) info.getData();
+                    if ("0".equalsIgnoreCase(assessConfirmEntity.IS_ABLE)) {
+                        CentreToast.showText(this, msg);
+                        Intent submitIntent = new Intent();
+                        setResult(RESULT_OK, submitIntent);
+                        finish();
+                    } else {
+                        MistakeDialog.showDialog(msg,this,wrong_back);
+                    }
+                } else if ("-6".equalsIgnoreCase(code)) {
+                    startActivity(new Intent(AssessConfirmActivity.this, TransactionLoginActivity.class));
+                } else if ("400".equalsIgnoreCase(code)) {
+                    startActivity(new Intent(AssessConfirmActivity.this, AgreementActivity.class));
+                } else {
+                    MistakeDialog.showDialog(msg, AssessConfirmActivity.this, wrong_back);
+                }
+                break;
         }
     }
 }

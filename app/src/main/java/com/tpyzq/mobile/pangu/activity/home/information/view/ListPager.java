@@ -106,7 +106,6 @@ public class ListPager extends BasePager implements InterfaceCollection.Interfac
                 else
                     list.addAll((ArrayList<InformationEntity>)obj);
                 adapter.setList(list);
-                mListView.onRefreshComplete();
             }
         }else{
             llChongXinJiaZai.setVisibility(View.VISIBLE);       //当请求失败的时候  显示重新加载图片
@@ -124,6 +123,7 @@ public class ListPager extends BasePager implements InterfaceCollection.Interfac
                 }
             });
         }
+        mListView.onRefreshComplete();
     }
 
     @Override

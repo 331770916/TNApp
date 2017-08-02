@@ -10,7 +10,6 @@ import android.widget.ListView;
 
 import com.google.gson.Gson;
 import com.tpyzq.mobile.pangu.R;
-import com.tpyzq.mobile.pangu.activity.detail.StockDetailActivity;
 import com.tpyzq.mobile.pangu.activity.home.managerMoney.adapter.OptionalFinancingAdapter;
 import com.tpyzq.mobile.pangu.activity.myself.login.ShouJiZhuCeActivity;
 import com.tpyzq.mobile.pangu.base.BaseActivity;

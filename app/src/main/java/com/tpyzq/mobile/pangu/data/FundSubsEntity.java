@@ -19,4 +19,5 @@ public class FundSubsEntity implements Serializable{
         public String FUND_STATUS_NAME;
         public String FUND_TYPE;
         public String OFUND_TYPE;
+        public String FUND_TYPE_CODE;
 }

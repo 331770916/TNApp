@@ -30,7 +30,7 @@ import java.util.ArrayList;
  */
 public class FundInfoActivity extends BaseActivity implements View.OnClickListener,
         DialogInterface.OnCancelListener, PullToRefreshBase.OnRefreshListener2,
-        FundInoConnect.FundInfoConnectListener, AdapterView.OnItemClickListener {
+        FundInoConnect.FundInfoConnectListener, AdapterView.OnItemClickListener, FundInfoAdapter.DetailClickListener {
     public static final String TAG = FundInfoActivity.class.getSimpleName();
     private Dialog                  mProgressDialog;
     private EditText                mSearchContent_et;
@@ -41,8 +41,14 @@ public class FundInfoActivity extends BaseActivity implements View.OnClickListen
     private int position = 0;
 
     private boolean clickBackKey;//判断用户是否点击返回键取消网络请求
+    private boolean isShowDetail = false;
+    private boolean isClickItem = false;
 
     private FundInoConnect mFundInoConnect = new FundInoConnect();
+    public static final String IS_SHOW = "isShow";//是否显示详情
+    public static final String ITEM_CLICK = "itemClick";//item是否可以点击
+    public static final String LIST_TYPE = "listType";//基金列表类型
+    private String mListType = "";
 
     @Override
     public void initView() {
@@ -50,9 +56,15 @@ public class FundInfoActivity extends BaseActivity implements View.OnClickListen
         findViewById(R.id.bt_search).setOnClickListener(this);
         ImageView emptyIv = (ImageView) findViewById(R.id.emptyIv);
 
+        Intent intent = getIntent();
+        isShowDetail = intent.getBooleanExtra(IS_SHOW, false);
+        isClickItem = intent.getBooleanExtra(ITEM_CLICK, false);
+        mListType = intent.getStringExtra(LIST_TYPE);
+
         mSearchContent_et = (EditText) findViewById(R.id.et_search_fundcompany);
         mListView = (PullToRefreshListView) findViewById(R.id.lv_fund);
-        mAdapter = new FundInfoAdapter(this, false);
+        mAdapter = new FundInfoAdapter(this, isShowDetail);
+        mAdapter.setDetailClickListener(this);
         mListView.setAdapter(mAdapter);
         mListView.setOnRefreshListener(this);
         mListView.setEmptyView(emptyIv);
@@ -63,7 +75,7 @@ public class FundInfoActivity extends BaseActivity implements View.OnClickListen
 
         initLoadDialog();
         mSession = SpUtils.getString(getApplication(), "mSession", null);
-        mFundInoConnect.fundQueryConnect("", 0, mSession, TAG, this);
+        mFundInoConnect.fundQueryConnect(mListType, "", 0, mSession, TAG, this);
     }
 
     @Override
@@ -75,22 +87,44 @@ public class FundInfoActivity extends BaseActivity implements View.OnClickListen
             case R.id.bt_search:
                 mBeans.clear();
                 mAdapter.setDatas(mBeans);
-                mFundInoConnect.fundQueryConnect(mSearchContent_et.getText().toString(), 0, mSession, TAG, this);
+                mFundInoConnect.fundQueryConnect(mListType, mSearchContent_et.getText().toString(), 0, mSession, TAG, this);
                 break;
         }
     }
 
     @Override
-    public void onItemClick(AdapterView<?> parent, View view, int position, long id) {
-//        Intent intent = new Intent();
-//        intent.setClass(FundInfoActivity.this, TargetInvestmentRecordActivity.class);
-//        startActivity(intent);
+    public void detailClick(FundSubsEntity entity) {
         Intent intent = new Intent();
-        intent.putExtra("productCode", mBeans.get(position).FUND_CODE);
-        intent.putExtra("TYPE", "1");
-        intent.putExtra("prod_type", "2");
+        if ("0".equals(entity.FUND_TYPE)) {//基金 （非资管）
+            intent.putExtra("TYPE", "1");
+            //基金分 货币基金和非货币基金
+            intent.putExtra("prod_type", entity.FUND_TYPE_CODE);
+        } else {//14天（资管）
+            intent.putExtra("TYPE", "2");
+        }
+        intent.putExtra("target", "fundInfoTarget");
+        intent.putExtra("productCode", entity.FUND_CODE);
+        intent.putExtra("prod_qgje", entity.OPEN_SHARE);
+        intent.putExtra("ofund_risklevel_name", entity.OFUND_RISKLEVEL_NAME);
         intent.setClass(FundInfoActivity.this, ManagerMoenyDetailActivity.class);
         startActivity(intent);
+    }
+
+    @Override
+    public void onItemClick(AdapterView<?> parent, View view, int position, long id) {
+
+        if (isClickItem) {
+            Intent intent = new Intent();
+            intent.putExtra("point", position);
+            if (mBeans != null && mBeans.size() > 0) {
+                intent.putExtra("FUND_CODE", mBeans.get(position).FUND_CODE);
+                intent.putExtra("FUND_COMPANY", mBeans.get(position).FUND_COMPANY);
+                intent.putExtra("data", mBeans.get(position));
+            }
+            setResult(RESULT_OK, intent);
+            finish();
+        }
+
     }
 
     @Override
@@ -110,7 +144,7 @@ public class FundInfoActivity extends BaseActivity implements View.OnClickListen
             } else {
                 return super.onKeyDown(keyCode, event);
             }
-        }else {
+        } else {
             return super.onKeyDown(keyCode, event);
         }
     }
@@ -119,9 +153,9 @@ public class FundInfoActivity extends BaseActivity implements View.OnClickListen
     public void onPullDownToRefresh(PullToRefreshBase refreshView) {
         if (position > 0) {
             position--;
-            mFundInoConnect.fundQueryConnect(mSearchContent_et.getText().toString(), position, mSession, TAG, this);
+            mFundInoConnect.fundQueryConnect(mListType, mSearchContent_et.getText().toString(), position, mSession, TAG, this);
         } else {
-            mFundInoConnect.fundQueryConnect(mSearchContent_et.getText().toString(), 0, mSession, TAG, this);
+            mFundInoConnect.fundQueryConnect(mListType, mSearchContent_et.getText().toString(), 0, mSession, TAG, this);
         }
 
     }
@@ -129,7 +163,7 @@ public class FundInfoActivity extends BaseActivity implements View.OnClickListen
     @Override
     public void onPullUpToRefresh(PullToRefreshBase refreshView) {
         position++;
-        mFundInoConnect.fundQueryConnect(mSearchContent_et.getText().toString(), position, mSession, TAG, this);
+        mFundInoConnect.fundQueryConnect(mListType, mSearchContent_et.getText().toString(), position, mSession, TAG, this);
     }
 
 

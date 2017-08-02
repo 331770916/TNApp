@@ -9,7 +9,7 @@
 
     <color name="lightBlue">#374B69</color>
     <!-- 日期左右切换，斜纹背景的title 等 -->
-
+    <color name="translucent">#80ffffff</color>
     <color name="startVidoeTipColor">#64ffffff</color>
     <color name="backgroundColor">#f4f4f4</color>
     <color name="TouMingColor">#40000000</color>

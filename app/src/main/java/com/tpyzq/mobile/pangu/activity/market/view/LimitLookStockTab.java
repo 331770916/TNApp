@@ -16,7 +16,7 @@ import com.tpyzq.mobile.pangu.data.StockDetailEntity;
 import com.tpyzq.mobile.pangu.data.StockInfoEntity;
 import com.tpyzq.mobile.pangu.db.Db_PUB_OPTIONALHISTORYSTOCK;
 import com.tpyzq.mobile.pangu.db.Db_PUB_STOCKLIST;
-import com.tpyzq.mobile.pangu.db.HOLD_SEQ;
+import com.tpyzq.mobile.pangu.db.StockTable;
 import com.tpyzq.mobile.pangu.util.ConstantUtil;
 import com.tpyzq.mobile.pangu.util.SpUtils;
 
@@ -71,43 +71,16 @@ public class LimitLookStockTab extends BaseTabPager implements View.OnClickListe
                 if (!TextUtils.isEmpty(stockInfoEntity.getStockNumber())) {
                     //判断是不是自选股
                     StockInfoEntity tempBean = Db_PUB_STOCKLIST.queryStockFromID(stockInfoEntity.getStockNumber());
-                    String code = HOLD_SEQ.getHoldCodes();
-                    if (!TextUtils.isEmpty(code)) {
-                        if (code.contains(",")) {
-                            String [] codes = code.split(",");
-
-                            for (String _tempCode : codes) {
-                                if (_tempCode.equals(stockInfoEntity.getStockNumber())) {
-                                    stockInfoEntity.setIsHoldStock("true");
-                                    String appearHold = SpUtils.getString(CustomApplication.getContext(), ConstantUtil.APPEARHOLD, "false");
-                                    stockInfoEntity.setApperHoldStock(appearHold);
-                                    stockInfoEntity.setStockholdon(appearHold);
-                                }
-                            }
-                        } else {
-                            if (code.equals(stockInfoEntity.getStockNumber())) {
-                                stockInfoEntity.setIsHoldStock("true");
-                                String appearHold = SpUtils.getString(CustomApplication.getContext(), ConstantUtil.APPEARHOLD, "false");
-                                stockInfoEntity.setApperHoldStock(appearHold);
-                                stockInfoEntity.setStockholdon(appearHold);
-                            }
-                        }
-                    }
 
                     if (tempBean != null) {
-                        stockInfoEntity.setSelfChoicStock(true);
-
-                        if (!TextUtils.isEmpty(tempBean.getIsHoldStock())) {
+                        if ((tempBean.getStock_flag()& StockTable.STOCK_HOLD) == StockTable.STOCK_HOLD ) {
                             stockInfoEntity.setIsHoldStock("true");
+                            String appearHold = SpUtils.getString(CustomApplication.getContext(), ConstantUtil.APPEARHOLD, "false");
+                            stockInfoEntity.setApperHoldStock(appearHold);
+                            stockInfoEntity.setStockholdon(appearHold);
                         }
 
-                        if (!TextUtils.isEmpty(tempBean.getApperHoldStock())) {
-                            stockInfoEntity.setApperHoldStock(tempBean.getApperHoldStock());
-                        }
-
-                        if (!TextUtils.isEmpty(tempBean.getStockholdon())) {
-                            stockInfoEntity.setStockholdon(tempBean.getStockholdon());
-                        }
+                        stockInfoEntity.setSelfChoicStock(true);
 
                     } else {
                         stockInfoEntity.setSelfChoicStock(false);

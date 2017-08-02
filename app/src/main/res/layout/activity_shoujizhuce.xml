@@ -59,7 +59,7 @@
             android:paddingRight="@dimen/size15">
 
             <EditText
-                android:id="@+id/SjNumber"
+                android:id="@+id/etNumber"
                 android:layout_width="match_parent"
                 android:layout_height="@dimen/size48"
                 android:layout_gravity="center_horizontal"
@@ -143,7 +143,7 @@
             android:paddingRight="@dimen/size15">
 
             <EditText
-                android:id="@+id/Captchabtn_ET"
+                android:id="@+id/etCaptcha"
                 android:layout_width="0dp"
                 android:layout_height="@dimen/size48"
                 android:layout_marginRight="@dimen/size10"
@@ -161,7 +161,7 @@
 
 
             <Button
-                android:id="@+id/Captchabtn"
+                android:id="@+id/butCaptcha"
                 android:layout_width="0dp"
                 android:layout_height="match_parent"
                 android:layout_marginLeft="@dimen/size4"
@@ -173,7 +173,7 @@
         </LinearLayout>
 
         <Button
-            android:id="@+id/SJLogIn"
+            android:id="@+id/butLogIn"
             android:layout_width="match_parent"
             android:layout_height="wrap_content"
             android:layout_marginLeft="@dimen/size15"
@@ -212,7 +212,7 @@
                     android:textSize="@dimen/txtSize14" />
 
                 <TextView
-                    android:id="@+id/Soundtv"
+                    android:id="@+id/tvSound"
                     android:layout_width="wrap_content"
                     android:layout_height="wrap_content"
                     android:text="@string/sjzcText7"
@@ -252,7 +252,7 @@
             </LinearLayout>
 
             <TextView
-                android:id="@+id/mWeiXin"
+                android:id="@+id/tvWeiXin"
                 android:layout_width="@dimen/size116"
                 android:layout_height="wrap_content"
                 android:layout_below="@+id/LinearLayout1"

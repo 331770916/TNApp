@@ -175,6 +175,7 @@
             android:theme="@style/Theme.PageIndicatorDefaults" />
         <activity android:name=".activity.PdfActivity" />
         <!-- 稳赢 相关activity -->
+        <activity android:name=".activity.home.managerMoney.product.hotsell.HotSellActivity"/>
         <activity android:name=".activity.home.managerMoney.ManagerMoenyDetailActivity" />
         <activity android:name=".activity.home.managerMoney.BuyResultActivity" />
         <activity android:name=".activity.home.managerMoney.ProductBuyActivity" />
