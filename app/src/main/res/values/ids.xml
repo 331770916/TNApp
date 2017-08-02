@@ -12,4 +12,8 @@
     <item type= "id" name="managerMoney_producetPersentView"/>
     <item type= "id" name="dialog_image"/>
     <item type= "id" name="dialog_text"/>
+    <item type= "id" name="autoloopswitch_viewpager_id"/>
+    <item type= "id" name="autoloopswitch_pagershow_id"/>
+    <item type= "id" name="autoloopswitch_title_id"/>
+    <item type= "id" name="autoloopswitch_time_id"/>
 </resources>

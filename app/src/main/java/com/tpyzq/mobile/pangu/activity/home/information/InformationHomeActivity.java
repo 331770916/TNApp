@@ -222,6 +222,7 @@ public class InformationHomeActivity extends BaseActivity implements View.OnClic
             commonNavigator.notifyDataSetChanged();
             tabAdapter.setClassNoList(mClassNoList);
             mViewPager.setCurrentItem(currentItem);
+            tabAdapter.getPager(currentTitle).initData();
             return;
         }
         mTitleList.clear();
