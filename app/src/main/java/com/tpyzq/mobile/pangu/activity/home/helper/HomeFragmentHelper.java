@@ -11,7 +11,6 @@ import com.tpyzq.mobile.pangu.activity.home.SearchActivity;
 import com.tpyzq.mobile.pangu.activity.home.hotsearchstock.HotSearchStockActivity;
 import com.tpyzq.mobile.pangu.activity.home.information.InformationHomeActivity;
 import com.tpyzq.mobile.pangu.activity.home.managerMoney.OptionalFinancingActivity;
-import com.tpyzq.mobile.pangu.activity.home.managerMoney.product.hotsell.HotSellActivity;
 import com.tpyzq.mobile.pangu.activity.myself.account.AssetsAnalysisActivity;
 import com.tpyzq.mobile.pangu.activity.myself.account.FinancialLifeActivity;
 import com.tpyzq.mobile.pangu.activity.myself.account.MyNewsActivity;
