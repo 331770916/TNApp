@@ -1,10 +1,14 @@
 package com.tpyzq.mobile.pangu.base;
 
+import android.graphics.Bitmap;
+import android.graphics.Color;
 import android.text.TextUtils;
 import android.util.ArrayMap;
 
 import com.google.gson.Gson;
 import com.google.gson.reflect.TypeToken;
+import com.tpyzq.mobile.pangu.R;
+import com.tpyzq.mobile.pangu.activity.myself.login.ShouJiZhuCeActivity;
 import com.tpyzq.mobile.pangu.activity.trade.open_fund.AddOrModFixFundActivity;
 import com.tpyzq.mobile.pangu.data.AssessConfirmEntity;
 import com.tpyzq.mobile.pangu.data.EtfDataEntity;
@@ -18,10 +22,13 @@ import com.tpyzq.mobile.pangu.data.ResultInfo;
 import com.tpyzq.mobile.pangu.data.StockHolderInfoEntity;
 import com.tpyzq.mobile.pangu.data.StructuredFundEntity;
 import com.tpyzq.mobile.pangu.http.NetWorkUtil;
+import com.tpyzq.mobile.pangu.log.LogUtil;
 import com.tpyzq.mobile.pangu.util.ConstantUtil;
+import com.tpyzq.mobile.pangu.util.DeviceUtil;
 import com.tpyzq.mobile.pangu.util.Helper;
 import com.tpyzq.mobile.pangu.util.SpUtils;
 import com.tpyzq.mobile.pangu.view.CentreToast;
+import com.tpyzq.mobile.pangu.view.dialog.MistakeDialog;
 import com.zhy.http.okhttp.callback.StringCallback;
 
 import org.json.JSONArray;
@@ -88,7 +95,7 @@ public class InterfaceCollection {
         hashMap.put("FLAG", "true");
         hashMap.put("SEC_ID", "tpyzq");
         map.put("parms", hashMap);
-        NetWorkUtil.getInstence().okHttpForPostString(TAG, ConstantUtil.URL_JY, map, new StringCallback() {
+        NetWorkUtil.getInstence().okHttpForPostString(TAG, ConstantUtil.URL_JY_HS, map, new StringCallback() {
             @Override
             public void onError(Call call, Exception e, int id) {
                 ResultInfo info = new ResultInfo();
@@ -157,7 +164,7 @@ public class InterfaceCollection {
         map2.put("SEC_ID", "tpyzq");
         map2.put("STOCK_CODE", stock_code);
         map1.put("parms", map2);
-        net.okHttpForPostString(TAG, ConstantUtil.URL_JY, map1, new StringCallback() {
+        net.okHttpForPostString(TAG, ConstantUtil.URL_JY_HS, map1, new StringCallback() {
             @Override
             public void onError(Call call, Exception e, int id) {
                 ResultInfo info = new ResultInfo();
@@ -235,7 +242,7 @@ public class InterfaceCollection {
         map2.put("STOCK_CODE", stock_code);
         map2.put("ENTRUST_AMOUNT", entrust_amount);
         map1.put("parms", map2);
-        net.okHttpForPostString(TAG, ConstantUtil.URL_JY, map1, new StringCallback() {
+        net.okHttpForPostString(TAG, ConstantUtil.URL_JY_HS, map1, new StringCallback() {
             @Override
             public void onError(Call call, Exception e, int id) {
                 ResultInfo info = new ResultInfo();
@@ -304,7 +311,7 @@ public class InterfaceCollection {
         map2.put("STOCK_CODE", stock_code);
         map2.put("ENTRUST_AMOUNT", entrust_amount);
         map1.put("parms", map2);
-        net.okHttpForPostString(TAG, ConstantUtil.URL_JY, map1, new StringCallback() {
+        net.okHttpForPostString(TAG, ConstantUtil.URL_JY_HS, map1, new StringCallback() {
             @Override
             public void onError(Call call, Exception e, int id) {
                 ResultInfo info = new ResultInfo();
@@ -371,7 +378,7 @@ public class InterfaceCollection {
         map2.put("REQUEST_NUM", num);
         map2.put("ACTION_IN", action_in);
         map1.put("parms", map2);
-        net.okHttpForPostString(TAG, ConstantUtil.URL_JY, map1, new StringCallback() {
+        net.okHttpForPostString(TAG, ConstantUtil.URL_JY_HS, map1, new StringCallback() {
             @Override
             public void onError(Call call, Exception e, int id) {
                 ResultInfo info = new ResultInfo();
@@ -447,7 +454,7 @@ public class InterfaceCollection {
         map2.put("FLAG", "true");
         map2.put("ENTRUST_NO", entrust_no);
         map1.put("parms", map2);
-        net.okHttpForPostString(TAG, ConstantUtil.URL_JY, map1, new StringCallback() {
+        net.okHttpForPostString(TAG, ConstantUtil.URL_JY_HS, map1, new StringCallback() {
             @Override
             public void onError(Call call, Exception e, int id) {
                 ResultInfo info = new ResultInfo();
@@ -522,7 +529,7 @@ public class InterfaceCollection {
         map2.put("END_DATE", end_date);
         map2.put("FLAG", "true");
         map1.put("parms", map2);
-        net.okHttpForPostString(TAG, ConstantUtil.URL_JY, map1, new StringCallback() {
+        net.okHttpForPostString(TAG, ConstantUtil.URL_JY_HS, map1, new StringCallback() {
             @Override
             public void onError(Call call, Exception e, int id) {
                 ResultInfo info = new ResultInfo();
@@ -601,7 +608,7 @@ public class InterfaceCollection {
         map2.put("POSITION_STR", page);
         map2.put("REQUEST_NUM", num);
         map1.put("parms", map2);
-        net.okHttpForPostString(TAG, ConstantUtil.URL_JY, map1, new StringCallback() {
+        net.okHttpForPostString(TAG, ConstantUtil.URL_JY_HS, map1, new StringCallback() {
             @Override
             public void onError(Call call, Exception e, int id) {
                 ResultInfo info = new ResultInfo();
@@ -683,7 +690,7 @@ public class InterfaceCollection {
         map2.put("END_DATE", end_date);
         map2.put("FLAG", "true");
         map1.put("parms", map2);
-        net.okHttpForPostString(TAG, ConstantUtil.URL_JY, map1, new StringCallback() {
+        net.okHttpForPostString(TAG, ConstantUtil.URL_JY_HS, map1, new StringCallback() {
             @Override
             public void onError(Call call, Exception e, int id) {
                 ResultInfo info = new ResultInfo();
@@ -766,7 +773,7 @@ public class InterfaceCollection {
         map2.put("POSITION_STR", page);
         map2.put("REQUEST_NUM", num);
         map1.put("parms", map2);
-        net.okHttpForPostString(TAG, ConstantUtil.URL_JY, map1, new StringCallback() {
+        net.okHttpForPostString(TAG, ConstantUtil.URL_JY_HS, map1, new StringCallback() {
             @Override
             public void onError(Call call, Exception e, int id) {
                 ResultInfo info = new ResultInfo();
@@ -841,7 +848,7 @@ public class InterfaceCollection {
         map2.put("FLAG", "true");
         map2.put("MEETING_SEQ", meeting_seq);
         map1.put("parms", map2);
-        net.okHttpForPostString(TAG, ConstantUtil.URL_JY, map1, new StringCallback() {
+        net.okHttpForPostString(TAG, ConstantUtil.URL_JY_HS, map1, new StringCallback() {
             @Override
             public void onError(Call call, Exception e, int id) {
                 ResultInfo info = new ResultInfo();
@@ -946,7 +953,7 @@ public class InterfaceCollection {
         }
         map2.put("LIST", data);
         map1.put("parms", map2);
-        net.okHttpForPostString(TAG, ConstantUtil.URL_JY, map1, new StringCallback() {
+        net.okHttpForPostString(TAG, ConstantUtil.URL_JY_HS, map1, new StringCallback() {
             @Override
             public void onError(Call call, Exception e, int id) {
                 ResultInfo info = new ResultInfo();
@@ -1007,7 +1014,7 @@ public class InterfaceCollection {
         map2.put("BEGIN_DATE", begin_date);
         map2.put("END_DATE", end_date);
         map1.put("parms", map2);
-        net.okHttpForPostString(TAG, ConstantUtil.URL_JY, map1, new StringCallback() {
+        net.okHttpForPostString(TAG, ConstantUtil.URL_JY_HS, map1, new StringCallback() {
             @Override
             public void onError(Call call, Exception e, int id) {
                 ResultInfo info = new ResultInfo();
@@ -1085,7 +1092,7 @@ public class InterfaceCollection {
         map2.put("REQUEST_NUM", num);
         map2.put("EXCHANGE_TYPE", exchange_type);
         map1.put("parms", map2);
-        net.okHttpForPostString(TAG, ConstantUtil.URL_JY, map1, new StringCallback() {
+        net.okHttpForPostString(TAG, ConstantUtil.URL_JY_HS, map1, new StringCallback() {
             @Override
             public void onError(Call call, Exception e, int id) {
                 ResultInfo info = new ResultInfo();
@@ -1158,7 +1165,7 @@ public class InterfaceCollection {
         map.put("parms", map1);
         map1.put("SEC_ID", "tpyzq");
         map1.put("FLAG", "true");
-        net.okHttpForPostString(TAG, ConstantUtil.URL_JY, map, new StringCallback() {
+        net.okHttpForPostString(TAG, ConstantUtil.URL_JY_HS, map, new StringCallback() {
             @Override
             public void onError(Call call, Exception e, int i) {
                 ResultInfo info = new ResultInfo();
@@ -1234,7 +1241,7 @@ public class InterfaceCollection {
         map2.put("FUND_COMPANY", fund_company);
         map2.put("FUND_CODE", fund_code);
         map1.put("parms", map2);
-        net.okHttpForPostString(TAG, ConstantUtil.URL_JY, map1, new StringCallback() {
+        net.okHttpForPostString(TAG, ConstantUtil.URL_JY_HS, map1, new StringCallback() {
             @Override
             public void onError(Call call, Exception e, int id) {
                 ResultInfo info = new ResultInfo();
@@ -1307,7 +1314,7 @@ public class InterfaceCollection {
         map2.put("INSTR_BATCH_NO", instr_batch_no);
         map2.put("OPER_INFO", oper_info);
         map1.put("parms", map2);
-        net.okHttpForPostString(TAG, ConstantUtil.URL_JY, map1, new StringCallback() {
+        net.okHttpForPostString(TAG, ConstantUtil.URL_JY_HS, map1, new StringCallback() {
             @Override
             public void onError(Call call, Exception e, int id) {
                 ResultInfo info = new ResultInfo();
@@ -1358,7 +1365,7 @@ public class InterfaceCollection {
         map1.put("funcid", "300512");
         map1.put("token", session);
         map1.put("parms", map2);
-        net.okHttpForPostString("300512", ConstantUtil.URL_JY, map1, new StringCallback() {
+        net.okHttpForPostString("300512", ConstantUtil.URL_JY_HS, map1, new StringCallback() {
             @Override
             public void onError(Call call, Exception e, int id) {
                 ResultInfo info = new ResultInfo();
@@ -1441,7 +1448,7 @@ public class InterfaceCollection {
         map1.put("funcid", funcid);
         map1.put("token", session);
         map1.put("parms", map2);
-        net.okHttpForPostString("730201", ConstantUtil.URL_JY, map1, new StringCallback() {
+        net.okHttpForPostString("730201", ConstantUtil.URL_JY_HS, map1, new StringCallback() {
             @Override
             public void onError(Call call, Exception e, int id) {
                 ResultInfo info = new ResultInfo();
@@ -1488,7 +1495,7 @@ public class InterfaceCollection {
         map2.put("SEC_ID", "tpyzq");
         map2.put("FLAG", "true");
         map1.put("parms", map2);
-        net.okHttpForPostString(TAG, ConstantUtil.URL_JY, map1, new StringCallback() {
+        net.okHttpForPostString(TAG, ConstantUtil.URL_JY_HS, map1, new StringCallback() {
             @Override
             public void onError(Call call, Exception e, int id) {
                 ResultInfo info = new ResultInfo();
@@ -1567,7 +1574,7 @@ public class InterfaceCollection {
         map2.put("STOCK_CODE", stock_code);
         map2.put("ENTRUST_AMOUNT", entrust_amount);
         map1.put("parms", map2);
-        net.okHttpForPostString(TAG, ConstantUtil.URL_JY, map1, new StringCallback() {
+        net.okHttpForPostString(TAG, ConstantUtil.URL_JY_HS, map1, new StringCallback() {
             @Override
             public void onError(Call call, Exception e, int id) {
                 ResultInfo info = new ResultInfo();
@@ -1641,7 +1648,7 @@ public class InterfaceCollection {
         map2.put("REQUEST_NUM", request_num);
         map1.put("parms", map2);
 
-        net.okHttpForPostString(TAG, ConstantUtil.URL_JY, map1, new StringCallback() {
+        net.okHttpForPostString(TAG, ConstantUtil.URL_JY_HS, map1, new StringCallback() {
             @Override
             public void onError(Call call, Exception e, int id) {
                 ResultInfo info = new ResultInfo();
@@ -1731,7 +1738,7 @@ public class InterfaceCollection {
         map2.put("STOCK_CODE", stock_code);
         map1.put("parms", map2);
 
-        net.okHttpForPostString(TAG, ConstantUtil.URL_JY, map1, new StringCallback() {
+        net.okHttpForPostString(TAG, ConstantUtil.URL_JY_HS, map1, new StringCallback() {
             @Override
             public void onError(Call call, Exception e, int id) {
                 ResultInfo info = new ResultInfo();
@@ -1808,7 +1815,7 @@ public class InterfaceCollection {
         map2.put("POSITION_STR", position_str);
         map2.put("REQUEST_NUM", request_num);
         map1.put("parms", map2);
-        net.okHttpForPostString(TAG, ConstantUtil.URL_JY, map1, new StringCallback() {
+        net.okHttpForPostString(TAG, ConstantUtil.URL_JY_HS, map1, new StringCallback() {
             @Override
             public void onError(Call call, Exception e, int id) {
                 ResultInfo info = new ResultInfo();
@@ -1890,7 +1897,7 @@ public class InterfaceCollection {
         map2.put("POSITION_STR", position_str);
         map2.put("REQUEST_NUM", request_num);
         map1.put("parms", map2);
-        net.okHttpForPostString(TAG, ConstantUtil.URL_JY, map1, new StringCallback() {
+        net.okHttpForPostString(TAG, ConstantUtil.URL_JY_HS, map1, new StringCallback() {
             @Override
             public void onError(Call call, Exception e, int id) {
                 ResultInfo info = new ResultInfo();
@@ -1974,7 +1981,7 @@ public class InterfaceCollection {
         map2.put("POSITION_STR", page);
         map2.put("REQUEST_NUM", num);
         map1.put("parms", map2);
-        net.okHttpForPostString(TAG, ConstantUtil.URL_JY, map1, new StringCallback() {
+        net.okHttpForPostString(TAG, ConstantUtil.URL_JY_HS, map1, new StringCallback() {
             @Override
             public void onError(Call call, Exception e, int id) {
                 ResultInfo info = new ResultInfo();
@@ -2052,7 +2059,7 @@ public class InterfaceCollection {
         map2.put("POSITION_STR", position_str);
         map2.put("REQUEST_NUM", request_num);
         map1.put("parms", map2);
-        net.okHttpForPostString(TAG, ConstantUtil.URL_JY, map1, new StringCallback() {
+        net.okHttpForPostString(TAG, ConstantUtil.URL_JY_HS, map1, new StringCallback() {
             @Override
             public void onError(Call call, Exception e, int id) {
                 ResultInfo info = new ResultInfo();
@@ -2115,7 +2122,7 @@ public class InterfaceCollection {
         map1.put("limit", limit);
         map1.put("page", page);
         map1.put("level", level);
-        parseInformation(ConstantUtil.URL_IMPORTANT,map1,TAG,callback,"");
+        parseInformation(ConstantUtil.URL_IMPORTANT, map1, TAG, callback, "");
     }
 
     /**
@@ -2132,7 +2139,7 @@ public class InterfaceCollection {
         map1.put("option", option);
         map1.put("limit", limit);
         map1.put("page", page);
-        parseInformation(ConstantUtil.URL_STREAMING,map1,TAG,callback,"queryStreaming");
+        parseInformation(ConstantUtil.URL_STREAMING, map1, TAG, callback, "queryStreaming");
     }
 
     /**
@@ -2147,33 +2154,35 @@ public class InterfaceCollection {
         map1.put("classno", classno);
         map1.put("limit", limit);
         map1.put("page", page);
-        parseInformation(ConstantUtil.URL_HKSTOCKS,map1,TAG,callback,"");
+        parseInformation(ConstantUtil.URL_HKSTOCKS, map1, TAG, callback, "");
     }
 
     /**
      * 1.7.4 信息详情
+     *
      * @param newsno 信息id
      */
-    public void queryDetail(String newsno,String TAG,InterfaceCallback callback) {
+    public void queryDetail(String newsno, String TAG, InterfaceCallback callback) {
         Map map1 = new HashMap<>();
         map1.put("newsno", newsno);
-        parseInformation(ConstantUtil.URL_DETAIL,map1,TAG,callback,"queryDetail");
+        parseInformation(ConstantUtil.URL_DETAIL, map1, TAG, callback, "queryDetail");
     }
 
     /**
      * 1.7.5 栏目list
      */
-    public void queryClasslist(String TAG,InterfaceCallback callback){
-        parseInformation(ConstantUtil.URL_CLASSLIST,new HashMap(),TAG,callback,"");
+    public void queryClasslist(String TAG, InterfaceCallback callback) {
+        parseInformation(ConstantUtil.URL_CLASSLIST, new HashMap(), TAG, callback, "");
     }
 
     /**
      * 解析资讯实体
+     *
      * @param TAG
      * @param callback
      * @return
      */
-    private void parseInformation(String url, Map map,final String TAG, final InterfaceCallback callback,final String type) {
+    private void parseInformation(String url, Map map, final String TAG, final InterfaceCallback callback, final String type) {
         net.okHttpForGet(TAG, url, map, new StringCallback() {
             @Override
             public void onError(Call call, Exception e, int id) {
@@ -2200,7 +2209,7 @@ public class InterfaceCollection {
                         info.setMsg(msg);
                         info.setTag(TAG);
                         if ("200".equals(code))
-                            info.setData(parseInformationArray(jsonObject.optJSONArray("data"),type));
+                            info.setData(parseInformationArray(jsonObject.optJSONArray("data"), type));
                     } catch (Exception e) {
                         info.setCode(ConstantUtil.JSON_ERROR_CODE);
                         info.setMsg(ConstantUtil.JSON_ERROR);
@@ -2214,24 +2223,25 @@ public class InterfaceCollection {
 
     /**
      * 解析json数据
+     *
      * @param array json数组
      * @return List<NetworkVotingEntity>
      * @throws JSONException
      */
-    private List<InformationEntity> parseInformationArray(JSONArray array,String type) throws JSONException{
+    private List<InformationEntity> parseInformationArray(JSONArray array, String type) throws JSONException {
         List<InformationEntity> ses = new ArrayList<>();
         for (int i = 0; i < array.length(); i++) {
-            if(type.equals("queryStreaming")){
+            if (type.equals("queryStreaming")) {
                 JSONArray a1 = array.getJSONArray(i);
-                for (int j = 0;j< a1.length();j++)
-                    parseJSONObject(ses,a1.optJSONObject(j),type);
-            }else
-                parseJSONObject(ses,array.optJSONObject(i),type);
+                for (int j = 0; j < a1.length(); j++)
+                    parseJSONObject(ses, a1.optJSONObject(j), type);
+            } else
+                parseJSONObject(ses, array.optJSONObject(i), type);
         }
         return ses;
     }
 
-    public void parseJSONObject(List<InformationEntity> ses,JSONObject obj,String type) throws JSONException{
+    public void parseJSONObject(List<InformationEntity> ses, JSONObject obj, String type) throws JSONException {
         InformationEntity bean = new InformationEntity();
         bean.setNewsno(obj.optString("newsno"));
         bean.setTitle(obj.optString("title"));
@@ -2247,8 +2257,8 @@ public class InterfaceCollection {
         bean.setClassno(obj.optString("classno"));
         bean.setClassname(obj.optString("classname"));
         JSONArray label = obj.optJSONArray("label");
-        if(label!=null&&label.length()>0)
-            bean.setList(parseInformationArray(label,type));
+        if (label != null && label.length() > 0)
+            bean.setList(parseInformationArray(label, type));
         ses.add(bean);
     }
 
@@ -2285,7 +2295,7 @@ public class InterfaceCollection {
 //        map2.put("DO_CONTRACT", DO_CONTRACT);   //是否需要签署协议 如果DO_PRE_CONDITION传1的话以上两个字段不传
         map2.put("DO_PRE_CONDITION", "1");
         map1.put("parms", map2);
-        net.okHttpForPostString(TAG, ConstantUtil.URL_JY, map1, new StringCallback() {
+        net.okHttpForPostString(TAG, ConstantUtil.URL_JY_HS, map1, new StringCallback() {
             @Override
             public void onError(Call call, Exception e, int id) {
                 ResultInfo info = new ResultInfo();
@@ -2358,7 +2368,7 @@ public class InterfaceCollection {
         map2.put("FLAG", "true");
         map2.put("ALLOTNO", ALLOTNO);
         map1.put("parms", map2);
-        net.okHttpForPostString(TAG, ConstantUtil.URL_JY, map1, new StringCallback() {
+        net.okHttpForPostString(TAG, ConstantUtil.URL_JY_HS, map1, new StringCallback() {
             @Override
             public void onError(Call call, Exception e, int id) {
                 ResultInfo info = new ResultInfo();
@@ -2452,7 +2462,7 @@ public class InterfaceCollection {
         map2.put("EN_FUND_DATE", EN_FUND_DATE);
         map2.put("ALLOTNO", ALLOTNO);
         map1.put("parms", map2);
-        net.okHttpForPostString(TAG, ConstantUtil.URL_JY, map1, new StringCallback() {
+        net.okHttpForPostString(TAG, ConstantUtil.URL_JY_HS, map1, new StringCallback() {
             @Override
             public void onError(Call call, Exception e, int id) {
                 ResultInfo info = new ResultInfo();
@@ -2511,7 +2521,7 @@ public class InterfaceCollection {
         map2.put("FUND_CODE", FUND_CODE);
         map2.put("ALLOTNO", ALLOTNO);
         map1.put("parms", map2);
-        net.okHttpForPostString(TAG, ConstantUtil.URL_JY, map1, new StringCallback() {
+        net.okHttpForPostString(TAG, ConstantUtil.URL_JY_HS, map1, new StringCallback() {
             @Override
             public void onError(Call call, Exception e, int id) {
                 ResultInfo info = new ResultInfo();
@@ -2563,7 +2573,7 @@ public class InterfaceCollection {
         map300431_1.put("FUND_COMPANY", fundcompany);
         map300431_1.put("OPER_TYPE", "0");
         map300431.put("parms", map300431_1);
-        NetWorkUtil.getInstence().okHttpForPostString("", ConstantUtil.URL_JY, map300431, new StringCallback() {
+        NetWorkUtil.getInstence().okHttpForPostString("", ConstantUtil.URL_JY_HS, map300431, new StringCallback() {
             @Override
             public void onError(Call call, Exception e, int id) {
                 ResultInfo info = new ResultInfo();
@@ -2602,6 +2612,207 @@ public class InterfaceCollection {
                 }
             }
         });
+    }
+
+
+    /**
+     * 手机注册 图片验证码
+     *
+     * @param TAG
+     * @param callback
+     */
+    public void getImageVerification(final String TAG, final InterfaceCallback callback) {
+        HashMap map = new HashMap();
+        map.put("equipment", DeviceUtil.getDeviceId(CustomApplication.getContext()));
+        NetWorkUtil.getInstence().okHttpForGet("", ConstantUtil.URL_HANDSE_PICTURE, map, new StringCallback() {
+            @Override
+            public void onError(Call call, Exception e, int id) {
+                ResultInfo info = new ResultInfo();
+                info.setCode(ConstantUtil.NETWORK_ERROR_CODE);
+                info.setMsg(ConstantUtil.NETWORK_ERROR);
+                info.setTag(TAG);
+                callback.callResult(info);
+            }
+
+            @Override
+            public void onResponse(String response, int id) {
+                ResultInfo info = new ResultInfo();
+                try {
+                    JSONObject jsonObject = new JSONObject(response);
+                    String code = jsonObject.getString("code");
+                    String type = jsonObject.getString("type");
+                    info.setCode(code);
+                    info.setTag(TAG);
+                    if ("0".equals(code)) {
+                        info.setData(jsonObject.getString("message"));
+
+                    } else {
+                        info.setMsg(type);
+                    }
+                } catch (Exception e) {
+                    info.setCode(ConstantUtil.JSON_ERROR_CODE);
+                    info.setMsg(ConstantUtil.JSON_ERROR);
+                    info.setTag(TAG);
+                }
+                callback.callResult(info);
+            }
+        });
+    }
+
+
+    /**
+     * 手机注册 短信验证码
+     *
+     * @param TAG
+     * @param number   手机号
+     * @param image    图片验证码
+     * @param callback
+     */
+    public void getVerificationCode(final String TAG, String number, final String image, final InterfaceCallback callback) {
+        HashMap map = new HashMap();
+        map.put("equipment", DeviceUtil.getDeviceId(CustomApplication.getContext()));
+        map.put("phone", number);
+        map.put("auth", image);
+
+        NetWorkUtil.getInstence().okHttpForGet(TAG, ConstantUtil.URL_HANDSE_SMS, map, new StringCallback() {
+            @Override
+            public void onError(Call call, Exception e, int id) {
+                ResultInfo info = new ResultInfo();
+                info.setCode(ConstantUtil.NETWORK_ERROR_CODE);
+                info.setMsg(ConstantUtil.NETWORK_ERROR);
+                info.setTag(TAG);
+                callback.callResult(info);
+            }
+
+            @Override
+            public void onResponse(String response, int id) {
+                ResultInfo info = new ResultInfo();
+                if (TextUtils.isEmpty(response)) {
+                    return;
+                }
+                try {
+                    JSONObject jsonObject = new JSONObject(response);
+                    String code = jsonObject.getString("code");
+                    info.setCode(code);
+                    info.setTag(TAG);
+                    if ("0".equals(code)) {
+//                        Helper.getInstance().showToast(ShouJiZhuCe.this,"发送短信成功");
+                    } else {
+                        info.setMsg(jsonObject.opt("message").toString());
+                    }
+                } catch (JSONException e) {
+                    info.setCode(ConstantUtil.JSON_ERROR_CODE);
+                    info.setMsg(ConstantUtil.JSON_ERROR);
+                    info.setTag(TAG);
+                }
+                callback.callResult(info);
+            }
+        });
+    }
+
+
+    /**
+     * 手机注册语音验证码
+     *
+     * @param TAG
+     * @param number   手机号
+     * @param image    图片验证码
+     * @param callback
+     */
+    public void getVoiceVerificationCode(final String TAG, String number, final String image, final InterfaceCallback callback) {
+        HashMap map = new HashMap();
+        map.put("equipment", DeviceUtil.getDeviceId(CustomApplication.getContext()));
+        map.put("phone", number);
+        map.put("auth", image);
+
+        NetWorkUtil.getInstence().okHttpForGet(TAG, ConstantUtil.URL_HANDSE_SPEECH, map, new StringCallback() {
+            @Override
+            public void onError(Call call, Exception e, int id) {
+                ResultInfo info = new ResultInfo();
+                info.setCode(ConstantUtil.NETWORK_ERROR_CODE);
+                info.setMsg(ConstantUtil.NETWORK_ERROR);
+                info.setTag(TAG);
+                callback.callResult(info);
+            }
+
+            @Override
+            public void onResponse(String response, int id) {
+                ResultInfo info = new ResultInfo();
+                if (TextUtils.isEmpty(response)) {
+                    return;
+                }
+                try {
+                    JSONObject jsonObject = new JSONObject(response);
+                    String code = jsonObject.getString("code");
+                    info.setTag(TAG);
+                    info.setCode(code);
+                    if ("0".equals(code)) {
+                    } else {
+                        info.setMsg(jsonObject.getString("message"));
+                    }
+
+                } catch (JSONException e) {
+                    info.setCode(ConstantUtil.JSON_ERROR_CODE);
+                    info.setMsg(ConstantUtil.JSON_ERROR);
+                    info.setTag(TAG);
+                }
+                callback.callResult(info);
+            }
+        });
+    }
+
+
+    /**
+     * 手机注册
+     *
+     * @param TAG
+     * @param number   手机号
+     * @param captcha  短信验证码
+     * @param callback
+     */
+    public void InscriptionRegistry(final String TAG, String number, String captcha, final InterfaceCallback callback) {
+        HashMap map = new HashMap();
+        map.put("equipment", DeviceUtil.getDeviceId(CustomApplication.getContext()));
+        map.put("phone", number);
+        map.put("auth", captcha);
+        map.put("phone_type", "1");  //手机类型 1.安卓 2.苹果 3.其他
+        map.put("token", SpUtils.getString(CustomApplication.getContext(), "RegId", ""));
+        map.put("user_account", number);
+        map.put("user_type", "1");//账户类型，1：手机，2：qq，3：微信
+
+        NetWorkUtil.getInstence().okHttpForGet(TAG, ConstantUtil.URL_HANDSE_REGISTER, map, new StringCallback() {
+            @Override
+            public void onError(Call call, Exception e, int id) {
+                ResultInfo info = new ResultInfo();
+                info.setCode(ConstantUtil.NETWORK_ERROR_CODE);
+                info.setMsg(ConstantUtil.NETWORK_ERROR);
+                info.setTag(TAG);
+                callback.callResult(info);
+            }
+
+            @Override
+            public void onResponse(String response, int id) {
+                ResultInfo info = new ResultInfo();
+                if (TextUtils.isEmpty(response)) {
+                    return;
+                }
+                response = response.replace("Served at: /Bigdata", "");
+                try {
+                    JSONObject object = new JSONObject(response);
+                    String code = object.getString("code");
+                    String msg = object.getString("message");
+                    info.setCode(code);
+                    info.setTag(TAG);
+                    info.setMsg(msg);
+                } catch (Exception e) {
+                    info.setCode(ConstantUtil.JSON_ERROR_CODE);
+                    info.setMsg(ConstantUtil.JSON_ERROR);
+                    info.setTag(TAG);
+                }
+                callback.callResult(info);
+            }
+        });
+
     }
 
 }

@@ -47,7 +47,6 @@ import java.util.Set;
 import okhttp3.Call;
 
 
-
 /**
  * Created by wangqi on 2017/2/15.
  * 微信登录
@@ -64,7 +63,7 @@ public class WXLogin implements ICallbackResult {
     public WXLogin(Context context, Marked marked, int Imarker) {
         mContext = context;
         mMarked = marked;
-        if (Imarker==0){
+        if (Imarker == 0) {
             inintView();
         }
 
@@ -81,7 +80,7 @@ public class WXLogin implements ICallbackResult {
     private UMAuthListener wwumAuthListener = new UMAuthListener() {
         @Override
         public void onComplete(SHARE_MEDIA share_media, int i, Map<String, String> map) {
-            if (mContext instanceof Activity&&((Activity)mContext).isFinishing())return;
+            if (mContext instanceof Activity && ((Activity) mContext).isFinishing()) return;
             //获取用户信息
             mLoadingDialog = LoadingDialog.initDialog((Activity) mContext, "正在提交...");
             //显示Dialog
@@ -166,7 +165,7 @@ public class WXLogin implements ICallbackResult {
         map1.put("phone_type", "1");
         map1.put("nickname", screen_name);
         map1.put("token", mRegId);
-        NetWorkUtil.getInstence().okHttpForPostString("", ConstantUtil.URL_SJLI, map, new StringCallback() {
+        NetWorkUtil.getInstence().okHttpForPostString("", ConstantUtil.URL_HQ_HS, map, new StringCallback() {
             @Override
             public void onError(Call call, Exception e, int id) {
                 LogUtil.e(TAG, e.toString());
@@ -203,9 +202,8 @@ public class WXLogin implements ICallbackResult {
                         updateNewUserSelfChoice();
 
                         Db_PUB_USERS.UpdateIsregister(userEntity);                       //修改  是否注册用户
-                        mLoadingDialog.dismiss();
                         SpUtils.putString(mContext, "First", "");
-                        mMarked.MarkedLogic(true);
+
 
                     } else if (code.equals("1")) {
                         UserEntity userEntity = new UserEntity();
@@ -232,9 +230,8 @@ public class WXLogin implements ICallbackResult {
                         mSimpleRemoteControl.setCommand(new ToQuerySelfChoiceStockConnect(new QuerySelfChoiceStockConnect(TAG, "", UserUtil.capitalAccount, UserUtil.userId)));
                         mSimpleRemoteControl.startConnect();
 
-                        mLoadingDialog.dismiss();
                         SpUtils.putString(mContext, "First", "");
-                        mMarked.MarkedLogic(true);
+
 
                     } else {
                         mLoadingDialog.dismiss();
@@ -306,13 +303,16 @@ public class WXLogin implements ICallbackResult {
         if ("AddSelfChoiceStockConnect".equals(tag)) {
             String msg = (String) result;
             SelfStockHelper.explanOneTimiceAddSelfChoiceResult((Activity) mContext, msg);
+            mLoadingDialog.dismiss();
+            mMarked.MarkedLogic(true);
         } else if ("QuerySelfChoiceStockConnect".equals(tag)) {
             //老用户
+            mLoadingDialog.dismiss();
             if (result instanceof String) {
                 MistakeDialog.showDialog("导入自选股异常" + result.toString(), (Activity) mContext, new MistakeDialog.MistakeDialgoListener() {
                     @Override
                     public void doPositive() {
-
+                        mMarked.MarkedLogic(true);
                     }
                 });
 
@@ -327,27 +327,11 @@ public class WXLogin implements ICallbackResult {
                         SelfStockHelper.sendUpdateSelfChoiceBrodcast((Activity) mContext, stockInfoEntity.getStockNumber());
                     }
                 }
+                mMarked.MarkedLogic(true);
             }
         }
     }
 
-
-    //清空数据库数据
-    private void setData() {
-        UserEntity userEntity = new UserEntity();
-        userEntity.setIslogin("false");
-        userEntity.setTradescno("");
-        userEntity.setMobile("");
-
-        SpUtils.putString(CustomApplication.getContext(), "mSession", "");
-        Db_PUB_USERS.UpdateMobile(userEntity);
-        Db_PUB_USERS.UpdateIslogin(userEntity);
-        Db_PUB_USERS.UpdateTradescno(userEntity);
-        Db_PUB_SEARCHHISTORYSTOCK.deleteAllDatas();
-        Db_PUB_OPTIONALHISTORYSTOCK.deleteAllDatas();
-        Db_PUB_USERS.clearRefreshTime();
-
-    }
 
     public interface Marked {
         void MarkedLogic(boolean isMarked);
