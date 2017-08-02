@@ -30,14 +30,14 @@ public class FundInoConnect {
      * @param session
      * @param tag
      */
-    public void fundQueryConnect(String company_name, int pageIndex, String session, String tag, final FundInfoConnectListener listener) {
+    public void fundQueryConnect(String fundType, String company_name, int pageIndex, String session, String tag, final FundInfoConnectListener listener) {
 
         HashMap map300441 = new HashMap();
         map300441.put("funcid", "300441");
         map300441.put("token", session);
         HashMap map300441_1 = new HashMap();
         map300441_1.put("SEC_ID", "tpyzq");
-        map300441_1.put("FUND_TYPE", "");
+        map300441_1.put("FUND_TYPE", fundType);
 //        map300441_1.put("FUND_CODE", "");
         map300441_1.put("FUND_COMPANY_NAME", company_name);
         map300441_1.put("PAGE_INDEX", pageIndex);
@@ -109,10 +109,13 @@ public class FundInoConnect {
 
 
                         String company_name = jsonObject.optString("FUND_COMPANY_NAME");//基金归
-                        String type = jsonObject.optString("OFUND_TYPE");// 类型
                         String level = jsonObject.optString("OFUND_RISKLEVEL_NAME");//风险等级
                         String status = jsonObject.optString("FUND_STATUS_NAME");//状态
-                        String ofundType = jsonObject.optString("OFUND_TYPE");
+
+                        String type = jsonObject.optString("FUND_TYPE");// 类型0：不可定投 1：可定投
+                        String typeCode = jsonObject.optString("OFUND_TYPE_CODE");//备注：2是货币型
+                        String ofundType = jsonObject.optString("OFUND_TYPE");//基金类型中文含义 如：股票型、货币型等
+
 
 
                         entity.FUND_NAME = fundname;
@@ -124,6 +127,7 @@ public class FundInoConnect {
                         entity.FUND_STATUS_NAME = status;
                         entity.FUND_TYPE = type;
                         entity.OFUND_TYPE = ofundType;
+                        entity.FUND_TYPE_CODE = typeCode;
                         entities.add(entity);
                     }
 

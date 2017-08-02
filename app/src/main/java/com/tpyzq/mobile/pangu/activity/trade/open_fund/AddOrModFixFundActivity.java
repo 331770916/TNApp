@@ -39,6 +39,7 @@ import java.util.HashMap;
 
 import static com.tpyzq.mobile.pangu.activity.trade.open_fund.FundInfoActivity.IS_SHOW;
 import static com.tpyzq.mobile.pangu.activity.trade.open_fund.FundInfoActivity.ITEM_CLICK;
+import static com.tpyzq.mobile.pangu.activity.trade.open_fund.FundInfoActivity.LIST_TYPE;
 
 /**
  * 增加修改定投
@@ -215,7 +216,7 @@ public class AddOrModFixFundActivity extends BaseActivity implements View.OnClic
                 intent.setClass(this, FundInfoActivity.class);
                 intent.putExtra(IS_SHOW, true);
                 intent.putExtra(ITEM_CLICK, true);
-                intent.putExtra("type", "1");
+                intent.putExtra(LIST_TYPE, "3");
                 startActivityForResult(intent, REQEST_CHOOSE);
                 break;
             case R.id.bt_commint:

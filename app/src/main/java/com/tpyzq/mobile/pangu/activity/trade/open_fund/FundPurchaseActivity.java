@@ -45,6 +45,7 @@ import okhttp3.Call;
 
 import static com.tpyzq.mobile.pangu.activity.trade.open_fund.FundInfoActivity.IS_SHOW;
 import static com.tpyzq.mobile.pangu.activity.trade.open_fund.FundInfoActivity.ITEM_CLICK;
+import static com.tpyzq.mobile.pangu.activity.trade.open_fund.FundInfoActivity.LIST_TYPE;
 import static com.tpyzq.mobile.pangu.util.keyboard.KeyEncryptionUtils.encryptBySessionKey;
 import static com.umeng.socialize.utils.DeviceConfig.context;
 
@@ -128,6 +129,7 @@ public class FundPurchaseActivity extends BaseActivity implements View.OnClickLi
                 intent.setClass(this, FundInfoActivity.class);
                 intent.putExtra(IS_SHOW, true);
                 intent.putExtra(ITEM_CLICK, true);
+                intent.putExtra(LIST_TYPE, "2");//基金申购
                 startActivityForResult(intent, REQUEST);
                 break;
             case R.id.iv_back:

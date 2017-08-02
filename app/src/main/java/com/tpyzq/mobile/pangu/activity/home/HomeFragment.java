@@ -27,6 +27,7 @@ import com.tpyzq.mobile.pangu.activity.home.information.NewsDetailActivity;
 import com.tpyzq.mobile.pangu.activity.home.managerMoney.ManagerMoenyDetailActivity;
 import com.tpyzq.mobile.pangu.activity.home.managerMoney.OptionalFinancingActivity;
 import com.tpyzq.mobile.pangu.activity.home.managerMoney.adapter.PreProductAdapter;
+import com.tpyzq.mobile.pangu.activity.home.managerMoney.product.hotsell.HotSellActivity;
 import com.tpyzq.mobile.pangu.activity.myself.login.ShouJiZhuCeActivity;
 import com.tpyzq.mobile.pangu.adapter.home.HomeAdapter;
 import com.tpyzq.mobile.pangu.adapter.home.HomeHotAdapter;
@@ -257,7 +258,7 @@ public class HomeFragment extends BaseFragment implements AdapterView.OnItemClic
                         switch (index) {
                             case 0:
                                 BRutil.menuSelect("N022");
-                                intent.setClass(getActivity(), OptionalFinancingActivity.class);
+                                intent.setClass(getActivity(), HotSellActivity.class);
                                 getActivity().startActivity(intent);
                                 break;
                             case 1:
