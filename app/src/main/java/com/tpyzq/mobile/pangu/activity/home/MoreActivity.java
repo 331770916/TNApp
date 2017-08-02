@@ -74,6 +74,13 @@ public class MoreActivity extends BaseActivity implements View.OnClickListener {
         }
         //初始化下面listview
         listDown = SpUtils.getDataList(this,"sortTitleTab");
+        //图片硬编码bug修复
+        for (FunctionEntity entity:listDown) {
+            String title = entity.getTitle();
+            Map<String, Integer> downDataMap = getDownDataMap();
+            entity.setIconId(downDataMap.get(title));
+        }
+
         String homeTitleTab = SpUtils.getString(this, "homeTitleTab", "");       //获取  选中的Tab 的名称
         String[] title = null;
         if (!TextUtils.isEmpty(homeTitleTab)) {
