@@ -165,7 +165,7 @@ public class WXLogin implements ICallbackResult {
         map1.put("phone_type", "1");
         map1.put("nickname", screen_name);
         map1.put("token", mRegId);
-        NetWorkUtil.getInstence().okHttpForPostString("", ConstantUtil.URL_HQ_HS, map, new StringCallback() {
+        NetWorkUtil.getInstence().okHttpForPostString("", ConstantUtil.URL_SJLI, map, new StringCallback() {
             @Override
             public void onError(Call call, Exception e, int id) {
                 LogUtil.e(TAG, e.toString());
