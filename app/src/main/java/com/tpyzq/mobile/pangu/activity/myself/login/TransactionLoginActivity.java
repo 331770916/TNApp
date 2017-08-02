@@ -851,9 +851,9 @@ public class TransactionLoginActivity extends BaseActivity implements ICallbackR
     @Override
     public boolean handleMessage(Message msg) {
         if (msg.what == 0) {
-            PasswordKeyboardUtils.hideSoftKeyboard(mAccount_et, TransactionLoginActivity.this);
-            PasswordKeyboardUtils.hideSoftKeyboard(mPassword_et, TransactionLoginActivity.this);
-            PasswordKeyboardUtils.hideSoftKeyboard(mCaptcha_et, TransactionLoginActivity.this);
+            PasswordKeyboardUtils.hideSoftKeyboard(mAccount_et, TransactionLoginActivity.this,false);
+            PasswordKeyboardUtils.hideSoftKeyboard(mPassword_et, TransactionLoginActivity.this,true);
+            PasswordKeyboardUtils.hideSoftKeyboard(mCaptcha_et, TransactionLoginActivity.this,false);
         } else if (msg.what == 1) {
             if ("0".equals(UserUtil.Keyboard)) {
 //                PasswordKeyboardUtils.showSoftKeyboar(mPassword_et, TransactionLoginActivity.this);
