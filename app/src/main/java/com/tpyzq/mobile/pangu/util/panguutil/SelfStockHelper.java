@@ -15,9 +15,9 @@ import com.tpyzq.mobile.pangu.http.doConnect.self.ToAddSelfChoiceStockConnect;
 import com.tpyzq.mobile.pangu.interfac.ICallbackResult;
 import com.tpyzq.mobile.pangu.interfac.OneTimiceAddSelfChoiceListener;
 import com.tpyzq.mobile.pangu.util.Helper;
+import com.tpyzq.mobile.pangu.view.CentreToast;
 import com.tpyzq.mobile.pangu.view.dialog.DoSelfChoiceResultDialog;
 import com.tpyzq.mobile.pangu.view.dialog.MistakeDialog;
-import com.tpyzq.mobile.pangu.view.dialog.ResultDialog;
 
 import org.json.JSONObject;
 
@@ -89,9 +89,9 @@ public class SelfStockHelper {
 
             if ("1".equals(code) && !"0".equals(totalcount)) {
                 String msg = "成功添加" + totalcount + "只自选股，其余自选股超出50条限制，请删除再添加";
-                ResultDialog.getInstance().show(msg, R.mipmap.lc_success);
+                CentreToast.showText(activity,msg,true);
             } else {
-                ResultDialog.getInstance().show("导入持仓成功", R.mipmap.lc_success);
+                CentreToast.showText(activity,"导入持仓成功",true);
             }
 
         } catch (Exception e) {
