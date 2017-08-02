@@ -47,6 +47,7 @@ public class SpeedTestActivity extends BaseActivity implements View.OnClickListe
     private Button bt_sure;
     private String sitename;
     private Dialog loadingDialog;
+    private int count;
 
     @Override
     public void initView() {
@@ -70,7 +71,7 @@ public class SpeedTestActivity extends BaseActivity implements View.OnClickListe
         if (TextUtils.isEmpty(ip)) {
             SpUtils.putString(this, "market_ip", ConstantUtil.IP);
         }
-//        loadingDialog = LoadingDialog.initDialog(this, "正在加载...");
+        loadingDialog = LoadingDialog.initDialog(this, "请稍后...");
         speedTestBeen = new ArrayList<SpeedTestEntity>();
         speedTestAdapter = new SpeedTestAdapter(this, speedTestBeen, speedCallBack);
         iv_back.setOnClickListener(this);
@@ -87,6 +88,7 @@ public class SpeedTestActivity extends BaseActivity implements View.OnClickListe
             HashMap hashMap = InterfaceCollection.getInstance().parseSites(jsonObj);
             String[] tradeArr=(String[])hashMap.get("hq");
             SpeedTestEntity speedTestEntity;
+            String ip ;
             if (null!=speedTestBeen)
                 speedTestBeen.clear();
             for (int i=0;i<tradeArr.length;i++) {
@@ -94,6 +96,11 @@ public class SpeedTestActivity extends BaseActivity implements View.OnClickListe
                 speedTestEntity = new SpeedTestEntity();
                 speedTestEntity.version_name = arr[0];
                 speedTestEntity.version_ip = arr[1];
+                if (ConstantUtil.IP.equals(speedTestEntity.version_ip)) {
+                    speedTestEntity.isChecked = true;
+                } else {
+                    speedTestEntity.isChecked = false;
+                }
                 speedTestBeen.add(speedTestEntity);
             }
             setSite();
@@ -175,6 +182,10 @@ public class SpeedTestActivity extends BaseActivity implements View.OnClickListe
 */
 
     private void setSite() {
+        if (null!=loadingDialog && !loadingDialog.isShowing()) {
+            loadingDialog.show();
+        }
+        count = 0;//需要调用的请求次数
         for (int i = 0; i < speedTestBeen.size(); i++) {
             final long starttime = System.currentTimeMillis();
             final int j = i;
@@ -192,7 +203,10 @@ public class SpeedTestActivity extends BaseActivity implements View.OnClickListe
             NetWorkUtil.getInstence().okHttpForGet("", url, map005, new StringCallback() {
                 @Override
                 public void onError(Call call, Exception e, int id) {
-
+                    count++;
+                    speedTestBeen.get(j).version_time = 10000;
+                    speedTestBeen.get(j).version_status = "良";
+                    setList();
                 }
 
                 @Override
@@ -204,21 +218,32 @@ public class SpeedTestActivity extends BaseActivity implements View.OnClickListe
                     } else {
                         speedTestBeen.get(j).version_status = "良";
                     }
-                    if (j == speedTestBeen.size() - 1) {
-                        speedTestBeen.get(getSort()).version_status = "优";
-                        lv_speed.setAdapter(new SpeedTestAdapter(SpeedTestActivity.this, speedTestBeen, speedCallBack));
-
-                        bt_speedtest.setClickable(true);
-                        bt_speedtest.setFocusable(true);
-                        bt_speedtest.setBackgroundResource(R.color.blue);
-
-                        bt_sure.setClickable(true);
-                        bt_sure.setFocusable(true);
-                        bt_sure.setBackgroundResource(R.color.blue);
-                    }
-                    setClear();
+                    count++;
+                    setList();
+//                    setClear();
                 }
             });
+        }
+    }
+
+    /**
+     * 测试完成，进行展示
+     */
+    private void setList() {
+        if (count == speedTestBeen.size()) {
+            speedTestBeen.get(getSort()).version_status = "优";
+            lv_speed.setAdapter(new SpeedTestAdapter(SpeedTestActivity.this, speedTestBeen, speedCallBack));
+
+            bt_speedtest.setClickable(true);
+            bt_speedtest.setFocusable(true);
+            bt_speedtest.setBackgroundResource(R.color.blue);
+
+            bt_sure.setClickable(true);
+            bt_sure.setFocusable(true);
+            bt_sure.setBackgroundResource(R.color.blue);
+            if (null!=loadingDialog && loadingDialog.isShowing()) {
+                loadingDialog.dismiss();
+            }
         }
     }
 
@@ -269,8 +294,9 @@ public class SpeedTestActivity extends BaseActivity implements View.OnClickListe
                 finish();
                 break;
             case R.id.bt_speedtest:
-                setClear();
-                getData();
+//                setClear();
+//                getData();
+                setSite();
                 break;
             case R.id.bt_sure:
                 SpUtils.putString(SpeedTestActivity.this, "market_ip", appIP);
@@ -282,6 +308,7 @@ public class SpeedTestActivity extends BaseActivity implements View.OnClickListe
         }
     }
 
+/*
     private void setClear() {
         for (SpeedTestEntity speedTestBean : speedTestBeen) {
             final String ip = speedTestBean.version_ip + ":" + speedTestBean.version_port;
@@ -295,4 +322,5 @@ public class SpeedTestActivity extends BaseActivity implements View.OnClickListe
             }
         }
     }
+*/
 }

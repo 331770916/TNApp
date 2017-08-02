@@ -9,4 +9,5 @@ public class SpeedTestEntity {
     public String version_port;
     public String version_status;
     public long version_time;
+    public boolean isChecked;
 }
