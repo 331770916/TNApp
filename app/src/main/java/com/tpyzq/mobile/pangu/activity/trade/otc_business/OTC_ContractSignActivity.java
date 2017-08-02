@@ -278,7 +278,12 @@ public class OTC_ContractSignActivity extends BaseActivity implements View.OnCli
             @Override
             public void onError(Call call, Exception e, int id) {
                 e.printStackTrace();
-                HandoverDialog.showDialog("暂无协议", OTC_ContractSignActivity.this);
+                MistakeDialog.showDialog("暂无协议", OTC_ContractSignActivity.this, new MistakeDialog.MistakeDialgoListener() {
+                    @Override
+                    public void doPositive() {
+                        finish();
+                    }
+                });
             }
 
             @Override
@@ -328,12 +333,22 @@ public class OTC_ContractSignActivity extends BaseActivity implements View.OnCli
                         mAdapter.setData(list);
 
                         if (list == null || list.size() <= 0) {
-                            HandoverDialog.showDialog("暂无协议", OTC_ContractSignActivity.this);
+                            MistakeDialog.showDialog("暂无协议", OTC_ContractSignActivity.this, new MistakeDialog.MistakeDialgoListener() {
+                                @Override
+                                public void doPositive() {
+                                    finish();
+                                }
+                            });
                         }
 
                     } else {
 //                        MistakeDialog.showDialog(type, OTC_ContractSignActivity.this);
-                        HandoverDialog.showDialog("暂无协议", OTC_ContractSignActivity.this);
+                        MistakeDialog.showDialog("暂无协议", OTC_ContractSignActivity.this, new MistakeDialog.MistakeDialgoListener() {
+                            @Override
+                            public void doPositive() {
+                                finish();
+                            }
+                        });
                     }
                 } catch (JSONException e) {
                     e.printStackTrace();

@@ -127,13 +127,9 @@ public class HandoverDialog {
 
     public static void closeDialog(Dialog dialog, Activity activity) {
         if (dialog != null && dialog.isShowing()) {
-//            HOLE_SEQ.deleteAll();
-            SpUtils.putString(CustomApplication.getContext(), ConstantUtil.APPEARHOLD, ConstantUtil.HOLD_DISAPPEAR);
-
             if (dialog != null) {
                 dialog.dismiss();
             }
-            activity.finish();
         }
     }
 

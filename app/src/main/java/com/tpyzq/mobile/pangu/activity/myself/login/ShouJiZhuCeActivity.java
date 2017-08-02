@@ -1,5 +1,6 @@
 package com.tpyzq.mobile.pangu.activity.myself.login;
 
+import android.content.DialogInterface;
 import android.content.Intent;
 import android.graphics.Bitmap;
 import android.graphics.Color;
@@ -8,6 +9,7 @@ import android.os.CountDownTimer;
 import android.text.Editable;
 import android.text.TextUtils;
 import android.text.TextWatcher;
+import android.view.KeyEvent;
 import android.view.View;
 import android.widget.Button;
 import android.widget.EditText;
@@ -29,6 +31,7 @@ import com.tpyzq.mobile.pangu.db.Db_PUB_SEARCHHISTORYSTOCK;
 import com.tpyzq.mobile.pangu.db.Db_PUB_STOCKLIST;
 import com.tpyzq.mobile.pangu.db.Db_PUB_USERS;
 import com.tpyzq.mobile.pangu.db.HOLD_SEQ;
+import com.tpyzq.mobile.pangu.http.OkHttpUtil;
 import com.tpyzq.mobile.pangu.http.doConnect.self.AddSelfChoiceStockConnect;
 import com.tpyzq.mobile.pangu.http.doConnect.self.QuerySelfChoiceStockConnect;
 import com.tpyzq.mobile.pangu.http.doConnect.self.ToAddSelfChoiceStockConnect;
@@ -53,7 +56,7 @@ import java.util.List;
  * 手机注册获取
  */
 public class ShouJiZhuCeActivity extends BaseActivity implements View.OnClickListener, InterfaceCollection.InterfaceCallback,
-        ICallbackResult,WXLogin.Marked {
+        ICallbackResult, WXLogin.Marked {
     private static String TAG = "ShouJiZhuCeActivity";
     private static String TAG1 = "ImageVerification";
     private static String TAG2 = "VerificationCode";
@@ -76,6 +79,28 @@ public class ShouJiZhuCeActivity extends BaseActivity implements View.OnClickLis
     private MyTimeCount time;
     private TextView mSound;
     private CustomDialog.Builder mBuilder;
+
+
+
+    DialogInterface.OnKeyListener onKeyListener = new DialogInterface.OnKeyListener() {
+        @Override
+        public boolean onKey(DialogInterface dialog, int keyCode, KeyEvent event) {
+            if (keyCode == KeyEvent.KEYCODE_BACK && event.getRepeatCount() == 0) {
+                if (mBuilder.dialog != null && mBuilder.dialog.isShowing())
+                    mBuilder.dialog.dismiss();
+                OkHttpUtil.cancelSingleRequestByTag(ShouJiZhuCeActivity.this.getClass().getName());
+                mImage_et.setText("");
+                mCaptcha_et.setText("");
+                ImageVerification();
+                if (time != null){
+                    time.cancel();
+                    time.setMarked(true);
+                    time.onFinish();
+                }
+            }
+            return false;
+        }
+    };
 
     @Override
     public int getLayoutId() {
@@ -122,8 +147,8 @@ public class ShouJiZhuCeActivity extends BaseActivity implements View.OnClickLis
     private void initLogic() {
         mBuilder = new CustomDialog.Builder(ShouJiZhuCeActivity.this);
         mBuilder.create();
+        mBuilder.dialog.setOnKeyListener(onKeyListener);
         mSound_tv.getPaint().setFlags(Paint.UNDERLINE_TEXT_FLAG);//下划线
-
         monitor();
         ImageVerification();
     }
@@ -455,18 +480,49 @@ public class ShouJiZhuCeActivity extends BaseActivity implements View.OnClickLis
     private void ShowNotice() {
         if ("1".equals(mIdentify)) {
             setData();
-            HandoverDialog.showDialog("切换成功", ShouJiZhuCeActivity.this);
+            HandoverDialog.showDialog("切换成功", ShouJiZhuCeActivity.this, new MistakeDialog.MistakeDialgoListener() {
+                @Override
+                public void doPositive() {
+//                    HOLE_SEQ.deleteAll();
+                    SpUtils.putString(CustomApplication.getContext(), ConstantUtil.APPEARHOLD, ConstantUtil.HOLD_DISAPPEAR);
+                    finish();
+                }
+            });
         } else if ("2".equals(mIdentify)) {
-            HandoverDialog.showDialog("注册成功", ShouJiZhuCeActivity.this);
+            HandoverDialog.showDialog("注册成功", ShouJiZhuCeActivity.this, new MistakeDialog.MistakeDialgoListener() {
+                @Override
+                public void doPositive() {
+                    //                    HOLE_SEQ.deleteAll();
+                    SpUtils.putString(CustomApplication.getContext(), ConstantUtil.APPEARHOLD, ConstantUtil.HOLD_DISAPPEAR);
+                    finish();
+                }
+            });
         } else {
-            SuccessDialog.showDialog("注册成功", ShouJiZhuCeActivity.this);
+            HandoverDialog.showDialog("注册成功", ShouJiZhuCeActivity.this, new MistakeDialog.MistakeDialgoListener() {
+                @Override
+                public void doPositive() {
+
+                    Intent intent = getIntent();
+                    if (intent == null) {
+                        intent = new Intent();
+                    }
+                    UserUtil.refrushUserInfo();
+                    if (!TextUtils.isEmpty(UserUtil.Mobile)) {
+                        intent.setClass(ShouJiZhuCeActivity.this, TransactionLoginActivity.class);
+                    } else if ("3".equals(KeyEncryptionUtils.getInstance().Typescno())) {
+                        intent.setClass(ShouJiZhuCeActivity.this, ShouJiVerificationActivity.class);
+                    }
+                    startActivity(intent);
+                    finish();
+                }
+            });
         }
     }
 
     @Override
     public void MarkedLogic(boolean isMarked) {
         if (isMarked) {
-           ShowNotice();
+            ShowNotice();
         } else {
             Marker = 0;
             Helper.getInstance().showToast(this, "微信登录失败");

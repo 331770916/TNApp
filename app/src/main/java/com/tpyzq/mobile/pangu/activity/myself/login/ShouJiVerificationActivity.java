@@ -26,6 +26,7 @@ import com.tpyzq.mobile.pangu.log.LogUtil;
 import com.tpyzq.mobile.pangu.util.ConstantUtil;
 import com.tpyzq.mobile.pangu.util.DeviceUtil;
 import com.tpyzq.mobile.pangu.util.Helper;
+import com.tpyzq.mobile.pangu.util.SpUtils;
 import com.tpyzq.mobile.pangu.util.keyboard.KeyEncryptionUtils;
 import com.tpyzq.mobile.pangu.util.panguutil.UserUtil;
 import com.tpyzq.mobile.pangu.view.dialog.HandoverDialog;
@@ -491,13 +492,7 @@ public class ShouJiVerificationActivity extends BaseActivity implements View.OnC
                         Db_PUB_USERS.UpdateScno(userEntity);                             //修改 注册账号
                         KeyEncryptionUtils.getInstance().localEncryptMobile(mSJYZNumber.getText().toString().trim());//修改手机号
 
-                        if ("1".equals(mIdentify)) {
-                            HandoverDialog.showDialog("验证成功", ShouJiVerificationActivity.this);
-                        } else if ("2".equals(mIdentify)) {
-                            HandoverDialog.showDialog("验证成功", ShouJiVerificationActivity.this);
-                        } else {
-                            SuccessDialog.showDialog("验证成功", ShouJiVerificationActivity.this);
-                        }
+                        ShowNotice();
                         LogUtil.e(TAG, jsonObject.getString("message"));
                     } else {
                         if (mLoadingDialog != null) {
@@ -531,7 +526,46 @@ public class ShouJiVerificationActivity extends BaseActivity implements View.OnC
         });
     }
 
+    private void ShowNotice() {
+        if ("1".equals(mIdentify)) {
+            HandoverDialog.showDialog("验证成功", ShouJiVerificationActivity.this, new MistakeDialog.MistakeDialgoListener() {
+                @Override
+                public void doPositive() {
+//                    HOLE_SEQ.deleteAll();
+                    SpUtils.putString(CustomApplication.getContext(), ConstantUtil.APPEARHOLD, ConstantUtil.HOLD_DISAPPEAR);
+                    finish();
+                }
+            });
+        } else if ("2".equals(mIdentify)) {
+            HandoverDialog.showDialog("验证成功", ShouJiVerificationActivity.this, new MistakeDialog.MistakeDialgoListener() {
+                @Override
+                public void doPositive() {
+                    //                    HOLE_SEQ.deleteAll();
+                    SpUtils.putString(CustomApplication.getContext(), ConstantUtil.APPEARHOLD, ConstantUtil.HOLD_DISAPPEAR);
+                    finish();
+                }
+            });
+        } else {
+            HandoverDialog.showDialog("验证成功", ShouJiVerificationActivity.this, new MistakeDialog.MistakeDialgoListener() {
+                @Override
+                public void doPositive() {
 
+                    Intent intent = getIntent();
+                    if (intent == null) {
+                        intent = new Intent();
+                    }
+                    UserUtil.refrushUserInfo();
+                    if (!TextUtils.isEmpty(UserUtil.Mobile)) {
+                        intent.setClass(ShouJiVerificationActivity.this, TransactionLoginActivity.class);
+                    } else if ("3".equals(KeyEncryptionUtils.getInstance().Typescno())) {
+                        intent.setClass(ShouJiVerificationActivity.this, ShouJiVerificationActivity.class);
+                    }
+                    startActivity(intent);
+                    finish();
+                }
+            });
+        }
+    }
     /**
      * EditText 监听事件
      */
