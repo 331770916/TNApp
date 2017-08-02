@@ -8,25 +8,29 @@
     <RelativeLayout
         android:layout_width="match_parent"
         android:layout_height="wrap_content"
-        android:layout_marginBottom="@dimen/size15"
-        android:paddingTop="@dimen/size15">
+        android:layout_marginBottom="@dimen/size15">
 
         <TextView
             android:id="@+id/item_text1"
             android:layout_width="wrap_content"
-            android:layout_height="wrap_content"/>
+            android:layout_height="wrap_content"
+            android:ellipsize="end"
+            android:singleLine="true"
+            android:maxEms="12" />
 
         <TextView
             android:id="@+id/item_text2"
             android:layout_width="wrap_content"
             android:layout_height="wrap_content"
-            android:layout_alignParentRight="true" />
+            android:layout_alignParentRight="true"/>
     </RelativeLayout>
 
     <TextView
         android:id="@+id/item_text3"
         android:layout_width="match_parent"
-        android:layout_height="wrap_content" />
+        android:layout_height="wrap_content"
+        android:maxLines="3"
+        android:ellipsize="end"/>
 
     <View
         android:layout_width="match_parent"
