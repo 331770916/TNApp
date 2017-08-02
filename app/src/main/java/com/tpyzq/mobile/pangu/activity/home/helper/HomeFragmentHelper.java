@@ -11,6 +11,7 @@ import com.tpyzq.mobile.pangu.activity.home.SearchActivity;
 import com.tpyzq.mobile.pangu.activity.home.hotsearchstock.HotSearchStockActivity;
 import com.tpyzq.mobile.pangu.activity.home.information.InformationHomeActivity;
 import com.tpyzq.mobile.pangu.activity.home.managerMoney.OptionalFinancingActivity;
+import com.tpyzq.mobile.pangu.activity.home.managerMoney.product.hotsell.HotSellActivity;
 import com.tpyzq.mobile.pangu.activity.myself.account.AssetsAnalysisActivity;
 import com.tpyzq.mobile.pangu.activity.myself.account.FinancialLifeActivity;
 import com.tpyzq.mobile.pangu.activity.myself.account.MyNewsActivity;
@@ -265,8 +266,8 @@ public class HomeFragmentHelper implements HomeSubject {
         } else if (AMAZING.equals(title)) {
 //            BRutil.menuNewSelect("z001-1", "2", "p2", "2", new Date(), "-1", "-1");     稳赢埋点
             BRutil.menuSelect("N022");
-//            intent.setClass(activity, HotSellActivity.class);
-            intent.setClass(activity, OptionalFinancingActivity.class);
+            intent.setClass(activity, HotSellActivity.class);
+//            intent.setClass(activity, OptionalFinancingActivity.class);
             activity.startActivity(intent);
         } else if (ALL.equals(title)) {
             intent.setClass(activity, MoreActivity.class);

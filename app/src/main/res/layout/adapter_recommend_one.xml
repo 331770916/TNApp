@@ -1,0 +1,116 @@
+<?xml version="1.0" encoding="utf-8"?>
+<LinearLayout xmlns:android="http://schemas.android.com/apk/res/android"
+    android:orientation="vertical"
+    android:layout_marginTop="@dimen/size5"
+    android:layout_marginBottom="@dimen/size5"
+    android:layout_width="match_parent"
+    android:layout_height="wrap_content">
+
+    <TextView
+        android:layout_gravity="center_horizontal"
+        android:layout_width="wrap_content"
+        android:layout_height="wrap_content"
+        android:textSize="@dimen/txtSize14"
+        android:gravity="center"
+        android:layout_margin="@dimen/size12"
+        android:textColor="@color/white"
+        android:background="@drawable/recommend_newbg"
+        android:text="新人专享"/>
+
+    <TextView
+        android:id="@+id/recommend_proName"
+        android:layout_width="wrap_content"
+        android:layout_height="wrap_content"
+        android:layout_gravity="center_horizontal"
+        android:textStyle="bold"
+        android:textColor="#565656"
+        android:textSize="@dimen/txtSize18"
+        android:text="海福新能源"/>
+
+    <TextView
+        android:id="@+id/recommend_prdio"
+        android:layout_width="wrap_content"
+        android:layout_height="wrap_content"
+        android:textSize="@dimen/txtSize40"
+        android:layout_marginTop="@dimen/size17"
+        android:textStyle="bold"
+        android:textColor="@color/red"
+        android:layout_gravity="center_horizontal"
+        android:text="7.7%"/>
+
+    <TextView
+        android:layout_width="wrap_content"
+        android:layout_height="wrap_content"
+        android:layout_gravity="center_horizontal"
+        android:textColor="#939393"
+        android:textSize="@dimen/txtSize12"
+        android:text="七日年化收益率"/>
+
+    <LinearLayout
+        android:id="@+id/labelLayout"
+        android:layout_width="wrap_content"
+        android:layout_height="wrap_content"
+        android:layout_gravity="center_horizontal"
+        android:layout_marginTop="@dimen/size10"
+        android:orientation="horizontal">
+
+        <TextView
+            android:layout_width="wrap_content"
+            android:layout_height="wrap_content"
+            android:textColor="#939393"
+            android:background="@drawable/recommend_top_tvbg"
+            android:layout_margin="@dimen/size5"
+            android:textSize="@dimen/txtSize10"
+            android:text="60天后转至"/>
+
+        <TextView
+            android:layout_width="wrap_content"
+            android:layout_height="wrap_content"
+            android:textColor="#939393"
+            android:layout_margin="@dimen/size5"
+            android:background="@drawable/recommend_top_tvbg"
+            android:textSize="@dimen/txtSize10"
+            android:text="60天后转至"/>
+
+        <TextView
+            android:layout_width="wrap_content"
+            android:layout_height="wrap_content"
+            android:layout_margin="@dimen/size5"
+            android:background="@drawable/recommend_top_tvbg"
+            android:textColor="#939393"
+            android:textSize="@dimen/txtSize10"
+            android:text="60天后转至"/>
+
+    </LinearLayout>
+
+    <LinearLayout
+        android:layout_width="match_parent"
+        android:layout_height="wrap_content"
+        android:padding="@dimen/size10"
+        android:orientation="horizontal">
+
+        <TextView
+            android:id="@+id/recommend_day"
+            android:layout_width="0dp"
+            android:layout_weight="1"
+            android:gravity="center"
+            android:text="120天\n期限"
+            android:layout_height="wrap_content" />
+
+        <View
+            android:layout_width="1px"
+            android:layout_height="match_parent"
+            android:background="@color/lineColor"/>
+
+        <TextView
+            android:id="@+id/recommend_qgje"
+            android:layout_width="0dp"
+            android:layout_weight="1"
+            android:gravity="center"
+            android:text="120天\n期限"
+            android:layout_height="wrap_content" />
+
+    </LinearLayout>
+
+
+</LinearLayout>
