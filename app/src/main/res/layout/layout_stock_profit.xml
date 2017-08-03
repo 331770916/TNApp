@@ -689,6 +689,18 @@
                 android:text="每股收益"
                 android:textColor="@color/calendarBtnColor"
                 android:textSize="@dimen/txtSize14" />
+
+            <TextView
+                android:id="@+id/tv_each_stock_in"
+                android:layout_width="wrap_content"
+                android:layout_height="wrap_content"
+                android:layout_gravity="center_vertical"
+                android:gravity="right"
+                android:paddingLeft="@dimen/size20"
+                android:paddingRight="@dimen/size20"
+                android:text="--.--"
+                android:textColor="@color/hushenTab_titleColor"
+                android:textSize="@dimen/txtSize14" />
         </LinearLayout>
 
         <View
