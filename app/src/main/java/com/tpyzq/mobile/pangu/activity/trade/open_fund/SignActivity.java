@@ -99,7 +99,7 @@ public class SignActivity extends BaseActivity implements View.OnClickListener, 
         HashMap map100237_1 = new HashMap();
         map100237_1.put("prodcode", code);
         map100237.put("parms", map100237_1);
-        NetWorkUtil.getInstence().okHttpForPostString("", ConstantUtil.URL_NEW, map100237, new StringCallback() {
+        NetWorkUtil.getInstence().okHttpForPostString("", ConstantUtil.getURL_HQ_HS(), map100237, new StringCallback() {
             @Override
             public void onError(Call call, Exception e, int id) {
                 MistakeDialog.showDialog(e.toString(), SignActivity.this);
@@ -176,7 +176,7 @@ public class SignActivity extends BaseActivity implements View.OnClickListener, 
         map300435_1.put("FLAG", "true");
         map300435_1.put("FUND_COMPANY", fund_company);
         map300435.put("parms", map300435_1);
-        NetWorkUtil.getInstence().okHttpForPostString("", ConstantUtil.URL_JY, map300435, new StringCallback() {
+        NetWorkUtil.getInstence().okHttpForPostString("", ConstantUtil.getURL_JY_HS(), map300435, new StringCallback() {
             @Override
             public void onError(Call call, Exception e, int id) {
                 MistakeDialog.showDialog(e.toString(), SignActivity.this);
@@ -224,7 +224,7 @@ public class SignActivity extends BaseActivity implements View.OnClickListener, 
         map300432_1.put("FUND_CODE", fund_code);
         map300432_1.put("FUND_COMPANY", fund_company);
         map300432.put("parms", map300432_1);
-        NetWorkUtil.getInstence().okHttpForPostString("", ConstantUtil.URL_JY, map300432, new StringCallback() {
+        NetWorkUtil.getInstence().okHttpForPostString("", ConstantUtil.getURL_JY_HS(), map300432, new StringCallback() {
             @Override
             public void onError(Call call, Exception e, int id) {
                 MistakeDialog.showDialog(e.toString(), SignActivity.this);

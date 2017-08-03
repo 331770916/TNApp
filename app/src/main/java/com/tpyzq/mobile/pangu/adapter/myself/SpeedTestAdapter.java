@@ -78,7 +78,7 @@ public class SpeedTestAdapter extends BaseAdapter {
             ip = speedTestBeen.get(position).version_ip + ":" + port;
         }
         final String url = ip;
-        if (ConstantUtil.IP.equals(url) || ConstantUtil.SJYZM.equals(url)) {
+        if (ConstantUtil.HQ_IP.equals(url) || ConstantUtil.JY_IP.equals(url)) {
             holder.cb_speed.setChecked(true);
         }
         holder.tv_text1.setText(speedTestBeen.get(position).version_name);

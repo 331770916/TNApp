@@ -123,7 +123,7 @@ public class FundEntrustCustomPager extends BaseTransactionPager implements View
         map720325_1.put("POSITION_STR", point);
         map720325_1.put("FLAG", "true");
         map720325.put("parms", map720325_1);
-        NetWorkUtil.getInstence().okHttpForPostString("", ConstantUtil.URL_JY, map720325, new StringCallback() {
+        NetWorkUtil.getInstence().okHttpForPostString("", ConstantUtil.getURL_JY_HS(), map720325, new StringCallback() {
             @Override
             public void onError(Call call, Exception e, int id) {
                 if (mDialog!=null){

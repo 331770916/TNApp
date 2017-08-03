@@ -83,7 +83,7 @@ public class AccountPowerActivity extends BaseActivity implements View.OnClickLi
         HashMap mapHQTNG010_1 = new HashMap();
         mapHQTNG010_1.put("cust_id", UserUtil.capitalAccount);
         mapHQTNG010.put("PARAMS", mapHQTNG010_1);
-        NetWorkUtil.getInstence().okHttpForPostString("", ConstantUtil.URL_BIGDATA, mapHQTNG010, new StringCallback() {
+        NetWorkUtil.getInstence().okHttpForPostString("", ConstantUtil.getURL_HQ_BB(), mapHQTNG010, new StringCallback() {
             @Override
             public void onError(Call call, Exception e, int id) {
                 Toast.makeText(AccountPowerActivity.this, "网络访问失败", Toast.LENGTH_SHORT).show();
@@ -124,7 +124,7 @@ public class AccountPowerActivity extends BaseActivity implements View.OnClickLi
         HashMap mapHQTNG011_1 = new HashMap();
         mapHQTNG011_1.put("cust_id", UserUtil.capitalAccount);
         mapHQTNG011.put("PARAMS", mapHQTNG011_1);
-        NetWorkUtil.getInstence().okHttpForPostString("", ConstantUtil.URL_BIGDATA, mapHQTNG011, new StringCallback() {
+        NetWorkUtil.getInstence().okHttpForPostString("", ConstantUtil.getURL_HQ_BB(), mapHQTNG011, new StringCallback() {
             @Override
             public void onError(Call call, Exception e, int id) {
                 Toast.makeText(AccountPowerActivity.this, "网络访问失败", Toast.LENGTH_SHORT).show();

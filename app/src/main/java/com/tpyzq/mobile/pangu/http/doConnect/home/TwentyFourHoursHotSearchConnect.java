@@ -55,7 +55,7 @@ public class TwentyFourHoursHotSearchConnect {
         hashMap_1.put("MOST_TYPE", mMostType);
         hashMap.put("TOKEN", "");
 
-        NetWorkUtil.getInstence().okHttpForPostString(mHttpTag, ConstantUtil.URL_RS, hashMap, new StringCallback() {
+        NetWorkUtil.getInstence().okHttpForPostString(mHttpTag, ConstantUtil.getURL_HQ_WB(), hashMap, new StringCallback() {
             @Override
             public void onError(Call call, Exception e, int id) {
 //                Helper.getInstance().showToast(mContext, "网络异常");

@@ -313,7 +313,7 @@ public class SubscribeHistorysAdapter extends BaseAdapter {
         map3.put("funcid", "300384");
         map3.put("token", mSession);
         map3.put("parms", map4);
-        NetWorkUtil.getInstence().okHttpForPostString(TAG, ConstantUtil.URL_JY, map3, new StringCallback() {
+        NetWorkUtil.getInstence().okHttpForPostString(TAG, ConstantUtil.getURL_JY_HS(), map3, new StringCallback() {
             @Override
             public void onError(Call call, Exception e, int id) {
                 e.toString();
@@ -391,7 +391,7 @@ public class SubscribeHistorysAdapter extends BaseAdapter {
         map1.put("funcid", "100210");
         map1.put("token", mSession);
         map1.put("parms", map2);
-        NetWorkUtil.getInstence().okHttpForPostString(TAG, ConstantUtil.URL_NEW, map1, new StringCallback() {
+        NetWorkUtil.getInstence().okHttpForPostString(TAG, ConstantUtil.getURL_HQ_HS(), map1, new StringCallback() {
             @Override
             public void onError(Call call, Exception e, int id) {
                 e.toString();

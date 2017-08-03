@@ -134,7 +134,7 @@ public void getTraBreed() {
     object[0] = map2;
     String json = new Gson().toJson(object);
     map001.put("PARAMS", json);
-    NetWorkUtil.getInstence().okHttpForGet("", ConstantUtil.URL, map001, new StringCallback() {
+    NetWorkUtil.getInstence().okHttpForGet("", ConstantUtil.getURL_HQ_HHN(), map001, new StringCallback() {
         @Override
         public void onError(Call call, Exception e, int id) {
             LogUtil.e(e.toString());

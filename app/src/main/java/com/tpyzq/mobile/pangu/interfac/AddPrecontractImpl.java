@@ -33,7 +33,7 @@ public class AddPrecontractImpl implements IAddPrecontract {
         map.put("order_prod_code", order_prod_code);
         params.put("PARAMS", map);
 
-        OkHttpUtil.okHttpForPostString(TAG, ConstantUtil.URL_UPDATE, params, new StringCallback() {
+        OkHttpUtil.okHttpForPostString(TAG, ConstantUtil.getURL_HQ_WA(), params, new StringCallback() {
             @Override
             public void onError(Call call, Exception e, int id) {
                 e.printStackTrace();

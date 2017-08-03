@@ -175,7 +175,7 @@ public class FundRedemptionActivity extends BaseActivity implements View.OnClick
         map300431_1.put("FUND_COMPANY", fundcompany);
         map300431_1.put("OPER_TYPE", "1");
         map300431.put("parms", map300431_1);
-        NetWorkUtil.getInstence().okHttpForPostString("", ConstantUtil.URL_JY, map300431, new StringCallback() {
+        NetWorkUtil.getInstence().okHttpForPostString("", ConstantUtil.getURL_JY_HS(), map300431, new StringCallback() {
             @Override
             public void onError(Call call, Exception e, int id) {
                 Helper.getInstance().showToast(FundRedemptionActivity.this, ConstantUtil.NETWORK_ERROR);
@@ -294,7 +294,7 @@ public class FundRedemptionActivity extends BaseActivity implements View.OnClick
             map720203_1.put("EXCEED_FLAG", 0);
         }
         map720203.put("parms", map720203_1);
-        NetWorkUtil.getInstence().okHttpForPostString("", ConstantUtil.URL_JY, map720203, new StringCallback() {
+        NetWorkUtil.getInstence().okHttpForPostString("", ConstantUtil.getURL_JY_HS(), map720203, new StringCallback() {
             @Override
             public void onError(Call call, Exception e, int id) {
                 Toast.makeText(FundRedemptionActivity.this, "网络访问失败", Toast.LENGTH_SHORT).show();

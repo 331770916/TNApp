@@ -71,7 +71,7 @@ public class TradingDynamicsActivity extends BaseActivity implements View.OnClic
         map1.put("SEC_ID", "tpyzq");
         map1.put("FLAG", true);
 
-        NetWorkUtil.getInstence().okHttpForPostString(TAG, ConstantUtil.URL_JY, map, new StringCallback() {
+        NetWorkUtil.getInstence().okHttpForPostString(TAG, ConstantUtil.getURL_JY_HS(), map, new StringCallback() {
             @Override
             public void onError(Call call, Exception e, int id) {
                 LogUtil.e(TAG, e.toString());
@@ -145,7 +145,7 @@ public class TradingDynamicsActivity extends BaseActivity implements View.OnClic
         map1.put("TOTAL_SELL", total_sell);
         map1.put("content_list", content_list);
 //                                                              URL_H5  URL_H5_New
-        NetWorkUtil.getInstence().okHttpForPostString(TAG, ConstantUtil.URL_H5_New, map, new StringCallback() {
+        NetWorkUtil.getInstence().okHttpForPostString(TAG, ConstantUtil.getURL_S_BB(), map, new StringCallback() {
             @Override
             public void onError(Call call, Exception e, int id) {
                 Helper.getInstance().showToast(TradingDynamicsActivity.this, "网络异常");

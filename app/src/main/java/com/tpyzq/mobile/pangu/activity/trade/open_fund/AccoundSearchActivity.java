@@ -93,7 +93,7 @@ public class AccoundSearchActivity extends BaseActivity implements View.OnClickL
         map300435_1.put("SEC_ID", "tpyzq");
         map300435_1.put("FLAG", "true");
         map300435.put("parms", map300435_1);
-        NetWorkUtil.getInstence().okHttpForPostString("", ConstantUtil.URL_JY, map300435, new StringCallback() {
+        NetWorkUtil.getInstence().okHttpForPostString("", ConstantUtil.getURL_JY_HS(), map300435, new StringCallback() {
             @Override
             public void onError(Call call, Exception e, int id) {
                 lv_accound_search.onRefreshComplete();

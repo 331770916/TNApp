@@ -229,7 +229,7 @@ public class ChangePasswordActivity extends BaseActivity implements View.OnClick
         map1.put("UNIKEYID", unikey);                       //UNIKEY插件ID
         map1.put("APP_TYPE", "1");                       //手机类型 0：ios        1：android
 
-        NetWorkUtil.getInstence().okHttpForPostString(TAG, ConstantUtil.URL_JY, map, new StringCallback() {
+        NetWorkUtil.getInstence().okHttpForPostString(TAG, ConstantUtil.getURL_JY_HS(), map, new StringCallback() {
             @Override
             public void onError(Call call, Exception e, int id) {
                 if (mLoadingDialog != null) {

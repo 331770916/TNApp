@@ -477,7 +477,7 @@ public class BuyAndSellActivity extends BaseActivity implements View.OnClickList
         map2.put("type", "0");
         object[0] = map2;
         map003.put("PARAMS", Arrays.toString(object));
-        NetWorkUtil.getInstence().okHttpForGet(TAG, ConstantUtil.URL, map003, new StringCallback() {
+        NetWorkUtil.getInstence().okHttpForGet(TAG, ConstantUtil.getURL_HQ_HHN(), map003, new StringCallback() {
             @Override
             public void onError(Call call, Exception e, int id) {
                 delist = "";
@@ -592,7 +592,7 @@ public class BuyAndSellActivity extends BaseActivity implements View.OnClickList
         map300130_1.put("SECU_CODE", code.substring(2));
         map300130_1.put("ORDER_PRICE", price);
         map300130.put("parms", map300130_1);
-        NetWorkUtil.getInstence().okHttpForPostString("", ConstantUtil.URL_JY, map300130, new StringCallback() {
+        NetWorkUtil.getInstence().okHttpForPostString("", ConstantUtil.getURL_JY_HS(), map300130, new StringCallback() {
             @Override
             public void onError(Call call, Exception e, int id) {
                 Toast.makeText(BuyAndSellActivity.this, "网络访问失败", Toast.LENGTH_SHORT).show();
@@ -664,7 +664,7 @@ public class BuyAndSellActivity extends BaseActivity implements View.OnClickList
         map300200_1.put("MARKET", market);
         map300200_1.put("SECU_CODE", code.substring(2));
         map300200.put("parms", map300200_1);
-        NetWorkUtil.getInstence().okHttpForPostString("", ConstantUtil.URL_JY, map300200, new StringCallback() {
+        NetWorkUtil.getInstence().okHttpForPostString("", ConstantUtil.getURL_JY_HS(), map300200, new StringCallback() {
             @Override
             public void onError(Call call, Exception e, int id) {
                 Toast.makeText(BuyAndSellActivity.this, "网络访问失败", Toast.LENGTH_SHORT).show();
@@ -1216,7 +1216,7 @@ public class BuyAndSellActivity extends BaseActivity implements View.OnClickList
         map300140_1.put("ENTRUST_PROP", encryptBySessionKey(entrusttype));
         map300140_1.put("FLAG", encryptBySessionKey("true"));
         map300140.put("parms", map300140_1);
-        NetWorkUtil.getInstence().okHttpForPostString("", ConstantUtil.URL_JY, map300140, new StringCallback() {
+        NetWorkUtil.getInstence().okHttpForPostString("", ConstantUtil.getURL_JY_HS(), map300140, new StringCallback() {
             @Override
             public void onError(Call call, Exception e, int id) {
                 ToastUtils.showShort(BuyAndSellActivity.this, "网络访问失败");
@@ -1275,7 +1275,7 @@ public class BuyAndSellActivity extends BaseActivity implements View.OnClickList
         map300140_1.put("ENTRUST_PROP", encryptBySessionKey(entrusttype));
         map300140_1.put("FLAG", encryptBySessionKey("true"));
         map300140.put("parms", map300140_1);
-        NetWorkUtil.getInstence().okHttpForPostString("", ConstantUtil.URL_JY, map300140, new StringCallback() {
+        NetWorkUtil.getInstence().okHttpForPostString("", ConstantUtil.getURL_JY_HS(), map300140, new StringCallback() {
             @Override
             public void onError(Call call, Exception e, int id) {
                 ToastUtils.showShort(BuyAndSellActivity.this, "网络访问失败");
@@ -1340,7 +1340,7 @@ public class BuyAndSellActivity extends BaseActivity implements View.OnClickList
         String strJson = gson.toJson(object);
         map.put("FUNCTIONCODE", "HQING006");
         map.put("PARAMS", strJson);
-        NetWorkUtil.getInstence().okHttpForGet(TAG, ConstantUtil.URL, map, new StringCallback() {
+        NetWorkUtil.getInstence().okHttpForGet(TAG, ConstantUtil.getURL_HQ_HHN(), map, new StringCallback() {
 
             @Override
             public void onError(Call call, Exception e, int id) {
@@ -1407,7 +1407,7 @@ public class BuyAndSellActivity extends BaseActivity implements View.OnClickList
         map2.put("FLAG", "true");
         map2.put("STOCK_CODE", stockInfo);
         map1.put("parms", map2);
-        NetWorkUtil.getInstence().okHttpForPostString(TAG, ConstantUtil.URL_JY, map1, new StringCallback() {
+        NetWorkUtil.getInstence().okHttpForPostString(TAG, ConstantUtil.getURL_JY_HS(), map1, new StringCallback() {
             @Override
             public void onError(Call call, Exception e, int id) {
                 Helper.getInstance().showToast(BuyAndSellActivity.this, ConstantUtil.NETWORK_ERROR);

@@ -128,7 +128,7 @@ public class FundChangeActivity extends BaseActivity implements View.OnClickList
         map720260_1.put("FUND_COMPANY_CODE", fundcompany);
         map720260_1.put("FLAG", "true");
         map720260.put("parms", map720260_1);
-        NetWorkUtil.getInstence().okHttpForPostString("", ConstantUtil.URL_JY, map720260, new StringCallback() {
+        NetWorkUtil.getInstence().okHttpForPostString("", ConstantUtil.getURL_JY_HS(), map720260, new StringCallback() {
             @Override
             public void onError(Call call, Exception e, int id) {
             }
@@ -185,7 +185,7 @@ public class FundChangeActivity extends BaseActivity implements View.OnClickList
         map300443_1.put("FUND_CODE", code);
         map300443_1.put("FLAG", "true");
         map300443.put("parms", map300443_1);
-        NetWorkUtil.getInstence().okHttpForPostString("", ConstantUtil.URL_JY, map300443, new StringCallback() {
+        NetWorkUtil.getInstence().okHttpForPostString("", ConstantUtil.getURL_JY_HS(), map300443, new StringCallback() {
             @Override
             public void onError(Call call, Exception e, int id) {
                 Helper.getInstance().showToast(FundChangeActivity.this,ConstantUtil.NETWORK_ERROR);

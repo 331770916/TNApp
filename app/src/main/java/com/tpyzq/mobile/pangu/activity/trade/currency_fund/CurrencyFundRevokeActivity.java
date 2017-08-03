@@ -89,7 +89,7 @@ public class CurrencyFundRevokeActivity extends BaseActivity implements View.OnC
         map1.put("funcid","300444");
         map1.put("token",SpUtils.getString(this, "mSession", ""));
         map1.put("parms",map2);
-        NetWorkUtil.getInstence().okHttpForPostString(TAG, ConstantUtil.URL_JY, map1, new StringCallback() {
+        NetWorkUtil.getInstence().okHttpForPostString(TAG, ConstantUtil.getURL_JY_HS(), map1, new StringCallback() {
             @Override
             public void onError(Call call, Exception e, int id) {
                 Helper.getInstance().showToast(CurrencyFundRevokeActivity.this,ConstantUtil.NETWORK_ERROR);

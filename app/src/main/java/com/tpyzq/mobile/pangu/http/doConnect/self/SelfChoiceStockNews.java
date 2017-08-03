@@ -48,7 +48,7 @@ public class SelfChoiceStockNews {
         HashMap mapHQONG002 = new HashMap();
         mapHQONG002.put("FUNCTIONCODE", "HQONG002");
         mapHQONG002.put("TOKEN", "");
-        mapHQONG002.put("url", ConstantUtil.URL_NEW_ZX);
+        mapHQONG002.put("url", ConstantUtil.getURL_HQ_WA());
         HashMap mapHQONG002_1 = new HashMap();
 
         String list = "";
@@ -63,7 +63,7 @@ public class SelfChoiceStockNews {
         mapHQONG002_1.put("offset",mOffset);
         mapHQONG002_1.put("limit","10");
         mapHQONG002.put("PARAMS", mapHQONG002_1);
-        NetWorkUtil.getInstence().okHttpForPostString(mHttpTAG, ConstantUtil.URL_NEW_ZX, mapHQONG002, new StringCallback() {
+        NetWorkUtil.getInstence().okHttpForPostString(mHttpTAG, ConstantUtil.getURL_HQ_WA(), mapHQONG002, new StringCallback() {
 //            NetWorkUtil.getInstence().okHttpForPostString(mHttpTAG, FileUtil.URL_NEW_ZX, mapHQONG002, new StringCallback() {
             @Override
             public void onError(Call call, Exception e, int id) {

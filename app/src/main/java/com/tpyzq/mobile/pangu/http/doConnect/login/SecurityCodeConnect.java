@@ -45,7 +45,7 @@ public class SecurityCodeConnect {
         map1.put("limit", "");
         map1.put("offset ", "");
         map1.put("tag ", "");
-        NetWorkUtil.getInstence().okHttpForPostString(mContext, ConstantUtil.URL_JYYZM, map, new StringCallback() {
+        NetWorkUtil.getInstence().okHttpForPostString(mContext, ConstantUtil.getURL_JY_UI(), map, new StringCallback() {
             @Override
             public void onError(Call call, Exception e, int id) {
                 mICallbackResult.getResult(ConstantUtil.NETWORK_ERROR, TAG);

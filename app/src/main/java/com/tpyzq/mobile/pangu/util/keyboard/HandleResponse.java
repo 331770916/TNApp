@@ -48,7 +48,7 @@ public class HandleResponse {
                             try {
                                 String data = params[0];
                                 String diviceid = params[1];
-                                String su = String.format("%s/unikeyAuth/servlet?funid=200008&appid=%s&mobile=%s&unikeyid=%s&data=%s", ConstantUtil.SJYZM, ConstantUtil.APP_ID, diviceid, uniKey.getUnikeyId(), data);
+                                String su = String.format("%s/unikeyAuth/servlet?funid=200008&appid=%s&mobile=%s&unikeyid=%s&data=%s", ConstantUtil.JY_IP, ConstantUtil.APP_ID, diviceid, uniKey.getUnikeyId(), data);
                                 LogUtil.e("url参数", su);
                                 URL url = new URL(su);
                                 HttpURLConnection conn = (HttpURLConnection) url.openConnection();
@@ -88,7 +88,7 @@ public class HandleResponse {
                             String data = params[0];
                             String diviceid = params[1];
                             try {
-                                String s = String.format("%s/unikeyAuth/servlet?funid=200005&appid=%s&mobile=%s&unikeyid=%s&data=%s", ConstantUtil.SJYZM, ConstantUtil.APP_ID, diviceid, uniKey.getUnikeyId(), data);
+                                String s = String.format("%s/unikeyAuth/servlet?funid=200005&appid=%s&mobile=%s&unikeyid=%s&data=%s", ConstantUtil.JY_IP, ConstantUtil.APP_ID, diviceid, uniKey.getUnikeyId(), data);
                                 LogUtil.e("url参数", s);
                                 URL url = new URL(s);
                                 HttpURLConnection conn = (HttpURLConnection) url.openConnection();

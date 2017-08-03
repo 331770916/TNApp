@@ -100,7 +100,7 @@ public class FundOpenAccountActivity extends BaseActivity implements View.OnClic
         map300436_1.put("SEC_ID", "tpyzq");
         map300436_1.put("FLAG", "true");
         map300436.put("parms", map300436_1);
-        NetWorkUtil.getInstence().okHttpForPostString("", ConstantUtil.URL_JY, map300436, new StringCallback() {
+        NetWorkUtil.getInstence().okHttpForPostString("", ConstantUtil.getURL_JY_HS(), map300436, new StringCallback() {
             @Override
             public void onError(Call call, Exception e, int id) {
             }
@@ -150,7 +150,7 @@ public class FundOpenAccountActivity extends BaseActivity implements View.OnClic
         map300436_1.put("FLAG", "true");
         map300436_1.put("FUND_COMPANY", company_code);
         map300436.put("parms", map300436_1);
-        NetWorkUtil.getInstence().okHttpForPostString("", ConstantUtil.URL_JY, map300436, new StringCallback() {
+        NetWorkUtil.getInstence().okHttpForPostString("", ConstantUtil.getURL_JY_HS(), map300436, new StringCallback() {
             @Override
             public void onError(Call call, Exception e, int id) {
             }

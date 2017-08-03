@@ -209,7 +209,7 @@ public class FrogetTransactionPwdActivity extends BaseActivity implements View.O
         Map map = new HashMap();
         params.put("parms", map);
 
-        OkHttpUtil.okHttpForPostString(TAG, ConstantUtil.URL_SCYHBG, params, new StringCallback() {
+        OkHttpUtil.okHttpForPostString(TAG, ConstantUtil.getURL_JY_HS(), params, new StringCallback() {
             @Override
             public void onError(Call call, Exception e, int id) {
                 e.printStackTrace();

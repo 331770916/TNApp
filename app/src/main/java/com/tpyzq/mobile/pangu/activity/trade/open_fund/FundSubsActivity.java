@@ -127,7 +127,7 @@ public class FundSubsActivity extends BaseActivity implements View.OnClickListen
         map300431_1.put("FUND_COMPANY", fundcompany);
         map300431_1.put("OPER_TYPE", "0");
         map300431.put("parms", map300431_1);
-        NetWorkUtil.getInstence().okHttpForPostString("", ConstantUtil.URL_JY, map300431, new StringCallback() {
+        NetWorkUtil.getInstence().okHttpForPostString("", ConstantUtil.getURL_JY_HS(), map300431, new StringCallback() {
             @Override
             public void onError(Call call, Exception e, int id) {
                 Helper.getInstance().showToast(FundSubsActivity.this, ConstantUtil.NETWORK_ERROR);
@@ -175,7 +175,7 @@ public class FundSubsActivity extends BaseActivity implements View.OnClickListen
         map300439_1.put("DO_CONTRACT", encryptBySessionKey(""));
         map300439_1.put("DO_PRE_CONDITION", encryptBySessionKey("1"));
         map300439.put("parms", map300439_1);
-        NetWorkUtil.getInstence().okHttpForPostString("", ConstantUtil.URL_JY, map300439, new StringCallback() {
+        NetWorkUtil.getInstence().okHttpForPostString("", ConstantUtil.getURL_JY_HS(), map300439, new StringCallback() {
             @Override
             public void onError(Call call, Exception e, int id) {
             }

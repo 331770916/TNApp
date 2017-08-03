@@ -431,7 +431,7 @@ public class IndustryExpoentTab2 extends BaseTabPager implements View.OnClickLis
             e.printStackTrace();
         }
         LogHelper.e(TAG, mType+"  request :"+params.toString());
-        NetWorkUtil.getInstence().okHttpForGet(TAG, ConstantUtil.URL, params, new StringCallback() {
+        NetWorkUtil.getInstence().okHttpForGet(TAG, ConstantUtil.getURL_HQ_HHN(), params, new StringCallback() {
             @Override
             public void onError(Call call, Exception e, int id) {
                 isCallBackSuccess = true;

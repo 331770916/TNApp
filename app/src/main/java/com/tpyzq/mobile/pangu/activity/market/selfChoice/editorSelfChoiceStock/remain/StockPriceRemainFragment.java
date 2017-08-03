@@ -220,7 +220,7 @@ public class StockPriceRemainFragment extends BaseFragment implements  View.OnCl
         }
 
 
-        NetWorkUtil.getInstence().okHttpForGet(TAG, ConstantUtil.URL, map, new StringCallback() {
+        NetWorkUtil.getInstence().okHttpForGet(TAG, ConstantUtil.getURL_HQ_HHN(), map, new StringCallback() {
 
             @Override
             public void onError(Call call, Exception e, int id) {

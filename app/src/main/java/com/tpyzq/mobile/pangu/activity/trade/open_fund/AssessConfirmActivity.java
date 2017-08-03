@@ -215,7 +215,7 @@ public class AssessConfirmActivity extends BaseActivity implements View.OnClickL
         map100237_1.put("prod_code", productcode);
         map100237_1.put("prod_kind_type", "3");
         mapHQTNG106.put("PARAMS", map100237_1);
-        NetWorkUtil.getInstence().okHttpForPostString("", ConstantUtil.URL_RS, mapHQTNG106, new StringCallback() {
+        NetWorkUtil.getInstence().okHttpForPostString("", ConstantUtil.getURL_HQ_WB(), mapHQTNG106, new StringCallback() {
             @Override
             public void onError(Call call, Exception e, int id) {
                 MistakeDialog.showDialog(e.toString(), AssessConfirmActivity.this, error_back);
@@ -286,7 +286,7 @@ public class AssessConfirmActivity extends BaseActivity implements View.OnClickL
         HashMap map100237_1 = new HashMap();
         map100237_1.put("prodcode", code);
         map100237.put("parms", map100237_1);
-        NetWorkUtil.getInstence().okHttpForPostString("", ConstantUtil.URL_NEW, map100237, new StringCallback() {
+        NetWorkUtil.getInstence().okHttpForPostString("", ConstantUtil.getURL_HQ_HS(), map100237, new StringCallback() {
             @Override
             public void onError(Call call, Exception e, int id) {
                 MistakeDialog.showDialog("暂无数据", AssessConfirmActivity.this, error_back);
@@ -411,7 +411,7 @@ public class AssessConfirmActivity extends BaseActivity implements View.OnClickL
         map300439_1.put("DO_CONTRACT", encryptBySessionKey(IS_AGREEMENT));
         map300439_1.put("DO_PRE_CONDITION", encryptBySessionKey("0"));
         map300439.put("parms", map300439_1);
-        NetWorkUtil.getInstence().okHttpForPostString("", ConstantUtil.URL_JY, map300439, new StringCallback() {
+        NetWorkUtil.getInstence().okHttpForPostString("", ConstantUtil.getURL_JY_HS(), map300439, new StringCallback() {
             @Override
             public void onError(Call call, Exception e, int id) {
                 MistakeDialog.showDialog(e.toString(), AssessConfirmActivity.this);
@@ -478,7 +478,7 @@ public class AssessConfirmActivity extends BaseActivity implements View.OnClickL
         map300440_1.put("DO_CONTRACT", encryptBySessionKey(IS_AGREEMENT));
         map300440_1.put("DO_PRE_CONDITION", encryptBySessionKey("0"));
         map300440.put("parms", map300440_1);
-        NetWorkUtil.getInstence().okHttpForPostString("", ConstantUtil.URL_JY, map300440, new StringCallback() {
+        NetWorkUtil.getInstence().okHttpForPostString("", ConstantUtil.getURL_JY_HS(), map300440, new StringCallback() {
             @Override
             public void onError(Call call, Exception e, int id) {
                 MistakeDialog.showDialog(e.toString(), AssessConfirmActivity.this);
@@ -524,7 +524,7 @@ public class AssessConfirmActivity extends BaseActivity implements View.OnClickL
         map1.put("funcid", "730201");
         map1.put("token", session);
         map1.put("parms", map2);
-        NetWorkUtil.getInstence().okHttpForPostString("", ConstantUtil.URL_JY, map1, new StringCallback() {
+        NetWorkUtil.getInstence().okHttpForPostString("", ConstantUtil.getURL_JY_HS(), map1, new StringCallback() {
             @Override
             public void onError(Call call, Exception e, int id) {
                 MistakeDialog.showDialog(e.toString(), AssessConfirmActivity.this);
@@ -571,7 +571,7 @@ public class AssessConfirmActivity extends BaseActivity implements View.OnClickL
         map1.put("funcid", "730202");
         map1.put("token", session);
         map1.put("parms", map2);
-        NetWorkUtil.getInstence().okHttpForPostString("", ConstantUtil.URL_JY, map1, new StringCallback() {
+        NetWorkUtil.getInstence().okHttpForPostString("", ConstantUtil.getURL_JY_HS(), map1, new StringCallback() {
             @Override
             public void onError(Call call, Exception e, int id) {
                 MistakeDialog.showDialog(e.toString(), AssessConfirmActivity.this);

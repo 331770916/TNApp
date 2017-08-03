@@ -238,7 +238,7 @@ public class FundPurchaseActivity extends BaseActivity implements View.OnClickLi
         map300440_1.put("DO_CONTRACT", encryptBySessionKey(""));
         map300440_1.put("DO_PRE_CONDITION", encryptBySessionKey("1"));
         map300440.put("parms", map300440_1);
-        NetWorkUtil.getInstence().okHttpForPostString("", ConstantUtil.URL_JY, map300440, new StringCallback() {
+        NetWorkUtil.getInstence().okHttpForPostString("", ConstantUtil.getURL_JY_HS(), map300440, new StringCallback() {
             @Override
             public void onError(Call call, Exception e, int id) {
                 ToastUtils.showShort(context, "委托失败");
@@ -346,7 +346,7 @@ public class FundPurchaseActivity extends BaseActivity implements View.OnClickLi
         map300431_1.put("FUND_COMPANY", fundcompany);
         map300431_1.put("OPER_TYPE", "0");
         map300431.put("parms", map300431_1);
-        NetWorkUtil.getInstence().okHttpForPostString("", ConstantUtil.URL_JY, map300431, new StringCallback() {
+        NetWorkUtil.getInstence().okHttpForPostString("", ConstantUtil.getURL_JY_HS(), map300431, new StringCallback() {
             @Override
             public void onError(Call call, Exception e, int id) {
                 Helper.getInstance().showToast(FundPurchaseActivity.this, ConstantUtil.NETWORK_ERROR);

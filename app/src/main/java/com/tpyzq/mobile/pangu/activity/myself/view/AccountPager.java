@@ -167,7 +167,7 @@ public class AccountPager extends BaseMySelfPager implements View.OnClickListene
         HashMap<Object, Object> mapHQTNG104_1 = new HashMap<>();
         mapHQTNG104_1.put("CUST_ID", UserUtil.capitalAccount);
         mapHQTNG104.put("PARAMS", mapHQTNG104_1);
-        NetWorkUtil.getInstence().okHttpForPostString("", ConstantUtil.URL_RS, mapHQTNG104, new StringCallback() {
+        NetWorkUtil.getInstence().okHttpForPostString("", ConstantUtil.getURL_HQ_WB(), mapHQTNG104, new StringCallback() {
             @Override
             public void onError(Call call, Exception e, int id) {
                 tagCloudAdapter = new TagCloudAdapter(list, userHeaderListen);

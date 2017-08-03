@@ -41,7 +41,7 @@ public class SpeedJYActivity extends BaseActivity implements View.OnClickListene
     private Dialog mLoadingDialog;
     private ListView mListView;
     private String sitename;
-    private String jyIp = ConstantUtil.SJYZM;
+    private String jyIp = ConstantUtil.JY_IP;
     private TextView mSureBtn;
     private static final String TAG = SpeedJYActivity.class.getSimpleName();
 
@@ -71,7 +71,7 @@ public class SpeedJYActivity extends BaseActivity implements View.OnClickListene
 
         String ip = SpUtils.getString(this, "jy_ip", null);
         if (TextUtils.isEmpty(ip)) {
-            SpUtils.putString(this, "jy_ip", ConstantUtil.SJYZM);
+            SpUtils.putString(this, "jy_ip", ConstantUtil.JY_IP);
         }
 
         getData();
@@ -119,7 +119,7 @@ public class SpeedJYActivity extends BaseActivity implements View.OnClickListene
         map800125.put("TOKEN", "");
         HashMap map800125_1 = new HashMap();
         map800125.put("PARAMS", map800125_1);
-        String url = ConstantUtil.URL_UPDATE;
+        String url = ConstantUtil.getURL_HQ_WA();
 
         NetWorkUtil.getInstence().okHttpForPostString(TAG, url, map800125, new StringCallback() {
             @Override

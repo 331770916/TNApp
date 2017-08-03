@@ -118,7 +118,7 @@ public class OTC_OpenAccountActivity extends BaseActivity implements View.OnClic
         map1.put("funcid", "300507");
         map1.put("token", mSession);
         map1.put("parms", map2);
-        NetWorkUtil.getInstence().okHttpForPostString(TAG, ConstantUtil.URL_JY, map1, new StringCallback() {
+        NetWorkUtil.getInstence().okHttpForPostString(TAG, ConstantUtil.getURL_JY_HS(), map1, new StringCallback() {
             @Override
             public void onError(Call call, Exception e, int id) {
 
@@ -194,7 +194,7 @@ public class OTC_OpenAccountActivity extends BaseActivity implements View.OnClic
         map1.put("funcid", "300509");
         map1.put("token", mSession);
         map1.put("parms", map2);
-        NetWorkUtil.getInstence().okHttpForPostString(TAG, ConstantUtil.URL_JY, map1, new StringCallback() {
+        NetWorkUtil.getInstence().okHttpForPostString(TAG, ConstantUtil.getURL_JY_HS(), map1, new StringCallback() {
             @Override
             public void onError(Call call, Exception e, int id) {
                 ResultDialog.getInstance().showText("网络异常");

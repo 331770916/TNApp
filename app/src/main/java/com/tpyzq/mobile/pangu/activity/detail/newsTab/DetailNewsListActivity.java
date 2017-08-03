@@ -174,7 +174,7 @@ public class DetailNewsListActivity extends BaseActivity implements View.OnClick
         map1.put("FUNCTIONCODE","HQONG002");
         map1.put("TOKEN","");
         map1.put("PARAMS",map2);
-        NetWorkUtil.getInstence().okHttpForPostString(TAG, ConstantUtil.URL_NEW_ZX, map1, new StringCallback() {
+        NetWorkUtil.getInstence().okHttpForPostString(TAG, ConstantUtil.getURL_HQ_WA(), map1, new StringCallback() {
             @Override
             public void onError(Call call, Exception e, int id) {
                 LogUtil.i(TAG,e.toString());

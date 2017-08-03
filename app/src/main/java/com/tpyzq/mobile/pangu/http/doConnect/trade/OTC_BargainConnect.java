@@ -40,7 +40,7 @@ public class OTC_BargainConnect {
         map.put("token", SpUtils.getString(CustomApplication.getContext(), "mSession", ""));
         map.put("parms", map2);
 
-        NetWorkUtil.getInstence().okHttpForPostString(tag, ConstantUtil.URL_JY, map, new StringCallback() {
+        NetWorkUtil.getInstence().okHttpForPostString(tag, ConstantUtil.getURL_JY_HS(), map, new StringCallback() {
             @Override
             public void onError(Call call, Exception e, int id) {
                 if (listener != null) {
@@ -143,7 +143,7 @@ public class OTC_BargainConnect {
         map1.put("token", SpUtils.getString(CustomApplication.getContext(), "mSession", ""));
         map1.put("parms",map2);
 
-        NetWorkUtil.getInstence().okHttpForPostString(tag, ConstantUtil.URL_JY, map1, new StringCallback() {
+        NetWorkUtil.getInstence().okHttpForPostString(tag, ConstantUtil.getURL_JY_HS(), map1, new StringCallback() {
             @Override
             public void onError(Call call, Exception e, int id) {
                 if (listener != null) {
@@ -239,7 +239,7 @@ public class OTC_BargainConnect {
         map1.put("token", SpUtils.getString(CustomApplication.getContext(), "mSession", ""));
         map1.put("parms",map2);
 
-        NetWorkUtil.getInstence().okHttpForPostString(tag, ConstantUtil.URL_JY, map1, new StringCallback() {
+        NetWorkUtil.getInstence().okHttpForPostString(tag, ConstantUtil.getURL_JY_HS(), map1, new StringCallback() {
             @Override
             public void onError(Call call, Exception e, int id) {
                 if (listener != null) {
@@ -326,7 +326,7 @@ public class OTC_BargainConnect {
         map1.put("token", SpUtils.getString(CustomApplication.getContext(), "mSession", ""));
         map1.put("parms",map2);
 
-        NetWorkUtil.getInstence().okHttpForPostString(tag, ConstantUtil.URL_JY, map1, new StringCallback() {
+        NetWorkUtil.getInstence().okHttpForPostString(tag, ConstantUtil.getURL_JY_HS(), map1, new StringCallback() {
             @Override
             public void onError(Call call, Exception e, int id) {
                 if (listener != null) {

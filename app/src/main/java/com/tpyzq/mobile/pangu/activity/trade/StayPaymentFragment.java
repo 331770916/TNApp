@@ -113,7 +113,7 @@ public class StayPaymentFragment extends BaseFragment implements PullDownScrollV
         map3.put("funcid", "300387");
         map3.put("token", session);
         map3.put("parms", map4);
-        NetWorkUtil.getInstence().okHttpForPostString(TAG, ConstantUtil.URL_JY, map3, new StringCallback() {
+        NetWorkUtil.getInstence().okHttpForPostString(TAG, ConstantUtil.getURL_JY_HS(), map3, new StringCallback() {
             @Override
             public void onError(Call call, Exception e, int id) {
                 LogUtil.i(TAG, e.toString());
@@ -244,7 +244,7 @@ public class StayPaymentFragment extends BaseFragment implements PullDownScrollV
         map5.put("funcid", "300384");
         map5.put("token", session);
         map5.put("parms", map6);
-        NetWorkUtil.getInstence().okHttpForPostString(TAG, ConstantUtil.URL_JY, map5, new StringCallback() {
+        NetWorkUtil.getInstence().okHttpForPostString(TAG, ConstantUtil.getURL_JY_HS(), map5, new StringCallback() {
             @Override
             public void onError(Call call, Exception e, int id) {
 
@@ -309,7 +309,7 @@ public class StayPaymentFragment extends BaseFragment implements PullDownScrollV
         map5.put("funcid", "100210");
         map5.put("token", session);
         map5.put("parms", map6);
-        NetWorkUtil.getInstence().okHttpForPostString(TAG, ConstantUtil.URL_ZX_GS, map5, new StringCallback() {
+        NetWorkUtil.getInstence().okHttpForPostString(TAG, ConstantUtil.getURL_HQ_HS(), map5, new StringCallback() {
             @Override
             public void onError(Call call, Exception e, int id) {
 

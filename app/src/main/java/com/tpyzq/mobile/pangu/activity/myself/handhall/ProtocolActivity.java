@@ -177,7 +177,7 @@ public class ProtocolActivity extends BaseActivity implements View.OnClickListen
         map1.put("EXCHANGE_TYPE", EXCHANGETYPE);
         map1.put("STOCK_ACCOUNT", secu_code);
 
-        NetWorkUtil.getInstence().okHttpForPostString(TAG, ConstantUtil.URL_JY, map, new StringCallback() {
+        NetWorkUtil.getInstence().okHttpForPostString(TAG, ConstantUtil.getURL_JY_HS(), map, new StringCallback() {
             @Override
             public void onError(Call call, Exception e, int id) {
                 if (loadingDialog != null) {

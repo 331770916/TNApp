@@ -103,7 +103,7 @@ public class FundSubscriptionDialog extends BaseDialog implements View.OnClickLi
         map1.put("funcid", "300195");
         map1.put("token", mSession);
         map1.put("parms", map2);
-        NetWorkUtil.getInstence().okHttpForPostString(TAG, ConstantUtil.URL_JY, map1, new StringCallback() {
+        NetWorkUtil.getInstence().okHttpForPostString(TAG, ConstantUtil.getURL_JY_HS(), map1, new StringCallback() {
             @Override
             public void onError(Call call, Exception e, int id) {
                 LogUtil.i(TAG,e.toString());

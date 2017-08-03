@@ -109,7 +109,7 @@ public class BanksBalanceQueryActivity extends BaseActivity implements View.OnCl
         map1.put("token",mSession);
         map1.put("parms",map2);
 
-        NetWorkUtil.getInstence().okHttpForPostString(TAG, ConstantUtil.URL_JY, map1, new StringCallback() {
+        NetWorkUtil.getInstence().okHttpForPostString(TAG, ConstantUtil.getURL_JY_HS(), map1, new StringCallback() {
             @Override
             public void onError(Call call, Exception e, int id) {
                 LogHelper.e(TAG, e.toString());
@@ -284,7 +284,7 @@ public class BanksBalanceQueryActivity extends BaseActivity implements View.OnCl
         map1.put("token",mSession);
         map1.put("parms",map2);
 
-        NetWorkUtil.getInstence().okHttpForPostString(TAG, ConstantUtil.URL_JY, map1, new StringCallback() {
+        NetWorkUtil.getInstence().okHttpForPostString(TAG, ConstantUtil.getURL_JY_HS(), map1, new StringCallback() {
             @Override
             public void onError(Call call, Exception e, int id) {
                 LogHelper.e(TAG, e.toString());

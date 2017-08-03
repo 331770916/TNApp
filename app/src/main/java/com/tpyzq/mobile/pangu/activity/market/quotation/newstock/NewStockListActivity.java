@@ -147,7 +147,7 @@ public class NewStockListActivity extends BaseActivity implements View.OnClickLi
         map.put("token", "");
         map.put("parms", map2);
 
-        NetWorkUtil.getInstence().okHttpForPostString(TAG, ConstantUtil.URL_NEW, map, new StringCallback() {
+        NetWorkUtil.getInstence().okHttpForPostString(TAG, ConstantUtil.getURL_HQ_HS(), map, new StringCallback() {
             @Override
             public void onError(Call call, Exception e, int id) {
                 LogHelper.e(TAG, e.toString());
@@ -238,7 +238,7 @@ public class NewStockListActivity extends BaseActivity implements View.OnClickLi
         }
         map.put("FUNCTIONCODE", "HQING014");
 
-        NetWorkUtil.getInstence().okHttpForGet(TAG, ConstantUtil.URL, map, new StringCallback() {
+        NetWorkUtil.getInstence().okHttpForGet(TAG, ConstantUtil.getURL_HQ_HHN(), map, new StringCallback() {
             @Override
             public void onError(Call call, Exception e, int id) {
                 isCallBackSuccess = true;

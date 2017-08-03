@@ -156,7 +156,7 @@ public class EntrustCustomPager extends BaseSearchPager {
         map2.put("KEY_STR", i);
         map2.put("REC_COUNT", j);
 
-        NetWorkUtil.getInstence().okHttpForPostString(TAG, ConstantUtil.URL_JY, map, new StringCallback() {
+        NetWorkUtil.getInstence().okHttpForPostString(TAG, ConstantUtil.getURL_JY_HS(), map, new StringCallback() {
             @Override
             public void onError(Call call, Exception e, int id) {
                 LogHelper.e(TAG, e.toString());

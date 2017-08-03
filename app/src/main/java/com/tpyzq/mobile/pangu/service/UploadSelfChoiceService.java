@@ -32,7 +32,7 @@ public class UploadSelfChoiceService extends Service {
     public int onStartCommand(Intent intent, int flags, int startId) {
 
 
-        NetWorkUtil.getInstence().okHttpForPostString(TAG, ConstantUtil.URL, "", new StringCallback() {
+        NetWorkUtil.getInstence().okHttpForPostString(TAG, ConstantUtil.getURL_HQ_HHN(), "", new StringCallback() {
 
             @Override
             public void onError(Call call, Exception e, int id) {

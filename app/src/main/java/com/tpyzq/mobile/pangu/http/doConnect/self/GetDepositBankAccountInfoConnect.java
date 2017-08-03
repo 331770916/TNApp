@@ -39,7 +39,7 @@ public class GetDepositBankAccountInfoConnect {
         hashMap.put("FLAG", "true");
         map.put("parms", hashMap);
 
-        OkHttpUtil.okHttpForPostString(tag, ConstantUtil.URL_SCYHBG, map, new StringCallback() {
+        OkHttpUtil.okHttpForPostString(tag, ConstantUtil.getURL_JY_HS(), map, new StringCallback() {
             @Override
             public void onError(Call call, Exception e, int id) {
                 if (changeDepositBankResult != null) {
@@ -144,7 +144,7 @@ public class GetDepositBankAccountInfoConnect {
         hashMap.put("MONEY_TYPE", currency);
         map.put("parms", hashMap);
 
-        OkHttpUtil.okHttpForPostString(tag, ConstantUtil.URL_SCYHBG, map, new StringCallback() {
+        OkHttpUtil.okHttpForPostString(tag, ConstantUtil.getURL_JY_HS(), map, new StringCallback() {
             @Override
             public void onError(Call call, Exception e, int id) {
                 e.printStackTrace();
@@ -226,7 +226,7 @@ public class GetDepositBankAccountInfoConnect {
         hashMap.put("BANK_NO", bank_no);
         map.put("parms", hashMap);
 
-        OkHttpUtil.okHttpForPostString(tag, ConstantUtil.URL_SCYHBG, map, new StringCallback() {
+        OkHttpUtil.okHttpForPostString(tag, ConstantUtil.getURL_JY_HS(), map, new StringCallback() {
             @Override
             public void onError(Call call, Exception e, int id) {
                 e.printStackTrace();
@@ -311,7 +311,7 @@ public class GetDepositBankAccountInfoConnect {
         hashMap.put("ACC_PWD", accPassword);
         map.put("parms", hashMap);
 
-        OkHttpUtil.okHttpForPostString(tag, ConstantUtil.URL_SCYHBG, map, new StringCallback() {
+        OkHttpUtil.okHttpForPostString(tag, ConstantUtil.getURL_JY_HS(), map, new StringCallback() {
             @Override
             public void onError(Call call, Exception e, int id) {
                 e.printStackTrace();
@@ -393,7 +393,7 @@ public class GetDepositBankAccountInfoConnect {
         hashMap.put("bankflag", bankNo);
         map.put("parms", hashMap);
 
-        OkHttpUtil.okHttpForPostString(tag, ConstantUtil.URL_ZX_GS, map, new StringCallback() {
+        OkHttpUtil.okHttpForPostString(tag, ConstantUtil.getURL_HQ_HS(), map, new StringCallback() {
             @Override
             public void onError(Call call, Exception e, int id) {
                 e.printStackTrace();
@@ -462,7 +462,7 @@ public class GetDepositBankAccountInfoConnect {
         hashMap.put("BANK_NO", oldBankNo);
         map.put("parms", hashMap);
 
-        OkHttpUtil.okHttpForPostString(tag, ConstantUtil.URL_SCYHBG, map, new StringCallback() {
+        OkHttpUtil.okHttpForPostString(tag, ConstantUtil.getURL_JY_HS(), map, new StringCallback() {
             @Override
             public void onError(Call call, Exception e, int id) {
                 e.printStackTrace();
@@ -555,7 +555,7 @@ public class GetDepositBankAccountInfoConnect {
         hashMap.put("MONEY_TYPE", currency);    //上一个界面传入过来的
         map.put("parms", hashMap);
 
-        OkHttpUtil.okHttpForPostString(tag, ConstantUtil.URL_SCYHBG, map, new StringCallback() {
+        OkHttpUtil.okHttpForPostString(tag, ConstantUtil.getURL_JY_HS(), map, new StringCallback() {
             @Override
             public void onError(Call call, Exception e, int id) {
                 e.printStackTrace();

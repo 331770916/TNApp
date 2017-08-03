@@ -176,7 +176,7 @@ public class NewStockSubscribeActivity extends BaseActivity implements View.OnCl
         map1.put("token", SpUtils.getString(this, "mSession", ""));
         map1.put("parms", map2);
 
-        NetWorkUtil.getInstence().okHttpForPostString(this, ConstantUtil.URL_JY, map1, new StringCallback() {
+        NetWorkUtil.getInstence().okHttpForPostString(this, ConstantUtil.getURL_JY_HS(), map1, new StringCallback() {
             @Override
             public void onError(Call call, Exception e, int id) {
                 LogUtil.e(TAG, e.toString());
@@ -220,7 +220,7 @@ public class NewStockSubscribeActivity extends BaseActivity implements View.OnCl
         map.put("token", "");
         map.put("parms", map2);
 
-        NetWorkUtil.getInstence().okHttpForPostString(TAG, ConstantUtil.URL_NEW, map, new StringCallback() {
+        NetWorkUtil.getInstence().okHttpForPostString(TAG, ConstantUtil.getURL_HQ_HS(), map, new StringCallback() {
             @Override
             public void onError(Call call, Exception e, int id) {
                 LogHelper.e(TAG, e.toString());

@@ -53,7 +53,7 @@ public class ReverseRepoActivityPresenter {
         map2.put("type", "0");
         object[0] = map2;
         map003.put("PARAMS", Arrays.toString(object));
-        NetWorkUtil.getInstence().okHttpForGet("", ConstantUtil.URL, map003, new StringCallback() {
+        NetWorkUtil.getInstence().okHttpForGet("", ConstantUtil.getURL_HQ_HHN(), map003, new StringCallback() {
             @Override
             public void onError(Call call, Exception e, int id) {
             }
@@ -103,7 +103,7 @@ public class ReverseRepoActivityPresenter {
         map300130_1.put("SECU_CODE", code.substring(2));
         map300130_1.put("ORDER_PRICE", 1);
         map300130.put("parms", map300130_1);
-        NetWorkUtil.getInstence().okHttpForPostString("", ConstantUtil.URL_JY, map300130, new StringCallback() {
+        NetWorkUtil.getInstence().okHttpForPostString("", ConstantUtil.getURL_JY_HS(), map300130, new StringCallback() {
             @Override
             public void onError(Call call, Exception e, int id) {
                 ToastUtils.showShort(activity, "网络访问失败");
@@ -156,7 +156,7 @@ public class ReverseRepoActivityPresenter {
         map300140_1.put("ENTRUST_PROP", 0);
         map300140_1.put("FLAG", true);
         map300140.put("parms", map300140_1);
-        NetWorkUtil.getInstence().okHttpForPostString("", ConstantUtil.URL_JY, map300140, new StringCallback() {
+        NetWorkUtil.getInstence().okHttpForPostString("", ConstantUtil.getURL_JY_HS(), map300140, new StringCallback() {
             @Override
             public void onError(Call call, Exception e, int id) {
                 ToastUtils.showShort(activity, "网络访问失败");

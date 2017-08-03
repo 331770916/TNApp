@@ -150,7 +150,7 @@ public class TakeAPositionActivity extends BaseActivity implements AdapterView.O
         map2.put("MARKET", "");
         map2.put("SECU_CODE", "");
 
-        NetWorkUtil.getInstence().okHttpForPostString(TAG, ConstantUtil.URL_JY, map, new StringCallback() {
+        NetWorkUtil.getInstence().okHttpForPostString(TAG, ConstantUtil.getURL_JY_HS(), map, new StringCallback() {
             @Override
             public void onError(Call call, Exception e, int id) {
                 mPullToRefreshScrollView.onRefreshComplete();

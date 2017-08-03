@@ -98,7 +98,7 @@ public class AssetsAnalysisActivity extends BaseActivity implements View.OnClick
         map2_300201.put("MARKET", "");
         map2_300201.put("SECU_CODE", "");
 
-        NetWorkUtil.getInstence().okHttpForPostString(TAG, ConstantUtil.URL_JY, map_300201, new StringCallback() {
+        NetWorkUtil.getInstence().okHttpForPostString(TAG, ConstantUtil.getURL_JY_HS(), map_300201, new StringCallback() {
                     @Override
                     public void onError(Call call, Exception e, int id) {
                         LogHelper.e(TAG, e.toString());
@@ -157,7 +157,7 @@ public class AssetsAnalysisActivity extends BaseActivity implements View.OnClick
         map1_720260.put("SEC_ID", "tpyzq");
         map1_720260.put("FLAG", "true");
 
-        NetWorkUtil.getInstence().okHttpForPostString(TAG, ConstantUtil.URL_JY, map_720260, new StringCallback() {
+        NetWorkUtil.getInstence().okHttpForPostString(TAG, ConstantUtil.getURL_JY_HS(), map_720260, new StringCallback() {
             @Override
             public void onError(Call call, Exception e, int id) {
                 LogUtil.e(TAG, e.toString());
@@ -214,7 +214,7 @@ public class AssetsAnalysisActivity extends BaseActivity implements View.OnClick
         map_300501.put("token", mSession);
         map_300501.put("parms", map1_300501);
 
-        NetWorkUtil.getInstence().okHttpForPostString(TAG, ConstantUtil.URL_JY, map_300501, new StringCallback() {
+        NetWorkUtil.getInstence().okHttpForPostString(TAG, ConstantUtil.getURL_JY_HS(), map_300501, new StringCallback() {
             @Override
             public void onError(Call call, Exception e, int id) {
                 LogUtil.e(TAG, e.toString());
@@ -269,7 +269,7 @@ public class AssetsAnalysisActivity extends BaseActivity implements View.OnClick
         map1_300608.put("SEC_ID", "tpyzq");
         map1_300608.put("FLAG", "true");
 
-        NetWorkUtil.getInstence().okHttpForPostString(TAG, ConstantUtil.URL_JY, map_300608, new StringCallback() {
+        NetWorkUtil.getInstence().okHttpForPostString(TAG, ConstantUtil.getURL_JY_HS(), map_300608, new StringCallback() {
             @Override
             public void onError(Call call, Exception e, int id) {
                 LogUtil.e(e.toString());
@@ -330,7 +330,7 @@ public class AssetsAnalysisActivity extends BaseActivity implements View.OnClick
         map1.put("fund_obj", mFund_list_map);
         map1.put("money_obj", mMoney_list_map);
 //                                                                URL_H5_New  URL_H5
-        NetWorkUtil.getInstence().okHttpForPostString(TAG, ConstantUtil.URL_H5_New, map, new StringCallback() {
+        NetWorkUtil.getInstence().okHttpForPostString(TAG, ConstantUtil.getURL_S_BB(), map, new StringCallback() {
             @Override
             public void onError(Call call, Exception e, int id) {
                 if (HC_LoadingDialog != null) {

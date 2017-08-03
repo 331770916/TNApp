@@ -130,7 +130,7 @@ public class OneKeySubscribeActivity extends BaseActivity implements View.OnClic
         map3.put("token", session);
         map3.put("parms", map4);
 
-        NetWorkUtil.getInstence().okHttpForPostString(TAG, ConstantUtil.URL_JY, map3, new StringCallback() {
+        NetWorkUtil.getInstence().okHttpForPostString(TAG, ConstantUtil.getURL_JY_HS(), map3, new StringCallback() {
             @Override
             public void onError(Call call, Exception e, int id) {
                 ivOneKeyKong.setVisibility(View.VISIBLE);      //显示空
@@ -233,7 +233,7 @@ public class OneKeySubscribeActivity extends BaseActivity implements View.OnClic
         map1.put("funcid", "300380");
         map1.put("token", session);
         map1.put("parms", map2);
-        NetWorkUtil.getInstence().okHttpForPostString(TAG, ConstantUtil.URL_JY, map1, new StringCallback() {
+        NetWorkUtil.getInstence().okHttpForPostString(TAG, ConstantUtil.getURL_JY_HS(), map1, new StringCallback() {
             @Override
             public void onError(Call call, Exception e, int id) {
                 e.toString();

@@ -91,7 +91,7 @@ public class EntrustTodayPager extends BaseSearchPager {
         map2.put("FUND_ACCOUNT", "");
         map2.put("ACTION_IN", "0");// 0：全部委托 1：可撤委托
 
-        NetWorkUtil.getInstence().okHttpForPostString(TAG, ConstantUtil.URL_JY, map, new StringCallback() {
+        NetWorkUtil.getInstence().okHttpForPostString(TAG, ConstantUtil.getURL_JY_HS(), map, new StringCallback() {
             @Override
             public void onError(Call call, Exception e, int id) {
                 LogHelper.e(TAG, e.toString());

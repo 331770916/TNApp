@@ -49,7 +49,7 @@ public class GetOptionalFinancingConnect {
         map.put("SCHEMAID", "13");
         params.put("PARAMS", map);
         params.put("TOKEN", "");
-        NetWorkUtil.getInstence().okHttpForPostString(TAG, ConstantUtil.URL_RS, params, new StringCallback() {
+        NetWorkUtil.getInstence().okHttpForPostString(TAG, ConstantUtil.getURL_HQ_WB(), params, new StringCallback() {
             @Override
             public void onError(Call call, Exception e, int id) {
                 list = new ArrayList<NewOptionalFinancingEntity>();

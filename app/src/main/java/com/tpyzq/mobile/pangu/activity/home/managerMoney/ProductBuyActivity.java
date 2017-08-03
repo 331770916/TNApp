@@ -181,7 +181,7 @@ public class ProductBuyActivity extends BaseActivity implements View.OnClickList
         map1.put("funcid", "730206");
         map1.put("token", mSession);
         map1.put("parms", map2);
-        NetWorkUtil.getInstence().okHttpForPostString("", ConstantUtil.URL_JY, map1, new StringCallback() {
+        NetWorkUtil.getInstence().okHttpForPostString("", ConstantUtil.getURL_JY_HS(), map1, new StringCallback() {
             @Override
             public void onError(Call call, Exception e, int id) {
                 if (loadingDialog != null) {
@@ -249,7 +249,7 @@ public class ProductBuyActivity extends BaseActivity implements View.OnClickList
         map300431_1.put("FUND_COMPANY", "");
         map300431_1.put("OPER_TYPE", "0");
         map300431.put("parms", map300431_1);
-        NetWorkUtil.getInstence().okHttpForPostString("", ConstantUtil.URL_JY, map300431, new StringCallback() {
+        NetWorkUtil.getInstence().okHttpForPostString("", ConstantUtil.getURL_JY_HS(), map300431, new StringCallback() {
             @Override
             public void onError(Call call, Exception e, int id) {
                 if (loadingDialog != null) {
@@ -304,7 +304,7 @@ public class ProductBuyActivity extends BaseActivity implements View.OnClickList
         map300439_1.put("DO_CONTRACT", encryptBySessionKey(""));
         map300439_1.put("DO_PRE_CONDITION", encryptBySessionKey("1"));
         map300439.put("parms", map300439_1);
-        NetWorkUtil.getInstence().okHttpForPostString("", ConstantUtil.URL_JY, map300439, new StringCallback() {
+        NetWorkUtil.getInstence().okHttpForPostString("", ConstantUtil.getURL_JY_HS(), map300439, new StringCallback() {
             @Override
             public void onError(Call call, Exception e, int id) {
                 if (loadingDialog != null) {
@@ -385,7 +385,7 @@ public class ProductBuyActivity extends BaseActivity implements View.OnClickList
         map300440_1.put("DO_CONTRACT", encryptBySessionKey(""));
         map300440_1.put("DO_PRE_CONDITION", encryptBySessionKey("1"));
         map300440.put("parms", map300440_1);
-        NetWorkUtil.getInstence().okHttpForPostString("", ConstantUtil.URL_JY, map300440, new StringCallback() {
+        NetWorkUtil.getInstence().okHttpForPostString("", ConstantUtil.getURL_JY_HS(), map300440, new StringCallback() {
             @Override
             public void onError(Call call, Exception e, int id) {
                 if (loadingDialog != null) {
@@ -459,7 +459,7 @@ public class ProductBuyActivity extends BaseActivity implements View.OnClickList
         map1.put("funcid", "300512");
         map1.put("token", session);
         map1.put("parms", map2);
-        NetWorkUtil.getInstence().okHttpForPostString("", ConstantUtil.URL_JY, map1, new StringCallback() {
+        NetWorkUtil.getInstence().okHttpForPostString("", ConstantUtil.getURL_JY_HS(), map1, new StringCallback() {
             @Override
             public void onError(Call call, Exception e, int id) {
                 if (loadingDialog != null) {
@@ -538,7 +538,7 @@ public class ProductBuyActivity extends BaseActivity implements View.OnClickList
         map1.put("funcid", "730201");
         map1.put("token", session);
         map1.put("parms", map2);
-        NetWorkUtil.getInstence().okHttpForPostString("", ConstantUtil.URL_JY, map1, new StringCallback() {
+        NetWorkUtil.getInstence().okHttpForPostString("", ConstantUtil.getURL_JY_HS(), map1, new StringCallback() {
             @Override
             public void onError(Call call, Exception e, int id) {
                 if (loadingDialog != null) {
@@ -589,7 +589,7 @@ public class ProductBuyActivity extends BaseActivity implements View.OnClickList
         map1.put("funcid", "730202");
         map1.put("token", session);
         map1.put("parms", map2);
-        NetWorkUtil.getInstence().okHttpForPostString("", ConstantUtil.URL_JY, map1, new StringCallback() {
+        NetWorkUtil.getInstence().okHttpForPostString("", ConstantUtil.getURL_JY_HS(), map1, new StringCallback() {
             @Override
             public void onError(Call call, Exception e, int id) {
                 if (loadingDialog != null) {

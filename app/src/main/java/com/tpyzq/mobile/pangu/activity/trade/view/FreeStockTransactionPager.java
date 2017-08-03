@@ -127,7 +127,7 @@ public class FreeStockTransactionPager extends BaseTransactionPager implements A
         map.put("FUNCTIONCODE", "HQING005");
         map.put("PARAMS", strJson);
 //        LogHelper.e("FreeStockTransactionPager","request:"+map.toString());
-        NetWorkUtil.getInstence().okHttpForGet("", ConstantUtil.URL, map, new StringCallback() {
+        NetWorkUtil.getInstence().okHttpForGet("", ConstantUtil.getURL_HQ_HHN(), map, new StringCallback() {
             @Override
             public void onError(Call call, Exception e, int id) {
                 lv_transaction.onRefreshComplete();

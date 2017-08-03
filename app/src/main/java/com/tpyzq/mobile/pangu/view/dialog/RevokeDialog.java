@@ -81,7 +81,7 @@ public class RevokeDialog extends BaseDialog implements View.OnClickListener {
         map1.put("MARKET", "");
         map1.put("ENTRUST_NO", data);
 
-        NetWorkUtil.getInstence().okHttpForPostString(context, ConstantUtil.URL_JY, map, new StringCallback() {
+        NetWorkUtil.getInstence().okHttpForPostString(context, ConstantUtil.getURL_JY_HS(), map, new StringCallback() {
             @Override
             public void onError(Call call, Exception e, int id) {
                 LogHelper.e("撤单", e.toString());

@@ -123,7 +123,7 @@ public class FundHistoryCustomPager extends BaseTransactionPager implements View
         map300433_1.put("REQUEST_NUM", "30");
         map300433_1.put("FLAG", "true");
         map300433.put("parms", map300433_1);
-        NetWorkUtil.getInstence().okHttpForPostString("", ConstantUtil.URL_JY, map300433, new StringCallback() {
+        NetWorkUtil.getInstence().okHttpForPostString("", ConstantUtil.getURL_JY_HS(), map300433, new StringCallback() {
             @Override
             public void onError(Call call, Exception e, int id) {
                 if (mDialog!=null){

@@ -80,7 +80,7 @@ public class FeedbackActivity extends BaseActivity implements View.OnClickListen
         map900105_1.put("content", et_valuable_idea.getText().toString());
         map900105_1.put("contenttype", "0");
         map900105.put("parms", map900105_1);
-        NetWorkUtil.getInstence().okHttpForPostString(TAG, ConstantUtil.URL_SXRZ, map900105, new StringCallback() {
+        NetWorkUtil.getInstence().okHttpForPostString(TAG, ConstantUtil.getURL_HQ_HS(), map900105, new StringCallback() {
             @Override
             public void onError(Call call, Exception e, int id) {
             }

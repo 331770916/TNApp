@@ -123,7 +123,7 @@ public class ShouJiVerificationActivity extends BaseActivity implements View.OnC
     private void ImageVerification() {
         HashMap map = new HashMap();
         map.put("equipment", DeviceUtil.getDeviceId(CustomApplication.getContext()));
-        NetWorkUtil.getInstence().okHttpForGet(TAG, ConstantUtil.URL_HANDSE_PICTURE, map, new StringCallback() {
+        NetWorkUtil.getInstence().okHttpForGet(TAG, ConstantUtil.getURL_HANDSE_PICTURE(), map, new StringCallback() {
             @Override
             public void onError(Call call, Exception e, int id) {
                 Helper.getInstance().showToast(ShouJiVerificationActivity.this, "网络异常");
@@ -274,7 +274,7 @@ public class ShouJiVerificationActivity extends BaseActivity implements View.OnC
         map.put("phone", mSJYZNumber.getText().toString().trim());
         map.put("auth", mImage_et.getText().toString().trim());
 
-        NetWorkUtil.getInstence().okHttpForGet(TAG, ConstantUtil.URL_HANDSE_SPEECH, map, new StringCallback() {
+        NetWorkUtil.getInstence().okHttpForGet(TAG, ConstantUtil.getURL_HANDSE_SPEECH(), map, new StringCallback() {
             @Override
             public void onError(Call call, Exception e, int id) {
                 LogUtil.e(TAG, e.toString());
@@ -448,7 +448,7 @@ public class ShouJiVerificationActivity extends BaseActivity implements View.OnC
         map.put("equipment", DeviceUtil.getDeviceId(CustomApplication.getContext()));
         map.put("auth",mSJYZ_ET.getText().toString());
 
-        NetWorkUtil.getInstence().okHttpForGet("", ConstantUtil.URL_HANDSE_BINDING, map, new StringCallback() {
+        NetWorkUtil.getInstence().okHttpForGet("", ConstantUtil.getURL_HANDSE_BINDING(), map, new StringCallback() {
             @Override
             public void onError(Call call, Exception e, int id) {
                 LogUtil.e("", e.toString());

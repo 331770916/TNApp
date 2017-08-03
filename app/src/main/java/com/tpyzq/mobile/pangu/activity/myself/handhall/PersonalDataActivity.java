@@ -131,7 +131,7 @@ public class PersonalDataActivity extends BaseActivity implements View.OnClickLi
         map1.put("SEC_ID", "tpyzq");
         map1.put("FLAG", "true");
 
-        NetWorkUtil.getInstence().okHttpForPostString(TAG, ConstantUtil.URL_JY, map, new StringCallback() {
+        NetWorkUtil.getInstence().okHttpForPostString(TAG, ConstantUtil.getURL_JY_HS(), map, new StringCallback() {
             @Override
             public void onError(Call call, Exception e, int id) {
                 LogHelper.e(TAG, e.toString());
@@ -480,7 +480,7 @@ public class PersonalDataActivity extends BaseActivity implements View.OnClickLi
         map1.put("SECOND_MOBILE", Phone.getText().toString().trim());
         map1.put("RELATIONSHIP", relationCode);
 
-        NetWorkUtil.getInstence().okHttpForPostString(TAG, ConstantUtil.URL_JY, map, new StringCallback() {
+        NetWorkUtil.getInstence().okHttpForPostString(TAG, ConstantUtil.getURL_JY_HS(), map, new StringCallback() {
             @Override
             public void onError(Call call, Exception e, int id) {
                 LogHelper.e(TAG, e.toString());

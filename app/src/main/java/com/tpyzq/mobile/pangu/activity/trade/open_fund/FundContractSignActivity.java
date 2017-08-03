@@ -103,7 +103,7 @@ public class FundContractSignActivity extends BaseActivity implements View.OnCli
         map300437_1.put("PAGE_INDEX", "0");
         map300437_1.put("PAGE_SIZE", "100");
         map300437.put("parms", map300437_1);
-        NetWorkUtil.getInstence().okHttpForPostString("", ConstantUtil.URL_JY, map300437, new StringCallback() {
+        NetWorkUtil.getInstence().okHttpForPostString("", ConstantUtil.getURL_JY_HS(), map300437, new StringCallback() {
             @Override
             public void onError(Call call, Exception e, int id) {
                 mDialog.dismiss();

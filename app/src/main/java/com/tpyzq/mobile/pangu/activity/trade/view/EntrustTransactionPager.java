@@ -119,7 +119,7 @@ public class EntrustTransactionPager extends BaseTransactionPager {
         map300130_1.put("FUND_ACCOUNT", "101000913");
         map300130_1.put("ACTION_IN", "1");
         map300130.put("parms", map300130_1);
-        NetWorkUtil.getInstence().okHttpForPostString("", ConstantUtil.URL_JY, map300130, new StringCallback() {
+        NetWorkUtil.getInstence().okHttpForPostString("", ConstantUtil.getURL_JY_HS(), map300130, new StringCallback() {
             @Override
             public void onError(Call call, Exception e, int id) {
                 Toast.makeText(mContext, "网络访问失败", Toast.LENGTH_SHORT).show();

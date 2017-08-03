@@ -95,7 +95,7 @@ public class LogInConnect {
         map2.put("APP_ID", ConstantUtil.APP_ID);
         map1.put("parms", map2);
 
-        NetWorkUtil.getInstence().okHttpForPostString(mContext, ConstantUtil.URL_JY, map1, new StringCallback() {
+        NetWorkUtil.getInstence().okHttpForPostString(mContext, ConstantUtil.getURL_JY_HS(), map1, new StringCallback() {
             @Override
             public void onError(Call call, Exception e, int id) {
                 LogHelper.e("TransactionLoginActivity  +++++  登录失败",e.toString());

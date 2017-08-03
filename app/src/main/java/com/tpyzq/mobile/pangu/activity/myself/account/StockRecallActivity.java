@@ -58,7 +58,7 @@ public class StockRecallActivity extends BaseActivity implements View.OnClickLis
         map.put("PARAMS", map1);
         map1.put("cust_id", UserUtil.capitalAccount);
 
-        NetWorkUtil.getInstence().okHttpForPostString(TAG, ConstantUtil.URL_H5, map, new StringCallback() {
+        NetWorkUtil.getInstence().okHttpForPostString(TAG, ConstantUtil.getURL_HQ_BB(), map, new StringCallback() {
             @Override
             public void onError(Call call, Exception e, int id) {
                 LogUtil.e(TAG, e.toString());
