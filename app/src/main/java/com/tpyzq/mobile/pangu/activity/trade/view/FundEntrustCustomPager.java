@@ -87,8 +87,8 @@ public class FundEntrustCustomPager extends BaseTransactionPager implements View
         fundEntrustTodayAdapter = new FundEntrustTodayAdapter(mContext);
         tv_text1.setText("名称");
         tv_text2.setText("委托时间");
-        tv_text3.setText("委托金额/份额");
-        tv_text4.setText("业务类型/状态");
+        tv_text3.setText("金额/份额");
+        tv_text4.setText("类型/状态");
         tv_start_data.setText(Helper.getNowData());
         tv_end_data.setText(Helper.getNowData());
         ll_search.setVisibility(View.VISIBLE);

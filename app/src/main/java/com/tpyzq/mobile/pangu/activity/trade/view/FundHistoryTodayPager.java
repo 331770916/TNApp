@@ -70,7 +70,7 @@ public class FundHistoryTodayPager extends BaseTransactionPager {
         tv_text1.setText("名称");
         tv_text2.setText("成交日期");
         tv_text3.setText("业务名称");
-        tv_text4.setText("成交金额/份额");
+        tv_text4.setText("金额/份额");
         lv_transaction.setAdapter(fundHistoryAdapter);
         lv_transaction.setEmptyView(tv_empty);
         Update();

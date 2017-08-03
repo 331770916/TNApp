@@ -39,6 +39,7 @@
         </RelativeLayout>
 
         <RelativeLayout
+            android:paddingRight="@dimen/size20"
             android:layout_width="@dimen/size0"
             android:layout_height="wrap_content"
             android:layout_weight="1">
@@ -47,7 +48,7 @@
                 android:id="@+id/takeaPositionItem_YingKui"
                 android:layout_width="match_parent"
                 android:layout_height="wrap_content"
-                android:gravity="center"
+                android:gravity="center|end"
                 android:textColor="@color/black"
                 android:textSize="@dimen/txtSize14" />
 
@@ -56,7 +57,7 @@
                 android:layout_width="match_parent"
                 android:layout_height="wrap_content"
                 android:layout_below="@id/takeaPositionItem_YingKui"
-                android:gravity="center"
+                android:gravity="center|end"
                 android:textColor="@color/black"
                 android:textSize="@dimen/txtSize14" />
         </RelativeLayout>

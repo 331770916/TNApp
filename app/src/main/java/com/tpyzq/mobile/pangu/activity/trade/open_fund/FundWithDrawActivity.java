@@ -69,7 +69,7 @@ public class FundWithDrawActivity extends BaseActivity implements View.OnClickLi
         tv_text1.setText("名称");
         tv_text2.setText("委托时间");
         tv_text3.setText("金额/份额");
-        tv_text4.setText("业务类型/状态");
+        tv_text4.setText("类型/状态");
         withdrawAdapter = new WithdrawAdapter(this);
         withdrawAdapter.setWithDrawBeens(withDrawBeens);
         lv_fund.setAdapter(withdrawAdapter);

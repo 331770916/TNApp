@@ -4,6 +4,7 @@
     android:layout_height="match_parent"
     android:orientation="vertical">
 
+
     <LinearLayout
         android:background="@color/white"
         android:id="@+id/fj_content"
@@ -23,21 +24,23 @@
             android:textColor="@color/hushenTab_titleColor" />
 
         <TextView
+            android:paddingRight="@dimen/size20"
             android:textSize="@dimen/txtSize14"
             android:id="@+id/stockcode"
             android:layout_width="0dp"
             android:layout_height="match_parent"
             android:layout_weight="1"
-            android:gravity="center"
+            android:gravity="center|end"
             android:textColor="@color/hushenTab_titleColor" />
 
         <TextView
+            android:paddingRight="@dimen/size20"
             android:textSize="@dimen/txtSize14"
             android:id="@+id/encode"
             android:layout_width="0dp"
             android:layout_height="match_parent"
             android:layout_weight="1"
-            android:gravity="center"
+            android:gravity="center|end"
             android:textColor="@color/hushenTab_titleColor" />
 
         <TextView

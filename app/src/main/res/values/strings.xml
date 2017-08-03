@@ -515,8 +515,8 @@
     <!--撤单-->
     <string name="Revoke">撤单</string>
     <string name="TextView1">股票名称</string>
-    <string name="TextView2">委托价/成交价</string>
-    <string name="TextView3">委托数/成交数</string>
+    <string name="TextView2">委托/成交价</string>
+    <string name="TextView3">委托/成交数</string>
     <string name="TextView4">状态/买卖</string>
 
 

@@ -3,7 +3,6 @@
     android:layout_width="match_parent"
     android:layout_height="35dp"
     android:background="@color/white"
-    android:paddingRight="@dimen/size10"
     android:orientation="horizontal">
     <TextView
         android:id="@+id/tv_text1"
@@ -21,7 +20,8 @@
         android:layout_width="0dp"
         android:layout_weight="1"
         android:layout_height="match_parent"
-        android:gravity="center"
+        android:gravity="center|end"
+        android:paddingRight="@dimen/size18"
         android:text="现价"
         android:textSize="@dimen/txtSize13"
         android:textColor="@color/newStockTitle"/>
@@ -30,9 +30,10 @@
         android:layout_width="0dp"
         android:layout_weight="1"
         android:layout_height="match_parent"
-        android:gravity="center"
+        android:gravity="center|end"
         android:text="涨跌幅/额"
         android:textSize="@dimen/txtSize13"
+        android:paddingRight="@dimen/size18"
         android:textColor="@color/newStockTitle"/>
     <TextView
         android:id="@+id/tv_text4"
@@ -42,6 +43,6 @@
         android:gravity="center|right"
         android:text="最高/最低"
         android:textSize="@dimen/txtSize13"
-
+        android:paddingRight="@dimen/size10"
         android:textColor="@color/newStockTitle"/>
 </LinearLayout>

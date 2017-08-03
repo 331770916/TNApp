@@ -7,6 +7,7 @@
     android:background="@color/white">
 
 
+
     <LinearLayout
         android:paddingRight="@dimen/size10"
         android:layout_width="match_parent"
@@ -46,9 +47,10 @@
         <LinearLayout
             android:layout_weight="1"
             android:layout_width="0dp"
+            android:paddingRight="@dimen/size20"
             android:layout_height="wrap_content"
             android:orientation="vertical"
-            android:gravity="center">
+            android:gravity="center|end">
             <TextView
                 android:id="@+id/tvRevokeData"
                 android:layout_width="wrap_content"

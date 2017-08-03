@@ -46,22 +46,24 @@
         android:layout_weight="1">
 
         <TextView
+            android:paddingRight="@dimen/size20"
             android:id="@+id/tv_OTCEntrustTodayData"
             android:layout_width="match_parent"
             android:layout_height="wrap_content"
             android:layout_centerHorizontal="true"
-            android:gravity="center"
+            android:gravity="center|end"
             android:text="--"
             android:textColor="@color/hushenTab_titleColor"
             android:textSize="@dimen/txtSize14" />
 
         <TextView
+            android:paddingRight="@dimen/size20"
             android:id="@+id/tv_OTCEntrustTodayTime"
             android:layout_width="match_parent"
             android:layout_height="wrap_content"
             android:layout_alignLeft="@id/tv_OTCEntrustTodayData"
             android:layout_below="@id/tv_OTCEntrustTodayData"
-            android:gravity="center"
+            android:gravity="center|end"
             android:text="--"
             android:textColor="@color/hushenTab_titleColor"
             android:textSize="@dimen/txtSize14" />

@@ -97,19 +97,21 @@
             android:textSize="@dimen/txtSize13" />
 
         <TextView
+            android:paddingRight="@dimen/size20"
             android:layout_width="0dp"
             android:layout_height="match_parent"
             android:layout_weight="1"
-            android:gravity="center"
+            android:gravity="center|end"
             android:text="证券代码"
             android:textColor="@color/newStockTitle"
             android:textSize="@dimen/txtSize13" />
 
         <TextView
+            android:paddingRight="@dimen/size20"
             android:layout_width="0dp"
             android:layout_height="match_parent"
             android:layout_weight="1"
-            android:gravity="center"
+            android:gravity="center|end"
             android:text="议案编号"
             android:textColor="@color/newStockTitle"
             android:textSize="@dimen/txtSize13" />

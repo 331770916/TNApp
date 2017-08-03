@@ -40,21 +40,23 @@
             android:layout_weight="1">
 
             <TextView
+                android:paddingRight="@dimen/size20"
                 android:id="@+id/delivery_Name"
                 android:layout_width="match_parent"
                 android:layout_height="wrap_content"
                 android:layout_centerHorizontal="true"
-                android:gravity="center"
+                android:gravity="center|end"
                 android:text="--"
                 android:textSize="@dimen/txtSize13" />
 
             <TextView
+                android:paddingRight="@dimen/size20"
                 android:id="@+id/delivery_Business"
                 android:layout_width="match_parent"
                 android:layout_height="wrap_content"
                 android:layout_alignLeft="@id/delivery_Name"
                 android:layout_below="@id/delivery_Name"
-                android:gravity="center"
+                android:gravity="center|end"
                 android:text="--"
                 android:textSize="@dimen/txtSize13" />
         </RelativeLayout>

@@ -101,8 +101,8 @@ public class EntrustTransactionPager extends BaseTransactionPager {
         };
         equitiesWithDrawBeans = new ArrayList<EquitiesWithDrawEntity>();
         tv_text1.setText("股票名称");
-        tv_text2.setText("委托价/成交价");
-        tv_text3.setText("委托数/成交数");
+        tv_text2.setText("委托/成交价");
+        tv_text3.setText("委托/成交数");
         tv_text4.setText("状态/买卖");
         equitiesWithdrawAdapter = new EquitiesWithdrawAdapter(mContext);
         lv_transaction.setAdapter(equitiesWithdrawAdapter);

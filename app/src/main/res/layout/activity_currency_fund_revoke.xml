@@ -65,10 +65,11 @@
             android:textSize="@dimen/txtSize13"/>
 
         <TextView
+            android:paddingRight="@dimen/size20"
             android:layout_weight="1"
             android:layout_width="0dp"
             android:layout_height="wrap_content"
-            android:gravity="center"
+            android:gravity="center|end"
             android:text="委托时间"
             android:textColor="@color/text"
             android:textSize="@dimen/txtSize13"/>

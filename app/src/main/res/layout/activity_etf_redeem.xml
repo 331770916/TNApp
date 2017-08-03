@@ -60,7 +60,7 @@
                     android:layout_centerVertical="true"
                     android:layout_marginLeft="@dimen/size20"
                     android:text="@string/etf_codes"
-                    android:textColor="@color/hushenTab_titleColor"
+                    android:textColor="@color/texts"
                     android:textSize="@dimen/txtSize15" />
 
                 <EditText
@@ -76,7 +76,7 @@
                     android:maxLength="6"
                     android:inputType="number"
                     android:singleLine="true"
-                    android:textColor="@color/textss"
+                    android:textColor="@color/title_list"
                     android:textColorHint="@color/texts"
                     android:textSize="@dimen/txtSize14" />
 
@@ -101,7 +101,7 @@
                     android:layout_centerVertical="true"
                     android:layout_marginLeft="@dimen/size20"
                     android:text="@string/etf_sgfe"
-                    android:textColor="@color/hushenTab_titleColor"
+                    android:textColor="@color/texts"
                     android:textSize="@dimen/txtSize15" />
 
                 <TextView
@@ -133,7 +133,7 @@
                     android:inputType="number"
                     android:maxLength="10"
                     android:singleLine="true"
-                    android:textColor="@color/textss"
+                    android:textColor="@color/title_list"
                     android:textColorHint="@color/texts"
                     android:textSize="@dimen/txtSize14" />
 

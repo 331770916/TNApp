@@ -5,6 +5,7 @@
     android:background="@color/white"
     android:orientation="vertical">
 
+
     <LinearLayout
         android:layout_width="match_parent"
         android:layout_height="match_parent"
@@ -17,7 +18,7 @@
             android:layout_height="40dp"
             android:layout_marginBottom="@dimen/size5"
             android:layout_marginTop="@dimen/size5"
-            android:layout_weight="1"
+            android:layout_weight="0.8"
             android:orientation="vertical">
 
             <TextView
@@ -32,6 +33,7 @@
                 android:textSize="@dimen/txtSize14" />
 
             <TextView
+
                 android:id="@+id/tv_revoke_text2"
                 android:layout_width="match_parent"
                 android:layout_height="0dp"
@@ -54,21 +56,23 @@
             android:orientation="vertical">
 
             <TextView
+                android:paddingRight="@dimen/size15"
                 android:id="@+id/tv_revoke_text3"
                 android:layout_width="match_parent"
                 android:layout_height="0dp"
                 android:layout_weight="1"
-                android:gravity="center"
+                android:gravity="center|end"
                 android:paddingBottom="@dimen/size2"
                 android:paddingTop="@dimen/size2"
                 android:textSize="@dimen/txtSize14" />
 
             <TextView
+                android:paddingRight="@dimen/size15"
                 android:id="@+id/tv_revoke_text4"
                 android:layout_width="match_parent"
                 android:layout_height="0dp"
                 android:layout_weight="1"
-                android:gravity="center"
+                android:gravity="center|end"
                 android:paddingBottom="@dimen/size2"
                 android:paddingTop="@dimen/size2"
                 android:textSize="@dimen/txtSize14" />
@@ -84,21 +88,23 @@
             android:orientation="vertical">
 
             <TextView
+                android:paddingRight="@dimen/size15"
                 android:id="@+id/tv_revoke_text5"
                 android:layout_width="match_parent"
                 android:layout_height="0dp"
                 android:layout_weight="1"
-                android:gravity="center"
+                android:gravity="center|end"
                 android:paddingBottom="@dimen/size2"
                 android:paddingTop="@dimen/size2"
                 android:textSize="@dimen/txtSize14" />
 
             <TextView
+                android:paddingRight="@dimen/size15"
                 android:id="@+id/tv_revoke_text6"
                 android:layout_width="match_parent"
                 android:layout_height="0dp"
                 android:layout_weight="1"
-                android:gravity="center"
+                android:gravity="center|end"
                 android:paddingBottom="@dimen/size2"
                 android:paddingTop="@dimen/size2"
                 android:textSize="@dimen/txtSize14" />
@@ -110,7 +116,7 @@
             android:layout_height="40dp"
             android:layout_marginBottom="@dimen/size5"
             android:layout_marginTop="@dimen/size5"
-            android:layout_weight="1"
+            android:layout_weight="0.8"
             android:orientation="vertical">
 
             <TextView

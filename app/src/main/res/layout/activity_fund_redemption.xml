@@ -52,6 +52,7 @@
             android:orientation="horizontal">
 
             <TextView
+                android:textColor="@color/texts"
                 android:layout_width="wrap_content"
                 android:layout_height="wrap_content"
                 android:layout_gravity="center"
@@ -70,7 +71,8 @@
                 android:gravity="center_vertical|start"
                 android:hint="@string/shurujijindaima"
                 android:maxLength="6"
-                android:textColorHint="@color/text"
+                android:textColor="@color/title_list"
+                android:textColorHint="@color/texts"
                 android:textSize="@dimen/txtSize14" />
 
             <TextView
@@ -82,7 +84,7 @@
                 android:drawablePadding="@dimen/size5"
                 android:drawableRight="@mipmap/icon_right"
                 android:text="持仓基金"
-                android:textColor="@color/text"
+                android:textColor="@color/texts"
                 android:textSize="@dimen/txtSize14" />
         </LinearLayout>
 
@@ -99,6 +101,7 @@
             android:background="@color/white">
 
             <TextView
+                android:textColor="@color/texts"
                 android:layout_width="wrap_content"
                 android:layout_height="wrap_content"
                 android:layout_gravity="center"
@@ -117,8 +120,9 @@
                 android:background="@android:color/transparent"
                 android:gravity="left"
                 android:hint="@string/shurushuhuifene"
+                android:textColor="@color/title_list"
                 android:inputType="numberDecimal"
-                android:textColorHint="@color/text"
+                android:textColorHint="@color/texts"
                 android:textSize="@dimen/txtSize14" />
         </LinearLayout>
 
@@ -135,6 +139,7 @@
             android:background="@color/white">
 
             <TextView
+                android:textColor="@color/texts"
                 android:layout_width="0dp"
                 android:layout_height="wrap_content"
                 android:layout_gravity="center"
@@ -144,6 +149,7 @@
                 android:textSize="@dimen/txtSize15" />
 
             <TextView
+                android:textColor="@color/texts"
                 android:id="@+id/tv_fund_redeem_way"
                 android:layout_width="wrap_content"
                 android:layout_height="wrap_content"

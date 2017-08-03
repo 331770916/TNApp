@@ -4,7 +4,6 @@
     android:layout_height="match_parent"
     android:orientation="vertical">
 
-
     <LinearLayout
         android:id="@+id/fj_content"
         android:layout_width="match_parent"
@@ -15,7 +14,6 @@
         <LinearLayout
             android:layout_width="0dp"
             android:layout_height="match_parent"
-            android:layout_marginLeft="@dimen/size5"
             android:layout_weight="1"
             android:orientation="vertical">
 
@@ -27,12 +25,10 @@
                 android:layout_marginTop="@dimen/size12"
                 android:textColor="@color/hushenTab_titleColor"
                 android:textSize="@dimen/txtSize14"
-                android:text="asdsadsad"
                 android:textStyle="bold" />
 
             <TextView
                 android:id="@+id/tv_stock_code"
-                android:text="asdsadsad"
                 android:layout_width="wrap_content"
                 android:layout_height="wrap_content"
                 android:layout_marginBottom="@dimen/size12"
@@ -46,13 +42,13 @@
         <LinearLayout
             android:layout_width="0dp"
             android:layout_height="match_parent"
-            android:layout_marginLeft="@dimen/size5"
             android:layout_weight="1"
-            android:gravity="center"
+            android:gravity="center|end"
             android:orientation="vertical">
 
             <TextView
-                android:text="asdsadsad"
+                android:paddingRight="@dimen/size20"
+                android:gravity="center|end"
                 android:id="@+id/tv_entrust_no"
                 android:layout_width="wrap_content"
                 android:layout_height="wrap_content"
@@ -76,7 +72,6 @@
                 android:orientation="vertical">
                 <TextView
                     android:id="@+id/tv_amount"
-                    android:text="asdsadsad"
                     android:layout_width="wrap_content"
                     android:layout_height="wrap_content"
                     android:layout_marginTop="@dimen/size13"
@@ -87,7 +82,6 @@
                     android:id="@+id/tv_blance"
                     android:layout_width="wrap_content"
                     android:layout_height="wrap_content"
-                    android:text="asdsadsad"
                     android:layout_marginBottom="@dimen/size12"
                     android:layout_marginTop="@dimen/size4"
                     android:textColor="@color/hushenTab_titleColor"
@@ -104,7 +98,6 @@
 
             <TextView
                 android:id="@+id/tv_status"
-                android:text="asdsadsad"
                 android:layout_width="wrap_content"
                 android:layout_height="wrap_content"
                 android:layout_marginRight="@dimen/size10"
@@ -115,7 +108,6 @@
             <TextView
                 android:id="@+id/tv_type"
                 android:layout_width="wrap_content"
-                android:text="asdsadsad"
                 android:layout_height="wrap_content"
                 android:layout_marginBottom="@dimen/size12"
                 android:layout_marginRight="@dimen/size10"

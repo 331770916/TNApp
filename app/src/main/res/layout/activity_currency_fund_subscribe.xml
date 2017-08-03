@@ -51,14 +51,14 @@
         android:layout_width="match_parent"
         android:layout_height="@dimen/size50">
         <TextView
+            android:textColor="@color/texts"
             android:id="@+id/tvFundCode"
             android:layout_width="wrap_content"
             android:layout_height="wrap_content"
             android:layout_centerVertical="true"
             android:layout_marginLeft="@dimen/size20"
             android:text="@string/JiJinDaiMa"
-            android:textSize="@dimen/txtSize15"
-            android:textStyle="bold"/>
+            android:textSize="@dimen/txtSize15" />
         <EditText
             android:id="@+id/etFundCode"
             android:layout_width="match_parent"
@@ -69,8 +69,9 @@
             android:hint="@string/QingShuRuJiJinDaiMa"
             android:maxLength="6"
             android:inputType="number"
-            android:textColorHint="@color/text"
+            android:textColorHint="@color/texts"
             android:textSize="@dimen/txtSize14"
+            android:textColor="@color/title_list"
             android:singleLine="true"
             android:background="@null"/>
 
@@ -101,14 +102,14 @@
         android:layout_width="match_parent"
         android:layout_height="@dimen/size50">
         <TextView
+            android:textColor="@color/texts"
             android:id="@+id/tvFundAmount"
             android:layout_width="wrap_content"
             android:layout_height="wrap_content"
             android:layout_centerVertical="true"
             android:layout_marginLeft="@dimen/size20"
             android:text="@string/ShenGouJinE"
-            android:textSize="@dimen/txtSize15"
-            android:textStyle="bold"/>
+            android:textSize="@dimen/txtSize15" />
         <EditText
             android:id="@+id/etFundAmount"
             android:layout_width="match_parent"
@@ -117,6 +118,7 @@
             android:layout_toRightOf="@id/tvFundAmount"
             android:layout_marginLeft="@dimen/size35"
             android:hint="@string/QingShuRuShenGouJinE"
+            android:textColor="@color/title_list"
             android:maxLength="10"
             android:inputType="numberDecimal"
             android:textColorHint="@color/text"
@@ -162,7 +164,7 @@
             android:layout_centerVertical="true"
             android:layout_marginLeft="@dimen/size20"
             android:text="@string/JiJinMingCheng"
-            android:textColor="@color/text"
+            android:textColor="@color/texts"
             android:textSize="@dimen/txtSize15" />
         <TextView
             android:id="@+id/tvFundNameValue"
@@ -189,7 +191,7 @@
             android:layout_centerVertical="true"
             android:layout_marginLeft="@dimen/size20"
             android:text="@string/GuDongZhangHao"
-            android:textColor="@color/text"
+            android:textColor="@color/texts"
             android:textSize="@dimen/txtSize15" />
         <TextView
             android:id="@+id/tvStockholderNumValue"
@@ -216,7 +218,7 @@
             android:layout_centerVertical="true"
             android:layout_marginLeft="@dimen/size20"
             android:text="@string/KeYongZiJin"
-            android:textColor="@color/text"
+            android:textColor="@color/texts"
             android:textSize="@dimen/txtSize15" />
         <TextView
             android:id="@+id/tvExpendableFundValue"

@@ -67,8 +67,8 @@ public class FundEntrustTodayPager extends BaseTransactionPager {
         fundEntrustTodayAdapter = new FundEntrustTodayAdapter(mContext);
         tv_text1.setText("名称");
         tv_text2.setText("委托时间");
-        tv_text3.setText("委托金额/份额");
-        tv_text4.setText("业务类型/状态");
+        tv_text3.setText("金额/份额");
+        tv_text4.setText("类型/状态");
         lv_transaction.setMode(PullToRefreshBase.Mode.PULL_FROM_START);
         lv_transaction.setAdapter(fundEntrustTodayAdapter);
         lv_transaction.setEmptyView(tv_empty);
