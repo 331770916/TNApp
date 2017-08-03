@@ -1134,24 +1134,32 @@ public class BuyAndSellActivity extends BaseActivity implements View.OnClickList
             if (TextUtils.isEmpty(ways)) {
                 return;
             }
-            if ("限价委托".equals(ways)) {
-                entrustWays = final_price;
-                iv_depute_way.setText(ways);
-                et_price.setText(final_price);
-                price = Double.valueOf(final_price);
-
-            } else {
-                entrustWays = ways;
-                iv_depute_way.setText(ways);
-                et_price.setText(ways);
-                if (rb_buy.isChecked()) {
-                    bt_buy.setText("买入");
-                    bt_sell.setText("卖");
-                } else if (rb_sell.isChecked()) {
-                    bt_buy.setText("买");
-                    bt_sell.setText("卖出");
-                }
+            if (TextUtils.isEmpty(final_price)){
+                return;
             }
+            try{
+                if ("限价委托".equals(ways)) {
+                    entrustWays = final_price;
+                    iv_depute_way.setText(ways);
+                    et_price.setText(final_price);
+                    price = Double.valueOf(final_price);
+
+                } else {
+                    entrustWays = ways;
+                    iv_depute_way.setText(ways);
+                    et_price.setText(ways);
+                    if (rb_buy.isChecked()) {
+                        bt_buy.setText("买入");
+                        bt_sell.setText("卖");
+                    } else if (rb_sell.isChecked()) {
+                        bt_buy.setText("买");
+                        bt_sell.setText("卖出");
+                    }
+                }
+            }catch (Exception e){
+             e.printStackTrace();
+            }
+
         }
     };
     /**

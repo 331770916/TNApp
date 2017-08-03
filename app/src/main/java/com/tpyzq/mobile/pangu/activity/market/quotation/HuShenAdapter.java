@@ -410,6 +410,7 @@ public class HuShenAdapter extends BaseAdapter {
 
         for (int i = 0; i < _beans.size(); i++) {
             model = _beans.get(i);
+            if (null==model)return;
             if ("10000001".equals(model.getStockNumber())) {
                 modelshang = model;
             } else if ("20399001".equals(model.getStockNumber())) {
