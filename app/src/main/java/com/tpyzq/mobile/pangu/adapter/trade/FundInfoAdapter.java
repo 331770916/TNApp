@@ -168,7 +168,7 @@ public class FundInfoAdapter extends BaseAdapter {
     private void initDiscriblayout(int position, LinearLayout layout) {
         layout.removeAllViews();
         String company = mEntitys.get(position).FUND_COMPANY_NAME;
-        String type = mEntitys.get(position).FUND_TYPE;
+        String type = mEntitys.get(position).OFUND_TYPE;
         String level = mEntitys.get(position).OFUND_RISKLEVEL_NAME;
         String status = mEntitys.get(position).FUND_STATUS_NAME;
 

@@ -110,7 +110,7 @@ public class FundInfoActivity extends BaseActivity implements View.OnClickListen
 
     @Override
     public void onItemClick(AdapterView<?> parent, View view, int position, long id) {
-
+        position = position - 1;
         if (isClickItem) {
             Intent intent = new Intent();
             intent.putExtra("point", position);
