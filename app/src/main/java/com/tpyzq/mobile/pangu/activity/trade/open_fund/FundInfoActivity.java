@@ -37,7 +37,6 @@ public class FundInfoActivity extends BaseActivity implements View.OnClickListen
     private PullToRefreshListView   mListView;
     private FundInfoAdapter         mAdapter;
     private ArrayList<FundSubsEntity>    mBeans;
-    private String mSession;
     private int position = 0;
 
     private boolean clickBackKey;//判断用户是否点击返回键取消网络请求
@@ -74,8 +73,7 @@ public class FundInfoActivity extends BaseActivity implements View.OnClickListen
 
 
         initLoadDialog();
-        mSession = SpUtils.getString(getApplication(), "mSession", null);
-        mFundInoConnect.fundQueryConnect(mListType, "", 0, mSession, TAG, this);
+        mFundInoConnect.fundQueryConnect(mListType, "", 0, TAG, this);
     }
 
     @Override
@@ -87,7 +85,7 @@ public class FundInfoActivity extends BaseActivity implements View.OnClickListen
             case R.id.bt_search:
                 mBeans.clear();
                 mAdapter.setDatas(mBeans);
-                mFundInoConnect.fundQueryConnect(mListType, mSearchContent_et.getText().toString(), 0, mSession, TAG, this);
+                mFundInoConnect.fundQueryConnect(mListType, mSearchContent_et.getText().toString(), 0, TAG, this);
                 break;
         }
     }
@@ -153,9 +151,9 @@ public class FundInfoActivity extends BaseActivity implements View.OnClickListen
     public void onPullDownToRefresh(PullToRefreshBase refreshView) {
         if (position > 0) {
             position--;
-            mFundInoConnect.fundQueryConnect(mListType, mSearchContent_et.getText().toString(), position, mSession, TAG, this);
+            mFundInoConnect.fundQueryConnect(mListType, mSearchContent_et.getText().toString(), position, TAG, this);
         } else {
-            mFundInoConnect.fundQueryConnect(mListType, mSearchContent_et.getText().toString(), 0, mSession, TAG, this);
+            mFundInoConnect.fundQueryConnect(mListType, mSearchContent_et.getText().toString(), 0, TAG, this);
         }
 
     }
@@ -163,7 +161,7 @@ public class FundInfoActivity extends BaseActivity implements View.OnClickListen
     @Override
     public void onPullUpToRefresh(PullToRefreshBase refreshView) {
         position++;
-        mFundInoConnect.fundQueryConnect(mListType, mSearchContent_et.getText().toString(), position, mSession, TAG, this);
+        mFundInoConnect.fundQueryConnect(mListType, mSearchContent_et.getText().toString(), position, TAG, this);
     }
 
 

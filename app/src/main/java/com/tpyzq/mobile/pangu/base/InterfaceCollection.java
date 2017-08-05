@@ -2564,7 +2564,7 @@ public class InterfaceCollection {
 
     public void getFundData(String fundcode, String fundcompany, final String TAG, final InterfaceCallback callback) {
         HashMap map300431 = new HashMap();
-        map300431.put("funcid", "300431");
+        map300431.put("funcid", "734103");
         map300431.put("token", SpUtils.getString(CustomApplication.getContext(), "mSession", ""));
         HashMap map300431_1 = new HashMap();
         map300431_1.put("SEC_ID", "tpyzq");

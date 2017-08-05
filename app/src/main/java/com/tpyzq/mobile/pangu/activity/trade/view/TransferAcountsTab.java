@@ -415,6 +415,15 @@ public class TransferAcountsTab extends BaseTransferSubjectTabView implements
                     mBankPasswrodEdit.setPasswordKeyboard(null);
 
                 } else {//1校验交易密码 2校验银行密码 3校验电话银行密码
+
+                    if ("1".equals(mAccountInfos.get(position).getMONEY_INTO())) {
+
+                    } else if ("2".equals(mAccountInfos.get(position).getMONEY_INTO())) {
+
+                    } else if ("3".equals(mAccountInfos.get(position).getMONEY_INTO())) {
+
+                    }
+
                     mBankPasswrodEdit.setHint("校验银行密码");
                     mBankPasswrodEdit.setClickable(true);
                     mBankPasswrodEdit.setFocusable(true);

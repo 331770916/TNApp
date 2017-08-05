@@ -6,21 +6,24 @@ import com.tpyzq.mobile.pangu.activity.myself.handhall.RiskConfirmActivity;
 import com.tpyzq.mobile.pangu.activity.myself.handhall.RiskEvaluationActivity;
 import com.tpyzq.mobile.pangu.activity.myself.login.TransactionLoginActivity;
 import com.tpyzq.mobile.pangu.base.BaseActivity;
+import com.tpyzq.mobile.pangu.base.CustomApplication;
 import com.tpyzq.mobile.pangu.base.InterfaceCollection;
 import com.tpyzq.mobile.pangu.data.AssessConfirmEntity;
 import com.tpyzq.mobile.pangu.data.FixFundEntity;
 import com.tpyzq.mobile.pangu.data.FundDataEntity;
 import com.tpyzq.mobile.pangu.data.FundSubsEntity;
 import com.tpyzq.mobile.pangu.data.ResultInfo;
+import com.tpyzq.mobile.pangu.http.NetWorkUtil;
 import com.tpyzq.mobile.pangu.util.ConstantUtil;
 import com.tpyzq.mobile.pangu.util.Helper;
+import com.tpyzq.mobile.pangu.util.SpUtils;
 import com.tpyzq.mobile.pangu.view.CentreToast;
 import com.tpyzq.mobile.pangu.view.dialog.CancelDialog;
-import com.tpyzq.mobile.pangu.view.dialog.FundPurchaseDialog;
 import com.tpyzq.mobile.pangu.view.dialog.LoadingDialog;
 import com.tpyzq.mobile.pangu.view.dialog.MistakeDialog;
 import com.tpyzq.mobile.pangu.view.dialog.StructuredFundDialog;
 import com.tpyzq.mobile.pangu.view.pickTime.TimePickerView;
+import com.zhy.http.okhttp.callback.StringCallback;
 
 import android.app.Dialog;
 import android.content.Intent;
@@ -33,9 +36,14 @@ import android.widget.EditText;
 import android.widget.ImageView;
 import android.widget.TextView;
 
+import org.json.JSONArray;
+import org.json.JSONObject;
+
 import java.text.SimpleDateFormat;
 import java.util.Date;
 import java.util.HashMap;
+
+import okhttp3.Call;
 
 import static com.tpyzq.mobile.pangu.activity.trade.open_fund.FundInfoActivity.IS_SHOW;
 import static com.tpyzq.mobile.pangu.activity.trade.open_fund.FundInfoActivity.ITEM_CLICK;
@@ -90,6 +98,7 @@ public class AddOrModFixFundActivity extends BaseActivity implements View.OnClic
         tv_branch_enable = (TextView)findViewById(R.id.tv_branch_enable);//可用资金
         bt_commint = (Button)findViewById(R.id.bt_commint);//确定按钮
         initData();
+        getUserfulPrice();
     }
 
     private void initData() {
@@ -440,6 +449,14 @@ public class AddOrModFixFundActivity extends BaseActivity implements View.OnClic
         if (requestCode == REQEST_CHOOSE && resultCode == RESULT_OK) {
             FundSubsEntity fundData = (FundSubsEntity) data.getSerializableExtra("data");
             et_input_code.setText(fundData.FUND_CODE);
+            tv_fund_name.setText(fundData.FUND_NAME);
+            tv_fund_jz.setText(fundData.FUND_VAL);
+
+            if (fixFundEntity != null) {
+                fixFundEntity.setFUND_NAME(fundData.FUND_NAME);
+                fixFundEntity.setFUND_CODE(fundData.FUND_CODE);
+                fixFundEntity.setFUND_COMPANY(fundData.FUND_COMPANY);
+            }
         }
         if (requestCode == REQAGREEMENTCODE && resultCode == RESULT_OK) {//签署协议页面返回
             et_input_branch.setText("");
@@ -447,5 +464,58 @@ public class AddOrModFixFundActivity extends BaseActivity implements View.OnClic
         if (requestCode == REQUEST_RISK && resultCode == RESULT_OK) {//风险同意书签署返回
             addFixFund();
         }
+    }
+
+    private final String TAG = AddOrModFixFundActivity.class.getSimpleName();
+    private void getUserfulPrice() {
+
+        HashMap map300441 = new HashMap();
+        map300441.put("funcid", "300120");
+        map300441.put("token", SpUtils.getString(CustomApplication.getContext(), "mSession", null));
+        HashMap map300441_1 = new HashMap();
+        map300441_1.put("SEC_ID", "tpyzq");
+        map300441_1.put("FLAG", "true");
+        map300441.put("parms", map300441_1);
+
+        NetWorkUtil.getInstence().okHttpForPostString(TAG, ConstantUtil.getURL_JY_HS(), map300441, new StringCallback() {
+            @Override
+            public void onError(Call call, Exception e, int id) {
+                e.printStackTrace();
+                MistakeDialog.showDialog(ConstantUtil.NETWORK_ERROR, AddOrModFixFundActivity.this);
+            }
+
+            @Override
+            public void onResponse(String response, int id) {
+
+                if (TextUtils.isEmpty(response)) {
+                    return;
+                }
+
+                try {
+                    JSONObject jsonObject = new JSONObject(response);
+                    String code = jsonObject.optString("code");
+                    String msg = jsonObject.optString("msg");
+                    String BALANCE = "-.-";
+                    if (!"0".equals(code)) {
+                        MistakeDialog.showDialog(msg, AddOrModFixFundActivity.this);
+                        return;
+                    }
+
+                    JSONArray jsonArray = jsonObject.optJSONArray("data");
+                    for (int i =0; i < jsonArray.length(); i++) {
+                        JSONObject object = jsonArray.getJSONObject(i);
+                        BALANCE = object.optString("BALANCE");
+                    }
+
+                    tv_branch_enable.setText(BALANCE);
+
+                } catch (Exception e) {
+                    e.printStackTrace();
+                    MistakeDialog.showDialog(ConstantUtil.JSON_ERROR, AddOrModFixFundActivity.this);
+                }
+
+            }
+        });
+
     }
 }

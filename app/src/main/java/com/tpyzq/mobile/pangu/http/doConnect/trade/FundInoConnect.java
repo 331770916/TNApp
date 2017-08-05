@@ -2,9 +2,11 @@ package com.tpyzq.mobile.pangu.http.doConnect.trade;
 
 import android.text.TextUtils;
 
+import com.tpyzq.mobile.pangu.base.CustomApplication;
 import com.tpyzq.mobile.pangu.data.FundSubsEntity;
 import com.tpyzq.mobile.pangu.http.NetWorkUtil;
 import com.tpyzq.mobile.pangu.util.ConstantUtil;
+import com.tpyzq.mobile.pangu.util.SpUtils;
 import com.zhy.http.okhttp.callback.StringCallback;
 
 import org.json.JSONArray;
@@ -25,16 +27,16 @@ public class FundInoConnect {
 
     /**
      * 获取基金产品
+     * @param fundType 1：认购基金2：申购基金 3:可定投基金
      * @param company_name 产品名称
      * @param pageIndex    第几页
-     * @param session
      * @param tag
      */
-    public void fundQueryConnect(String fundType, String company_name, int pageIndex, String session, String tag, final FundInfoConnectListener listener) {
+    public void fundQueryConnect(String fundType, String company_name, int pageIndex, String tag, final FundInfoConnectListener listener) {
 
         HashMap map300441 = new HashMap();
         map300441.put("funcid", "300441");
-        map300441.put("token", session);
+        map300441.put("token", SpUtils.getString(CustomApplication.getContext(), "mSession", null));
         HashMap map300441_1 = new HashMap();
         map300441_1.put("SEC_ID", "tpyzq");
         map300441_1.put("FUND_TYPE", fundType);
@@ -108,6 +110,7 @@ public class FundInoConnect {
                         String openShare = jsonObject.optString("OPEN_SHARE");//最低投资
 
 
+                        String companyCode = jsonObject.optString("FUND_COMPANY");
                         String company_name = jsonObject.optString("FUND_COMPANY_NAME");//基金归
                         String level = jsonObject.optString("OFUND_RISKLEVEL_NAME");//风险等级
                         String status = jsonObject.optString("FUND_STATUS_NAME");//状态
@@ -122,6 +125,7 @@ public class FundInoConnect {
                         entity.FUND_CODE = fundCode;
                         entity.FUND_VAL = fund_val;
                         entity.OPEN_SHARE = openShare;
+                        entity.FUND_COMPANY = companyCode;
                         entity.FUND_COMPANY_NAME = company_name;
                         entity.OFUND_RISKLEVEL_NAME = level;
                         entity.FUND_STATUS_NAME = status;
