@@ -358,9 +358,12 @@ public class AssessConfirmActivity extends BaseActivity implements View.OnClickL
             case R.id.bt_continue_buy:
                 switch (assessConfirmBean.type) {
                     case "0":
+                        String isAgreement = assessConfirmBean.IS_AGREEMENT.equalsIgnoreCase("0")?"1":"0";
                         InterfaceCollection.getInstance().addFixFund(assessConfirmBean.productcompany,
                                 assessConfirmBean.productcode,"0",assessConfirmBean.productprice,
-                                assessConfirmBean.RISK_RATING,assessConfirmBean.RISK_LEVEL,assessConfirmBean.RISK_LEVEL_NAME,AddOrModFixFundActivity.TAG_SUBMIT,this);
+                                assessConfirmBean.RISK_RATING,assessConfirmBean.RISK_LEVEL,
+                                assessConfirmBean.RISK_LEVEL_NAME,assessConfirmBean.IS_OPEN,isAgreement,
+                                "0",AddOrModFixFundActivity.TAG_SUBMIT,this);
                         break;
                     case "1":
                         fund_rengou();

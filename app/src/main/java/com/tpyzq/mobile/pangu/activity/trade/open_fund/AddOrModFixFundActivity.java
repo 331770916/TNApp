@@ -282,7 +282,7 @@ public class AddOrModFixFundActivity extends BaseActivity implements View.OnClic
                 fixFundEntity.getFUND_CODE(), "0", fixFundEntity.getBALANCE(),
                 Helper.getInstance().getMyDate(fixFundEntity.getSTART_DATE()),
                 Helper.getInstance().getMyDate(fixFundEntity.getEND_DATE()),
-                fixFundEntity.getEN_FUND_DATE(), TAG_SUBMIT, this);
+                fixFundEntity.getEN_FUND_DATE(),"1","0","0", TAG_SUBMIT, this);
     }
 
     @Override

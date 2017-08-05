@@ -2277,7 +2277,9 @@ public class InterfaceCollection {
      * @param EN_FUND_DATE 扣款允许日
      */
     public void addFixFund(final String FUND_COMPANY, final String FUND_CODE, String RATION_TYPE, final String BALANCE,
-                           final String START_DATE, final String END_DATE, final String EN_FUND_DATE, final String TAG, final InterfaceCallback callback) {
+                           final String START_DATE, final String END_DATE, final String EN_FUND_DATE,
+                           final String DO_OPEN, final String DO_CONTRACT, final String DO_PRE_CONDITION,
+                           final String TAG, final InterfaceCallback callback) {
         Map map1 = new HashMap<>();
         map1.put("funcid", "334008");
         map1.put("token", SpUtils.getString(CustomApplication.getContext(), "mSession", ""));
@@ -2291,9 +2293,9 @@ public class InterfaceCollection {
         map2.put("START_DATE", START_DATE);
         map2.put("END_DATE", END_DATE);
         map2.put("EN_FUND_DATE", EN_FUND_DATE);
-//        map2.put("DO_OPEN", DO_OPEN);   //是否需要开户
-//        map2.put("DO_CONTRACT", DO_CONTRACT);   //是否需要签署协议 如果DO_PRE_CONDITION传1的话以上两个字段不传
-        map2.put("DO_PRE_CONDITION", "1");
+        map2.put("DO_OPEN", DO_OPEN);   //是否需要开户
+        map2.put("DO_CONTRACT", DO_CONTRACT);   //是否需要签署协议 如果DO_PRE_CONDITION传1的话以上两个字段不传
+        map2.put("DO_PRE_CONDITION", DO_PRE_CONDITION);
         map1.put("parms", map2);
         net.okHttpForPostString(TAG, ConstantUtil.getURL_JY_HS(), map1, new StringCallback() {
             @Override
@@ -2564,7 +2566,7 @@ public class InterfaceCollection {
 
     public void getFundData(String fundcode, String fundcompany, final String TAG, final InterfaceCallback callback) {
         HashMap map300431 = new HashMap();
-        map300431.put("funcid", "734103");
+        map300431.put("funcid", "300431");
         map300431.put("token", SpUtils.getString(CustomApplication.getContext(), "mSession", ""));
         HashMap map300431_1 = new HashMap();
         map300431_1.put("SEC_ID", "tpyzq");
