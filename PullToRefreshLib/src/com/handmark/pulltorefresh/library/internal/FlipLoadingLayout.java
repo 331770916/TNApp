@@ -90,28 +90,34 @@ public class FlipLoadingLayout extends LoadingLayout {
 	@Override
 	protected void pullToRefreshImpl() {
 		// Only start reset Animation, we've previously show the rotate anim
-		if (mRotateAnimation == mHeaderImage.getAnimation()) {
-			mHeaderImage.startAnimation(mResetRotateAnimation);
-		}
+//		if (mRotateAnimation == mHeaderImage.getAnimation()) {
+//			mHeaderImage.startAnimation(mResetRotateAnimation);
+//		}
+
+
 	}
 
 	@Override
 	protected void refreshingImpl() {
-		mHeaderImage.clearAnimation();
-		mHeaderImage.setVisibility(View.INVISIBLE);
+		if (null !=mHeaderImage) {
+			mHeaderImage.clearAnimation();
+			mHeaderImage.setVisibility(View.INVISIBLE);
+		}
 		mHeaderProgress.setVisibility(View.VISIBLE);
 	}
 
 	@Override
 	protected void releaseToRefreshImpl() {
-		mHeaderImage.startAnimation(mRotateAnimation);
+//		mHeaderImage.startAnimation(mRotateAnimation);
 	}
 
 	@Override
 	protected void resetImpl() {
-		mHeaderImage.clearAnimation();
+		if (null !=mHeaderImage) {
+			mHeaderImage.clearAnimation();
+			mHeaderImage.setVisibility(View.VISIBLE);
+		}
 		mHeaderProgress.setVisibility(View.GONE);
-		mHeaderImage.setVisibility(View.VISIBLE);
 	}
 
 	@Override

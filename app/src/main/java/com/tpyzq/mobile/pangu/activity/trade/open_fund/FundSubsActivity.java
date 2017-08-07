@@ -241,6 +241,7 @@ public class FundSubsActivity extends BaseActivity implements View.OnClickListen
         tv_netvalue.setText(fundDataBean.data.get(0).NAV);
         tv_lowest_investment.setText(fundDataBean.data.get(0).OPEN_SHARE + "\t元");
         tv_usable_money.setText(fundDataBean.data.get(0).ENABLE_BALANCE + "\t元");
+        tv_fhfs.setEnabled(true);
     }
 
     /**
@@ -253,6 +254,8 @@ public class FundSubsActivity extends BaseActivity implements View.OnClickListen
         tv_fhfs.setOnClickListener(this);
         bt_true.setClickable(false);
         et_rengou_price.setEnabled(false);
+        tv_fhfs.setEnabled(false);
+
         bt_true.setBackgroundResource(R.drawable.button_login_unchecked);
         et_rengou_price.addTextChangedListener(new PriceWatch());
 
@@ -349,6 +352,7 @@ public class FundSubsActivity extends BaseActivity implements View.OnClickListen
         tv_usable_money.setText("");
         bt_true.setClickable(false);
         et_rengou_price.setEnabled(false);
+        tv_fhfs.setEnabled(false);
         bt_true.setBackgroundResource(R.drawable.button_login_unchecked);
     }
 
@@ -412,12 +416,12 @@ public class FundSubsActivity extends BaseActivity implements View.OnClickListen
                     }, new CancelDialog.NagtiveClickListener() {
                         @Override
                         public void onNagtiveClick() {
-                            FundSubsDialog dialog = new FundSubsDialog(FundSubsActivity.this, fundDataBean, et_rengou_price.getText().toString(), fundSubsListen);
+                            FundSubsDialog dialog = new FundSubsDialog(FundSubsActivity.this, fundDataBean, et_rengou_price.getText().toString(), tv_fhfs.getText().toString(),fundSubsListen);
                             dialog.show();
                         }
                     });
                 } else {
-                    FundSubsDialog dialog = new FundSubsDialog(this, fundDataBean, et_rengou_price.getText().toString(), fundSubsListen);
+                    FundSubsDialog dialog = new FundSubsDialog(this, fundDataBean, et_rengou_price.getText().toString(),tv_fhfs.getText().toString(),fundSubsListen);
                     dialog.show();
                 }
                 break;
@@ -428,7 +432,7 @@ public class FundSubsActivity extends BaseActivity implements View.OnClickListen
                 Helper.showItemSelectDialog(this,getWidth(),new Helper.OnItemSelectedListener(){
                     @Override
                     public void getSelectedItem(String content) {
-
+                        tv_fhfs.setText(content);
                     }
                 },false,new String[]{"现金分红", "份额分红"});
                 break;

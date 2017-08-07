@@ -57,6 +57,7 @@ public class FundPurchaseActivity extends BaseActivity implements View.OnClickLi
     private AssessConfirmEntity assessConfirmBean;
     private SubsStatusEntity subsStatusBean;
     private String mSession;
+    private String AUTO_BUY = "";
 
     @Override
     public void initView() {
@@ -85,6 +86,7 @@ public class FundPurchaseActivity extends BaseActivity implements View.OnClickLi
         bt_true.setOnClickListener(FundPurchaseActivity.this);
         bt_true.setClickable(false);
         tv_fhfs.setOnClickListener(this);
+        tv_fhfs.setEnabled(false);
         bt_true.setBackgroundResource(R.drawable.button_login_unchecked);
         et_fund_price.addTextChangedListener(new PriceWatch());
         et_fund_code.addTextChangedListener(new TextWatcher() {
@@ -142,12 +144,12 @@ public class FundPurchaseActivity extends BaseActivity implements View.OnClickLi
                     }, new CancelDialog.NagtiveClickListener() {
                         @Override
                         public void onNagtiveClick() {
-                            FundPurchaseDialog fundPurchaseDialog = new FundPurchaseDialog(FundPurchaseActivity.this, fundData, et_fund_price.getText().toString(), fundPurchaseListen);
+                            FundPurchaseDialog fundPurchaseDialog = new FundPurchaseDialog(FundPurchaseActivity.this, fundData, et_fund_price.getText().toString(),tv_fhfs.getText().toString(), fundPurchaseListen);
                             fundPurchaseDialog.show();
                         }
                     });
                 } else {
-                    FundPurchaseDialog fundPurchaseDialog = new FundPurchaseDialog(this, fundData, et_fund_price.getText().toString(), fundPurchaseListen);
+                    FundPurchaseDialog fundPurchaseDialog = new FundPurchaseDialog(this, fundData, et_fund_price.getText().toString(),tv_fhfs.getText().toString(), fundPurchaseListen);
                     fundPurchaseDialog.show();
                 }
                 break;
@@ -155,7 +157,7 @@ public class FundPurchaseActivity extends BaseActivity implements View.OnClickLi
                 Helper.showItemSelectDialog(this,getWidth(),new Helper.OnItemSelectedListener(){
                     @Override
                     public void getSelectedItem(String content) {
-
+                        tv_fhfs.setText(content);
                     }
                 },false,new String[]{"现金分红", "份额分红"});
                 break;
@@ -242,6 +244,13 @@ public class FundPurchaseActivity extends BaseActivity implements View.OnClickLi
         map300440_1.put("FLAG", encryptBySessionKey("true"));
         map300440_1.put("DO_OPEN", encryptBySessionKey(""));
         map300440_1.put("DO_CONTRACT", encryptBySessionKey(""));
+        if ("份额分红".equals(tv_fhfs.getText().toString())){
+            AUTO_BUY= "0";
+        }else {
+            AUTO_BUY= "1";
+        }
+
+        map300440_1.put("AUTO_BUY", encryptBySessionKey(AUTO_BUY));
         map300440_1.put("DO_PRE_CONDITION", encryptBySessionKey("1"));
         map300440.put("parms", map300440_1);
         net.okHttpForPostString("", ConstantUtil.getURL_JY_HS(), map300440, new StringCallback() {
@@ -285,6 +294,7 @@ public class FundPurchaseActivity extends BaseActivity implements View.OnClickLi
 
                             Intent intent = new Intent();
                             intent.setClass(FundPurchaseActivity.this, AssessConfirmActivity.class);
+                            intent.putExtra("AUTO_BUY",AUTO_BUY);
                             intent.putExtra("assessConfirm", assessConfirmBean);
                             intent.putExtra("transaction", "true");
                             startActivityForResult(intent, REQAGREEMENTCODE);
@@ -312,6 +322,7 @@ public class FundPurchaseActivity extends BaseActivity implements View.OnClickLi
         tv_usable_money.setText("");
         bt_true.setClickable(false);
         et_fund_price.setEnabled(false);
+        tv_fhfs.setEnabled(false);
         bt_true.setBackgroundResource(R.drawable.button_login_unchecked);
     }
 
@@ -391,6 +402,7 @@ public class FundPurchaseActivity extends BaseActivity implements View.OnClickLi
         tv_fund_value.setText(fundDataBean.data.get(0).NAV);
         tv_low_money.setText(fundDataBean.data.get(0).OPEN_SHARE + "\t元");
         tv_usable_money.setText(fundDataBean.data.get(0).ENABLE_BALANCE + "\t元");
+        tv_fhfs.setEnabled(true);
     }
 
     @Override

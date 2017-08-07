@@ -1,0 +1,30 @@
+<animation-list xmlns:android="http://schemas.android.com/apk/res/android"
+
+    android:oneshot="false">
+
+    <item android:drawable="@drawable/cow_1" android:duration="50"/>
+    <item android:drawable="@drawable/cow_2" android:duration="50"/>
+    <item android:drawable="@drawable/cow_3" android:duration="50"/>
+    <item android:drawable="@drawable/cow_4" android:duration="50"/>
+    <item android:drawable="@drawable/cow_5" android:duration="50"/>
+    <item android:drawable="@drawable/cow_6" android:duration="50"/>
+    <item android:drawable="@drawable/cow_7" android:duration="50"/>
+    <item android:drawable="@drawable/cow_8" android:duration="50"/>
+    <item android:drawable="@drawable/cow_9" android:duration="50"/>
+    <item android:drawable="@drawable/cow_10" android:duration="50"/>
+    <item android:drawable="@drawable/cow_11" android:duration="50"/>
+    <item android:drawable="@drawable/cow_12" android:duration="50"/>
+    <item android:drawable="@drawable/cow_13" android:duration="50"/>
+    <item android:drawable="@drawable/cow_14" android:duration="50"/>
+    <item android:drawable="@drawable/cow_15" android:duration="50"/>
+    <item android:drawable="@drawable/cow_16" android:duration="50"/>
+    <item android:drawable="@drawable/cow_17" android:duration="50"/>
+    <item android:drawable="@drawable/cow_18" android:duration="50"/>
+    <item android:drawable="@drawable/cow_19" android:duration="50"/>
+    <item android:drawable="@drawable/cow_20" android:duration="50"/>
+    <item android:drawable="@drawable/cow_21" android:duration="50"/>
+    <item android:drawable="@drawable/cow_22" android:duration="50"/>
+    <item android:drawable="@drawable/cow_23" android:duration="50"/>
+    <item android:drawable="@drawable/cow_24" android:duration="50"/>
+
+</animation-list>

@@ -526,7 +526,7 @@ public class TransferAcountsTab extends BaseTransferSubjectTabView implements
         map2.put("EXT_INST",bankNumber);        //银行代码
         map2.put("ACC_PWD", bankPassword);    //银行密码
         map2.put("REMARK", "");
-        if ("false".equals(Db_PUB_USERS.queryingCertification()) || !isNeedPassword) {
+        if ("0".equals(UserUtil.Keyboard) || !isNeedPassword) {
             map2.put("PWD_TYPE", "0");
         } else {
 
@@ -614,7 +614,7 @@ public class TransferAcountsTab extends BaseTransferSubjectTabView implements
         map2.put("EXT_SERIAL_NO","");
         map2.put("REMARK", "");
 
-        if ("false".equals(Db_PUB_USERS.queryingCertification()) || !isNeedPassword) {
+        if ("0".equals(UserUtil.Keyboard) || !isNeedPassword) {
             map2.put("PWD_TYPE", "0");
         } else {
 

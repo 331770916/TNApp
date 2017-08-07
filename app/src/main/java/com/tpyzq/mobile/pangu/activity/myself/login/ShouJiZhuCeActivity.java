@@ -424,6 +424,8 @@ public class ShouJiZhuCeActivity extends BaseActivity implements View.OnClickLis
                 mSimpleRemoteControl.setCommand(new ToAddSelfChoiceStockConnect(new AddSelfChoiceStockConnect(TAG, "", UserUtil.capitalAccount, stockNumbers, UserUtil.userId, stockNames, NewPrices)));
                 mSimpleRemoteControl.startConnect();
             }
+        }else {
+            ShowNotice();
         }
     }
 

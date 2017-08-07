@@ -295,6 +295,9 @@ public class WXLogin implements ICallbackResult {
                 mSimpleRemoteControl.setCommand(new ToAddSelfChoiceStockConnect(new AddSelfChoiceStockConnect(TAG, "", UserUtil.capitalAccount, stockNumbers, UserUtil.userId, stockNames, NewPrices)));
                 mSimpleRemoteControl.startConnect();
             }
+        }else {
+            mLoadingDialog.dismiss();
+            mMarked.MarkedLogic(true);
         }
     }
 

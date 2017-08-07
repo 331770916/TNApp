@@ -19,14 +19,16 @@ public class FundPurchaseDialog extends BaseDialog implements View.OnClickListen
     Button bt_true, bt_false;
     FundSubsEntity fundData;
     String price;
+    String content;
     private FundPurchaseListen fundPurchaseListen;
 
 
-    public FundPurchaseDialog(Context context, FundSubsEntity fundData, String price, FundPurchaseListen fundPurchaseListen) {
+    public FundPurchaseDialog(Context context, FundSubsEntity fundData, String price,String content, FundPurchaseListen fundPurchaseListen) {
         super(context);
         this.fundData = fundData;
         this.price = price;
         this.fundPurchaseListen =  fundPurchaseListen;
+        this.content =  content;
     }
 
     @Override
@@ -55,7 +57,7 @@ public class FundPurchaseDialog extends BaseDialog implements View.OnClickListen
         if (null != fundData) {
             tv_fund_name.setText(fundData.FUND_NAME);
             tv_fund_code.setText(fundData.FUND_CODE);
-            tv_fund_fhfs.setText("");//分红方式
+            tv_fund_fhfs.setText(content);//分红方式
         }
         tv_fund_price.setText(price);
     }

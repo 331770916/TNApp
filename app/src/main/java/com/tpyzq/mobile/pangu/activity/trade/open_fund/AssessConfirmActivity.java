@@ -73,6 +73,7 @@ public class AssessConfirmActivity extends BaseActivity implements View.OnClickL
     private Message message;
 //    private TextView tv_fit, tv_risk_level, tv_produce_risk_level, tv_evaluating;
     private String SERIAL_NO;
+    private String AUTO_BUY;
     @Override
     public void initView() {
         ll_view2 = (LinearLayout) findViewById(R.id.ll_view2);
@@ -96,6 +97,7 @@ public class AssessConfirmActivity extends BaseActivity implements View.OnClickL
         buyintent = getIntent();
         flag = buyintent.getStringExtra("transaction");
         SERIAL_NO = buyintent.getStringExtra("SERIAL_NO");
+        AUTO_BUY = buyintent.getStringExtra("AUTO_BUY");
         if (TextUtils.isEmpty(SERIAL_NO)){
             SERIAL_NO = "-1";
         }
@@ -480,6 +482,7 @@ public class AssessConfirmActivity extends BaseActivity implements View.OnClickL
         map300440_1.put("DO_OPEN", encryptBySessionKey(IS_OPEN));
         map300440_1.put("DO_CONTRACT", encryptBySessionKey(IS_AGREEMENT));
         map300440_1.put("DO_PRE_CONDITION", encryptBySessionKey("0"));
+        map300440_1.put("AUTO_BUY", encryptBySessionKey(AUTO_BUY));
         map300440.put("parms", map300440_1);
         NetWorkUtil.getInstence().okHttpForPostString("", ConstantUtil.getURL_JY_HS(), map300440, new StringCallback() {
             @Override

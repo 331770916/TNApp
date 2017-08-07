@@ -25,12 +25,15 @@ public class FundSubsDialog extends BaseDialog implements View.OnClickListener {
     private String code;
     private SubsStatusEntity subsStatusBean;
     private FundSubsActivity.FundSubsListen fundSubsListen;
+    private String content;
 
-    public FundSubsDialog(Context context, FundDataEntity fundDataBean, String price, FundSubsActivity.FundSubsListen fundSubsListen) {
+    public FundSubsDialog(Context context, FundDataEntity fundDataBean, String price, String content,FundSubsActivity.FundSubsListen fundSubsListen) {
         super(context);
         this.fundDataBean = fundDataBean;
         this.price = price;
         this.fundSubsListen = fundSubsListen;
+        this.content = content;
+
     }
 
     @Override
@@ -38,7 +41,7 @@ public class FundSubsDialog extends BaseDialog implements View.OnClickListener {
         tv_fund_name = (TextView) findViewById(R.id.tv_fund_name);
         tv_fund_code = (TextView) findViewById(R.id.tv_fund_code);
         tv_fund_price = (TextView) findViewById(R.id.tv_fund_price);
-        tv_fhfs  = (TextView) findViewById(R.id.tv_fhfs);
+        tv_fhfs  = (TextView) findViewById(R.id.tv_fund_fhfs);
         bt_true = (Button) findViewById(R.id.bt_true);
         bt_false = (Button) findViewById(R.id.bt_false);
     }
@@ -55,7 +58,7 @@ public class FundSubsDialog extends BaseDialog implements View.OnClickListener {
         if (null != fundDataBean && null != fundDataBean.data && fundDataBean.data.size() > 0) {
             tv_fund_name.setText(fundDataBean.data.get(0).FUND_NAME);
             tv_fund_code.setText(fundDataBean.data.get(0).FUND_CODE);
-            tv_fhfs.setText("");
+            tv_fhfs.setText(content);
         }
         tv_fund_price.setText(price);
 

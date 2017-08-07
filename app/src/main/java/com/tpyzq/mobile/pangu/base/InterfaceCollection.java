@@ -27,6 +27,7 @@ import com.tpyzq.mobile.pangu.util.ConstantUtil;
 import com.tpyzq.mobile.pangu.util.DeviceUtil;
 import com.tpyzq.mobile.pangu.util.Helper;
 import com.tpyzq.mobile.pangu.util.SpUtils;
+import com.tpyzq.mobile.pangu.util.panguutil.UserUtil;
 import com.tpyzq.mobile.pangu.view.CentreToast;
 import com.tpyzq.mobile.pangu.view.dialog.MistakeDialog;
 import com.zhy.http.okhttp.callback.StringCallback;
@@ -2815,6 +2816,71 @@ public class InterfaceCollection {
             }
         });
 
+    }
+
+
+    /**
+     * 修改资金密码
+     * @param TAG
+     * @param currentpassword 旧密码
+     * @param newpassword     新密码
+     * @param unikey          UNIKEY插件ID
+     * @param callback
+     */
+    public void ModifyFundsPassword(final String TAG, String currentpassword, String newpassword,String unikey, final InterfaceCallback callback){
+        HashMap map=new HashMap();
+        map.put("funcid","700061");
+        map.put("token", SpUtils.getString(CustomApplication.getContext(), "mSession", ""));
+        HashMap hashMap=new HashMap();
+        hashMap.put("SEC_ID", "tpyzq");
+        hashMap.put("FLAG", "true");
+        hashMap.put("NEW_PWD", newpassword);
+        hashMap.put("OLD_PWD", currentpassword);
+
+
+        hashMap.put("PWD_TYPE", UserUtil.Keyboard); //密码类型 0：明文 1：密文
+        hashMap.put("MOBILE", DeviceUtil.getDeviceId(CustomApplication.getContext()));                       //绑定UNIKEYID的手机号
+        hashMap.put("UNIKEYID", unikey);                       //UNIKEY插件ID
+        hashMap.put("APP_TYPE", "1");                       //手机类型 0：ios        1：android
+
+        map.put("parms",hashMap);
+
+        NetWorkUtil.getInstence().okHttpForPostString(TAG, ConstantUtil.getURL_JY_HS(), map, new StringCallback() {
+            @Override
+            public void onError(Call call, Exception e, int id) {
+                ResultInfo info = new ResultInfo();
+                info.setCode(ConstantUtil.NETWORK_ERROR_CODE);
+                info.setMsg(ConstantUtil.NETWORK_ERROR);
+                info.setTag(TAG);
+                callback.callResult(info);
+            }
+
+            @Override
+            public void onResponse(String response, int id) {
+                ResultInfo info = new ResultInfo();
+                if (TextUtils.isEmpty(response)){
+                    return;
+                }
+                try {
+                    JSONObject jsonObject =new JSONObject(response);
+                    String code=jsonObject.getString("code");
+                    String msg= jsonObject.getString("msg");
+                    JSONArray data=jsonObject.getJSONArray("data");
+                    info.setCode(code);
+                    info.setTag(TAG);
+                    info.setMsg(msg);
+                    if("0".equals(code)){
+//                        {"code":"0","msg":"331101成功","data":[{"ERROR_NO":"0","ERROR_INFO":""}]}
+                        info.setData(data);
+                    }
+                 } catch (JSONException e) {
+                    info.setCode(ConstantUtil.JSON_ERROR_CODE);
+                    info.setMsg(ConstantUtil.JSON_ERROR);
+                    info.setTag(TAG);
+                }
+                callback.callResult(info);
+            }
+        });
     }
 
 }

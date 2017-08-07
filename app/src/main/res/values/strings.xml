@@ -853,4 +853,6 @@
     <string name="modify_fund">定投修改</string>
     <string name="add_fund">新增定投</string>
 
+    <!--修改资金密码-->
+    <string name="changemoneypwdactivity">修改资金密码</string>
 </resources>

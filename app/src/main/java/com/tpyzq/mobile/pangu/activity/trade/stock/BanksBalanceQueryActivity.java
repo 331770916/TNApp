@@ -261,7 +261,7 @@ public class BanksBalanceQueryActivity extends BaseActivity implements View.OnCl
         map2.put("ACCOUNT", mAccount);
         map2.put("BANK_PASSWORD", s);
 
-        if ("false".equals(Db_PUB_USERS.queryingCertification()) || "0".equals(queryType)) {
+        if ("0".equals(UserUtil.Keyboard) || "0".equals(queryType)) {
             map2.put("PWD_TYPE", "0");
         } else {
 

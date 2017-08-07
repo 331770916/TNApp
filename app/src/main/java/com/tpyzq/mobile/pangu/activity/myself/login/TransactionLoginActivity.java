@@ -589,19 +589,22 @@ public class TransactionLoginActivity extends BaseActivity implements ICallbackR
             if (mBuilder.dialog.isShowing())
                 mBuilder.dialog.dismiss();
             if (result instanceof Boolean) {
-                if ((Boolean) result) {
-                    mUserEntity.setKeyboard("true");
-                    UserUtil.Keyboard = "1";
+
+                if (ConstantUtil.USERFUL_KEYBOARD) {
+                    if ((Boolean) result) {
+                        mUserEntity.setKeyboard("true");
+                        UserUtil.Keyboard = "1";
+                    } else {
+                        mUserEntity.setKeyboard("false");
+                        UserUtil.Keyboard = "0";
+                    }
+                    initKeyBoard((Boolean) result);
                 } else {
                     mUserEntity.setKeyboard("false");
                     UserUtil.Keyboard = "0";
-                }
-                Db_PUB_USERS.UpdateKeyboard(mUserEntity);
-                if (ConstantUtil.USERFUL_KEYBOARD) {
-                    initKeyBoard((Boolean) result);
-                } else {
                     initKeyBoard(false);
                 }
+                Db_PUB_USERS.UpdateKeyboard(mUserEntity);
             }
         } else if (KeyBoardTypeConnect.TAG.equals(tag)) {
             if (mBuilder.dialog.isShowing())
@@ -797,7 +800,6 @@ public class TransactionLoginActivity extends BaseActivity implements ICallbackR
                 break;
         }
     }
-
 
 
     /**
