@@ -18,6 +18,9 @@ import com.tpyzq.mobile.pangu.activity.home.managerMoney.product.currencyFund.Mo
 import com.tpyzq.mobile.pangu.activity.myself.login.ShouJiVerificationActivity;
 import com.tpyzq.mobile.pangu.activity.myself.login.ShouJiZhuCeActivity;
 import com.tpyzq.mobile.pangu.activity.myself.login.TransactionLoginActivity;
+import com.tpyzq.mobile.pangu.activity.trade.open_fund.AddOrModFixFundActivity;
+import com.tpyzq.mobile.pangu.activity.trade.open_fund.FixFundListActivity;
+import com.tpyzq.mobile.pangu.activity.trade.open_fund.OpenFundActivity;
 import com.tpyzq.mobile.pangu.base.BaseActivity;
 import com.tpyzq.mobile.pangu.base.SimpleRemoteControl;
 import com.tpyzq.mobile.pangu.data.CleverManamgerMoneyEntity;
@@ -452,6 +455,7 @@ public class ManagerMoenyDetailActivity extends BaseActivity implements View.OnC
 
                 break;
             case R.id.fornightBuyBtn:
+            case R.id.targetBuyBtn:
                 String login = Db_PUB_USERS.queryingIslogin();
                 String phone = Db_PUB_USERS.queryingMobile();
                 Intent intent = new Intent();
@@ -496,6 +500,12 @@ public class ManagerMoenyDetailActivity extends BaseActivity implements View.OnC
                         }
                     }
                 }
+                break;
+            case R.id.targetTouBtn:
+
+                intent = new Intent();
+                intent.setClass(ManagerMoenyDetailActivity.this, FixFundListActivity.class);
+                startActivity(intent);
                 break;
         }
     }
