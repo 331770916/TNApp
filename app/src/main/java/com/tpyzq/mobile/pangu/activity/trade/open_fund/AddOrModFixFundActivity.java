@@ -429,7 +429,7 @@ public class AddOrModFixFundActivity extends BaseActivity implements View.OnClic
         tv_end_date.setText(Helper.getInstance().getNextYear(new Date(),"yyyy-MM-dd"));
         et_input_branch.setText("");
         fixFundEntity.setSTART_DATE(currentDate);
-        fixFundEntity.setEND_DATE(currentDate);
+        fixFundEntity.setEND_DATE(Helper.getInstance().getNextYear(new Date(),"yyyy-MM-dd"));
         fixFundEntity.setEN_FUND_DATE("1");
         if (isAllClear) {
             tv_branch_enable.setText("--");
