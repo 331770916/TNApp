@@ -220,7 +220,7 @@
                         android:layout_height="wrap_content"
                         android:layout_gravity="center_vertical"
                         android:layout_marginLeft="@dimen/size10"
-                        android:text="更新身份证有效期"
+                        android:text="身份证重要信息修改"
                         android:textColor="@color/black"
                         android:textSize="@dimen/txtSize12" />
                 </LinearLayout>
