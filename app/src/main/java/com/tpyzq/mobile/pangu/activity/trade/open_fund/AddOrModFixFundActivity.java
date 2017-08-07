@@ -374,14 +374,14 @@ public class AddOrModFixFundActivity extends BaseActivity implements View.OnClic
                 break;
             case TAG_MODIFY:
                 if ("0".equalsIgnoreCase(code)) {
-                    /*CentreToast.showText(this, msg);
+                    CentreToast.showText(this, msg);
                     Intent modifyIntent= new Intent();
                     modifyIntent.putExtra("fixFundEntity",fixFundEntity);
                     modifyIntent.putExtra("position",position);
                     setResult(RESULT_OK, modifyIntent);
-                    finish();*/
-                    CentreToast.showText(this, msg);
                     finish();
+                   /* CentreToast.showText(this, msg);
+                    finish();*/
                 } else {
                     MistakeDialog.showDialog(msg,this,null);
                 }
@@ -390,9 +390,9 @@ public class AddOrModFixFundActivity extends BaseActivity implements View.OnClic
                 if ("0".equalsIgnoreCase(code)) {
                     AssessConfirmEntity assessConfirmEntity = (AssessConfirmEntity)info.getData();
                     if ("0".equalsIgnoreCase(assessConfirmEntity.IS_ABLE)) {
+                       /* CentreToast.showText(this, msg);
+                        finish();*/
                         CentreToast.showText(this, msg);
-                        finish();
-                        /*CentreToast.showText(this, msg);
                         Intent submitIntent = new Intent();
                         fixFundEntity.setSEND_BALANCE("0");
                         fixFundEntity.setDEAL_FLAG("0");
@@ -400,7 +400,7 @@ public class AddOrModFixFundActivity extends BaseActivity implements View.OnClic
                         submitIntent.putExtra("fixFundEntity",fixFundEntity);
                         submitIntent.putExtra("position",position);
                         setResult(RESULT_OK,submitIntent);
-                        finish();*/
+                        finish();
                     } else {
                         if ("1".equalsIgnoreCase(assessConfirmEntity.IS_OPEN) || "0".equalsIgnoreCase(assessConfirmEntity.IS_AGREEMENT)){
                             Intent intent = new Intent();
