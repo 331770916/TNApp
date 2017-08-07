@@ -9,10 +9,10 @@ import android.text.TextUtils;
 import android.view.KeyEvent;
 import android.view.LayoutInflater;
 import android.view.View;
+import android.widget.EditText;
 import android.widget.LinearLayout;
 import android.widget.RadioButton;
 import android.widget.TextView;
-import android.widget.Toast;
 
 import com.tpyzq.mobile.pangu.R;
 import com.tpyzq.mobile.pangu.activity.myself.login.ShouJiZhuCeActivity;
@@ -25,6 +25,7 @@ import com.tpyzq.mobile.pangu.http.NetWorkUtil;
 import com.tpyzq.mobile.pangu.http.OkHttpUtil;
 import com.tpyzq.mobile.pangu.util.ConstantUtil;
 import com.tpyzq.mobile.pangu.util.SpUtils;
+import com.tpyzq.mobile.pangu.view.CentreToast;
 import com.tpyzq.mobile.pangu.view.dialog.CancelDialog;
 import com.tpyzq.mobile.pangu.view.dialog.LoadingDialog;
 import com.tpyzq.mobile.pangu.view.pickTime.TimePickerView;
@@ -62,6 +63,12 @@ public class UpdateIdCodeValidityActivity extends BaseActivity implements Dialog
     private int mTempCheckedStateId = -1;
     private String mTempStartTime;
     private String mTempEndTime;
+
+    private EditText mGroveMent;
+    private EditText mAddress;
+
+    private String mTempGroveMentText;
+    private String mTempAddressText;
 
     private String isRest = "0";  //是否是重新变更  0:否， 1:是
     private boolean clickBackKey;//判断用户是否点击返回键取消网络请求
@@ -170,15 +177,32 @@ public class UpdateIdCodeValidityActivity extends BaseActivity implements Dialog
     private boolean isDoSomeThing() {
 
         boolean isDo = true;
-        if (mTempCheckedStateId == mCheckedStateId) {
-            //如果radio的状态没有改变， 那么在判断是否对日期进行了操作
-
-            if (mTempStartTime.equals(mStartTimeTv.getText().toString()) && mTempEndTime.equals(mEndTimeTv.getText().toString())) {
-                showMistackDialog("您未做任何操作", null);
+        if (TextUtils.isEmpty(mGroveMent.getText().toString())) {
+            CentreToast.showText(UpdateIdCodeValidityActivity.this, "请填写签发机关");
+            isDo = false;
+        } else if (TextUtils.isEmpty(mAddress.getText().toString())) {
+            CentreToast.showText(UpdateIdCodeValidityActivity.this, "请填写身份证地址");
+            isDo = false;
+        } else if (mTempCheckedStateId == mCheckedStateId) {
+            if (timeNoChanged() && grovementNoChanged() && addressNoChanged()) {
+                CentreToast.showText(UpdateIdCodeValidityActivity.this, "您未做任何操作");
                 isDo = false;
             }
         }
+
         return isDo;
+    }
+
+    private boolean timeNoChanged() {
+        return mTempStartTime.equals(mStartTimeTv.getText().toString()) && mTempEndTime.equals(mEndTimeTv.getText().toString());
+    }
+
+    private boolean grovementNoChanged() {
+        return mGroveMent.getText().toString().equals(mTempGroveMentText);
+    }
+
+    private boolean addressNoChanged() {
+        return mAddress.getText().toString().equals(mTempAddressText);
     }
 
     /**
@@ -190,6 +214,15 @@ public class UpdateIdCodeValidityActivity extends BaseActivity implements Dialog
         mLongTimeRb.setVisibility(View.VISIBLE);
         mStartTimeTv.setOnClickListener(this);
         mEndTimeTv.setOnClickListener(this);
+
+        mGroveMent.setClickable(true);
+        mGroveMent.setFocusable(true);
+        mGroveMent.setFocusableInTouchMode(true);
+
+        mAddress.setClickable(true);
+        mAddress.setFocusable(true);
+        mAddress.setFocusableInTouchMode(true);
+
         changeEffectiveTimeTextColor(R.color.text, R.color.hushenTab_titleColor, R.color.text);
     }
 
@@ -368,11 +401,19 @@ public class UpdateIdCodeValidityActivity extends BaseActivity implements Dialog
                         TextView idCardNumber = (TextView) view.findViewById(R.id.tv_effective_idNumber);
                         idCardNumber.setText(id_no);
 
-                        TextView groveMent = (TextView) view.findViewById(R.id.tv_effective_grovement);
-                        groveMent.setText(issued_depart);
+                        mGroveMent = (EditText) view.findViewById(R.id.tv_effective_grovement);
+                        mGroveMent.setClickable(false);
+                        mGroveMent.setFocusable(false);
+                        mGroveMent.setFocusableInTouchMode(false);
+                        mGroveMent.setText(issued_depart);
+                        mTempGroveMentText = mGroveMent.getText().toString();
 
-                        TextView address = (TextView) view.findViewById(R.id.tv_effective_address);
-                        address.setText(id_address);
+                        mAddress = (EditText) view.findViewById(R.id.tv_effective_address);
+                        mAddress.setClickable(false);
+                        mAddress.setFocusable(false);
+                        mAddress.setFocusableInTouchMode(false);
+                        mAddress.setText(id_address);
+                        mTempAddressText = mAddress.getText().toString();
 
                         mTempStartTime = id_begindate;
                         mTempEndTime = id_enddate;

@@ -68,11 +68,13 @@
                 android:text="签发机关"
                 android:padding="@dimen/size10"/>
 
-            <TextView
+            <EditText
                 android:id="@+id/tv_effective_grovement"
                 android:layout_width="@dimen/size200"
                 android:layout_height="wrap_content"
+                android:textSize="@dimen/txtSize14"
                 android:layout_alignParentRight="true"
+                android:background="@color/white"
                 android:lineSpacingExtra="@dimen/size2"
                 android:gravity="center|end"
                 android:textColor="@color/hushenTab_titleColor"
@@ -95,13 +97,15 @@
                 android:text="身份证地址"
                 android:padding="@dimen/size10"/>
 
-            <TextView
+            <EditText
                 android:id="@+id/tv_effective_address"
                 android:layout_width="@dimen/size200"
                 android:layout_height="wrap_content"
                 android:layout_alignParentRight="true"
                 android:lineSpacingExtra="@dimen/size2"
+                android:background="@color/white"
                 android:gravity="center|end"
+                android:textSize="@dimen/txtSize14"
                 android:textColor="@color/hushenTab_titleColor"
                 android:padding="@dimen/size10"/>
 
