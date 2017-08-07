@@ -320,6 +320,7 @@ public class FundPurchaseActivity extends BaseActivity implements View.OnClickLi
         tv_fund_value.setText("");
         tv_low_money.setText("");
         tv_usable_money.setText("");
+        tv_fhfs.setText("");
         bt_true.setClickable(false);
         et_fund_price.setEnabled(false);
         tv_fhfs.setEnabled(false);

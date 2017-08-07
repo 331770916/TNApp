@@ -350,6 +350,7 @@ public class FundSubsActivity extends BaseActivity implements View.OnClickListen
         tv_netvalue.setText("");
         tv_lowest_investment.setText("");
         tv_usable_money.setText("");
+        tv_fhfs.setText("");
         bt_true.setClickable(false);
         et_rengou_price.setEnabled(false);
         tv_fhfs.setEnabled(false);

@@ -13,9 +13,12 @@ import android.view.View;
 import android.widget.AdapterView;
 import android.widget.ImageView;
 import android.widget.LinearLayout;
+import android.widget.ScrollView;
 import android.widget.TextView;
 
 import com.facebook.drawee.view.SimpleDraweeView;
+import com.handmark.pulltorefresh.library.PullToRefreshBase;
+import com.handmark.pulltorefresh.library.PullToRefreshScrollView;
 import com.tpyzq.mobile.pangu.R;
 import com.tpyzq.mobile.pangu.activity.detail.StockDetailActivity;
 import com.tpyzq.mobile.pangu.activity.home.helper.HomeFragmentHelper;
@@ -142,7 +145,7 @@ public class HomeFragment extends BaseFragment implements AdapterView.OnItemClic
     private TextView mTopTextView; //上推时显示应用标题
 
     private SimpleRemoteControl simpleRemoteControl;
-    private PullRefreshView mPullDownScrollView;
+    private PullToRefreshScrollView mPullDownScrollView;
     private ArrayList<HomeInfomationObsever> mOberservers;
     private ArrayList<MyHomePageEntity> messageList;
     private int hotNum = 5;
@@ -183,8 +186,6 @@ public class HomeFragment extends BaseFragment implements AdapterView.OnItemClic
         mMiddleImageView.setOnClickListener(this);
         mMiddleImageView.setVisibility(View.VISIBLE);
 
-        MyScrollView scrollView = (MyScrollView) view.findViewById(R.id.homeScrollView);
-        scrollView.setOnScrollListener(this);
 
         gridView = (MyGridView) view.findViewById(R.id.homeGridView);
         mGrideAdapter = new HomeAdapter(true, getActivity());
@@ -192,7 +193,7 @@ public class HomeFragment extends BaseFragment implements AdapterView.OnItemClic
         gridView.setAdapter(mGrideAdapter);
 
         //下拉刷新
-        mPullDownScrollView = (PullRefreshView) view.findViewById(R.id.selfchoice_PullDownScroll);
+        mPullDownScrollView = (PullToRefreshScrollView) view.findViewById(R.id.selfchoice_PullDownScroll);
 
         mProductReservationView = (MyListView) view.findViewById(R.id.homeProductReservation);
         mFinaceView = (MyListView) view.findViewById(R.id.homeSelfNewsListView);
@@ -433,23 +434,27 @@ public class HomeFragment extends BaseFragment implements AdapterView.OnItemClic
     }
 
     private void initScrollView() {
-        PullRefreshUtil.setRefresh(mPullDownScrollView, true, false);
-        mPullDownScrollView.setOnPullDownRefreshListener(
-                new PullRefreshView.OnPullDownRefreshListener() {
+         mPullDownScrollView.setOnScrollChangedListener(new PullToRefreshScrollView.OnScrollChangedListener() {
+            @Override
+            public void onScrollChanged(ScrollView who, int x, int y, int oldx, int oldy) {
+                onScroll(y);
+            }
+        });
+        mPullDownScrollView.setFocusableInTouchMode(true);
+        mPullDownScrollView.setMode(PullToRefreshBase.Mode.PULL_FROM_START);
+        mPullDownScrollView.setOnRefreshListener(new PullToRefreshBase.OnRefreshListener<ScrollView>() {
+            @Override
+            public void onRefresh(PullToRefreshBase<ScrollView> refreshView) {
+                new Handler().postDelayed(new Runnable() {
+
                     @Override
-                    public void onRefresh() {
-                        mPullDownScrollView.isMore(true);
-                        new Handler().postDelayed(new Runnable() {
-
-                            @Override
-                            public void run() {
-                                initData();
-                                mPullDownScrollView.refreshFinish();
-                            }
-                        }, 2000);
+                    public void run() {
+                        initData();
+                        mPullDownScrollView.onRefreshComplete();
                     }
-                });
-
+                }, 2000);
+            }
+        });
     }
 
 
