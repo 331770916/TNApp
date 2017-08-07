@@ -800,6 +800,7 @@ public class ProductBuyActivity extends BaseActivity implements View.OnClickList
         public String stockcode;
         public String stockprice;
         public String account;
+        public String fhfs;
     }
 
     private class StockPriceListen implements TextWatcher {

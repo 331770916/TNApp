@@ -18,7 +18,7 @@ import com.tpyzq.mobile.pangu.data.SubsStatusEntity;
  * 基金认购页面dialog
  */
 public class FundSubsDialog extends BaseDialog implements View.OnClickListener {
-    private TextView tv_fund_name, tv_fund_code, tv_fund_price;
+    private TextView tv_fund_name, tv_fund_code, tv_fund_price,tv_fhfs;
     private Button bt_true, bt_false;
     private String price;
     private FundDataEntity fundDataBean;
@@ -38,6 +38,7 @@ public class FundSubsDialog extends BaseDialog implements View.OnClickListener {
         tv_fund_name = (TextView) findViewById(R.id.tv_fund_name);
         tv_fund_code = (TextView) findViewById(R.id.tv_fund_code);
         tv_fund_price = (TextView) findViewById(R.id.tv_fund_price);
+        tv_fhfs  = (TextView) findViewById(R.id.tv_fhfs);
         bt_true = (Button) findViewById(R.id.bt_true);
         bt_false = (Button) findViewById(R.id.bt_false);
     }
@@ -54,6 +55,7 @@ public class FundSubsDialog extends BaseDialog implements View.OnClickListener {
         if (null != fundDataBean && null != fundDataBean.data && fundDataBean.data.size() > 0) {
             tv_fund_name.setText(fundDataBean.data.get(0).FUND_NAME);
             tv_fund_code.setText(fundDataBean.data.get(0).FUND_CODE);
+            tv_fhfs.setText("");
         }
         tv_fund_price.setText(price);
 
@@ -65,13 +67,12 @@ public class FundSubsDialog extends BaseDialog implements View.OnClickListener {
         switch (v.getId()) {
             case R.id.bt_true:
                 if (null != fundDataBean && null != fundDataBean.data && fundDataBean.data.size() > 0) {
-                    fundSubsListen.setBuy(price, fundDataBean.data.get(0).FUND_COMPANY);
+                    fundSubsListen.setBuy(price, fundDataBean.data.get(0).FUND_COMPANY,"");
                 } else {
-                    fundSubsListen.setBuy(price, "");
+                    fundSubsListen.setBuy(price, "","");
                 }
                 dismiss();
                 break;
-
             case R.id.bt_false:
                 dismiss();
                 break;

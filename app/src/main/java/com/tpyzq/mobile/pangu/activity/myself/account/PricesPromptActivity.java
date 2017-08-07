@@ -1,5 +1,6 @@
 package com.tpyzq.mobile.pangu.activity.myself.account;
 
+import android.app.Dialog;
 import android.content.Intent;
 import android.os.AsyncTask;
 import android.text.TextUtils;
@@ -22,6 +23,7 @@ import com.tpyzq.mobile.pangu.util.ConstantUtil;
 import com.tpyzq.mobile.pangu.util.Helper;
 import com.tpyzq.mobile.pangu.util.SpUtils;
 import com.tpyzq.mobile.pangu.util.panguutil.UserUtil;
+import com.tpyzq.mobile.pangu.view.dialog.LoadingDialog;
 import com.zhy.http.okhttp.callback.StringCallback;
 
 import org.json.JSONArray;
@@ -48,6 +50,7 @@ public class PricesPromptActivity extends BaseActivity implements View.OnClickLi
     private TextView item_TextView, publish_title;
     private List<InformEntity> list;
     private ImageView iv_isEmpty;
+    private Dialog loading;
     private int i = 0;
     int refresh = 10;
 
@@ -57,6 +60,7 @@ public class PricesPromptActivity extends BaseActivity implements View.OnClickLi
         SpUtils.putString(this, "mDivnum_PricesPrompt", "true");
 
         list = new ArrayList<InformEntity>();
+        loading = LoadingDialog.initDialog(this, "正在查询...");
         findViewById(R.id.ASpublish_back).setOnClickListener(this);
         item_image = (ImageView) findViewById(R.id.item_image);
 
@@ -66,6 +70,7 @@ public class PricesPromptActivity extends BaseActivity implements View.OnClickLi
         publish_title = (TextView) findViewById(R.id.publish_title);
         iv_isEmpty = (ImageView) findViewById(R.id.iv_isEmpty);
         initData();
+        loading.show();
         setInfoNum(String.valueOf(i), false);
         getData();
     }
@@ -79,52 +84,15 @@ public class PricesPromptActivity extends BaseActivity implements View.OnClickLi
                     mListView.getLoadingLayoutProxy().setRefreshingLabel("正在刷新");
                     mListView.getLoadingLayoutProxy().setPullLabel("下拉刷新数据");
                     mListView.getLoadingLayoutProxy().setReleaseLabel("释放开始刷新");
-
-                    new AsyncTask<Void, Void, Void>() {
-                        @Override
-                        protected Void doInBackground(Void... params) {
-                            try {
-                                Thread.sleep(1500);
-                                i = 1;
-                                setInfoNum(String.valueOf(i), false);
-                            } catch (InterruptedException e) {
-                                e.printStackTrace();
-                            }
-                            return null;
-                        }
-                        @Override
-                        protected void onPostExecute(Void result) {
-                            super.onPostExecute(result);
-                            //将下拉视图收起
-                            mListView.onRefreshComplete();
-                        }
-                    }.execute();
+                    i = 1;
+                    setInfoNum(String.valueOf(i), false);
                 } else if (mListView.isShownFooter()) {
                     //设置尾布局样式文字
                     mListView.getLoadingLayoutProxy().setRefreshingLabel("正在刷新");
                     mListView.getLoadingLayoutProxy().setPullLabel("上拉加载数据");
                     mListView.getLoadingLayoutProxy().setReleaseLabel("释放开始刷新");
-
-                    new AsyncTask<Void, Void, Void>() {
-                        @Override
-                        protected Void doInBackground(Void... params) {
-                            try {
-                                Thread.sleep(1500);
-                                i++;
-                                setInfoNum(String.valueOf(i), true);
-                            } catch (InterruptedException e) {
-                                e.printStackTrace();
-                            }
-                            return null;
-                        }
-
-                        @Override
-                        protected void onPostExecute(Void result) {
-                            super.onPostExecute(result);
-                            //将下拉视图收起
-                            mListView.onRefreshComplete();
-                        }
-                    }.execute();
+                    i++;
+                    setInfoNum(String.valueOf(i), true);
                 }
 
             }
@@ -149,16 +117,18 @@ public class PricesPromptActivity extends BaseActivity implements View.OnClickLi
         map2.put("3", "");
         map2.put("4", "");
         map2.put("5", "");
-
-        NetWorkUtil.getInstence().okHttpForPostString(TAG, ConstantUtil.getURL_HQ_HS(), map, new StringCallback() {
+        net.okHttpForPostString(TAG, ConstantUtil.getURL_HQ_HS(), map, new StringCallback() {
             @Override
             public void onError(Call call, Exception e, int id) {
                 LogUtil.e("", e.toString());
+                loading.dismiss();
+                mListView.onRefreshComplete();
                 Helper.getInstance().showToast(PricesPromptActivity.this, "网络异常");
             }
 
             @Override
             public void onResponse(String response, int id) {
+                loading.dismiss();
                 if (TextUtils.isEmpty(response)) {
                     return;
                 }
@@ -228,6 +198,7 @@ public class PricesPromptActivity extends BaseActivity implements View.OnClickLi
                 } catch (JSONException e) {
                     e.printStackTrace();
                 }
+                mListView.onRefreshComplete();
             }
         });
     }
@@ -291,5 +262,13 @@ public class PricesPromptActivity extends BaseActivity implements View.OnClickLi
         intent.putExtra("BIZID", list.get(position - 1).getBizid().toString());
         intent.putExtra("Marked","true");
         startActivity(intent);
+    }
+
+    @Override
+    public void destroy() {
+        if(loading!=null) {
+            loading.dismiss();
+            loading = null;
+        }
     }
 }

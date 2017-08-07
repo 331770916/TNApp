@@ -135,6 +135,42 @@
 
         <LinearLayout
             android:layout_width="match_parent"
+            android:layout_height="@dimen/size50"
+            android:background="@color/white">
+
+            <TextView
+                android:textColor="@color/texts"
+                android:layout_width="wrap_content"
+                android:layout_height="wrap_content"
+                android:layout_gravity="center"
+                android:layout_marginLeft="@dimen/size20"
+                android:text="分红方式："
+                android:textSize="@dimen/txtSize15" />
+
+            <TextView
+                android:id="@+id/tv_fhfs"
+                android:layout_width="0dp"
+                android:layout_height="wrap_content"
+                android:layout_gravity="center"
+                android:layout_marginLeft="@dimen/size20"
+                android:layout_marginRight="@dimen/size20"
+                android:layout_weight="1"
+                android:background="@android:color/transparent"
+                android:gravity="left"
+                android:drawableRight="@mipmap/icon_right"
+                android:textColor="@color/title_list"
+                android:textSize="@dimen/txtSize14" />
+        </LinearLayout>
+
+        <ImageView
+            android:layout_width="match_parent"
+            android:layout_height="@dimen/size0.5"
+            android:background="@color/white"
+            android:paddingLeft="@dimen/size20"
+            android:src="@color/grey" />
+
+        <LinearLayout
+            android:layout_width="match_parent"
             android:layout_height="@dimen/size200"
             android:background="@color/white"
             android:orientation="vertical"

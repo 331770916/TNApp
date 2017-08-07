@@ -107,6 +107,7 @@
     <dimen name="size63">63dp</dimen>
     <dimen name="size64">64dp</dimen>
     <dimen name="size65">65dp</dimen>
+    <dimen name="size66">66dp</dimen>
     <dimen name="size67">67dp</dimen>
     <!-- 100px for WVGA -->
     <dimen name="size68">68dp</dimen>
