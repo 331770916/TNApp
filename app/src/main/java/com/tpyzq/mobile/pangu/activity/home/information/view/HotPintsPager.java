@@ -36,7 +36,6 @@ public class HotPintsPager extends BasePager implements View.OnClickListener,Int
     private PullToRefreshListView refreshListView;
     private NewHomeInformationAdapter mListViewAdapter;             //listView 适配器
     private ArrayList<InformationEntity> leve4,leve1;                    //存储  重大事件数据的  集合
-    private ProgressBar pb_HotPager;          //菊花
     private RelativeLayout rlHot;
     private LinearLayout llHotJiaZai;
     private AutoSwitchView loopView;
@@ -60,7 +59,6 @@ public class HotPintsPager extends BasePager implements View.OnClickListener,Int
         refreshListView = (PullToRefreshListView)rootView.findViewById(R.id.listview);
         rlHot = (RelativeLayout) rootView.findViewById(R.id.rlHot);     //包裹所有布局的 RelativeLayout  默认为灰色
         llHotJiaZai = (LinearLayout) rootView.findViewById(R.id.llHotJiaZai);
-        pb_HotPager = (ProgressBar) rootView.findViewById(R.id.pb_HotPager);    //初始化  默认显示菊花
         loopView = new AutoSwitchView(mContext);
         loopView.setLayoutParams(new AbsListView.LayoutParams(-1,mContext.getResources().getDimensionPixelSize(R.dimen.size250)));
         refreshListView.getRefreshableView().addHeaderView(loopView);
@@ -72,7 +70,6 @@ public class HotPintsPager extends BasePager implements View.OnClickListener,Int
                     refreshListView.getLoadingLayoutProxy().setRefreshingLabel("正在刷新");
                     refreshListView.getLoadingLayoutProxy().setPullLabel("下拉刷新数据");
                     refreshListView.getLoadingLayoutProxy().setReleaseLabel("释放开始刷新");
-                    pb_HotPager.setVisibility(View.VISIBLE);
                     page = 1;
                     leve1.clear();
                     ifc.queryImportant("3","1","4","GetImportant4",HotPintsPager.this);
@@ -81,7 +78,6 @@ public class HotPintsPager extends BasePager implements View.OnClickListener,Int
                     refreshListView.getLoadingLayoutProxy().setRefreshingLabel("正在刷新");
                     refreshListView.getLoadingLayoutProxy().setPullLabel("下拉刷新数据");
                     refreshListView.getLoadingLayoutProxy().setReleaseLabel("释放开始刷新");
-                    pb_HotPager.setVisibility(View.VISIBLE);
                     page ++;
                     ifc.queryImportant("3","1","4","GetImportant4",HotPintsPager.this);
                     ifc.queryImportant(ZIXUN_NUM,page+"","3","GetImportant1",HotPintsPager.this);
@@ -116,7 +112,6 @@ public class HotPintsPager extends BasePager implements View.OnClickListener,Int
 
     @Override
     public void callResult(ResultInfo info) {
-        pb_HotPager.setVisibility(View.GONE);  //隐藏菊花
         rlHot.setBackgroundColor(ContextCompat.getColor(mContext, R.color.white));
         if(info.getCode().equals("200")){
             Object obj = info.getData();
@@ -150,7 +145,6 @@ public class HotPintsPager extends BasePager implements View.OnClickListener,Int
             case R.id.llHotJiaZai:          //点击  重新加载的时候
                 isFirst = true;
                 llHotJiaZai.setVisibility(View.GONE);  //隐藏重新加载图片
-                pb_HotPager.setVisibility(View.VISIBLE);      //显示菊花
                 rlHot.setVisibility(View.VISIBLE);//显示背景
                 rlHot.setBackgroundColor(ContextCompat.getColor(mContext, R.color.dividerColor)); //设置为灰色
                 ifc.queryImportant(ZIXUN_NUM,page+"","3","GetImportant1",HotPintsPager.this);

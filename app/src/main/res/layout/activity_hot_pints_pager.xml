@@ -35,14 +35,6 @@
             android:textColor="@color/text"/>
     </LinearLayout>
 
-    <!-- 菊花 -->
-    <ProgressBar
-        android:id="@+id/pb_HotPager"
-        style="@style/mProgress_circle"
-        android:layout_width="wrap_content"
-        android:layout_height="wrap_content"
-        android:layout_centerInParent="true"
-        />
 
         <LinearLayout
             android:layout_width="match_parent"

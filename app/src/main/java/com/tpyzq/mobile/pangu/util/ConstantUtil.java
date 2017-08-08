@@ -137,6 +137,11 @@ public class ConstantUtil {
         return HQ_IP + "/news/classlist";
     }
 
+    //1.7.6 股票相关新闻
+    public static String getURL_STOCKNEWS(){
+        return HQ_IP + "/news/stockNews";
+    }
+
 
     ///////////////////////////////////// 交易地址 /////////////////////////////////////////
 

@@ -2,7 +2,6 @@ package com.tpyzq.mobile.pangu.activity.detail.newsTab;
 
 import android.content.Context;
 import android.content.Intent;
-import android.os.AsyncTask;
 import android.support.v4.content.ContextCompat;
 import android.view.View;
 import android.widget.AdapterView;
@@ -13,8 +12,8 @@ import android.widget.TextView;
 
 import com.tpyzq.mobile.pangu.R;
 import com.tpyzq.mobile.pangu.adapter.detail.AnnouncementAdapter;
-import com.tpyzq.mobile.pangu.data.DetailNewsEntity;
-import com.tpyzq.mobile.pangu.http.NetWorkUtil;
+import com.tpyzq.mobile.pangu.base.BasePager;
+import com.tpyzq.mobile.pangu.data.InformationEntity;
 import com.tpyzq.mobile.pangu.util.ConstantUtil;
 import com.zhy.http.okhttp.callback.StringCallback;
 
@@ -35,12 +34,12 @@ import okhttp3.Call;
  * Created by zhangwenbo on 2016/6/30.
  * 公告页面
  */
-public class AnnouncementFragment extends BaseDetailNewsPager implements View.OnClickListener {
+public class AnnouncementFragment extends BasePager implements View.OnClickListener {
 
     private final String TAG = "AnnouncementFragment";
     private ListView mListView;
-    private ArrayList<DetailNewsEntity> list;
-    private ArrayList<DetailNewsEntity> newlist;
+    private ArrayList<InformationEntity> list;
+    private ArrayList<InformationEntity> newlist;
     private AnnouncementAdapter adapter;
     private RelativeLayout rlAnnouncement;          //背景
     private ProgressBar pb_Announcement_Pager;      //菊花
@@ -59,11 +58,11 @@ public class AnnouncementFragment extends BaseDetailNewsPager implements View.On
         pb_Announcement_Pager = (ProgressBar) rootView.findViewById(R.id.pb_Announcement_Pager);    //初始化显示 菊花
         tvAnnouncementJiaZai = (TextView) rootView.findViewById(R.id.tvAnnouncementJiaZai);         //重新加载
         tvAnnouncementGengDuo = (TextView) rootView.findViewById(R.id.tvAnnouncementGengDuo);       //加载更多
+        initData();
     }
 
     @Override
     public void initData() {
-        super.initData();
         mListView.setVisibility(View.GONE);     //初始化 listView 隐藏
         tvAnnouncementGengDuo.setVisibility(View.GONE);  //初始化 隐藏 点击查看更多
         getData();
@@ -76,8 +75,8 @@ public class AnnouncementFragment extends BaseDetailNewsPager implements View.On
         mListView.setOnItemClickListener(new AdapterView.OnItemClickListener() {
             @Override
             public void onItemClick(AdapterView<?> parent, View view, int position, long id) {
-                DetailNewsEntity bean = list.get(position);
-                String msgId = bean.getId();
+                InformationEntity bean = list.get(position);
+                String msgId = bean.getNewsno();
                 Intent intent = new Intent(mContext,AnnouncementStydyDetailActivity.class);
                 intent.putExtra("msgId",msgId);
                 intent.putExtra("type",1);
@@ -94,7 +93,7 @@ public class AnnouncementFragment extends BaseDetailNewsPager implements View.On
         map1.put("funcid","900103");
         map1.put("token","");
         map1.put("parms",map2);
-        NetWorkUtil.getInstence().okHttpForPostString(TAG, ConstantUtil.getURL_HQ_HS(), map1, new StringCallback() {
+        net.okHttpForPostString(TAG, ConstantUtil.getURL_HQ_HS(), map1, new StringCallback() {
             @Override
             public void onError(Call call, Exception e, int id) {
                 pb_Announcement_Pager.setVisibility(View.GONE);      //隐藏菊花
@@ -109,25 +108,7 @@ public class AnnouncementFragment extends BaseDetailNewsPager implements View.On
                         pb_Announcement_Pager.setVisibility(View.VISIBLE);      //显示菊花
                         rlAnnouncement.setVisibility(View.VISIBLE);//显示背景
                         rlAnnouncement.setBackgroundColor(ContextCompat.getColor(mContext,R.color.dividerColor)); //设置为灰色
-
-                        //模拟加载数据线程休息1秒
-                        new AsyncTask<Void, Void, Void>() {
-                            @Override
-                            protected Void doInBackground(Void... params) {
-                                try {
-                                    Thread.sleep(1000);
-                                } catch (InterruptedException e) {
-                                    e.printStackTrace();
-                                }
-                                return null;
-                            }
-
-                            @Override
-                            protected void onPostExecute(Void result) {
-                                super.onPostExecute(result);
-                                getData();
-                            }
-                        }.execute();
+                        getData();
                     }
                 });
 
@@ -142,7 +123,7 @@ public class AnnouncementFragment extends BaseDetailNewsPager implements View.On
                     if("0".equals(code)){
                         JSONArray data = jsonObject.optJSONArray("data");
                         for (int i = 0; i < data.length(); i++) {
-                            DetailNewsEntity bean = new DetailNewsEntity();
+                            InformationEntity bean = new InformationEntity();
                             JSONArray item = data.optJSONArray(i);
                             if (item==null){
                                 continue;
@@ -160,7 +141,7 @@ public class AnnouncementFragment extends BaseDetailNewsPager implements View.On
                             } catch (ParseException e) {
                                 e.printStackTrace();
                             }
-                            bean.setId(msgId);
+                            bean.setNewsno(msgId);
                             bean.setTitle(title);
                             bean.setSource(source);
                             bean.setType(2);
@@ -202,32 +183,11 @@ public class AnnouncementFragment extends BaseDetailNewsPager implements View.On
                                 pb_Announcement_Pager.setVisibility(View.VISIBLE);      //显示菊花
                                 rlAnnouncement.setVisibility(View.VISIBLE);//显示背景
                                 rlAnnouncement.setBackgroundColor(ContextCompat.getColor(mContext,R.color.dividerColor)); //设置为灰色
-
                                 //模拟加载数据线程休息1秒
-                                new AsyncTask<Void, Void, Void>() {
-                                    @Override
-                                    protected Void doInBackground(Void... params) {
-                                        try {
-                                            Thread.sleep(1000);
-                                        } catch (InterruptedException e) {
-                                            e.printStackTrace();
-                                        }
-                                        return null;
-                                    }
-
-                                    @Override
-                                    protected void onPostExecute(Void result) {
-                                        super.onPostExecute(result);
-                                        getData();
-                                    }
-                                }.execute();
+                                getData();
                             }
                         });
-
                     }
-
-
-
                 } catch (JSONException e) {
                     e.printStackTrace();
                 }
@@ -250,4 +210,8 @@ public class AnnouncementFragment extends BaseDetailNewsPager implements View.On
         return R.layout.fragment_announcement;
     }
 
+    @Override
+    public void destroy() {
+        net.cancelSingleRequest(TAG);
+    }
 }

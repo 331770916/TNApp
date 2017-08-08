@@ -5,6 +5,7 @@ import android.content.Intent;
 import android.text.Editable;
 import android.text.TextUtils;
 import android.text.TextWatcher;
+import android.util.DisplayMetrics;
 import android.view.View;
 import android.widget.TextView;
 import android.widget.Toast;
@@ -63,6 +64,7 @@ public class ProductBuyActivity extends BaseActivity implements View.OnClickList
     private TextView tv_stock_info1;
     private TextView tv_stock_info2;
     private TextView et_stock_price;
+    private TextView tv_fhfs;
     private TextView tv_transaction_account;
     private TextView tv_transaction_price;
     private FundDataEntity fundDataEntity;
@@ -88,6 +90,7 @@ public class ProductBuyActivity extends BaseActivity implements View.OnClickList
         tv_stock_info1 = (TextView) findViewById(R.id.tv_stock_info1);
         tv_stock_info2 = (TextView) findViewById(R.id.tv_stock_info2);
         et_stock_price = (TextView) findViewById(R.id.et_stock_price);
+        tv_fhfs = (TextView) findViewById(R.id.tv_fhfs);
         tv_transaction_account = (TextView) findViewById(R.id.tv_transaction_account);
         tv_transaction_price = (TextView) findViewById(R.id.tv_transaction_price);
         findViewById(R.id.productBuyBack).setOnClickListener(this);
@@ -108,6 +111,9 @@ public class ProductBuyActivity extends BaseActivity implements View.OnClickList
         UserUtil.refrushUserInfo();
         Intent intent = getIntent();
         tv_sure.setOnClickListener(this);
+        tv_fhfs.setOnClickListener(this);
+        tv_fhfs.setText("份额分红");
+        dialogBean.fhfs = "份额分红";
         fundcode = intent.getStringExtra("productCode");
         type = intent.getStringExtra("productType");
         schema_id = intent.getStringExtra("schema_id");
@@ -140,8 +146,6 @@ public class ProductBuyActivity extends BaseActivity implements View.OnClickList
                 finish();
                 break;
             case R.id.tv_sure:
-
-
                 if (Helper.getInstance().isNeedShowRiskDialog()) {
                     Helper.getInstance().showCorpDialog(this, new CancelDialog.PositiveClickListener() {
                         @Override
@@ -163,9 +167,23 @@ public class ProductBuyActivity extends BaseActivity implements View.OnClickList
                     productBuyDialog = new ProductBuyDialog(ProductBuyActivity.this, ProductBuyActivity.this, dialogBean);
                     productBuyDialog.show();
                 }
-
+                break;
+            case R.id.tv_fhfs:
+                Helper.showItemSelectDialog(this,getWidth(),new Helper.OnItemSelectedListener(){
+                    @Override
+                    public void getSelectedItem(String content) {
+                        tv_fhfs.setText(content);
+                        dialogBean.fhfs = content;
+                    }
+                },false,new String[]{"现金分红", "份额分红"});
                 break;
         }
+    }
+
+    private int  getWidth() {
+        DisplayMetrics dm = new DisplayMetrics();
+        this.getWindowManager().getDefaultDisplay().getMetrics(dm);
+        return dm.widthPixels;
     }
 
     /**
@@ -384,6 +402,11 @@ public class ProductBuyActivity extends BaseActivity implements View.OnClickList
         map300440_1.put("DO_OPEN", encryptBySessionKey(""));
         map300440_1.put("DO_CONTRACT", encryptBySessionKey(""));
         map300440_1.put("DO_PRE_CONDITION", encryptBySessionKey("1"));
+        if("份额分红".equals(tv_fhfs.getText().toString())){
+            map300440_1.put("AUTO_BUY", encryptBySessionKey("0"));
+        }else if("现金分红".equals(tv_fhfs.getText().toString())){
+            map300440_1.put("AUTO_BUY", encryptBySessionKey("1"));
+        }
         map300440.put("parms", map300440_1);
         NetWorkUtil.getInstence().okHttpForPostString("", ConstantUtil.getURL_JY_HS(), map300440, new StringCallback() {
             @Override

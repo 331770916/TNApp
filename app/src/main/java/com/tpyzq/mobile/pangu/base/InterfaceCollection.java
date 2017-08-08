@@ -2118,7 +2118,7 @@ public class InterfaceCollection {
      * @param page  页码
      * @param level 级别
      */
-    public void queryImportant(String limit, String page, String level, final String TAG, final InterfaceCallback callback) {
+    public void queryImportant(String limit, String page, String level,String TAG, InterfaceCallback callback) {
         Map map1 = new HashMap<>();
         map1.put("limit", limit);
         map1.put("page", page);
@@ -2134,7 +2134,7 @@ public class InterfaceCollection {
      * @param limit  页数
      * @param page   页码
      */
-    public void queryStreaming(String daysno, String option, String limit, String page, final String TAG, final InterfaceCallback callback) {
+    public void queryStreaming(String daysno, String option, String limit, String page,String TAG,InterfaceCallback callback) {
         Map map1 = new HashMap<>();
         map1.put("daysno", daysno);
         map1.put("option", option);
@@ -2150,7 +2150,7 @@ public class InterfaceCollection {
      * @param limit
      * @param page
      */
-    public void queryHkstocks(String classno, String limit, String page, final String TAG, final InterfaceCallback callback) {
+    public void queryHkstocks(String classno, String limit, String page,String TAG,InterfaceCallback callback) {
         Map map1 = new HashMap<>();
         map1.put("classno", classno);
         map1.put("limit", limit);
@@ -2174,6 +2174,17 @@ public class InterfaceCollection {
      */
     public void queryClasslist(String TAG, InterfaceCallback callback) {
         parseInformation(ConstantUtil.getURL_CLASSLIST(), new HashMap(), TAG, callback, "");
+    }
+
+    /**
+     * 1.7.6 股票相关新闻
+     */
+    public void queryStockNews(String stockNo, String limit, String page,String TAG,InterfaceCallback callback){
+        Map map1 = new HashMap<>();
+        map1.put("stockNo", stockNo);
+        map1.put("limit", limit);
+        map1.put("page", page);
+        parseInformation(ConstantUtil.getURL_STOCKNEWS(),map1, TAG, callback,"");
     }
 
     /**
@@ -2257,6 +2268,8 @@ public class InterfaceCollection {
         bean.setLabelname(obj.optString("labelname"));
         bean.setClassno(obj.optString("classno"));
         bean.setClassname(obj.optString("classname"));
+        bean.setSecuCode(obj.optString("secuCode"));
+        bean.setSecuAbbr(obj.optString("secuAbbr"));
         JSONArray label = obj.optJSONArray("label");
         if (label != null && label.length() > 0)
             bean.setList(parseInformationArray(label, type));

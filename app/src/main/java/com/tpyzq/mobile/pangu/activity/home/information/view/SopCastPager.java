@@ -36,7 +36,6 @@ public class SopCastPager extends BasePager implements InterfaceCollection.Inter
     private SopCastAdapter adapter;
     private ArrayList<InformationEntity> list;
     private int count = 1;
-    private ProgressBar pb_SopCastPager;            //菊花
     private RelativeLayout rlSopCast;               //包裹整个布局的  RelativeLayout
     private LinearLayout llSopCastJiaZai;          //内容为空的   图片
     private TextView tvDay,tvDate;
@@ -60,7 +59,6 @@ public class SopCastPager extends BasePager implements InterfaceCollection.Inter
         View rl = rootView.findViewById(R.id.itemSopcast);
         tvDay = (TextView) rl.findViewById(R.id.tvDay);
         tvDate = (TextView) rl.findViewById(R.id.tvDate);
-        pb_SopCastPager = (ProgressBar) rootView.findViewById(R.id.pb_SopCastPager);    //显示菊花
         rlSopCast = (RelativeLayout) rootView.findViewById(R.id.rlSopCast);              //初始化  背景为灰色
         llSopCastJiaZai = (LinearLayout) rootView.findViewById(R.id.llSopCastJiaZai);
         rootView.findViewById(R.id.goTop).setOnClickListener(this);
@@ -120,7 +118,6 @@ public class SopCastPager extends BasePager implements InterfaceCollection.Inter
 
     @Override
     public void callResult(ResultInfo info) {
-        pb_SopCastPager.setVisibility(View.GONE);       //隐藏 菊花
         rlSopCast.setBackgroundColor(ContextCompat.getColor(mContext, R.color.white));   //背景设置为白色
         if(info.getCode().equals("200")){
             Object obj = info.getData();
@@ -139,7 +136,6 @@ public class SopCastPager extends BasePager implements InterfaceCollection.Inter
                 @Override
                 public void onClick(View v) {       //点击图片重新请求数据
                     llSopCastJiaZai.setVisibility(View.GONE);  //隐藏重新加载图片
-                    pb_SopCastPager.setVisibility(View.VISIBLE);      //显示菊花
                     rlSopCast.setVisibility(View.VISIBLE);//显示背景
                     rlSopCast.setBackgroundColor(ContextCompat.getColor(mContext, R.color.dividerColor)); //设置为灰色
                     count = 1;
