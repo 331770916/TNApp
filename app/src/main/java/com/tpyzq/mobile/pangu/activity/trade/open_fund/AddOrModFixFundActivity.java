@@ -102,7 +102,7 @@ public class AddOrModFixFundActivity extends BaseActivity implements View.OnClic
     }
 
     private void initData() {
-        currentDate = Helper.getCurDate();
+        currentDate = Helper.getNextDate(new Date(),"yyyy-MM-dd");
         position = getIntent().getIntExtra("position",-1);//position不为-1表示为修改
         if (position != -1) {
             fixFundEntity = (FixFundEntity)getIntent().getSerializableExtra("fixFundEntity");
@@ -124,6 +124,7 @@ public class AddOrModFixFundActivity extends BaseActivity implements View.OnClic
             tv_title.setText(getResources().getString(R.string.add_fund));
             tv_start_date.setText(currentDate);
             tv_end_date.setText(Helper.getInstance().getNextYear(new Date(),"yyyy-MM-dd"));
+
             fixFundEntity = new FixFundEntity();
             fixFundEntity.setEN_FUND_DATE("1");
             fixFundEntity.setSTART_DATE(currentDate);
@@ -234,6 +235,19 @@ public class AddOrModFixFundActivity extends BaseActivity implements View.OnClic
                     CentreToast.showText(this,"请输入定投金额");
                     break;
                 }
+
+                int numDate2 = Helper.compareToDate(Helper.getCurDate(), tv_start_date.getText().toString());
+                if (numDate2 != 2) {
+                    CentreToast.showText(this,"开始日期不能小于当前日期");
+                    break;
+                }
+
+                int numDate1 = Helper.compareToDate(tv_start_date.getText().toString(), tv_end_date.getText().toString());
+                if (numDate1 != 2) {
+                    CentreToast.showText(this,"结束日期不能小于开始日期");
+                    break;
+                }
+
                 fixFundEntity.setBALANCE(balance);
                 if (position == -1) {//新增
                     if (Helper.getInstance().isNeedShowRiskDialog()) {//判断风险评测

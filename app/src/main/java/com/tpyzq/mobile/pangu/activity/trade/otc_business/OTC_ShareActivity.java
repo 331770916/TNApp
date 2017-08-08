@@ -42,7 +42,6 @@ public class OTC_ShareActivity extends BaseActivity implements View.OnClickListe
     private Dialog                  mProgressDialog;
     private SimplePullLayout        mSimplePullLayout;
     private OTC_ShareAdapter        mAdapter;
-    private String                  mSession;
     private ImageView               mKong_iv;
     private OTC_ShareConnect mConnect = new OTC_ShareConnect();
     private boolean clickBackKey;//判断用户是否点击返回键取消网络请求
@@ -68,9 +67,8 @@ public class OTC_ShareActivity extends BaseActivity implements View.OnClickListe
         mAdapter.setClick(this);
 
         mSimplePullLayout.setOnPullListener(this);
-        mSession = SpUtils.getString(this, "mSession", "");
         initLoadDialog();
-        mConnect.toOtcShareConnect(TAG, mSession, this);
+        mConnect.toOtcShareConnect(TAG, this);
 
     }
 
@@ -100,7 +98,7 @@ public class OTC_ShareActivity extends BaseActivity implements View.OnClickListe
 
     @Override
     public void onRefresh() {
-        mConnect.toOtcShareConnect(TAG, mSession, this);
+        mConnect.toOtcShareConnect(TAG, this);
     }
 
     @Override

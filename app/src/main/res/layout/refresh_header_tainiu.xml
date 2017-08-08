@@ -1,50 +1,55 @@
 <LinearLayout xmlns:android="http://schemas.android.com/apk/res/android"
     android:layout_width="match_parent"
     android:layout_height="wrap_content"
+    android:gravity="center_horizontal"
     android:orientation="horizontal"
     android:layout_marginTop="15dp">
 
-    <RelativeLayout
-        android:layout_width="@dimen/size30"
-        android:layout_height="@dimen/size30"
-        android:layout_marginLeft="@dimen/size20">
+    <FrameLayout
+        android:layout_weight="0.6"
+        android:layout_width="0dp"
+        android:layout_height="wrap_content">
         <ImageView
             android:id="@+id/arrow"
-            android:layout_width="wrap_content"
-            android:layout_height="wrap_content"
-            android:layout_alignParentRight="true"
+            android:layout_gravity="end"
+            android:layout_width="35dp"
+            android:layout_height="35dp"
             android:background="@android:color/transparent"
-            android:src="@drawable/cow" />
-    </RelativeLayout>
+            android:src="@drawable/cow"/>
+    </FrameLayout>
 
-    <RelativeLayout
-        android:layout_width="wrap_content"
-        android:layout_height="30dp">
+    <LinearLayout
+        android:paddingRight="70dp"
+        android:layout_weight="1"
+        android:layout_width="0dp"
+        android:layout_height="wrap_content"
+        android:layout_gravity="center"
+        android:gravity="center_horizontal|fill"
+        android:orientation="vertical">
 
         <TextView
             android:id="@+id/description"
+            android:layout_gravity="center"
+            android:textSize="12sp"
             android:layout_width="wrap_content"
             android:layout_height="wrap_content"
-            android:layout_centerVertical="true"
-            android:text="下拉可以刷新"
-            android:textColor="@color/texts"
-            android:padding="@dimen/size5"
-            android:textSize="@dimen/txtSize12" />
+            android:text="下拉刷新"
+            android:singleLine="true"
+            android:textAppearance="?android:attr/textAppearance"
+            android:textColor="#999999"
+            android:textStyle="bold" />
 
-    </RelativeLayout>
-
-    <RelativeLayout
-        android:layout_width="wrap_content"
-        android:layout_height="30dp">
         <TextView
-            android:textColor="@color/texts"
             android:id="@+id/updated_at"
-            android:layout_centerVertical="true"
-            android:layout_alignParentLeft="true"
-            android:padding="@dimen/size5"
+            android:layout_gravity="center"
+            android:textSize="10sp"
             android:layout_width="wrap_content"
             android:layout_height="wrap_content"
-            android:textSize="@dimen/txtSize12" />
-    </RelativeLayout>
+            android:singleLine="true"
+            android:textAppearance="?android:attr/textAppearanceSmall"
+            android:textColor="#999999"
+            android:visibility="visible" />
+
+    </LinearLayout>
 
 </LinearLayout>

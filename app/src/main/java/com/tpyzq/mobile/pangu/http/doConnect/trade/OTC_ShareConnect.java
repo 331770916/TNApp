@@ -1,8 +1,10 @@
 package com.tpyzq.mobile.pangu.http.doConnect.trade;
 
+import com.tpyzq.mobile.pangu.base.CustomApplication;
 import com.tpyzq.mobile.pangu.data.OtcShareEntity;
 import com.tpyzq.mobile.pangu.http.NetWorkUtil;
 import com.tpyzq.mobile.pangu.util.ConstantUtil;
+import com.tpyzq.mobile.pangu.util.SpUtils;
 import com.zhy.http.okhttp.callback.StringCallback;
 
 import org.json.JSONArray;
@@ -20,13 +22,13 @@ import okhttp3.Call;
 
 public class OTC_ShareConnect {
 
-    public void toOtcShareConnect (String tag, String session, final OTC_ShareConnectInterface otcShareInterface) {
+    public void toOtcShareConnect (String tag, final OTC_ShareConnectInterface otcShareInterface) {
         HashMap map1 = new HashMap();
         HashMap map2 = new HashMap();
         map2.put("FLAG", "true");
         map2.put("SEC_ID", "tpyzq");
         map1.put("funcid", "300501");
-        map1.put("token", session);
+        map1.put("token", SpUtils.getString(CustomApplication.getContext(), "mSession", ""));
         map1.put("parms", map2);
 
         NetWorkUtil.getInstence().okHttpForPostString(tag, ConstantUtil.getURL_JY_HS(), map1, new StringCallback() {
