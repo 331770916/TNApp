@@ -164,7 +164,7 @@ public class FixFundListActivity extends BaseActivity implements View.OnClickLis
                 lv.onRefreshComplete();
             } else {
                 lv.onRefreshComplete();
-                CentreToast.showText(this,msg,false);
+                CentreToast.showText(this,msg);
             }
         }
         /*else if (TAG_LIST_FIRST.equalsIgnoreCase(tag)) {//进入第一次请求

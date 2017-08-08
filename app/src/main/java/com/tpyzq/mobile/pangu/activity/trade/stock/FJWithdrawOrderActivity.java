@@ -19,6 +19,8 @@ import com.tpyzq.mobile.pangu.data.StructuredFundEntity;
 import com.tpyzq.mobile.pangu.util.ConstantUtil;
 import com.tpyzq.mobile.pangu.util.Helper;
 import com.tpyzq.mobile.pangu.util.SpUtils;
+import com.tpyzq.mobile.pangu.view.CentreToast;
+import com.tpyzq.mobile.pangu.view.CustomCenterDialog;
 import com.tpyzq.mobile.pangu.view.dialog.LoadingDialog;
 import com.tpyzq.mobile.pangu.view.dialog.MistakeDialog;
 import com.tpyzq.mobile.pangu.view.dialog.StructuredFundDialog;
@@ -97,14 +99,14 @@ public class FJWithdrawOrderActivity extends BaseActivity implements AdapterView
                     mList.addAll(ses);
                     mFjwithdrawOrderAdapter.notifyDataSetChanged();
                 } else if ("400".equals(info.getCode()) || "-2".equals(info.getCode()) || "-3".equals(info.getCode())) {
-                    Helper.getInstance().showToast(FJWithdrawOrderActivity.this, info.getMsg());
+                    CentreToast.showText(FJWithdrawOrderActivity.this, info.getMsg());
                 } else if ("-6".equals(info.getCode())) {
                     Intent intent = new Intent();
                     intent.setClass(FJWithdrawOrderActivity.this, TransactionLoginActivity.class);
                     startActivity(intent);
                 } else {
-                    //   系统弹窗
-                    MistakeDialog.specialshowDialog(info.getMsg(), FJWithdrawOrderActivity.this, null);
+                    CustomCenterDialog customCenterDialog = CustomCenterDialog.CustomCenterDialog(info.getMsg(),CustomCenterDialog.SHOWCENTER);
+                    customCenterDialog.show(getFragmentManager(),FJWithdrawOrderActivity.class.toString());
                 }
             }
         });

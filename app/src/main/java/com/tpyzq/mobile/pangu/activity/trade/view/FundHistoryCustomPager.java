@@ -26,6 +26,7 @@ import com.tpyzq.mobile.pangu.util.ConstantUtil;
 import com.tpyzq.mobile.pangu.util.Helper;
 import com.tpyzq.mobile.pangu.util.SpUtils;
 import com.tpyzq.mobile.pangu.util.ToastUtils;
+import com.tpyzq.mobile.pangu.view.CentreToast;
 import com.tpyzq.mobile.pangu.view.dialog.LoadingDialog;
 import com.tpyzq.mobile.pangu.view.pickTime.TimePickerView;
 import com.zhy.http.okhttp.callback.StringCallback;
@@ -88,7 +89,7 @@ public class FundHistoryCustomPager extends BaseTransactionPager implements View
         tv_text1.setText("名称");
         tv_text2.setText("成交日期");
         tv_text3.setText("业务名称");
-        tv_text4.setText("成交金额/份额");
+        tv_text4.setText("金额/份额");
         tv_start_data.setText(Helper.getNowData());
         tv_end_data.setText(Helper.getNowData());
         ll_search.setVisibility(View.VISIBLE);
@@ -129,7 +130,7 @@ public class FundHistoryCustomPager extends BaseTransactionPager implements View
                 if (mDialog!=null){
                     mDialog.dismiss();
                 }
-                Toast.makeText(mContext, "网络访问失败", Toast.LENGTH_SHORT).show();
+                CentreToast.showText(mContext,ConstantUtil.NETWORK_ERROR);
             }
 
             @Override
@@ -164,7 +165,7 @@ public class FundHistoryCustomPager extends BaseTransactionPager implements View
                     } else if ("-6".equals(code)) {
                         mContext.startActivity(new Intent(mContext, TransactionLoginActivity.class));
                     } else {
-                        ToastUtils.showShort(mContext, msg);
+                        CentreToast.showText(mContext,msg);
                     }
 
                 } catch (JSONException e) {
@@ -242,7 +243,7 @@ public class FundHistoryCustomPager extends BaseTransactionPager implements View
                 if (sure >= 30) {
 
                 } else {
-                    ToastUtils.showShort(mContext, "已经滑到底了");
+                    CentreToast.showText(mContext,"已经滑到底了");
                 }
             }
         });

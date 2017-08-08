@@ -16,8 +16,9 @@ import com.tpyzq.mobile.pangu.data.EtfDataEntity;
 import com.tpyzq.mobile.pangu.data.ResultInfo;
 import com.tpyzq.mobile.pangu.http.OkHttpUtil;
 import com.tpyzq.mobile.pangu.util.ConstantUtil;
-import com.tpyzq.mobile.pangu.util.Helper;
 import com.tpyzq.mobile.pangu.util.SpUtils;
+import com.tpyzq.mobile.pangu.view.CentreToast;
+import com.tpyzq.mobile.pangu.view.CustomCenterDialog;
 import com.tpyzq.mobile.pangu.view.dialog.LoadingDialog;
 import com.tpyzq.mobile.pangu.view.dialog.MistakeDialog;
 import com.tpyzq.mobile.pangu.view.dialog.StructuredFundDialog;
@@ -132,7 +133,7 @@ public class ETFRevokeActivity extends BaseActivity implements StructuredFundDia
                         lv.setMode(PullToRefreshBase.Mode.BOTH);
                     }
                 }else  if ("400".equals(info.getCode()) || "-2".equals(info.getCode()) || "-3".equals(info.getCode())) {   //  网络错误 解析错误 其他
-                    Helper.getInstance().showToast(ETFRevokeActivity.this, info.getMsg());
+                    CentreToast.showText(ETFRevokeActivity.this, info.getMsg());
                 }else if ("-6".equals(info.getCode())){
                     skip.startLogin(ETFRevokeActivity.this);
                 } else {
@@ -141,7 +142,7 @@ public class ETFRevokeActivity extends BaseActivity implements StructuredFundDia
                     if (isRefresh && mList.size() == 0) {
                         lv.setMode(PullToRefreshBase.Mode.PULL_FROM_START);
                     }
-                    MistakeDialog.showDialog(msg, ETFRevokeActivity.this, null);
+                    showDialog(msg);
                 }
                 if (null != mDialog && mDialog.isShowing()) {
                     mDialog.dismiss();
@@ -170,15 +171,20 @@ public class ETFRevokeActivity extends BaseActivity implements StructuredFundDia
                 String code = info.getCode();
                 String msg = info.getMsg();
                 if ("0".equalsIgnoreCase(code)) {
-                    MistakeDialog.showDialog(msg, ETFRevokeActivity.this, null);
+                    showDialog(msg);
                 } else {
-                    MistakeDialog.showDialog(msg, ETFRevokeActivity.this, null);
+                    showDialog(msg);
                 }
                 if (null != mSubDialog && mSubDialog.isShowing()) {
                     mSubDialog.dismiss();
                 }
             }
         });
+    }
+
+    public void showDialog(String msg){
+        CustomCenterDialog customCenterDialog = CustomCenterDialog.CustomCenterDialog(msg,CustomCenterDialog.SHOWCENTER);
+        customCenterDialog.show(getFragmentManager(),ETFRevokeActivity.class.toString());
     }
 
     @Override

@@ -53,6 +53,7 @@ public class IndexActivity extends BaseActivity {
     private int tabIds[] = new int[]{R.id.homeRadioBtn, R.id.marketRadioBtn, R.id.transactionRadioBtn, R.id.informationRadioBtn};
     private ExitDialog dialog;
     private Boolean flag = false;
+    private String url  ="";
 
     @Override
     public void initView() {
@@ -318,15 +319,15 @@ public class IndexActivity extends BaseActivity {
                         String[] thisVersionCode = APPInfoUtils.getVersionName(IndexActivity.this).split("\\.");
                         //如果 版本号  与  当前版本号 相同 删除安装包
                         if (Double.parseDouble(versionCode[0]) > Double.parseDouble(thisVersionCode[0])) {
-                            Dialog mDialog = new VersionDialog(IndexActivity.this, apkAddress, forceIsupdate, versionNumber);
+                            Dialog mDialog = new VersionDialog(IndexActivity.this, apkAddress, forceIsupdate, versionNumber,url);
                             mDialog.show();
                         } else if(Double.parseDouble(versionCode[0]) == Double.parseDouble(thisVersionCode[0])){
                             if (Double.parseDouble(versionCode[1]) > Double.parseDouble(thisVersionCode[1])) {
-                                Dialog mDialog = new VersionDialog(IndexActivity.this, apkAddress, forceIsupdate, versionNumber);
+                                Dialog mDialog = new VersionDialog(IndexActivity.this, apkAddress, forceIsupdate, versionNumber,url);
                                 mDialog.show();
                             } else if (Double.parseDouble(versionCode[1]) == Double.parseDouble(thisVersionCode[1])) {
                                 if (Double.parseDouble(versionCode[2]) > Double.parseDouble(thisVersionCode[2])) {
-                                    Dialog mDialog = new VersionDialog(IndexActivity.this, apkAddress, forceIsupdate, versionNumber);
+                                    Dialog mDialog = new VersionDialog(IndexActivity.this, apkAddress, forceIsupdate, versionNumber,url);
                                     mDialog.show();
                                 }
                             }

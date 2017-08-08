@@ -25,6 +25,7 @@ import com.tpyzq.mobile.pangu.util.ConstantUtil;
 import com.tpyzq.mobile.pangu.util.Helper;
 import com.tpyzq.mobile.pangu.util.SpUtils;
 import com.tpyzq.mobile.pangu.util.ToastUtils;
+import com.tpyzq.mobile.pangu.view.CentreToast;
 import com.tpyzq.mobile.pangu.view.dialog.LoadingDialog;
 import com.tpyzq.mobile.pangu.view.pickTime.TimePickerView;
 import com.zhy.http.okhttp.callback.StringCallback;
@@ -129,6 +130,7 @@ public class FundEntrustCustomPager extends BaseTransactionPager implements View
                 if (mDialog!=null){
                     mDialog.dismiss();
                 }
+                CentreToast.showText(mContext,ConstantUtil.NETWORK_ERROR);
             }
 
             @Override
@@ -163,7 +165,7 @@ public class FundEntrustCustomPager extends BaseTransactionPager implements View
                     } else if ("-6".equals(code)) {
                         mContext.startActivity(new Intent(mContext, TransactionLoginActivity.class));
                     } else {
-                        ToastUtils.showShort(mContext, msg);
+                        CentreToast.showText(mContext,msg);
                     }
 
                 } catch (JSONException e) {
@@ -241,7 +243,7 @@ public class FundEntrustCustomPager extends BaseTransactionPager implements View
                 if (sure >= 30) {
 
                 } else {
-                    ToastUtils.showShort(mContext, "已经滑到底了");
+                    CentreToast.showText(mContext,"已经滑到底了");
                 }
             }
         });

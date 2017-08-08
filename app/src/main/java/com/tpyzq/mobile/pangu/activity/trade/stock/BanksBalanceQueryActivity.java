@@ -26,8 +26,9 @@ import com.tpyzq.mobile.pangu.util.Helper;
 import com.tpyzq.mobile.pangu.util.SpUtils;
 import com.tpyzq.mobile.pangu.util.keyboard.UsefulKeyBoard;
 import com.tpyzq.mobile.pangu.util.panguutil.UserUtil;
+import com.tpyzq.mobile.pangu.view.CentreToast;
+import com.tpyzq.mobile.pangu.view.CustomCenterDialog;
 import com.tpyzq.mobile.pangu.view.dialog.LoadingDialog;
-import com.tpyzq.mobile.pangu.view.dialog.MistakeDialog;
 import com.tpyzq.mobile.pangu.view.keybody.InputPasswordView;
 import com.tpyzq.mobile.pangu.view.keybody.PopKeyBody;
 import com.yzd.unikeysdk.OnInputDoneCallBack;
@@ -137,12 +138,7 @@ public class BanksBalanceQueryActivity extends BaseActivity implements View.OnCl
 
                 if (!bean.getCode().equals("0")) {
                     mEmpty.setVisibility(View.VISIBLE);
-                    MistakeDialog.showDialog(bean.getMsg(), BanksBalanceQueryActivity.this, new MistakeDialog.MistakeDialgoListener() {
-                        @Override
-                        public void doPositive() {
-                            finish();
-                        }
-                    });
+                    showDialog(bean.getMsg());
                     return;
                 }
 
@@ -247,7 +243,7 @@ public class BanksBalanceQueryActivity extends BaseActivity implements View.OnCl
     private void queryBalance(String s, String queryType) {
 
         if (TextUtils.isEmpty(mBankNo)) {
-            Helper.getInstance().showToast(CustomApplication.getContext(), "银行代码为空");
+            CentreToast.showText(CustomApplication.getContext(), "银行代码为空");
             return;
         }
 
@@ -291,13 +287,7 @@ public class BanksBalanceQueryActivity extends BaseActivity implements View.OnCl
                 if (mLoadingDialog != null) {
                     mLoadingDialog.dismiss();
                 }
-
-                MistakeDialog.showDialog("" + e.toString(), BanksBalanceQueryActivity.this, new MistakeDialog.MistakeDialgoListener() {
-                    @Override
-                    public void doPositive() {
-                        finish();
-                    }
-                });
+                showDialog("" + e.toString());
             }
 
             @Override
@@ -324,12 +314,7 @@ public class BanksBalanceQueryActivity extends BaseActivity implements View.OnCl
                 }
 
                 if (!bean.getCode().equals("0")) {
-                    MistakeDialog.showDialog(bean.getMsg(), BanksBalanceQueryActivity.this, new MistakeDialog.MistakeDialgoListener() {
-                        @Override
-                        public void doPositive() {
-                            finish();
-                        }
-                    });
+                   showDialog(bean.getMsg());
                     return;
                 }
 
@@ -347,6 +332,17 @@ public class BanksBalanceQueryActivity extends BaseActivity implements View.OnCl
 
                 }
 
+            }
+        });
+    }
+
+    public void showDialog(String msg){
+        CustomCenterDialog customCenterDialog = CustomCenterDialog.CustomCenterDialog(msg,CustomCenterDialog.SHOWCENTER);
+        customCenterDialog.show(getFragmentManager(),BanksBalanceQueryActivity.class.toString());
+        customCenterDialog.setOnClickListener(new CustomCenterDialog.ConfirmOnClick() {
+            @Override
+            public void confirmOnclick() {
+                finish();
             }
         });
     }

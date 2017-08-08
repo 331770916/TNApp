@@ -26,8 +26,8 @@ import com.tpyzq.mobile.pangu.http.NetWorkUtil;
 import com.tpyzq.mobile.pangu.util.ConstantUtil;
 import com.tpyzq.mobile.pangu.util.Helper;
 import com.tpyzq.mobile.pangu.util.SpUtils;
-import com.tpyzq.mobile.pangu.util.ToastUtils;
 import com.tpyzq.mobile.pangu.util.panguutil.UserUtil;
+import com.tpyzq.mobile.pangu.view.CentreToast;
 import com.tpyzq.mobile.pangu.view.dialog.CancelDialog;
 import com.tpyzq.mobile.pangu.view.dialog.FundPurchaseDialog;
 import com.tpyzq.mobile.pangu.view.dialog.MistakeDialog;
@@ -38,7 +38,6 @@ import java.util.HashMap;
 import okhttp3.Call;
 import static com.tpyzq.mobile.pangu.activity.trade.open_fund.FundInfoActivity.*;
 import static com.tpyzq.mobile.pangu.util.keyboard.KeyEncryptionUtils.encryptBySessionKey;
-import static com.umeng.socialize.utils.DeviceConfig.context;
 
 
 /**
@@ -256,7 +255,7 @@ public class FundPurchaseActivity extends BaseActivity implements View.OnClickLi
         net.okHttpForPostString("", ConstantUtil.getURL_JY_HS(), map300440, new StringCallback() {
             @Override
             public void onError(Call call, Exception e, int id) {
-                ToastUtils.showShort(context, "委托失败");
+                CentreToast.showText(FundPurchaseActivity.this,ConstantUtil.NETWORK_ERROR);
             }
 
             @Override
@@ -328,7 +327,7 @@ public class FundPurchaseActivity extends BaseActivity implements View.OnClickLi
     }
 
     private void startFinish() {
-        ToastUtils.showShort(FundPurchaseActivity.this, "委托成功");
+        CentreToast.showText(FundPurchaseActivity.this,"委托已提交",true);
         clearView(true);
     }
 
@@ -367,7 +366,7 @@ public class FundPurchaseActivity extends BaseActivity implements View.OnClickLi
         NetWorkUtil.getInstence().okHttpForPostString("", ConstantUtil.getURL_JY_HS(), map300431, new StringCallback() {
             @Override
             public void onError(Call call, Exception e, int id) {
-                Helper.getInstance().showToast(FundPurchaseActivity.this, ConstantUtil.NETWORK_ERROR);
+                CentreToast.showText(FundPurchaseActivity.this, ConstantUtil.NETWORK_ERROR);
             }
 
             @Override
@@ -388,7 +387,7 @@ public class FundPurchaseActivity extends BaseActivity implements View.OnClickLi
                         fundData.FUND_NAME = fundDataBean.data.get(0).FUND_NAME;
                     } else {
 
-                        ToastUtils.showShort(FundPurchaseActivity.this, msg);
+                        CentreToast.showText(FundPurchaseActivity.this, msg);
 //                        startActivity(new Intent(FundSubsActivity.this, TransactionLoginActivity.class));
                     }
                 } catch (JSONException e) {

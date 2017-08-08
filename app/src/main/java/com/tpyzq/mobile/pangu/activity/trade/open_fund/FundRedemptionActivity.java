@@ -178,7 +178,7 @@ public class FundRedemptionActivity extends BaseActivity implements View.OnClick
         NetWorkUtil.getInstence().okHttpForPostString("", ConstantUtil.getURL_JY_HS(), map300431, new StringCallback() {
             @Override
             public void onError(Call call, Exception e, int id) {
-                Helper.getInstance().showToast(FundRedemptionActivity.this, ConstantUtil.NETWORK_ERROR);
+                CentreToast.showText(FundRedemptionActivity.this, ConstantUtil.NETWORK_ERROR);
             }
 
             @Override
@@ -196,7 +196,7 @@ public class FundRedemptionActivity extends BaseActivity implements View.OnClick
                     } else if ("-6".equals(code)) {
                         startActivity(new Intent(FundRedemptionActivity.this, TransactionLoginActivity.class));
                     } else {
-                        ToastUtils.showShort(FundRedemptionActivity.this, msg);
+                        CentreToast.showText(FundRedemptionActivity.this, msg);
                     }
                 } catch (JSONException e) {
                     e.printStackTrace();
@@ -297,7 +297,7 @@ public class FundRedemptionActivity extends BaseActivity implements View.OnClick
         NetWorkUtil.getInstence().okHttpForPostString("", ConstantUtil.getURL_JY_HS(), map720203, new StringCallback() {
             @Override
             public void onError(Call call, Exception e, int id) {
-                Toast.makeText(FundRedemptionActivity.this, "网络访问失败", Toast.LENGTH_SHORT).show();
+                CentreToast.showText(FundRedemptionActivity.this,ConstantUtil.NETWORK_ERROR);
             }
 
             @Override

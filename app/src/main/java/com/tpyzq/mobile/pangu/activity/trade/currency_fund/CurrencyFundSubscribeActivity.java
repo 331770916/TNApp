@@ -24,6 +24,8 @@ import com.tpyzq.mobile.pangu.http.NetWorkUtil;
 import com.tpyzq.mobile.pangu.util.ConstantUtil;
 import com.tpyzq.mobile.pangu.util.Helper;
 import com.tpyzq.mobile.pangu.util.SpUtils;
+import com.tpyzq.mobile.pangu.view.CentreToast;
+import com.tpyzq.mobile.pangu.view.CustomCenterDialog;
 import com.tpyzq.mobile.pangu.view.dialog.MistakeDialog;
 import com.zhy.http.okhttp.callback.StringCallback;
 
@@ -191,7 +193,7 @@ public class CurrencyFundSubscribeActivity extends BaseActivity implements View.
         NetWorkUtil.getInstence().okHttpForPostString(TAG, ConstantUtil.getURL_JY_HS(), map1, new StringCallback() {
             @Override
             public void onError(Call call, Exception e, int id) {
-                Helper.getInstance().showToast(CurrencyFundSubscribeActivity.this,ConstantUtil.NETWORK_ERROR);
+                CentreToast.showText(CurrencyFundSubscribeActivity.this,ConstantUtil.NETWORK_ERROR);
             }
 
             @Override
@@ -226,7 +228,8 @@ public class CurrencyFundSubscribeActivity extends BaseActivity implements View.
                             map.put("mSession",mSession);
                         }
                     }else {
-                        MistakeDialog.showDialog(bean.getMsg(),CurrencyFundSubscribeActivity.this);
+                        CustomCenterDialog customCenterDialog = CustomCenterDialog.CustomCenterDialog(bean.getMsg(),CustomCenterDialog.SHOWCENTER);
+                        customCenterDialog.show(getFragmentManager(),CurrencyFundSubscribeActivity.class.toString());
                     }
                 }
 

@@ -21,6 +21,7 @@ import com.tpyzq.mobile.pangu.log.LogHelper;
 import com.tpyzq.mobile.pangu.util.ConstantUtil;
 import com.tpyzq.mobile.pangu.util.Helper;
 import com.tpyzq.mobile.pangu.util.SpUtils;
+import com.tpyzq.mobile.pangu.view.CentreToast;
 import com.zhy.http.okhttp.callback.StringCallback;
 
 import org.json.JSONArray;
@@ -80,7 +81,7 @@ public class DeliveryThreeWeekPager extends BaseSearchPager {
 
     private void toConnect(String i, String j, final boolean flag) {
         String mSession = SpUtils.getString(mContext, "mSession", "");
-        Map map = new HashMap();
+        final Map map = new HashMap();
         Map map2 = new HashMap();
 
         map2.put("SEC_ID", "tpyzq");
@@ -147,7 +148,7 @@ public class DeliveryThreeWeekPager extends BaseSearchPager {
                         kong_null.setVisibility(View.GONE);
                     }
                 } catch (JSONException e) {
-                    Helper.getInstance().showToast(mContext, "网络异常");
+                    CentreToast.showText(mContext,ConstantUtil.NETWORK_ERROR);
                     e.printStackTrace();
                 }
             }

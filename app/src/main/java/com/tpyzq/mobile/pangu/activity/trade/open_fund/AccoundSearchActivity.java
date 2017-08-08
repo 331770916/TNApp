@@ -22,6 +22,7 @@ import com.tpyzq.mobile.pangu.util.ConstantUtil;
 import com.tpyzq.mobile.pangu.util.Helper;
 import com.tpyzq.mobile.pangu.util.SpUtils;
 import com.tpyzq.mobile.pangu.util.ToastUtils;
+import com.tpyzq.mobile.pangu.view.CentreToast;
 import com.tpyzq.mobile.pangu.view.dialog.MistakeDialog;
 import com.zhy.http.okhttp.callback.StringCallback;
 
@@ -97,7 +98,7 @@ public class AccoundSearchActivity extends BaseActivity implements View.OnClickL
             @Override
             public void onError(Call call, Exception e, int id) {
                 lv_accound_search.onRefreshComplete();
-                Helper.getInstance().showToast(AccoundSearchActivity.this,ConstantUtil.NETWORK_ERROR);
+                CentreToast.showText(AccoundSearchActivity.this,ConstantUtil.NETWORK_ERROR);
             }
 
             @Override
@@ -124,7 +125,7 @@ public class AccoundSearchActivity extends BaseActivity implements View.OnClickL
                     } else if ("-6".equals(code)) {
                         startActivity(new Intent(AccoundSearchActivity.this, TransactionLoginActivity.class));
                     } else {
-                        MistakeDialog.showDialog(msg,AccoundSearchActivity.this);
+                        CentreToast.showText(AccoundSearchActivity.this,msg);
                     }
                 } catch (JSONException e) {
                     e.printStackTrace();

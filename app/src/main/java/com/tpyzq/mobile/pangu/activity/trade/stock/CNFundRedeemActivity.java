@@ -21,9 +21,9 @@ import com.tpyzq.mobile.pangu.http.NetWorkUtil;
 import com.tpyzq.mobile.pangu.interfac.ClearData;
 import com.tpyzq.mobile.pangu.util.ConstantUtil;
 import com.tpyzq.mobile.pangu.util.SpUtils;
+import com.tpyzq.mobile.pangu.view.CustomCenterDialog;
 import com.tpyzq.mobile.pangu.view.dialog.CNFundRedeemDialog;
 import com.tpyzq.mobile.pangu.view.dialog.MistakeDialog;
-import com.tpyzq.mobile.pangu.view.dialog.ResultDialog;
 import com.zhy.http.okhttp.callback.StringCallback;
 
 import java.lang.reflect.Type;
@@ -215,8 +215,8 @@ public class CNFundRedeemActivity extends BaseActivity implements View.OnClickLi
                         map.put("nav", nav);
                     }
                 } else {
-                    MistakeDialog.showDialog(bean.getMsg(), CNFundRedeemActivity.this);
-
+                    CustomCenterDialog customCenterDialog = CustomCenterDialog.CustomCenterDialog(bean.getMsg(),CustomCenterDialog.SHOWCENTER);
+                    customCenterDialog.show(getFragmentManager(),CNFundRedeemActivity.class.toString());
                 }
             }
         });

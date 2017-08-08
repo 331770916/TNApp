@@ -1,4 +1,5 @@
 package com.tpyzq.mobile.pangu.activity.trade.stock;
+import android.app.FragmentManager;
 import android.content.Context;
 import android.support.v4.view.ViewPager;
 import android.view.View;
@@ -36,10 +37,12 @@ public class FJDealQueryActivity  extends BaseActivity implements View.OnClickLi
     private MagicIndicator magicIndicator;
     private ViewPager viewPager;
     private TextView title;
+    public static FragmentManager fragmentManager;
 
 
     @Override
     public void initView() {
+        fragmentManager = getFragmentManager();
         findViewById(R.id.ivCNFund_back).setOnClickListener(this);
         title =(TextView)this.findViewById(R.id.fj_title);
         title.setText("成交查询");

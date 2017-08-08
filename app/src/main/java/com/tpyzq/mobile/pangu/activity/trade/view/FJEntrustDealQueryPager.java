@@ -10,20 +10,21 @@ import android.widget.AbsListView;
 import android.widget.ImageView;
 import android.widget.LinearLayout;
 import android.widget.ListView;
-import android.widget.RelativeLayout;
 import android.widget.TextView;
 
 import com.handmark.pulltorefresh.library.PullToRefreshBase;
 import com.handmark.pulltorefresh.library.PullToRefreshListView;
 import com.tpyzq.mobile.pangu.R;
+import com.tpyzq.mobile.pangu.activity.trade.stock.FJDealQueryActivity;
+import com.tpyzq.mobile.pangu.activity.trade.stock.FJEntrustedQueryActivity;
 import com.tpyzq.mobile.pangu.adapter.trade.FJEntrustedDealListViewAdapter;
 import com.tpyzq.mobile.pangu.base.BasePager;
 import com.tpyzq.mobile.pangu.base.InterfaceCollection;
 import com.tpyzq.mobile.pangu.data.ResultInfo;
 import com.tpyzq.mobile.pangu.data.StructuredFundEntity;
-import com.tpyzq.mobile.pangu.util.Helper;
+import com.tpyzq.mobile.pangu.view.CentreToast;
+import com.tpyzq.mobile.pangu.view.CustomCenterDialog;
 import com.tpyzq.mobile.pangu.view.dialog.LoadingDialog;
-import com.tpyzq.mobile.pangu.view.dialog.MistakeDialog;
 import com.tpyzq.mobile.pangu.view.pickTime.TimePickerView;
 
 import java.util.Date;
@@ -48,7 +49,7 @@ public class FJEntrustDealQueryPager extends BasePager implements InterfaceColle
     private ImageView iv_isEmpty;
     private boolean isFirst=true;
     private int refresh = 30;
-
+    private Activity activity;
 
     public FJEntrustDealQueryPager(Context context, String params) {
         super(context, params);
@@ -101,6 +102,7 @@ public class FJEntrustDealQueryPager extends BasePager implements InterfaceColle
             });
         }
         mDialog = LoadingDialog.initDialog((Activity) mContext, "正在查询...");
+        activity = (Activity)mContext;
     }
 
 
@@ -122,9 +124,23 @@ public class FJEntrustDealQueryPager extends BasePager implements InterfaceColle
                         String str = helper.compareTo(startDate, finishDate);
                         int days = helper.daysBetween(startDate, finishDate);
                         if (str.equalsIgnoreCase(startDate)) {
-                            mistakeDialog = MistakeDialog.showDialog("请选择正确日期,起始日期不能超过截止日期", (Activity) mContext);
+//                            mistakeDialog = MistakeDialog.showDialog("请选择正确日期,起始日期不能超过截止日期", (Activity) mContext);
+                            CustomCenterDialog customCenterDialog = CustomCenterDialog.CustomCenterDialog("请选择正确日期,起始日期不能超过截止日期",CustomCenterDialog.SHOWCENTER);
+                            if (activity instanceof FJEntrustedQueryActivity){
+                                customCenterDialog.show(FJEntrustedQueryActivity.fragmentManager,FJEntrustDealQueryPager.class.toString());
+                            }else {
+                                customCenterDialog.show(FJDealQueryActivity.fragmentManager,FJEntrustDealQueryPager.class.toString());
+
+                            }
                         } else if (days > 90) {
-                            mistakeDialog = MistakeDialog.showDialog("选择的日期间隔不能超过3个月", (Activity) mContext);
+                            CustomCenterDialog customCenterDialog = CustomCenterDialog.CustomCenterDialog("选择的日期间隔不能超过3个月",CustomCenterDialog.SHOWCENTER);
+                            if (activity instanceof FJEntrustedQueryActivity){
+                                customCenterDialog.show(FJEntrustedQueryActivity.fragmentManager,FJEntrustDealQueryPager.class.toString());
+                            }else {
+                                customCenterDialog.show(FJDealQueryActivity.fragmentManager,FJEntrustDealQueryPager.class.toString());
+
+                            }
+//                            mistakeDialog = MistakeDialog.showDialog("选择的日期间隔不能超过3个月", (Activity) mContext);
                         } else {
                             isCustomRefresh = true;
                             mDialog.show();
@@ -164,9 +180,17 @@ public class FJEntrustDealQueryPager extends BasePager implements InterfaceColle
         } else if ("-6".equals(code)) {
             skip.startLogin(mContext);
         } else  if ("400".equals(info.getCode()) || "-2".equals(info.getCode()) || "-3".equals(info.getCode())) {   //  网络错误 解析错误 其他
-            Helper.getInstance().showToast(mContext, info.getMsg());
-        }else {   // 柜台错误信息
-            MistakeDialog.showDialog("提示",info.getMsg(),false,(Activity) mContext,null);
+            CentreToast.showText(mContext, info.getMsg());
+        }else {
+            CustomCenterDialog customCenterDialog = CustomCenterDialog.CustomCenterDialog(info.getMsg(),CustomCenterDialog.SHOWCENTER);
+            if (activity instanceof FJEntrustedQueryActivity){
+                customCenterDialog.show(FJEntrustedQueryActivity.fragmentManager,FJEntrustDealQueryPager.class.toString());
+            }else {
+                customCenterDialog.show(FJDealQueryActivity.fragmentManager,FJEntrustDealQueryPager.class.toString());
+
+            }
+            // 柜台错误信息
+//            MistakeDialog.showDialog("提示",info.getMsg(),false,(Activity) mContext,null);
         }
         listView.onRefreshComplete();
     }

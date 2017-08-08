@@ -19,6 +19,7 @@ import com.tpyzq.mobile.pangu.db.Db_PUB_USERS;
 import com.tpyzq.mobile.pangu.http.OkHttpUtil;
 import com.tpyzq.mobile.pangu.http.doConnect.trade.OTC_AccountConnect;
 import com.tpyzq.mobile.pangu.util.SpUtils;
+import com.tpyzq.mobile.pangu.view.CentreToast;
 import com.tpyzq.mobile.pangu.view.dialog.LoadingDialog;
 import com.tpyzq.mobile.pangu.view.dialog.MistakeDialog;
 import com.tpyzq.mobile.pangu.view.itemdecoration.LinearDividerItemDecoration;
@@ -81,7 +82,7 @@ public class OTC_AccountQueryActivity extends BaseActivity implements View.OnCli
 
     @Override
     public void connectError(String error) {
-        MistakeDialog.showDialog(error, OTC_AccountQueryActivity.this);
+        CentreToast.showText(OTC_AccountQueryActivity.this,error);
     }
 
     @Override

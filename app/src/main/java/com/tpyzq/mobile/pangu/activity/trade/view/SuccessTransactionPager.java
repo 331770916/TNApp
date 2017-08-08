@@ -18,6 +18,7 @@ import com.tpyzq.mobile.pangu.data.SuccessTransactionEntity;
 import com.tpyzq.mobile.pangu.http.NetWorkUtil;
 import com.tpyzq.mobile.pangu.util.ConstantUtil;
 import com.tpyzq.mobile.pangu.util.SpUtils;
+import com.tpyzq.mobile.pangu.view.CentreToast;
 import com.zhy.http.okhttp.callback.StringCallback;
 
 import org.json.JSONArray;
@@ -105,7 +106,7 @@ public class SuccessTransactionPager extends BaseTransactionPager {
             @Override
             public void onError(Call call, Exception e, int id) {
                 lv_transaction.onRefreshComplete();
-                Toast.makeText(mContext, "网络访问失败", Toast.LENGTH_SHORT).show();
+                CentreToast.showText(mContext,ConstantUtil.NETWORK_ERROR);
             }
 
             @Override

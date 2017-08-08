@@ -132,7 +132,7 @@ public class FundSubsActivity extends BaseActivity implements View.OnClickListen
         NetWorkUtil.getInstence().okHttpForPostString("", ConstantUtil.getURL_JY_HS(), map300431, new StringCallback() {
             @Override
             public void onError(Call call, Exception e, int id) {
-                Helper.getInstance().showToast(FundSubsActivity.this, ConstantUtil.NETWORK_ERROR);
+                CentreToast.showText(FundSubsActivity.this, ConstantUtil.NETWORK_ERROR);
             }
 
             @Override
@@ -150,7 +150,7 @@ public class FundSubsActivity extends BaseActivity implements View.OnClickListen
                     } else if ("-6".equals(code)) {
                         startActivity(new Intent(FundSubsActivity.this, TransactionLoginActivity.class));
                     } else {
-                        ToastUtils.showShort(FundSubsActivity.this, msg);
+                        CentreToast.showText(FundSubsActivity.this, msg);
                     }
                 } catch (JSONException e) {
                     e.printStackTrace();

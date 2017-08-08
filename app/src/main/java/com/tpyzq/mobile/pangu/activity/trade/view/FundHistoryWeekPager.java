@@ -22,6 +22,7 @@ import com.tpyzq.mobile.pangu.http.NetWorkUtil;
 import com.tpyzq.mobile.pangu.util.ConstantUtil;
 import com.tpyzq.mobile.pangu.util.SpUtils;
 import com.tpyzq.mobile.pangu.util.ToastUtils;
+import com.tpyzq.mobile.pangu.view.CentreToast;
 import com.zhy.http.okhttp.callback.StringCallback;
 
 import org.json.JSONArray;
@@ -70,7 +71,7 @@ public class FundHistoryWeekPager extends BaseTransactionPager {
         tv_text1.setText("名称");
         tv_text2.setText("成交日期");
         tv_text3.setText("业务名称");
-        tv_text4.setText("成交金额/份额");
+        tv_text4.setText("金额/份额");
         lv_transaction.setAdapter(fundHistoryAdapter);
         lv_transaction.setEmptyView(tv_empty);
         Update();
@@ -100,7 +101,7 @@ public class FundHistoryWeekPager extends BaseTransactionPager {
         NetWorkUtil.getInstence().okHttpForPostString("", ConstantUtil.getURL_JY_HS(), map300433, new StringCallback() {
             @Override
             public void onError(Call call, Exception e, int id) {
-                Toast.makeText(mContext, "网络访问失败", Toast.LENGTH_SHORT).show();
+                CentreToast.showText(mContext,ConstantUtil.NETWORK_ERROR);
             }
 
             @Override
@@ -130,7 +131,7 @@ public class FundHistoryWeekPager extends BaseTransactionPager {
                     } else if ("-6".equals(code)) {
                         mContext.startActivity(new Intent(mContext, TransactionLoginActivity.class));
                     } else {
-                        ToastUtils.showShort(mContext, msg);
+                        CentreToast.showText(mContext,msg);
                     }
 
                 } catch (JSONException e) {
@@ -207,7 +208,7 @@ public class FundHistoryWeekPager extends BaseTransactionPager {
                 if (sure >= 30) {
 
                 } else {
-                    ToastUtils.showShort(mContext, "已经滑到底了");
+                    CentreToast.showText(mContext,"已经滑到底了");
                 }
             }
         });

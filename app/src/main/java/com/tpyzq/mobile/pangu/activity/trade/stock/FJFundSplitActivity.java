@@ -22,6 +22,8 @@ import com.tpyzq.mobile.pangu.http.NetWorkUtil;
 import com.tpyzq.mobile.pangu.util.ConstantUtil;
 import com.tpyzq.mobile.pangu.util.Helper;
 import com.tpyzq.mobile.pangu.util.SpUtils;
+import com.tpyzq.mobile.pangu.view.CentreToast;
+import com.tpyzq.mobile.pangu.view.CustomCenterDialog;
 import com.tpyzq.mobile.pangu.view.dialog.LoadingDialog;
 import com.tpyzq.mobile.pangu.view.dialog.MistakeDialog;
 import com.tpyzq.mobile.pangu.view.dialog.StructuredFundDialog;
@@ -171,16 +173,19 @@ public class FJFundSplitActivity extends BaseActivity implements View.OnClickLis
             mStatements_tv.setText(bean.getFund_status());
             mCnExpendableFundValue_tv.setText(bean.getSplit_amount());
         } else if ("400".equals(info.getCode()) || "-2".equals(info.getCode()) || "-3".equals(info.getCode())) {
-            Helper.getInstance().showToast(this, info.getMsg());
+            CentreToast.showText(this, info.getMsg());
         } else if ("-6".equals(info.getCode())) {
             Intent intent = new Intent();
             intent.setClass(this, TransactionLoginActivity.class);
             startActivity(intent);
         } else {
-            MistakeDialog.showDialog(info.getMsg(), this, new MistakeDialog.MistakeDialgoListener() {
+            final CustomCenterDialog customCenterDialog = CustomCenterDialog.CustomCenterDialog(info.getMsg(),CustomCenterDialog.SHOWCENTER);
+            customCenterDialog.show(getFragmentManager(),FJFundSplitActivity.this.toString());
+            customCenterDialog.setOnClickListener(new CustomCenterDialog.ConfirmOnClick() {
                 @Override
-                public void doPositive() {
+                public void confirmOnclick() {
                     factoryReset();
+                    customCenterDialog.dismiss();
                 }
             });
         }

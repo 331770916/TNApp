@@ -20,6 +20,7 @@ import com.tpyzq.mobile.pangu.data.EquitiesWithDrawEntity;
 import com.tpyzq.mobile.pangu.http.NetWorkUtil;
 import com.tpyzq.mobile.pangu.util.ConstantUtil;
 import com.tpyzq.mobile.pangu.util.SpUtils;
+import com.tpyzq.mobile.pangu.view.CentreToast;
 import com.tpyzq.mobile.pangu.view.dialog.RevokeDialog;
 import com.zhy.http.okhttp.callback.StringCallback;
 
@@ -122,7 +123,7 @@ public class EntrustTransactionPager extends BaseTransactionPager {
         NetWorkUtil.getInstence().okHttpForPostString("", ConstantUtil.getURL_JY_HS(), map300130, new StringCallback() {
             @Override
             public void onError(Call call, Exception e, int id) {
-                Toast.makeText(mContext, "网络访问失败", Toast.LENGTH_SHORT).show();
+                CentreToast.showText(mContext,ConstantUtil.NETWORK_ERROR);
                 lv_transaction.onRefreshComplete();
             }
 

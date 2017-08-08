@@ -111,7 +111,7 @@ public class OTC_RevokePopupWindow extends PopupWindow implements View.OnClickLi
         NetWorkUtil.getInstence().okHttpForPostString(TAG, ConstantUtil.getURL_JY_HS(), map1, new StringCallback() {
             @Override
             public void onError(Call call, Exception e, int id) {
-
+                    CentreToast.showText(context,ConstantUtil.NETWORK_ERROR);
             }
 
             @Override

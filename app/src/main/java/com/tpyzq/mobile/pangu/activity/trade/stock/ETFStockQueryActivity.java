@@ -16,8 +16,9 @@ import com.tpyzq.mobile.pangu.base.BaseActivity;
 import com.tpyzq.mobile.pangu.base.InterfaceCollection;
 import com.tpyzq.mobile.pangu.data.EtfDataEntity;
 import com.tpyzq.mobile.pangu.data.ResultInfo;
-import com.tpyzq.mobile.pangu.util.Helper;
 import com.tpyzq.mobile.pangu.util.SpUtils;
+import com.tpyzq.mobile.pangu.view.CentreToast;
+import com.tpyzq.mobile.pangu.view.CustomCenterDialog;
 import com.tpyzq.mobile.pangu.view.dialog.LoadingDialog;
 import com.tpyzq.mobile.pangu.view.dialog.MistakeDialog;
 
@@ -99,9 +100,10 @@ public class ETFStockQueryActivity extends BaseActivity implements View.OnClickL
             } else if ("-6".equals(code)) {
                 skip.startLogin(this);
             } else  if ("400".equals(info.getCode()) || "-2".equals(info.getCode()) || "-3".equals(info.getCode())) {   //  网络错误 解析错误 其他
-                Helper.getInstance().showToast(this, info.getMsg());
+                CentreToast.showText(this, info.getMsg());
             } else {
-                MistakeDialog.showDialog(info.getMsg(),this);
+                CustomCenterDialog customCenterDialog  = CustomCenterDialog.CustomCenterDialog(info.getMsg(),CustomCenterDialog.SHOWCENTER);
+                customCenterDialog.show(getFragmentManager(),ETFStockQueryActivity.class.toString());
             }
 
         }

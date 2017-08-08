@@ -19,6 +19,7 @@ import com.tpyzq.mobile.pangu.http.NetWorkUtil;
 import com.tpyzq.mobile.pangu.interfac.ClearData;
 import com.tpyzq.mobile.pangu.util.ConstantUtil;
 import com.tpyzq.mobile.pangu.util.SpUtils;
+import com.tpyzq.mobile.pangu.view.CustomCenterDialog;
 import com.tpyzq.mobile.pangu.view.dialog.FundSubscriptionDialog;
 import com.tpyzq.mobile.pangu.view.dialog.MistakeDialog;
 import com.tpyzq.mobile.pangu.view.dialog.ResultDialog;
@@ -203,7 +204,8 @@ public class FundSubscriptionActivity extends BaseActivity implements View.OnCli
                         map.put("nav", nav);
                     }
                 } else {
-                    MistakeDialog.showDialog(bean.getMsg(),FundSubscriptionActivity.this);
+                    CustomCenterDialog customCenterDialog = CustomCenterDialog.CustomCenterDialog(bean.getMsg(),CustomCenterDialog.SHOWCENTER);
+                    customCenterDialog.show(getFragmentManager(),FundSubscriptionActivity.class.toString());
                 }
             }
         });
