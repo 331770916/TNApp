@@ -286,6 +286,7 @@ public class FundEntrustCustomPager extends BaseTransactionPager implements View
                 tv_start_data.setText(simpleDateFormat.format(date));
             }
         });
+        lv_transaction.setEmptyView(tv_empty);
     }
 
 

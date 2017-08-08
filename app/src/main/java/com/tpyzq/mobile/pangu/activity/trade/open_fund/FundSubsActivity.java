@@ -69,6 +69,7 @@ public class FundSubsActivity extends BaseActivity implements View.OnClickListen
     private static int REQAGREEMENTCODE = 1002; //进入签署协议页面的请求码
 
     private KeyboardUtil mKeyBoardUtil;
+    private String AUTO_BUY = "";
 
     @Override
     public void initView() {
@@ -176,6 +177,13 @@ public class FundSubsActivity extends BaseActivity implements View.OnClickListen
         map300439_1.put("DO_OPEN", encryptBySessionKey(""));
         map300439_1.put("DO_CONTRACT", encryptBySessionKey(""));
         map300439_1.put("DO_PRE_CONDITION", encryptBySessionKey("1"));
+        if ("份额分红".equals(tv_fhfs.getText().toString())){
+            AUTO_BUY= "0";
+        }else {
+            AUTO_BUY= "1";
+        }
+
+        map300439_1.put("AUTO_BUY", encryptBySessionKey(AUTO_BUY));
         map300439.put("parms", map300439_1);
         NetWorkUtil.getInstence().okHttpForPostString("", ConstantUtil.getURL_JY_HS(), map300439, new StringCallback() {
             @Override
@@ -220,6 +228,7 @@ public class FundSubsActivity extends BaseActivity implements View.OnClickListen
                             intent.setClass(FundSubsActivity.this, AssessConfirmActivity.class);
                             intent.putExtra("transaction", "true");
                             intent.putExtra("assessConfirm", assessConfirmBean);
+                            intent.putExtra("AUTO_BUY", AUTO_BUY);
                             startActivityForResult(intent, REQAGREEMENTCODE);
                         }
                     } else {
@@ -242,6 +251,7 @@ public class FundSubsActivity extends BaseActivity implements View.OnClickListen
         tv_lowest_investment.setText(fundDataBean.data.get(0).OPEN_SHARE + "\t元");
         tv_usable_money.setText(fundDataBean.data.get(0).ENABLE_BALANCE + "\t元");
         tv_fhfs.setEnabled(true);
+        tv_fhfs.setText("份额分红");
     }
 
     /**
@@ -399,10 +409,12 @@ public class FundSubsActivity extends BaseActivity implements View.OnClickListen
                     data.FUND_CODE = code;
                     fundDataBean.data.add(data);
                 }else{
+                    String mFund_company=fundDataBean.data.get(0).FUND_COMPANY;
                     fundDataBean.data =new ArrayList();
                     FundDataEntity.Data data = fundDataBean.getData();
                     data.FUND_CODE = code;
                     data.FUND_NAME = tv_fund_name.getText().toString();
+                    data.FUND_COMPANY = mFund_company;
                     fundDataBean.data.add(data);
                 }
 

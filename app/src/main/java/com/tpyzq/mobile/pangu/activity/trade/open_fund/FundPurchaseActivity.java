@@ -403,6 +403,7 @@ public class FundPurchaseActivity extends BaseActivity implements View.OnClickLi
         tv_low_money.setText(fundDataBean.data.get(0).OPEN_SHARE + "\t元");
         tv_usable_money.setText(fundDataBean.data.get(0).ENABLE_BALANCE + "\t元");
         tv_fhfs.setEnabled(true);
+        tv_fhfs.setText("份额分红");
     }
 
     @Override

@@ -2,6 +2,7 @@
 <LinearLayout xmlns:android="http://schemas.android.com/apk/res/android"
     android:layout_width="match_parent"
     android:layout_height="match_parent"
+    xmlns:app="http://schemas.android.com/apk/res-auto"
     android:background="@color/bgColor"
     android:orientation="vertical">
     <View
@@ -9,17 +10,16 @@
         android:layout_height="@dimen/size0.5"
         android:background="@color/bgColor"/>
 
-    <com.tpyzq.mobile.pangu.view.pullDownGroup.PullDownScrollView
+    <com.handmark.pulltorefresh.library.PullToRefreshScrollView
         android:id="@+id/xiaLaShuaXin"
         android:layout_width="match_parent"
         android:layout_height="0dp"
         android:layout_weight="5"
-        android:orientation="vertical">
+        android:orientation="vertical"
+        app:ptrAnimationStyle="flip"
+        android:fillViewport="true"
+        app:ptrMode="both">
 
-        <ScrollView
-            android:id="@+id/scrollView"
-            android:layout_width="match_parent"
-            android:layout_height="wrap_content">
 
             <LinearLayout
                 android:layout_width="match_parent"
@@ -42,9 +42,8 @@
                     <com.tpyzq.mobile.pangu.view.gridview.MyListView
                         android:id="@+id/lvStayPayment"
                         android:layout_width="match_parent"
-                        android:layout_height="match_parent">
+                        android:layout_height="match_parent"/>
 
-                    </com.tpyzq.mobile.pangu.view.gridview.MyListView>
 
                     <ImageView
                         android:id="@+id/ivStayPaymentKong"
@@ -57,8 +56,7 @@
 
                 </RelativeLayout>
             </LinearLayout>
-        </ScrollView>
-    </com.tpyzq.mobile.pangu.view.pullDownGroup.PullDownScrollView>
+    </com.handmark.pulltorefresh.library.PullToRefreshScrollView>
 
 
     <!-- 下方的 资金转入转让出 -->

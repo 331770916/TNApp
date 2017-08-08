@@ -415,6 +415,7 @@ public class AssessConfirmActivity extends BaseActivity implements View.OnClickL
         map300439_1.put("DO_OPEN", encryptBySessionKey(IS_OPEN));
         map300439_1.put("DO_CONTRACT", encryptBySessionKey(IS_AGREEMENT));
         map300439_1.put("DO_PRE_CONDITION", encryptBySessionKey("0"));
+        map300439_1.put("AUTO_BUY", encryptBySessionKey(AUTO_BUY));
         map300439.put("parms", map300439_1);
         NetWorkUtil.getInstence().okHttpForPostString("", ConstantUtil.getURL_JY_HS(), map300439, new StringCallback() {
             @Override

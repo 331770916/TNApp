@@ -7,6 +7,8 @@ import android.view.View;
 import android.widget.ListView;
 import android.widget.TextView;
 
+import com.handmark.pulltorefresh.library.PullToRefreshBase;
+import com.handmark.pulltorefresh.library.PullToRefreshListView;
 import com.tpyzq.mobile.pangu.R;
 import com.tpyzq.mobile.pangu.adapter.market.PublishNewStockDetailAdapter;
 import com.tpyzq.mobile.pangu.base.BaseActivity;
@@ -38,15 +40,15 @@ import okhttp3.Call;
  * Created by wangqi on 2016/7/3.
  * 新股详情
  */
-public class PublishNewStockDetail extends BaseActivity implements View.OnClickListener, PullDownScrollView.RefreshListener {
+public class PublishNewStockDetail extends BaseActivity implements View.OnClickListener {
 
     private String TAG = "PublishNewStockDetail";
 
-    private PullDownScrollView mPullDownScrollView;
     private PublishNewStockDetailAdapter mDetailAdapter;
     private DecimalFormat mFormat1;
     private DecimalFormat mFormat2;
     private String mNumber;
+    private PullToRefreshListView mListView;
 
 
     @Override
@@ -67,19 +69,32 @@ public class PublishNewStockDetail extends BaseActivity implements View.OnClickL
             titleTv.setText(name);
         }
 
-        ListView listView = (ListView) findViewById(R.id.newStockDetailList);
+        mListView = (PullToRefreshListView) findViewById(R.id.newStockDetailList);
 
         mDetailAdapter = new PublishNewStockDetailAdapter();
 
-        listView.setAdapter(mDetailAdapter);
+        mListView.setAdapter(mDetailAdapter);
 
-        mPullDownScrollView = (PullDownScrollView) findViewById(R.id.new_pullDownId);
-        mPullDownScrollView.setRefreshListener(this);
-        mPullDownScrollView.setPullDownElastic(new PullDownElasticImp(PublishNewStockDetail.this));
+
+
+        mListView.setMode(PullToRefreshBase.Mode.PULL_FROM_START);
 
         if (!TextUtils.isEmpty(mNumber)) {
             toConnect(mNumber);
         }
+
+
+        mListView.setOnRefreshListener(new PullToRefreshBase.OnRefreshListener2<ListView>() {
+            @Override
+            public void onPullDownToRefresh(PullToRefreshBase<ListView> refreshView) {
+                toConnect(mNumber);
+            }
+
+            @Override
+            public void onPullUpToRefresh(PullToRefreshBase<ListView> refreshView) {
+
+            }
+        });
     }
 
     @Override
@@ -92,19 +107,6 @@ public class PublishNewStockDetail extends BaseActivity implements View.OnClickL
     }
 
 
-    @Override
-    public void onRefresh(PullDownScrollView view) {
-        new Handler().postDelayed(new Runnable() {
-
-            @Override
-            public void run() {
-                DateFormat format1 = new SimpleDateFormat("yyyy-MM-dd HH:mm:ss");
-                String bDate = format1.format(new Date());
-                toConnect(mNumber);
-                mPullDownScrollView.finishRefresh("上次刷新时间:" + bDate);
-            }
-        }, 2000);
-    }
 
 
     @Override
@@ -124,10 +126,12 @@ public class PublishNewStockDetail extends BaseActivity implements View.OnClickL
             @Override
             public void onError(Call call, Exception e, int id) {
                 LogHelper.e(TAG, e.toString());
+                mListView.onRefreshComplete();
             }
 
             @Override
             public void onResponse(String response, int id) {
+                mListView.onRefreshComplete();
                 if (TextUtils.isEmpty(response)) {
                     return;
                 }

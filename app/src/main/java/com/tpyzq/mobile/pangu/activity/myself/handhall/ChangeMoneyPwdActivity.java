@@ -13,6 +13,7 @@ import android.widget.EditText;
 import android.widget.TextView;
 
 import com.tpyzq.mobile.pangu.R;
+import com.tpyzq.mobile.pangu.activity.myself.login.ChangeAccoutActivity;
 import com.tpyzq.mobile.pangu.activity.myself.login.TransactionLoginActivity;
 import com.tpyzq.mobile.pangu.base.BaseActivity;
 import com.tpyzq.mobile.pangu.base.InterfaceCollection;
@@ -21,6 +22,7 @@ import com.tpyzq.mobile.pangu.util.ConstantUtil;
 import com.tpyzq.mobile.pangu.util.Helper;
 import com.tpyzq.mobile.pangu.util.keyboard.NoSoftInputEditText;
 import com.tpyzq.mobile.pangu.util.panguutil.UserUtil;
+import com.tpyzq.mobile.pangu.view.CentreToast;
 import com.tpyzq.mobile.pangu.view.dialog.LoadingDialog;
 import com.tpyzq.mobile.pangu.view.dialog.LoginDialog;
 import com.tpyzq.mobile.pangu.view.dialog.MistakeDialog;
@@ -188,14 +190,26 @@ public class ChangeMoneyPwdActivity extends BaseActivity implements View.OnClick
     private boolean isEmptyData() {
         if ("0".equals(UserUtil.Keyboard)) {
             if (!mNew_et.getText().toString().equals(mAgainNew_et.getText().toString())) {
-                Helper.getInstance().showToast(this, "两次输入新密码不一致");
+                CentreToast.showText(ChangeMoneyPwdActivity.this,"两次输入新密码不一致");
+                return false;
+            } else if (!Helper.getInstance().isNumberDimc(mNew_et.getText().toString())) {
+                CentreToast.showText(ChangeMoneyPwdActivity.this,"请输入数字密码");
+                return false;
+            } else if (mNew_et.getText().toString().length() != 6) {
+                CentreToast.showText(ChangeMoneyPwdActivity.this,"请输入6位新密码");
                 return false;
             } else {
                 return true;
             }
         } else {
             if (!mKeyboardInput_mNew.equals(mKeyboardInput_mAgainNew)) {
-                Helper.getInstance().showToast(this, "两次输入新密码不一致");
+                CentreToast.showText(ChangeMoneyPwdActivity.this,"两次输入新密码不一致");
+                return false;
+            } else if (!Helper.getInstance().isNumberDimc(mKeyboardInput_mNew)) {
+                CentreToast.showText(ChangeMoneyPwdActivity.this,"请输入数字密码");
+                return false;
+            } else if (mKeyboardInput_mNew.length() != 6) {
+                CentreToast.showText(ChangeMoneyPwdActivity.this,"请输入6位新密码");
                 return false;
             } else {
                 return true;
@@ -332,15 +346,15 @@ public class ChangeMoneyPwdActivity extends BaseActivity implements View.OnClick
                         finish();
                     }
                 });
-            }else if ("-6".equals(info.getCode())){
-                startActivity(new Intent().setClass(this,TransactionLoginActivity.class));
+            } else if ("-6".equals(info.getCode())) {
+                startActivity(new Intent().setClass(this, TransactionLoginActivity.class));
                 finish();
-            }else if (ConstantUtil.NETWORK_ERROR_CODE.equals(info.getCode())){
+            } else if (ConstantUtil.NETWORK_ERROR_CODE.equals(info.getCode())) {
                 setTextView();
-                Helper.getInstance().showToast(this,info.getMsg());
-            }else {
+                Helper.getInstance().showToast(this, info.getMsg());
+            } else {
                 setTextView();
-                MistakeDialog.showDialog(info.getMsg(),this);
+                MistakeDialog.showDialog(info.getMsg(), this);
             }
         }
     }
