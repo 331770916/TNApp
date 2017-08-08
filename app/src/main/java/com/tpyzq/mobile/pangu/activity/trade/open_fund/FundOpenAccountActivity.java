@@ -22,7 +22,7 @@ import com.tpyzq.mobile.pangu.http.NetWorkUtil;
 import com.tpyzq.mobile.pangu.util.ConstantUtil;
 import com.tpyzq.mobile.pangu.util.Helper;
 import com.tpyzq.mobile.pangu.util.SpUtils;
-import com.tpyzq.mobile.pangu.view.dialog.MistakeDialog;
+import com.tpyzq.mobile.pangu.view.CustomCenterDialog;
 import com.zhy.http.okhttp.callback.StringCallback;
 
 import org.json.JSONArray;
@@ -132,7 +132,7 @@ public class FundOpenAccountActivity extends BaseActivity implements View.OnClic
                     } else if ("-6".equals(code)) {
                         startActivity(new Intent(FundOpenAccountActivity.this, TransactionLoginActivity.class));
                     } else {
-                        MistakeDialog.showDialog(msg, FundOpenAccountActivity.this);
+                        showDialog(msg);
                     }
                 } catch (JSONException e) {
                     e.printStackTrace();
@@ -166,11 +166,11 @@ public class FundOpenAccountActivity extends BaseActivity implements View.OnClic
                     String data = object.getString("data");
                     String code = object.getString("code");
                     if ("0".equals(code)) {
-                        MistakeDialog.showDialog("开户成功", FundOpenAccountActivity.this);
+                        showDialog("开户成功");
                     } else if ("-6".equals(code)) {
                         startActivity(new Intent(FundOpenAccountActivity.this, TransactionLoginActivity.class));
                     } else {
-                        MistakeDialog.showDialog(msg, FundOpenAccountActivity.this);
+                        showDialog(msg);
                     }
                 } catch (JSONException e) {
                     e.printStackTrace();
@@ -193,6 +193,11 @@ public class FundOpenAccountActivity extends BaseActivity implements View.OnClic
                 bt_true.setBackgroundResource(R.drawable.button_login_unchecked);
             }
         }
+    }
+
+    private void showDialog(String msg){
+        CustomCenterDialog customCenterDialog = CustomCenterDialog.CustomCenterDialog(msg,CustomCenterDialog.SHOWCENTER);
+        customCenterDialog.show(getFragmentManager(),FundOpenAccountActivity.class.toString());
     }
 
     @Override

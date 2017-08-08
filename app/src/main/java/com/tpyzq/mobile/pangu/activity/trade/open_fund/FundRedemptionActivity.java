@@ -11,33 +11,24 @@ import android.widget.EditText;
 import android.widget.ImageView;
 import android.widget.LinearLayout;
 import android.widget.TextView;
-import android.widget.Toast;
 
 import com.google.gson.Gson;
 import com.tpyzq.mobile.pangu.R;
 import com.tpyzq.mobile.pangu.activity.myself.login.TransactionLoginActivity;
 import com.tpyzq.mobile.pangu.base.BaseActivity;
 import com.tpyzq.mobile.pangu.data.FundDataEntity;
-import com.tpyzq.mobile.pangu.data.FundEntity;
-import com.tpyzq.mobile.pangu.data.FundRedemptionEntity;
 import com.tpyzq.mobile.pangu.http.NetWorkUtil;
 import com.tpyzq.mobile.pangu.util.ConstantUtil;
-import com.tpyzq.mobile.pangu.util.Helper;
 import com.tpyzq.mobile.pangu.util.SpUtils;
-import com.tpyzq.mobile.pangu.util.ToastUtils;
 import com.tpyzq.mobile.pangu.view.CentreToast;
+import com.tpyzq.mobile.pangu.view.CustomCenterDialog;
 import com.tpyzq.mobile.pangu.view.dialog.FundRedemptionDialog;
-import com.tpyzq.mobile.pangu.view.dialog.MistakeDialog;
 import com.zhy.http.okhttp.callback.StringCallback;
 
-import org.json.JSONArray;
 import org.json.JSONException;
 import org.json.JSONObject;
 
-import java.io.Serializable;
-import java.util.ArrayList;
 import java.util.HashMap;
-import java.util.List;
 
 import okhttp3.Call;
 
@@ -315,7 +306,8 @@ public class FundRedemptionActivity extends BaseActivity implements View.OnClick
                     } else if ("-6".equals(code)) {
                         startActivity(new Intent(FundRedemptionActivity.this, TransactionLoginActivity.class));
                     } else {
-                        MistakeDialog.showDialog(msg,FundRedemptionActivity.this);
+                        CustomCenterDialog customCenterDialog = CustomCenterDialog.CustomCenterDialog(msg,CustomCenterDialog.SHOWCENTER);
+                        customCenterDialog.show(getFragmentManager(),FundRedemptionActivity.class.toString());
                     }
                 } catch (JSONException e) {
                     e.printStackTrace();
