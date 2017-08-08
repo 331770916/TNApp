@@ -20,6 +20,7 @@ import com.tpyzq.mobile.pangu.log.LogHelper;
 import com.tpyzq.mobile.pangu.util.ConstantUtil;
 import com.tpyzq.mobile.pangu.util.Helper;
 import com.tpyzq.mobile.pangu.util.SpUtils;
+import com.tpyzq.mobile.pangu.view.CentreToast;
 import com.tpyzq.mobile.pangu.view.pulllayou.PullLayout;
 import com.zhy.http.okhttp.callback.StringCallback;
 
@@ -134,7 +135,7 @@ public class AllotWeekTab extends BaseTab implements PullLayout.OnPullCallBackLi
                 }
 
                 if (TextUtils.isEmpty(response)) {
-                    Helper.getInstance().showToast(CustomApplication.getContext(), "" + response);
+//                    Helper.getInstance().showToast(CustomApplication.getContext(), "" + response);
                     return ;
                 }
                 Gson gson = new Gson();
@@ -143,7 +144,7 @@ public class AllotWeekTab extends BaseTab implements PullLayout.OnPullCallBackLi
 
                 if (!bean.getCode().equals("0") && !bean.getCode().equals("-6")) {
                     mEmpty.setVisibility(View.VISIBLE);
-                    Helper.getInstance().showToast(CustomApplication.getContext(), "" + response);
+                    CentreToast.showText(CustomApplication.getContext(), "" + response);
                     return;
                 }
 

@@ -18,6 +18,7 @@ import com.tpyzq.mobile.pangu.data.SubscribeHistoryStateBean;
 import com.tpyzq.mobile.pangu.http.NetWorkUtil;
 import com.tpyzq.mobile.pangu.util.ConstantUtil;
 import com.tpyzq.mobile.pangu.util.SpUtils;
+import com.tpyzq.mobile.pangu.view.CentreToast;
 import com.tpyzq.mobile.pangu.view.dialog.ResultDialog;
 import com.tpyzq.mobile.pangu.view.pullDownGroup.PullDownElasticImp;
 import com.tpyzq.mobile.pangu.view.pullDownGroup.PullDownScrollView;
@@ -130,7 +131,7 @@ public class SubscribeHistoryFragment extends BaseFragment implements PullDownSc
 //                    adapter.setList(datas);
                     adapter.setStateList(stateList);
                 } else {
-                    ResultDialog.getInstance().showText(bean.getMsg());
+                    CentreToast.showText(getActivity(),bean.getMsg());
                 }
             }
         });

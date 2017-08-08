@@ -1,10 +1,10 @@
 package com.tpyzq.mobile.pangu.activity.trade.stock;
 
+import android.app.FragmentManager;
 import android.content.Context;
 import android.content.Intent;
 import android.support.v4.view.ViewPager;
 import android.view.View;
-import android.widget.AdapterView;
 import android.widget.TextView;
 
 import com.tpyzq.mobile.pangu.R;
@@ -42,9 +42,11 @@ public class VoteQueryActivity extends BaseActivity implements View.OnClickListe
     private ViewPager viewPager;
     private String mMarket= "1";
     private int mPostion;
+    public static FragmentManager fragmentManager;
 
     @Override
     public void initView() {
+        fragmentManager = getFragmentManager();
         findViewById(R.id.detail_back).setOnClickListener(this);
         mShareholderCode_tv = (TextView) findViewById(R.id.tvShareholderCode);
         magicIndicator = (MagicIndicator) findViewById(R.id.capital_buy);

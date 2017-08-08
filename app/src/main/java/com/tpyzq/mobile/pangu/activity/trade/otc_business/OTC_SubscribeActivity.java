@@ -221,12 +221,13 @@ public class OTC_SubscribeActivity extends BaseActivity implements View.OnClickL
                     tvOTC_SGProductJingZhiValue.setText("");
                     tvOTC_SGExpendableCapitalValue.setText("");
 
-                    Toast toast = Toast.makeText(OTC_SubscribeActivity.this, msg, Toast.LENGTH_SHORT);
-                    toast.setGravity(Gravity.CENTER, 0, 0);
-                    LinearLayout toastView = (LinearLayout) toast.getView();
-                    ImageView imageCodeProject = new ImageView(OTC_SubscribeActivity.this);
-                    toastView.addView(imageCodeProject, 0);
-                    toast.show();
+//                    Toast toast = Toast.makeText(OTC_SubscribeActivity.this, msg, Toast.LENGTH_SHORT);
+//                    toast.setGravity(Gravity.CENTER, 0, 0);
+//                    LinearLayout toastView = (LinearLayout) toast.getView();
+//                    ImageView imageCodeProject = new ImageView(OTC_SubscribeActivity.this);
+//                    toastView.addView(imageCodeProject, 0);
+//                    toast.show();
+                    CentreToast.showText(OTC_SubscribeActivity.this,msg);
                     if(submit != null){
                         submit.dismiss();
                     }

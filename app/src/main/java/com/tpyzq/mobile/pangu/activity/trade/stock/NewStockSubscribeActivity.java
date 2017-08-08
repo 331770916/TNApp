@@ -23,6 +23,7 @@ import com.tpyzq.mobile.pangu.log.LogHelper;
 import com.tpyzq.mobile.pangu.log.LogUtil;
 import com.tpyzq.mobile.pangu.util.ConstantUtil;
 import com.tpyzq.mobile.pangu.util.SpUtils;
+import com.tpyzq.mobile.pangu.view.CentreToast;
 import com.tpyzq.mobile.pangu.view.dialog.ResultDialog;
 import com.zhy.http.okhttp.callback.StringCallback;
 
@@ -281,7 +282,7 @@ public class NewStockSubscribeActivity extends BaseActivity implements View.OnCl
                         adapter.setList(list);
                         bean.setNewStockSize(publishNum);
                     } else {
-                        ResultDialog.getInstance().showText("网络异常");
+                        CentreToast.showText(NewStockSubscribeActivity.this,ConstantUtil.NETWORK_ERROR);
                     }
 
                     mCalendarEntitiy = bean;

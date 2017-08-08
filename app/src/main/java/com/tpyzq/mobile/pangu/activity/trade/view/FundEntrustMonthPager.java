@@ -22,6 +22,7 @@ import com.tpyzq.mobile.pangu.http.NetWorkUtil;
 import com.tpyzq.mobile.pangu.util.ConstantUtil;
 import com.tpyzq.mobile.pangu.util.SpUtils;
 import com.tpyzq.mobile.pangu.util.ToastUtils;
+import com.tpyzq.mobile.pangu.view.CentreToast;
 import com.zhy.http.okhttp.callback.StringCallback;
 
 import org.json.JSONArray;
@@ -101,7 +102,7 @@ public class FundEntrustMonthPager extends BaseTransactionPager {
         NetWorkUtil.getInstence().okHttpForPostString("", ConstantUtil.getURL_JY_HS(), map720325, new StringCallback() {
             @Override
             public void onError(Call call, Exception e, int id) {
-                Toast.makeText(mContext, "网络访问失败", Toast.LENGTH_SHORT).show();
+                CentreToast.showText(mContext,ConstantUtil.NETWORK_ERROR);
             }
 
             @Override
@@ -130,7 +131,7 @@ public class FundEntrustMonthPager extends BaseTransactionPager {
                     } else if ("-6".equals(code)) {
                         mContext.startActivity(new Intent(mContext, TransactionLoginActivity.class));
                     } else {
-                        ToastUtils.showShort(mContext, msg);
+                        CentreToast.showText(mContext,msg);
                     }
 
                 } catch (JSONException e) {
@@ -207,7 +208,7 @@ public class FundEntrustMonthPager extends BaseTransactionPager {
                 if (sure >= 30) {
 
                 } else {
-                    ToastUtils.showShort(mContext, "已经滑到底了");
+                    CentreToast.showText(mContext,"已经滑到底了");
                 }
             }
         });

@@ -1,5 +1,6 @@
 package com.tpyzq.mobile.pangu.activity.trade.currency_fund;
 
+import android.app.FragmentManager;
 import android.content.Context;
 import android.support.v4.view.ViewPager;
 import android.view.View;
@@ -41,9 +42,11 @@ public class CurrencyFundQueryActivity extends BaseActivity implements View.OnCl
     private MagicIndicator entrust_buy;
     private ViewPager mViewPager;
     private Map<Integer,Boolean> map = new HashMap<>();
+    public static FragmentManager fragmentManager;
 
     @Override
     public void initView() {
+        fragmentManager = getFragmentManager();
         entrust_buy = (MagicIndicator) findViewById(R.id.entrust_buy);
         mViewPager = (ViewPager) findViewById(R.id.vpHBJJEntrustQuery);
         findViewById(R.id.ivHBJJWTCX_back).setOnClickListener(this);

@@ -117,7 +117,7 @@ public class FundRevokePopupWindow extends PopupWindow{
         NetWorkUtil.getInstence().okHttpForPostString(TAG, ConstantUtil.getURL_JY_HS(), map1, new StringCallback() {
             @Override
             public void onError(Call call, Exception e, int id) {
-                Helper.getInstance().showToast(context,ConstantUtil.NETWORK_ERROR);
+                CentreToast.showText(context,ConstantUtil.NETWORK_ERROR);
             }
 
             @Override

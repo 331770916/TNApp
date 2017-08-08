@@ -19,6 +19,7 @@ import com.tpyzq.mobile.pangu.http.NetWorkUtil;
 import com.tpyzq.mobile.pangu.util.ConstantUtil;
 import com.tpyzq.mobile.pangu.util.SpUtils;
 import com.tpyzq.mobile.pangu.util.ToastUtils;
+import com.tpyzq.mobile.pangu.view.CentreToast;
 import com.tpyzq.mobile.pangu.view.dialog.FundShareDialog;
 import com.zhy.http.okhttp.callback.StringCallback;
 
@@ -90,7 +91,7 @@ public class ShareFundActivity extends BaseActivity implements View.OnClickListe
         NetWorkUtil.getInstence().okHttpForPostString("", ConstantUtil.getURL_JY_HS(), map720260, new StringCallback() {
             @Override
             public void onError(Call call, Exception e, int id) {
-                Toast.makeText(ShareFundActivity.this, "网络访问失败", Toast.LENGTH_SHORT).show();
+                CentreToast.showText(ShareFundActivity.this,ConstantUtil.NETWORK_ERROR);
             }
 
             @Override
@@ -126,7 +127,7 @@ public class ShareFundActivity extends BaseActivity implements View.OnClickListe
                     } else if ("-6".equals(code)) {
                         startActivity(new Intent(ShareFundActivity.this, TransactionLoginActivity.class));
                     } else {
-                        ToastUtils.showShort(ShareFundActivity.this, msg);
+                        CentreToast.showText(ShareFundActivity.this,msg);
                     }
                 } catch (JSONException e) {
                     e.printStackTrace();

@@ -19,6 +19,7 @@ import com.tpyzq.mobile.pangu.http.NetWorkUtil;
 import com.tpyzq.mobile.pangu.util.ConstantUtil;
 import com.tpyzq.mobile.pangu.util.Helper;
 import com.tpyzq.mobile.pangu.util.SpUtils;
+import com.tpyzq.mobile.pangu.view.CentreToast;
 import com.zhy.http.okhttp.callback.StringCallback;
 
 import java.util.ArrayList;
@@ -99,7 +100,7 @@ public class CurrencyThreeMonthPager extends BaseSearchPager {
             @Override
             public void onError(Call call, Exception e, int id) {
                 mListView.onRefreshComplete();
-                Helper.getInstance().showToast(mContext,ConstantUtil.NETWORK_ERROR);
+                CentreToast.showText(mContext,ConstantUtil.NETWORK_ERROR);
             }
 
             @Override

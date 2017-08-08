@@ -22,8 +22,8 @@ import com.tpyzq.mobile.pangu.log.LogHelper;
 import com.tpyzq.mobile.pangu.util.ConstantUtil;
 import com.tpyzq.mobile.pangu.util.Helper;
 import com.tpyzq.mobile.pangu.util.SpUtils;
-import com.tpyzq.mobile.pangu.view.dialog.MistakeDialog;
-import com.tpyzq.mobile.pangu.view.dialog.ResultDialog;
+import com.tpyzq.mobile.pangu.view.CentreToast;
+import com.tpyzq.mobile.pangu.view.CustomCenterDialog;
 import com.zhy.http.okhttp.callback.StringCallback;
 
 import java.util.ArrayList;
@@ -127,12 +127,7 @@ public class PriceCollectionActivity extends BaseActivity implements View.OnClic
                 }
 
                 if (!bean.getCode().equals("0")) {
-                    MistakeDialog.showDialog(bean.getMsg(), PriceCollectionActivity.this, new MistakeDialog.MistakeDialgoListener() {
-                        @Override
-                        public void doPositive() {
-                            finish();
-                        }
-                    });
+                    showDialog(bean.getMsg());
                     mEmpty.setVisibility(View.GONE);
                     return;
                 }
@@ -304,12 +299,12 @@ public class PriceCollectionActivity extends BaseActivity implements View.OnClic
     private boolean juedge(String accounts, String occurBalances, String balances) {
 
         if (TextUtils.isEmpty(accounts)) {
-            Helper.getInstance().showToast(CustomApplication.getContext(), "请选择辅助资金账号");
+            CentreToast.showText(CustomApplication.getContext(), "请选择辅助资金账号");
             return false;
         }
 
         if (TextUtils.isEmpty(occurBalances)) {
-            Helper.getInstance().showToast(CustomApplication.getContext(), "请输入转账金额");
+            CentreToast.showText(CustomApplication.getContext(), "请输入转账金额");
             return false;
         }
 
@@ -323,7 +318,7 @@ public class PriceCollectionActivity extends BaseActivity implements View.OnClic
                     if (Helper.isDecimal(obs[i]) && Helper.isDecimal(bs[i])
                             && Double.parseDouble(obs[i]) > Double.parseDouble(bs[i])) {
 
-                        Helper.getInstance().showToast(CustomApplication.getContext(), "输入金额超出可用余额");
+                        CentreToast.showText(CustomApplication.getContext(), "输入金额超出可用余额");
 
                         return false;
                     }
@@ -332,7 +327,7 @@ public class PriceCollectionActivity extends BaseActivity implements View.OnClic
             } else {
                 if (Helper.isDecimal(occurBalances) && Helper.isDecimal(balances)
                         && Double.parseDouble(occurBalances) > Double.parseDouble(balances)) {
-                    Helper.getInstance().showToast(CustomApplication.getContext(), "输入金额超出可用余额");
+                    CentreToast.showText(CustomApplication.getContext(), "输入金额超出可用余额");
                     return false;
                 }
             }
@@ -384,24 +379,30 @@ public class PriceCollectionActivity extends BaseActivity implements View.OnClic
                 }
 
                 if (!bean.getCode().equals("0")) {
-                    MistakeDialog.showDialog(bean.getMsg(), PriceCollectionActivity.this, new MistakeDialog.MistakeDialgoListener() {
-                        @Override
-                        public void doPositive() {
-                            finish();
-                        }
-                    });
+                    showDialog(bean.getMsg());
                     return;
                 }
 
                 if (bean.getData() != null &&  bean.getData().size() > 0) {
                     getBanksList();
-                    ResultDialog.getInstance().show("" + bean.getMsg(), R.mipmap.lc_success);
+//                    ResultDialog.getInstance().show("" + bean.getMsg(), R.mipmap.lc_success);
+                    CentreToast.showText(PriceCollectionActivity.this,""+bean.getMsg(),true);
                 }
 
             }
         });
     }
 
+    public void showDialog(String msg){
+        CustomCenterDialog customCenterDialog = CustomCenterDialog.CustomCenterDialog(msg,CustomCenterDialog.SHOWCENTER);
+        customCenterDialog.show(getFragmentManager(),PriceCollectionActivity.class.toString());
+        customCenterDialog.setOnClickListener(new CustomCenterDialog.ConfirmOnClick() {
+            @Override
+            public void confirmOnclick() {
+                finish();
+            }
+        });
+    }
     @Override
     public int getLayoutId() {
         return R.layout.activity_price_collection;

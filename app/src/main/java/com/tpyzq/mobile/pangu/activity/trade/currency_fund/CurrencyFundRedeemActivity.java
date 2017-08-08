@@ -23,8 +23,9 @@ import com.tpyzq.mobile.pangu.base.BaseActivity;
 import com.tpyzq.mobile.pangu.data.CurrencyFundShuHuiBean;
 import com.tpyzq.mobile.pangu.http.NetWorkUtil;
 import com.tpyzq.mobile.pangu.util.ConstantUtil;
-import com.tpyzq.mobile.pangu.util.Helper;
 import com.tpyzq.mobile.pangu.util.SpUtils;
+import com.tpyzq.mobile.pangu.view.CentreToast;
+import com.tpyzq.mobile.pangu.view.CustomCenterDialog;
 import com.tpyzq.mobile.pangu.view.dialog.MistakeDialog;
 import com.zhy.http.okhttp.callback.StringCallback;
 
@@ -221,7 +222,7 @@ public class CurrencyFundRedeemActivity extends BaseActivity implements View.OnC
         NetWorkUtil.getInstence().okHttpForPostString(TAG, ConstantUtil.getURL_JY_HS(), map1, new StringCallback() {
             @Override
             public void onError(Call call, Exception e, int id) {
-                Helper.getInstance().showToast(CurrencyFundRedeemActivity.this,ConstantUtil.NETWORK_ERROR);
+                CentreToast.showText(CurrencyFundRedeemActivity.this,ConstantUtil.NETWORK_ERROR);
                 e.toString();
             }
 
@@ -258,7 +259,8 @@ public class CurrencyFundRedeemActivity extends BaseActivity implements View.OnC
                         tvRedeemExpendableFundValue.setText(enable_amount);   //可用份额
                     }
                 }else {
-                    MistakeDialog.showDialog(bean.getMsg(),CurrencyFundRedeemActivity.this);
+                    CustomCenterDialog customCenterDialog = CustomCenterDialog.CustomCenterDialog(bean.getMsg(),CustomCenterDialog.SHOWCENTER);
+                    customCenterDialog.show(getFragmentManager(),CurrencyFundRedeemActivity.class.toString());
                 }
 
             }

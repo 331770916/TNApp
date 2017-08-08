@@ -16,6 +16,7 @@ import com.tpyzq.mobile.pangu.data.ResultInfo;
 import com.tpyzq.mobile.pangu.util.ConstantUtil;
 import com.tpyzq.mobile.pangu.util.Helper;
 import com.tpyzq.mobile.pangu.util.SpUtils;
+import com.tpyzq.mobile.pangu.view.CentreToast;
 import com.tpyzq.mobile.pangu.view.dialog.LoadingDialog;
 import com.tpyzq.mobile.pangu.view.dialog.MistakeDialog;
 import com.tpyzq.mobile.pangu.view.dialog.StructuredFundDialog;
@@ -108,12 +109,12 @@ public class VoteDetailActivity extends BaseActivity  implements InterfaceCollec
                     }
                 }
             }else if(info.getTag().equals(TAG+"submit")){
-                showToast(info.getMsg());
+                CentreToast.showText(VoteDetailActivity.this,info.getMsg());
             }
         }else if("-6".equals(code)){
             skip.startLogin(this);
         }else{//-1,-2,-3情况下显示定义好信息
-            showToast(info.getMsg());
+            CentreToast.showText(VoteDetailActivity.this,info.getMsg());
         }
     }
 

@@ -26,6 +26,7 @@ import com.tpyzq.mobile.pangu.util.ConstantUtil;
 import com.tpyzq.mobile.pangu.util.Helper;
 import com.tpyzq.mobile.pangu.util.SpUtils;
 import com.tpyzq.mobile.pangu.util.ToastUtils;
+import com.tpyzq.mobile.pangu.view.CentreToast;
 import com.tpyzq.mobile.pangu.view.dialog.FundChangeDialog;
 import com.zhy.http.okhttp.callback.StringCallback;
 
@@ -163,7 +164,8 @@ public class FundChangeActivity extends BaseActivity implements View.OnClickList
                     } else if ("-6".equals(code)) {
                         startActivity(new Intent(FundChangeActivity.this, TransactionLoginActivity.class));
                     } else {
-                        ToastUtils.showShort(FundChangeActivity.this, msg);
+
+                        CentreToast.showText(FundChangeActivity.this,msg);
                     }
                 } catch (JSONException e) {
                     e.printStackTrace();
@@ -188,7 +190,7 @@ public class FundChangeActivity extends BaseActivity implements View.OnClickList
         NetWorkUtil.getInstence().okHttpForPostString("", ConstantUtil.getURL_JY_HS(), map300443, new StringCallback() {
             @Override
             public void onError(Call call, Exception e, int id) {
-                Helper.getInstance().showToast(FundChangeActivity.this,ConstantUtil.NETWORK_ERROR);
+                CentreToast.showText(FundChangeActivity.this,ConstantUtil.NETWORK_ERROR);
             }
 
             @Override
@@ -211,7 +213,7 @@ public class FundChangeActivity extends BaseActivity implements View.OnClickList
                         startActivity(new Intent(FundChangeActivity.this, TransactionLoginActivity.class));
                         finish();
                     } else {
-                        ToastUtils.showShort(FundChangeActivity.this, msg);
+                        CentreToast.showText(FundChangeActivity.this, msg);
                     }
                 } catch (JSONException e) {
                     e.printStackTrace();

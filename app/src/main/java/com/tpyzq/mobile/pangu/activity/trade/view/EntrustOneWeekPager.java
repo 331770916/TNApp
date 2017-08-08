@@ -1,6 +1,7 @@
 package com.tpyzq.mobile.pangu.activity.trade.view;
 
 import android.content.Context;
+import android.content.Intent;
 import android.os.AsyncTask;
 import android.os.Handler;
 import android.os.Message;
@@ -13,6 +14,7 @@ import android.widget.RelativeLayout;
 import com.handmark.pulltorefresh.library.PullToRefreshBase;
 import com.handmark.pulltorefresh.library.PullToRefreshListView;
 import com.tpyzq.mobile.pangu.R;
+import com.tpyzq.mobile.pangu.activity.myself.login.TransactionLoginActivity;
 import com.tpyzq.mobile.pangu.activity.trade.BaseSearchPager;
 import com.tpyzq.mobile.pangu.adapter.trade.EntrustListViewAdapter;
 import com.tpyzq.mobile.pangu.data.TodayEntrustEntity;
@@ -20,6 +22,7 @@ import com.tpyzq.mobile.pangu.http.NetWorkUtil;
 import com.tpyzq.mobile.pangu.log.LogHelper;
 import com.tpyzq.mobile.pangu.util.ConstantUtil;
 import com.tpyzq.mobile.pangu.util.SpUtils;
+import com.tpyzq.mobile.pangu.view.CentreToast;
 import com.zhy.http.okhttp.callback.StringCallback;
 
 import org.json.JSONArray;
@@ -150,7 +153,10 @@ public class EntrustOneWeekPager extends BaseSearchPager {
                             mAdapter.notifyDataSetChanged();
                             sure = data.length();
                         }
+                    }else if ("-6".equals(jsonObject.getString("code"))) {
+                        mContext.startActivity(new Intent(mContext, TransactionLoginActivity.class));
                     } else {
+                        CentreToast.showText(mContext,jsonObject.getString("msg"));
                         kong_null.setVisibility(View.GONE);
                     }
                 } catch (JSONException e) {

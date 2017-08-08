@@ -27,6 +27,7 @@ import com.tpyzq.mobile.pangu.log.LogHelper;
 import com.tpyzq.mobile.pangu.util.ConstantUtil;
 import com.tpyzq.mobile.pangu.util.Helper;
 import com.tpyzq.mobile.pangu.util.SpUtils;
+import com.tpyzq.mobile.pangu.view.CentreToast;
 import com.tpyzq.mobile.pangu.view.dialog.LoadingDialog;
 import com.tpyzq.mobile.pangu.view.dialog.MistakeDialog;
 import com.tpyzq.mobile.pangu.view.dialog.ResultDialog;
@@ -163,7 +164,7 @@ public class EntrustCustomPager extends BaseSearchPager {
                 if (mDialog != null) {
                     mDialog.dismiss();
                 }
-                ResultDialog.getInstance().showText("网络异常");
+                CentreToast.showText(mContext,ConstantUtil.NETWORK_ERROR);
                 kong_null.setVisibility(View.GONE);
             }
 
@@ -233,7 +234,7 @@ public class EntrustCustomPager extends BaseSearchPager {
                             if (mDialog != null) {
                                 mDialog.dismiss();
                             }
-                            Helper.getInstance().showToast(mContext, " 暂无数据");
+                            CentreToast.showText(mContext,"暂无数据");
                         }
                     } else if ("-6".equals(jsonObject.getString("code"))) {
                         if (mDialog != null) {
@@ -244,7 +245,7 @@ public class EntrustCustomPager extends BaseSearchPager {
                         if (mDialog != null) {
                             mDialog.dismiss();
                         }
-                        ResultDialog.getInstance().showText(jsonObject.getString("msg"));
+//                        ResultDialog.getInstance().showText(jsonObject.getString("msg"));
                         kong_null.setVisibility(View.GONE);
                     }
                 } catch (JSONException e) {

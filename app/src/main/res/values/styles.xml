@@ -307,4 +307,11 @@
         <item name="android:windowEnterAnimation">@anim/slide_in_bottom</item>
         <item name="android:windowExitAnimation">@anim/slide_out_bottom</item>
     </style>
+    <!--在style.xml中引入自定义动画-->
+    <style name="CustomDialog" parent="@android:style/Theme.Dialog">
+        <item name="android:windowEnterAnimation">@anim/popwin_show_anim</item>
+        <item name="android:windowExitAnimation">@anim/popwin_hide_anim</item>
+    </style>
+
+
 </resources>

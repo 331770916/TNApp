@@ -25,6 +25,7 @@ import com.tpyzq.mobile.pangu.util.ConstantUtil;
 import com.tpyzq.mobile.pangu.util.Helper;
 import com.tpyzq.mobile.pangu.util.SpUtils;
 import com.tpyzq.mobile.pangu.util.panguutil.UserUtil;
+import com.tpyzq.mobile.pangu.view.CentreToast;
 import com.tpyzq.mobile.pangu.view.pullrefreshrecyclerview.PullRefreshView;
 import com.zhy.http.okhttp.callback.StringCallback;
 
@@ -92,7 +93,7 @@ public class CurrencyFundRevokeActivity extends BaseActivity implements View.OnC
         NetWorkUtil.getInstence().okHttpForPostString(TAG, ConstantUtil.getURL_JY_HS(), map1, new StringCallback() {
             @Override
             public void onError(Call call, Exception e, int id) {
-                Helper.getInstance().showToast(CurrencyFundRevokeActivity.this,ConstantUtil.NETWORK_ERROR);
+                CentreToast.showText(CurrencyFundRevokeActivity.this,ConstantUtil.NETWORK_ERROR);
                 mListView.onRefreshComplete();
             }
 

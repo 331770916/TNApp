@@ -20,6 +20,7 @@ import com.tpyzq.mobile.pangu.util.ConstantUtil;
 import com.tpyzq.mobile.pangu.util.Helper;
 import com.tpyzq.mobile.pangu.util.SpUtils;
 import com.tpyzq.mobile.pangu.util.ToastUtils;
+import com.tpyzq.mobile.pangu.view.CentreToast;
 import com.tpyzq.mobile.pangu.view.dialog.MistakeDialog;
 import com.zhy.http.okhttp.callback.StringCallback;
 
@@ -95,7 +96,7 @@ public class PositionFundActivity extends BaseActivity {
         NetWorkUtil.getInstence().okHttpForPostString("", ConstantUtil.getURL_JY_HS(), map720260, new StringCallback() {
             @Override
             public void onError(Call call, Exception e, int id) {
-                Helper.getInstance().showToast(PositionFundActivity.this,ConstantUtil.NETWORK_ERROR);
+                CentreToast.showText(PositionFundActivity.this,ConstantUtil.NETWORK_ERROR);
             }
 
             @Override
@@ -124,7 +125,7 @@ public class PositionFundActivity extends BaseActivity {
                     } else if ("-6".equals(code)) {
                         startActivity(new Intent(PositionFundActivity.this, TransactionLoginActivity.class));
                     } else {
-                        MistakeDialog.showDialog(msg,PositionFundActivity.this);
+                        CentreToast.showText(PositionFundActivity.this,msg);
                     }
                 } catch (JSONException e) {
                     e.printStackTrace();

@@ -18,9 +18,9 @@ import com.tpyzq.mobile.pangu.base.InterfaceCollection;
 import com.tpyzq.mobile.pangu.data.EtfDataEntity;
 import com.tpyzq.mobile.pangu.data.ResultInfo;
 import com.tpyzq.mobile.pangu.util.ConstantUtil;
-import com.tpyzq.mobile.pangu.util.Helper;
 import com.tpyzq.mobile.pangu.util.SpUtils;
 import com.tpyzq.mobile.pangu.view.CentreToast;
+import com.tpyzq.mobile.pangu.view.CustomCenterDialog;
 import com.tpyzq.mobile.pangu.view.dialog.LoadingDialog;
 import com.tpyzq.mobile.pangu.view.dialog.MistakeDialog;
 import com.tpyzq.mobile.pangu.view.dialog.StructuredFundDialog;
@@ -115,7 +115,7 @@ public class ETFApplyforOrRedeemActivity extends BaseActivity implements TextWat
                 String str = mInputCount.getText().toString().trim();
                 if (str.indexOf('0') == 0) {
                     mInputCount.setText("");
-                    Helper.getInstance().showToast(this, "首位不能为0");
+                    CentreToast.showText(this, "首位不能为0");
                 }
                 break;
         }
@@ -226,11 +226,11 @@ public class ETFApplyforOrRedeemActivity extends BaseActivity implements TextWat
         String code = mInputCode.getText().toString().trim();
         String count = mInputCount.getText().toString().trim();
         if (code.isEmpty()) {
-            Helper.getInstance().showToast(this, "请输入代码");
+            CentreToast.showText(this, "请输入代码");
             return false;
         }
         if (count.isEmpty()) {
-            Helper.getInstance().showToast(this, "请输入份额");
+            CentreToast.showText(this, "请输入份额");
             return false;
         }
         return true;
@@ -257,11 +257,10 @@ public class ETFApplyforOrRedeemActivity extends BaseActivity implements TextWat
             } else if ("-6".equals(code)) {
                 skip.startLogin(this);
             } else if ("400".equals(info.getCode()) || "-2".equals(info.getCode()) || "-3".equals(info.getCode())) {   //  网络错误 解析错误 其他
-                Helper.getInstance().showToast(this, info.getMsg());
-//                setText();
+                CentreToast.showText(this, info.getMsg());
             } else {
                 setText();
-                MistakeDialog.showDialog(info.getMsg(), ETFApplyforOrRedeemActivity.this);
+                showDialog(info.getMsg());
             }
         } else if ("Redeem".equals(info.getTag())) {
             String code = info.getCode();
@@ -278,60 +277,64 @@ public class ETFApplyforOrRedeemActivity extends BaseActivity implements TextWat
             } else if ("-6".equals(code)) {
                 skip.startLogin(this);
             } else if ("400".equals(info.getCode()) || "-2".equals(info.getCode()) || "-3".equals(info.getCode())) {   //  网络错误 解析错误 其他
-                Helper.getInstance().showToast(this, info.getMsg());
-//                setText();
+                CentreToast.showText(this, info.getMsg());
             } else {
                 setText();
-                MistakeDialog.showDialog(info.getMsg(), ETFApplyforOrRedeemActivity.this);
+                showDialog(info.getMsg());
             }
         } else if (TAG_APPLYFOR.equals(info.getTag())) {
             String code = info.getCode();
             if ("0".equals(code)) {
                 CentreToast.showText(this,"委托已提交",true);
-                mInputCode.setText("");
-                mInputCount.setText("");
                 tv_upperlimit.setText("申购上限：--");
-                available_funds.setText("--");
-                etf_code.setText("--");
-                tv_shareholder.setText("--");
+                cleanText();
             } else if ("-6".equals(code)) {
                 skip.startLogin(this);
             } else if ("400".equals(info.getCode()) || "-2".equals(info.getCode()) || "-3".equals(info.getCode())) {   //  网络错误 解析错误 其他
-                Helper.getInstance().showToast(this, info.getMsg());
+                CentreToast.showText(this, info.getMsg());
             } else {
                 mInputCode.setFocusable(true);
                 mInputCount.setEnabled(false);
                 mInputCode.setText("");
                 mInputCount.setText("");
                 setText();
-                MistakeDialog.showDialog(info.getMsg(), ETFApplyforOrRedeemActivity.this);
+                showDialog(info.getMsg());
             }
         } else if (TAG_REAEEM.equals(info.getTag())) {
             String code = info.getCode();
             if ("0".equals(code)) {
-//                Helper.getInstance().showToast(this, "委托已提交");
                 CentreToast.showText(this,"委托已提交",true);
-                mInputCode.setText("");
-                mInputCount.setText("");
                 tv_upperlimit.setText("赎回上限：--");
-                available_funds.setText("--");
-                etf_code.setText("--");
-                tv_shareholder.setText("--");
+                cleanText();
             } else if ("-6".equals(code)) {
                 skip.startLogin(this);
             } else if ("400".equals(info.getCode()) || "-2".equals(info.getCode()) || "-3".equals(info.getCode())) {   //  网络错误 解析错误 其他
-                Helper.getInstance().showToast(this, info.getMsg());
+                CentreToast.showText(this, info.getMsg());
             } else {
                 mInputCode.setFocusable(true);
                 mInputCount.setEnabled(false);
                 mInputCode.setText("");
                 mInputCount.setText("");
                 setText();
-                MistakeDialog.showDialog(info.getMsg(), ETFApplyforOrRedeemActivity.this);
+                showDialog(info.getMsg());
             }
 
         }
 
+    }
+
+    public void showDialog(String msg){
+        CustomCenterDialog customCenterDialog = CustomCenterDialog.CustomCenterDialog(msg,CustomCenterDialog.SHOWCENTER);
+        customCenterDialog.show(getFragmentManager(),ETFApplyforOrRedeemActivity.this.toString());
+    }
+
+    private void cleanText(){
+
+        mInputCode.setText("");
+        mInputCount.setText("");
+        available_funds.setText("--");
+        etf_code.setText("--");
+        tv_shareholder.setText("--");
     }
 
     private void setText() {

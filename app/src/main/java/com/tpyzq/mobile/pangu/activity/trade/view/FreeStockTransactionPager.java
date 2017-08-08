@@ -23,6 +23,7 @@ import com.tpyzq.mobile.pangu.interfac.StockCodeCallBack;
 import com.tpyzq.mobile.pangu.util.ConstantUtil;
 import com.tpyzq.mobile.pangu.util.Helper;
 import com.tpyzq.mobile.pangu.util.TransitionUtils;
+import com.tpyzq.mobile.pangu.view.CentreToast;
 import com.zhy.http.okhttp.callback.StringCallback;
 
 import org.json.JSONArray;
@@ -131,6 +132,7 @@ public class FreeStockTransactionPager extends BaseTransactionPager implements A
             @Override
             public void onError(Call call, Exception e, int id) {
                 lv_transaction.onRefreshComplete();
+                CentreToast.showText(mContext,ConstantUtil.NETWORK_ERROR);
             }
 
             @Override

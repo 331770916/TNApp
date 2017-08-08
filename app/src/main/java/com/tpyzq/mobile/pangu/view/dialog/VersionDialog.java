@@ -1,8 +1,11 @@
 package com.tpyzq.mobile.pangu.view.dialog;
 
 import android.content.Context;
+import android.graphics.drawable.AnimationDrawable;
 import android.os.Environment;
+import android.util.Log;
 import android.view.View;
+import android.webkit.WebView;
 import android.widget.ImageView;
 import android.widget.TextView;
 
@@ -17,6 +20,7 @@ import com.zhy.http.okhttp.callback.FileCallBack;
 import java.io.File;
 import java.io.IOException;
 
+import bonree.k.G;
 import okhttp3.Call;
 
 
@@ -25,48 +29,68 @@ import okhttp3.Call;
  */
 public class VersionDialog extends BaseDialogCenter implements View.OnClickListener {
 
-    private ImageView ivGuanBi;                 //叉子 关闭
+    private ImageView mTopImage;                 //   顶部图片
     private TextView tvVersionNumber;          //版本号
     private TextView tv_download;        //立即更新  按钮
     private String apkAddress;                 // 下载地址
     private String forceIsupdate;              //是否强制更新
     private String versionNumber;               //版本号
     private WavaBezierProgress wbp_download;
+    private AnimationDrawable animationDrawable;
+    private TextView mUpdateContont;
+    private ImageView mCloseDialog;
+    private WebView mLoadingText;
+    private String url ;
+    private String mimeType  = "text/html";
+    private String encoding = "utf-8";
 
-    public VersionDialog(Context context, String apkAddress, String forceIsupdate, String versionNumber) {
+    public VersionDialog(Context context, String apkAddress, String forceIsupdate, String versionNumber,String url) {
         super(context);
         this.apkAddress = apkAddress;
         this.forceIsupdate = forceIsupdate;
         this.versionNumber = versionNumber;
+        this.url = url;
     }
 
     @Override
     public void setView() {
-        ivGuanBi = (ImageView) findViewById(R.id.ivGuanBi);
+        mLoadingText = (WebView) findViewById(R.id.loading_contont);
+        mTopImage = (ImageView) findViewById(R.id.ivGuanBi);
+        mCloseDialog  = (ImageView) findViewById(R.id.mclose);
         tvVersionNumber = (TextView) findViewById(R.id.tvVersionNumber);
         tv_download = (TextView) findViewById(R.id.tv_download);
         wbp_download = (WavaBezierProgress) findViewById(R.id.wbp_download);
+        mUpdateContont = (TextView) findViewById(R.id.update_content);
+        mLoadingText.getSettings().setDefaultTextEncodingName("UTF -8");//设置默认为utf-8
+        animationDrawable = (AnimationDrawable) mTopImage.getBackground();
+        animationDrawable.start();
     }
 
     @Override
     public void initData() {
 
         setCancelable(false);                 //屏蔽返回键
-
-        if ("1".equals(forceIsupdate)) {      //强制更新
-            ivGuanBi.setVisibility(View.GONE);
-        } else if ("0".equals(forceIsupdate)) {      //非 强制更新
-            ivGuanBi.setVisibility(View.VISIBLE);
+        try {
+            mLoadingText.loadData(url, "text/html; charset=UTF-8", null);
+        }catch (Exception e){
+            e.printStackTrace();
         }
 
-        tvVersionNumber.setText("最新版本 " + versionNumber);
+        if ("1".equals(forceIsupdate)) {      //强制更新
+            mCloseDialog.setVisibility(View.GONE);
+        } else if ("0".equals(forceIsupdate)) {      //非 强制更新
+            mCloseDialog.setVisibility(View.VISIBLE);
+        }
+//        mUpdateContont.setText("");            // 更新内容
+        tvVersionNumber.setText(versionNumber);
         tv_download.setOnClickListener(this);         //更新
-        ivGuanBi.setOnClickListener(this);              //关闭 按钮
+        mTopImage.setOnClickListener(this);              //关闭 按钮
+        mCloseDialog.setOnClickListener(this);
     }
 
     @Override
     public int getLayoutId() {
-        return R.layout.version_dialog;
+        return R.layout.dialog_find_new_version;
     }
 
     @Override
@@ -89,8 +113,11 @@ public class VersionDialog extends BaseDialogCenter implements View.OnClickListe
 
                 break;
 
-            case R.id.ivGuanBi:             //关闭
-                dismiss();
+            case R.id.ivGuanBi:
+//                dismiss();
+                break;
+            case R.id.mclose:
+                  dismiss();
                 break;
         }
     }

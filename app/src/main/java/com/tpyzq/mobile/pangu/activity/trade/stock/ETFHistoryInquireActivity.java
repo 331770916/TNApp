@@ -1,5 +1,6 @@
 package com.tpyzq.mobile.pangu.activity.trade.stock;
 
+import android.app.FragmentManager;
 import android.content.Context;
 import android.support.v4.view.ViewPager;
 import android.view.View;
@@ -37,9 +38,11 @@ public class ETFHistoryInquireActivity extends BaseActivity implements View.OnCl
     private MagicIndicator capital_buy;
     private ViewPager viewPager;
     private boolean isTrue;
+    public static FragmentManager fragmentManager;
 
     @Override
     public void initView() {
+        fragmentManager = getFragmentManager();
         findViewById(R.id.ivCNFund_back).setOnClickListener(this);
         ((TextView) findViewById(R.id.fj_title)).setText(getString(R.string.ETF_shenshu_History));
         capital_buy = (MagicIndicator) findViewById(R.id.capital_buy);

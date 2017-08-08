@@ -20,6 +20,7 @@ import com.tpyzq.mobile.pangu.http.NetWorkUtil;
 import com.tpyzq.mobile.pangu.log.LogHelper;
 import com.tpyzq.mobile.pangu.util.ConstantUtil;
 import com.tpyzq.mobile.pangu.util.SpUtils;
+import com.tpyzq.mobile.pangu.view.CentreToast;
 import com.tpyzq.mobile.pangu.view.dialog.ResultDialog;
 import com.zhy.http.okhttp.callback.StringCallback;
 
@@ -141,7 +142,8 @@ public class MoneyInAMonthPager extends BaseSearchPager {
                             sure = data.length();
                         }
                     } else {
-                        ResultDialog.getInstance().showText(jsonObject.getString("msg"));
+                        CentreToast.showText(mContext,jsonObject.getString("msg"));
+
                         kong_null.setVisibility(View.GONE);
                     }
                 } catch (JSONException e) {

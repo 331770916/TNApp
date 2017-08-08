@@ -22,6 +22,7 @@ import com.tpyzq.mobile.pangu.util.ConstantUtil;
 import com.tpyzq.mobile.pangu.util.Helper;
 import com.tpyzq.mobile.pangu.util.SpUtils;
 import com.tpyzq.mobile.pangu.util.ToastUtils;
+import com.tpyzq.mobile.pangu.view.CentreToast;
 import com.tpyzq.mobile.pangu.view.dialog.FundWithDrawDialog;
 import com.zhy.http.okhttp.callback.StringCallback;
 
@@ -126,7 +127,7 @@ public class FundWithDrawActivity extends BaseActivity implements View.OnClickLi
             @Override
             public void onError(Call call, Exception e, int id) {
                 lv_fund.onRefreshComplete();
-                Helper.getInstance().showToast(FundWithDrawActivity.this,ConstantUtil.NETWORK_ERROR);
+                CentreToast.showText(FundWithDrawActivity.this,ConstantUtil.NETWORK_ERROR);
             }
 
             @Override
@@ -151,7 +152,7 @@ public class FundWithDrawActivity extends BaseActivity implements View.OnClickLi
                         withdrawAdapter.setWithDrawBeens(withDrawBeens);
                         withdrawAdapter.notifyDataSetChanged();
                     } else {
-                        ToastUtils.showShort(FundWithDrawActivity.this, msg);
+                        CentreToast.showText(FundWithDrawActivity.this, msg);
                         startActivity(new Intent(FundWithDrawActivity.this, TransactionLoginActivity.class));
                     }
                 } catch (JSONException e) {

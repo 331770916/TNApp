@@ -22,6 +22,7 @@ import com.tpyzq.mobile.pangu.data.FundSubsEntity;
 import com.tpyzq.mobile.pangu.http.OkHttpUtil;
 import com.tpyzq.mobile.pangu.http.doConnect.trade.FundInoConnect;
 import com.tpyzq.mobile.pangu.util.SpUtils;
+import com.tpyzq.mobile.pangu.view.CentreToast;
 import com.tpyzq.mobile.pangu.view.dialog.LoadingDialog;
 import java.util.ArrayList;
 
@@ -203,7 +204,7 @@ public class FundInfoActivity extends BaseActivity implements View.OnClickListen
     }
 
     private void showMistackDialog(String errorMsg) {
-        Toast.makeText(CustomApplication.getContext(), errorMsg, Toast.LENGTH_SHORT).show();
+        CentreToast.showText(CustomApplication.getContext(),errorMsg);
 //        MistakeDialog.showDialog(errorMsg, FundInfoActivity.this, listener);
     }
 

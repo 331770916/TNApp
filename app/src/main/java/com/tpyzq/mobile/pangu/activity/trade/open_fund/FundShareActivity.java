@@ -25,6 +25,7 @@ import com.tpyzq.mobile.pangu.util.ConstantUtil;
 import com.tpyzq.mobile.pangu.util.Helper;
 import com.tpyzq.mobile.pangu.util.SpUtils;
 import com.tpyzq.mobile.pangu.util.ToastUtils;
+import com.tpyzq.mobile.pangu.view.CentreToast;
 import com.tpyzq.mobile.pangu.view.dialog.MistakeDialog;
 import com.tpyzq.mobile.pangu.view.gridview.MyListView;
 import com.tpyzq.mobile.pangu.view.pullDownGroup.PullDownScrollView;
@@ -114,7 +115,7 @@ public class FundShareActivity extends BaseActivity implements View.OnClickListe
                 mPullToRefreshScrollView.onRefreshComplete();
                 iv_kong.setVisibility(View.VISIBLE);
                 ll_content.setVisibility(View.GONE);
-                Helper.getInstance().showToast(FundShareActivity.this,ConstantUtil.NETWORK_ERROR);
+                CentreToast.showText(FundShareActivity.this,ConstantUtil.NETWORK_ERROR);
             }
 
             @Override
@@ -150,7 +151,7 @@ public class FundShareActivity extends BaseActivity implements View.OnClickListe
                     } else if ("-6".equals(code)) {
                         startActivity(new Intent(FundShareActivity.this, TransactionLoginActivity.class));
                     } else {
-                        ToastUtils.showShort(FundShareActivity.this, msg);
+                        CentreToast.showText(FundShareActivity.this, msg);
                     }
                 } catch (JSONException e) {
                     e.printStackTrace();

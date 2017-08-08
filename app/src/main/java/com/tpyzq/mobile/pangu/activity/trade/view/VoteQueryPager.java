@@ -26,12 +26,16 @@ import com.tpyzq.mobile.pangu.data.NetworkVotingEntity;
 import com.tpyzq.mobile.pangu.data.ResultInfo;
 import com.tpyzq.mobile.pangu.data.StructuredFundEntity;
 import com.tpyzq.mobile.pangu.util.Helper;
+import com.tpyzq.mobile.pangu.view.CentreToast;
+import com.tpyzq.mobile.pangu.view.CustomCenterDialog;
 import com.tpyzq.mobile.pangu.view.dialog.LoadingDialog;
 import com.tpyzq.mobile.pangu.view.dialog.MistakeDialog;
 import com.tpyzq.mobile.pangu.view.pickTime.TimePickerView;
 
 import java.util.Date;
 import java.util.List;
+
+import static com.tpyzq.mobile.pangu.activity.trade.stock.VoteQueryActivity.fragmentManager;
 
 /**
  * 投票查询page
@@ -44,7 +48,7 @@ public class VoteQueryPager extends BasePager implements InterfaceCollection.Int
     private TimePickerView startTime, finishTime;
     private boolean isScallBottom, mIsClean;
     private boolean isCustomRefresh = false;
-    private Dialog mDialog, mistakeDialog;
+    private Dialog mDialog;
     private PullToRefreshListView mListView;
     private VoteQueryAdapter mAdapter;
     private ImageView iv_isEmpty;
@@ -141,9 +145,9 @@ public class VoteQueryPager extends BasePager implements InterfaceCollection.Int
                         String str = helper.compareTo(startDate, finishDate);
                         int days = helper.daysBetween(startDate, finishDate);
                         if (str.equalsIgnoreCase(startDate)) {
-                            mistakeDialog = MistakeDialog.showDialog("请选择正确日期,起始日期不能超过截止日期", (Activity) mContext);
+                            showDialog("请选择正确日期,起始日期不能超过截止日期");
                         } else if (days > 90) {
-                            mistakeDialog = MistakeDialog.showDialog("选择的日期间隔不能超过3个月", (Activity) mContext);
+                            showDialog("选择的日期间隔不能超过3个月");
                         } else {
                             isCustomRefresh = true;
                             mDialog.show();
@@ -279,21 +283,22 @@ public class VoteQueryPager extends BasePager implements InterfaceCollection.Int
         } else if ("-6".equals(code)) {
             skip.startLogin(mContext);
         } else if ("400".equals(info.getCode()) || "-2".equals(info.getCode()) || "-3".equals(info.getCode())) {   //  网络错误 解析错误 其他
-            Helper.getInstance().showToast(mContext, info.getMsg());
+            CentreToast.showText(mContext, info.getMsg());
         } else {
-            mistakeDialog=MistakeDialog.showDialog("提示",info.getMsg(),false,(Activity) mContext,null);
+            showDialog(info.getMsg());
         }
         mListView.onRefreshComplete();
+    }
+
+    public void showDialog(String msg){
+        CustomCenterDialog customCenterDialog = CustomCenterDialog.CustomCenterDialog(msg,CustomCenterDialog.SHOWCENTER);
+        customCenterDialog.show(fragmentManager,VoteQueryPager.this.toString());
     }
 
 
     @Override
     public void destroy() {
         net.cancelSingleRequestByTag(TAG);
-        if (mistakeDialog != null) {
-            mistakeDialog.dismiss();
-            mistakeDialog = null;
-        }
         if (mDialog != null) {
             mDialog.dismiss();
             mDialog = null;

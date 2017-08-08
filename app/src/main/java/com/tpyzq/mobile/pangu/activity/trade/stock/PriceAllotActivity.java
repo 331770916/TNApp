@@ -32,8 +32,8 @@ import com.tpyzq.mobile.pangu.log.LogHelper;
 import com.tpyzq.mobile.pangu.util.ConstantUtil;
 import com.tpyzq.mobile.pangu.util.Helper;
 import com.tpyzq.mobile.pangu.util.SpUtils;
-import com.tpyzq.mobile.pangu.view.dialog.MistakeDialog;
-import com.tpyzq.mobile.pangu.view.dialog.ResultDialog;
+import com.tpyzq.mobile.pangu.view.CentreToast;
+import com.tpyzq.mobile.pangu.view.CustomCenterDialog;
 import com.zhy.http.okhttp.callback.StringCallback;
 
 import org.json.JSONArray;
@@ -267,7 +267,7 @@ public class PriceAllotActivity extends BaseActivity implements View.OnClickList
         if (!TextUtils.isEmpty(input)) {
             _input = Double.parseDouble(input);
         } else {
-            Helper.getInstance().showToast(CustomApplication.getContext(), "输入金额不能为空");
+            CentreToast.showText(CustomApplication.getContext(), "输入金额不能为空");
             return false;
         }
 
@@ -275,24 +275,24 @@ public class PriceAllotActivity extends BaseActivity implements View.OnClickList
             balance = balance.substring(5, balance.length());
             _balance = Double.parseDouble(balance);
         } else {
-            Helper.getInstance().showToast(CustomApplication.getContext(), "无可取余额");
+            CentreToast.showText(CustomApplication.getContext(), "无可取余额");
             return false;
         }
 
         if (TextUtils.isEmpty(mFundAccountDest)) {
-            Helper.getInstance().showToast(CustomApplication.getContext(), "请选择转入资金账号");
+            CentreToast.showText(CustomApplication.getContext(), "请选择转入资金账号");
             return false;
         }
 
         if (TextUtils.isEmpty(mFundAccountSrc)) {
-            Helper.getInstance().showToast(CustomApplication.getContext(), "请选择转出资金账号");
+            CentreToast.showText(CustomApplication.getContext(), "请选择转出资金账号");
             return false;
         }
 
         if (_balance >= _input) {
             return true;
         } else {
-            Helper.getInstance().showToast(CustomApplication.getContext(), "输入金额大于可取金额");
+            CentreToast.showText(CustomApplication.getContext(), "输入金额大于可取金额");
             return false;
         }
     }
@@ -419,7 +419,7 @@ public class PriceAllotActivity extends BaseActivity implements View.OnClickList
             @Override
             public void onResponse(String response, int id) {
                 if (TextUtils.isEmpty(response)) {
-                    Helper.getInstance().showToast(CustomApplication.getContext(), "" + response);
+//                    Helper.getInstance().showToast(CustomApplication.getContext(), "" + response);
                     return ;
                 }
                 try{
@@ -443,7 +443,7 @@ public class PriceAllotActivity extends BaseActivity implements View.OnClickList
                                     getResultAccountPrice(FETCH_BALANCE, FUND_ACCOUNT);
                                     mUsefulBalanceTv.setText("可取余额：" + FETCH_BALANCE);
                                     mBalanceTv.setText("");
-                                    ResultDialog.getInstance().show("转账申请已提交", R.mipmap.lc_success);
+                                    CentreToast.showText(PriceAllotActivity.this,"转账申请已提交", true);
                                 }
                                 if (fundAccountDest.equals(FUND_ACCOUNT)) {
                                     getResultAccountPrice(FETCH_BALANCE, FUND_ACCOUNT);
@@ -451,12 +451,8 @@ public class PriceAllotActivity extends BaseActivity implements View.OnClickList
                             }
                         }
                     } else {
-                        MistakeDialog.showDialog(msg, PriceAllotActivity.this, new MistakeDialog.MistakeDialgoListener() {
-                            @Override
-                            public void doPositive() {
-                                finish();
-                            }
-                        });
+
+                        showDialog(msg);
                     }
                 }catch (JSONException e){
                     e.printStackTrace();
@@ -576,12 +572,7 @@ public class PriceAllotActivity extends BaseActivity implements View.OnClickList
                 }
 
                 if (!bean.getCode().equals("0")) {
-                    MistakeDialog.showDialog(bean.getMsg(), PriceAllotActivity.this, new MistakeDialog.MistakeDialgoListener() {
-                        @Override
-                        public void doPositive() {
-                            finish();
-                        }
-                    });
+                    showDialog(bean.getMsg());
                     return;
                 }
 
@@ -613,6 +604,17 @@ public class PriceAllotActivity extends BaseActivity implements View.OnClickList
 
                     initTopContentView(mAccountContentLayout,""+ mMainEntitiy.getFUND_ACCOUNT(),"" + mMainEntitiy.getBANK_NAME(), mMainEntitiy.getBANK_ACCOUNT());
                 }
+            }
+        });
+    }
+
+    public void showDialog(String msg){
+        CustomCenterDialog customCenterDialog = CustomCenterDialog.CustomCenterDialog(msg,CustomCenterDialog.SHOWCENTER);
+        customCenterDialog.show(getFragmentManager(),PriceAllotActivity.class.toString());
+        customCenterDialog.setOnClickListener(new CustomCenterDialog.ConfirmOnClick() {
+            @Override
+            public void confirmOnclick() {
+                finish();
             }
         });
     }
