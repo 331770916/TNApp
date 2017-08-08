@@ -2,7 +2,6 @@ package com.tpyzq.mobile.pangu.activity.detail.newsTab;
 
 import android.app.Dialog;
 import android.content.Intent;
-import android.os.AsyncTask;
 import android.support.v4.content.ContextCompat;
 import android.view.View;
 import android.widget.AdapterView;
@@ -15,7 +14,7 @@ import com.handmark.pulltorefresh.library.PullToRefreshListView;
 import com.tpyzq.mobile.pangu.R;
 import com.tpyzq.mobile.pangu.adapter.detail.NewsAdapter;
 import com.tpyzq.mobile.pangu.base.BaseActivity;
-import com.tpyzq.mobile.pangu.data.DetailNewsEntity;
+import com.tpyzq.mobile.pangu.data.InformationEntity;
 import com.tpyzq.mobile.pangu.http.NetWorkUtil;
 import com.tpyzq.mobile.pangu.log.LogUtil;
 import com.tpyzq.mobile.pangu.util.ConstantUtil;
@@ -46,7 +45,7 @@ public class DetailAnnouncementListActivity extends BaseActivity implements View
     private Dialog dialog;
     private NewsAdapter adapter;
     private int index;
-    private ArrayList<DetailNewsEntity> list;
+    private ArrayList<InformationEntity> list;
     private String stockCode;
 
     @Override
@@ -73,8 +72,8 @@ public class DetailAnnouncementListActivity extends BaseActivity implements View
         mListView.setOnItemClickListener(new AdapterView.OnItemClickListener() {
             @Override
             public void onItemClick(AdapterView<?> parent, View view, int position, long id) {
-                DetailNewsEntity bean = list.get(position-1);
-                String msgId = bean.getId();
+                InformationEntity bean = list.get(position-1);
+                String msgId = bean.getNewsno();
                 Intent intent = new Intent(DetailAnnouncementListActivity.this,AnnouncementStydyDetailActivity.class);
                 intent.putExtra("msgId",msgId);
                 intent.putExtra("type",1);
@@ -93,29 +92,7 @@ public class DetailAnnouncementListActivity extends BaseActivity implements View
                     mListView.getLoadingLayoutProxy().setRefreshingLabel("正在刷新");
                     mListView.getLoadingLayoutProxy().setPullLabel("下拉刷新数据");
                     mListView.getLoadingLayoutProxy().setReleaseLabel("释放开始刷新");
-                    //模拟加载数据线程休息3秒
-                    new AsyncTask<Void, Void, Void>() {
-                        @Override
-                        protected Void doInBackground(Void... params) {
-                            try {
-                                Thread.sleep(1500);
-                                getData();
-                            } catch (InterruptedException e) {
-                                e.printStackTrace();
-                            }
-                            return null;
-                        }
-
-                        @Override
-                        protected void onPostExecute(Void result) {
-                            super.onPostExecute(result);
-
-                            //完成对下拉刷新ListView的更新操作
-                            adapter.notifyDataSetChanged();
-                            //将下拉视图收起
-                            mListView.onRefreshComplete();
-                        }
-                    }.execute();
+                    getData();
                 }/*else if (refreshView.isShownFooter()) {
                     //判断尾布局是否可见，如果可见执行上拉加载更多
                     //设置尾布局样式文字
@@ -186,27 +163,8 @@ public class DetailAnnouncementListActivity extends BaseActivity implements View
                         if (!isFinishing())
                             dialog.show();      //显示菊花
                         rlDetailAnnouncement.setVisibility(View.VISIBLE);//显示背景
-
                         rlDetailAnnouncement.setBackgroundColor(ContextCompat.getColor(DetailAnnouncementListActivity.this,R.color.dividerColor)); //设置为灰色
-
-                        //模拟加载数据线程休息1秒
-                        new AsyncTask<Void, Void, Void>() {
-                            @Override
-                            protected Void doInBackground(Void... params) {
-                                try {
-                                    Thread.sleep(1000);
-                                } catch (InterruptedException e) {
-                                    e.printStackTrace();
-                                }
-                                return null;
-                            }
-
-                            @Override
-                            protected void onPostExecute(Void result) {
-                                super.onPostExecute(result);
-                                getData();
-                            }
-                        }.execute();
+                        getData();
                     }
                 });
 
@@ -225,7 +183,7 @@ public class DetailAnnouncementListActivity extends BaseActivity implements View
                     if("0".equals(code)){
                         JSONArray data = jsonObject.optJSONArray("data");
                         for (int i = 0; i < data.length(); i++) {
-                            DetailNewsEntity bean = new DetailNewsEntity();
+                            InformationEntity bean = new InformationEntity();
                             JSONArray item = data.optJSONArray(i);
                             String title = item.getString(1);
                             String source = item.getString(7);
@@ -240,7 +198,7 @@ public class DetailAnnouncementListActivity extends BaseActivity implements View
                             } catch (ParseException e) {
                                 e.printStackTrace();
                             }
-                            bean.setId(msgId);
+                            bean.setNewsno(msgId);
                             bean.setTitle(title);
                             bean.setSource(source);
                             bean.setType(2);
@@ -250,14 +208,16 @@ public class DetailAnnouncementListActivity extends BaseActivity implements View
                 } catch (JSONException e) {
                     e.printStackTrace();
                 }
-
                 if (!isFinishing())
                     dialog.dismiss();      //隐藏菊花
                 llAnnouncementJiaZai.setVisibility(View.GONE);       //隐藏重新加载
                 rlDetailAnnouncement.setBackgroundColor(ContextCompat.getColor(DetailAnnouncementListActivity.this,R.color.white));      //背景设置为白色
                 mListView.setVisibility(View.VISIBLE);      //请求到数据 展示 listView
-
                 adapter.setList(list);
+                //完成对下拉刷新ListView的更新操作
+                adapter.notifyDataSetChanged();
+                //将下拉视图收起
+                mListView.onRefreshComplete();
             }
         });
     }

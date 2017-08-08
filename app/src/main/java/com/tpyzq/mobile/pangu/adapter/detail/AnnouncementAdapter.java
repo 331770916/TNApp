@@ -8,7 +8,7 @@ import android.widget.BaseAdapter;
 import android.widget.TextView;
 
 import com.tpyzq.mobile.pangu.R;
-import com.tpyzq.mobile.pangu.data.DetailNewsEntity;
+import com.tpyzq.mobile.pangu.data.InformationEntity;
 
 import java.util.ArrayList;
 
@@ -21,13 +21,13 @@ import java.util.ArrayList;
 public class AnnouncementAdapter extends BaseAdapter {
 
     private Context context;
-    private ArrayList<DetailNewsEntity> list;
+    private ArrayList<InformationEntity> list;
 
     public AnnouncementAdapter(Context context) {
         this.context = context;
     }
 
-    public void setList(ArrayList<DetailNewsEntity> list){
+    public void setList(ArrayList<InformationEntity> list){
         this.list = list;
         notifyDataSetChanged();
     }
@@ -67,7 +67,7 @@ public class AnnouncementAdapter extends BaseAdapter {
             viewHolder = (AnnouncementAdapter.ViewHolder) convertView.getTag();
         }
 
-        DetailNewsEntity bean = list.get(position);
+        InformationEntity bean = list.get(position);
         int type = bean.getType();
         if(type == 1){
             viewHolder.tvNewAnnStudySource.setVisibility(View.GONE);

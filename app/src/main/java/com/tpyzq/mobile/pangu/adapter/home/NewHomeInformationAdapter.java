@@ -1,23 +1,18 @@
 package com.tpyzq.mobile.pangu.adapter.home;
 
 import android.app.Activity;
-import android.graphics.Bitmap;
+import android.content.Context;
 import android.view.LayoutInflater;
 import android.view.View;
 import android.view.ViewGroup;
 import android.widget.BaseAdapter;
 import android.widget.TextView;
-
 import com.facebook.drawee.view.SimpleDraweeView;
 import com.tpyzq.mobile.pangu.R;
 import com.tpyzq.mobile.pangu.base.CustomApplication;
 import com.tpyzq.mobile.pangu.data.InformationEntity;
 import com.tpyzq.mobile.pangu.util.Helper;
 import java.util.ArrayList;
-import java.util.HashMap;
-import java.util.Map;
-import java.util.concurrent.ExecutorService;
-import java.util.concurrent.Executors;
 
 /**
  * Created by wangqi on 2017/2/13.
@@ -28,10 +23,10 @@ public class NewHomeInformationAdapter extends BaseAdapter{
 
     private ArrayList<InformationEntity> mDatas;
     private ViewHolder viewHolder = null;
-    private Activity mActivity;
+    private Context context;
 
-    public NewHomeInformationAdapter(Activity activity) {
-        mActivity = activity;
+    public NewHomeInformationAdapter(Context activity) {
+        context = activity;
     }
 
     public void setDatas(ArrayList<InformationEntity> datas) {
@@ -65,7 +60,7 @@ public class NewHomeInformationAdapter extends BaseAdapter{
     public View getView(int position, View convertView, ViewGroup parent) {
         if (convertView == null) {
             viewHolder = new ViewHolder();
-            convertView = LayoutInflater.from(CustomApplication.getContext()).inflate(R.layout.item_news_refcontent, null);
+            convertView = LayoutInflater.from(context).inflate(R.layout.item_news_refcontent, null);
             viewHolder.image = (SimpleDraweeView) convertView.findViewById(R.id.iv_image);
             viewHolder.title = (TextView)convertView.findViewById(R.id.tv_title);
             viewHolder.time =  (TextView)convertView.findViewById(R.id.tv_time);

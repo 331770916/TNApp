@@ -2,7 +2,6 @@ package com.tpyzq.mobile.pangu.activity.detail.newsTab;
 
 import android.content.Context;
 import android.content.Intent;
-import android.os.AsyncTask;
 import android.support.v4.content.ContextCompat;
 import android.view.View;
 import android.widget.AdapterView;
@@ -10,10 +9,10 @@ import android.widget.ListView;
 import android.widget.ProgressBar;
 import android.widget.RelativeLayout;
 import android.widget.TextView;
-
 import com.tpyzq.mobile.pangu.R;
 import com.tpyzq.mobile.pangu.adapter.detail.AnnouncementAdapter;
-import com.tpyzq.mobile.pangu.data.DetailNewsEntity;
+import com.tpyzq.mobile.pangu.base.BasePager;
+import com.tpyzq.mobile.pangu.data.InformationEntity;
 import com.tpyzq.mobile.pangu.http.NetWorkUtil;
 import com.tpyzq.mobile.pangu.log.LogUtil;
 import com.tpyzq.mobile.pangu.util.ConstantUtil;
@@ -35,12 +34,12 @@ import okhttp3.Call;
  * Created by zhangwenbo on 2016/6/30.
  * 研报页面
  */
-public class StudyFragment extends BaseDetailNewsPager implements View.OnClickListener{
+public class StudyFragment extends BasePager implements View.OnClickListener{
 
     private final String TAG = "StudyFragment";
     private ListView mListView;
-    private ArrayList<DetailNewsEntity> list;
-    private ArrayList<DetailNewsEntity> newlist;
+    private ArrayList<InformationEntity> list;
+    private ArrayList<InformationEntity> newlist;
     private AnnouncementAdapter adapter;
     private RelativeLayout rlStudy;          //背景
     private ProgressBar pb_Study_Pager;      //菊花
@@ -63,7 +62,6 @@ public class StudyFragment extends BaseDetailNewsPager implements View.OnClickLi
 
     @Override
     public void initData() {
-        super.initData();
         mListView.setVisibility(View.GONE);         //初始化 隱藏
         tvStudyGengDuo.setVisibility(View.GONE);  //初始化 隐藏 点击查看更多
         getData(stockCode);
@@ -72,12 +70,11 @@ public class StudyFragment extends BaseDetailNewsPager implements View.OnClickLi
         adapter = new AnnouncementAdapter(mContext);
         mListView.setAdapter(adapter);
         tvStudyGengDuo.setOnClickListener(this);
-
         mListView.setOnItemClickListener(new AdapterView.OnItemClickListener() {
             @Override
             public void onItemClick(AdapterView<?> parent, View view, int position, long id) {
-                DetailNewsEntity bean = list.get(position);
-                String msgId = bean.getId();
+                InformationEntity bean = list.get(position);
+                String msgId = bean.getNewsno();
                 Intent intent = new Intent(mContext,AnnouncementStydyDetailActivity.class);
                 intent.putExtra("msgId",msgId);
                 intent.putExtra("type",2);
@@ -98,7 +95,6 @@ public class StudyFragment extends BaseDetailNewsPager implements View.OnClickLi
             @Override
             public void onError(Call call, Exception e, int id) {
                 LogUtil.i(TAG,e.toString());
-
                 pb_Study_Pager.setVisibility(View.GONE);      //隐藏菊花
                 rlStudy.setBackgroundColor(ContextCompat.getColor(mContext,R.color.white));    //背景 为 白色
                 mListView.setVisibility(View.GONE);         //隐藏listView
@@ -111,25 +107,7 @@ public class StudyFragment extends BaseDetailNewsPager implements View.OnClickLi
                         pb_Study_Pager.setVisibility(View.VISIBLE);      //显示菊花
                         rlStudy.setVisibility(View.VISIBLE);//显示背景
                         rlStudy.setBackgroundColor(ContextCompat.getColor(mContext,R.color.dividerColor)); //设置为灰色
-
-                        //模拟加载数据线程休息1秒
-                        new AsyncTask<Void, Void, Void>() {
-                            @Override
-                            protected Void doInBackground(Void... params) {
-                                try {
-                                    Thread.sleep(1000);
-                                } catch (InterruptedException e) {
-                                    e.printStackTrace();
-                                }
-                                return null;
-                            }
-
-                            @Override
-                            protected void onPostExecute(Void result) {
-                                super.onPostExecute(result);
-                                getData(stockCode);
-                            }
-                        }.execute();
+                        getData(stockCode);
                     }
                 });
 
@@ -145,7 +123,7 @@ public class StudyFragment extends BaseDetailNewsPager implements View.OnClickLi
                         JSONArray data = jsonObject.getJSONArray("data");
                         if (data != null) {
                             for (int i = 0; i < data.length(); i++) {
-                                DetailNewsEntity bean = new DetailNewsEntity();
+                                InformationEntity bean = new InformationEntity();
                                 JSONArray item = data.optJSONArray(i);
                                 String title = item.optString(1);
                                 String source = item.optString(7);
@@ -160,7 +138,7 @@ public class StudyFragment extends BaseDetailNewsPager implements View.OnClickLi
                                 } catch (ParseException e) {
                                     e.printStackTrace();
                                 }
-                                bean.setId(msgId);
+                                bean.setNewsno(msgId);
                                 bean.setTitle(title);
                                 bean.setSource(source);
                                 bean.setType(2);
@@ -202,25 +180,7 @@ public class StudyFragment extends BaseDetailNewsPager implements View.OnClickLi
                                 pb_Study_Pager.setVisibility(View.VISIBLE);      //显示菊花
                                 rlStudy.setVisibility(View.VISIBLE);//显示背景
                                 rlStudy.setBackgroundColor(ContextCompat.getColor(mContext,R.color.dividerColor)); //设置为灰色
-
-                                //模拟加载数据线程休息1秒
-                                new AsyncTask<Void, Void, Void>() {
-                                    @Override
-                                    protected Void doInBackground(Void... params) {
-                                        try {
-                                            Thread.sleep(1000);
-                                        } catch (InterruptedException e) {
-                                            e.printStackTrace();
-                                        }
-                                        return null;
-                                    }
-
-                                    @Override
-                                    protected void onPostExecute(Void result) {
-                                        super.onPostExecute(result);
-                                        getData(stockCode);
-                                    }
-                                }.execute();
+                                getData(stockCode);
                             }
                         });
 
@@ -247,5 +207,10 @@ public class StudyFragment extends BaseDetailNewsPager implements View.OnClickLi
     @Override
     public int getLayoutId() {
         return R.layout.fragment_study;
+    }
+
+    @Override
+    public void destroy() {
+
     }
 }

@@ -70,9 +70,9 @@ public class FundSubsDialog extends BaseDialog implements View.OnClickListener {
         switch (v.getId()) {
             case R.id.bt_true:
                 if (null != fundDataBean && null != fundDataBean.data && fundDataBean.data.size() > 0) {
-                    fundSubsListen.setBuy(price, fundDataBean.data.get(0).FUND_COMPANY,"");
+                    fundSubsListen.setBuy(price, fundDataBean.data.get(0).FUND_COMPANY,content);
                 } else {
-                    fundSubsListen.setBuy(price, "","");
+                    fundSubsListen.setBuy(price, "",content);
                 }
                 dismiss();
                 break;
