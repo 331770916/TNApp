@@ -7,7 +7,6 @@ import android.view.View;
 import android.widget.AdapterView;
 import android.widget.LinearLayout;
 import android.widget.ListView;
-import android.widget.ProgressBar;
 import android.widget.RelativeLayout;
 import com.handmark.pulltorefresh.library.PullToRefreshBase;
 import com.handmark.pulltorefresh.library.PullToRefreshListView;
@@ -18,7 +17,6 @@ import com.tpyzq.mobile.pangu.base.BasePager;
 import com.tpyzq.mobile.pangu.base.InterfaceCollection;
 import com.tpyzq.mobile.pangu.data.InformationEntity;
 import com.tpyzq.mobile.pangu.data.ResultInfo;
-import com.tpyzq.mobile.pangu.util.ConstantUtil;
 import java.util.ArrayList;
 import java.util.List;
 
@@ -34,7 +32,6 @@ public class ListPager extends BasePager implements InterfaceCollection.Interfac
     private ZxTabAdapter adapter;
     private ArrayList<InformationEntity> list;
     private int mIndex = 1;     //分页加载数据  的  标记
-    private ProgressBar pb_Pager;
     private RelativeLayout rl_Pager;
     private LinearLayout llChongXinJiaZai;               //内容为空的   图片
     private boolean isFirst = true;
@@ -54,7 +51,6 @@ public class ListPager extends BasePager implements InterfaceCollection.Interfac
     public void setView(String params) {
         this.classno = params;
         mListView = (PullToRefreshListView) rootView.findViewById(R.id.lvFinancial);
-        pb_Pager = (ProgressBar) rootView.findViewById(R.id.pb_Pager);
         rl_Pager = (RelativeLayout) rootView.findViewById(R.id.rl_Pager);
         llChongXinJiaZai = (LinearLayout) rootView.findViewById(R.id.llChongXinJiaZai);
         list = new ArrayList<>();
@@ -96,7 +92,6 @@ public class ListPager extends BasePager implements InterfaceCollection.Interfac
 
     @Override
     public void callResult(ResultInfo info) {
-        pb_Pager.setVisibility(View.GONE);
         rl_Pager.setBackgroundColor(ContextCompat.getColor(mContext, R.color.white));
         if(info.getCode().equals("200")){
             Object obj = info.getData();
@@ -113,7 +108,6 @@ public class ListPager extends BasePager implements InterfaceCollection.Interfac
                 @Override
                 public void onClick(View v) {       //点击图片重新请求数据
                     llChongXinJiaZai.setVisibility(View.GONE);  //隐藏重新加载图片
-                    pb_Pager.setVisibility(View.VISIBLE);      //显示菊花
                     rl_Pager.setVisibility(View.VISIBLE);//显示背景
                     rl_Pager.setBackgroundColor(ContextCompat.getColor(mContext, R.color.dividerColor)); //设置为灰色
                     isFirst = true;
