@@ -112,8 +112,6 @@ public class ProductBuyActivity extends BaseActivity implements View.OnClickList
         Intent intent = getIntent();
         tv_sure.setOnClickListener(this);
         tv_fhfs.setOnClickListener(this);
-        tv_fhfs.setText("份额分红");
-        dialogBean.fhfs = "份额分红";
         fundcode = intent.getStringExtra("productCode");
         type = intent.getStringExtra("productType");
         schema_id = intent.getStringExtra("schema_id");
@@ -321,6 +319,11 @@ public class ProductBuyActivity extends BaseActivity implements View.OnClickList
         map300439_1.put("DO_OPEN", encryptBySessionKey(""));
         map300439_1.put("DO_CONTRACT", encryptBySessionKey(""));
         map300439_1.put("DO_PRE_CONDITION", encryptBySessionKey("1"));
+        if("份额分红".equals(tv_fhfs.getText().toString())){
+            map300439_1.put("AUTO_BUY", encryptBySessionKey("0"));
+        }else if("现金分红".equals(tv_fhfs.getText().toString())){
+            map300439_1.put("AUTO_BUY", encryptBySessionKey("1"));
+        }
         map300439.put("parms", map300439_1);
         NetWorkUtil.getInstence().okHttpForPostString("", ConstantUtil.getURL_JY_HS(), map300439, new StringCallback() {
             @Override
@@ -668,11 +671,11 @@ public class ProductBuyActivity extends BaseActivity implements View.OnClickList
         tv_stock_info2.setText("追加最低" + fundDataEntity.data.get(0).PERSON_INVEST + "元");
         //FUND_STATUS  0申购 1认购
         tv_transaction_price.setText("可用:" + fundDataEntity.data.get(0).ENABLE_BALANCE + "元");
-
         dialogBean.stockname = fundDataEntity.data.get(0).FUND_NAME;
         dialogBean.stockcode = fundDataEntity.data.get(0).FUND_CODE;
-
         dialogBean.account = UserUtil.capitalAccount;
+        tv_fhfs.setText("份额分红");
+        dialogBean.fhfs = "份额分红";
     }
 
     /**
