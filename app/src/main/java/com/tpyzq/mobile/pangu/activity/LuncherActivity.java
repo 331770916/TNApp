@@ -3,6 +3,7 @@ package com.tpyzq.mobile.pangu.activity;
 import android.app.Dialog;
 import android.content.Intent;
 import android.os.Environment;
+import android.text.TextUtils;
 import android.view.View;
 
 import com.bonree.agent.android.Bonree;
@@ -87,6 +88,9 @@ public class LuncherActivity extends BaseActivity implements ICallbackResult {
         SpUtils.putString(CustomApplication.getContext(), "mDivnum_InformActivity", "false");
         SpUtils.putString(CustomApplication.getContext(), "mDivnum_NewSharesTips", "false");
         SpUtils.putString(CustomApplication.getContext(), "mDivnum_PricesPrompt", "false");
+        String isNewStock = SpUtils.getString(CustomApplication.getContext(),"isNewStock","");
+        if(TextUtils.isEmpty(isNewStock)||!isNewStock.contains(Helper.getCurDate()))
+            SpUtils.putString(CustomApplication.getContext(), "isNewStock", Helper.getCurDate());
         initData();
 
     }

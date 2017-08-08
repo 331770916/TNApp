@@ -16,6 +16,7 @@ import com.tpyzq.mobile.pangu.data.FixFundEntity;
 import com.tpyzq.mobile.pangu.data.FundDataEntity;
 import com.tpyzq.mobile.pangu.data.InformationEntity;
 import com.tpyzq.mobile.pangu.data.NetworkVotingEntity;
+import com.tpyzq.mobile.pangu.data.NewStockEnitiy;
 import com.tpyzq.mobile.pangu.data.OTC_AffirmBean;
 import com.tpyzq.mobile.pangu.data.OTC_SubscriptionCommitBean;
 import com.tpyzq.mobile.pangu.data.ResultInfo;
@@ -96,7 +97,7 @@ public class InterfaceCollection {
         hashMap.put("FLAG", "true");
         hashMap.put("SEC_ID", "tpyzq");
         map.put("parms", hashMap);
-        NetWorkUtil.getInstence().okHttpForPostString(TAG, ConstantUtil.getURL_JY_HS(), map, new StringCallback() {
+        net.okHttpForPostString(TAG, ConstantUtil.getURL_JY_HS(), map, new StringCallback() {
             @Override
             public void onError(Call call, Exception e, int id) {
                 ResultInfo info = new ResultInfo();
@@ -2589,7 +2590,7 @@ public class InterfaceCollection {
         map300431_1.put("FUND_COMPANY", fundcompany);
         map300431_1.put("OPER_TYPE", "0");
         map300431.put("parms", map300431_1);
-        NetWorkUtil.getInstence().okHttpForPostString("", ConstantUtil.getURL_JY_HS(), map300431, new StringCallback() {
+        net.okHttpForPostString("", ConstantUtil.getURL_JY_HS(), map300431, new StringCallback() {
             @Override
             public void onError(Call call, Exception e, int id) {
                 ResultInfo info = new ResultInfo();
@@ -2640,7 +2641,7 @@ public class InterfaceCollection {
     public void getImageVerification(final String TAG, final InterfaceCallback callback) {
         HashMap map = new HashMap();
         map.put("equipment", DeviceUtil.getDeviceId(CustomApplication.getContext()));
-        NetWorkUtil.getInstence().okHttpForGet("", ConstantUtil.getURL_HANDSE_PICTURE(), map, new StringCallback() {
+        net.okHttpForGet("", ConstantUtil.getURL_HANDSE_PICTURE(), map, new StringCallback() {
             @Override
             public void onError(Call call, Exception e, int id) {
                 ResultInfo info = new ResultInfo();
@@ -2690,7 +2691,7 @@ public class InterfaceCollection {
         map.put("phone", number);
         map.put("auth", image);
 
-        NetWorkUtil.getInstence().okHttpForGet(TAG, ConstantUtil.getURL_HANDSE_SMS(), map, new StringCallback() {
+        net.okHttpForGet(TAG, ConstantUtil.getURL_HANDSE_SMS(), map, new StringCallback() {
             @Override
             public void onError(Call call, Exception e, int id) {
                 ResultInfo info = new ResultInfo();
@@ -2741,7 +2742,7 @@ public class InterfaceCollection {
         map.put("phone", number);
         map.put("auth", image);
 
-        NetWorkUtil.getInstence().okHttpForGet(TAG, ConstantUtil.getURL_HANDSE_SPEECH(), map, new StringCallback() {
+        net.okHttpForGet(TAG, ConstantUtil.getURL_HANDSE_SPEECH(), map, new StringCallback() {
             @Override
             public void onError(Call call, Exception e, int id) {
                 ResultInfo info = new ResultInfo();
@@ -2754,9 +2755,6 @@ public class InterfaceCollection {
             @Override
             public void onResponse(String response, int id) {
                 ResultInfo info = new ResultInfo();
-                if (TextUtils.isEmpty(response)) {
-                    return;
-                }
                 try {
                     JSONObject jsonObject = new JSONObject(response);
                     String code = jsonObject.getString("code");
@@ -2796,7 +2794,7 @@ public class InterfaceCollection {
         map.put("user_account", number);
         map.put("user_type", "1");//账户类型，1：手机，2：qq，3：微信
 
-        NetWorkUtil.getInstence().okHttpForGet(TAG, ConstantUtil.getURL_HANDSE_REGISTER(), map, new StringCallback() {
+        net.okHttpForGet(TAG, ConstantUtil.getURL_HANDSE_REGISTER(), map, new StringCallback() {
             @Override
             public void onError(Call call, Exception e, int id) {
                 ResultInfo info = new ResultInfo();
@@ -2809,9 +2807,6 @@ public class InterfaceCollection {
             @Override
             public void onResponse(String response, int id) {
                 ResultInfo info = new ResultInfo();
-                if (TextUtils.isEmpty(response)) {
-                    return;
-                }
                 response = response.replace("Served at: /Bigdata", "");
                 try {
                     JSONObject object = new JSONObject(response);
@@ -2831,6 +2826,76 @@ public class InterfaceCollection {
 
     }
 
+    /**
+     * HQING014
+     * 新股查询接口
+     */
+    public void queryNewStock(final String TAG,final InterfaceCallback callback){
+        HashMap map=new HashMap();
+        map.put("funcid", "100213");
+        map.put("token", "");
+        map.put("parms", new HashMap());
+        net.okHttpForPostString(TAG, ConstantUtil.getURL_HQ_HS(), map, new StringCallback() {
+            @Override
+            public void onError(Call call, Exception e, int id) {
+                ResultInfo info = new ResultInfo();
+                info.setCode(ConstantUtil.NETWORK_ERROR_CODE);
+                info.setMsg(ConstantUtil.NETWORK_ERROR);
+                info.setTag(TAG);
+                callback.callResult(info);
+            }
+
+            @Override
+            public void onResponse(String response, int id) {
+                ResultInfo info = new ResultInfo();
+                try {
+                    JSONObject object = new JSONObject(response);
+                    String code = object.getString("code");
+                    String msg = object.getString("msg");
+                    info.setCode(code);
+                    info.setTag(TAG);
+                    info.setMsg(msg);
+                    if("0".equals(code)){
+                        JSONArray data = object.optJSONArray("data");
+                        NewStockEnitiy bean = new NewStockEnitiy();
+                        if (data != null && data.length() > 0) {
+                            List<NewStockEnitiy.DataBeanToday> dataBeanTodays = new ArrayList();
+                            int publishNum = 0;
+                            for (int i = 0;i<data.length();i++) {
+                                JSONObject item = data.optJSONObject(i);
+                                NewStockEnitiy.DataBeanToday dataBeanToday = new NewStockEnitiy.DataBeanToday();
+                                dataBeanToday.setSECUCODE(item.optString("SECUCODE"));
+                                dataBeanToday.setONLINESTARTDATE(item.optString("ONLINESTARTDATE"));
+                                dataBeanToday.setISSUENAMEABBR_ONLINE(item.optString("ISSUENAMEABBR_ONLINE"));
+                                dataBeanToday.setAPPLYMAXONLINE(item.optString("APPLYMAXONLINE"));
+                                String isToday =item.optString("ISTODAY");
+                                if (null != isToday) {//W N
+                                    dataBeanToday.setISTODAY(isToday);
+                                    if ("N".equals(isToday))
+                                        publishNum++;
+                                }
+                                dataBeanToday.setDILUTEDPERATIO(item.optString("DILUTEDPERATIO"));
+                                dataBeanToday.setAPPLYCODEONLINE(item.optString("APPLYCODEONLINE"));
+                                dataBeanToday.setPREPAREDLISTEXCHANGE(item.optString("PREPAREDLISTEXCHANGE"));
+                                dataBeanToday.setISSUEPRICE(item.optString("ISSUEPRICE"));
+                                dataBeanToday.setWEIGHTEDPERATIO(item.optString("WEIGHTEDPERATIO"));
+                                dataBeanToday.setAPPLYMAXONLINEMONEY(item.optString("APPLYMAXONLINEMONEY"));
+                                dataBeanTodays.add(dataBeanToday);
+                            }
+                            bean.setNewStockSize(publishNum);
+                            bean.setData(dataBeanTodays);
+                        }
+                        info.setData(bean);
+                    }
+                } catch (Exception e) {
+                    info.setCode(ConstantUtil.JSON_ERROR_CODE);
+                    info.setMsg(ConstantUtil.JSON_ERROR);
+                    info.setTag(TAG);
+                }
+                callback.callResult(info);
+            }
+        });
+    }
 
     /**
      * 修改资金密码
@@ -2858,7 +2923,7 @@ public class InterfaceCollection {
 
         map.put("parms",hashMap);
 
-        NetWorkUtil.getInstence().okHttpForPostString(TAG, ConstantUtil.getURL_JY_HS(), map, new StringCallback() {
+        net.okHttpForPostString(TAG, ConstantUtil.getURL_JY_HS(), map, new StringCallback() {
             @Override
             public void onError(Call call, Exception e, int id) {
                 ResultInfo info = new ResultInfo();
@@ -2871,9 +2936,6 @@ public class InterfaceCollection {
             @Override
             public void onResponse(String response, int id) {
                 ResultInfo info = new ResultInfo();
-                if (TextUtils.isEmpty(response)){
-                    return;
-                }
                 try {
                     JSONObject jsonObject =new JSONObject(response);
                     String code=jsonObject.getString("code");
@@ -2895,5 +2957,7 @@ public class InterfaceCollection {
             }
         });
     }
+
+
 
 }

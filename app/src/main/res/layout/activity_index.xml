@@ -4,8 +4,6 @@
     android:orientation="vertical"
     android:layout_width="match_parent"
     android:layout_height="match_parent">
-
-
     <RadioGroup
         android:id="@+id/radioGroup"
         android:layout_width="match_parent"
@@ -75,18 +73,88 @@
             android:textSize="@dimen/home_IndexRadioBtnText"
             android:layout_weight="1"/>
     </RadioGroup>
-
     <View
         android:id="@+id/indexViewTip"
         android:layout_above="@id/radioGroup"
         android:layout_width="match_parent"
         android:layout_height="@dimen/size1"
         android:background="@color/lineColor"/>
-
     <FrameLayout
         android:id="@+id/fragmentLayout"
         android:layout_above="@id/indexViewTip"
         android:layout_width="match_parent"
-        android:layout_height="match_parent"/>
-
+        android:layout_height="match_parent">
+    </FrameLayout>
+    <FrameLayout
+        android:id="@+id/newstockremind"
+        android:layout_width="match_parent"
+        android:layout_height="wrap_content"
+        android:layout_gravity="bottom"
+        android:layout_above="@id/indexViewTip"
+        android:visibility="gone">
+        <RelativeLayout
+            android:layout_width="match_parent"
+            android:layout_height="wrap_content"
+            android:orientation="horizontal"
+            android:layout_marginTop="@dimen/size22"
+            android:background="@mipmap/newstockremindbg">
+            <ImageView
+                android:id="@+id/newstockclose"
+                android:layout_width="@dimen/size12"
+                android:layout_height="@dimen/size12"
+                android:layout_centerVertical="true"
+                android:layout_alignParentRight="true"
+                android:layout_marginRight="@dimen/size10"
+                android:src="@mipmap/newstockclose"
+                />
+            <TextView
+                android:id="@+id/newstockjump"
+                android:layout_marginRight="@dimen/size26"
+                android:layout_toLeftOf="@id/newstockclose"
+                android:layout_width="wrap_content"
+                android:layout_height="wrap_content"
+                android:background="@mipmap/newstockremindtvbg"
+                android:padding="@dimen/size2"
+                android:gravity="center"
+                android:textSize="@dimen/txtSize12"
+                android:layout_centerVertical="true"
+                android:textColor="@color/white"
+                android:text="一键打新"
+                />
+            <LinearLayout
+                android:layout_width="wrap_content"
+                android:layout_height="wrap_content"
+                android:layout_centerInParent="true"
+                android:layout_marginLeft="@dimen/size100"
+                >
+                <TextView
+                    android:layout_width="wrap_content"
+                    android:layout_height="wrap_content"
+                    android:textColor="@color/white"
+                    android:textSize="@dimen/txtSize12"
+                    android:text="今 日"/>
+                <TextView
+                    android:id="@+id/newstockNumber"
+                    android:layout_width="wrap_content"
+                    android:layout_height="wrap_content"
+                    android:textColor="@color/calendarBtnColor"
+                    android:textSize="@dimen/txtSize16"
+                    android:paddingLeft="@dimen/size2"
+                    android:paddingRight="@dimen/size2"
+                    android:textStyle="bold"
+                    />
+                <TextView
+                    android:layout_width="wrap_content"
+                    android:layout_height="wrap_content"
+                    android:textColor="@color/white"
+                    android:textSize="@dimen/txtSize12"
+                    android:text="只 新 股"/>
+            </LinearLayout>
+        </RelativeLayout>
+        <ImageView
+            android:layout_width="wrap_content"
+            android:layout_height="wrap_content"
+            android:layout_marginLeft="@dimen/size10"
+            android:background="@mipmap/newstockbg"/>
+    </FrameLayout>
 </RelativeLayout>

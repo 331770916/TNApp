@@ -1,24 +1,36 @@
 package com.tpyzq.mobile.pangu.activity;
 
 import android.app.Dialog;
+import android.content.Intent;
 import android.content.res.Configuration;
 import android.os.Bundle;
 import android.support.v4.app.Fragment;
 import android.support.v4.app.FragmentManager;
 import android.support.v4.app.FragmentTransaction;
 import android.text.TextUtils;
+import android.view.View;
+import android.view.animation.Animation;
+import android.view.animation.AnimationUtils;
+import android.widget.FrameLayout;
+import android.widget.ImageView;
 import android.widget.RadioGroup;
+import android.widget.TextView;
 
 import com.tpyzq.mobile.pangu.R;
 import com.tpyzq.mobile.pangu.activity.home.HomeFragment;
 import com.tpyzq.mobile.pangu.activity.market.MarketFragment;
 import com.tpyzq.mobile.pangu.activity.myself.MySelfFragment;
 import com.tpyzq.mobile.pangu.activity.trade.TradeFragment;
+import com.tpyzq.mobile.pangu.activity.trade.stock.CalendarNewStockActivity;
 import com.tpyzq.mobile.pangu.base.BaseActivity;
 import com.tpyzq.mobile.pangu.base.CustomApplication;
+import com.tpyzq.mobile.pangu.base.InterfaceCollection;
+import com.tpyzq.mobile.pangu.data.NewStockEnitiy;
+import com.tpyzq.mobile.pangu.data.ResultInfo;
 import com.tpyzq.mobile.pangu.http.NetWorkUtil;
 import com.tpyzq.mobile.pangu.log.LogUtil;
 import com.tpyzq.mobile.pangu.util.ConstantUtil;
+import com.tpyzq.mobile.pangu.util.Helper;
 import com.tpyzq.mobile.pangu.util.SpUtils;
 import com.tpyzq.mobile.pangu.util.panguutil.APPInfoUtils;
 import com.tpyzq.mobile.pangu.util.panguutil.BRutil;
@@ -34,6 +46,7 @@ import org.json.JSONException;
 import org.json.JSONObject;
 
 import java.util.HashMap;
+import java.util.List;
 
 import okhttp3.Call;
 
@@ -42,7 +55,7 @@ import okhttp3.Call;
 /**
  * Created by zhangwenbo on 2016/6/16.
  */
-public class IndexActivity extends BaseActivity {
+public class IndexActivity extends BaseActivity implements InterfaceCollection.InterfaceCallback{
 
     private long mnLastBackKeyPressTime = 0;
     private RadioGroup radioGroup;
@@ -54,6 +67,10 @@ public class IndexActivity extends BaseActivity {
     private ExitDialog dialog;
     private Boolean flag = false;
     private String url  ="";
+    private FrameLayout newstockremind;
+    private TextView tvNewStock,tvNewStockJump;
+    private ImageView ivNewStockClose;
+    private NewStockEnitiy enitiy;
 
     @Override
     public void initView() {
@@ -66,6 +83,8 @@ public class IndexActivity extends BaseActivity {
         }
         getVersionData();       //判断是否是 最新版本
         getHintCode();
+        if(SpUtils.getString(this,"isNewStock","").equals(Helper.getCurDate()))
+            mInterface.queryNewStock("IndexActivity",this);
         SpUtils.putBoolean(this, "burse", false);
         SpUtils.putBoolean(this, "account", true);
         radioGroup = (RadioGroup) findViewById(R.id.radioGroup);
@@ -73,7 +92,25 @@ public class IndexActivity extends BaseActivity {
         marketRadioBtn = (MyRadioButton) findViewById(R.id.marketRadioBtn);
         transactionRaioBtn = (MyRadioButton) findViewById(R.id.transactionRadioBtn);
         mySelfRaioBtn = (MyRadioButton) findViewById(R.id.informationRadioBtn);
-
+        newstockremind = (FrameLayout)findViewById(R.id.newstockremind);
+        tvNewStock = (TextView)findViewById(R.id.newstockNumber);
+        ivNewStockClose = (ImageView)findViewById(R.id.newstockclose);
+        tvNewStockJump = (TextView)findViewById(R.id.newstockjump);
+        tvNewStockJump.setOnClickListener(new View.OnClickListener() {
+            @Override
+            public void onClick(View v) {
+                Intent intent = new Intent();
+                intent.putExtra("entiity", enitiy);
+                intent.setClass(IndexActivity.this, CalendarNewStockActivity.class);
+                startActivity(intent);
+            }
+        });
+        ivNewStockClose.setOnClickListener(new View.OnClickListener() {
+            @Override
+            public void onClick(View v) {
+                newstockremind.setVisibility(View.GONE);
+            }
+        });
         homeRadioBtn.setChecked(true);
         replaceFragment(0);
         radioGroup.setOnCheckedChangeListener(new RadioGroup.OnCheckedChangeListener() {
@@ -87,6 +124,24 @@ public class IndexActivity extends BaseActivity {
                 }
             }
         });
+    }
+
+
+
+    @Override
+    public void callResult(ResultInfo info) {
+        if(info.getCode().equals("0")){
+            enitiy = (NewStockEnitiy) info.getData();
+            if(enitiy!=null){
+                List<NewStockEnitiy.DataBeanToday> data =  enitiy.getData();
+                if(data!=null&data.size()>0) {
+                    newstockremind.setVisibility(View.VISIBLE);
+                    tvNewStock.setText(String.valueOf(data.size()));
+                    String isNewStock = SpUtils.getString(CustomApplication.getContext(),"isNewStock","");
+                    SpUtils.putString(CustomApplication.getContext(),"isNewStock",isNewStock+data.size());
+                }
+            }
+        }
     }
 
     /**
@@ -364,5 +419,10 @@ public class IndexActivity extends BaseActivity {
     @Override
     protected void onRestoreInstanceState(Bundle savedInstanceState) {
         super.onRestoreInstanceState(savedInstanceState);
+    }
+
+    @Override
+    public void destroy() {
+        net.cancelSingleRequest("IndexActivity");
     }
 }

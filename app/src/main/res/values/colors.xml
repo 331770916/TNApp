@@ -195,6 +195,7 @@
 
     <!--注册登录-->
     <color name="ZhutextColor">#87bd43</color>
+    <color name="newstockColor">#231916</color>
 
     <!--退市和风险警示-->
     <color name="AgreementSignedColor">#F1AE26</color>
