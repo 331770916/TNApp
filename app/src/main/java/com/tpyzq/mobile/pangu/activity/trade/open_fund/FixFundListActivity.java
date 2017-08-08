@@ -19,8 +19,8 @@ import com.tpyzq.mobile.pangu.data.FixFundEntity;
 import com.tpyzq.mobile.pangu.data.ResultInfo;
 import com.tpyzq.mobile.pangu.util.ConstantUtil;
 import com.tpyzq.mobile.pangu.view.CentreToast;
+import com.tpyzq.mobile.pangu.view.CustomCenterDialog;
 import com.tpyzq.mobile.pangu.view.dialog.LoadingDialog;
-import com.tpyzq.mobile.pangu.view.dialog.MistakeDialog;
 import com.tpyzq.mobile.pangu.view.dialog.StructuredFundDialog;
 
 import java.util.ArrayList;
@@ -202,7 +202,8 @@ public class FixFundListActivity extends BaseActivity implements View.OnClickLis
             } else if ("-6".equalsIgnoreCase(code)) {
                 skip.startLogin(FixFundListActivity.this);
             } else {
-                MistakeDialog.showDialog(msg, this, null);
+                CustomCenterDialog customCenterDialog = CustomCenterDialog.CustomCenterDialog(msg,CustomCenterDialog.SHOWCENTER);
+                customCenterDialog.show(getFragmentManager(),FixFundListActivity.class.toString());
             }
             lv.onRefreshComplete();
         }

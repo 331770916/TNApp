@@ -34,9 +34,9 @@ import com.tpyzq.mobile.pangu.util.SpUtils;
 import com.tpyzq.mobile.pangu.util.ToastUtils;
 import com.tpyzq.mobile.pangu.util.panguutil.UserUtil;
 import com.tpyzq.mobile.pangu.view.CentreToast;
+import com.tpyzq.mobile.pangu.view.CustomCenterDialog;
 import com.tpyzq.mobile.pangu.view.dialog.CancelDialog;
 import com.tpyzq.mobile.pangu.view.dialog.FundSubsDialog;
-import com.tpyzq.mobile.pangu.view.dialog.MistakeDialog;
 import com.zhy.http.okhttp.callback.StringCallback;
 
 import org.json.JSONException;
@@ -234,7 +234,7 @@ public class FundSubsActivity extends BaseActivity implements View.OnClickListen
                     } else {
                         subsStatusBean = new Gson().fromJson(response, SubsStatusEntity.class);
 //                        ToastUtils.showShort(FundSubsActivity.this, msg);
-                        MistakeDialog.showDialog(msg, FundSubsActivity.this);
+                        showDialog(msg);
                     }
 
                 } catch (JSONException e) {
@@ -290,7 +290,7 @@ public class FundSubsActivity extends BaseActivity implements View.OnClickListen
                         if ("0".equalsIgnoreCase(code)) {
                             resultMap = (HashMap<String, String>) info.getData();
                             if (null == resultMap) {
-                                MistakeDialog.showDialog("数据异常", FundSubsActivity.this, null);
+                                showDialog("数据异常");
                                 return;
                             }
                             //弹框逻辑
@@ -316,7 +316,7 @@ public class FundSubsActivity extends BaseActivity implements View.OnClickListen
                             intent.putExtra("resultMap", resultMap);
                             FundSubsActivity.this.startActivityForResult(intent, REQUESTCODE);
                         } else {
-                            MistakeDialog.showDialog(msg, FundSubsActivity.this, null);
+                            showDialog(msg);
                         }
                     }
                 });
@@ -450,6 +450,11 @@ public class FundSubsActivity extends BaseActivity implements View.OnClickListen
                 },false,new String[]{"现金分红", "份额分红"});
                 break;
         }
+    }
+
+    private void showDialog(String msg){
+        CustomCenterDialog customCenterDialog = CustomCenterDialog.CustomCenterDialog(msg,CustomCenterDialog.SHOWCENTER);
+        customCenterDialog.show(getFragmentManager(),FundSubsActivity.this.toString());
     }
 
 

@@ -18,9 +18,9 @@ import com.tpyzq.mobile.pangu.util.ConstantUtil;
 import com.tpyzq.mobile.pangu.util.Helper;
 import com.tpyzq.mobile.pangu.util.SpUtils;
 import com.tpyzq.mobile.pangu.view.CentreToast;
+import com.tpyzq.mobile.pangu.view.CustomCenterDialog;
 import com.tpyzq.mobile.pangu.view.dialog.CancelDialog;
 import com.tpyzq.mobile.pangu.view.dialog.LoadingDialog;
-import com.tpyzq.mobile.pangu.view.dialog.MistakeDialog;
 import com.tpyzq.mobile.pangu.view.dialog.StructuredFundDialog;
 import com.tpyzq.mobile.pangu.view.pickTime.TimePickerView;
 import com.zhy.http.okhttp.callback.StringCallback;
@@ -320,7 +320,7 @@ public class AddOrModFixFundActivity extends BaseActivity implements View.OnClic
                             if ("0".equalsIgnoreCase(code)) {
                                 resultMap = (HashMap<String, String>) info.getData();
                                 if (null == resultMap) {
-                                    MistakeDialog.showDialog("数据异常", AddOrModFixFundActivity.this, null);
+                                    showDialog("数据异常");
                                     return;
                                 }
                                 //弹框逻辑
@@ -346,7 +346,7 @@ public class AddOrModFixFundActivity extends BaseActivity implements View.OnClic
                                 intent.putExtra("resultMap", resultMap);
                                 AddOrModFixFundActivity.this.startActivityForResult(intent, REQUEST_RISK);
                             } else {
-                                MistakeDialog.showDialog(msg, AddOrModFixFundActivity.this, null);
+                                showDialog(msg);
                             }
                         }
                     });
@@ -383,7 +383,7 @@ public class AddOrModFixFundActivity extends BaseActivity implements View.OnClic
                     fixFundEntity.setFUND_COMPANY(fundDataBean.data.get(0).FUND_COMPANY);
                 } else {
                     clearView(true);
-                    MistakeDialog.showDialog(msg,this,null);
+                    showDialog(msg);
                 }
                 break;
             case TAG_MODIFY:
@@ -397,7 +397,7 @@ public class AddOrModFixFundActivity extends BaseActivity implements View.OnClic
                    /* CentreToast.showText(this, msg);
                     finish();*/
                 } else {
-                    MistakeDialog.showDialog(msg,this,null);
+                    showDialog(msg);
                 }
                 break;
             case TAG_SUBMIT:
@@ -429,7 +429,7 @@ public class AddOrModFixFundActivity extends BaseActivity implements View.OnClic
                 }  else if ("400".equalsIgnoreCase(code)) {
                     startActivity(new Intent(AddOrModFixFundActivity.this, AgreementActivity.class));
                 } else {
-                    MistakeDialog.showDialog(msg, AddOrModFixFundActivity.this, null);
+                    showDialog(msg);
                 }
                 break;
         }
@@ -495,7 +495,7 @@ public class AddOrModFixFundActivity extends BaseActivity implements View.OnClic
             @Override
             public void onError(Call call, Exception e, int id) {
                 e.printStackTrace();
-                MistakeDialog.showDialog(ConstantUtil.NETWORK_ERROR, AddOrModFixFundActivity.this);
+                CentreToast.showText(AddOrModFixFundActivity.this,ConstantUtil.NETWORK_ERROR);
             }
 
             @Override
@@ -511,7 +511,7 @@ public class AddOrModFixFundActivity extends BaseActivity implements View.OnClic
                     String msg = jsonObject.optString("msg");
                     String BALANCE = "-.-";
                     if (!"0".equals(code)) {
-                        MistakeDialog.showDialog(msg, AddOrModFixFundActivity.this);
+                        showDialog(msg);
                         return;
                     }
 
@@ -525,11 +525,16 @@ public class AddOrModFixFundActivity extends BaseActivity implements View.OnClic
 
                 } catch (Exception e) {
                     e.printStackTrace();
-                    MistakeDialog.showDialog(ConstantUtil.JSON_ERROR, AddOrModFixFundActivity.this);
+                    showDialog(ConstantUtil.JSON_ERROR);
                 }
 
             }
         });
 
+    }
+
+    private void showDialog(String msg){
+        CustomCenterDialog customCenterDialog = CustomCenterDialog.CustomCenterDialog(msg,CustomCenterDialog.SHOWCENTER);
+        customCenterDialog.show(getFragmentManager(),AddOrModFixFundActivity.class.toString());
     }
 }

@@ -28,6 +28,7 @@ import com.tpyzq.mobile.pangu.util.Helper;
 import com.tpyzq.mobile.pangu.util.SpUtils;
 import com.tpyzq.mobile.pangu.util.panguutil.UserUtil;
 import com.tpyzq.mobile.pangu.view.CentreToast;
+import com.tpyzq.mobile.pangu.view.CustomCenterDialog;
 import com.tpyzq.mobile.pangu.view.dialog.CancelDialog;
 import com.tpyzq.mobile.pangu.view.dialog.FundPurchaseDialog;
 import com.tpyzq.mobile.pangu.view.dialog.MistakeDialog;
@@ -191,7 +192,8 @@ public class FundPurchaseActivity extends BaseActivity implements View.OnClickLi
                     if ("0".equalsIgnoreCase(code)) {
                         resultMap = (HashMap<String,String>)info.getData();
                         if (null == resultMap) {
-                            MistakeDialog.showDialog("数据异常", FundPurchaseActivity.this, null);
+                            showDialog("数据异常");
+
                             return;
                         }
                         //弹框逻辑
@@ -216,7 +218,7 @@ public class FundPurchaseActivity extends BaseActivity implements View.OnClickLi
                         intent.putExtra("resultMap",resultMap);
                         FundPurchaseActivity.this.startActivityForResult(intent, REQUESTCODE);
                     } else {
-                        MistakeDialog.showDialog(msg, FundPurchaseActivity.this, null);
+                        showDialog(msg);
                     }
                 }
             });
@@ -301,13 +303,18 @@ public class FundPurchaseActivity extends BaseActivity implements View.OnClickLi
                     } else if ("-6".equals(code)) {
                         skip.startLogin(FundPurchaseActivity.this);
                     } else {
-                        MistakeDialog.showDialog(msg,  FundPurchaseActivity.this);
+                        showDialog(msg);
                     }
                 } catch (JSONException e) {
                     e.printStackTrace();
                 }
             }
         });
+    }
+
+    private void showDialog(String msg){
+        CustomCenterDialog dialog = CustomCenterDialog.CustomCenterDialog(msg,CustomCenterDialog.SHOWCENTER);
+        dialog.show(getFragmentManager(),FundPurchaseActivity.class.toString());
     }
 
     private void clearView(boolean is) {
