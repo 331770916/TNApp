@@ -406,7 +406,7 @@ public class ShouJiVerificationActivity extends BaseActivity implements View.OnC
                     UserUtil.refrushUserInfo();
                     if (!TextUtils.isEmpty(UserUtil.Mobile)) {
                         intent.setClass(ShouJiVerificationActivity.this, TransactionLoginActivity.class);
-                    } else if ("3".equals(KeyEncryptionUtils.getInstance().Typescno())) {
+                    } else {
                         intent.setClass(ShouJiVerificationActivity.this, ShouJiVerificationActivity.class);
                     }
                     startActivity(intent);
