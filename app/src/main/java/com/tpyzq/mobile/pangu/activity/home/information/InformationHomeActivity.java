@@ -228,6 +228,8 @@ public class InformationHomeActivity extends BaseActivity implements View.OnClic
         mClassNoList.clear();
         mClassNoList.add("1");
         mClassNoList.add("2");
+        SpUtils.putString(this,"要闻","1");
+        SpUtils.putString(this,"直播","2");
         currentTitle = SpUtils.getString(this,"currentTitle","");
         if(!TextUtils.isEmpty(sortTab)&&sortTab.contains(",")){
             String[] title = sortTab.split(",");
