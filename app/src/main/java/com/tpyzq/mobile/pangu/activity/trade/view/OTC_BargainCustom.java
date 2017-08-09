@@ -34,11 +34,11 @@ public class OTC_BargainCustom extends OTC_BargainToday implements TimePickerVie
         mStartDateTv.setOnClickListener(this);
         mEndDateTv.setOnClickListener(this);
         view.findViewById(R.id.tv_OTCBargainZDYQueryBtn).setOnClickListener(this);       //查询按钮
-        mStartDateTv.setText(mFormate.format(new Date()));
-        mEndDateTv.setText(mFormate.format(new Date()));
+        mStartDateTv.setText(Helper.getBeforeString());
+        mEndDateTv.setText(Helper.getBeforeString());
 
         mPvTime = new TimePickerView(mContext, TimePickerView.Type.YEAR_MONTH_DAY);     //实例化选择时间空间
-        mPvTime.setTime(new Date());
+        mPvTime.setTime(Helper.getBeforeDate());
         mPvTime.setCyclic(false);
         mPvTime.setCancelable(true);
         mPvTime.setTitle("选择日期");

@@ -91,7 +91,7 @@ public class AllotCustomTab extends BaseTab implements TimePickerView.OnTimeSele
         mQueryEndDate.setText(mFormate.format(new Date()));
 
         mPvTime = new TimePickerView(activity, TimePickerView.Type.YEAR_MONTH_DAY);
-        mPvTime.setTime(new Date());
+        mPvTime.setTime(Helper.getBeforeDate());
         mPvTime.setCyclic(false);
         mPvTime.setCancelable(true);
         mPvTime.setTitle("选择日期");

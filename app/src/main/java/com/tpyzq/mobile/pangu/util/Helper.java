@@ -69,6 +69,19 @@ public class Helper {
     private static long towTime = 0;
     public static final String TAG = "Helper";
 
+    public static List<Map<String,String>> covertLoopModel(List<InformationEntity> list){
+        List<Map<String,String>> data = new ArrayList<>();
+        for (InformationEntity entity:list) {
+            Map<String,String> model = new HashMap();
+            model.put("id",entity.getNewsno());
+            model.put("title",entity.getTitle());
+            model.put("time",Helper.getCurDate()+" "+entity.getTime());
+            model.put("url",entity.getImage_url());
+            data.add(model);
+        }
+        return data;
+    }
+
     public static int getTime(){
         int time;
         String timelogo = Db_PUB_USERS.searchRefreshTime();
@@ -105,13 +118,6 @@ public class Helper {
         return mHelper;
     }
 
-
-    public static String getNowData() {
-        SimpleDateFormat formatter = new SimpleDateFormat("yyyy-MM-dd");
-        Date curDate = new Date(System.currentTimeMillis());//获取当前时间
-        String str = formatter.format(curDate);
-        return str;
-    }
 
     /**
      * 从Assets文件夹下读取文件
@@ -1174,6 +1180,26 @@ public class Helper {
         Date resultDate = ca.getTime(); // 结果
         SimpleDateFormat sdf = new SimpleDateFormat(dateStyle);
         return sdf.format(resultDate);
+    }
+
+    /**
+     * 获取当前日期的前一天
+     * @return
+     */
+    public static Date getBeforeDate(){
+        Calendar ca = Calendar.getInstance();// 得到一个Calendar的实例
+        ca.setTime(new Date());
+        ca.add(Calendar.DATE,-1);
+        return ca.getTime();
+    }
+
+    /**
+     * 获取当前日期的前一天
+     * @return
+     */
+    public static String getBeforeString(){
+        SimpleDateFormat sdf = new SimpleDateFormat("yyyy-MM-dd");
+        return sdf.format(getBeforeDate());
     }
 
     /**

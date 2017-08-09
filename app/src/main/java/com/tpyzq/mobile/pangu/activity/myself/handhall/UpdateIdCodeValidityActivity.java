@@ -24,6 +24,7 @@ import com.tpyzq.mobile.pangu.db.Db_PUB_USERS;
 import com.tpyzq.mobile.pangu.http.NetWorkUtil;
 import com.tpyzq.mobile.pangu.http.OkHttpUtil;
 import com.tpyzq.mobile.pangu.util.ConstantUtil;
+import com.tpyzq.mobile.pangu.util.Helper;
 import com.tpyzq.mobile.pangu.util.SpUtils;
 import com.tpyzq.mobile.pangu.view.CentreToast;
 import com.tpyzq.mobile.pangu.view.dialog.CancelDialog;
@@ -154,7 +155,7 @@ public class UpdateIdCodeValidityActivity extends BaseActivity implements Dialog
      */
     private void showPickerCandler(final TextView textView) {
         TimePickerView timePickerView = new TimePickerView(this, TimePickerView.Type.YEAR_MONTH_DAY);
-        timePickerView.setTime(new Date());
+        timePickerView.setTime(Helper.getBeforeDate());
         timePickerView.setCyclic(false);
         timePickerView.setCancelable(true);
         timePickerView.setTitle("选择日期");

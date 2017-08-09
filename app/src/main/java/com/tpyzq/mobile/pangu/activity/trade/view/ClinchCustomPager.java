@@ -63,6 +63,7 @@ public class ClinchCustomPager extends BaseSearchPager {
     String position = "";
     int refresh = 30;
     int sure = 30;
+    SimpleDateFormat sdf = new SimpleDateFormat("yyyy-MM-dd");
     private RelativeLayout kong_null;
     private Dialog mDialog;
 
@@ -78,8 +79,8 @@ public class ClinchCustomPager extends BaseSearchPager {
         mInquire = (TextView) rootView.findViewById(R.id.ClinchInquire);
         iv_isEmpty = (ImageView) rootView.findViewById(R.id.iv_isEmpty);
         kong_null = (RelativeLayout) rootView.findViewById(R.id.CCP_Kong_Null);
-        mStartpvTime.setText(Helper.getCurDate().toString());
-        mFinishpvTime.setText(Helper.getCurDate().toString());
+        mStartpvTime.setText(sdf.format(Helper.getBeforeDate()));
+        mFinishpvTime.setText(sdf.format(Helper.getBeforeDate()));
 
         beans = new ArrayList<>();
         mStartpvTime.setOnClickListener(new MyOnClickListenr());
@@ -199,7 +200,7 @@ public class ClinchCustomPager extends BaseSearchPager {
 
     private void toFinishDate() {
         mCjFinishpvTime = new TimePickerView(mContext, TimePickerView.Type.YEAR_MONTH_DAY);
-        mCjFinishpvTime.setTime(new Date());
+        mCjFinishpvTime.setTime(Helper.getBeforeDate());
         mCjFinishpvTime.setCyclic(false);
         mCjFinishpvTime.setCancelable(true);
 
@@ -219,7 +220,7 @@ public class ClinchCustomPager extends BaseSearchPager {
 
     private void toStartDate() {
         mCjStartpvTime = new TimePickerView(mContext, TimePickerView.Type.YEAR_MONTH_DAY);
-        mCjStartpvTime.setTime(new Date());
+        mCjStartpvTime.setTime(Helper.getBeforeDate());
         mCjStartpvTime.setCyclic(false);
         mCjStartpvTime.setCancelable(true);
 

@@ -66,6 +66,7 @@ public class DeliveryCustomPager extends BaseSearchPager {
     private RelativeLayout kong_null;
     private Dialog mDialog;
 
+
     public DeliveryCustomPager(Context context) {
         super(context);
     }
@@ -78,9 +79,8 @@ public class DeliveryCustomPager extends BaseSearchPager {
         mCustomListView = (PullToRefreshListView) rootView.findViewById(R.id.DeliveryListView);
         iv_isEmpty = (ImageView) rootView.findViewById(R.id.iv_isEmpty);
         kong_null = (RelativeLayout) rootView.findViewById(R.id.DP_Kong_Null_1);
-        mJgStartDate.setText(Helper.getCurDate().toString());
-        mJgfinishDate.setText(Helper.getCurDate().toString());
-
+        mJgStartDate.setText(Helper.getBeforeString());
+        mJgfinishDate.setText(Helper.getBeforeString());
         mJgStartDate.setOnClickListener(new MyOnClickListenr());
         mJgfinishDate.setOnClickListener(new MyOnClickListenr());
         mJginquire.setOnClickListener(new MyOnClickListenr());
@@ -246,7 +246,7 @@ public class DeliveryCustomPager extends BaseSearchPager {
 
     private void toFinishDate() {
         mJgFinishpvTime = new TimePickerView(mContext, TimePickerView.Type.YEAR_MONTH_DAY);
-        mJgFinishpvTime.setTime(new Date());
+        mJgFinishpvTime.setTime(Helper.getBeforeDate());
         mJgFinishpvTime.setCyclic(false);
         mJgFinishpvTime.setCancelable(true);
 
@@ -266,7 +266,7 @@ public class DeliveryCustomPager extends BaseSearchPager {
 
     private void toStartDate() {
         mJgStartpvTime = new TimePickerView(mContext, TimePickerView.Type.YEAR_MONTH_DAY);
-        mJgStartpvTime.setTime(new Date());
+        mJgStartpvTime.setTime(Helper.getBeforeDate());
         mJgStartpvTime.setCyclic(false);
         mJgStartpvTime.setCancelable(true);
 

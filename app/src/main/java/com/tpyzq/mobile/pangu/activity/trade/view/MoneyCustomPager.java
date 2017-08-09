@@ -79,8 +79,8 @@ public class MoneyCustomPager extends BaseSearchPager {
         mZjInquire = (TextView) rootView.findViewById(R.id.CapitalInquire);
         iv_isEmpty = (ImageView) rootView.findViewById(R.id.iv_isEmpty);
         kong_null = (RelativeLayout) rootView.findViewById(R.id.Kong_Null);
-        mZjStartDate.setText(Helper.getCurDate().toString());
-        mZjFinishDate.setText(Helper.getCurDate().toString());
+        mZjStartDate.setText(Helper.getBeforeString());
+        mZjFinishDate.setText(Helper.getBeforeString());
 
         beans = new ArrayList<>();
         mZjStartDate.setOnClickListener(new MyOnClickListenr());
@@ -246,7 +246,7 @@ public class MoneyCustomPager extends BaseSearchPager {
      */
     private void toStartDate() {
         mZjStartpvTime = new TimePickerView(mContext, TimePickerView.Type.YEAR_MONTH_DAY);
-        mZjStartpvTime.setTime(new Date());
+        mZjStartpvTime.setTime(Helper.getBeforeDate());
         mZjStartpvTime.setCyclic(false);
         mZjStartpvTime.setCancelable(true);
         mZjStartpvTime.setTitle("选择日期");
@@ -266,7 +266,7 @@ public class MoneyCustomPager extends BaseSearchPager {
      */
     private void toFinishDate() {
         mZjFinishpvTime = new TimePickerView(mContext, TimePickerView.Type.YEAR_MONTH_DAY);
-        mZjFinishpvTime.setTime(new Date());
+        mZjFinishpvTime.setTime(Helper.getBeforeDate());
         mZjFinishpvTime.setCyclic(false);
         mZjFinishpvTime.setCancelable(true);
         mZjFinishpvTime.setTitle("选择日期");

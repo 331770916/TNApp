@@ -90,8 +90,8 @@ public class FundHistoryCustomPager extends BaseTransactionPager implements View
         tv_text2.setText("成交日期");
         tv_text3.setText("业务名称");
         tv_text4.setText("金额/份额");
-        tv_start_data.setText(Helper.getNowData());
-        tv_end_data.setText(Helper.getNowData());
+        tv_start_data.setText(Helper.getBeforeString());
+        tv_end_data.setText(Helper.getBeforeString());
         ll_search.setVisibility(View.VISIBLE);
         tv_start_data.setOnClickListener(this);
         tv_end_data.setOnClickListener(this);
@@ -251,7 +251,7 @@ public class FundHistoryCustomPager extends BaseTransactionPager implements View
 
     private void toFinishDate() {
         mCjFinishpvTime = new TimePickerView(mContext, TimePickerView.Type.YEAR_MONTH_DAY);
-        mCjFinishpvTime.setTime(new Date());
+        mCjFinishpvTime.setTime(Helper.getBeforeDate());
         mCjFinishpvTime.setCyclic(false);
         mCjFinishpvTime.setCancelable(true);
 
@@ -271,7 +271,7 @@ public class FundHistoryCustomPager extends BaseTransactionPager implements View
 
     private void toStartDate() {
         mCjStartpvTime = new TimePickerView(mContext, TimePickerView.Type.YEAR_MONTH_DAY);
-        mCjStartpvTime.setTime(new Date());
+        mCjStartpvTime.setTime(Helper.getBeforeDate());
         mCjStartpvTime.setCyclic(false);
         mCjStartpvTime.setCancelable(true);
 

@@ -80,8 +80,8 @@ public class EntrustCustomPager extends BaseSearchPager {
         mWtListView = (PullToRefreshListView) rootView.findViewById(R.id.EntrustListView);
         iv_isEmpty = (ImageView) rootView.findViewById(R.id.iv_isEmpty);
         kong_null = (RelativeLayout) rootView.findViewById(R.id.EAMP_Kong_Null);
-        mWtStartDate.setText(Helper.getCurDate().toString());
-        mWtfinishDate.setText(Helper.getCurDate().toString());
+        mWtStartDate.setText(Helper.getBeforeString());
+        mWtfinishDate.setText(Helper.getBeforeString());
         mBeans = new ArrayList<>();
         mWtStartDate.setOnClickListener(new MyOnClickListenr());
         mWtfinishDate.setOnClickListener(new MyOnClickListenr());
@@ -107,7 +107,7 @@ public class EntrustCustomPager extends BaseSearchPager {
      */
     private void toStartDate() {
         mWtStartpvTime = new TimePickerView(mContext, TimePickerView.Type.YEAR_MONTH_DAY);
-        mWtStartpvTime.setTime(new Date());
+        mWtStartpvTime.setTime(Helper.getBeforeDate());
         mWtStartpvTime.setCyclic(false);
         mWtStartpvTime.setCancelable(true);
         mWtStartpvTime.setTitle("选择日期");
@@ -126,7 +126,7 @@ public class EntrustCustomPager extends BaseSearchPager {
      */
     private void toFinishDate() {
         mWtFinishpvTime = new TimePickerView(mContext, TimePickerView.Type.YEAR_MONTH_DAY);
-        mWtFinishpvTime.setTime(new Date());
+        mWtFinishpvTime.setTime(Helper.getBeforeDate());
         mWtFinishpvTime.setCyclic(false);
         mWtFinishpvTime.setCancelable(true);
         mWtFinishpvTime.setTitle("选择日期");

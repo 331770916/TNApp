@@ -22,6 +22,7 @@ import com.tpyzq.mobile.pangu.base.BasePager;
 import com.tpyzq.mobile.pangu.base.InterfaceCollection;
 import com.tpyzq.mobile.pangu.data.ResultInfo;
 import com.tpyzq.mobile.pangu.data.StructuredFundEntity;
+import com.tpyzq.mobile.pangu.util.Helper;
 import com.tpyzq.mobile.pangu.view.CentreToast;
 import com.tpyzq.mobile.pangu.view.CustomCenterDialog;
 import com.tpyzq.mobile.pangu.view.dialog.LoadingDialog;
@@ -68,14 +69,14 @@ public class FJEntrustDealQueryPager extends BasePager implements InterfaceColle
             mtvFinishTime = (TextView) rootView.findViewById(R.id.fjfinishDate);
             fjInquire = (TextView) rootView.findViewById(R.id.fjInquire);
             fjInquire.setOnClickListener(new MyOnClickListenr());
-            mtvStartTime.setText(helper.getCurDate());
+            mtvStartTime.setText(helper.getBeforeString());
             mtvStartTime.setTextColor(Color.parseColor("#368de7"));
             mtvStartTime.setOnClickListener(new MyOnClickListenr());
-            mtvFinishTime.setText(helper.getCurDate());
+            mtvFinishTime.setText(helper.getBeforeString());
             mtvFinishTime.setOnClickListener(new MyOnClickListenr());
             mtvFinishTime.setTextColor(Color.parseColor("#368de7"));
             startTime = new TimePickerView(mContext, TimePickerView.Type.YEAR_MONTH_DAY);
-            startTime.setTime(new Date());
+            startTime.setTime(Helper.getBeforeDate());
             startTime.setCyclic(false);
             startTime.setCancelable(true);
             startTime.setTitle("选择日期");
@@ -87,7 +88,7 @@ public class FJEntrustDealQueryPager extends BasePager implements InterfaceColle
                 }
             });
             finishTime = new TimePickerView(mContext, TimePickerView.Type.YEAR_MONTH_DAY);
-            finishTime.setTime(new Date());
+            finishTime.setTime(Helper.getBeforeDate());
             finishTime.setCyclic(false);
             finishTime.setCancelable(true);
             finishTime.setTitle("选择日期");

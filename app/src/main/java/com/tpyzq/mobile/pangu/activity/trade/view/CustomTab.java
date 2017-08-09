@@ -91,15 +91,15 @@ public class CustomTab extends BaseTransferObserverTabView implements
         mAdapter = new QueryTransferAdapter();
         listView.setAdapter(mAdapter);
 
-        mQueryStartDate.setText(mFormate.format(new Date()));
-        mQueryEndDate.setText(mFormate.format(new Date()));
+        mQueryStartDate.setText(mFormate.format(Helper.getBeforeDate()));
+        mQueryEndDate.setText(mFormate.format(Helper.getBeforeDate()));
 
         mQueryStartDate.setOnClickListener(this);
         mQueryBtn.setOnClickListener(this);
         mQueryEndDate.setOnClickListener(this);
 
         mPvTime = new TimePickerView(activity, TimePickerView.Type.YEAR_MONTH_DAY);
-        mPvTime.setTime(new Date());
+        mPvTime.setTime(Helper.getBeforeDate());
         mPvTime.setCyclic(false);
         mPvTime.setCancelable(true);
         mPvTime.setTitle("选择日期");

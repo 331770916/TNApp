@@ -68,7 +68,7 @@ public class CurrencyZiDingYiPager extends BaseSearchPager implements TimePicker
         mFormate = new SimpleDateFormat("yyyy-MM-dd");                                   //实例化时间格式
 
         mPvTime = new TimePickerView(mContext, TimePickerView.Type.YEAR_MONTH_DAY);     //实例化选择时间空间
-        mPvTime.setTime(new Date());
+        mPvTime.setTime(Helper.getBeforeDate());
         mPvTime.setCyclic(false);
         mPvTime.setCancelable(true);
         mPvTime.setTitle("选择日期");
@@ -78,8 +78,8 @@ public class CurrencyZiDingYiPager extends BaseSearchPager implements TimePicker
         tvZDYEndDate = (TextView) rootView.findViewById(R.id.tvZDYEndDate);         //结束时间
         tvZDYQueryBtn = (TextView) rootView.findViewById(R.id.tvZDYQueryBtn);       //查询按钮
 
-        tvZDYStartDate.setText(mFormate.format(new Date()));
-        tvZDYEndDate.setText(mFormate.format(new Date()));
+        tvZDYStartDate.setText(mFormate.format(Helper.getBeforeDate()));
+        tvZDYEndDate.setText(mFormate.format(Helper.getBeforeDate()));
 
         //添加监听
         tvZDYStartDate.setOnClickListener(new MyOnClickListenr());
