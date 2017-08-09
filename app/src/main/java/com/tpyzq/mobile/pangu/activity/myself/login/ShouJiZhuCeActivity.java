@@ -248,6 +248,8 @@ public class ShouJiZhuCeActivity extends BaseActivity implements View.OnClickLis
 
     //图片验证码网络请求
     private void ImageVerification() {
+        mBuilder.setTitle("加载中...");
+        mBuilder.create().show();
         InterfaceCollection.getInstance().getImageVerification(TAG1, this);
     }
 
@@ -280,6 +282,9 @@ public class ShouJiZhuCeActivity extends BaseActivity implements View.OnClickLis
     @Override
     public void callResult(ResultInfo info) {
         if (TAG1.equals(info.getTag())) {       //图片
+            if (mBuilder.dialog != null) {
+                mBuilder.dialog.dismiss();
+            }
             if ("0".equals(info.getCode())) {
                 Bitmap bitmap = Helper.base64ToBitmap((String) info.getData());
                 mSecurityCode.setImageBitmap(bitmap);
@@ -494,7 +499,7 @@ public class ShouJiZhuCeActivity extends BaseActivity implements View.OnClickLis
             HandoverDialog.showDialog("注册成功", ShouJiZhuCeActivity.this, new MistakeDialog.MistakeDialgoListener() {
                 @Override
                 public void doPositive() {
-                    //                    HOLE_SEQ.deleteAll();
+//                                        HOLE_SEQ.deleteAll();
                     SpUtils.putString(CustomApplication.getContext(), ConstantUtil.APPEARHOLD, ConstantUtil.HOLD_DISAPPEAR);
                     finish();
                 }
@@ -509,9 +514,10 @@ public class ShouJiZhuCeActivity extends BaseActivity implements View.OnClickLis
                         intent = new Intent();
                     }
                     UserUtil.refrushUserInfo();
+                    String a=KeyEncryptionUtils.getInstance().Typescno();
                     if (!TextUtils.isEmpty(UserUtil.Mobile)) {
                         intent.setClass(ShouJiZhuCeActivity.this, TransactionLoginActivity.class);
-                    } else if ("3".equals(KeyEncryptionUtils.getInstance().Typescno())) {
+                    } else {
                         intent.setClass(ShouJiZhuCeActivity.this, ShouJiVerificationActivity.class);
                     }
                     startActivity(intent);

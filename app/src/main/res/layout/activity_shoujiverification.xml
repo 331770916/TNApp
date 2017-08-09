@@ -1,8 +1,8 @@
 <?xml version="1.0" encoding="utf-8"?>
 <RelativeLayout xmlns:android="http://schemas.android.com/apk/res/android"
+    xmlns:fresco="http://schemas.android.com/apk/res-auto"
     android:layout_width="match_parent"
     android:layout_height="match_parent"
-    xmlns:fresco="http://schemas.android.com/apk/res-auto"
     android:background="@color/bgColor"
     android:orientation="vertical">
 
@@ -44,6 +44,8 @@
         android:id="@+id/LinearLayout"
         android:layout_width="match_parent"
         android:layout_height="wrap_content"
+        android:layout_alignParentLeft="true"
+        android:layout_alignParentStart="true"
         android:layout_below="@+id/RindingLayout"
         android:orientation="vertical">
 
@@ -58,12 +60,13 @@
             android:paddingRight="@dimen/size15">
 
             <EditText
-                android:id="@+id/SJYZNumber"
+                android:id="@+id/etNumber"
                 android:layout_width="match_parent"
                 android:layout_height="@dimen/size48"
                 android:layout_gravity="center_horizontal"
                 android:background="@drawable/edittext"
                 android:gravity="center_vertical"
+                android:inputType="number"
                 android:maxLength="11"
                 android:numeric="integer"
                 android:paddingLeft="@dimen/size70" />
@@ -86,9 +89,7 @@
         </FrameLayout>
 
 
-
         <LinearLayout
-            android:visibility="visible"
             android:layout_width="match_parent"
             android:layout_height="match_parent"
             android:layout_marginTop="@dimen/size10"
@@ -96,7 +97,8 @@
             android:focusableInTouchMode="true"
             android:orientation="horizontal"
             android:paddingLeft="@dimen/size15"
-            android:paddingRight="@dimen/size15">
+            android:paddingRight="@dimen/size15"
+            android:visibility="visible">
 
             <EditText
                 android:id="@+id/etImage"
@@ -117,17 +119,17 @@
 
 
             <com.facebook.drawee.view.SimpleDraweeView
-                android:layout_marginTop="@dimen/size4"
                 android:id="@+id/SecurityCode"
                 android:layout_width="0dp"
                 android:layout_height="match_parent"
-                android:layout_weight="0.5"
                 android:layout_marginLeft="@dimen/size4"
+                android:layout_marginTop="@dimen/size4"
+                android:layout_weight="0.5"
                 fresco:actualImageScaleType="fitCenter"
                 fresco:failureImageScaleType="fitCenter"
                 fresco:placeholderImage="@mipmap/ic_again"
-                fresco:retryImage="@mipmap/ic_again"
-                fresco:placeholderImageScaleType="centerInside"/>
+                fresco:placeholderImageScaleType="centerInside"
+                fresco:retryImage="@mipmap/ic_again" />
         </LinearLayout>
 
 
@@ -135,13 +137,14 @@
             android:layout_width="match_parent"
             android:layout_height="match_parent"
             android:layout_marginTop="@dimen/size10"
+            android:focusable="true"
+            android:focusableInTouchMode="true"
             android:orientation="horizontal"
             android:paddingLeft="@dimen/size15"
             android:paddingRight="@dimen/size15">
 
             <EditText
-                android:numeric="integer"
-                android:id="@+id/SJYZ_ET"
+                android:id="@+id/etCaptcha"
                 android:layout_width="0dp"
                 android:layout_height="@dimen/size48"
                 android:layout_marginRight="@dimen/size10"
@@ -150,72 +153,75 @@
                 android:drawableLeft="@mipmap/mima"
                 android:drawablePadding="15dp"
                 android:gravity="fill|center"
-                android:maxLength="6"
                 android:hint="@string/sjzcText1"
+                android:maxLength="6"
+                android:numeric="integer"
                 android:paddingLeft="@dimen/size10"
+                android:singleLine="true"
                 android:textSize="@dimen/txtSize16" />
 
 
             <Button
-                android:layout_marginLeft="@dimen/size4"
-                android:id="@+id/SJYZCaptchabtn"
+                android:id="@+id/butCaptcha"
                 android:layout_width="0dp"
                 android:layout_height="match_parent"
+                android:layout_marginLeft="@dimen/size4"
                 android:layout_weight="0.5"
                 android:background="@drawable/captcha_button_unchecked"
                 android:text="@string/sjzcText2"
                 android:textColor="@drawable/text_green_white_selector"
-                android:textSize="@dimen/size12"  />
+                android:textSize="@dimen/size12" />
         </LinearLayout>
 
         <Button
-            android:id="@+id/SJYZLogIn"
+            android:id="@+id/butLogIn"
             android:layout_width="match_parent"
             android:layout_height="wrap_content"
-            android:layout_marginLeft="@dimen/size23"
-            android:layout_marginRight="@dimen/size23"
-            android:layout_marginTop="@dimen/size50"
-            android:background="@drawable/button_login_unchecked"
-            android:text="@string/sjyzText2"
-            android:textColor="@color/white" />
-
-
-
-
-        <LinearLayout
-            android:id="@+id/LinearLayout_Marked"
-            android:layout_width="match_parent"
-            android:layout_height="@dimen/size50"
             android:layout_marginLeft="@dimen/size15"
             android:layout_marginRight="@dimen/size15"
-            android:layout_marginTop="@dimen/size20"
-            android:background="@drawable/captcha_button_prohibit"
-            android:gravity="center_vertical"
-            android:orientation="horizontal"
-            android:visibility="gone">
+            android:layout_marginTop="@dimen/size50"
+            android:background="@drawable/button_login_unchecked"
+            android:text="@string/sjzcText3"
+            android:textColor="@color/white" />
+
+        <RelativeLayout
+            android:layout_width="match_parent"
+            android:layout_height="wrap_content">
+
+            <LinearLayout
+                android:id="@+id/LinearLayout_Marked"
+                android:layout_width="match_parent"
+                android:layout_height="@dimen/size50"
+                android:layout_marginLeft="@dimen/size15"
+                android:layout_marginRight="@dimen/size15"
+                android:layout_marginTop="@dimen/size20"
+                android:background="@drawable/captcha_button_prohibit"
+                android:gravity="center_vertical"
+                android:orientation="horizontal"
+                android:visibility="gone">
 
 
-            <TextView
-                android:id="@+id/Sound"
-                android:layout_width="wrap_content"
-                android:layout_height="wrap_content"
-                android:drawableLeft="@mipmap/hongtixing"
-                android:drawablePadding="6dp"
-                android:paddingLeft="@dimen/size10"
-                android:text="@string/sjzcText6"
-                android:textColor="#808080"
-                android:textSize="@dimen/txtSize14" />
+                <TextView
+                    android:id="@+id/Sound"
+                    android:layout_width="wrap_content"
+                    android:layout_height="wrap_content"
+                    android:drawableLeft="@mipmap/hongtixing"
+                    android:drawablePadding="6dp"
+                    android:paddingLeft="@dimen/size10"
+                    android:text="@string/sjzcText6"
+                    android:textColor="#808080"
+                    android:textSize="@dimen/txtSize14" />
 
-            <TextView
-                android:id="@+id/Soundtv"
-                android:layout_width="wrap_content"
-                android:layout_height="wrap_content"
-                android:text="@string/sjzcText7"
-                android:textColor="@color/ZhutextColor"
-                android:textSize="@dimen/txtSize14" />
+                <TextView
+                    android:id="@+id/tvSound"
+                    android:layout_width="wrap_content"
+                    android:layout_height="wrap_content"
+                    android:text="@string/sjzcText7"
+                    android:textColor="@color/ZhutextColor"
+                    android:textSize="@dimen/txtSize14" />
 
-
-        </LinearLayout>
+            </LinearLayout>
+        </RelativeLayout>
     </LinearLayout>
 
 

@@ -27,6 +27,7 @@ import com.tpyzq.mobile.pangu.util.ConstantUtil;
 import com.tpyzq.mobile.pangu.util.DeviceUtil;
 import com.tpyzq.mobile.pangu.util.Helper;
 import com.tpyzq.mobile.pangu.util.SpUtils;
+import com.tpyzq.mobile.pangu.util.keyboard.KeyEncryptionUtils;
 import com.tpyzq.mobile.pangu.util.panguutil.UserUtil;
 import com.tpyzq.mobile.pangu.view.CentreToast;
 import com.tpyzq.mobile.pangu.view.dialog.MistakeDialog;
@@ -2894,6 +2895,53 @@ public class InterfaceCollection {
                 callback.callResult(info);
             }
         });
+    }
+
+
+    /**
+     *
+     * @param TAG
+     * @param number  手机号
+     * @param captcha 短信验证码
+     * @param callback
+     */
+    public void BindingMobil(final String TAG , String number, String captcha, final InterfaceCallback callback){
+        HashMap map = new HashMap();
+        map.put("phone", number);
+        map.put("user_account", UserUtil.userId);
+        map.put("user_type", KeyEncryptionUtils.getInstance().Typescno());
+        map.put("equipment", DeviceUtil.getDeviceId(CustomApplication.getContext()));
+        map.put("auth", captcha);
+
+        NetWorkUtil.getInstence().okHttpForPostString(TAG, ConstantUtil.getURL_HANDSE_BINDING(), map, new StringCallback() {
+            @Override
+            public void onError(Call call, Exception e, int id) {
+                ResultInfo info = new ResultInfo();
+                info.setCode(ConstantUtil.NETWORK_ERROR_CODE);
+                info.setMsg(ConstantUtil.NETWORK_ERROR);
+                info.setTag(TAG);
+                callback.callResult(info);
+            }
+
+            @Override
+            public void onResponse(String response, int id) {
+                ResultInfo info = new ResultInfo();
+                try {
+                    JSONObject object = new JSONObject(response);
+                    String code = object.getString("code");
+                    String msg = object.getString("message");
+                    info.setCode(code);
+                    info.setTag(TAG);
+                    info.setMsg(msg);
+                } catch (Exception e) {
+                    info.setCode(ConstantUtil.JSON_ERROR_CODE);
+                    info.setMsg(ConstantUtil.JSON_ERROR);
+                    info.setTag(TAG);
+                }
+                callback.callResult(info);
+            }
+        });
+
     }
 
 }
