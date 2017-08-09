@@ -14,6 +14,7 @@ import android.widget.AbsListView;
 import android.widget.AdapterView;
 import android.widget.ImageView;
 import android.widget.LinearLayout;
+import android.widget.RelativeLayout;
 import android.widget.ScrollView;
 import android.widget.TextView;
 
@@ -100,7 +101,7 @@ public class HomeFragment extends BaseFragment implements AdapterView.OnItemClic
     /**
      * 轮播控件
      */
-    private CarouselView vp_carousel;
+    private RelativeLayout vp_carousel;
     private AutoSwitchView loopView;
     private AutoSwitchAdapter adapter;
     private int[] image = {R.mipmap.top1, R.mipmap.top2, R.mipmap.top4};
@@ -182,7 +183,7 @@ public class HomeFragment extends BaseFragment implements AdapterView.OnItemClic
 //        mConvenientBanner.setPageIndicatorAlign(ConvenientBanner.PageIndicatorAlign.CENTER_HORIZONTAL);
 //        mConvenientBanner.startTurning(5000);
 //        mConvenientBanner.setOnItemClickListener(this);
-        vp_carousel = (CarouselView) view.findViewById(R.id.vp_carousel);
+        vp_carousel = (RelativeLayout) view.findViewById(R.id.vp_carousel);
         initCarouseView();
 
         mMiddleImageView = (ImageView) view.findViewById(R.id.home_middlebander);
@@ -432,6 +433,7 @@ public class HomeFragment extends BaseFragment implements AdapterView.OnItemClic
             case R.id.homeInfoHeadLayout:
                 intent.setClass(getActivity(), InformationHomeActivity.class);
                 intent.putExtra("currentItem", 0);
+                SpUtils.putString(getActivity(),"currentTitle","要闻");
                 startActivity(intent);
                 BRutil.menuSelect("N004");
                 break;

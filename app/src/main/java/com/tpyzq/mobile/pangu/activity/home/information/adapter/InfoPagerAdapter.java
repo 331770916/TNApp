@@ -9,26 +9,28 @@ import com.tpyzq.mobile.pangu.activity.home.information.view.ListPager;
 import com.tpyzq.mobile.pangu.activity.home.information.view.SopCastPager;
 import com.tpyzq.mobile.pangu.base.BasePager;
 
+import java.util.ArrayList;
 import java.util.HashMap;
 import java.util.List;
 import java.util.Map;
+import java.util.Set;
 
 /**
  * Created by hackware on 2016/9/10.
  */
 
 public class InfoPagerAdapter extends PagerAdapter {
-    private List<String> mDataList,mClassnoList;
+    private ArrayList<String> mDataList,mClassnoList;
     private Map<String,BasePager> cache;
     private Context context ;
 
-    public InfoPagerAdapter(List<String> dataList,Context context) {
+    public InfoPagerAdapter(ArrayList<String> dataList, Context context) {
         mDataList = dataList;
         this.context = context;
         cache = new HashMap();
     }
 
-    public void setClassNoList(List<String> classNoList){
+    public void setClassNoList(ArrayList<String> classNoList){
         this.mClassnoList = classNoList;
         notifyDataSetChanged();
     }

@@ -34,8 +34,7 @@ public class CompileTabActivity extends BaseActivity implements View.OnClickList
     private ArrayList<String> listTitle,checkedTab;             //接收title的list
     private ArrayList<CompileTabEntity> listUp;           //头布局条目
     private ArrayList<CompileTabEntity> listDown;         //下条目
-    CompileTabEntity compileTabEntity;
-    private ArrayList<String> fragmentList;
+    private CompileTabEntity compileTabEntity;
 
     @Override
     public void initView() {
@@ -46,23 +45,18 @@ public class CompileTabActivity extends BaseActivity implements View.OnClickList
     }
 
     private void initData() {
-
-        listTitle = new ArrayList<String>();
-        listUp = new ArrayList<CompileTabEntity>();
-        listDown = new ArrayList<CompileTabEntity>();
-//        fragmentList = new ArrayList<String>();
+        listTitle = new ArrayList<>();
+        listUp = new ArrayList<>();
+        listDown = new ArrayList<>();
         listTitle = getIntent().getStringArrayListExtra("listTab");
-//        fragmentList = getIntent().getStringArrayListExtra("fragmentList");myTab
         checkedTab = getIntent().getStringArrayListExtra("myTab");
         //给头布局list添加数据
         for (int i = 0; i < 2; i++) {
             compileTabEntity = new CompileTabEntity();
             compileTabEntity.setBiaoTi(listTitle.get(i));
-//            compileTabEntity.setFragmentName(fragmentList.get(i));
             listUp.add(compileTabEntity);
         }
         //给下部list添加数据
-
         for (int i = 2; i < listTitle.size(); i++) {
             compileTabEntity = new CompileTabEntity();
             compileTabEntity.setBiaoTi(listTitle.get(i));
@@ -71,7 +65,6 @@ public class CompileTabActivity extends BaseActivity implements View.OnClickList
             }else{
                 compileTabEntity.setChecked(false);
             }
-//            compileTabEntity.setFragmentName(fragmentList.get(i));
             listDown.add(compileTabEntity);
         }
         ivFinish.setOnClickListener(this);
@@ -86,43 +79,9 @@ public class CompileTabActivity extends BaseActivity implements View.OnClickList
 
         mListView.addHeaderView(mListViewUp);
         mListView.setAdapter(adapter);                                              //适配
-//        initStart();
-
         mListView.setDropListener(onDrop);
         mListView.setChoiceMode(ListView.CHOICE_MODE_SINGLE);
         mListView.setDragEnabled(true); //设置是否可拖动。
-    }
-
-    private void initStart() {
-        String zixuntab = SpUtils.getString(this, "ziXunTab", "");       //获取  选中的Tab 的名称
-        String infopagerpoint = SpUtils.getString(this, "infopagerpoint", "");       //获取  选中的Tab 的名称
-        if (TextUtils.isEmpty(zixuntab)) {
-            return;
-        }
-        listDown.clear();
-        String[] title = zixuntab.split(",");
-        String[] fm = infopagerpoint.split(",");
-
-
-        //给下部list添加数据
-        for (int i = 2; i < title.length; i++) {
-            compileTabEntity = new CompileTabEntity();
-            compileTabEntity.setBiaoTi(title[i]);
-            compileTabEntity.setChecked(true);
-//            compileTabEntity.setFragmentName(fm[i]);
-            listDown.add(compileTabEntity);
-        }
-
-        for (int i = 2; i < listTitle.size(); i++) {
-            compileTabEntity = new CompileTabEntity();
-            if (!zixuntab.contains(listTitle.get(i))) {
-                compileTabEntity.setBiaoTi(listTitle.get(i));
-//                compileTabEntity.setFragmentName(fragmentList.get(i));
-                compileTabEntity.setChecked(false);
-                listDown.add(compileTabEntity);
-            }
-        }
-        adapter.setList(listDown);
     }
 
     private DragSortListView.DropListener onDrop = new DragSortListView.DropListener() {
@@ -146,33 +105,22 @@ public class CompileTabActivity extends BaseActivity implements View.OnClickList
     public void onClick(View v) {
         //点击 完成 按钮
         if (v.getId() == R.id.ivFinish) {
-
             StringBuilder slist = new StringBuilder();
             StringBuilder sortList = new StringBuilder();
-            String pointinfo = "";
             for (int i = 0; i < listUp.size(); i++) {
                 CompileTabEntity bean = listUp.get(i);
                 slist.append(bean.getBiaoTi()).append(",");
-//                slist += bean.getBiaoTi() + ",";
                 sortList.append(bean.getBiaoTi()).append(",");
-                pointinfo += bean.getFragmentName() + ",";
             }
             for (int i = 0; i < listDown.size(); i++) {
                 CompileTabEntity bean = listDown.get(i);
                 sortList.append(bean.getBiaoTi()).append(",");
-                if (bean.isChecked()) {
+                if (bean.isChecked())
                     slist.append(bean.getBiaoTi()).append(",");
-                    pointinfo += bean.getFragmentName() + ",";
-                }
             }
-
-
-//            ToastUtils.showLong(this, slist);
-            SpUtils.putString(this, "ziXunTab", slist.toString());       //存储  选中的Tab 的名称
-            SpUtils.putString(this, "sortTab", sortList.toString());       //调整顺序后Tab 的名称
-            Intent intent = new Intent();
-            intent.putExtra("point", 1);
-            setResult(RESULT_OK, intent);
+            SpUtils.putString(this, "ziXunTab", slist.substring(0,slist.length()-1));       //存储  选中的Tab 的名称
+            SpUtils.putString(this, "sortTab", sortList.substring(0,sortList.length()-1));       //调整顺序后Tab 的名称
+            setResult(RESULT_OK);
             finish();       //销毁当前界面
         }
     }

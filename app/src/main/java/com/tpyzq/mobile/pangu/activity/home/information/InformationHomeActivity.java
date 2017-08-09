@@ -29,6 +29,7 @@ import com.tpyzq.mobile.pangu.view.magicindicator.buildins.commonnavigator.title
 
 import java.util.ArrayList;
 import java.util.Arrays;
+import java.util.HashSet;
 import java.util.List;
 
 /**
@@ -222,45 +223,43 @@ public class InformationHomeActivity extends BaseActivity implements View.OnClic
     private void getTabList(){
         String sortTab = SpUtils.getString(this, "sortTab", "");
         listTab.clear();
+        listTab.add("要闻");
+        listTab.add("直播");
         mClassNoList.clear();
+        mClassNoList.add("1");
+        mClassNoList.add("2");
         currentTitle = SpUtils.getString(this,"currentTitle","");
-        String[] title = sortTab.split(",");
-        for (int i = 0; i < title.length; i++) {
-            if(title[i].equals(currentTitle))
-                currentItem = i;
-            listTab.add(title[i]);
-            mClassNoList.add(SpUtils.getString(this,title[i],""));
+        if(!TextUtils.isEmpty(sortTab)&&sortTab.contains(",")){
+            String[] title = sortTab.split(",");
+            for (int i = 0; i < title.length; i++) {
+                if(title[i].equals(currentTitle))
+                    currentItem = i;
+                listTab.add(title[i]);
+                mClassNoList.add(SpUtils.getString(this,title[i],""));
+            }
         }
         addData();
     }
 
     private void addData() {
-        String zixuntab = SpUtils.getString(this, "ziXunTab", "");      //获取  选中的Tab 的名称
-        if (TextUtils.isEmpty(zixuntab)) {
-            if(listTab.size()==0){
-                listTab.add("要闻");
-                listTab.add("直播");
-            }
-            if(mClassNoList.size()==0){
-                mClassNoList.add("1");
-                mClassNoList.add("2");
-            }
-            mTitleList.addAll(listTab);
-            commonNavigator.setAdjustMode(false);
-            commonNavigator.notifyDataSetChanged();
-            tabAdapter.setClassNoList(mClassNoList);
-            mViewPager.setCurrentItem(currentItem);
-            tabAdapter.getPager(currentTitle).initData();
-            return;
-        }
         mTitleList.clear();
-        mClassNoList.clear();
-        String[] title = zixuntab.split(",");
-        for (int i = 0; i < title.length; i++) {
-            if(title[i].equals(currentTitle))
-                currentItem = i;
-            mTitleList.add(title[i]);
-            mClassNoList.add(SpUtils.getString(this,title[i],""));
+        String zixuntab = SpUtils.getString(this, "ziXunTab", "");      //获取  选中的Tab 的名称
+        if (!TextUtils.isEmpty(zixuntab)) {
+            mClassNoList.clear();
+            if(zixuntab.contains(",")){
+                String[] title = zixuntab.split(",");
+                for (int i = 0; i < title.length; i++) {
+                    if(title[i].equals(currentTitle))
+                        currentItem = i;
+                    mTitleList.add(title[i]);
+                    mClassNoList.add(SpUtils.getString(this,title[i],""));
+                }
+            }else {
+                mTitleList.add(zixuntab);
+                mClassNoList.add(SpUtils.getString(this,zixuntab,""));
+            }
+        }else{
+            mTitleList.addAll(listTab);
         }
         if(mTitleList.size() < 5){
             commonNavigator.setAdjustMode(true);
@@ -271,6 +270,7 @@ public class InformationHomeActivity extends BaseActivity implements View.OnClic
         tabAdapter.setClassNoList(mClassNoList);
         mViewPager.setCurrentItem(currentItem);
         tabAdapter.getPager(currentTitle).initData();
+
     }
 
 
@@ -281,6 +281,7 @@ public class InformationHomeActivity extends BaseActivity implements View.OnClic
                 this.finish();
                 break;
             case R.id.ivCompile:                     //点击跳转编辑  Tab  界面
+                listTab = new ArrayList(new HashSet(listTab));
                 SpUtils.putString(this,"currentTitle",currentTitle);
                 Intent intent = new Intent();
                 intent.setClass(this, CompileTabActivity.class);
