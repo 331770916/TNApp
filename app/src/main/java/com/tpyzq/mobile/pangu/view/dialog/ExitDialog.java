@@ -1,5 +1,6 @@
 package com.tpyzq.mobile.pangu.view.dialog;
 
+import android.app.Activity;
 import android.content.Context;
 import android.graphics.drawable.Drawable;
 import android.view.View;
@@ -59,7 +60,7 @@ public class ExitDialog extends BaseDialog implements View.OnClickListener {
                 break;
             case R.id.Confirmbtn:
                 CustomApplication.getInstance().finish();
-//                ((Activity) context).finish();
+                ((Activity) context).finish();
 //                int currentVersion = android.os.Build.VERSION.SDK_INT;
 //                if (currentVersion > android.os.Build.VERSION_CODES.ECLAIR_MR1) {
 //                    Intent startMain = new Intent(Intent.ACTION_MAIN);
