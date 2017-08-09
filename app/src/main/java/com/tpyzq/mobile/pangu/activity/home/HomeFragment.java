@@ -4,7 +4,6 @@ import android.content.Intent;
 import android.graphics.Bitmap;
 import android.graphics.Color;
 import android.graphics.drawable.Drawable;
-import android.net.Uri;
 import android.os.Handler;
 import android.support.v4.content.ContextCompat;
 import android.text.TextUtils;
@@ -18,7 +17,6 @@ import android.widget.RelativeLayout;
 import android.widget.ScrollView;
 import android.widget.TextView;
 
-import com.facebook.drawee.view.SimpleDraweeView;
 import com.handmark.pulltorefresh.library.PullToRefreshBase;
 import com.handmark.pulltorefresh.library.PullToRefreshScrollView;
 import com.tpyzq.mobile.pangu.R;
@@ -30,7 +28,6 @@ import com.tpyzq.mobile.pangu.activity.home.hotsearchstock.HotSearchStockActivit
 import com.tpyzq.mobile.pangu.activity.home.information.InformationHomeActivity;
 import com.tpyzq.mobile.pangu.activity.home.information.NewsDetailActivity;
 import com.tpyzq.mobile.pangu.activity.home.managerMoney.ManagerMoenyDetailActivity;
-import com.tpyzq.mobile.pangu.activity.home.managerMoney.OptionalFinancingActivity;
 import com.tpyzq.mobile.pangu.activity.home.managerMoney.adapter.PreProductAdapter;
 import com.tpyzq.mobile.pangu.activity.myself.login.ShouJiZhuCeActivity;
 import com.tpyzq.mobile.pangu.adapter.home.HomeAdapter;
@@ -66,15 +63,11 @@ import com.tpyzq.mobile.pangu.util.SpUtils;
 import com.tpyzq.mobile.pangu.util.ToastUtils;
 import com.tpyzq.mobile.pangu.util.imageUtil.ImageUtil;
 import com.tpyzq.mobile.pangu.util.panguutil.BRutil;
-import com.tpyzq.mobile.pangu.view.CarouselView;
 import com.tpyzq.mobile.pangu.view.gridview.MyGridView;
 import com.tpyzq.mobile.pangu.view.gridview.MyListView;
 import com.tpyzq.mobile.pangu.view.gridview.MyScrollView;
 import com.tpyzq.mobile.pangu.view.listview.HomeSwitchAdapter;
-import com.tpyzq.mobile.pangu.view.loopswitch.AutoSwitchAdapter;
 import com.tpyzq.mobile.pangu.view.loopswitch.AutoSwitchView;
-import com.tpyzq.mobile.pangu.view.pullrefreshrecyclerview.PullRefreshUtil;
-import com.tpyzq.mobile.pangu.view.pullrefreshrecyclerview.PullRefreshView;
 import com.zhy.http.okhttp.callback.BitmapCallback;
 
 import org.json.JSONException;
@@ -214,23 +207,43 @@ public class HomeFragment extends BaseFragment implements AdapterView.OnItemClic
         CustomApplication.setGetMessageListenr(this);  //消息的Handler
         gridView.setOnItemClickListener(this);
         initScrollView(); //下拉刷新初始化
-
+        requestCarouselImg(); // 请求轮播图
         initData();
     }
 
     @Override
     public void callResult(ResultInfo info) {
-        if(info.getCode().equals("200")){
-            headView.setVisibility(View.VISIBLE);
-            if(info.getTag().equals("GetImportant")){
-                mInformationEntities = (ArrayList<InformationEntity>)info.getData();
-                mNewslistView.setVisibility(View.VISIBLE);
-                mAdapter.setDatas(mInformationEntities);
+        if ("GetImportant".equals(info.getTag())){
+            if(info.getCode().equals("200")){
+                headView.setVisibility(View.VISIBLE);
+                if(info.getTag().equals("GetImportant")){
+                    mInformationEntities = (ArrayList<InformationEntity>)info.getData();
+                    mNewslistView.setVisibility(View.VISIBLE);
+                    mAdapter.setDatas(mInformationEntities);
+                }
+            }else{
+                mNewslistView.setVisibility(View.GONE);
+                headView.setVisibility(View.GONE);
             }
-        }else{
-            mNewslistView.setVisibility(View.GONE);
-            headView.setVisibility(View.GONE);
+        }else if ("getCarouselImg".equals(info.getTag())){
+            if ("0".equals(info.getCode())){
+                if (info.getCode()!=null){
+                   List<List<Map<String,String>>> list = (List<List<Map<String, String>>>) info.getData();
+                    int listsize = list.size();
+                    if (listsize!=0 &&listsize ==2){
+                        if (list.get(0)!=null){
+                            List<Map<String,String>> centerImage = list.get(0);   // 中间广告图
+                        }
+                        if (list.get(1)!=null){
+                            List<Map<String,String>> topImage = list.get(1);     // 顶部轮播图
+                            adapter.setDatas(topImage);
+                        }
+                    }
+
+                }
+            }
         }
+
     }
 
     private void initCarouseView() {
@@ -251,6 +264,10 @@ public class HomeFragment extends BaseFragment implements AdapterView.OnItemClic
         if (mInformationEntities == null || mInformationEntities.size() <= 0) {
             getInfoListByDb();     //从数据库获取资讯数据
         }
+    }
+
+    private void requestCarouselImg() {
+        InterfaceCollection.getInstance().requestCarouselImg("getCarouselImg","7","","",this);
     }
 
 

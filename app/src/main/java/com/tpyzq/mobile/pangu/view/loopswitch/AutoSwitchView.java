@@ -44,7 +44,7 @@ public class AutoSwitchView extends AutoLoopSwitchBaseView {
         params.addRule(RelativeLayout.ALIGN_PARENT_BOTTOM);
         switch (mType){
             case 0://首页轮播
-                mPageShowView.initColor(getResources().getColor(R.color.white),getResources().getColor(R.color.transparent));
+                mPageShowView.initColor(getResources().getColor(R.color.white),getResources().getColor(R.color.dark));
                 mPageShowView.scale(5);
                 params.addRule(RelativeLayout.CENTER_HORIZONTAL);
                 addView(mPageShowView, params);

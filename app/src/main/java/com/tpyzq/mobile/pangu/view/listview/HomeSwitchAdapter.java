@@ -43,7 +43,7 @@ public class HomeSwitchAdapter extends AutoLoopSwitchBaseAdapter {
         final Map<String,String> model = mDatas.get(position);
         SimpleDraweeView imageView = new SimpleDraweeView(mContext);
         imageView.setScaleType(ImageView.ScaleType.FIT_XY);
-        imageView.setImageURI(model.get("url"));
+        imageView.setImageURI(model.get("show_url"));
         imageView.setOnClickListener(new View.OnClickListener() {
             @Override
             public void onClick(View v) {
