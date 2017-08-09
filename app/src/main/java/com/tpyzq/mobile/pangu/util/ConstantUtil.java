@@ -5,6 +5,8 @@ import android.text.TextUtils;
 
 
 import com.tpyzq.mobile.pangu.BuildConfig;
+import com.tpyzq.mobile.pangu.R;
+import com.tpyzq.mobile.pangu.base.CustomApplication;
 
 import java.io.File;
 
@@ -75,15 +77,45 @@ public class ConstantUtil {
     public static String status = BuildConfig.status;
     public static String HQ_IP = BuildConfig.IP;  //行情 IP
     public static String JY_IP = BuildConfig.SJYZM;   //交易 IP
+    public static String registerServerUrl = BuildConfig.registerServerUrl;//默认注册地址
+    public static String registerNoteUrl=BuildConfig.registerNoteUrl;
     public static String BORY = BuildConfig.BORY;   //博瑞url
     public static String BORY_APPID = BuildConfig.BORY_APPID; //博瑞id
     public static String APP_ID = BuildConfig.APP_ID;   //生产ID
     public static String SecurityIp = BuildConfig.SecurityIp;   //注册  绑定手机号  资产分析  交易动态  股市月账单
     public static String SecurityIps = BuildConfig.SecurityIps;   //短信验证码 语音验证码  验证码验证
 
+    //    //生产 北京或昆明
+    public static String bjUrl = BuildConfig.bjUrl;//北京行情地址 测试
+    public static String kmUrl = BuildConfig.kmUrl;//昆明行情地址  灰度
+    public static String currentUrl = BuildConfig.currentUrl;//昆明行情地址  灰度
+    //测试或灰度
+//    public static String bjUrl = BuildConfig.bjUrl;//北京行情地址 测试
+//    public static String kmUrl = BuildConfig.kmUrl;//昆明行情地址  灰度
+//    public static String currentUrl = BuildConfig.currentUrl;//昆明行情地址  灰度
+
+    public static String SITE_JSON ;
+
+    public static String setSiteJson() {
+        String url = "";
+        try {
+            Context context = CustomApplication.getContext();
+            String resValueStr = context.getResources().getString(R.string.site_json);
+            int id = context.getResources().getIdentifier(resValueStr, "string", context.getPackageName());
+            url = context.getResources().getString(id);
+        } catch (Exception e) {
+            e.printStackTrace();
+        } finally {
+            return url;
+        }
+    }
 
     public static final String OPEN_ACCOUNT_CHANNEL = "tainiuapp"; //开户id
 
+    //资讯 故事 手机注册 交易用户绑定 自选股 查询产品信息 新股
+    public static String getURL_NEW(){
+        return registerServerUrl + "/HTTPServer/servlet";
+    }
 
     ///////////////////////////////////// 行情地址 /////////////////////////////////////////
 
@@ -159,27 +191,27 @@ public class ConstantUtil {
     //新的URL路径
     //手机图片验证码
     public static String getURL_HANDSE_PICTURE() {
-        return SecurityIps + "/note/getImage";
+        return registerNoteUrl + "/note/getImage";
     }
 
     //手机短信验证码
     public static String getURL_HANDSE_SMS() {
-        return SecurityIps + "/note/imgAuthSms";
+        return registerNoteUrl + "/note/imgAuthSms";
     }
 
     //手机语音验证码
     public static String getURL_HANDSE_SPEECH() {
-        return SecurityIps + "/note/imgAuthVoice?=&=&=";
+        return registerNoteUrl + "/note/imgAuthVoice?=&=&=";
     }
 
     //手机注册
     public static String getURL_HANDSE_REGISTER() {
-        return SecurityIps + "/note/authAndRegister";
+        return registerNoteUrl + "/note/authAndRegister";
     }
 
     //手机绑定手机号
     public static String getURL_HANDSE_BINDING() {
-        return SecurityIps + "/note/WXBinding";
+        return registerNoteUrl + "/note/WXBinding";
     }
 
     //H5

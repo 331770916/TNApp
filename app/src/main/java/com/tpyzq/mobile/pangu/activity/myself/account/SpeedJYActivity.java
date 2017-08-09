@@ -125,7 +125,7 @@ public class SpeedJYActivity extends BaseActivity implements View.OnClickListene
                 speedTestEntity = new SpeedTestEntity();
                 speedTestEntity.version_name = arr[0];
                 speedTestEntity.version_ip = arr[1];
-                if (ConstantUtil.SJYZM.equals(speedTestEntity.version_ip)) {
+                if (ConstantUtil.JY_IP.equals(speedTestEntity.version_ip)) {
                     speedTestEntity.isChecked = true;
                 } else {
                     speedTestEntity.isChecked = false;

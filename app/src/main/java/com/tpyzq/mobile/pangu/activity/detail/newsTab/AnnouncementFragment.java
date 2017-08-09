@@ -14,6 +14,7 @@ import com.tpyzq.mobile.pangu.R;
 import com.tpyzq.mobile.pangu.adapter.detail.AnnouncementAdapter;
 import com.tpyzq.mobile.pangu.base.BasePager;
 import com.tpyzq.mobile.pangu.data.InformationEntity;
+import com.tpyzq.mobile.pangu.http.NetWorkUtil;
 import com.tpyzq.mobile.pangu.util.ConstantUtil;
 import com.zhy.http.okhttp.callback.StringCallback;
 

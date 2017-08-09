@@ -82,14 +82,14 @@ public class GetConfigService extends Service implements InterfaceCollection.Int
                     ConstantUtil.currentUrl = getUrl();
                     //只有一个可用
                     SpUtils.putString(CustomApplication.getContext(), "market_ip", hqArr[0].split("\\|")[1]);
-                    ConstantUtil.IP = hqArr[0].split("\\|")[1];
+                    ConstantUtil.HQ_IP = hqArr[0].split("\\|")[1];
                     // 判断交易用哪个
                    if (tradeArr.length == 1){
                         //只有一个可用
                         SpUtils.putString(CustomApplication.getContext(), "jy_ip", tradeArr[0].split("\\|")[1]);
-                        ConstantUtil.SJYZM = tradeArr[0].split("\\|")[1];
+                        ConstantUtil.JY_IP = tradeArr[0].split("\\|")[1];
                     }
-                    ConstantUtil.setUrl(ConstantUtil.IP,ConstantUtil.SJYZM);
+                    ConstantUtil.setUrl(ConstantUtil.HQ_IP,ConstantUtil.JY_IP);
                 } else if (hqArr.length == 2){
                     //都可用不变
                 }

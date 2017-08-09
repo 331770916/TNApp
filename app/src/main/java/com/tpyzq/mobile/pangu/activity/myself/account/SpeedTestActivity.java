@@ -96,7 +96,7 @@ public class SpeedTestActivity extends BaseActivity implements View.OnClickListe
                 speedTestEntity = new SpeedTestEntity();
                 speedTestEntity.version_name = arr[0];
                 speedTestEntity.version_ip = arr[1];
-                if (ConstantUtil.IP.equals(speedTestEntity.version_ip)) {
+                if (ConstantUtil.JY_IP.equals(speedTestEntity.version_ip)) {
                     speedTestEntity.isChecked = true;
                 } else {
                     speedTestEntity.isChecked = false;

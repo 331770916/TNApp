@@ -2,8 +2,11 @@ package com.tpyzq.mobile.pangu.http.doConnect.self;
 
 import android.text.TextUtils;
 
-import com.tpyzq.mobile.pangu.http.NetWorkUtil;
 import com.tpyzq.mobile.pangu.interfac.ICallbackResult;
+
+import java.util.Map;
+
+import com.tpyzq.mobile.pangu.http.NetWorkUtil;
 import com.tpyzq.mobile.pangu.log.LogHelper;
 import com.tpyzq.mobile.pangu.util.ConstantUtil;
 import com.zhy.http.okhttp.callback.StringCallback;
@@ -16,7 +19,9 @@ import java.util.Map;
 import okhttp3.Call;
 
 /**
- * Created by zhangwenbo on 2016/9/12.
+ * Created by zh
+ *
+ * angwenbo on 2016/9/12.
  * 添加一条自选股到价提醒
  */
 public class AddRemainStockPriceConnect {
