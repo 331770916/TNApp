@@ -369,6 +369,7 @@ public class AccountPager extends BaseMySelfPager implements View.OnClickListene
                             intent.setClass(activity, AgreementActivity.class);
                             break;
                         case TransactionLoginActivity.PAGE_INDEX_RiskEvaluation: //风险测评
+                            intent.putExtra("showResult","1");
                             intent.setClass(activity, RiskEvaluationActivity.class);
                             break;
                         case TransactionLoginActivity.PAGE_INDEX_PersonalData: //修改个人资料

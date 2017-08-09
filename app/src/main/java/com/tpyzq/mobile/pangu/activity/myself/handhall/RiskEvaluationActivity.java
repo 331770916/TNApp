@@ -56,6 +56,7 @@ public class RiskEvaluationActivity extends BaseActivity implements View.OnClick
 
     private TextView mType, mDate, mResultTV, mResultTV1, mResulDate1;
     private RoundProgressBar mRoundProgressBar, mRoundProgressBar1;
+    private int showResult;
 //    private boolean isFinishAnswer = false;
 
     @Override
@@ -64,7 +65,6 @@ public class RiskEvaluationActivity extends BaseActivity implements View.OnClick
 //        isLogin = intent.getBooleanExtra("isLogin", false);
 
         ResulttoConnect();
-
         findViewById(R.id.AGpublish_back).setOnClickListener(this);
         Anew = (LinearLayout) findViewById(R.id.Anew);
         Answer = (LinearLayout) findViewById(R.id.Answer);
@@ -92,7 +92,11 @@ public class RiskEvaluationActivity extends BaseActivity implements View.OnClick
         Anew.findViewById(R.id.lookRiskResultDetail).setOnClickListener(this);
         mRestart1 = (Button) findViewById(R.id.Restart1);
         mRestart1.setOnClickListener(this);
+        showResult = getIntent().getIntExtra("showResult",-1);
         initData();
+        if (showResult == -1&&Helper.isNeedShowRiskDialog()) {//判断是否展示答题页面
+            showAnswer();
+        }
     }
 
     /**
@@ -589,16 +593,7 @@ public class RiskEvaluationActivity extends BaseActivity implements View.OnClick
                 finish();
                 break;
             case R.id.Restart1:
-                count = 0;
-                riskTableBeans.clear();
-                mPenalList.clear();
-                mSerialNumber.clear();
-                Answer.setVisibility(View.VISIBLE);
-                Result.setVisibility(View.GONE);
-                Anew.setVisibility(View.GONE);
-                Affirm.setVisibility(View.INVISIBLE);
-                initData();
-                toConnect();
+                showAnswer();
                 break;
             case R.id.lookRiskResultDetail:
                 Intent intent = new Intent();
@@ -606,6 +601,19 @@ public class RiskEvaluationActivity extends BaseActivity implements View.OnClick
                 startActivity(intent);
                 break;
         }
+    }
+
+    private void showAnswer() {
+        count = 0;
+        riskTableBeans.clear();
+        mPenalList.clear();
+        mSerialNumber.clear();
+        Answer.setVisibility(View.VISIBLE);
+        Result.setVisibility(View.GONE);
+        Anew.setVisibility(View.GONE);
+        Affirm.setVisibility(View.INVISIBLE);
+        initData();
+        toConnect();
     }
 
     /**
