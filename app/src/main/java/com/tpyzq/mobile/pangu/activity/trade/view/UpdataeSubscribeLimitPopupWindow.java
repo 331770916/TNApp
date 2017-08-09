@@ -18,6 +18,7 @@ import com.tpyzq.mobile.pangu.R;
 import com.tpyzq.mobile.pangu.activity.trade.stock.OneKeySubscribeActivity;
 import com.tpyzq.mobile.pangu.data.OneKeySubscribeItem;
 import com.tpyzq.mobile.pangu.util.Helper;
+import com.tpyzq.mobile.pangu.view.CentreToast;
 import com.tpyzq.mobile.pangu.view.CustomCenterDialog;
 
 
@@ -38,7 +39,7 @@ public class UpdataeSubscribeLimitPopupWindow extends PopupWindow implements Vie
     private Activity mActivity;
 
 
-    public UpdataeSubscribeLimitPopupWindow(Context context, final OneKeySubscribeItem item, String data_HuANum, String data_ShenANum, Activity activity, UpdataSubscribeNumberListener listener) {
+    public UpdataeSubscribeLimitPopupWindow(final Context context, final OneKeySubscribeItem item, String data_HuANum, String data_ShenANum, Activity activity, UpdataSubscribeNumberListener listener) {
         this.context = context;
         this.item = item;
         this.mListener = listener;
@@ -66,8 +67,12 @@ public class UpdataeSubscribeLimitPopupWindow extends PopupWindow implements Vie
                 oldNum = Long.parseLong(limit);
             }
         }
+        if (num.equals("0")){
+            this.etUpdatedSubscribeLimit.setText("");
+        }else {
+            this.etUpdatedSubscribeLimit.setText(num);
+        }
 
-        this.etUpdatedSubscribeLimit.setText(num);
         this.etUpdatedSubscribeLimit.addTextChangedListener(new TextWatcher() {
             @Override
             public void beforeTextChanged(CharSequence s, int start, int count, int after) {
@@ -76,6 +81,11 @@ public class UpdataeSubscribeLimitPopupWindow extends PopupWindow implements Vie
 
             @Override
             public void onTextChanged(CharSequence s, int start, int before, int count) {
+                String str = etUpdatedSubscribeLimit.getText().toString();
+                if (str.indexOf('0') == 0) {
+                    etUpdatedSubscribeLimit.setText("");
+                    CentreToast.showText(context, "首位不能为0");
+                }
 
                 if (!TextUtils.isEmpty(s) && !TextUtils.isEmpty(num)) {
 //                    int newS = Integer.parseInt(s.toString());
