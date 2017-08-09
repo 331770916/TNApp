@@ -245,7 +245,9 @@ public class ShouJiZhuCeActivity extends BaseActivity implements View.OnClickLis
     //图片验证码网络请求
     private void ImageVerification() {
         mBuilder.setTitle("加载中...");
-        mBuilder.create().show();
+        if (!this.isFinishing()) {
+            mBuilder.create().show();
+        }
         InterfaceCollection.getInstance().getImageVerification(TAG1, this);
     }
 
@@ -306,7 +308,6 @@ public class ShouJiZhuCeActivity extends BaseActivity implements View.OnClickLis
             }
         } else if (TAG4.equals(info.getTag())) {     //注册
             if ("0".equals(info.getCode())) {        //新用户
-                setWipeData();
                 setUsermodData(info.getCode());
             } else if ("1".equals(info.getCode())) { //老用户
                 setUsermodData(info.getCode());
@@ -344,6 +345,7 @@ public class ShouJiZhuCeActivity extends BaseActivity implements View.OnClickLis
 
     //修改数据库
     private void setUsermodData(String usermarked) {
+        setWipeData();
         UserEntity userEntity = new UserEntity();
         userEntity.setScno(mNumber_et.getText().toString().trim());       //注册账号
         userEntity.setRegisterID(mNumber_et.getText().toString().trim()); //注册账号标识ID
@@ -502,7 +504,7 @@ public class ShouJiZhuCeActivity extends BaseActivity implements View.OnClickLis
                 UserUtil.refrushUserInfo();
                 if (!TextUtils.isEmpty(UserUtil.Mobile)) {
                     intent.setClass(ShouJiZhuCeActivity.this, TransactionLoginActivity.class);
-                } else  {
+                } else if ("3".equals(KeyEncryptionUtils.Typescno())){
                     intent.setClass(ShouJiZhuCeActivity.this, ShouJiVerificationActivity.class);
                 }
                 startActivity(intent);

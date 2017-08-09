@@ -111,27 +111,9 @@ public abstract class AutoLoopSwitchBaseView extends RelativeLayout implements V
         this.mCurrentVisible = mCurrentVisible;
     }
 
-    private void initView() {
-        mViewPager = new ViewPager(getContext());
-        mViewPager.setId(R.id.autoloopswitch_viewpager_id);
-        mViewPager.addOnPageChangeListener(this);
-        addView(mViewPager, generalLayoutParams(LayoutParams.MATCH_PARENT, LayoutParams.MATCH_PARENT));
-        controlViewPagerSpeed();
-        LayoutParams params;
-        mPageShowView = new PageShowView(getContext());
-        mPageShowView.setId(R.id.autoloopswitch_pagershow_id);
-        DisplayMetrics displayMetrics = new DisplayMetrics();
-        WindowManager windowManager = (WindowManager) getContext().getSystemService(Context.WINDOW_SERVICE);
-        windowManager.getDefaultDisplay().getMetrics(displayMetrics);
-        params = generalLayoutParams(LayoutParams.WRAP_CONTENT, (int) TypedValue.applyDimension(TypedValue.COMPLEX_UNIT_DIP, 15, displayMetrics));
-        params.addRule(RelativeLayout.ALIGN_PARENT_BOTTOM);
-        params.addRule(RelativeLayout.ALIGN_RIGHT);
-        mPageShowView.setPadding(-750,0,0,-10);
-        addView(mPageShowView, params);
-        mHandler = new LoopHandler(this);
-    }
+    protected abstract void initView() ;
 
-    private LayoutParams generalLayoutParams(int w, int h) {
+    public LayoutParams generalLayoutParams(int w, int h) {
         LayoutParams params = new LayoutParams(w, h);
         return params;
     }
@@ -331,7 +313,7 @@ public abstract class AutoLoopSwitchBaseView extends RelativeLayout implements V
     }
 
 
-    private void controlViewPagerSpeed() {
+    public void controlViewPagerSpeed() {
         try {
             Field mField;
             mField = ViewPager.class.getDeclaredField("mScroller");

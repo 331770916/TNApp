@@ -394,11 +394,12 @@ public class PriceCollectionActivity extends BaseActivity implements View.OnClic
     }
 
     public void showDialog(String msg){
-        CustomCenterDialog customCenterDialog = CustomCenterDialog.CustomCenterDialog(msg,CustomCenterDialog.SHOWCENTER);
+        final CustomCenterDialog customCenterDialog = CustomCenterDialog.CustomCenterDialog(msg,CustomCenterDialog.SHOWCENTER);
         customCenterDialog.show(getFragmentManager(),PriceCollectionActivity.class.toString());
         customCenterDialog.setOnClickListener(new CustomCenterDialog.ConfirmOnClick() {
             @Override
             public void confirmOnclick() {
+                customCenterDialog.dismiss();
                 finish();
             }
         });

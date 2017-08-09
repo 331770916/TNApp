@@ -103,6 +103,7 @@ import com.tpyzq.mobile.pangu.util.keyboard.ResponseInterface;
 import com.tpyzq.mobile.pangu.util.panguutil.APPInfoUtils;
 import com.tpyzq.mobile.pangu.util.panguutil.BRutil;
 import com.tpyzq.mobile.pangu.util.panguutil.UserUtil;
+import com.tpyzq.mobile.pangu.view.CustomCenterDialog;
 import com.tpyzq.mobile.pangu.view.dialog.CancelDialog;
 import com.tpyzq.mobile.pangu.view.dialog.CertificationDialog;
 import com.tpyzq.mobile.pangu.view.dialog.CustomDialog;
@@ -619,11 +620,11 @@ public class TransactionLoginActivity extends BaseActivity implements ICallbackR
                 } else {
                     if (isHttp) {
                         if (!TransactionLoginActivity.this.isFinishing()) {
-                            MutualAuthenticationDialog.showDialog("双向认证失败点击退出", TransactionLoginActivity.this);
+                            showDialog("双向认证失败点击退出");
                         }
                     } else {
                         if (!TransactionLoginActivity.this.isFinishing()) {
-                            MutualAuthenticationDialog.showDialog("系统异常", TransactionLoginActivity.this);
+                            showDialog("系统异常");
                         }
                     }
                 }
@@ -666,7 +667,7 @@ public class TransactionLoginActivity extends BaseActivity implements ICallbackR
                 } else {
                     mPassword_et.setText("");
                     mCaptcha_et.setText("");
-                    MistakeDialog.showDialog(result, TransactionLoginActivity.this);
+                    showCallDialog(result.toString());
                 }
                 return;
             }
@@ -982,19 +983,7 @@ public class TransactionLoginActivity extends BaseActivity implements ICallbackR
                 } else {            //下载失败后的参数
                     mBuilder.dialog.dismiss();
                     if (!TransactionLoginActivity.this.isFinishing()) {
-                        //重复下载提示
-                        CertificationDialog.showDialog("提示信息", "安全插件加载失败，为了您的安全考虑希望您重下载。", "重新下载", "取消", TransactionLoginActivity.this, new CertificationDialog.PositiveCliceListener() {
-                            @Override
-                            public void positiveClick(View v) {
-                                Lomboz();
-                            }
-                        }, new CertificationDialog.CancleClickListener() {
-                            @Override
-                            public void cancleClick(View v) {
-                                isHttp = true;
-                                IsKeyBoardTypeHttp();
-                            }
-                        });
+                        showTwoClickDialog("安全插件加载失败，为了您的安全考虑希望您重下载。","取消","重新下载","0");
                     }
                     userEntity.setPlugins("false");
                     Db_PUB_USERS.UpdatePlugins(userEntity);
@@ -1026,18 +1015,7 @@ public class TransactionLoginActivity extends BaseActivity implements ICallbackR
                     setPassEdit();
                 } else {
                     if (!TransactionLoginActivity.this.isFinishing()) {
-                        CertificationDialog.showDialog("提示信息", "双向认证网络异常", "重新请求", "取消", TransactionLoginActivity.this, new CertificationDialog.PositiveCliceListener() {
-                            @Override
-                            public void positiveClick(View v) {
-                                biAuthBtnClick();
-                            }
-                        }, new CertificationDialog.CancleClickListener() {
-                            @Override
-                            public void cancleClick(View v) {
-                                isHttp = true;
-                                IsKeyBoardTypeHttp();
-                            }
-                        });
+                        showTwoClickDialog("双向认证网络异常","取消","重新请求","1");
                     }
                 }
             }
@@ -1120,6 +1098,52 @@ public class TransactionLoginActivity extends BaseActivity implements ICallbackR
                 mClose_iv.setVisibility(View.VISIBLE);
             }
         }
+    }
+
+    /**
+     * 设置不带客服电话Dialog
+     * @param msg
+     */
+    private void showDialog(String msg){
+        CustomCenterDialog customCenterDialog = CustomCenterDialog.CustomCenterDialog(msg,CustomCenterDialog.SHOWCENTER);
+        customCenterDialog.cancelSetCall(); // 取消打电话文字拼接
+        customCenterDialog.show(getFragmentManager(),TransactionLoginActivity.class.toString());
+    }
+
+    /**
+     * 设置打电话的Dialog
+     */
+    private void showCallDialog(String msg){
+        CustomCenterDialog customCenterDialog = CustomCenterDialog.CustomCenterDialog(msg,CustomCenterDialog.SHOWCENTER);
+        customCenterDialog.show(getFragmentManager(),TransactionLoginActivity.class.toString());
+    }
+
+    /**
+     * 设置两个button点击事件的Dialog
+     */
+    private void showTwoClickDialog(String msg, String leftButtonText, String rightButtonText, final String where){
+        CustomCenterDialog customCenterDialog = CustomCenterDialog.CustomCenterDialog(msg,CustomCenterDialog.SHOWCENTERBOTH);
+        customCenterDialog.setBothButtonText(leftButtonText,rightButtonText);
+        customCenterDialog.show(getFragmentManager(),TransactionLoginActivity.class.toString());
+        customCenterDialog.setOnClickListener(new CustomCenterDialog.ConfirmOnClick() {
+            @Override
+            public void confirmOnclick() {
+                if ("1".equals(where)){
+                    biAuthBtnClick();
+                }else {
+                    Lomboz();
+                }
+
+            }
+        });
+        customCenterDialog.setOnCancelListener(new CustomCenterDialog.CancelOnClick() {
+            @Override
+            public void cancelOnClick() {
+                isHttp = true;
+                IsKeyBoardTypeHttp();
+            }
+        });
+
     }
 
     /**

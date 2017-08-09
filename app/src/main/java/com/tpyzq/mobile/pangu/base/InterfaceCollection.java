@@ -23,6 +23,7 @@ import com.tpyzq.mobile.pangu.data.ResultInfo;
 import com.tpyzq.mobile.pangu.data.StockHolderInfoEntity;
 import com.tpyzq.mobile.pangu.data.StructuredFundEntity;
 import com.tpyzq.mobile.pangu.http.NetWorkUtil;
+import com.tpyzq.mobile.pangu.log.LogHelper;
 import com.tpyzq.mobile.pangu.log.LogUtil;
 import com.tpyzq.mobile.pangu.util.ConstantUtil;
 import com.tpyzq.mobile.pangu.util.DeviceUtil;
@@ -44,6 +45,7 @@ import java.util.HashMap;
 import java.util.List;
 import java.util.Map;
 
+import bonree.k.M;
 import okhttp3.Call;
 
 /**
@@ -2842,7 +2844,7 @@ public class InterfaceCollection {
         map.put("funcid", "100213");
         map.put("token", "");
         map.put("parms", new HashMap());
-        net.okHttpForPostString(TAG, ConstantUtil.getURL_HQ_HHN(), map, new StringCallback() {
+        net.okHttpForPostString(TAG, ConstantUtil.getURL_HQ_HS(), map, new StringCallback() {
             @Override
             public void onError(Call call, Exception e, int id) {
                 ResultInfo info = new ResultInfo();
@@ -3014,6 +3016,104 @@ public class InterfaceCollection {
             }
         });
 
+    }
+
+
+    /**
+     * 轮播图
+     * @param TAG tag
+     * @param position    广告位置（数据字典id）
+     * @param pageIndex  pageIndex 页码
+     * @param session    session
+     * @param callback   callback
+     */
+    public void requestCarouselImg(final String TAG, String position, String pageIndex, String session, final InterfaceCallback callback){
+        HashMap map = new HashMap();
+        HashMap map2 = new HashMap();
+        map2.put("position", position);
+        map2.put("pageIndex", pageIndex);
+        map.put("PARAMS", map2);
+        map.put("FUNCTIONCODE" , "HQLNG101");
+        map.put("TOKEN", session);
+
+        NetWorkUtil.getInstence().okHttpForPostString(TAG, ConstantUtil.getURL_HQ_WA(), map, new StringCallback() {
+            @Override
+            public void onError(Call call, Exception e, int id) {
+                ResultInfo info = new ResultInfo();
+                info.setCode(ConstantUtil.NETWORK_ERROR_CODE);
+                info.setMsg(ConstantUtil.NETWORK_ERROR);
+                info.setTag(TAG);
+                callback.callResult(info);
+
+            }
+
+            @Override
+            public void onResponse(String response, int id) {
+                ResultInfo info = new ResultInfo(response);
+                if (TextUtils.isEmpty(response)) {
+                    info.setCode(ConstantUtil.SERVICE_NO_DATA_CODE);
+                    info.setMsg(ConstantUtil.SERVICE_NO_DATA);
+                    info.setTag(TAG);
+                } else {
+                    try {
+//                        List<Map<String,String>> list = new ArrayList<>();
+                        List<List<Map<String,String>>> lists = new ArrayList<>();
+                        JSONObject jsonObject = new JSONObject(response);
+                        String code = jsonObject.optString("code");
+                        String msg = jsonObject.optString("message");
+                        info.setCode(code);
+                        info.setMsg(msg);
+                        info.setTag(TAG);
+                        if ("0".equals(code)){
+                            JSONArray jsonArray = jsonObject.optJSONArray("data");
+                            for (int i = 0; i < jsonArray.length(); i++) {
+                                List<Map<String,String>> list = new ArrayList<>();
+                                if ("M1N2".equals(jsonArray.optJSONObject(i).optString("marshalling"))){
+                                    JSONArray array = jsonArray.optJSONObject(i).optJSONArray("advert_data");
+                                    for (int j = 0; j < array.length(); j++) {
+                                        Map<String,String> map = new HashMap<>();
+                                        String jump_type = array.optJSONObject(j).optString("jump_type");
+                                        String jump_url = array.optJSONObject(j).optString("jump_url");
+                                        String jump_position = array.optJSONObject(j).optString("jump_type");
+                                        String show_url = array.optJSONObject(j).optString("show_url");
+                                        map.put("show_url",show_url);
+                                        map.put("jump_position",jump_position);
+                                        map.put("jump_url",jump_url);
+                                        map.put("jump_type",jump_type);
+                                        list.add(map);
+                                    }
+                                    lists.add(0,list);
+                                }else if ("M1N1".equals(jsonArray.optJSONObject(i).optString("marshalling"))){
+                                    JSONArray array = jsonArray.optJSONObject(i).optJSONArray("advert_data");
+                                    for (int j = 0; j < array.length(); j++) {
+                                        Map<String,String> map = new HashMap<>();
+                                        String jump_type = array.optJSONObject(j).optString("jump_type");
+                                        String jump_url = array.optJSONObject(j).optString("jump_url");
+                                        String jump_position = array.optJSONObject(j).optString("jump_type");
+                                        String show_url = array.optJSONObject(j).optString("show_url");
+                                        map.put("show_url",show_url);
+                                        map.put("jump_position",jump_position);
+                                        map.put("jump_url",jump_url);
+                                        map.put("jump_type",jump_type);
+                                        list.add(map);
+                                    }
+                                    lists.add(list);
+                                }
+                            }
+                            info.setData(lists);
+                        }
+
+                    } catch (Exception e) {
+                        info.setCode(ConstantUtil.JSON_ERROR_CODE);
+                        info.setMsg(ConstantUtil.JSON_ERROR);
+                        info.setTag(TAG);
+                    }
+                    callback.callResult(info);
+                }
+            }
+
+
+        });
     }
 
     /**

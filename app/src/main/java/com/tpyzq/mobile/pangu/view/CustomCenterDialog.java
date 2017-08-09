@@ -252,7 +252,11 @@ public class CustomCenterDialog extends DialogFragment {
         talkLater.setOnClickListener(new View.OnClickListener() {
             @Override
             public void onClick(View view) {
-                getDialog().dismiss();
+                if (cancelOnClick!=null){
+                    cancelOnClick.cancelOnClick();
+                }else {
+                    getDialog().dismiss();
+                }
             }
         });
 
@@ -299,8 +303,13 @@ public class CustomCenterDialog extends DialogFragment {
     }
 
     private ConfirmOnClick confirmOnClick;
+    private CancelOnClick cancelOnClick;
     public void setOnClickListener(ConfirmOnClick confirmOnClick){
         this.confirmOnClick = confirmOnClick;
+    }
+
+    public void setOnCancelListener(CancelOnClick cancelOnClick){
+        this.cancelOnClick = cancelOnClick;
     }
 
     public interface DialogListener{
@@ -309,6 +318,9 @@ public class CustomCenterDialog extends DialogFragment {
 
     public interface ConfirmOnClick{
        void confirmOnclick();
+    }
+    public interface CancelOnClick{
+        void cancelOnClick();
     }
 
 }

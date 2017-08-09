@@ -337,11 +337,12 @@ public class BanksBalanceQueryActivity extends BaseActivity implements View.OnCl
     }
 
     public void showDialog(String msg){
-        CustomCenterDialog customCenterDialog = CustomCenterDialog.CustomCenterDialog(msg,CustomCenterDialog.SHOWCENTER);
+        final CustomCenterDialog customCenterDialog = CustomCenterDialog.CustomCenterDialog(msg,CustomCenterDialog.SHOWCENTER);
         customCenterDialog.show(getFragmentManager(),BanksBalanceQueryActivity.class.toString());
         customCenterDialog.setOnClickListener(new CustomCenterDialog.ConfirmOnClick() {
             @Override
             public void confirmOnclick() {
+                customCenterDialog.dismiss();
                 finish();
             }
         });
