@@ -1,27 +1,25 @@
 <?xml version="1.0" encoding="utf-8"?>
-<RelativeLayout xmlns:android="http://schemas.android.com/apk/res/android"
+<LinearLayout xmlns:android="http://schemas.android.com/apk/res/android"
     xmlns:app="http://schemas.android.com/apk/res-auto"
     android:layout_width="match_parent"
     android:layout_height="match_parent"
     android:orientation="vertical">
+
         <FrameLayout
             android:background="@color/bgColor"
             android:layout_width="match_parent"
             android:layout_height="match_parent">
 
-            <com.tpyzq.mobile.pangu.view.pullrefreshrecyclerview.PullRefreshView
+            <com.handmark.pulltorefresh.library.PullToRefreshScrollView
                 android:id="@+id/selfchoice_PullDownScroll"
                 android:layout_width="match_parent"
-                android:layout_height="match_parent">
-            <com.tpyzq.mobile.pangu.view.gridview.MyScrollView
-                android:background="@color/white"
-                android:id="@+id/homeScrollView"
-                android:layout_width="match_parent"
                 android:layout_height="match_parent"
-                android:scrollbars="none">
+                android:scrollbars="none"
+                app:ptrAnimationStyle="flip"
+                android:fillViewport="true"
+                app:ptrMode="both">
 
-                <LinearLayout
-
+            <LinearLayout
                     android:layout_width="match_parent"
                     android:layout_height="wrap_content"
                     android:orientation="vertical">
@@ -118,8 +116,7 @@
                         android:divider="@null" />
                 </LinearLayout>
 
-            </com.tpyzq.mobile.pangu.view.gridview.MyScrollView>
-            </com.tpyzq.mobile.pangu.view.pullrefreshrecyclerview.PullRefreshView>
+            </com.handmark.pulltorefresh.library.PullToRefreshScrollView>
 
         <TextView
             android:id="@+id/homeLayoutTopTextView"
@@ -134,4 +131,4 @@
             android:textSize="@dimen/pickerview_topbar_title_textsize" />
     </FrameLayout>
 
-</RelativeLayout>
+</LinearLayout>

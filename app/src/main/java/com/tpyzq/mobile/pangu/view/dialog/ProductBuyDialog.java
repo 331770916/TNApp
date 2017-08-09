@@ -19,6 +19,7 @@ public class ProductBuyDialog extends BaseDialog {
     private TextView tv_stock_code;
     private TextView tv_stock_price;
     private TextView tv_account;
+    private  TextView tv_fhfs;
     private ProductBuyDialogPositiveListener listener;
     private ProductBuyActivity.DialogBean dialogBean;
 
@@ -36,6 +37,7 @@ public class ProductBuyDialog extends BaseDialog {
         tv_stock_code = (TextView) findViewById(R.id.tv_stock_code);
         tv_stock_price = (TextView) findViewById(R.id.tv_stock_price);
         tv_account = (TextView) findViewById(R.id.tv_account);
+        tv_fhfs = (TextView) findViewById(R.id.tv_fhfs);
     }
 
     @Override
@@ -49,6 +51,7 @@ public class ProductBuyDialog extends BaseDialog {
         tv_stock_code.setText(dialogBean.stockcode);
         tv_stock_price.setText(dialogBean.stockprice);
         tv_account.setText(dialogBean.account);
+        tv_fhfs.setText(dialogBean.fhfs);
         tv_true.setOnClickListener(new View.OnClickListener() {
             @Override
             public void onClick(View v) {

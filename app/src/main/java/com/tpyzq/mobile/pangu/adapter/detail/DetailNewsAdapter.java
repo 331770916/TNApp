@@ -3,8 +3,7 @@ package com.tpyzq.mobile.pangu.adapter.detail;
 import android.support.v4.view.PagerAdapter;
 import android.view.View;
 import android.view.ViewGroup;
-
-import com.tpyzq.mobile.pangu.activity.detail.newsTab.BaseDetailNewsPager;
+import com.tpyzq.mobile.pangu.base.BasePager;
 
 import java.util.List;
 
@@ -15,9 +14,9 @@ import java.util.List;
  */
 public class DetailNewsAdapter extends PagerAdapter {
 
-    private List<BaseDetailNewsPager> pagers;
+    private List<BasePager> pagers;
 
-    public DetailNewsAdapter(List<BaseDetailNewsPager> pagers) {
+    public DetailNewsAdapter(List<BasePager> pagers) {
         this.pagers = pagers;
     }
 
@@ -39,7 +38,7 @@ public class DetailNewsAdapter extends PagerAdapter {
 
     @Override
     public Object instantiateItem(ViewGroup container, int position) {
-        BaseDetailNewsPager pager = pagers.get(position);
+        BasePager pager = pagers.get(position);
         container.addView(pager.rootView);
 //        pager.initData(); //加载数据方法放在这，会导致提前调用，浪费流量
         return pager.rootView;

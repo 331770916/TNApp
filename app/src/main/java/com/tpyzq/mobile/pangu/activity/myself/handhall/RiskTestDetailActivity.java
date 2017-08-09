@@ -114,7 +114,7 @@ public class RiskTestDetailActivity extends BaseActivity implements View.OnClick
         map1.put("FLAG", "true");
         map.put("parms", map1);
 
-        OkHttpUtil.okHttpForPostString(TAG, ConstantUtil.URL_JY, map, new StringCallback() {
+        OkHttpUtil.okHttpForPostString(TAG, ConstantUtil.getURL_JY_HS(), map, new StringCallback() {
             @Override
             public void onError(Call call, Exception e, int id) {
                 e.printStackTrace();
@@ -246,7 +246,7 @@ public class RiskTestDetailActivity extends BaseActivity implements View.OnClick
         map1.put("FLAG", "true");
         map.put("parms", map1);
 
-        OkHttpUtil.okHttpForPostString(TAG, ConstantUtil.URL_JY, map, new StringCallback() {
+        OkHttpUtil.okHttpForPostString(TAG, ConstantUtil.getURL_JY_HS(), map, new StringCallback() {
             @Override
             public void onError(Call call, Exception e, int id) {
                 e.printStackTrace();

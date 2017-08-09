@@ -18,6 +18,7 @@ import com.tpyzq.mobile.pangu.data.SubscribeHistoryStateBean;
 import com.tpyzq.mobile.pangu.http.NetWorkUtil;
 import com.tpyzq.mobile.pangu.util.ConstantUtil;
 import com.tpyzq.mobile.pangu.util.SpUtils;
+import com.tpyzq.mobile.pangu.view.CentreToast;
 import com.tpyzq.mobile.pangu.view.dialog.ResultDialog;
 import com.tpyzq.mobile.pangu.view.pullDownGroup.PullDownElasticImp;
 import com.tpyzq.mobile.pangu.view.pullDownGroup.PullDownScrollView;
@@ -77,7 +78,7 @@ public class SubscribeHistoryFragment extends BaseFragment implements PullDownSc
         map5.put("funcid", "100221");
         map5.put("token", mSession);
         map5.put("parms", map6);
-        NetWorkUtil.getInstence().okHttpForPostString(TAG, ConstantUtil.URL_NEW, map5, new StringCallback() {
+        NetWorkUtil.getInstence().okHttpForPostString(TAG, ConstantUtil.getURL_HQ_HS(), map5, new StringCallback() {
             @Override
             public void onError(Call call, Exception e, int id) {
                 e.toString();
@@ -130,7 +131,7 @@ public class SubscribeHistoryFragment extends BaseFragment implements PullDownSc
 //                    adapter.setList(datas);
                     adapter.setStateList(stateList);
                 } else {
-                    ResultDialog.getInstance().showText(bean.getMsg());
+                    CentreToast.showText(getActivity(),bean.getMsg());
                 }
             }
         });
@@ -149,7 +150,7 @@ public class SubscribeHistoryFragment extends BaseFragment implements PullDownSc
         map1.put("funcid", "300383");
         map1.put("token", mSession);
         map1.put("parms", map2);
-        NetWorkUtil.getInstence().okHttpForPostString(TAG, ConstantUtil.URL_JY, map1, new StringCallback() {
+        NetWorkUtil.getInstence().okHttpForPostString(TAG, ConstantUtil.getURL_JY_HS(), map1, new StringCallback() {
             @Override
             public void onError(Call call, Exception e, int id) {
                 e.toString();

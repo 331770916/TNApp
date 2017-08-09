@@ -15,18 +15,20 @@ import com.tpyzq.mobile.pangu.data.FundSubsEntity;
  * 基金申购页面dialog
  */
 public class FundPurchaseDialog extends BaseDialog implements View.OnClickListener {
-    TextView tv_title,tv_fund_priceway, tv_fund_name, tv_fund_code, tv_fund_price;
+    TextView tv_title,tv_fund_priceway, tv_fund_name, tv_fund_code, tv_fund_price,tv_fund_fhfs;
     Button bt_true, bt_false;
     FundSubsEntity fundData;
     String price;
+    String content;
     private FundPurchaseListen fundPurchaseListen;
 
 
-    public FundPurchaseDialog(Context context, FundSubsEntity fundData, String price, FundPurchaseListen fundPurchaseListen) {
+    public FundPurchaseDialog(Context context, FundSubsEntity fundData, String price,String content, FundPurchaseListen fundPurchaseListen) {
         super(context);
         this.fundData = fundData;
         this.price = price;
         this.fundPurchaseListen =  fundPurchaseListen;
+        this.content =  content;
     }
 
     @Override
@@ -35,6 +37,7 @@ public class FundPurchaseDialog extends BaseDialog implements View.OnClickListen
         tv_fund_code = (TextView) findViewById(R.id.tv_fund_code);
         tv_fund_priceway = (TextView) findViewById(R.id.tv_fund_priceway);
         tv_fund_price = (TextView) findViewById(R.id.tv_fund_price);
+        tv_fund_fhfs =  (TextView) findViewById(R.id.tv_fund_fhfs);
         tv_title = (TextView) findViewById(R.id.tv_title);
         bt_true = (Button) findViewById(R.id.bt_true);
         bt_false = (Button) findViewById(R.id.bt_false);
@@ -54,6 +57,7 @@ public class FundPurchaseDialog extends BaseDialog implements View.OnClickListen
         if (null != fundData) {
             tv_fund_name.setText(fundData.FUND_NAME);
             tv_fund_code.setText(fundData.FUND_CODE);
+            tv_fund_fhfs.setText(content);//分红方式
         }
         tv_fund_price.setText(price);
     }
@@ -64,9 +68,9 @@ public class FundPurchaseDialog extends BaseDialog implements View.OnClickListen
         switch (v.getId()) {
             case R.id.bt_true:
                 if (null != fundData){
-                    fundPurchaseListen.setEntrust(price,fundData.FUND_COMPANY,fundData.FUND_CODE);
+                    fundPurchaseListen.setEntrust(price,fundData.FUND_COMPANY,fundData.FUND_CODE,"");
                 }else {
-                    fundPurchaseListen.setEntrust(price,"","");
+                    fundPurchaseListen.setEntrust(price,"","","");
                 }
 
                 dismiss();
@@ -78,6 +82,6 @@ public class FundPurchaseDialog extends BaseDialog implements View.OnClickListen
         }
     }
     public interface FundPurchaseListen{
-        void setEntrust(String price, String fund_company, String fund_code);
+        void setEntrust(String price, String fund_company, String fund_code,String fhfs);
     }
 }

@@ -50,7 +50,6 @@ import com.tpyzq.mobile.pangu.http.OkHttpUtil;
 import com.tpyzq.mobile.pangu.interfac.StockCodeCallBack;
 import com.tpyzq.mobile.pangu.interfac.StockItemCallBack;
 import com.tpyzq.mobile.pangu.log.LogHelper;
-import com.tpyzq.mobile.pangu.log.LogUtil;
 import com.tpyzq.mobile.pangu.util.ConstantUtil;
 import com.tpyzq.mobile.pangu.util.Helper;
 import com.tpyzq.mobile.pangu.util.SpUtils;
@@ -59,10 +58,10 @@ import com.tpyzq.mobile.pangu.util.TransitionUtils;
 import com.tpyzq.mobile.pangu.util.panguutil.JudgeStockUtils;
 import com.tpyzq.mobile.pangu.util.panguutil.UserUtil;
 import com.tpyzq.mobile.pangu.view.CentreToast;
+import com.tpyzq.mobile.pangu.view.CustomCenterDialog;
 import com.tpyzq.mobile.pangu.view.dialog.CancelDialog;
 import com.tpyzq.mobile.pangu.view.dialog.CommissionedBuyAndSellDialog;
 import com.tpyzq.mobile.pangu.view.dialog.FundEntrustDialog;
-import com.tpyzq.mobile.pangu.view.dialog.MistakeDialog;
 import com.tpyzq.mobile.pangu.view.magicindicator.MagicIndicator;
 import com.tpyzq.mobile.pangu.view.magicindicator.ViewPagerHelper;
 import com.tpyzq.mobile.pangu.view.magicindicator.buildins.commonnavigator.CommonNavigator;
@@ -72,7 +71,6 @@ import com.tpyzq.mobile.pangu.view.magicindicator.buildins.commonnavigator.abs.I
 import com.tpyzq.mobile.pangu.view.magicindicator.buildins.commonnavigator.indicators.LinePagerIndicator;
 import com.tpyzq.mobile.pangu.view.magicindicator.buildins.commonnavigator.titles.SimplePagerTitleView;
 import com.zhy.http.okhttp.callback.StringCallback;
-import com.zhy.http.okhttp.utils.Exceptions;
 
 import org.json.JSONArray;
 import org.json.JSONException;
@@ -334,7 +332,7 @@ public class BuyAndSellActivity extends BaseActivity implements View.OnClickList
         }
         if (!TextUtils.isEmpty(istockcode)){
             if (istockcode.startsWith("20") || istockcode.startsWith("10") || istockcode.startsWith("12") || istockcode.startsWith("22")) {
-                ToastUtils.showShort(BuyAndSellActivity.this, "当前股票代码不可交易");
+                CentreToast.showText(BuyAndSellActivity.this, "当前股票代码不可交易",Toast.LENGTH_SHORT);
             } else {
                 refresh(istockcode);
                 stockCode = istockcode;
@@ -477,7 +475,7 @@ public class BuyAndSellActivity extends BaseActivity implements View.OnClickList
         map2.put("type", "0");
         object[0] = map2;
         map003.put("PARAMS", Arrays.toString(object));
-        NetWorkUtil.getInstence().okHttpForGet(TAG, ConstantUtil.URL, map003, new StringCallback() {
+        NetWorkUtil.getInstence().okHttpForGet(TAG, ConstantUtil.getURL_HQ_HHN(), map003, new StringCallback() {
             @Override
             public void onError(Call call, Exception e, int id) {
                 delist = "";
@@ -592,10 +590,10 @@ public class BuyAndSellActivity extends BaseActivity implements View.OnClickList
         map300130_1.put("SECU_CODE", code.substring(2));
         map300130_1.put("ORDER_PRICE", price);
         map300130.put("parms", map300130_1);
-        NetWorkUtil.getInstence().okHttpForPostString("", ConstantUtil.URL_JY, map300130, new StringCallback() {
+        NetWorkUtil.getInstence().okHttpForPostString("", ConstantUtil.getURL_JY_HS(), map300130, new StringCallback() {
             @Override
             public void onError(Call call, Exception e, int id) {
-                Toast.makeText(BuyAndSellActivity.this, "网络访问失败", Toast.LENGTH_SHORT).show();
+                  CentreToast.showText(BuyAndSellActivity.this,ConstantUtil.NETWORK_ERROR);
             }
 
             @Override
@@ -637,7 +635,7 @@ public class BuyAndSellActivity extends BaseActivity implements View.OnClickList
                         startActivity(new Intent(BuyAndSellActivity.this, TransactionLoginActivity.class));
                         finish();
                     }else{
-                        MistakeDialog.showDialog(msg,BuyAndSellActivity.this);
+                        showDialog(msg);
                     }
                 } catch (JSONException e) {
                     e.printStackTrace();
@@ -664,10 +662,10 @@ public class BuyAndSellActivity extends BaseActivity implements View.OnClickList
         map300200_1.put("MARKET", market);
         map300200_1.put("SECU_CODE", code.substring(2));
         map300200.put("parms", map300200_1);
-        NetWorkUtil.getInstence().okHttpForPostString("", ConstantUtil.URL_JY, map300200, new StringCallback() {
+        NetWorkUtil.getInstence().okHttpForPostString("", ConstantUtil.getURL_JY_HS(), map300200, new StringCallback() {
             @Override
             public void onError(Call call, Exception e, int id) {
-                Toast.makeText(BuyAndSellActivity.this, "网络访问失败", Toast.LENGTH_SHORT).show();
+                CentreToast.showText(BuyAndSellActivity.this,ConstantUtil.NETWORK_ERROR);
             }
 
             @Override
@@ -700,10 +698,11 @@ public class BuyAndSellActivity extends BaseActivity implements View.OnClickList
                         startActivity(new Intent(BuyAndSellActivity.this, TransactionLoginActivity.class));
                         finish();
                     } else {
-                        MistakeDialog.showDialog(msg,BuyAndSellActivity.this);
+                        showDialog(msg);
                     }
                 } catch (JSONException e) {
                     e.printStackTrace();
+                    CentreToast.showText(BuyAndSellActivity.this,ConstantUtil.JSON_ERROR);
                 }
 
             }
@@ -841,7 +840,7 @@ public class BuyAndSellActivity extends BaseActivity implements View.OnClickList
                 bt_sell.setText("卖");
             }
             if (numString.startsWith("0")) {
-                ToastUtils.showShort(BuyAndSellActivity.this, "交易数量首位不能为0");
+                CentreToast.showText(BuyAndSellActivity.this, "交易数量首位不能为0",Toast.LENGTH_SHORT);
                 et_num.setText(TransitionUtils.delHeaderZero(numString));
                 return;
             }
@@ -850,7 +849,7 @@ public class BuyAndSellActivity extends BaseActivity implements View.OnClickList
             } else {
                 long numInt = Long.parseLong(numString);
                 if (numInt < 0) {
-                    Toast.makeText(getApplication(), "请输入一个大于0的数字", Toast.LENGTH_SHORT).show();
+                    CentreToast.showText(BuyAndSellActivity.this, "请输入一个大于0的数字", Toast.LENGTH_SHORT);
                     et_num.setText("");
 
                 } else {
@@ -903,11 +902,11 @@ public class BuyAndSellActivity extends BaseActivity implements View.OnClickList
                 } else {
                     double numInt = Double.parseDouble(numString);
                     if (numInt < 0) {
-                        Toast.makeText(getApplication(), "请输入一个大于0的数字", Toast.LENGTH_SHORT).show();
+
+                        CentreToast.showText(BuyAndSellActivity.this, "请输入一个大于0的数字", Toast.LENGTH_SHORT);
                         et_price.setText("0");
                     } else {
                         price = numInt;
-
                         if (!TextUtils.isEmpty(stockCode)) {
                             final_price = numString;
                             if ("买".equals(transactiontype)) {
@@ -1053,9 +1052,9 @@ public class BuyAndSellActivity extends BaseActivity implements View.OnClickList
                     et_num.setText(amount + "");
                 } else {
                     if(rb_buy.isChecked()){
-                        ToastUtils.showShort(this, "请确认可买数量为有效数值");
+                        CentreToast.showText(this,"请确认可买数量为有效数值",Toast.LENGTH_SHORT);
                     }else if(rb_sell.isChecked()){
-                        ToastUtils.showShort(this, "请确认可卖数量为有效数值");
+                        CentreToast.showText(this,"请确认可买数量为有效数值",Toast.LENGTH_SHORT);
                     }
                 }
                 break;
@@ -1082,7 +1081,7 @@ public class BuyAndSellActivity extends BaseActivity implements View.OnClickList
                     }
                 } else {
                     if (rb_buy.isChecked()){
-                        ToastUtils.showShort(BuyAndSellActivity.this, "请确认数量为有效数值");
+                        CentreToast.showText(BuyAndSellActivity.this,"请确认数量为有效数值",Toast.LENGTH_SHORT);
                     }else {
                         rb_buy.setChecked(true);
                     }
@@ -1092,9 +1091,9 @@ public class BuyAndSellActivity extends BaseActivity implements View.OnClickList
                 if (!TextUtils.isEmpty(stockCode)) {
                     if (rb_sell.isChecked()) {
                         if ("0".equals(et_num.getText().toString()) || TextUtils.isEmpty(et_num.getText().toString())) {
-                            ToastUtils.showShort(BuyAndSellActivity.this, "请确认价格或数量为有效数值");
+                            CentreToast.showText(BuyAndSellActivity.this,"请确认价格或数量为有效数值",Toast.LENGTH_SHORT);
                         } else if ("0".equals(et_price.getText().toString()) || TextUtils.isEmpty(et_price.getText().toString())) {
-                            ToastUtils.showShort(BuyAndSellActivity.this, "请确认价格或数量为有效数值");
+                            CentreToast.showText(BuyAndSellActivity.this,"请确认价格或数量为有效数值",Toast.LENGTH_SHORT);
                         } else {
                             CommissionedBuyAndSellDialog commissionedBuyAndSellDialog = new CommissionedBuyAndSellDialog(this, commissionedBuyAndSell, stockName, stockCode, price + "", stocknum, transactiontype, entrustWays);
                             commissionedBuyAndSellDialog.show();
@@ -1104,7 +1103,7 @@ public class BuyAndSellActivity extends BaseActivity implements View.OnClickList
                     }
                 } else {
                     if (rb_sell.isChecked()){
-                        ToastUtils.showShort(BuyAndSellActivity.this, "请输入股票代码后进行操作");
+                        CentreToast.showText(BuyAndSellActivity.this,"请输入股票代码后进行操作",Toast.LENGTH_SHORT);
                     }else {
                         rb_sell.setChecked(true);
                     }
@@ -1119,7 +1118,7 @@ public class BuyAndSellActivity extends BaseActivity implements View.OnClickList
 
     private void toBuy(String stocknum) {
         if ("0".equals(et_num.getText().toString()) || TextUtils.isEmpty(et_num.getText().toString()) || "0".equals(et_price.getText().toString()) || TextUtils.isEmpty(et_price.getText().toString())) {
-            ToastUtils.showShort(this, "请确认价格或数量为有效数值");
+            CentreToast.showText(this,"请确认价格或数量为有效数值",Toast.LENGTH_SHORT);
         } else {
             CommissionedBuyAndSellDialog commissionedBuyAndSellDialog = new CommissionedBuyAndSellDialog(this, commissionedBuyAndSell, stockName, stockCode, price + "", stocknum, transactiontype, entrustWays);
             commissionedBuyAndSellDialog.show();
@@ -1181,7 +1180,7 @@ public class BuyAndSellActivity extends BaseActivity implements View.OnClickList
         @Override
         public void setSell(String code, String price, String num) {
             if (TextUtils.isEmpty(code)) {
-                Toast.makeText(BuyAndSellActivity.this, "股票代码为空", Toast.LENGTH_SHORT).show();
+                CentreToast.showText(BuyAndSellActivity.this,"股票代码为空");
                 return;
             }
 
@@ -1216,10 +1215,10 @@ public class BuyAndSellActivity extends BaseActivity implements View.OnClickList
         map300140_1.put("ENTRUST_PROP", encryptBySessionKey(entrusttype));
         map300140_1.put("FLAG", encryptBySessionKey("true"));
         map300140.put("parms", map300140_1);
-        NetWorkUtil.getInstence().okHttpForPostString("", ConstantUtil.URL_JY, map300140, new StringCallback() {
+        NetWorkUtil.getInstence().okHttpForPostString("", ConstantUtil.getURL_JY_HS(), map300140, new StringCallback() {
             @Override
             public void onError(Call call, Exception e, int id) {
-                ToastUtils.showShort(BuyAndSellActivity.this, "网络访问失败");
+                CentreToast.showText(BuyAndSellActivity.this,ConstantUtil.NETWORK_ERROR);
             }
 
             @Override
@@ -1239,7 +1238,7 @@ public class BuyAndSellActivity extends BaseActivity implements View.OnClickList
                         startActivity(new Intent(BuyAndSellActivity.this, TransactionLoginActivity.class));
                         finish();
                     }  else {
-                        MistakeDialog.showDialog(msg,BuyAndSellActivity.this);
+                        showDialog(msg);
                     }
                 } catch (JSONException e) {
                     e.printStackTrace();
@@ -1275,10 +1274,10 @@ public class BuyAndSellActivity extends BaseActivity implements View.OnClickList
         map300140_1.put("ENTRUST_PROP", encryptBySessionKey(entrusttype));
         map300140_1.put("FLAG", encryptBySessionKey("true"));
         map300140.put("parms", map300140_1);
-        NetWorkUtil.getInstence().okHttpForPostString("", ConstantUtil.URL_JY, map300140, new StringCallback() {
+        NetWorkUtil.getInstence().okHttpForPostString("", ConstantUtil.getURL_JY_HS(), map300140, new StringCallback() {
             @Override
             public void onError(Call call, Exception e, int id) {
-                ToastUtils.showShort(BuyAndSellActivity.this, "网络访问失败");
+                CentreToast.showText(BuyAndSellActivity.this,ConstantUtil.NETWORK_ERROR);
             }
 
             @Override
@@ -1298,13 +1297,18 @@ public class BuyAndSellActivity extends BaseActivity implements View.OnClickList
                         startActivity(new Intent(BuyAndSellActivity.this, TransactionLoginActivity.class));
                         finish();
                     } else {
-                        MistakeDialog.showDialog(msg,BuyAndSellActivity.this);
+                        showDialog(msg);
                     }
                 } catch (JSONException e) {
                     e.printStackTrace();
                 }
             }
         });
+    }
+
+    public void showDialog(String msg){
+        CustomCenterDialog customCenterDialog = CustomCenterDialog.CustomCenterDialog(msg,CustomCenterDialog.SHOWCENTER);
+        customCenterDialog.show(getFragmentManager(),BuyAndSellActivity.class.toString());
     }
 
 //    /**
@@ -1340,7 +1344,7 @@ public class BuyAndSellActivity extends BaseActivity implements View.OnClickList
         String strJson = gson.toJson(object);
         map.put("FUNCTIONCODE", "HQING006");
         map.put("PARAMS", strJson);
-        NetWorkUtil.getInstence().okHttpForGet(TAG, ConstantUtil.URL, map, new StringCallback() {
+        NetWorkUtil.getInstence().okHttpForGet(TAG, ConstantUtil.getURL_HQ_HHN(), map, new StringCallback() {
 
             @Override
             public void onError(Call call, Exception e, int id) {
@@ -1407,10 +1411,10 @@ public class BuyAndSellActivity extends BaseActivity implements View.OnClickList
         map2.put("FLAG", "true");
         map2.put("STOCK_CODE", stockInfo);
         map1.put("parms", map2);
-        NetWorkUtil.getInstence().okHttpForPostString(TAG, ConstantUtil.URL_JY, map1, new StringCallback() {
+        NetWorkUtil.getInstence().okHttpForPostString(TAG, ConstantUtil.getURL_JY_HS(), map1, new StringCallback() {
             @Override
             public void onError(Call call, Exception e, int id) {
-                Helper.getInstance().showToast(BuyAndSellActivity.this, ConstantUtil.NETWORK_ERROR);
+                CentreToast.showText(BuyAndSellActivity.this,ConstantUtil.NETWORK_ERROR);
             }
 
             @Override
@@ -1450,7 +1454,7 @@ public class BuyAndSellActivity extends BaseActivity implements View.OnClickList
                         et_price.requestFocus();
                         mKeyBoardUtil.hideAllKeyBoard();
                     } else {
-                        Helper.getInstance().showToast(BuyAndSellActivity.this, msg);
+                        CentreToast.showText(BuyAndSellActivity.this,msg);
                     }
                 } catch (Exception e) {
                     e.printStackTrace();
@@ -1467,7 +1471,7 @@ public class BuyAndSellActivity extends BaseActivity implements View.OnClickList
         public void stockCode(String code) {
             if (TextUtils.isEmpty(code) || code.startsWith("20") || code.startsWith("10") || code.startsWith("12") || code.startsWith("22")) {
                 et_stock_code.setText("");
-                ToastUtils.showShort(BuyAndSellActivity.this, "当前股票代码不可交易");
+                CentreToast.showText(BuyAndSellActivity.this, "当前股票代码不可交易",Toast.LENGTH_SHORT);
             } else {
 
 //                stockCode = code;
@@ -1485,7 +1489,8 @@ public class BuyAndSellActivity extends BaseActivity implements View.OnClickList
         @Override
         public void setStockCode(String code) {
             if (TextUtils.isEmpty(code) || code.startsWith("20") || code.startsWith("10") || code.startsWith("12") || code.startsWith("22")) {
-                ToastUtils.showShort(BuyAndSellActivity.this, "当前股票代码不可交易");
+//                ToastUtils.showShort(BuyAndSellActivity.this, "当前股票代码不可交易");
+                CentreToast.showText(BuyAndSellActivity.this, "当前股票代码不可交易",Toast.LENGTH_SHORT);
             } else {
                 refresh(code);
 //                stockCode = code;

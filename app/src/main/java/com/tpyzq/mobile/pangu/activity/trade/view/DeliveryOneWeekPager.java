@@ -19,8 +19,8 @@ import com.tpyzq.mobile.pangu.data.CapitalEntity;
 import com.tpyzq.mobile.pangu.http.NetWorkUtil;
 import com.tpyzq.mobile.pangu.log.LogHelper;
 import com.tpyzq.mobile.pangu.util.ConstantUtil;
-import com.tpyzq.mobile.pangu.util.Helper;
 import com.tpyzq.mobile.pangu.util.SpUtils;
+import com.tpyzq.mobile.pangu.view.CentreToast;
 import com.zhy.http.okhttp.callback.StringCallback;
 
 import org.json.JSONArray;
@@ -94,7 +94,7 @@ public class DeliveryOneWeekPager extends BaseSearchPager {
         map.put("token", mSession);
         map.put("parms", map2);
 
-        NetWorkUtil.getInstence().okHttpForPostString(TAG, ConstantUtil.URL_JY, map, new StringCallback() {
+        NetWorkUtil.getInstence().okHttpForPostString(TAG, ConstantUtil.getURL_JY_HS(), map, new StringCallback() {
             @Override
             public void onError(Call call, Exception e, int id) {
                 LogHelper.e(TAG, e.toString());
@@ -148,7 +148,7 @@ public class DeliveryOneWeekPager extends BaseSearchPager {
                     }
                 } catch (JSONException e) {
                     e.printStackTrace();
-                    Helper.getInstance().showToast(mContext, "网络异常");
+                    CentreToast.showText(mContext, ConstantUtil.NETWORK_ERROR);
                 }
             }
         });

@@ -136,7 +136,7 @@ public class RiskWarningActivity extends BaseActivity implements View.OnClickLis
         map1.put("SEC_ID", "tpyzq");
         map1.put("FLAG", "true");
 
-        NetWorkUtil.getInstence().okHttpForPostString(TAGDate, ConstantUtil.URL_JY, map, new StringCallback() {
+        NetWorkUtil.getInstence().okHttpForPostString(TAGDate, ConstantUtil.getURL_JY_HS(), map, new StringCallback() {
             @Override
             public void onError(Call call, Exception e, int id) {
                 LogUtil.e(TAG, e.toString());
@@ -194,7 +194,7 @@ public class RiskWarningActivity extends BaseActivity implements View.OnClickLis
         map1.put("FLAG", "true");
         map1.put("STOCK_ACCOUNT", Code);
 
-        NetWorkUtil.getInstence().okHttpForPostString(TAG, ConstantUtil.URL_JY, map, new StringCallback() {
+        NetWorkUtil.getInstence().okHttpForPostString(TAG, ConstantUtil.getURL_JY_HS(), map, new StringCallback() {
             @Override
             public void onError(Call call, Exception e, int id) {
                 if (loadingDialog != null) {

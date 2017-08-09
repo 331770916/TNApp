@@ -41,7 +41,7 @@ public class KeyBoardConnect {
 
         HashMap map = new HashMap();
         map.put("funcid", "400102");
-        NetWorkUtil.getInstence().okHttpForPostString(mContext, ConstantUtil.URL_JYBD, map, new StringCallback() {
+        NetWorkUtil.getInstence().okHttpForPostString(mContext, ConstantUtil.getURL_HQ_HS(), map, new StringCallback() {
             @Override
             public void onError(Call call, Exception e, int id) {
                 LogUtil.e(mHttpTag, e.toString());

@@ -65,7 +65,7 @@ public class StockBillActivity extends BaseActivity implements View.OnClickListe
         map.put("PARAMS", map1);
         map1.put("code", UserUtil.capitalAccount);
 //                                                              URL_H5_New  URL_H5
-        NetWorkUtil.getInstence().okHttpForPostString(TAG, ConstantUtil.URL_H5_New, map, new StringCallback() {
+        NetWorkUtil.getInstence().okHttpForPostString(TAG, ConstantUtil.getURL_S_BB(), map, new StringCallback() {
             @Override
             public void onError(Call call, Exception e, int id) {
                 LogUtil.e(TAG, e.toString());

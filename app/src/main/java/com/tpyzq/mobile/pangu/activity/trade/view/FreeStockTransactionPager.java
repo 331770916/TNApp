@@ -23,6 +23,7 @@ import com.tpyzq.mobile.pangu.interfac.StockCodeCallBack;
 import com.tpyzq.mobile.pangu.util.ConstantUtil;
 import com.tpyzq.mobile.pangu.util.Helper;
 import com.tpyzq.mobile.pangu.util.TransitionUtils;
+import com.tpyzq.mobile.pangu.view.CentreToast;
 import com.zhy.http.okhttp.callback.StringCallback;
 
 import org.json.JSONArray;
@@ -127,10 +128,11 @@ public class FreeStockTransactionPager extends BaseTransactionPager implements A
         map.put("FUNCTIONCODE", "HQING005");
         map.put("PARAMS", strJson);
 //        LogHelper.e("FreeStockTransactionPager","request:"+map.toString());
-        NetWorkUtil.getInstence().okHttpForGet("", ConstantUtil.URL, map, new StringCallback() {
+        NetWorkUtil.getInstence().okHttpForGet("", ConstantUtil.getURL_HQ_HHN(), map, new StringCallback() {
             @Override
             public void onError(Call call, Exception e, int id) {
                 lv_transaction.onRefreshComplete();
+                CentreToast.showText(mContext,ConstantUtil.NETWORK_ERROR);
             }
 
             @Override

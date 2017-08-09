@@ -22,6 +22,7 @@ import com.tpyzq.mobile.pangu.http.NetWorkUtil;
 import com.tpyzq.mobile.pangu.log.LogHelper;
 import com.tpyzq.mobile.pangu.util.ConstantUtil;
 import com.tpyzq.mobile.pangu.util.SpUtils;
+import com.tpyzq.mobile.pangu.view.CentreToast;
 import com.tpyzq.mobile.pangu.view.dialog.ResultDialog;
 import com.zhy.http.okhttp.callback.StringCallback;
 
@@ -93,11 +94,11 @@ public class ClinchTodayPager extends BaseSearchPager {
         map.put("token", mSession);
         map.put("parms", map2);
 
-        NetWorkUtil.getInstence().okHttpForPostString(TAG, ConstantUtil.URL_JY, map, new StringCallback() {
+        NetWorkUtil.getInstence().okHttpForPostString(TAG, ConstantUtil.getURL_JY_HS(), map, new StringCallback() {
             @Override
             public void onError(Call call, Exception e, int id) {
                 LogHelper.e(TAG, e.toString());
-                ResultDialog.getInstance().showText("网络异常");
+                CentreToast.showText(mContext,"网络异常");
                 kong_null.setVisibility(View.GONE);
             }
 
@@ -141,7 +142,7 @@ public class ClinchTodayPager extends BaseSearchPager {
                     } else if ("-6".equals(jsonObject.getString("code"))) {
                         mContext.startActivity(new Intent(mContext, TransactionLoginActivity.class));
                     } else {
-                        ResultDialog.getInstance().showText("网络异常");
+                        CentreToast.showText(mContext,"网络异常");
                         kong_null.setVisibility(View.GONE);
                     }
                 } catch (JSONException e) {

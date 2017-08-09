@@ -93,10 +93,10 @@ public class FundWithDrawDialog extends BaseDialog implements View.OnClickListen
         map720204_1.put("FUND_CODE", FUND_CODE);
         map720204_1.put("FLAG", true);
         map720204.put("parms", map720204_1);
-        NetWorkUtil.getInstence().okHttpForPostString("", ConstantUtil.URL_JY, map720204, new StringCallback() {
+        NetWorkUtil.getInstence().okHttpForPostString("", ConstantUtil.getURL_JY_HS(), map720204, new StringCallback() {
             @Override
             public void onError(Call call, Exception e, int id) {
-
+                CentreToast.showText(context,ConstantUtil.NETWORK_ERROR);
             }
 
             @Override

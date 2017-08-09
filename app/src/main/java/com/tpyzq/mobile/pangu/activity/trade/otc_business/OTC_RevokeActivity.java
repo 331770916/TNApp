@@ -24,6 +24,7 @@ import com.tpyzq.mobile.pangu.db.Db_PUB_USERS;
 import com.tpyzq.mobile.pangu.http.OkHttpUtil;
 import com.tpyzq.mobile.pangu.http.doConnect.trade.OTC_RevokeConnect;
 import com.tpyzq.mobile.pangu.util.SpUtils;
+import com.tpyzq.mobile.pangu.view.CentreToast;
 import com.tpyzq.mobile.pangu.view.dialog.LoadingDialog;
 import com.tpyzq.mobile.pangu.view.dialog.MistakeDialog;
 import com.tpyzq.mobile.pangu.view.pulllayou.SimplePullLayout;
@@ -170,7 +171,7 @@ public class OTC_RevokeActivity extends BaseActivity implements View.OnClickList
 
     @Override
     public void connectError(String error) {
-        MistakeDialog.showDialog(error, OTC_RevokeActivity.this);
+        CentreToast.showText( OTC_RevokeActivity.this,error);
     }
 
     @Override

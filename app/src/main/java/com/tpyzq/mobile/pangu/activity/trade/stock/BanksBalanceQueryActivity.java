@@ -26,8 +26,9 @@ import com.tpyzq.mobile.pangu.util.Helper;
 import com.tpyzq.mobile.pangu.util.SpUtils;
 import com.tpyzq.mobile.pangu.util.keyboard.UsefulKeyBoard;
 import com.tpyzq.mobile.pangu.util.panguutil.UserUtil;
+import com.tpyzq.mobile.pangu.view.CentreToast;
+import com.tpyzq.mobile.pangu.view.CustomCenterDialog;
 import com.tpyzq.mobile.pangu.view.dialog.LoadingDialog;
-import com.tpyzq.mobile.pangu.view.dialog.MistakeDialog;
 import com.tpyzq.mobile.pangu.view.keybody.InputPasswordView;
 import com.tpyzq.mobile.pangu.view.keybody.PopKeyBody;
 import com.yzd.unikeysdk.OnInputDoneCallBack;
@@ -109,7 +110,7 @@ public class BanksBalanceQueryActivity extends BaseActivity implements View.OnCl
         map1.put("token",mSession);
         map1.put("parms",map2);
 
-        NetWorkUtil.getInstence().okHttpForPostString(TAG, ConstantUtil.URL_JY, map1, new StringCallback() {
+        NetWorkUtil.getInstence().okHttpForPostString(TAG, ConstantUtil.getURL_JY_HS(), map1, new StringCallback() {
             @Override
             public void onError(Call call, Exception e, int id) {
                 LogHelper.e(TAG, e.toString());
@@ -137,12 +138,7 @@ public class BanksBalanceQueryActivity extends BaseActivity implements View.OnCl
 
                 if (!bean.getCode().equals("0")) {
                     mEmpty.setVisibility(View.VISIBLE);
-                    MistakeDialog.showDialog(bean.getMsg(), BanksBalanceQueryActivity.this, new MistakeDialog.MistakeDialgoListener() {
-                        @Override
-                        public void doPositive() {
-                            finish();
-                        }
-                    });
+                    showDialog(bean.getMsg());
                     return;
                 }
 
@@ -247,7 +243,7 @@ public class BanksBalanceQueryActivity extends BaseActivity implements View.OnCl
     private void queryBalance(String s, String queryType) {
 
         if (TextUtils.isEmpty(mBankNo)) {
-            Helper.getInstance().showToast(CustomApplication.getContext(), "银行代码为空");
+            CentreToast.showText(CustomApplication.getContext(), "银行代码为空");
             return;
         }
 
@@ -261,7 +257,7 @@ public class BanksBalanceQueryActivity extends BaseActivity implements View.OnCl
         map2.put("ACCOUNT", mAccount);
         map2.put("BANK_PASSWORD", s);
 
-        if ("false".equals(Db_PUB_USERS.queryingCertification()) || "0".equals(queryType)) {
+        if ("0".equals(UserUtil.Keyboard) || "0".equals(queryType)) {
             map2.put("PWD_TYPE", "0");
         } else {
 
@@ -284,20 +280,14 @@ public class BanksBalanceQueryActivity extends BaseActivity implements View.OnCl
         map1.put("token",mSession);
         map1.put("parms",map2);
 
-        NetWorkUtil.getInstence().okHttpForPostString(TAG, ConstantUtil.URL_JY, map1, new StringCallback() {
+        NetWorkUtil.getInstence().okHttpForPostString(TAG, ConstantUtil.getURL_JY_HS(), map1, new StringCallback() {
             @Override
             public void onError(Call call, Exception e, int id) {
                 LogHelper.e(TAG, e.toString());
                 if (mLoadingDialog != null) {
                     mLoadingDialog.dismiss();
                 }
-
-                MistakeDialog.showDialog("" + e.toString(), BanksBalanceQueryActivity.this, new MistakeDialog.MistakeDialgoListener() {
-                    @Override
-                    public void doPositive() {
-                        finish();
-                    }
-                });
+                showDialog("" + e.toString());
             }
 
             @Override
@@ -324,12 +314,7 @@ public class BanksBalanceQueryActivity extends BaseActivity implements View.OnCl
                 }
 
                 if (!bean.getCode().equals("0")) {
-                    MistakeDialog.showDialog(bean.getMsg(), BanksBalanceQueryActivity.this, new MistakeDialog.MistakeDialgoListener() {
-                        @Override
-                        public void doPositive() {
-                            finish();
-                        }
-                    });
+                   showDialog(bean.getMsg());
                     return;
                 }
 
@@ -347,6 +332,17 @@ public class BanksBalanceQueryActivity extends BaseActivity implements View.OnCl
 
                 }
 
+            }
+        });
+    }
+
+    public void showDialog(String msg){
+        CustomCenterDialog customCenterDialog = CustomCenterDialog.CustomCenterDialog(msg,CustomCenterDialog.SHOWCENTER);
+        customCenterDialog.show(getFragmentManager(),BanksBalanceQueryActivity.class.toString());
+        customCenterDialog.setOnClickListener(new CustomCenterDialog.ConfirmOnClick() {
+            @Override
+            public void confirmOnclick() {
+                finish();
             }
         });
     }

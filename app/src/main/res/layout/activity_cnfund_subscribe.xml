@@ -72,7 +72,7 @@
                         android:layout_centerVertical="true"
                         android:layout_marginLeft="@dimen/size20"
                         android:text="@string/JiJinDaiMa"
-                        android:textColor="@color/hushenTab_titleColor"
+                        android:textColor="@color/texts"
                         android:textSize="@dimen/txtSize15" />
 
                     <EditText
@@ -86,7 +86,7 @@
                         android:hint="@string/QingShuRuJiJinDaiMa"
                         android:maxLength="6"
                         android:singleLine="true"
-                        android:textColor="@color/textss"
+                        android:textColor="@color/title_list"
                         android:textColorHint="@color/texts"
                         android:textSize="@dimen/txtSize14" />
 
@@ -111,7 +111,7 @@
                         android:layout_centerVertical="true"
                         android:layout_marginLeft="@dimen/size20"
                         android:text="@string/ShenGouJinE"
-                        android:textColor="@color/hushenTab_titleColor"
+                        android:textColor="@color/texts"
                         android:textSize="@dimen/txtSize15" />
 
                     <EditText
@@ -125,7 +125,7 @@
                         android:hint="@string/QingShuRuShenGouJinE"
                         android:inputType="numberDecimal"
                         android:singleLine="true"
-                        android:textColor="@color/textss"
+                        android:textColor="@color/title_list"
                         android:textColorHint="@color/texts"
                         android:textSize="@dimen/txtSize14"  />
 

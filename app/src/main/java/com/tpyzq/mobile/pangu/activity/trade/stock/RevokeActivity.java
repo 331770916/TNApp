@@ -18,11 +18,9 @@ import com.tpyzq.mobile.pangu.data.RevokeEntity;
 import com.tpyzq.mobile.pangu.http.NetWorkUtil;
 import com.tpyzq.mobile.pangu.log.LogHelper;
 import com.tpyzq.mobile.pangu.util.ConstantUtil;
-import com.tpyzq.mobile.pangu.util.Helper;
 import com.tpyzq.mobile.pangu.util.SpUtils;
 import com.tpyzq.mobile.pangu.view.CentreToast;
-import com.tpyzq.mobile.pangu.view.dialog.MistakeDialog;
-import com.tpyzq.mobile.pangu.view.dialog.ResultDialog;
+import com.tpyzq.mobile.pangu.view.CustomCenterDialog;
 import com.tpyzq.mobile.pangu.view.dialog.RevokeDialog;
 import com.zhy.http.okhttp.callback.StringCallback;
 
@@ -119,11 +117,11 @@ public class RevokeActivity extends BaseActivity implements AdapterView.OnItemCl
         map1.put("FUND_ACCOUNT", "true");
         map1.put("ACTION_IN", "1");
 
-        NetWorkUtil.getInstence().okHttpForPostString(TAG, ConstantUtil.URL_JY, map, new StringCallback() {
+        NetWorkUtil.getInstence().okHttpForPostString(TAG, ConstantUtil.getURL_JY_HS(), map, new StringCallback() {
             @Override
             public void onError(Call call, Exception e, int id) {
                 LogHelper.e(TAG, e.toString());
-                Helper.getInstance().showToast(RevokeActivity.this, "网络异常");
+                CentreToast.showText(RevokeActivity.this,ConstantUtil.NETWORK_ERROR);
             }
 
             @Override
@@ -163,10 +161,11 @@ public class RevokeActivity extends BaseActivity implements AdapterView.OnItemCl
                     } else if ("-6".equals(jsonObject.getString("code"))) {
                         startActivity(new Intent(RevokeActivity.this, TransactionLoginActivity.class));
                     } else {
-                        MistakeDialog.showDialog(jsonObject.getString("msg"), RevokeActivity.this);
+                        CustomCenterDialog customCenterDialog = CustomCenterDialog.CustomCenterDialog(jsonObject.getString("msg"),CustomCenterDialog.SHOWCENTER);
+                        customCenterDialog.show(getFragmentManager(),RevokeActivity.class.toString());
                     }
                 } catch (JSONException e) {
-                    Helper.getInstance().showToast(RevokeActivity.this, "网络异常");
+                    CentreToast.showText(RevokeActivity.this,ConstantUtil.JSON_ERROR);
                     e.printStackTrace();
                 }
             }

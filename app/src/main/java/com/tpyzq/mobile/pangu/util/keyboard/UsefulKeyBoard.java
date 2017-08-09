@@ -8,6 +8,7 @@ import com.tpyzq.mobile.pangu.base.CustomApplication;
 import com.tpyzq.mobile.pangu.db.Db_PUB_USERS;
 import com.tpyzq.mobile.pangu.log.LogHelper;
 import com.tpyzq.mobile.pangu.util.DeviceUtil;
+import com.tpyzq.mobile.pangu.util.panguutil.UserUtil;
 import com.tpyzq.mobile.pangu.view.keybody.PopKeyBody;
 import com.yzd.unikeysdk.UnikeyException;
 import com.yzd.unikeysdk.UnikeyUrls;
@@ -48,7 +49,7 @@ public class UsefulKeyBoard {
     public Object initUserKeyBoard(boolean userCustomKeyBoard, PopKeyBody.ContentListener listener,
                                    boolean isNeedInputPassword, EditText editText) {
 
-        if ("false".equals(Db_PUB_USERS.queryingCertification())) {
+        if ("0".equals(UserUtil.Keyboard)) {
             //认证失败
             //调用 系统键盘 还是自定义键盘
             if (userCustomKeyBoard) {

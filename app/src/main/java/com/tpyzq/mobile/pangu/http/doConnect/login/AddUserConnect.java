@@ -55,7 +55,7 @@ public class AddUserConnect {
         map1.put("user_type", KeyEncryptionUtils.getInstance().Typescno());
         map1.put("user_account", UserUtil.userId);
 
-        NetWorkUtil.getInstence().okHttpForPostString(mContext, ConstantUtil.URL_JYBD, map, new StringCallback() {
+        NetWorkUtil.getInstence().okHttpForPostString(mContext, ConstantUtil.getURL_HQ_HS(), map, new StringCallback() {
             @Override
             public void onError(Call call, Exception e, int id) {
                 LogHelper.e("TransactionLoginActivity  +++++  绑定失败",e.toString());

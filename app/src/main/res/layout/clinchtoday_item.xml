@@ -46,24 +46,26 @@
         <RelativeLayout
             android:layout_width="@dimen/size0"
             android:layout_height="wrap_content"
-            android:layout_weight="1">
+            android:layout_weight="1.2">
 
             <TextView
+                android:paddingRight="@dimen/size20"
                 android:id="@+id/clinch_Date"
                 android:layout_width="match_parent"
+                android:text="--"
                 android:layout_height="wrap_content"
                 android:layout_centerHorizontal="true"
-                android:gravity="center"
-                android:text="--"
+                android:gravity="center|end"
                 android:textSize="@dimen/txtSize14" />
 
             <TextView
+                android:paddingRight="@dimen/size20"
                 android:id="@+id/clinch_Time"
                 android:layout_width="match_parent"
                 android:layout_height="wrap_content"
                 android:layout_alignLeft="@id/clinch_Date"
                 android:layout_below="@id/clinch_Date"
-                android:gravity="center"
+                android:gravity="center|end"
                 android:text="--"
                 android:textSize="@dimen/txtSize14" />
         </RelativeLayout>
@@ -75,23 +77,23 @@
             android:layout_weight="1">
 
             <TextView
-                android:paddingLeft="@dimen/size20"
+                android:paddingRight="@dimen/size20"
                 android:id="@+id/clinch_Entrust"
                 android:layout_width="match_parent"
                 android:layout_height="wrap_content"
                 android:layout_centerHorizontal="true"
-                android:gravity="center"
+                android:gravity="center|end"
                 android:text="--"
                 android:textSize="@dimen/txtSize14" />
 
             <TextView
-                android:paddingLeft="@dimen/size20"
+                android:paddingRight="@dimen/size20"
                 android:id="@+id/clinch_Succeed"
                 android:layout_width="match_parent"
                 android:layout_height="wrap_content"
                 android:layout_alignLeft="@id/clinch_Entrust"
                 android:layout_below="@id/clinch_Entrust"
-                android:gravity="center"
+                android:gravity="center|end"
                 android:text="--"
                 android:textSize="@dimen/txtSize14" />
         </RelativeLayout>

@@ -1,5 +1,6 @@
 package com.tpyzq.mobile.pangu.activity.detail.newsTab;
 
+import android.app.Activity;
 import android.content.Context;
 import android.graphics.Color;
 import android.util.TypedValue;
@@ -8,6 +9,7 @@ import android.view.View;
 import com.tpyzq.mobile.pangu.R;
 import com.tpyzq.mobile.pangu.activity.trade.view.ScaleTransitionPagerTitleView;
 import com.tpyzq.mobile.pangu.adapter.detail.DetailNewsAdapter;
+import com.tpyzq.mobile.pangu.base.BasePager;
 import com.tpyzq.mobile.pangu.view.dealviewpager.NoScrollViewPager;
 import com.tpyzq.mobile.pangu.view.magicindicator.MagicIndicator;
 import com.tpyzq.mobile.pangu.view.magicindicator.ViewPagerHelper;
@@ -26,17 +28,17 @@ import java.util.List;
  * 作者：刘泽鹏 on 2016/10/26 09:55
  * 详情页  里面的   新闻公告研报  部分
  */
-public class DetailNews extends BaseDetailNewsPager {
+public class DetailNews extends BasePager {
 
     private MagicIndicator magicIndicator;      //上边的  Tab
     private NoScrollViewPager mViewPager;               //下边的  ViewPager
     private static final String[] news_tab = new String[]{"新闻", "公告", "研报"};
     private List<String> news_tab_list;       //存储标题的 集合
-    private List<BaseDetailNewsPager> viewList;      //存储view 的 集合
+    private List<BasePager> viewList;      //存储view 的 集合
     private String stockCode;
     private DetailNewsAdapter adapter;
 
-    public DetailNews(Context context, String stockCode) {
+    public DetailNews(Activity context, String stockCode) {
         super(context,stockCode);
     }
 
@@ -47,19 +49,17 @@ public class DetailNews extends BaseDetailNewsPager {
         this.stockCode = stockCode;
         magicIndicator = (MagicIndicator) rootView.findViewById(R.id.mi_DetailNews);
         mViewPager = (NoScrollViewPager) rootView.findViewById(R.id.vp_DetailNews);
-        initDatas();
+        initData();
         setIndicatorListen();
     }
 
-    public void initDatas() {
-        super.initData();
+    @Override
+    public void initData() {
         news_tab_list = Arrays.asList(news_tab);
         viewList = new ArrayList<>();
-
         viewList.add(new NewsFragment(mContext,stockCode));              //"000972"
         viewList.add(new AnnouncementFragment(mContext,stockCode));      //"11601211"
         viewList.add(new StudyFragment(mContext,stockCode));             //"11601211"
-
         adapter= new DetailNewsAdapter(viewList);
         mViewPager.setAdapter(adapter);
     }
@@ -122,5 +122,10 @@ public class DetailNews extends BaseDetailNewsPager {
     @Override
     public int getLayoutId() {
         return R.layout.home_news;
+    }
+
+    @Override
+    public void destroy() {
+
     }
 }

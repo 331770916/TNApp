@@ -21,6 +21,7 @@ import com.tpyzq.mobile.pangu.db.Db_PUB_USERS;
 import com.tpyzq.mobile.pangu.http.OkHttpUtil;
 import com.tpyzq.mobile.pangu.http.doConnect.trade.OTC_ShareConnect;
 import com.tpyzq.mobile.pangu.util.SpUtils;
+import com.tpyzq.mobile.pangu.view.CentreToast;
 import com.tpyzq.mobile.pangu.view.dialog.LoadingDialog;
 import com.tpyzq.mobile.pangu.view.dialog.MistakeDialog;
 import com.tpyzq.mobile.pangu.view.pulllayou.SimplePullLayout;
@@ -41,7 +42,6 @@ public class OTC_ShareActivity extends BaseActivity implements View.OnClickListe
     private Dialog                  mProgressDialog;
     private SimplePullLayout        mSimplePullLayout;
     private OTC_ShareAdapter        mAdapter;
-    private String                  mSession;
     private ImageView               mKong_iv;
     private OTC_ShareConnect mConnect = new OTC_ShareConnect();
     private boolean clickBackKey;//判断用户是否点击返回键取消网络请求
@@ -67,9 +67,8 @@ public class OTC_ShareActivity extends BaseActivity implements View.OnClickListe
         mAdapter.setClick(this);
 
         mSimplePullLayout.setOnPullListener(this);
-        mSession = SpUtils.getString(this, "mSession", "");
         initLoadDialog();
-        mConnect.toOtcShareConnect(TAG, mSession, this);
+        mConnect.toOtcShareConnect(TAG, this);
 
     }
 
@@ -99,7 +98,7 @@ public class OTC_ShareActivity extends BaseActivity implements View.OnClickListe
 
     @Override
     public void onRefresh() {
-        mConnect.toOtcShareConnect(TAG, mSession, this);
+        mConnect.toOtcShareConnect(TAG, this);
     }
 
     @Override
@@ -114,7 +113,7 @@ public class OTC_ShareActivity extends BaseActivity implements View.OnClickListe
 
     @Override
     public void connectError(String error) {
-        MistakeDialog.showDialog(error, OTC_ShareActivity.this);
+        CentreToast.showText(OTC_ShareActivity.this,error);
     }
 
     @Override

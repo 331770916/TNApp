@@ -11,6 +11,8 @@ import android.widget.TextView;
 
 import com.google.gson.Gson;
 import com.google.gson.reflect.TypeToken;
+import com.handmark.pulltorefresh.library.PullToRefreshBase;
+import com.handmark.pulltorefresh.library.PullToRefreshScrollView;
 import com.tpyzq.mobile.pangu.R;
 import com.tpyzq.mobile.pangu.activity.myself.login.TransactionLoginActivity;
 import com.tpyzq.mobile.pangu.activity.trade.stock.BanksTransferAccountsActivity;
@@ -51,9 +53,9 @@ import okhttp3.Call;
  * Created by 刘泽鹏 on 2016/8/10.
  * 待缴款  Fragment
  */
-public class StayPaymentFragment extends BaseFragment implements PullDownScrollView.RefreshListener, View.OnClickListener {
+public class StayPaymentFragment extends BaseFragment implements  View.OnClickListener {
     private static final String TAG = "StayPaymentFragment";
-    private PullDownScrollView mPullDownScrollView;         //下拉刷新
+    private PullToRefreshScrollView mPullDownScrollView;         //下拉刷新
     private MyListView listView;
     private TextView tvDaiJiaoJinE, tvRenGouSuoXu = null;      //待缴金额   认购所需
     private RoundProgressBar mRoundProgressBar;             //圆形进度条
@@ -64,7 +66,6 @@ public class StayPaymentFragment extends BaseFragment implements PullDownScrollV
     private StayPaymentAdapter adapter;
     private ImageView ivStayPaymentKong;
     private LinearLayout hdader;
-    private ScrollView sv_container;
 
 
     @Override
@@ -73,12 +74,10 @@ public class StayPaymentFragment extends BaseFragment implements PullDownScrollV
         getData(mSession);
 
         ivStayPaymentKong = (ImageView) view.findViewById(R.id.ivStayPaymentKong);      //没数据的时候的  空 图片
-        sv_container = (ScrollView) view.findViewById(R.id.scrollView);
         hdader = (LinearLayout) view.findViewById(R.id.Hdader);
         tvDaiJiaoJinE = (TextView) view.findViewById(R.id.tvDaiJiaoJinE);
         tvRenGouSuoXu = (TextView) view.findViewById(R.id.tvRenGouSuoXu);
-
-        sv_container.smoothScrollTo(0, 0);
+        mPullDownScrollView = (PullToRefreshScrollView) view.findViewById(R.id.xiaLaShuaXin);
         //更新进度条
         mRoundProgressBar = (RoundProgressBar) view.findViewById(R.id.roundProgressBar2);
         if (short_money == 0 || money == 0) {
@@ -91,14 +90,35 @@ public class StayPaymentFragment extends BaseFragment implements PullDownScrollV
         view.findViewById(R.id.llZhuanRu).setOnClickListener(this);
         view.findViewById(R.id.llZhuanChu).setOnClickListener(this);
 
-        mPullDownScrollView = (PullDownScrollView) view.findViewById(R.id.xiaLaShuaXin);
-        mPullDownScrollView.setRefreshListener(this);
-        mPullDownScrollView.setPullDownElastic(new PullDownElasticImp(getActivity()));
-
+        mPullDownScrollView.getRefreshableView().scrollTo(0,0);
         this.listView = (MyListView) view.findViewById(R.id.lvStayPayment);
         adapter = new StayPaymentAdapter(getContext());
         this.listView.setEmptyView(ivStayPaymentKong);
         this.listView.setAdapter(adapter);
+
+        initScrollView(); //下拉刷新初始化
+
+    }
+
+    private void initScrollView() {
+        mPullDownScrollView.setFocusableInTouchMode(true);
+        mPullDownScrollView.setMode(PullToRefreshBase.Mode.PULL_FROM_START);
+        mPullDownScrollView.setOnRefreshListener(new PullToRefreshBase.OnRefreshListener<ScrollView>() {
+            @Override
+            public void onRefresh(PullToRefreshBase<ScrollView> refreshView) {
+                new Handler().postDelayed(new Runnable() {
+
+                    @Override
+                    public void run() {
+                        progress = 0;
+                        money = 0;
+                        short_money = 0;
+                        getData(mSession);
+                        mPullDownScrollView.onRefreshComplete();
+                    }
+                }, 2000);
+            }
+        });
     }
 
 
@@ -113,7 +133,7 @@ public class StayPaymentFragment extends BaseFragment implements PullDownScrollV
         map3.put("funcid", "300387");
         map3.put("token", session);
         map3.put("parms", map4);
-        NetWorkUtil.getInstence().okHttpForPostString(TAG, ConstantUtil.URL_JY, map3, new StringCallback() {
+        NetWorkUtil.getInstence().okHttpForPostString(TAG, ConstantUtil.getURL_JY_HS(), map3, new StringCallback() {
             @Override
             public void onError(Call call, Exception e, int id) {
                 LogUtil.i(TAG, e.toString());
@@ -244,7 +264,7 @@ public class StayPaymentFragment extends BaseFragment implements PullDownScrollV
         map5.put("funcid", "300384");
         map5.put("token", session);
         map5.put("parms", map6);
-        NetWorkUtil.getInstence().okHttpForPostString(TAG, ConstantUtil.URL_JY, map5, new StringCallback() {
+        NetWorkUtil.getInstence().okHttpForPostString(TAG, ConstantUtil.getURL_JY_HS(), map5, new StringCallback() {
             @Override
             public void onError(Call call, Exception e, int id) {
 
@@ -277,7 +297,7 @@ public class StayPaymentFragment extends BaseFragment implements PullDownScrollV
                 if (!TextUtils.isEmpty(stockCode)){
                     getDtor(stockCode, session, map, list);
                 }
-                sv_container.smoothScrollTo(0, 0);
+                mPullDownScrollView.getRefreshableView().scrollTo(0,0);
             }
         });
 
@@ -309,7 +329,7 @@ public class StayPaymentFragment extends BaseFragment implements PullDownScrollV
         map5.put("funcid", "100210");
         map5.put("token", session);
         map5.put("parms", map6);
-        NetWorkUtil.getInstence().okHttpForPostString(TAG, ConstantUtil.URL_ZX_GS, map5, new StringCallback() {
+        NetWorkUtil.getInstence().okHttpForPostString(TAG, ConstantUtil.getURL_HQ_HS(), map5, new StringCallback() {
             @Override
             public void onError(Call call, Exception e, int id) {
 
@@ -353,23 +373,6 @@ public class StayPaymentFragment extends BaseFragment implements PullDownScrollV
     }
 
 
-    @Override
-    public void onRefresh(PullDownScrollView view) {
-        new Handler().postDelayed(new Runnable() {
-
-            @Override
-            public void run() {
-                progress = 0;
-                money = 0;
-                short_money = 0;
-                getData(mSession);
-
-                DateFormat format1 = new SimpleDateFormat("yyyy-MM-dd HH:mm:ss");
-                String bDate = format1.format(new Date());
-                mPullDownScrollView.finishRefresh("上次刷新时间:" + bDate);
-            }
-        }, 2000);
-    }
 
     @Override
     public void onClick(View v) {

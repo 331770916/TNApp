@@ -163,7 +163,7 @@ public class OptionalFundActivity extends BaseActivity implements View.OnClickLi
         map300441_1.put("PAGE_SIZE", "30");
         map300441_1.put("FLAG", "true");
         map300441.put("parms", map300441_1);
-        NetWorkUtil.getInstence().okHttpForPostString("", ConstantUtil.URL_JY, map300441, new StringCallback() {
+        NetWorkUtil.getInstence().okHttpForPostString("", ConstantUtil.getURL_JY_HS(), map300441, new StringCallback() {
             @Override
             public void onError(Call call, Exception e, int id) {
                 Toast.makeText(OptionalFundActivity.this, "网络访问失败", Toast.LENGTH_SHORT).show();

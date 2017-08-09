@@ -62,7 +62,7 @@ public class QueryLimitActivity extends BaseActivity implements View.OnClickList
         map1.put("funcid", "300380");
         map1.put("token", session);
         map1.put("parms", map2);
-        NetWorkUtil.getInstence().okHttpForPostString(TAG, ConstantUtil.URL_JY, map1, new StringCallback() {
+        NetWorkUtil.getInstence().okHttpForPostString(TAG, ConstantUtil.getURL_JY_HS(), map1, new StringCallback() {
             @Override
             public void onError(Call call, Exception e, int id) {
 

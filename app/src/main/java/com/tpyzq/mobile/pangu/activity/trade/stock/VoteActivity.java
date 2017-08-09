@@ -15,6 +15,7 @@ import com.tpyzq.mobile.pangu.base.InterfaceCollection;
 import com.tpyzq.mobile.pangu.data.NetworkVotingEntity;
 import com.tpyzq.mobile.pangu.data.ResultInfo;
 import com.tpyzq.mobile.pangu.util.SpUtils;
+import com.tpyzq.mobile.pangu.view.CentreToast;
 import com.tpyzq.mobile.pangu.view.dialog.LoadingDialog;
 
 import java.util.List;
@@ -107,7 +108,8 @@ public class VoteActivity extends BaseActivity  implements InterfaceCollection.I
                     mAdapter.setData(myList);
                 }else{
                     if (mIsClean) {//下拉刷新或者初始化时提示
-                        showToast(" 暂无数据");
+//                        showToast(" 暂无数据");
+                        CentreToast.showText(VoteActivity.this,"暂无数据");
                     }
                     kong_null.setVisibility(View.GONE);
                     listView.onRefreshComplete();
@@ -118,7 +120,7 @@ public class VoteActivity extends BaseActivity  implements InterfaceCollection.I
             skip.startLogin(this);
             listView.onRefreshComplete();
         }else{//-1,-2,-3情况下显示定义好信息
-            showToast(info.getMsg());
+            CentreToast.showText(VoteActivity.this,info.getMsg());
             kong_null.setVisibility(View.GONE);
             listView.onRefreshComplete();
         }

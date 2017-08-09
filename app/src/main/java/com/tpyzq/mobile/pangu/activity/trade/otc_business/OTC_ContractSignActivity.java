@@ -201,7 +201,7 @@ public class OTC_ContractSignActivity extends BaseActivity implements View.OnCli
         map1.put("parms", map2);
 
 
-        NetWorkUtil.getInstence().okHttpForPostString("", ConstantUtil.URL_JY, map1, new StringCallback() {
+        NetWorkUtil.getInstence().okHttpForPostString("", ConstantUtil.getURL_JY_HS(), map1, new StringCallback() {
             @Override
             public void onError(Call call, Exception e, int id) {
                 e.printStackTrace();
@@ -274,7 +274,7 @@ public class OTC_ContractSignActivity extends BaseActivity implements View.OnCli
         map100237_1.put("prod_code", code);
         map100237_1.put("prod_kind_type", "3");
         mapHQTNG106.put("PARAMS", map100237_1);
-        NetWorkUtil.getInstence().okHttpForPostString("", ConstantUtil.URL_RS, mapHQTNG106, new StringCallback() {
+        NetWorkUtil.getInstence().okHttpForPostString("", ConstantUtil.getURL_HQ_WB(), mapHQTNG106, new StringCallback() {
             @Override
             public void onError(Call call, Exception e, int id) {
                 e.printStackTrace();
@@ -372,7 +372,7 @@ public class OTC_ContractSignActivity extends BaseActivity implements View.OnCli
         map1.put("funcid", "300432");
         map1.put("token", mSession);
         map1.put("parms", map2);
-        NetWorkUtil.getInstence().okHttpForPostString(TAG, ConstantUtil.URL_JY, map1, new StringCallback() {
+        NetWorkUtil.getInstence().okHttpForPostString(TAG, ConstantUtil.getURL_JY_HS(), map1, new StringCallback() {
             @Override
             public void onError(Call call, Exception e, int id) {
                 e.printStackTrace();

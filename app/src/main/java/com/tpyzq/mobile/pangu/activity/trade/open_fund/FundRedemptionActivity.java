@@ -11,33 +11,24 @@ import android.widget.EditText;
 import android.widget.ImageView;
 import android.widget.LinearLayout;
 import android.widget.TextView;
-import android.widget.Toast;
 
 import com.google.gson.Gson;
 import com.tpyzq.mobile.pangu.R;
 import com.tpyzq.mobile.pangu.activity.myself.login.TransactionLoginActivity;
 import com.tpyzq.mobile.pangu.base.BaseActivity;
 import com.tpyzq.mobile.pangu.data.FundDataEntity;
-import com.tpyzq.mobile.pangu.data.FundEntity;
-import com.tpyzq.mobile.pangu.data.FundRedemptionEntity;
 import com.tpyzq.mobile.pangu.http.NetWorkUtil;
 import com.tpyzq.mobile.pangu.util.ConstantUtil;
-import com.tpyzq.mobile.pangu.util.Helper;
 import com.tpyzq.mobile.pangu.util.SpUtils;
-import com.tpyzq.mobile.pangu.util.ToastUtils;
 import com.tpyzq.mobile.pangu.view.CentreToast;
+import com.tpyzq.mobile.pangu.view.CustomCenterDialog;
 import com.tpyzq.mobile.pangu.view.dialog.FundRedemptionDialog;
-import com.tpyzq.mobile.pangu.view.dialog.MistakeDialog;
 import com.zhy.http.okhttp.callback.StringCallback;
 
-import org.json.JSONArray;
 import org.json.JSONException;
 import org.json.JSONObject;
 
-import java.io.Serializable;
-import java.util.ArrayList;
 import java.util.HashMap;
-import java.util.List;
 
 import okhttp3.Call;
 
@@ -175,10 +166,10 @@ public class FundRedemptionActivity extends BaseActivity implements View.OnClick
         map300431_1.put("FUND_COMPANY", fundcompany);
         map300431_1.put("OPER_TYPE", "1");
         map300431.put("parms", map300431_1);
-        NetWorkUtil.getInstence().okHttpForPostString("", ConstantUtil.URL_JY, map300431, new StringCallback() {
+        NetWorkUtil.getInstence().okHttpForPostString("", ConstantUtil.getURL_JY_HS(), map300431, new StringCallback() {
             @Override
             public void onError(Call call, Exception e, int id) {
-                Helper.getInstance().showToast(FundRedemptionActivity.this, ConstantUtil.NETWORK_ERROR);
+                CentreToast.showText(FundRedemptionActivity.this, ConstantUtil.NETWORK_ERROR);
             }
 
             @Override
@@ -196,7 +187,7 @@ public class FundRedemptionActivity extends BaseActivity implements View.OnClick
                     } else if ("-6".equals(code)) {
                         startActivity(new Intent(FundRedemptionActivity.this, TransactionLoginActivity.class));
                     } else {
-                        ToastUtils.showShort(FundRedemptionActivity.this, msg);
+                        CentreToast.showText(FundRedemptionActivity.this, msg);
                     }
                 } catch (JSONException e) {
                     e.printStackTrace();
@@ -294,10 +285,10 @@ public class FundRedemptionActivity extends BaseActivity implements View.OnClick
             map720203_1.put("EXCEED_FLAG", 0);
         }
         map720203.put("parms", map720203_1);
-        NetWorkUtil.getInstence().okHttpForPostString("", ConstantUtil.URL_JY, map720203, new StringCallback() {
+        NetWorkUtil.getInstence().okHttpForPostString("", ConstantUtil.getURL_JY_HS(), map720203, new StringCallback() {
             @Override
             public void onError(Call call, Exception e, int id) {
-                Toast.makeText(FundRedemptionActivity.this, "网络访问失败", Toast.LENGTH_SHORT).show();
+                CentreToast.showText(FundRedemptionActivity.this,ConstantUtil.NETWORK_ERROR);
             }
 
             @Override
@@ -315,7 +306,8 @@ public class FundRedemptionActivity extends BaseActivity implements View.OnClick
                     } else if ("-6".equals(code)) {
                         startActivity(new Intent(FundRedemptionActivity.this, TransactionLoginActivity.class));
                     } else {
-                        MistakeDialog.showDialog(msg,FundRedemptionActivity.this);
+                        CustomCenterDialog customCenterDialog = CustomCenterDialog.CustomCenterDialog(msg,CustomCenterDialog.SHOWCENTER);
+                        customCenterDialog.show(getFragmentManager(),FundRedemptionActivity.class.toString());
                     }
                 } catch (JSONException e) {
                     e.printStackTrace();

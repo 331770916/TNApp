@@ -6,21 +6,24 @@ import com.tpyzq.mobile.pangu.activity.myself.handhall.RiskConfirmActivity;
 import com.tpyzq.mobile.pangu.activity.myself.handhall.RiskEvaluationActivity;
 import com.tpyzq.mobile.pangu.activity.myself.login.TransactionLoginActivity;
 import com.tpyzq.mobile.pangu.base.BaseActivity;
+import com.tpyzq.mobile.pangu.base.CustomApplication;
 import com.tpyzq.mobile.pangu.base.InterfaceCollection;
 import com.tpyzq.mobile.pangu.data.AssessConfirmEntity;
 import com.tpyzq.mobile.pangu.data.FixFundEntity;
 import com.tpyzq.mobile.pangu.data.FundDataEntity;
 import com.tpyzq.mobile.pangu.data.FundSubsEntity;
 import com.tpyzq.mobile.pangu.data.ResultInfo;
+import com.tpyzq.mobile.pangu.http.NetWorkUtil;
 import com.tpyzq.mobile.pangu.util.ConstantUtil;
 import com.tpyzq.mobile.pangu.util.Helper;
+import com.tpyzq.mobile.pangu.util.SpUtils;
 import com.tpyzq.mobile.pangu.view.CentreToast;
+import com.tpyzq.mobile.pangu.view.CustomCenterDialog;
 import com.tpyzq.mobile.pangu.view.dialog.CancelDialog;
-import com.tpyzq.mobile.pangu.view.dialog.FundPurchaseDialog;
 import com.tpyzq.mobile.pangu.view.dialog.LoadingDialog;
-import com.tpyzq.mobile.pangu.view.dialog.MistakeDialog;
 import com.tpyzq.mobile.pangu.view.dialog.StructuredFundDialog;
 import com.tpyzq.mobile.pangu.view.pickTime.TimePickerView;
+import com.zhy.http.okhttp.callback.StringCallback;
 
 import android.app.Dialog;
 import android.content.Intent;
@@ -33,9 +36,14 @@ import android.widget.EditText;
 import android.widget.ImageView;
 import android.widget.TextView;
 
+import org.json.JSONArray;
+import org.json.JSONObject;
+
 import java.text.SimpleDateFormat;
 import java.util.Date;
 import java.util.HashMap;
+
+import okhttp3.Call;
 
 import static com.tpyzq.mobile.pangu.activity.trade.open_fund.FundInfoActivity.IS_SHOW;
 import static com.tpyzq.mobile.pangu.activity.trade.open_fund.FundInfoActivity.ITEM_CLICK;
@@ -90,10 +98,11 @@ public class AddOrModFixFundActivity extends BaseActivity implements View.OnClic
         tv_branch_enable = (TextView)findViewById(R.id.tv_branch_enable);//可用资金
         bt_commint = (Button)findViewById(R.id.bt_commint);//确定按钮
         initData();
+        getUserfulPrice();
     }
 
     private void initData() {
-        currentDate = Helper.getCurDate();
+        currentDate = Helper.getNextDate(new Date(),"yyyy-MM-dd");
         position = getIntent().getIntExtra("position",-1);//position不为-1表示为修改
         if (position != -1) {
             fixFundEntity = (FixFundEntity)getIntent().getSerializableExtra("fixFundEntity");
@@ -115,6 +124,7 @@ public class AddOrModFixFundActivity extends BaseActivity implements View.OnClic
             tv_title.setText(getResources().getString(R.string.add_fund));
             tv_start_date.setText(currentDate);
             tv_end_date.setText(Helper.getInstance().getNextYear(new Date(),"yyyy-MM-dd"));
+
             fixFundEntity = new FixFundEntity();
             fixFundEntity.setEN_FUND_DATE("1");
             fixFundEntity.setSTART_DATE(currentDate);
@@ -225,6 +235,19 @@ public class AddOrModFixFundActivity extends BaseActivity implements View.OnClic
                     CentreToast.showText(this,"请输入定投金额");
                     break;
                 }
+
+                int numDate2 = Helper.compareToDate(Helper.getCurDate(), tv_start_date.getText().toString());
+                if (numDate2 != 2) {
+                    CentreToast.showText(this,"开始日期不能小于当前日期");
+                    break;
+                }
+
+                int numDate1 = Helper.compareToDate(tv_start_date.getText().toString(), tv_end_date.getText().toString());
+                if (numDate1 != 2) {
+                    CentreToast.showText(this,"结束日期不能小于开始日期");
+                    break;
+                }
+
                 fixFundEntity.setBALANCE(balance);
                 if (position == -1) {//新增
                     if (Helper.getInstance().isNeedShowRiskDialog()) {//判断风险评测
@@ -273,7 +296,7 @@ public class AddOrModFixFundActivity extends BaseActivity implements View.OnClic
                 fixFundEntity.getFUND_CODE(), "0", fixFundEntity.getBALANCE(),
                 Helper.getInstance().getMyDate(fixFundEntity.getSTART_DATE()),
                 Helper.getInstance().getMyDate(fixFundEntity.getEND_DATE()),
-                fixFundEntity.getEN_FUND_DATE(), TAG_SUBMIT, this);
+                fixFundEntity.getEN_FUND_DATE(),"1","0","1", TAG_SUBMIT, this);
     }
 
     @Override
@@ -297,7 +320,7 @@ public class AddOrModFixFundActivity extends BaseActivity implements View.OnClic
                             if ("0".equalsIgnoreCase(code)) {
                                 resultMap = (HashMap<String, String>) info.getData();
                                 if (null == resultMap) {
-                                    MistakeDialog.showDialog("数据异常", AddOrModFixFundActivity.this, null);
+                                    showDialog("数据异常");
                                     return;
                                 }
                                 //弹框逻辑
@@ -323,7 +346,7 @@ public class AddOrModFixFundActivity extends BaseActivity implements View.OnClic
                                 intent.putExtra("resultMap", resultMap);
                                 AddOrModFixFundActivity.this.startActivityForResult(intent, REQUEST_RISK);
                             } else {
-                                MistakeDialog.showDialog(msg, AddOrModFixFundActivity.this, null);
+                                showDialog(msg);
                             }
                         }
                     });
@@ -360,30 +383,30 @@ public class AddOrModFixFundActivity extends BaseActivity implements View.OnClic
                     fixFundEntity.setFUND_COMPANY(fundDataBean.data.get(0).FUND_COMPANY);
                 } else {
                     clearView(true);
-                    MistakeDialog.showDialog(msg,this,null);
+                    showDialog(msg);
                 }
                 break;
             case TAG_MODIFY:
                 if ("0".equalsIgnoreCase(code)) {
-                    /*CentreToast.showText(this, msg);
+                    CentreToast.showText(this, msg);
                     Intent modifyIntent= new Intent();
                     modifyIntent.putExtra("fixFundEntity",fixFundEntity);
                     modifyIntent.putExtra("position",position);
                     setResult(RESULT_OK, modifyIntent);
-                    finish();*/
-                    CentreToast.showText(this, msg);
                     finish();
+                   /* CentreToast.showText(this, msg);
+                    finish();*/
                 } else {
-                    MistakeDialog.showDialog(msg,this,null);
+                    showDialog(msg);
                 }
                 break;
             case TAG_SUBMIT:
                 if ("0".equalsIgnoreCase(code)) {
                     AssessConfirmEntity assessConfirmEntity = (AssessConfirmEntity)info.getData();
                     if ("0".equalsIgnoreCase(assessConfirmEntity.IS_ABLE)) {
+                       /* CentreToast.showText(this, msg);
+                        finish();*/
                         CentreToast.showText(this, msg);
-                        finish();
-                        /*CentreToast.showText(this, msg);
                         Intent submitIntent = new Intent();
                         fixFundEntity.setSEND_BALANCE("0");
                         fixFundEntity.setDEAL_FLAG("0");
@@ -391,7 +414,7 @@ public class AddOrModFixFundActivity extends BaseActivity implements View.OnClic
                         submitIntent.putExtra("fixFundEntity",fixFundEntity);
                         submitIntent.putExtra("position",position);
                         setResult(RESULT_OK,submitIntent);
-                        finish();*/
+                        finish();
                     } else {
                         if ("1".equalsIgnoreCase(assessConfirmEntity.IS_OPEN) || "0".equalsIgnoreCase(assessConfirmEntity.IS_AGREEMENT)){
                             Intent intent = new Intent();
@@ -406,7 +429,7 @@ public class AddOrModFixFundActivity extends BaseActivity implements View.OnClic
                 }  else if ("400".equalsIgnoreCase(code)) {
                     startActivity(new Intent(AddOrModFixFundActivity.this, AgreementActivity.class));
                 } else {
-                    MistakeDialog.showDialog(msg, AddOrModFixFundActivity.this, null);
+                    showDialog(msg);
                 }
                 break;
         }
@@ -420,7 +443,7 @@ public class AddOrModFixFundActivity extends BaseActivity implements View.OnClic
         tv_end_date.setText(Helper.getInstance().getNextYear(new Date(),"yyyy-MM-dd"));
         et_input_branch.setText("");
         fixFundEntity.setSTART_DATE(currentDate);
-        fixFundEntity.setEND_DATE(currentDate);
+        fixFundEntity.setEND_DATE(Helper.getInstance().getNextYear(new Date(),"yyyy-MM-dd"));
         fixFundEntity.setEN_FUND_DATE("1");
         if (isAllClear) {
             tv_branch_enable.setText("--");
@@ -440,6 +463,14 @@ public class AddOrModFixFundActivity extends BaseActivity implements View.OnClic
         if (requestCode == REQEST_CHOOSE && resultCode == RESULT_OK) {
             FundSubsEntity fundData = (FundSubsEntity) data.getSerializableExtra("data");
             et_input_code.setText(fundData.FUND_CODE);
+            tv_fund_name.setText(fundData.FUND_NAME);
+            tv_fund_jz.setText(fundData.FUND_VAL);
+
+            if (fixFundEntity != null) {
+                fixFundEntity.setFUND_NAME(fundData.FUND_NAME);
+                fixFundEntity.setFUND_CODE(fundData.FUND_CODE);
+                fixFundEntity.setFUND_COMPANY(fundData.FUND_COMPANY);
+            }
         }
         if (requestCode == REQAGREEMENTCODE && resultCode == RESULT_OK) {//签署协议页面返回
             et_input_branch.setText("");
@@ -447,5 +478,63 @@ public class AddOrModFixFundActivity extends BaseActivity implements View.OnClic
         if (requestCode == REQUEST_RISK && resultCode == RESULT_OK) {//风险同意书签署返回
             addFixFund();
         }
+    }
+
+    private final String TAG = AddOrModFixFundActivity.class.getSimpleName();
+    private void getUserfulPrice() {
+
+        HashMap map300441 = new HashMap();
+        map300441.put("funcid", "300120");
+        map300441.put("token", SpUtils.getString(CustomApplication.getContext(), "mSession", null));
+        HashMap map300441_1 = new HashMap();
+        map300441_1.put("SEC_ID", "tpyzq");
+        map300441_1.put("FLAG", "true");
+        map300441.put("parms", map300441_1);
+
+        NetWorkUtil.getInstence().okHttpForPostString(TAG, ConstantUtil.getURL_JY_HS(), map300441, new StringCallback() {
+            @Override
+            public void onError(Call call, Exception e, int id) {
+                e.printStackTrace();
+                CentreToast.showText(AddOrModFixFundActivity.this,ConstantUtil.NETWORK_ERROR);
+            }
+
+            @Override
+            public void onResponse(String response, int id) {
+
+                if (TextUtils.isEmpty(response)) {
+                    return;
+                }
+
+                try {
+                    JSONObject jsonObject = new JSONObject(response);
+                    String code = jsonObject.optString("code");
+                    String msg = jsonObject.optString("msg");
+                    String BALANCE = "-.-";
+                    if (!"0".equals(code)) {
+                        showDialog(msg);
+                        return;
+                    }
+
+                    JSONArray jsonArray = jsonObject.optJSONArray("data");
+                    for (int i =0; i < jsonArray.length(); i++) {
+                        JSONObject object = jsonArray.getJSONObject(i);
+                        BALANCE = object.optString("BALANCE");
+                    }
+
+                    tv_branch_enable.setText(BALANCE);
+
+                } catch (Exception e) {
+                    e.printStackTrace();
+                    showDialog(ConstantUtil.JSON_ERROR);
+                }
+
+            }
+        });
+
+    }
+
+    private void showDialog(String msg){
+        CustomCenterDialog customCenterDialog = CustomCenterDialog.CustomCenterDialog(msg,CustomCenterDialog.SHOWCENTER);
+        customCenterDialog.show(getFragmentManager(),AddOrModFixFundActivity.class.toString());
     }
 }

@@ -1,7 +1,7 @@
 package com.tpyzq.mobile.pangu.activity.myself.account;
 
+import android.app.Dialog;
 import android.content.Intent;
-import android.os.AsyncTask;
 import android.text.TextUtils;
 import android.view.View;
 import android.widget.AdapterView;
@@ -18,12 +18,12 @@ import com.tpyzq.mobile.pangu.activity.myself.login.TransactionLoginActivity;
 import com.tpyzq.mobile.pangu.adapter.myself.InformAdapter;
 import com.tpyzq.mobile.pangu.base.BaseActivity;
 import com.tpyzq.mobile.pangu.data.InformEntity;
-import com.tpyzq.mobile.pangu.http.NetWorkUtil;
 import com.tpyzq.mobile.pangu.log.LogUtil;
 import com.tpyzq.mobile.pangu.util.ConstantUtil;
 import com.tpyzq.mobile.pangu.util.Helper;
 import com.tpyzq.mobile.pangu.util.SpUtils;
 import com.tpyzq.mobile.pangu.util.panguutil.UserUtil;
+import com.tpyzq.mobile.pangu.view.dialog.LoadingDialog;
 import com.zhy.http.okhttp.callback.StringCallback;
 
 import org.json.JSONArray;
@@ -48,6 +48,7 @@ public class NewStockTipsActivity extends BaseActivity implements View.OnClickLi
     private InformAdapter adapter;
     private TextView item_TextView, publish_title;
     private List<InformEntity> list;
+    private Dialog loading;
     private ImageView iv_isEmpty;
     private int i = 1;
     int refresh = 10;
@@ -57,8 +58,8 @@ public class NewStockTipsActivity extends BaseActivity implements View.OnClickLi
     public void initView() {
         SpUtils.putString(this, "mDivnum", "true");
         SpUtils.putString(this, "mDivnum_NewSharesTips", "true");
-
         list = new ArrayList<InformEntity>();
+        loading = LoadingDialog.initDialog(this, "正在查询...");
         findViewById(R.id.ASpublish_back).setOnClickListener(this);
         item_image = (ImageView) findViewById(R.id.item_image);
         it_relativeLayout = (RelativeLayout) findViewById(R.id.it_RelativeLayout);
@@ -69,6 +70,7 @@ public class NewStockTipsActivity extends BaseActivity implements View.OnClickLi
         iv_isEmpty = (ImageView) findViewById(R.id.iv_isEmpty);
 
         initData();
+        loading.show();
         setInfoNum(String.valueOf(i), false);
         getData();
     }
@@ -83,53 +85,15 @@ public class NewStockTipsActivity extends BaseActivity implements View.OnClickLi
                     mListView.getLoadingLayoutProxy().setRefreshingLabel("正在刷新");
                     mListView.getLoadingLayoutProxy().setPullLabel("下拉刷新数据");
                     mListView.getLoadingLayoutProxy().setReleaseLabel("释放开始刷新");
-
-                    new AsyncTask<Void, Void, Void>() {
-                        @Override
-                        protected Void doInBackground(Void... params) {
-                            try {
-                                Thread.sleep(1500);
-                                i = 1;
-                                setInfoNum(String.valueOf(i), false);
-                            } catch (InterruptedException e) {
-                                e.printStackTrace();
-                            }
-                            return null;
-                        }
-
-                        @Override
-                        protected void onPostExecute(Void result) {
-                            super.onPostExecute(result);
-                            //将下拉视图收起
-                            mListView.onRefreshComplete();
-                        }
-                    }.execute();
+                    i = 1;
+                    setInfoNum(String.valueOf(i), false);
                 } else if (mListView.isShownFooter()) {
                     //设置尾布局样式文字
                     mListView.getLoadingLayoutProxy().setRefreshingLabel("正在刷新");
                     mListView.getLoadingLayoutProxy().setPullLabel("上拉加载数据");
                     mListView.getLoadingLayoutProxy().setReleaseLabel("释放开始刷新");
-
-                    new AsyncTask<Void, Void, Void>() {
-                        @Override
-                        protected Void doInBackground(Void... params) {
-                            try {
-                                Thread.sleep(1500);
-                                i++;
-                                setInfoNum(String.valueOf(i), true);
-                            } catch (InterruptedException e) {
-                                e.printStackTrace();
-                            }
-                            return null;
-                        }
-
-                        @Override
-                        protected void onPostExecute(Void result) {
-                            super.onPostExecute(result);
-                            //将下拉视图收起
-                            mListView.onRefreshComplete();
-                        }
-                    }.execute();
+                    i++;
+                    setInfoNum(String.valueOf(i), true);
                 }
 
             }
@@ -156,16 +120,18 @@ public class NewStockTipsActivity extends BaseActivity implements View.OnClickLi
         map2.put("1", warning_push_time);
         map2.put("2", newshare_push_time);
         map2.put("3", inform_push_time);
-
-        NetWorkUtil.getInstence().okHttpForPostString(TAG, ConstantUtil.URL_ZX_GS, map, new StringCallback() {
+        net.okHttpForPostString(TAG, ConstantUtil.getURL_HQ_HS(), map, new StringCallback() {
             @Override
             public void onError(Call call, Exception e, int id) {
                 LogUtil.e("", e.toString());
+                loading.dismiss();
+                mListView.onRefreshComplete();
                 Helper.getInstance().showToast(NewStockTipsActivity.this, "网络异常");
             }
 
             @Override
             public void onResponse(String response, int id) {
+                loading.dismiss();
                 if (TextUtils.isEmpty(response)) {
                     return;
                 }
@@ -206,6 +172,7 @@ public class NewStockTipsActivity extends BaseActivity implements View.OnClickLi
                     e.printStackTrace();
                     Helper.getInstance().showToast(NewStockTipsActivity.this, "网络异常");
                 }
+                mListView.onRefreshComplete();
             }
         });
     }
@@ -268,5 +235,13 @@ public class NewStockTipsActivity extends BaseActivity implements View.OnClickLi
     public void onItemClick(AdapterView<?> parent, View view, int position, long id) {
         Intent intent = new Intent();
         HomeFragmentHelper.getInstance().gotoPage(this, TransactionLoginActivity.PAGE_INDEX_NewStockSubscribe, intent);
+    }
+
+    @Override
+    public void destroy() {
+        if(loading!=null) {
+            loading.dismiss();
+            loading = null;
+        }
     }
 }

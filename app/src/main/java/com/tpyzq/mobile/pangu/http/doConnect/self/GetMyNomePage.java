@@ -62,7 +62,7 @@ public class GetMyNomePage {
         map2.put("2", newshare_push_time);
         map2.put("3", inform_push_time);
 
-        NetWorkUtil.getInstence().okHttpForPostString(TAG, ConstantUtil.URL_ZX_GS, map, new StringCallback() {
+        NetWorkUtil.getInstence().okHttpForPostString(TAG, ConstantUtil.getURL_HQ_HS(), map, new StringCallback() {
 
 
             @Override

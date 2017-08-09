@@ -528,7 +528,7 @@ public class StockListActivity extends BaseActivity implements View.OnClickListe
             e.printStackTrace();
         }
 
-        NetWorkUtil.getInstence().okHttpForGet(TAG, ConstantUtil.URL, params, new StringCallback() {
+        NetWorkUtil.getInstence().okHttpForGet(TAG, ConstantUtil.getURL_HQ_HHN(), params, new StringCallback() {
             @Override
             public void onError(Call call, Exception e, int id) {
                 isCallBackSuccess = true;
@@ -607,7 +607,7 @@ public class StockListActivity extends BaseActivity implements View.OnClickListe
             e.printStackTrace();
         }
 //        LogHelper.e(TAG, "requestIndustryStockList request:"+params.toString());
-        NetWorkUtil.getInstence().okHttpForGet(TAG, ConstantUtil.URL, params, new StringCallback() {
+        NetWorkUtil.getInstence().okHttpForGet(TAG, ConstantUtil.getURL_HQ_HHN(), params, new StringCallback() {
             @Override
             public void onError(Call call, Exception e, int id) {
                 isCallBackSuccess = true;
@@ -688,7 +688,7 @@ public class StockListActivity extends BaseActivity implements View.OnClickListe
             e.printStackTrace();
         }
 
-        NetWorkUtil.getInstence().okHttpForGet(TAG, ConstantUtil.URL, params, new StringCallback() {
+        NetWorkUtil.getInstence().okHttpForGet(TAG, ConstantUtil.getURL_HQ_HHN(), params, new StringCallback() {
             @Override
             public void onError(Call call, Exception e, int id) {
                 isCallBackSuccess = true;
@@ -767,7 +767,7 @@ public class StockListActivity extends BaseActivity implements View.OnClickListe
             e.printStackTrace();
         }
 //        LogHelper.e(TAG, "request:"+params.toString());
-        NetWorkUtil.getInstence().okHttpForGet(TAG, ConstantUtil.URL, params, new StringCallback() {
+        NetWorkUtil.getInstence().okHttpForGet(TAG, ConstantUtil.getURL_HQ_HHN(), params, new StringCallback() {
             @Override
             public void onError(Call call, Exception e, int id) {
                 isCallBackSuccess = true;

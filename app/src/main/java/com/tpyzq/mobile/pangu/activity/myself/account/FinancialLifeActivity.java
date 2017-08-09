@@ -99,7 +99,7 @@ public class FinancialLifeActivity extends BaseActivity implements View.OnClickL
         map1.put("CUST_ID", UserUtil.capitalAccount);
         map.put("TOKEN", "");
 
-        NetWorkUtil.getInstence().okHttpForPostString(TAG, ConstantUtil.URL_RS, map, new StringCallback() {
+        NetWorkUtil.getInstence().okHttpForPostString(TAG, ConstantUtil.getURL_HQ_WB(), map, new StringCallback() {
             @Override
             public void onError(Call call, Exception e, int id) {
                 if (mLoadDialog != null) {
@@ -156,7 +156,7 @@ public class FinancialLifeActivity extends BaseActivity implements View.OnClickL
         map.put("PARAMS", map1);
         map1.put("cust_id", UserUtil.capitalAccount);//1021029121  UserUtil.capitalAccount
 
-        NetWorkUtil.getInstence().okHttpForPostString(TAG, ConstantUtil.URL_H5, map, new StringCallback() {
+        NetWorkUtil.getInstence().okHttpForPostString(TAG, ConstantUtil.getURL_HQ_BB(), map, new StringCallback() {
             @Override
             public void onError(Call call, Exception e, int id) {
                 if (mLoadDialog != null) {

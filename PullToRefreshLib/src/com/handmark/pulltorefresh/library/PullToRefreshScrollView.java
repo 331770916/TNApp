@@ -73,6 +73,21 @@ public class PullToRefreshScrollView extends PullToRefreshBase<ScrollView> {
 		return false;
 	}
 
+	public interface OnScrollChangedListener {
+		void onScrollChanged(ScrollView who, int x, int y, int oldx, int oldy);
+	}
+
+	private OnScrollChangedListener mOnScrollChangedListener;
+
+	/**
+	 * 暴露给外部的方法：设置滚动监听
+	 *
+	 * @param listener
+	 */
+	public void setOnScrollChangedListener(OnScrollChangedListener listener) {
+		mOnScrollChangedListener = listener;
+	}
+
 	@TargetApi(9)
 	final class InternalScrollViewSDK9 extends ScrollView {
 
@@ -104,6 +119,18 @@ public class PullToRefreshScrollView extends PullToRefreshBase<ScrollView> {
 				scrollRange = Math.max(0, child.getHeight() - (getHeight() - getPaddingBottom() - getPaddingTop()));
 			}
 			return scrollRange;
+		}
+
+		/**
+		 * 公共接口：ScrollView滚动监听
+		 */
+		@Override
+		protected void onScrollChanged(int x, int y, int oldx, int oldy) {
+			super.onScrollChanged(x, y, oldx, oldy);
+			if (mOnScrollChangedListener != null) {
+				//使用公共接口触发滚动信息的onScrollChanged方法，将滚动位置信息暴露给外部
+				mOnScrollChangedListener.onScrollChanged(this, x, y, oldx, oldy);
+			}
 		}
 	}
 }

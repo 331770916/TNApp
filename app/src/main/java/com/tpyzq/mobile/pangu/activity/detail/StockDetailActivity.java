@@ -1217,7 +1217,7 @@ public class StockDetailActivity extends BaseActivity implements  View.OnClickLi
 
         // QutataionConnectUtil.HANGQING_URL 对应 ConstantUtil.URL 外网
         //QutataionConnectUtil.NEWSTOCK_URL 对应 ConstantUtil.URL_NEW  //新股日历页的网络接口
-        NetWorkUtil.getInstence().okHttpForGet(TAG, ConstantUtil.URL, params, new StringCallback() {
+        NetWorkUtil.getInstence().okHttpForGet(TAG, ConstantUtil.getURL_HQ_HHN(), params, new StringCallback() {
             @Override
             public void onError(Call call, Exception e, int id) {
                 isCallBackSuccess = true;
@@ -1986,7 +1986,7 @@ public class StockDetailActivity extends BaseActivity implements  View.OnClickLi
         }
 
 
-        NetWorkUtil.getInstence().okHttpForGet(TAG+"detail", ConstantUtil.URL, params, new StringCallback() {
+        NetWorkUtil.getInstence().okHttpForGet(TAG+"detail", ConstantUtil.getURL_HQ_HHN(), params, new StringCallback() {
             @Override
             public void onError(Call call, Exception e, int id) {
                 LogHelper.e(TAG, e.toString());
@@ -2154,7 +2154,7 @@ public class StockDetailActivity extends BaseActivity implements  View.OnClickLi
         }
 
 
-        NetWorkUtil.getInstence().okHttpForGet(TAG+"detail", ConstantUtil.URL, params, new StringCallback() {
+        NetWorkUtil.getInstence().okHttpForGet(TAG+"detail", ConstantUtil.getURL_HQ_HHN(), params, new StringCallback() {
             @Override
             public void onError(Call call, Exception e, int id) {
                 LogHelper.e(TAG, e.toString());
@@ -2320,7 +2320,7 @@ public class StockDetailActivity extends BaseActivity implements  View.OnClickLi
         }
 
 
-        NetWorkUtil.getInstence().okHttpForGet(TAG+"kline",ConstantUtil.URL, params, new StringCallback() {
+        NetWorkUtil.getInstence().okHttpForGet(TAG+"kline",ConstantUtil.getURL_HQ_HHN(), params, new StringCallback() {
             @Override
             public void onError(Call call, Exception e, int id) {
                 LogHelper.e(TAG, e.toString());
@@ -2702,7 +2702,7 @@ public class StockDetailActivity extends BaseActivity implements  View.OnClickLi
         map2.put("phone_type","2");
         map1.put("FUNCTIONCODE", "HQFNG001");
         map1.put("PARAMS", map2);
-        NetWorkUtil.getInstence().okHttpForPostString("MarketFragment", ConstantUtil.URL_FX, map1, new StringCallback() {
+        NetWorkUtil.getInstence().okHttpForPostString("MarketFragment", ConstantUtil.getURL_HQ_BB(), map1, new StringCallback() {
             @Override
             public void onError(Call call, Exception e, int id) {
                 LogUtil.i("shareUpLoad:", e.toString());
@@ -2771,7 +2771,7 @@ public class StockDetailActivity extends BaseActivity implements  View.OnClickLi
         map300130_1.put("KEY_STR", "");
 //        map300130_1.put("REC_COUNT", 2);
         map300130.put("parms", map300130_1);
-        NetWorkUtil.getInstence().okHttpForPostString("", ConstantUtil.URL_JY, map300130, new StringCallback() {
+        NetWorkUtil.getInstence().okHttpForPostString("", ConstantUtil.getURL_JY_HS(), map300130, new StringCallback() {
             @Override
             public void onError(Call call, Exception e, int id) {
             }

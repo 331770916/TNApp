@@ -19,6 +19,7 @@ import com.tpyzq.mobile.pangu.http.NetWorkUtil;
 import com.tpyzq.mobile.pangu.util.ConstantUtil;
 import com.tpyzq.mobile.pangu.util.Helper;
 import com.tpyzq.mobile.pangu.util.SpUtils;
+import com.tpyzq.mobile.pangu.view.CentreToast;
 import com.zhy.http.okhttp.callback.StringCallback;
 
 import java.util.ArrayList;
@@ -95,11 +96,11 @@ public class CurrencyOneWeekPager extends BaseSearchPager {
         map1.put("funcid", "300445");
         map1.put("token", mSession);
         map1.put("parms", map2);
-        NetWorkUtil.getInstence().okHttpForPostString(TAG, ConstantUtil.URL_JY, map1, new StringCallback() {
+        NetWorkUtil.getInstence().okHttpForPostString(TAG, ConstantUtil.getURL_JY_HS(), map1, new StringCallback() {
             @Override
             public void onError(Call call, Exception e, int id) {
                 mListView.onRefreshComplete();
-                Helper.getInstance().showToast(mContext, ConstantUtil.NETWORK_ERROR);
+                CentreToast.showText(mContext, ConstantUtil.NETWORK_ERROR);
             }
 
             @Override

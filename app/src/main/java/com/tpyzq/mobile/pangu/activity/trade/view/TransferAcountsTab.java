@@ -302,7 +302,7 @@ public class TransferAcountsTab extends BaseTransferSubjectTabView implements
         map1.put("token",mSession);
         map1.put("parms",map2);
 
-        NetWorkUtil.getInstence().okHttpForPostString(TAG, ConstantUtil.URL_JY, map1, new StringCallback() {
+        NetWorkUtil.getInstence().okHttpForPostString(TAG, ConstantUtil.getURL_JY_HS(), map1, new StringCallback() {
             @Override
             public void onError(Call call, Exception e, int id) {
                 LogHelper.e(TAG, e.toString());
@@ -415,6 +415,15 @@ public class TransferAcountsTab extends BaseTransferSubjectTabView implements
                     mBankPasswrodEdit.setPasswordKeyboard(null);
 
                 } else {//1校验交易密码 2校验银行密码 3校验电话银行密码
+
+                    if ("1".equals(mAccountInfos.get(position).getMONEY_INTO())) {
+
+                    } else if ("2".equals(mAccountInfos.get(position).getMONEY_INTO())) {
+
+                    } else if ("3".equals(mAccountInfos.get(position).getMONEY_INTO())) {
+
+                    }
+
                     mBankPasswrodEdit.setHint("校验银行密码");
                     mBankPasswrodEdit.setClickable(true);
                     mBankPasswrodEdit.setFocusable(true);
@@ -517,7 +526,7 @@ public class TransferAcountsTab extends BaseTransferSubjectTabView implements
         map2.put("EXT_INST",bankNumber);        //银行代码
         map2.put("ACC_PWD", bankPassword);    //银行密码
         map2.put("REMARK", "");
-        if ("false".equals(Db_PUB_USERS.queryingCertification()) || !isNeedPassword) {
+        if ("0".equals(UserUtil.Keyboard) || !isNeedPassword) {
             map2.put("PWD_TYPE", "0");
         } else {
 
@@ -538,7 +547,7 @@ public class TransferAcountsTab extends BaseTransferSubjectTabView implements
         map1.put("token",mSession);
         map1.put("parms",map2);
 
-        NetWorkUtil.getInstence().okHttpForPostString(TAG, ConstantUtil.URL_JY, map1, new StringCallback() {
+        NetWorkUtil.getInstence().okHttpForPostString(TAG, ConstantUtil.getURL_JY_HS(), map1, new StringCallback() {
             @Override
             public void onError(Call call, Exception e, int id) {
                 LogHelper.e(TAG, e.toString());
@@ -605,7 +614,7 @@ public class TransferAcountsTab extends BaseTransferSubjectTabView implements
         map2.put("EXT_SERIAL_NO","");
         map2.put("REMARK", "");
 
-        if ("false".equals(Db_PUB_USERS.queryingCertification()) || !isNeedPassword) {
+        if ("0".equals(UserUtil.Keyboard) || !isNeedPassword) {
             map2.put("PWD_TYPE", "0");
         } else {
 
@@ -628,7 +637,7 @@ public class TransferAcountsTab extends BaseTransferSubjectTabView implements
         map1.put("token",mSession);
         map1.put("parms",map2);
 
-        NetWorkUtil.getInstence().okHttpForPostString(TAG, ConstantUtil.URL_JY, map1, new StringCallback() {
+        NetWorkUtil.getInstence().okHttpForPostString(TAG, ConstantUtil.getURL_JY_HS(), map1, new StringCallback() {
             @Override
             public void onError(Call call, Exception e, int id) {
                 LogHelper.e(TAG, e.toString());

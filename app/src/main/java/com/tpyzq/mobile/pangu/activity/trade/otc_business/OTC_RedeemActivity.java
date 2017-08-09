@@ -20,6 +20,7 @@ import com.tpyzq.mobile.pangu.http.NetWorkUtil;
 import com.tpyzq.mobile.pangu.interfac.IsClickedListener;
 import com.tpyzq.mobile.pangu.util.ConstantUtil;
 import com.tpyzq.mobile.pangu.util.SpUtils;
+import com.tpyzq.mobile.pangu.view.CentreToast;
 import com.tpyzq.mobile.pangu.view.dialog.MistakeDialog;
 import com.tpyzq.mobile.pangu.view.dialog.OTC_RedeemDialog;
 import com.tpyzq.mobile.pangu.view.dialog.ResultDialog;
@@ -143,7 +144,7 @@ public class OTC_RedeemActivity extends BaseActivity implements View.OnClickList
     /**
      * 获取确认信息
      */
-    private void getAffirmMsg(String mSession, String stockCode) {
+    private void getAffirmMsg(final String mSession, String stockCode) {
         HashMap map1 = new HashMap();
         HashMap map2 = new HashMap();
         map2.put("SEC_ID", "tpyzq");
@@ -153,10 +154,10 @@ public class OTC_RedeemActivity extends BaseActivity implements View.OnClickList
         map1.put("funcid", "730206");
         map1.put("token", mSession);
         map1.put("parms", map2);
-        NetWorkUtil.getInstence().okHttpForPostString(TAG, ConstantUtil.URL_JY, map1, new StringCallback() {
+        NetWorkUtil.getInstence().okHttpForPostString(TAG, ConstantUtil.getURL_JY_HS(), map1, new StringCallback() {
             @Override
             public void onError(Call call, Exception e, int id) {
-
+                CentreToast.showText(OTC_RedeemActivity.this,ConstantUtil.NETWORK_ERROR);
             }
 
             @Override
@@ -193,7 +194,8 @@ public class OTC_RedeemActivity extends BaseActivity implements View.OnClickList
 //                        etOTC_RedeemShare.setInputType(EditorInfo.TYPE_CLASS_PHONE);       //调  数字键盘
                     } else {
 
-                        MistakeDialog.showDialog(jsonObject.getString("msg"), OTC_RedeemActivity.this);
+//                        MistakeDialog.showDialog(jsonObject.getString("msg"), OTC_RedeemActivity.this);
+                        CentreToast.showText(OTC_RedeemActivity.this,jsonObject.getString("msg"));
                         //给产品名称，净值，可用资金赋值
                         tvOTC_SHProductNameValue.setText("");
                         tvOTC_SHProductJingZhiValue.setText("");

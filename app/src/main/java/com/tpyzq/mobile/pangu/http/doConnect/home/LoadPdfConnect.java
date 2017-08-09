@@ -56,7 +56,7 @@ public class LoadPdfConnect {
         map.put("prod_kind_type", mProType);
         params.put("PARAMS", map);
 
-        NetWorkUtil.getInstence().okHttpForPostString(mHttpTAG, ConstantUtil.URL_NEW_ZX, params, new StringCallback() {
+        NetWorkUtil.getInstence().okHttpForPostString(mHttpTAG, ConstantUtil.getURL_HQ_WA(), params, new StringCallback() {
             @Override
             public void onError(Call call, Exception e, int id) {
                 e.printStackTrace();

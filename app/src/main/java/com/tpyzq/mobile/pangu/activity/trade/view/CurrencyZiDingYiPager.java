@@ -23,8 +23,9 @@ import com.tpyzq.mobile.pangu.http.NetWorkUtil;
 import com.tpyzq.mobile.pangu.util.ConstantUtil;
 import com.tpyzq.mobile.pangu.util.Helper;
 import com.tpyzq.mobile.pangu.util.SpUtils;
+import com.tpyzq.mobile.pangu.view.CentreToast;
+import com.tpyzq.mobile.pangu.view.CustomCenterDialog;
 import com.tpyzq.mobile.pangu.view.dialog.LoadingDialog;
-import com.tpyzq.mobile.pangu.view.dialog.MistakeDialog;
 import com.tpyzq.mobile.pangu.view.pickTime.TimePickerView;
 import com.zhy.http.okhttp.callback.StringCallback;
 
@@ -35,6 +36,8 @@ import java.util.HashMap;
 import java.util.List;
 
 import okhttp3.Call;
+
+import static com.tpyzq.mobile.pangu.activity.trade.currency_fund.CurrencyFundQueryActivity.fragmentManager;
 
 /**
  * 作者：刘泽鹏 on 2016/8/24 10:52
@@ -140,9 +143,9 @@ public class CurrencyZiDingYiPager extends BaseSearchPager implements TimePicker
                         int days = Helper.daysBetween(startDay, endDay);
 
                         if (str.equalsIgnoreCase(startDay)) {
-                            MistakeDialog.showDialog("请选择正确日期,起始日期不能超过截止日期", (Activity) mContext);
+                            showDialog("请选择正确日期,起始日期不能超过截止日期");
                         } else if (days > 90) {
-                            MistakeDialog.showDialog("选择的日期间隔不能超过3个月", (Activity) mContext);
+                            showDialog("选择的日期间隔不能超过3个月");
                         } else {
                             mDialog = LoadingDialog.initDialog((Activity) mContext, "正在查询...");
                             mDialog.show();
@@ -184,14 +187,14 @@ public class CurrencyZiDingYiPager extends BaseSearchPager implements TimePicker
         map1.put("funcid", "300445");
         map1.put("token", mSession);
         map1.put("parms", map2);
-        NetWorkUtil.getInstence().okHttpForPostString(TAG, ConstantUtil.URL_JY, map1, new StringCallback() {
+        NetWorkUtil.getInstence().okHttpForPostString(TAG, ConstantUtil.getURL_JY_HS(), map1, new StringCallback() {
             @Override
             public void onError(Call call, Exception e, int id) {
                 if (mDialog != null) {
                     mDialog.dismiss();
                 }
                 mListView.onRefreshComplete();
-                Helper.getInstance().showToast(mContext, ConstantUtil.NETWORK_ERROR);
+                CentreToast.showText(mContext, ConstantUtil.NETWORK_ERROR);
             }
 
             @Override
@@ -238,6 +241,11 @@ public class CurrencyZiDingYiPager extends BaseSearchPager implements TimePicker
             }
         });
 
+    }
+
+    private void showDialog(String msg){
+        CustomCenterDialog customCenterDialog = CustomCenterDialog.CustomCenterDialog(msg,CustomCenterDialog.SHOWCENTER);
+        customCenterDialog.show(fragmentManager,CurrencyZiDingYiPager.class.toString());
     }
 
 }

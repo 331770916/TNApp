@@ -41,6 +41,7 @@
         </LinearLayout>
 
         <LinearLayout
+            android:paddingRight="@dimen/size20"
             android:layout_width="0dp"
             android:layout_height="wrap_content"
             android:layout_weight="1"
@@ -52,7 +53,7 @@
                 android:layout_width="match_parent"
                 android:layout_height="0dp"
                 android:layout_weight="1"
-                android:gravity="center"
+                android:gravity="center|end"
                 android:text="--"
                 android:textColor="@color/bkColor"
                 android:textSize="@dimen/txtSize14" />
@@ -62,7 +63,7 @@
                 android:layout_width="match_parent"
                 android:layout_height="0dp"
                 android:layout_weight="1"
-                android:gravity="center"
+                android:gravity="center|end"
                 android:text="--"
                 android:textColor="@color/bkColor"
                 android:textSize="@dimen/txtSize14" />

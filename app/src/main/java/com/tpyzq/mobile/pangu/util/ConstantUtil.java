@@ -14,7 +14,7 @@ import java.io.File;
 public class ConstantUtil {
 
     public static String TAG = "ConstantUtil";
-    public static String  DB_FILE_NAME 	= "mydb.db";
+    public static String DB_FILE_NAME = "mydb.db";
     public static boolean LOG_DEBUG = false;
     public static boolean LOG_IS_BASE64 = false;
     public static String PUB_STOCKLIST = "pub_stocklist";//自选股
@@ -51,129 +51,10 @@ public class ConstantUtil {
     public static final String SERVICE_NO_DATA = "服务未返回数据";
     public static final String SERVICE_NO_DATA_CODE = "-3";
     public static final String JSON_ERROR = "服务数据解析异常";
-    public static final String JSON_ERROR_CODE ="-2";
+    public static final String JSON_ERROR_CODE = "-2";
 
-
-    /**
-     * 交易相关常量
-     */
-    public static final int PAGE_INDEX_PRODUCTBUY = 2;//精选理财
-
-    public static String ONE_SERVLET = "/HTTPServer/servlet";     ////新股 & 交易 & 手机注册 & 自选股 & 双向认证 & 消息推送
-
-    public static final String TWO_SERVLET = "/hqserver/http/newGet";   //行情
-
-    public static String THREE_SERVLET = "/Bigdata/bighttp";      //资讯 & 手机验证 & H5
-
-    public static String FOUR_SERVLET = "/Bigdata/ImageServlet"; //登录验证码
-
-    public static String FOUR_SHOUJI = "/unikeyAuth/ImageServlet"; //登录验证码
-
-    public static String FIVE_RESOU = "/webapp/bigAction"; //热搜 & 金融生活
-
-    public static String FIVE_SERVLET = "/webapp/bigAction";
-
-    public static String SEVEN_ZIXUN = "/webapp/action";  //资讯
-    public static String SIX_SERVLET = "/tainiu_Business/business/WTaction";
-
-    public static String SEVEN_YZ = "/note/send";    //手机短信
-
-    public static String EIGHT_VALIDATION = "/note/auth";     //手机效验
-
-    public static String NINE_VALIDATION = "/note/sendVoice";     //发送语音
-
-//    public static boolean auto_flag = false;
-    public static String status = BuildConfig.status;
-    public static String IP = BuildConfig.IP;  //行情 IP
-    public static String SJYZM = BuildConfig.SJYZM;   //交易 IP
-    public static String BORY = BuildConfig.BORY;   //博瑞url
-    public static String BORY_APPID = BuildConfig.BORY_APPID; //博瑞id
-    public static String APP_ID = BuildConfig.APP_ID;   //生产ID
-    public static String SecurityIp = BuildConfig.SecurityIp;   //注册  绑定手机号  资产分析  交易动态  股市月账单
-    public static String SecurityIps = BuildConfig.SecurityIps;   //短信验证码 语音验证码  验证码验证
-
-
-    public static final String OPEN_ACCOUNT_CHANNEL = "tainiuapp"; //开户id
-    //新股
-    public static String URL_NEW = IP + ONE_SERVLET;
-    //行情
-    public static String URL = IP + TWO_SERVLET;
-    //资讯
-    public static String URL_ZX = IP + THREE_SERVLET;
-    //新资讯
-    public static String URL_NEW_ZX = IP + SEVEN_ZIXUN;
-
-    public static String URL_BIGDATA = IP + THREE_SERVLET;
-    //资讯 故事
-    public static String URL_ZX_GS = IP + ONE_SERVLET;
-    //交易 & 分级基金信息查询
-    public static String URL_JY = SJYZM + ONE_SERVLET;
-
-    //登录验证码
-    public static String URL_YZM = IP + FOUR_SERVLET;
-
-    //手机注册
-    public static String URL_SJLI = IP + ONE_SERVLET;
-//    public static String URL_SJLI = IPS + ONE_SERVLET;
-
-
-    //手机验证
-    public static String URL_SJYZM = SecurityIps + SEVEN_YZ;
-//    public static String URL_SJYZM = IPS + THREE_SERVLET;
-    public static String URL_VALIDATION = SecurityIps + EIGHT_VALIDATION;    //手机验证
-    //语音验证
-    public static String URL_YY = SecurityIps + NINE_VALIDATION;
-
-    //交易登录验证码
-    public static String URL_JYYZM = SJYZM + FOUR_SHOUJI;
-
-    //交易用户绑定
-    public static String URL_JYBD = IP + ONE_SERVLET;
-
-    //自选股
-    public static String URL_SELFCHOICENET = IP + ONE_SERVLET;
-
-    //查询产品信息
-
-    public static String ULR_MANAGEMONEY = IP + ONE_SERVLET;
-
-    public static String URL_MANAGEMONEY2 = IP + FIVE_SERVLET;
-
-    public static String URL_SXRZ = IP + ONE_SERVLET;
-
-    //手机注册绑定
-    public static String URL_SJZCBD = IP + ONE_SERVLET;
-//    public static String URL_SJZCBD = IPS + ONE_SERVLET;
-
-    //H5
-    public static String URL_H5 = IP + THREE_SERVLET;
-    public static String URL_H5_New = SecurityIp + THREE_SERVLET;
-
-    //分享
-    public static String URL_FX = IP + THREE_SERVLET;
-
-    //热搜
-    public static String URL_RS = IP + FIVE_RESOU;
-
-    //身份证有效期变更
-//    public static String URL_SFZYXQ = IP + SIX_SERVLET;
-    //填写信息对应接口
-//    public static String URL_USERINFO = IP + SIX_SERVLET;
-    public static String getURL_USERINFO(){
-        String URL_USERINFO = "";
-        if ("com.tpyzq.self.mobile.pangu".equalsIgnoreCase(BuildConfig.APPLICATION_ID)) {
-            URL_USERINFO = SJYZM + SIX_SERVLET;
-        } else {
-            URL_USERINFO = IP + SIX_SERVLET;
-        }
-        return URL_USERINFO;
-    }
-
-    //三存银行变更
-    public static String URL_SCYHBG = SJYZM + ONE_SERVLET;
-
-    //跟新下载
-    public static String URL_UPDATE = IP + SEVEN_ZIXUN;
+    public static final String DEFAULT_NUM = "30";//默认请求数据条数
+    public static final String ZIXUN_NUM = "10";//默认请求数据条数
 
     //显示持仓的key
     public static String APPEARHOLD = "appearHold";
@@ -182,32 +63,142 @@ public class ConstantUtil {
     public static String HOLD_DISAPPEAR = "false";    //不显示持仓
 
     public static boolean USERFUL_KEYBOARD = true;
-    public static boolean list_item_flag = true ; //    判断listview item 不能重复点击
+    public static boolean list_item_flag = true; //    判断listview item 不能重复点击
+
+    /**
+     * 交易相关常量
+     */
+    public static final int PAGE_INDEX_PRODUCTBUY = 2;//精选理财
+
+
+    //    public static boolean auto_flag = false;
+    public static String status = BuildConfig.status;
+    public static String HQ_IP = BuildConfig.IP;  //行情 IP
+    public static String JY_IP = BuildConfig.SJYZM;   //交易 IP
+    public static String BORY = BuildConfig.BORY;   //博瑞url
+    public static String BORY_APPID = BuildConfig.BORY_APPID; //博瑞id
+    public static String APP_ID = BuildConfig.APP_ID;   //生产ID
+    public static String SecurityIp = BuildConfig.SecurityIp;   //注册  绑定手机号  资产分析  交易动态  股市月账单
+    public static String SecurityIps = BuildConfig.SecurityIps;   //短信验证码 语音验证码  验证码验证
+
+
+    public static final String OPEN_ACCOUNT_CHANNEL = "tainiuapp"; //开户id
+
+
+    ///////////////////////////////////// 行情地址 /////////////////////////////////////////
+
+    //新股 & 资讯故事 & 自选股 & 微信注册 & 查询产品信息
+    public static String getURL_HQ_HS() {
+        return HQ_IP + "/HTTPServer/servlet";
+    }
+
+    //行情
+    public static String getURL_HQ_HHN() {
+        return HQ_IP + "/hqserver/http/newGet";
+    }
+
+    //H5 & 分享
+    public static String getURL_HQ_BB() {
+        return HQ_IP + "/Bigdata/bighttp";
+    }
+
+    //热搜
+    public static String getURL_HQ_WB() {
+        return HQ_IP + "/webapp/bigAction";
+    }
+
+    //资讯 & 跟新下载
+    public static String getURL_HQ_WA() {
+        return HQ_IP + "/webapp/action";
+    }
 
     //1.7.1要闻
-    public static String URL_IMPORTANT = IP + "/news/important";
-    //1.7.2直播
-    public static String URL_STREAMING = IP + "/news/streaming";
-    //1.7.3 查询栏目信息列表
-    public static String URL_HKSTOCKS = IP + "/news/hkstocks";
-    //1.7.4 信息详情
-    public static String URL_DETAIL = IP + "/news/detail";
-    //1.7.5 栏目list
-    public static String URL_CLASSLIST = IP + "/news/classlist";
-    public static final String DEFAULT_NUM = "30";//默认请求数据条数
-    public static final String ZIXUN_NUM = "10";//默认请求数据条数
+    public static String getURL_IMPORTANT() {
+        return HQ_IP + "/news/important";
+    }
 
+    //1.7.2直播
+    public static String getURL_STREAMING() {
+        return HQ_IP + "/news/streaming";
+    }
+
+    //1.7.3 查询栏目信息列表
+    public static String getURL_HKSTOCKS() {
+        return HQ_IP + "/news/hkstocks";
+    }
+
+    //1.7.4 信息详情
+    public static String getURL_DETAIL() {
+        return HQ_IP + "/news/detail";
+    }
+
+    //1.7.5 栏目list
+    public static String getURL_CLASSLIST() {
+        return HQ_IP + "/news/classlist";
+    }
+
+    //1.7.6 股票相关新闻
+    public static String getURL_STOCKNEWS(){
+        return HQ_IP + "/news/stockNews";
+    }
+
+
+    ///////////////////////////////////// 交易地址 /////////////////////////////////////////
+
+    //分级基金信息查询 & 三存银行变更
+    public static String getURL_JY_HS() {
+        return JY_IP + "/HTTPServer/servlet";
+    }
+
+    //交易登录图片验证码
+    public static String getURL_JY_UI() {
+        return JY_IP + "/unikeyAuth/ImageServlet";
+    }
+
+    ///////////////////////////////////// HTTPS地址 /////////////////////////////////////////
     //新的URL路径
     //手机图片验证码
-    public static String  URL_HANDSE_PICTURE = SecurityIps + "/note/getImage";
+    public static String getURL_HANDSE_PICTURE() {
+        return SecurityIps + "/note/getImage";
+    }
+
     //手机短信验证码
-    public static String  URL_HANDSE_SMS = SecurityIps + "/note/imgAuthSms";
+    public static String getURL_HANDSE_SMS() {
+        return SecurityIps + "/note/imgAuthSms";
+    }
+
     //手机语音验证码
-    public static String  URL_HANDSE_SPEECH = SecurityIps + "/note/imgAuthVoice?=&=&=";
+    public static String getURL_HANDSE_SPEECH() {
+        return SecurityIps + "/note/imgAuthVoice?=&=&=";
+    }
+
     //手机注册
-    public static String  URL_HANDSE_REGISTER = SecurityIps + "/note/authAndRegister";
+    public static String getURL_HANDSE_REGISTER() {
+        return SecurityIps + "/note/authAndRegister";
+    }
+
     //手机绑定手机号
-    public static String  URL_HANDSE_BINDING = SecurityIps + "/note/WXBinding";
+    public static String getURL_HANDSE_BINDING() {
+        return SecurityIps + "/note/WXBinding";
+    }
+
+    //H5
+    // 资产分析 & 交易动态 & 股市月账单
+    public static String getURL_S_BB() {
+        return SecurityIp + "/Bigdata/bighttp";
+    }
+
+    public static String getURL_USERINFO() {
+        String URL_USERINFO = "";
+        if ("com.tpyzq.self.mobile.pangu".equalsIgnoreCase(BuildConfig.APPLICATION_ID)) {
+            URL_USERINFO = JY_IP + "/tainiu_Business/business/WTaction";
+        } else {
+            URL_USERINFO = HQ_IP + "/tainiu_Business/business/WTaction";
+        }
+        return URL_USERINFO;
+    }
+
+
 /////////////// SDcard文件存储位置相关/////////////////////////////////////////
 
     /**
@@ -224,46 +215,15 @@ public class ConstantUtil {
         return file;
     }
 
-    public static void setUrl(String appip,String jyip) {
+    public static void setUrl(String appip, String jyip) {
         if (!TextUtils.isEmpty(appip)) {
-            IP = appip;
-        } else {
-            appip = IP;
+            HQ_IP = appip;
         }
 
         if (!TextUtils.isEmpty(jyip)) {
-            SJYZM = jyip;
-        } else {
-            jyip = SJYZM;
+            JY_IP = jyip;
         }
-        URL_NEW = appip + ONE_SERVLET;
-        URL = appip + TWO_SERVLET;
-        URL_BIGDATA = appip + THREE_SERVLET;
-        URL_ZX_GS = appip + ONE_SERVLET;
-        URL_YZM = appip + FOUR_SERVLET;
-        URL_JYBD = appip + ONE_SERVLET;
-        URL_SELFCHOICENET = appip + ONE_SERVLET;
-        ULR_MANAGEMONEY = appip + ONE_SERVLET;
-        URL_MANAGEMONEY2 = appip + FIVE_SERVLET;
-        URL_SXRZ = appip + ONE_SERVLET;
-        URL_FX = appip + THREE_SERVLET;
-        URL_RS = appip + FIVE_RESOU;
-        URL_SCYHBG = appip + ONE_SERVLET;
-//        URL_SFZYXQ = appip + SIX_SERVLET;
-        URL_UPDATE = appip + SEVEN_ZIXUN;
-        //交易
-        URL_JY = jyip + ONE_SERVLET;
-        URL_JYYZM = jyip + FOUR_SHOUJI;
-        URL_SCYHBG = jyip + ONE_SERVLET;
-
-//        URL_SJLI = appip + ONE_SERVLET;             //http 手机注册
-//        URL_SJYZM = appip + THREE_SERVLET;          //http 发送短信
-//        URL_SJZCBD = appip + ONE_SERVLET;           //http 手机注册绑定
-//        URL_YY = appip + SEVEN_ZIXUN;               //http 发送语音
-//        URL_H5 = appip + THREE_SERVLET;                 //http H5
 
 
-//        QutataionConnectUtil.HANGQING_URL = URL;
-//        QutataionConnectUtil.NEWSTOCK_URL = URL_NEW;
     }
 }

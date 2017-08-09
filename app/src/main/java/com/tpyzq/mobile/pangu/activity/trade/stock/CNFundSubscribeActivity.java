@@ -21,6 +21,7 @@ import com.tpyzq.mobile.pangu.http.NetWorkUtil;
 import com.tpyzq.mobile.pangu.interfac.ClearData;
 import com.tpyzq.mobile.pangu.util.ConstantUtil;
 import com.tpyzq.mobile.pangu.util.SpUtils;
+import com.tpyzq.mobile.pangu.view.CustomCenterDialog;
 import com.tpyzq.mobile.pangu.view.dialog.CNFundSubscribeDialog;
 import com.tpyzq.mobile.pangu.view.dialog.MistakeDialog;
 import com.zhy.http.okhttp.callback.StringCallback;
@@ -171,7 +172,7 @@ public class CNFundSubscribeActivity extends BaseActivity implements View.OnClic
         map1.put("funcid", "300198");
         map1.put("token", mSession);
         map1.put("parms", map2);
-        NetWorkUtil.getInstence().okHttpForPostString(TAG, ConstantUtil.URL_JY, map1, new StringCallback() {
+        NetWorkUtil.getInstence().okHttpForPostString(TAG, ConstantUtil.getURL_JY_HS(), map1, new StringCallback() {
             @Override
             public void onError(Call call, Exception e, int id) {
                 e.toString();
@@ -213,7 +214,8 @@ public class CNFundSubscribeActivity extends BaseActivity implements View.OnClic
                         map.put("nav", nav);
                     }
                 } else {
-                    MistakeDialog.showDialog(bean.getMsg(),CNFundSubscribeActivity.this);
+                    CustomCenterDialog customCenterDialog = CustomCenterDialog.CustomCenterDialog(bean.getMsg(),CustomCenterDialog.SHOWCENTER);
+                    customCenterDialog.show(getFragmentManager(),CNFundSubscribeActivity.class.toString());
                 }
             }
         });

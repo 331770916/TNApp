@@ -59,15 +59,14 @@ public class ExitDialog extends BaseDialog implements View.OnClickListener {
                 dismiss();
                 break;
             case R.id.Confirmbtn:
-                CustomApplication.getInstance().finish();
-                ((Activity) context).finish();
+//                CustomApplication.getInstance().finish();
+//
 //                int currentVersion = android.os.Build.VERSION.SDK_INT;
 //                if (currentVersion > android.os.Build.VERSION_CODES.ECLAIR_MR1) {
 //                    Intent startMain = new Intent(Intent.ACTION_MAIN);
 //                    startMain.addCategory(Intent.CATEGORY_HOME);
 //                    startMain.setFlags(Intent.FLAG_ACTIVITY_NEW_TASK);
 //                    context.startActivity(startMain);
-//                    System.exit(0);
 //                } else {// android2.1
 //                    ActivityManager am = (ActivityManager) context.getSystemService(ACTIVITY_SERVICE);
 //                    am.restartPackage(context.getPackageName());
@@ -91,6 +90,9 @@ public class ExitDialog extends BaseDialog implements View.OnClickListener {
                 Db_PUB_USERS.UpdateIslogin(userEntity);
                 Db_PUB_USERS.UpdateCertification(userEntity);
                 Db_PUB_USERS.UpdateKeyboard(userEntity);
+//                System.exit(0);
+                this.dismiss();
+                ((Activity) context).finish();
                 break;
         }
     }

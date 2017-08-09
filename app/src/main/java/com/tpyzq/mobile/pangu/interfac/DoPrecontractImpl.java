@@ -33,7 +33,7 @@ public class DoPrecontractImpl implements IDoPrecontract {
         map.put("fund_account", fund_account);
         params.put("PARAMS", map);
 
-        OkHttpUtil.okHttpForPostString(TAG, ConstantUtil.URL_UPDATE, params, new StringCallback() {
+        OkHttpUtil.okHttpForPostString(TAG, ConstantUtil.getURL_HQ_WA(), params, new StringCallback() {
             @Override
             public void onError(Call call, Exception e, int id) {
                 e.printStackTrace();

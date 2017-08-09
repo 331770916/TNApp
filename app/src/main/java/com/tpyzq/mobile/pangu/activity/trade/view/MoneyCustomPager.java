@@ -27,6 +27,7 @@ import com.tpyzq.mobile.pangu.log.LogHelper;
 import com.tpyzq.mobile.pangu.util.ConstantUtil;
 import com.tpyzq.mobile.pangu.util.Helper;
 import com.tpyzq.mobile.pangu.util.SpUtils;
+import com.tpyzq.mobile.pangu.view.CentreToast;
 import com.tpyzq.mobile.pangu.view.dialog.LoadingDialog;
 import com.tpyzq.mobile.pangu.view.dialog.MistakeDialog;
 import com.tpyzq.mobile.pangu.view.dialog.ResultDialog;
@@ -122,14 +123,14 @@ public class MoneyCustomPager extends BaseSearchPager {
         map2.put("POSITION_STR", i);
         map2.put("REQUEST_NUM", j);
 
-        NetWorkUtil.getInstence().okHttpForPostString(TAG, ConstantUtil.URL_JY, map, new StringCallback() {
+        NetWorkUtil.getInstence().okHttpForPostString(TAG, ConstantUtil.getURL_JY_HS(), map, new StringCallback() {
             @Override
             public void onError(Call call, Exception e, int id) {
                 if (mDialog!=null){
                     mDialog.dismiss();
                 }
                 LogHelper.e(TAG, e.toString());
-                ResultDialog.getInstance().showText("网络异常");
+                CentreToast.showText(mContext,ConstantUtil.NETWORK_ERROR);
                 kong_null.setVisibility(View.GONE);
             }
 
@@ -178,7 +179,7 @@ public class MoneyCustomPager extends BaseSearchPager {
                             if (mDialog != null) {
                                 mDialog.dismiss();
                             }
-                            Helper.getInstance().showToast(mContext," 暂无数据");
+                            CentreToast.showText(mContext,"暂无数据");
                         }
                     } else if ("-6".equals(jsonObject.getString("code"))) {
                         if (mDialog!=null){
@@ -189,7 +190,8 @@ public class MoneyCustomPager extends BaseSearchPager {
                         if (mDialog!=null){
                             mDialog.dismiss();
                         }
-                        ResultDialog.getInstance().showText(jsonObject.getString("msg"));
+                        CentreToast.showText(mContext,jsonObject.getString("msg"));
+
                         kong_null.setVisibility(View.GONE);
                     }
                 } catch (JSONException e) {

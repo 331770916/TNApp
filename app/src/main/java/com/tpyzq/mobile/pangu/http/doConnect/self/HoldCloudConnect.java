@@ -53,7 +53,7 @@ public class HoldCloudConnect {
         map2.put("FLAG", "true");
         map1.put("parms", map2);
 
-        NetWorkUtil.getInstence().okHttpForPostString(mHttpTAG, ConstantUtil.URL_JY, map1, new StringCallback() {
+        NetWorkUtil.getInstence().okHttpForPostString(mHttpTAG, ConstantUtil.getURL_JY_HS(), map1, new StringCallback() {
             @Override
             public void onError(Call call, Exception e, int id) {
                 LogHelper.e(TAG, e.toString());

@@ -67,12 +67,13 @@
                     android:layout_centerVertical="true"
                     android:layout_marginLeft="@dimen/size20"
                     android:text="@string/JiJinDaiMa"
-                    android:textColor="@color/hushenTab_titleColor"
+                    android:textColor="@color/texts"
                     android:textSize="@dimen/txtSize15" />
 
                 <TextView
                     android:textSize="@dimen/size14"
                     android:id="@+id/textView8"
+                    android:textColor="@color/texts"
                     android:layout_width="wrap_content"
                     android:layout_height="match_parent"
                     android:gravity="center"
@@ -98,7 +99,7 @@
                     android:hint="@string/QingShuRuJiJinDaiMa"
                     android:maxLength="6"
                     android:singleLine="true"
-                    android:textColor="@color/textss"
+                    android:textColor="@color/title_list"
                     android:textColorHint="@color/texts"
                     android:textSize="@dimen/txtSize14" />
 
@@ -124,7 +125,7 @@
                     android:layout_centerVertical="true"
                     android:layout_marginLeft="@dimen/size20"
                     android:text="@string/mergershare"
-                    android:textColor="@color/hushenTab_titleColor"
+                    android:textColor="@color/texts"
                     android:textSize="@dimen/txtSize15" />
 
                 <EditText
@@ -139,7 +140,7 @@
                     android:hint="@string/input_mergershare_1"
                     android:inputType="numberDecimal"
                     android:singleLine="true"
-                    android:textColor="@color/textss"
+                    android:textColor="@color/title_list"
                     android:textColorHint="@color/texts"
                     android:textSize="@dimen/txtSize14" />
 

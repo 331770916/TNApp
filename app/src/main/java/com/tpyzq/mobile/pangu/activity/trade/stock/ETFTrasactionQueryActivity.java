@@ -14,8 +14,9 @@ import com.tpyzq.mobile.pangu.base.InterfaceCollection;
 import com.tpyzq.mobile.pangu.data.EtfDataEntity;
 import com.tpyzq.mobile.pangu.data.ResultInfo;
 import com.tpyzq.mobile.pangu.http.OkHttpUtil;
-import com.tpyzq.mobile.pangu.util.Helper;
 import com.tpyzq.mobile.pangu.util.SpUtils;
+import com.tpyzq.mobile.pangu.view.CentreToast;
+import com.tpyzq.mobile.pangu.view.CustomCenterDialog;
 import com.tpyzq.mobile.pangu.view.dialog.LoadingDialog;
 import com.tpyzq.mobile.pangu.view.dialog.MistakeDialog;
 
@@ -122,7 +123,7 @@ public class ETFTrasactionQueryActivity extends BaseActivity {
                         lv.setMode(PullToRefreshBase.Mode.BOTH);
                     }
                 } else  if ("400".equals(info.getCode()) || "-2".equals(info.getCode()) || "-3".equals(info.getCode())) {   //  网络错误 解析错误 其他
-                    Helper.getInstance().showToast(ETFTrasactionQueryActivity.this, info.getMsg());
+                    CentreToast.showText(ETFTrasactionQueryActivity.this, info.getMsg());
                 }else if ("-6".equals(info.getCode())){
                     skip.startLogin(ETFTrasactionQueryActivity.this);
                 } else {
@@ -131,7 +132,8 @@ public class ETFTrasactionQueryActivity extends BaseActivity {
                     if (isRefresh&&mList.size()==0) {
                         lv.setMode(PullToRefreshBase.Mode.PULL_FROM_START);
                     }
-                    MistakeDialog.showDialog(msg,ETFTrasactionQueryActivity.this,null);
+                    CustomCenterDialog customCenterDialog = CustomCenterDialog.CustomCenterDialog(msg,CustomCenterDialog.SHOWCENTER);
+                    customCenterDialog.show(getFragmentManager(),ETFTrasactionQueryActivity.class.toString());
                 }
                 if (null!=mDialog && mDialog.isShowing()) {
                     mDialog.dismiss();

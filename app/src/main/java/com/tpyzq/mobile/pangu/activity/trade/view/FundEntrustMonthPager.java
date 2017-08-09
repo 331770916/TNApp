@@ -22,6 +22,7 @@ import com.tpyzq.mobile.pangu.http.NetWorkUtil;
 import com.tpyzq.mobile.pangu.util.ConstantUtil;
 import com.tpyzq.mobile.pangu.util.SpUtils;
 import com.tpyzq.mobile.pangu.util.ToastUtils;
+import com.tpyzq.mobile.pangu.view.CentreToast;
 import com.zhy.http.okhttp.callback.StringCallback;
 
 import org.json.JSONArray;
@@ -70,8 +71,8 @@ public class FundEntrustMonthPager extends BaseTransactionPager {
         fundEntrustTodayAdapter = new FundEntrustTodayAdapter(mContext);
         tv_text1.setText("名称");
         tv_text2.setText("委托时间");
-        tv_text3.setText("委托金额/份额");
-        tv_text4.setText("业务类型/状态");
+        tv_text3.setText("金额/份额");
+        tv_text4.setText("类型/状态");
         lv_transaction.setAdapter(fundEntrustTodayAdapter);
         lv_transaction.setEmptyView(tv_empty);
         Update();
@@ -98,10 +99,10 @@ public class FundEntrustMonthPager extends BaseTransactionPager {
         map720325_1.put("POSITION_STR", point);
         map720325_1.put("FLAG", "true");
         map720325.put("parms", map720325_1);
-        NetWorkUtil.getInstence().okHttpForPostString("", ConstantUtil.URL_JY, map720325, new StringCallback() {
+        NetWorkUtil.getInstence().okHttpForPostString("", ConstantUtil.getURL_JY_HS(), map720325, new StringCallback() {
             @Override
             public void onError(Call call, Exception e, int id) {
-                Toast.makeText(mContext, "网络访问失败", Toast.LENGTH_SHORT).show();
+                CentreToast.showText(mContext,ConstantUtil.NETWORK_ERROR);
             }
 
             @Override
@@ -130,7 +131,7 @@ public class FundEntrustMonthPager extends BaseTransactionPager {
                     } else if ("-6".equals(code)) {
                         mContext.startActivity(new Intent(mContext, TransactionLoginActivity.class));
                     } else {
-                        ToastUtils.showShort(mContext, msg);
+                        CentreToast.showText(mContext,msg);
                     }
 
                 } catch (JSONException e) {
@@ -207,7 +208,7 @@ public class FundEntrustMonthPager extends BaseTransactionPager {
                 if (sure >= 30) {
 
                 } else {
-                    ToastUtils.showShort(mContext, "已经滑到底了");
+                    CentreToast.showText(mContext,"已经滑到底了");
                 }
             }
         });

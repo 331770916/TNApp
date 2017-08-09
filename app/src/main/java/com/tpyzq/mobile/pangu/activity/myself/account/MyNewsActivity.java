@@ -81,7 +81,7 @@ public class MyNewsActivity extends BaseActivity implements View.OnClickListener
         map2.put("3", inform_push_time);
         String a = new Gson().toJson(map);
         LogUtil.e("----------req:"+map);
-        NetWorkUtil.getInstence().okHttpForPostString("", ConstantUtil.URL_ZX_GS, map, new StringCallback() {
+        NetWorkUtil.getInstence().okHttpForPostString("", ConstantUtil.getURL_HQ_HS(), map, new StringCallback() {
 
             private int count_five_int;
             private int count_four_int;

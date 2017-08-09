@@ -15,6 +15,7 @@ import com.tpyzq.mobile.pangu.activity.myself.handhall.AccountPowerActivity;
 import com.tpyzq.mobile.pangu.activity.myself.handhall.AgreementActivity;
 import com.tpyzq.mobile.pangu.activity.myself.handhall.AgreementSignActvity;
 import com.tpyzq.mobile.pangu.activity.myself.handhall.ChangeDepositBankActivity;
+import com.tpyzq.mobile.pangu.activity.myself.handhall.ChangeMoneyPwdActivity;
 import com.tpyzq.mobile.pangu.activity.myself.handhall.ChangePasswordActivity;
 import com.tpyzq.mobile.pangu.activity.myself.handhall.FrogetTransactionPwdActivity;
 import com.tpyzq.mobile.pangu.activity.myself.handhall.StartyUpBoardActivity;
@@ -60,7 +61,7 @@ public class AccountPager extends BaseMySelfPager implements View.OnClickListene
             tv_userdata_change/*修改个人资料*/, tv_warn/*退市和风险警示*/, tv_myself_partner/*股东账户查询*/, tv_transactionpass_change/*修改交易密码*/,
             tv_server /*联系客服*/, tv_gem_sign,/*创业板转签*/
             tv_three_bankdeposit,/*三存银行*/
-            tv_refresh_iccard/*更新身份证有效期*/, tv_forget_transactionpw/*忘记交易密码*/;
+            tv_refresh_iccard/*更新身份证有效期*/, tv_forget_transactionpw/*忘记交易密码*/,tv_change_moneypw/*修改资金密码*/;
     private ImageView iv_open_account;
     private TextView tv_login;
     private ImageView iv_title;
@@ -86,6 +87,7 @@ public class AccountPager extends BaseMySelfPager implements View.OnClickListene
         tv_three_bankdeposit = (TextView) rootView.findViewById(R.id.tv_three_bankdeposit);
         tv_refresh_iccard = (TextView) rootView.findViewById(R.id.tv_refresh_iccard);
         tv_forget_transactionpw = (TextView) rootView.findViewById(R.id.tv_forget_transactionpw);
+        tv_change_moneypw = (TextView) rootView.findViewById(R.id.tv_change_moneypw);
         iv_title = (ImageView) rootView.findViewById(R.id.iv_title);
         tv_login = (TextView) rootView.findViewById(R.id.tv_login);
         iv_open_account = (ImageView) rootView.findViewById(R.id.iv_open_account);
@@ -123,6 +125,7 @@ public class AccountPager extends BaseMySelfPager implements View.OnClickListene
         tv_three_bankdeposit.setOnClickListener(this);
         tv_refresh_iccard.setOnClickListener(this);
         tv_forget_transactionpw.setOnClickListener(this);
+        tv_change_moneypw.setOnClickListener(this);
     }
 
 
@@ -167,7 +170,7 @@ public class AccountPager extends BaseMySelfPager implements View.OnClickListene
         HashMap<Object, Object> mapHQTNG104_1 = new HashMap<>();
         mapHQTNG104_1.put("CUST_ID", UserUtil.capitalAccount);
         mapHQTNG104.put("PARAMS", mapHQTNG104_1);
-        NetWorkUtil.getInstence().okHttpForPostString("", ConstantUtil.URL_RS, mapHQTNG104, new StringCallback() {
+        NetWorkUtil.getInstence().okHttpForPostString("", ConstantUtil.getURL_HQ_WB(), mapHQTNG104, new StringCallback() {
             @Override
             public void onError(Call call, Exception e, int id) {
                 tagCloudAdapter = new TagCloudAdapter(list, userHeaderListen);
@@ -280,6 +283,10 @@ public class AccountPager extends BaseMySelfPager implements View.OnClickListene
                 break;
             case R.id.tv_forget_transactionpw:
                 intent.setClass(mContext, FrogetTransactionPwdActivity.class);
+                mContext.startActivity(intent);
+                break;
+            case R.id.tv_change_moneypw:
+                intent.setClass(mContext, ChangeMoneyPwdActivity.class);
                 mContext.startActivity(intent);
                 break;
             default:

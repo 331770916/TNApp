@@ -20,6 +20,7 @@ import com.tpyzq.mobile.pangu.data.EquitiesWithDrawEntity;
 import com.tpyzq.mobile.pangu.http.NetWorkUtil;
 import com.tpyzq.mobile.pangu.util.ConstantUtil;
 import com.tpyzq.mobile.pangu.util.SpUtils;
+import com.tpyzq.mobile.pangu.view.CentreToast;
 import com.tpyzq.mobile.pangu.view.dialog.RevokeDialog;
 import com.zhy.http.okhttp.callback.StringCallback;
 
@@ -101,8 +102,8 @@ public class EntrustTransactionPager extends BaseTransactionPager {
         };
         equitiesWithDrawBeans = new ArrayList<EquitiesWithDrawEntity>();
         tv_text1.setText("股票名称");
-        tv_text2.setText("委托价/成交价");
-        tv_text3.setText("委托数/成交数");
+        tv_text2.setText("委托/成交价");
+        tv_text3.setText("委托/成交数");
         tv_text4.setText("状态/买卖");
         equitiesWithdrawAdapter = new EquitiesWithdrawAdapter(mContext);
         lv_transaction.setAdapter(equitiesWithdrawAdapter);
@@ -119,10 +120,10 @@ public class EntrustTransactionPager extends BaseTransactionPager {
         map300130_1.put("FUND_ACCOUNT", "101000913");
         map300130_1.put("ACTION_IN", "1");
         map300130.put("parms", map300130_1);
-        NetWorkUtil.getInstence().okHttpForPostString("", ConstantUtil.URL_JY, map300130, new StringCallback() {
+        NetWorkUtil.getInstence().okHttpForPostString("", ConstantUtil.getURL_JY_HS(), map300130, new StringCallback() {
             @Override
             public void onError(Call call, Exception e, int id) {
-                Toast.makeText(mContext, "网络访问失败", Toast.LENGTH_SHORT).show();
+                CentreToast.showText(mContext,ConstantUtil.NETWORK_ERROR);
                 lv_transaction.onRefreshComplete();
             }
 

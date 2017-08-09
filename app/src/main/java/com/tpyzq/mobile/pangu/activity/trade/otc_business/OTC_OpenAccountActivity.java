@@ -13,6 +13,7 @@ import com.tpyzq.mobile.pangu.data.OTC_OpenAccountEntity;
 import com.tpyzq.mobile.pangu.http.NetWorkUtil;
 import com.tpyzq.mobile.pangu.util.ConstantUtil;
 import com.tpyzq.mobile.pangu.util.SpUtils;
+import com.tpyzq.mobile.pangu.view.CentreToast;
 import com.tpyzq.mobile.pangu.view.dialog.MistakeDialog;
 import com.tpyzq.mobile.pangu.view.dialog.ResultDialog;
 import com.zhy.http.okhttp.callback.StringCallback;
@@ -118,7 +119,7 @@ public class OTC_OpenAccountActivity extends BaseActivity implements View.OnClic
         map1.put("funcid", "300507");
         map1.put("token", mSession);
         map1.put("parms", map2);
-        NetWorkUtil.getInstence().okHttpForPostString(TAG, ConstantUtil.URL_JY, map1, new StringCallback() {
+        NetWorkUtil.getInstence().okHttpForPostString(TAG, ConstantUtil.getURL_JY_HS(), map1, new StringCallback() {
             @Override
             public void onError(Call call, Exception e, int id) {
 
@@ -139,7 +140,7 @@ public class OTC_OpenAccountActivity extends BaseActivity implements View.OnClic
                     }else if("0".equals(code)){
                         MistakeDialog.showDialog(res.optString("msg"), OTC_OpenAccountActivity.this);
                     }else {
-                        MistakeDialog.showDialog(res.optString("msg"), OTC_OpenAccountActivity.this);
+                        CentreToast.showText(OTC_OpenAccountActivity.this,res.optString("msg"));
                     }
                 }catch (JSONException e){
                     e.printStackTrace();
@@ -194,10 +195,10 @@ public class OTC_OpenAccountActivity extends BaseActivity implements View.OnClic
         map1.put("funcid", "300509");
         map1.put("token", mSession);
         map1.put("parms", map2);
-        NetWorkUtil.getInstence().okHttpForPostString(TAG, ConstantUtil.URL_JY, map1, new StringCallback() {
+        NetWorkUtil.getInstence().okHttpForPostString(TAG, ConstantUtil.getURL_JY_HS(), map1, new StringCallback() {
             @Override
             public void onError(Call call, Exception e, int id) {
-                ResultDialog.getInstance().showText("网络异常");
+                CentreToast.showText(OTC_OpenAccountActivity.this,ConstantUtil.NETWORK_ERROR);
             }
 
             @Override
@@ -225,7 +226,7 @@ public class OTC_OpenAccountActivity extends BaseActivity implements View.OnClic
                             }
                         }
                     }else {
-                        ResultDialog.getInstance().showText(res.optString("msg"));
+                        CentreToast.showText(OTC_OpenAccountActivity.this,res.optString("msg"));
                     }
                 }catch (JSONException e){
                     e.printStackTrace();

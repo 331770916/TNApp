@@ -241,7 +241,8 @@ public class StructuredFundDialog extends BaseDialog implements View.OnClickList
             tv_8.setText(fixFundEntity.getBALANCE());
             tv_10.setText(fixFundEntity.getSTART_DATE());
             tv_12.setText(fixFundEntity.getEND_DATE());
-        } else if (AddOrModFixFundActivity.TAG_SUBMIT.equalsIgnoreCase(mTAG)||AddOrModFixFundActivity.TAG_MODIFY.equalsIgnoreCase(mTAG)) {//定投基金增加或修改
+//        } else if (AddOrModFixFundActivity.TAG_SUBMIT.equalsIgnoreCase(mTAG)||AddOrModFixFundActivity.TAG_MODIFY.equalsIgnoreCase(mTAG)) {//定投基金增加或修改
+        } else if (AddOrModFixFundActivity.TAG_REQUEST_FUND.equalsIgnoreCase(mTAG)) {//定投基金增加或修改
             FixFundEntity fixFundEntity = (FixFundEntity) object;
             tv_title.setText(mShare);
             img_1.setImageResource(R.mipmap.icon_fix_fund);
@@ -292,7 +293,8 @@ public class StructuredFundDialog extends BaseDialog implements View.OnClickList
                 } else if (ETFRevokeActivity.TAG.equalsIgnoreCase(mTAG)) {
                     mExpression.State();
                     dismiss();
-                } else if (AddOrModFixFundActivity.TAG_SUBMIT.equalsIgnoreCase(mTAG)||AddOrModFixFundActivity.TAG_MODIFY.equalsIgnoreCase(mTAG)) {
+//                } else if (AddOrModFixFundActivity.TAG_SUBMIT.equalsIgnoreCase(mTAG)||AddOrModFixFundActivity.TAG_MODIFY.equalsIgnoreCase(mTAG)) {
+                } else if (AddOrModFixFundActivity.TAG_REQUEST_FUND.equalsIgnoreCase(mTAG)) {
                     mExpression.State();
                     dismiss();
                 }

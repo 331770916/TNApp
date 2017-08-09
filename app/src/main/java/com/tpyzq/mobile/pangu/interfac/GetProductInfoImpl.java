@@ -35,7 +35,7 @@ public class GetProductInfoImpl implements IGetProductInfo {
 
         params.put("PARAMS", map);
 
-        NetWorkUtil.getInstence().okHttpForPostString(TAG, ConstantUtil.URL_MANAGEMONEY2, params, new StringCallback() {
+        NetWorkUtil.getInstence().okHttpForPostString(TAG, ConstantUtil.getURL_HQ_WB(), params, new StringCallback() {
             @Override
             public void onError(Call call, Exception e, int id) {
                 e.printStackTrace();

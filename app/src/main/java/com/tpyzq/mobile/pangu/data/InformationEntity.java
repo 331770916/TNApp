@@ -25,6 +25,35 @@ public class InformationEntity {
     //1.7.5栏目list
     private String classno;//id
     private String classname;//栏目名称
+    //1.7.6股票新闻
+    private String secuCode;
+    private String secuAbbr;
+    private int type;
+
+    public int getType() {
+        return type;
+    }
+
+    public void setType(int type) {
+        this.type = type;
+    }
+
+    public String getSecuCode() {
+        return secuCode;
+    }
+
+    public void setSecuCode(String secuCode) {
+        this.secuCode = secuCode;
+    }
+
+    public String getSecuAbbr() {
+        return secuAbbr;
+    }
+
+    public void setSecuAbbr(String secuAbbr) {
+        this.secuAbbr = secuAbbr;
+    }
+
     private List<InformationEntity> list;
 
     public String getNewsno() {
@@ -137,25 +166,5 @@ public class InformationEntity {
 
     public void setList(List<InformationEntity> list) {
         this.list = list;
-    }
-
-    @Override
-    public String toString() {
-        return "InformationEntity{" +
-                "newsno='" + newsno + '\'' +
-                ", title='" + title + '\'' +
-                ", digest='" + digest + '\'' +
-                ", time='" + time + '\'' +
-                ", image_url='" + image_url + '\'' +
-                ", data='" + date + '\'' +
-                ", content='" + content + '\'' +
-                ", source='" + source + '\'' +
-                ", statement='" + statement + '\'' +
-                ", labelno='" + labelno + '\'' +
-                ", labelname='" + labelname + '\'' +
-                ", classno='" + classno + '\'' +
-                ", classname='" + classname + '\'' +
-                ", list=" + list +
-                '}';
     }
 }

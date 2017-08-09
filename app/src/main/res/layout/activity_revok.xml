@@ -49,7 +49,7 @@
         <TextView
             android:layout_width="0dp"
             android:layout_height="wrap_content"
-            android:layout_weight="1"
+            android:layout_weight="0.8"
             android:gravity="center|start"
             android:text="@string/TextView1"
             android:paddingLeft="@dimen/size10"
@@ -57,19 +57,21 @@
             android:textSize="@dimen/txtSize13" />
 
         <TextView
+            android:paddingRight="@dimen/size18"
             android:layout_width="0dp"
             android:layout_height="wrap_content"
             android:layout_weight="1"
-            android:gravity="center"
+            android:gravity="center|end"
             android:text="@string/TextView2"
             android:textColor="@color/newStockTitle"
             android:textSize="@dimen/txtSize13" />
 
         <TextView
+            android:paddingRight="@dimen/size18"
             android:layout_width="0dp"
             android:layout_height="wrap_content"
             android:layout_weight="1"
-            android:gravity="center"
+            android:gravity="center|end"
             android:text="@string/TextView3"
             android:textColor="@color/newStockTitle"
             android:textSize="@dimen/txtSize13" />
@@ -78,7 +80,7 @@
         <TextView
             android:layout_width="0dp"
             android:layout_height="wrap_content"
-            android:layout_weight="1"
+            android:layout_weight="0.8"
             android:paddingRight="@dimen/size10"
             android:gravity="center|end"
             android:text="@string/TextView4"

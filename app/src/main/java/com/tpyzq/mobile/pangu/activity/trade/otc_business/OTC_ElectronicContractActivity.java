@@ -29,6 +29,7 @@ import com.tpyzq.mobile.pangu.http.OkHttpUtil;
 import com.tpyzq.mobile.pangu.http.doConnect.trade.OTC_ElectronicConnect;
 import com.tpyzq.mobile.pangu.util.ConstantUtil;
 import com.tpyzq.mobile.pangu.util.SpUtils;
+import com.tpyzq.mobile.pangu.view.CentreToast;
 import com.tpyzq.mobile.pangu.view.dialog.LoadingDialog;
 import com.tpyzq.mobile.pangu.view.dialog.MistakeDialog;
 import com.tpyzq.mobile.pangu.view.dialog.ResultDialog;
@@ -108,7 +109,7 @@ public class OTC_ElectronicContractActivity extends BaseActivity implements View
 
     @Override
     public void connectError(String error) {
-        MistakeDialog.showDialog(error, OTC_ElectronicContractActivity.this);
+        CentreToast.showText(OTC_ElectronicContractActivity.this,error);
     }
 
     @Override

@@ -50,8 +50,8 @@ public class HuPager extends BaseTraPager implements AdapterView.OnItemClickList
         iv_kong = (ImageView) rootView.findViewById(R.id.iv_kong);
         tv_text1.setText("品种");
         tv_text2.setText("年收益率");
-        tv_text3.setText("万元日收益(元)");
-        tv_text4.setText("10万元收益(元)");
+        tv_text3.setText("万元日收益");
+        tv_text4.setText("10万元收益");
     }
 
     @Override

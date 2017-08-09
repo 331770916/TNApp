@@ -104,7 +104,7 @@ public class TransactionFragmentDialog extends BaseDialog implements View.OnClic
         map1.put("SEC_ID", "tpyzq");
         map.put("parms", map1);
 
-        NetWorkUtil.getInstence().okHttpForPostString(TAG, ConstantUtil.URL_JY, map, new StringCallback() {
+        NetWorkUtil.getInstence().okHttpForPostString(TAG, ConstantUtil.getURL_JY_HS(), map, new StringCallback() {
             @Override
             public void onError(Call call, Exception e, int id) {
                 LogUtil.e(TAG, e.toString());

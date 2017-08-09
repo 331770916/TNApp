@@ -2,6 +2,7 @@ package com.tpyzq.mobile.pangu.activity.myself.handhall;
 
 import android.app.Dialog;
 import android.content.Intent;
+import android.text.InputFilter;
 import android.text.TextUtils;
 import android.util.Log;
 import android.view.View;
@@ -21,6 +22,7 @@ import com.tpyzq.mobile.pangu.util.Helper;
 import com.tpyzq.mobile.pangu.util.SpUtils;
 import com.tpyzq.mobile.pangu.util.ToastUtils;
 import com.tpyzq.mobile.pangu.util.keyboard.NoSoftInputEditText;
+import com.tpyzq.mobile.pangu.util.panguutil.UserUtil;
 import com.tpyzq.mobile.pangu.view.dialog.LoadingDialog;
 import com.tpyzq.mobile.pangu.view.dialog.MistakeDialog;
 import com.yzd.unikeysdk.OnInputDoneCallBack;
@@ -63,9 +65,9 @@ public class ChangePasswordActivity extends BaseActivity implements View.OnClick
         mAgainNewET = (EditText) findViewById(R.id.AgainNewPasswordET);                    //再次输入密码_明
         mAgainNew = (NoSoftInputEditText) findViewById(R.id.AgainNewPassword);             //再次输入密码_密
 
-
+        mAtpresentET.setFilters(new InputFilter[]{new InputFilter.LengthFilter(6)});
 //        查询加密键盘是否显示
-        if ("false".equals(Db_PUB_USERS.queryingKeyboard())) {
+        if ("0".equals(UserUtil.Keyboard)) {
             setPassEdit(false);
         } else {
             setPassEdit(true);
@@ -229,7 +231,7 @@ public class ChangePasswordActivity extends BaseActivity implements View.OnClick
         map1.put("UNIKEYID", unikey);                       //UNIKEY插件ID
         map1.put("APP_TYPE", "1");                       //手机类型 0：ios        1：android
 
-        NetWorkUtil.getInstence().okHttpForPostString(TAG, ConstantUtil.URL_JY, map, new StringCallback() {
+        NetWorkUtil.getInstence().okHttpForPostString(TAG, ConstantUtil.getURL_JY_HS(), map, new StringCallback() {
             @Override
             public void onError(Call call, Exception e, int id) {
                 if (mLoadingDialog != null) {

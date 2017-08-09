@@ -39,11 +39,12 @@
 
         <!--时间-->
         <LinearLayout
+            android:paddingRight="@dimen/size20"
             android:layout_weight="1"
             android:layout_width="0dp"
             android:layout_height="wrap_content"
             android:orientation="vertical"
-            android:gravity="center">
+            android:gravity="center|end">
             <TextView
                 android:id="@+id/tvRiqi"
                 android:layout_width="wrap_content"

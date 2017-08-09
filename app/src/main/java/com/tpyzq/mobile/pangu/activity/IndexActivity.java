@@ -1,24 +1,36 @@
 package com.tpyzq.mobile.pangu.activity;
 
 import android.app.Dialog;
+import android.content.Intent;
 import android.content.res.Configuration;
 import android.os.Bundle;
 import android.support.v4.app.Fragment;
 import android.support.v4.app.FragmentManager;
 import android.support.v4.app.FragmentTransaction;
 import android.text.TextUtils;
+import android.view.View;
+import android.view.animation.Animation;
+import android.view.animation.AnimationUtils;
+import android.widget.FrameLayout;
+import android.widget.ImageView;
 import android.widget.RadioGroup;
+import android.widget.TextView;
 
 import com.tpyzq.mobile.pangu.R;
 import com.tpyzq.mobile.pangu.activity.home.HomeFragment;
 import com.tpyzq.mobile.pangu.activity.market.MarketFragment;
 import com.tpyzq.mobile.pangu.activity.myself.MySelfFragment;
 import com.tpyzq.mobile.pangu.activity.trade.TradeFragment;
+import com.tpyzq.mobile.pangu.activity.trade.stock.CalendarNewStockActivity;
 import com.tpyzq.mobile.pangu.base.BaseActivity;
 import com.tpyzq.mobile.pangu.base.CustomApplication;
+import com.tpyzq.mobile.pangu.base.InterfaceCollection;
+import com.tpyzq.mobile.pangu.data.NewStockEnitiy;
+import com.tpyzq.mobile.pangu.data.ResultInfo;
 import com.tpyzq.mobile.pangu.http.NetWorkUtil;
 import com.tpyzq.mobile.pangu.log.LogUtil;
 import com.tpyzq.mobile.pangu.util.ConstantUtil;
+import com.tpyzq.mobile.pangu.util.Helper;
 import com.tpyzq.mobile.pangu.util.SpUtils;
 import com.tpyzq.mobile.pangu.util.panguutil.APPInfoUtils;
 import com.tpyzq.mobile.pangu.util.panguutil.BRutil;
@@ -34,6 +46,7 @@ import org.json.JSONException;
 import org.json.JSONObject;
 
 import java.util.HashMap;
+import java.util.List;
 
 import okhttp3.Call;
 
@@ -42,7 +55,7 @@ import okhttp3.Call;
 /**
  * Created by zhangwenbo on 2016/6/16.
  */
-public class IndexActivity extends BaseActivity {
+public class IndexActivity extends BaseActivity implements InterfaceCollection.InterfaceCallback{
 
     private long mnLastBackKeyPressTime = 0;
     private RadioGroup radioGroup;
@@ -53,6 +66,11 @@ public class IndexActivity extends BaseActivity {
     private int tabIds[] = new int[]{R.id.homeRadioBtn, R.id.marketRadioBtn, R.id.transactionRadioBtn, R.id.informationRadioBtn};
     private ExitDialog dialog;
     private Boolean flag = false;
+    private String url  ="";
+    private FrameLayout newstockremind;
+    private TextView tvNewStock,tvNewStockJump;
+    private ImageView ivNewStockClose;
+    private NewStockEnitiy enitiy;
 
     @Override
     public void initView() {
@@ -65,6 +83,8 @@ public class IndexActivity extends BaseActivity {
         }
         getVersionData();       //判断是否是 最新版本
         getHintCode();
+        if(SpUtils.getString(this,"isNewStock","").equals(Helper.getCurDate()))
+            mInterface.queryNewStock("IndexActivity",this);
         SpUtils.putBoolean(this, "burse", false);
         SpUtils.putBoolean(this, "account", true);
         radioGroup = (RadioGroup) findViewById(R.id.radioGroup);
@@ -72,7 +92,25 @@ public class IndexActivity extends BaseActivity {
         marketRadioBtn = (MyRadioButton) findViewById(R.id.marketRadioBtn);
         transactionRaioBtn = (MyRadioButton) findViewById(R.id.transactionRadioBtn);
         mySelfRaioBtn = (MyRadioButton) findViewById(R.id.informationRadioBtn);
-
+        newstockremind = (FrameLayout)findViewById(R.id.newstockremind);
+        tvNewStock = (TextView)findViewById(R.id.newstockNumber);
+        ivNewStockClose = (ImageView)findViewById(R.id.newstockclose);
+        tvNewStockJump = (TextView)findViewById(R.id.newstockjump);
+        tvNewStockJump.setOnClickListener(new View.OnClickListener() {
+            @Override
+            public void onClick(View v) {
+                Intent intent = new Intent();
+                intent.putExtra("entiity", enitiy);
+                intent.setClass(IndexActivity.this, CalendarNewStockActivity.class);
+                startActivity(intent);
+            }
+        });
+        ivNewStockClose.setOnClickListener(new View.OnClickListener() {
+            @Override
+            public void onClick(View v) {
+                newstockremind.setVisibility(View.GONE);
+            }
+        });
         homeRadioBtn.setChecked(true);
         replaceFragment(0);
         radioGroup.setOnCheckedChangeListener(new RadioGroup.OnCheckedChangeListener() {
@@ -86,6 +124,24 @@ public class IndexActivity extends BaseActivity {
                 }
             }
         });
+    }
+
+
+
+    @Override
+    public void callResult(ResultInfo info) {
+        if(info.getCode().equals("0")){
+            enitiy = (NewStockEnitiy) info.getData();
+            if(enitiy!=null){
+                List<NewStockEnitiy.DataBeanToday> data =  enitiy.getData();
+                if(data!=null&data.size()>0) {
+                    newstockremind.setVisibility(View.VISIBLE);
+                    tvNewStock.setText(String.valueOf(data.size()));
+                    String isNewStock = SpUtils.getString(CustomApplication.getContext(),"isNewStock","");
+                    SpUtils.putString(CustomApplication.getContext(),"isNewStock",isNewStock+data.size());
+                }
+            }
+        }
     }
 
     /**
@@ -107,7 +163,7 @@ public class IndexActivity extends BaseActivity {
         map2.put("2", newshare_push_time);
         map2.put("3", inform_push_time);
 
-        NetWorkUtil.getInstence().okHttpForPostString(this, ConstantUtil.URL_ZX_GS, map, new StringCallback() {
+        NetWorkUtil.getInstence().okHttpForPostString(this, ConstantUtil.getURL_HQ_HS(), map, new StringCallback() {
             private String mInform_push_time;
             private String token_inform;
             @Override
@@ -292,7 +348,7 @@ public class IndexActivity extends BaseActivity {
         map400101.put("funcid", "400101");
         map400101.put("token", "");
         map400101.put("parms", map400101_1);
-        NetWorkUtil.getInstence().okHttpForPostString("", ConstantUtil.URL_SXRZ, map400101, new StringCallback() {
+        NetWorkUtil.getInstence().okHttpForPostString("", ConstantUtil.getURL_HQ_HS(), map400101, new StringCallback() {
             @Override
             public void onError(Call call, Exception e, int id) {
             }
@@ -318,15 +374,15 @@ public class IndexActivity extends BaseActivity {
                         String[] thisVersionCode = APPInfoUtils.getVersionName(IndexActivity.this).split("\\.");
                         //如果 版本号  与  当前版本号 相同 删除安装包
                         if (Double.parseDouble(versionCode[0]) > Double.parseDouble(thisVersionCode[0])) {
-                            Dialog mDialog = new VersionDialog(IndexActivity.this, apkAddress, forceIsupdate, versionNumber);
+                            Dialog mDialog = new VersionDialog(IndexActivity.this, apkAddress, forceIsupdate, versionNumber,url);
                             mDialog.show();
                         } else if(Double.parseDouble(versionCode[0]) == Double.parseDouble(thisVersionCode[0])){
                             if (Double.parseDouble(versionCode[1]) > Double.parseDouble(thisVersionCode[1])) {
-                                Dialog mDialog = new VersionDialog(IndexActivity.this, apkAddress, forceIsupdate, versionNumber);
+                                Dialog mDialog = new VersionDialog(IndexActivity.this, apkAddress, forceIsupdate, versionNumber,url);
                                 mDialog.show();
                             } else if (Double.parseDouble(versionCode[1]) == Double.parseDouble(thisVersionCode[1])) {
                                 if (Double.parseDouble(versionCode[2]) > Double.parseDouble(thisVersionCode[2])) {
-                                    Dialog mDialog = new VersionDialog(IndexActivity.this, apkAddress, forceIsupdate, versionNumber);
+                                    Dialog mDialog = new VersionDialog(IndexActivity.this, apkAddress, forceIsupdate, versionNumber,url);
                                     mDialog.show();
                                 }
                             }
@@ -363,5 +419,10 @@ public class IndexActivity extends BaseActivity {
     @Override
     protected void onRestoreInstanceState(Bundle savedInstanceState) {
         super.onRestoreInstanceState(savedInstanceState);
+    }
+
+    @Override
+    public void destroy() {
+        net.cancelSingleRequest("IndexActivity");
     }
 }

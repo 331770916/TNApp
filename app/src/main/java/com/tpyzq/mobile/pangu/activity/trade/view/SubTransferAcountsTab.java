@@ -239,7 +239,7 @@ public class SubTransferAcountsTab extends BaseTransferObserverTabView implement
         map2.put("ACCOUNT", mAccountInfo.getFUND_ACCOUNT());
         map2.put("BANK_PASSWORD", s);
 
-        if ("false".equals(Db_PUB_USERS.queryingCertification()) || "0".equals(queryType)) {
+        if ("0".equals(UserUtil.Keyboard) || "0".equals(queryType)) {
             map2.put("PWD_TYPE", "0");
         } else {
 
@@ -262,7 +262,7 @@ public class SubTransferAcountsTab extends BaseTransferObserverTabView implement
         map1.put("token",mSession);
         map1.put("parms",map2);
 
-        NetWorkUtil.getInstence().okHttpForPostString(TAG, ConstantUtil.URL_JY, map1, new StringCallback() {
+        NetWorkUtil.getInstence().okHttpForPostString(TAG, ConstantUtil.getURL_JY_HS(), map1, new StringCallback() {
             @Override
             public void onError(Call call, Exception e, int id) {
                 LogHelper.e(TAG, e.toString());
@@ -338,7 +338,7 @@ public class SubTransferAcountsTab extends BaseTransferObserverTabView implement
         map1.put("token",mSession);
         map1.put("parms",map2);
 
-        NetWorkUtil.getInstence().okHttpForPostString(TAG, ConstantUtil.URL_JY, map1, new StringCallback() {
+        NetWorkUtil.getInstence().okHttpForPostString(TAG, ConstantUtil.getURL_JY_HS(), map1, new StringCallback() {
             @Override
             public void onError(Call call, Exception e, int id) {
                 if (mLoadingDialog != null && mLoadingDialog.isShowing()) {

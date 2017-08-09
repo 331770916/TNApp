@@ -3,16 +3,17 @@
     xmlns:tools="http://schemas.android.com/tools"
     android:layout_width="match_parent"
     android:layout_height="match_parent"
+    xmlns:app="http://schemas.android.com/apk/res-auto"
     android:background="@color/bgColor"
     android:orientation="vertical">
 
     <RelativeLayout
+        android:id="@+id/rl_top_bar"
         android:layout_width="match_parent"
         android:layout_height="@dimen/size25"
         android:background="@color/blue"
         android:clipToPadding="true"
-        android:id="@+id/rl_top_bar"
-		android:fitsSystemWindows="true" />
+        android:fitsSystemWindows="true" />
 
     <RelativeLayout
         android:layout_width="match_parent"
@@ -38,15 +39,11 @@
 
     </RelativeLayout>
 
-    <com.tpyzq.mobile.pangu.view.pullDownGroup.PullDownScrollView
-        android:id="@+id/new_pullDownId"
+
+    <com.handmark.pulltorefresh.library.PullToRefreshListView
+        android:id="@+id/newStockDetailList"
         android:layout_width="match_parent"
         android:layout_height="match_parent"
-        android:background="@color/bgColor"
-        android:orientation="vertical">
-        <ListView
-            android:id="@+id/newStockDetailList"
-            android:layout_width="match_parent"
-            android:layout_height="match_parent" />
-    </com.tpyzq.mobile.pangu.view.pullDownGroup.PullDownScrollView>
+        app:ptrAnimationStyle="flip"
+        app:ptrMode="both"/>
 </LinearLayout>

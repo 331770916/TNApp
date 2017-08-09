@@ -1,5 +1,7 @@
 package com.tpyzq.mobile.pangu.activity.myself.account;
 
+import android.app.Activity;
+import android.app.Dialog;
 import android.content.Intent;
 import android.os.AsyncTask;
 import android.text.TextUtils;
@@ -22,6 +24,7 @@ import com.tpyzq.mobile.pangu.util.ConstantUtil;
 import com.tpyzq.mobile.pangu.util.Helper;
 import com.tpyzq.mobile.pangu.util.SpUtils;
 import com.tpyzq.mobile.pangu.util.panguutil.UserUtil;
+import com.tpyzq.mobile.pangu.view.dialog.LoadingDialog;
 import com.zhy.http.okhttp.callback.StringCallback;
 
 import org.json.JSONArray;
@@ -46,6 +49,7 @@ public class InformActivity extends BaseActivity implements View.OnClickListener
     private TextView item_TextView, publish_title;
     private List<InformEntity> list;
     private ImageView iv_isEmpty;
+    private Dialog loading;
     private int i = 1;
     int refresh = 10;
     int sure = 10;
@@ -55,14 +59,15 @@ public class InformActivity extends BaseActivity implements View.OnClickListener
         SpUtils.putString(this, "mDivnum", "true");
         SpUtils.putString(this, "mDivnum_InformActivity", "true");
         list = new ArrayList<InformEntity>();
+        loading = LoadingDialog.initDialog(this, "正在查询...");
         findViewById(R.id.ASpublish_back).setOnClickListener(this);
         it_relativeLayout = (RelativeLayout) findViewById(R.id.it_RelativeLayout);
         mListView = (PullToRefreshListView) findViewById(R.id.mListView);
         item_TextView = (TextView) findViewById(R.id.item_TextView);
         publish_title = (TextView) findViewById(R.id.publish_title);
         iv_isEmpty = (ImageView) findViewById(R.id.iv_isEmpty);
-
         initData();
+        loading.show();
         setInfoNum("1", false);
         getData();
     }
@@ -77,52 +82,14 @@ public class InformActivity extends BaseActivity implements View.OnClickListener
                     mListView.getLoadingLayoutProxy().setRefreshingLabel("正在刷新");
                     mListView.getLoadingLayoutProxy().setPullLabel("下拉刷新数据");
                     mListView.getLoadingLayoutProxy().setReleaseLabel("释放开始刷新");
-
-                    new AsyncTask<Void, Void, Void>() {
-                        @Override
-                        protected Void doInBackground(Void... params) {
-                            try {
-                                Thread.sleep(1500);
-                                i=1;
-                                setInfoNum(String.valueOf(i), false);
-                            } catch (InterruptedException e) {
-                                e.printStackTrace();
-                            }
-                            return null;
-                        }
-
-                        @Override
-                        protected void onPostExecute(Void result) {
-                            super.onPostExecute(result);
-                            //将下拉视图收起
-                            mListView.onRefreshComplete();
-                        }
-                    }.execute();
+                    i=1;
+                    setInfoNum(String.valueOf(i), false);
                 } else if (mListView.isShownFooter()) {
                     //设置尾布局样式文字
                     mListView.getLoadingLayoutProxy().setRefreshingLabel("正在刷新");
                     mListView.getLoadingLayoutProxy().setPullLabel("上拉加载数据");
                     mListView.getLoadingLayoutProxy().setReleaseLabel("释放开始刷新");
-
-                    new AsyncTask<Void, Void, Void>() {
-                        @Override
-                        protected Void doInBackground(Void... params) {
-                            try {
-                                Thread.sleep(1500);
-                                setInfoNum(String.valueOf(i++), true);
-                            } catch (InterruptedException e) {
-                                e.printStackTrace();
-                            }
-                            return null;
-                        }
-
-                        @Override
-                        protected void onPostExecute(Void result) {
-                            super.onPostExecute(result);
-                            //将下拉视图收起
-                            mListView.onRefreshComplete();
-                        }
-                    }.execute();
+                    setInfoNum(String.valueOf(i++), true);
                 }
 
             }
@@ -136,29 +103,28 @@ public class InformActivity extends BaseActivity implements View.OnClickListener
         map.put("funcid", "800123");
         map.put("token", "");
         map.put("parms", map1);
-
         map1.put("ACCOUNT", UserUtil.Mobile);
         map1.put("pageIndex", initial);
         map1.put("pageSize", "10");
         map1.put("OBJECTIVE", map2);
-
         String warning_push_time = "0001-01-01 00:00:00";
         String newshare_push_time = "0001-01-01 00:00:00";
         String inform_push_time = "0001-01-01 00:00:00";
-
         map2.put("1", warning_push_time);
         map2.put("2", newshare_push_time);
         map2.put("3", inform_push_time);
-
-        NetWorkUtil.getInstence().okHttpForPostString(TAG, ConstantUtil.URL_ZX_GS, map, new StringCallback() {
+        net.okHttpForPostString(TAG, ConstantUtil.getURL_HQ_HS(), map, new StringCallback() {
             @Override
             public void onError(Call call, Exception e, int id) {
                 LogUtil.e("", e.toString());
+                loading.dismiss();
+                mListView.onRefreshComplete();
                 Helper.getInstance().showToast(InformActivity.this, "网络异常");
             }
 
             @Override
             public void onResponse(String response, int id) {
+                loading.dismiss();
                 if (TextUtils.isEmpty(response)) {
                     return;
                 }
@@ -197,6 +163,7 @@ public class InformActivity extends BaseActivity implements View.OnClickListener
                     Helper.getInstance().showToast(InformActivity.this, "网络异常");
                     e.printStackTrace();
                 }
+                mListView.onRefreshComplete();
             }
         });
     }
@@ -260,4 +227,13 @@ public class InformActivity extends BaseActivity implements View.OnClickListener
         intent.putExtra("BIZID", list.get(position - 1).getBizid().toString());
         startActivity(intent);
     }
+
+    @Override
+    public void destroy() {
+        if(loading!=null) {
+            loading.dismiss();
+            loading = null;
+        }
+    }
+
 }

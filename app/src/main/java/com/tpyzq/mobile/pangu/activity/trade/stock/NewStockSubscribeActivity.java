@@ -23,6 +23,7 @@ import com.tpyzq.mobile.pangu.log.LogHelper;
 import com.tpyzq.mobile.pangu.log.LogUtil;
 import com.tpyzq.mobile.pangu.util.ConstantUtil;
 import com.tpyzq.mobile.pangu.util.SpUtils;
+import com.tpyzq.mobile.pangu.view.CentreToast;
 import com.tpyzq.mobile.pangu.view.dialog.ResultDialog;
 import com.zhy.http.okhttp.callback.StringCallback;
 
@@ -176,7 +177,7 @@ public class NewStockSubscribeActivity extends BaseActivity implements View.OnCl
         map1.put("token", SpUtils.getString(this, "mSession", ""));
         map1.put("parms", map2);
 
-        NetWorkUtil.getInstence().okHttpForPostString(this, ConstantUtil.URL_JY, map1, new StringCallback() {
+        NetWorkUtil.getInstence().okHttpForPostString(this, ConstantUtil.getURL_JY_HS(), map1, new StringCallback() {
             @Override
             public void onError(Call call, Exception e, int id) {
                 LogUtil.e(TAG, e.toString());
@@ -220,7 +221,7 @@ public class NewStockSubscribeActivity extends BaseActivity implements View.OnCl
         map.put("token", "");
         map.put("parms", map2);
 
-        NetWorkUtil.getInstence().okHttpForPostString(TAG, ConstantUtil.URL_NEW, map, new StringCallback() {
+        NetWorkUtil.getInstence().okHttpForPostString(TAG, ConstantUtil.getURL_HQ_HS(), map, new StringCallback() {
             @Override
             public void onError(Call call, Exception e, int id) {
                 LogHelper.e(TAG, e.toString());
@@ -281,7 +282,7 @@ public class NewStockSubscribeActivity extends BaseActivity implements View.OnCl
                         adapter.setList(list);
                         bean.setNewStockSize(publishNum);
                     } else {
-                        ResultDialog.getInstance().showText("网络异常");
+                        CentreToast.showText(NewStockSubscribeActivity.this,ConstantUtil.NETWORK_ERROR);
                     }
 
                     mCalendarEntitiy = bean;

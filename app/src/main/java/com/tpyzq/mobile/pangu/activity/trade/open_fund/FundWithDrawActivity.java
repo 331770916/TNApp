@@ -22,6 +22,7 @@ import com.tpyzq.mobile.pangu.util.ConstantUtil;
 import com.tpyzq.mobile.pangu.util.Helper;
 import com.tpyzq.mobile.pangu.util.SpUtils;
 import com.tpyzq.mobile.pangu.util.ToastUtils;
+import com.tpyzq.mobile.pangu.view.CentreToast;
 import com.tpyzq.mobile.pangu.view.dialog.FundWithDrawDialog;
 import com.zhy.http.okhttp.callback.StringCallback;
 
@@ -69,7 +70,7 @@ public class FundWithDrawActivity extends BaseActivity implements View.OnClickLi
         tv_text1.setText("名称");
         tv_text2.setText("委托时间");
         tv_text3.setText("金额/份额");
-        tv_text4.setText("业务类型/状态");
+        tv_text4.setText("类型/状态");
         withdrawAdapter = new WithdrawAdapter(this);
         withdrawAdapter.setWithDrawBeens(withDrawBeens);
         lv_fund.setAdapter(withdrawAdapter);
@@ -122,11 +123,11 @@ public class FundWithDrawActivity extends BaseActivity implements View.OnClickLi
         map720320_1.put("FLAG", "true");
         map720320_1.put("ACTION_IN", "1");
         map720320.put("parms", map720320_1);
-        NetWorkUtil.getInstence().okHttpForPostString("", ConstantUtil.URL_JY, map720320, new StringCallback() {
+        NetWorkUtil.getInstence().okHttpForPostString("", ConstantUtil.getURL_JY_HS(), map720320, new StringCallback() {
             @Override
             public void onError(Call call, Exception e, int id) {
                 lv_fund.onRefreshComplete();
-                Helper.getInstance().showToast(FundWithDrawActivity.this,ConstantUtil.NETWORK_ERROR);
+                CentreToast.showText(FundWithDrawActivity.this,ConstantUtil.NETWORK_ERROR);
             }
 
             @Override
@@ -151,7 +152,7 @@ public class FundWithDrawActivity extends BaseActivity implements View.OnClickLi
                         withdrawAdapter.setWithDrawBeens(withDrawBeens);
                         withdrawAdapter.notifyDataSetChanged();
                     } else {
-                        ToastUtils.showShort(FundWithDrawActivity.this, msg);
+                        CentreToast.showText(FundWithDrawActivity.this, msg);
                         startActivity(new Intent(FundWithDrawActivity.this, TransactionLoginActivity.class));
                     }
                 } catch (JSONException e) {

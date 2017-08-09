@@ -174,7 +174,7 @@ public class OTC_SubscriptionActivity extends BaseActivity implements View.OnCli
         map1.put("funcid", "730206");
         map1.put("token", mSession);
         map1.put("parms", map2);
-        NetWorkUtil.getInstence().okHttpForPostString(TAG, ConstantUtil.URL_JY, map1, new StringCallback() {
+        NetWorkUtil.getInstence().okHttpForPostString(TAG, ConstantUtil.getURL_JY_HS(), map1, new StringCallback() {
             @Override
             public void onError(Call call, Exception e, int id) {
                 submit.dismiss();
@@ -227,12 +227,13 @@ public class OTC_SubscriptionActivity extends BaseActivity implements View.OnCli
                     tvOTC_ProductJingZhiValue.setText("");
                     tvOTC_ExpendableCapitalValue.setText("");
 
-                    Toast toast = Toast.makeText(OTC_SubscriptionActivity.this, msg, Toast.LENGTH_SHORT);
-                    toast.setGravity(Gravity.CENTER, 0, 0);
-                    LinearLayout toastView = (LinearLayout) toast.getView();
-                    ImageView imageCodeProject = new ImageView(OTC_SubscriptionActivity.this);
-                    toastView.addView(imageCodeProject, 0);
-                    toast.show();
+//                    Toast toast = Toast.makeText(OTC_SubscriptionActivity.this, msg, Toast.LENGTH_SHORT);
+//                    toast.setGravity(Gravity.CENTER, 0, 0);
+//                    LinearLayout toastView = (LinearLayout) toast.getView();
+//                    ImageView imageCodeProject = new ImageView(OTC_SubscriptionActivity.this);
+//                    toastView.addView(imageCodeProject, 0);
+//                    toast.show();
+                    CentreToast.showText(OTC_SubscriptionActivity.this,msg);
                 }
 
             }
@@ -248,7 +249,7 @@ public class OTC_SubscriptionActivity extends BaseActivity implements View.OnCli
         hashMap.put("fund_account", UserUtil.capitalAccount);
         map.put("PARAMS", hashMap);
 
-        NetWorkUtil.getInstence().okHttpForPostString(TAG, ConstantUtil.URL_UPDATE, map, new StringCallback() {
+        NetWorkUtil.getInstence().okHttpForPostString(TAG, ConstantUtil.getURL_HQ_WA(), map, new StringCallback() {
             @Override
             public void onError(Call call, Exception e, int id) {
                 submit.dismiss();

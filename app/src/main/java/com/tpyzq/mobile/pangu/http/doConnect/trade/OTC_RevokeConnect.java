@@ -31,7 +31,7 @@ public class OTC_RevokeConnect {
         map1.put("token", session);
         map1.put("parms", map2);
 
-        NetWorkUtil.getInstence().okHttpForPostString(tag, ConstantUtil.URL_JY, map1, new StringCallback() {
+        NetWorkUtil.getInstence().okHttpForPostString(tag, ConstantUtil.getURL_JY_HS(), map1, new StringCallback() {
             @Override
             public void onError(Call call, Exception e, int id) {
                 if (listener != null) {

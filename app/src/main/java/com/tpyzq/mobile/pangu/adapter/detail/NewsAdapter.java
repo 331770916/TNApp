@@ -6,11 +6,9 @@ import android.view.View;
 import android.view.ViewGroup;
 import android.widget.BaseAdapter;
 import android.widget.TextView;
-
 import com.tpyzq.mobile.pangu.R;
-import com.tpyzq.mobile.pangu.data.DetailNewsEntity;
-
-import java.util.ArrayList;
+import com.tpyzq.mobile.pangu.data.InformationEntity;
+import java.util.List;
 
 /**
  * 作者：刘泽鹏 on 2016/10/26 10:57
@@ -19,13 +17,13 @@ import java.util.ArrayList;
 public class NewsAdapter extends BaseAdapter {
 
     private Context context;
-    private ArrayList<DetailNewsEntity> list;
+    private List<InformationEntity> list;
 
     public NewsAdapter(Context context) {
         this.context = context;
     }
 
-    public void setList(ArrayList<DetailNewsEntity> list){
+    public void setList(List<InformationEntity> list){
         this.list = list;
         notifyDataSetChanged();
     }
@@ -65,7 +63,7 @@ public class NewsAdapter extends BaseAdapter {
             viewHolder = (ViewHolder) convertView.getTag();
         }
 
-        DetailNewsEntity bean = list.get(position);
+        InformationEntity bean = list.get(position);
         int type = bean.getType();
         if(type == 1){
             viewHolder.tvDetailNewsSource.setVisibility(View.GONE);

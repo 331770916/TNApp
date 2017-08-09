@@ -18,6 +18,7 @@ import com.tpyzq.mobile.pangu.adapter.trade.OTC_EntrustTodayAdapter;
 import com.tpyzq.mobile.pangu.db.Db_PUB_USERS;
 import com.tpyzq.mobile.pangu.http.OkHttpUtil;
 import com.tpyzq.mobile.pangu.http.doConnect.trade.OTC_BargainConnect;
+import com.tpyzq.mobile.pangu.view.CentreToast;
 import com.tpyzq.mobile.pangu.view.dialog.LoadingDialog;
 import com.tpyzq.mobile.pangu.view.dialog.MistakeDialog;
 import com.tpyzq.mobile.pangu.view.itemdecoration.LinearDividerItemDecoration;
@@ -141,7 +142,7 @@ public class OTC_BargainToday extends LazyBaseFragment implements BasePullLayout
 
     @Override
     public void connectError(String error) {
-        MistakeDialog.showDialog(error, getActivity());
+        CentreToast.showText(getActivity(),error);
     }
 
     @Override

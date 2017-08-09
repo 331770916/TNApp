@@ -264,7 +264,7 @@ public class MarketFragment extends BaseFragment
         map2.put("phone_type","2");
         map1.put("FUNCTIONCODE","HQFNG001");
         map1.put("PARAMS",map2);
-        NetWorkUtil.getInstence().okHttpForPostString("MarketFragment", ConstantUtil.URL_FX, map1, new StringCallback() {
+        NetWorkUtil.getInstence().okHttpForPostString("MarketFragment", ConstantUtil.getURL_HQ_BB(), map1, new StringCallback() {
             @Override
             public void onError(Call call, Exception e, int id) {
             }

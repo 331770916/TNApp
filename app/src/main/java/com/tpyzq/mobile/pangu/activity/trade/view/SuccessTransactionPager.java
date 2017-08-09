@@ -18,6 +18,7 @@ import com.tpyzq.mobile.pangu.data.SuccessTransactionEntity;
 import com.tpyzq.mobile.pangu.http.NetWorkUtil;
 import com.tpyzq.mobile.pangu.util.ConstantUtil;
 import com.tpyzq.mobile.pangu.util.SpUtils;
+import com.tpyzq.mobile.pangu.view.CentreToast;
 import com.zhy.http.okhttp.callback.StringCallback;
 
 import org.json.JSONArray;
@@ -101,11 +102,11 @@ public class SuccessTransactionPager extends BaseTransactionPager {
         map300180_1.put("KEY_STR",key_start);
         map300180_1.put("REC_COUNT","100");
         map300180.put("parms", map300180_1);
-        NetWorkUtil.getInstence().okHttpForPostString("", ConstantUtil.URL_JY, map300180, new StringCallback() {
+        NetWorkUtil.getInstence().okHttpForPostString("", ConstantUtil.getURL_JY_HS(), map300180, new StringCallback() {
             @Override
             public void onError(Call call, Exception e, int id) {
                 lv_transaction.onRefreshComplete();
-                Toast.makeText(mContext, "网络访问失败", Toast.LENGTH_SHORT).show();
+                CentreToast.showText(mContext,ConstantUtil.NETWORK_ERROR);
             }
 
             @Override

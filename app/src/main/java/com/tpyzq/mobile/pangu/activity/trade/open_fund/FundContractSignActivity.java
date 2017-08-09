@@ -23,6 +23,7 @@ import com.tpyzq.mobile.pangu.util.ConstantUtil;
 import com.tpyzq.mobile.pangu.util.Helper;
 import com.tpyzq.mobile.pangu.util.SpUtils;
 import com.tpyzq.mobile.pangu.util.ToastUtils;
+import com.tpyzq.mobile.pangu.view.CentreToast;
 import com.tpyzq.mobile.pangu.view.dialog.LoadingDialog;
 import com.zhy.http.okhttp.callback.StringCallback;
 
@@ -103,12 +104,13 @@ public class FundContractSignActivity extends BaseActivity implements View.OnCli
         map300437_1.put("PAGE_INDEX", "0");
         map300437_1.put("PAGE_SIZE", "100");
         map300437.put("parms", map300437_1);
-        NetWorkUtil.getInstence().okHttpForPostString("", ConstantUtil.URL_JY, map300437, new StringCallback() {
+        NetWorkUtil.getInstence().okHttpForPostString("", ConstantUtil.getURL_JY_HS(), map300437, new StringCallback() {
             @Override
             public void onError(Call call, Exception e, int id) {
                 mDialog.dismiss();
                 lv_accound_search.onRefreshComplete();
-                Helper.getInstance().showToast(FundContractSignActivity.this,ConstantUtil.NETWORK_ERROR);
+
+                CentreToast.showText(FundContractSignActivity.this,ConstantUtil.NETWORK_ERROR);
             }
 
             @Override
@@ -134,7 +136,7 @@ public class FundContractSignActivity extends BaseActivity implements View.OnCli
                     } else if ("-6".equals(code)) {
                         startActivity(new Intent(FundContractSignActivity.this, TransactionLoginActivity.class));
                     } else {
-                        ToastUtils.showShort(FundContractSignActivity.this, msg);
+                        CentreToast.showText(FundContractSignActivity.this, msg);
                     }
                 } catch (JSONException e) {
                     e.printStackTrace();

@@ -72,7 +72,7 @@ public class ExponentConnect {
             e.printStackTrace();
         }
 
-        NetWorkUtil.getInstence().okHttpForGet(mHttpTAG, ConstantUtil.URL, params, new StringCallback() {
+        NetWorkUtil.getInstence().okHttpForGet(mHttpTAG, ConstantUtil.getURL_HQ_HHN(), params, new StringCallback() {
             @Override
             public void onError(Call call, Exception e, int id) {
                 LogHelper.e(TAG, e.toString());

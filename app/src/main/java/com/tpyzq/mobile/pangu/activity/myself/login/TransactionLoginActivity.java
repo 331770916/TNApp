@@ -589,19 +589,22 @@ public class TransactionLoginActivity extends BaseActivity implements ICallbackR
             if (mBuilder.dialog.isShowing())
                 mBuilder.dialog.dismiss();
             if (result instanceof Boolean) {
-                if ((Boolean) result) {
-                    mUserEntity.setKeyboard("true");
-                    UserUtil.Keyboard = "1";
+
+                if (ConstantUtil.USERFUL_KEYBOARD) {
+                    if ((Boolean) result) {
+                        mUserEntity.setKeyboard("true");
+                        UserUtil.Keyboard = "1";
+                    } else {
+                        mUserEntity.setKeyboard("false");
+                        UserUtil.Keyboard = "0";
+                    }
+                    initKeyBoard((Boolean) result);
                 } else {
                     mUserEntity.setKeyboard("false");
                     UserUtil.Keyboard = "0";
-                }
-                Db_PUB_USERS.UpdateKeyboard(mUserEntity);
-                if (ConstantUtil.USERFUL_KEYBOARD) {
-                    initKeyBoard((Boolean) result);
-                } else {
                     initKeyBoard(false);
                 }
+                Db_PUB_USERS.UpdateKeyboard(mUserEntity);
             }
         } else if (KeyBoardTypeConnect.TAG.equals(tag)) {
             if (mBuilder.dialog.isShowing())
@@ -679,7 +682,11 @@ public class TransactionLoginActivity extends BaseActivity implements ICallbackR
                     IS_OVERDUE = Session.optString("IS_OVERDUE");//风险评测状态 0正常 1即将过期 2过期 3未做
                     CORP_RISK_LEVEL = Session.optString("CORP_RISK_LEVEL");//客户当前风险承受等级
                     CORP_END_DATE = Session.optString("CORP_END_DATE");//风险测评有效期到期时间
-
+                    //存储风险测试结果 测评状态--测评等级--有效期结束日期
+                    SpUtils.putString(TransactionLoginActivity.this, "IS_OVERDUE", IS_OVERDUE);
+                    SpUtils.putString(TransactionLoginActivity.this, "CORP_RISK_LEVEL", CORP_RISK_LEVEL);
+                    SpUtils.putString(TransactionLoginActivity.this, "mSession", mSession);
+                    SpUtils.putString(TransactionLoginActivity.this, "CORP_END_DATE", CORP_END_DATE);
                     getAccountData();
 
                 } catch (JSONException e) {
@@ -797,7 +804,6 @@ public class TransactionLoginActivity extends BaseActivity implements ICallbackR
                 break;
         }
     }
-
 
 
     /**

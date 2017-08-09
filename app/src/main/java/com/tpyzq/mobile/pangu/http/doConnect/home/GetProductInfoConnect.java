@@ -61,7 +61,7 @@ public class GetProductInfoConnect {
 
         params.put("parms", map);
 
-        NetWorkUtil.getInstence().okHttpForPostString(mHttpTAG, ConstantUtil.ULR_MANAGEMONEY, params, new StringCallback() {
+        NetWorkUtil.getInstence().okHttpForPostString(mHttpTAG, ConstantUtil.getURL_HQ_HS(), params, new StringCallback() {
             @Override
             public void onError(Call call, Exception e, int id) {
                 LogHelper.e(TAG, e.toString());

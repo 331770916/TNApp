@@ -114,10 +114,10 @@ public class FundRevokePopupWindow extends PopupWindow{
         map1.put("funcid","300150");
         map1.put("token",mSession);
         map1.put("parms",map2);
-        NetWorkUtil.getInstence().okHttpForPostString(TAG, ConstantUtil.URL_JY, map1, new StringCallback() {
+        NetWorkUtil.getInstence().okHttpForPostString(TAG, ConstantUtil.getURL_JY_HS(), map1, new StringCallback() {
             @Override
             public void onError(Call call, Exception e, int id) {
-                Helper.getInstance().showToast(context,ConstantUtil.NETWORK_ERROR);
+                CentreToast.showText(context,ConstantUtil.NETWORK_ERROR);
             }
 
             @Override

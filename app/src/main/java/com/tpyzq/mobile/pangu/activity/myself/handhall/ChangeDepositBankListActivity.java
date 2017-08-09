@@ -140,7 +140,7 @@ public class ChangeDepositBankListActivity extends BaseActivity implements View.
         hashMap.put("FLAG", "true");
         hashMap.put("BANK_NO", "");
         map.put("parms", hashMap);
-        OkHttpUtil.okHttpForPostString(TAG, ConstantUtil.URL_SCYHBG, map, new StringCallback() {
+        OkHttpUtil.okHttpForPostString(TAG, ConstantUtil.getURL_JY_HS(), map, new StringCallback() {
             @Override
             public void onError(Call call, Exception e, int id) {
                 e.printStackTrace();

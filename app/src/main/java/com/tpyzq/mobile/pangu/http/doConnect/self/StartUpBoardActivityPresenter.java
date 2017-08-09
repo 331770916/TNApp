@@ -52,7 +52,7 @@ public class StartUpBoardActivityPresenter {
         parms.put("token", token);
         parms.put("parms", map);
         activity.setLoading(true);
-        OkHttpUtil.okHttpForPostStringTime(StartyUpBoardActivity.TAG, ConstantUtil.URL_JY, parms, new StringCallback() {
+        OkHttpUtil.okHttpForPostStringTime(StartyUpBoardActivity.TAG, ConstantUtil.getURL_JY_HS(), parms, new StringCallback() {
             @Override
             public void onError(Call call, Exception e, int id) {
                 activity.setHint(ConstantUtil.NETWORK_ERROR);
@@ -137,7 +137,7 @@ public class StartUpBoardActivityPresenter {
         parms.put("funcid", funcid);
         parms.put("token", token);
         parms.put("parms", map);
-        OkHttpUtil.okHttpForPostString(StartyUpBoardActivity.TAG, ConstantUtil.URL_JY, parms, new StringCallback() {
+        OkHttpUtil.okHttpForPostString(StartyUpBoardActivity.TAG, ConstantUtil.getURL_JY_HS(), parms, new StringCallback() {
             @Override
             public void onError(Call call, Exception e, int id) {
                 activity.setHint(ConstantUtil.NETWORK_ERROR);
@@ -206,7 +206,7 @@ public class StartUpBoardActivityPresenter {
         parms.put("funcid", funcid);
         parms.put("token", token);
         parms.put("parms", map);
-        OkHttpUtil.okHttpForPostString(StartyUpBoardActivity.TAG, ConstantUtil.URL_JY, parms, new StringCallback() {
+        OkHttpUtil.okHttpForPostString(StartyUpBoardActivity.TAG, ConstantUtil.getURL_JY_HS(), parms, new StringCallback() {
             @Override
             public void onError(Call call, Exception e, int id) {
                 activity.setHint(ConstantUtil.NETWORK_ERROR);
@@ -265,7 +265,7 @@ public class StartUpBoardActivityPresenter {
         parms.put("funcid", funcid);
         parms.put("token", token);
         parms.put("parms", map);
-        OkHttpUtil.okHttpForPostString(StartyUpBoardActivity.TAG, ConstantUtil.URL_JY, parms, new StringCallback() {
+        OkHttpUtil.okHttpForPostString(StartyUpBoardActivity.TAG, ConstantUtil.getURL_JY_HS(), parms, new StringCallback() {
             @Override
             public void onError(Call call, Exception e, int id) {
                 activity.setHint(ConstantUtil.NETWORK_ERROR);

@@ -67,7 +67,7 @@ public class SpeedTestActivity extends BaseActivity implements View.OnClickListe
     private void initData() {
         String ip = SpUtils.getString(this, "market_ip", null);
         if (TextUtils.isEmpty(ip)) {
-            SpUtils.putString(this, "market_ip", ConstantUtil.IP);
+            SpUtils.putString(this, "market_ip", ConstantUtil.HQ_IP);
         }
         loadingDialog = LoadingDialog.initDialog(this, "正在加载...");
         speedTestBeen = new ArrayList<SpeedTestEntity>();
@@ -85,7 +85,7 @@ public class SpeedTestActivity extends BaseActivity implements View.OnClickListe
         map800125.put("TOKEN", "");
         HashMap map800125_1 = new HashMap();
         map800125.put("PARAMS", map800125_1);
-        String url = ConstantUtil.URL_UPDATE;
+        String url = ConstantUtil.getURL_HQ_WA();
         NetWorkUtil.getInstence().okHttpForPostString(TAG, url, map800125, new StringCallback() {
             @Override
             public void onError(Call call, Exception e, int id) {
@@ -227,7 +227,7 @@ public class SpeedTestActivity extends BaseActivity implements View.OnClickListe
         return R.layout.activity_speed_test;
     }
 
-    private String appIP = ConstantUtil.IP;
+    private String appIP = ConstantUtil.HQ_IP;
 
     SpeedTestAdapter.SpeedCallBack speedCallBack = new SpeedTestAdapter.SpeedCallBack() {
         @Override
@@ -261,13 +261,13 @@ public class SpeedTestActivity extends BaseActivity implements View.OnClickListe
     private void setClear() {
         for (SpeedTestEntity speedTestBean : speedTestBeen) {
             final String ip = speedTestBean.version_ip + ":" + speedTestBean.version_port;
-            if (ConstantUtil.IP.equals(ip)) {
+            if (ConstantUtil.HQ_IP.equals(ip)) {
                 sitename = ConstantUtil.status;
-                appIP = ConstantUtil.IP;
+                appIP = ConstantUtil.HQ_IP;
                 return;
             } else {
                 sitename = "暂无选中";
-                appIP = ConstantUtil.IP;
+                appIP = ConstantUtil.HQ_IP;
             }
         }
     }

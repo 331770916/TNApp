@@ -660,7 +660,7 @@ public class TabHuShen extends BaseTabPager implements AdapterView.OnItemClickLi
         LogHelper.e(TAG, params.toString());
         //FileUtil.URL 外网
         //FileUtil.ULR_HANGQING
-        String url = ConstantUtil.URL;
+        String url = ConstantUtil.getURL_HQ_HHN();
         NetWorkUtil.getInstence().okHttpForGet(TAG, url, params, new StringCallback() {
             @Override
             public void onError(Call call, Exception e, int id) {

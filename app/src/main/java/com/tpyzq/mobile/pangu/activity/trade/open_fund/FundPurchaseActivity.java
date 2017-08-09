@@ -1,23 +1,20 @@
 package com.tpyzq.mobile.pangu.activity.trade.open_fund;
 
-import android.app.Activity;
 import android.content.Intent;
 import android.text.Editable;
 import android.text.TextUtils;
 import android.text.TextWatcher;
+import android.util.DisplayMetrics;
 import android.view.View;
 import android.widget.Button;
 import android.widget.EditText;
 import android.widget.ImageView;
 import android.widget.LinearLayout;
 import android.widget.TextView;
-import android.widget.Toast;
-
 import com.google.gson.Gson;
 import com.tpyzq.mobile.pangu.R;
 import com.tpyzq.mobile.pangu.activity.myself.handhall.RiskConfirmActivity;
 import com.tpyzq.mobile.pangu.activity.myself.handhall.RiskEvaluationActivity;
-import com.tpyzq.mobile.pangu.activity.myself.login.TransactionLoginActivity;
 import com.tpyzq.mobile.pangu.base.BaseActivity;
 import com.tpyzq.mobile.pangu.base.InterfaceCollection;
 import com.tpyzq.mobile.pangu.data.AssessConfirmEntity;
@@ -29,25 +26,19 @@ import com.tpyzq.mobile.pangu.http.NetWorkUtil;
 import com.tpyzq.mobile.pangu.util.ConstantUtil;
 import com.tpyzq.mobile.pangu.util.Helper;
 import com.tpyzq.mobile.pangu.util.SpUtils;
-import com.tpyzq.mobile.pangu.util.ToastUtils;
 import com.tpyzq.mobile.pangu.util.panguutil.UserUtil;
+import com.tpyzq.mobile.pangu.view.CentreToast;
+import com.tpyzq.mobile.pangu.view.CustomCenterDialog;
 import com.tpyzq.mobile.pangu.view.dialog.CancelDialog;
 import com.tpyzq.mobile.pangu.view.dialog.FundPurchaseDialog;
 import com.tpyzq.mobile.pangu.view.dialog.MistakeDialog;
 import com.zhy.http.okhttp.callback.StringCallback;
-
 import org.json.JSONException;
 import org.json.JSONObject;
-
 import java.util.HashMap;
-
 import okhttp3.Call;
-
-import static com.tpyzq.mobile.pangu.activity.trade.open_fund.FundInfoActivity.IS_SHOW;
-import static com.tpyzq.mobile.pangu.activity.trade.open_fund.FundInfoActivity.ITEM_CLICK;
-import static com.tpyzq.mobile.pangu.activity.trade.open_fund.FundInfoActivity.LIST_TYPE;
+import static com.tpyzq.mobile.pangu.activity.trade.open_fund.FundInfoActivity.*;
 import static com.tpyzq.mobile.pangu.util.keyboard.KeyEncryptionUtils.encryptBySessionKey;
-import static com.umeng.socialize.utils.DeviceConfig.context;
 
 
 /**
@@ -56,7 +47,7 @@ import static com.umeng.socialize.utils.DeviceConfig.context;
 public class FundPurchaseActivity extends BaseActivity implements View.OnClickListener {
     private static final int REQUESTCODE = 1001;//进入风险确认页面的请求码
     private static int REQAGREEMENTCODE = 1002; //进入签署协议页面的请求码
-    private TextView tv_choose_fund/*选择基金产品*/, tv_fund_name/*基金名称*/, tv_fund_value/*基金净值*/, tv_low_money/*个人最低投资*/, tv_usable_money/*可用资金*/;
+    private TextView tv_choose_fund/*选择基金产品*/, tv_fund_name/*基金名称*/, tv_fund_value/*基金净值*/, tv_low_money/*个人最低投资*/, tv_usable_money/*可用资金*/,tv_fhfs/*分红方式*/;
     private ImageView iv_back/*返回*/;
     private EditText et_fund_code/*基金代码*/, et_fund_price/*申购金额*/;
     private static int REQUEST = 5; //Activity请求码
@@ -66,6 +57,7 @@ public class FundPurchaseActivity extends BaseActivity implements View.OnClickLi
     private AssessConfirmEntity assessConfirmBean;
     private SubsStatusEntity subsStatusBean;
     private String mSession;
+    private String AUTO_BUY = "";
 
     @Override
     public void initView() {
@@ -74,6 +66,7 @@ public class FundPurchaseActivity extends BaseActivity implements View.OnClickLi
         tv_fund_value = (TextView) findViewById(R.id.tv_fund_value);
         tv_low_money = (TextView) findViewById(R.id.tv_low_money);
         tv_usable_money = (TextView) findViewById(R.id.tv_usable_money);
+        tv_fhfs = (TextView)findViewById(R.id.tv_fhfs);
         iv_back = (ImageView) findViewById(R.id.iv_back);
         et_fund_code = (EditText) findViewById(R.id.et_fund_code);
         et_fund_price = (EditText) findViewById(R.id.et_fund_price);
@@ -92,6 +85,8 @@ public class FundPurchaseActivity extends BaseActivity implements View.OnClickLi
         et_fund_price.setEnabled(false);
         bt_true.setOnClickListener(FundPurchaseActivity.this);
         bt_true.setClickable(false);
+        tv_fhfs.setOnClickListener(this);
+        tv_fhfs.setEnabled(false);
         bt_true.setBackgroundResource(R.drawable.button_login_unchecked);
         et_fund_price.addTextChangedListener(new PriceWatch());
         et_fund_code.addTextChangedListener(new TextWatcher() {
@@ -120,7 +115,6 @@ public class FundPurchaseActivity extends BaseActivity implements View.OnClickLi
         });
     }
 
-
     @Override
     public void onClick(View v) {
         switch (v.getId()) {
@@ -138,7 +132,6 @@ public class FundPurchaseActivity extends BaseActivity implements View.OnClickLi
             case R.id.bt_true:
                 if (null == fundData)
                     fundData =new FundSubsEntity();
-
                 fundData.FUND_CODE = et_fund_code.getText().toString();
                 if (Helper.getInstance().isNeedShowRiskDialog()) {
                     Helper.getInstance().showCorpDialog(this, new CancelDialog.PositiveClickListener() {
@@ -151,23 +144,38 @@ public class FundPurchaseActivity extends BaseActivity implements View.OnClickLi
                     }, new CancelDialog.NagtiveClickListener() {
                         @Override
                         public void onNagtiveClick() {
-                            FundPurchaseDialog fundPurchaseDialog = new FundPurchaseDialog(FundPurchaseActivity.this, fundData, et_fund_price.getText().toString(), fundPurchaseListen);
+                            FundPurchaseDialog fundPurchaseDialog = new FundPurchaseDialog(FundPurchaseActivity.this, fundData, et_fund_price.getText().toString(),tv_fhfs.getText().toString(), fundPurchaseListen);
                             fundPurchaseDialog.show();
                         }
                     });
                 } else {
-                    FundPurchaseDialog fundPurchaseDialog = new FundPurchaseDialog(this, fundData, et_fund_price.getText().toString(), fundPurchaseListen);
+                    FundPurchaseDialog fundPurchaseDialog = new FundPurchaseDialog(this, fundData, et_fund_price.getText().toString(),tv_fhfs.getText().toString(), fundPurchaseListen);
                     fundPurchaseDialog.show();
                 }
                 break;
+            case R.id.tv_fhfs://分红方式
+                Helper.showItemSelectDialog(this,getWidth(),new Helper.OnItemSelectedListener(){
+                    @Override
+                    public void getSelectedItem(String content) {
+                        tv_fhfs.setText(content);
+                    }
+                },false,new String[]{"现金分红", "份额分红"});
+                break;
         }
+    }
+
+
+    private int  getWidth() {
+        DisplayMetrics dm = new DisplayMetrics();
+        this.getWindowManager().getDefaultDisplay().getMetrics(dm);
+        return dm.widthPixels;
     }
 
 
     private FundPurchaseDialog.FundPurchaseListen fundPurchaseListen = new FundPurchaseDialog.FundPurchaseListen() {
 
         @Override
-        public void setEntrust(String price, String fund_company, String fund_code) {
+        public void setEntrust(String price, String fund_company, String fund_code,String fhfs) {
 //            buy_shengou(price, fund_company, fund_code);
             String mFund_company = "";
             String mFund_code = "";
@@ -175,7 +183,7 @@ public class FundPurchaseActivity extends BaseActivity implements View.OnClickLi
                 mFund_company = fundData.FUND_COMPANY;
                 mFund_code = fundData.FUND_CODE;
             }
-            InterfaceCollection.getInstance().queryProductSuitability(mSession, "", "", mFund_company, mFund_code, "331261", new InterfaceCollection.InterfaceCallback() {
+            mInterface.queryProductSuitability(mSession, "", "", mFund_company, mFund_code, "331261", new InterfaceCollection.InterfaceCallback() {
                 @Override
                 public void callResult(ResultInfo info) {
                     String code = info.getCode();
@@ -184,7 +192,8 @@ public class FundPurchaseActivity extends BaseActivity implements View.OnClickLi
                     if ("0".equalsIgnoreCase(code)) {
                         resultMap = (HashMap<String,String>)info.getData();
                         if (null == resultMap) {
-                            MistakeDialog.showDialog("数据异常", FundPurchaseActivity.this, null);
+                            showDialog("数据异常");
+
                             return;
                         }
                         //弹框逻辑
@@ -209,7 +218,7 @@ public class FundPurchaseActivity extends BaseActivity implements View.OnClickLi
                         intent.putExtra("resultMap",resultMap);
                         FundPurchaseActivity.this.startActivityForResult(intent, REQUESTCODE);
                     } else {
-                        MistakeDialog.showDialog(msg, FundPurchaseActivity.this, null);
+                        showDialog(msg);
                     }
                 }
             });
@@ -236,12 +245,19 @@ public class FundPurchaseActivity extends BaseActivity implements View.OnClickLi
         map300440_1.put("FLAG", encryptBySessionKey("true"));
         map300440_1.put("DO_OPEN", encryptBySessionKey(""));
         map300440_1.put("DO_CONTRACT", encryptBySessionKey(""));
+        if ("份额分红".equals(tv_fhfs.getText().toString())){
+            AUTO_BUY= "0";
+        }else {
+            AUTO_BUY= "1";
+        }
+
+        map300440_1.put("AUTO_BUY", encryptBySessionKey(AUTO_BUY));
         map300440_1.put("DO_PRE_CONDITION", encryptBySessionKey("1"));
         map300440.put("parms", map300440_1);
-        NetWorkUtil.getInstence().okHttpForPostString("", ConstantUtil.URL_JY, map300440, new StringCallback() {
+        net.okHttpForPostString("", ConstantUtil.getURL_JY_HS(), map300440, new StringCallback() {
             @Override
             public void onError(Call call, Exception e, int id) {
-                ToastUtils.showShort(context, "委托失败");
+                CentreToast.showText(FundPurchaseActivity.this,ConstantUtil.NETWORK_ERROR);
             }
 
             @Override
@@ -279,20 +295,26 @@ public class FundPurchaseActivity extends BaseActivity implements View.OnClickLi
 
                             Intent intent = new Intent();
                             intent.setClass(FundPurchaseActivity.this, AssessConfirmActivity.class);
+                            intent.putExtra("AUTO_BUY",AUTO_BUY);
                             intent.putExtra("assessConfirm", assessConfirmBean);
                             intent.putExtra("transaction", "true");
                             startActivityForResult(intent, REQAGREEMENTCODE);
                         }
                     } else if ("-6".equals(code)) {
-                        FundPurchaseActivity.this.startActivity(new Intent(FundPurchaseActivity.this, TransactionLoginActivity.class));
+                        skip.startLogin(FundPurchaseActivity.this);
                     } else {
-                        MistakeDialog.showDialog(msg, (Activity) FundPurchaseActivity.this);
+                        showDialog(msg);
                     }
                 } catch (JSONException e) {
                     e.printStackTrace();
                 }
             }
         });
+    }
+
+    private void showDialog(String msg){
+        CustomCenterDialog dialog = CustomCenterDialog.CustomCenterDialog(msg,CustomCenterDialog.SHOWCENTER);
+        dialog.show(getFragmentManager(),FundPurchaseActivity.class.toString());
     }
 
     private void clearView(boolean is) {
@@ -304,13 +326,15 @@ public class FundPurchaseActivity extends BaseActivity implements View.OnClickLi
         tv_fund_value.setText("");
         tv_low_money.setText("");
         tv_usable_money.setText("");
+        tv_fhfs.setText("");
         bt_true.setClickable(false);
         et_fund_price.setEnabled(false);
+        tv_fhfs.setEnabled(false);
         bt_true.setBackgroundResource(R.drawable.button_login_unchecked);
     }
 
     private void startFinish() {
-        ToastUtils.showShort(FundPurchaseActivity.this, "委托成功");
+        CentreToast.showText(FundPurchaseActivity.this,"委托已提交",true);
         clearView(true);
     }
 
@@ -346,10 +370,10 @@ public class FundPurchaseActivity extends BaseActivity implements View.OnClickLi
         map300431_1.put("FUND_COMPANY", fundcompany);
         map300431_1.put("OPER_TYPE", "0");
         map300431.put("parms", map300431_1);
-        NetWorkUtil.getInstence().okHttpForPostString("", ConstantUtil.URL_JY, map300431, new StringCallback() {
+        NetWorkUtil.getInstence().okHttpForPostString("", ConstantUtil.getURL_JY_HS(), map300431, new StringCallback() {
             @Override
             public void onError(Call call, Exception e, int id) {
-                Helper.getInstance().showToast(FundPurchaseActivity.this, ConstantUtil.NETWORK_ERROR);
+                CentreToast.showText(FundPurchaseActivity.this, ConstantUtil.NETWORK_ERROR);
             }
 
             @Override
@@ -370,7 +394,7 @@ public class FundPurchaseActivity extends BaseActivity implements View.OnClickLi
                         fundData.FUND_NAME = fundDataBean.data.get(0).FUND_NAME;
                     } else {
 
-                        ToastUtils.showShort(FundPurchaseActivity.this, msg);
+                        CentreToast.showText(FundPurchaseActivity.this, msg);
 //                        startActivity(new Intent(FundSubsActivity.this, TransactionLoginActivity.class));
                     }
                 } catch (JSONException e) {
@@ -385,6 +409,8 @@ public class FundPurchaseActivity extends BaseActivity implements View.OnClickLi
         tv_fund_value.setText(fundDataBean.data.get(0).NAV);
         tv_low_money.setText(fundDataBean.data.get(0).OPEN_SHARE + "\t元");
         tv_usable_money.setText(fundDataBean.data.get(0).ENABLE_BALANCE + "\t元");
+        tv_fhfs.setEnabled(true);
+        tv_fhfs.setText("份额分红");
     }
 
     @Override

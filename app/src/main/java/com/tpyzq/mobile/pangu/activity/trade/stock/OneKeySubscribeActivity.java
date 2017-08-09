@@ -27,10 +27,9 @@ import com.tpyzq.mobile.pangu.data.OneKeySubscribeItem;
 import com.tpyzq.mobile.pangu.data.OneKeySubscribeListBean;
 import com.tpyzq.mobile.pangu.http.NetWorkUtil;
 import com.tpyzq.mobile.pangu.util.ConstantUtil;
-import com.tpyzq.mobile.pangu.util.Helper;
 import com.tpyzq.mobile.pangu.util.SpUtils;
-import com.tpyzq.mobile.pangu.view.dialog.MistakeDialog;
-import com.tpyzq.mobile.pangu.view.dialog.ResultDialog;
+import com.tpyzq.mobile.pangu.view.CentreToast;
+import com.tpyzq.mobile.pangu.view.CustomCenterDialog;
 import com.zhy.http.okhttp.callback.StringCallback;
 
 import java.lang.reflect.Type;
@@ -130,11 +129,11 @@ public class OneKeySubscribeActivity extends BaseActivity implements View.OnClic
         map3.put("token", session);
         map3.put("parms", map4);
 
-        NetWorkUtil.getInstence().okHttpForPostString(TAG, ConstantUtil.URL_JY, map3, new StringCallback() {
+        NetWorkUtil.getInstence().okHttpForPostString(TAG, ConstantUtil.getURL_JY_HS(), map3, new StringCallback() {
             @Override
             public void onError(Call call, Exception e, int id) {
                 ivOneKeyKong.setVisibility(View.VISIBLE);      //显示空
-                Helper.getInstance().showToast(OneKeySubscribeActivity.this, ConstantUtil.NETWORK_ERROR);
+                CentreToast.showText(OneKeySubscribeActivity.this, ConstantUtil.NETWORK_ERROR);
             }
 
             @Override
@@ -201,7 +200,7 @@ public class OneKeySubscribeActivity extends BaseActivity implements View.OnClic
                     tvOneKeySubscribe.setVisibility(View.GONE);
                 } else {
                     ivOneKeyKong.setVisibility(View.VISIBLE);      //显示空
-                    Helper.getInstance().showToast(OneKeySubscribeActivity.this, ConstantUtil.SERVICE_NO_DATA);
+                    CentreToast.showText(OneKeySubscribeActivity.this, ConstantUtil.SERVICE_NO_DATA);
                 }
 
             }
@@ -233,7 +232,7 @@ public class OneKeySubscribeActivity extends BaseActivity implements View.OnClic
         map1.put("funcid", "300380");
         map1.put("token", session);
         map1.put("parms", map2);
-        NetWorkUtil.getInstence().okHttpForPostString(TAG, ConstantUtil.URL_JY, map1, new StringCallback() {
+        NetWorkUtil.getInstence().okHttpForPostString(TAG, ConstantUtil.getURL_JY_HS(), map1, new StringCallback() {
             @Override
             public void onError(Call call, Exception e, int id) {
                 e.toString();
@@ -284,7 +283,7 @@ public class OneKeySubscribeActivity extends BaseActivity implements View.OnClic
                         } else if (data != null && code.equals("0") && data.size() == 0) {
                             getListViewData("0", "0");    //获取listView的数据
                         } else {
-                            ResultDialog.getInstance().showText("网络异常");
+                            CentreToast.showText(OneKeySubscribeActivity.this,ConstantUtil.NETWORK_ERROR);
                         }
                 }
             }
@@ -316,7 +315,8 @@ public class OneKeySubscribeActivity extends BaseActivity implements View.OnClic
             case R.id.tvOneKeySubscribe:    //点击一键申购按钮，弹出确认信息框
 
                 if (Islist == null || Islist.size() == 0) {     //如果没有选中   则不弹出确认信息框
-                    MistakeDialog.showDialog("未选择申购股票",OneKeySubscribeActivity.this);
+                    CustomCenterDialog customCenterDialog = CustomCenterDialog.CustomCenterDialog("未选择申购股票",CustomCenterDialog.SHOWCENTER);
+                    customCenterDialog.show(getFragmentManager(),OneKeySubscribeActivity.class.toString());
                     return;
                 }
 

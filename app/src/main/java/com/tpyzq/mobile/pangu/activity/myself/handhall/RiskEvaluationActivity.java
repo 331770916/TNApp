@@ -136,7 +136,7 @@ public class RiskEvaluationActivity extends BaseActivity implements View.OnClick
         map1.put("SEC_ID", "tpyzq");
         map1.put("FLAG", "true");
 
-        NetWorkUtil.getInstence().okHttpForPostString(TAG, ConstantUtil.URL_JY, map, new StringCallback() {
+        NetWorkUtil.getInstence().okHttpForPostString(TAG, ConstantUtil.getURL_JY_HS(), map, new StringCallback() {
             @Override
             public void onError(Call call, Exception e, int id) {
                 LogHelper.e(TAG, e.toString());
@@ -199,7 +199,7 @@ public class RiskEvaluationActivity extends BaseActivity implements View.OnClick
         map1.put("PAPER_ANSWER", map2);
         map.put("parms", map1);
 
-        NetWorkUtil.getInstence().okHttpForPostString(TAG, ConstantUtil.URL_JY, map, new StringCallback() {
+        NetWorkUtil.getInstence().okHttpForPostString(TAG, ConstantUtil.getURL_JY_HS(), map, new StringCallback() {
             @Override
             public void onError(Call call, Exception e, int id) {
                 LogHelper.e(TAG, e.toString());
@@ -294,7 +294,7 @@ public class RiskEvaluationActivity extends BaseActivity implements View.OnClick
         map1.put("SEC_ID", "tpyzq");
         map1.put("FLAG", "true");
 
-        NetWorkUtil.getInstence().okHttpForPostString(TAG, ConstantUtil.URL_JY, map, new StringCallback() {
+        NetWorkUtil.getInstence().okHttpForPostString(TAG, ConstantUtil.getURL_JY_HS(), map, new StringCallback() {
             @Override
             public void onError(Call call, Exception e, int id) {
                 if (mloadingDialog != null&&!isFinishing()) {
@@ -621,7 +621,7 @@ public class RiskEvaluationActivity extends BaseActivity implements View.OnClick
         map1.put("SEC_ID", "tpyzq");
         map1.put("FLAG", "true");
 
-        NetWorkUtil.getInstence().okHttpForPostString(TAG, ConstantUtil.URL_JY, map, new StringCallback() {
+        NetWorkUtil.getInstence().okHttpForPostString(TAG, ConstantUtil.getURL_JY_HS(), map, new StringCallback() {
             @Override
             public void onError(Call call, Exception e, int id) {
                 LogHelper.e(TAG, e.toString());

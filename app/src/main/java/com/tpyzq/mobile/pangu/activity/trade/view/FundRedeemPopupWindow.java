@@ -110,10 +110,10 @@ public class FundRedeemPopupWindow extends PopupWindow implements View.OnClickLi
         map1.put("funcid", "300442");
         map1.put("token", mSession);
         map1.put("parms", map2);
-        NetWorkUtil.getInstence().okHttpForPostString(TAG, ConstantUtil.URL_JY, map1, new StringCallback() {
+        NetWorkUtil.getInstence().okHttpForPostString(TAG, ConstantUtil.getURL_JY_HS(), map1, new StringCallback() {
             @Override
             public void onError(Call call, Exception e, int id) {
-                Helper.getInstance().showToast(context,ConstantUtil.NETWORK_ERROR);
+                CentreToast.showText(context,ConstantUtil.NETWORK_ERROR);
             }
 
             @Override

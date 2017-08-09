@@ -1,7 +1,9 @@
 package com.tpyzq.mobile.pangu.http;
 
 import com.google.gson.Gson;
+import com.tpyzq.mobile.pangu.BuildConfig;
 import com.tpyzq.mobile.pangu.http.manager.NetworkManager;
+import com.tpyzq.mobile.pangu.log.LogUtil;
 import com.zhy.http.okhttp.OkHttpUtils;
 import com.zhy.http.okhttp.builder.GetBuilder;
 import com.zhy.http.okhttp.builder.PostFormBuilder;
@@ -82,7 +84,8 @@ public class OkHttpUtil {
         if (object == null) {
             return;
         }
-
+        if(BuildConfig.DEBUG)
+            LogUtil.i("请求参数："+new Gson().toJson(object));
         postStringBuilder.content(new Gson().toJson(object)).tag(pairTag(tag)).build().readTimeOut(30000).execute(callback);
     }
 
@@ -92,7 +95,8 @@ public class OkHttpUtil {
         if (object == null) {
             return;
         }
-
+        if(BuildConfig.DEBUG)
+            LogUtil.i("请求参数："+new Gson().toJson(object));
         postStringBuilder.content(new Gson().toJson(object)).tag(pairTag(tag)).build().readTimeOut(time).execute(callback);
     }
 

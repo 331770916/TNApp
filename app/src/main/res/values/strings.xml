@@ -515,15 +515,15 @@
     <!--撤单-->
     <string name="Revoke">撤单</string>
     <string name="TextView1">股票名称</string>
-    <string name="TextView2">委托价/成交价</string>
-    <string name="TextView3">委托数/成交数</string>
+    <string name="TextView2">委托/成交价</string>
+    <string name="TextView3">委托/成交数</string>
     <string name="TextView4">状态/买卖</string>
 
 
     <!--适当性评估结果确认书-->
     <string name="Remind">经评估,向您做出提示，建议您审慎考虑，若仍坚持投资该项产品，并愿意承担该项投资可能引起的损失和其他后果，且投资该项产品的决定，系您独立、自主、真实的意思表达，与代销机构无关，请确认。</string>
 
-    <string name="hintTv">提示</string>
+    <string name="hintTv">提 示</string>
 
     <!--电子签名约定书签署内容-->
     <string name="AgreementTextView">\t\t\t\t根据《合同法》、《电子签名法》关于民事合同使用数据电文、电子签名的规定，采用电子签名签订的电子合同具有与纸质合同同等的法律效力，以此作为法律依据，本着提高合同签署效力的目的，委托人、集合资产管理计划管理人(以下简称管理人)、推广机构三方就委托人在推广机构参与由管理人所管理的集合资产管理计划过程中使用电子签名合同、电子签名事宜，经协商达成如下一致的意见：
@@ -853,4 +853,6 @@
     <string name="modify_fund">定投修改</string>
     <string name="add_fund">新增定投</string>
 
+    <!--修改资金密码-->
+    <string name="changemoneypwdactivity">修改资金密码</string>
 </resources>

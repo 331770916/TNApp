@@ -311,7 +311,7 @@ public class TabPlate extends BaseTabPager implements AdapterView.OnItemClickLis
         object[2] = map4;
         params.put("PARAMS", Arrays.toString(object));
         LogHelper.e(TAG, "request:"+params.toString());
-        NetWorkUtil.getInstence().okHttpForGet(TAG, ConstantUtil.URL, params, new StringCallback() {
+        NetWorkUtil.getInstence().okHttpForGet(TAG, ConstantUtil.getURL_HQ_HHN(), params, new StringCallback() {
             @Override
             public void onError(Call call, Exception e, int id) {
                 isCallBackSuccess = true;

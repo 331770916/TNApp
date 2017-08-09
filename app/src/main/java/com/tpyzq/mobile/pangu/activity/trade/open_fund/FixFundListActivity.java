@@ -11,7 +11,6 @@ import android.widget.TextView;
 import com.handmark.pulltorefresh.library.PullToRefreshBase;
 import com.handmark.pulltorefresh.library.PullToRefreshListView;
 import com.tpyzq.mobile.pangu.R;
-import com.tpyzq.mobile.pangu.activity.trade.stock.ETFStockListActivity;
 import com.tpyzq.mobile.pangu.adapter.trade.FixFundAdapter;
 import com.tpyzq.mobile.pangu.base.BaseActivity;
 import com.tpyzq.mobile.pangu.base.InterfaceCollection;
@@ -20,8 +19,8 @@ import com.tpyzq.mobile.pangu.data.FixFundEntity;
 import com.tpyzq.mobile.pangu.data.ResultInfo;
 import com.tpyzq.mobile.pangu.util.ConstantUtil;
 import com.tpyzq.mobile.pangu.view.CentreToast;
+import com.tpyzq.mobile.pangu.view.CustomCenterDialog;
 import com.tpyzq.mobile.pangu.view.dialog.LoadingDialog;
-import com.tpyzq.mobile.pangu.view.dialog.MistakeDialog;
 import com.tpyzq.mobile.pangu.view.dialog.StructuredFundDialog;
 
 import java.util.ArrayList;
@@ -55,6 +54,8 @@ public class FixFundListActivity extends BaseActivity implements View.OnClickLis
     @Override
     public void initView() {
         tv_title_click = (TextView) findViewById(R.id.tv_title_click);//添加
+        findViewById(R.id.rl_null).setOnClickListener(this);
+
         tv_title_click.setOnClickListener(this);
         rl_null = (RelativeLayout) findViewById(R.id.rl_null);//空页面
         lv = (PullToRefreshListView) findViewById(R.id.lv);//基金列表
@@ -107,6 +108,7 @@ public class FixFundListActivity extends BaseActivity implements View.OnClickLis
     public void onClick(View v) {
         switch (v.getId()) {
             case R.id.tv_title_click:
+            case R.id.rl_null:
                 Intent intent = new Intent(this, AddOrModFixFundActivity.class);
                 startActivityForResult(intent,REQUEST_ADD);
                 break;
@@ -162,7 +164,7 @@ public class FixFundListActivity extends BaseActivity implements View.OnClickLis
                 lv.onRefreshComplete();
             } else {
                 lv.onRefreshComplete();
-                CentreToast.showText(this,msg,false);
+                CentreToast.showText(this,msg);
             }
         }
         /*else if (TAG_LIST_FIRST.equalsIgnoreCase(tag)) {//进入第一次请求
@@ -200,7 +202,8 @@ public class FixFundListActivity extends BaseActivity implements View.OnClickLis
             } else if ("-6".equalsIgnoreCase(code)) {
                 skip.startLogin(FixFundListActivity.this);
             } else {
-                MistakeDialog.showDialog(msg, this, null);
+                CustomCenterDialog customCenterDialog = CustomCenterDialog.CustomCenterDialog(msg,CustomCenterDialog.SHOWCENTER);
+                customCenterDialog.show(getFragmentManager(),FixFundListActivity.class.toString());
             }
             lv.onRefreshComplete();
         }

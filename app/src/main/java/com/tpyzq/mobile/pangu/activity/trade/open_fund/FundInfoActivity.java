@@ -22,6 +22,7 @@ import com.tpyzq.mobile.pangu.data.FundSubsEntity;
 import com.tpyzq.mobile.pangu.http.OkHttpUtil;
 import com.tpyzq.mobile.pangu.http.doConnect.trade.FundInoConnect;
 import com.tpyzq.mobile.pangu.util.SpUtils;
+import com.tpyzq.mobile.pangu.view.CentreToast;
 import com.tpyzq.mobile.pangu.view.dialog.LoadingDialog;
 import java.util.ArrayList;
 
@@ -37,7 +38,6 @@ public class FundInfoActivity extends BaseActivity implements View.OnClickListen
     private PullToRefreshListView   mListView;
     private FundInfoAdapter         mAdapter;
     private ArrayList<FundSubsEntity>    mBeans;
-    private String mSession;
     private int position = 0;
 
     private boolean clickBackKey;//判断用户是否点击返回键取消网络请求
@@ -74,8 +74,7 @@ public class FundInfoActivity extends BaseActivity implements View.OnClickListen
 
 
         initLoadDialog();
-        mSession = SpUtils.getString(getApplication(), "mSession", null);
-        mFundInoConnect.fundQueryConnect(mListType, "", 0, mSession, TAG, this);
+        mFundInoConnect.fundQueryConnect(mListType, "", 0, TAG, this);
     }
 
     @Override
@@ -87,7 +86,7 @@ public class FundInfoActivity extends BaseActivity implements View.OnClickListen
             case R.id.bt_search:
                 mBeans.clear();
                 mAdapter.setDatas(mBeans);
-                mFundInoConnect.fundQueryConnect(mListType, mSearchContent_et.getText().toString(), 0, mSession, TAG, this);
+                mFundInoConnect.fundQueryConnect(mListType, mSearchContent_et.getText().toString(), 0, TAG, this);
                 break;
         }
     }
@@ -112,7 +111,7 @@ public class FundInfoActivity extends BaseActivity implements View.OnClickListen
 
     @Override
     public void onItemClick(AdapterView<?> parent, View view, int position, long id) {
-
+        position = position - 1;
         if (isClickItem) {
             Intent intent = new Intent();
             intent.putExtra("point", position);
@@ -153,9 +152,9 @@ public class FundInfoActivity extends BaseActivity implements View.OnClickListen
     public void onPullDownToRefresh(PullToRefreshBase refreshView) {
         if (position > 0) {
             position--;
-            mFundInoConnect.fundQueryConnect(mListType, mSearchContent_et.getText().toString(), position, mSession, TAG, this);
+            mFundInoConnect.fundQueryConnect(mListType, mSearchContent_et.getText().toString(), position, TAG, this);
         } else {
-            mFundInoConnect.fundQueryConnect(mListType, mSearchContent_et.getText().toString(), 0, mSession, TAG, this);
+            mFundInoConnect.fundQueryConnect(mListType, mSearchContent_et.getText().toString(), 0, TAG, this);
         }
 
     }
@@ -163,7 +162,7 @@ public class FundInfoActivity extends BaseActivity implements View.OnClickListen
     @Override
     public void onPullUpToRefresh(PullToRefreshBase refreshView) {
         position++;
-        mFundInoConnect.fundQueryConnect(mListType, mSearchContent_et.getText().toString(), position, mSession, TAG, this);
+        mFundInoConnect.fundQueryConnect(mListType, mSearchContent_et.getText().toString(), position, TAG, this);
     }
 
 
@@ -205,7 +204,7 @@ public class FundInfoActivity extends BaseActivity implements View.OnClickListen
     }
 
     private void showMistackDialog(String errorMsg) {
-        Toast.makeText(CustomApplication.getContext(), errorMsg, Toast.LENGTH_SHORT).show();
+        CentreToast.showText(CustomApplication.getContext(),errorMsg);
 //        MistakeDialog.showDialog(errorMsg, FundInfoActivity.this, listener);
     }
 

@@ -22,7 +22,7 @@ import com.tpyzq.mobile.pangu.http.NetWorkUtil;
 import com.tpyzq.mobile.pangu.util.ConstantUtil;
 import com.tpyzq.mobile.pangu.util.Helper;
 import com.tpyzq.mobile.pangu.util.SpUtils;
-import com.tpyzq.mobile.pangu.view.dialog.MistakeDialog;
+import com.tpyzq.mobile.pangu.view.CustomCenterDialog;
 import com.zhy.http.okhttp.callback.StringCallback;
 
 import org.json.JSONArray;
@@ -100,7 +100,7 @@ public class FundOpenAccountActivity extends BaseActivity implements View.OnClic
         map300436_1.put("SEC_ID", "tpyzq");
         map300436_1.put("FLAG", "true");
         map300436.put("parms", map300436_1);
-        NetWorkUtil.getInstence().okHttpForPostString("", ConstantUtil.URL_JY, map300436, new StringCallback() {
+        NetWorkUtil.getInstence().okHttpForPostString("", ConstantUtil.getURL_JY_HS(), map300436, new StringCallback() {
             @Override
             public void onError(Call call, Exception e, int id) {
             }
@@ -132,7 +132,7 @@ public class FundOpenAccountActivity extends BaseActivity implements View.OnClic
                     } else if ("-6".equals(code)) {
                         startActivity(new Intent(FundOpenAccountActivity.this, TransactionLoginActivity.class));
                     } else {
-                        MistakeDialog.showDialog(msg, FundOpenAccountActivity.this);
+                        showDialog(msg);
                     }
                 } catch (JSONException e) {
                     e.printStackTrace();
@@ -150,7 +150,7 @@ public class FundOpenAccountActivity extends BaseActivity implements View.OnClic
         map300436_1.put("FLAG", "true");
         map300436_1.put("FUND_COMPANY", company_code);
         map300436.put("parms", map300436_1);
-        NetWorkUtil.getInstence().okHttpForPostString("", ConstantUtil.URL_JY, map300436, new StringCallback() {
+        NetWorkUtil.getInstence().okHttpForPostString("", ConstantUtil.getURL_JY_HS(), map300436, new StringCallback() {
             @Override
             public void onError(Call call, Exception e, int id) {
             }
@@ -166,11 +166,11 @@ public class FundOpenAccountActivity extends BaseActivity implements View.OnClic
                     String data = object.getString("data");
                     String code = object.getString("code");
                     if ("0".equals(code)) {
-                        MistakeDialog.showDialog("开户成功", FundOpenAccountActivity.this);
+                        showDialog("开户成功");
                     } else if ("-6".equals(code)) {
                         startActivity(new Intent(FundOpenAccountActivity.this, TransactionLoginActivity.class));
                     } else {
-                        MistakeDialog.showDialog(msg, FundOpenAccountActivity.this);
+                        showDialog(msg);
                     }
                 } catch (JSONException e) {
                     e.printStackTrace();
@@ -193,6 +193,11 @@ public class FundOpenAccountActivity extends BaseActivity implements View.OnClic
                 bt_true.setBackgroundResource(R.drawable.button_login_unchecked);
             }
         }
+    }
+
+    private void showDialog(String msg){
+        CustomCenterDialog customCenterDialog = CustomCenterDialog.CustomCenterDialog(msg,CustomCenterDialog.SHOWCENTER);
+        customCenterDialog.show(getFragmentManager(),FundOpenAccountActivity.class.toString());
     }
 
     @Override

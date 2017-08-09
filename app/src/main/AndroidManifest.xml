@@ -196,15 +196,9 @@
         <activity android:name=".activity.home.managerMoney.product.precontract.ReservationSuccessActivity" />
         <!-- 资讯 相关activity -->
         <activity android:name=".activity.home.information.NewsDetailActivity" />
-        <activity android:name=".activity.home.information.NewsDetailMoreActivity" />
         <activity android:name=".activity.home.information.IndustryRelevanceActivity" />
         <activity android:name=".activity.home.information.InformationHomeActivity" />
         <activity android:name=".activity.home.information.CompileTabActivity" />
-        <activity android:name=".activity.home.information.EventDetailRelatedInfoListActivity" />
-        <activity android:name=".activity.home.information.HotAnalysisDetailActivity" />
-        <activity android:name=".activity.home.information.HotAnalysisListActivity" />
-        <activity android:name=".activity.home.information.ImportantEventActivity" />
-        <activity android:name=".activity.home.information.ImportantEventDetailActivity" />
         <!-- 热搜 相关activity -->
         <activity android:name=".activity.home.hotsearchstock.HotSearchStockActivity" />
         <activity android:name=".activity.home.SearchActivity" />
@@ -279,7 +273,7 @@
         <activity android:name=".activity.myself.handhall.StartyUpBoardActivity"/>
         <activity android:name=".activity.myself.handhall.ChooseRelationshipActivity"/>
         <activity android:name=".activity.myself.handhall.VideoViewActivity"/>
-
+        <activity android:name=".activity.myself.handhall.ChangeMoneyPwdActivity"/>
 
 
         <!-- open_fund 基金相关activity -->
@@ -405,7 +399,6 @@
         <activity android:name=".activity.market.quotation.StockListActivity" />
         <activity android:name=".activity.market.quotation.newstock.NewStockListActivity" />
         <activity android:name=".activity.market.selfChoice.editorSelfChoiceStock.EditorSelfChoiceStockActivity" />
-        <activity android:name=".activity.market.selfChoice.childNews.newsdetail.NewsDetailListActivity" />
         <activity android:name=".activity.market.selfChoice.editorSelfChoiceStock.remain.RemainActivity" />
         <activity android:name=".activity.market.quotation.plate.PlateIndexActivity" />
 

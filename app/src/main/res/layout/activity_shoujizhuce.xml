@@ -67,6 +67,7 @@
                 android:gravity="center_vertical"
                 android:inputType="number"
                 android:maxLength="11"
+                android:hint="@string/sjzcText"
                 android:numeric="integer"
                 android:paddingLeft="@dimen/size70" />
 

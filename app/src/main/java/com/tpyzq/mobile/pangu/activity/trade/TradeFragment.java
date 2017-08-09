@@ -104,7 +104,7 @@ public class TradeFragment extends BaseFragment
         map2.put("SECU_CODE", "");
         map.put("parms", map2);
 
-        NetWorkUtil.getInstence().okHttpForPostString(TAG, ConstantUtil.URL_JY, map, new StringCallback() {
+        NetWorkUtil.getInstence().okHttpForPostString(TAG, ConstantUtil.getURL_JY_HS(), map, new StringCallback() {
             @Override
             public void onError(Call call, Exception e, int id) {
                 LogHelper.e(TAG, e.toString());
@@ -142,7 +142,7 @@ public class TradeFragment extends BaseFragment
         map720260_1.put("SEC_ID", "tpyzq");
         map720260_1.put("FLAG", "true");
         map720260.put("parms", map720260_1);
-        NetWorkUtil.getInstence().okHttpForPostString("", ConstantUtil.URL_JY, map720260, new StringCallback() {
+        NetWorkUtil.getInstence().okHttpForPostString("", ConstantUtil.getURL_JY_HS(), map720260, new StringCallback() {
             @Override
             public void onError(Call call, Exception e, int id) {
 //                Toast.makeText(getContext(), "网络访问失败", Toast.LENGTH_SHORT).show();
@@ -179,7 +179,7 @@ public class TradeFragment extends BaseFragment
         map300501_1.put("SEC_ID", "tpyzq");
         map300501_1.put("FLAG", "true");
         map300501.put("parms", map300501_1);
-        NetWorkUtil.getInstence().okHttpForPostString("", ConstantUtil.URL_JY, map300501, new StringCallback() {
+        NetWorkUtil.getInstence().okHttpForPostString("", ConstantUtil.getURL_JY_HS(), map300501, new StringCallback() {
             @Override
             public void onError(Call call, Exception e, int id) {
             }

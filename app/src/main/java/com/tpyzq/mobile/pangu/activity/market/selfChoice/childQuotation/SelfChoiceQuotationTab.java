@@ -467,7 +467,7 @@ public class SelfChoiceQuotationTab extends BaseTabPager implements View.OnClick
         map.put("FUNCTIONCODE", "HQING005");
         map.put("PARAMS", strJson);
 
-        NetWorkUtil.getInstence().okHttpForGet(TAG, ConstantUtil.URL, map, new StringCallback() {
+        NetWorkUtil.getInstence().okHttpForGet(TAG, ConstantUtil.getURL_HQ_HHN(), map, new StringCallback() {
             @Override
             public void onError(Call call, Exception e, int id) {
                 LogHelper.e(TAG, e.toString());
