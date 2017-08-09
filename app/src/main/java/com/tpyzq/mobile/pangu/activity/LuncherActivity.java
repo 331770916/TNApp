@@ -6,12 +6,12 @@ import android.os.Environment;
 import android.text.TextUtils;
 import android.view.View;
 import android.view.WindowManager;
-import android.widget.ImageView;
 import android.widget.LinearLayout;
 import android.widget.TextView;
 
 import com.bonree.agent.android.Bonree;
 import com.bonree.agent.android.harvest.Statistics;
+import com.facebook.drawee.drawable.ScalingUtils;
 import com.facebook.drawee.view.SimpleDraweeView;
 import com.tpyzq.mobile.pangu.R;
 import com.tpyzq.mobile.pangu.activity.navigation.NavigationActivity;
@@ -54,7 +54,6 @@ public class LuncherActivity extends BaseActivity implements ICallbackResult {
     private View mView;
     private Handler handler ;
     private Runnable runnable;
-    private ImageView isShowImg;
     private SimpleDraweeView simpleDraweeView;
     private LinearLayout titleLinearLayout;
     private TextView timeText;
@@ -64,13 +63,13 @@ public class LuncherActivity extends BaseActivity implements ICallbackResult {
 
     @Override
     public void initView() {
+        getWindow().setFlags(WindowManager.LayoutParams.FLAG_FULLSCREEN, WindowManager.LayoutParams.FLAG_FULLSCREEN);
         handler = new Handler();
         initData();
-        isShowImg = (ImageView) findViewById(R.id.show_view);
         simpleDraweeView = (SimpleDraweeView) findViewById(R.id.iv_ad);
+//        simpleDraweeView.getHierarchy().setActualImageScaleType(ScalingUtils.ScaleType.FIT_XY);
         titleLinearLayout = (LinearLayout) findViewById(R.id.ll_title);
         timeText = (TextView) findViewById(R.id.tv_time);
-        simpleDraweeView.setImageResource(R.mipmap.luncher);
         CustomApplication.getInstance().addActivity(this);
         File _file = Helper.getExternalDir(this, "ImageView");
         if (_file != null) {
@@ -172,22 +171,17 @@ public class LuncherActivity extends BaseActivity implements ICallbackResult {
     }
 
     private void getWelcomeView(View view) {
-
         //  延时操作
         runnable = new Runnable() {
             @Override
             public void run() {
                 if (startflag){
-                    getWindow().setFlags(WindowManager.LayoutParams.FLAG_FULLSCREEN, WindowManager.LayoutParams.FLAG_FULLSCREEN);
 //        handler.removeCallbacks(runnable);    // 移除handle
-
                     titleLinearLayout.setVisibility(View.VISIBLE);
                     Uri uri = Uri.parse(resultImg);
                     simpleDraweeView.setImageURI(uri);
-                    simpleDraweeView.setVisibility(View.VISIBLE);
 
-                    isShowImg.setVisibility(View.GONE);
-                    myTimeCount = new MyTimeCount(1000*4,1000);
+                    myTimeCount = new MyTimeCount(1000*3,1000);
                     myTimeCount.start();
                 }else {
                     finishLuncher();
@@ -195,16 +189,14 @@ public class LuncherActivity extends BaseActivity implements ICallbackResult {
 
             }
         };
-        handler.postDelayed(runnable,1000*3);
+        handler.postDelayed(runnable,1000*2);
     }
 
 
     @Override
     public void getResult(Object result, String tag) {
-
-
         if (result instanceof String) {
-            CentreToast.showText(this,ConstantUtil.NETWORK_ERROR);
+//            CentreToast.showText(this,ConstantUtil.NETWORK_ERROR);
         } else {
             if (TAG.equals(tag)){
                 deleteData(result);

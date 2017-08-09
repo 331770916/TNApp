@@ -50,6 +50,7 @@ public class CustomCenterDialog extends DialogFragment {
     private Button presentEvaluation; // 现在评测
     private String showcenter;
     private String titleText,centerButtonText,leftButtonText,rightButtonText;
+    private boolean isShowCallPhone = true;
 
 
 
@@ -123,11 +124,16 @@ public class CustomCenterDialog extends DialogFragment {
         presentEvaluation = (Button) view.findViewById(R.id.present_evaluation);
         if (SHOWCENTER.equals(showcenter)){
             mRelativeLayoutCenter.setVisibility(View.VISIBLE);
-            mRelativelayoutCenterTwoButton.setVisibility(View.GONE);
-            callPhone = "(" + getActivity().getResources().getString(R.string.dh1) +
-                    getActivity().getResources().getString(R.string.dh) + ")";
-            // 设置电话拨打
-            setTextClickColorForSplin();
+
+            if (isShowCallPhone){
+                callPhone = "(" + getActivity().getResources().getString(R.string.dh1) +
+                        getActivity().getResources().getString(R.string.dh) + ")";
+                // 设置电话拨打
+                setTextClickColorForSplin();
+            }else {
+                callPhone ="";
+            }
+
         }else if (SHOWCENTERBOTH.equals(showcenter)){
             mRelativeLayoutCenter.setVisibility(View.GONE);
             mRelativelayoutCenterTwoButton.setVisibility(View.VISIBLE);
@@ -146,6 +152,13 @@ public class CustomCenterDialog extends DialogFragment {
     public void setBothButtonText(String leftButtonText ,String rightButtonText){   //  设置两个按钮的问题
         this.leftButtonText = leftButtonText;
         this.rightButtonText = rightButtonText;
+    }
+
+    /**
+     * 设置当前弹窗客服电话
+     */
+    public void cancelSetCall(){
+        isShowCallPhone = false;
     }
 
     private void setTextClickColorForSplin() {
