@@ -2842,7 +2842,7 @@ public class InterfaceCollection {
         map.put("funcid", "100213");
         map.put("token", "");
         map.put("parms", new HashMap());
-        net.okHttpForPostString(TAG, ConstantUtil.getURL_HQ_HHN(), map, new StringCallback() {
+        net.okHttpForPostString(TAG, ConstantUtil.getURL_HQ_HS(), map, new StringCallback() {
             @Override
             public void onError(Call call, Exception e, int id) {
                 ResultInfo info = new ResultInfo();
