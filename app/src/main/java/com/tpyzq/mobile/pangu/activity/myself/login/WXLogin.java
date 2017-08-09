@@ -10,8 +10,6 @@ import com.tpyzq.mobile.pangu.base.SimpleRemoteControl;
 import com.tpyzq.mobile.pangu.data.StockInfoEntity;
 import com.tpyzq.mobile.pangu.data.UserEntity;
 import com.tpyzq.mobile.pangu.db.Db_HOME_INFO;
-import com.tpyzq.mobile.pangu.db.Db_PUB_OPTIONALHISTORYSTOCK;
-import com.tpyzq.mobile.pangu.db.Db_PUB_SEARCHHISTORYSTOCK;
 import com.tpyzq.mobile.pangu.db.Db_PUB_STOCKLIST;
 import com.tpyzq.mobile.pangu.db.Db_PUB_USERS;
 import com.tpyzq.mobile.pangu.db.HOLD_SEQ;
@@ -84,7 +82,7 @@ public class WXLogin implements ICallbackResult {
             //获取用户信息
             mLoadingDialog = LoadingDialog.initDialog((Activity) mContext, "正在提交...");
             //显示Dialog
-            mLoadingDialog.show();
+//            mLoadingDialog.show();
             mShareAPI.getPlatformInfo((Activity) mContext, SHARE_MEDIA.WEIXIN, umAuthListener);
         }
 
@@ -206,6 +204,7 @@ public class WXLogin implements ICallbackResult {
 
 
                     } else if (code.equals("1")) {
+                        WipeData();
                         UserEntity userEntity = new UserEntity();
                         userEntity.setScno(screen_name);                                 //注册账号
                         userEntity.setIsregister("0");                                   //0是注册用户，1是未注册用户

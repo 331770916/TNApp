@@ -113,6 +113,7 @@ public class ShouJiVerificationActivity extends BaseActivity implements View.OnC
         //获取语音验证码
         mSound_tv = (TextView) findViewById(R.id.tvSound);
 
+
         getIntentData();
         initLogic();
     }
@@ -258,7 +259,9 @@ public class ShouJiVerificationActivity extends BaseActivity implements View.OnC
     //图片验证码网络请求
     private void ImageVerification() {
         mBuilder.setTitle("加载中...");
-        mBuilder.create().show();
+        if (!this.isFinishing()) {
+            mBuilder.create().show();
+        }
         InterfaceCollection.getInstance().getImageVerification(TAG1, this);
     }
 
@@ -310,21 +313,17 @@ public class ShouJiVerificationActivity extends BaseActivity implements View.OnC
                 time.cancel();
                 time.onFinish();
             }
-        } else if (TAG4.equals(info.getTag())) {     //绑定手机号
+        } else if (TAG4.equals(info.getTag())) {
+            if (mBuilder.dialog != null) {
+                mBuilder.dialog.dismiss();
+            }//绑定手机号
             if ("0".equals(info.getCode())) {
                 setUsermodData();
             }else if (ConstantUtil.NETWORK_ERROR_CODE.equals(info.getCode())) {
-                if (mBuilder.dialog != null) {
-                    mBuilder.dialog.dismiss();
-                }
                 time.cancel();
                 time.setMarked(true);
                 time.onFinish();
             } else {
-                if (mBuilder.dialog != null) {
-                    mBuilder.dialog.dismiss();
-                }
-
                 showMissCallDialog(info.getMsg(),"4");
             }
 
@@ -333,9 +332,9 @@ public class ShouJiVerificationActivity extends BaseActivity implements View.OnC
 
     //修改数据库
     private void setUsermodData() {
-        UserEntity userEntity = new UserEntity();
-        userEntity.setScno(mNumber_et.getText().toString().trim());       //注册账号
-        Db_PUB_USERS.UpdateScno(userEntity);                             //修改 注册账号
+//        UserEntity userEntity = new UserEntity();
+//        userEntity.setScno(mNumber_et.getText().toString().trim());       //注册账号
+//        Db_PUB_USERS.UpdateScno(userEntity);                             //修改 注册账号
         KeyEncryptionUtils.getInstance().localEncryptMobile(mNumber_et.getText().toString().trim());//修改手机号
         ShowNotice();
     }
@@ -374,7 +373,7 @@ public class ShouJiVerificationActivity extends BaseActivity implements View.OnC
                     UserUtil.refrushUserInfo();
                     if (!TextUtils.isEmpty(UserUtil.Mobile)) {
                         intent.setClass(ShouJiVerificationActivity.this, TransactionLoginActivity.class);
-                    } else {
+                    } else if ("3".equals(KeyEncryptionUtils.Typescno())){
                         intent.setClass(ShouJiVerificationActivity.this, ShouJiVerificationActivity.class);
                     }
                     startActivity(intent);

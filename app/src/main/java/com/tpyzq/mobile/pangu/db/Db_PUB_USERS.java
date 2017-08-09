@@ -147,7 +147,7 @@ public class Db_PUB_USERS extends BaseTable {
     }
 
     public static String queryingScno() {
-      return entity.getScno();
+      return entity.getPickname();
     }
 
     /**
@@ -233,10 +233,10 @@ public class Db_PUB_USERS extends BaseTable {
      */
     public static void UpdateScno(UserEntity userEntity) {
         ContentValues contentValues = new ContentValues();
-        contentValues.put("REGISTER_ACCOUNT", userEntity.getScno());
+        contentValues.put("NICKNAME", userEntity.getScno());
         try {
             if(getDatabase().update("USER", contentValues, "ID = 1", null)>0){
-                entity.setScno(userEntity.getScno());
+                entity.setPickname(userEntity.getScno());
             }
         } catch (Exception e) {
             e.printStackTrace();
@@ -321,7 +321,7 @@ public class Db_PUB_USERS extends BaseTable {
         contentValues.put("USER_TYPE", userEntity.getTypescno());
         try {
             if(getDatabase().update("USER", contentValues, "ID = 1", null)>0){
-                entity.setUsertype(userEntity.getUsertype());
+                entity.setUsertype(userEntity.getTypescno());
             }
         } catch (Exception e) {
             LogUtil.e(TAG, e.toString());
@@ -336,7 +336,7 @@ public class Db_PUB_USERS extends BaseTable {
         contentValues.put("REGISTER_ACCOUNT", userEntity.getRegisterID());
         try {
             if(getDatabase().update("USER", contentValues, "ID = 1", null)>0){
-                entity.setScno(userEntity.getScno());
+                entity.setScno(userEntity.getRegisterID());
             }
         } catch (Exception e) {
             LogUtil.e(TAG, e.toString());
