@@ -133,13 +133,10 @@ public class IndexActivity extends BaseActivity implements InterfaceCollection.I
         if(info.getCode().equals("0")){
             enitiy = (NewStockEnitiy) info.getData();
             if(enitiy!=null){
-                List<NewStockEnitiy.DataBeanToday> data =  enitiy.getData();
-                if(data!=null&data.size()>0) {
-                    newstockremind.setVisibility(View.VISIBLE);
-                    tvNewStock.setText(String.valueOf(data.size()));
-                    String isNewStock = SpUtils.getString(CustomApplication.getContext(),"isNewStock","");
-                    SpUtils.putString(CustomApplication.getContext(),"isNewStock",isNewStock+data.size());
-                }
+                newstockremind.setVisibility(View.VISIBLE);
+                tvNewStock.setText(String.valueOf(enitiy.getNewStockSize()));
+                String isNewStock = SpUtils.getString(CustomApplication.getContext(),"isNewStock","");
+                SpUtils.putString(CustomApplication.getContext(),"isNewStock",isNewStock+enitiy.getNewStockSize());
             }
         }
     }
