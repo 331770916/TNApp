@@ -15,9 +15,10 @@ import android.widget.PopupWindow;
 import android.widget.TextView;
 
 import com.tpyzq.mobile.pangu.R;
+import com.tpyzq.mobile.pangu.activity.trade.stock.OneKeySubscribeActivity;
 import com.tpyzq.mobile.pangu.data.OneKeySubscribeItem;
 import com.tpyzq.mobile.pangu.util.Helper;
-import com.tpyzq.mobile.pangu.view.dialog.MistakeDialog;
+import com.tpyzq.mobile.pangu.view.CustomCenterDialog;
 
 
 /**
@@ -135,9 +136,12 @@ public class UpdataeSubscribeLimitPopupWindow extends PopupWindow implements Vie
                     if (number > 0) {
                         num = String.valueOf(number);
                         this.etUpdatedSubscribeLimit.setText(num);
+                    } else {
+                        // TODO: 2017/8/9
+                        showDialog("当前无法更改数量");
                     }
                 } else {
-                    MistakeDialog.showDialog("申购股数不能空", mActivity);
+                    showDialog("申购股数不能空");
                 }
 
                 break;
@@ -155,9 +159,12 @@ public class UpdataeSubscribeLimitPopupWindow extends PopupWindow implements Vie
                     if (number < oldNum + 1) {
                         num = String.valueOf(number);
                         this.etUpdatedSubscribeLimit.setText(num);
+                    } else {
+                        // TODO: 2017/8/9
+                        showDialog("当前无法更改数量");
                     }
                 } else {
-                    MistakeDialog.showDialog("申购股数不能空", mActivity);
+                    showDialog("申购股数不能空");
                 }
                 break;
             case R.id.tvQuDing:     //确定
@@ -167,20 +174,20 @@ public class UpdataeSubscribeLimitPopupWindow extends PopupWindow implements Vie
                     if (market.equals("1")) {
                         if (changeNum % 1000 == 0) {
                             if (changeNum > oldNum) {
-                                MistakeDialog.showDialog("您输入的申购股数不能大于最高申购数", mActivity);
+                                showDialog("您输入的申购股数不能大于最高申购数");
                                 dismiss();
                             }
                             item.setNum(num);
                             mListener.onClick(item);
                             dismiss();
                         } else {
-                            MistakeDialog.showDialog("申购股数必须为1000的整数倍", mActivity);
+                            showDialog("申购股数必须为1000的整数倍");
                             dismiss();
                         }
                     } else if (market.equals("2")) {
                         if (changeNum % 500 == 0) {
                             if (changeNum > oldNum) {
-                                MistakeDialog.showDialog("您输入的申购股数不能大于最高申购数", mActivity);
+                                showDialog("您输入的申购股数不能大于最高申购数");
                                 dismiss();
                             }
                             item.setNum(num);
@@ -188,18 +195,23 @@ public class UpdataeSubscribeLimitPopupWindow extends PopupWindow implements Vie
                             dismiss();
 
                         } else {
-                            MistakeDialog.showDialog("申购股数必须为500的整数倍", mActivity);
+                            showDialog("申购股数必须为500的整数倍");
                             dismiss();
                         }
                     }
                 } else {
-                    MistakeDialog.showDialog("申购股数不能空", mActivity);
+                    showDialog("申购股数不能空");
                 }
                 break;
             case R.id.tvQuXiao:     //取消
                 dismiss();//销毁当前弹框
                 break;
         }
+    }
+
+    public void showDialog(String msg){
+        CustomCenterDialog customCenterDialog =CustomCenterDialog.CustomCenterDialog(msg,CustomCenterDialog.SHOWCENTER);
+        customCenterDialog.show(OneKeySubscribeActivity.fragmentManager,UpdataeSubscribeLimitPopupWindow.class.toString());
     }
 
     public interface UpdataSubscribeNumberListener {

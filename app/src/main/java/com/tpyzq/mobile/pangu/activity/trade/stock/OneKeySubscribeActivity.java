@@ -1,5 +1,6 @@
 package com.tpyzq.mobile.pangu.activity.trade.stock;
 
+import android.app.FragmentManager;
 import android.content.Intent;
 import android.graphics.drawable.ColorDrawable;
 import android.text.TextUtils;
@@ -60,11 +61,13 @@ public class OneKeySubscribeActivity extends BaseActivity implements View.OnClic
     private CheckBox allCheckBox;
     private OneKeySubscribeAdapter adapter;
     private String session, huA, shenA;
-    private ImageView ivOneKeyKong;     //无数据显示 空的图片
+    private ImageView ivOneKeyKong;     //无数据显示 空的图片\
+    public static FragmentManager fragmentManager;
 
 
     @Override
     public void initView() {
+        fragmentManager=getFragmentManager();
         this.ivOneKeyKong = (ImageView) this.findViewById(R.id.ivOneKeyKong);
         this.tvHuA = (TextView) this.findViewById(R.id.tvHuA);                //沪A的证券账户
         this.tvHuANum = (TextView) this.findViewById(R.id.tvHuANum);         //沪A的可购买数量
