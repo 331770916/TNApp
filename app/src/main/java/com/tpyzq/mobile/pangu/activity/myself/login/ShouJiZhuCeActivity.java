@@ -43,11 +43,9 @@ import com.tpyzq.mobile.pangu.util.SpUtils;
 import com.tpyzq.mobile.pangu.util.keyboard.KeyEncryptionUtils;
 import com.tpyzq.mobile.pangu.util.panguutil.SelfStockHelper;
 import com.tpyzq.mobile.pangu.util.panguutil.UserUtil;
+import com.tpyzq.mobile.pangu.view.CentreToast;
+import com.tpyzq.mobile.pangu.view.CustomCenterDialog;
 import com.tpyzq.mobile.pangu.view.dialog.CustomDialog;
-import com.tpyzq.mobile.pangu.view.dialog.HandoverDialog;
-import com.tpyzq.mobile.pangu.view.dialog.MistakeDialog;
-import com.tpyzq.mobile.pangu.view.dialog.SuccessDialog;
-
 import java.util.ArrayList;
 import java.util.List;
 
@@ -132,8 +130,6 @@ public class ShouJiZhuCeActivity extends BaseActivity implements View.OnClickLis
 
         getIntentData();
         initLogic();
-
-
     }
 
     private void getIntentData() {
@@ -216,29 +212,29 @@ public class ShouJiZhuCeActivity extends BaseActivity implements View.OnClickLis
 
         if (is) {
             if (TextUtils.isEmpty(mNumber_str)) {
-                Helper.getInstance().showToast(this, "请输入手机号");
+                CentreToast.showText(this, "请输入手机号");
                 return false;
             } else if (TextUtils.isEmpty(mImage_str)) {
-                Helper.getInstance().showToast(this, "请输入图片验证码");
+                CentreToast.showText(this, "请输入图片验证码");
                 return false;
             } else if (TextUtils.isEmpty(mCaptcha_str)) {
-                Helper.getInstance().showToast(this, "请输手机短信入验证码");
+                CentreToast.showText(this, "请输手机短信入验证码");
                 return false;
             } else if (!Helper.isMobileNO(mNumber_str)) {
-                Helper.getInstance().showToast(this, "请输入正确的手机号");
+                CentreToast.showText(this, "请输入正确的手机号");
                 return false;
             } else {
                 return true;
             }
         } else {
             if (TextUtils.isEmpty(mNumber_str)) {
-                Helper.getInstance().showToast(this, "请输入手机号");
+                CentreToast.showText(this, "请输入手机号");
                 return false;
             } else if (TextUtils.isEmpty(mImage_str)) {
-                Helper.getInstance().showToast(this, "请输入图片验证码");
+                CentreToast.showText(this, "请输入图片验证码");
                 return false;
             } else if (!Helper.isMobileNO(mNumber_str)) {
-                Helper.getInstance().showToast(this, "请输入正确的手机号");
+                CentreToast.showText(this, "请输入正确的手机号");
                 return false;
             } else {
                 return true;
@@ -295,14 +291,7 @@ public class ShouJiZhuCeActivity extends BaseActivity implements View.OnClickLis
             }
         } else if (TAG2.equals(info.getTag())) {   //短信
             if (!"0".equals(info.getCode()) && !ConstantUtil.NETWORK_ERROR_CODE.equals(info.getCode())) {
-                MistakeDialog.showDialog(info.getMsg(), ShouJiZhuCeActivity.this, new MistakeDialog.MistakeDialgoListener() {
-                    @Override
-                    public void doPositive() {
-                        time.cancel();
-                        time.setMarked(true);
-                        time.onFinish();
-                    }
-                });
+                showMissCallDialog(info.getMsg(),"4");
             } else if (ConstantUtil.NETWORK_ERROR_CODE.equals(info.getCode())) {
                 time.cancel();
                 time.setMarked(true);
@@ -310,13 +299,7 @@ public class ShouJiZhuCeActivity extends BaseActivity implements View.OnClickLis
             }
         } else if (TAG3.equals(info.getTag())) {        //语音
             if (!"0".equals(info.getCode()) && !ConstantUtil.NETWORK_ERROR_CODE.equals(info.getCode())) {
-                MistakeDialog.showDialog(info.getMsg(), ShouJiZhuCeActivity.this, new MistakeDialog.MistakeDialgoListener() {
-                    @Override
-                    public void doPositive() {
-                        time.cancel();
-                        time.onFinish();
-                    }
-                });
+                showMissCallDialog(info.getMsg(),"5");
             } else if (ConstantUtil.NETWORK_ERROR_CODE.equals(info.getCode())) {
                 time.cancel();
                 time.onFinish();
@@ -338,14 +321,7 @@ public class ShouJiZhuCeActivity extends BaseActivity implements View.OnClickLis
                 if (mBuilder.dialog != null) {
                     mBuilder.dialog.dismiss();
                 }
-                MistakeDialog.showDialog(info.getMsg(), ShouJiZhuCeActivity.this, new MistakeDialog.MistakeDialgoListener() {
-                    @Override
-                    public void doPositive() {
-                        time.cancel();
-                        time.setMarked(true);
-                        time.onFinish();
-                    }
-                });
+                showMissCallDialog(info.getMsg(),"4");
             }
         }
     }
@@ -448,12 +424,7 @@ public class ShouJiZhuCeActivity extends BaseActivity implements View.OnClickLis
                 mBuilder.dialog.dismiss();
             }
             if (result instanceof String) {
-                MistakeDialog.showDialog("导入自选股异常" + result.toString(), ShouJiZhuCeActivity.this, new MistakeDialog.MistakeDialgoListener() {
-                    @Override
-                    public void doPositive() {
-                        ShowNotice();
-                    }
-                });
+                showCallDialog("导入自选股异常" + result.toString());
             } else {
                 //把查询到的股票添加到数据库
                 ArrayList<StockInfoEntity> stockInfoEntities = (ArrayList<StockInfoEntity>) result;
@@ -487,44 +458,65 @@ public class ShouJiZhuCeActivity extends BaseActivity implements View.OnClickLis
     private void ShowNotice() {
         if ("1".equals(mIdentify)) {
             setData();
-            HandoverDialog.showDialog("切换成功", ShouJiZhuCeActivity.this, new MistakeDialog.MistakeDialgoListener() {
-                @Override
-                public void doPositive() {
-//                    HOLE_SEQ.deleteAll();
-                    SpUtils.putString(CustomApplication.getContext(), ConstantUtil.APPEARHOLD, ConstantUtil.HOLD_DISAPPEAR);
-                    finish();
-                }
-            });
+            showMissCallDialog("切换成功","1");
         } else if ("2".equals(mIdentify)) {
-            HandoverDialog.showDialog("注册成功", ShouJiZhuCeActivity.this, new MistakeDialog.MistakeDialgoListener() {
-                @Override
-                public void doPositive() {
-//                                        HOLE_SEQ.deleteAll();
+            showMissCallDialog("注册成功","1");
+        } else {
+            showMissCallDialog("注册成功","3");
+
+        }
+    }
+
+    private void showCallDialog(String msg){
+        final CustomCenterDialog customCenterDialog = CustomCenterDialog.CustomCenterDialog(msg,CustomCenterDialog.SHOWCENTER);
+        customCenterDialog.show(getFragmentManager(),ShouJiZhuCeActivity.class.toString());
+        customCenterDialog.setOnClickListener(new CustomCenterDialog.ConfirmOnClick() {
+            @Override
+            public void confirmOnclick() {
+                customCenterDialog.dismiss();
+                ShowNotice();
+            }
+        });
+    }
+
+    /**
+     * 显示不带客服电话Dialog
+     * @param msg 显示的文字
+     */
+    private void showMissCallDialog(String msg, final String mIdentify){
+        final CustomCenterDialog customCenterDialog = CustomCenterDialog.CustomCenterDialog(msg,CustomCenterDialog.SHOWCENTER);
+        customCenterDialog.show(getFragmentManager(),ShouJiZhuCeActivity.class.toString());
+        customCenterDialog.cancelSetCall();
+        customCenterDialog.setOnClickListener(new CustomCenterDialog.ConfirmOnClick() {
+            @Override
+            public void confirmOnclick() {
+                customCenterDialog.dismiss();
+                if ("1".equals(mIdentify)){
                     SpUtils.putString(CustomApplication.getContext(), ConstantUtil.APPEARHOLD, ConstantUtil.HOLD_DISAPPEAR);
                     finish();
-                }
-            });
-        } else {
-            HandoverDialog.showDialog("注册成功", ShouJiZhuCeActivity.this, new MistakeDialog.MistakeDialgoListener() {
-                @Override
-                public void doPositive() {
-
+                }else  if ("3".equals(mIdentify)){
                     Intent intent = getIntent();
-                    if (intent == null) {
-                        intent = new Intent();
-                    }
-                    UserUtil.refrushUserInfo();
-                    String a=KeyEncryptionUtils.getInstance().Typescno();
-                    if (!TextUtils.isEmpty(UserUtil.Mobile)) {
-                        intent.setClass(ShouJiZhuCeActivity.this, TransactionLoginActivity.class);
-                    } else {
-                        intent.setClass(ShouJiZhuCeActivity.this, ShouJiVerificationActivity.class);
-                    }
-                    startActivity(intent);
-                    finish();
+                if (intent == null) {
+                    intent = new Intent();
                 }
-            });
-        }
+                UserUtil.refrushUserInfo();
+                if (!TextUtils.isEmpty(UserUtil.Mobile)) {
+                    intent.setClass(ShouJiZhuCeActivity.this, TransactionLoginActivity.class);
+                } else  {
+                    intent.setClass(ShouJiZhuCeActivity.this, ShouJiVerificationActivity.class);
+                }
+                startActivity(intent);
+                finish();
+                }else if ("4".equals(mIdentify)){
+                    time.cancel();
+                    time.setMarked(true);
+                    time.onFinish();
+                }else if ("5".equals(mIdentify)){
+                    time.cancel();
+                    time.onFinish();
+                }
+            }
+        });
     }
 
     @Override
@@ -533,7 +525,7 @@ public class ShouJiZhuCeActivity extends BaseActivity implements View.OnClickLis
             ShowNotice();
         } else {
             Marker = 0;
-            Helper.getInstance().showToast(this, "微信登录失败");
+            CentreToast.showText(this, "微信登录失败");
         }
     }
 

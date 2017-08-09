@@ -23,32 +23,16 @@ import com.tpyzq.mobile.pangu.base.CustomApplication;
 import com.tpyzq.mobile.pangu.base.InterfaceCollection;
 import com.tpyzq.mobile.pangu.data.ResultInfo;
 import com.tpyzq.mobile.pangu.data.UserEntity;
-import com.tpyzq.mobile.pangu.db.Db_HOME_INFO;
-import com.tpyzq.mobile.pangu.db.Db_PUB_STOCKLIST;
 import com.tpyzq.mobile.pangu.db.Db_PUB_USERS;
-import com.tpyzq.mobile.pangu.db.HOLD_SEQ;
-import com.tpyzq.mobile.pangu.http.NetWorkUtil;
 import com.tpyzq.mobile.pangu.http.OkHttpUtil;
-import com.tpyzq.mobile.pangu.log.LogUtil;
 import com.tpyzq.mobile.pangu.util.ConstantUtil;
-import com.tpyzq.mobile.pangu.util.DeviceUtil;
 import com.tpyzq.mobile.pangu.util.Helper;
 import com.tpyzq.mobile.pangu.util.SpUtils;
 import com.tpyzq.mobile.pangu.util.keyboard.KeyEncryptionUtils;
 import com.tpyzq.mobile.pangu.util.panguutil.UserUtil;
+import com.tpyzq.mobile.pangu.view.CentreToast;
+import com.tpyzq.mobile.pangu.view.CustomCenterDialog;
 import com.tpyzq.mobile.pangu.view.dialog.CustomDialog;
-import com.tpyzq.mobile.pangu.view.dialog.HandoverDialog;
-import com.tpyzq.mobile.pangu.view.dialog.LoadingDialog;
-import com.tpyzq.mobile.pangu.view.dialog.MistakeDialog;
-import com.zhy.http.okhttp.callback.StringCallback;
-
-import org.json.JSONException;
-import org.json.JSONObject;
-
-import java.util.HashMap;
-
-import okhttp3.Call;
-
 /**
  * Created by wangqi on 2016/8/22.
  * 手机验证
@@ -208,29 +192,29 @@ public class ShouJiVerificationActivity extends BaseActivity implements View.OnC
 
         if (is) {
             if (TextUtils.isEmpty(mNumber_str)) {
-                Helper.getInstance().showToast(this, "请输入手机号");
+                CentreToast.showText(this, "请输入手机号");
                 return false;
             } else if (TextUtils.isEmpty(mImage_str)) {
-                Helper.getInstance().showToast(this, "请输入图片验证码");
+                CentreToast.showText(this, "请输入图片验证码");
                 return false;
             } else if (TextUtils.isEmpty(mCaptcha_str)) {
-                Helper.getInstance().showToast(this, "请输手机短信入验证码");
+                CentreToast.showText(this, "请输手机短信入验证码");
                 return false;
             } else if (!Helper.isMobileNO(mNumber_str)) {
-                Helper.getInstance().showToast(this, "请输入正确的手机号");
+                CentreToast.showText(this, "请输入正确的手机号");
                 return false;
             } else {
                 return true;
             }
         } else {
             if (TextUtils.isEmpty(mNumber_str)) {
-                Helper.getInstance().showToast(this, "请输入手机号");
+                CentreToast.showText(this, "请输入手机号");
                 return false;
             } else if (TextUtils.isEmpty(mImage_str)) {
-                Helper.getInstance().showToast(this, "请输入图片验证码");
+                CentreToast.showText(this, "请输入图片验证码");
                 return false;
             } else if (!Helper.isMobileNO(mNumber_str)) {
-                Helper.getInstance().showToast(this, "请输入正确的手机号");
+                CentreToast.showText(this, "请输入正确的手机号");
                 return false;
             } else {
                 return true;
@@ -313,14 +297,7 @@ public class ShouJiVerificationActivity extends BaseActivity implements View.OnC
             }
         } else if (TAG2.equals(info.getTag())) {   //短信
             if (!"0".equals(info.getCode()) && !ConstantUtil.NETWORK_ERROR_CODE.equals(info.getCode())) {
-                MistakeDialog.showDialog(info.getMsg(), ShouJiVerificationActivity.this, new MistakeDialog.MistakeDialgoListener() {
-                    @Override
-                    public void doPositive() {
-                        time.cancel();
-                        time.setMarked(true);
-                        time.onFinish();
-                    }
-                });
+                showMissCallDialog(info.getMsg(),"4");
             } else if (ConstantUtil.NETWORK_ERROR_CODE.equals(info.getCode())) {
                 time.cancel();
                 time.setMarked(true);
@@ -328,13 +305,7 @@ public class ShouJiVerificationActivity extends BaseActivity implements View.OnC
             }
         } else if (TAG3.equals(info.getTag())) {        //语音
             if (!"0".equals(info.getCode()) && !ConstantUtil.NETWORK_ERROR_CODE.equals(info.getCode())) {
-                MistakeDialog.showDialog(info.getMsg(), ShouJiVerificationActivity.this, new MistakeDialog.MistakeDialgoListener() {
-                    @Override
-                    public void doPositive() {
-                        time.cancel();
-                        time.onFinish();
-                    }
-                });
+                showMissCallDialog(info.getMsg(),"5");
             } else if (ConstantUtil.NETWORK_ERROR_CODE.equals(info.getCode())) {
                 time.cancel();
                 time.onFinish();
@@ -353,14 +324,8 @@ public class ShouJiVerificationActivity extends BaseActivity implements View.OnC
                 if (mBuilder.dialog != null) {
                     mBuilder.dialog.dismiss();
                 }
-                MistakeDialog.showDialog(info.getMsg(), ShouJiVerificationActivity.this, new MistakeDialog.MistakeDialgoListener() {
-                    @Override
-                    public void doPositive() {
-                        time.cancel();
-                        time.setMarked(true);
-                        time.onFinish();
-                    }
-                });
+
+                showMissCallDialog(info.getMsg(),"4");
             }
 
         }
@@ -377,28 +342,31 @@ public class ShouJiVerificationActivity extends BaseActivity implements View.OnC
 
     private void ShowNotice() {
         if ("1".equals(mIdentify)) {
-            HandoverDialog.showDialog("验证成功", ShouJiVerificationActivity.this, new MistakeDialog.MistakeDialgoListener() {
-                @Override
-                public void doPositive() {
-//                    HOLE_SEQ.deleteAll();
-                    SpUtils.putString(CustomApplication.getContext(), ConstantUtil.APPEARHOLD, ConstantUtil.HOLD_DISAPPEAR);
-                    finish();
-                }
-            });
+            showMissCallDialog("验证成功","1");
         } else if ("2".equals(mIdentify)) {
-            HandoverDialog.showDialog("验证成功", ShouJiVerificationActivity.this, new MistakeDialog.MistakeDialgoListener() {
-                @Override
-                public void doPositive() {
-                    //                    HOLE_SEQ.deleteAll();
+            showMissCallDialog("验证成功","1");
+        } else {
+            showMissCallDialog("验证成功","3");
+        }
+
+    }
+
+    /**
+     * 显示不带客服电话Dialog
+     * @param msg 显示的文字
+     */
+    private void showMissCallDialog(String msg, final String mIdentify){
+        final CustomCenterDialog customCenterDialog = CustomCenterDialog.CustomCenterDialog(msg,CustomCenterDialog.SHOWCENTER);
+        customCenterDialog.show(getFragmentManager(),ShouJiZhuCeActivity.class.toString());
+        customCenterDialog.cancelSetCall();
+        customCenterDialog.setOnClickListener(new CustomCenterDialog.ConfirmOnClick() {
+            @Override
+            public void confirmOnclick() {
+                customCenterDialog.dismiss();
+                if ("1".equals(mIdentify)){
                     SpUtils.putString(CustomApplication.getContext(), ConstantUtil.APPEARHOLD, ConstantUtil.HOLD_DISAPPEAR);
                     finish();
-                }
-            });
-        } else {
-            HandoverDialog.showDialog("验证成功", ShouJiVerificationActivity.this, new MistakeDialog.MistakeDialgoListener() {
-                @Override
-                public void doPositive() {
-
+                }else  if ("3".equals(mIdentify)){
                     Intent intent = getIntent();
                     if (intent == null) {
                         intent = new Intent();
@@ -411,10 +379,19 @@ public class ShouJiVerificationActivity extends BaseActivity implements View.OnC
                     }
                     startActivity(intent);
                     finish();
+                }else if ("4".equals(mIdentify)){
+                    time.cancel();
+                    time.setMarked(true);
+                    time.onFinish();
+                }else if ("5".equals(mIdentify)){
+                    time.cancel();
+                    time.onFinish();
                 }
-            });
-        }
+            }
+        });
     }
+
+
 
     /**
      * 短信 语音 倒计时
@@ -471,6 +448,7 @@ public class ShouJiVerificationActivity extends BaseActivity implements View.OnC
             ImageVerification();
         }
     }
+
 
     /**
      * EditText 监听事件
