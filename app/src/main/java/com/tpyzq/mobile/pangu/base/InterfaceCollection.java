@@ -3016,4 +3016,102 @@ public class InterfaceCollection {
 
     }
 
+    /**
+     * 请求站点
+     * @param url 请求地址 启动页两路都要进行请求，ConstantUtil.IP+ConstantUtil.GET_SITES
+     * @param TAG tag值
+     * @param callback 返回类
+     */
+    public void getSites(String url, final String TAG, final InterfaceCallback callback) {
+        Map<String, String> map001 = new HashMap<>();
+        NetWorkUtil.getInstence().okHttpForGet("", url, map001, new StringCallback() {
+            @Override
+            public void onError(Call call, Exception e, int id) {
+                ResultInfo info = new ResultInfo();
+                info.setCode(ConstantUtil.NETWORK_ERROR_CODE);
+                info.setMsg(ConstantUtil.NETWORK_ERROR);
+                info.setTag(TAG);
+                callback.callResult(info);
+            }
+
+            @Override
+            public void onResponse(String response, int id) {
+                ResultInfo info = new ResultInfo(response);
+                JSONObject jsonObj;
+                String code, type;
+                try {
+                    if (TextUtils.isEmpty(response)) {
+                        info.setCode(ConstantUtil.SERVICE_NO_DATA_CODE);
+                        info.setMsg(ConstantUtil.SERVICE_NO_DATA);
+                        info.setTag(TAG);
+                    } else {
+                        jsonObj = new JSONObject(response);
+                        code = jsonObj.optString("code");
+                        type = jsonObj.optString("type");
+                        info.setCode(code);
+                        info.setMsg(type);
+                        info.setTag(TAG);
+                        if ("0".equalsIgnoreCase(code)) {
+                            jsonObj = jsonObj.optJSONObject("message");
+                            SpUtils.putString(CustomApplication.getContext(),"site_json",response);
+                            ConstantUtil.SITE_JSON = response;
+                            ConstantUtil.registerServerUrl = jsonObj.optString("register-httpServer");
+                            ConstantUtil.registerNoteUrl = jsonObj.optString("register-note");
+                            HashMap resultMap = parseSites(jsonObj);
+                            info.setData(resultMap);
+                        }
+                    }
+                } catch (Exception e) {
+                    info.setCode(ConstantUtil.JSON_ERROR_CODE);
+                    info.setMsg(ConstantUtil.JSON_ERROR);
+                    info.setTag(TAG);
+                }
+                callback.callResult(info);
+
+            }
+        });
+    }
+
+    /**
+     * 站点接口解析
+     * @param jsonObj message的jsonobject
+     * @return
+     * @throws JSONException
+     */
+    public static HashMap parseSites(JSONObject jsonObj) throws JSONException{
+        HashMap resultMap = new HashMap();
+        String code, type;
+        JSONObject subJsonObj;
+        JSONArray jsonArr, subJsonArr;
+        String[] strs;
+        try {
+            //map第二个值为注册URL
+            resultMap.put("register",jsonObj.optString("register"));
+
+            //map第三个值为交易站点集合 key为trade value为数组 数组内为字符串 格式 站点名称+^^^+站点地址
+            jsonArr = jsonObj.optJSONArray("trade");
+            strs = new String[jsonArr.length()];
+            for (int i=0;i<jsonArr.length();i++){
+                subJsonObj = jsonArr.optJSONObject(i);
+                strs[i] = subJsonObj.optString("name")+"|"+subJsonObj.optString("url");
+            }
+            resultMap.put("trade",strs);
+
+            //map第四个值为行情站点集合 key为hq value为数组 数组内为字符串 格式 站点名称+^^^+站点地址
+            jsonArr = jsonObj.optJSONArray("hq");
+            strs = new String[jsonArr.length()];
+            for (int i=0;i<jsonArr.length();i++){
+                subJsonObj = jsonArr.optJSONObject(i);
+                strs[i] = subJsonObj.optString("name")+"|"+subJsonObj.optString("url");
+            }
+            resultMap.put("hq",strs);
+
+        } catch (Exception e) {
+            e.printStackTrace();
+        } finally {
+            return resultMap;
+        }
+
+    }
+
 }

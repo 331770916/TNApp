@@ -113,7 +113,7 @@ public class InformActivity extends BaseActivity implements View.OnClickListener
         map2.put("1", warning_push_time);
         map2.put("2", newshare_push_time);
         map2.put("3", inform_push_time);
-        net.okHttpForPostString(TAG, ConstantUtil.getURL_HQ_HS(), map, new StringCallback() {
+        NetWorkUtil.getInstence().okHttpForPostString(TAG, ConstantUtil.getURL_NEW(), map, new StringCallback() {
             @Override
             public void onError(Call call, Exception e, int id) {
                 LogUtil.e("", e.toString());

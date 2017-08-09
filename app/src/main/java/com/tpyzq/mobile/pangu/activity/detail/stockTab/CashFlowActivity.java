@@ -198,7 +198,7 @@ public class CashFlowActivity extends BaseActivity implements View.OnClickListen
         map100200_1.put("secucode", stockcode);
         map100200_1.put("querytype", pager);
         map100200.put("parms", map100200_1);
-        NetWorkUtil.getInstence().okHttpForPostString("", ConstantUtil.getURL_HQ_HS(), map100200, new StringCallback() {
+        NetWorkUtil.getInstence().okHttpForPostString("", ConstantUtil.getURL_NEW(), map100200, new StringCallback() {
             @Override
             public void onError(Call call, Exception e, int id) {
             }

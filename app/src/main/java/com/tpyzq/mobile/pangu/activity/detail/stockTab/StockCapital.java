@@ -74,7 +74,7 @@ public class StockCapital extends BaseStockDetailPager {
         HashMap map100207_1 = new HashMap();
         map100207_1.put("secucode", stockcode);
         map100207.put("parms", map100207_1);
-        NetWorkUtil.getInstence().okHttpForPostString("", ConstantUtil.getURL_HQ_HS(), map100207, new StringCallback() {
+        NetWorkUtil.getInstence().okHttpForPostString("", ConstantUtil.getURL_NEW(), map100207, new StringCallback() {
             @Override
             public void onError(Call call, Exception e, int id) {
                 ToastUtils.showShort(mContext, "网络访问失败");
@@ -108,7 +108,7 @@ public class StockCapital extends BaseStockDetailPager {
         HashMap map100208_1 = new HashMap();
         map100208_1.put("secucode", stockcode);
         map100208.put("parms", map100207_1);
-        NetWorkUtil.getInstence().okHttpForPostString("", ConstantUtil.getURL_HQ_HS(), map100208, new StringCallback() {
+        NetWorkUtil.getInstence().okHttpForPostString("", ConstantUtil.getURL_NEW(), map100208, new StringCallback() {
             @Override
             public void onError(Call call, Exception e, int id) {
                 ToastUtils.showShort(mContext, "网络访问失败");

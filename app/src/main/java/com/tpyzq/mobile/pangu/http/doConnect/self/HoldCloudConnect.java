@@ -113,12 +113,14 @@ public class HoldCloudConnect {
                                         }
                                         stockInfoEntities.add(stockInfoEntity);
                                     }
+                                    mCallbackResult.getResult(stockInfoEntities, TAG);
                                 }else{
                                     mCallbackResult.getResult("导入持仓暂无数据", TAG);
                                 }
                             }
+                        } else {
+                            mCallbackResult.getResult("导入持仓暂无数据", TAG);
                         }
-                        mCallbackResult.getResult(stockInfoEntities, TAG);
                     }else {
                         mCallbackResult.getResult(res.optString("msg"), TAG);
                     }

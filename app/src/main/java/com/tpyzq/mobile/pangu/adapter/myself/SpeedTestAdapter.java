@@ -25,14 +25,12 @@ import java.util.List;
 public class SpeedTestAdapter extends BaseAdapter {
     private Context context;
     private List<SpeedTestEntity> speedTestBeen;
-    private List<CheckBox> checkBoxes;
     private SpeedCallBack speedCallBack;
 
     public SpeedTestAdapter(Context context, List<SpeedTestEntity> speedTestBeen, SpeedCallBack speedCallBack) {
         this.context = context;
         this.speedCallBack = speedCallBack;
         this.speedTestBeen = speedTestBeen;
-        checkBoxes = new ArrayList<CheckBox>();
     }
 
     @Override
@@ -62,7 +60,6 @@ public class SpeedTestAdapter extends BaseAdapter {
             holder.tv_text1 = (TextView) convertView.findViewById(R.id.tv_text1);
             holder.tv_text2 = (TextView) convertView.findViewById(R.id.tv_text2);
             holder.cb_speed = (CheckBox) convertView.findViewById(R.id.cb_speed);
-            checkBoxes.add(holder.cb_speed);
             convertView.setTag(holder);
         } else {
             holder = (ViewHolder) convertView.getTag();
@@ -71,18 +68,17 @@ public class SpeedTestAdapter extends BaseAdapter {
         holder.cb_speed.setChecked(false);
 
         String ip = "";
-        String port = speedTestBeen.get(position).version_port;
+        final SpeedTestEntity speedTestEntity = speedTestBeen.get(position);
+        String port = speedTestEntity.version_port;
         if ("80".equals(port) || TextUtils.isEmpty(port)) {
-            ip = speedTestBeen.get(position).version_ip;
+            ip = speedTestEntity.version_ip;
         } else {
-            ip = speedTestBeen.get(position).version_ip + ":" + port;
+            ip = speedTestEntity.version_ip + ":" + port;
         }
         final String url = ip;
-        if (ConstantUtil.HQ_IP.equals(url) || ConstantUtil.JY_IP.equals(url)) {
-            holder.cb_speed.setChecked(true);
-        }
-        holder.tv_text1.setText(speedTestBeen.get(position).version_name);
-        String status = speedTestBeen.get(position).version_status;
+        holder.cb_speed.setChecked(speedTestEntity.isChecked);
+        holder.tv_text1.setText(speedTestEntity.version_name);
+        String status = speedTestEntity.version_status;
         holder.tv_text2.setText(status);
         if ("优".equals(status)) {
             holder.tv_text2.setTextColor(ColorUtils.RED);
@@ -92,18 +88,17 @@ public class SpeedTestAdapter extends BaseAdapter {
         convertView.setOnClickListener(new View.OnClickListener() {
             @Override
             public void onClick(View v) {
-                for (int i = 0; i < checkBoxes.size(); i++) {
+                for (int i = 0; i < speedTestBeen.size(); i++) {
                     if (i != position) {
-                        checkBoxes.get(i).setChecked(false);
+                        speedTestBeen.get(i).isChecked = false;
                     } else {
-                        checkBoxes.get(i).setChecked(true);
-                        speedCallBack.setUrl(speedTestBeen.get(position).version_name,url);
+                        speedTestBeen.get(i).isChecked = true;
+                        speedCallBack.setUrl(speedTestEntity.version_name,url);
                     }
                 }
+                notifyDataSetChanged();
             }
         });
-
-
         return convertView;
     }
 

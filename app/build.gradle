@@ -9,8 +9,8 @@ android {
 //        applicationId "com.tpyzq.self.mobile.pangu"
         minSdkVersion 15
         targetSdkVersion 22
-        versionCode 1
-        versionName "1.7.6"
+        versionCode 20170807
+        versionName "1.1.4"
 
         multiDexEnabled = true
 
@@ -48,7 +48,7 @@ android {
     productFlavors {
         km_online{
             applicationId "com.tpyzq.self.mobile.pangu"
-            buildConfigField "String", "IP", '"http://km-tnhq.tpyzq.com"'
+            buildConfigField "String", "IP", '"http://newkm-tnhq.tpyzq.com"'
             buildConfigField "String", "SJYZM", '"https://km-tn.tpyzq.com"'
             buildConfigField "String", "BORY", '"https://bj-apm.tpyzq.com/config/"'
             buildConfigField "String", "BORY_APPID", '"3951f553-a63c-4d9e-9896-5f28ce2926f3"'
@@ -56,18 +56,30 @@ android {
             buildConfigField "String", "SecurityIps", '"https://km-tnhq.tpyzq.com"'
             buildConfigField "String", "SecurityIp", '"http://km-tnhq.tpyzq.com"'
             buildConfigField "String", "status", '"生产"'
+            buildConfigField "String", "registerServerUrl", '"https://bj-tnyw.tpyzq.com"'
+            buildConfigField "String", "registerNoteUrl", '"https://bj-tnyw.tpyzq.com"'
+            buildConfigField "String", "bjUrl", '"https://bj-tnhq.tpyzq.com/note/getPath"'
+            buildConfigField "String", "kmUrl", '"https://newkm-tnhq.tpyzq.com/note/getPath"'
+            buildConfigField "String", "currentUrl", '"https://newkm-tnhq.tpyzq.com/note/getPath"'
+            resValue "string", "site_json", "site_json_online"
             manifestPlaceholders = [appicon:"@mipmap/icon_logo"]
         }
         evironment_test{
             applicationId "com.tpyzq.test.mobile.pangu"
-            buildConfigField "String", "IP", '"http://test-tnhq.tpyzq.com:8082"'
+            buildConfigField "String", "IP", '"https://test-tnhq.tpyzq.com:8082"'
             buildConfigField "String", "SJYZM", '"http://106.120.112.246:8081"'
             buildConfigField "String", "BORY", '"https://123.127.198.52:443/config"'
             buildConfigField "String", "BORY_APPID", '"95f7a69e-db11-40a4-b242-6be2b396a0ee"'
             buildConfigField "String", "APP_ID", '"479a67630d2a36996b6aa485f80a4560abefcb91"'
-            buildConfigField "String", "SecurityIps", '"http://test-tnhq.tpyzq.com:8082"'
-            buildConfigField "String", "SecurityIp", '"http://test-tnhq.tpyzq.com:8082"'
+            buildConfigField "String", "SecurityIps", '"https://test-tnhq.tpyzq.com:8082"'
+            buildConfigField "String", "SecurityIp", '"https://test-tnhq.tpyzq.com:8082"'
             buildConfigField "String", "status", '"测试"'
+            buildConfigField "String", "registerServerUrl", '"https://test-tnyw.tpyzq.com/"'
+            buildConfigField "String", "registerNoteUrl", '"https://test-tnyw.tpyzq.com/"'
+            buildConfigField "String", "bjUrl", '"https://test-tnhq.tpyzq.com/note/getPath"'
+            buildConfigField "String", "kmUrl", '"https://tnhq.tpyzq.com/note/getPath"'
+            buildConfigField "String", "currentUrl", '"https://test-tnhq.tpyzq.com/note/getPath"'
+            resValue "string", "site_json", "site_json_gray"
             manifestPlaceholders = [appicon:"@mipmap/icon_test"]
         }
         bj_online{
@@ -80,18 +92,30 @@ android {
             buildConfigField "String", "SecurityIps", '"https://bj-tnhq.tpyzq.com"'
             buildConfigField "String", "SecurityIp", '"http://bj-tnhq.tpyzq.com"'
             buildConfigField "String", "status", '"生产"'
+            buildConfigField "String", "registerServerUrl", '"https://bj-tnyw.tpyzq.com"'
+            buildConfigField "String", "registerNoteUrl", '"https://bj-tnyw.tpyzq.com"'
+            buildConfigField "String", "bjUrl", '"https://bj-tnhq.tpyzq.com/note/getPath"'
+            buildConfigField "String", "kmUrl", '"https://newkm-tnhq.tpyzq.com/note/getPath"'
+            buildConfigField "String", "currentUrl", '"https://bj-tnhq.tpyzq.com/note/getPath"'
+            resValue "string", "site_json", "site_json_online"
             manifestPlaceholders = [appicon:"@mipmap/icon_logo"]
         }
         gray{
             applicationId "com.tpyzq.gary.mobile.pangu"
             buildConfigField "String", "IP", '"http://tnhq.tpyzq.com"'
             buildConfigField "String", "SJYZM", '"https://tn.tpyzq.com"'
-            buildConfigField "String", "BORY", '"https://apm.tpyzq.com/config"'
+            buildConfigField "String", "BORY", '"https://apm.tpyzq.com/config/"'
             buildConfigField "String", "BORY_APPID", '"ae41fc21-a00c-4263-a7e7-b8a017aebcdf"'
             buildConfigField "String", "APP_ID", '"479a67630d2a36996b6aa485f80a4560abefcb91"'
             buildConfigField "String", "SecurityIps", '"https://tnhq.tpyzq.com"'
             buildConfigField "String", "SecurityIp", '"http://tnhq.tpyzq.com"'
             buildConfigField "String", "status", '"灰度"'
+            buildConfigField "String", "registerServerUrl", '"https://tnyw.tpyzq.com"'
+            buildConfigField "String", "registerNoteUrl", '"https://tnyw.tpyzq.com"'
+            buildConfigField "String", "bjUrl", '"https://test-tnhq.tpyzq.com/note/getPath"'
+            buildConfigField "String", "kmUrl", '"https://tnhq.tpyzq.com/note/getPath"'
+            buildConfigField "String", "currentUrl", '"https://tnhq.tpyzq.com/note/getPath"'
+            resValue "string", "site_json", "site_json_gray"
             manifestPlaceholders = [appicon:"@mipmap/ic_gray"]
         }
     }

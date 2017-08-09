@@ -98,7 +98,7 @@ public class FinanceInfo extends BaseStockDetailPager implements View.OnClickLis
         HashMap map100201_1 = new HashMap();
         map100201_1.put("secucode", stockcode);
         map100201.put("parms", map100201_1);
-        NetWorkUtil.getInstence().okHttpForPostString("", ConstantUtil.getURL_HQ_HS(), map100201, new StringCallback() {
+        NetWorkUtil.getInstence().okHttpForPostString("", ConstantUtil.getURL_NEW(), map100201, new StringCallback() {
             @Override
             public void onError(Call call, Exception e, int id) {
             }

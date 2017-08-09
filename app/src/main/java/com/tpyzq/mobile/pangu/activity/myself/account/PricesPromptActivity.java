@@ -117,7 +117,8 @@ public class PricesPromptActivity extends BaseActivity implements View.OnClickLi
         map2.put("3", "");
         map2.put("4", "");
         map2.put("5", "");
-        net.okHttpForPostString(TAG, ConstantUtil.getURL_HQ_HS(), map, new StringCallback() {
+
+        NetWorkUtil.getInstence().okHttpForPostString(TAG, ConstantUtil.getURL_NEW(), map, new StringCallback() {
             @Override
             public void onError(Call call, Exception e, int id) {
                 LogUtil.e("", e.toString());

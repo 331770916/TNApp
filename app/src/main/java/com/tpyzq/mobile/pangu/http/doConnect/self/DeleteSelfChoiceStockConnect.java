@@ -107,7 +107,7 @@ public class DeleteSelfChoiceStockConnect {
 
         String tempUrl = "http://192.168.0.205:8080/HTTPServer/servlet";
         //FileUtil.URL_SELFCHOICENET
-        NetWorkUtil.getInstence().okHttpForPostString(mHttpTAG, ConstantUtil.getURL_HQ_HS(), params, new StringCallback() {
+        NetWorkUtil.getInstence().okHttpForPostString(mHttpTAG, ConstantUtil.getURL_NEW(), params, new StringCallback() {
             @Override
             public void onError(Call call, Exception e, int id) {
                 LogHelper.e(TAG, e.toString());

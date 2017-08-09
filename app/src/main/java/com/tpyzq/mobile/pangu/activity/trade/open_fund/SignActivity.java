@@ -99,7 +99,7 @@ public class SignActivity extends BaseActivity implements View.OnClickListener, 
         HashMap map100237_1 = new HashMap();
         map100237_1.put("prodcode", code);
         map100237.put("parms", map100237_1);
-        NetWorkUtil.getInstence().okHttpForPostString("", ConstantUtil.getURL_HQ_HS(), map100237, new StringCallback() {
+        NetWorkUtil.getInstence().okHttpForPostString("", ConstantUtil.getURL_NEW(), map100237, new StringCallback() {
             @Override
             public void onError(Call call, Exception e, int id) {
                 MistakeDialog.showDialog(e.toString(), SignActivity.this);

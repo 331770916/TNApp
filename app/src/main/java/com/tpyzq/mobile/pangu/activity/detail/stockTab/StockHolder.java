@@ -71,7 +71,7 @@ public class StockHolder extends BaseStockDetailPager {
         HashMap map100202_1 = new HashMap();
         map100202_1.put("secucode", stockcode);
         map100202.put("parms", map100202_1);
-        NetWorkUtil.getInstence().okHttpForPostString("", ConstantUtil.getURL_HQ_HS(), map100202, new StringCallback() {
+        NetWorkUtil.getInstence().okHttpForPostString("", ConstantUtil.getURL_NEW(), map100202, new StringCallback() {
             @Override
             public void onError(Call call, Exception e, int id) {
             }
@@ -111,7 +111,7 @@ public class StockHolder extends BaseStockDetailPager {
         HashMap map100203_1 = new HashMap();
         map100203_1.put("secucode", stockcode);
         map100203.put("parms", map100203_1);
-        NetWorkUtil.getInstence().okHttpForPostString("", ConstantUtil.getURL_HQ_HS(), map100203, new StringCallback() {
+        NetWorkUtil.getInstence().okHttpForPostString("", ConstantUtil.getURL_NEW(), map100203, new StringCallback() {
             @Override
             public void onError(Call call, Exception e, int id) {
             }
@@ -128,20 +128,19 @@ public class StockHolder extends BaseStockDetailPager {
                     String data = object.optString("data");
                     String msg = object.optString("msg");
                     JSONArray dataArray = new JSONArray(data);
-                    if ("0".equals(code)) {
-                        if(null != dataArray && dataArray.length() > 0){
-                            for (int i = 0; i < dataArray.length(); i++) {
-                                JSONObject dataObejct = dataArray.getJSONObject(i);
-                                StockHolderTop10Entity stockHolderTop10Bean = new StockHolderTop10Entity();
-                                stockHolderTop10Bean.ENDDATE = dataObejct.getString("ENDDATE");
-                                stockHolderTop10Bean.HOLDSUMCHANGERATE = dataObejct.getString("HOLDSUMCHANGERATE");
-                                stockHolderTop10Bean.PCTOFTOTALSHARES = dataObejct.getString("PCTOFTOTALSHARES");
-                                stockHolderTop10Bean.SHLIST = dataObejct.getString("SHLIST");
-                                stockHolderTop10Bean.SHNO = dataObejct.getString("SHNO");
-                                stockHolderTop10Been.add(stockHolderTop10Bean);
-                            }
-                            stockHolderAdapter.setStockHolderTop10Beans(stockHolderTop10Been);
+                    if (code.equals("0")) {
+                        stockHolderTop10Been.clear();
+                        for (int i = 0; i < dataArray.length(); i++) {
+                            JSONObject dataObejct = dataArray.getJSONObject(i);
+                            StockHolderTop10Entity stockHolderTop10Bean = new StockHolderTop10Entity();
+                            stockHolderTop10Bean.ENDDATE = dataObejct.getString("ENDDATE");
+                            stockHolderTop10Bean.HOLDSUMCHANGERATE = dataObejct.getString("HOLDSUMCHANGERATE");
+                            stockHolderTop10Bean.PCTOFTOTALSHARES = dataObejct.getString("PCTOFTOTALSHARES");
+                            stockHolderTop10Bean.SHLIST = dataObejct.getString("SHLIST");
+                            stockHolderTop10Bean.SHNO = dataObejct.getString("SHNO");
+                            stockHolderTop10Been.add(stockHolderTop10Bean);
                         }
+                        stockHolderAdapter.setStockHolderTop10Beans(stockHolderTop10Been);
                     } else {
 
                     }

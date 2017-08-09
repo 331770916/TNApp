@@ -73,7 +73,7 @@ public class StockPw extends PopupWindow {
         lv_stock.setOnItemClickListener(new AdapterView.OnItemClickListener() {
             @Override
             public void onItemClick(AdapterView<?> parent, View view, int position, long id) {
-                stockItemCallBack.stockCode(transStockBeen.get(position).stockCode);
+                stockItemCallBack.stockCode(transStockBeen.get(position).stockName, transStockBeen.get(position).stockCode);
                 StockPw.this.dismiss();
             }
         });

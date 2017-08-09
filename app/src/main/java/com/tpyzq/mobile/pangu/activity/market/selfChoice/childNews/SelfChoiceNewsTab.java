@@ -99,6 +99,10 @@ public class SelfChoiceNewsTab extends BaseTabPager implements
         } else {
             mEntities.clear();
             mSelfNewsAdapter.setDatas(mEntities);
+            if (null!=mPullLayout) {
+                mPullLayout.finishPull();
+            }
+            mKongLayout.setVisibility(View.VISIBLE);
         }
     }
 

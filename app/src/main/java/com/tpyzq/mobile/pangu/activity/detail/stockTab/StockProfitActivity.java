@@ -70,6 +70,7 @@ public class StockProfitActivity extends BaseActivity implements View.OnClickLis
             tv_view4,
             tv_view4_01,
             tv_view5,
+            tv_each_stock_in,
             tv_view6_01,
             tv_view6_02;
     private String stockcode;
@@ -80,6 +81,7 @@ public class StockProfitActivity extends BaseActivity implements View.OnClickLis
         tv_choose_title = (TextView) findViewById(R.id.tv_choose_title);
         mi_title = (MagicIndicator) findViewById(R.id.mi_title);
         ll_stock_profit = (ScrollView) findViewById(R.id.ll_stock_profit);
+        tv_view1 = (TextView) findViewById(R.id.tv_view1);
         tv_view1_01 = (TextView) findViewById(R.id.tv_view1_01);
         tv_view1_02 = (TextView) findViewById(R.id.tv_view1_02);
         tv_view1_03 = (TextView) findViewById(R.id.tv_view1_03);
@@ -101,6 +103,7 @@ public class StockProfitActivity extends BaseActivity implements View.OnClickLis
         tv_view4 = (TextView) findViewById(R.id.tv_view4);
         tv_view4_01 = (TextView) findViewById(R.id.tv_view4_01);
         tv_view5 = (TextView) findViewById(R.id.tv_view5);
+        tv_each_stock_in = (TextView) findViewById(R.id.tv_each_stock_in);
         tv_view6_01 = (TextView) findViewById(R.id.tv_view6_01);
         tv_view6_02 = (TextView) findViewById(R.id.tv_view6_02);
         initData();
@@ -128,7 +131,7 @@ public class StockProfitActivity extends BaseActivity implements View.OnClickLis
         map100200_1.put("secucode", stockcode);
         map100200_1.put("querytype", pager);
         map100200.put("parms", map100200_1);
-        NetWorkUtil.getInstence().okHttpForPostString("", ConstantUtil.getURL_HQ_HS(), map100200, new StringCallback() {
+        NetWorkUtil.getInstence().okHttpForPostString("", ConstantUtil.getURL_NEW(), map100200, new StringCallback() {
             @Override
             public void onError(Call call, Exception e, int id) {
             }
@@ -175,6 +178,7 @@ public class StockProfitActivity extends BaseActivity implements View.OnClickLis
                 tv_choose_title.setText(stockProfitBean.ENDDATE.substring(0,4)+"三季报");
                 break;
         }
+        tv_view1.setText(TransitionUtils.long2million(stockProfitBean.OPERATINGREVENUE)+"元");
         tv_view1_01.setText(TransitionUtils.long2million(stockProfitBean.NETINTERESTINCOME)+"元");
         tv_view1_02.setText(TransitionUtils.long2million(stockProfitBean.INTERESTINCOME)+"元");
         tv_view1_03.setText(TransitionUtils.long2million(stockProfitBean.INTERESTEXPENSE)+"元");
@@ -194,8 +198,10 @@ public class StockProfitActivity extends BaseActivity implements View.OnClickLis
         tv_view3_01.setText(TransitionUtils.long2million(stockProfitBean.NONOPERATINGINCOME)+"元");
         tv_view3_02.setText(TransitionUtils.long2million(stockProfitBean.NONOPERATINGEXPENSE)+"元");
         tv_view4.setText(TransitionUtils.long2million(stockProfitBean.TOTALPROFIT)+"元");
-        tv_view4_01.setText(TransitionUtils.long2million(stockProfitBean.TOTALPROFIT)+"元");
+        tv_view4_01.setText(TransitionUtils.long2million(stockProfitBean.INCOMETAXCOST)+"元");
         tv_view5.setText(TransitionUtils.long2million(stockProfitBean.NETPROFIT)+"元");
+        // TODO: 2017/8/3 lx
+        tv_each_stock_in.setText(TransitionUtils.long2million(stockProfitBean.BASICEPS)+"元");
         tv_view6_01.setText(TransitionUtils.long2million(stockProfitBean.BASICEPS)+"元");
         tv_view6_02.setText(TransitionUtils.long2million(stockProfitBean.DILUTEDEPS)+"元");
 

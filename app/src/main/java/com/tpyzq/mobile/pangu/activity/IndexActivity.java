@@ -1,6 +1,10 @@
 package com.tpyzq.mobile.pangu.activity;
 
 import android.app.Dialog;
+import android.content.BroadcastReceiver;
+import android.content.Context;
+import android.content.Intent;
+import android.content.IntentFilter;
 import android.content.Intent;
 import android.content.res.Configuration;
 import android.os.Bundle;
@@ -14,6 +18,7 @@ import android.view.animation.AnimationUtils;
 import android.widget.FrameLayout;
 import android.widget.ImageView;
 import android.widget.RadioGroup;
+import android.widget.Toast;
 import android.widget.TextView;
 
 import com.tpyzq.mobile.pangu.R;
@@ -29,6 +34,7 @@ import com.tpyzq.mobile.pangu.data.NewStockEnitiy;
 import com.tpyzq.mobile.pangu.data.ResultInfo;
 import com.tpyzq.mobile.pangu.http.NetWorkUtil;
 import com.tpyzq.mobile.pangu.log.LogUtil;
+import com.tpyzq.mobile.pangu.service.GetConfigService;
 import com.tpyzq.mobile.pangu.util.ConstantUtil;
 import com.tpyzq.mobile.pangu.util.Helper;
 import com.tpyzq.mobile.pangu.util.SpUtils;
@@ -37,6 +43,7 @@ import com.tpyzq.mobile.pangu.util.panguutil.BRutil;
 import com.tpyzq.mobile.pangu.util.panguutil.UserUtil;
 import com.tpyzq.mobile.pangu.view.dialog.ExitDialog;
 import com.tpyzq.mobile.pangu.view.dialog.HintDialog;
+import com.tpyzq.mobile.pangu.view.dialog.MistakeDialog;
 import com.tpyzq.mobile.pangu.view.dialog.VersionDialog;
 import com.tpyzq.mobile.pangu.view.radiobutton.MyRadioButton;
 import com.zhy.http.okhttp.callback.StringCallback;
@@ -74,7 +81,15 @@ public class IndexActivity extends BaseActivity implements InterfaceCollection.I
 
     @Override
     public void initView() {
+        //注册广播
+        IntentFilter filter=new IntentFilter();
+        filter.addAction("com.pangu.showdialog");
+        BroadcastReceiver broadcastReceiver=new SitesChangeRecever();
+        registerReceiver(broadcastReceiver, filter);
         CustomApplication.getInstance().addActivity(this);
+        //开启站点服务
+        Intent serviceIntent = new Intent(this, GetConfigService.class);
+        startService(serviceIntent);
         for (Fragment frag:tab_fragment) {
             if (frag!=null){
                 tab_fragment=new Fragment[4];
@@ -163,7 +178,7 @@ public class IndexActivity extends BaseActivity implements InterfaceCollection.I
         map2.put("2", newshare_push_time);
         map2.put("3", inform_push_time);
 
-        NetWorkUtil.getInstence().okHttpForPostString(this, ConstantUtil.getURL_HQ_HS(), map, new StringCallback() {
+        NetWorkUtil.getInstence().okHttpForPostString(this, ConstantUtil.getURL_NEW(), map, new StringCallback() {
             private String mInform_push_time;
             private String token_inform;
             @Override
@@ -331,7 +346,6 @@ public class IndexActivity extends BaseActivity implements InterfaceCollection.I
         dialog = new ExitDialog(this);
         dialog.show();
     }
-
     @Override
     protected void onResume() {
         super.onResume();
@@ -348,7 +362,7 @@ public class IndexActivity extends BaseActivity implements InterfaceCollection.I
         map400101.put("funcid", "400101");
         map400101.put("token", "");
         map400101.put("parms", map400101_1);
-        NetWorkUtil.getInstence().okHttpForPostString("", ConstantUtil.getURL_HQ_HS(), map400101, new StringCallback() {
+        NetWorkUtil.getInstence().okHttpForPostString("", ConstantUtil.getURL_NEW(), map400101, new StringCallback() {
             @Override
             public void onError(Call call, Exception e, int id) {
             }
@@ -419,6 +433,15 @@ public class IndexActivity extends BaseActivity implements InterfaceCollection.I
     @Override
     protected void onRestoreInstanceState(Bundle savedInstanceState) {
         super.onRestoreInstanceState(savedInstanceState);
+    }
+
+    class SitesChangeRecever extends BroadcastReceiver {
+        @Override
+        public void onReceive(Context context, Intent intent) {
+            if ("com.pangu.showdialog".equalsIgnoreCase(intent.getAction())) {
+                MistakeDialog.showDialog("获取可用行情站点失败\r\n", IndexActivity.this,null);
+            }
+        }
     }
 
     @Override
