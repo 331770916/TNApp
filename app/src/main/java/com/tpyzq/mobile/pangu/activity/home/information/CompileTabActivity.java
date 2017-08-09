@@ -50,22 +50,26 @@ public class CompileTabActivity extends BaseActivity implements View.OnClickList
         listDown = new ArrayList<>();
         listTitle = getIntent().getStringArrayListExtra("listTab");
         checkedTab = getIntent().getStringArrayListExtra("myTab");
-        //给头布局list添加数据
-        for (int i = 0; i < 2; i++) {
-            compileTabEntity = new CompileTabEntity();
-            compileTabEntity.setBiaoTi(listTitle.get(i));
-            listUp.add(compileTabEntity);
-        }
+        CompileTabEntity c1 = new CompileTabEntity();
+        c1.setBiaoTi("要闻");
+        c1.setChecked(true);
+        listUp.add(c1);
+        CompileTabEntity c2 = new CompileTabEntity();
+        c2.setBiaoTi("直播");
+        c2.setChecked(true);
+        listUp.add(c2);
         //给下部list添加数据
-        for (int i = 2; i < listTitle.size(); i++) {
-            compileTabEntity = new CompileTabEntity();
-            compileTabEntity.setBiaoTi(listTitle.get(i));
-            if(checkedTab.contains(listTitle.get(i))){
-                compileTabEntity.setChecked(true);
-            }else{
-                compileTabEntity.setChecked(false);
+        for (int i = 0; i < listTitle.size(); i++) {
+            if(!listTitle.get(i).equals("要闻")&&!listTitle.get(i).equals("直播")){
+                compileTabEntity = new CompileTabEntity();
+                compileTabEntity.setBiaoTi(listTitle.get(i));
+                if(checkedTab.contains(listTitle.get(i))){
+                    compileTabEntity.setChecked(true);
+                }else{
+                    compileTabEntity.setChecked(false);
+                }
+                listDown.add(compileTabEntity);
             }
-            listDown.add(compileTabEntity);
         }
         ivFinish.setOnClickListener(this);
 
