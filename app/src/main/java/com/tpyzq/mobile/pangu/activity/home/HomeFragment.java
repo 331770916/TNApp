@@ -10,6 +10,7 @@ import android.support.v4.content.ContextCompat;
 import android.text.TextUtils;
 import android.view.LayoutInflater;
 import android.view.View;
+import android.widget.AbsListView;
 import android.widget.AdapterView;
 import android.widget.ImageView;
 import android.widget.LinearLayout;
@@ -68,6 +69,8 @@ import com.tpyzq.mobile.pangu.view.CarouselView;
 import com.tpyzq.mobile.pangu.view.gridview.MyGridView;
 import com.tpyzq.mobile.pangu.view.gridview.MyListView;
 import com.tpyzq.mobile.pangu.view.gridview.MyScrollView;
+import com.tpyzq.mobile.pangu.view.loopswitch.AutoSwitchAdapter;
+import com.tpyzq.mobile.pangu.view.loopswitch.AutoSwitchView;
 import com.tpyzq.mobile.pangu.view.pullrefreshrecyclerview.PullRefreshUtil;
 import com.tpyzq.mobile.pangu.view.pullrefreshrecyclerview.PullRefreshView;
 import com.zhy.http.okhttp.callback.BitmapCallback;
@@ -98,9 +101,11 @@ public class HomeFragment extends BaseFragment implements AdapterView.OnItemClic
      * 轮播控件
      */
     private CarouselView vp_carousel;
-    private LinearLayout ll_point;
-    private List<View> points;
+    private AutoSwitchView loopView;
+    private AutoSwitchAdapter adapter;
     private int[] image = {R.mipmap.top1, R.mipmap.top2, R.mipmap.top4};
+    private Class[] clazz = {OptionalFinancingActivity.class, AdvertActivity.class,InformationHomeActivity.class};
+    private String[] br = {"N022","","N004"};
 
 //    private ConvenientBanner mConvenientBanner;
 //    private ArrayList<Bitmap> mBitmaps;
@@ -178,7 +183,6 @@ public class HomeFragment extends BaseFragment implements AdapterView.OnItemClic
 //        mConvenientBanner.startTurning(5000);
 //        mConvenientBanner.setOnItemClickListener(this);
         vp_carousel = (CarouselView) view.findViewById(R.id.vp_carousel);
-        ll_point = (LinearLayout) view.findViewById(R.id.ll_point);
         initCarouseView();
 
         mMiddleImageView = (ImageView) view.findViewById(R.id.home_middlebander);
@@ -231,63 +235,14 @@ public class HomeFragment extends BaseFragment implements AdapterView.OnItemClic
     }
 
     private void initCarouseView() {
-        points = new ArrayList<>();
-        for (int i = 0; i < image.length; i++) {
-            View view = new View(getContext());
-            LinearLayout.LayoutParams vParams = new LinearLayout.LayoutParams(16, 16);
-            vParams.setMargins(5, 0, 5, 0);
-            view.setLayoutParams(vParams);
-            if (i == 0) {
-                view.setBackgroundResource(R.drawable.shape_white_round);
-            } else {
-                view.setBackgroundResource(R.drawable.shape_transparent_round);
-            }
-            points.add(view);
-            ll_point.addView(view);
-        }
-        vp_carousel.init(image.length, new CarouselView.SimpleDraweeViewHandler() {
-            @Override
-            public void handle(final int index, SimpleDraweeView view) {
-                Uri uri = Uri.parse("res:///"+image[index]);
-                view.setImageURI(uri);
-//                view.setImageResource(image[index]);
-                view.setOnClickListener(new View.OnClickListener() {
-                    @Override
-                    public void onClick(View v) {
-                        Intent intent = new Intent();
-                        switch (index) {
-                            case 0:
-                                BRutil.menuSelect("N022");
-//                                intent.setClass(getActivity(), HotSellActivity.class);
-                                intent.setClass(getActivity(), OptionalFinancingActivity.class);
-                                getActivity().startActivity(intent);
-                                break;
-                            case 1:
-                                intent.setClass(getActivity(), AdvertActivity.class);
-                                startActivity(intent);
-                                break;
-                            case 2:
-                                BRutil.menuSelect("N004");
-                                intent.setClass(getActivity(), InformationHomeActivity.class);
-                                getActivity().startActivity(intent);
-                                break;
-                        }
-                    }
-                });
-            }
-
-            @Override
-            public void select(int position) {
-                for (int i = 0; i < 3; i++) {
-                    if (i == position) {
-                        points.get(i).setBackgroundResource(R.drawable.shape_white_round);
-                    } else {
-                        points.get(i).setBackgroundResource(R.drawable.shape_transparent_round);
-                    }
-                }
-            }
-        });
+        loopView = new AutoSwitchView(mContext);
+        loopView.setLayoutParams(new AbsListView.LayoutParams(-1,mContext.getResources().getDimensionPixelSize(R.dimen.size250)));
+        vp_carousel.addView(loopView);
+        adapter = new AutoSwitchAdapter(mContext,1);
+        loopView.setAdapter(adapter);
+        adapter.setDatas(Helper.covertLoopModel(image,clazz,br));
     }
+
 
     public void initData() {
         getFinaceConnect(simpleRemoteControl);  //请求稳赢数据

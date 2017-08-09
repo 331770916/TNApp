@@ -159,6 +159,7 @@ public class InformationHomeActivity extends BaseActivity implements View.OnClic
         listTab.clear();
         mClassNoList.clear();
         String sortTab = SpUtils.getString(this,"sortTab","");
+        String ziXunTab = SpUtils.getString(this,"ziXunTab","");
         StringBuffer sb = new StringBuffer();
         if(!TextUtils.isEmpty(sortTab)){
             List<String> tabs = Arrays.asList(sortTab.split(","));
@@ -173,13 +174,17 @@ public class InformationHomeActivity extends BaseActivity implements View.OnClic
                 sb.append(entity.getClassname()).append(",");
             }
             String mSortTab = sb.substring(0,sb.length()-1);
-            if(!sortTab.equals(mSortTab)) {//存储列表和返回列表不相等
+            if(!sortTab.equals(mSortTab)) {//存储列表和返回列表不相等（新加的无所谓，因为列表会覆盖，删除的必须删除本地存储的key-value）
                 SpUtils.putString(this, "sortTab", mSortTab);
                 List<String> mTabs = Arrays.asList(mSortTab.split(","));
+                List<String> zixunTabs = Arrays.asList(ziXunTab.split(","));
                 for (String tab:tabs){
-                     if(!mTabs.contains(tab))
-                        SpUtils.removeKey(this,tab);
+                     if(!mTabs.contains(tab)) {
+                         SpUtils.removeKey(this, tab);
+                         ziXunTab = removeZiXun(zixunTabs,tab);
+                     }
                 }
+                SpUtils.putString(this, "ziXunTab", ziXunTab);
             }
         }else{
             for (InformationEntity entity:list) {
@@ -197,6 +202,21 @@ public class InformationHomeActivity extends BaseActivity implements View.OnClic
                 currentTitle = tabs.get(i);
         }
         addData();
+    }
+
+    /**
+     * 如果保存的列表里没有服务器删除数据则从列表里删除
+     * @param zixunTabs
+     * @param tab
+     * @return
+     */
+    public String removeZiXun(List<String> zixunTabs,String tab){
+        StringBuffer sb = new StringBuffer();
+        for (String zixun:zixunTabs){
+            if(!zixun.equals(tab))
+                sb.append(zixun).append(",");
+        }
+        return sb.substring(0,sb.length()-1);
     }
 
     private void getTabList(){
@@ -217,6 +237,14 @@ public class InformationHomeActivity extends BaseActivity implements View.OnClic
     private void addData() {
         String zixuntab = SpUtils.getString(this, "ziXunTab", "");      //获取  选中的Tab 的名称
         if (TextUtils.isEmpty(zixuntab)) {
+            if(listTab.size()==0){
+                listTab.add("要闻");
+                listTab.add("直播");
+            }
+            if(mClassNoList.size()==0){
+                mClassNoList.add("1");
+                mClassNoList.add("2");
+            }
             mTitleList.addAll(listTab);
             commonNavigator.setAdjustMode(false);
             commonNavigator.notifyDataSetChanged();

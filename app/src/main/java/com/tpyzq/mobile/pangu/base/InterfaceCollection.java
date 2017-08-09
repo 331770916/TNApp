@@ -16,6 +16,7 @@ import com.tpyzq.mobile.pangu.data.FixFundEntity;
 import com.tpyzq.mobile.pangu.data.FundDataEntity;
 import com.tpyzq.mobile.pangu.data.InformationEntity;
 import com.tpyzq.mobile.pangu.data.NetworkVotingEntity;
+import com.tpyzq.mobile.pangu.data.NewStockEnitiy;
 import com.tpyzq.mobile.pangu.data.OTC_AffirmBean;
 import com.tpyzq.mobile.pangu.data.OTC_SubscriptionCommitBean;
 import com.tpyzq.mobile.pangu.data.ResultInfo;
@@ -2832,6 +2833,76 @@ public class InterfaceCollection {
 
     }
 
+    /**
+     * HQING014
+     * 新股查询接口
+     */
+    public void queryNewStock(final String TAG,final InterfaceCallback callback){
+        HashMap map=new HashMap();
+        map.put("funcid", "100213");
+        map.put("token", "");
+        map.put("parms", new HashMap());
+        net.okHttpForPostString(TAG, ConstantUtil.getURL_HQ_HHN(), map, new StringCallback() {
+            @Override
+            public void onError(Call call, Exception e, int id) {
+                ResultInfo info = new ResultInfo();
+                info.setCode(ConstantUtil.NETWORK_ERROR_CODE);
+                info.setMsg(ConstantUtil.NETWORK_ERROR);
+                info.setTag(TAG);
+                callback.callResult(info);
+            }
+
+            @Override
+            public void onResponse(String response, int id) {
+                ResultInfo info = new ResultInfo();
+                try {
+                    JSONObject object = new JSONObject(response);
+                    String code = object.getString("code");
+                    String msg = object.getString("msg");
+                    info.setCode(code);
+                    info.setTag(TAG);
+                    info.setMsg(msg);
+                    if("0".equals(code)){
+                        JSONArray data = object.optJSONArray("data");
+                        NewStockEnitiy bean = new NewStockEnitiy();
+                        if (data != null && data.length() > 0) {
+                            List<NewStockEnitiy.DataBeanToday> dataBeanTodays = new ArrayList();
+                            int publishNum = 0;
+                            for (int i = 0;i<data.length();i++) {
+                                JSONObject item = data.optJSONObject(i);
+                                NewStockEnitiy.DataBeanToday dataBeanToday = new NewStockEnitiy.DataBeanToday();
+                                dataBeanToday.setSECUCODE(item.optString("SECUCODE"));
+                                dataBeanToday.setONLINESTARTDATE(item.optString("ONLINESTARTDATE"));
+                                dataBeanToday.setISSUENAMEABBR_ONLINE(item.optString("ISSUENAMEABBR_ONLINE"));
+                                dataBeanToday.setAPPLYMAXONLINE(item.optString("APPLYMAXONLINE"));
+                                String isToday =item.optString("ISTODAY");
+                                if (null != isToday) {//W N
+                                    dataBeanToday.setISTODAY(isToday);
+                                    if ("N".equals(isToday))
+                                        publishNum++;
+                                }
+                                dataBeanToday.setDILUTEDPERATIO(item.optString("DILUTEDPERATIO"));
+                                dataBeanToday.setAPPLYCODEONLINE(item.optString("APPLYCODEONLINE"));
+                                dataBeanToday.setPREPAREDLISTEXCHANGE(item.optString("PREPAREDLISTEXCHANGE"));
+                                dataBeanToday.setISSUEPRICE(item.optString("ISSUEPRICE"));
+                                dataBeanToday.setWEIGHTEDPERATIO(item.optString("WEIGHTEDPERATIO"));
+                                dataBeanToday.setAPPLYMAXONLINEMONEY(item.optString("APPLYMAXONLINEMONEY"));
+                                dataBeanTodays.add(dataBeanToday);
+                            }
+                            bean.setNewStockSize(publishNum);
+                            bean.setData(dataBeanTodays);
+                        }
+                        info.setData(bean);
+                    }
+                } catch (Exception e) {
+                    info.setCode(ConstantUtil.JSON_ERROR_CODE);
+                    info.setMsg(ConstantUtil.JSON_ERROR);
+                    info.setTag(TAG);
+                }
+                callback.callResult(info);
+            }
+        });
+    }
 
     /**
      * 修改资金密码

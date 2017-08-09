@@ -69,10 +69,10 @@ public class Helper {
     private static long towTime = 0;
     public static final String TAG = "Helper";
 
-    public static List<Map<String,String>> covertLoopModel(List<InformationEntity> list){
-        List<Map<String,String>> data = new ArrayList<>();
+    public static List<Map<String,Object>> covertLoopModel(List<InformationEntity> list){
+        List<Map<String,Object>> data = new ArrayList<>();
         for (InformationEntity entity:list) {
-            Map<String,String> model = new HashMap();
+            Map<String,Object> model = new HashMap();
             model.put("id",entity.getNewsno());
             model.put("title",entity.getTitle());
             model.put("time",Helper.getCurDate()+" "+entity.getTime());
@@ -81,6 +81,18 @@ public class Helper {
         }
         return data;
     }
+
+    public static List<Map<String,Object>> covertLoopModel(int[] image,Class[] clazz,String[] br){
+        List<Map<String,Object>> data = new ArrayList<>();
+        for (int i =0; i< image.length;i++) {
+            Map<String,Object> model = new HashMap();
+            model.put("resource",image[i]);
+            model.put("clazz",clazz[i]);
+            model.put("br",br[i]);
+        }
+        return data;
+    }
+
 
     public static int getTime(){
         int time;
