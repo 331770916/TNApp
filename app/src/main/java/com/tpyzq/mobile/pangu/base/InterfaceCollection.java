@@ -2899,7 +2899,7 @@ public class InterfaceCollection {
 
 
     /**
-     *
+     * 绑定手机号
      * @param TAG
      * @param number  手机号
      * @param captcha 短信验证码
@@ -2913,7 +2913,8 @@ public class InterfaceCollection {
         map.put("equipment", DeviceUtil.getDeviceId(CustomApplication.getContext()));
         map.put("auth", captcha);
 
-        NetWorkUtil.getInstence().okHttpForPostString(TAG, ConstantUtil.getURL_HANDSE_BINDING(), map, new StringCallback() {
+        NetWorkUtil.getInstence().okHttpForGet("", ConstantUtil.getURL_HANDSE_BINDING(), map, new StringCallback()
+        {
             @Override
             public void onError(Call call, Exception e, int id) {
                 ResultInfo info = new ResultInfo();

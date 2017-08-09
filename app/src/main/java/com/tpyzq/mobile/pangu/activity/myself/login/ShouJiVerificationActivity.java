@@ -170,7 +170,7 @@ public class ShouJiVerificationActivity extends BaseActivity implements View.OnC
     @Override
     public void onClick(View v) {
         switch (v.getId()) {
-            case R.id.SJublish_back:
+            case R.id.SJYZ_back:
                 finish();
                 break;
             case R.id.butLogIn:
