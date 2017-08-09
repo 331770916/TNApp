@@ -70,6 +70,7 @@ import com.tpyzq.mobile.pangu.view.CarouselView;
 import com.tpyzq.mobile.pangu.view.gridview.MyGridView;
 import com.tpyzq.mobile.pangu.view.gridview.MyListView;
 import com.tpyzq.mobile.pangu.view.gridview.MyScrollView;
+import com.tpyzq.mobile.pangu.view.listview.HomeSwitchAdapter;
 import com.tpyzq.mobile.pangu.view.loopswitch.AutoSwitchAdapter;
 import com.tpyzq.mobile.pangu.view.loopswitch.AutoSwitchView;
 import com.tpyzq.mobile.pangu.view.pullrefreshrecyclerview.PullRefreshUtil;
@@ -103,10 +104,7 @@ public class HomeFragment extends BaseFragment implements AdapterView.OnItemClic
      */
     private RelativeLayout vp_carousel;
     private AutoSwitchView loopView;
-    private AutoSwitchAdapter adapter;
-    private int[] image = {R.mipmap.top1, R.mipmap.top2, R.mipmap.top4};
-    private Class[] clazz = {OptionalFinancingActivity.class, AdvertActivity.class,InformationHomeActivity.class};
-    private String[] br = {"N022","","N004"};
+    private HomeSwitchAdapter adapter;
 
 //    private ConvenientBanner mConvenientBanner;
 //    private ArrayList<Bitmap> mBitmaps;
@@ -239,9 +237,8 @@ public class HomeFragment extends BaseFragment implements AdapterView.OnItemClic
         loopView = new AutoSwitchView(mContext);
         loopView.setLayoutParams(new AbsListView.LayoutParams(-1,mContext.getResources().getDimensionPixelSize(R.dimen.size250)));
         vp_carousel.addView(loopView);
-        adapter = new AutoSwitchAdapter(mContext,1);
+        adapter = new HomeSwitchAdapter(mContext);
         loopView.setAdapter(adapter);
-        adapter.setDatas(Helper.covertLoopModel(image,clazz,br));
     }
 
 

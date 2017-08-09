@@ -61,6 +61,7 @@ public class HotPintsPager extends BasePager implements View.OnClickListener,Int
         llHotJiaZai = (LinearLayout) rootView.findViewById(R.id.llHotJiaZai);
         loopView = new AutoSwitchView(mContext);
         loopView.setLayoutParams(new AbsListView.LayoutParams(-1,mContext.getResources().getDimensionPixelSize(R.dimen.size250)));
+        loopView.setType(1);
         refreshListView.getRefreshableView().addHeaderView(loopView);
         refreshListView.setMode(PullToRefreshBase.Mode.BOTH);
         refreshListView.setOnRefreshListener(new PullToRefreshBase.OnRefreshListener<ListView>() {
@@ -119,7 +120,7 @@ public class HotPintsPager extends BasePager implements View.OnClickListener,Int
                 switch (info.getTag()){
                     case "GetImportant4":
                         leve4 = (ArrayList<InformationEntity>)obj;
-                        adapter.setDatas(Helper.covertLoopModel(leve4));
+                        adapter.setDatas(leve4);
                         break;
                     case "GetImportant1":
                         if(page==1)

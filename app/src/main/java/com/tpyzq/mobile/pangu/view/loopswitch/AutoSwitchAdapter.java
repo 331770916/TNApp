@@ -10,11 +10,8 @@ import android.widget.TextView;
 import com.facebook.drawee.view.SimpleDraweeView;
 import com.tpyzq.mobile.pangu.R;
 import com.tpyzq.mobile.pangu.activity.home.information.NewsDetailActivity;
-import com.tpyzq.mobile.pangu.activity.home.managerMoney.OptionalFinancingActivity;
-import com.tpyzq.mobile.pangu.util.panguutil.BRutil;
-
+import com.tpyzq.mobile.pangu.data.InformationEntity;
 import java.util.List;
-import java.util.Map;
 
 /**
  * Created by ltyhome on 02/08/2017.
@@ -24,20 +21,18 @@ import java.util.Map;
 
 public class AutoSwitchAdapter extends AutoLoopSwitchBaseAdapter{
     private Context mContext;
-    private int mType;
-    private List<Map<String,Object>> mDatas;
+
+    private List<InformationEntity> mDatas;
+
+    public AutoSwitchAdapter() {
+        super();
+    }
 
     public AutoSwitchAdapter(Context mContext) {
         this.mContext = mContext;
     }
 
-    public AutoSwitchAdapter(Context mContext,int type) {
-        this.mContext = mContext;
-        this.mType = type;
-    }
-
-
-    public void setDatas(List<Map<String,Object>> mDatas) {
+    public void setDatas(List<InformationEntity> mDatas) {
         this.mDatas = mDatas;
         notifyDataSetChanged();
     }
@@ -49,57 +44,41 @@ public class AutoSwitchAdapter extends AutoLoopSwitchBaseAdapter{
 
     @Override
     public View getView(int position) {
-        final Map<String,Object> model = (Map<String,Object>)getItem(position);
+        final InformationEntity model = (InformationEntity)getItem(position);
         RelativeLayout ll  = new RelativeLayout(mContext);
+        TextView tvTitle = new TextView(mContext);
+        tvTitle.setSingleLine();
+        tvTitle.setId(R.id.autoloopswitch_title_id);
+        tvTitle.setText(model.getTitle());
+        tvTitle.setTextSize(18);
+        tvTitle.setPadding(0,5,0,5);
+        tvTitle.setTextColor(mContext.getResources().getColor(R.color.bkColor));
+        ll.addView(tvTitle);
+        RelativeLayout.LayoutParams lpbottom = new RelativeLayout.LayoutParams(-2,-2);
+        lpbottom.addRule(RelativeLayout.ALIGN_PARENT_BOTTOM);
+        lpbottom.addRule(RelativeLayout.ALIGN_LEFT);
+        TextView tvTime = new TextView(mContext);
+        tvTime.setId(R.id.autoloopswitch_time_id);
+        tvTime.setTextSize(12);
+        tvTime.setText(model.getTime());
+        tvTime.setPadding(0,2,0,2);
+        tvTime.setTextColor(mContext.getResources().getColor(R.color.hideTextColor));
+        ll.addView(tvTime,lpbottom);
         RelativeLayout.LayoutParams lpimage = new RelativeLayout.LayoutParams(-1,-1);
+        lpimage.addRule(RelativeLayout.BELOW,R.id.autoloopswitch_title_id);
+        lpimage.addRule(RelativeLayout.ABOVE,R.id.autoloopswitch_time_id);
         SimpleDraweeView imageView = new SimpleDraweeView(mContext);
         imageView.setScaleType(ImageView.ScaleType.FIT_XY);
-        switch (mType){
-            case 0:
-                TextView tvTitle = new TextView(mContext);
-                tvTitle.setSingleLine();
-                tvTitle.setId(R.id.autoloopswitch_title_id);
-                tvTitle.setText(model.get("title").toString());
-                tvTitle.setTextSize(18);
-                tvTitle.setPadding(0,5,0,5);
-                tvTitle.setTextColor(mContext.getResources().getColor(R.color.bkColor));
-                ll.addView(tvTitle);
-                RelativeLayout.LayoutParams lpbottom = new RelativeLayout.LayoutParams(-2,-2);
-                lpbottom.addRule(RelativeLayout.ALIGN_PARENT_BOTTOM);
-                lpbottom.addRule(RelativeLayout.ALIGN_LEFT);
-                TextView tvTime = new TextView(mContext);
-                tvTime.setId(R.id.autoloopswitch_time_id);
-                tvTime.setTextSize(12);
-                tvTime.setText(model.get("time").toString());
-                tvTime.setPadding(0,2,0,2);
-                tvTime.setTextColor(mContext.getResources().getColor(R.color.hideTextColor));
-                ll.addView(tvTime,lpbottom);
-                lpimage.addRule(RelativeLayout.BELOW,R.id.autoloopswitch_title_id);
-                lpimage.addRule(RelativeLayout.ABOVE,R.id.autoloopswitch_time_id);
-                imageView.setImageURI(model.get("url").toString());
-                ll.setOnClickListener(new View.OnClickListener() {
-                    @Override
-                    public void onClick(View v) {
-                        Intent intent = new Intent(mContext, NewsDetailActivity.class);
-                        intent.putExtra("requestId",model.get("id").toString());
-                        mContext.startActivity(intent);
-                    }
-                });
-                break;
-            case 1:
-                imageView.setImageResource((int)model.get("resource"));
-                ll.setOnClickListener(new View.OnClickListener() {
-                    @Override
-                    public void onClick(View v) {
-                        Intent intent = new Intent();
-                        BRutil.menuSelect(model.get("br").toString());
-                        intent.setClass(mContext, (Class<?>) model.get("clazz"));
-                        mContext.startActivity(intent);
-                    }
-                });
-                break;
-        }
+        imageView.setImageURI(model.getImage_url());
         ll.addView(imageView,lpimage);
+        ll.setOnClickListener(new View.OnClickListener() {
+            @Override
+            public void onClick(View v) {
+                Intent intent = new Intent(mContext, NewsDetailActivity.class);
+                intent.putExtra("requestId",model.getNewsno());
+                mContext.startActivity(intent);
+            }
+        });
         return ll;
     }
 
