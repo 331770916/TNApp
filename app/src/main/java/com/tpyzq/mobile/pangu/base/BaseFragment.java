@@ -4,6 +4,7 @@ import android.app.Activity;
 import android.content.Context;
 import android.os.Build;
 import android.os.Bundle;
+import android.support.annotation.IdRes;
 import android.support.annotation.Nullable;
 import android.support.v4.app.Fragment;
 import android.support.v4.app.FragmentHostCallback;
@@ -23,12 +24,13 @@ public abstract class BaseFragment extends Fragment {
     protected Context mContext;
     protected Activity mActivity;
     private FragmentHostCallback mHost;
+    private View view;
 
     @Nullable
     @Override
     public View onCreateView(LayoutInflater inflater, @Nullable ViewGroup container, @Nullable Bundle savedInstanceState) {
 
-        View view = inflater.inflate(getFragmentLayoutId(), container, false);
+        view = inflater.inflate(getFragmentLayoutId(), container, false);
         try {
             this.mContext = getContext();
             this.mActivity = getActivity();
@@ -41,9 +43,9 @@ public abstract class BaseFragment extends Fragment {
             storeErr(e);
         }
         if (Build.VERSION.SDK_INT<19){
-            View fitView=view.findViewById(R.id.rl_top_bar);
+            View fitView= view.findViewById(R.id.rl_top_bar);
             if (fitView!=null)
-                ((ViewGroup)view).removeView(fitView);
+                ((ViewGroup) view).removeView(fitView);
         }
         return view;
     }
@@ -78,5 +80,9 @@ public abstract class BaseFragment extends Fragment {
 
     protected void storeErr(Throwable th){
         CrashHandler.getInstance(mContext).handleException(th);
+    }
+
+    public View findViewById(@IdRes int resId){
+        return view.findViewById(resId);
     }
 }

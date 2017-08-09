@@ -404,6 +404,7 @@ public class Db_PUB_USERS extends BaseTable {
             ContentValues contentValues=new ContentValues();
             contentValues.put("IS_INIT_UNREGISTER_DATA",s);
             getDatabase().update("USER",contentValues,"ID=1",null);
+            entity.setIsInitUnregisterData(s);
         } catch (Exception e) {
             e.printStackTrace();
         }

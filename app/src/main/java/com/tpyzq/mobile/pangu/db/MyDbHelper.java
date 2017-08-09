@@ -55,10 +55,11 @@ public class MyDbHelper extends SQLiteOpenHelper {
 
     private void compatiblePreDb() {
         try {
-            if (!new File("/data/data/com.tpyzq.test.mobile.pangu/mydb.db").exists()){
+            String packageName = mContext.getPackageName();
+            if (!new File("/data/data/"+packageName+"/mydb.db").exists()){
                 return;
             }
-            SQLiteDatabase db = SQLiteDatabase.openDatabase("/data/data/com.tpyzq.test.mobile.pangu/mydb.db", null, SQLiteDatabase.OPEN_READWRITE);
+            SQLiteDatabase db = SQLiteDatabase.openDatabase("/data/data/"+packageName+"/mydb.db", null, SQLiteDatabase.OPEN_READWRITE);
             Cursor cursor = db.rawQuery("select * from PUB_USERS where USERID=1", null);
 
             if (cursor != null && cursor.moveToNext()) {

@@ -133,6 +133,7 @@ public class StockDetailActivity extends BaseActivity implements  View.OnClickLi
     private TextView[] landItemDetailValueTvs = null;
     private TextView[] landItemDetailTitleTvs = null;
     private ShareDialog shareDialog;
+
     private String[] grideTopTitles() {
         String [] grideTvs1 = {"最高", "最低", "换手", "成交额"};
         if(stkType==0){
