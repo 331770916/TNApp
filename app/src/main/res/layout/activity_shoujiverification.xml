@@ -68,6 +68,7 @@
                 android:gravity="center_vertical"
                 android:inputType="number"
                 android:maxLength="11"
+                android:hint="@string/sjzcText"
                 android:numeric="integer"
                 android:paddingLeft="@dimen/size70" />
 
@@ -181,7 +182,7 @@
             android:layout_marginRight="@dimen/size15"
             android:layout_marginTop="@dimen/size50"
             android:background="@drawable/button_login_unchecked"
-            android:text="@string/sjzcText3"
+            android:text="@string/sjyzText2"
             android:textColor="@color/white" />
 
         <RelativeLayout
