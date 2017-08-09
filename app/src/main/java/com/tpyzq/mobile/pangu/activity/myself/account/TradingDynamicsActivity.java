@@ -7,6 +7,7 @@ import android.os.Message;
 import android.text.TextUtils;
 import android.view.View;
 import android.webkit.WebSettings;
+import android.widget.ImageView;
 import android.widget.RelativeLayout;
 
 import com.tpyzq.mobile.pangu.R;
@@ -46,6 +47,7 @@ public class TradingDynamicsActivity extends BaseActivity implements View.OnClic
     private String mURL;
     private Dialog loadingDialog, HC_LoadingDialog;
     private ShareDialog shareDialog;
+    private ImageView iv_fenxiang;
     @Override
     public void initView() {
         initJSAPI();
@@ -53,7 +55,8 @@ public class TradingDynamicsActivity extends BaseActivity implements View.OnClic
         layout = (RelativeLayout) findViewById(R.id.stockNewsLayout);
         layout.setOnClickListener(this);
         findViewById(R.id.iv_back).setOnClickListener(this);
-        findViewById(R.id.iv_fenxiang).setOnClickListener(this);
+        iv_fenxiang = (ImageView)findViewById(R.id.iv_fenxiang);
+        iv_fenxiang.setOnClickListener(this);
         shareDialog = new ShareDialog(this);
         toConnechistory();
     }
@@ -163,6 +166,7 @@ public class TradingDynamicsActivity extends BaseActivity implements View.OnClic
                     String code = jsonObject.getString("code");
                     String msg = jsonObject.getString("msg");
                     if ("0".equals(code)) {
+                        iv_fenxiang.setVisibility(View.VISIBLE);
                         LogUtil.e("ccccc", msg);
                         if (!TextUtils.isEmpty(msg)) {
                             if (HC_LoadingDialog != null) {
@@ -268,6 +272,7 @@ public class TradingDynamicsActivity extends BaseActivity implements View.OnClic
         }
         wb_trading_dynamics.setVisibility(View.GONE);
         layout.setVisibility(View.VISIBLE);
+        iv_fenxiang.setVisibility(View.GONE);
     }
 
     @Override
