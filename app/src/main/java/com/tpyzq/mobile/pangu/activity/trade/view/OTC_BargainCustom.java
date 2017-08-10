@@ -88,10 +88,10 @@ public class OTC_BargainCustom extends OTC_BargainToday implements TimePickerVie
 
                     int days = Helper.daysBetween(startDay, endDay);
 
-                    if (str.equalsIgnoreCase(startDay)) {
-                        MistakeDialog.showDialog("起始时间不能大于等于截止时间", mActivity);
+                    if (str.equalsIgnoreCase(startDay) && !str.equals(startDay)) {
+                        MistakeDialog.showDialog("请选择正确日期,起始日期不能超过截止日期", mActivity);
                     } else if (days > 90) {
-                        MistakeDialog.showDialog("起始时间和截止时间不能大于3个月", mActivity);
+                        MistakeDialog.showDialog("选择的日期间隔不能超过3个月", mActivity);
                     } else {
                         onVisible();
                     }

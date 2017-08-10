@@ -142,7 +142,7 @@ public class CurrencyZiDingYiPager extends BaseSearchPager implements TimePicker
 
                         int days = Helper.daysBetween(startDay, endDay);
 
-                        if (str.equalsIgnoreCase(startDay)) {
+                        if (str.equalsIgnoreCase(startDay) && !str.equals(endDay)) {
                             showDialog("请选择正确日期,起始日期不能超过截止日期");
                         } else if (days > 90) {
                             showDialog("选择的日期间隔不能超过3个月");

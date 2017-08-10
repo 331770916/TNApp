@@ -183,54 +183,8 @@ public class WXLogin implements ICallbackResult {
                     JSONObject jsonObject = new JSONObject(response);
                     String code = jsonObject.getString("code");
                     String msg = jsonObject.getString("msg");
-                    if ("0".equals(code)) {
-                        WipeData();
-                        UserEntity userEntity = new UserEntity();
-                        userEntity.setScno(screen_name);                                 //注册账号
-                        userEntity.setIsregister("0");                                   //0是注册用户，1是未注册用户
-                        userEntity.setTypescno("3");                                     //账号类型（4:微博 1:手机 2:QQ 3:微信）
-                        userEntity.setRegisterID(openid);                                //注册账号标识ID
-
-                        Db_PUB_USERS.UpdateScno(userEntity);                             //修改 注册账号
-                        Db_PUB_USERS.UpdateTypescno(userEntity);                         //修改 账号类型（4:微博 1:手机 2:QQ 3:微信）
-                        Db_PUB_USERS.UpdateRegister(userEntity);                         //修改 注册标识ID
-
-                        HOLD_SEQ.deleteAll();
-                        SpUtils.putString(CustomApplication.getContext(), ConstantUtil.APPEARHOLD, ConstantUtil.HOLD_DISAPPEAR);
-                        updateNewUserSelfChoice();
-
-                        Db_PUB_USERS.UpdateIsregister(userEntity);                       //修改  是否注册用户
-                        SpUtils.putString(mContext, "First", "");
-
-
-                    } else if (code.equals("1")) {
-                        WipeData();
-                        UserEntity userEntity = new UserEntity();
-                        userEntity.setScno(screen_name);                                 //注册账号
-                        userEntity.setIsregister("0");                                   //0是注册用户，1是未注册用户
-                        userEntity.setTypescno("3");                                     //账号类型（4:微博 1:手机 2:QQ 3:微信）
-                        userEntity.setRegisterID(openid);                                //注册账号标识ID
-
-                        //修改 数据储存
-                        Db_PUB_USERS.UpdateScno(userEntity);                             //修改 注册账号
-                        Db_PUB_USERS.UpdateTypescno(userEntity);                         //修改 账号类型（0:qq 1:微信 2:微博 3:手机）
-                        Db_PUB_USERS.UpdateRegister(userEntity);                         //修改 注册标识ID
-                        Db_PUB_USERS.UpdateIsregister(userEntity);                       //修改  是否注册用户
-                        UserUtil.refrushUserInfo();
-
-
-                        //删除数据股所有自选股
-                        HOLD_SEQ.deleteAll();
-                        SpUtils.putString(CustomApplication.getContext(), ConstantUtil.APPEARHOLD, ConstantUtil.HOLD_DISAPPEAR);
-                        Db_PUB_STOCKLIST.deleteAllStocListkDatas();                            //从云端下载数据库自选股
-                        Db_HOME_INFO.deleteAllSelfNewsDatas();//删除自选股新闻
-
-                        SimpleRemoteControl mSimpleRemoteControl = new SimpleRemoteControl((ICallbackResult) mContext);
-                        mSimpleRemoteControl.setCommand(new ToQuerySelfChoiceStockConnect(new QuerySelfChoiceStockConnect(TAG, "", UserUtil.capitalAccount, UserUtil.userId)));
-                        mSimpleRemoteControl.startConnect();
-
-                        SpUtils.putString(mContext, "First", "");
-
+                    if ("0".equals(code) || "1".equals(code)) {    //"0" 新用户   "1" 老用户
+                        setUsermodData(code, openid, screen_name);
 
                     } else {
                         mLoadingDialog.dismiss();
@@ -241,6 +195,45 @@ public class WXLogin implements ICallbackResult {
                 }
             }
         });
+    }
+
+
+    private void setUsermodData(String usermarked, String openid, String screen_name) {
+        WipeData();
+
+        UserEntity userEntity = new UserEntity();
+        userEntity.setScno(screen_name);                                 //注册账号
+        userEntity.setIsregister("0");                                   //0是注册用户，1是未注册用户
+        userEntity.setTypescno("3");                                     //账号类型（4:微博 1:手机 2:QQ 3:微信）
+        userEntity.setRegisterID(openid);                                //注册账号标识ID
+
+        //修改 数据储存
+        Db_PUB_USERS.UpdateScno(userEntity);                             //修改 注册账号
+        Db_PUB_USERS.UpdateTypescno(userEntity);                         //修改 账号类型（0:qq 1:微信 2:微博 3:手机）
+        Db_PUB_USERS.UpdateRegister(userEntity);                         //修改 注册标识ID
+        Db_PUB_USERS.UpdateIsregister(userEntity);                       //修改  是否注册用户
+        SpUtils.putString(mContext, "First", "");
+
+        UserUtil.refrushUserInfo();
+        //删除数据股所有自选股
+        HOLD_SEQ.deleteAll();
+        SpUtils.putString(CustomApplication.getContext(), ConstantUtil.APPEARHOLD, ConstantUtil.HOLD_DISAPPEAR);
+
+
+        if ("0".equals(usermarked)) {
+            updateNewUserSelfChoice();
+        } else {
+            Db_PUB_STOCKLIST.deleteAllStocListkDatas();                            //从云端下载数据库自选股
+            Db_HOME_INFO.deleteAllSelfNewsDatas();                                  //删除自选股新闻
+            refreshData();
+        }
+    }
+
+    //下载自选股
+    private void refreshData() {
+        SimpleRemoteControl mSimpleRemoteControl = new SimpleRemoteControl((ICallbackResult) mContext);
+        mSimpleRemoteControl.setCommand(new ToQuerySelfChoiceStockConnect(new QuerySelfChoiceStockConnect(TAG, "", UserUtil.capitalAccount, UserUtil.userId)));
+        mSimpleRemoteControl.startConnect();
     }
 
 
@@ -287,14 +280,14 @@ public class WXLogin implements ICallbackResult {
             UserUtil.refrushUserInfo();
 
             if (Db_PUB_USERS.isRegister()) {
-                Db_PUB_STOCKLIST.deleteAllStocListkDatas();
-                Db_HOME_INFO.deleteAllSelfNewsDatas();
-            } else {
                 SimpleRemoteControl mSimpleRemoteControl = new SimpleRemoteControl((ICallbackResult) mContext);
                 mSimpleRemoteControl.setCommand(new ToAddSelfChoiceStockConnect(new AddSelfChoiceStockConnect(TAG, "", UserUtil.capitalAccount, stockNumbers, UserUtil.userId, stockNames, NewPrices)));
                 mSimpleRemoteControl.startConnect();
+            } else {
+                Db_PUB_STOCKLIST.deleteAllStocListkDatas();
+                Db_HOME_INFO.deleteAllSelfNewsDatas();
             }
-        }else {
+        } else {
             mLoadingDialog.dismiss();
             mMarked.MarkedLogic(true);
         }

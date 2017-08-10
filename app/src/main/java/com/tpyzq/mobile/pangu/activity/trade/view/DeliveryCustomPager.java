@@ -227,7 +227,7 @@ public class DeliveryCustomPager extends BaseSearchPager {
 
                         int days = Helper.daysBetween(startDay, endDay);
 
-                        if (str.equalsIgnoreCase(startDay)) {
+                        if (str.equalsIgnoreCase(startDay) && !str.equals(endDay)) {
                             MistakeDialog.showDialog("请选择正确日期,起始日期不能超过截止日期", (Activity) mContext);
                         } else if (days > 90) {
                             MistakeDialog.showDialog("选择的日期间隔不能超过3个月", (Activity) mContext);

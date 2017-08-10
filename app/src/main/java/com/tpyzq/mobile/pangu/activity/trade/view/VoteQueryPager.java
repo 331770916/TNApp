@@ -144,7 +144,7 @@ public class VoteQueryPager extends BasePager implements InterfaceCollection.Int
                     if (!TextUtils.isEmpty(startDate) && !TextUtils.isEmpty(finishDate)) {
                         String str = helper.compareTo(startDate, finishDate);
                         int days = helper.daysBetween(startDate, finishDate);
-                        if (str.equalsIgnoreCase(startDate)) {
+                        if (str.equalsIgnoreCase(startDate) && !str.equals(startDate)) {
                             showDialog("请选择正确日期,起始日期不能超过截止日期");
                         } else if (days > 90) {
                             showDialog("选择的日期间隔不能超过3个月");

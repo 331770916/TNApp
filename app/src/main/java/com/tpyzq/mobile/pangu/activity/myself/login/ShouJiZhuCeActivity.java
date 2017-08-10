@@ -400,12 +400,12 @@ public class ShouJiZhuCeActivity extends BaseActivity implements View.OnClickLis
             UserUtil.refrushUserInfo();
 
             if (Db_PUB_USERS.isRegister()) {
-                Db_PUB_STOCKLIST.deleteAllStocListkDatas();
-                Db_HOME_INFO.deleteAllSelfNewsDatas();
-            } else {
                 SimpleRemoteControl mSimpleRemoteControl = new SimpleRemoteControl(ShouJiZhuCeActivity.this);
                 mSimpleRemoteControl.setCommand(new ToAddSelfChoiceStockConnect(new AddSelfChoiceStockConnect(TAG, "", UserUtil.capitalAccount, stockNumbers, UserUtil.userId, stockNames, NewPrices)));
                 mSimpleRemoteControl.startConnect();
+            } else {
+                Db_PUB_STOCKLIST.deleteAllStocListkDatas();
+                Db_HOME_INFO.deleteAllSelfNewsDatas();
             }
         }else {
             ShowNotice();

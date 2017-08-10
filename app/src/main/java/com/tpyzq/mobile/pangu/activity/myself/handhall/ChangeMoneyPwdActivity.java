@@ -255,12 +255,8 @@ public class ChangeMoneyPwdActivity extends BaseActivity implements View.OnClick
                 }
             }, MAXLINES, false, "custom_keyboard_view");
             v.setPasswordKeyboard(passwordKeyboard);
-
-//        Object   abc =passwordKeyboard.getView("bt_abc");
-//
-//            Button bt_abc= (Button) passwordKeyboard.getView("bt_abc");
-//
-//            bt_abc.setVisibility(View.GONE);
+            Button bt_abc= (Button) passwordKeyboard.getView("bt_abc");
+            bt_abc.setVisibility(View.INVISIBLE);
 
 
         } catch (UnikeyException e) {
@@ -295,7 +291,8 @@ public class ChangeMoneyPwdActivity extends BaseActivity implements View.OnClick
                 }
             }, 6, false, "custom_keyboard_view");
             v.setPasswordKeyboard(passwordKeyboard);
-
+            Button bt_abc= (Button) passwordKeyboard.getView("bt_abc");
+            bt_abc.setVisibility(View.INVISIBLE);
         } catch (UnikeyException e) {
             Helper.getInstance().showToast(this, "弹出密码键盘失败：" + Integer.toHexString(e.getNumber()));
         }
@@ -327,7 +324,8 @@ public class ChangeMoneyPwdActivity extends BaseActivity implements View.OnClick
                 }
             }, 6, false, "custom_keyboard_view");
             v.setPasswordKeyboard(passwordKeyboard);
-
+            Button bt_abc= (Button) passwordKeyboard.getView("bt_abc");
+            bt_abc.setVisibility(View.INVISIBLE);
         } catch (UnikeyException e) {
             Helper.getInstance().showToast(this, "弹出密码键盘失败：" + Integer.toHexString(e.getNumber()));
         }

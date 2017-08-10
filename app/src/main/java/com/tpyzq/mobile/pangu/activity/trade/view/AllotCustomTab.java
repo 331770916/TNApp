@@ -129,7 +129,7 @@ public class AllotCustomTab extends BaseTab implements TimePickerView.OnTimeSele
                     String str = Helper.compareTo(startDay, endDay);
                     int days = Helper.daysBetween(startDay, endDay);
 
-                    if (str.equalsIgnoreCase(startDay)) {
+                    if (str.equalsIgnoreCase(startDay) && !str.equals(endDay)) {
                         MistakeDialog.showDialog("起始时间不能大于等于截止时间", mActivity);
                     } else if (days > 90) {
                         MistakeDialog.showDialog("起始时间和截止时间不能大于3个月", mActivity);
