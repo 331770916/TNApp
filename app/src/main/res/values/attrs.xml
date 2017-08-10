@@ -216,4 +216,8 @@
         <attr name="autoplay" format="boolean" />
     </declare-styleable>
 
+    <declare-styleable name="Themes">
+        <attr name="numberProgressBarStyle" format="reference"/>
+    </declare-styleable>
+
 </resources>

@@ -37,8 +37,8 @@ public class HotSellActivity extends BaseActivity implements View.OnClickListene
         mSafeBetFragment = new SafeBetFragment();
         mRecommendFragment = new RecommendFragment();
 
-        pagers.add(mSafeBetFragment);
         pagers.add(mRecommendFragment);
+        pagers.add(mSafeBetFragment);
 
         HotSellAdapter adapter = new HotSellAdapter(getSupportFragmentManager(), pagers);
         viewPager.setAdapter(adapter);

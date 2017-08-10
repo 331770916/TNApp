@@ -27,16 +27,22 @@ import okhttp3.Call;
 public class ExponentConnect {
 
     private ICallbackResult mCallbackResult;
+    private ExpontentConnectInterface mExpontentConnectInterface;
     private static final String TAG = "ExponentConnect";
     private String mFlag = "";
     private String mAsc = "";
     private String mExponentNumber = "";
     private String mHttpTAG;
     private String mType;
+    private String mPageIndex;
+    private String mResultNum;
 
-    public ExponentConnect(String httpTag, String flag, String asc,String exponentNumber, String type) {
+    public ExponentConnect(String pageIndex, String resultNum, String httpTag, String flag, String asc,String exponentNumber, String type, ExpontentConnectInterface expontentConnectInterface) {
+        mPageIndex = pageIndex;
+        mResultNum = resultNum;
         mHttpTAG = httpTag;
         mExponentNumber = exponentNumber;
+        mExpontentConnectInterface = expontentConnectInterface;
         mAsc = asc;
         mFlag = flag;
         mType = type;
@@ -57,8 +63,8 @@ public class ExponentConnect {
             Map map2 = new HashMap();
             map2.put("flag", mFlag);//1行情2换手率
             map2.put("asc", mAsc);//1为涨 其他为跌
-            map2.put("startNo", "0");//起始的记录数，从0开始
-            map2.put("number", "20");//返回的记录数 -1从起始数到最后
+            map2.put("startNo", mPageIndex);//起始的记录数，从0开始
+            map2.put("number", mResultNum);//返回的记录数 -1从起始数到最后
             map2.put("exponential", mExponentNumber);
             object[0] = map2;
 
@@ -75,14 +81,14 @@ public class ExponentConnect {
         NetWorkUtil.getInstence().okHttpForGet(mHttpTAG, ConstantUtil.getURL_HQ_HHN(), params, new StringCallback() {
             @Override
             public void onError(Call call, Exception e, int id) {
-                LogHelper.e(TAG, e.toString());
-                ArrayList<StockInfoEntity> beanss = new ArrayList<StockInfoEntity>();
-                mCallbackResult.getResult(beanss, TAG);
+                mExpontentConnectInterface.showError(ConstantUtil.NETWORK_ERROR);
             }
 
             @Override
             public void onResponse(String response, int id) {
                 if (TextUtils.isEmpty(response)) {
+                    mExpontentConnectInterface.showError(ConstantUtil.SERVICE_NO_DATA);
+                    mExpontentConnectInterface.showEmpty();
                     return ;
                 }
 //                LogHelper.e(TAG, response);
@@ -113,15 +119,22 @@ public class ExponentConnect {
                         }
                         mCallbackResult.getResult(beans, TAG);
                     }else{
-                        mCallbackResult.getResult("网络请求无数据",TAG);
+                        mExpontentConnectInterface.showError(ConstantUtil.SERVICE_NO_DATA);
+                        mExpontentConnectInterface.showEmpty();
                     }
 
                 }catch (JSONException e){
                    e.printStackTrace();
-                    mCallbackResult.getResult(e.toString(), TAG);
+                    mExpontentConnectInterface.showError(ConstantUtil.JSON_ERROR);
                 }
             }
         });
 
+    }
+
+    public interface ExpontentConnectInterface {
+        public void showError(String error);
+
+        public void showEmpty();
     }
 }

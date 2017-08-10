@@ -2,6 +2,7 @@ package com.tpyzq.mobile.pangu.activity.home.managerMoney.product.hotsell.recomm
 
 import android.app.Dialog;
 import android.content.DialogInterface;
+import android.support.v7.widget.LinearLayoutManager;
 import android.support.v7.widget.RecyclerView;
 import android.view.KeyEvent;
 import android.view.View;
@@ -17,7 +18,11 @@ import java.util.HashMap;
 import java.util.List;
 import java.util.Map;
 
+import static com.tpyzq.mobile.pangu.activity.home.managerMoney.adapter.RecommendAdapter.TYPE_HOT;
 import static com.tpyzq.mobile.pangu.activity.home.managerMoney.adapter.RecommendAdapter.TYPE_NEW;
+import static com.tpyzq.mobile.pangu.activity.home.managerMoney.adapter.RecommendAdapter.TYPE_SELL;
+import static com.tpyzq.mobile.pangu.activity.home.managerMoney.adapter.RecommendAdapter.TYPE_TITLE_HOT;
+import static com.tpyzq.mobile.pangu.activity.home.managerMoney.adapter.RecommendAdapter.TYPE_TITLE_SELL;
 
 /**
  * Created by zhangwenbo on 2017/7/28.
@@ -35,6 +40,7 @@ public class RecommendFragment extends LazyBaseFragment implements DialogInterfa
     public void initView(View view) {
 
         RecyclerView recyclerView = (RecyclerView) view.findViewById(R.id.recommendRl);
+        recyclerView.setLayoutManager(new LinearLayoutManager(getContext()));
         mAdapter = new RecommendAdapter(getContext());
         recyclerView.setAdapter(mAdapter);
         test();
@@ -45,12 +51,85 @@ public class RecommendFragment extends LazyBaseFragment implements DialogInterfa
         Map<String, String> map = new HashMap<>();
         map.put("type", TYPE_NEW);
         map.put("hold1ProName", "货币基金A");
-        map.put("hold1Prdio", "30%");
+        map.put("hold1Prdio", "7.71");
         map.put("hold1Day", "15天");
         map.put("hold1Qgje", "100元");
-//        map.put("", "");
-//        map.put("", "");
+        map.put("lable", "60天后可转让,到期前30天不可转让,综合年后5.8%");
+
+        Map<String, String> map8 = new HashMap<>();
+        map8.put("type", TYPE_TITLE_HOT);
+        Map<String, String> map9 = new HashMap<>();
+        map9.put("type", TYPE_TITLE_SELL);
+
+
+        Map<String, String> map2 = new HashMap<>();
+        map2.put("type", TYPE_HOT);
+        map2.put("hold2ProName", "B级基金");
+        map2.put("hold2Time", "12小时56分");
+        map2.put("hold2Prdio", "6.29");
+        map2.put("hold2Day", "90天");
+        map2.put("hold2Price", "100元");
+        map2.put("lable", "中低风险,太平洋产品,收益高");
+
+        Map<String, String> map3 = new HashMap<>();
+        map3.put("type", TYPE_HOT);
+        map3.put("hold2ProName", "B级基金");
+        map3.put("hold2Time", "12小时56分");
+        map3.put("hold2Prdio", "6.29");
+        map3.put("hold2Day", "90天");
+        map3.put("hold2Price", "100元");
+        map3.put("lable", "中低风险,太平洋产品,收益高");
+
+        Map<String, String> map4 = new HashMap<>();
+        map4.put("type", TYPE_SELL);
+        map4.put("hold2ProName", "B级基金");
+        map4.put("hold2Prdio", "6.29");
+        map4.put("hold2Day", "90天");
+        map4.put("hold2Price", "100元");
+        map4.put("lable", "中低风险,太平洋产品,收益高");
+
+
+        Map<String, String> map5 = new HashMap<>();
+        map5.put("type", TYPE_SELL);
+        map5.put("hold2ProName", "B级基金");
+        map5.put("hold2Prdio", "6.29");
+        map5.put("hold2Day", "90天");
+        map5.put("hold2Price", "100元");
+        map5.put("lable", "中低风险,太平洋产品,收益高");
+
+
+        Map<String, String> map6 = new HashMap<>();
+        map6.put("type", TYPE_SELL);
+        map6.put("hold2ProName", "B级基金");
+        map6.put("hold2Prdio", "6.29");
+        map6.put("hold2Day", "90天");
+        map6.put("hold2Price", "100元");
+        map6.put("lable", "中低风险,太平洋产品,收益高");
+
+
+        Map<String, String> map7 = new HashMap<>();
+        map7.put("type", TYPE_SELL);
+        map7.put("hold2ProName", "B级基金");
+        map7.put("hold2Prdio", "6.29");
+        map7.put("hold2Day", "90天");
+        map7.put("hold2Price", "100元");
+        map7.put("lable", "中低风险,太平洋产品,收益高");
+
+
+
         datas.add(map);
+
+        datas.add(map8);
+        datas.add(map2);
+        datas.add(map3);
+
+        datas.add(map9);
+        datas.add(map4);
+        datas.add(map5);
+        datas.add(map6);
+        datas.add(map7);
+
+
         mAdapter.setDatas(datas);
     }
 

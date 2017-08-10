@@ -3,6 +3,7 @@
     android:orientation="vertical"
     android:layout_marginTop="@dimen/size5"
     android:layout_marginBottom="@dimen/size5"
+    android:background="@color/white"
     android:layout_width="match_parent"
     android:layout_height="wrap_content">
 
@@ -25,7 +26,7 @@
         android:textStyle="bold"
         android:textColor="#565656"
         android:textSize="@dimen/txtSize18"
-        android:text="海福新能源"/>
+        android:text=""/>
 
     <TextView
         android:id="@+id/recommend_prdio"
@@ -33,10 +34,11 @@
         android:layout_height="wrap_content"
         android:textSize="@dimen/txtSize40"
         android:layout_marginTop="@dimen/size17"
+        android:gravity="bottom"
         android:textStyle="bold"
         android:textColor="@color/red"
         android:layout_gravity="center_horizontal"
-        android:text="7.7%"/>
+        android:text=""/>
 
     <TextView
         android:layout_width="wrap_content"
@@ -44,7 +46,7 @@
         android:layout_gravity="center_horizontal"
         android:textColor="#939393"
         android:textSize="@dimen/txtSize12"
-        android:text="七日年化收益率"/>
+        android:text="七日年化收益"/>
 
     <LinearLayout
         android:id="@+id/labelLayout"
@@ -54,32 +56,6 @@
         android:layout_marginTop="@dimen/size10"
         android:orientation="horizontal">
 
-        <TextView
-            android:layout_width="wrap_content"
-            android:layout_height="wrap_content"
-            android:textColor="#939393"
-            android:background="@drawable/recommend_top_tvbg"
-            android:layout_margin="@dimen/size5"
-            android:textSize="@dimen/txtSize10"
-            android:text="60天后转至"/>
-
-        <TextView
-            android:layout_width="wrap_content"
-            android:layout_height="wrap_content"
-            android:textColor="#939393"
-            android:layout_margin="@dimen/size5"
-            android:background="@drawable/recommend_top_tvbg"
-            android:textSize="@dimen/txtSize10"
-            android:text="60天后转至"/>
-
-        <TextView
-            android:layout_width="wrap_content"
-            android:layout_height="wrap_content"
-            android:layout_margin="@dimen/size5"
-            android:background="@drawable/recommend_top_tvbg"
-            android:textColor="#939393"
-            android:textSize="@dimen/txtSize10"
-            android:text="60天后转至"/>
 
     </LinearLayout>
 
@@ -94,7 +70,7 @@
             android:layout_width="0dp"
             android:layout_weight="1"
             android:gravity="center"
-            android:text="120天\n期限"
+            android:text=""
             android:layout_height="wrap_content" />
 
         <View
@@ -107,7 +83,7 @@
             android:layout_width="0dp"
             android:layout_weight="1"
             android:gravity="center"
-            android:text="120天\n期限"
+            android:text=""
             android:layout_height="wrap_content" />
 
     </LinearLayout>

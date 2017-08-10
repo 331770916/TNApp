@@ -8,6 +8,9 @@ import android.support.v4.content.ContextCompat;
 import android.text.TextUtils;
 import android.view.View;
 import android.widget.AdapterView;
+import android.widget.LinearLayout;
+import android.widget.TextView;
+import android.widget.Toast;
 
 import com.tpyzq.mobile.pangu.R;
 import com.tpyzq.mobile.pangu.activity.detail.StockDetailActivity;
@@ -39,7 +42,7 @@ import java.util.List;
  * Created by zhangwenbo on 2016/10/26.
  * 指数详情指数tab
  */
-public class ExPonentTab extends BaseExponentTab implements ICallbackResult, AdapterView.OnItemClickListener {
+public class ExPonentTab extends BaseExponentTab implements ICallbackResult, AdapterView.OnItemClickListener, ExponentConnect.ExpontentConnectInterface {
 
     private Activity mActivity;
     private static final String TAG = "ExPonentTab";
@@ -48,6 +51,8 @@ public class ExPonentTab extends BaseExponentTab implements ICallbackResult, Ada
     public static final String DF_TYPE = "2000";
     public static final String HS_TYPE = "3000";
     private ArrayList<StockInfoEntity> mBeans;
+    private String _exponentCode;
+    private View footerView;
 
     /**
      * 指数代码传6位
@@ -60,7 +65,7 @@ public class ExPonentTab extends BaseExponentTab implements ICallbackResult, Ada
     }
 
     @Override
-    public void initView(View view, Activity activity, final String exponentCode) {
+    public void initView(View view, final Activity activity, final String exponentCode) {
         mActivity = activity;
         try
         {
@@ -71,7 +76,7 @@ public class ExPonentTab extends BaseExponentTab implements ICallbackResult, Ada
         }
 
         int length = exponentCode.length();
-        String _exponentCode = exponentCode;
+         _exponentCode = exponentCode;
         if (length > 6) {
             _exponentCode = Helper.getStockNumber(_exponentCode);
         }
@@ -81,13 +86,25 @@ public class ExPonentTab extends BaseExponentTab implements ICallbackResult, Ada
 
         List<String> titleList = Arrays.asList(strings);
 
+        footerView = LinearLayout.inflate(activity, R.layout.footer_exponent, null);
         MyListView listView = (MyListView) view.findViewById(R.id.detailExponentListView);
         mAdapter = new ExponentAdapter();
+        listView.addFooterView(footerView);
         listView.setAdapter(mAdapter);
         listView.setOnItemClickListener(this);
+            footerView.setOnClickListener(new View.OnClickListener() {
+                @Override
+                public void onClick(View v) {
+                    Intent intent = new Intent();
+                    intent.putExtra("exponentCode", _exponentCode);
+                    intent.setClass(activity, ExpontentMoreActivity.class);
+                    activity.startActivity(intent);
+                }
+            });
+
 
         final SimpleRemoteControl simpleRemoteControl = new SimpleRemoteControl(this);
-        simpleRemoteControl.setCommand(new ToExponentConnect(new ExponentConnect(TAG, "1", "1", _exponentCode, ZF_TYPE)));
+        simpleRemoteControl.setCommand(new ToExponentConnect(new ExponentConnect("0", "20", TAG, "1", "1", _exponentCode, ZF_TYPE, this)));
         simpleRemoteControl.startConnect();
 
 
@@ -122,18 +139,35 @@ public class ExPonentTab extends BaseExponentTab implements ICallbackResult, Ada
 
     @Override
     public void getResult(Object result, String tag) {
-        if(result instanceof String){
-//            ToastUtils.showLong(mActivity,"网络请求数据失败");
-            return;
-        }
         mBeans = (ArrayList<StockInfoEntity>) result;
 
         if (mBeans != null && mBeans.size() > 0) {
             mAdapter.setData(mBeans);
+
+            if (mBeans.size() < 20) {
+                TextView textView = (TextView) footerView.findViewById(R.id.footerMore);
+                textView.setText("没有更多啦");
+                textView.setTextColor(ContextCompat.getColor(mActivity, R.color.newStockTitle));
+                footerView.setBackgroundColor(ContextCompat.getColor(mActivity, R.color.bgColor));
+                footerView.setClickable(false);
+                footerView.setFocusable(false);
+                footerView.setFocusableInTouchMode(false);
+            }
         }
+
+
 
     }
 
+    @Override
+    public void showError(String error) {
+
+    }
+
+    @Override
+    public void showEmpty() {
+
+    }
 
     private void setIndicatorListen(final List<String> titlelist, final MagicIndicator magicIndicator, final SimpleRemoteControl simpleRemoteControl, final String exponentCode, final FragmentContainerHelper fragmentContainerHelper) {
         CommonNavigator commonNavigator = new CommonNavigator(mActivity);
@@ -159,15 +193,15 @@ public class ExPonentTab extends BaseExponentTab implements ICallbackResult, Ada
                         fragmentContainerHelper.handlePageSelected(index);
                         switch (index) {
                             case 0:
-                                simpleRemoteControl.setCommand(new ToExponentConnect(new ExponentConnect(TAG, "1", "1", exponentCode, ZF_TYPE)));
+                                simpleRemoteControl.setCommand(new ToExponentConnect(new ExponentConnect("0", "20", TAG, "1", "1", exponentCode, ZF_TYPE, ExPonentTab.this)));
                                 simpleRemoteControl.startConnect();
                                 break;
                             case 1:
-                                simpleRemoteControl.setCommand(new ToExponentConnect(new ExponentConnect(TAG, "1", "2", exponentCode, DF_TYPE)));
+                                simpleRemoteControl.setCommand(new ToExponentConnect(new ExponentConnect("0", "20", TAG, "1", "2", exponentCode, DF_TYPE, ExPonentTab.this)));
                                 simpleRemoteControl.startConnect();
                                 break;
                             case 2:
-                                simpleRemoteControl.setCommand(new ToExponentConnect(new ExponentConnect(TAG, "2", "1", exponentCode, HS_TYPE)));
+                                simpleRemoteControl.setCommand(new ToExponentConnect(new ExponentConnect("0", "20", TAG, "2", "1", exponentCode, HS_TYPE, ExPonentTab.this)));
                                 simpleRemoteControl.startConnect();
                                 break;
                         }

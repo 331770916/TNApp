@@ -4,13 +4,22 @@ import android.app.Activity;
 import android.content.Context;
 import android.content.Intent;
 import android.os.CountDownTimer;
+import android.support.v4.content.ContextCompat;
 import android.text.Editable;
+import android.text.SpannableString;
+import android.text.Spanned;
 import android.text.TextUtils;
 import android.text.TextWatcher;
+import android.text.style.AbsoluteSizeSpan;
+import android.text.style.ForegroundColorSpan;
+import android.util.TypedValue;
+import android.view.Gravity;
 import android.view.View;
+import android.view.ViewGroup;
 import android.view.inputmethod.InputMethodManager;
 import android.widget.AdapterView;
 import android.widget.Button;
+import android.widget.CheckedTextView;
 import android.widget.EditText;
 import android.widget.ImageView;
 import android.widget.LinearLayout;
@@ -22,6 +31,7 @@ import com.tpyzq.mobile.pangu.R;
 import com.tpyzq.mobile.pangu.activity.trade.presenter.ReverseRepoActivityPresenter;
 import com.tpyzq.mobile.pangu.adapter.trade.BuySellAdapter;
 import com.tpyzq.mobile.pangu.base.BaseActivity;
+import com.tpyzq.mobile.pangu.base.CustomApplication;
 import com.tpyzq.mobile.pangu.data.StockInfoBean;
 import com.tpyzq.mobile.pangu.util.Helper;
 import com.tpyzq.mobile.pangu.util.ToastUtils;
@@ -57,6 +67,9 @@ public class ReverseRepoActivity extends BaseActivity implements View.OnClickLis
     ReverseRepoActivityPresenter presenter;
     private LinearLayout ll_mKeyboard;
 
+    private LinearLayout mRepoLayout;
+    private TextView     mRepoTextView;
+
     @Override
     public void initView() {
         tv_title = (TextView) findViewById(R.id.tv_title);
@@ -78,7 +91,69 @@ public class ReverseRepoActivity extends BaseActivity implements View.OnClickLis
         iv_back = (ImageView) findViewById(R.id.iv_back);
         ll_mKeyboard = (LinearLayout) findViewById(R.id.Keyboard_LinearLayout);
 
+        mRepoLayout = (LinearLayout) findViewById(R.id.reverse_repoLayout);
+        mRepoTextView = (TextView) findViewById(R.id.reverse_daytv);
+        testData();
         initData();
+    }
+
+    private void testData() {
+        mRepoLayout.setVisibility(View.VISIBLE);
+        String day = "1天";
+        String repoText = "占款天数\n";
+        String strRepoText = repoText + day;
+        SpannableString ss = new SpannableString(strRepoText);
+        ss.setSpan(new ForegroundColorSpan(ContextCompat.getColor(CustomApplication.getContext(), R.color.title_list)), 0, repoText.length(), Spanned.SPAN_EXCLUSIVE_EXCLUSIVE);
+        ss.setSpan(new ForegroundColorSpan(ContextCompat.getColor(CustomApplication.getContext(), R.color.red)), repoText.length(), strRepoText.length(), Spanned.SPAN_EXCLUSIVE_EXCLUSIVE);
+        ss.setSpan(new AbsoluteSizeSpan(12, true), 0, repoText.length(), Spanned.SPAN_EXCLUSIVE_EXCLUSIVE);
+        ss.setSpan(new AbsoluteSizeSpan(14, true), repoText.length(), strRepoText.length(), Spanned.SPAN_EXCLUSIVE_EXCLUSIVE);
+        mRepoTextView.setGravity(Gravity.CENTER);
+        mRepoTextView.setText(ss);
+
+        String [] strs = {"借款", "可用", "可取"};
+        String[] strDate = {"2017/08/01", "2017/08/03", "2017/08/09"};
+
+
+        for (int i = 0; i < strs.length; i++) {
+            LinearLayout layout = new LinearLayout(this);
+            layout.setOrientation(LinearLayout.VERTICAL);
+            layout.setGravity(Gravity.CENTER);
+            TextView textView = new TextView(this);
+            textView.setText(strs[i]);
+            textView.setTextSize(TypedValue.COMPLEX_UNIT_SP, 12);
+            textView.setTextColor(ContextCompat.getColor(this, R.color.reverse_tvcolor));
+            textView.setGravity(Gravity.CENTER);
+            textView.setBackgroundDrawable(ContextCompat.getDrawable(this, R.drawable.reverse_selectortvbg));
+
+            int width =View.MeasureSpec.makeMeasureSpec(0,View.MeasureSpec.UNSPECIFIED);
+            int height =View.MeasureSpec.makeMeasureSpec(0,View.MeasureSpec.UNSPECIFIED);
+            textView.measure(width,height);
+
+
+            TextView daytv = new TextView(this);
+            daytv.setGravity(Gravity.CENTER);
+            daytv.setTextSize(TypedValue.COMPLEX_UNIT_SP, 12);
+            daytv.setTextColor(ContextCompat.getColor(this, R.color.newStockTitle));
+            daytv.setText(strDate[i]);
+
+            layout.addView(textView);
+            layout.addView(daytv);
+
+            mRepoLayout.addView(layout);
+            int margin = textView.getMeasuredHeight();
+
+            if (i < strs.length - 1) {
+                View view = new View(this);
+                view.setBackgroundColor(ContextCompat.getColor(this, R.color.newStockTitle));
+                mRepoLayout.addView(view);
+                LinearLayout.LayoutParams layoutParams = (LinearLayout.LayoutParams) view.getLayoutParams();
+                layoutParams.gravity = Gravity.TOP;
+                layoutParams.width = 100;
+                layoutParams.height = 1;
+                layoutParams.topMargin = margin;
+                view.setLayoutParams(layoutParams);
+            }
+        }
     }
 
     private void initData() {
