@@ -30,6 +30,7 @@ import java.text.SimpleDateFormat;
 import java.util.ArrayList;
 import java.util.Date;
 import java.util.List;
+import java.util.Locale;
 
 /**
  * Created by zhangwnebo on 2016/8/13.
@@ -286,7 +287,13 @@ public class CalendarNewStockActivity extends BaseActivity implements View.OnCli
 
             return "未选中任何新股";
         }
-        return FORMATTER.format(date.getDate());
+
+        if (FORMATTER.format(System.currentTimeMillis()).equals(FORMATTER.format(date.getDate()))){
+            return "今日";
+        } else {
+            return FORMATTER.format(date.getDate());
+        }
+
     }
 
     @Override
