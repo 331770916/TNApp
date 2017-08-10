@@ -459,18 +459,15 @@ public class TransactionLoginActivity extends BaseActivity implements ICallbackR
         mPassword_et.setOnTouchListener(new View.OnTouchListener() {
             @Override
             public boolean onTouch(View v, MotionEvent event) {
-                if (event.getAction() == MotionEvent.ACTION_UP) {
-
-                    if (mMarkbit == 0) {
-
-                        if (!isKeyStatusControl) {
+                if (event.getAction() == MotionEvent.ACTION_DOWN) {
+                    if (mMarkbit == 0) {   //  第一次点击
+                        if (!isKeyStatusControl) {   //
                             mBuilder.setTitle(LOADING);
                             mBuilder.create().show();
                         }
                         mMarkbit = 1;
                     }
                     if (mMarkbit == 1) {
-                        mMarkbit = 1;
                         if ("1".equals(passwordFormat)) {
                             mPassword_et.setFocusable(true);
                             handler.sendEmptyMessage(0);
@@ -1012,14 +1009,17 @@ public class TransactionLoginActivity extends BaseActivity implements ICallbackR
         };
     }
 
-    /**
+    boolean isShow = true;
+
+   /**
      * 键盘插件数据获取
      */
     private void showKeyboardWithHeader() {
 
         try {
             //显示当前用户已经输入的字符串个数
-            passwordKeyboard = UniKey.getInstance().getPasswordKeyboard(this, new OnInputDoneCallBack() {
+            if(passwordKeyboard==null)
+               passwordKeyboard = UniKey.getInstance().getPasswordKeyboard(this, new OnInputDoneCallBack() {
                 @Override
                 public void getInputEncrypted(String s) {
                     mKeyboardInput = s;
@@ -1037,7 +1037,8 @@ public class TransactionLoginActivity extends BaseActivity implements ICallbackR
                     mPassword_et.setSelection(mPassword_et.getText().length());
                 }
             }, 6, true, "custom_keyboard_view");
-            passwordKeyboard.show();
+            if(!passwordKeyboard.isShow())
+                passwordKeyboard.show();
         } catch (UnikeyException e) {
             Helper.getInstance().showToast(TransactionLoginActivity.this, "弹出密码键盘失败：" + Integer.toHexString(e.getNumber()));
         }
