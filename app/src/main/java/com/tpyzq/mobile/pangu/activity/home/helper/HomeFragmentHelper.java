@@ -266,8 +266,8 @@ public class HomeFragmentHelper implements HomeSubject {
         } else if (AMAZING.equals(title)) {
 //            BRutil.menuNewSelect("z001-1", "2", "p2", "2", new Date(), "-1", "-1");     稳赢埋点
             BRutil.menuSelect("N022");
-            intent.setClass(activity, HotSellActivity.class);
-//            intent.setClass(activity, OptionalFinancingActivity.class);
+//            intent.setClass(activity, HotSellActivity.class);
+            intent.setClass(activity, OptionalFinancingActivity.class);
             activity.startActivity(intent);
         } else if (ALL.equals(title)) {
             intent.setClass(activity, MoreActivity.class);
