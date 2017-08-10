@@ -78,13 +78,14 @@ public class IndexActivity extends BaseActivity implements InterfaceCollection.I
     private TextView tvNewStock,tvNewStockJump;
     private ImageView ivNewStockClose;
     private NewStockEnitiy enitiy;
+    private SitesChangeRecever broadcastReceiver;
 
     @Override
     public void initView() {
         //注册广播
         IntentFilter filter=new IntentFilter();
         filter.addAction("com.pangu.showdialog");
-        BroadcastReceiver broadcastReceiver=new SitesChangeRecever();
+        broadcastReceiver=new SitesChangeRecever();
         registerReceiver(broadcastReceiver, filter);
         CustomApplication.getInstance().addActivity(this);
         //开启站点服务
@@ -229,6 +230,9 @@ public class IndexActivity extends BaseActivity implements InterfaceCollection.I
             if(dialog!=null)
             {
                 dialog.dismiss();
+            }
+            if (null != broadcastReceiver) {
+                unregisterReceiver(broadcastReceiver);
             }
             SpUtils.putBoolean(this,"isFirstInToHomeMoreGride", false);
         } catch (Exception e) {

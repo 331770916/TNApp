@@ -71,7 +71,7 @@ public class QueryAdForLuncherConnect {
             @Override
             public void onError(Call call, Exception e, int id) {
                 LogHelper.e(mHttpTAG, e.toString());
-                CentreToast.showText(CustomApplication.getContext(),ConstantUtil.NETWORK_ERROR);
+//                CentreToast.showText(CustomApplication.getContext(),ConstantUtil.NETWORK_ERROR);
                 String msg = "" + e.toString();
                 mCallbackResult.getResult(msg, mHttpTAG);
 //                Map<String,String> resultMap = new HashMap<String, String>();

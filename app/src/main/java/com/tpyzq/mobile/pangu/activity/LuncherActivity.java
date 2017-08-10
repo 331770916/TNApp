@@ -2,11 +2,17 @@ package com.tpyzq.mobile.pangu.activity;
 
 import android.app.Dialog;
 import android.content.Intent;
+import android.graphics.Bitmap;
+import android.graphics.Color;
+import android.graphics.drawable.Animatable;
 import android.net.Uri;
 import android.os.CountDownTimer;
 import android.os.Environment;
 import android.os.Handler;
+import android.os.Message;
+import android.support.annotation.Nullable;
 import android.text.TextUtils;
+import android.util.Log;
 import android.view.View;
 import android.view.WindowManager;
 import android.widget.LinearLayout;
@@ -14,8 +20,20 @@ import android.widget.TextView;
 
 import com.bonree.agent.android.Bonree;
 import com.bonree.agent.android.harvest.Statistics;
+import com.facebook.common.util.ExceptionWithNoStacktrace;
+import com.facebook.drawee.backends.pipeline.Fresco;
+import com.facebook.drawee.controller.BaseControllerListener;
+import com.facebook.drawee.controller.ControllerListener;
 import com.facebook.drawee.drawable.ScalingUtils;
+import com.facebook.drawee.interfaces.DraweeController;
 import com.facebook.drawee.view.SimpleDraweeView;
+import com.facebook.imagepipeline.common.ResizeOptions;
+import com.facebook.imagepipeline.image.ImageInfo;
+import com.facebook.imagepipeline.image.QualityInfo;
+import com.facebook.imagepipeline.request.BasePostprocessor;
+import com.facebook.imagepipeline.request.ImageRequest;
+import com.facebook.imagepipeline.request.ImageRequestBuilder;
+import com.facebook.imagepipeline.request.Postprocessor;
 import com.tpyzq.mobile.pangu.R;
 import com.tpyzq.mobile.pangu.activity.navigation.NavigationActivity;
 import com.tpyzq.mobile.pangu.base.BaseActivity;
@@ -36,6 +54,7 @@ import com.tpyzq.mobile.pangu.util.ConstantUtil;
 import com.tpyzq.mobile.pangu.util.FileUtil;
 import com.tpyzq.mobile.pangu.util.Helper;
 import com.tpyzq.mobile.pangu.util.SpUtils;
+import com.tpyzq.mobile.pangu.util.imageUtil.ImageUtil;
 import com.tpyzq.mobile.pangu.util.keyboard.KeyEncryptionUtils;
 import com.tpyzq.mobile.pangu.util.panguutil.SelfChoiceStockTempData;
 import com.tpyzq.mobile.pangu.util.panguutil.UserUtil;
@@ -45,7 +64,10 @@ import java.io.File;
 import java.io.IOException;
 import java.util.ArrayList;
 import java.util.Map;
+import java.util.Timer;
+import java.util.TimerTask;
 
+import static android.R.attr.width;
 
 
 /**
@@ -60,10 +82,31 @@ public class LuncherActivity extends BaseActivity implements ICallbackResult {
     private SimpleDraweeView simpleDraweeView;
     private LinearLayout titleLinearLayout;
     private TextView timeText;
-    private MyTimeCount myTimeCount;
     private boolean startflag = false;
     private String resultImg = "";
+    int i = 3;
+    Handler mHandler = new Handler() {
+        public void handleMessage(Message msg) {
+            if (i==0){
+                timer.cancel();
+                finishLuncher();
+                return;
+            }
+            titleLinearLayout.setVisibility(View.VISIBLE);
+            timeText.setText(i+"秒");
+            i--;
+            super.handleMessage(msg);
+        }
+    };
+    Timer timer = new Timer();
+    TimerTask task = new TimerTask() {
 
+        @Override
+        public void run() {
+            // 需要做的事:发送消息
+            mHandler.sendEmptyMessage(0);
+        }
+    };
     @Override
     public void initView() {
         getWindow().setFlags(WindowManager.LayoutParams.FLAG_FULLSCREEN, WindowManager.LayoutParams.FLAG_FULLSCREEN);
@@ -123,7 +166,7 @@ public class LuncherActivity extends BaseActivity implements ICallbackResult {
         timeText.setOnClickListener(new View.OnClickListener() {
             @Override
             public void onClick(View view) {
-                myTimeCount.onFinish();
+                timer.cancel();
             }
         });
     }
@@ -168,8 +211,8 @@ public class LuncherActivity extends BaseActivity implements ICallbackResult {
         startflag = false ;
         OkHttpUtil.cancelSingleRequestByTag(TAG);
         OkHttpUtil.cancelSingleRequestByTag(LuncherActivityTAG);
-        if (myTimeCount!=null){
-            myTimeCount.cancel();
+        if (timer!=null){
+            timer.cancel();
         }
     }
 
@@ -179,13 +222,68 @@ public class LuncherActivity extends BaseActivity implements ICallbackResult {
             @Override
             public void run() {
                 if (startflag){
-//        handler.removeCallbacks(runnable);    // 移除handle
-                    titleLinearLayout.setVisibility(View.VISIBLE);
+//                    handler.removeCallbacks(runnable);    // 移除handle
+//                    Uri uri = Uri.parse("http://img4.imgtn.bdimg.com/it/u=3552367727,879479145&fm=26&gp=0.jpg");
+//                    Log.e("LuncherActivity","resultImg=="+resultImg);
                     Uri uri = Uri.parse(resultImg);
-                    simpleDraweeView.setImageURI(uri);
+                    ControllerListener controllerListener = new BaseControllerListener<ImageInfo>() {
+                        @Override
+                        public void onFinalImageSet(String id, @Nullable ImageInfo imageInfo, @Nullable Animatable anim) {}
 
-                    myTimeCount = new MyTimeCount(1000*4,1000);
-                    myTimeCount.start();
+                        @Override
+                        public void onIntermediateImageSet(String id, @Nullable ImageInfo imageInfo) {
+                        }
+
+                        @Override
+                        public void onFailure(String id, Throwable throwable) {
+                            finishLuncher();
+                        }
+                    };
+
+                    Postprocessor redMeshPostprocessor = new BasePostprocessor() {
+                        @Override
+                        public String getName() {
+                            return "redMeshPostprocessor";
+                        }
+
+                        @Override
+                        public void process(Bitmap bitmap) {
+                            try {
+                                /*for (int x = 0; x < bitmap.getWidth(); x+=2) {
+                                    for (int y = 0; y < bitmap.getHeight(); y+=2) {
+                                        bitmap.setPixel(x, y, Color.RED);
+                                    }
+                                }*/
+                                int width = bitmap.getWidth();
+                                int height = bitmap.getHeight();
+                                int screenWidth = Helper.getScreenWidth(LuncherActivity.this);
+                                int screenHeight = Helper.getScreenHeight(LuncherActivity.this);
+                                if (screenHeight<height||screenWidth<width) {
+                                    //压缩图片大小到满足屏幕
+                                    bitmap = ImageUtil.zoomImageTo(bitmap,screenWidth,screenHeight);
+                                }
+                            } catch (Exception e){
+                                e.printStackTrace();
+                            } finally {
+                                timer.schedule(task,0,1000);
+                            }
+                        }
+                    };
+
+                    ImageRequest request = ImageRequestBuilder.newBuilderWithSource(uri)
+                            .setPostprocessor(redMeshPostprocessor)
+                            .setResizeOptions(new ResizeOptions(Helper.getScreenWidth(LuncherActivity.this)
+                                    , Helper.getScreenHeight(LuncherActivity.this)))
+                            .build();
+                    DraweeController controller = Fresco.newDraweeControllerBuilder()
+//                            .setUri(uri)
+                            .setImageRequest(request)
+                            .setTapToRetryEnabled(true)
+                            .setOldController(simpleDraweeView.getController())
+                            .setControllerListener(controllerListener)
+                            .build();
+
+                    simpleDraweeView.setController(controller);
                 }else {
                     finishLuncher();
                 }
@@ -241,26 +339,4 @@ public class LuncherActivity extends BaseActivity implements ICallbackResult {
     public int getLayoutId() {
         return R.layout.activity_luncher;
     }
-
-
-    /**
-     * 短信 语音 倒计时
-     */
-    class MyTimeCount extends CountDownTimer {
-
-        public MyTimeCount(long millisInFuture, long countDownInterval){
-            super(millisInFuture, countDownInterval);//参数依次为总时长,和计时的时间间隔
-        }
-
-        @Override
-        public void onTick(long millisUntilFinished) {  //计时过程显示
-            timeText.setText(millisUntilFinished / 1000+"  秒");
-        }
-
-        @Override
-        public void onFinish() {//计时完毕时触发
-            finishLuncher();
-        }
-    }
-
 }

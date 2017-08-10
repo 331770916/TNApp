@@ -222,6 +222,29 @@ public class ImageUtil {
 
 		return bRet;
 	}
+	/**
+	 * @Title: zoomImageTo
+	 * @说       明: 将图片缩放到指定大小
+	 * @throws
+	 */
+	public static Bitmap zoomImageTo(Bitmap bitmap, float newWidth, float newHeight) {
+		return zoomImage(bitmap, newWidth / bitmap.getWidth(), newHeight / bitmap.getHeight());
+	}
+
+	/**
+	 * @Title: zoomImage
+	 * @说       明: 图片缩放到指定倍数
+	 * @throws
+	 */
+	public static Bitmap zoomImage(Bitmap bitmap, float scaleWidth, float scaleHeight) {
+		if(null == bitmap) {
+			return bitmap;
+		}
+
+		Matrix matrix = new Matrix();
+		matrix.postScale(scaleWidth, scaleHeight);
+		return Bitmap.createBitmap(bitmap, 0, 0, bitmap.getWidth(), bitmap.getHeight(), matrix, true);
+	}
 
 	/**
 	 *  Resize the bitmap with ratio of equality, and cut out a square thumbnail to return.

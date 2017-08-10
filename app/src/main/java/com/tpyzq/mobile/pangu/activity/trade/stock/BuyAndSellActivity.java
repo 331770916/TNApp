@@ -560,9 +560,9 @@ public class BuyAndSellActivity extends BaseActivity implements View.OnClickList
                     }
 //                    et_price.setEnabled(true);
 //                    et_price.requestFocus();
-                    if (!TextUtils.isEmpty(price+"")) {
+                    /*if (!TextUtils.isEmpty(price+"")) {
                         et_price.setSelection(et_price.getText().length());
-                    }
+                    }*/
                     mKeyBoardUtil.hideKeyboardLayout();
                 } catch (JSONException e) {
                     e.printStackTrace();
@@ -1392,6 +1392,17 @@ public class BuyAndSellActivity extends BaseActivity implements View.OnClickList
                         String data = jsonObject.getString("data");
                         JSONArray jaData = new JSONArray(data);
                         transStockBeen.clear();
+                        if (jaData.length()==1) {
+                            transStockBeen.clear();
+                            if (null != stockPw) {
+                                stockPw.refreshView();
+                            }
+                            if (null != stockPw && stockPw.isShowing()) {
+                                stockPw.dismiss();
+                            }
+                            onPwClick(jaData.getJSONArray(0).getString(1),jaData.getJSONArray(0).getString(0));
+                            return;
+                        }
                         for (int i = 0; i < jaData.length(); i++) {
                             TransStockEntity transStockBean = new TransStockEntity();
                             transStockBean.stockCode = jaData.getJSONArray(i).getString(0);
@@ -1400,10 +1411,10 @@ public class BuyAndSellActivity extends BaseActivity implements View.OnClickList
                         }
                         if (this != null) {
                             if (!BuyAndSellActivity.this.isFinishing()) {
-                                if (null!=stockPw&&!stockPw.isShowing()) {
+                                if (null != stockPw && !stockPw.isShowing()) {
                                     stockPw.showPopupWindow(traLayout1);
                                 }
-                                if (null!=stockPw) {
+                                if (null != stockPw) {
                                     stockPw.refreshView();
                                 }
                             }
@@ -1542,17 +1553,21 @@ public class BuyAndSellActivity extends BaseActivity implements View.OnClickList
     StockItemCallBack stockItemCallBack = new StockItemCallBack() {
         @Override
         public void stockCode(String stockName, String code) {
-            if (TextUtils.isEmpty(code) || code.startsWith("20") || code.startsWith("10") || code.startsWith("12") || code.startsWith("22")) {
-                et_stock_code.setText("");
-                CentreToast.showText(BuyAndSellActivity.this, "当前股票代码不可交易",Toast.LENGTH_SHORT);
-            } else {
-                setStock(stockName, code);
-                refresh(code);
-                iv_depute_way.setClickable(true);
-                iv_depute_way.setBackgroundResource(R.mipmap.icon_entrust_way);
-            }
+            onPwClick(stockName, code);
         }
     };
+
+    private void onPwClick(String stockName, String code) {
+        if (TextUtils.isEmpty(code) || code.startsWith("20") || code.startsWith("10") || code.startsWith("12") || code.startsWith("22")) {
+            et_stock_code.setText("");
+            CentreToast.showText(BuyAndSellActivity.this, "当前股票代码不可交易", Toast.LENGTH_SHORT);
+        } else {
+            setStock(stockName, code);
+            refresh(code);
+            iv_depute_way.setClickable(true);
+            iv_depute_way.setBackgroundResource(R.mipmap.icon_entrust_way);
+        }
+    }
 
     private void setStock(String stockName, String code) {
         stockCode = code;
