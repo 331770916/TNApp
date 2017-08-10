@@ -66,13 +66,13 @@ android {
         }
         evironment_test{
             applicationId "com.tpyzq.test.mobile.pangu"
-            buildConfigField "String", "IP", '"https://test-tnhq.tpyzq.com:8082"'
+            buildConfigField "String", "IP", '"http://test-tnhq.tpyzq.com:8082"'
             buildConfigField "String", "SJYZM", '"http://106.120.112.246:8081"'
             buildConfigField "String", "BORY", '"https://123.127.198.52:443/config"'
             buildConfigField "String", "BORY_APPID", '"95f7a69e-db11-40a4-b242-6be2b396a0ee"'
             buildConfigField "String", "APP_ID", '"479a67630d2a36996b6aa485f80a4560abefcb91"'
             buildConfigField "String", "SecurityIps", '"https://test-tnhq.tpyzq.com:8082"'
-            buildConfigField "String", "SecurityIp", '"https://test-tnhq.tpyzq.com:8082"'
+            buildConfigField "String", "SecurityIp", '"http://test-tnhq.tpyzq.com:8082"'
             buildConfigField "String", "status", '"测试"'
             buildConfigField "String", "registerServerUrl", '"https://test-tnyw.tpyzq.com/"'
             buildConfigField "String", "registerNoteUrl", '"https://test-tnyw.tpyzq.com/"'

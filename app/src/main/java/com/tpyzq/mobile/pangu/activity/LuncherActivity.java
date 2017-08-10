@@ -184,7 +184,7 @@ public class LuncherActivity extends BaseActivity implements ICallbackResult {
                     Uri uri = Uri.parse(resultImg);
                     simpleDraweeView.setImageURI(uri);
 
-                    myTimeCount = new MyTimeCount(1000*3,1000);
+                    myTimeCount = new MyTimeCount(1000*4,1000);
                     myTimeCount.start();
                 }else {
                     finishLuncher();

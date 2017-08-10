@@ -36,11 +36,17 @@ public class GetConfigService extends Service implements InterfaceCollection.Int
     @Override
     public void onCreate() {
         super.onCreate();
-        try {
-            doConnect();
-        } catch (Exception e) {
-            e.printStackTrace();
-        }
+        new Thread(){
+            @Override
+            public void run() {
+                super.run();
+                try {
+                    doConnect();
+                } catch (Exception e) {
+                    e.printStackTrace();
+                }
+            }
+        }.start();
     }
 
     private void doConnect() throws InterruptedException {
