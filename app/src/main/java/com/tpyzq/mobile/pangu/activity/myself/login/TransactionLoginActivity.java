@@ -556,17 +556,7 @@ public class TransactionLoginActivity extends BaseActivity implements ICallbackR
     private void LogInLogic() {
         //第一次登录数据库交易账号无数据 添加到数据库
         if (!"".equals(OLD_SRRC) && !DeviceUtil.getDeviceId(CustomApplication.getContext()).equalsIgnoreCase(OLD_TCC) && !android.os.Build.MODEL.equals(OLD_SRRC)) { //换手机登录
-            LoginDialog.showDialog("您更换了登录设备，上次使用的设备型号是" + OLD_SRRC, TransactionLoginActivity.this, new MistakeDialog.MistakeDialgoListener() {
-                @Override
-                public void doPositive() {
-                    if ("2".equalsIgnoreCase(IS_OVERDUE) || "3".equalsIgnoreCase(IS_OVERDUE)) {
-                        //未做或过期弹出风险评测dialog
-                        showCorpDialog();
-                    } else {
-                        finish();
-                    }
-                }
-            });
+            showCenterButtoonDialog("您更换了登录设备，上次使用的设备型号是" + OLD_SRRC);
             Gather();
         } else {//没有更换手机
             showDialogOrSaveData();
@@ -1101,6 +1091,30 @@ public class TransactionLoginActivity extends BaseActivity implements ICallbackR
     }
 
     /**
+     * 设置打没有登录的
+     * @param msg
+     */
+    private void showCenterButtoonDialog(String msg){
+        final CustomCenterDialog customCenterDialog = CustomCenterDialog.CustomCenterDialog(msg,CustomCenterDialog.SHOWCENTER);
+        customCenterDialog.cancelSetCall(); // 取消打电话文字拼接
+        customCenterDialog.show(getFragmentManager(),TransactionLoginActivity.class.toString());
+        customCenterDialog.setOnClickListener(new CustomCenterDialog.ConfirmOnClick() {
+            @Override
+            public void confirmOnclick() {
+                if ("2".equalsIgnoreCase(IS_OVERDUE) || "3".equalsIgnoreCase(IS_OVERDUE)) {
+                    //未做或过期弹出风险评测dialog
+                    showCorpDialog();
+                } else {
+                    finish();
+                }
+                customCenterDialog.dismiss();
+            }
+        });
+
+
+    }
+
+    /**
      * 设置不带客服电话Dialog
      * @param msg
      */
@@ -1122,7 +1136,7 @@ public class TransactionLoginActivity extends BaseActivity implements ICallbackR
      * 设置两个button点击事件的Dialog
      */
     private void showTwoClickDialog(String msg, String leftButtonText, String rightButtonText, final String where){
-        CustomCenterDialog customCenterDialog = CustomCenterDialog.CustomCenterDialog(msg,CustomCenterDialog.SHOWCENTERBOTH);
+        final CustomCenterDialog customCenterDialog = CustomCenterDialog.CustomCenterDialog(msg,CustomCenterDialog.SHOWCENTERBOTH);
         customCenterDialog.setBothButtonText(leftButtonText,rightButtonText);
         customCenterDialog.show(getFragmentManager(),TransactionLoginActivity.class.toString());
         customCenterDialog.setOnClickListener(new CustomCenterDialog.ConfirmOnClick() {
@@ -1133,6 +1147,7 @@ public class TransactionLoginActivity extends BaseActivity implements ICallbackR
                 }else {
                     Lomboz();
                 }
+                customCenterDialog.dismiss();
 
             }
         });
@@ -1141,6 +1156,7 @@ public class TransactionLoginActivity extends BaseActivity implements ICallbackR
             public void cancelOnClick() {
                 isHttp = true;
                 IsKeyBoardTypeHttp();
+                customCenterDialog.dismiss();
             }
         });
 
