@@ -26,8 +26,8 @@ import com.tpyzq.mobile.pangu.util.Helper;
 import com.tpyzq.mobile.pangu.util.SpUtils;
 import com.tpyzq.mobile.pangu.util.panguutil.SelfStockHelper;
 import com.tpyzq.mobile.pangu.util.panguutil.UserUtil;
+import com.tpyzq.mobile.pangu.view.CustomCenterDialog;
 import com.tpyzq.mobile.pangu.view.dialog.LoadingDialog;
-import com.tpyzq.mobile.pangu.view.dialog.MistakeDialog;
 import com.umeng.socialize.UMAuthListener;
 import com.umeng.socialize.UMShareAPI;
 import com.umeng.socialize.bean.SHARE_MEDIA;
@@ -188,7 +188,7 @@ public class WXLogin implements ICallbackResult {
 
                     } else {
                         mLoadingDialog.dismiss();
-                        MistakeDialog.showDialog(msg, (Activity) mContext);
+                        showDialog(msg,false);
                     }
                 } catch (JSONException e) {
                     e.printStackTrace();
@@ -304,12 +304,7 @@ public class WXLogin implements ICallbackResult {
             //老用户
             mLoadingDialog.dismiss();
             if (result instanceof String) {
-                MistakeDialog.showDialog("导入自选股异常" + result.toString(), (Activity) mContext, new MistakeDialog.MistakeDialgoListener() {
-                    @Override
-                    public void doPositive() {
-                        mMarked.MarkedLogic(true);
-                    }
-                });
+                showDialog("导入自选股异常" + result.toString(),true);
 
             } else {
                 //把查询到的股票添加到数据库
@@ -324,6 +319,19 @@ public class WXLogin implements ICallbackResult {
                 }
                 mMarked.MarkedLogic(true);
             }
+        }
+    }
+
+    private void showDialog(String msg , boolean isClick){
+        CustomCenterDialog customCenterDialog = CustomCenterDialog.CustomCenterDialog(msg,CustomCenterDialog.SHOWCENTER);
+        customCenterDialog.show(((Activity)mContext).getFragmentManager(),WXLogin.class.toString());
+        if (isClick){
+            customCenterDialog.setOnClickListener(new CustomCenterDialog.ConfirmOnClick() {
+                @Override
+                public void confirmOnclick() {
+                    mMarked.MarkedLogic(true);
+                }
+            });
         }
     }
 

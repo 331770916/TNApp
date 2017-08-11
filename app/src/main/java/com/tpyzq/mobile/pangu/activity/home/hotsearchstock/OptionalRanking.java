@@ -23,6 +23,7 @@ import com.tpyzq.mobile.pangu.data.StockInfoEntity;
 import com.tpyzq.mobile.pangu.http.doConnect.home.ToTwentyFourHoursHotSearch;
 import com.tpyzq.mobile.pangu.http.doConnect.home.TwentyFourHoursHotSearchConnect;
 import com.tpyzq.mobile.pangu.interfac.ICallbackResult;
+import com.tpyzq.mobile.pangu.view.CustomCenterDialog;
 import com.tpyzq.mobile.pangu.view.dialog.LoadingDialog;
 import com.tpyzq.mobile.pangu.view.dialog.MistakeDialog;
 
@@ -143,7 +144,10 @@ public class OptionalRanking extends BaseFragment implements AdapterView.OnItemC
         }
         if (TwentyFourHoursHotSearchConnect.TAG.equals(tag)) {
             if (result instanceof String) {
-                MistakeDialog.showDialog(result, (Activity) getContext());
+                CustomCenterDialog customCenterDialog = CustomCenterDialog.CustomCenterDialog(result.toString(),CustomCenterDialog.SHOWCENTER);
+                customCenterDialog.show(getActivity().getFragmentManager(),OptionalRanking.class.toString());
+
+
                 return;
             }
             mEntities = (ArrayList<StockInfoEntity>) result;

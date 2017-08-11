@@ -31,9 +31,9 @@ import com.tpyzq.mobile.pangu.util.panguutil.BRutil;
 import com.tpyzq.mobile.pangu.util.panguutil.SelfChoiceStockTempData;
 import com.tpyzq.mobile.pangu.util.panguutil.SelfStockHelper;
 import com.tpyzq.mobile.pangu.util.panguutil.UserUtil;
+import com.tpyzq.mobile.pangu.view.CustomCenterDialog;
 import com.tpyzq.mobile.pangu.view.dialog.DoSelfChoiceResultDialog;
 import com.tpyzq.mobile.pangu.view.dialog.LoadingDialog;
-import com.tpyzq.mobile.pangu.view.dialog.MistakeDialog;
 
 import org.json.JSONObject;
 
@@ -165,7 +165,7 @@ public class LimitLookStockAdapter extends BaseAdapter {
                                     String totalcount = jsonObject.getString("totalcount");
 
                                     if ("0".equals(totalcount)) {
-                                        MistakeDialog.showDialog("totalCount:" + totalcount + ",服务器无该数据", mActivity);
+                                        showDialog("totalCount:" + totalcount + ",服务器无该数据");
                                     } else if("0".equals(code)) {
                                         boolean tag1 = Db_PUB_STOCKLIST.deleteStockFromID(stockNumber);
                                         if(tag1){
@@ -178,7 +178,7 @@ public class LimitLookStockAdapter extends BaseAdapter {
                                             DoSelfChoiceResultDialog.getInstance().singleDialog("删除自选股成功", mActivity);
                                         }
                                     } else {
-                                        MistakeDialog.showDialog("删除自选股失败", mActivity);
+                                        showDialog("删除自选股失败");
                                     }
                                 } catch (Exception e) {
                                     e.printStackTrace();
@@ -221,7 +221,7 @@ public class LimitLookStockAdapter extends BaseAdapter {
                                     JSONObject jsonObject = new JSONObject(msg);
                                     String code = jsonObject.getString("code");
                                     if (!"0".equals(code)) {
-                                        MistakeDialog.showDialog("添加失败", mActivity);
+                                        showDialog("添加失败");
                                         return;
                                     }
                                 } catch (Exception e) {
@@ -267,6 +267,11 @@ public class LimitLookStockAdapter extends BaseAdapter {
             }
         });
         return convertView;
+    }
+
+    private void showDialog(String msg){
+        CustomCenterDialog customCenterDialog = CustomCenterDialog.CustomCenterDialog(msg,CustomCenterDialog.SHOWCENTER);
+        customCenterDialog.show(mActivity.getFragmentManager(),LimitLookStockAdapter.class.toString());
     }
 
     private class ViewHolder{

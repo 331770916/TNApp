@@ -18,8 +18,8 @@ import com.tpyzq.mobile.pangu.data.PartnerInfoEntity;
 import com.tpyzq.mobile.pangu.data.SecondContactsEntity;
 import com.tpyzq.mobile.pangu.http.OkHttpUtil;
 import com.tpyzq.mobile.pangu.http.doConnect.self.StartUpBoardActivityPresenter;
+import com.tpyzq.mobile.pangu.view.CustomCenterDialog;
 import com.tpyzq.mobile.pangu.view.dialog.LoadingDialog;
-import com.tpyzq.mobile.pangu.view.dialog.MistakeDialog;
 
 /**
  * Created by tianchen on 2017/7/6.
@@ -81,16 +81,22 @@ public class StartyUpBoardActivity extends BaseActivity implements View.OnClickL
         if (loading.isShowing()){
             loading.dismiss();
         }
-        MistakeDialog.showDialog(hint, this, mistakeDialgoListener);
+        showDialog(hint);
     }
 
-    MistakeDialog.MistakeDialgoListener mistakeDialgoListener = new MistakeDialog.MistakeDialgoListener() {
-        @Override
-        public void doPositive() {
-//            setBack();
-            finish();
-        }
-    };
+
+
+    private void showDialog(String msg){
+        final CustomCenterDialog customCenterDialog = CustomCenterDialog.CustomCenterDialog(msg,CustomCenterDialog.SHOWCENTER);
+        customCenterDialog.show(getFragmentManager(),StartyUpBoardActivity.class.toString());
+        customCenterDialog.setOnClickListener(new CustomCenterDialog.ConfirmOnClick() {
+            @Override
+            public void confirmOnclick() {
+                   finish();
+                   customCenterDialog.dismiss();
+                }
+            });
+    }
 
     public void startFragment(int position) {
         getSupportFragmentManager().beginTransaction()

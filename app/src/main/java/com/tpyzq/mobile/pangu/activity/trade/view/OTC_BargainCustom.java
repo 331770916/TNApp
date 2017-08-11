@@ -5,10 +5,12 @@ import android.view.View;
 import android.widget.TextView;
 import com.tpyzq.mobile.pangu.R;
 import com.tpyzq.mobile.pangu.util.Helper;
-import com.tpyzq.mobile.pangu.view.dialog.MistakeDialog;
+import com.tpyzq.mobile.pangu.view.CustomCenterDialog;
 import com.tpyzq.mobile.pangu.view.pickTime.TimePickerView;
 import java.text.SimpleDateFormat;
 import java.util.Date;
+
+import static com.tpyzq.mobile.pangu.activity.trade.otc_business.OTC_BargainQueryActivity.otc_FragmentManager;
 
 /**
  * 作者：刘泽鹏 on 2016/9/7 13:43
@@ -88,10 +90,10 @@ public class OTC_BargainCustom extends OTC_BargainToday implements TimePickerVie
 
                     int days = Helper.daysBetween(startDay, endDay);
 
-                    if (str.equalsIgnoreCase(startDay) && !str.equals(startDay)) {
-                        MistakeDialog.showDialog("请选择正确日期,起始日期不能超过截止日期", mActivity);
+                    if (str.equalsIgnoreCase(startDay)&& !str.equals(startDay)) {
+                        showDialog("请选择正确日期,起始日期不能超过截止日期");
                     } else if (days > 90) {
-                        MistakeDialog.showDialog("选择的日期间隔不能超过3个月", mActivity);
+                        showDialog("选择的日期间隔不能超过3个月");
                     } else {
                         onVisible();
                     }
@@ -101,5 +103,11 @@ public class OTC_BargainCustom extends OTC_BargainToday implements TimePickerVie
                 break;
         }
     }
+
+    private void showDialog(String msg){
+        CustomCenterDialog customCenterDialog = CustomCenterDialog.CustomCenterDialog(msg,CustomCenterDialog.SHOWCENTER);
+        customCenterDialog.show(otc_FragmentManager,OTC_BargainCustom.class.toString());
+    }
+
 
 }

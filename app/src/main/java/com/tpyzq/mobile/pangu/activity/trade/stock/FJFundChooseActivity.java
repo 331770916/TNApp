@@ -2,7 +2,6 @@ package com.tpyzq.mobile.pangu.activity.trade.stock;
 
 import android.app.Dialog;
 import android.content.Intent;
-import android.view.KeyEvent;
 import android.view.View;
 import android.widget.AdapterView;
 import android.widget.ImageView;
@@ -11,19 +10,16 @@ import android.widget.ListView;
 import android.widget.TextView;
 
 import com.tpyzq.mobile.pangu.R;
-import com.tpyzq.mobile.pangu.activity.myself.login.TransactionLoginActivity;
 import com.tpyzq.mobile.pangu.adapter.trade.FJFundChooseAdapter;
 import com.tpyzq.mobile.pangu.base.BaseActivity;
 import com.tpyzq.mobile.pangu.base.InterfaceCollection;
-import com.tpyzq.mobile.pangu.data.NetworkVotingEntity;
 import com.tpyzq.mobile.pangu.data.ResultInfo;
 import com.tpyzq.mobile.pangu.data.StockHolderInfoEntity;
 import com.tpyzq.mobile.pangu.data.StructuredFundEntity;
-import com.tpyzq.mobile.pangu.util.ConstantUtil;
 import com.tpyzq.mobile.pangu.util.Helper;
 import com.tpyzq.mobile.pangu.util.SpUtils;
+import com.tpyzq.mobile.pangu.view.CustomCenterDialog;
 import com.tpyzq.mobile.pangu.view.dialog.LoadingDialog;
-import com.tpyzq.mobile.pangu.view.dialog.MistakeDialog;
 
 import java.util.List;
 
@@ -158,12 +154,16 @@ public class FJFundChooseActivity extends BaseActivity implements View.OnClickLi
         } else if ("-6".equals(info.getCode())) {
             skip.startLogin(this);
         } else {
-            MistakeDialog.showDialog(info.getMsg(), this, new MistakeDialog.MistakeDialgoListener() {
+            final CustomCenterDialog customCenterDialog = CustomCenterDialog.CustomCenterDialog(info.getMsg(),CustomCenterDialog.SHOWCENTER);
+            customCenterDialog.show(getFragmentManager(),FJFundChooseActivity.class.toString());
+            customCenterDialog.setOnClickListener(new CustomCenterDialog.ConfirmOnClick() {
                 @Override
-                public void doPositive() {
+                public void confirmOnclick() {
                     finish();
+                    customCenterDialog.dismiss();
                 }
             });
+
         }
     }
 

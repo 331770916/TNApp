@@ -28,9 +28,8 @@ import com.tpyzq.mobile.pangu.util.ConstantUtil;
 import com.tpyzq.mobile.pangu.util.Helper;
 import com.tpyzq.mobile.pangu.util.SpUtils;
 import com.tpyzq.mobile.pangu.view.CentreToast;
+import com.tpyzq.mobile.pangu.view.CustomCenterDialog;
 import com.tpyzq.mobile.pangu.view.dialog.LoadingDialog;
-import com.tpyzq.mobile.pangu.view.dialog.MistakeDialog;
-import com.tpyzq.mobile.pangu.view.dialog.ResultDialog;
 import com.tpyzq.mobile.pangu.view.pickTime.TimePickerView;
 import com.zhy.http.okhttp.callback.StringCallback;
 
@@ -46,6 +45,8 @@ import java.util.List;
 import java.util.Map;
 
 import okhttp3.Call;
+
+import static com.tpyzq.mobile.pangu.activity.trade.stock.EntrustActivity.entrustFragment;
 
 
 /**
@@ -276,10 +277,10 @@ public class EntrustCustomPager extends BaseSearchPager {
 
                         int days = Helper.daysBetween(startDay, endDay);
 
-                        if (str.equalsIgnoreCase(startDay) && !str.equals(endDay)) {
-                            MistakeDialog.showDialog("请选择正确日期,起始日期不能超过截止日期", (Activity) mContext);
+                        if (str.equalsIgnoreCase(startDay)&& !str.equals(endDay)) {
+                            showDialog("请选择正确日期,起始日期不能超过截止日期");
                         } else if (days > 90) {
-                            MistakeDialog.showDialog("选择的日期间隔不能超过3个月", (Activity) mContext);
+                            showDialog("选择的日期间隔不能超过3个月");
                         } else {
                             mDialog = LoadingDialog.initDialog((Activity) mContext, "正在查询...");
                             mDialog.show();
@@ -291,6 +292,11 @@ public class EntrustCustomPager extends BaseSearchPager {
                     break;
             }
         }
+    }
+
+    public void showDialog(String msg){
+        CustomCenterDialog customCenterDialog = CustomCenterDialog.CustomCenterDialog(msg,CustomCenterDialog.SHOWCENTER);
+        customCenterDialog.show(entrustFragment,EntrustCustomPager.class.toString());
     }
 
 

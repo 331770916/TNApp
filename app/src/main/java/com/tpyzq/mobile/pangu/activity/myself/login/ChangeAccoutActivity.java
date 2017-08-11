@@ -103,12 +103,11 @@ import com.tpyzq.mobile.pangu.util.keyboard.ResponseInterface;
 import com.tpyzq.mobile.pangu.util.panguutil.APPInfoUtils;
 import com.tpyzq.mobile.pangu.util.panguutil.BRutil;
 import com.tpyzq.mobile.pangu.util.panguutil.UserUtil;
+import com.tpyzq.mobile.pangu.view.CustomCenterDialog;
 import com.tpyzq.mobile.pangu.view.dialog.CancelDialog;
 import com.tpyzq.mobile.pangu.view.dialog.CertificationDialog;
 import com.tpyzq.mobile.pangu.view.dialog.CustomDialog;
 import com.tpyzq.mobile.pangu.view.dialog.LoadingDialog;
-import com.tpyzq.mobile.pangu.view.dialog.LoginDialog;
-import com.tpyzq.mobile.pangu.view.dialog.MistakeDialog;
 import com.tpyzq.mobile.pangu.view.dialog.MutualAuthenticationDialog;
 import com.yzd.unikeysdk.OnInputDoneCallBack;
 import com.yzd.unikeysdk.UniKey;
@@ -382,28 +381,7 @@ public class ChangeAccoutActivity extends BaseActivity implements ICallbackResul
     //网络请求交易登录
     private void toLogInConnect() {
         if (TextUtils.isEmpty(UserUtil.Mobile)) {
-            MistakeDialog.showDialog("登录入参异常", this, new MistakeDialog.MistakeDialgoListener() {
-                @Override
-                public void doPositive() {
-                    UserEntity userEntity = new UserEntity();
-                    userEntity.setMobile("");
-                    userEntity.setIsregister("");
-                    userEntity.setScno("");
-                    userEntity.setTypescno("");
-                    userEntity.setRegisterID("");
-                    userEntity.setIslogin("");
-
-
-                    Db_PUB_USERS.UpdateMobile(userEntity);
-                    Db_PUB_USERS.UpdateIsregister(userEntity);
-                    Db_PUB_USERS.UpdateScno(userEntity);
-                    Db_PUB_USERS.UpdateTypescno(userEntity);
-                    Db_PUB_USERS.UpdateRegister(userEntity);
-                    Db_PUB_USERS.UpdateIslogin(userEntity);
-
-                    finish();
-                }
-            });
+            showCenterButtonDialog("登录入参异常","2");
         } else {
             isLoginSuc = false;
             mBuilder.setTitle(ISCOMMIT);
@@ -428,17 +406,7 @@ public class ChangeAccoutActivity extends BaseActivity implements ICallbackResul
     private void LogInLogic() {
         //第一次登录数据库交易账号无数据 添加到数据库
         if (!"".equals(OLD_SRRC) && !DeviceUtil.getDeviceId(CustomApplication.getContext()).equalsIgnoreCase(OLD_TCC) && !android.os.Build.MODEL.equals(OLD_SRRC)) { //换手机登录
-            LoginDialog.showDialog("您更换了登录设备，上次使用的设备型号是" + OLD_SRRC, ChangeAccoutActivity.this, new MistakeDialog.MistakeDialgoListener() {
-                @Override
-                public void doPositive() {
-                    if ("2".equalsIgnoreCase(IS_OVERDUE) || "3".equalsIgnoreCase(IS_OVERDUE)) {
-                        //未做或过期弹出风险评测dialog
-                        showCorpDialog();
-                    } else {
-                        finish();
-                    }
-                }
-            });
+            showCenterButtonDialog("您更换了登录设备，上次使用的设备型号是" + OLD_SRRC,"1");
             Gather();
         } else {//没有更换手机
             showDialogOrSaveData();
@@ -587,7 +555,7 @@ public class ChangeAccoutActivity extends BaseActivity implements ICallbackResul
                 } else {
                     mPassword_et.setText("");
                     mCaptcha_et.setText("");
-                    MistakeDialog.showDialog(result, ChangeAccoutActivity.this);
+                    showDialog(result.toString());
                 }
                 return;
             }
@@ -624,12 +592,57 @@ public class ChangeAccoutActivity extends BaseActivity implements ICallbackResul
                     setAccountData();                      //修改资金账号数据
                 } else {
                     isLoginSuc = false;
-                    MistakeDialog.showDialog(result.toString(), ChangeAccoutActivity.this);
+                    showDialog(result.toString());
                     mPassword_et.setText("");
                     mCaptcha_et.setText("");
                 }
             }
         }
+    }
+
+
+
+    private void showDialog(String msg){
+        CustomCenterDialog customCenterDialog = CustomCenterDialog.CustomCenterDialog(msg,CustomCenterDialog.SHOWCENTER);
+        customCenterDialog.show(getFragmentManager(),ChangeAccoutActivity.class.toString());
+    }
+
+    private void showCenterButtonDialog(String msg, final String where){
+        final CustomCenterDialog customCenterDialog = CustomCenterDialog.CustomCenterDialog(msg,CustomCenterDialog.SHOWCENTER);
+        customCenterDialog.cancelSetCall();
+        customCenterDialog.show(getFragmentManager(),ChangeAccoutActivity.class.toString());
+        customCenterDialog.setOnClickListener(new CustomCenterDialog.ConfirmOnClick() {
+            @Override
+            public void confirmOnclick() {
+                if ("1".equals(where)){
+                    if ("2".equalsIgnoreCase(IS_OVERDUE) || "3".equalsIgnoreCase(IS_OVERDUE)) {
+                        //未做或过期弹出风险评测dialog
+                        showCorpDialog();
+                    } else {
+                        finish();
+                    }
+                }else {
+                    UserEntity userEntity = new UserEntity();
+                    userEntity.setMobile("");
+                    userEntity.setIsregister("");
+                    userEntity.setScno("");
+                    userEntity.setTypescno("");
+                    userEntity.setRegisterID("");
+                    userEntity.setIslogin("");
+
+
+                    Db_PUB_USERS.UpdateMobile(userEntity);
+                    Db_PUB_USERS.UpdateIsregister(userEntity);
+                    Db_PUB_USERS.UpdateScno(userEntity);
+                    Db_PUB_USERS.UpdateTypescno(userEntity);
+                    Db_PUB_USERS.UpdateRegister(userEntity);
+                    Db_PUB_USERS.UpdateIslogin(userEntity);
+
+                    finish();
+                }
+                customCenterDialog.dismiss();
+            }
+        });
     }
 
     /**

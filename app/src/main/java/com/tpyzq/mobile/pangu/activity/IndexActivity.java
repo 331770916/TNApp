@@ -5,7 +5,6 @@ import android.content.BroadcastReceiver;
 import android.content.Context;
 import android.content.Intent;
 import android.content.IntentFilter;
-import android.content.Intent;
 import android.content.res.Configuration;
 import android.os.Bundle;
 import android.support.v4.app.Fragment;
@@ -13,12 +12,9 @@ import android.support.v4.app.FragmentManager;
 import android.support.v4.app.FragmentTransaction;
 import android.text.TextUtils;
 import android.view.View;
-import android.view.animation.Animation;
-import android.view.animation.AnimationUtils;
 import android.widget.FrameLayout;
 import android.widget.ImageView;
 import android.widget.RadioGroup;
-import android.widget.Toast;
 import android.widget.TextView;
 
 import com.tpyzq.mobile.pangu.R;
@@ -41,9 +37,9 @@ import com.tpyzq.mobile.pangu.util.SpUtils;
 import com.tpyzq.mobile.pangu.util.panguutil.APPInfoUtils;
 import com.tpyzq.mobile.pangu.util.panguutil.BRutil;
 import com.tpyzq.mobile.pangu.util.panguutil.UserUtil;
+import com.tpyzq.mobile.pangu.view.CustomCenterDialog;
 import com.tpyzq.mobile.pangu.view.dialog.ExitDialog;
 import com.tpyzq.mobile.pangu.view.dialog.HintDialog;
-import com.tpyzq.mobile.pangu.view.dialog.MistakeDialog;
 import com.tpyzq.mobile.pangu.view.dialog.VersionDialog;
 import com.tpyzq.mobile.pangu.view.radiobutton.MyRadioButton;
 import com.zhy.http.okhttp.callback.StringCallback;
@@ -53,7 +49,6 @@ import org.json.JSONException;
 import org.json.JSONObject;
 
 import java.util.HashMap;
-import java.util.List;
 
 import okhttp3.Call;
 
@@ -440,7 +435,8 @@ public class IndexActivity extends BaseActivity implements InterfaceCollection.I
         @Override
         public void onReceive(Context context, Intent intent) {
             if ("com.pangu.showdialog".equalsIgnoreCase(intent.getAction())) {
-                MistakeDialog.showDialog("获取可用行情站点失败\r\n", IndexActivity.this,null);
+                CustomCenterDialog customCenterDialog = CustomCenterDialog.CustomCenterDialog("获取可用行情站点失败\r\n",CustomCenterDialog.SHOWCENTER);
+                customCenterDialog.show(getFragmentManager(),IndexActivity.class.toString());
             }
         }
     }

@@ -19,7 +19,7 @@ import com.tpyzq.mobile.pangu.util.ConstantUtil;
 import com.tpyzq.mobile.pangu.util.Helper;
 import com.tpyzq.mobile.pangu.util.HtmlUtil;
 import com.tpyzq.mobile.pangu.util.SpUtils;
-import com.tpyzq.mobile.pangu.view.dialog.MistakeDialog;
+import com.tpyzq.mobile.pangu.view.CustomCenterDialog;
 import com.tpyzq.mobile.pangu.view.dialog.ResultDialog;
 import com.zhy.http.okhttp.callback.StringCallback;
 
@@ -274,7 +274,7 @@ public class PersonalDataActivity extends BaseActivity implements View.OnClickLi
                         Intent intent = new Intent(PersonalDataActivity.this, TransactionLoginActivity.class);
                         startActivity(intent);
                     } else {
-                        MistakeDialog.showDialog(msg, PersonalDataActivity.this);
+                        showDialog(msg);
                     }
                 } catch (JSONException e) {
                     e.printStackTrace();
@@ -506,11 +506,11 @@ public class PersonalDataActivity extends BaseActivity implements View.OnClickLi
                         Intent intent = new Intent(PersonalDataActivity.this, TransactionLoginActivity.class);
                         startActivity(intent);
                     }else{
-                        MistakeDialog.showDialog(res.optString("msg"), PersonalDataActivity.this);
+                        showDialog(res.optString("msg"));
                     }
                 }catch (JSONException e){
                     e.printStackTrace();
-                    MistakeDialog.showDialog(e.toString(), PersonalDataActivity.this);
+                    showDialog(e.toString());
                 }
                 /**
                 Gson gson = new Gson();
@@ -528,6 +528,11 @@ public class PersonalDataActivity extends BaseActivity implements View.OnClickLi
                 */
             }
         });
+    }
+
+    private void showDialog(String msg){
+        CustomCenterDialog customCenterDialog = CustomCenterDialog.CustomCenterDialog(msg,CustomCenterDialog.SHOWCENTER);
+        customCenterDialog.show(getFragmentManager(),PersonalDataActivity.class.toString());
     }
 
     /**

@@ -16,8 +16,7 @@ import com.tpyzq.mobile.pangu.http.NetWorkUtil;
 import com.tpyzq.mobile.pangu.util.ConstantUtil;
 import com.tpyzq.mobile.pangu.util.SpUtils;
 import com.tpyzq.mobile.pangu.view.CentreToast;
-import com.tpyzq.mobile.pangu.view.dialog.MistakeDialog;
-import com.tpyzq.mobile.pangu.view.dialog.ResultDialog;
+import com.tpyzq.mobile.pangu.view.CustomCenterDialog;
 import com.zhy.http.okhttp.callback.StringCallback;
 
 import org.json.JSONException;
@@ -27,6 +26,8 @@ import java.util.HashMap;
 import java.util.Map;
 
 import okhttp3.Call;
+
+import static com.tpyzq.mobile.pangu.activity.trade.otc_business.OTC_RevokeActivity.oTC_RevokeFragmentMananger;
 
 /**
  * 作者：刘泽鹏 on 2016/8/31 11:39
@@ -132,7 +133,8 @@ public class OTC_RevokePopupWindow extends PopupWindow implements View.OnClickLi
                         CentreToast.showText(context,"委托已提交",true);
                         listener.callBack(position);
                     }else {
-                        MistakeDialog.showDialog(res.optString("msg"), mActivity);
+                        CustomCenterDialog customCenterDialog  = CustomCenterDialog.CustomCenterDialog(res.optString("msg"),CustomCenterDialog.SHOWCENTER);
+                        customCenterDialog.show(oTC_RevokeFragmentMananger,OTC_RevokePopupWindow.class.toString());
                     }
                 }catch (JSONException e){
                     e.printStackTrace();

@@ -19,8 +19,8 @@ import com.tpyzq.mobile.pangu.db.Db_PUB_USERS;
 import com.tpyzq.mobile.pangu.http.OkHttpUtil;
 import com.tpyzq.mobile.pangu.util.ConstantUtil;
 import com.tpyzq.mobile.pangu.util.SpUtils;
+import com.tpyzq.mobile.pangu.view.CustomCenterDialog;
 import com.tpyzq.mobile.pangu.view.dialog.LoadingDialog;
-import com.tpyzq.mobile.pangu.view.dialog.MistakeDialog;
 import com.zhy.http.okhttp.callback.StringCallback;
 
 import org.json.JSONArray;
@@ -122,9 +122,9 @@ public class ChangeDepositBankListActivity extends BaseActivity implements View.
         mProgressDialog.show();
     }
 
-    private void showMistackDialog(String errorMsg, MistakeDialog.MistakeDialgoListener listener) {
-        MistakeDialog.showDialog(errorMsg, ChangeDepositBankListActivity.this, listener);
-//        CancelDialog.cancleDialog(ChangeDepositBankListActivity.this, errorMsg, CancelDialog.NOT_BUY, listener, null);
+    private void showMistackDialog(String errorMsg) {
+        CustomCenterDialog customCenterDialog = CustomCenterDialog.CustomCenterDialog(errorMsg,CustomCenterDialog.SHOWCENTER);
+        customCenterDialog.show(getFragmentManager(),ChangeDepositBankListActivity.class.toString());
     }
 
     private void getBankList() {
@@ -147,7 +147,7 @@ public class ChangeDepositBankListActivity extends BaseActivity implements View.
                 if (mProgressDialog != null && mProgressDialog.isShowing()) {
                     mProgressDialog.dismiss();
                 }
-                showMistackDialog(ConstantUtil.NETWORK_ERROR, null);
+                showMistackDialog(ConstantUtil.NETWORK_ERROR);
             }
 
             @Override
@@ -158,7 +158,7 @@ public class ChangeDepositBankListActivity extends BaseActivity implements View.
                 }
 
                 if (TextUtils.isEmpty(response)) {
-                    showMistackDialog(ConstantUtil.SERVICE_NO_DATA, null);
+                    showMistackDialog(ConstantUtil.SERVICE_NO_DATA);
                     return;
                 }
 
@@ -186,7 +186,7 @@ public class ChangeDepositBankListActivity extends BaseActivity implements View.
                     }
 
                     if (!"0".equals(code)) {
-                        showMistackDialog(msg, null);
+                        showMistackDialog(msg);
                         return;
                     }
 
@@ -211,7 +211,7 @@ public class ChangeDepositBankListActivity extends BaseActivity implements View.
 
                 } catch (JSONException e) {
                     e.printStackTrace();
-                    showMistackDialog(ConstantUtil.JSON_ERROR, null);
+                    showMistackDialog(ConstantUtil.JSON_ERROR);
                 }
             }
         });

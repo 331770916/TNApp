@@ -25,15 +25,14 @@ import com.tpyzq.mobile.pangu.http.doConnect.self.ToAddSelfChoiceStockConnect;
 import com.tpyzq.mobile.pangu.http.doConnect.self.ToDelteSlefChoiceStockConnect;
 import com.tpyzq.mobile.pangu.interfac.ICallbackResult;
 import com.tpyzq.mobile.pangu.util.ConstantUtil;
-import com.tpyzq.mobile.pangu.util.Helper;
 import com.tpyzq.mobile.pangu.util.SpUtils;
 import com.tpyzq.mobile.pangu.util.panguutil.BRutil;
 import com.tpyzq.mobile.pangu.util.panguutil.SelfChoiceStockTempData;
 import com.tpyzq.mobile.pangu.util.panguutil.SelfStockHelper;
 import com.tpyzq.mobile.pangu.util.panguutil.UserUtil;
-import com.tpyzq.mobile.pangu.view.dialog.DoSelfChoiceResultDialog;
+import com.tpyzq.mobile.pangu.view.CentreToast;
+import com.tpyzq.mobile.pangu.view.CustomCenterDialog;
 import com.tpyzq.mobile.pangu.view.dialog.LoadingDialog;
-import com.tpyzq.mobile.pangu.view.dialog.MistakeDialog;
 
 import org.json.JSONObject;
 
@@ -174,7 +173,7 @@ public class SearchAdapter extends BaseAdapter implements ICallbackResult {
                                     String totalcount = jsonObject.getString("totalcount");
 
                                     if ("0".equals(totalcount)) {
-                                        MistakeDialog.showDialog("totalCount:" + totalcount + ",服务器无该数据", mActivity);
+                                        showDialog("totalCount:" + totalcount + ",服务器无该数据");
                                     } else if ("0".equals(code)){
                                         boolean tag1 = Db_PUB_STOCKLIST.deleteStockFromID(stockNumber);
                                         if (tag1) {
@@ -184,10 +183,10 @@ public class SearchAdapter extends BaseAdapter implements ICallbackResult {
                                             Db_PUB_SEARCHHISTORYSTOCK.addOneData(mDatas.get(position));
                                             SelfChoiceStockTempData.getInstance().removeSelfchoicestockTempValue(stockNumber);
                                             viewHolder.operationIv.setImageResource(R.mipmap.search_add);
-                                            DoSelfChoiceResultDialog.getInstance().singleDialog("删除自选股成功", mActivity);
+                                            CentreToast.showText(mActivity,"删除自选股成功");
                                         }
                                     }else {
-                                        MistakeDialog.showDialog("删除失败", mActivity);
+                                        showDialog("删除失败");
                                     }
                                 } catch (Exception e) {
                                     e.printStackTrace();
@@ -205,7 +204,7 @@ public class SearchAdapter extends BaseAdapter implements ICallbackResult {
                             Db_PUB_SEARCHHISTORYSTOCK.addOneData(mDatas.get(position));
                             SelfChoiceStockTempData.getInstance().removeSelfchoicestockTempValue(stockNumber);
                             viewHolder.operationIv.setImageResource(R.mipmap.search_add);
-                            DoSelfChoiceResultDialog.getInstance().singleDialog("删除自选股成功", mActivity);
+                            CentreToast.showText(mActivity,"删除自选股成功");
                         }
                     }
                 } else {
@@ -230,7 +229,7 @@ public class SearchAdapter extends BaseAdapter implements ICallbackResult {
                                     JSONObject jsonObject = new JSONObject(msg);
                                     String code = jsonObject.getString("code");
                                     if (!"0".equals(code)) {
-                                        MistakeDialog.showDialog("添加失败", mActivity);
+                                        showDialog("添加失败");
                                         return;
                                     }
                                 } catch (Exception e) {
@@ -248,9 +247,9 @@ public class SearchAdapter extends BaseAdapter implements ICallbackResult {
                                     SelfChoiceStockTempData.getInstance().setSelfchoicestockTempValue(stockNumber, stockName);
                                     mDatas.get(position).setSelfChoicStock(true);
                                     viewHolder.operationIv.setImageResource(R.mipmap.search_remove);
-                                    DoSelfChoiceResultDialog.getInstance().singleDialog("添加自选股成功", mActivity);
+                                    CentreToast.showText(mActivity,"添加自选股成功");
                                 }else{
-                                    Helper.getInstance().showToast(CustomApplication.getContext(), "自选股超出50条上线，请删除再添加");
+                                    CentreToast.showText(mActivity,"自选股超出50条上线，请删除再添加");
                                 }
                             }
                         });
@@ -269,15 +268,20 @@ public class SearchAdapter extends BaseAdapter implements ICallbackResult {
                             SelfChoiceStockTempData.getInstance().setSelfchoicestockTempValue(stockNumber, stockName);
                             mDatas.get(position).setSelfChoicStock(true);
                             viewHolder.operationIv.setImageResource(R.mipmap.search_remove);
-                            DoSelfChoiceResultDialog.getInstance().singleDialog("添加自选股成功", mActivity);
+                            CentreToast.showText(mActivity,"添加自选股成功");
                         }else {
-                            Helper.getInstance().showToast(CustomApplication.getContext(), "自选股超出50条上线，请删除再添加");
+                            CentreToast.showText(mActivity,"自选股超出50条上线，请删除再添加");
                         }
                     }
                 }
             }
         });
         return convertView;
+    }
+
+    private void showDialog(String msg){
+        CustomCenterDialog customCenterDialog = CustomCenterDialog.CustomCenterDialog(msg,CustomCenterDialog.SHOWCENTER);
+        customCenterDialog.show(mActivity.getFragmentManager(),SearchAdapter.class.toString());
     }
 
     @Override

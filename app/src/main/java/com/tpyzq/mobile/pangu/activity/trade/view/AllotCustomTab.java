@@ -21,8 +21,8 @@ import com.tpyzq.mobile.pangu.log.LogHelper;
 import com.tpyzq.mobile.pangu.util.ConstantUtil;
 import com.tpyzq.mobile.pangu.util.Helper;
 import com.tpyzq.mobile.pangu.util.SpUtils;
+import com.tpyzq.mobile.pangu.view.CustomCenterDialog;
 import com.tpyzq.mobile.pangu.view.dialog.LoadingDialog;
-import com.tpyzq.mobile.pangu.view.dialog.MistakeDialog;
 import com.tpyzq.mobile.pangu.view.pickTime.TimePickerView;
 import com.tpyzq.mobile.pangu.view.pulllayou.PullLayout;
 import com.zhy.http.okhttp.callback.StringCallback;
@@ -34,6 +34,8 @@ import java.util.HashMap;
 import java.util.Map;
 
 import okhttp3.Call;
+
+import static com.tpyzq.mobile.pangu.activity.trade.stock.AllotQueryActivity.allToFragmentManager;
 
 
 /**
@@ -129,10 +131,10 @@ public class AllotCustomTab extends BaseTab implements TimePickerView.OnTimeSele
                     String str = Helper.compareTo(startDay, endDay);
                     int days = Helper.daysBetween(startDay, endDay);
 
-                    if (str.equalsIgnoreCase(startDay) && !str.equals(endDay)) {
-                        MistakeDialog.showDialog("起始时间不能大于等于截止时间", mActivity);
+                    if (str.equalsIgnoreCase(startDay) &&!str.equals(endDay)) {
+                        showDialog("起始时间不能大于等于截止时间");
                     } else if (days > 90) {
-                        MistakeDialog.showDialog("起始时间和截止时间不能大于3个月", mActivity);
+                        showDialog("起始时间和截止时间不能大于3个月");
                     } else {
                         mEmptyBg.setVisibility(View.GONE);
 
@@ -145,6 +147,11 @@ public class AllotCustomTab extends BaseTab implements TimePickerView.OnTimeSele
                 }
                 break;
         }
+    }
+
+    private void showDialog(String msg){
+        CustomCenterDialog customCenterDialog = CustomCenterDialog.CustomCenterDialog(msg,CustomCenterDialog.SHOWCENTER);
+        customCenterDialog.show(allToFragmentManager,AllotCustomTab.class.toString());
     }
 
 //    @Override

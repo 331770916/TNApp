@@ -11,7 +11,7 @@ import com.tpyzq.mobile.pangu.data.CleverManamgerMoneyEntity;
 import com.tpyzq.mobile.pangu.http.doConnect.home.GetProductInfoOtcConnect;
 import com.tpyzq.mobile.pangu.http.doConnect.home.ToGetProductInfoOtcConnect;
 import com.tpyzq.mobile.pangu.interfac.ICallbackResult;
-import com.tpyzq.mobile.pangu.view.dialog.MistakeDialog;
+import com.tpyzq.mobile.pangu.view.CustomCenterDialog;
 
 import java.util.ArrayList;
 
@@ -68,7 +68,7 @@ public class AlreadyReservationActivity extends BaseActivity implements View.OnC
         ArrayList<CleverManamgerMoneyEntity> mEntities = (ArrayList<CleverManamgerMoneyEntity>) result;
         if (mEntities != null && mEntities.size() > 0) {
             if (!TextUtils.isEmpty(mEntities.get(0).getMistackMsg())) {
-                MistakeDialog.showDialog(mEntities.get(0).getMistackMsg(), this);
+                showDialog(mEntities.get(0).getMistackMsg());
             } else {
                 mName.setText(mEntities.get(0).getPRODNAME());
                 mIDNumber.setText(mEntities.get(0).getIPO_BEGIN_DATE());
@@ -81,7 +81,12 @@ public class AlreadyReservationActivity extends BaseActivity implements View.OnC
                 mPrompt.setText("请您于" + mEntities.get(0).getIPO_BEGIN_DATE() + " 9:00到15:00登录太牛APP购买本产品，如您不能在此时间内购买，产品预约自动失效。");
             }
         } else {
-            MistakeDialog.showDialog("暂无数据", this);
+            showDialog("暂无数据");
         }
+    }
+
+    private void showDialog(String msg){
+        CustomCenterDialog customCenterDialog = CustomCenterDialog.CustomCenterDialog(msg,CustomCenterDialog.SHOWCENTER);
+        customCenterDialog.show(getFragmentManager(),AlreadyReservationActivity.class.toString());
     }
 }

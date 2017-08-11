@@ -1,5 +1,6 @@
 package com.tpyzq.mobile.pangu.activity.trade.stock;
 
+import android.app.FragmentManager;
 import android.text.Editable;
 import android.text.TextUtils;
 import android.text.TextWatcher;
@@ -47,9 +48,11 @@ public class CNFundRedeemActivity extends BaseActivity implements View.OnClickLi
     private KeyboardUtil mKeyBoardUtil;
     private ScrollView mScrollView;
     private LinearLayout ll_father;
+    public static FragmentManager CNFundFragmengManager;
 
     @Override
     public void initView() {
+        CNFundFragmengManager = getFragmentManager();
         mSession = SpUtils.getString(this, "mSession", "");
         this.findViewById(R.id.ivCnFundRedeem_back).setOnClickListener(this);       //返回按钮销毁界面
         OK = (Button) this.findViewById(R.id.tvCnRedeemQueDing);      //点击确定按钮

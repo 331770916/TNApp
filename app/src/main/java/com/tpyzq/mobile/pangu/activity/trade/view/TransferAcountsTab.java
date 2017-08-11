@@ -27,7 +27,6 @@ import com.tpyzq.mobile.pangu.activity.trade.stock.BanksTransferAccountsActivity
 import com.tpyzq.mobile.pangu.adapter.trade.TransferAcountsAdapter;
 import com.tpyzq.mobile.pangu.base.CustomApplication;
 import com.tpyzq.mobile.pangu.data.BankAccountEntity;
-import com.tpyzq.mobile.pangu.db.Db_PUB_USERS;
 import com.tpyzq.mobile.pangu.http.NetWorkUtil;
 import com.tpyzq.mobile.pangu.interfac.BanksTransferAccountsResultCode;
 import com.tpyzq.mobile.pangu.interfac.ITabDataObserver;
@@ -41,8 +40,8 @@ import com.tpyzq.mobile.pangu.util.keyboard.NoSoftInputEditText;
 import com.tpyzq.mobile.pangu.util.keyboard.UsefulKeyBoard;
 import com.tpyzq.mobile.pangu.util.panguutil.PanguParameters;
 import com.tpyzq.mobile.pangu.util.panguutil.UserUtil;
+import com.tpyzq.mobile.pangu.view.CustomCenterDialog;
 import com.tpyzq.mobile.pangu.view.dialog.LoadingDialog;
-import com.tpyzq.mobile.pangu.view.dialog.MistakeDialog;
 import com.tpyzq.mobile.pangu.view.dialog.ResultDialog;
 import com.tpyzq.mobile.pangu.view.keybody.InputPasswordView;
 import com.tpyzq.mobile.pangu.view.keybody.PopKeyBody;
@@ -327,12 +326,7 @@ public class TransferAcountsTab extends BaseTransferSubjectTabView implements
                 }
 
                 if (!bean.getCode().equals("0")) {
-                    MistakeDialog.showDialog(bean.getMsg(), mActivity, new MistakeDialog.MistakeDialgoListener() {
-                        @Override
-                        public void doPositive() {
-//                            mActivity.finish();
-                        }
-                    });
+                    showDialog(bean.getMsg());
                     return;
                 }
 
@@ -586,12 +580,7 @@ public class TransferAcountsTab extends BaseTransferSubjectTabView implements
                     keyboardResult= "";
                     mPriceEidt.setText("");
                     mBankPasswrodEdit.setText("");
-                    MistakeDialog.showDialog(bean.getMsg(), mActivity, new MistakeDialog.MistakeDialgoListener() {
-                        @Override
-                        public void doPositive() {
-//                            mActivity.finish();
-                        }
-                    });
+                    showDialog(bean.getMsg());
 
                 }
             }
@@ -679,15 +668,15 @@ public class TransferAcountsTab extends BaseTransferSubjectTabView implements
                     keyboardResult= "";
                     mPriceEidt.setText("");
                     mBankPasswrodEdit.setText("");
-                    MistakeDialog.showDialog(bean.getMsg(), mActivity, new MistakeDialog.MistakeDialgoListener() {
-                        @Override
-                        public void doPositive() {
-//                            mActivity.finish();
-                        }
-                    });
+                    showDialog(bean.getMsg());
                 }
             }
         });
+    }
+
+    private void showDialog(String msg){
+        CustomCenterDialog customCenterDialog = CustomCenterDialog.CustomCenterDialog(msg,CustomCenterDialog.SHOWCENTER);
+        customCenterDialog.show(mActivity.getFragmentManager(),TransferAcountsTab.class.toString());
     }
 
     @Override

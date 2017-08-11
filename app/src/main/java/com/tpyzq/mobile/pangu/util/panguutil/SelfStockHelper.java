@@ -5,7 +5,6 @@ import android.content.Context;
 import android.content.Intent;
 import android.text.TextUtils;
 
-import com.tpyzq.mobile.pangu.R;
 import com.tpyzq.mobile.pangu.base.SimpleRemoteControl;
 import com.tpyzq.mobile.pangu.data.StockInfoEntity;
 import com.tpyzq.mobile.pangu.db.Db_PUB_STOCKLIST;
@@ -17,8 +16,8 @@ import com.tpyzq.mobile.pangu.interfac.ICallbackResult;
 import com.tpyzq.mobile.pangu.interfac.OneTimiceAddSelfChoiceListener;
 import com.tpyzq.mobile.pangu.util.Helper;
 import com.tpyzq.mobile.pangu.view.CentreToast;
+import com.tpyzq.mobile.pangu.view.CustomCenterDialog;
 import com.tpyzq.mobile.pangu.view.dialog.DoSelfChoiceResultDialog;
-import com.tpyzq.mobile.pangu.view.dialog.MistakeDialog;
 
 import org.json.JSONObject;
 
@@ -33,7 +32,7 @@ import java.util.regex.Pattern;
 public class SelfStockHelper {
     public static void explanOneTimiceAddSelfChoiceResult(Activity activity, String json) {
         if (TextUtils.isEmpty(json)) {
-            MistakeDialog.showDialog("网络异常", activity);
+            showDialog("网络异常", activity);
             return;
         }
 
@@ -42,12 +41,7 @@ public class SelfStockHelper {
             String code = jsonObject.getString("code");
             String totalcount = String.valueOf(jsonObject.get("totalcount"));
             if ("1".equals(code) && "0".equals(totalcount)) {
-                MistakeDialog.showDialog("添加自选股失败，超出50条限制", activity, new MistakeDialog.MistakeDialgoListener() {
-                    @Override
-                    public void doPositive() {
-
-                    }
-                });
+                showDialog("添加自选股失败，超出50条限制", activity);
                 return;
             }
 
@@ -59,7 +53,7 @@ public class SelfStockHelper {
             }
         } catch (Exception e) {
             e.printStackTrace();
-            MistakeDialog.showDialog("网络异常", activity);
+            showDialog("网络异常", activity);
         }
     }
 
@@ -71,7 +65,7 @@ public class SelfStockHelper {
      */
     public static void explanImportHoldResult(Activity activity, String json) {
         if (TextUtils.isEmpty(json)) {
-            MistakeDialog.showDialog("网络异常", activity);
+            showDialog("网络异常", activity);
             return;
         }
         try {
@@ -79,12 +73,8 @@ public class SelfStockHelper {
             String code = jsonObject.getString("code");
             String totalcount = jsonObject.getString("totalcount");
             if ("1".equals(code) && "0".equals(totalcount)) {
-                MistakeDialog.showDialog("导入持仓，同步云自选股上传失败，超出50条限制", activity, new MistakeDialog.MistakeDialgoListener() {
-                    @Override
-                    public void doPositive() {
+                showDialog("导入持仓，同步云自选股上传失败，超出50条限制", activity);
 
-                    }
-                });
                 return;
             }
 
@@ -97,8 +87,13 @@ public class SelfStockHelper {
 
         } catch (Exception e) {
             e.printStackTrace();
-            MistakeDialog.showDialog("网络异常", activity);
+            showDialog("网络异常", activity);
         }
+    }
+
+    private static void showDialog(String msg,Activity activity){
+        CustomCenterDialog customCenterDialog  = CustomCenterDialog.CustomCenterDialog(msg,CustomCenterDialog.SHOWCENTER);
+        customCenterDialog.show(activity.getFragmentManager(),SelfStockHelper.class.toString());
     }
 
     /**

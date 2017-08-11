@@ -19,9 +19,9 @@ import com.tpyzq.mobile.pangu.util.Helper;
 import com.tpyzq.mobile.pangu.util.SpUtils;
 import com.tpyzq.mobile.pangu.util.TransitionUtils;
 import com.tpyzq.mobile.pangu.util.panguutil.UserUtil;
+import com.tpyzq.mobile.pangu.view.CustomCenterDialog;
 import com.tpyzq.mobile.pangu.view.dialog.DoSelfChoiceResultDialog;
 import com.tpyzq.mobile.pangu.view.dialog.LoadingDialog;
-import com.tpyzq.mobile.pangu.view.dialog.MistakeDialog;
 
 import java.lang.ref.WeakReference;
 import java.util.ArrayList;
@@ -99,7 +99,8 @@ public class ProductPrecontractActivity extends BaseActivity implements View.OnC
     public void addPrecontractError(String error) {
         progressCancel();
 
-        MistakeDialog.showDialog(error, this);
+        CustomCenterDialog customCenterDialog = CustomCenterDialog.CustomCenterDialog(error,CustomCenterDialog.SHOWCENTER);
+        customCenterDialog.show(getFragmentManager(),ProductPrecontractActivity.class.toString());
     }
 
     @Override

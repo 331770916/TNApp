@@ -1,5 +1,6 @@
 package com.tpyzq.mobile.pangu.activity.trade.otc_business;
 
+import android.app.FragmentManager;
 import android.content.Intent;
 import android.text.Editable;
 import android.text.TextUtils;
@@ -52,9 +53,11 @@ public class OTC_RedeemActivity extends BaseActivity implements View.OnClickList
     private int point = -1;
     private KeyboardUtil mKeyBoardUtil;
     private ScrollView mScrollView;
+    public static FragmentManager OTC_RedeemfragmentManager;
 
     @Override
     public void initView() {
+        OTC_RedeemfragmentManager = getFragmentManager();
         Intent intent = getIntent();
         String prod_code = intent.getStringExtra("prod_code");//从 份额页面传过来的  赎回 股票代码
 

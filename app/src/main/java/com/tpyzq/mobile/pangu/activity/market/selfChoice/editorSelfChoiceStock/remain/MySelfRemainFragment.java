@@ -17,9 +17,11 @@ import com.tpyzq.mobile.pangu.http.doConnect.self.ToDeleteRemainStockPriceConnec
 import com.tpyzq.mobile.pangu.http.doConnect.self.ToQueryRemainStockPriceConnect;
 import com.tpyzq.mobile.pangu.interfac.ICallbackResult;
 import com.tpyzq.mobile.pangu.log.LogUtil;
+import com.tpyzq.mobile.pangu.util.ConstantUtil;
 import com.tpyzq.mobile.pangu.util.panguutil.UserUtil;
+import com.tpyzq.mobile.pangu.view.CentreToast;
+import com.tpyzq.mobile.pangu.view.CustomCenterDialog;
 import com.tpyzq.mobile.pangu.view.dialog.LoadingDialog;
-import com.tpyzq.mobile.pangu.view.dialog.MistakeDialog;
 import com.tpyzq.mobile.pangu.view.dialog.ResultDialog;
 
 import java.util.List;
@@ -83,7 +85,7 @@ public class MySelfRemainFragment extends BaseFragment implements ICallbackResul
 
             if (result instanceof String) {
                 mKongIv.setVisibility(View.VISIBLE);
-                MistakeDialog.showDialog("网络连接超时", getActivity());
+                CentreToast.showText(getActivity(), ConstantUtil.NETWORK_ERROR);
                 mSwipeRefreshLayout.setRefreshing(false);
                 return;
             }
@@ -102,7 +104,7 @@ public class MySelfRemainFragment extends BaseFragment implements ICallbackResul
             String strResult = (String) result;
 
             if (!TextUtils.isEmpty(strResult) && strResult.contains("成功")) {
-                ResultDialog.getInstance().show("删除成功", R.mipmap.lc_success);
+                CentreToast.showText(getActivity(),"删除成功",true);
                 mDatas.remove(mDeletePosition);
 
                 if (mDatas == null || mDatas.size() <= 0) {
@@ -111,7 +113,8 @@ public class MySelfRemainFragment extends BaseFragment implements ICallbackResul
 
                 mAdapter.setDatas(mDatas);
             } else {
-                    MistakeDialog.showDialog("" + strResult, getActivity());
+                CustomCenterDialog customCenterDialog = CustomCenterDialog.CustomCenterDialog("" + strResult,CustomCenterDialog.SHOWCENTER);
+                customCenterDialog.show(getActivity().getFragmentManager(),MySelfRemainFragment.class.toString());
             }
         }
     }

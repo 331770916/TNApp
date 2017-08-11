@@ -149,7 +149,7 @@ public class FJWithdrawOrderActivity extends BaseActivity implements AdapterView
             public void callResult(ResultInfo info) {
 
                 if ("0".equals(info.getCode())) {
-                    Helper.getInstance().showToast(FJWithdrawOrderActivity.this, "撤销此委托成功");
+                    CentreToast.showText(FJWithdrawOrderActivity.this, "撤销此委托成功",true);
                     requestData("");
                 } else if ("400".equals(info.getCode()) || "-2".equals(info.getCode()) || "-3".equals(info.getCode())) {
                     Helper.getInstance().showToast(FJWithdrawOrderActivity.this, info.getMsg());
@@ -159,7 +159,8 @@ public class FJWithdrawOrderActivity extends BaseActivity implements AdapterView
                     startActivity(intent);
                 } else {
                     //   系统弹窗
-                    MistakeDialog.specialshowDialog(info.getMsg(), FJWithdrawOrderActivity.this, null);
+                    CustomCenterDialog customCenterDialog = CustomCenterDialog.CustomCenterDialog(info.getMsg(),CustomCenterDialog.SHOWCENTER);
+                    customCenterDialog.show(getFragmentManager(),FJWithdrawOrderActivity.class.toString());
                 }
             }
         });

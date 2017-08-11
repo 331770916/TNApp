@@ -25,9 +25,9 @@ import com.tpyzq.mobile.pangu.interfac.IChangeDepositBankResult;
 import com.tpyzq.mobile.pangu.util.Helper;
 import com.tpyzq.mobile.pangu.util.SpUtils;
 import com.tpyzq.mobile.pangu.util.keyboard.UsefulKeyBoard;
+import com.tpyzq.mobile.pangu.view.CustomCenterDialog;
 import com.tpyzq.mobile.pangu.view.dialog.CancelDialog;
 import com.tpyzq.mobile.pangu.view.dialog.LoadingDialog;
-import com.tpyzq.mobile.pangu.view.dialog.MistakeDialog;
 import com.tpyzq.mobile.pangu.view.keybody.InputPasswordView;
 import com.tpyzq.mobile.pangu.view.keybody.PopKeyBody;
 import com.yzd.unikeysdk.OnInputDoneCallBack;
@@ -172,7 +172,7 @@ public class ChangeDepositBankActivity extends BaseActivity implements View.OnCl
 
     @Override
     public void error(String errorMsg) {
-        showMistackDialog(errorMsg, null);
+        showMistackDialog(errorMsg);
     }
 
     @Override
@@ -232,7 +232,7 @@ public class ChangeDepositBankActivity extends BaseActivity implements View.OnCl
                 break;
             case "2":
             case "3":
-                showMistackDialog(error_info, null);
+                showMistackDialog(error_info);
                 break;
         }
     }
@@ -250,7 +250,7 @@ public class ChangeDepositBankActivity extends BaseActivity implements View.OnCl
 
     @Override
     public void closeAccountSuccess() {
-        showMistackDialog("预销户处理成功，您需要隔天再次提交销户申请完成销户！", null);
+        showMistackDialog("预销户处理成功，您需要隔天再次提交销户申请完成销户！");
     }
 
     private void initLoadDialog() {
@@ -260,10 +260,10 @@ public class ChangeDepositBankActivity extends BaseActivity implements View.OnCl
         mProgressDialog.show();
     }
 
-    private void showMistackDialog(String errorMsg, MistakeDialog.MistakeDialgoListener listener) {
+    private void showMistackDialog(String errorMsg) {
 
-        MistakeDialog.showDialog(errorMsg, ChangeDepositBankActivity.this, listener);
-//        CancelDialog.cancleDialog(ChangeDepositBankActivity.this, errorMsg, CancelDialog.NOT_BUY, listener, null);
+        CustomCenterDialog customCenterDialog = CustomCenterDialog.CustomCenterDialog(errorMsg,CustomCenterDialog.SHOWCENTER);
+        customCenterDialog.show(getFragmentManager(),ChangeDepositBankActivity.class.toString());
     }
 
     /**

@@ -20,7 +20,6 @@ import com.tpyzq.mobile.pangu.http.OkHttpUtil;
 import com.tpyzq.mobile.pangu.http.doConnect.trade.OTC_BargainConnect;
 import com.tpyzq.mobile.pangu.view.CentreToast;
 import com.tpyzq.mobile.pangu.view.dialog.LoadingDialog;
-import com.tpyzq.mobile.pangu.view.dialog.MistakeDialog;
 import com.tpyzq.mobile.pangu.view.itemdecoration.LinearDividerItemDecoration;
 import com.tpyzq.mobile.pangu.view.pulllayou.SimplePullLayout;
 import com.tpyzq.mobile.pangu.view.pulllayou.base.BasePullLayout;

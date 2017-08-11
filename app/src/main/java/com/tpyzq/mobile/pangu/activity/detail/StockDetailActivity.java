@@ -71,8 +71,9 @@ import com.tpyzq.mobile.pangu.util.panguutil.BRutil;
 import com.tpyzq.mobile.pangu.util.panguutil.SelfChoiceStockTempData;
 import com.tpyzq.mobile.pangu.util.panguutil.SelfStockHelper;
 import com.tpyzq.mobile.pangu.util.panguutil.UserUtil;
+import com.tpyzq.mobile.pangu.view.CentreToast;
+import com.tpyzq.mobile.pangu.view.CustomCenterDialog;
 import com.tpyzq.mobile.pangu.view.dialog.LoadingDialog;
-import com.tpyzq.mobile.pangu.view.dialog.MistakeDialog;
 import com.tpyzq.mobile.pangu.view.dialog.ShareDialog;
 import com.tpyzq.mobile.pangu.view.gridview.MyGridView;
 import com.tpyzq.mobile.pangu.view.spinner.CustomSpinner;
@@ -964,7 +965,7 @@ public class StockDetailActivity extends BaseActivity implements  View.OnClickLi
                                 }else {
                                     if(isShow)
                                     {
-                                        MistakeDialog.showDialog("删除自选股失败", StockDetailActivity.this);
+                                        showDialog("删除自选股失败");
                                     }
                                 }
                             } catch (Exception e) {
@@ -1012,7 +1013,7 @@ public class StockDetailActivity extends BaseActivity implements  View.OnClickLi
                                 String code = jsonObject.getString("code");
                                 if (!"0".equals(code)) {
                                     if(isShow) {
-                                        MistakeDialog.showDialog("添加失败", StockDetailActivity.this);
+                                        showDialog("添加失败");
                                     }
                                     return;
                                 }
@@ -1022,7 +1023,7 @@ public class StockDetailActivity extends BaseActivity implements  View.OnClickLi
 
                             boolean isNotFull = Db_PUB_STOCKLIST.addOneStockListData(_bean);
                             if (!isNotFull) {
-                                Helper.getInstance().showToast(CustomApplication.getContext(), "自选股超出50条上线，请删除再添加");
+                                CentreToast.showText(CustomApplication.getContext(),"自选股超出50条上线，请删除再添加");
                                 return;
                             } else {
                                 Db_PUB_SEARCHHISTORYSTOCK.deleteFromID(stkCode);
@@ -1046,7 +1047,7 @@ public class StockDetailActivity extends BaseActivity implements  View.OnClickLi
                     boolean isNotFull = Db_PUB_STOCKLIST.addOneStockListData(_bean);
                     if (!isNotFull) {
                         if(isShow) {
-                            Helper.getInstance().showToast(CustomApplication.getContext(), "自选股超出50条上线，请删除再添加");
+                            CentreToast.showText(CustomApplication.getContext(), "自选股超出50条上线，请删除再添加");
                         }
                         return;
                     } else {
@@ -1060,9 +1061,16 @@ public class StockDetailActivity extends BaseActivity implements  View.OnClickLi
                 }
             }
     }
+
+    private void showDialog(String msg){
+        CustomCenterDialog customCenterDialog = CustomCenterDialog.CustomCenterDialog(msg,CustomCenterDialog.SHOWCENTER);
+        customCenterDialog.show(getFragmentManager(),StockDetailActivity.class.toString());
+    }
+
     private void gotoStkBuyAndSell(String optType) {
         if (stkType==0||stkType==2) {
-            ToastUtils.showShort(StockDetailActivity.this, "当前股票代码不可交易");
+            CentreToast.showText(StockDetailActivity.this, "当前股票代码不可交易");
+
             return;
         }
         Intent intent = new Intent();

@@ -18,7 +18,7 @@ import com.tpyzq.mobile.pangu.data.ResultInfo;
 import com.tpyzq.mobile.pangu.http.OkHttpUtil;
 import com.tpyzq.mobile.pangu.util.Helper;
 import com.tpyzq.mobile.pangu.util.SpUtils;
-import com.tpyzq.mobile.pangu.view.dialog.MistakeDialog;
+import com.tpyzq.mobile.pangu.view.CustomCenterDialog;
 
 import java.util.HashMap;
 
@@ -216,7 +216,8 @@ public class RiskConfirmActivity extends BaseActivity implements View.OnClickLis
                             setResult(RESULT_OK);
                             finish();
                         } else {
-                            MistakeDialog.showDialog(info.getMsg(),RiskConfirmActivity.this);
+                            CustomCenterDialog customCenterDialog = CustomCenterDialog.CustomCenterDialog(info.getMsg(),CustomCenterDialog.SHOWCENTER);
+                            customCenterDialog.show(getFragmentManager(),RiskConfirmActivity.class.toString());
                         }
                     }
                 });

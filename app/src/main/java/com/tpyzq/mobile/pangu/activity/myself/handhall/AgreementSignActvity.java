@@ -21,8 +21,8 @@ import com.tpyzq.mobile.pangu.log.LogHelper;
 import com.tpyzq.mobile.pangu.util.ConstantUtil;
 import com.tpyzq.mobile.pangu.util.Helper;
 import com.tpyzq.mobile.pangu.util.SpUtils;
+import com.tpyzq.mobile.pangu.view.CustomCenterDialog;
 import com.tpyzq.mobile.pangu.view.dialog.LoadingDialog;
-import com.tpyzq.mobile.pangu.view.dialog.MistakeDialog;
 import com.zhy.http.okhttp.callback.StringCallback;
 
 import org.json.JSONArray;
@@ -162,7 +162,8 @@ public class AgreementSignActvity extends BaseActivity implements View.OnClickLi
                     } else {
                         isShow.setVisibility(View.GONE);
                         isNodata.setVisibility(View.VISIBLE);
-                        MistakeDialog.showDialog(jsonObject.getString("msg"), AgreementSignActvity.this);
+                        CustomCenterDialog customCenterDialog = CustomCenterDialog.CustomCenterDialog(jsonObject.getString("msg"),CustomCenterDialog.SHOWCENTER);
+                        customCenterDialog.show(getFragmentManager(),AgreementSignActvity.class.toString());
                     }
                 } catch (JSONException e) {
                     e.printStackTrace();

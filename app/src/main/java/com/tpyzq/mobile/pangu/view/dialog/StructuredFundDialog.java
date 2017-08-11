@@ -29,6 +29,7 @@ import com.tpyzq.mobile.pangu.util.ConstantUtil;
 import com.tpyzq.mobile.pangu.util.Helper;
 import com.tpyzq.mobile.pangu.util.SpUtils;
 import com.tpyzq.mobile.pangu.view.CentreToast;
+import com.tpyzq.mobile.pangu.view.CustomCenterDialog;
 
 /**
  * Created by wangqi on 2017/6/23.
@@ -315,10 +316,11 @@ public class StructuredFundDialog extends BaseDialog implements View.OnClickList
             CentreToast.showText(context,"委托已提交",true);
             mExpression.State();
         } else if ("400".equals(info.getCode()) || "-2".equals(info.getCode()) || "-3".equals(info.getCode())) {
-            Helper.getInstance().showToast(context, info.getMsg());
+            CentreToast.showText(context, info.getMsg());
         } else {
 //            Helper.getInstance().showToast(context, info.getMsg());
-            MistakeDialog.showDialog(info.getMsg(), (Activity) context);
+            CustomCenterDialog customCenterDialog = CustomCenterDialog.CustomCenterDialog(info.getMsg(),CustomCenterDialog.SHOWCENTER);
+            customCenterDialog.show(((Activity) context).getFragmentManager(),StructuredFundDialog.class.toString());
         }
     }
 

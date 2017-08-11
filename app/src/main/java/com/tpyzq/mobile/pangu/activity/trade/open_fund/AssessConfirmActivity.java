@@ -28,11 +28,10 @@ import com.tpyzq.mobile.pangu.http.NetWorkUtil;
 import com.tpyzq.mobile.pangu.util.ColorUtils;
 import com.tpyzq.mobile.pangu.util.ConstantUtil;
 import com.tpyzq.mobile.pangu.util.SpUtils;
-import com.tpyzq.mobile.pangu.util.ToastUtils;
 import com.tpyzq.mobile.pangu.util.panguutil.UserUtil;
 import com.tpyzq.mobile.pangu.view.CentreToast;
+import com.tpyzq.mobile.pangu.view.CustomCenterDialog;
 import com.tpyzq.mobile.pangu.view.dialog.DownloadDocPdfDialog;
-import com.tpyzq.mobile.pangu.view.dialog.MistakeDialog;
 import com.tpyzq.mobile.pangu.view.gridview.MyListView;
 import com.zhy.http.okhttp.callback.StringCallback;
 
@@ -220,13 +219,13 @@ public class AssessConfirmActivity extends BaseActivity implements View.OnClickL
         NetWorkUtil.getInstence().okHttpForPostString("", ConstantUtil.getURL_HQ_WB(), mapHQTNG106, new StringCallback() {
             @Override
             public void onError(Call call, Exception e, int id) {
-                MistakeDialog.showDialog(e.toString(), AssessConfirmActivity.this, error_back);
+                CentreToast.showText(AssessConfirmActivity.this,ConstantUtil.NETWORK_ERROR);
             }
 
             @Override
             public void onResponse(String response, int id) {
                 if (TextUtils.isEmpty(response)) {
-                    MistakeDialog.showDialog("暂无协议", AssessConfirmActivity.this, error_back);
+                    showErrorDialog("暂无协议");
                     return;
                 }
                 try {
@@ -255,8 +254,7 @@ public class AssessConfirmActivity extends BaseActivity implements View.OnClickL
                             pdfs.add(pdfBean3);
                         }
                         if (pdfs.size() == 0) {
-                            MistakeDialog.showDialog("暂无协议", AssessConfirmActivity.this, error_back);
-                        }
+                            showErrorDialog("暂无协议");}
                         List<String> list = new ArrayList<String>();
                         for (int i = 0; i < pdfs.size(); i++) {
                             list.add(pdfs.get(i).filename);
@@ -264,22 +262,16 @@ public class AssessConfirmActivity extends BaseActivity implements View.OnClickL
                         adapter = new ArrayAdapter<String>(AssessConfirmActivity.this, R.layout.item_agreement, list);
                         lv_agreement.setAdapter(adapter);
                     } else {
-                        MistakeDialog.showDialog("暂无协议", AssessConfirmActivity.this, error_back);
+                        showErrorDialog("暂无协议");
                     }
                 } catch (JSONException e) {
-                    MistakeDialog.showDialog("暂无协议", AssessConfirmActivity.this, error_back);
+                    showErrorDialog("暂无协议");
                     e.printStackTrace();
                 }
             }
         });
     }
 
-    MistakeDialog.MistakeDialgoListener mistakeDialgoListener = new MistakeDialog.MistakeDialgoListener() {
-        @Override
-        public void doPositive() {
-            finish();
-        }
-    };
 
     private void getFundPdf(String code) {
         HashMap map100237 = new HashMap();
@@ -291,13 +283,13 @@ public class AssessConfirmActivity extends BaseActivity implements View.OnClickL
         NetWorkUtil.getInstence().okHttpForPostString("", ConstantUtil.getURL_NEW(), map100237, new StringCallback() {
             @Override
             public void onError(Call call, Exception e, int id) {
-                MistakeDialog.showDialog("暂无数据", AssessConfirmActivity.this, error_back);
+                showErrorDialog("暂无数据");
             }
 
             @Override
             public void onResponse(String response, int id) {
                 if (TextUtils.isEmpty(response)) {
-                    MistakeDialog.showDialog("暂无协议", AssessConfirmActivity.this, error_back);
+                    showErrorDialog("暂无协议");
                     return;
                 }
                 try {
@@ -307,7 +299,7 @@ public class AssessConfirmActivity extends BaseActivity implements View.OnClickL
                         String data = object.getString("PROAOCOLDATE");
                         JSONArray jsonArray = new JSONArray(data);
                         if (jsonArray.length() <= 0) {
-                            MistakeDialog.showDialog("暂无协议", AssessConfirmActivity.this, error_back);
+                            showErrorDialog("暂无协议");
                             return;
                         }
                         for (int i = 0; i < jsonArray.length(); i++) {
@@ -323,10 +315,10 @@ public class AssessConfirmActivity extends BaseActivity implements View.OnClickL
                         adapter = new ArrayAdapter<String>(AssessConfirmActivity.this, R.layout.item_agreement, list);
                         lv_agreement.setAdapter(adapter);
                     } else {
-                        MistakeDialog.showDialog("暂无协议", AssessConfirmActivity.this, error_back);
+                        showErrorDialog("暂无协议");
                     }
                 } catch (JSONException e) {
-                    MistakeDialog.showDialog("暂无协议", AssessConfirmActivity.this, error_back);
+                    showErrorDialog("暂无协议");
                     e.printStackTrace();
                 }
             }
@@ -420,7 +412,7 @@ public class AssessConfirmActivity extends BaseActivity implements View.OnClickL
         NetWorkUtil.getInstence().okHttpForPostString("", ConstantUtil.getURL_JY_HS(), map300439, new StringCallback() {
             @Override
             public void onError(Call call, Exception e, int id) {
-                MistakeDialog.showDialog(e.toString(), AssessConfirmActivity.this);
+                CentreToast.showText(AssessConfirmActivity.this,ConstantUtil.NETWORK_ERROR);
             }
 
             @Override
@@ -439,7 +431,7 @@ public class AssessConfirmActivity extends BaseActivity implements View.OnClickL
                     } else if ("400".equalsIgnoreCase(code)) {
                         startActivity(new Intent(AssessConfirmActivity.this, AgreementActivity.class));
                     } else {
-                        MistakeDialog.showDialog(msg, AssessConfirmActivity.this, error_back);
+                        showErrorDialog(msg);
                     }
                 } catch (JSONException e) {
                     e.printStackTrace();
@@ -448,20 +440,6 @@ public class AssessConfirmActivity extends BaseActivity implements View.OnClickL
         });
     }
 
-    MistakeDialog.MistakeDialgoListener error_back = new MistakeDialog.MistakeDialgoListener() {
-        @Override
-        public void doPositive() {
-            setResult(RESULT_OK);
-            finish();
-        }
-    };
-    MistakeDialog.MistakeDialgoListener wrong_back = new MistakeDialog.MistakeDialgoListener() {
-        @Override
-        public void doPositive() {
-            setResult(RESULT_CANCELED);
-            finish();
-        }
-    };
 
     /**
      * 获取基金申购数据
@@ -488,7 +466,7 @@ public class AssessConfirmActivity extends BaseActivity implements View.OnClickL
         NetWorkUtil.getInstence().okHttpForPostString("", ConstantUtil.getURL_JY_HS(), map300440, new StringCallback() {
             @Override
             public void onError(Call call, Exception e, int id) {
-                MistakeDialog.showDialog(e.toString(), AssessConfirmActivity.this);
+                CentreToast.showText(AssessConfirmActivity.this,ConstantUtil.NETWORK_ERROR);
             }
 
             @Override
@@ -508,7 +486,7 @@ public class AssessConfirmActivity extends BaseActivity implements View.OnClickL
                     }  else if ("400".equalsIgnoreCase(code)) {
                         startActivity(new Intent(AssessConfirmActivity.this, AgreementActivity.class));
                     } else {
-                        MistakeDialog.showDialog(msg, AssessConfirmActivity.this, error_back);
+                        showErrorDialog(msg);
                     }
                 } catch (JSONException e) {
                     e.printStackTrace();
@@ -534,7 +512,7 @@ public class AssessConfirmActivity extends BaseActivity implements View.OnClickL
         NetWorkUtil.getInstence().okHttpForPostString("", ConstantUtil.getURL_JY_HS(), map1, new StringCallback() {
             @Override
             public void onError(Call call, Exception e, int id) {
-                MistakeDialog.showDialog(e.toString(), AssessConfirmActivity.this);
+                CentreToast.showText(AssessConfirmActivity.this,ConstantUtil.NETWORK_ERROR);
             }
 
             @Override
@@ -555,7 +533,7 @@ public class AssessConfirmActivity extends BaseActivity implements View.OnClickL
                     } else if ("400".equalsIgnoreCase(code)) {
                         startActivity(new Intent(AssessConfirmActivity.this, AgreementActivity.class));
                     } else {
-                        MistakeDialog.showDialog(msg, AssessConfirmActivity.this, error_back);
+                        showErrorDialog(msg);
                     }
                 } catch (JSONException e) {
                     e.printStackTrace();
@@ -581,7 +559,7 @@ public class AssessConfirmActivity extends BaseActivity implements View.OnClickL
         NetWorkUtil.getInstence().okHttpForPostString("", ConstantUtil.getURL_JY_HS(), map1, new StringCallback() {
             @Override
             public void onError(Call call, Exception e, int id) {
-                MistakeDialog.showDialog(e.toString(), AssessConfirmActivity.this);
+                CentreToast.showText(AssessConfirmActivity.this,ConstantUtil.NETWORK_ERROR);
             }
 
             @Override
@@ -602,7 +580,7 @@ public class AssessConfirmActivity extends BaseActivity implements View.OnClickL
                     } else if ("400".equalsIgnoreCase(code)) {
                         startActivity(new Intent(AssessConfirmActivity.this, AgreementActivity.class));
                     } else {
-                        MistakeDialog.showDialog(msg, AssessConfirmActivity.this, error_back);
+                        showErrorDialog(msg);
                     }
                 } catch (JSONException e) {
                     e.printStackTrace();
@@ -654,16 +632,46 @@ public class AssessConfirmActivity extends BaseActivity implements View.OnClickL
                         setResult(RESULT_OK, submitIntent);
                         finish();
                     } else {
-                        MistakeDialog.showDialog(msg,this,wrong_back);
+                        showWrongDialog(msg);
                     }
                 } else if ("-6".equalsIgnoreCase(code)) {
                     startActivity(new Intent(AssessConfirmActivity.this, TransactionLoginActivity.class));
                 } else if ("400".equalsIgnoreCase(code)) {
                     startActivity(new Intent(AssessConfirmActivity.this, AgreementActivity.class));
                 } else {
-                    MistakeDialog.showDialog(msg, AssessConfirmActivity.this, wrong_back);
+                    showWrongDialog(msg);
                 }
                 break;
         }
+    }
+
+    /**
+     * 显示警告
+     * @param msg
+     */
+    private void showWrongDialog(String msg){
+        final CustomCenterDialog customCenterDialog = CustomCenterDialog.CustomCenterDialog(msg,CustomCenterDialog.SHOWCENTER);
+        customCenterDialog.show(getFragmentManager(),AssessConfirmActivity.class.toString());
+        customCenterDialog.setOnClickListener(new CustomCenterDialog.ConfirmOnClick() {
+            @Override
+            public void confirmOnclick() {
+                setResult(RESULT_CANCELED);
+                finish();
+                customCenterDialog.dismiss();
+            }
+        });
+    }
+
+    private void showErrorDialog(String msg){
+        final CustomCenterDialog customCenterDialog = CustomCenterDialog.CustomCenterDialog(msg,CustomCenterDialog.SHOWCENTER);
+        customCenterDialog.show(getFragmentManager(),AssessConfirmActivity.class.toString());
+        customCenterDialog.setOnClickListener(new CustomCenterDialog.ConfirmOnClick() {
+            @Override
+            public void confirmOnclick() {
+                setResult(RESULT_OK);
+                finish();
+                customCenterDialog.dismiss();
+            }
+        });
     }
 }

@@ -19,7 +19,7 @@ import com.tpyzq.mobile.pangu.http.NetWorkUtil;
 import com.tpyzq.mobile.pangu.log.LogHelper;
 import com.tpyzq.mobile.pangu.util.ConstantUtil;
 import com.tpyzq.mobile.pangu.util.SpUtils;
-import com.tpyzq.mobile.pangu.view.dialog.MistakeDialog;
+import com.tpyzq.mobile.pangu.view.CustomCenterDialog;
 import com.tpyzq.mobile.pangu.view.pulllayou.PullLayout;
 import com.zhy.http.okhttp.callback.StringCallback;
 
@@ -28,6 +28,8 @@ import java.util.HashMap;
 import java.util.Map;
 
 import okhttp3.Call;
+
+import static com.tpyzq.mobile.pangu.activity.trade.stock.AllotQueryActivity.allToFragmentManager;
 
 
 /**
@@ -142,12 +144,7 @@ public class AllotTodayTab extends BaseTab implements PullLayout.OnPullCallBackL
 
 
                 if (TextUtils.isEmpty(response)) {
-                    MistakeDialog.showDialog(ConstantUtil.SERVICE_NO_DATA,mActivity, new MistakeDialog.MistakeDialgoListener() {
-                        @Override
-                        public void doPositive() {
-                            mActivity.finish();
-                        }
-                    });
+                    showDialog(ConstantUtil.SERVICE_NO_DATA);
                     return ;
                 }
 
@@ -166,7 +163,7 @@ public class AllotTodayTab extends BaseTab implements PullLayout.OnPullCallBackL
 
                 if (!bean.getCode().equals("0")) {
                     mEmpty.setVisibility(View.VISIBLE);
-                    MistakeDialog.showDialog("" + response, mActivity);
+                    showDialog("" + response);
                     return;
                 }
 
@@ -210,6 +207,11 @@ public class AllotTodayTab extends BaseTab implements PullLayout.OnPullCallBackL
 
             }
         });
+    }
+
+    public void showDialog(String msg){
+        CustomCenterDialog customCenterDialog = CustomCenterDialog.CustomCenterDialog(msg,CustomCenterDialog.SHOWCENTER);
+        customCenterDialog.show(allToFragmentManager,AllotTodayTab.class.toString());
     }
 
     @Override

@@ -17,7 +17,7 @@ import com.tpyzq.mobile.pangu.interfac.ITab;
 import com.tpyzq.mobile.pangu.log.LogHelper;
 import com.tpyzq.mobile.pangu.util.ConstantUtil;
 import com.tpyzq.mobile.pangu.util.SpUtils;
-import com.tpyzq.mobile.pangu.view.dialog.MistakeDialog;
+import com.tpyzq.mobile.pangu.view.CustomCenterDialog;
 import com.tpyzq.mobile.pangu.view.pulllayou.PullLayout;
 import com.zhy.http.okhttp.callback.StringCallback;
 
@@ -156,9 +156,12 @@ public class TodayTab extends BaseTransferObserverTabView implements PullLayout.
                     }
                     if (!"0".equals(code)) {
                         mEmpty.setVisibility(View.VISIBLE);
-                        MistakeDialog.showDialog(msg, mActivity, new MistakeDialog.MistakeDialgoListener() {
+                        final CustomCenterDialog customCenterDialog = CustomCenterDialog.CustomCenterDialog(msg,CustomCenterDialog.SHOWCENTER);
+                        customCenterDialog.show(mActivity.getFragmentManager(),TodayTab.class.toString());
+                        customCenterDialog.setOnClickListener(new CustomCenterDialog.ConfirmOnClick() {
                             @Override
-                            public void doPositive() {
+                            public void confirmOnclick() {
+                                customCenterDialog.dismiss();
                                 mActivity.finish();
                             }
                         });

@@ -3,50 +3,29 @@ package com.tpyzq.mobile.pangu.activity.trade.otc_business;
 import android.app.Dialog;
 import android.content.DialogInterface;
 import android.content.Intent;
-import android.os.AsyncTask;
 import android.support.v7.widget.LinearLayoutManager;
 import android.support.v7.widget.RecyclerView;
-import android.text.TextUtils;
 import android.view.KeyEvent;
 import android.view.View;
-import android.widget.AdapterView;
 import android.widget.ImageView;
-import android.widget.ListView;
 import android.widget.TextView;
 
-import com.handmark.pulltorefresh.library.PullToRefreshBase;
-import com.handmark.pulltorefresh.library.PullToRefreshListView;
 import com.tpyzq.mobile.pangu.R;
 import com.tpyzq.mobile.pangu.activity.myself.login.ShouJiZhuCeActivity;
 import com.tpyzq.mobile.pangu.activity.myself.login.TransactionLoginActivity;
-import com.tpyzq.mobile.pangu.adapter.trade.OTC_AccountQueryAdapter;
 import com.tpyzq.mobile.pangu.adapter.trade.OTC_ElectronicContractAdapter;
 import com.tpyzq.mobile.pangu.base.BaseActivity;
 import com.tpyzq.mobile.pangu.data.OTC_ElectronicContractEntity;
 import com.tpyzq.mobile.pangu.db.Db_PUB_USERS;
-import com.tpyzq.mobile.pangu.http.NetWorkUtil;
 import com.tpyzq.mobile.pangu.http.OkHttpUtil;
 import com.tpyzq.mobile.pangu.http.doConnect.trade.OTC_ElectronicConnect;
-import com.tpyzq.mobile.pangu.util.ConstantUtil;
-import com.tpyzq.mobile.pangu.util.SpUtils;
 import com.tpyzq.mobile.pangu.view.CentreToast;
 import com.tpyzq.mobile.pangu.view.dialog.LoadingDialog;
-import com.tpyzq.mobile.pangu.view.dialog.MistakeDialog;
-import com.tpyzq.mobile.pangu.view.dialog.ResultDialog;
-import com.tpyzq.mobile.pangu.view.itemdecoration.LinearDividerItemDecoration;
 import com.tpyzq.mobile.pangu.view.pulllayou.SimplePullLayout;
 import com.tpyzq.mobile.pangu.view.pulllayou.base.BasePullLayout;
 import com.tpyzq.mobile.pangu.view.pulllayou.head.TainiuRefreshHead;
-import com.zhy.http.okhttp.callback.StringCallback;
-
-import org.json.JSONArray;
-import org.json.JSONException;
-import org.json.JSONObject;
 
 import java.util.ArrayList;
-import java.util.HashMap;
-
-import okhttp3.Call;
 
 /**
  * OTC 电子合同界面

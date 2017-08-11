@@ -5,15 +5,12 @@ import android.content.Intent;
 import android.text.Editable;
 import android.text.TextUtils;
 import android.text.TextWatcher;
-import android.view.Gravity;
 import android.view.View;
 import android.widget.Button;
 import android.widget.EditText;
-import android.widget.ImageView;
 import android.widget.LinearLayout;
 import android.widget.ScrollView;
 import android.widget.TextView;
-import android.widget.Toast;
 
 import com.android.keyboardlibrary.KeyboardUtil;
 import com.google.gson.Gson;
@@ -27,8 +24,6 @@ import com.tpyzq.mobile.pangu.base.BaseActivity;
 import com.tpyzq.mobile.pangu.base.InterfaceCollection;
 import com.tpyzq.mobile.pangu.data.AssessConfirmEntity;
 import com.tpyzq.mobile.pangu.data.OTC_SubscribeAffirmMsgBean;
-import com.tpyzq.mobile.pangu.data.OTC_SubscribeEntity;
-import com.tpyzq.mobile.pangu.data.OTC_SubscribeListBean;
 import com.tpyzq.mobile.pangu.data.ResultInfo;
 import com.tpyzq.mobile.pangu.http.NetWorkUtil;
 import com.tpyzq.mobile.pangu.interfac.IsClickedListener;
@@ -38,18 +33,16 @@ import com.tpyzq.mobile.pangu.util.Helper;
 import com.tpyzq.mobile.pangu.util.SpUtils;
 import com.tpyzq.mobile.pangu.util.panguutil.UserUtil;
 import com.tpyzq.mobile.pangu.view.CentreToast;
+import com.tpyzq.mobile.pangu.view.CustomCenterDialog;
 import com.tpyzq.mobile.pangu.view.dialog.CancelDialog;
 import com.tpyzq.mobile.pangu.view.dialog.LoadingDialog;
-import com.tpyzq.mobile.pangu.view.dialog.MistakeDialog;
 import com.tpyzq.mobile.pangu.view.dialog.OTC_SubscriptionDialog;
-import com.tpyzq.mobile.pangu.view.dialog.ResultDialog;
 import com.zhy.http.okhttp.callback.StringCallback;
 
 import org.json.JSONException;
 import org.json.JSONObject;
 
 import java.lang.reflect.Type;
-import java.util.ArrayList;
 import java.util.HashMap;
 import java.util.List;
 
@@ -252,12 +245,7 @@ public class OTC_SubscribeActivity extends BaseActivity implements View.OnClickL
             public void onError(Call call, Exception e, int id) {
                 submit.dismiss();
                 LogUtil.e(TAG, e.toString());
-                MistakeDialog.showDialog("没有请求到数据，请重新再试一次", OTC_SubscribeActivity.this, new MistakeDialog.MistakeDialgoListener() {
-                    @Override
-                    public void doPositive() {
-                        wipeData();
-                    }
-                });
+                showCenterDialog("没有请求到数据，请重新再试一次");
             }
 
             @Override
@@ -283,12 +271,8 @@ public class OTC_SubscribeActivity extends BaseActivity implements View.OnClickL
                                 if ("0".equals(isorder)) {    //是否已经预约(0:是 1:否)
                                     setFocus(true);//是否已经预约(0:是 1:否)
                                 }else if ("0".equals(order)) { //是否可以预约(0:可以预约 1:无法预约 )
-                                        MistakeDialog.showDialog("本产品需要先预约才能购买", OTC_SubscribeActivity.this, new MistakeDialog.MistakeDialgoListener() {
-                                            @Override
-                                            public void doPositive() {
-                                                wipeData();
-                                            }
-                                        });
+                                    showCenterDialog("本产品需要先预约才能购买");
+
                                     } else {
                                         setFocus(true);
                                         bnOTC_SubscribeQueDing.setText("已售罄");
@@ -305,12 +289,7 @@ public class OTC_SubscribeActivity extends BaseActivity implements View.OnClickL
                     } else if ("10203".equals(code)) {
                         setFocus(true);
                     } else {
-                        MistakeDialog.showDialog(code + "," + type, OTC_SubscribeActivity.this, new MistakeDialog.MistakeDialgoListener() {
-                            @Override
-                            public void doPositive() {
-                                wipeData();
-                            }
-                        });
+                        showCenterDialog(code + "," + type);
                     }
 
                 } catch (JSONException e) {
@@ -367,7 +346,7 @@ public class OTC_SubscribeActivity extends BaseActivity implements View.OnClickL
                             }
                         }
                     } else {
-                        MistakeDialog.showDialog(msg, OTC_SubscribeActivity.this);
+                        showDialog(msg);
                     }
                 }
             });
@@ -393,7 +372,7 @@ public class OTC_SubscribeActivity extends BaseActivity implements View.OnClickL
                     CentreToast.showText(OTC_SubscribeActivity.this,"委托已提交",true);
                     wipeData();
                 }else {
-                    MistakeDialog.showDialog(msg, OTC_SubscribeActivity.this);
+                    showDialog(msg);
                     if (null!=dialog&&dialog.isShowing()) {
                         dialog.dismiss();
                         finish();
@@ -402,6 +381,24 @@ public class OTC_SubscribeActivity extends BaseActivity implements View.OnClickL
             }
         });
     }
+
+    private void showCenterDialog(String msg){
+        final CustomCenterDialog customCenterDialog = CustomCenterDialog.CustomCenterDialog(msg,CustomCenterDialog.SHOWCENTER);
+        customCenterDialog.show(getFragmentManager(),OTC_SubscribeActivity.class.toString());
+        customCenterDialog.setOnClickListener(new CustomCenterDialog.ConfirmOnClick() {
+            @Override
+            public void confirmOnclick() {
+                wipeData();
+                customCenterDialog.dismiss();
+            }
+        });
+    }
+
+    private void showDialog(String msg){
+        CustomCenterDialog customCenterDialog = CustomCenterDialog.CustomCenterDialog(msg,CustomCenterDialog.SHOWCENTER);
+        customCenterDialog.show(getFragmentManager(),OTC_SubscribeActivity.class.toString());
+    }
+
 
     @Override
     public int getLayoutId() {
@@ -460,7 +457,7 @@ public class OTC_SubscribeActivity extends BaseActivity implements View.OnClickL
                 if ("0".equalsIgnoreCase(code)) {
                     resultMap = (HashMap<String,String>)info.getData();
                     if (null == resultMap) {
-                        MistakeDialog.showDialog("数据异常", OTC_SubscribeActivity.this, null);
+                        showDialog("数据异常");
                         return;
                     }
                     //弹框逻辑
@@ -486,7 +483,7 @@ public class OTC_SubscribeActivity extends BaseActivity implements View.OnClickL
                     intent.putExtra("resultMap",resultMap);
                     OTC_SubscribeActivity.this.startActivityForResult(intent, REQUESTCODE);
                 } else {
-                    MistakeDialog.showDialog(msg, OTC_SubscribeActivity.this, null);
+                    showDialog(msg);
                 }
             }
         });

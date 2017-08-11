@@ -1,5 +1,6 @@
 package com.tpyzq.mobile.pangu.activity.trade.otc_business;
 
+import android.app.FragmentManager;
 import android.support.design.widget.TabLayout;
 import android.support.v4.app.Fragment;
 import android.support.v4.view.ViewPager;
@@ -29,10 +30,11 @@ public class OTC_BargainQueryActivity extends BaseActivity implements View.OnCli
     private OTC_BargainOneMonth   mOTC_BargainOneMonth;
     private OTC_BargainThreeMonth mOTC_BargainThreeMonth;
     private OTC_BargainCustom     mOTC_BargainCustom;
+    public static FragmentManager otc_FragmentManager;
 
     @Override
     public void initView() {
-
+        otc_FragmentManager = getFragmentManager();
         findViewById(R.id.userIdBackBtn).setOnClickListener(this);
         TextView title = (TextView) findViewById(R.id.toolbar_title);
         title.setText("成交查询");

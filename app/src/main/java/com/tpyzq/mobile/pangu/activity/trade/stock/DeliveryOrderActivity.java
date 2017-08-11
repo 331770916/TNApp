@@ -1,5 +1,6 @@
 package com.tpyzq.mobile.pangu.activity.trade.stock;
 
+import android.app.FragmentManager;
 import android.content.Context;
 import android.support.v4.view.ViewPager;
 import android.view.View;
@@ -40,9 +41,11 @@ public class DeliveryOrderActivity extends BaseActivity implements View.OnClickL
     private ViewPager mDeliveryOrderViewPager;
     private List<BaseSearchPager> pagers = new ArrayList<>();
     private Map<Integer,Boolean> isLoad = new HashMap<>();
+    public static FragmentManager deliveryOrderFragmentManager;
 
     @Override
     public void initView() {
+        deliveryOrderFragmentManager = getFragmentManager();
         findViewById(R.id.publish_detail_back).setOnClickListener(this);
         delivery_buy = (MagicIndicator) findViewById(R.id.delivery_buy);
         mDeliveryOrderViewPager = (ViewPager) findViewById(R.id.jgd_view);

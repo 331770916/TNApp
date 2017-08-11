@@ -33,8 +33,8 @@ import com.tpyzq.mobile.pangu.log.LogHelper;
 import com.tpyzq.mobile.pangu.util.ConstantUtil;
 import com.tpyzq.mobile.pangu.util.Helper;
 import com.tpyzq.mobile.pangu.util.panguutil.UserUtil;
+import com.tpyzq.mobile.pangu.view.CustomCenterDialog;
 import com.tpyzq.mobile.pangu.view.dialog.LoadingDialog;
-import com.tpyzq.mobile.pangu.view.dialog.MistakeDialog;
 import com.tpyzq.mobile.pangu.view.dialog.ResultDialog;
 import com.zhy.http.okhttp.callback.StringCallback;
 
@@ -140,7 +140,7 @@ public class StockPriceRemainFragment extends BaseFragment implements  View.OnCl
             mDownDfEdit.setText("");
 
         } else {
-            MistakeDialog.showDialog("" + msg, mActivity);
+            showDialog("" + msg);
         }
     }
 
@@ -229,8 +229,7 @@ public class StockPriceRemainFragment extends BaseFragment implements  View.OnCl
                 if (mLoadingDialog != null) {
                     mLoadingDialog.dismiss();
                 }
-
-                MistakeDialog.showDialog("网络异常", getActivity());
+                showDialog("网络异常");
             }
 
             @Override
@@ -291,7 +290,7 @@ public class StockPriceRemainFragment extends BaseFragment implements  View.OnCl
                                 if (mLoadingDialog != null) {
                                     mLoadingDialog.dismiss();
                                 }
-                                MistakeDialog.showDialog("不支持该股票设置提醒", getActivity());
+                                showDialog("不支持该股票设置提醒");
                                 return;
                             }
                             mStockName = beans.get(0).getStockName();
@@ -312,7 +311,7 @@ public class StockPriceRemainFragment extends BaseFragment implements  View.OnCl
                             mRemainTitle.setText("最新价：" + _newPrice + "\u3000\u3000\u3000涨跌幅：" +_zdf);
                         }
                     }else{
-                        MistakeDialog.showDialog("无该只股票", mActivity).show();
+                        showDialog("无该只股票");
                         mRemainSearchEdit.setText("");
                     }
                 }catch (Exception e){
@@ -320,6 +319,11 @@ public class StockPriceRemainFragment extends BaseFragment implements  View.OnCl
                 }
             }
         });
+    }
+
+    private void showDialog(String msg){
+        CustomCenterDialog customCenterDialog = CustomCenterDialog.CustomCenterDialog(msg,CustomCenterDialog.SHOWCENTER);
+        customCenterDialog.show(mActivity.getFragmentManager(),StockPriceRemainFragment.class.toString());
     }
 
     @Override

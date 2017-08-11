@@ -26,8 +26,8 @@ import com.tpyzq.mobile.pangu.util.ConstantUtil;
 import com.tpyzq.mobile.pangu.util.Helper;
 import com.tpyzq.mobile.pangu.util.SpUtils;
 import com.tpyzq.mobile.pangu.util.ToastUtils;
+import com.tpyzq.mobile.pangu.view.CustomCenterDialog;
 import com.tpyzq.mobile.pangu.view.dialog.DownloadDocPdfDialog;
-import com.tpyzq.mobile.pangu.view.dialog.MistakeDialog;
 import com.tpyzq.mobile.pangu.view.dialog.ResultDialog;
 import com.zhy.http.okhttp.callback.StringCallback;
 
@@ -102,13 +102,13 @@ public class SignActivity extends BaseActivity implements View.OnClickListener, 
         NetWorkUtil.getInstence().okHttpForPostString("", ConstantUtil.getURL_NEW(), map100237, new StringCallback() {
             @Override
             public void onError(Call call, Exception e, int id) {
-                MistakeDialog.showDialog(e.toString(), SignActivity.this);
+                showDialog(e.toString());
             }
 
             @Override
             public void onResponse(String response, int id) {
                 if (TextUtils.isEmpty(response)) {
-                    MistakeDialog.showDialog("暂无协议", SignActivity.this, callback);
+                    showClickDialog("暂无协议");
                     return;
                 }
                 try {
@@ -131,22 +131,32 @@ public class SignActivity extends BaseActivity implements View.OnClickListener, 
                         lv_agreement.setAdapter(adapter);
                     }
                     if (pdfs.size() == 0) {
-                        MistakeDialog.showDialog("暂无协议", SignActivity.this, callback);
+                        showDialog("暂无协议");
                     }
                 } catch (JSONException e) {
-                    MistakeDialog.showDialog("暂无协议", SignActivity.this, callback);
+                    showClickDialog("暂无协议");
                     e.printStackTrace();
                 }
             }
         });
     }
 
-    MistakeDialog.MistakeDialgoListener callback = new MistakeDialog.MistakeDialgoListener() {
-        @Override
-        public void doPositive() {
-            finish();
-        }
-    };
+    private void showDialog(String msg){
+        CustomCenterDialog customCenterDialog = CustomCenterDialog.CustomCenterDialog(msg,CustomCenterDialog.SHOWCENTER);
+        customCenterDialog.show(getFragmentManager(),SignActivity.class.toString());
+    }
+
+    private void showClickDialog(String msg){
+        final CustomCenterDialog customCenterDialog = CustomCenterDialog.CustomCenterDialog(msg,CustomCenterDialog.SHOWCENTER);
+        customCenterDialog.show(getFragmentManager(),SignActivity.class.toString());
+        customCenterDialog.setOnClickListener(new CustomCenterDialog.ConfirmOnClick() {
+            @Override
+            public void confirmOnclick() {
+                customCenterDialog.dismiss();
+                finish();
+            }
+        });
+    }
 
     private void setPdfDown(String url, String filename) {
         DownloadDocPdfDialog.getInstance().showDialog(this, downloadPdfCallback, url, filename);
@@ -179,7 +189,7 @@ public class SignActivity extends BaseActivity implements View.OnClickListener, 
         NetWorkUtil.getInstence().okHttpForPostString("", ConstantUtil.getURL_JY_HS(), map300435, new StringCallback() {
             @Override
             public void onError(Call call, Exception e, int id) {
-                MistakeDialog.showDialog(e.toString(), SignActivity.this);
+                showDialog(e.toString());
             }
 
             @Override
@@ -227,7 +237,7 @@ public class SignActivity extends BaseActivity implements View.OnClickListener, 
         NetWorkUtil.getInstence().okHttpForPostString("", ConstantUtil.getURL_JY_HS(), map300432, new StringCallback() {
             @Override
             public void onError(Call call, Exception e, int id) {
-                MistakeDialog.showDialog(e.toString(), SignActivity.this);
+                showDialog(e.toString());
             }
 
             @Override

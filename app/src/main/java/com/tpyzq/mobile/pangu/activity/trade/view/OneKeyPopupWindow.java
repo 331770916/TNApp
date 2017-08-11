@@ -22,6 +22,7 @@ import com.tpyzq.mobile.pangu.http.NetWorkUtil;
 import com.tpyzq.mobile.pangu.util.ConstantUtil;
 import com.tpyzq.mobile.pangu.util.SpUtils;
 import com.tpyzq.mobile.pangu.view.CentreToast;
+import com.tpyzq.mobile.pangu.view.CustomCenterDialog;
 import com.tpyzq.mobile.pangu.view.dialog.MistakeDialog;
 import com.tpyzq.mobile.pangu.view.dialog.ResultDialog;
 import com.zhy.http.okhttp.callback.StringCallback;
@@ -32,6 +33,8 @@ import java.util.HashMap;
 import java.util.Map;
 
 import okhttp3.Call;
+
+import static com.tpyzq.mobile.pangu.activity.trade.stock.OneKeySubscribeActivity.fragmentManager;
 
 /**
  * Created by 刘泽鹏 on 2016/8/10.
@@ -141,7 +144,8 @@ public class OneKeyPopupWindow extends PopupWindow implements View.OnClickListen
                     CentreToast.showText(context,"委托已提交",true);
                     dismiss();
                 }else {
-                    MistakeDialog.showDialog(msg, mActivity);
+                    CustomCenterDialog customCenterDialog = CustomCenterDialog.CustomCenterDialog(msg,CustomCenterDialog.SHOWCENTER);
+                    customCenterDialog.show(fragmentManager,OneKeyPopupWindow.class.toString());
                     dismiss();
                 }
             }

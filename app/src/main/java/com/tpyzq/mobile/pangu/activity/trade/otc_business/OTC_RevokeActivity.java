@@ -1,6 +1,7 @@
 package com.tpyzq.mobile.pangu.activity.trade.otc_business;
 
 import android.app.Dialog;
+import android.app.FragmentManager;
 import android.content.DialogInterface;
 import android.content.Intent;
 import android.graphics.drawable.ColorDrawable;
@@ -54,10 +55,11 @@ public class OTC_RevokeActivity extends BaseActivity implements View.OnClickList
 
     private ArrayList<Map<String, String>> mDatas;
     private boolean clickBackKey;//判断用户是否点击返回键取消网络请求
+    public static FragmentManager oTC_RevokeFragmentMananger;
 
     @Override
     public void initView() {
-
+        oTC_RevokeFragmentMananger = getFragmentManager();
         findViewById(R.id.userIdBackBtn).setOnClickListener(this);
         TextView title = (TextView) findViewById(R.id.toolbar_title);
         title.setText("OTC撤单");

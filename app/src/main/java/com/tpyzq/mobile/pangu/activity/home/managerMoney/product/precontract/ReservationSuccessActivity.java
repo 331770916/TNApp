@@ -7,6 +7,7 @@ import android.widget.TextView;
 import com.tpyzq.mobile.pangu.R;
 import com.tpyzq.mobile.pangu.base.BaseActivity;
 import com.tpyzq.mobile.pangu.data.CleverManamgerMoneyEntity;
+import com.tpyzq.mobile.pangu.view.CustomCenterDialog;
 import com.tpyzq.mobile.pangu.view.dialog.MistakeDialog;
 
 import java.util.ArrayList;
@@ -46,8 +47,13 @@ public class ReservationSuccessActivity extends BaseActivity implements View.OnC
 
             mPrompt.setText("请您于" + cleverManamgerMoneyEntitys.get(0).getIPO_BEGIN_DATE() + " 9:00到15:00登录太牛APP购买本产品，如您不能在此时间内购买，产品预约自动失效。");
         } else {
-            MistakeDialog.showDialog("暂无数据", this);
+            showDialog("暂无数据");
         }
+    }
+
+    private void showDialog(String msg){
+        CustomCenterDialog customCenterDialog  = CustomCenterDialog.CustomCenterDialog(msg,CustomCenterDialog.SHOWCENTER);
+        customCenterDialog.show(getFragmentManager(),ReservationSuccessActivity.class.toString());
     }
 
 

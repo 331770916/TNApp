@@ -1,5 +1,6 @@
 package com.tpyzq.mobile.pangu.activity.trade.stock;
 
+import android.app.FragmentManager;
 import android.content.Context;
 import android.support.v4.view.ViewPager;
 import android.view.View;
@@ -39,9 +40,11 @@ public class CapitalQueryActivity extends BaseActivity implements View.OnClickLi
     private List<BaseSearchPager> listBuy = new ArrayList<>();
     private MagicIndicator capital_buy;
     private Map<Integer,Boolean> map ;
+    public static FragmentManager CapitalQueryFragmentManager;
 
     @Override
     public void initView() {
+        CapitalQueryFragmentManager = getFragmentManager();
         map = new HashMap<>();
         findViewById(R.id.publish_detail_back).setOnClickListener(this);
         mZjViewPager = (ViewPager) findViewById(R.id.zj_view);

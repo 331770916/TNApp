@@ -26,11 +26,9 @@ import com.tpyzq.mobile.pangu.log.LogUtil;
 import com.tpyzq.mobile.pangu.util.ConstantUtil;
 import com.tpyzq.mobile.pangu.util.Helper;
 import com.tpyzq.mobile.pangu.util.SpUtils;
-import com.tpyzq.mobile.pangu.view.dialog.MistakeDialog;
+import com.tpyzq.mobile.pangu.view.CustomCenterDialog;
 import com.tpyzq.mobile.pangu.view.gridview.MyListView;
 import com.tpyzq.mobile.pangu.view.progress.RoundProgressBar;
-import com.tpyzq.mobile.pangu.view.pullDownGroup.PullDownElasticImp;
-import com.tpyzq.mobile.pangu.view.pullDownGroup.PullDownScrollView;
 import com.zhy.http.okhttp.callback.StringCallback;
 
 import org.json.JSONArray;
@@ -38,11 +36,8 @@ import org.json.JSONException;
 import org.json.JSONObject;
 
 import java.lang.reflect.Type;
-import java.text.DateFormat;
 import java.text.DecimalFormat;
-import java.text.SimpleDateFormat;
 import java.util.ArrayList;
-import java.util.Date;
 import java.util.HashMap;
 import java.util.List;
 import java.util.Map;
@@ -238,7 +233,7 @@ public class StayPaymentFragment extends BaseFragment implements  View.OnClickLi
                         }
 
                     } else {
-                        MistakeDialog.showDialog(msg, getActivity());
+                        showDialog(msg);
                     }
                     adapter.setList(list);
                 }
@@ -292,7 +287,7 @@ public class StayPaymentFragment extends BaseFragment implements  View.OnClickLi
                         map.put("next_trade_date", dataBean.getNEXT_TRADE_DATE());     //配好日期
                     }
                 } else {
-                    MistakeDialog.showDialog(msg, getActivity());
+                    showDialog(msg);
                 }
                 if (!TextUtils.isEmpty(stockCode)){
                     getDtor(stockCode, session, map, list);
@@ -365,6 +360,11 @@ public class StayPaymentFragment extends BaseFragment implements  View.OnClickLi
                 }
             }
         });
+    }
+
+    private void showDialog(String msg){
+        CustomCenterDialog customCenterDialog = CustomCenterDialog.CustomCenterDialog(msg,CustomCenterDialog.SHOWCENTER);
+        customCenterDialog.show(getActivity().getFragmentManager(),StayPaymentFragment.class.toString());
     }
 
     @Override

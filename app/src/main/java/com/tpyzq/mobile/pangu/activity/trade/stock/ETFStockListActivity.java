@@ -17,6 +17,7 @@ import com.tpyzq.mobile.pangu.data.ResultInfo;
 import com.tpyzq.mobile.pangu.http.OkHttpUtil;
 import com.tpyzq.mobile.pangu.util.Helper;
 import com.tpyzq.mobile.pangu.util.SpUtils;
+import com.tpyzq.mobile.pangu.view.CustomCenterDialog;
 import com.tpyzq.mobile.pangu.view.dialog.LoadingDialog;
 import com.tpyzq.mobile.pangu.view.dialog.MistakeDialog;
 
@@ -139,7 +140,8 @@ public class ETFStockListActivity extends BaseActivity {
                     if (isRefresh&&mList.size()==0) {
                         lv.setMode(PullToRefreshBase.Mode.PULL_FROM_START);
                     }
-                    MistakeDialog.showDialog(msg,ETFStockListActivity.this,null);
+                    CustomCenterDialog customCenterDialog = CustomCenterDialog.CustomCenterDialog(msg,CustomCenterDialog.SHOWCENTER);
+                    customCenterDialog.show(getFragmentManager(),ETFStockListActivity.class.toString());
                 }
                 if (null!=mDialog && mDialog.isShowing()) {
                     mDialog.dismiss();

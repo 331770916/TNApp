@@ -6,14 +6,12 @@ import android.text.Editable;
 import android.text.InputFilter;
 import android.text.TextUtils;
 import android.text.TextWatcher;
-import android.util.Log;
 import android.view.View;
 import android.widget.Button;
 import android.widget.EditText;
 import android.widget.TextView;
 
 import com.tpyzq.mobile.pangu.R;
-import com.tpyzq.mobile.pangu.activity.myself.login.ChangeAccoutActivity;
 import com.tpyzq.mobile.pangu.activity.myself.login.TransactionLoginActivity;
 import com.tpyzq.mobile.pangu.base.BaseActivity;
 import com.tpyzq.mobile.pangu.base.InterfaceCollection;
@@ -23,15 +21,13 @@ import com.tpyzq.mobile.pangu.util.Helper;
 import com.tpyzq.mobile.pangu.util.keyboard.NoSoftInputEditText;
 import com.tpyzq.mobile.pangu.util.panguutil.UserUtil;
 import com.tpyzq.mobile.pangu.view.CentreToast;
+import com.tpyzq.mobile.pangu.view.CustomCenterDialog;
 import com.tpyzq.mobile.pangu.view.dialog.LoadingDialog;
-import com.tpyzq.mobile.pangu.view.dialog.LoginDialog;
-import com.tpyzq.mobile.pangu.view.dialog.MistakeDialog;
 import com.yzd.unikeysdk.OnInputDoneCallBack;
 import com.yzd.unikeysdk.PasswordKeyboard;
 import com.yzd.unikeysdk.UniKey;
 import com.yzd.unikeysdk.UnikeyException;
 
-import bonree.k.H;
 
 /**
  * Created by ltyhome on 05/08/2017.
@@ -338,12 +334,7 @@ public class ChangeMoneyPwdActivity extends BaseActivity implements View.OnClick
                 mCommit.dismiss();
             if ("0".equals(info.getCode())) {
                 setTextView();
-                MistakeDialog.showDialog("修改密码成功", this, new MistakeDialog.MistakeDialgoListener() {
-                    @Override
-                    public void doPositive() {
-                        finish();
-                    }
-                });
+                showDialog("修改密码成功",true);
             } else if ("-6".equals(info.getCode())) {
                 startActivity(new Intent().setClass(this, TransactionLoginActivity.class));
                 finish();
@@ -352,11 +343,24 @@ public class ChangeMoneyPwdActivity extends BaseActivity implements View.OnClick
                 Helper.getInstance().showToast(this, info.getMsg());
             } else {
                 setTextView();
-                MistakeDialog.showDialog(info.getMsg(), this);
+                showDialog(info.getMsg(),false);
             }
         }
     }
 
+    private void showDialog(String msg,boolean isShowClick){
+        final CustomCenterDialog customCenterDialog = CustomCenterDialog.CustomCenterDialog(msg,CustomCenterDialog.SHOWCENTER);
+        customCenterDialog.show(getFragmentManager(),ChangeMoneyPwdActivity.class.toString());
+        if (isShowClick){
+            customCenterDialog.setOnClickListener(new CustomCenterDialog.ConfirmOnClick() {
+                @Override
+                public void confirmOnclick() {
+                    finish();
+                    customCenterDialog.dismiss();
+                }
+            });
+        }
+    }
 
     /**
      * EditText 内容监听

@@ -1,5 +1,6 @@
 package com.tpyzq.mobile.pangu.activity.trade.stock;
 
+import android.app.FragmentManager;
 import android.support.v4.view.ViewPager;
 import android.view.View;
 import android.widget.ProgressBar;
@@ -29,9 +30,11 @@ public class AllotQueryActivity extends BaseActivity implements View.OnClickList
     private AllotThreeMounthTab mTab4;
     private ProgressBar mProgressBar;
     public static final String TAG = "AllotQuery";
+    public static FragmentManager allToFragmentManager;
 
     @Override
     public void initView() {
+        allToFragmentManager = getFragmentManager();
         findViewById(R.id.allotQuery_back).setOnClickListener(this);
         TabLineIndicator indicator = (TabLineIndicator) findViewById(R.id.allotQueryIndicator);
         ViewPager viewPager = (ViewPager) findViewById(R.id.allotQueryViewPager);

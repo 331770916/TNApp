@@ -12,7 +12,7 @@ import com.tpyzq.mobile.pangu.http.NetWorkUtil;
 import com.tpyzq.mobile.pangu.util.ConstantUtil;
 import com.tpyzq.mobile.pangu.util.Helper;
 import com.tpyzq.mobile.pangu.util.ToastUtils;
-import com.tpyzq.mobile.pangu.view.dialog.MistakeDialog;
+import com.tpyzq.mobile.pangu.view.CustomCenterDialog;
 import com.zhy.http.okhttp.callback.StringCallback;
 
 import org.json.JSONException;
@@ -94,9 +94,9 @@ public class FeedbackActivity extends BaseActivity implements View.OnClickListen
                     JSONObject jsonObject = new JSONObject(response);
                     String code = jsonObject.getString("code");
                     if ("0".equals(code)) {
-                        MistakeDialog.showDialog("反馈成功", FeedbackActivity.this,mistakeDialgoListener);
+                        showDialog("反馈成功",true);
                     } else {
-                        MistakeDialog.showDialog("反馈失败", FeedbackActivity.this);
+                        showDialog("反馈失败",false);
                     }
                 } catch (JSONException e) {
                     e.printStackTrace();
@@ -104,10 +104,18 @@ public class FeedbackActivity extends BaseActivity implements View.OnClickListen
             }
         });
     }
-    MistakeDialog.MistakeDialgoListener mistakeDialgoListener = new MistakeDialog.MistakeDialgoListener() {
-        @Override
-        public void doPositive() {
-            finish();
+
+    private void showDialog(String msg , boolean isClick){
+        final CustomCenterDialog customCenterDialog = CustomCenterDialog.CustomCenterDialog(msg,CustomCenterDialog.SHOWCENTER);
+        customCenterDialog.show(getFragmentManager(),FeedbackActivity.class.toString());
+        if (isClick){
+            customCenterDialog.setOnClickListener(new CustomCenterDialog.ConfirmOnClick() {
+                @Override
+                public void confirmOnclick() {
+                    finish();
+                    customCenterDialog.dismiss();
+                }
+            });
         }
-    };
+    }
 }

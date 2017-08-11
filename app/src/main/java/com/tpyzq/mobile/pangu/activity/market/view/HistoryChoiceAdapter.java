@@ -27,9 +27,9 @@ import com.tpyzq.mobile.pangu.util.SpUtils;
 import com.tpyzq.mobile.pangu.util.panguutil.BRutil;
 import com.tpyzq.mobile.pangu.util.panguutil.SelfStockHelper;
 import com.tpyzq.mobile.pangu.util.panguutil.UserUtil;
+import com.tpyzq.mobile.pangu.view.CustomCenterDialog;
 import com.tpyzq.mobile.pangu.view.dialog.DoSelfChoiceResultDialog;
 import com.tpyzq.mobile.pangu.view.dialog.LoadingDialog;
-import com.tpyzq.mobile.pangu.view.dialog.MistakeDialog;
 
 import org.json.JSONObject;
 
@@ -170,7 +170,8 @@ public class HistoryChoiceAdapter extends BaseAdapter {
                             String code = jsonObject.getString("code");
 
                             if (!"0".equals(code)) {
-                                MistakeDialog.showDialog("添加失败", mActivity);
+                                CustomCenterDialog customCenterDialog = CustomCenterDialog.CustomCenterDialog("添加失败",CustomCenterDialog.SHOWCENTER);
+                                customCenterDialog.show(mActivity.getFragmentManager(),HistoryChoiceAdapter.class.toString());
                                 return;
                             }
                         } catch (Exception e) {

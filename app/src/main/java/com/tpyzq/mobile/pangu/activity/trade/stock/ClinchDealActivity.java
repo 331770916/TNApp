@@ -1,5 +1,6 @@
 package com.tpyzq.mobile.pangu.activity.trade.stock;
 
+import android.app.FragmentManager;
 import android.content.Context;
 import android.support.v4.view.ViewPager;
 import android.view.View;
@@ -40,9 +41,11 @@ public class ClinchDealActivity extends BaseActivity implements View.OnClickList
     private List<BaseSearchPager> listBuy = new ArrayList<>();
     private MagicIndicator clinchl_buy;
     private Map<Integer,Boolean> map ;
+    public static FragmentManager ClinchDealFragmentManager;
 
     @Override
     public void initView() {
+        ClinchDealFragmentManager = getFragmentManager();
         map = new HashMap<>();
         findViewById(R.id.publish_detail_back).setOnClickListener(this);
         clinchl_buy = (MagicIndicator) findViewById(R.id.clinchl_buy);

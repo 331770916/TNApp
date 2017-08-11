@@ -15,10 +15,12 @@ import com.tpyzq.mobile.pangu.base.CustomApplication;
 import com.tpyzq.mobile.pangu.data.CleverManamgerMoneyEntity;
 import com.tpyzq.mobile.pangu.util.SpUtils;
 import com.tpyzq.mobile.pangu.util.panguutil.UserUtil;
+import com.tpyzq.mobile.pangu.view.CustomCenterDialog;
 import com.tpyzq.mobile.pangu.view.dialog.LoadingDialog;
-import com.tpyzq.mobile.pangu.view.dialog.MistakeDialog;
 
 import java.util.ArrayList;
+
+import static com.tpyzq.mobile.pangu.activity.home.managerMoney.ManagerMoenyDetailActivity.ManagerMoenyfragmentManager;
 
 
 /**
@@ -86,12 +88,7 @@ public class DoPrecontractLoadImpl implements IDoPrecontractLoad, PrecontractLoa
             mActivity.startActivity(intent1);
             mActivity.finish();
         } else {
-            MistakeDialog.showDialog(error, mActivity, new MistakeDialog.MistakeDialgoListener() {
-                @Override
-                public void doPositive() {
-                    mActivity.finish();
-                }
-            });
+            showDialog(error);
         }
     }
 
@@ -114,12 +111,7 @@ public class DoPrecontractLoadImpl implements IDoPrecontractLoad, PrecontractLoa
                     intent.setClass(mActivity, ProductBuyActivity.class);
                     mActivity.startActivity(intent);
                 } else if ("1".equals(isorder)) {
-                    MistakeDialog.showDialog("本产品需要先预约才能购买", mActivity, new MistakeDialog.MistakeDialgoListener() {
-                        @Override
-                        public void doPositive() {
-                            mActivity.finish();
-                        }
-                    });
+                    showDialog("本产品需要先预约才能购买");
                 }
             } else {
                 intent.setClass(mActivity, ProductBuyActivity.class);
@@ -136,12 +128,7 @@ public class DoPrecontractLoadImpl implements IDoPrecontractLoad, PrecontractLoa
 
             } else if ("1".equals(isorder)) {
                 if ("2".equals(mProductStauts)) {
-                    MistakeDialog.showDialog("预约已满", mActivity, new MistakeDialog.MistakeDialgoListener() {
-                        @Override
-                        public void doPositive() {
-                            mActivity.finish();
-                        }
-                    });
+                    showDialog("预约已满");
                     return;
                 }
 
@@ -154,12 +141,7 @@ public class DoPrecontractLoadImpl implements IDoPrecontractLoad, PrecontractLoa
                     mActivity.startActivity(intent);
                     mActivity.finish();
                 } else if ("1".equals(oreder)) {
-                    MistakeDialog.showDialog("预约已满", mActivity, new MistakeDialog.MistakeDialgoListener() {
-                        @Override
-                        public void doPositive() {
-                            mActivity.finish();
-                        }
-                    });
+                    showDialog("预约已满");
                 }
             }
         }
@@ -192,20 +174,21 @@ public class DoPrecontractLoadImpl implements IDoPrecontractLoad, PrecontractLoa
         } else if ("1".equals(mProductStauts) || "2".equals(mProductStauts)) {//预约中或者预约已满
             mPresenter.queryTotalPrice();
         } else if ("4".equals(mProductStauts)) {
-            MistakeDialog.showDialog("已售罄", mActivity, new MistakeDialog.MistakeDialgoListener() {
-                @Override
-                public void doPositive() {
-                    mActivity.finish();
-                }
-            });
+            showDialog("已售罄");
         } else {
-            MistakeDialog.showDialog("无数据", mActivity, new MistakeDialog.MistakeDialgoListener() {
-                @Override
-                public void doPositive() {
-                    mActivity.finish();
-                }
-            });
+            showDialog("无数据");
         }
+    }
+
+    private void showDialog(String msg){
+        CustomCenterDialog customCenterDialog = CustomCenterDialog.CustomCenterDialog(msg,CustomCenterDialog.SHOWCENTER);
+        customCenterDialog.show(ManagerMoenyfragmentManager,DoPrecontractLoadImpl.class.toString());
+        customCenterDialog.setOnClickListener(new CustomCenterDialog.ConfirmOnClick() {
+            @Override
+            public void confirmOnclick() {
+                mActivity.finish();
+            }
+        });
     }
 
     private void progressCancel() {

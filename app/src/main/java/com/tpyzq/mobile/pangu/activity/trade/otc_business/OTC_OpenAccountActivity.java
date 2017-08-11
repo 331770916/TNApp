@@ -14,8 +14,7 @@ import com.tpyzq.mobile.pangu.http.NetWorkUtil;
 import com.tpyzq.mobile.pangu.util.ConstantUtil;
 import com.tpyzq.mobile.pangu.util.SpUtils;
 import com.tpyzq.mobile.pangu.view.CentreToast;
-import com.tpyzq.mobile.pangu.view.dialog.MistakeDialog;
-import com.tpyzq.mobile.pangu.view.dialog.ResultDialog;
+import com.tpyzq.mobile.pangu.view.CustomCenterDialog;
 import com.zhy.http.okhttp.callback.StringCallback;
 
 import org.json.JSONArray;
@@ -138,7 +137,8 @@ public class OTC_OpenAccountActivity extends BaseActivity implements View.OnClic
                         OTC_OpenAccountActivity.this.startActivity(intent);
                         OTC_OpenAccountActivity.this.finish();
                     }else if("0".equals(code)){
-                        MistakeDialog.showDialog(res.optString("msg"), OTC_OpenAccountActivity.this);
+                        CustomCenterDialog customCenterDialog = CustomCenterDialog.CustomCenterDialog(res.optString("msg"),CustomCenterDialog.SHOWCENTER);
+                        customCenterDialog.show(getFragmentManager(),OTC_OpenAccountActivity.class.toString());
                     }else {
                         CentreToast.showText(OTC_OpenAccountActivity.this,res.optString("msg"));
                     }

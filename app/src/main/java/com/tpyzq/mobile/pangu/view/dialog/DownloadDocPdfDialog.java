@@ -13,7 +13,9 @@ import com.tpyzq.mobile.pangu.R;
 import com.tpyzq.mobile.pangu.base.CustomApplication;
 import com.tpyzq.mobile.pangu.http.NetWorkUtil;
 import com.tpyzq.mobile.pangu.log.LogHelper;
+import com.tpyzq.mobile.pangu.util.ConstantUtil;
 import com.tpyzq.mobile.pangu.util.Helper;
+import com.tpyzq.mobile.pangu.view.CentreToast;
 import com.zhy.http.okhttp.callback.FileCallBack;
 
 import java.io.File;
@@ -95,7 +97,7 @@ public class DownloadDocPdfDialog {
                 e.printStackTrace();
                 LogHelper.e(TAG, e.toString());
                 downloadPdfCallback.downloadResult(null, null);
-                MistakeDialog.showDialog("网络异常", activity);
+                CentreToast.showText(activity, ConstantUtil.NETWORK_ERROR);
                 File file = new File(Helper.getAppFileDirPath(CustomApplication.getContext()) + "pdf/" + fileName + ".pdf");
                 if (file.exists()) {
                     file.delete();

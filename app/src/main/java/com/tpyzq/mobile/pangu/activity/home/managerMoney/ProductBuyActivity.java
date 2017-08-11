@@ -16,12 +16,10 @@ import com.tpyzq.mobile.pangu.activity.myself.handhall.RiskConfirmActivity;
 import com.tpyzq.mobile.pangu.activity.myself.handhall.RiskEvaluationActivity;
 import com.tpyzq.mobile.pangu.activity.myself.login.TransactionLoginActivity;
 import com.tpyzq.mobile.pangu.activity.trade.open_fund.AssessConfirmActivity;
-import com.tpyzq.mobile.pangu.activity.trade.open_fund.FundSubsActivity;
 import com.tpyzq.mobile.pangu.base.BaseActivity;
 import com.tpyzq.mobile.pangu.base.InterfaceCollection;
 import com.tpyzq.mobile.pangu.data.AssessConfirmEntity;
 import com.tpyzq.mobile.pangu.data.FundDataEntity;
-import com.tpyzq.mobile.pangu.data.FundSubsEntity;
 import com.tpyzq.mobile.pangu.data.OtcDataEntity;
 import com.tpyzq.mobile.pangu.data.OtcRiskEntity;
 import com.tpyzq.mobile.pangu.data.ResultInfo;
@@ -32,10 +30,9 @@ import com.tpyzq.mobile.pangu.util.Helper;
 import com.tpyzq.mobile.pangu.util.SpUtils;
 import com.tpyzq.mobile.pangu.util.ToastUtils;
 import com.tpyzq.mobile.pangu.util.panguutil.UserUtil;
+import com.tpyzq.mobile.pangu.view.CustomCenterDialog;
 import com.tpyzq.mobile.pangu.view.dialog.CancelDialog;
-import com.tpyzq.mobile.pangu.view.dialog.FundSubsDialog;
 import com.tpyzq.mobile.pangu.view.dialog.LoadingDialog;
-import com.tpyzq.mobile.pangu.view.dialog.MistakeDialog;
 import com.tpyzq.mobile.pangu.view.dialog.ProductBuyDialog;
 import com.zhy.http.okhttp.callback.StringCallback;
 
@@ -220,7 +217,7 @@ public class ProductBuyActivity extends BaseActivity implements View.OnClickList
                         otcDataEntity = new Gson().fromJson(jsonArray.getString(0), OtcDataEntity.class);
                         setTextView(otcDataEntity);
                     }else{
-                        MistakeDialog.showDialog(msg,ProductBuyActivity.this,listener);
+                        showClickDialog(msg);
                     }
                     et_stock_price.addTextChangedListener(new StockPriceListen());
                     if (loadingDialog != null) {
@@ -288,7 +285,7 @@ public class ProductBuyActivity extends BaseActivity implements View.OnClickList
                     } else if ("-6".equals(code)) {
                         startActivity(new Intent(ProductBuyActivity.this, TransactionLoginActivity.class));
                     } else {
-                        MistakeDialog.showDialog(msg, ProductBuyActivity.this,listener);
+                        showClickDialog(msg);
                     }
                     et_stock_price.addTextChangedListener(new StockPriceListen());
                     if (loadingDialog != null) {
@@ -463,7 +460,7 @@ public class ProductBuyActivity extends BaseActivity implements View.OnClickList
                     } else if ("-6".equals(code)) {
                         startActivity(new Intent(ProductBuyActivity.this, TransactionLoginActivity.class));
                     } else {
-                        MistakeDialog.showDialog(msg, ProductBuyActivity.this);
+                        showDialog(msg);
                     }
                 } catch (JSONException e) {
                     e.printStackTrace();
@@ -592,7 +589,7 @@ public class ProductBuyActivity extends BaseActivity implements View.OnClickList
                     } else if ("-6".equals(code)) {
                         startActivity(new Intent(ProductBuyActivity.this, TransactionLoginActivity.class));
                     } else {
-                        MistakeDialog.showDialog(msg, ProductBuyActivity.this);
+                        showDialog(msg);
                     }
                 } catch (JSONException e) {
                     e.printStackTrace();
@@ -643,7 +640,7 @@ public class ProductBuyActivity extends BaseActivity implements View.OnClickList
                     } else if ("-6".equals(code)) {
                         startActivity(new Intent(ProductBuyActivity.this, TransactionLoginActivity.class));
                     } else {
-                        MistakeDialog.showDialog(msg, ProductBuyActivity.this,listener);
+                        showClickDialog(msg);
                     }
                 } catch (JSONException e) {
                     e.printStackTrace();
@@ -652,13 +649,23 @@ public class ProductBuyActivity extends BaseActivity implements View.OnClickList
         });
     }
 
-    MistakeDialog.MistakeDialgoListener listener = new MistakeDialog.MistakeDialgoListener() {
-        @Override
-        public void doPositive() {
-            finish();
-        }
-    };
 
+    private void showDialog(String msg){
+        CustomCenterDialog customCenterDialog = CustomCenterDialog.CustomCenterDialog(msg,CustomCenterDialog.SHOWCENTER);
+        customCenterDialog.show(getFragmentManager(),ProductBuyActivity.class.toString());
+    }
+
+    private void showClickDialog(String msg){
+        final CustomCenterDialog customCenterDialog = CustomCenterDialog.CustomCenterDialog(msg,CustomCenterDialog.SHOWCENTER);
+        customCenterDialog.show(getFragmentManager(),ProductBuyActivity.class.toString());
+        customCenterDialog.setOnClickListener(new CustomCenterDialog.ConfirmOnClick() {
+            @Override
+            public void confirmOnclick() {
+                finish();
+                customCenterDialog.dismiss();
+            }
+        });
+    }
     /**
      * 14天以及基金类型赋值
      *
@@ -768,7 +775,7 @@ public class ProductBuyActivity extends BaseActivity implements View.OnClickList
                 if ("0".equalsIgnoreCase(code)) {
                     resultMap = (HashMap<String,String>)info.getData();
                     if (null == resultMap) {
-                        MistakeDialog.showDialog("数据异常", ProductBuyActivity.this, null);
+                        showDialog("数据异常");
                         return;
                     }
                     //弹框逻辑
@@ -793,7 +800,7 @@ public class ProductBuyActivity extends BaseActivity implements View.OnClickList
                     intent.putExtra("resultMap",resultMap);
                     startActivityForResult(intent, requestCode);
                 } else {
-                    MistakeDialog.showDialog(msg, ProductBuyActivity.this, null);
+                    showDialog(msg);
                 }
             }
         });

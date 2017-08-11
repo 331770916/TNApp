@@ -18,8 +18,8 @@ import com.tpyzq.mobile.pangu.activity.home.managerMoney.product.precontract.Pre
 import com.tpyzq.mobile.pangu.base.CustomApplication;
 import com.tpyzq.mobile.pangu.data.CleverManamgerMoneyEntity;
 import com.tpyzq.mobile.pangu.util.Helper;
+import com.tpyzq.mobile.pangu.view.CustomCenterDialog;
 import com.tpyzq.mobile.pangu.view.dialog.DownloadDocPdfDialog;
-import com.tpyzq.mobile.pangu.view.dialog.MistakeDialog;
 import com.tpyzq.mobile.pangu.view.gridview.MyListView;
 import com.tpyzq.mobile.pangu.view.progress.FornightHorizontalProgressBar;
 
@@ -114,7 +114,7 @@ public class FixationEarningsView extends BaseProductView implements DownloadDoc
                     if (isUrl) {
                         DownloadDocPdfDialog.getInstance().showDialog(activity, FixationEarningsView.this, url, name);
                     } else {
-                        MistakeDialog.showDialog("该url不正确", mActivity);
+                        showDialog("该url不正确");
                     }
                 }
 
@@ -147,7 +147,7 @@ public class FixationEarningsView extends BaseProductView implements DownloadDoc
                             //下载
                             DownloadDocPdfDialog.getInstance().showDialog(activity, FixationEarningsView.this, url, name);
                         } else {
-                            MistakeDialog.showDialog("该url不正确", mActivity);
+                            showDialog("该url不正确");
                         }
                     }
 
@@ -168,6 +168,11 @@ public class FixationEarningsView extends BaseProductView implements DownloadDoc
             productNoticeListView.addFooterView(view1);
             productArgementListView.addFooterView(view1);
         }
+    }
+
+    private void showDialog(String msg){
+        CustomCenterDialog customCenterDialog = CustomCenterDialog.CustomCenterDialog(msg,CustomCenterDialog.SHOWCENTER);
+        customCenterDialog.show(mActivity.getFragmentManager(),FixationEarningsView.class.toString());
     }
 
     private void initProgressDate(CleverManamgerMoneyEntity entity) {

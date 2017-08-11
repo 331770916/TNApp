@@ -15,7 +15,7 @@ import com.tpyzq.mobile.pangu.log.LogHelper;
 import com.tpyzq.mobile.pangu.util.ConstantUtil;
 import com.tpyzq.mobile.pangu.util.Helper;
 import com.tpyzq.mobile.pangu.util.SpUtils;
-import com.tpyzq.mobile.pangu.view.dialog.MistakeDialog;
+import com.tpyzq.mobile.pangu.view.CustomCenterDialog;
 import com.tpyzq.mobile.pangu.view.dialog.ResultDialog;
 import com.zhy.http.okhttp.callback.StringCallback;
 
@@ -110,12 +110,12 @@ public class AgreementActivity extends BaseActivity implements View.OnClickListe
                         Intent intent = new Intent(AgreementActivity.this, TransactionLoginActivity.class);
                         startActivity(intent);
                     }else{
-                        MistakeDialog.showDialog(res.optString("msg"), AgreementActivity.this);
+                        showDialog(res.optString("msg"));
                     }
 
                 }catch (JSONException e){
                     e.printStackTrace();
-                    MistakeDialog.showDialog(e.toString(), AgreementActivity.this);
+                    showDialog(e.toString());
                 }
                 /**
                 Gson gson = new Gson();
@@ -197,11 +197,11 @@ public class AgreementActivity extends BaseActivity implements View.OnClickListe
                         Intent intent = new Intent(AgreementActivity.this, TransactionLoginActivity.class);
                         startActivity(intent);
                     }else{
-                        MistakeDialog.showDialog(res.optString("msg"), AgreementActivity.this);
+                        showDialog(res.optString("msg"));
                     }
                 }catch (JSONException e){
                     e.printStackTrace();
-                    MistakeDialog.showDialog(e.toString(), AgreementActivity.this);
+                    showDialog(e.toString());
                 }
                 /**
                 Gson gson = new Gson();
@@ -225,6 +225,11 @@ public class AgreementActivity extends BaseActivity implements View.OnClickListe
     private void initData() {
         Headline.setText("电子签名约定书");
         Data.setText(getString(R.string.AgreementTextView));
+    }
+
+    private void showDialog(String msg){
+        CustomCenterDialog customCenterDialog = CustomCenterDialog.CustomCenterDialog(msg,CustomCenterDialog.SHOWCENTER);
+        customCenterDialog.show(getFragmentManager(),AgreementActivity.class.toString());
     }
 
     @Override

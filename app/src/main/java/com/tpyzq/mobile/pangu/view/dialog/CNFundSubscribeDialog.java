@@ -19,12 +19,15 @@ import com.tpyzq.mobile.pangu.log.LogUtil;
 import com.tpyzq.mobile.pangu.util.ConstantUtil;
 import com.tpyzq.mobile.pangu.util.SpUtils;
 import com.tpyzq.mobile.pangu.view.CentreToast;
+import com.tpyzq.mobile.pangu.view.CustomCenterDialog;
 import com.zhy.http.okhttp.callback.StringCallback;
 
 import java.lang.reflect.Type;
 import java.util.HashMap;
 
 import okhttp3.Call;
+
+import static com.tpyzq.mobile.pangu.activity.trade.stock.CNFundSubscribeActivity.cNFundSubscribeManager;
 
 /**
  * Created by wangqi on 2016/12/7.
@@ -141,7 +144,8 @@ public class CNFundSubscribeDialog extends BaseDialog implements View.OnClickLis
                     mClearData.clear();
                     dismiss();
                 }else {
-                    MistakeDialog.showDialog(msg, mActivity);
+                    CustomCenterDialog customCenterDialog = CustomCenterDialog.CustomCenterDialog(msg,CustomCenterDialog.SHOWCENTER);
+                    customCenterDialog.show(cNFundSubscribeManager,CNFundSubscribeDialog.class.toString());
                     dismiss();
                 }
             }

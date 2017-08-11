@@ -23,8 +23,8 @@ import com.tpyzq.mobile.pangu.util.SpUtils;
 import com.tpyzq.mobile.pangu.util.ToastUtils;
 import com.tpyzq.mobile.pangu.util.keyboard.NoSoftInputEditText;
 import com.tpyzq.mobile.pangu.util.panguutil.UserUtil;
+import com.tpyzq.mobile.pangu.view.CustomCenterDialog;
 import com.tpyzq.mobile.pangu.view.dialog.LoadingDialog;
-import com.tpyzq.mobile.pangu.view.dialog.MistakeDialog;
 import com.yzd.unikeysdk.OnInputDoneCallBack;
 import com.yzd.unikeysdk.PasswordKeyboard;
 import com.yzd.unikeysdk.UniKey;
@@ -258,12 +258,7 @@ public class ChangePasswordActivity extends BaseActivity implements View.OnClick
                         if (mLoadingDialog != null) {
                             mLoadingDialog.dismiss();
                         }
-                        MistakeDialog.showDialog("" + "修改密码成功",ChangePasswordActivity.this, new MistakeDialog.MistakeDialgoListener() {
-                            @Override
-                            public void doPositive() {
-                                finish();
-                            }
-                        });
+                        showDialog("修改密码成功",true);
                     } else if (mCode_Str.equals("-6")) {
                         if (mLoadingDialog != null) {
                             mLoadingDialog.dismiss();
@@ -275,7 +270,7 @@ public class ChangePasswordActivity extends BaseActivity implements View.OnClick
                             mLoadingDialog.dismiss();
                         }
                         setTextView();
-                        MistakeDialog.showDialog(mMsg_Str, ChangePasswordActivity.this);
+                        showDialog(mMsg_Str,false);
                     }
                 } catch (JSONException e) {
                     e.printStackTrace();
@@ -284,6 +279,20 @@ public class ChangePasswordActivity extends BaseActivity implements View.OnClick
             }
         });
 
+    }
+
+    private void showDialog(String msg,boolean isClick){
+        final CustomCenterDialog customCenterDialog = CustomCenterDialog.CustomCenterDialog(msg,CustomCenterDialog.SHOWCENTER);
+        customCenterDialog.show(getFragmentManager(),ChangePasswordActivity.class.toString());
+        if (isClick){
+            customCenterDialog.setOnClickListener(new CustomCenterDialog.ConfirmOnClick() {
+                @Override
+                public void confirmOnclick() {
+                    finish();
+                    customCenterDialog.dismiss();
+                }
+            });
+        }
     }
 
 

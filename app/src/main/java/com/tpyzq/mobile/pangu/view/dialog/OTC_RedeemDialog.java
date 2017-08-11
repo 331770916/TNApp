@@ -16,6 +16,7 @@ import com.tpyzq.mobile.pangu.log.LogUtil;
 import com.tpyzq.mobile.pangu.util.ConstantUtil;
 import com.tpyzq.mobile.pangu.util.SpUtils;
 import com.tpyzq.mobile.pangu.view.CentreToast;
+import com.tpyzq.mobile.pangu.view.CustomCenterDialog;
 import com.zhy.http.okhttp.callback.StringCallback;
 
 import org.json.JSONException;
@@ -24,6 +25,8 @@ import org.json.JSONObject;
 import java.util.HashMap;
 
 import okhttp3.Call;
+
+import static com.tpyzq.mobile.pangu.activity.trade.otc_business.OTC_RedeemActivity.OTC_RedeemfragmentManager;
 
 /**
  * Created by wangqi on 2016/12/7.
@@ -131,7 +134,8 @@ public class OTC_RedeemDialog extends BaseDialog implements View.OnClickListener
                         isOk.callBack(true);
                         dismiss();
                     } else {
-                        MistakeDialog.showDialog(res.optString("msg"), mActivity);
+                        CustomCenterDialog customCenterDialog =  CustomCenterDialog.CustomCenterDialog(res.optString("msg"),CustomCenterDialog.SHOWCENTER);
+                        customCenterDialog.show(OTC_RedeemfragmentManager,OTC_RedeemDialog.class.toString());
                         isOk.callBack(false);
                         dismiss();
                     }

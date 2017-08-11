@@ -14,11 +14,9 @@ import com.tpyzq.mobile.pangu.R;
 import com.tpyzq.mobile.pangu.activity.myself.login.TransactionLoginActivity;
 import com.tpyzq.mobile.pangu.http.NetWorkUtil;
 import com.tpyzq.mobile.pangu.util.ConstantUtil;
-import com.tpyzq.mobile.pangu.util.Helper;
 import com.tpyzq.mobile.pangu.util.SpUtils;
 import com.tpyzq.mobile.pangu.view.CentreToast;
-import com.tpyzq.mobile.pangu.view.dialog.MistakeDialog;
-import com.tpyzq.mobile.pangu.view.dialog.ResultDialog;
+import com.tpyzq.mobile.pangu.view.CustomCenterDialog;
 import com.zhy.http.okhttp.callback.StringCallback;
 
 import org.json.JSONObject;
@@ -138,7 +136,8 @@ public class FundRevokePopupWindow extends PopupWindow{
                         context.startActivity(intent);
 //                        dismiss();
                     }else{
-                        MistakeDialog.showDialog(res.optString("msg"), mActivity);
+                        CustomCenterDialog customCenterDialog = CustomCenterDialog.CustomCenterDialog(res.optString("msg"),CustomCenterDialog.SHOWCENTER);
+                        customCenterDialog.show(mActivity.getFragmentManager(),FundRevokePopupWindow.class.toString());
                     }
                 }catch (Exception e){
                     e.printStackTrace();

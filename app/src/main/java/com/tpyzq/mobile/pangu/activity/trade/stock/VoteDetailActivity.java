@@ -14,11 +14,10 @@ import com.tpyzq.mobile.pangu.base.InterfaceCollection;
 import com.tpyzq.mobile.pangu.data.NetworkVotingEntity;
 import com.tpyzq.mobile.pangu.data.ResultInfo;
 import com.tpyzq.mobile.pangu.util.ConstantUtil;
-import com.tpyzq.mobile.pangu.util.Helper;
 import com.tpyzq.mobile.pangu.util.SpUtils;
 import com.tpyzq.mobile.pangu.view.CentreToast;
+import com.tpyzq.mobile.pangu.view.CustomCenterDialog;
 import com.tpyzq.mobile.pangu.view.dialog.LoadingDialog;
-import com.tpyzq.mobile.pangu.view.dialog.MistakeDialog;
 import com.tpyzq.mobile.pangu.view.dialog.StructuredFundDialog;
 import com.tpyzq.mobile.pangu.view.listview.AutoListview;
 
@@ -41,7 +40,7 @@ public class VoteDetailActivity extends BaseActivity  implements InterfaceCollec
     public static final String TAG = "VoteDetailActivity";
     public LinearLayout goneUnacc;
     private TextView goneAcc;
-    private Dialog mDialog,mistake;
+    private Dialog mDialog;
     private ImageView back;
     private Button submit;
     private StructuredFundDialog mStructuredFundDialog;
@@ -150,7 +149,9 @@ public class VoteDetailActivity extends BaseActivity  implements InterfaceCollec
                     }
                     if (count!=accumulate.size()) {
                         String msg = "议案组：\"" + entity.getVote_info() + "(当选人数：" + entity.getList().size() + ")\"未表决，请表决后再提交!";
-                        mistake = MistakeDialog.showDialog("提示", msg, false, this, null);
+                        CustomCenterDialog customCenterDialog = CustomCenterDialog.CustomCenterDialog(msg,CustomCenterDialog.SHOWCENTER);
+                        customCenterDialog.cancelSetCall();
+                        customCenterDialog.show(getFragmentManager(),VoteDetailActivity.class.toString());
                     } else {
                         if (ConstantUtil.list_item_flag) {
                             ConstantUtil.list_item_flag = false;
@@ -197,10 +198,6 @@ public class VoteDetailActivity extends BaseActivity  implements InterfaceCollec
         if(mDialog!=null){
             mDialog.dismiss();
             mDialog = null;
-        }
-        if(mistake!=null){
-            mistake.dismiss();
-            mistake = null;
         }
         accumulateAdapter = null;
         unAccumulateAdapter = null;

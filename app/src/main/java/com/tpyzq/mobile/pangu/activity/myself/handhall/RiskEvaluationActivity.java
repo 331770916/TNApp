@@ -22,8 +22,8 @@ import com.tpyzq.mobile.pangu.log.LogHelper;
 import com.tpyzq.mobile.pangu.util.ConstantUtil;
 import com.tpyzq.mobile.pangu.util.Helper;
 import com.tpyzq.mobile.pangu.util.SpUtils;
+import com.tpyzq.mobile.pangu.view.CustomCenterDialog;
 import com.tpyzq.mobile.pangu.view.dialog.LoadingDialog;
-import com.tpyzq.mobile.pangu.view.dialog.MistakeDialog;
 import com.tpyzq.mobile.pangu.view.listview.NoScrollListView;
 import com.tpyzq.mobile.pangu.view.progress.RoundProgressBar;
 import com.zhy.http.okhttp.callback.StringCallback;
@@ -174,7 +174,7 @@ public class RiskEvaluationActivity extends BaseActivity implements View.OnClick
                         Intent intent = new Intent(RiskEvaluationActivity.this, TransactionLoginActivity.class);
                         startActivity(intent);
                     } else {
-                        MistakeDialog.showDialog(msg.toString(), RiskEvaluationActivity.this);
+                        showDialog(msg.toString());
                     }
                 } catch (JSONException e) {
                     e.printStackTrace();
@@ -272,7 +272,7 @@ public class RiskEvaluationActivity extends BaseActivity implements View.OnClick
                         Intent intent = new Intent(RiskEvaluationActivity.this, TransactionLoginActivity.class);
                         startActivity(intent);
                     } else {
-                        MistakeDialog.showDialog(msg, RiskEvaluationActivity.this);
+                        showDialog(msg);
                     }
                 } catch (JSONException e) {
                     e.printStackTrace();
@@ -387,12 +387,12 @@ public class RiskEvaluationActivity extends BaseActivity implements View.OnClick
                         Intent intent = new Intent(RiskEvaluationActivity.this, TransactionLoginActivity.class);
                         startActivity(intent);
                     }else{
-                        MistakeDialog.showDialog(res.optString("msg"), RiskEvaluationActivity.this);
+                        showDialog(res.optString("msg"));
                     }
 
                 }catch (JSONException e){
                     e.printStackTrace();
-                    MistakeDialog.showDialog(e.toString(), RiskEvaluationActivity.this);
+                    showDialog(e.toString());
                 }
                 /**
                  Gson gson = new Gson();
@@ -651,7 +651,7 @@ public class RiskEvaluationActivity extends BaseActivity implements View.OnClick
                         JSONObject json = res.getJSONArray("data").getJSONObject(0);
                         mDate.setText(Helper.getMyDateY_M_D(json.optString("CORP_END_DATE")));
                     }else{
-                        MistakeDialog.showDialog(res.optString("msg"), RiskEvaluationActivity.this);
+                        showDialog(res.optString("msg"));
                     }
                 }catch (JSONException e){
                     e.printStackTrace();
@@ -679,6 +679,12 @@ public class RiskEvaluationActivity extends BaseActivity implements View.OnClick
             }
 
         });
+    }
+
+    private void showDialog(String msg){
+        CustomCenterDialog customCenterDialog = CustomCenterDialog.CustomCenterDialog(msg,CustomCenterDialog.SHOWCENTER);
+        customCenterDialog.show(getFragmentManager(),RiskEvaluationActivity.class.toString());
+
     }
 
     @Override

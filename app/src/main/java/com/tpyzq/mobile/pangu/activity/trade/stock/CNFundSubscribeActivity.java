@@ -1,5 +1,6 @@
 package com.tpyzq.mobile.pangu.activity.trade.stock;
 
+import android.app.FragmentManager;
 import android.text.Editable;
 import android.text.TextUtils;
 import android.text.TextWatcher;
@@ -49,9 +50,11 @@ public class CNFundSubscribeActivity extends BaseActivity implements View.OnClic
     private ScrollView mScrollView;
     private KeyboardUtil mKeyBoardUtil;
     private LinearLayout ll_father;
+    public static FragmentManager cNFundSubscribeManager;
 
     @Override
     public void initView() {
+        cNFundSubscribeManager = getFragmentManager();
         mSession = SpUtils.getString(this, "mSession", "");
         this.findViewById(R.id.ivCnFundSubscribe_back).setOnClickListener(this);                      //返回按钮销毁界面
         OK = (Button) this.findViewById(R.id.tvCnSubscribeQueDing);                                 //点击确定按钮

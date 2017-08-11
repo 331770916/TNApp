@@ -15,8 +15,7 @@ import com.tpyzq.mobile.pangu.data.OTC_RedeemEntity;
 import com.tpyzq.mobile.pangu.http.NetWorkUtil;
 import com.tpyzq.mobile.pangu.util.ConstantUtil;
 import com.tpyzq.mobile.pangu.util.SpUtils;
-import com.tpyzq.mobile.pangu.view.dialog.MistakeDialog;
-import com.tpyzq.mobile.pangu.view.dialog.ResultDialog;
+import com.tpyzq.mobile.pangu.view.CustomCenterDialog;
 import com.zhy.http.okhttp.callback.StringCallback;
 
 import org.json.JSONArray;
@@ -123,13 +122,18 @@ public class OTC_ChiCangActivity extends BaseActivity implements View.OnClickLis
                         }
 
                     } else {
-                        MistakeDialog.showDialog(jsonObject.getString("msg"), OTC_ChiCangActivity.this);
+                        showDialog(jsonObject.getString("msg"));
                     }
                 } catch (JSONException e) {
                     e.printStackTrace();
                 }
             }
         });
+    }
+
+    private void showDialog(String msg){
+        CustomCenterDialog customCenterDialog = CustomCenterDialog.CustomCenterDialog(msg,CustomCenterDialog.SHOWCENTER);
+        customCenterDialog.show(getFragmentManager(),OTC_ChiCangActivity.class.toString());
     }
 
     @Override

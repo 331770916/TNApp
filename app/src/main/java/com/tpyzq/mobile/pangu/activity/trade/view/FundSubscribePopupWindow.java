@@ -16,6 +16,7 @@ import com.tpyzq.mobile.pangu.http.NetWorkUtil;
 import com.tpyzq.mobile.pangu.util.ConstantUtil;
 import com.tpyzq.mobile.pangu.util.Helper;
 import com.tpyzq.mobile.pangu.view.CentreToast;
+import com.tpyzq.mobile.pangu.view.CustomCenterDialog;
 import com.tpyzq.mobile.pangu.view.dialog.MistakeDialog;
 import com.tpyzq.mobile.pangu.view.dialog.ResultDialog;
 import com.zhy.http.okhttp.callback.StringCallback;
@@ -134,7 +135,8 @@ public class FundSubscribePopupWindow extends PopupWindow implements View.OnClic
                         context.startActivity(intent);
 //                        dismiss();
                     }else {
-                        MistakeDialog.showDialog(res.optString("msg"), mActivity);
+                        CustomCenterDialog customCenterDialog = CustomCenterDialog.CustomCenterDialog(res.optString("msg"),CustomCenterDialog.SHOWCENTER);
+                        customCenterDialog.show(mActivity.getFragmentManager(),FundSubscribePopupWindow.class.toString());
                     }
                 }catch (Exception e){
                     e.printStackTrace();

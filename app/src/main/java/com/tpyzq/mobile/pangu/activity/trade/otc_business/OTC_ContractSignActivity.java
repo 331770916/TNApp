@@ -26,9 +26,8 @@ import com.tpyzq.mobile.pangu.util.Helper;
 import com.tpyzq.mobile.pangu.util.SpUtils;
 import com.tpyzq.mobile.pangu.util.ToastUtils;
 import com.tpyzq.mobile.pangu.view.CentreToast;
+import com.tpyzq.mobile.pangu.view.CustomCenterDialog;
 import com.tpyzq.mobile.pangu.view.dialog.DownloadDocPdfDialog;
-import com.tpyzq.mobile.pangu.view.dialog.HandoverDialog;
-import com.tpyzq.mobile.pangu.view.dialog.MistakeDialog;
 import com.tpyzq.mobile.pangu.view.gridview.MyListView;
 import com.zhy.http.okhttp.callback.StringCallback;
 
@@ -278,12 +277,7 @@ public class OTC_ContractSignActivity extends BaseActivity implements View.OnCli
             @Override
             public void onError(Call call, Exception e, int id) {
                 e.printStackTrace();
-                MistakeDialog.showDialog("暂无协议", OTC_ContractSignActivity.this, new MistakeDialog.MistakeDialgoListener() {
-                    @Override
-                    public void doPositive() {
-                        finish();
-                    }
-                });
+                showCenterDialog("暂无协议");
             }
 
             @Override
@@ -333,22 +327,12 @@ public class OTC_ContractSignActivity extends BaseActivity implements View.OnCli
                         mAdapter.setData(list);
 
                         if (list == null || list.size() <= 0) {
-                            MistakeDialog.showDialog("暂无协议", OTC_ContractSignActivity.this, new MistakeDialog.MistakeDialgoListener() {
-                                @Override
-                                public void doPositive() {
-                                    finish();
-                                }
-                            });
+                            showCenterDialog("暂无协议");
                         }
 
                     } else {
 //                        MistakeDialog.showDialog(type, OTC_ContractSignActivity.this);
-                        MistakeDialog.showDialog("暂无协议", OTC_ContractSignActivity.this, new MistakeDialog.MistakeDialgoListener() {
-                            @Override
-                            public void doPositive() {
-                                finish();
-                            }
-                        });
+                        showCenterDialog("暂无协议");
                     }
                 } catch (JSONException e) {
                     e.printStackTrace();
@@ -359,6 +343,17 @@ public class OTC_ContractSignActivity extends BaseActivity implements View.OnCli
 
     }
 
+    private void showCenterDialog(String msg){
+        final CustomCenterDialog customCenterDialog = CustomCenterDialog.CustomCenterDialog(msg,CustomCenterDialog.SHOWCENTER);
+        customCenterDialog.show(getFragmentManager(),OTC_ContractSignActivity.class.toString());
+        customCenterDialog.setOnClickListener(new CustomCenterDialog.ConfirmOnClick() {
+            @Override
+            public void confirmOnclick() {
+                finish();
+                customCenterDialog.dismiss();
+            }
+        });
+    }
     /**
      * 签署协议
      */
@@ -398,7 +393,8 @@ public class OTC_ContractSignActivity extends BaseActivity implements View.OnCli
                         Intent intent2 = new Intent(OTC_ContractSignActivity.this, AgreementActivity.class);
                         OTC_ContractSignActivity.this.startActivity(intent2);
                     }else {
-                        MistakeDialog.showDialog(msg, OTC_ContractSignActivity.this);
+                        CustomCenterDialog customCenterDialog = CustomCenterDialog.CustomCenterDialog(msg,CustomCenterDialog.SHOWCENTER);
+                        customCenterDialog.show(getFragmentManager(),OTC_ContractSignActivity.class.toString());
                     }
                 } catch (JSONException e) {
                     e.printStackTrace();

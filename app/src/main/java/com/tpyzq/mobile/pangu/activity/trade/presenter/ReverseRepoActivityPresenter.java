@@ -15,7 +15,7 @@ import com.tpyzq.mobile.pangu.util.SpUtils;
 import com.tpyzq.mobile.pangu.util.ToastUtils;
 import com.tpyzq.mobile.pangu.util.panguutil.JudgeStockUtils;
 import com.tpyzq.mobile.pangu.view.CentreToast;
-import com.tpyzq.mobile.pangu.view.dialog.MistakeDialog;
+import com.tpyzq.mobile.pangu.view.CustomCenterDialog;
 import com.zhy.http.okhttp.callback.StringCallback;
 
 import org.json.JSONArray;
@@ -127,7 +127,7 @@ public class ReverseRepoActivityPresenter {
                     }else if ("-6".equals(code)){
                         activity.startActivity(new Intent(activity, TransactionLoginActivity.class));
                     } else {
-                        MistakeDialog.showDialog(msg, activity);
+                        showDialog(msg);
                     }
                 } catch (JSONException e) {
                     e.printStackTrace();
@@ -180,12 +180,17 @@ public class ReverseRepoActivityPresenter {
                     }else if ("-6".equals(code)){
                         activity.startActivity(new Intent(activity, TransactionLoginActivity.class));
                     } else{
-                        MistakeDialog.showDialog(msg,activity);
+                        showDialog(msg);
                     }
                 } catch (JSONException e) {
                     e.printStackTrace();
                 }
             }
         });
+    }
+
+    private void showDialog(String msg){
+        CustomCenterDialog customCenterDialog = CustomCenterDialog.CustomCenterDialog(msg,CustomCenterDialog.SHOWCENTER);
+        customCenterDialog.show(activity.getFragmentManager(),ReverseRepoActivityPresenter.class.toString());
     }
 }

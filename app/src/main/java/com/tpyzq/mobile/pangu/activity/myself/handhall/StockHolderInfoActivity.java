@@ -19,7 +19,7 @@ import com.tpyzq.mobile.pangu.log.LogHelper;
 import com.tpyzq.mobile.pangu.util.ConstantUtil;
 import com.tpyzq.mobile.pangu.util.Helper;
 import com.tpyzq.mobile.pangu.util.SpUtils;
-import com.tpyzq.mobile.pangu.view.dialog.MistakeDialog;
+import com.tpyzq.mobile.pangu.view.CustomCenterDialog;
 import com.zhy.http.okhttp.callback.StringCallback;
 
 import org.json.JSONArray;
@@ -130,7 +130,8 @@ public class StockHolderInfoActivity extends BaseActivity implements View.OnClic
                     } else if ("-6".equals(jsonObject.getString("code"))) {
                         startActivity(new Intent(StockHolderInfoActivity.this, TransactionLoginActivity.class));
                     } else {
-                        MistakeDialog.showDialog(jsonObject.getString("msg"), StockHolderInfoActivity.this);
+                        CustomCenterDialog customCenterDialog = CustomCenterDialog.CustomCenterDialog(jsonObject.getString("msg"),CustomCenterDialog.SHOWCENTER);
+                        customCenterDialog.show(getFragmentManager(),StockHolderInfoActivity.class.toString());
                     }
                 } catch (JSONException e) {
                     e.printStackTrace();

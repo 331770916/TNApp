@@ -5,17 +5,12 @@ import android.content.Intent;
 import android.text.Editable;
 import android.text.TextUtils;
 import android.text.TextWatcher;
-import android.view.Gravity;
 import android.view.View;
 import android.widget.Button;
 import android.widget.EditText;
-import android.widget.ImageView;
 import android.widget.LinearLayout;
-import android.widget.ScrollView;
 import android.widget.TextView;
-import android.widget.Toast;
 
-import com.android.keyboardlibrary.KeyboardUtil;
 import com.google.gson.Gson;
 import com.google.gson.reflect.TypeToken;
 import com.tpyzq.mobile.pangu.R;
@@ -27,8 +22,6 @@ import com.tpyzq.mobile.pangu.base.BaseActivity;
 import com.tpyzq.mobile.pangu.base.InterfaceCollection;
 import com.tpyzq.mobile.pangu.data.AssessConfirmEntity;
 import com.tpyzq.mobile.pangu.data.OTC_SubscriptionAffirmMsgBean;
-import com.tpyzq.mobile.pangu.data.OTC_SubscriptionListEntity;
-import com.tpyzq.mobile.pangu.data.OTC_SubscriptionListMasBean;
 import com.tpyzq.mobile.pangu.data.ResultInfo;
 import com.tpyzq.mobile.pangu.http.NetWorkUtil;
 import com.tpyzq.mobile.pangu.interfac.IsClickedListener;
@@ -38,11 +31,10 @@ import com.tpyzq.mobile.pangu.util.Helper;
 import com.tpyzq.mobile.pangu.util.SpUtils;
 import com.tpyzq.mobile.pangu.util.panguutil.UserUtil;
 import com.tpyzq.mobile.pangu.view.CentreToast;
+import com.tpyzq.mobile.pangu.view.CustomCenterDialog;
 import com.tpyzq.mobile.pangu.view.dialog.CancelDialog;
 import com.tpyzq.mobile.pangu.view.dialog.LoadingDialog;
-import com.tpyzq.mobile.pangu.view.dialog.MistakeDialog;
 import com.tpyzq.mobile.pangu.view.dialog.OTC_SubscriptionDialog;
-import com.tpyzq.mobile.pangu.view.dialog.ResultDialog;
 import com.zhy.http.okhttp.callback.StringCallback;
 
 import org.json.JSONException;
@@ -254,12 +246,7 @@ public class OTC_SubscriptionActivity extends BaseActivity implements View.OnCli
             public void onError(Call call, Exception e, int id) {
                 submit.dismiss();
                 LogUtil.e(TAG, e.toString());
-                MistakeDialog.showDialog("没有请求到数据，请重新再试一次", OTC_SubscriptionActivity.this, new MistakeDialog.MistakeDialgoListener() {
-                    @Override
-                    public void doPositive() {
-                        wipeData();
-                    }
-                });
+                showDialog("没有请求到数据，请重新再试一次",true);
             }
 
             @Override
@@ -283,12 +270,8 @@ public class OTC_SubscriptionActivity extends BaseActivity implements View.OnCli
                                 if ("0".equals(isorder)) {    //是否已经预约(0:是 1:否)
                                     setFocus(true);
                                 } else {
-                                    MistakeDialog.specialshowDialog("本产品需要先预约才能购买", OTC_SubscriptionActivity.this, new MistakeDialog.MistakeDialgoListener() {
-                                        @Override
-                                        public void doPositive() {
-                                            wipeData();
-                                        }
-                                    });
+                                    showDialog("本产品需要先预约才能购买",true);
+
                                 }
 
                             } else {
@@ -298,12 +281,7 @@ public class OTC_SubscriptionActivity extends BaseActivity implements View.OnCli
                     } else if ("10203".equals(code)) {
                         setFocus(true);
                     } else {
-                        MistakeDialog.showDialog(code + "," + type, OTC_SubscriptionActivity.this, new MistakeDialog.MistakeDialgoListener() {
-                            @Override
-                            public void doPositive() {
-                                wipeData();
-                            }
-                        });
+                        showDialog(code + "," + type,true);
                     }
 
                 } catch (JSONException e) {
@@ -313,6 +291,19 @@ public class OTC_SubscriptionActivity extends BaseActivity implements View.OnCli
             }
         });
 
+    }
+
+    private void showDialog(String msg,boolean isShow){
+        CustomCenterDialog customCenterDialog = CustomCenterDialog.CustomCenterDialog(msg,CustomCenterDialog.SHOWCENTER);
+        customCenterDialog.show(getFragmentManager(),OTC_SubscriptionActivity.class.toString());
+        if (isShow){
+            customCenterDialog.setOnClickListener(new CustomCenterDialog.ConfirmOnClick() {
+                @Override
+                public void confirmOnclick() {
+                    wipeData();
+                }
+            });
+        }
     }
 
     @Override
@@ -406,7 +397,7 @@ public class OTC_SubscriptionActivity extends BaseActivity implements View.OnCli
                             }
                         }
                     } else {
-                        MistakeDialog.showDialog(msg, OTC_SubscriptionActivity.this);
+                        showDialog(msg,false);
                     }
                 }
             });
@@ -426,7 +417,7 @@ public class OTC_SubscriptionActivity extends BaseActivity implements View.OnCli
                 if ("0".equalsIgnoreCase(code)) {
                     resultMap = (HashMap<String,String>)info.getData();
                     if (null == resultMap) {
-                        MistakeDialog.showDialog("数据异常", OTC_SubscriptionActivity.this, null);
+                        showDialog("数据异常",false);
                         return;
                     }
                     //弹框逻辑
@@ -451,7 +442,7 @@ public class OTC_SubscriptionActivity extends BaseActivity implements View.OnCli
                     intent.putExtra("resultMap",resultMap);
                     OTC_SubscriptionActivity.this.startActivityForResult(intent, REQUESTCODE);
                 } else {
-                    MistakeDialog.showDialog(msg, OTC_SubscriptionActivity.this, null);
+                    showDialog(msg,false);
                 }
             }
         });
@@ -480,7 +471,7 @@ public class OTC_SubscriptionActivity extends BaseActivity implements View.OnCli
                     CentreToast.showText(OTC_SubscriptionActivity.this,"委托已提交",true);
                     wipeData();
                 }else {
-                    MistakeDialog.showDialog(msg, OTC_SubscriptionActivity.this);
+                    showDialog(msg,false);
                     if (null!=dialog&&dialog.isShowing()) {
                         dialog.dismiss();
                         finish();

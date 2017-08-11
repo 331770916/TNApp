@@ -19,8 +19,8 @@ import com.tpyzq.mobile.pangu.log.LogHelper;
 import com.tpyzq.mobile.pangu.util.ConstantUtil;
 import com.tpyzq.mobile.pangu.util.Helper;
 import com.tpyzq.mobile.pangu.util.SpUtils;
+import com.tpyzq.mobile.pangu.view.CustomCenterDialog;
 import com.tpyzq.mobile.pangu.view.dialog.LoadingDialog;
-import com.tpyzq.mobile.pangu.view.dialog.MistakeDialog;
 import com.tpyzq.mobile.pangu.view.pickTime.TimePickerView;
 import com.tpyzq.mobile.pangu.view.pulllayou.PullLayout;
 import com.zhy.http.okhttp.callback.StringCallback;
@@ -144,9 +144,9 @@ public class CustomTab extends BaseTransferObserverTabView implements
                     int days = Helper.daysBetween(startDay, endDay);
 
                     if (str.equalsIgnoreCase(startDay) && !str.equals(endDay)) {
-                        MistakeDialog.showDialog("起始时间不能大于等于截止时间", mActivity);
+                        showDialog(("起始时间不能大于等于截止时间");
                     } else if (days > 90) {
-                        MistakeDialog.showDialog("起始时间和截止时间不能大于3个月", mActivity);
+                        showDialog("起始时间和截止时间不能大于3个月",false);
                     } else {
 
                         mEmptyBg.setVisibility(View.GONE);
@@ -162,6 +162,19 @@ public class CustomTab extends BaseTransferObserverTabView implements
 
 
                 break;
+        }
+    }
+
+    private void showDialog(String msg,boolean isClick){
+        CustomCenterDialog customCenterDialog  = CustomCenterDialog.CustomCenterDialog(msg,CustomCenterDialog.SHOWCENTER);
+        customCenterDialog.show(mActivity.getFragmentManager(),CustomTab.class.toString());
+        if (isClick){
+            customCenterDialog.setOnClickListener(new CustomCenterDialog.ConfirmOnClick() {
+                @Override
+                public void confirmOnclick() {
+                    mActivity.finish();
+                }
+            });
         }
     }
 
@@ -254,12 +267,7 @@ public class CustomTab extends BaseTransferObserverTabView implements
                             } else if ("-6".equals(code)) {
                                 mBanksTransferAccountsResultCode.getCode("-6", REQUESTCUSTOMTRANSFERRECORD, false);
                             } else {
-                                MistakeDialog.showDialog(msg, mActivity, new MistakeDialog.MistakeDialgoListener() {
-                                    @Override
-                                    public void doPositive() {
-                                        mActivity.finish();
-                                    }
-                                });
+                                showDialog(msg,true);
                             }
                         } catch (JSONException e) {
                             e.printStackTrace();

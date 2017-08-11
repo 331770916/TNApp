@@ -32,9 +32,9 @@ import com.tpyzq.mobile.pangu.util.panguutil.BRutil;
 import com.tpyzq.mobile.pangu.util.panguutil.SelfChoiceStockTempData;
 import com.tpyzq.mobile.pangu.util.panguutil.SelfStockHelper;
 import com.tpyzq.mobile.pangu.util.panguutil.UserUtil;
+import com.tpyzq.mobile.pangu.view.CustomCenterDialog;
 import com.tpyzq.mobile.pangu.view.dialog.DoSelfChoiceResultDialog;
 import com.tpyzq.mobile.pangu.view.dialog.LoadingDialog;
-import com.tpyzq.mobile.pangu.view.dialog.MistakeDialog;
 
 import org.json.JSONException;
 import org.json.JSONObject;
@@ -192,7 +192,7 @@ public class HotSearchAdapter extends BaseAdapter {
                                 }
                                 String msg = (String) result;
                                 if (!msg.contains("成功")) {
-                                    MistakeDialog.showDialog("" + msg, (Activity) mContext);
+                                    showDialog("" + msg);
                                     return;
                                 }
 
@@ -202,7 +202,7 @@ public class HotSearchAdapter extends BaseAdapter {
                                     String code = jsonObject.getString("code");
                                     String totalcount = jsonObject.getString("totalcount");
                                     if ("0".equals(totalcount)) {
-                                        MistakeDialog.showDialog("totalCount:" + totalcount + ",服务器无该数据", (Activity) mContext);
+                                        showDialog("totalCount:" + totalcount + ",服务器无该数据");
                                     } else {
                                         boolean tag1 = Db_PUB_STOCKLIST.deleteStockFromID(stockNumber);
                                         Db_HOME_INFO.deleteOneSelfNewsData(stockNumber);
@@ -262,7 +262,7 @@ public class HotSearchAdapter extends BaseAdapter {
                                 String msg = (String) result;
 
                                 if (!msg.contains("成功")) {
-                                    MistakeDialog.showDialog("" + msg, (Activity) mContext);
+                                    showDialog("" + msg);
                                     return;
                                 }
 
@@ -305,6 +305,11 @@ public class HotSearchAdapter extends BaseAdapter {
 
         });
         return convertView;
+    }
+
+    private void showDialog(String msg){
+        CustomCenterDialog customCenterDialog = CustomCenterDialog.CustomCenterDialog(msg,CustomCenterDialog.SHOWCENTER);
+        customCenterDialog.show(((Activity)mContext).getFragmentManager(),HotSearchAdapter.class.toString());
     }
 
 

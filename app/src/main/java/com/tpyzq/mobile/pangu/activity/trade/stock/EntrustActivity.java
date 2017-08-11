@@ -1,5 +1,6 @@
 package com.tpyzq.mobile.pangu.activity.trade.stock;
 
+import android.app.FragmentManager;
 import android.content.Context;
 import android.support.v4.view.ViewPager;
 import android.view.View;
@@ -40,9 +41,11 @@ public class EntrustActivity extends BaseActivity implements View.OnClickListene
     private List<BaseSearchPager> listBuy = new ArrayList<>();
     private MagicIndicator entrust_buy;
     private Map<Integer ,Boolean> map ;
+    public static FragmentManager entrustFragment;
 
     @Override
     public void initView() {
+        entrustFragment = getFragmentManager();
         map = new HashMap<>();
         mWtViewPager = (ViewPager) findViewById(R.id.wt_view);
         entrust_buy = (MagicIndicator) findViewById(R.id.entrust_buy);

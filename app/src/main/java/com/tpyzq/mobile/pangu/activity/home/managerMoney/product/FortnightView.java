@@ -15,8 +15,8 @@ import com.tpyzq.mobile.pangu.activity.home.managerMoney.adapter.ProductNoticeAd
 import com.tpyzq.mobile.pangu.base.CustomApplication;
 import com.tpyzq.mobile.pangu.data.CleverManamgerMoneyEntity;
 import com.tpyzq.mobile.pangu.util.Helper;
+import com.tpyzq.mobile.pangu.view.CustomCenterDialog;
 import com.tpyzq.mobile.pangu.view.dialog.DownloadDocPdfDialog;
-import com.tpyzq.mobile.pangu.view.dialog.MistakeDialog;
 import com.tpyzq.mobile.pangu.view.gridview.MyListView;
 import com.tpyzq.mobile.pangu.view.progress.FornightHorizontalProgressBar;
 
@@ -24,6 +24,8 @@ import java.io.File;
 import java.util.ArrayList;
 import java.util.List;
 import java.util.Map;
+
+import static com.tpyzq.mobile.pangu.activity.home.managerMoney.ManagerMoenyDetailActivity.ManagerMoenyfragmentManager;
 
 /**
  * Created by zhangwenbo on 2016/9/24.
@@ -95,7 +97,7 @@ public class FortnightView extends BaseProductView implements  DownloadDocPdfDia
                             DownloadDocPdfDialog.getInstance().showDialog(activity, FortnightView.this, url, name);
 
                         } else {
-                            MistakeDialog.showDialog("该url不正确", mActivity);
+                            showDialog("该url不正确");
                         }
                     }
 
@@ -127,7 +129,7 @@ public class FortnightView extends BaseProductView implements  DownloadDocPdfDia
                             //下载
                             DownloadDocPdfDialog.getInstance().showDialog(activity, FortnightView.this, url, name);
                         } else {
-                            MistakeDialog.showDialog("该url不正确", mActivity);
+                            showDialog("该url不正确");
                         }
                     }
 
@@ -223,6 +225,11 @@ public class FortnightView extends BaseProductView implements  DownloadDocPdfDia
 
         mProductInterduceAdapter.setDatas(productInterducedatas);
 
+    }
+
+    private void showDialog(String msg){
+        CustomCenterDialog customCenterDialog = CustomCenterDialog.CustomCenterDialog(msg,CustomCenterDialog.SHOWCENTER);
+        customCenterDialog.show(ManagerMoenyfragmentManager,FortnightView.class.toString());
     }
 
 

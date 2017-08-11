@@ -27,8 +27,8 @@ import com.tpyzq.mobile.pangu.util.Helper;
 import com.tpyzq.mobile.pangu.util.SpUtils;
 import com.tpyzq.mobile.pangu.util.panguutil.SelfStockHelper;
 import com.tpyzq.mobile.pangu.util.panguutil.UserUtil;
+import com.tpyzq.mobile.pangu.view.CustomCenterDialog;
 import com.tpyzq.mobile.pangu.view.dialog.LoadingDialog;
-import com.tpyzq.mobile.pangu.view.dialog.MistakeDialog;
 
 import java.util.ArrayList;
 
@@ -123,7 +123,7 @@ public class SelfChoiceDefaultTab extends BaseTabPager implements View.OnClickLi
                     mLoadingDialog.dismiss();
                 }
 
-                MistakeDialog.showDialog("" + result, mActivity);
+                showDialog("" + result);
                 return;
             }
 
@@ -183,7 +183,7 @@ public class SelfChoiceDefaultTab extends BaseTabPager implements View.OnClickLi
                 if (mLoadingDialog != null) {
                     mLoadingDialog.dismiss();
                 }
-                MistakeDialog.showDialog("无持仓股票", mActivity);
+                showDialog("无持仓股票");
             }
         } else if ("AddSelfChoiceStockConnect".equals(tag)) {
             if (mLoadingDialog != null) {
@@ -194,6 +194,11 @@ public class SelfChoiceDefaultTab extends BaseTabPager implements View.OnClickLi
 
         }
 
+    }
+
+    private void showDialog(String msg){
+        CustomCenterDialog cu = CustomCenterDialog.CustomCenterDialog(msg,CustomCenterDialog.SHOWCENTER);
+        cu.show(mActivity.getFragmentManager(),SelfChoiceDefaultTab.class.toString());
     }
 
     @Override

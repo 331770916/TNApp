@@ -12,15 +12,14 @@ import android.widget.TextView;
 import com.tpyzq.mobile.pangu.R;
 import com.tpyzq.mobile.pangu.activity.myself.login.TransactionLoginActivity;
 import com.tpyzq.mobile.pangu.base.BaseActivity;
-import com.tpyzq.mobile.pangu.data.AgreementSignedEntity;
 import com.tpyzq.mobile.pangu.http.NetWorkUtil;
 import com.tpyzq.mobile.pangu.log.LogHelper;
 import com.tpyzq.mobile.pangu.log.LogUtil;
 import com.tpyzq.mobile.pangu.util.ConstantUtil;
 import com.tpyzq.mobile.pangu.util.Helper;
 import com.tpyzq.mobile.pangu.util.SpUtils;
+import com.tpyzq.mobile.pangu.view.CustomCenterDialog;
 import com.tpyzq.mobile.pangu.view.dialog.LoadingDialog;
-import com.tpyzq.mobile.pangu.view.dialog.MistakeDialog;
 import com.tpyzq.mobile.pangu.view.dialog.ResultDialog;
 import com.zhy.http.okhttp.callback.StringCallback;
 
@@ -32,7 +31,6 @@ import java.util.HashMap;
 
 import okhttp3.Call;
 
-import static com.tpyzq.mobile.pangu.R.string.RiskWarning;
 
 
 /**
@@ -165,7 +163,7 @@ public class RiskWarningActivity extends BaseActivity implements View.OnClickLis
                     } else if ("-6".equals(jsonObject.getString("code"))) {
                         startActivity(new Intent(RiskWarningActivity.this, TransactionLoginActivity.class));
                     } else {
-                        MistakeDialog.showDialog(jsonObject.getString("msg"), RiskWarningActivity.this);
+                        showDialog(jsonObject.getString("msg"));
                     }
                 } catch (JSONException e) {
                     e.printStackTrace();
@@ -232,7 +230,7 @@ public class RiskWarningActivity extends BaseActivity implements View.OnClickLis
                         if (loadingDialog != null) {
                             loadingDialog.dismiss();
                         }
-                        MistakeDialog.showDialog(jsonObject.getString("msg"), RiskWarningActivity.this);
+                        showDialog(jsonObject.getString("msg"));
                     }
                 } catch (JSONException e) {
                     e.printStackTrace();
@@ -240,6 +238,11 @@ public class RiskWarningActivity extends BaseActivity implements View.OnClickLis
                 }
             }
         });
+    }
+
+    private void showDialog(String msg){
+        CustomCenterDialog customCenterDialog = CustomCenterDialog.CustomCenterDialog(msg,CustomCenterDialog.SHOWCENTER);
+        customCenterDialog.show(getFragmentManager(),RiskWarningActivity.class.toString());
     }
 
     @Override

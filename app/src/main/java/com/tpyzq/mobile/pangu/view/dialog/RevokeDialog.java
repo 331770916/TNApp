@@ -17,6 +17,7 @@ import com.tpyzq.mobile.pangu.util.ConstantUtil;
 import com.tpyzq.mobile.pangu.util.Helper;
 import com.tpyzq.mobile.pangu.util.SpUtils;
 import com.tpyzq.mobile.pangu.view.CentreToast;
+import com.tpyzq.mobile.pangu.view.CustomCenterDialog;
 import com.zhy.http.okhttp.callback.StringCallback;
 
 import org.json.JSONArray;
@@ -108,7 +109,9 @@ public class RevokeDialog extends BaseDialog implements View.OnClickListener {
                     } else if ("-6".equals(jsonObject.getString("code"))) {
                         context.startActivity(new Intent(context, TransactionLoginActivity.class));
                     } else {
-                        MistakeDialog.showDialog(jsonObject.getString("msg"), (Activity) context);
+                        CustomCenterDialog customCenterDialog = CustomCenterDialog.
+                                CustomCenterDialog(jsonObject.getString("msg"),CustomCenterDialog.SHOWCENTER);
+                        customCenterDialog.show(((Activity) context).getFragmentManager(),RevokeDialog.class.toString());
                     }
                 } catch (JSONException e) {
                     e.printStackTrace();

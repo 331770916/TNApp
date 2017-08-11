@@ -1,6 +1,7 @@
 package com.tpyzq.mobile.pangu.activity.home.managerMoney;
 
 import android.app.Dialog;
+import android.app.FragmentManager;
 import android.content.Intent;
 import android.text.TextUtils;
 import android.view.View;
@@ -18,9 +19,7 @@ import com.tpyzq.mobile.pangu.activity.home.managerMoney.product.currencyFund.Mo
 import com.tpyzq.mobile.pangu.activity.myself.login.ShouJiVerificationActivity;
 import com.tpyzq.mobile.pangu.activity.myself.login.ShouJiZhuCeActivity;
 import com.tpyzq.mobile.pangu.activity.myself.login.TransactionLoginActivity;
-import com.tpyzq.mobile.pangu.activity.trade.open_fund.AddOrModFixFundActivity;
 import com.tpyzq.mobile.pangu.activity.trade.open_fund.FixFundListActivity;
-import com.tpyzq.mobile.pangu.activity.trade.open_fund.OpenFundActivity;
 import com.tpyzq.mobile.pangu.base.BaseActivity;
 import com.tpyzq.mobile.pangu.base.SimpleRemoteControl;
 import com.tpyzq.mobile.pangu.data.CleverManamgerMoneyEntity;
@@ -34,13 +33,12 @@ import com.tpyzq.mobile.pangu.http.doConnect.home.ToGetProductInfoOtcConnect;
 import com.tpyzq.mobile.pangu.http.doConnect.home.ToLoadPdfConnect;
 import com.tpyzq.mobile.pangu.interfac.DoPrecontractLoadImpl;
 import com.tpyzq.mobile.pangu.interfac.ICallbackResult;
-import com.tpyzq.mobile.pangu.log.LogUtil;
 import com.tpyzq.mobile.pangu.util.ConstantUtil;
 import com.tpyzq.mobile.pangu.util.Helper;
 import com.tpyzq.mobile.pangu.util.TransitionUtils;
+import com.tpyzq.mobile.pangu.view.CustomCenterDialog;
 import com.tpyzq.mobile.pangu.view.dialog.CounterDialog;
 import com.tpyzq.mobile.pangu.view.dialog.LoadingDialog;
-import com.tpyzq.mobile.pangu.view.dialog.MistakeDialog;
 
 import java.text.DecimalFormat;
 import java.text.NumberFormat;
@@ -90,9 +88,11 @@ public class ManagerMoenyDetailActivity extends BaseActivity implements View.OnC
     private String schema_id;
     private String prod_code;
     private String mProdType;
+    public static FragmentManager ManagerMoenyfragmentManager;
 
     @Override
     public void initView() {
+        ManagerMoenyfragmentManager = getFragmentManager();
         mLoadingDialog = LoadingDialog.initDialog(this, "正在加载");
         mLoadingLayout = (FrameLayout) findViewById(R.id.manamgerMoneyloadingLayout);
         mLoadingLayout.setVisibility(View.VISIBLE);
@@ -373,19 +373,14 @@ public class ManagerMoenyDetailActivity extends BaseActivity implements View.OnC
             mLoadingDialog.dismiss();
         }
         if(result instanceof String ){
-            MistakeDialog.showDialog(result + "------------"+tag,this);
+            showDialog(result + "------------"+tag,false);
             return;
         }
         mEntities = (ArrayList<CleverManamgerMoneyEntity>) result;
         if ("LoadPdfConnect".equals(tag) || "GetProductInfoConnect".equals(tag)) {
             if (mEntities == null || mEntities.size() <= 0) {
                 try {
-                    MistakeDialog.showDialog("暂无数据", this, new MistakeDialog.MistakeDialgoListener() {
-                        @Override
-                        public void doPositive() {
-                            finish();
-                        }
-                    });
+                    showDialog("暂无数据",true);
                 } catch (Exception e) {
                     e.printStackTrace();
                 }
@@ -393,12 +388,7 @@ public class ManagerMoenyDetailActivity extends BaseActivity implements View.OnC
         }
         mLoadingLayout.setVisibility(View.GONE);
             if (!TextUtils.isEmpty(mEntities.get(0).getMistackMsg())) {
-                MistakeDialog.showDialog(mEntities.get(0).getMistackMsg(), this, new MistakeDialog.MistakeDialgoListener() {
-                    @Override
-                    public void doPositive() {
-                        finish();
-                    }
-                });
+                showDialog(mEntities.get(0).getMistackMsg(),true);
                 return;
             }
 
@@ -407,6 +397,20 @@ public class ManagerMoenyDetailActivity extends BaseActivity implements View.OnC
             SimpleRemoteControl simpleRemoteControl = new SimpleRemoteControl(this);
             simpleRemoteControl.setCommand(new ToLoadPdfConnect(new LoadPdfConnect(TAG, "", prod_code, mProductType, mEntities)));
             simpleRemoteControl.startConnect();
+        }
+    }
+
+    private void showDialog(String msg,boolean isShowClick){
+        final CustomCenterDialog customCenterDialog = CustomCenterDialog.CustomCenterDialog(msg,CustomCenterDialog.SHOWCENTER);
+        customCenterDialog.show(ManagerMoenyfragmentManager,ManagerMoenyDetailActivity.class.toString());
+        if (isShowClick){
+            customCenterDialog.setOnClickListener(new CustomCenterDialog.ConfirmOnClick() {
+                @Override
+                public void confirmOnclick() {
+                    finish();
+                    customCenterDialog.dismiss();
+                }
+            });
         }
     }
 

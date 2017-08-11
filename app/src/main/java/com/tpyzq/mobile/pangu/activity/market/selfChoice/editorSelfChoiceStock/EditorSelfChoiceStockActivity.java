@@ -39,9 +39,9 @@ import com.tpyzq.mobile.pangu.util.Helper;
 import com.tpyzq.mobile.pangu.util.SpUtils;
 import com.tpyzq.mobile.pangu.util.panguutil.SelfStockHelper;
 import com.tpyzq.mobile.pangu.util.panguutil.UserUtil;
+import com.tpyzq.mobile.pangu.view.CustomCenterDialog;
 import com.tpyzq.mobile.pangu.view.dialog.LoadingDialog;
 import com.tpyzq.mobile.pangu.view.dialog.MessageDialog;
-import com.tpyzq.mobile.pangu.view.dialog.MistakeDialog;
 import com.tpyzq.mobile.pangu.view.dialog.ResultDialog;
 import com.tpyzq.mobile.pangu.view.dragsortlistview.DragSortListView;
 
@@ -218,8 +218,7 @@ public class EditorSelfChoiceStockActivity extends BaseActivity implements ICall
                     if (mLoadingDialog != null) {
                         mLoadingDialog.dismiss();
                     }
-
-                    MistakeDialog.showDialog("" + result, EditorSelfChoiceStockActivity.this);
+                    showDialog("" + result);
                 }
                 return;
             }
@@ -278,7 +277,7 @@ public class EditorSelfChoiceStockActivity extends BaseActivity implements ICall
                     if (mLoadingDialog != null) {
                         mLoadingDialog.dismiss();
                     }
-                    MistakeDialog.showDialog("无持仓股票", EditorSelfChoiceStockActivity.this);
+                    showDialog("无持仓股票");
                 }
             }
         } else if ("AddSelfChoiceStockConnect".equals(tag)) {
@@ -314,15 +313,15 @@ public class EditorSelfChoiceStockActivity extends BaseActivity implements ICall
                 finish();
             } else {
                 if (!isDestory) {
-                    MistakeDialog.showDialog("删除失败", EditorSelfChoiceStockActivity.this, new MistakeDialog.MistakeDialgoListener() {
-                        @Override
-                        public void doPositive() {
-
-                        }
-                    });
+                    showDialog("删除失败");
                 }
             }
         }
+    }
+
+    private void showDialog(String msg){
+        CustomCenterDialog customCenterDialog = CustomCenterDialog.CustomCenterDialog(msg,CustomCenterDialog.SHOWCENTER);
+        customCenterDialog.show(getFragmentManager(),EditorSelfChoiceStockActivity.class.toString());
     }
 
     @Override

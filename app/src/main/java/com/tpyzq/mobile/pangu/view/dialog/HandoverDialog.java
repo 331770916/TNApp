@@ -10,9 +10,6 @@ import android.widget.TextView;
 
 import com.tpyzq.mobile.pangu.R;
 import com.tpyzq.mobile.pangu.base.CustomApplication;
-import com.tpyzq.mobile.pangu.util.ConstantUtil;
-import com.tpyzq.mobile.pangu.util.SpUtils;
-
 
 /**
  * Created by wangqi on 2016/9/6.

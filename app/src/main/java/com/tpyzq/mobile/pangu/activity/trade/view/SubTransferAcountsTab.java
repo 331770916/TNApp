@@ -18,7 +18,6 @@ import com.google.gson.reflect.TypeToken;
 import com.tpyzq.mobile.pangu.R;
 import com.tpyzq.mobile.pangu.base.CustomApplication;
 import com.tpyzq.mobile.pangu.data.BankAccountEntity;
-import com.tpyzq.mobile.pangu.db.Db_PUB_USERS;
 import com.tpyzq.mobile.pangu.http.NetWorkUtil;
 import com.tpyzq.mobile.pangu.interfac.BanksTransferAccountsResultCode;
 import com.tpyzq.mobile.pangu.interfac.ITab;
@@ -30,8 +29,8 @@ import com.tpyzq.mobile.pangu.util.SpUtils;
 import com.tpyzq.mobile.pangu.util.keyboard.UsefulKeyBoard;
 import com.tpyzq.mobile.pangu.util.panguutil.PanguParameters;
 import com.tpyzq.mobile.pangu.util.panguutil.UserUtil;
+import com.tpyzq.mobile.pangu.view.CustomCenterDialog;
 import com.tpyzq.mobile.pangu.view.dialog.LoadingDialog;
-import com.tpyzq.mobile.pangu.view.dialog.MistakeDialog;
 import com.tpyzq.mobile.pangu.view.keybody.InputPasswordView;
 import com.tpyzq.mobile.pangu.view.keybody.PopKeyBody;
 import com.yzd.unikeysdk.PasswordKeyboard;
@@ -293,12 +292,7 @@ public class SubTransferAcountsTab extends BaseTransferObserverTabView implement
                 }
 
                 if (!bean.getCode().equals("0")) {
-                    MistakeDialog.showDialog(bean.getMsg(), mActivity, new MistakeDialog.MistakeDialgoListener() {
-                        @Override
-                        public void doPositive() {
-                            mActivity.finish();
-                        }
-                    });
+                    showDialog(bean.getMsg());
                     return;
                 }
 
@@ -370,12 +364,7 @@ public class SubTransferAcountsTab extends BaseTransferObserverTabView implement
                 }
 
                 if (!bean.getCode().equals("0")) {
-                    MistakeDialog.showDialog(bean.getMsg(), mActivity, new MistakeDialog.MistakeDialgoListener() {
-                        @Override
-                        public void doPositive() {
-                            mActivity.finish();
-                        }
-                    });
+                    showDialog(bean.getMsg());
                     return;
                 }
 
@@ -387,6 +376,18 @@ public class SubTransferAcountsTab extends BaseTransferObserverTabView implement
 
                 }
                 compliteListener.complite();
+            }
+        });
+    }
+
+    private void showDialog(String msg){
+        final CustomCenterDialog customCenterDialog = CustomCenterDialog.CustomCenterDialog(msg,CustomCenterDialog.SHOWCENTER);
+        customCenterDialog.show(mActivity.getFragmentManager(),SubTransferAcountsTab.class.toString());
+        customCenterDialog.setOnClickListener(new CustomCenterDialog.ConfirmOnClick() {
+            @Override
+            public void confirmOnclick() {
+                customCenterDialog.dismiss();
+                mActivity.finish();
             }
         });
     }

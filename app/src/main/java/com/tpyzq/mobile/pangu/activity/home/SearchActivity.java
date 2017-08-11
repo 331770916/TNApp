@@ -52,8 +52,8 @@ import com.tpyzq.mobile.pangu.util.Helper;
 import com.tpyzq.mobile.pangu.util.SpUtils;
 import com.tpyzq.mobile.pangu.util.panguutil.SelfStockHelper;
 import com.tpyzq.mobile.pangu.util.panguutil.UserUtil;
+import com.tpyzq.mobile.pangu.view.CustomCenterDialog;
 import com.tpyzq.mobile.pangu.view.dialog.LoadingDialog;
-import com.tpyzq.mobile.pangu.view.dialog.MistakeDialog;
 import com.tpyzq.mobile.pangu.view.magicindicator.FragmentContainerHelper;
 import com.tpyzq.mobile.pangu.view.magicindicator.MagicIndicator;
 import com.tpyzq.mobile.pangu.view.magicindicator.ViewPagerHelper;
@@ -178,7 +178,7 @@ public class SearchActivity extends BaseActivity implements View.OnClickListener
                 if (mLoadingDialog != null) {
                     mLoadingDialog.dismiss();
                 }
-                MistakeDialog.showDialog("" + result, SearchActivity.this);
+                showDialog("" + result);
                 return;
             }
             ArrayList<StockInfoEntity> stockInfoEntities = (ArrayList<StockInfoEntity>) result;
@@ -217,7 +217,7 @@ public class SearchActivity extends BaseActivity implements View.OnClickListener
                 mSimpleRemoteControl.setCommand(new ToAddSelfChoiceStockConnect(new AddSelfChoiceStockConnect(TAG, "", UserUtil.capitalAccount, stockCodes, UserUtil.userId, stockNames, stockPricees)));
                 mSimpleRemoteControl.startConnect();
             } else {
-                MistakeDialog.showDialog("无持仓股票", SearchActivity.this);
+                showDialog("无持仓股票");
             }
         } else if ("AddSelfChoiceStockConnect".equals(tag)) {
             if (mLoadingDialog != null) {
@@ -229,7 +229,7 @@ public class SearchActivity extends BaseActivity implements View.OnClickListener
             if (result instanceof String) {
                 String strResult = (String) result;
                 if (strResult.contains("-1")) {
-                    MistakeDialog.showDialog("网络异常", this);
+                    showDialog("网络异常");
                 } else {
                     mRecyclerView.setVisibility(View.GONE);
                     mNoSearchText.setVisibility(View.VISIBLE);
@@ -260,6 +260,11 @@ public class SearchActivity extends BaseActivity implements View.OnClickListener
                 }
             }
         }
+    }
+
+    private void showDialog(String msg){
+        CustomCenterDialog customCenterDialog = CustomCenterDialog.CustomCenterDialog(msg,CustomCenterDialog.SHOWCENTER);
+        customCenterDialog.show(getFragmentManager(),SearchActivity.class.toString());
     }
 
     @Override

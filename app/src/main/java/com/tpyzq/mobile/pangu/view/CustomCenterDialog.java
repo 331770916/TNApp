@@ -91,6 +91,8 @@ public class CustomCenterDialog extends DialogFragment {
         initEvent();
         //设置窗口动画
         getDialog().getWindow().getAttributes().windowAnimations = R.style.CustomDialog;
+        getDialog().getWindow().setBackgroundDrawableResource(android.R.color.transparent);
+
 
     }
 
