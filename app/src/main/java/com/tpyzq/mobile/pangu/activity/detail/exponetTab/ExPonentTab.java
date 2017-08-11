@@ -14,6 +14,8 @@ import android.widget.Toast;
 
 import com.tpyzq.mobile.pangu.R;
 import com.tpyzq.mobile.pangu.activity.detail.StockDetailActivity;
+import com.tpyzq.mobile.pangu.activity.market.quotation.StockListActivity;
+import com.tpyzq.mobile.pangu.activity.market.quotation.StockListIntent;
 import com.tpyzq.mobile.pangu.activity.trade.view.ScaleTransitionPagerTitleView;
 import com.tpyzq.mobile.pangu.adapter.detail.ExponentAdapter;
 import com.tpyzq.mobile.pangu.base.CustomApplication;
@@ -53,6 +55,7 @@ public class ExPonentTab extends BaseExponentTab implements ICallbackResult, Ada
     private ArrayList<StockInfoEntity> mBeans;
     private String _exponentCode;
     private View footerView;
+    private int mIndex;
 
     /**
      * 指数代码传6位
@@ -96,15 +99,39 @@ public class ExPonentTab extends BaseExponentTab implements ICallbackResult, Ada
                 @Override
                 public void onClick(View v) {
                     Intent intent = new Intent();
+                    StockListIntent data = new StockListIntent();
+                    data.setHead2("现价");
+                    data.setHead3("涨跌幅");
+                    data.setHead1("股票名称");
+
+                    intent.putExtra("tag","exponent");
+                    intent.putExtra("stockIntent", data);
+                    intent.putExtra("isExponent", true);
+
+                    if (mIndex == 0) {
+                        intent.putExtra("flag", "1");
+                        intent.putExtra("asc", "1");
+                        intent.putExtra("type", "1000");
+                    } else if (mIndex == 1) {
+                        intent.putExtra("flag", "1");
+                        intent.putExtra("asc", "2");
+                        intent.putExtra("type", "2000");
+                        intent.putExtra("order", "2");
+                    } else {
+                        data.setHead3("换手率");
+                        intent.putExtra("flag", "2");
+                        intent.putExtra("asc", "1");
+                        intent.putExtra("type", "3000");
+                    }
                     intent.putExtra("exponentCode", _exponentCode);
-                    intent.setClass(activity, ExpontentMoreActivity.class);
+                    intent.setClass(activity, StockListActivity.class);
                     activity.startActivity(intent);
                 }
             });
 
 
         final SimpleRemoteControl simpleRemoteControl = new SimpleRemoteControl(this);
-        simpleRemoteControl.setCommand(new ToExponentConnect(new ExponentConnect("0", "20", TAG, "1", "1", _exponentCode, ZF_TYPE, this)));
+        simpleRemoteControl.setCommand(new ToExponentConnect(new ExponentConnect("0", "10", TAG, "1", "1", _exponentCode, ZF_TYPE, this)));
         simpleRemoteControl.startConnect();
 
 
@@ -144,7 +171,7 @@ public class ExPonentTab extends BaseExponentTab implements ICallbackResult, Ada
         if (mBeans != null && mBeans.size() > 0) {
             mAdapter.setData(mBeans);
 
-            if (mBeans.size() < 20) {
+            if (mBeans.size() < 10) {
                 TextView textView = (TextView) footerView.findViewById(R.id.footerMore);
                 textView.setText("没有更多啦");
                 textView.setTextColor(ContextCompat.getColor(mActivity, R.color.newStockTitle));
@@ -190,18 +217,19 @@ public class ExPonentTab extends BaseExponentTab implements ICallbackResult, Ada
                 simplePagerTitleView.setOnClickListener(new View.OnClickListener() {
                     @Override
                     public void onClick(View v) {
+                        mIndex = index;
                         fragmentContainerHelper.handlePageSelected(index);
                         switch (index) {
                             case 0:
-                                simpleRemoteControl.setCommand(new ToExponentConnect(new ExponentConnect("0", "20", TAG, "1", "1", exponentCode, ZF_TYPE, ExPonentTab.this)));
+                                simpleRemoteControl.setCommand(new ToExponentConnect(new ExponentConnect("0", "10", TAG, "1", "1", exponentCode, ZF_TYPE, ExPonentTab.this)));
                                 simpleRemoteControl.startConnect();
                                 break;
                             case 1:
-                                simpleRemoteControl.setCommand(new ToExponentConnect(new ExponentConnect("0", "20", TAG, "1", "2", exponentCode, DF_TYPE, ExPonentTab.this)));
+                                simpleRemoteControl.setCommand(new ToExponentConnect(new ExponentConnect("0", "10", TAG, "1", "2", exponentCode, DF_TYPE, ExPonentTab.this)));
                                 simpleRemoteControl.startConnect();
                                 break;
                             case 2:
-                                simpleRemoteControl.setCommand(new ToExponentConnect(new ExponentConnect("0", "20", TAG, "2", "1", exponentCode, HS_TYPE, ExPonentTab.this)));
+                                simpleRemoteControl.setCommand(new ToExponentConnect(new ExponentConnect("0", "10", TAG, "2", "1", exponentCode, HS_TYPE, ExPonentTab.this)));
                                 simpleRemoteControl.startConnect();
                                 break;
                         }

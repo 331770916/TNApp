@@ -337,7 +337,7 @@
                                 android:layout_width="wrap_content"
                                 android:layout_height="wrap_content"
                                 android:layout_gravity="center_vertical"
-                                android:text="最大可借出(元): "
+                                android:text="最大借出: "
                                 android:textColor="@color/newStockTitle"
                                 android:textSize="@dimen/txtSize12" />
 

@@ -214,6 +214,40 @@ public class StockListAdapter extends BaseAdapter {
 //            }
 
 
+        } else if ("exponent".equals(mFromStockListTag)) {
+
+            if (!TextUtils.isEmpty(mBeans.get(position).getType()) && "3000".equals(mBeans.get(position).getType())) {
+
+                double zdf = Double.parseDouble(mBeans.get(position).getTurnover());
+                viewHodler.turnoverRate.setText(mFormat2.format(zdf));
+
+                viewHodler.turnoverRate.setTextColor(ContextCompat.getColor(CustomApplication.getContext(), R.color.text));
+
+            } else if (!TextUtils.isEmpty(mBeans.get(position).getType()) && "2000".equals(mBeans.get(position).getType())
+                    || !TextUtils.isEmpty(mBeans.get(position).getType()) && "1000".equals(mBeans.get(position).getType())) {
+
+                double zdf = mBeans.get(position).getPriceChangeRatio();
+                viewHodler.turnoverRate.setText(mFormat2.format(zdf));
+
+                if (zdf > 0f) {
+                    viewHodler.turnoverRate.setTextColor(ContextCompat.getColor(CustomApplication.getContext(), R.color.red));
+                } else if (zdf == 0f) {
+                    viewHodler.turnoverRate.setTextColor(ContextCompat.getColor(CustomApplication.getContext(), R.color.black));
+                } else {
+                    viewHodler.turnoverRate.setTextColor(ContextCompat.getColor(CustomApplication.getContext(), R.color.green));
+                }
+
+            }
+
+            double zdf = mBeans.get(position).getPriceChangeRatio();
+
+            if (zdf > 0f) {
+                viewHodler.turnoverPrice.setTextColor(ContextCompat.getColor(CustomApplication.getContext(), R.color.red));
+            } else if (zdf == 0f) {
+                viewHodler.turnoverPrice.setTextColor(ContextCompat.getColor(CustomApplication.getContext(), R.color.black));
+            } else {
+                viewHodler.turnoverPrice.setTextColor(ContextCompat.getColor(CustomApplication.getContext(), R.color.green));
+            }
         }
 
         return convertView;

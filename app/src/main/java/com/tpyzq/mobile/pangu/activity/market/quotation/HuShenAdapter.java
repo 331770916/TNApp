@@ -678,7 +678,6 @@ public class HuShenAdapter extends BaseAdapter {
                     data.setHead2("现价");
                     data.setHead3("涨跌幅");
                     data.setHead1("股票名称");
-                    data.setFiledNames(new String[]{"stockName", "stockNumber", "newPrice", "priceChangeRatio"});
                     intent.putExtra("market", "0");
                     intent.putExtra("type", "1");
                     intent.putExtra("tag", "lingzhang");
