@@ -29,6 +29,7 @@ import com.tpyzq.mobile.pangu.http.doConnect.home.GetFundHistoryValueConnect;
 import com.tpyzq.mobile.pangu.http.doConnect.home.ToGetFundHistoryValueConnect;
 import com.tpyzq.mobile.pangu.interfac.ICallbackResult;
 import com.tpyzq.mobile.pangu.util.Helper;
+import com.tpyzq.mobile.pangu.view.CentreToast;
 import com.tpyzq.mobile.pangu.view.chart.element.MyXAxis;
 import com.tpyzq.mobile.pangu.view.chart.element.MyYAxis;
 
@@ -202,7 +203,7 @@ public class MoneyFundFundChartView extends MoneyFundBaseView implements RadioGr
             String msg = (String) datas.get("msg");
 
             if (!TextUtils.isEmpty(code) && "-1".equals(code)) {
-                Helper.getInstance().showToast(CustomApplication.getContext(), msg);
+                CentreToast.showText(CustomApplication.getContext(), msg);
                 return;
             }
 

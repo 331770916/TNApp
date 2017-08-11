@@ -20,6 +20,7 @@ import com.tpyzq.mobile.pangu.util.Helper;
 import com.tpyzq.mobile.pangu.util.SpUtils;
 import com.tpyzq.mobile.pangu.util.panguutil.JSAPI;
 import com.tpyzq.mobile.pangu.util.panguutil.UserUtil;
+import com.tpyzq.mobile.pangu.view.CentreToast;
 import com.tpyzq.mobile.pangu.view.dialog.LoadingDialog;
 import com.tpyzq.mobile.pangu.view.dialog.ShareDialog;
 import com.tpyzq.mobile.pangu.view.webview.ProgressWebView;
@@ -78,7 +79,7 @@ public class TradingDynamicsActivity extends BaseActivity implements View.OnClic
             @Override
             public void onError(Call call, Exception e, int id) {
                 LogUtil.e(TAG, e.toString());
-                Helper.getInstance().showToast(TradingDynamicsActivity.this, "网络异常");
+                CentreToast.showText(TradingDynamicsActivity.this, "网络异常");
                 setShow();
             }
 
@@ -126,7 +127,7 @@ public class TradingDynamicsActivity extends BaseActivity implements View.OnClic
                     }
                 } catch (JSONException e) {
                     e.printStackTrace();
-                    Helper.getInstance().showToast(TradingDynamicsActivity.this, "网络异常");
+                    CentreToast.showText(TradingDynamicsActivity.this, "网络异常");
                 }
             }
         });
@@ -151,7 +152,7 @@ public class TradingDynamicsActivity extends BaseActivity implements View.OnClic
         NetWorkUtil.getInstence().okHttpForPostString(TAG, ConstantUtil.getURL_S_BB(), map, new StringCallback() {
             @Override
             public void onError(Call call, Exception e, int id) {
-                Helper.getInstance().showToast(TradingDynamicsActivity.this, "网络异常");
+                CentreToast.showText(TradingDynamicsActivity.this, "网络异常");
                 LogUtil.e(TAG, e.toString());
                 setShow();
             }
@@ -184,7 +185,7 @@ public class TradingDynamicsActivity extends BaseActivity implements View.OnClic
                     }
                 } catch (JSONException e) {
                     e.printStackTrace();
-                    Helper.getInstance().showToast(TradingDynamicsActivity.this, "网络异常");
+                    CentreToast.showText(TradingDynamicsActivity.this, "网络异常");
                 }
             }
         });

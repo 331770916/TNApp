@@ -17,6 +17,7 @@ import com.tpyzq.mobile.pangu.data.ResultInfo;
 import com.tpyzq.mobile.pangu.http.OkHttpUtil;
 import com.tpyzq.mobile.pangu.util.Helper;
 import com.tpyzq.mobile.pangu.util.SpUtils;
+import com.tpyzq.mobile.pangu.view.CentreToast;
 import com.tpyzq.mobile.pangu.view.CustomCenterDialog;
 import com.tpyzq.mobile.pangu.view.dialog.LoadingDialog;
 import com.tpyzq.mobile.pangu.view.dialog.MistakeDialog;
@@ -131,7 +132,7 @@ public class ETFStockListActivity extends BaseActivity {
                     }
                     //
                 } else  if ("400".equals(info.getCode()) || "-2".equals(info.getCode()) || "-3".equals(info.getCode())) {   //  网络错误 解析错误 其他
-                    Helper.getInstance().showToast(ETFStockListActivity.this, info.getMsg());
+                    CentreToast.showText(ETFStockListActivity.this, info.getMsg());
                 }else if ("-6".equals(info.getCode())){
                     skip.startLogin(ETFStockListActivity.this);
                 } else {

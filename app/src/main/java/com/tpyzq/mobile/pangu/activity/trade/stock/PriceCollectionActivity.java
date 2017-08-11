@@ -385,7 +385,6 @@ public class PriceCollectionActivity extends BaseActivity implements View.OnClic
 
                 if (bean.getData() != null &&  bean.getData().size() > 0) {
                     getBanksList();
-//                    ResultDialog.getInstance().show("" + bean.getMsg(), R.mipmap.lc_success);
                     CentreToast.showText(PriceCollectionActivity.this,""+bean.getMsg(),true);
                 }
 

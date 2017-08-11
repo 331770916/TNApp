@@ -25,10 +25,9 @@ import com.tpyzq.mobile.pangu.util.ColorUtils;
 import com.tpyzq.mobile.pangu.util.ConstantUtil;
 import com.tpyzq.mobile.pangu.util.Helper;
 import com.tpyzq.mobile.pangu.util.SpUtils;
-import com.tpyzq.mobile.pangu.util.ToastUtils;
+import com.tpyzq.mobile.pangu.view.CentreToast;
 import com.tpyzq.mobile.pangu.view.CustomCenterDialog;
 import com.tpyzq.mobile.pangu.view.dialog.DownloadDocPdfDialog;
-import com.tpyzq.mobile.pangu.view.dialog.ResultDialog;
 import com.zhy.http.okhttp.callback.StringCallback;
 
 import org.json.JSONArray;
@@ -212,7 +211,7 @@ public class SignActivity extends BaseActivity implements View.OnClickListener, 
                     } else if ("-6".equals(code)) {
                         startActivity(new Intent(SignActivity.this, TransactionLoginActivity.class));
                     } else {
-                        ToastUtils.showShort(SignActivity.this, msg);
+                        CentreToast.showText(SignActivity.this, msg);
                     }
                 } catch (JSONException e) {
                     e.printStackTrace();
@@ -252,7 +251,7 @@ public class SignActivity extends BaseActivity implements View.OnClickListener, 
                     String code = object.getString("code");
                     JSONArray jsonArray = new JSONArray(data);
                     if ("0".equals(code)) {
-                        ResultDialog.getInstance().show("签署成功", R.mipmap.lc_success);
+                        CentreToast.showText(SignActivity.this,"签署成功",true);
                         setResult(1);
                         finish();
                     } else if ("-6".equals(code)) {
@@ -260,7 +259,7 @@ public class SignActivity extends BaseActivity implements View.OnClickListener, 
                     } else if ("400".equals(code)) {
 //                        startActivity(new Intent(SignActivity.this, Agreement.class));
                     } else {
-                        ToastUtils.showShort(SignActivity.this, msg);
+                        CentreToast.showText(SignActivity.this, msg);
                         finish();
                     }
                 } catch (JSONException e) {

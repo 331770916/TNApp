@@ -22,6 +22,7 @@ import com.tpyzq.mobile.pangu.log.LogHelper;
 import com.tpyzq.mobile.pangu.util.ConstantUtil;
 import com.tpyzq.mobile.pangu.util.Helper;
 import com.tpyzq.mobile.pangu.util.SpUtils;
+import com.tpyzq.mobile.pangu.view.CentreToast;
 import com.tpyzq.mobile.pangu.view.CustomCenterDialog;
 import com.tpyzq.mobile.pangu.view.dialog.LoadingDialog;
 import com.tpyzq.mobile.pangu.view.listview.NoScrollListView;
@@ -144,7 +145,7 @@ public class RiskEvaluationActivity extends BaseActivity implements View.OnClick
             @Override
             public void onError(Call call, Exception e, int id) {
                 LogHelper.e(TAG, e.toString());
-                Helper.getInstance().showToast(RiskEvaluationActivity.this, "网络异常");
+                CentreToast.showText(RiskEvaluationActivity.this, "网络异常");
             }
 
             @Override
@@ -178,7 +179,7 @@ public class RiskEvaluationActivity extends BaseActivity implements View.OnClick
                     }
                 } catch (JSONException e) {
                     e.printStackTrace();
-                    Helper.getInstance().showToast(RiskEvaluationActivity.this, "网络异常");
+                    CentreToast.showText(RiskEvaluationActivity.this, "网络异常");
                 }
             }
         });
@@ -207,7 +208,7 @@ public class RiskEvaluationActivity extends BaseActivity implements View.OnClick
             @Override
             public void onError(Call call, Exception e, int id) {
                 LogHelper.e(TAG, e.toString());
-                Helper.getInstance().showToast(RiskEvaluationActivity.this, "网络异常");
+                CentreToast.showText(RiskEvaluationActivity.this, "网络异常");
             }
 
             @Override
@@ -276,7 +277,7 @@ public class RiskEvaluationActivity extends BaseActivity implements View.OnClick
                     }
                 } catch (JSONException e) {
                     e.printStackTrace();
-                    Helper.getInstance().showToast(RiskEvaluationActivity.this, "网络异常");
+                    CentreToast.showText(RiskEvaluationActivity.this, "网络异常");
                 }
             }
         });
@@ -305,7 +306,7 @@ public class RiskEvaluationActivity extends BaseActivity implements View.OnClick
                     mloadingDialog.dismiss();
                 }
                 LogHelper.e(TAG, e.toString());
-                Helper.getInstance().showToast(RiskEvaluationActivity.this, "网络异常");
+                CentreToast.showText(RiskEvaluationActivity.this, "网络异常");
             }
 
             @Override
@@ -633,7 +634,7 @@ public class RiskEvaluationActivity extends BaseActivity implements View.OnClick
             @Override
             public void onError(Call call, Exception e, int id) {
                 LogHelper.e(TAG, e.toString());
-                Helper.getInstance().showToast(RiskEvaluationActivity.this, "网络异常");
+                CentreToast.showText(RiskEvaluationActivity.this, "网络异常");
             }
 
             @Override

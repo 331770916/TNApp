@@ -17,6 +17,7 @@ import com.tpyzq.mobile.pangu.http.doConnect.home.AnnounceMentConnect;
 import com.tpyzq.mobile.pangu.http.doConnect.home.ToAnnounceMentConnect;
 import com.tpyzq.mobile.pangu.interfac.ICallbackResult;
 import com.tpyzq.mobile.pangu.util.Helper;
+import com.tpyzq.mobile.pangu.view.CentreToast;
 import com.tpyzq.mobile.pangu.view.gridview.MyListView;
 
 import java.util.ArrayList;
@@ -90,7 +91,7 @@ public class AnnounceMent extends MoneyFundBaseView implements ICallbackResult {
             if (!TextUtils.isEmpty(code) && "-1".equals(code)) {
                 mKongLayout.setVisibility(View.VISIBLE);
                 mListView.setVisibility(View.GONE);
-                Helper.getInstance().showToast(CustomApplication.getContext(), msg);
+                CentreToast.showText(CustomApplication.getContext(), msg);
                 return;
             }
 

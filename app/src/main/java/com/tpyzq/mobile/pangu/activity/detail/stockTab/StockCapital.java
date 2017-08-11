@@ -10,8 +10,8 @@ import com.tpyzq.mobile.pangu.data.StockCapitalEntity;
 import com.tpyzq.mobile.pangu.http.NetWorkUtil;
 import com.tpyzq.mobile.pangu.util.ColorUtils;
 import com.tpyzq.mobile.pangu.util.ConstantUtil;
-import com.tpyzq.mobile.pangu.util.ToastUtils;
 import com.tpyzq.mobile.pangu.util.TransitionUtils;
+import com.tpyzq.mobile.pangu.view.CentreToast;
 import com.tpyzq.mobile.pangu.view.histogram.Histogram;
 import com.tpyzq.mobile.pangu.view.pieChart.PieChart;
 import com.tpyzq.mobile.pangu.view.pieChart.PieDataEntity;
@@ -77,7 +77,7 @@ public class StockCapital extends BaseStockDetailPager {
         NetWorkUtil.getInstence().okHttpForPostString("", ConstantUtil.getURL_NEW(), map100207, new StringCallback() {
             @Override
             public void onError(Call call, Exception e, int id) {
-                ToastUtils.showShort(mContext, "网络访问失败");
+                CentreToast.showText(mContext, "网络访问失败");
             }
 
             @Override
@@ -111,7 +111,7 @@ public class StockCapital extends BaseStockDetailPager {
         NetWorkUtil.getInstence().okHttpForPostString("", ConstantUtil.getURL_NEW(), map100208, new StringCallback() {
             @Override
             public void onError(Call call, Exception e, int id) {
-                ToastUtils.showShort(mContext, "网络访问失败");
+                CentreToast.showText(mContext, "网络访问失败");
             }
 
             @Override

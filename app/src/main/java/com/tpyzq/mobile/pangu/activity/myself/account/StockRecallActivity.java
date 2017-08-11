@@ -17,6 +17,7 @@ import com.tpyzq.mobile.pangu.util.ConstantUtil;
 import com.tpyzq.mobile.pangu.util.Helper;
 import com.tpyzq.mobile.pangu.util.TransitionUtils;
 import com.tpyzq.mobile.pangu.util.panguutil.UserUtil;
+import com.tpyzq.mobile.pangu.view.CentreToast;
 import com.tpyzq.mobile.pangu.view.webview.ProgressWebView;
 import com.zhy.http.okhttp.callback.StringCallback;
 
@@ -62,7 +63,7 @@ public class StockRecallActivity extends BaseActivity implements View.OnClickLis
             @Override
             public void onError(Call call, Exception e, int id) {
                 LogUtil.e(TAG, e.toString());
-                Helper.getInstance().showToast(StockRecallActivity.this, "网络异常");
+                CentreToast.showText(StockRecallActivity.this, "网络异常");
             }
 
             @Override

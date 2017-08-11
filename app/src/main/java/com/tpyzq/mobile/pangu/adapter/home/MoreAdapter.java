@@ -16,6 +16,7 @@ import android.widget.Toast;
 import com.tpyzq.mobile.pangu.R;
 import com.tpyzq.mobile.pangu.base.CustomApplication;
 import com.tpyzq.mobile.pangu.data.FunctionEntity;
+import com.tpyzq.mobile.pangu.view.CentreToast;
 
 import java.util.ArrayList;
 
@@ -98,9 +99,7 @@ public class MoreAdapter extends BaseAdapter {
                         list.get(position).setChild(true);
                         point++;
                     } else {
-                        Toast mToast = Toast.makeText(context, "达到上限", Toast.LENGTH_SHORT);
-                        mToast.setGravity(Gravity.CENTER, 0, 0);
-                        mToast.show();
+                        CentreToast.showText(context, "达到上限");
                         viewHolder.ivMoreGouXuan.setChecked(false);
                     }
                 } else {

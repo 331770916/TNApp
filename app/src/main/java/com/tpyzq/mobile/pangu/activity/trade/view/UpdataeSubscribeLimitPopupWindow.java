@@ -93,7 +93,7 @@ public class UpdataeSubscribeLimitPopupWindow extends PopupWindow implements Vie
 
                     if (newS > oldNum) {
                         tvQueDing.setEnabled(false);
-                        Helper.getInstance().showToast(mActivity, "超出申购股数");
+                        CentreToast.showText(mActivity, "超出申购股数");
                     } else {
                         tvQueDing.setEnabled(true);
                     }

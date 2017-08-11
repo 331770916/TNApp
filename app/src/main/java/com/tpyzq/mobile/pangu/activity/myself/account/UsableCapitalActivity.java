@@ -16,7 +16,7 @@ import com.tpyzq.mobile.pangu.data.UserMoneyEntity;
 import com.tpyzq.mobile.pangu.http.NetWorkUtil;
 import com.tpyzq.mobile.pangu.util.ConstantUtil;
 import com.tpyzq.mobile.pangu.util.SpUtils;
-import com.tpyzq.mobile.pangu.util.ToastUtils;
+import com.tpyzq.mobile.pangu.view.CentreToast;
 import com.zhy.http.okhttp.callback.StringCallback;
 
 import org.json.JSONArray;
@@ -127,7 +127,7 @@ public class UsableCapitalActivity extends BaseActivity implements View.OnClickL
                     } else if ("-6".equals(code)) {
                         startActivity(new Intent(UsableCapitalActivity.this, TransactionLoginActivity.class));
                     } else {
-                        ToastUtils.showShort(UsableCapitalActivity.this, msg);
+                        CentreToast.showText(UsableCapitalActivity.this, msg);
                     }
                 } catch (JSONException e) {
                     e.printStackTrace();

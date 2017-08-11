@@ -17,7 +17,6 @@ import com.tpyzq.mobile.pangu.interfac.OneTimiceAddSelfChoiceListener;
 import com.tpyzq.mobile.pangu.util.Helper;
 import com.tpyzq.mobile.pangu.view.CentreToast;
 import com.tpyzq.mobile.pangu.view.CustomCenterDialog;
-import com.tpyzq.mobile.pangu.view.dialog.DoSelfChoiceResultDialog;
 
 import org.json.JSONObject;
 
@@ -47,9 +46,9 @@ public class SelfStockHelper {
 
             if ("1".equals(code) && !"0".equals(totalcount)) {
                 String msg = "成功添加" + totalcount + "只自选股，其余自选股超出50条限制，请删除再添加";
-                DoSelfChoiceResultDialog.getInstance().singleDialog(msg, activity);
+                CentreToast.showText(activity,msg);
             } else {
-                DoSelfChoiceResultDialog.getInstance().singleDialog("添加自选股成功", activity);
+                CentreToast.showText(activity,"添加自选股成功");
             }
         } catch (Exception e) {
             e.printStackTrace();

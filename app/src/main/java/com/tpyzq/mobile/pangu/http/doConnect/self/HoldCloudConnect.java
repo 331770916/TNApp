@@ -152,7 +152,7 @@ public class HoldCloudConnect {
 //                    }
 //
 //                    if (!(responseValues.get("data") instanceof List)) {
-//                        Helper.getInstance().showToast(CustomApplication.getContext(), "导入持仓网络接口json类型服务器更改");
+//                        CentreToast.showText(CustomApplication.getContext(), "导入持仓网络接口json类型服务器更改");
 //                        return;
 //                    }
 //
@@ -166,7 +166,7 @@ public class HoldCloudConnect {
 //                    for (Object responseObj : data) {
 //
 //                        if (!(responseObj instanceof Map)) {
-//                            Helper.getInstance().showToast(CustomApplication.getContext(), "导入持仓网络连接数据类型错误");
+//                            CentreToast.showText(CustomApplication.getContext(), "导入持仓网络连接数据类型错误");
 //                            return;
 //                        }
 //

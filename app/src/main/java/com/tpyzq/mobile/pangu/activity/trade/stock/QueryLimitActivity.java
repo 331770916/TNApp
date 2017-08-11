@@ -16,7 +16,7 @@ import com.tpyzq.mobile.pangu.data.OneKeySubscribeBean;
 import com.tpyzq.mobile.pangu.http.NetWorkUtil;
 import com.tpyzq.mobile.pangu.util.ConstantUtil;
 import com.tpyzq.mobile.pangu.util.SpUtils;
-import com.tpyzq.mobile.pangu.view.dialog.ResultDialog;
+import com.tpyzq.mobile.pangu.view.CentreToast;
 import com.zhy.http.okhttp.callback.StringCallback;
 
 import java.util.HashMap;
@@ -94,7 +94,7 @@ public class QueryLimitActivity extends BaseActivity implements View.OnClickList
                             }
                         }
                     } else {
-                        ResultDialog.getInstance().showText("网络异常");
+                    CentreToast.showText(QueryLimitActivity.this,"网络异常");
                     }
                 }
             }

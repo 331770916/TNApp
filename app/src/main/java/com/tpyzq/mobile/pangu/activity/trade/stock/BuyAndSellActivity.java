@@ -52,7 +52,6 @@ import com.tpyzq.mobile.pangu.log.LogHelper;
 import com.tpyzq.mobile.pangu.util.ConstantUtil;
 import com.tpyzq.mobile.pangu.util.Helper;
 import com.tpyzq.mobile.pangu.util.SpUtils;
-import com.tpyzq.mobile.pangu.util.ToastUtils;
 import com.tpyzq.mobile.pangu.util.TransitionUtils;
 import com.tpyzq.mobile.pangu.util.panguutil.JudgeStockUtils;
 import com.tpyzq.mobile.pangu.util.panguutil.UserUtil;
@@ -1314,7 +1313,7 @@ public class BuyAndSellActivity extends BaseActivity implements View.OnClickList
                     String data = jsonObject.getString("data");
                     if ("0".equals(code)) {
                         clearView(true);
-                        ToastUtils.showShort(BuyAndSellActivity.this,"委托已提交");
+                        CentreToast.showText(BuyAndSellActivity.this,"委托已提交");
                     }else if ("-6".equals(code)){
                         startActivity(new Intent(BuyAndSellActivity.this, TransactionLoginActivity.class));
                         finish();
@@ -1424,7 +1423,7 @@ public class BuyAndSellActivity extends BaseActivity implements View.OnClickList
                         if (null!=stockPw&&stockPw.isShowing()) {
                             stockPw.dismiss();
                         }
-//                        Helper.getInstance().showToast(BuyAndSellActivity.this, "该股票不存在");
+//                        CentreToast.showText(BuyAndSellActivity.this, "该股票不存在");
                         // TODO: 2017/7/20 调用333000接口 获取股票代码名称和最新价
                         if (stockInfo.length()==6) {
                             confirmCode(stockInfo);
@@ -1583,7 +1582,7 @@ public class BuyAndSellActivity extends BaseActivity implements View.OnClickList
         @Override
         public void setStockCode(String stockName, String code) {
             if (TextUtils.isEmpty(code) || code.startsWith("20") || code.startsWith("10") || code.startsWith("12") || code.startsWith("22")) {
-//                ToastUtils.showShort(BuyAndSellActivity.this, "当前股票代码不可交易");
+//                CentreToast.showText(BuyAndSellActivity.this, "当前股票代码不可交易");
                 CentreToast.showText(BuyAndSellActivity.this, "当前股票代码不可交易",Toast.LENGTH_SHORT);
             } else {
                 searchNetStock(false,code.substring(2));

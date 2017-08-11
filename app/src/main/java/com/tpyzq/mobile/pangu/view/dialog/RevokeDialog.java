@@ -152,8 +152,6 @@ public class RevokeDialog extends BaseDialog implements View.OnClickListener {
                 dismiss();
 
                 break;
-//            ResultDialog.getInstance().show("" + mMsg_Str, R.mipmap.duigou);
-//            MistakeDialog.showDialog(mMsg_Str, Password.this);
             case R.id.bt_false:
                 dismiss();
                 break;

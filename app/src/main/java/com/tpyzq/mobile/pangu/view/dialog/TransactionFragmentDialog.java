@@ -17,6 +17,7 @@ import com.tpyzq.mobile.pangu.log.LogUtil;
 import com.tpyzq.mobile.pangu.util.ConstantUtil;
 import com.tpyzq.mobile.pangu.util.Helper;
 import com.tpyzq.mobile.pangu.util.SpUtils;
+import com.tpyzq.mobile.pangu.view.CentreToast;
 import com.zhy.http.okhttp.callback.StringCallback;
 
 import org.json.JSONException;
@@ -108,7 +109,7 @@ public class TransactionFragmentDialog extends BaseDialog implements View.OnClic
             @Override
             public void onError(Call call, Exception e, int id) {
                 LogUtil.e(TAG, e.toString());
-                Helper.getInstance().showToast(context, "网络异常");
+                CentreToast.showText(context, "网络异常");
             }
 
             @Override

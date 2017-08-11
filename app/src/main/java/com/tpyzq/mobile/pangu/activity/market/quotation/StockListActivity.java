@@ -29,6 +29,7 @@ import com.tpyzq.mobile.pangu.log.LogHelper;
 import com.tpyzq.mobile.pangu.util.ConstantUtil;
 import com.tpyzq.mobile.pangu.util.Helper;
 import com.tpyzq.mobile.pangu.util.TransitionUtils;
+import com.tpyzq.mobile.pangu.view.CentreToast;
 import com.zhy.http.okhttp.callback.StringCallback;
 
 import org.json.JSONArray;
@@ -486,7 +487,7 @@ public class StockListActivity extends BaseActivity implements View.OnClickListe
         }
 
         if (responseCode.equals("-5")) {
-            Helper.getInstance().showToast(StockListActivity.this, "Code:-5");
+            CentreToast.showText(StockListActivity.this, "Code:-5");
             return;
         }
 

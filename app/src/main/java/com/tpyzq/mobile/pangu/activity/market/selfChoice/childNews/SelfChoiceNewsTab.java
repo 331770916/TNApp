@@ -22,6 +22,7 @@ import com.tpyzq.mobile.pangu.http.doConnect.self.ToSelfChoiceStockNews;
 import com.tpyzq.mobile.pangu.interfac.ICallbackResult;
 import com.tpyzq.mobile.pangu.log.LogHelper;
 import com.tpyzq.mobile.pangu.log.LogUtil;
+import com.tpyzq.mobile.pangu.view.CentreToast;
 import com.tpyzq.mobile.pangu.view.dialog.LoadingDialog;
 import com.tpyzq.mobile.pangu.view.pulllayou.PullLayout;
 
@@ -150,7 +151,7 @@ public class SelfChoiceNewsTab extends BaseTabPager implements
                 if (mEntities == null || mEntities.size() <= 0 ) {
                     mKongLayout.setVisibility(View.VISIBLE);
                 }
-                Toast.makeText(CustomApplication.getContext(), (String)result, Toast.LENGTH_SHORT).show();
+                CentreToast.showText(CustomApplication.getContext(), (String)result);
                 return;
             }
             ArrayList<NewsInofEntity> entities = (ArrayList<NewsInofEntity>) result;

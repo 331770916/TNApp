@@ -21,6 +21,7 @@ import com.tpyzq.mobile.pangu.log.LogHelper;
 import com.tpyzq.mobile.pangu.util.ConstantUtil;
 import com.tpyzq.mobile.pangu.util.Helper;
 import com.tpyzq.mobile.pangu.util.SpUtils;
+import com.tpyzq.mobile.pangu.view.CentreToast;
 import com.tpyzq.mobile.pangu.view.CustomCenterDialog;
 import com.tpyzq.mobile.pangu.view.dialog.LoadingDialog;
 import com.tpyzq.mobile.pangu.view.pickTime.TimePickerView;
@@ -217,7 +218,7 @@ public class AllotCustomTab extends BaseTab implements TimePickerView.OnTimeSele
                 }
 
                 if (TextUtils.isEmpty(response)) {
-                    Helper.getInstance().showToast(CustomApplication.getContext(), "" + response);
+                    CentreToast.showText(CustomApplication.getContext(), "" + response);
                     return ;
                 }
 
@@ -226,7 +227,7 @@ public class AllotCustomTab extends BaseTab implements TimePickerView.OnTimeSele
                 BankAccountEntity bean = gson.fromJson(response, type);
 
                 if (!bean.getCode().equals("0") && !bean.getCode().equals("-6")) {
-                    Helper.getInstance().showToast(CustomApplication.getContext(), "" + response);
+                    CentreToast.showText(CustomApplication.getContext(), "" + response);
                     return;
                 }
 

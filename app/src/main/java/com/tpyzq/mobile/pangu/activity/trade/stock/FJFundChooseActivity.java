@@ -18,6 +18,7 @@ import com.tpyzq.mobile.pangu.data.StockHolderInfoEntity;
 import com.tpyzq.mobile.pangu.data.StructuredFundEntity;
 import com.tpyzq.mobile.pangu.util.Helper;
 import com.tpyzq.mobile.pangu.util.SpUtils;
+import com.tpyzq.mobile.pangu.view.CentreToast;
 import com.tpyzq.mobile.pangu.view.CustomCenterDialog;
 import com.tpyzq.mobile.pangu.view.dialog.LoadingDialog;
 
@@ -138,7 +139,7 @@ public class FJFundChooseActivity extends BaseActivity implements View.OnClickLi
     public void callResult(ResultInfo info) {
         mDialog.dismiss();
         if ("400".equals(info.getCode()) || "-2".equals(info.getCode()) || "-3".equals(info.getCode())) {
-            Helper.getInstance().showToast(this, info.getMsg());
+            CentreToast.showText(this, info.getMsg());
         } else if ("0".equals(info.getCode())) {
 
             switch (mTag) {

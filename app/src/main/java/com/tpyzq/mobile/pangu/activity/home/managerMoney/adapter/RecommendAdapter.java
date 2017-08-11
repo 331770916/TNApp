@@ -21,6 +21,7 @@ import android.widget.Toast;
 
 import com.tpyzq.mobile.pangu.R;
 import com.tpyzq.mobile.pangu.util.Helper;
+import com.tpyzq.mobile.pangu.view.CentreToast;
 
 import java.util.List;
 import java.util.Map;
@@ -123,7 +124,7 @@ public class RecommendAdapter extends RecyclerView.Adapter<RecyclerView.ViewHold
                 viewHolder4.more.setOnClickListener(new View.OnClickListener() {
                     @Override
                     public void onClick(View v) {
-                        Toast.makeText(mContext, "more", Toast.LENGTH_SHORT).show();
+                        CentreToast.showText(mContext, "more");
                     }
                 });
                 break;

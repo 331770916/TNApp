@@ -19,8 +19,8 @@ import com.tpyzq.mobile.pangu.util.Helper;
 import com.tpyzq.mobile.pangu.util.SpUtils;
 import com.tpyzq.mobile.pangu.util.TransitionUtils;
 import com.tpyzq.mobile.pangu.util.panguutil.UserUtil;
+import com.tpyzq.mobile.pangu.view.CentreToast;
 import com.tpyzq.mobile.pangu.view.CustomCenterDialog;
-import com.tpyzq.mobile.pangu.view.dialog.DoSelfChoiceResultDialog;
 import com.tpyzq.mobile.pangu.view.dialog.LoadingDialog;
 
 import java.lang.ref.WeakReference;
@@ -220,7 +220,7 @@ public class ProductPrecontractActivity extends BaseActivity implements View.OnC
             case R.id.precontractBtn:
 
                 if (TextUtils.isEmpty(mInputEdittext.getText().toString())) {
-                    DoSelfChoiceResultDialog.getInstance().singleDialog("输入金额不能为空", ProductPrecontractActivity.this);
+                    CentreToast.showText(ProductPrecontractActivity.this,"输入金额不能为空");
                     return;
                 }
 

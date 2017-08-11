@@ -203,7 +203,7 @@ public class BanksBalanceQueryActivity extends BaseActivity implements View.OnCl
 
             } catch (UnikeyException e) {
                 e.printStackTrace();
-                Helper.getInstance().showToast(CustomApplication.getContext(), "弹出密码键盘失败：" + Integer.toHexString(e.getNumber()));
+                CentreToast.showText(CustomApplication.getContext(), "弹出密码键盘失败：" + Integer.toHexString(e.getNumber()));
             }
         } else {
             mPopKeyBody.clearContent();

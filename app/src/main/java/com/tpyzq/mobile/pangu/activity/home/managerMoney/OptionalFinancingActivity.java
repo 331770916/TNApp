@@ -19,9 +19,9 @@ import com.tpyzq.mobile.pangu.http.NetWorkUtil;
 import com.tpyzq.mobile.pangu.log.LogUtil;
 import com.tpyzq.mobile.pangu.util.ConstantUtil;
 import com.tpyzq.mobile.pangu.util.ScreenShot;
-import com.tpyzq.mobile.pangu.util.ToastUtils;
 import com.tpyzq.mobile.pangu.util.panguutil.BRutil;
 import com.tpyzq.mobile.pangu.util.panguutil.UserUtil;
+import com.tpyzq.mobile.pangu.view.CentreToast;
 import com.tpyzq.mobile.pangu.view.dialog.LoadingDialog;
 import com.tpyzq.mobile.pangu.view.dialog.ShareDialog;
 import com.zhy.http.okhttp.callback.StringCallback;
@@ -103,7 +103,7 @@ public class OptionalFinancingActivity extends BaseActivity implements View.OnCl
                         optionalFinancingAdapter.setData(fixSucessBean.prod,fixSucessBean.schema_id);
                         BRutil.menuNewSelect("Z1-4-4", fixSucessBean.schema_id, "-1", "1", new Date(), "-1", "-1");
                     } else {
-                        ToastUtils.showShort(OptionalFinancingActivity.this, type);
+                        CentreToast.showText(OptionalFinancingActivity.this, type);
                     }
                 } catch (JSONException e) {
                     e.printStackTrace();
@@ -178,7 +178,7 @@ public class OptionalFinancingActivity extends BaseActivity implements View.OnCl
                             shareDialog.show();
                         }
                     } else {
-                        ToastUtils.showShort(OptionalFinancingActivity.this, msg);
+                        CentreToast.showText(OptionalFinancingActivity.this, msg);
                     }
                 } catch (JSONException e) {
                     e.printStackTrace();

@@ -22,6 +22,7 @@ import com.tpyzq.mobile.pangu.util.Helper;
 import com.tpyzq.mobile.pangu.util.SpUtils;
 import com.tpyzq.mobile.pangu.util.panguutil.JSAPI;
 import com.tpyzq.mobile.pangu.util.panguutil.UserUtil;
+import com.tpyzq.mobile.pangu.view.CentreToast;
 import com.tpyzq.mobile.pangu.view.dialog.LoadingDialog;
 import com.tpyzq.mobile.pangu.view.dialog.ShareDialog;
 import com.tpyzq.mobile.pangu.view.webview.ProgressWebView;
@@ -103,7 +104,7 @@ public class AssetsAnalysisActivity extends BaseActivity implements View.OnClick
                     public void onError(Call call, Exception e, int id) {
                         LogHelper.e(TAG, e.toString());
                         setShow();
-                        Helper.getInstance().showToast(AssetsAnalysisActivity.this, "网络异常");
+                        CentreToast.showText(AssetsAnalysisActivity.this, "网络异常");
                     }
 
                     @Override
@@ -140,7 +141,7 @@ public class AssetsAnalysisActivity extends BaseActivity implements View.OnClick
                             }
                         } catch (JSONException e) {
                             e.printStackTrace();
-                            Helper.getInstance().showToast(AssetsAnalysisActivity.this, "网络异常");
+                            CentreToast.showText(AssetsAnalysisActivity.this, "网络异常");
                         }
                     }
                 }
@@ -162,7 +163,7 @@ public class AssetsAnalysisActivity extends BaseActivity implements View.OnClick
             public void onError(Call call, Exception e, int id) {
                 LogUtil.e(TAG, e.toString());
                 setShow();
-                Helper.getInstance().showToast(AssetsAnalysisActivity.this, "网络异常");
+                CentreToast.showText(AssetsAnalysisActivity.this, "网络异常");
             }
 
             @Override
@@ -198,7 +199,7 @@ public class AssetsAnalysisActivity extends BaseActivity implements View.OnClick
                     }
                 } catch (JSONException e) {
                     e.printStackTrace();
-                    Helper.getInstance().showToast(AssetsAnalysisActivity.this, "网络异常");
+                    CentreToast.showText(AssetsAnalysisActivity.this, "网络异常");
                 }
             }
         });
@@ -219,7 +220,7 @@ public class AssetsAnalysisActivity extends BaseActivity implements View.OnClick
             public void onError(Call call, Exception e, int id) {
                 LogUtil.e(TAG, e.toString());
                 setShow();
-                Helper.getInstance().showToast(AssetsAnalysisActivity.this, "网络异常");
+                CentreToast.showText(AssetsAnalysisActivity.this, "网络异常");
             }
 
             @Override
@@ -274,7 +275,7 @@ public class AssetsAnalysisActivity extends BaseActivity implements View.OnClick
             public void onError(Call call, Exception e, int id) {
                 LogUtil.e(e.toString());
                 setShow();
-                Helper.getInstance().showToast(AssetsAnalysisActivity.this, "网络异常");
+                CentreToast.showText(AssetsAnalysisActivity.this, "网络异常");
             }
 
             @Override
@@ -338,7 +339,7 @@ public class AssetsAnalysisActivity extends BaseActivity implements View.OnClick
                 }
                 LogUtil.e(e.toString());
                 setShow();
-                Helper.getInstance().showToast(AssetsAnalysisActivity.this, "数据异常");
+                CentreToast.showText(AssetsAnalysisActivity.this, "数据异常");
             }
 
             @Override

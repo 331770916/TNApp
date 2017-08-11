@@ -300,7 +300,7 @@ public class SpeedTestActivity extends BaseActivity implements View.OnClickListe
                 break;
             case R.id.bt_sure:
                 SpUtils.putString(SpeedTestActivity.this, "market_ip", appIP);
-//                ToastUtils.showShort(this, "站点已切换到: " + sitename);
+//                CentreToast.showText(this, "站点已切换到: " + sitename);
                 String jy_ip = SpUtils.getString(SpeedTestActivity.this, "jy_ip", null);
                 ConstantUtil.setUrl(appIP,jy_ip);
                 finish();

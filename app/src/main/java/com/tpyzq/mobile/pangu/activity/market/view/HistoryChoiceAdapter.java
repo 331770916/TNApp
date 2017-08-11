@@ -22,13 +22,12 @@ import com.tpyzq.mobile.pangu.http.doConnect.self.AddSelfChoiceStockConnect;
 import com.tpyzq.mobile.pangu.http.doConnect.self.ToAddSelfChoiceStockConnect;
 import com.tpyzq.mobile.pangu.interfac.ICallbackResult;
 import com.tpyzq.mobile.pangu.util.ConstantUtil;
-import com.tpyzq.mobile.pangu.util.Helper;
 import com.tpyzq.mobile.pangu.util.SpUtils;
 import com.tpyzq.mobile.pangu.util.panguutil.BRutil;
 import com.tpyzq.mobile.pangu.util.panguutil.SelfStockHelper;
 import com.tpyzq.mobile.pangu.util.panguutil.UserUtil;
+import com.tpyzq.mobile.pangu.view.CentreToast;
 import com.tpyzq.mobile.pangu.view.CustomCenterDialog;
-import com.tpyzq.mobile.pangu.view.dialog.DoSelfChoiceResultDialog;
 import com.tpyzq.mobile.pangu.view.dialog.LoadingDialog;
 
 import org.json.JSONObject;
@@ -188,7 +187,7 @@ public class HistoryChoiceAdapter extends BaseAdapter {
                             operationIv.setImageResource(R.mipmap.search_remove);
                             SelfStockHelper.explanOneTimiceAddSelfChoiceResult(mActivity, msg);
                         } else {
-                            Helper.getInstance().showToast(CustomApplication.getContext(), "自选股超出50条上线，请删除再添加");
+                            CentreToast.showText(CustomApplication.getContext(), "自选股超出50条上线，请删除再添加");
                         }
                     }
                 });
@@ -206,9 +205,9 @@ public class HistoryChoiceAdapter extends BaseAdapter {
                     notifyDataSetChanged();
                     operationIv.setImageResource(R.mipmap.search_remove);
                     Db_PUB_SEARCHHISTORYSTOCK.deleteFromID(stockNumber);
-                    DoSelfChoiceResultDialog.getInstance().singleDialog("添加自选股成功", mActivity);
+                    CentreToast.showText(mActivity,"添加自选股成功");
                 } else {
-                    Helper.getInstance().showToast(CustomApplication.getContext(), "自选股超出50条上线，请删除再添加");
+                    CentreToast.showText(CustomApplication.getContext(), "自选股超出50条上线，请删除再添加");
                 }
             }
 

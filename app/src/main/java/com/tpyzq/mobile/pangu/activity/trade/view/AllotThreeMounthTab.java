@@ -134,7 +134,7 @@ public class AllotThreeMounthTab extends BaseTab implements PullLayout.OnPullCal
                 }
 
                 if (TextUtils.isEmpty(response)) {
-//                    Helper.getInstance().showToast(CustomApplication.getContext(), "" + response);
+//                    CentreToast.showText(CustomApplication.getContext(), "" + response);
                     return ;
                 }
 

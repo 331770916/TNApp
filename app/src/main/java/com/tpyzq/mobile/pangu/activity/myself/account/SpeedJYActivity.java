@@ -106,7 +106,7 @@ public class SpeedJYActivity extends BaseActivity implements View.OnClickListene
                 SpUtils.putString(CustomApplication.getContext(), ConstantUtil.APPEARHOLD, ConstantUtil.HOLD_DISAPPEAR);
 
                 SpUtils.putString(SpeedJYActivity.this, "jy_ip", jyIp);
-//                ToastUtils.showShort(this, "站点已切换到: " + sitename);
+//                CentreToast.showText(this, "站点已切换到: " + sitename);
                 String ip = SpUtils.getString(SpeedJYActivity.this, "market_ip", null);
                 ConstantUtil.setUrl(ip, jyIp);
                 finish();

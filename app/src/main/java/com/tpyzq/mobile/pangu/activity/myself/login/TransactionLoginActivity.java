@@ -93,7 +93,6 @@ import com.tpyzq.mobile.pangu.util.ConstantUtil;
 import com.tpyzq.mobile.pangu.util.DeviceUtil;
 import com.tpyzq.mobile.pangu.util.Helper;
 import com.tpyzq.mobile.pangu.util.SpUtils;
-import com.tpyzq.mobile.pangu.util.ToastUtils;
 import com.tpyzq.mobile.pangu.util.TransitionUtils;
 import com.tpyzq.mobile.pangu.util.keyboard.Constants;
 import com.tpyzq.mobile.pangu.util.keyboard.HandleResponse;
@@ -103,14 +102,12 @@ import com.tpyzq.mobile.pangu.util.keyboard.ResponseInterface;
 import com.tpyzq.mobile.pangu.util.panguutil.APPInfoUtils;
 import com.tpyzq.mobile.pangu.util.panguutil.BRutil;
 import com.tpyzq.mobile.pangu.util.panguutil.UserUtil;
+import com.tpyzq.mobile.pangu.view.CentreToast;
 import com.tpyzq.mobile.pangu.view.CustomCenterDialog;
 import com.tpyzq.mobile.pangu.view.dialog.CancelDialog;
-import com.tpyzq.mobile.pangu.view.dialog.CertificationDialog;
 import com.tpyzq.mobile.pangu.view.dialog.CustomDialog;
 import com.tpyzq.mobile.pangu.view.dialog.LoadingDialog;
-import com.tpyzq.mobile.pangu.view.dialog.LoginDialog;
 import com.tpyzq.mobile.pangu.view.dialog.MistakeDialog;
-import com.tpyzq.mobile.pangu.view.dialog.MutualAuthenticationDialog;
 import com.tpyzq.mobile.pangu.view.dialog.OpeningAnAccountDialog;
 import com.yzd.unikeysdk.OnInputDoneCallBack;
 import com.yzd.unikeysdk.PasswordKeyboard;
@@ -620,10 +617,10 @@ public class TransactionLoginActivity extends BaseActivity implements ICallbackR
             mBuilder.dialog.dismiss();
             if (result instanceof String && SecurityCodeConnect.MSG.equals(result)) {
                 mSecurityCode.setImageResource(R.mipmap.ic_again);
-                Helper.getInstance().showToast(TransactionLoginActivity.this, result.toString());
+                CentreToast.showText(TransactionLoginActivity.this, result.toString());
             } else if (result instanceof String && ConstantUtil.NETWORK_ERROR.equals(result)) {
                 mSecurityCode.setImageResource(R.mipmap.ic_again);
-                Helper.getInstance().showToast(TransactionLoginActivity.this, ConstantUtil.NETWORK_ERROR);
+                CentreToast.showText(TransactionLoginActivity.this, ConstantUtil.NETWORK_ERROR);
             } else {
                 try {
                     JSONObject jsonObject = (JSONObject) result;
@@ -644,11 +641,11 @@ public class TransactionLoginActivity extends BaseActivity implements ICallbackR
             mBuilder.dialog.dismiss();
             if (result instanceof String) {
                 if (ConstantUtil.NETWORK_ERROR.equals(result)) {
-                    Helper.getInstance().showToast(TransactionLoginActivity.this, result.toString());
+                    CentreToast.showText(TransactionLoginActivity.this, result.toString());
                     mPassword_et.setText("");
                     mCaptcha_et.setText("");
                 } else if (LogInConnect.MSG.equals(tag)) {
-                    Helper.getInstance().showToast(TransactionLoginActivity.this, result.toString() + ",请重新输入");
+                    CentreToast.showText(TransactionLoginActivity.this, result.toString() + ",请重新输入");
                     mPassword_et.setText("");
                     mCaptcha_et.setText("");
                 } else {
@@ -687,7 +684,7 @@ public class TransactionLoginActivity extends BaseActivity implements ICallbackR
                 mBuilder.dialog.dismiss();
                 if (ConstantUtil.NETWORK_ERROR.equals(result)) {
                     isLoginSuc = true;
-//                    Helper.getInstance().showToast(TransactionLoginActivity.this, result.toString());
+//                    CentreToast.showText(TransactionLoginActivity.this, result.toString());
 //                    mPassword_et.setText("");
 //                    mCaptcha_et.setText("");
                     HOLD_SEQ.deleteAll();
@@ -784,7 +781,7 @@ public class TransactionLoginActivity extends BaseActivity implements ICallbackR
 
                     toLogInConnect();
                 } else {
-                    Helper.getInstance().showToast(TransactionLoginActivity.this, "验证码错误");
+                    CentreToast.showText(TransactionLoginActivity.this, "验证码错误");
                     toSecurityCode();
                     mPassword_et.setText("");
                     mCaptcha_et.setText("");
@@ -946,7 +943,7 @@ public class TransactionLoginActivity extends BaseActivity implements ICallbackR
             //初始化加密键盘
             unikeyUrls = new UnikeyUrls(Constants.APPLY_PLUGIN, Constants.GET_CHALLEAGE, Constants.GET_BIT_AUTH_DATA, Constants.CHECK_BIT_AUTH_DATA, Constants.VERIFY_APP, Constants.CONFIRM_APPLY_PLUGIN_FORMAT);
         } catch (UnikeyException e) {
-            ToastUtils.showShort(this, e.toString());
+            CentreToast.showText(this, e.toString());
             e.printStackTrace();
         }
     }
@@ -966,7 +963,7 @@ public class TransactionLoginActivity extends BaseActivity implements ICallbackR
                     userEntity.setPlugins("true");
                     Db_PUB_USERS.UpdatePlugins(userEntity);
                     biAuthBtnClick();
-                    Helper.getInstance().showToast(TransactionLoginActivity.this, "下载插件成功");
+                    CentreToast.showText(TransactionLoginActivity.this, "下载插件成功");
                 } else {            //下载失败后的参数
                     mBuilder.dialog.dismiss();
                     if (!TransactionLoginActivity.this.isFinishing()) {
@@ -1040,7 +1037,7 @@ public class TransactionLoginActivity extends BaseActivity implements ICallbackR
             if(!passwordKeyboard.isShow())
                 passwordKeyboard.show();
         } catch (UnikeyException e) {
-            Helper.getInstance().showToast(TransactionLoginActivity.this, "弹出密码键盘失败：" + Integer.toHexString(e.getNumber()));
+            CentreToast.showText(TransactionLoginActivity.this, "弹出密码键盘失败：" + Integer.toHexString(e.getNumber()));
         }
     }
 

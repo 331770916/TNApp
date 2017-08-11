@@ -21,6 +21,7 @@ import android.widget.Toast;
 import com.tpyzq.mobile.pangu.R;
 import com.tpyzq.mobile.pangu.data.RiskTableEntity;
 import com.tpyzq.mobile.pangu.util.Helper;
+import com.tpyzq.mobile.pangu.view.CentreToast;
 
 import java.util.ArrayList;
 import java.util.HashMap;
@@ -170,7 +171,7 @@ public class RiskEvaluationAdapter extends BaseAdapter {
 
                             delayTime(Integer.parseInt(sb.toString()), position);
                         } else {
-                            Toast.makeText(context, "请选择答案再提交", Toast.LENGTH_SHORT).show();
+                            CentreToast.showText(context, "请选择答案再提交");
                         }
 
                     }

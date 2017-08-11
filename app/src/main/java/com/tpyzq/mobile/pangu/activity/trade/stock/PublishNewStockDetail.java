@@ -17,20 +17,15 @@ import com.tpyzq.mobile.pangu.log.LogHelper;
 import com.tpyzq.mobile.pangu.util.ConstantUtil;
 import com.tpyzq.mobile.pangu.util.Helper;
 import com.tpyzq.mobile.pangu.util.TransitionUtils;
-import com.tpyzq.mobile.pangu.view.dialog.ResultDialog;
-import com.tpyzq.mobile.pangu.view.pullDownGroup.PullDownElasticImp;
-import com.tpyzq.mobile.pangu.view.pullDownGroup.PullDownScrollView;
+import com.tpyzq.mobile.pangu.view.CentreToast;
 import com.zhy.http.okhttp.callback.StringCallback;
 
 import org.json.JSONArray;
 import org.json.JSONException;
 import org.json.JSONObject;
 
-import java.text.DateFormat;
 import java.text.DecimalFormat;
-import java.text.SimpleDateFormat;
 import java.util.ArrayList;
-import java.util.Date;
 import java.util.HashMap;
 import java.util.Map;
 
@@ -197,11 +192,11 @@ public class PublishNewStockDetail extends BaseActivity implements View.OnClickL
                            }
                        }
                    }else{
-                       ResultDialog.getInstance().showText(res.optString("msg"));
+                       CentreToast.showText(PublishNewStockDetail.this,res.optString("msg"));
                    }
                }catch (JSONException e){
                    e.printStackTrace();
-                   ResultDialog.getInstance().showText(e.toString());
+                   CentreToast.showText(PublishNewStockDetail.this,e.toString());
                }
                /**
                 Gson gson = new Gson();

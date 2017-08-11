@@ -28,6 +28,7 @@ import com.tpyzq.mobile.pangu.util.ConstantUtil;
 import com.tpyzq.mobile.pangu.util.Helper;
 import com.tpyzq.mobile.pangu.util.SpUtils;
 import com.tpyzq.mobile.pangu.util.TransitionUtils;
+import com.tpyzq.mobile.pangu.view.CentreToast;
 import com.tpyzq.mobile.pangu.view.dialog.LoadingDialog;
 import com.tpyzq.mobile.pangu.view.pulllayou.PullLayout;
 import com.zhy.http.okhttp.callback.StringCallback;
@@ -475,7 +476,7 @@ public class SelfChoiceQuotationTab extends BaseTabPager implements View.OnClick
                 closeWating();
                 if(isShow&&!isAutoRequest){
                     isAutoRequest = false;
-                    Helper.getInstance().showToast(CustomApplication.getContext(), "请求数据失败" );
+                    CentreToast.showText(CustomApplication.getContext(), "请求数据失败" );
                 }
 //                ArrayList<StockInfoEntity> beans = new ArrayList<StockInfoEntity>();
 //                mCallbackResult.getResult(beans, TAG);

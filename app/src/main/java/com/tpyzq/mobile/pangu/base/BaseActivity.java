@@ -160,35 +160,35 @@ public abstract class BaseActivity extends AppCompatActivity {
         return res;
     }
 
-    /**
-     * 显示tost
-     * @param content 内容
-     */
-    protected void showToast(String content){
-        showToast(content,0,false);
-    }
-
-    protected void showToast(String content,int time,boolean hasGravity) {
-        if (mToast == null) {
-            mToast = Toast.makeText(CustomApplication.getContext(), content,time);
-            if(hasGravity)
-                mToast.setGravity(Gravity.CENTER, 0, 0);
-            mToast.show();
-            oldMsg = content;
-            oneTime = System.currentTimeMillis();
-        } else {
-            towTime = System.currentTimeMillis();
-            if (content.equals(oldMsg)) {
-                if (towTime - oneTime > time)
-                    mToast.show();
-            } else {
-                oldMsg = content;
-                mToast.setText(content);
-                mToast.show();
-            }
-        }
-        oneTime = towTime;
-    }
+//    /**
+//     * 显示tost
+//     * @param content 内容
+//     */
+//    protected void showToast(String content){
+//        showToast(content,0,false);
+//    }
+//
+//    protected void showToast(String content,int time,boolean hasGravity) {
+//        if (mToast == null) {
+//            mToast = Toast.makeText(CustomApplication.getContext(), content,time);
+//            if(hasGravity)
+//                mToast.setGravity(Gravity.CENTER, 0, 0);
+//            mToast.show();
+//            oldMsg = content;
+//            oneTime = System.currentTimeMillis();
+//        } else {
+//            towTime = System.currentTimeMillis();
+//            if (content.equals(oldMsg)) {
+//                if (towTime - oneTime > time)
+//                    mToast.show();
+//            } else {
+//                oldMsg = content;
+//                mToast.setText(content);
+//                mToast.show();
+//            }
+//        }
+//        oneTime = towTime;
+//    }
 
 
     @Override

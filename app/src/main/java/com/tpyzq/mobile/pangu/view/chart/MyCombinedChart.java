@@ -27,6 +27,7 @@ import com.github.mikephil.charting.listener.ChartTouchListener;
 import com.github.mikephil.charting.listener.OnChartGestureListener;
 import com.github.mikephil.charting.listener.OnChartValueSelectedListener;
 import com.tpyzq.mobile.pangu.data.ChartKEntity;
+import com.tpyzq.mobile.pangu.view.CentreToast;
 import com.tpyzq.mobile.pangu.view.chart.gesture.IOnValueSelectedListener;
 
 import java.util.ArrayList;
@@ -221,7 +222,7 @@ public class MyCombinedChart extends CombinedChart implements OnChartGestureList
     @Override
     public void onChartLongPressed(MotionEvent me) {
         if (!isTranslate) {
-            Toast.makeText(getContext().getApplicationContext(), "长按\n震动50毫秒\n可以左右滑动  查看数据", Toast.LENGTH_SHORT).show();
+            CentreToast.showText(getContext().getApplicationContext(), "长按\n震动50毫秒\n可以左右滑动  查看数据");
             // 震动50毫秒
             mVibrator.vibrate(50);
             setDragEnabled(false);

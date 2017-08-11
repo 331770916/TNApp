@@ -60,7 +60,7 @@ public class AnnouncementActivity extends BaseActivity implements View.OnClickLi
             @Override
             public void onError(Call call, Exception e, int id) {
                 LogUtil.e(TAG, e.toString());
-                CentreToast.showText(AnnouncementActivity.this, ConstantUtil.NETWORK_ERROR);
+                Helper.getInstance().showToast(AnnouncementActivity.this, "网络异常");
             }
 
             @Override

@@ -11,7 +11,7 @@ import com.tpyzq.mobile.pangu.base.BaseActivity;
 import com.tpyzq.mobile.pangu.http.NetWorkUtil;
 import com.tpyzq.mobile.pangu.util.ConstantUtil;
 import com.tpyzq.mobile.pangu.util.Helper;
-import com.tpyzq.mobile.pangu.util.ToastUtils;
+import com.tpyzq.mobile.pangu.view.CentreToast;
 import com.tpyzq.mobile.pangu.view.CustomCenterDialog;
 import com.zhy.http.okhttp.callback.StringCallback;
 
@@ -60,7 +60,7 @@ public class FeedbackActivity extends BaseActivity implements View.OnClickListen
                 break;
             case R.id.bt_true:
                 if (!Helper.isMobileNO(et_contact_way.getText().toString())) {
-                    ToastUtils.centreshow(this, "请输入正确的手机号");
+                    CentreToast.showText(this, "请输入正确的手机号");
                 } else {
                     getData();
                 }

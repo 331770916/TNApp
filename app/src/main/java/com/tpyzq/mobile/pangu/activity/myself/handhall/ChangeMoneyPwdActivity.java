@@ -256,7 +256,7 @@ public class ChangeMoneyPwdActivity extends BaseActivity implements View.OnClick
 
 
         } catch (UnikeyException e) {
-            Helper.getInstance().showToast(this, "弹出密码键盘失败：" + Integer.toHexString(e.getNumber()));
+            CentreToast.showText(this, "弹出密码键盘失败：" + Integer.toHexString(e.getNumber()));
         }
     }
 
@@ -290,7 +290,7 @@ public class ChangeMoneyPwdActivity extends BaseActivity implements View.OnClick
             Button bt_abc= (Button) passwordKeyboard.getView("bt_abc");
             bt_abc.setVisibility(View.INVISIBLE);
         } catch (UnikeyException e) {
-            Helper.getInstance().showToast(this, "弹出密码键盘失败：" + Integer.toHexString(e.getNumber()));
+            CentreToast.showText(this, "弹出密码键盘失败：" + Integer.toHexString(e.getNumber()));
         }
     }
 
@@ -323,7 +323,7 @@ public class ChangeMoneyPwdActivity extends BaseActivity implements View.OnClick
             Button bt_abc= (Button) passwordKeyboard.getView("bt_abc");
             bt_abc.setVisibility(View.INVISIBLE);
         } catch (UnikeyException e) {
-            Helper.getInstance().showToast(this, "弹出密码键盘失败：" + Integer.toHexString(e.getNumber()));
+            CentreToast.showText(this, "弹出密码键盘失败：" + Integer.toHexString(e.getNumber()));
         }
     }
 
@@ -340,7 +340,7 @@ public class ChangeMoneyPwdActivity extends BaseActivity implements View.OnClick
                 finish();
             } else if (ConstantUtil.NETWORK_ERROR_CODE.equals(info.getCode())) {
                 setTextView();
-                Helper.getInstance().showToast(this, info.getMsg());
+                CentreToast.showText(this, info.getMsg());
             } else {
                 setTextView();
                 showDialog(info.getMsg(),false);

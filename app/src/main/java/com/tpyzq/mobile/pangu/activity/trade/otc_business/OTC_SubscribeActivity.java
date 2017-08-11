@@ -368,7 +368,6 @@ public class OTC_SubscribeActivity extends BaseActivity implements View.OnClickL
                     finish();
                 } else
                 if (("0").equalsIgnoreCase(code)) {
-//                    ResultDialog.getInstance().show("委托已提交", R.mipmap.duigou);
                     CentreToast.showText(OTC_SubscribeActivity.this,"委托已提交",true);
                     wipeData();
                 }else {

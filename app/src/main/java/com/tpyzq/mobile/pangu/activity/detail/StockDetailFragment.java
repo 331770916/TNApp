@@ -65,7 +65,6 @@
 //import com.tpyzq.mobile.pangu.util.Helper;
 //import com.tpyzq.mobile.pangu.util.ScreenShot;
 //import com.tpyzq.mobile.pangu.util.SpUtils;
-//import com.tpyzq.mobile.pangu.util.ToastUtils;
 //import com.tpyzq.mobile.pangu.util.panguutil.AddPosition;
 //import com.tpyzq.mobile.pangu.util.panguutil.BRutil;
 //import com.tpyzq.mobile.pangu.util.panguutil.SelfChoiceStockTempData;
@@ -937,7 +936,7 @@
 //
 //                        boolean isNotFull = Db_PUB_STOCKLIST.addOneStockListData(_bean);
 //                        if (!isNotFull) {
-//                            Helper.getInstance().showToast(CustomApplication.getContext(), "自选股超出50条上线，请删除再添加");
+//                            CentreToast.showText(CustomApplication.getContext(), "自选股超出50条上线，请删除再添加");
 //                            return;
 //                        } else {
 //                            Db_PUB_SEARCHHISTORYSTOCK.deleteFromID(stkCode);
@@ -961,7 +960,7 @@
 //                boolean isNotFull = Db_PUB_STOCKLIST.addOneStockListData(_bean);
 //                if (!isNotFull) {
 //                    if(isShow) {
-//                        Helper.getInstance().showToast(CustomApplication.getContext(), "自选股超出50条上线，请删除再添加");
+//                        CentreToast.showText(CustomApplication.getContext(), "自选股超出50条上线，请删除再添加");
 //                    }
 //                    return;
 //                } else {
@@ -977,7 +976,7 @@
 //    }
 //    private void gotoStkBuyAndSell(String optType) {
 //        if (stkType==0||stkType==2) {
-//            ToastUtils.showShort(mActivity, "当前股票代码不可交易");
+//            CentreToast.showText(mActivity, "当前股票代码不可交易");
 //            return;
 //        }
 //        Intent intent = new Intent();

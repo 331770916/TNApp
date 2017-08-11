@@ -20,9 +20,9 @@ import com.tpyzq.mobile.pangu.util.ConstantUtil;
 import com.tpyzq.mobile.pangu.util.DeviceUtil;
 import com.tpyzq.mobile.pangu.util.Helper;
 import com.tpyzq.mobile.pangu.util.SpUtils;
-import com.tpyzq.mobile.pangu.util.ToastUtils;
 import com.tpyzq.mobile.pangu.util.keyboard.NoSoftInputEditText;
 import com.tpyzq.mobile.pangu.util.panguutil.UserUtil;
+import com.tpyzq.mobile.pangu.view.CentreToast;
 import com.tpyzq.mobile.pangu.view.CustomCenterDialog;
 import com.tpyzq.mobile.pangu.view.dialog.LoadingDialog;
 import com.yzd.unikeysdk.OnInputDoneCallBack;
@@ -122,24 +122,24 @@ public class ChangePasswordActivity extends BaseActivity implements View.OnClick
             case R.id.Submit:
                 if (mAtpresentET_str.equals("") || mNewET_str.equals("") || mAgainNewET_str.equals("")) {
                     if (mAtpresent_str.equals("") || mNew_str.equals("") || mAgainNew_str.equals("")) {
-                        ToastUtils.showShort(this, "密码不能为空");
+                        CentreToast.showText(this, "密码不能为空");
                     } else {
                         if (mKeyboardInput_mAtpresent.equals(mKeyboardInput_mNew)) {
-                            ToastUtils.showShort(this, "新密码不能与原密码相同");
+                            CentreToast.showText(this, "新密码不能与原密码相同");
                             setTextView();
                         } else if (!mKeyboardInput_mNew.equals(mKeyboardInput_mAgainNew)) {
-                            ToastUtils.showShort(this, "两次输入密码不一样");
+                            CentreToast.showText(this, "两次输入密码不一样");
                             setTextView();
                         } else {
                             int a = Helper.weakPwdCheck(mKeyboardInput_mNew);
                             if (a == 1) {
-                                ToastUtils.showShort(this, "新密码不能为连续相同3个数字");
+                                CentreToast.showText(this, "新密码不能为连续相同3个数字");
                                 setTextView();
                             } else if (a == 2) {
-                                ToastUtils.showShort(this, "新密码不能为连续3个数字");
+                                CentreToast.showText(this, "新密码不能为连续3个数字");
                                 setTextView();
                             } else if (Helper.isContinuous(mKeyboardInput_mNew)) {
-                                ToastUtils.showShort(this, "新密码不能为2个连续相同3个数字");
+                                CentreToast.showText(this, "新密码不能为2个连续相同3个数字");
                                 setTextView();
                             } else {
                                 //通过
@@ -153,21 +153,21 @@ public class ChangePasswordActivity extends BaseActivity implements View.OnClick
 
                 } else {
                     if (mAtpresentET_str.equals(mNewET_str)) {
-                        ToastUtils.showShort(this, "原密码跟新密码不一样");
+                        CentreToast.showText(this, "原密码跟新密码不一样");
                         setTextView();
                     } else if (!mNewET_str.equals(mAgainNewET_str)) {
-                        ToastUtils.showShort(this, "两次输入密码不样");
+                        CentreToast.showText(this, "两次输入密码不样");
                         setTextView();
                     } else {
                         int a = Helper.weakPwdCheck(mNewET_str);
                         if (a == 1) {
-                            ToastUtils.showShort(this, "新密码不能为连续相同3个数字");
+                            CentreToast.showText(this, "新密码不能为连续相同3个数字");
                             setTextView();
                         } else if (a == 2) {
-                            ToastUtils.showShort(this, "新密码不能为连续3个数字");
+                            CentreToast.showText(this, "新密码不能为连续3个数字");
                             setTextView();
                         } else if (Helper.isContinuous(mNewET_str)) {
-                            ToastUtils.showShort(this, "新密码不能为2个连续相同3个数字");
+                            CentreToast.showText(this, "新密码不能为2个连续相同3个数字");
                             setTextView();
                         } else {
                             //通过
@@ -238,7 +238,7 @@ public class ChangePasswordActivity extends BaseActivity implements View.OnClick
                     mLoadingDialog.dismiss();
                 }
                 LogHelper.e(TAG, e.toString());
-                Helper.getInstance().showToast(ChangePasswordActivity.this, "网络异常");
+                CentreToast.showText(ChangePasswordActivity.this, "网络异常");
             }
 
             @Override
@@ -274,7 +274,7 @@ public class ChangePasswordActivity extends BaseActivity implements View.OnClick
                     }
                 } catch (JSONException e) {
                     e.printStackTrace();
-                    Helper.getInstance().showToast(ChangePasswordActivity.this, "网络异常");
+                    CentreToast.showText(ChangePasswordActivity.this, "网络异常");
                 }
             }
         });
@@ -324,7 +324,7 @@ public class ChangePasswordActivity extends BaseActivity implements View.OnClick
             v.setPasswordKeyboard(passwordKeyboard);
 
         } catch (UnikeyException e) {
-            Helper.getInstance().showToast(ChangePasswordActivity.this, "弹出密码键盘失败：" + Integer.toHexString(e.getNumber()));
+            CentreToast.showText(ChangePasswordActivity.this, "弹出密码键盘失败：" + Integer.toHexString(e.getNumber()));
         }
     }
 
@@ -357,7 +357,7 @@ public class ChangePasswordActivity extends BaseActivity implements View.OnClick
             v.setPasswordKeyboard(passwordKeyboard);
 
         } catch (UnikeyException e) {
-            Helper.getInstance().showToast(ChangePasswordActivity.this, "弹出密码键盘失败：" + Integer.toHexString(e.getNumber()));
+            CentreToast.showText(ChangePasswordActivity.this, "弹出密码键盘失败：" + Integer.toHexString(e.getNumber()));
         }
     }
 
@@ -389,7 +389,7 @@ public class ChangePasswordActivity extends BaseActivity implements View.OnClick
             v.setPasswordKeyboard(passwordKeyboard);
 
         } catch (UnikeyException e) {
-            Helper.getInstance().showToast(ChangePasswordActivity.this, "弹出密码键盘失败：" + Integer.toHexString(e.getNumber()));
+            CentreToast.showText(ChangePasswordActivity.this, "弹出密码键盘失败：" + Integer.toHexString(e.getNumber()));
         }
     }
 }

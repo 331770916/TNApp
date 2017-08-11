@@ -22,7 +22,7 @@ import com.tpyzq.mobile.pangu.http.NetWorkUtil;
 import com.tpyzq.mobile.pangu.util.ConstantUtil;
 import com.tpyzq.mobile.pangu.util.Helper;
 import com.tpyzq.mobile.pangu.util.SpUtils;
-import com.tpyzq.mobile.pangu.view.dialog.ResultDialog;
+import com.tpyzq.mobile.pangu.view.CentreToast;
 import com.zhy.http.okhttp.callback.StringCallback;
 
 import org.json.JSONArray;
@@ -357,7 +357,7 @@ public class SubscribeHistorysAdapter extends BaseAdapter {
                         tvQiShiHao.setText(remark);                                           //起始号
                     }
                 } else {
-                    ResultDialog.getInstance().showText("网络异常");
+                    CentreToast.showText(context,"网络异常");
                 }
                 getPercent(stockCode, textView_time3, textView_time4, textView_time5);
             }

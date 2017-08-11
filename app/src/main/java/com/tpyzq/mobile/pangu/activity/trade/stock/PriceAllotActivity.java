@@ -419,7 +419,7 @@ public class PriceAllotActivity extends BaseActivity implements View.OnClickList
             @Override
             public void onResponse(String response, int id) {
                 if (TextUtils.isEmpty(response)) {
-//                    Helper.getInstance().showToast(CustomApplication.getContext(), "" + response);
+//                    CentreToast.showText(CustomApplication.getContext(), "" + response);
                     return ;
                 }
                 try{
@@ -496,7 +496,7 @@ public class PriceAllotActivity extends BaseActivity implements View.OnClickList
 //                                    getResultAccountPrice(FETCH_BALANCE, FUND_ACCOUNT);
 //                                    mUsefulBalanceTv.setText("可取余额：" + FETCH_BALANCE);
 //                                    mBalanceTv.setText("");
-//                                    ResultDialog.getInstance().show("转账申请已提交", R.mipmap.lc_success);
+//
 //                                }
 //                                if (fundAccountDest.equals(FUND_ACCOUNT)) {
 //                                    getResultAccountPrice(FETCH_BALANCE, FUND_ACCOUNT);

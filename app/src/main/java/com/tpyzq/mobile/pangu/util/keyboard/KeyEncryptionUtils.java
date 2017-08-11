@@ -66,10 +66,10 @@ public class KeyEncryptionUtils {
         userEntity.setMobile(data);
         Db_PUB_USERS.UpdateMobile(userEntity);
 //                } else {
-////                    Helper.getInstance().showToast(CustomApplication.getContext(), "加密之后的数据为空，可能导致后面的操作异常");
+////                    CentreToast.showText(CustomApplication.getContext(), "加密之后的数据为空，可能导致后面的操作异常");
 //                }
 //            } else {
-////                Helper.getInstance().showToast(CustomApplication.getContext(), "进行加密的数据为空，可能导致后面的操作异常");
+////                CentreToast.showText(CustomApplication.getContext(), "进行加密的数据为空，可能导致后面的操作异常");
 //            }
 //        } catch (UnikeyException e) {
 //            e.printStackTrace();
@@ -118,10 +118,10 @@ public class KeyEncryptionUtils {
         userEntity.setTradescno(data);
         Db_PUB_USERS.UpdateTradescno(userEntity);
 //                } else {
-//                    Helper.getInstance().showToast(CustomApplication.getContext(), "加密之后的数据为空，可能导致后面的操作异常");
+//                    CentreToast.showText(CustomApplication.getContext(), "加密之后的数据为空，可能导致后面的操作异常");
 //    }
 //            } else {
-//                Helper.getInstance().showToast(CustomApplication.getContext(), "进行加密的数据为空，可能导致后面的操作异常");
+//                CentreToast.showText(CustomApplication.getContext(), "进行加密的数据为空，可能导致后面的操作异常");
 //            }
 //        } catch (UnikeyException e) {
 //            e.printStackTrace();

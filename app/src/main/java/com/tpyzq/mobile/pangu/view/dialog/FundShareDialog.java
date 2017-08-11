@@ -14,7 +14,6 @@ import com.tpyzq.mobile.pangu.base.BaseDialog;
 import com.tpyzq.mobile.pangu.http.NetWorkUtil;
 import com.tpyzq.mobile.pangu.util.ConstantUtil;
 import com.tpyzq.mobile.pangu.util.SpUtils;
-import com.tpyzq.mobile.pangu.util.ToastUtils;
 import com.tpyzq.mobile.pangu.view.CentreToast;
 import com.zhy.http.okhttp.callback.StringCallback;
 
@@ -78,7 +77,7 @@ public class FundShareDialog extends BaseDialog implements View.OnClickListener 
         NetWorkUtil.getInstence().okHttpForPostString("", ConstantUtil.getURL_JY_HS(), map720205, new StringCallback() {
             @Override
             public void onError(Call call, Exception e, int id) {
-                Toast.makeText(context, "网络访问失败", Toast.LENGTH_SHORT).show();
+                CentreToast.showText(context, ConstantUtil.NETWORK_ERROR);
             }
 
             @Override
@@ -96,7 +95,7 @@ public class FundShareDialog extends BaseDialog implements View.OnClickListener 
                     } else if ("-6".equals(code)) {
                         context.startActivity(new Intent(context, TransactionLoginActivity.class));
                     } else {
-                        ToastUtils.showShort(context, msg);
+                        CentreToast.showText(context, msg);
                     }
                 } catch (JSONException e) {
                     e.printStackTrace();

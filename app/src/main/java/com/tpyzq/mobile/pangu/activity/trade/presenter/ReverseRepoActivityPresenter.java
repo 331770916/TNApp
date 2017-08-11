@@ -12,7 +12,6 @@ import com.tpyzq.mobile.pangu.data.TimeShareEntity;
 import com.tpyzq.mobile.pangu.http.NetWorkUtil;
 import com.tpyzq.mobile.pangu.util.ConstantUtil;
 import com.tpyzq.mobile.pangu.util.SpUtils;
-import com.tpyzq.mobile.pangu.util.ToastUtils;
 import com.tpyzq.mobile.pangu.util.panguutil.JudgeStockUtils;
 import com.tpyzq.mobile.pangu.view.CentreToast;
 import com.tpyzq.mobile.pangu.view.CustomCenterDialog;
@@ -106,7 +105,7 @@ public class ReverseRepoActivityPresenter {
         NetWorkUtil.getInstence().okHttpForPostString("", ConstantUtil.getURL_JY_HS(), map300130, new StringCallback() {
             @Override
             public void onError(Call call, Exception e, int id) {
-                ToastUtils.showShort(activity, "网络访问失败");
+                CentreToast.showText(activity, "网络访问失败");
             }
 
             @Override
@@ -159,7 +158,7 @@ public class ReverseRepoActivityPresenter {
         NetWorkUtil.getInstence().okHttpForPostString("", ConstantUtil.getURL_JY_HS(), map300140, new StringCallback() {
             @Override
             public void onError(Call call, Exception e, int id) {
-                ToastUtils.showShort(activity, "网络访问失败");
+                CentreToast.showText(activity, "网络访问失败");
             }
 
             @Override

@@ -29,6 +29,7 @@ import com.tpyzq.mobile.pangu.util.SpUtils;
 import com.tpyzq.mobile.pangu.util.keyboard.UsefulKeyBoard;
 import com.tpyzq.mobile.pangu.util.panguutil.PanguParameters;
 import com.tpyzq.mobile.pangu.util.panguutil.UserUtil;
+import com.tpyzq.mobile.pangu.view.CentreToast;
 import com.tpyzq.mobile.pangu.view.CustomCenterDialog;
 import com.tpyzq.mobile.pangu.view.dialog.LoadingDialog;
 import com.tpyzq.mobile.pangu.view.keybody.InputPasswordView;
@@ -172,7 +173,7 @@ public class SubTransferAcountsTab extends BaseTransferObserverTabView implement
 
                     } catch (UnikeyException e) {
                         e.printStackTrace();
-                        Helper.getInstance().showToast(CustomApplication.getContext(), "弹出密码键盘失败：" + Integer.toHexString(e.getNumber()));
+                        CentreToast.showText(CustomApplication.getContext(), "弹出密码键盘失败：" + Integer.toHexString(e.getNumber()));
                     }
                 } else {
 
@@ -224,7 +225,7 @@ public class SubTransferAcountsTab extends BaseTransferObserverTabView implement
     private void queryBalance(String s, String queryType) {
 
         if (TextUtils.isEmpty(mAccountInfo.getBANK_NO())) {
-            Helper.getInstance().showToast(CustomApplication.getContext(), "银行代码为空");
+            CentreToast.showText(CustomApplication.getContext(), "银行代码为空");
             return;
         }
 

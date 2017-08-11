@@ -9,6 +9,7 @@ import com.tpyzq.mobile.pangu.interfac.ICallbackResult;
 import com.tpyzq.mobile.pangu.log.LogHelper;
 import com.tpyzq.mobile.pangu.util.ConstantUtil;
 import com.tpyzq.mobile.pangu.util.Helper;
+import com.tpyzq.mobile.pangu.view.CentreToast;
 import com.zhy.http.okhttp.callback.StringCallback;
 
 import org.json.JSONArray;
@@ -65,7 +66,7 @@ public class QuerySelfChoiceStockConnect {
             @Override
             public void onError(Call call, Exception e, int id) {
                 LogHelper.e(TAG, e.toString());
-                Helper.getInstance().showToast(CustomApplication.getContext(), "网络异常");
+                CentreToast.showText(CustomApplication.getContext(), "网络异常");
                 String msg = "" + e.toString();
                 mCallbackResult.getResult(msg, TAG);
             }

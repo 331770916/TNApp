@@ -24,7 +24,6 @@ import com.tpyzq.mobile.pangu.interfac.OpenOtcCheckBoxListenerImpl;
 import com.tpyzq.mobile.pangu.util.ConstantUtil;
 import com.tpyzq.mobile.pangu.util.Helper;
 import com.tpyzq.mobile.pangu.util.SpUtils;
-import com.tpyzq.mobile.pangu.util.ToastUtils;
 import com.tpyzq.mobile.pangu.view.CentreToast;
 import com.tpyzq.mobile.pangu.view.CustomCenterDialog;
 import com.tpyzq.mobile.pangu.view.dialog.DownloadDocPdfDialog;
@@ -228,7 +227,7 @@ public class OTC_ContractSignActivity extends BaseActivity implements View.OnCli
                             mLinearLayout.setVisibility(View.GONE);
                         }
                     }else{
-                        ToastUtils.showShort(OTC_ContractSignActivity.this,msg);
+                        CentreToast.showText(OTC_ContractSignActivity.this,msg);
                     }
                 } catch (JSONException e) {
                     e.printStackTrace();

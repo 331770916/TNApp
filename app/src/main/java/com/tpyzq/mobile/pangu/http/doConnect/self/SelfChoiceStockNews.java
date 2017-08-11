@@ -239,7 +239,7 @@ public class SelfChoiceStockNews {
 //                            }
 //                            boolean isSuccessForAddSelfNewsDb = Db_HOME_INFO.addStockListDatas(entities);
 //                            if (!isSuccessForAddSelfNewsDb) {
-////                                Helper.getInstance().showToast(CustomApplication.getContext(), "批量添加自选股新闻失败");
+////                                CentreToast.showText(CustomApplication.getContext(), "批量添加自选股新闻失败");
 //                            }
 //                            mCallbackResult.getResult(entities, TAG);
 //                        }

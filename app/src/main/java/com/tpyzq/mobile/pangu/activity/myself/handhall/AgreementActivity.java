@@ -15,8 +15,8 @@ import com.tpyzq.mobile.pangu.log.LogHelper;
 import com.tpyzq.mobile.pangu.util.ConstantUtil;
 import com.tpyzq.mobile.pangu.util.Helper;
 import com.tpyzq.mobile.pangu.util.SpUtils;
+import com.tpyzq.mobile.pangu.view.CentreToast;
 import com.tpyzq.mobile.pangu.view.CustomCenterDialog;
-import com.tpyzq.mobile.pangu.view.dialog.ResultDialog;
 import com.zhy.http.okhttp.callback.StringCallback;
 
 import org.json.JSONException;
@@ -74,7 +74,7 @@ public class AgreementActivity extends BaseActivity implements View.OnClickListe
             @Override
             public void onError(Call call, Exception e, int id) {
                 LogHelper.e(TAG, e.toString());
-                Helper.getInstance().showToast(AgreementActivity.this, "网络异常");
+                CentreToast.showText(AgreementActivity.this, "网络异常");
             }
 
             @Override
@@ -179,7 +179,7 @@ public class AgreementActivity extends BaseActivity implements View.OnClickListe
             @Override
             public void onError(Call call, Exception e, int id) {
                 LogHelper.e(TAG, e.toString());
-                Helper.getInstance().showToast(AgreementActivity.this, "网络异常");
+                CentreToast.showText(AgreementActivity.this, "网络异常");
             }
 
             @Override
@@ -191,7 +191,7 @@ public class AgreementActivity extends BaseActivity implements View.OnClickListe
                     JSONObject res = new JSONObject(response);
                     String code = res.optString("code");
                     if("0".equals(code)){
-                        ResultDialog.getInstance().show("" + "签署成功", R.mipmap.lc_success);
+                        CentreToast.showText(AgreementActivity.this,"签署成功",true);
                         mAGLinearLayout.setVisibility(View.GONE);
                     }else if("-6".equals(code)){
                         Intent intent = new Intent(AgreementActivity.this, TransactionLoginActivity.class);
@@ -209,7 +209,6 @@ public class AgreementActivity extends BaseActivity implements View.OnClickListe
                 }.getType();
                 AgreementBean bean = gson.fromJson(response, type);
                 if (bean.getCode().equals("0")) {
-                    ResultDialog.getInstance().show("" + "签署成功", R.mipmap.lc_success);
                     mAGLinearLayout.setVisibility(View.GONE);
                 } else if (bean.getCode().equals("-6")) {
                     Intent intent = new Intent(Agreement.this, TransactionLoginActivity.class);
@@ -248,7 +247,7 @@ public class AgreementActivity extends BaseActivity implements View.OnClickListe
                 finish();
                 break;
             case R.id.NO:
-                ResultDialog.getInstance().show("" + "权限开通失败", R.mipmap.lc_failed);
+                CentreToast.showText(AgreementActivity.this,"权限开通失败",false);
                 finish();
                 break;
         }

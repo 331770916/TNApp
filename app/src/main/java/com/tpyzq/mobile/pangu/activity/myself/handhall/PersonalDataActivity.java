@@ -19,8 +19,8 @@ import com.tpyzq.mobile.pangu.util.ConstantUtil;
 import com.tpyzq.mobile.pangu.util.Helper;
 import com.tpyzq.mobile.pangu.util.HtmlUtil;
 import com.tpyzq.mobile.pangu.util.SpUtils;
+import com.tpyzq.mobile.pangu.view.CentreToast;
 import com.tpyzq.mobile.pangu.view.CustomCenterDialog;
-import com.tpyzq.mobile.pangu.view.dialog.ResultDialog;
 import com.zhy.http.okhttp.callback.StringCallback;
 
 import org.json.JSONArray;
@@ -135,7 +135,7 @@ public class PersonalDataActivity extends BaseActivity implements View.OnClickLi
             @Override
             public void onError(Call call, Exception e, int id) {
                 LogHelper.e(TAG, e.toString());
-                Helper.getInstance().showToast(PersonalDataActivity.this, "网络异常");
+                CentreToast.showText(PersonalDataActivity.this, "网络异常");
             }
 
             @Override
@@ -328,17 +328,17 @@ public class PersonalDataActivity extends BaseActivity implements View.OnClickLi
                     mState = 1;
                 } else if (mState == 1) {
                     if (TextUtils.isEmpty(ContactAddress.getText().toString().trim())) {
-                        Helper.getInstance().showToast(this, "请填写您联系地址");
+                        CentreToast.showText(this, "请填写您联系地址");
                     } else if (!Helper.checkPost(ZipCode.getText().toString().toString())) {
-                        Helper.getInstance().showToast(this, "邮政编码错误");
+                        CentreToast.showText(this, "邮政编码错误");
                     } else if (TextUtils.isEmpty(EducationBackground.getText().toString().toString())) {
-                        Helper.getInstance().showToast(this, "学历不能为空");
+                        CentreToast.showText(this, "学历不能为空");
                     } else if (!Helper.isMobileNO(Phone.getText().toString())) {
-                        Helper.getInstance().showToast(this, "请输入正确手机号");
+                        CentreToast.showText(this, "请输入正确手机号");
                     } else if (TextUtils.isEmpty(TheSecondName.getText().toString().trim())) {
-                        Helper.getInstance().showToast(this, "请填写联系人");
+                        CentreToast.showText(this, "请填写联系人");
                     } else if (TextUtils.isEmpty(Relation.getText().toString().trim())) {
-                        Helper.getInstance().showToast(this, "请填写您跟第二联系人关系");
+                        CentreToast.showText(this, "请填写您跟第二联系人关系");
                     } else {
                         setDatatoConnect();
                     }
@@ -484,7 +484,7 @@ public class PersonalDataActivity extends BaseActivity implements View.OnClickLi
             @Override
             public void onError(Call call, Exception e, int id) {
                 LogHelper.e(TAG, e.toString());
-                Helper.getInstance().showToast(PersonalDataActivity.this, "网络异常");
+                CentreToast.showText(PersonalDataActivity.this, "网络异常");
             }
 
             @Override
@@ -496,7 +496,7 @@ public class PersonalDataActivity extends BaseActivity implements View.OnClickLi
                     JSONObject res = new JSONObject(response);
                     String code = res.optString("code");
                     if("0".equals(code)){
-                        ResultDialog.getInstance().show("" + "编辑成功", R.mipmap.lc_success);
+                        CentreToast.showText(PersonalDataActivity.this,"编辑成功",true);
                         mCompile.setText("编辑");
                         setCompoundDrawables();
                         setColor();
@@ -518,7 +518,6 @@ public class PersonalDataActivity extends BaseActivity implements View.OnClickLi
                 }.getType();
                 PersonalDataBean bean = gson.fromJson(response, type);
                 if (bean.getCode().equals("0")) {
-                    ResultDialog.getInstance().show("" + "编辑成功", R.mipmap.lc_success);
                 } else if (bean.getCode().equals("-6")) {
                     Intent intent = new Intent(PersonalData.this, TransactionLoginActivity.class);
                     startActivity(intent);

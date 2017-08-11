@@ -33,11 +33,9 @@ import com.tpyzq.mobile.pangu.log.LogHelper;
 import com.tpyzq.mobile.pangu.util.ConstantUtil;
 import com.tpyzq.mobile.pangu.util.Helper;
 import com.tpyzq.mobile.pangu.util.SpUtils;
-import com.tpyzq.mobile.pangu.util.ToastUtils;
 import com.tpyzq.mobile.pangu.util.TransitionUtils;
 import com.tpyzq.mobile.pangu.util.panguutil.AddPosition;
 import com.tpyzq.mobile.pangu.view.CentreToast;
-import com.tpyzq.mobile.pangu.view.dialog.ResultDialog;
 import com.tpyzq.mobile.pangu.view.listview.AutoListview;
 import com.zhy.http.okhttp.callback.StringCallback;
 
@@ -159,7 +157,6 @@ public class TakeAPositionActivity extends BaseActivity implements AdapterView.O
                 if (isClean){
                     mExpandedMenuPos = -1;
                 }
-//                ResultDialog.getInstance().showText("网络异常");
                 CentreToast.showText(TakeAPositionActivity.this,ConstantUtil.NETWORK_ERROR);
             }
 
@@ -245,7 +242,6 @@ public class TakeAPositionActivity extends BaseActivity implements AdapterView.O
                     } else if ("-6".equals(jsonObject.getString("code"))) {
                         startActivity(new Intent(TakeAPositionActivity.this, TransactionLoginActivity.class));
                     } else {
-//                        ResultDialog.getInstance().showText("网络异常");
                         CentreToast.showText(TakeAPositionActivity.this,ConstantUtil.NETWORK_ERROR);
                     }
                 } catch (JSONException e) {

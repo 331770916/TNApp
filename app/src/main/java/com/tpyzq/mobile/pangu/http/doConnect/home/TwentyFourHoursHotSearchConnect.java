@@ -58,7 +58,7 @@ public class TwentyFourHoursHotSearchConnect {
         NetWorkUtil.getInstence().okHttpForPostString(mHttpTag, ConstantUtil.getURL_HQ_WB(), hashMap, new StringCallback() {
             @Override
             public void onError(Call call, Exception e, int id) {
-//                Helper.getInstance().showToast(mContext, "网络异常");
+//                CentreToast.showText(mContext, "网络异常");
                 LogUtil.e(mHttpTag, e.toString());
                 mCallbackResult.getResult("网络异常", TAG);
             }

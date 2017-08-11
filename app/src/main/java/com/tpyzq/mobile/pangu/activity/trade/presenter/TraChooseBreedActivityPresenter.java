@@ -9,7 +9,7 @@ import com.tpyzq.mobile.pangu.http.NetWorkUtil;
 import com.tpyzq.mobile.pangu.log.LogUtil;
 import com.tpyzq.mobile.pangu.util.ConstantUtil;
 import com.tpyzq.mobile.pangu.util.Helper;
-import com.tpyzq.mobile.pangu.util.ToastUtils;
+import com.tpyzq.mobile.pangu.view.CentreToast;
 import com.zhy.http.okhttp.callback.StringCallback;
 
 import org.json.JSONArray;
@@ -114,10 +114,10 @@ public class TraChooseBreedActivityPresenter {
                         activity.setHuPager(hu_data);
                         activity.setSzPager(sz_data);
                     } else {
-                        ToastUtils.showShort(activity, "数据异常: " + code);
+                        CentreToast.showText(activity, "数据异常: " + code);
                     }
                 } catch (JSONException e) {
-                    ToastUtils.showShort(activity, "数据解析异常");
+                    CentreToast.showText(activity, "数据解析异常");
                     e.printStackTrace();
                 }
             }
@@ -193,10 +193,10 @@ public void getTraBreed() {
                     activity.setHuPager(hu_data);
                     activity.setSzPager(sz_data);
                 } else {
-//                    ToastUtils.showShort(activity, "数据异常: " + type);
+//                    CentreToast.showText(activity, "数据异常: " + type);
                 }
             } catch (JSONException e) {
-                ToastUtils.showShort(activity, "数据解析异常");
+                CentreToast.showText(activity, "数据解析异常");
                 e.printStackTrace();
             }
 

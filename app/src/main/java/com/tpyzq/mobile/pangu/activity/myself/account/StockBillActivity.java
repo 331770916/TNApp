@@ -18,6 +18,7 @@ import com.tpyzq.mobile.pangu.util.ConstantUtil;
 import com.tpyzq.mobile.pangu.util.Helper;
 import com.tpyzq.mobile.pangu.util.panguutil.JSAPI;
 import com.tpyzq.mobile.pangu.util.panguutil.UserUtil;
+import com.tpyzq.mobile.pangu.view.CentreToast;
 import com.tpyzq.mobile.pangu.view.dialog.LoadingDialog;
 import com.tpyzq.mobile.pangu.view.dialog.ShareDialog;
 import com.tpyzq.mobile.pangu.view.webview.ProgressWebView;
@@ -70,7 +71,7 @@ public class StockBillActivity extends BaseActivity implements View.OnClickListe
             public void onError(Call call, Exception e, int id) {
                 LogUtil.e(TAG, e.toString());
                 setShow();
-                Helper.getInstance().showToast(StockBillActivity.this, "网络异常");
+                CentreToast.showText(StockBillActivity.this, "网络异常");
             }
 
             @Override

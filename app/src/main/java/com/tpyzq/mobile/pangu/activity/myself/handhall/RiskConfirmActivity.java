@@ -18,6 +18,7 @@ import com.tpyzq.mobile.pangu.data.ResultInfo;
 import com.tpyzq.mobile.pangu.http.OkHttpUtil;
 import com.tpyzq.mobile.pangu.util.Helper;
 import com.tpyzq.mobile.pangu.util.SpUtils;
+import com.tpyzq.mobile.pangu.view.CentreToast;
 import com.tpyzq.mobile.pangu.view.CustomCenterDialog;
 
 import java.util.HashMap;
@@ -200,7 +201,7 @@ public class RiskConfirmActivity extends BaseActivity implements View.OnClickLis
                 break;
             case R.id.btn_ok://确定按钮
                 if (!cb_open_fund.isChecked()) {
-                    Helper.getInstance().showToast(this,"您还没有签署协议");
+                    CentreToast.showText(this,"您还没有签署协议");
                     break;
                 }
                 String oper_info;

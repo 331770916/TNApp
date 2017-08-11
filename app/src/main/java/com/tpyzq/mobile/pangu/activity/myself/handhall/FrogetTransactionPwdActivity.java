@@ -21,6 +21,7 @@ import com.tpyzq.mobile.pangu.base.BaseActivity;
 import com.tpyzq.mobile.pangu.data.UpdateIdCodeValidityEntity;
 import com.tpyzq.mobile.pangu.http.OkHttpUtil;
 import com.tpyzq.mobile.pangu.util.ConstantUtil;
+import com.tpyzq.mobile.pangu.view.CentreToast;
 import com.tpyzq.mobile.pangu.view.dialog.CancelDialog;
 import com.tpyzq.mobile.pangu.view.dialog.LoadingDialog;
 import com.zhy.http.okhttp.callback.StringCallback;
@@ -125,17 +126,17 @@ public class FrogetTransactionPwdActivity extends BaseActivity implements View.O
     private boolean pass(String fund_account, String user_name, String id_no) {
 
         if (TextUtils.isEmpty(fund_account)) {
-            Toast.makeText(FrogetTransactionPwdActivity.this, "资金账号不能为空", Toast.LENGTH_SHORT).show();
+            CentreToast.showText(FrogetTransactionPwdActivity.this, "资金账号不能为空");
             return false;
         }
 
         if (TextUtils.isEmpty(user_name)) {
-            Toast.makeText(FrogetTransactionPwdActivity.this, "名字不能为空", Toast.LENGTH_SHORT).show();
+            CentreToast.showText(FrogetTransactionPwdActivity.this, "名字不能为空");
             return false;
         }
 
         if (TextUtils.isEmpty(id_no)) {
-            Toast.makeText(FrogetTransactionPwdActivity.this, "身份证不能为空", Toast.LENGTH_SHORT).show();
+            CentreToast.showText(FrogetTransactionPwdActivity.this, "身份证不能为空");
             return false;
         }
 

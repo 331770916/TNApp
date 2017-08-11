@@ -12,6 +12,7 @@ import android.widget.TextView;
 import com.tpyzq.mobile.pangu.R;
 import com.tpyzq.mobile.pangu.base.BaseDialog;
 import com.tpyzq.mobile.pangu.util.Helper;
+import com.tpyzq.mobile.pangu.view.CentreToast;
 
 import java.io.InputStream;
 
@@ -65,7 +66,7 @@ public class SaveImageDialog extends BaseDialog implements View.OnClickListener 
             Drawable d = Drawable.createFromStream(inputStream, null);
             Bitmap bitmap = ((BitmapDrawable) d).getBitmap();
             MediaStore.Images.Media.insertImage(context.getContentResolver(), bitmap, Helper.getCurDate(), "description");
-            Helper.getInstance().showToast(context,"保存成功");
+            CentreToast.showText(context,"保存成功");
             inputStream.close();
             dismiss();
         } catch (java.io.IOException e) {

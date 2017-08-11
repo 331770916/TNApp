@@ -26,6 +26,7 @@ import com.tpyzq.mobile.pangu.util.Helper;
 import com.tpyzq.mobile.pangu.util.SpUtils;
 import com.tpyzq.mobile.pangu.util.panguutil.SelfStockHelper;
 import com.tpyzq.mobile.pangu.util.panguutil.UserUtil;
+import com.tpyzq.mobile.pangu.view.CentreToast;
 import com.tpyzq.mobile.pangu.view.CustomCenterDialog;
 import com.tpyzq.mobile.pangu.view.dialog.LoadingDialog;
 import com.umeng.socialize.UMAuthListener;
@@ -88,13 +89,13 @@ public class WXLogin implements ICallbackResult {
 
         @Override
         public void onError(SHARE_MEDIA share_media, int i, Throwable throwable) {
-            Helper.getInstance().showToast(mContext, "授权失败");
+            CentreToast.showText(mContext, "授权失败");
             mMarked.MarkedLogic(false);
         }
 
         @Override
         public void onCancel(SHARE_MEDIA share_media, int i) {
-            Helper.getInstance().showToast(mContext, "授权失败");
+            CentreToast.showText(mContext, "授权失败");
             mMarked.MarkedLogic(false);
         }
 
@@ -134,13 +135,13 @@ public class WXLogin implements ICallbackResult {
             @Override
             public void onError(SHARE_MEDIA share_media, int i, Throwable throwable) {
                 throwable.printStackTrace();
-                Helper.getInstance().showToast(mContext, "授权失败");
+                CentreToast.showText(mContext, "授权失败");
                 mMarked.MarkedLogic(false);
             }
 
             @Override
             public void onCancel(SHARE_MEDIA share_media, int i) {
-                Helper.getInstance().showToast(mContext, "授权失败");
+                CentreToast.showText(mContext, "授权失败");
                 mMarked.MarkedLogic(false);
 
             }
@@ -167,7 +168,7 @@ public class WXLogin implements ICallbackResult {
             @Override
             public void onError(Call call, Exception e, int id) {
                 LogUtil.e(TAG, e.toString());
-                Helper.getInstance().showToast(mContext, "网络异常");
+                CentreToast.showText(mContext, "网络异常");
                 mLoadingDialog.dismiss();
                 mMarked.MarkedLogic(false);
             }

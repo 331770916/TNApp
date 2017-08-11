@@ -19,7 +19,7 @@ import com.tpyzq.mobile.pangu.data.FundSubsEntity;
 import com.tpyzq.mobile.pangu.http.NetWorkUtil;
 import com.tpyzq.mobile.pangu.util.ConstantUtil;
 import com.tpyzq.mobile.pangu.util.SpUtils;
-import com.tpyzq.mobile.pangu.util.ToastUtils;
+import com.tpyzq.mobile.pangu.view.CentreToast;
 import com.tpyzq.mobile.pangu.view.dialog.LoadingDialog;
 import com.zhy.http.okhttp.callback.StringCallback;
 
@@ -27,7 +27,6 @@ import org.json.JSONArray;
 import org.json.JSONException;
 import org.json.JSONObject;
 
-import java.io.Serializable;
 import java.util.ArrayList;
 import java.util.HashMap;
 import java.util.List;
@@ -134,7 +133,7 @@ public class FundProductActivity extends BaseActivity implements View.OnClickLis
                     } else if ("-6".equals(code)) {
                         startActivity(new Intent(FundProductActivity.this, TransactionLoginActivity.class));
                     } else {
-                        ToastUtils.showShort(FundProductActivity.this, msg);
+                        CentreToast.showText(FundProductActivity.this, msg);
                     }
                 } catch (JSONException e) {
                     e.printStackTrace();

@@ -246,7 +246,6 @@ public class EntrustCustomPager extends BaseSearchPager {
                         if (mDialog != null) {
                             mDialog.dismiss();
                         }
-//                        ResultDialog.getInstance().showText(jsonObject.getString("msg"));
                         kong_null.setVisibility(View.GONE);
                     }
                 } catch (JSONException e) {

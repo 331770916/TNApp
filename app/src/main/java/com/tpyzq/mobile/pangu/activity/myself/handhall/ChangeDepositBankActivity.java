@@ -25,6 +25,7 @@ import com.tpyzq.mobile.pangu.interfac.IChangeDepositBankResult;
 import com.tpyzq.mobile.pangu.util.Helper;
 import com.tpyzq.mobile.pangu.util.SpUtils;
 import com.tpyzq.mobile.pangu.util.keyboard.UsefulKeyBoard;
+import com.tpyzq.mobile.pangu.view.CentreToast;
 import com.tpyzq.mobile.pangu.view.CustomCenterDialog;
 import com.tpyzq.mobile.pangu.view.dialog.CancelDialog;
 import com.tpyzq.mobile.pangu.view.dialog.LoadingDialog;
@@ -291,7 +292,7 @@ public class ChangeDepositBankActivity extends BaseActivity implements View.OnCl
 
             } catch (UnikeyException e) {
                 e.printStackTrace();
-                Helper.getInstance().showToast(CustomApplication.getContext(), "弹出密码键盘失败：" + Integer.toHexString(e.getNumber()));
+                CentreToast.showText(CustomApplication.getContext(), "弹出密码键盘失败：" + Integer.toHexString(e.getNumber()));
             }
 
         }

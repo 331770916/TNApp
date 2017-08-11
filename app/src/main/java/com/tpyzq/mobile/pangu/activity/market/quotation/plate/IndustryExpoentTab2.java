@@ -25,6 +25,7 @@ import com.tpyzq.mobile.pangu.log.LogHelper;
 import com.tpyzq.mobile.pangu.util.ConstantUtil;
 import com.tpyzq.mobile.pangu.util.Helper;
 import com.tpyzq.mobile.pangu.util.TransitionUtils;
+import com.tpyzq.mobile.pangu.view.CentreToast;
 import com.zhy.http.okhttp.callback.StringCallback;
 
 import org.json.JSONArray;
@@ -307,7 +308,7 @@ public class IndustryExpoentTab2 extends BaseTabPager implements View.OnClickLis
 
 
         if (entities!= null && entities.size() > 0 && entities.get(0).getCode().equals("-5")) {
-            Helper.getInstance().showToast(mActivity, "Code:-5");
+            CentreToast.showText(mActivity, "Code:-5");
 
             if (mBeans == null || mBeans.size() <= 0) {
                 mAdapter.setDatas(null,mType);

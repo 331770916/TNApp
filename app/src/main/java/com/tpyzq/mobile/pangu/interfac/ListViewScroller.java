@@ -8,6 +8,7 @@ import android.widget.ListView;
 import com.tpyzq.mobile.pangu.base.CustomApplication;
 import com.tpyzq.mobile.pangu.http.NetWorkUtil;
 import com.tpyzq.mobile.pangu.util.Helper;
+import com.tpyzq.mobile.pangu.view.CentreToast;
 
 
 /**
@@ -58,7 +59,7 @@ public class ListViewScroller implements AbsListView.OnScrollListener, IListView
                         } else {
                             doSelectMiddle = false;
                             mListViewScrollerListener.doSelectMiddle(doSelectMiddle);
-                            Helper.getInstance().showToast(CustomApplication.getContext(), "没有更多数据了");
+                            CentreToast.showText(CustomApplication.getContext(), "没有更多数据了");
                         }
 
                     }  else {

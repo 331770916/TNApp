@@ -20,6 +20,7 @@ import com.tpyzq.mobile.pangu.util.ConstantUtil;
 import com.tpyzq.mobile.pangu.util.DeviceUtil;
 import com.tpyzq.mobile.pangu.util.Helper;
 import com.tpyzq.mobile.pangu.util.panguutil.APPInfoUtils;
+import com.tpyzq.mobile.pangu.view.CentreToast;
 import com.zhy.http.okhttp.callback.StringCallback;
 
 import java.util.HashMap;
@@ -135,10 +136,10 @@ public class InviteCodeDialog extends BaseDialogCenter implements View.OnClickLi
     private boolean checkInvite() {
         int length = mInviteEdit.getText().length();
         if (TextUtils.isEmpty(mInviteEdit.getText().toString())) {
-            Helper.getInstance().showToast(CustomApplication.getContext(), "邀请码不能为空");
+            CentreToast.showText(CustomApplication.getContext(), "邀请码不能为空");
             return false;
         } else if (length < 19) {
-            Helper.getInstance().showToast(CustomApplication.getContext(), "请输入完整的邀请码");
+            CentreToast.showText(CustomApplication.getContext(), "请输入完整的邀请码");
             return false;
         }
 

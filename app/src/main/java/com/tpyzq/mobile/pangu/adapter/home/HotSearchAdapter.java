@@ -32,8 +32,8 @@ import com.tpyzq.mobile.pangu.util.panguutil.BRutil;
 import com.tpyzq.mobile.pangu.util.panguutil.SelfChoiceStockTempData;
 import com.tpyzq.mobile.pangu.util.panguutil.SelfStockHelper;
 import com.tpyzq.mobile.pangu.util.panguutil.UserUtil;
+import com.tpyzq.mobile.pangu.view.CentreToast;
 import com.tpyzq.mobile.pangu.view.CustomCenterDialog;
-import com.tpyzq.mobile.pangu.view.dialog.DoSelfChoiceResultDialog;
 import com.tpyzq.mobile.pangu.view.dialog.LoadingDialog;
 
 import org.json.JSONException;
@@ -214,7 +214,7 @@ public class HotSearchAdapter extends BaseAdapter {
                                         imageitem2.setImageResource(R.mipmap.search_add);
 
                                         if (tag1) {
-                                            DoSelfChoiceResultDialog.getInstance().singleDialog("删除自选股成功", (Activity) mContext);
+                                            CentreToast.showText(mContext,"删除自选股成功");
                                         }
                                     }
                                 } catch (JSONException e) {
@@ -234,7 +234,7 @@ public class HotSearchAdapter extends BaseAdapter {
                         SelfChoiceStockTempData.getInstance().removeSelfchoicestockTempValue(stockNumber);
                         imageitem2.setImageResource(R.mipmap.search_add);
                         if (tag1) {
-                            DoSelfChoiceResultDialog.getInstance().singleDialog("删除自选股成功", (Activity) mContext);
+                            CentreToast.showText(mContext,"删除自选股成功");
                         }
                     }
                 } else {
@@ -280,7 +280,7 @@ public class HotSearchAdapter extends BaseAdapter {
                                 imageitem2.setImageResource(R.mipmap.search_remove);
 
                                 if (tag1) {
-                                    DoSelfChoiceResultDialog.getInstance().singleDialog("添加自选股成功", (Activity) mContext);
+                                    CentreToast.showText(mContext,"添加自选股成功");
                                 }
                             }
                         });
@@ -296,7 +296,7 @@ public class HotSearchAdapter extends BaseAdapter {
                         }
                         SelfChoiceStockTempData.getInstance().setSelfchoicestockTempValue(stockNumber, stockName);
                         if (tag1) {
-                            DoSelfChoiceResultDialog.getInstance().singleDialog("添加自选股成功", (Activity) mContext);
+                            CentreToast.showText(mContext,"添加自选股成功");
                         }
                         imageitem2.setImageResource(R.mipmap.search_remove);
                     }

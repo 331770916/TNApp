@@ -18,9 +18,9 @@ import com.tpyzq.mobile.pangu.log.LogUtil;
 import com.tpyzq.mobile.pangu.util.ConstantUtil;
 import com.tpyzq.mobile.pangu.util.Helper;
 import com.tpyzq.mobile.pangu.util.SpUtils;
+import com.tpyzq.mobile.pangu.view.CentreToast;
 import com.tpyzq.mobile.pangu.view.CustomCenterDialog;
 import com.tpyzq.mobile.pangu.view.dialog.LoadingDialog;
-import com.tpyzq.mobile.pangu.view.dialog.ResultDialog;
 import com.zhy.http.okhttp.callback.StringCallback;
 
 import org.json.JSONArray;
@@ -111,7 +111,7 @@ public class RiskWarningActivity extends BaseActivity implements View.OnClickLis
                 toConnect();
                 break;
             case R.id.NO:
-                ResultDialog.getInstance().show("" + "权限开通失败", R.mipmap.lc_failed);
+                CentreToast.showText(RiskWarningActivity.this,"权限开通失败",false);
 //                Intent intent=new Intent();
 //                intent.putExtra("names1",0);
 //                intent.setClass(this, AgreementSigned.class);
@@ -138,7 +138,7 @@ public class RiskWarningActivity extends BaseActivity implements View.OnClickLis
             @Override
             public void onError(Call call, Exception e, int id) {
                 LogUtil.e(TAG, e.toString());
-                Helper.getInstance().showToast(RiskWarningActivity.this, "网络异常");
+                CentreToast.showText(RiskWarningActivity.this, "网络异常");
             }
 
             @Override
@@ -167,7 +167,7 @@ public class RiskWarningActivity extends BaseActivity implements View.OnClickLis
                     }
                 } catch (JSONException e) {
                     e.printStackTrace();
-                    Helper.getInstance().showToast(RiskWarningActivity.this, "网络异常");
+                    CentreToast.showText(RiskWarningActivity.this, "网络异常");
                 }
             }
         });
@@ -199,7 +199,7 @@ public class RiskWarningActivity extends BaseActivity implements View.OnClickLis
                     loadingDialog.dismiss();
                 }
                 LogHelper.e(TAG, e.toString());
-                Helper.getInstance().showToast(RiskWarningActivity.this, "网络异常");
+                CentreToast.showText(RiskWarningActivity.this, "网络异常");
             }
 
             @Override
@@ -214,7 +214,7 @@ public class RiskWarningActivity extends BaseActivity implements View.OnClickLis
                         if (loadingDialog != null) {
                             loadingDialog.dismiss();
                         }
-                        ResultDialog.getInstance().show("" + "权限已开通", R.mipmap.lc_success);
+                        CentreToast.showText(RiskWarningActivity.this,"权限已开通",true);
                         mAGLinearLayout.setVisibility(View.GONE);
                     } else if ("-6".equals(code)) {
                         if (loadingDialog != null) {
@@ -234,7 +234,7 @@ public class RiskWarningActivity extends BaseActivity implements View.OnClickLis
                     }
                 } catch (JSONException e) {
                     e.printStackTrace();
-                    Helper.getInstance().showToast(RiskWarningActivity.this, "网络异常");
+                    CentreToast.showText(RiskWarningActivity.this, "网络异常");
                 }
             }
         });

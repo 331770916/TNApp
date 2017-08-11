@@ -1,7 +1,6 @@
 package com.tpyzq.mobile.pangu.activity.home;
 
 import android.view.View;
-import android.webkit.WebResourceRequest;
 import android.webkit.WebView;
 import android.webkit.WebViewClient;
 
@@ -21,13 +20,14 @@ public class LovingHeartActivity extends BaseActivity implements View.OnClickLis
 
     @Override
     public void initView() {
-        ProgressWebView mwebView = (ProgressWebView) findViewById(R.id.mwebView);
+        final ProgressWebView mwebView = (ProgressWebView) findViewById(R.id.mwebView);
         mwebView.getSettings().setUseWideViewPort(true);
         mwebView.getSettings().setLoadWithOverviewMode(true);
         mwebView.getSettings().setJavaScriptEnabled(true);
         mwebView.setWebViewClient(new WebViewClient(){
             @Override
-            public boolean shouldOverrideUrlLoading(WebView view, WebResourceRequest request) {
+            public boolean shouldOverrideUrlLoading(WebView view, String url) {
+                mwebView.loadUrl(url);
                 return true;
             }
         });
@@ -72,7 +72,7 @@ public class LovingHeartActivity extends BaseActivity implements View.OnClickLis
 //            req.profileType = JumpToBizProfile.JUMP_TO_NORMAL_BIZ_PROFILE; // 普通公众号
 //            api.sendReq(req);
 //        } else {
-//            Helper.getInstance().showToast(this, "微信未安装");
+//            CentreToast.showText(this, "微信未安装");
 //        }
 //    }
 

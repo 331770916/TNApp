@@ -12,6 +12,7 @@ import com.tpyzq.mobile.pangu.interfac.ICallbackResult;
 import com.tpyzq.mobile.pangu.log.LogHelper;
 import com.tpyzq.mobile.pangu.util.ConstantUtil;
 import com.tpyzq.mobile.pangu.util.Helper;
+import com.tpyzq.mobile.pangu.view.CentreToast;
 import com.zhy.http.okhttp.callback.StringCallback;
 
 import java.util.ArrayList;
@@ -79,7 +80,7 @@ public class QueryRemainStockPriceConnect {
                     code = bean.getCode();
                 }
                 if (!"0".equals(code)) {
-                    Helper.getInstance().showToast(CustomApplication.getContext(), "" + bean.getMsg());
+                    CentreToast.showText(CustomApplication.getContext(), "" + bean.getMsg());
                     return ;
                 }
 

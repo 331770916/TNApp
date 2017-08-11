@@ -12,12 +12,10 @@ import android.widget.Toast;
 import com.tpyzq.mobile.pangu.R;
 import com.tpyzq.mobile.pangu.activity.myself.login.TransactionLoginActivity;
 import com.tpyzq.mobile.pangu.activity.trade.open_fund.FundChangeActivity;
-import com.tpyzq.mobile.pangu.activity.trade.open_fund.ShareFundActivity;
 import com.tpyzq.mobile.pangu.base.BaseDialog;
 import com.tpyzq.mobile.pangu.http.NetWorkUtil;
 import com.tpyzq.mobile.pangu.util.ConstantUtil;
 import com.tpyzq.mobile.pangu.util.SpUtils;
-import com.tpyzq.mobile.pangu.util.ToastUtils;
 import com.tpyzq.mobile.pangu.view.CentreToast;
 import com.zhy.http.okhttp.callback.StringCallback;
 
@@ -103,7 +101,7 @@ public class FundChangeDialog extends BaseDialog implements View.OnClickListener
                     } else if ("-6".equals(code)) {
                         context.startActivity(new Intent(context, TransactionLoginActivity.class));
                     } else {
-                        ToastUtils.showShort(context, msg);
+                        CentreToast.showText(context, msg);
                     }
                 } catch (JSONException e) {
                     e.printStackTrace();

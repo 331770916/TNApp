@@ -52,6 +52,7 @@ import com.tpyzq.mobile.pangu.util.Helper;
 import com.tpyzq.mobile.pangu.util.SpUtils;
 import com.tpyzq.mobile.pangu.util.panguutil.SelfStockHelper;
 import com.tpyzq.mobile.pangu.util.panguutil.UserUtil;
+import com.tpyzq.mobile.pangu.view.CentreToast;
 import com.tpyzq.mobile.pangu.view.CustomCenterDialog;
 import com.tpyzq.mobile.pangu.view.dialog.LoadingDialog;
 import com.tpyzq.mobile.pangu.view.magicindicator.FragmentContainerHelper;
@@ -195,7 +196,7 @@ public class SearchActivity extends BaseActivity implements View.OnClickListener
                     if (mLoadingDialog != null) {
                         mLoadingDialog.dismiss();
                     }
-                    Helper.getInstance().showToast(CustomApplication.getContext(), "导入持仓自选股数据库失败");
+                    CentreToast.showText(CustomApplication.getContext(), "导入持仓自选股数据库失败");
                 }
                 for (int i = 0; i < stockInfoEntities.size(); i++) {
                     stockInfoEntities.get(i).setStock_flag(StockTable.STOCK_OPTIONAL);

@@ -2716,7 +2716,7 @@ public class InterfaceCollection {
                     info.setCode(code);
                     info.setTag(TAG);
                     if ("0".equals(code)) {
-//                        Helper.getInstance().showToast(ShouJiZhuCe.this,"发送短信成功");
+//                        CentreToast.showText(ShouJiZhuCe.this,"发送短信成功");
                     } else {
                         info.setMsg(jsonObject.opt("message").toString());
                     }

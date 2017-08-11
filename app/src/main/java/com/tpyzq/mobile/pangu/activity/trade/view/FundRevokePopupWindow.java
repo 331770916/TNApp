@@ -155,7 +155,6 @@ public class FundRevokePopupWindow extends PopupWindow{
                     ((Activity)context).finish();
                 }else
                 if(code.equals("0")){
-                    ResultDialog.getInstance().show("委托已提交", R.mipmap.duigou);
                     click.OnClickListener(position);            //回调给 acitity  使刷新数据源
                     FundRevokePopupWindow.this.dismiss();       //销毁当前popupWindow
 

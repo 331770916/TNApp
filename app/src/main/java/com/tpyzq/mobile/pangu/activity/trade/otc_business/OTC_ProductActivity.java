@@ -19,7 +19,7 @@ import com.tpyzq.mobile.pangu.http.NetWorkUtil;
 import com.tpyzq.mobile.pangu.log.LogUtil;
 import com.tpyzq.mobile.pangu.util.ConstantUtil;
 import com.tpyzq.mobile.pangu.util.SpUtils;
-import com.tpyzq.mobile.pangu.view.dialog.ResultDialog;
+import com.tpyzq.mobile.pangu.view.CentreToast;
 import com.zhy.http.okhttp.callback.StringCallback;
 
 import java.lang.reflect.Type;
@@ -121,7 +121,7 @@ public class OTC_ProductActivity extends BaseActivity implements View.OnClickLis
                         adapter.setList(list);
                     }
                 } else {
-                    ResultDialog.getInstance().showText("网络异常");
+                    CentreToast.showText(OTC_ProductActivity.this,"网络异常");
                 }
             }
         });

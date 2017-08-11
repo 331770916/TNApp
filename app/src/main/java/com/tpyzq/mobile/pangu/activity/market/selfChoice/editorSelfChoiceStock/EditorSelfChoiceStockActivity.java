@@ -39,10 +39,10 @@ import com.tpyzq.mobile.pangu.util.Helper;
 import com.tpyzq.mobile.pangu.util.SpUtils;
 import com.tpyzq.mobile.pangu.util.panguutil.SelfStockHelper;
 import com.tpyzq.mobile.pangu.util.panguutil.UserUtil;
+import com.tpyzq.mobile.pangu.view.CentreToast;
 import com.tpyzq.mobile.pangu.view.CustomCenterDialog;
 import com.tpyzq.mobile.pangu.view.dialog.LoadingDialog;
 import com.tpyzq.mobile.pangu.view.dialog.MessageDialog;
-import com.tpyzq.mobile.pangu.view.dialog.ResultDialog;
 import com.tpyzq.mobile.pangu.view.dragsortlistview.DragSortListView;
 
 import java.util.ArrayList;
@@ -239,7 +239,7 @@ public class EditorSelfChoiceStockActivity extends BaseActivity implements ICall
 
                 boolean holdFlag = HOLD_SEQ.addHoldDatas(stockInfoEntities);
                 if (!holdFlag) {
-                    Helper.getInstance().showToast(CustomApplication.getContext(), "导入持仓自选股数据库失败");
+                    CentreToast.showText(CustomApplication.getContext(), "导入持仓自选股数据库失败");
                     return;
                 }
 
@@ -305,7 +305,7 @@ public class EditorSelfChoiceStockActivity extends BaseActivity implements ICall
                         }
                     }
                 }
-                ResultDialog.getInstance().show("删除成功", R.mipmap.lc_success);
+                CentreToast.showText(EditorSelfChoiceStockActivity.this,"删除成功",true);
                 mDatas = null;
                 Intent intent = new Intent();
                 intent.putExtra("finish", "finish");
@@ -394,9 +394,9 @@ public class EditorSelfChoiceStockActivity extends BaseActivity implements ICall
                 }
 
                 if (mDatas == null || mDatas.size() <= 0) {
-                    Helper.getInstance().showToast(CustomApplication.getContext(), "无可删除数据");
+                    CentreToast.showText(CustomApplication.getContext(), "无可删除数据");
                 } else if (mDatas != null && mDatas.size() > 0 &&  mRemoveBeans.size() <= 0) {
-                    Helper.getInstance().showToast(CustomApplication.getContext(), "无勾选删除数据");
+                    CentreToast.showText(CustomApplication.getContext(), "无勾选删除数据");
                 }
                 if(mDatas!=null&& mDatas.size() > 0)
                 {
@@ -463,7 +463,7 @@ public class EditorSelfChoiceStockActivity extends BaseActivity implements ICall
             intent.putExtra("stockNumber", stockNumber);
             String market = stockNumber.substring(1, 2);
             if ("0".equals(market)) {
-                Helper.getInstance().showToast(CustomApplication.getContext(), "不支持该股票设置提醒");
+                CentreToast.showText(CustomApplication.getContext(), "不支持该股票设置提醒");
                 return;
             }
         }

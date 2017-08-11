@@ -26,7 +26,7 @@ import com.tpyzq.mobile.pangu.data.FundSubsEntity;
 import com.tpyzq.mobile.pangu.http.NetWorkUtil;
 import com.tpyzq.mobile.pangu.util.ConstantUtil;
 import com.tpyzq.mobile.pangu.util.SpUtils;
-import com.tpyzq.mobile.pangu.util.ToastUtils;
+import com.tpyzq.mobile.pangu.view.CentreToast;
 import com.zhy.http.okhttp.callback.StringCallback;
 
 import org.json.JSONArray;
@@ -166,7 +166,7 @@ public class OptionalFundActivity extends BaseActivity implements View.OnClickLi
         NetWorkUtil.getInstence().okHttpForPostString("", ConstantUtil.getURL_JY_HS(), map300441, new StringCallback() {
             @Override
             public void onError(Call call, Exception e, int id) {
-                Toast.makeText(OptionalFundActivity.this, "网络访问失败", Toast.LENGTH_SHORT).show();
+                CentreToast.showText(OptionalFundActivity.this, ConstantUtil.NETWORK_ERROR);
             }
 
             @Override
@@ -191,7 +191,7 @@ public class OptionalFundActivity extends BaseActivity implements View.OnClickLi
                     } else if ("-6".equals(code)) {
                         startActivity(new Intent(OptionalFundActivity.this, TransactionLoginActivity.class));
                     } else {
-                        ToastUtils.showShort(OptionalFundActivity.this, msg);
+                        CentreToast.showText(OptionalFundActivity.this, msg);
                     }
                     optionalFundAdapter.setData(fundSubsBeans);
                 } catch (JSONException e) {

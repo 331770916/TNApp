@@ -312,13 +312,13 @@ public class StructuredFundDialog extends BaseDialog implements View.OnClickList
             StructuredFundEntity bean = (StructuredFundEntity) info.getData();
             bean.getInit_date();
             bean.getMerge_amount();
-//            Helper.getInstance().showToast(context, "委托提交成功");
+//            CentreToast.showText(context, "委托提交成功");
             CentreToast.showText(context,"委托已提交",true);
             mExpression.State();
         } else if ("400".equals(info.getCode()) || "-2".equals(info.getCode()) || "-3".equals(info.getCode())) {
             CentreToast.showText(context, info.getMsg());
         } else {
-//            Helper.getInstance().showToast(context, info.getMsg());
+//            CentreToast.showText(context, info.getMsg());
             CustomCenterDialog customCenterDialog = CustomCenterDialog.CustomCenterDialog(info.getMsg(),CustomCenterDialog.SHOWCENTER);
             customCenterDialog.show(((Activity) context).getFragmentManager(),StructuredFundDialog.class.toString());
         }

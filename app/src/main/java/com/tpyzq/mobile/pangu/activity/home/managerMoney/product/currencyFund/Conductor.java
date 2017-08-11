@@ -27,6 +27,7 @@ import com.tpyzq.mobile.pangu.http.doConnect.home.ToGetHistoryFundManagerConnect
 import com.tpyzq.mobile.pangu.interfac.ICallbackResult;
 import com.tpyzq.mobile.pangu.util.Helper;
 import com.tpyzq.mobile.pangu.util.imageUtil.ImageUtil;
+import com.tpyzq.mobile.pangu.view.CentreToast;
 import com.tpyzq.mobile.pangu.view.gridview.MyListView;
 
 import java.util.ArrayList;
@@ -125,7 +126,7 @@ public class Conductor extends MoneyFundBaseView implements ICallbackResult {
             String msg = (String) datas.get("msg");
 
             if (!TextUtils.isEmpty(code) && "-1".equals(code)) {
-                Helper.getInstance().showToast(CustomApplication.getContext(), msg);
+                CentreToast.showText(CustomApplication.getContext(), msg);
                 hasManager = true;
                 return;
             }
@@ -164,7 +165,7 @@ public class Conductor extends MoneyFundBaseView implements ICallbackResult {
 
             if (!TextUtils.isEmpty(code) && "-1".equals(code)) {
                 hasHistoryManger = true;
-                Helper.getInstance().showToast(CustomApplication.getContext(), msg);
+                CentreToast.showText(CustomApplication.getContext(), msg);
                 return;
             }
 

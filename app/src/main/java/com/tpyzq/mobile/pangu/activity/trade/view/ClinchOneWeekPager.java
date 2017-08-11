@@ -20,7 +20,7 @@ import com.tpyzq.mobile.pangu.http.NetWorkUtil;
 import com.tpyzq.mobile.pangu.log.LogHelper;
 import com.tpyzq.mobile.pangu.util.ConstantUtil;
 import com.tpyzq.mobile.pangu.util.SpUtils;
-import com.tpyzq.mobile.pangu.util.ToastUtils;
+import com.tpyzq.mobile.pangu.view.CentreToast;
 import com.zhy.http.okhttp.callback.StringCallback;
 
 import org.json.JSONArray;
@@ -138,7 +138,7 @@ public class ClinchOneWeekPager extends BaseSearchPager {
                             sure = data.length();
                         }
                     } else {
-                        ToastUtils.centreshow(mContext, "网络异常");
+                        CentreToast.showText(mContext, "网络异常");
                         kong_null.setVisibility(View.GONE);
                     }
                 } catch (JSONException e) {

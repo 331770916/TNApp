@@ -135,7 +135,7 @@ public class AllotWeekTab extends BaseTab implements PullLayout.OnPullCallBackLi
                 }
 
                 if (TextUtils.isEmpty(response)) {
-//                    Helper.getInstance().showToast(CustomApplication.getContext(), "" + response);
+//                    CentreToast.showText(CustomApplication.getContext(), "" + response);
                     return ;
                 }
                 Gson gson = new Gson();

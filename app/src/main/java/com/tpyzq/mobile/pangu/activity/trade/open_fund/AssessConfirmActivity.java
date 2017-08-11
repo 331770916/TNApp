@@ -601,7 +601,7 @@ public class AssessConfirmActivity extends BaseActivity implements View.OnClickL
 
     public void startFinish(String type) {
         if ("true".equals(flag)) {
-//            ToastUtils.showShort(this, "委托已提交");
+//            CentreToast.showText(this, "委托已提交");
             CentreToast.showText(this,"委托已提交",true);
             setResult(RESULT_OK, buyintent);
             finish();

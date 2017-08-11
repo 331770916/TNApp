@@ -38,6 +38,7 @@ import com.tpyzq.mobile.pangu.base.CustomApplication;
 import com.tpyzq.mobile.pangu.data.StockInfoEntity;
 import com.tpyzq.mobile.pangu.db.Db_PUB_USERS;
 import com.tpyzq.mobile.pangu.log.LogHelper;
+import com.tpyzq.mobile.pangu.view.CentreToast;
 import com.tpyzq.mobile.pangu.view.dialog.CancelDialog;
 import org.apache.http.util.EncodingUtils;
 
@@ -859,7 +860,7 @@ public class Helper {
     public static File getRootExternalDir(Context context) {
 
         if (!isSDcardExsit()) {
-            Helper.getInstance().showToast(context, "无SDCard");
+            CentreToast.showText(context, "无SDCard");
             LogHelper.e(TAG, "sdcard not exist");
             return null;
         }
@@ -886,7 +887,7 @@ public class Helper {
     public static String getAppFileDirPath(Context context) {
 
         if (!isSDcardExsit()) {
-            Helper.getInstance().showToast(context, "无SDCard");
+            CentreToast.showText(context, "无SDCard");
             LogHelper.e(TAG, "sdcard not exist");
             return null;
         }
@@ -914,7 +915,7 @@ public class Helper {
     public static File getExternalFile(Context context, String fileDir, String fileName) {
 
         if (!isSDcardExsit()) {
-            Helper.getInstance().showToast(context, "无SDCard");
+            CentreToast.showText(context, "无SDCard");
             LogHelper.e(TAG, "sdcard not exist");
             return null;
         }
@@ -944,7 +945,7 @@ public class Helper {
      */
     public static File getExternalFileDir(Context context, String fileDir) {
         if (!isSDcardExsit()) {
-            Helper.getInstance().showToast(context, "无SDCard");
+            CentreToast.showText(context, "无SDCard");
             LogHelper.e(TAG, "sdcard not exist");
             return null;
         }

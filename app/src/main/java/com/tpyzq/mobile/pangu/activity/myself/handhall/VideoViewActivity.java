@@ -18,6 +18,7 @@ import com.bairuitech.anychat.AnyChatDefine;
 import com.bairuitech.anychat.AnyChatTextMsgEvent;
 import com.tpyzq.mobile.pangu.R;
 import com.tpyzq.mobile.pangu.base.BaseActivity;
+import com.tpyzq.mobile.pangu.view.CentreToast;
 
 /**
  * Created by Administrator on 2017/6/23.
@@ -196,7 +197,7 @@ public class VideoViewActivity extends BaseActivity implements View.OnClickListe
 
                 if (mFirstGetVideoBitrate) {
                     if (videoBitrate <= 0) {
-                        Toast.makeText(VideoViewActivity.this, "对方视频中断了!", Toast.LENGTH_SHORT).show();
+                        CentreToast.showText(VideoViewActivity.this, "对方视频中断了!");
                         // 重置下，如果对方退出了，有进去了的情况
                         mFirstGetVideoBitrate = false;
                     }
@@ -204,7 +205,7 @@ public class VideoViewActivity extends BaseActivity implements View.OnClickListe
 
                 if (mFirstGetAudioBitrate) {
                     if (audioBitrate <= 0) {
-                        Toast.makeText(VideoViewActivity.this, "对方音频中断了!", Toast.LENGTH_SHORT).show();
+                        CentreToast.showText(VideoViewActivity.this, "对方音频中断了!");
                         // 重置下，如果对方退出了，有进去了的情况
                         mFirstGetAudioBitrate = false;
                     }
@@ -243,7 +244,7 @@ public class VideoViewActivity extends BaseActivity implements View.OnClickListe
     public void OnAnyChatUserAtRoomMessage(int dwUserId, boolean bEnter) {
         if (!bEnter) {
             if (dwUserId == mRemoteId) {
-                Toast.makeText(VideoViewActivity.this, "对方已离开！", Toast.LENGTH_SHORT).show();
+                CentreToast.showText(VideoViewActivity.this, "对方已离开！");
                 mRemoteId = 0;
                 mAnyChatCoreSDK.UserCameraControl(dwUserId, 0);
                 mAnyChatCoreSDK.UserSpeakControl(dwUserId, 0);

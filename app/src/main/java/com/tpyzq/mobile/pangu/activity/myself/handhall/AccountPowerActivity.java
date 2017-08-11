@@ -87,7 +87,7 @@ public class AccountPowerActivity extends BaseActivity implements View.OnClickLi
         NetWorkUtil.getInstence().okHttpForPostString("", ConstantUtil.getURL_HQ_BB(), mapHQTNG010, new StringCallback() {
             @Override
             public void onError(Call call, Exception e, int id) {
-                CentreToast.showText(AccountPowerActivity.this,ConstantUtil.NETWORK_ERROR);
+                CentreToast.showText(AccountPowerActivity.this, ConstantUtil.NETWORK_ERROR);
             }
 
             @Override
@@ -128,7 +128,7 @@ public class AccountPowerActivity extends BaseActivity implements View.OnClickLi
         NetWorkUtil.getInstence().okHttpForPostString("", ConstantUtil.getURL_HQ_BB(), mapHQTNG011, new StringCallback() {
             @Override
             public void onError(Call call, Exception e, int id) {
-                CentreToast.showText(AccountPowerActivity.this,ConstantUtil.NETWORK_ERROR);
+                Toast.makeText(AccountPowerActivity.this, "网络访问失败", Toast.LENGTH_SHORT).show();
             }
 
             @Override

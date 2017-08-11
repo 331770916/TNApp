@@ -283,7 +283,6 @@ public class HomeFragmentHelper implements HomeSubject {
         }else if (REVERSEREPO.equals(title)) {
             gotoPage(activity, TransactionLoginActivity.PAGE_INDEX_ReverseRepoGuideActivity, intent);
         } else if ("牛掌柜".equals(title)) {
-            Toast.makeText(activity, "进入牛掌柜", Toast.LENGTH_SHORT).show();
         }
     }
 

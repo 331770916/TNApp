@@ -92,7 +92,6 @@ public class EntrustOneWeekPager extends BaseSearchPager {
             @Override
             public void onError(Call call, Exception e, int id) {
                 LogHelper.e(TAG, e.toString());
-//                ToastUtils.centreshow(mContext, "网络异常");
                 kong_null.setVisibility(View.GONE);
             }
 

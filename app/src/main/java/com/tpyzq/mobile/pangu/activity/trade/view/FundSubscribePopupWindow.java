@@ -14,11 +14,8 @@ import com.tpyzq.mobile.pangu.R;
 import com.tpyzq.mobile.pangu.activity.myself.login.TransactionLoginActivity;
 import com.tpyzq.mobile.pangu.http.NetWorkUtil;
 import com.tpyzq.mobile.pangu.util.ConstantUtil;
-import com.tpyzq.mobile.pangu.util.Helper;
 import com.tpyzq.mobile.pangu.view.CentreToast;
 import com.tpyzq.mobile.pangu.view.CustomCenterDialog;
-import com.tpyzq.mobile.pangu.view.dialog.MistakeDialog;
-import com.tpyzq.mobile.pangu.view.dialog.ResultDialog;
 import com.zhy.http.okhttp.callback.StringCallback;
 
 import org.json.JSONObject;
@@ -155,7 +152,6 @@ public class FundSubscribePopupWindow extends PopupWindow implements View.OnClic
                     ((Activity)context).finish();
                 }else
                 if (code.equals("0")) {
-                    ResultDialog.getInstance().show("委托已提交", R.mipmap.duigou);
                 }else {
                     MistakeDialog.showDialog(msg, mActivity);
                 }

@@ -24,6 +24,7 @@ import com.tpyzq.mobile.pangu.base.CustomApplication;
 import com.tpyzq.mobile.pangu.data.BankAccountEntity;
 import com.tpyzq.mobile.pangu.util.Helper;
 import com.tpyzq.mobile.pangu.util.panguutil.PanguParameters;
+import com.tpyzq.mobile.pangu.view.CentreToast;
 
 import java.util.ArrayList;
 
@@ -231,7 +232,7 @@ public class PriceCollectionAdapter extends BaseAdapter {
                 }
 
                 if (inputEditable > _banlance) {
-                    Helper.getInstance().showToast(CustomApplication.getContext(), "调拨资金不能大于可用资金");
+                    CentreToast.showText(CustomApplication.getContext(), "调拨资金不能大于可用资金");
                     mEditText.setText(String.valueOf(MAX_VALUE));
                     return;
                 }

@@ -61,9 +61,9 @@ import com.tpyzq.mobile.pangu.log.LogHelper;
 import com.tpyzq.mobile.pangu.util.ConstantUtil;
 import com.tpyzq.mobile.pangu.util.Helper;
 import com.tpyzq.mobile.pangu.util.SpUtils;
-import com.tpyzq.mobile.pangu.util.ToastUtils;
 import com.tpyzq.mobile.pangu.util.imageUtil.ImageUtil;
 import com.tpyzq.mobile.pangu.util.panguutil.BRutil;
+import com.tpyzq.mobile.pangu.view.CentreToast;
 import com.tpyzq.mobile.pangu.view.gridview.MyGridView;
 import com.tpyzq.mobile.pangu.view.gridview.MyListView;
 import com.tpyzq.mobile.pangu.view.gridview.MyScrollView;
@@ -350,7 +350,7 @@ public class HomeFragment extends BaseFragment implements AdapterView.OnItemClic
                 if (position == 0) {
                     HomeFragmentHelper.getInstance().gotoPager("稳赢理财", getActivity(), mJumpPageListener, null);
                 } else {
-                    ToastUtils.centreshow(getContext(), "1");
+                    CentreToast.showText(getContext(), "1");
                 }
             }
         });
@@ -716,7 +716,7 @@ public class HomeFragment extends BaseFragment implements AdapterView.OnItemClic
             @Override
             public void onError(Call call, Exception e, int id) {
                 LogHelper.e(TAG, e.toString());
-                Helper.getInstance().showToast(getActivity(), "" + e.toString());
+                CentreToast.showText(getActivity(), "" + e.toString());
             }
 
             @Override

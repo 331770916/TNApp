@@ -27,6 +27,7 @@ import com.tpyzq.mobile.pangu.util.Helper;
 import com.tpyzq.mobile.pangu.util.SpUtils;
 import com.tpyzq.mobile.pangu.util.panguutil.SelfStockHelper;
 import com.tpyzq.mobile.pangu.util.panguutil.UserUtil;
+import com.tpyzq.mobile.pangu.view.CentreToast;
 import com.tpyzq.mobile.pangu.view.CustomCenterDialog;
 import com.tpyzq.mobile.pangu.view.dialog.LoadingDialog;
 
@@ -146,7 +147,7 @@ public class SelfChoiceDefaultTab extends BaseTabPager implements View.OnClickLi
                     if (mLoadingDialog != null) {
                         mLoadingDialog.dismiss();
                     }
-                    Helper.getInstance().showToast(CustomApplication.getContext(), "导入持仓自选股数据库失败");
+                    CentreToast.showText(CustomApplication.getContext(), "导入持仓自选股数据库失败");
                     return;
                 }
 

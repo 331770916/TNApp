@@ -133,7 +133,6 @@ public class CNFundRedeemDialog extends BaseDialog implements View.OnClickListen
                     dismiss();
                     ((Activity) context).finish();
                 } else if (code.equals("0")) {
-//                    ResultDialog.getInstance().show("委托已提交", R.mipmap.duigou);
                     CentreToast.showText(context,"委托已提交",true);
                     mclearData.clear();
                     dismiss();

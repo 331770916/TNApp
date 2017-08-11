@@ -11,6 +11,8 @@ import android.os.Environment;
 import android.provider.Settings;
 import android.telephony.TelephonyManager;
 
+import com.tpyzq.mobile.pangu.view.CentreToast;
+
 import java.io.File;
 import java.io.UnsupportedEncodingException;
 import java.lang.reflect.Method;
@@ -106,7 +108,7 @@ public class DeviceUtil {
             boolean b5 = context.checkCallingOrSelfPermission("android.permission.ACCESS_WIFI_STATE") == PackageManager.PERMISSION_GRANTED;
 
             if(!b1 || !b2 || !b3 || !b4 || !b5){
-                Helper.getInstance().showToast(context, "没有添加权限");
+                CentreToast.showText(context, "没有添加权限");
             }
             return b1 && b2 && b3 && b4 && b5;
         }

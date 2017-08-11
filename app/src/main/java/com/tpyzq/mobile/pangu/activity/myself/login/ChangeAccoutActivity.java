@@ -93,7 +93,6 @@ import com.tpyzq.mobile.pangu.util.ConstantUtil;
 import com.tpyzq.mobile.pangu.util.DeviceUtil;
 import com.tpyzq.mobile.pangu.util.Helper;
 import com.tpyzq.mobile.pangu.util.SpUtils;
-import com.tpyzq.mobile.pangu.util.ToastUtils;
 import com.tpyzq.mobile.pangu.util.TransitionUtils;
 import com.tpyzq.mobile.pangu.util.keyboard.Constants;
 import com.tpyzq.mobile.pangu.util.keyboard.HandleResponse;
@@ -103,6 +102,7 @@ import com.tpyzq.mobile.pangu.util.keyboard.ResponseInterface;
 import com.tpyzq.mobile.pangu.util.panguutil.APPInfoUtils;
 import com.tpyzq.mobile.pangu.util.panguutil.BRutil;
 import com.tpyzq.mobile.pangu.util.panguutil.UserUtil;
+import com.tpyzq.mobile.pangu.view.CentreToast;
 import com.tpyzq.mobile.pangu.view.CustomCenterDialog;
 import com.tpyzq.mobile.pangu.view.dialog.CancelDialog;
 import com.tpyzq.mobile.pangu.view.dialog.CertificationDialog;
@@ -459,7 +459,7 @@ public class ChangeAccoutActivity extends BaseActivity implements ICallbackResul
 
                     toLogInConnect();
                 } else {
-                    Helper.getInstance().showToast(ChangeAccoutActivity.this, "验证码错误");
+                    CentreToast.showText(ChangeAccoutActivity.this, "验证码错误");
                     toSecurityCode();
                     mPassword_et.setText("");
                     mCaptcha_et.setText("");
@@ -521,10 +521,10 @@ public class ChangeAccoutActivity extends BaseActivity implements ICallbackResul
             mBuilder.dialog.dismiss();
             if (result instanceof String && SecurityCodeConnect.MSG.equals(result)) {
                 mSecurityCode.setImageResource(R.mipmap.ic_again);
-                Helper.getInstance().showToast(ChangeAccoutActivity.this, result.toString());
+                CentreToast.showText(ChangeAccoutActivity.this, result.toString());
             } else if (result instanceof String && ConstantUtil.NETWORK_ERROR.equals(result)) {
                 mSecurityCode.setImageResource(R.mipmap.ic_again);
-                Helper.getInstance().showToast(ChangeAccoutActivity.this, ConstantUtil.NETWORK_ERROR);
+                CentreToast.showText(ChangeAccoutActivity.this, ConstantUtil.NETWORK_ERROR);
             } else {
                 try {
                     JSONObject jsonObject = (JSONObject) result;
@@ -545,11 +545,11 @@ public class ChangeAccoutActivity extends BaseActivity implements ICallbackResul
             mBuilder.dialog.dismiss();
             if (result instanceof String) {
                 if (ConstantUtil.NETWORK_ERROR.equals(result)) {
-                    Helper.getInstance().showToast(ChangeAccoutActivity.this, result.toString());
+                    CentreToast.showText(ChangeAccoutActivity.this, result.toString());
                     mPassword_et.setText("");
                     mCaptcha_et.setText("");
                 } else if (LogInConnect.MSG.equals(tag)) {
-                    Helper.getInstance().showToast(ChangeAccoutActivity.this, result.toString() + ",请重新输入");
+                    CentreToast.showText(ChangeAccoutActivity.this, result.toString() + ",请重新输入");
                     mPassword_et.setText("");
                     mCaptcha_et.setText("");
                 } else {
@@ -583,7 +583,7 @@ public class ChangeAccoutActivity extends BaseActivity implements ICallbackResul
                 mBuilder.dialog.dismiss();
                 if (ConstantUtil.NETWORK_ERROR.equals(result)) {
                     isLoginSuc = false;
-                    Helper.getInstance().showToast(ChangeAccoutActivity.this, result.toString());
+                    CentreToast.showText(ChangeAccoutActivity.this, result.toString());
                     mPassword_et.setText("");
                     mCaptcha_et.setText("");
                 } else if ("0".equals(result)) {
@@ -856,7 +856,7 @@ public class ChangeAccoutActivity extends BaseActivity implements ICallbackResul
             //初始化加密键盘
             unikeyUrls = new UnikeyUrls(Constants.APPLY_PLUGIN, Constants.GET_CHALLEAGE, Constants.GET_BIT_AUTH_DATA, Constants.CHECK_BIT_AUTH_DATA, Constants.VERIFY_APP, Constants.CONFIRM_APPLY_PLUGIN_FORMAT);
         } catch (UnikeyException e) {
-            ToastUtils.showShort(this, e.toString());
+            CentreToast.showText(this, e.toString());
             e.printStackTrace();
         }
     }
@@ -936,7 +936,7 @@ public class ChangeAccoutActivity extends BaseActivity implements ICallbackResul
                     userEntity.setPlugins("true");
                     Db_PUB_USERS.UpdatePlugins(userEntity);
                     biAuthBtnClick();
-                    Helper.getInstance().showToast(ChangeAccoutActivity.this, "下载插件成功");
+                    CentreToast.showText(ChangeAccoutActivity.this, "下载插件成功");
                 } else {            //下载失败后的参数
                     mBuilder.dialog.dismiss();
                     if (!ChangeAccoutActivity.this.isFinishing()) {
@@ -988,7 +988,7 @@ public class ChangeAccoutActivity extends BaseActivity implements ICallbackResul
             }, 6, true, "custom_keyboard_view");
             passwordKeyboard.show();
         } catch (UnikeyException e) {
-            Helper.getInstance().showToast(ChangeAccoutActivity.this, "弹出密码键盘失败：" + Integer.toHexString(e.getNumber()));
+            CentreToast.showText(ChangeAccoutActivity.this, "弹出密码键盘失败：" + Integer.toHexString(e.getNumber()));
         }
     }
 

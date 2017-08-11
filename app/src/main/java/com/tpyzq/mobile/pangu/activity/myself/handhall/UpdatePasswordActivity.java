@@ -18,6 +18,7 @@ import com.tpyzq.mobile.pangu.R;
 import com.tpyzq.mobile.pangu.base.BaseActivity;
 import com.tpyzq.mobile.pangu.http.OkHttpUtil;
 import com.tpyzq.mobile.pangu.util.ConstantUtil;
+import com.tpyzq.mobile.pangu.view.CentreToast;
 import com.tpyzq.mobile.pangu.view.dialog.CancelDialog;
 import com.tpyzq.mobile.pangu.view.dialog.LoadingDialog;
 import com.zhy.http.okhttp.callback.StringCallback;
@@ -100,17 +101,17 @@ public class UpdatePasswordActivity extends BaseActivity implements View.OnClick
      */
     private boolean checkPwd() {
         if (TextUtils.isEmpty(mNewPasswrod.getText().toString())) {
-            Toast.makeText(this, "新密码不能为空", Toast.LENGTH_SHORT).show();
+            CentreToast.showText(this, "新密码不能为空");
             return false;
         }
 
         if (TextUtils.isEmpty(mConfirmPassword.getText().toString())) {
-            Toast.makeText(this, "确认密码不能为空", Toast.LENGTH_SHORT).show();
+            CentreToast.showText(this, "确认密码不能为空");
             return false;
         }
 
         if (!mNewPasswrod.getText().toString().equals(mConfirmPassword.getText().toString())) {
-            Toast.makeText(this, "两次输入的密码不同，请重新输入", Toast.LENGTH_SHORT).show();
+            CentreToast.showText(this, "两次输入的密码不同，请重新输入");
             return false;
         }
         return true;
@@ -199,7 +200,7 @@ public class UpdatePasswordActivity extends BaseActivity implements View.OnClick
                     }
 
                     if ("success".equals(flag)) {
-                        Toast.makeText(UpdatePasswordActivity.this, "密码修改成功", Toast.LENGTH_SHORT).show();
+                        CentreToast.showText(UpdatePasswordActivity.this, "密码修改成功");
                         finish();
                     } else if ("failed".equals(flag)) {
                         showMistackDialog("密码修改失败", null);

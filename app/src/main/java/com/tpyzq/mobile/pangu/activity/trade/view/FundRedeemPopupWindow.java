@@ -150,7 +150,6 @@ public class FundRedeemPopupWindow extends PopupWindow implements View.OnClickLi
                     ((Activity)context).finish();
                 }else
                 if (code.equals("0")) {
-                    ResultDialog.getInstance().show("委托已提交", R.mipmap.duigou);
                 }else {
                  MistakeDialog.showDialog(msg, mActivity);
                 }

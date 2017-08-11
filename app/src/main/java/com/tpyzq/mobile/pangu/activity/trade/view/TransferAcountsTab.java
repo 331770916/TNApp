@@ -40,9 +40,9 @@ import com.tpyzq.mobile.pangu.util.keyboard.NoSoftInputEditText;
 import com.tpyzq.mobile.pangu.util.keyboard.UsefulKeyBoard;
 import com.tpyzq.mobile.pangu.util.panguutil.PanguParameters;
 import com.tpyzq.mobile.pangu.util.panguutil.UserUtil;
+import com.tpyzq.mobile.pangu.view.CentreToast;
 import com.tpyzq.mobile.pangu.view.CustomCenterDialog;
 import com.tpyzq.mobile.pangu.view.dialog.LoadingDialog;
-import com.tpyzq.mobile.pangu.view.dialog.ResultDialog;
 import com.tpyzq.mobile.pangu.view.keybody.InputPasswordView;
 import com.tpyzq.mobile.pangu.view.keybody.PopKeyBody;
 import com.yzd.unikeysdk.OnInputDoneCallBack;
@@ -161,15 +161,15 @@ public class TransferAcountsTab extends BaseTransferSubjectTabView implements
     private boolean juedgePriceAndPasswordIsNull(String price, String password, boolean isNeedPassword) {
 
         if (TextUtils.isEmpty(price)) {
-            Helper.getInstance().showToast(CustomApplication.getContext(), "请输入转账金额");
+            CentreToast.showText(CustomApplication.getContext(), "请输入转账金额");
 
             return false;
         } else if (TextUtils.isEmpty(password) && isNeedPassword) {
-            Helper.getInstance().showToast(CustomApplication.getContext(), "请输入账户密码");
+            CentreToast.showText(CustomApplication.getContext(), "请输入账户密码");
 
             return false;
         } else if (!Helper.isDecimal(price)) {
-            Helper.getInstance().showToast(CustomApplication.getContext(), "请输入正确的金额");
+            CentreToast.showText(CustomApplication.getContext(), "请输入正确的金额");
             return false;
         }
 
@@ -181,7 +181,7 @@ public class TransferAcountsTab extends BaseTransferSubjectTabView implements
         if (!TextUtils.isEmpty(price) && !TextUtils.isEmpty(totalPrice)) {
 
             if (Double.parseDouble(price) > Double.parseDouble(totalPrice)) {
-                Helper.getInstance().showToast(CustomApplication.getContext(), "当前输入的金额大于可转出金额");
+                CentreToast.showText(CustomApplication.getContext(), "当前输入的金额大于可转出金额");
                 return false;
             }
         }
@@ -545,7 +545,7 @@ public class TransferAcountsTab extends BaseTransferSubjectTabView implements
             @Override
             public void onError(Call call, Exception e, int id) {
                 LogHelper.e(TAG, e.toString());
-                Helper.getInstance().showToast(CustomApplication.getContext(), e.toString());
+                CentreToast.showText(CustomApplication.getContext(), e.toString());
             }
 
             @Override
@@ -568,7 +568,7 @@ public class TransferAcountsTab extends BaseTransferSubjectTabView implements
                 }
 
                 if (bean.getCode().equals("0")) {
-                    ResultDialog.getInstance().show("转账申请已提交", R.mipmap.lc_success);
+                    CentreToast.showText(mActivity,"转账申请已提交",true);
                     keyboardResult= "";
                     mPriceEidt.setText("");
                     mBankPasswrodEdit.setText("");
@@ -630,7 +630,7 @@ public class TransferAcountsTab extends BaseTransferSubjectTabView implements
             @Override
             public void onError(Call call, Exception e, int id) {
                 LogHelper.e(TAG, e.toString());
-                Helper.getInstance().showToast(CustomApplication.getContext(), e.toString());
+                CentreToast.showText(CustomApplication.getContext(), e.toString());
             }
 
             @Override
@@ -655,7 +655,7 @@ public class TransferAcountsTab extends BaseTransferSubjectTabView implements
                 }
 
                 if (bean.getCode().equals("0")) {
-                    ResultDialog.getInstance().show("转账申请已提交", R.mipmap.lc_success);
+                    CentreToast.showText(mActivity,"转账申请已提交",true);
 
                     keyboardResult= "";
                     mPriceEidt.setText("");
@@ -721,7 +721,7 @@ public class TransferAcountsTab extends BaseTransferSubjectTabView implements
                 mPasswordKeyboard.show();
             }
         } catch (UnikeyException e) {
-            Helper.getInstance().showToast(CustomApplication.getContext(), "弹出密码键盘失败：" + Integer.toHexString(e.getNumber()));
+            CentreToast.showText(CustomApplication.getContext(), "弹出密码键盘失败：" + Integer.toHexString(e.getNumber()));
         }
     }
 

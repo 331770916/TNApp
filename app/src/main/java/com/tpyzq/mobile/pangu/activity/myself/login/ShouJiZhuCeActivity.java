@@ -296,7 +296,7 @@ public class ShouJiZhuCeActivity extends BaseActivity implements View.OnClickLis
                 mSecurityCode.setAspectRatio(3.2f);
             } else {
                 mSecurityCode.setImageResource(R.mipmap.ic_again);
-                Helper.getInstance().showToast(this, info.getMsg());
+                CentreToast.showText(this, info.getMsg());
             }
         } else if (TAG2.equals(info.getTag())) {   //短信
             if (!"0".equals(info.getCode()) && !ConstantUtil.NETWORK_ERROR_CODE.equals(info.getCode())) {

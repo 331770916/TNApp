@@ -38,6 +38,7 @@ import com.tpyzq.mobile.pangu.util.Helper;
 import com.tpyzq.mobile.pangu.util.SpUtils;
 import com.tpyzq.mobile.pangu.util.keyboard.NoSoftInputEditText;
 import com.tpyzq.mobile.pangu.util.keyboard.UsefulKeyBoard;
+import com.tpyzq.mobile.pangu.view.CentreToast;
 import com.tpyzq.mobile.pangu.view.dialog.CancelDialog;
 import com.tpyzq.mobile.pangu.view.dialog.DownloadDocPdfDialog;
 import com.tpyzq.mobile.pangu.view.dialog.LoadingDialog;
@@ -231,7 +232,7 @@ public class DoChangeDepositBankActivity extends BaseActivity implements View.On
                 if (!TextUtils.isEmpty(mPdfFileUrl) && !TextUtils.isEmpty(mPdfTv.getText().toString())) {
                     DownloadDocPdfDialog.getInstance().showDialog(this, downloadPdfCallback, mPdfFileUrl, mPdfTv.getText().toString());
                 } else {
-                    Toast.makeText(this, "协议为空", Toast.LENGTH_SHORT).show();
+                    CentreToast.showText(this, "协议为空");
                 }
                 break;
             case R.id.btn_depository:
@@ -282,7 +283,7 @@ public class DoChangeDepositBankActivity extends BaseActivity implements View.On
 
             } catch (UnikeyException e) {
                 e.printStackTrace();
-                Helper.getInstance().showToast(CustomApplication.getContext(), "弹出密码键盘失败：" + Integer.toHexString(e.getNumber()));
+                CentreToast.showText(CustomApplication.getContext(), "弹出密码键盘失败：" + Integer.toHexString(e.getNumber()));
             }
 
         }

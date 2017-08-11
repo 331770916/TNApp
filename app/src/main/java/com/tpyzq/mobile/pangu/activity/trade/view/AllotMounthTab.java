@@ -134,7 +134,7 @@ public class AllotMounthTab extends BaseTab implements PullLayout.OnPullCallBack
                 }
 
                 if (TextUtils.isEmpty(response)) {
-                    Helper.getInstance().showToast(CustomApplication.getContext(), "" + response);
+                   CentreToast.showText(CustomApplication.getContext(), "" + response);
                     return ;
                 }
 

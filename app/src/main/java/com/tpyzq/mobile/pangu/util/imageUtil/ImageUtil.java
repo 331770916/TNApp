@@ -10,6 +10,7 @@ import android.widget.Toast;
 
 import com.tpyzq.mobile.pangu.base.CustomApplication;
 import com.tpyzq.mobile.pangu.util.Helper;
+import com.tpyzq.mobile.pangu.view.CentreToast;
 
 import org.apache.commons.codec.binary.Base64;
 
@@ -201,8 +202,7 @@ public class ImageUtil {
 				bos.writeTo(outputStream);
 				BitmapCache.getInstance().cacheBitmap(path, bitmap);
 			} else {
-
-				Toast.makeText(CustomApplication.getContext(), "亲~ 你有图片保存失败，有空换一张吧!", Toast.LENGTH_SHORT).show();
+				CentreToast.showText(CustomApplication.getContext(), "亲~ 你有图片保存失败，有空换一张吧!");
 
 			}
 		} catch (IOException e) {

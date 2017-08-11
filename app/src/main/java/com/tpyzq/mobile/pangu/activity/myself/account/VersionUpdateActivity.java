@@ -82,9 +82,9 @@ public class VersionUpdateActivity extends BaseActivity implements View.OnClickL
                             tv_update.setClickable(true);
                         }
                         //版本名
-//                        ToastUtils.showShort(VersionUpdateActivity.this,"最新版本号"+versionNumber);
+//                        CentreToast.showText(VersionUpdateActivity.this,"最新版本号"+versionNumber);
 //                        APPUpdateBean appUpdateBean = new Gson().fromJson(result,APPUpdateBean.class);
-//                        ToastUtils.showShort(VersionUpdateActivity.this,"版本号"+appUpdateBean.versionNumber);
+//                        CentreToast.showText(VersionUpdateActivity.this,"版本号"+appUpdateBean.versionNumber);
 //                        MistakeDialog.showDialog("版本需要更新", VersionUpdateActivity.this);
                     }
                 } catch (JSONException e) {

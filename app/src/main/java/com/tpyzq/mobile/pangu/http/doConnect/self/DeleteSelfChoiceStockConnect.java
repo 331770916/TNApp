@@ -9,6 +9,7 @@ import com.tpyzq.mobile.pangu.interfac.ICallbackResult;
 import com.tpyzq.mobile.pangu.log.LogHelper;
 import com.tpyzq.mobile.pangu.util.ConstantUtil;
 import com.tpyzq.mobile.pangu.util.Helper;
+import com.tpyzq.mobile.pangu.view.CentreToast;
 import com.zhy.http.okhttp.callback.StringCallback;
 
 import org.json.JSONObject;
@@ -127,7 +128,7 @@ public class DeleteSelfChoiceStockConnect {
                     String code = jsonObject.getString("code");
                     String totalcount = jsonObject.getString("totalcount");
                     if (!TextUtils.isEmpty(code) && !code.equals("0")) {
-                        Helper.getInstance().showToast(CustomApplication.getContext(), "" + msg);
+                        CentreToast.showText(CustomApplication.getContext(), "" + msg);
                     } else if (!TextUtils.isEmpty(code) && "0".equals(code) && !TextUtils.isEmpty(totalcount) && "0".equals(totalcount)) {
                         mCallbackResult.getResult("删除失败", TAG);
                     }

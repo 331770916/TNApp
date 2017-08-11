@@ -19,6 +19,7 @@ import com.tpyzq.mobile.pangu.log.LogHelper;
 import com.tpyzq.mobile.pangu.util.ConstantUtil;
 import com.tpyzq.mobile.pangu.util.Helper;
 import com.tpyzq.mobile.pangu.util.SpUtils;
+import com.tpyzq.mobile.pangu.view.CentreToast;
 import com.tpyzq.mobile.pangu.view.CustomCenterDialog;
 import com.zhy.http.okhttp.callback.StringCallback;
 
@@ -101,7 +102,7 @@ public class StockHolderInfoActivity extends BaseActivity implements View.OnClic
             @Override
             public void onError(Call call, Exception e, int id) {
                 LogHelper.e(TAG, e.toString());
-                Helper.getInstance().showToast(StockHolderInfoActivity.this,"网络异常");
+                CentreToast.showText(StockHolderInfoActivity.this,"网络异常");
             }
 
             @Override
@@ -135,7 +136,7 @@ public class StockHolderInfoActivity extends BaseActivity implements View.OnClic
                     }
                 } catch (JSONException e) {
                     e.printStackTrace();
-                    Helper.getInstance().showToast(StockHolderInfoActivity.this,"网络异常");
+                    CentreToast.showText(StockHolderInfoActivity.this,"网络异常");
                 }
             }
         });

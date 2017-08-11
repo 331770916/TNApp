@@ -17,6 +17,7 @@ import com.tpyzq.mobile.pangu.http.doConnect.home.ToGetFundHistoryValueConnect;
 import com.tpyzq.mobile.pangu.interfac.ICallbackResult;
 import com.tpyzq.mobile.pangu.util.ConstantUtil;
 import com.tpyzq.mobile.pangu.util.Helper;
+import com.tpyzq.mobile.pangu.view.CentreToast;
 
 import java.text.SimpleDateFormat;
 import java.util.ArrayList;
@@ -97,7 +98,7 @@ public class MoneyFundHistoryListActivity extends BaseActivity implements View.O
             String msg = (String) datas.get("msg");
 
             if (!TextUtils.isEmpty(code) && "-1".equals(code)) {
-                Helper.getInstance().showToast(CustomApplication.getContext(), msg);
+                CentreToast.showText(CustomApplication.getContext(), msg);
                 return;
             }
 

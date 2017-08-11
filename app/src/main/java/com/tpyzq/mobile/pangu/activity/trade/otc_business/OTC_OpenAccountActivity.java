@@ -157,7 +157,6 @@ public class OTC_OpenAccountActivity extends BaseActivity implements View.OnClic
                     OTC_OpenAccountActivity.this.startActivity(intent);
                     OTC_OpenAccountActivity.this.finish();
                 } else if (code.equals("0")) {
-//                    ResultDialog.getInstance().show("委托已提交", R.mipmap.duigou);
                     MistakeDialog.showDialog(msg, OTC_OpenAccountActivity.this);
 
 
@@ -254,7 +253,6 @@ public class OTC_OpenAccountActivity extends BaseActivity implements View.OnClic
                         list.add(intentBean);
                     }
                 } else {
-                    ResultDialog.getInstance().showText("网络异常");
                 }
                 */
             }

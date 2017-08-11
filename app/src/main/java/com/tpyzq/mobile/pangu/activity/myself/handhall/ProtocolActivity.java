@@ -14,11 +14,10 @@ import com.tpyzq.mobile.pangu.base.BaseActivity;
 import com.tpyzq.mobile.pangu.http.NetWorkUtil;
 import com.tpyzq.mobile.pangu.log.LogHelper;
 import com.tpyzq.mobile.pangu.util.ConstantUtil;
-import com.tpyzq.mobile.pangu.util.Helper;
 import com.tpyzq.mobile.pangu.util.SpUtils;
+import com.tpyzq.mobile.pangu.view.CentreToast;
 import com.tpyzq.mobile.pangu.view.CustomCenterDialog;
 import com.tpyzq.mobile.pangu.view.dialog.LoadingDialog;
-import com.tpyzq.mobile.pangu.view.dialog.ResultDialog;
 import com.zhy.http.okhttp.callback.StringCallback;
 
 import org.json.JSONException;
@@ -141,7 +140,7 @@ public class ProtocolActivity extends BaseActivity implements View.OnClickListen
                 toConnect();
                 break;
             case R.id.NO:
-                ResultDialog.getInstance().show("" + "权限开通失败", R.mipmap.lc_failed);
+                CentreToast.showText(ProtocolActivity.this,"权限开通失败",false);
 //                intent.putExtra("names1",names1);
 //                intent.setClass(this, AgreementSigned.class);
 //                startActivity(intent);
@@ -184,7 +183,7 @@ public class ProtocolActivity extends BaseActivity implements View.OnClickListen
                     loadingDialog.dismiss();
                 }
                 LogHelper.e(TAG, e.toString());
-                Helper.getInstance().showToast(ProtocolActivity.this, "网络异常");
+                CentreToast.showText(ProtocolActivity.this, "网络异常");
             }
 
             @Override
@@ -199,7 +198,7 @@ public class ProtocolActivity extends BaseActivity implements View.OnClickListen
                         if (loadingDialog != null) {
                             loadingDialog.dismiss();
                         }
-                        ResultDialog.getInstance().show("" + jsonObject.getString("msg"), R.mipmap.duigou);
+                        CentreToast.showText(ProtocolActivity.this,""+jsonObject.getString("msg"),true);
                         mAGLinearLayout.setVisibility(View.GONE);
                     } else if ("-6".equals(jsonObject.getString("code"))) {
                         if (loadingDialog != null) {
@@ -218,7 +217,7 @@ public class ProtocolActivity extends BaseActivity implements View.OnClickListen
                     }
                 } catch (JSONException e) {
                     e.printStackTrace();
-                    Helper.getInstance().showToast(ProtocolActivity.this, "网络异常");
+                    CentreToast.showText(ProtocolActivity.this, "网络异常");
                 }
             }
         });

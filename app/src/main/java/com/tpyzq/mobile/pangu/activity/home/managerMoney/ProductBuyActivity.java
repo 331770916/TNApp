@@ -28,8 +28,8 @@ import com.tpyzq.mobile.pangu.http.NetWorkUtil;
 import com.tpyzq.mobile.pangu.util.ConstantUtil;
 import com.tpyzq.mobile.pangu.util.Helper;
 import com.tpyzq.mobile.pangu.util.SpUtils;
-import com.tpyzq.mobile.pangu.util.ToastUtils;
 import com.tpyzq.mobile.pangu.util.panguutil.UserUtil;
+import com.tpyzq.mobile.pangu.view.CentreToast;
 import com.tpyzq.mobile.pangu.view.CustomCenterDialog;
 import com.tpyzq.mobile.pangu.view.dialog.CancelDialog;
 import com.tpyzq.mobile.pangu.view.dialog.LoadingDialog;
@@ -328,7 +328,7 @@ public class ProductBuyActivity extends BaseActivity implements View.OnClickList
                 if (loadingDialog != null) {
                     loadingDialog.dismiss();
                 }
-                Toast.makeText(ProductBuyActivity.this, "网络访问失败", Toast.LENGTH_SHORT).show();
+                CentreToast.showText(ProductBuyActivity.this, "网络访问失败");
             }
 
             @Override
@@ -375,7 +375,7 @@ public class ProductBuyActivity extends BaseActivity implements View.OnClickList
                         }
                     } else {
                         subsStatusBean = new Gson().fromJson(response, SubsStatusEntity.class);
-                        ToastUtils.showShort(ProductBuyActivity.this, msg);
+                        CentreToast.showText(ProductBuyActivity.this, msg);
                     }
 
                 } catch (JSONException e) {
@@ -414,7 +414,7 @@ public class ProductBuyActivity extends BaseActivity implements View.OnClickList
                 if (loadingDialog != null) {
                     loadingDialog.dismiss();
                 }
-                Toast.makeText(ProductBuyActivity.this, "网络访问失败", Toast.LENGTH_SHORT).show();
+                CentreToast.showText(ProductBuyActivity.this, "网络访问失败");
             }
 
             @Override
@@ -807,7 +807,7 @@ public class ProductBuyActivity extends BaseActivity implements View.OnClickList
     }
 
     public void startFinish(String name, String price, String type) {
-//        ToastUtils.showShort(this, "委托成功");
+//        CentreToast.showText(this, "委托成功");
         Intent intent = new Intent();
         intent.putExtra("name", name);
         intent.putExtra("schema_id", schema_id);

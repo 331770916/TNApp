@@ -31,11 +31,10 @@ import com.tpyzq.mobile.pangu.http.doConnect.self.ToAddRemainStockPriceConnect;
 import com.tpyzq.mobile.pangu.interfac.ICallbackResult;
 import com.tpyzq.mobile.pangu.log.LogHelper;
 import com.tpyzq.mobile.pangu.util.ConstantUtil;
-import com.tpyzq.mobile.pangu.util.Helper;
 import com.tpyzq.mobile.pangu.util.panguutil.UserUtil;
+import com.tpyzq.mobile.pangu.view.CentreToast;
 import com.tpyzq.mobile.pangu.view.CustomCenterDialog;
 import com.tpyzq.mobile.pangu.view.dialog.LoadingDialog;
-import com.tpyzq.mobile.pangu.view.dialog.ResultDialog;
 import com.zhy.http.okhttp.callback.StringCallback;
 
 import org.json.JSONArray;
@@ -130,8 +129,7 @@ public class StockPriceRemainFragment extends BaseFragment implements  View.OnCl
         mLoadingDialog.dismiss();
 
         if (msg.contains("成功")) {
-            ResultDialog.getInstance().show("提交成功", R.mipmap.lc_success);
-
+            CentreToast.showText(mActivity,"提交成功",true);
             mRemainTitle.setText("");
             mRemainSearchEdit.setText("");
             mIncreaseEdit.setText("");
@@ -149,14 +147,14 @@ public class StockPriceRemainFragment extends BaseFragment implements  View.OnCl
         boolean flag = true;
 
         if (TextUtils.isEmpty(mRemainSearchEdit.getText().toString()) || TextUtils.isEmpty(mAddRainStockNumber) || mAddRainStockNumber.length() < 6) {
-            Helper.getInstance().showToast(CustomApplication.getContext(), "请输入完整的股票代码");
+            CentreToast.showText(CustomApplication.getContext(), "请输入完整的股票代码");
             flag = false;
         } else if (TextUtils.isEmpty(mIncreaseEdit.getText().toString())
                 && TextUtils.isEmpty(mDownEdit.getText().toString())
                 && TextUtils.isEmpty(mIncreaseZfEdit.getText().toString())
                 && TextUtils.isEmpty(mDownDfEdit.getText().toString())) {
 
-            Helper.getInstance().showToast(CustomApplication.getContext(), "至少输入一个提醒");
+            CentreToast.showText(CustomApplication.getContext(), "至少输入一个提醒");
 
             flag = false;
         }

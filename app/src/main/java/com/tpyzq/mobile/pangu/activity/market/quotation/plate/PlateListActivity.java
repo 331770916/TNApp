@@ -33,6 +33,7 @@ import com.tpyzq.mobile.pangu.log.LogHelper;
 import com.tpyzq.mobile.pangu.util.ConstantUtil;
 import com.tpyzq.mobile.pangu.util.Helper;
 import com.tpyzq.mobile.pangu.util.TransitionUtils;
+import com.tpyzq.mobile.pangu.view.CentreToast;
 import com.zhy.http.okhttp.callback.StringCallback;
 
 import org.json.JSONArray;
@@ -384,7 +385,7 @@ public class PlateListActivity extends BaseActivity implements View.OnClickListe
         mBeans = entities; //得到返回的结果
         for (StockInfoEntity bean : mBeans) {
             if (bean.getCode().equals("-5") || bean.getCode().equals("-3") || bean.getCode().equals("-1")) {
-                Helper.getInstance().showToast(PlateListActivity.this, "Code:-5");
+                CentreToast.showText(PlateListActivity.this, "Code:-5");
                 return;
             }
 
@@ -562,7 +563,7 @@ public class PlateListActivity extends BaseActivity implements View.OnClickListe
                         intent.setClass(PlateListActivity.this, StockDetailActivity.class);
                         PlateListActivity.this.startActivity(intent);
                     } else {
-                        Helper.getInstance().showToast(PlateListActivity.this, "股票代码或股票名称是空");
+                        CentreToast.showText(PlateListActivity.this, "股票代码或股票名称是空");
                     }
                 }
             });

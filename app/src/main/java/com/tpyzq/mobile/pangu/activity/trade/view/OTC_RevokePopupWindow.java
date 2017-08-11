@@ -129,7 +129,6 @@ public class OTC_RevokePopupWindow extends PopupWindow implements View.OnClickLi
                         dismiss();
                         ((Activity)context).finish();
                     }else if(code.equals("0")){
-//                        ResultDialog.getInstance().show("委托已提交", R.mipmap.duigou);
                         CentreToast.showText(context,"委托已提交",true);
                         listener.callBack(position);
                     }else {
@@ -152,7 +151,6 @@ public class OTC_RevokePopupWindow extends PopupWindow implements View.OnClickLi
                     ((Activity)context).finish();
                 }else
                 if(code.equals("0")){
-                    ResultDialog.getInstance().show("委托已提交", R.mipmap.duigou);
                     listener.callBack(position);
                 }else {
                     MistakeDialog.showDialog(msg, mActivity);

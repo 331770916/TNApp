@@ -12,13 +12,10 @@ import android.text.TextUtils;
 import android.text.TextWatcher;
 import android.text.style.AbsoluteSizeSpan;
 import android.text.style.ForegroundColorSpan;
-import android.util.TypedValue;
 import android.view.Gravity;
 import android.view.View;
-import android.view.ViewGroup;
 import android.view.inputmethod.InputMethodManager;
 import android.widget.AdapterView;
-import android.widget.Button;
 import android.widget.CheckedTextView;
 import android.widget.EditText;
 import android.widget.HorizontalScrollView;
@@ -35,8 +32,8 @@ import com.tpyzq.mobile.pangu.base.BaseActivity;
 import com.tpyzq.mobile.pangu.base.CustomApplication;
 import com.tpyzq.mobile.pangu.data.StockInfoBean;
 import com.tpyzq.mobile.pangu.util.Helper;
-import com.tpyzq.mobile.pangu.util.ToastUtils;
 import com.tpyzq.mobile.pangu.util.TransitionUtils;
+import com.tpyzq.mobile.pangu.view.CentreToast;
 import com.tpyzq.mobile.pangu.view.dialog.CommissionedBuyAndSellDialog;
 
 import org.json.JSONArray;
@@ -45,7 +42,6 @@ import org.json.JSONException;
 import java.math.BigDecimal;
 import java.text.DecimalFormat;
 
-import static com.tpyzq.mobile.pangu.util.ToastUtils.showShort;
 import static com.tpyzq.mobile.pangu.util.TransitionUtils.fundPirce;
 import static com.tpyzq.mobile.pangu.util.TransitionUtils.string2doubleS3;
 
@@ -227,7 +223,7 @@ public class ReverseRepoActivity extends BaseActivity implements View.OnClickLis
                 } else {
                     double numInt = Double.parseDouble(numString);
                     if (numInt < 0) {
-                        Toast.makeText(getApplication(), "请输入一个大于0的数字", Toast.LENGTH_SHORT).show();
+                        CentreToast.showText(getApplication(), "请输入一个大于0的数字");
                         et_income.setText("");
                         mSyTv.setText("0.00");
                     } else {
@@ -286,7 +282,7 @@ public class ReverseRepoActivity extends BaseActivity implements View.OnClickLis
         public void afterTextChanged(Editable s) {
             String numString = s.toString();
             if (numString.startsWith("0")) {
-                ToastUtils.showShort(ReverseRepoActivity.this, "交易数量首位不能为0");
+                CentreToast.showText(ReverseRepoActivity.this, "交易数量首位不能为0");
                 et_price.setText(TransitionUtils.delHeaderZero(numString));
                 mSyTv.setText("0.00");
                 return;
@@ -300,7 +296,7 @@ public class ReverseRepoActivity extends BaseActivity implements View.OnClickLis
 
                 long numInt = Long.parseLong(numString);
                 if (numInt < 0) {
-                    Toast.makeText(getApplication(), "请输入一个大于0的数字", Toast.LENGTH_SHORT).show();
+                    CentreToast.showText(getApplication(), "请输入一个大于0的数字");
                     mSyTv.setText("0.00");
                     et_price.setText("");
                 } else {
@@ -388,7 +384,7 @@ public class ReverseRepoActivity extends BaseActivity implements View.OnClickLis
                         long maxPrice = Long.parseLong(tempPrice);
                         if (amount > maxPrice) {
                             //输入的钱大于最大可借出
-                            ToastUtils.showShort(this, "你的最大可借出数量为" + maxPrice + "\n\r请确认后重新输入");
+                            CentreToast.showText(this, "你的最大可借出数量为" + maxPrice + "\n\r请确认后重新输入");
                         } else {
 //                输入钱小于最大可借出
                             String result = stockInfoBean.stockCode.substring(2, stockInfoBean.stockCode.length());
@@ -397,10 +393,10 @@ public class ReverseRepoActivity extends BaseActivity implements View.OnClickLis
                         }
 
                     } else {//最大可借出为"- -"
-                        ToastUtils.showShort(this, "你的最大可借出数量为0\n\r请确认后重新输入");
+                        CentreToast.showText(this, "你的最大可借出数量为0\n\r请确认后重新输入");
                     }
                 } else {
-                    ToastUtils.showShort(this, "年利率或金额不能为空");
+                    CentreToast.showText(this, "年利率或金额不能为空");
                 }
                 break;
             case R.id.iv_back:
@@ -417,7 +413,7 @@ public class ReverseRepoActivity extends BaseActivity implements View.OnClickLis
                     amount += addsub;
                     et_price.setText(amount + "");
                 } else {
-                    showShort(this, "请确认可借出数量为有效数值");
+                    CentreToast.showText(this, "请确认可借出数量为有效数值");
                 }
                 break;
             case R.id.Keyboard_LinearLayout:
