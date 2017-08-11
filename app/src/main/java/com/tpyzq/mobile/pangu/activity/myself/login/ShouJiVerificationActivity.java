@@ -60,6 +60,7 @@ public class ShouJiVerificationActivity extends BaseActivity implements View.OnC
     private String mIdentify = "";
     private int pageIndex;
     private boolean mCaptchabtnState = false;
+    private boolean isShow = false;
     private MyTimeCount time;
 
     DialogInterface.OnKeyListener onKeyListener = new DialogInterface.OnKeyListener() {
@@ -71,6 +72,7 @@ public class ShouJiVerificationActivity extends BaseActivity implements View.OnC
                 OkHttpUtil.cancelSingleRequestByTag(ShouJiVerificationActivity.this.getClass().getName());
                 mImage_et.setText("");
                 mCaptcha_et.setText("");
+                isShow = false;
                 ImageVerification();
                 if (time != null) {
                     time.cancel();
@@ -161,6 +163,7 @@ public class ShouJiVerificationActivity extends BaseActivity implements View.OnC
             case R.id.butLogIn:
                 if (isEmptyData(true)) {
                     mLogIn_but.setClickable(false);
+                    isShow = true;
                     InscriptionRegistry();
                 }
                 break;
@@ -258,9 +261,11 @@ public class ShouJiVerificationActivity extends BaseActivity implements View.OnC
 
     //图片验证码网络请求
     private void ImageVerification() {
-        mBuilder.setTitle("加载中...");
-        if (!this.isFinishing()) {
-            mBuilder.create().show();
+        if (!isShow) {
+            mBuilder.setTitle("加载中...");
+            if (!this.isFinishing()) {
+                mBuilder.create().show();
+            }
         }
         InterfaceCollection.getInstance().getImageVerification(TAG1, this);
     }
@@ -287,8 +292,10 @@ public class ShouJiVerificationActivity extends BaseActivity implements View.OnC
     @Override
     public void callResult(ResultInfo info) {
         if (TAG1.equals(info.getTag())) {       //图片
-            if (mBuilder.dialog != null) {
-                mBuilder.dialog.dismiss();
+            if (!isShow) {
+                if (mBuilder.dialog != null) {
+                    mBuilder.dialog.dismiss();
+                }
             }
             if ("0".equals(info.getCode())) {
                 Bitmap bitmap = Helper.base64ToBitmap((String) info.getData());
@@ -320,10 +327,12 @@ public class ShouJiVerificationActivity extends BaseActivity implements View.OnC
             if ("0".equals(info.getCode())) {
                 setUsermodData();
             }else if (ConstantUtil.NETWORK_ERROR_CODE.equals(info.getCode())) {
+                isShow = false;
                 time.cancel();
                 time.setMarked(true);
                 time.onFinish();
             } else {
+                isShow = false;
                 showMissCallDialog(info.getMsg(),"4");
             }
 

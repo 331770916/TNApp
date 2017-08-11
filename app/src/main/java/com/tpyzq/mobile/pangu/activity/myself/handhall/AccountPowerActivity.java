@@ -18,6 +18,7 @@ import com.tpyzq.mobile.pangu.util.ColorUtils;
 import com.tpyzq.mobile.pangu.util.ConstantUtil;
 import com.tpyzq.mobile.pangu.util.SpUtils;
 import com.tpyzq.mobile.pangu.util.panguutil.UserUtil;
+import com.tpyzq.mobile.pangu.view.CentreToast;
 import com.tpyzq.mobile.pangu.view.progress.ColorArcProgressBar;
 import com.zhy.http.okhttp.callback.StringCallback;
 
@@ -86,7 +87,7 @@ public class AccountPowerActivity extends BaseActivity implements View.OnClickLi
         NetWorkUtil.getInstence().okHttpForPostString("", ConstantUtil.getURL_HQ_BB(), mapHQTNG010, new StringCallback() {
             @Override
             public void onError(Call call, Exception e, int id) {
-                Toast.makeText(AccountPowerActivity.this, "网络访问失败", Toast.LENGTH_SHORT).show();
+                CentreToast.showText(AccountPowerActivity.this,ConstantUtil.NETWORK_ERROR);
             }
 
             @Override
@@ -127,7 +128,7 @@ public class AccountPowerActivity extends BaseActivity implements View.OnClickLi
         NetWorkUtil.getInstence().okHttpForPostString("", ConstantUtil.getURL_HQ_BB(), mapHQTNG011, new StringCallback() {
             @Override
             public void onError(Call call, Exception e, int id) {
-                Toast.makeText(AccountPowerActivity.this, "网络访问失败", Toast.LENGTH_SHORT).show();
+                CentreToast.showText(AccountPowerActivity.this,ConstantUtil.NETWORK_ERROR);
             }
 
             @Override

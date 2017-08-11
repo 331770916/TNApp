@@ -34,6 +34,7 @@ import com.tpyzq.mobile.pangu.util.ConstantUtil;
 import com.tpyzq.mobile.pangu.util.SpUtils;
 import com.tpyzq.mobile.pangu.util.ToastUtils;
 import com.tpyzq.mobile.pangu.util.panguutil.UserUtil;
+import com.tpyzq.mobile.pangu.view.CentreToast;
 import com.zhy.http.okhttp.callback.StringCallback;
 
 import org.json.JSONArray;
@@ -175,7 +176,7 @@ public class AccountPager extends BaseMySelfPager implements View.OnClickListene
             public void onError(Call call, Exception e, int id) {
                 tagCloudAdapter = new TagCloudAdapter(list, userHeaderListen);
                 tag_cloud.setAdapter(tagCloudAdapter);
-                ToastUtils.showShort(mContext, "头像信息获取失败");
+                CentreToast.showText(mContext, ConstantUtil.NETWORK_ERROR);
             }
 
             @Override
@@ -215,7 +216,7 @@ public class AccountPager extends BaseMySelfPager implements View.OnClickListene
                         tagCloudAdapter = new TagCloudAdapter(list, userHeaderListen);
                         tag_cloud.setAdapter(tagCloudAdapter);
                     } else {
-                        ToastUtils.showShort(mContext, "头像信息获取失败");
+                        CentreToast.showText(mContext, "头像信息获取失败");
                     }
                 } catch (JSONException e) {
                     e.printStackTrace();

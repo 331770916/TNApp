@@ -10,6 +10,7 @@ import com.tpyzq.mobile.pangu.http.NetWorkUtil;
 import com.tpyzq.mobile.pangu.log.LogUtil;
 import com.tpyzq.mobile.pangu.util.ConstantUtil;
 import com.tpyzq.mobile.pangu.util.Helper;
+import com.tpyzq.mobile.pangu.view.CentreToast;
 import com.zhy.http.okhttp.callback.StringCallback;
 
 import org.json.JSONArray;
@@ -59,7 +60,7 @@ public class AnnouncementActivity extends BaseActivity implements View.OnClickLi
             @Override
             public void onError(Call call, Exception e, int id) {
                 LogUtil.e(TAG, e.toString());
-                Helper.getInstance().showToast(AnnouncementActivity.this, "网络异常");
+                CentreToast.showText(AnnouncementActivity.this, ConstantUtil.NETWORK_ERROR);
             }
 
             @Override
@@ -81,8 +82,8 @@ public class AnnouncementActivity extends BaseActivity implements View.OnClickLi
                     }
 
                 } catch (JSONException e) {
+                    CentreToast.showText(AnnouncementActivity.this, ConstantUtil.JSON_ERROR);
                     e.printStackTrace();
-                    Helper.getInstance().showToast(AnnouncementActivity.this, "网络异常");
                 }
             }
         });
@@ -120,7 +121,7 @@ public class AnnouncementActivity extends BaseActivity implements View.OnClickLi
             @Override
             public void onError(Call call, Exception e, int id) {
                 LogUtil.e(TAG, e.toString());
-                Helper.getInstance().showToast(AnnouncementActivity.this, "网络异常");
+                CentreToast.showText(AnnouncementActivity.this, ConstantUtil.NETWORK_ERROR);
             }
 
             @Override

@@ -23,6 +23,7 @@ import com.tpyzq.mobile.pangu.util.ConstantUtil;
 import com.tpyzq.mobile.pangu.util.Helper;
 import com.tpyzq.mobile.pangu.util.SpUtils;
 import com.tpyzq.mobile.pangu.util.panguutil.UserUtil;
+import com.tpyzq.mobile.pangu.view.CentreToast;
 import com.tpyzq.mobile.pangu.view.dialog.LoadingDialog;
 import com.zhy.http.okhttp.callback.StringCallback;
 
@@ -124,7 +125,7 @@ public class PricesPromptActivity extends BaseActivity implements View.OnClickLi
                 LogUtil.e("", e.toString());
                 loading.dismiss();
                 mListView.onRefreshComplete();
-                Helper.getInstance().showToast(PricesPromptActivity.this, "网络异常");
+                CentreToast.showText(PricesPromptActivity.this, ConstantUtil.NETWORK_ERROR);
             }
 
             @Override
