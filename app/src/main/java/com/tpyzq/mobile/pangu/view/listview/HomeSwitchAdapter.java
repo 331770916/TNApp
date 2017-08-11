@@ -1,10 +1,17 @@
 package com.tpyzq.mobile.pangu.view.listview;
 
+import android.app.Activity;
 import android.content.Context;
+import android.text.TextUtils;
 import android.view.View;
 import android.view.ViewGroup;
 import android.widget.ImageView;
 import com.facebook.drawee.view.SimpleDraweeView;
+import com.tpyzq.mobile.pangu.R;
+import com.tpyzq.mobile.pangu.activity.LuncherActivity;
+import com.tpyzq.mobile.pangu.activity.home.HomeFragment;
+import com.tpyzq.mobile.pangu.activity.home.helper.HomeFragmentHelper;
+import com.tpyzq.mobile.pangu.util.Helper;
 import com.tpyzq.mobile.pangu.view.loopswitch.AutoLoopSwitchBaseAdapter;
 import java.util.List;
 import java.util.Map;
@@ -16,15 +23,15 @@ import java.util.Map;
  */
 
 public class HomeSwitchAdapter extends AutoLoopSwitchBaseAdapter {
-    private Context mContext;
+    private Activity mContext;
 
     private List<Map<String,String>> mDatas;
-
+    private HomeFragment.JumpPageListener listener;
     public HomeSwitchAdapter() {
         super();
     }
 
-    public HomeSwitchAdapter(Context mContext) {
+    public HomeSwitchAdapter(Activity mContext) {
         this.mContext = mContext;
     }
 
@@ -41,18 +48,38 @@ public class HomeSwitchAdapter extends AutoLoopSwitchBaseAdapter {
     @Override
     public View getView(int position) {
         final Map<String,String> model = mDatas.get(position);
+        final String jump_type =model.get("jump_type");
+        final String jump_position = model.get("jump_position");
+        final String jump_url = model.get("jump_url");
+        String show_url = model.get("show_url");
         SimpleDraweeView imageView = new SimpleDraweeView(mContext);
         imageView.setScaleType(ImageView.ScaleType.FIT_XY);
-        imageView.setImageURI(model.get("show_url"));
+        if("default".equals(show_url))
+            imageView.setImageResource(R.mipmap.news_default_bbg);
+         else
+            imageView.setImageURI(show_url);
         imageView.setOnClickListener(new View.OnClickListener() {
             @Override
             public void onClick(View v) {
-
+                if(!TextUtils.isEmpty(jump_type)){
+                    switch (jump_type){
+                        case "0":
+                            Helper.startActivity(mContext,"TN0023",jump_url,listener);
+                            break;
+                        case "1":
+                            if(!TextUtils.isEmpty(jump_position))
+                                Helper.startActivity(mContext,jump_position,null,listener);
+                            break;
+                    }
+                }
             }
         });
         return imageView;
     }
 
+    public void setListener(HomeFragment.JumpPageListener mJumpPageListener){
+        this.listener = mJumpPageListener;
+    }
 
     @Override
     public Object getItem(int position) {

@@ -51,12 +51,6 @@
                 android:id="@+id/mwebView"
                 android:layout_width="match_parent"
                 android:layout_height="wrap_content" />
-
-
-            <WebView
-                android:id="@+id/mwebView2"
-                android:layout_width="match_parent"
-                android:layout_height="wrap_content" />
         </LinearLayout>
     </ScrollView>
 

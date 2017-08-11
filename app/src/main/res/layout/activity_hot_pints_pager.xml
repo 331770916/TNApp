@@ -45,7 +45,7 @@
                 android:id="@+id/FJEAMP_Kong_Null"
                 android:layout_width="match_parent"
                 android:layout_height="match_parent"
-                android:layout_marginLeft="@dimen/size10">
+                >
 
                 <com.handmark.pulltorefresh.library.PullToRefreshListView
                     android:id="@+id/listview"

@@ -90,15 +90,13 @@ public class QueryAdForLuncherConnect {
                     if("0".equals(code)){
                         JSONArray jsonArray = jsonObject.optJSONArray("data");
                         for (int i = 0; i < jsonArray.length(); i++) {
-                            String advert_id =jsonArray.optJSONObject(i).optString("advert_id");
                             JSONArray array = jsonArray.optJSONObject(i).optJSONArray("advert_data");
                             for (int j = 0; j < array.length(); j++) {
-                                String jump_type = array.optJSONObject(j).optString("jump_type");
-                                String jump_url = array.optJSONObject(j).optString("jump_url");
-                                String jump_position = array.optJSONObject(j).optString("jump_type");
-                                String show_url = array.optJSONObject(j).optString("show_url");
                                 Map<String,String> resultMap = new HashMap<>();
-                                resultMap.put("adUrl",show_url);
+                                resultMap.put("jump_type",array.optJSONObject(j).optString("jump_type"));
+                                resultMap.put("jump_url",array.optJSONObject(j).optString("jump_url"));
+                                resultMap.put("jump_position",array.optJSONObject(j).optString("jump_position"));
+                                resultMap.put("show_url",array.optJSONObject(j).optString("show_url"));
                                 mCallbackResult.getResult(resultMap, mHttpTAG);
                             }
                         }

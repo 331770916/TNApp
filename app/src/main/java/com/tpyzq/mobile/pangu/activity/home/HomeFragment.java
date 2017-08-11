@@ -7,6 +7,7 @@ import android.graphics.drawable.Drawable;
 import android.os.Handler;
 import android.support.v4.content.ContextCompat;
 import android.text.TextUtils;
+import android.util.ArrayMap;
 import android.view.LayoutInflater;
 import android.view.View;
 import android.widget.AbsListView;
@@ -176,7 +177,6 @@ public class HomeFragment extends BaseFragment implements AdapterView.OnItemClic
 //        mConvenientBanner.setOnItemClickListener(this);
         vp_carousel = (RelativeLayout) view.findViewById(R.id.vp_carousel);
         initCarouseView();
-
         mMiddleImageView = (ImageView) view.findViewById(R.id.home_middlebander);
         mMiddleImageView.setImageDrawable(ContextCompat.getDrawable(CustomApplication.getContext(), R.mipmap.openanaccount_shouye));
         mMiddleImageView.setOnClickListener(this);
@@ -233,6 +233,7 @@ public class HomeFragment extends BaseFragment implements AdapterView.OnItemClic
                     if (listsize!=0 &&listsize ==2){
                         if (list.get(0)!=null){
                             List<Map<String,String>> centerImage = list.get(0);   // 中间广告图
+
                         }
                         if (list.get(1)!=null){
                             List<Map<String,String>> topImage = list.get(1);     // 顶部轮播图
@@ -241,6 +242,12 @@ public class HomeFragment extends BaseFragment implements AdapterView.OnItemClic
                     }
 
                 }
+            }else {
+                List<Map<String,String>> defaultList = new ArrayList<>();
+                Map<String,String> map = new HashMap<>();
+                map.put("show_url","default");
+                defaultList.add(map);
+                adapter.setDatas(defaultList);
             }
         }
 
@@ -250,7 +257,8 @@ public class HomeFragment extends BaseFragment implements AdapterView.OnItemClic
         loopView = new AutoSwitchView(mContext);
         loopView.setLayoutParams(new AbsListView.LayoutParams(-1,mContext.getResources().getDimensionPixelSize(R.dimen.size250)));
         vp_carousel.addView(loopView);
-        adapter = new HomeSwitchAdapter(mContext);
+        adapter = new HomeSwitchAdapter(getActivity());
+        adapter.setListener(mJumpPageListener);
         loopView.setAdapter(adapter);
     }
 

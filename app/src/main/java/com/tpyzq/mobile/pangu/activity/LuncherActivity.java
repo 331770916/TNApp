@@ -60,6 +60,8 @@ import com.tpyzq.mobile.pangu.util.panguutil.SelfChoiceStockTempData;
 import com.tpyzq.mobile.pangu.util.panguutil.UserUtil;
 import com.tpyzq.mobile.pangu.view.CentreToast;
 
+import org.w3c.dom.Text;
+
 import java.io.File;
 import java.io.IOException;
 import java.util.ArrayList;
@@ -83,7 +85,7 @@ public class LuncherActivity extends BaseActivity implements ICallbackResult {
     private LinearLayout titleLinearLayout;
     private TextView timeText;
     private boolean startflag = false;
-    private String resultImg = "";
+    private String show_url ,jump_type,jump_url,jump_position;
     int i = 3;
     Handler mHandler = new Handler() {
         public void handleMessage(Message msg) {
@@ -223,13 +225,31 @@ public class LuncherActivity extends BaseActivity implements ICallbackResult {
             @Override
             public void run() {
                 if (startflag){
-//                    handler.removeCallbacks(runnable);    // 移除handle
-//                    Uri uri = Uri.parse("http://img4.imgtn.bdimg.com/it/u=3552367727,879479145&fm=26&gp=0.jpg");
-//                    Log.e("LuncherActivity","resultImg=="+resultImg);
-                    Uri uri = Uri.parse(resultImg);
+                    Uri uri = Uri.parse(show_url);
                     ControllerListener controllerListener = new BaseControllerListener<ImageInfo>() {
                         @Override
-                        public void onFinalImageSet(String id, @Nullable ImageInfo imageInfo, @Nullable Animatable anim) {}
+                        public void onFinalImageSet(String id, @Nullable ImageInfo imageInfo, @Nullable Animatable anim) {
+                            timer.schedule(task,0,1000);
+                            simpleDraweeView.setOnClickListener(new View.OnClickListener() {
+                                @Override
+                                public void onClick(View v) {
+                                    if(!TextUtils.isEmpty(jump_type)){
+                                        switch (jump_type){
+                                            case "0":
+                                                Helper.startActivity(LuncherActivity.this,"TN0023",jump_url);
+                                                finish();
+                                                break;
+                                            case "1":
+                                                if(!TextUtils.isEmpty(jump_position)){
+                                                    Helper.startActivity(LuncherActivity.this,jump_position,null);
+                                                    finish();
+                                                }
+                                                break;
+                                        }
+                                    }
+                                }
+                            });
+                        }
 
                         @Override
                         public void onIntermediateImageSet(String id, @Nullable ImageInfo imageInfo) {
@@ -240,50 +260,16 @@ public class LuncherActivity extends BaseActivity implements ICallbackResult {
                             finishLuncher();
                         }
                     };
-
-                    Postprocessor redMeshPostprocessor = new BasePostprocessor() {
-                        @Override
-                        public String getName() {
-                            return "redMeshPostprocessor";
-                        }
-
-                        @Override
-                        public void process(Bitmap bitmap) {
-                            try {
-                                /*for (int x = 0; x < bitmap.getWidth(); x+=2) {
-                                    for (int y = 0; y < bitmap.getHeight(); y+=2) {
-                                        bitmap.setPixel(x, y, Color.RED);
-                                    }
-                                }*/
-                                int width = bitmap.getWidth();
-                                int height = bitmap.getHeight();
-                                int screenWidth = Helper.getScreenWidth(LuncherActivity.this);
-                                int screenHeight = Helper.getScreenHeight(LuncherActivity.this);
-                                if (screenHeight<height||screenWidth<width) {
-                                    //压缩图片大小到满足屏幕
-                                    bitmap = ImageUtil.zoomImageTo(bitmap,screenWidth,screenHeight);
-                                }
-                            } catch (Exception e){
-                                e.printStackTrace();
-                            } finally {
-                                timer.schedule(task,0,1000);
-                            }
-                        }
-                    };
-
                     ImageRequest request = ImageRequestBuilder.newBuilderWithSource(uri)
-                            .setPostprocessor(redMeshPostprocessor)
                             .setResizeOptions(new ResizeOptions(Helper.getScreenWidth(LuncherActivity.this)
                                     , Helper.getScreenHeight(LuncherActivity.this)))
                             .build();
                     DraweeController controller = Fresco.newDraweeControllerBuilder()
-//                            .setUri(uri)
                             .setImageRequest(request)
                             .setTapToRetryEnabled(true)
                             .setOldController(simpleDraweeView.getController())
                             .setControllerListener(controllerListener)
                             .build();
-
                     simpleDraweeView.setController(controller);
                 }else {
                     finishLuncher();
@@ -309,9 +295,11 @@ public class LuncherActivity extends BaseActivity implements ICallbackResult {
     }
 
     private void cancelFinish(Map<String,String> result){
-
-        if (!TextUtils.isEmpty(result.get("adUrl"))){
-            resultImg = result.get("adUrl");
+        if (!TextUtils.isEmpty(result.get("show_url"))){
+            show_url = result.get("show_url");
+            jump_type =result.get("jump_type");
+            jump_position = result.get("jump_position");
+            jump_url = result.get("jump_url");
             startflag = true;
         }else {
             startflag = false;

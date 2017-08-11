@@ -2,6 +2,7 @@ package com.tpyzq.mobile.pangu.view.loopswitch;
 
 import android.content.Context;
 import android.content.Intent;
+import android.text.TextUtils;
 import android.view.View;
 import android.view.ViewGroup;
 import android.widget.ImageView;
@@ -48,6 +49,7 @@ public class AutoSwitchAdapter extends AutoLoopSwitchBaseAdapter{
         RelativeLayout ll  = new RelativeLayout(mContext);
         TextView tvTitle = new TextView(mContext);
         tvTitle.setSingleLine();
+        tvTitle.setEllipsize(TextUtils.TruncateAt.END);
         tvTitle.setId(R.id.autoloopswitch_title_id);
         tvTitle.setText(model.getTitle());
         tvTitle.setTextSize(18);
@@ -60,7 +62,7 @@ public class AutoSwitchAdapter extends AutoLoopSwitchBaseAdapter{
         TextView tvTime = new TextView(mContext);
         tvTime.setId(R.id.autoloopswitch_time_id);
         tvTime.setTextSize(12);
-        tvTime.setText(model.getTime());
+        tvTime.setText(model.getDate()+" "+model.getTime());
         tvTime.setPadding(0,2,0,2);
         tvTime.setTextColor(mContext.getResources().getColor(R.color.hideTextColor));
         ll.addView(tvTime,lpbottom);

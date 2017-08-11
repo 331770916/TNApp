@@ -25,7 +25,9 @@ import com.tpyzq.mobile.pangu.util.Helper;
 import com.tpyzq.mobile.pangu.view.loopswitch.AutoSwitchAdapter;
 import com.tpyzq.mobile.pangu.view.loopswitch.AutoSwitchView;
 import java.util.ArrayList;
+import java.util.HashMap;
 import java.util.List;
+import java.util.Map;
 
 import static com.tpyzq.mobile.pangu.util.ConstantUtil.ZIXUN_NUM;
 
@@ -62,6 +64,7 @@ public class HotPintsPager extends BasePager implements View.OnClickListener,Int
         loopView = new AutoSwitchView(mContext);
         loopView.setLayoutParams(new AbsListView.LayoutParams(-1,mContext.getResources().getDimensionPixelSize(R.dimen.size250)));
         loopView.setType(1);
+        loopView.setPadding(10,0,10,0);
         refreshListView.getRefreshableView().addHeaderView(loopView);
         refreshListView.setMode(PullToRefreshBase.Mode.BOTH);
         refreshListView.setOnRefreshListener(new PullToRefreshBase.OnRefreshListener<ListView>() {
@@ -85,7 +88,7 @@ public class HotPintsPager extends BasePager implements View.OnClickListener,Int
                 }
             }
         });
-        mListViewAdapter = new NewHomeInformationAdapter((Activity) mContext);            //实例化 ListView 适配器
+        mListViewAdapter = new NewHomeInformationAdapter(mContext);            //实例化 ListView 适配器
         refreshListView.setAdapter(mListViewAdapter);                                  //适配
         // 给热点公告解析列表添加   item 的点击事件
         refreshListView.setOnItemClickListener(new AdapterView.OnItemClickListener() {

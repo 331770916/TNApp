@@ -3074,7 +3074,7 @@ public class InterfaceCollection {
                                         Map<String,String> map = new HashMap<>();
                                         String jump_type = array.optJSONObject(j).optString("jump_type");
                                         String jump_url = array.optJSONObject(j).optString("jump_url");
-                                        String jump_position = array.optJSONObject(j).optString("jump_type");
+                                        String jump_position = array.optJSONObject(j).optString("jump_position");
                                         String show_url = array.optJSONObject(j).optString("show_url");
                                         map.put("show_url",show_url);
                                         map.put("jump_position",jump_position);
@@ -3089,7 +3089,7 @@ public class InterfaceCollection {
                                         Map<String,String> map = new HashMap<>();
                                         String jump_type = array.optJSONObject(j).optString("jump_type");
                                         String jump_url = array.optJSONObject(j).optString("jump_url");
-                                        String jump_position = array.optJSONObject(j).optString("jump_type");
+                                        String jump_position = array.optJSONObject(j).optString("jump_position");
                                         String show_url = array.optJSONObject(j).optString("show_url");
                                         map.put("show_url",show_url);
                                         map.put("jump_position",jump_position);

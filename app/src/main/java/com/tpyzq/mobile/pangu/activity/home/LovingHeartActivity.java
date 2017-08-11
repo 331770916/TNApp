@@ -1,7 +1,9 @@
 package com.tpyzq.mobile.pangu.activity.home;
 
 import android.view.View;
+import android.webkit.WebResourceRequest;
 import android.webkit.WebView;
+import android.webkit.WebViewClient;
 
 import com.tpyzq.mobile.pangu.R;
 import com.tpyzq.mobile.pangu.base.BaseActivity;
@@ -20,21 +22,18 @@ public class LovingHeartActivity extends BaseActivity implements View.OnClickLis
     @Override
     public void initView() {
         ProgressWebView mwebView = (ProgressWebView) findViewById(R.id.mwebView);
-        WebView mwebView2 = (WebView) findViewById(R.id.mwebView2);
-
-        String str = "file:///android_asset/lovingheartwild.png";
-        String str1 = "file:///android_asset/2Dbarcode.png";
-        mwebView.loadUrl(str);
         mwebView.getSettings().setUseWideViewPort(true);
         mwebView.getSettings().setLoadWithOverviewMode(true);
-
-        mwebView2.loadUrl(str1);
-        mwebView2.getSettings().setUseWideViewPort(true);
-        mwebView2.getSettings().setLoadWithOverviewMode(true);
-
-
+        mwebView.getSettings().setJavaScriptEnabled(true);
+        mwebView.setWebViewClient(new WebViewClient(){
+            @Override
+            public boolean shouldOverrideUrlLoading(WebView view, WebResourceRequest request) {
+                return true;
+            }
+        });
+        if(getIntent()!=null)
+            mwebView.loadUrl(getIntent().getStringExtra("jump"));
         findViewById(R.id.iv_back).setOnClickListener(this);
-        mwebView2.setOnLongClickListener(this);
     }
 
     @Override

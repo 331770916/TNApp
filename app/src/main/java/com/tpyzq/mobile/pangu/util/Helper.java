@@ -5,6 +5,7 @@ import android.app.ActivityManager;
 import android.app.Dialog;
 import android.content.ComponentName;
 import android.content.Context;
+import android.content.Intent;
 import android.content.res.AssetManager;
 import android.graphics.Bitmap;
 import android.graphics.BitmapFactory;
@@ -26,10 +27,14 @@ import android.widget.EditText;
 import android.widget.LinearLayout;
 import android.widget.TextView;
 import android.widget.Toast;
-
 import com.tpyzq.mobile.pangu.R;
+import com.tpyzq.mobile.pangu.activity.IndexActivity;
+import com.tpyzq.mobile.pangu.activity.home.HomeFragment;
+import com.tpyzq.mobile.pangu.activity.home.LovingHeartActivity;
+import com.tpyzq.mobile.pangu.activity.home.SearchActivity;
+import com.tpyzq.mobile.pangu.activity.home.helper.HomeFragmentHelper;
+import com.tpyzq.mobile.pangu.activity.myself.account.AssetsAnalysisActivity;
 import com.tpyzq.mobile.pangu.base.CustomApplication;
-import com.tpyzq.mobile.pangu.data.InformationEntity;
 import com.tpyzq.mobile.pangu.data.StockInfoEntity;
 import com.tpyzq.mobile.pangu.db.Db_PUB_USERS;
 import com.tpyzq.mobile.pangu.log.LogHelper;
@@ -51,11 +56,10 @@ import java.util.ArrayList;
 import java.util.Calendar;
 import java.util.Collections;
 import java.util.Date;
-import java.util.HashMap;
 import java.util.List;
-import java.util.Map;
 import java.util.regex.Matcher;
 import java.util.regex.Pattern;
+import static com.tpyzq.mobile.pangu.activity.home.helper.HomeFragmentHelper.*;
 
 /**
  * 常用工具类
@@ -69,17 +73,105 @@ public class Helper {
     private static long towTime = 0;
     public static final String TAG = "Helper";
 
-    public static List<Map<String,String>> covertLoopModel(List<InformationEntity> list){
-        List<Map<String,String>> data = new ArrayList<>();
-        for (InformationEntity entity:list) {
-            Map<String,String> model = new HashMap();
-            model.put("id",entity.getNewsno());
-            model.put("title",entity.getTitle());
-            model.put("time",Helper.getCurDate()+" "+entity.getTime());
-            model.put("url",entity.getImage_url());
-            data.add(model);
+
+    /**
+     * 广告跳转
+     */
+    public static void startActivity(Activity activity, String code, String url){
+        startActivity(activity,code,url,null);
+    }
+
+    public static void startActivity(Activity activity, String code, String url, HomeFragment.JumpPageListener listener){
+        String jump="",type="";
+        switch (code){
+            case "TN0000"://我的账户
+                jump = MYACCOUNT;
+                break;
+            case "TN0001"://自选股
+                jump = SELFCHOICESTOCK;
+                break;
+            case "TN0002"://搜索股票
+                jump = SEARCHSTOCK;
+                break;
+            case "TN0003":// 新股
+                jump = NEWSTOCK;
+                break;
+            case "TN0004":// 资产分析
+                jump = APPROACH;
+                break;
+            case "TN0005"://稳赢理财
+                jump = AMAZING;
+                break;
+            case "TN0006"://开户
+                jump = OPEN_USER;
+                break;
+            case "TN0007 "://资讯
+                jump = MESSAGE;
+                break;
+            case "TN0008"://交易动态
+                jump = TRANSACTION;
+                break;
+            case "TN0009"://股市回忆录
+                jump = MARKETMEMORY;
+                break;
+            case "TN0010"://股票买入
+                jump = STOCKBUY;
+                break;
+            case "TN0011"://股票卖出
+                jump = STOCKSELL;
+                break;
+            case "TN0012"://股票持仓
+                jump = HOLDSTOCK;
+                break;
+            case "TN0013"://OTC持仓
+                jump = OTCHOLD;
+                break;
+            case "TN0014"://        可取资金
+                jump = ADVISABLEFUND;
+                break;
+            case "TN0015"://        银行转账
+                jump = BANKTRANSFER;
+                break;
+            case "TN0016"://        业务办理
+                jump = BUSINESSHANDLING;
+                break;
+            case "TN0017"://        自选股新闻
+                jump = NEWSSELFCHOICE;
+                break;
+            case "TN0018"://        资金持仓
+                jump = HOLDFUND;
+                break;
+            case "TN0019"://        我的消息
+                jump= MYINFO;
+                break;
+            case "TN0020"://        股市月账单
+                jump = STOCKBILL;
+                break;
+            case "TN0021"://        热搜股票
+                jump = HOTSEARCH;
+                break;
+            case "TN0022"://        国债逆回购
+                jump = REVERSEREPO;
+                break;
+            case "TN0023"://网页
+                jump = url;
+                type = "0";
+                break;
         }
-        return data;
+        if(activity.getClass().equals(IndexActivity.class)){
+            if(!TextUtils.isEmpty(type)){
+                Intent intent = new Intent(activity,LovingHeartActivity.class);
+                intent.putExtra("jump",jump);
+                activity.startActivity(intent);
+            }else
+                HomeFragmentHelper.getInstance().gotoPager(jump, activity, listener, null);
+        }else {
+            Intent intent = new Intent(activity,IndexActivity.class);
+            intent.putExtra("jump",jump);
+            if(!TextUtils.isEmpty(type))
+                intent.putExtra("type",type);
+            activity.startActivity(intent);
+        }
     }
 
     public static int getTime(){

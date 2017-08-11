@@ -12,6 +12,7 @@
             android:layout_height="@dimen/size90"
             android:layout_marginBottom="@dimen/size15"
             android:layout_marginTop="@dimen/size12"
+            android:layout_marginLeft="@dimen/size10"
             android:background="@mipmap/news_default_sbg" />
 
         <RelativeLayout

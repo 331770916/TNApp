@@ -19,6 +19,8 @@ import android.widget.TextView;
 
 import com.tpyzq.mobile.pangu.R;
 import com.tpyzq.mobile.pangu.activity.home.HomeFragment;
+import com.tpyzq.mobile.pangu.activity.home.LovingHeartActivity;
+import com.tpyzq.mobile.pangu.activity.home.helper.HomeFragmentHelper;
 import com.tpyzq.mobile.pangu.activity.market.MarketFragment;
 import com.tpyzq.mobile.pangu.activity.myself.MySelfFragment;
 import com.tpyzq.mobile.pangu.activity.trade.TradeFragment;
@@ -73,6 +75,8 @@ public class IndexActivity extends BaseActivity implements InterfaceCollection.I
     private ImageView ivNewStockClose;
     private NewStockEnitiy enitiy;
     private SitesChangeRecever broadcastReceiver;
+    private HomeFragment.JumpPageListener mJumpPageListener;
+    private String jump;
 
     @Override
     public void initView() {
@@ -134,8 +138,34 @@ public class IndexActivity extends BaseActivity implements InterfaceCollection.I
                 }
             }
         });
-    }
+        mJumpPageListener = new HomeFragment.JumpPageListener() {
+            @Override
+            public void onCheckedChanged(int position) {
 
+                if (position == 0) {
+                    homeRadioBtn.setChecked(true);
+                } else if (position == 1) {
+                    marketRadioBtn.setChecked(true);
+                } else if (position == 2) {
+                    transactionRaioBtn.setChecked(true);
+                } else if (position == 3) {
+                    mySelfRaioBtn.setChecked(true);
+                }
+            }
+        };
+        if(getIntent()!=null) {
+            jump = getIntent().getStringExtra("jump");
+            if(!TextUtils.isEmpty(jump)){
+                String type = getIntent().getStringExtra("type");
+                if(!TextUtils.isEmpty(type)&&type.equals("0")) {
+                    Intent intent = new Intent(this, LovingHeartActivity.class);
+                    intent.putExtra("url",jump);
+                    startActivity(intent);
+                }else
+                    HomeFragmentHelper.getInstance().gotoPager(jump, this, mJumpPageListener, null);
+            }
+        }
+    }
 
 
     @Override
@@ -250,21 +280,7 @@ public class IndexActivity extends BaseActivity implements InterfaceCollection.I
             case 0:
                 if (tab_fragment[0] == null) {
                     tab_fragment[0] = new HomeFragment();
-                    ((HomeFragment) tab_fragment[0]).setJumPageListener(new HomeFragment.JumpPageListener() {
-                        @Override
-                        public void onCheckedChanged(int position) {
-
-                            if (position == 0) {
-                                homeRadioBtn.setChecked(true);
-                            } else if (position == 1) {
-                                marketRadioBtn.setChecked(true);
-                            } else if (position == 2) {
-                                transactionRaioBtn.setChecked(true);
-                            } else if (position == 3) {
-                                mySelfRaioBtn.setChecked(true);
-                            }
-                        }
-                    });
+                    ((HomeFragment) tab_fragment[0]).setJumPageListener(mJumpPageListener);
                     ft.add(R.id.fragmentLayout, tab_fragment[0]);
                 } else {
                     ft.show(tab_fragment[0]);
