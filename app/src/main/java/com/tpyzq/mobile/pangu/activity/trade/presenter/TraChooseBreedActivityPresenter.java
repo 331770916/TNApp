@@ -155,12 +155,17 @@ public void getTraBreed() {
                     JSONArray jsdata = jsonObject.getJSONArray("message");
                     for (int i = 0; i < jsdata.length(); i++) {
                         StockInfoBean stockInfo = new StockInfoBean();
-                        stockInfo.stockCode = jsdata.getJSONObject(i).getString("mcode");
-                        String earnings = jsdata.getJSONObject(i).getString("earnings");
-                        String w_eamings = jsdata.getJSONObject(i).getString("w_eamings");
-                        String sw_eamings = jsdata.getJSONObject(i).getString("sw_eamings");
-                        String stockName = jsdata.getJSONObject(i).getString("sname");
-                        String market = jsdata.getJSONObject(i).getString("market");
+                        stockInfo.stockCode = jsdata.getJSONObject(i).optString("mcode");
+                        String earnings = jsdata.getJSONObject(i).optString("earnings");
+                        String w_eamings = jsdata.getJSONObject(i).optString("w_eamings");
+                        String sw_eamings = jsdata.getJSONObject(i).optString("sw_eamings");
+                        String stockName = jsdata.getJSONObject(i).optString("sname");
+                        String market = jsdata.getJSONObject(i).optString("market");
+                        String dj_time = jsdata.getJSONObject(i).optString("dj_time");//可取日期
+                        String dq_time = jsdata.getJSONObject(i).optString("dq_time");//可用日期
+                        String sq_time = jsdata.getJSONObject(i).optString("sq_time");//行情日期
+                        String occupied_days = jsdata.getJSONObject(i).optString("occupied_days");
+
                         if (!TextUtils.isEmpty(stockName)){
                             stockName = stockName.trim();
                             stockInfo.stockName1 = stockName;
@@ -173,6 +178,10 @@ public void getTraBreed() {
                         stockInfo.yearIncome = string2doubleS3(earnings+"") + "%";
                         stockInfo.wYuanIncome = string2double4(w_eamings);
                         stockInfo.tenwYuanDayIncome = string2doubleS3(sw_eamings);
+                        stockInfo.dj_time = dj_time;
+                        stockInfo.dq_time = dq_time;
+                        stockInfo.sq_time = sq_time;
+                        stockInfo.occupied_days = occupied_days;
                         if ("sh".equals(market)) {
                             hu_data.add(stockInfo);
                         } else if ("sz".equals(market)){

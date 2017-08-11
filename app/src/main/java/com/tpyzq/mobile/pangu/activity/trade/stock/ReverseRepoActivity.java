@@ -21,6 +21,7 @@ import android.widget.AdapterView;
 import android.widget.Button;
 import android.widget.CheckedTextView;
 import android.widget.EditText;
+import android.widget.HorizontalScrollView;
 import android.widget.ImageView;
 import android.widget.LinearLayout;
 import android.widget.ListView;
@@ -41,13 +42,15 @@ import com.tpyzq.mobile.pangu.view.dialog.CommissionedBuyAndSellDialog;
 import org.json.JSONArray;
 import org.json.JSONException;
 
+import java.math.BigDecimal;
+import java.text.DecimalFormat;
+
 import static com.tpyzq.mobile.pangu.util.ToastUtils.showShort;
 import static com.tpyzq.mobile.pangu.util.TransitionUtils.fundPirce;
 import static com.tpyzq.mobile.pangu.util.TransitionUtils.string2doubleS3;
 
 public class ReverseRepoActivity extends BaseActivity implements View.OnClickListener, AdapterView.OnItemClickListener {
     private TextView tv_title, tv_using_money, tv_price, tv_chedan, tv_search, tv_sub_price, tv_add_price;
-    private Button bt_loan;
     private ImageView iv_sub_price, iv_add_price, iv_sub_sum, iv_add_sum, iv_back;
     public String[] price_buy = new String[5];
     public String[] price_sell = new String[5];
@@ -58,6 +61,7 @@ public class ReverseRepoActivity extends BaseActivity implements View.OnClickLis
     private BuySellAdapter sellAdapter;
     private StockInfoBean stockInfoBean;
     private EditText et_income, et_price;
+    private TextView mSyTv;
     private double price;
     private long amount;
     private long finalamount;
@@ -67,8 +71,9 @@ public class ReverseRepoActivity extends BaseActivity implements View.OnClickLis
     ReverseRepoActivityPresenter presenter;
     private LinearLayout ll_mKeyboard;
 
-    private LinearLayout mRepoLayout;
+    private HorizontalScrollView mRepoLayout;
     private TextView     mRepoTextView;
+    private DecimalFormat mFormat2 = new DecimalFormat("#0.00");
 
     @Override
     public void initView() {
@@ -79,7 +84,7 @@ public class ReverseRepoActivity extends BaseActivity implements View.OnClickLis
         tv_add_price = (TextView) findViewById(R.id.tv_add_price);
         tv_chedan = (TextView) findViewById(R.id.tv_chedan);
         tv_search = (TextView) findViewById(R.id.tv_search);
-        bt_loan = (Button) findViewById(R.id.bt_loan);
+        findViewById(R.id.bt_loan).setOnClickListener(this);
         lv_buy = (ListView) findViewById(R.id.lv_buy);
         lv_sell = (ListView) findViewById(R.id.lv_sell);
         et_income = (EditText) findViewById(R.id.et_income);
@@ -90,69 +95,69 @@ public class ReverseRepoActivity extends BaseActivity implements View.OnClickLis
         iv_add_sum = (ImageView) findViewById(R.id.iv_add_sum);
         iv_back = (ImageView) findViewById(R.id.iv_back);
         ll_mKeyboard = (LinearLayout) findViewById(R.id.Keyboard_LinearLayout);
+        mSyTv = (TextView) findViewById(R.id.syTv);
 
-        mRepoLayout = (LinearLayout) findViewById(R.id.reverse_repoLayout);
+        mRepoLayout = (HorizontalScrollView) findViewById(R.id.reverse_repoLayout);
         mRepoTextView = (TextView) findViewById(R.id.reverse_daytv);
-        testData();
+
         initData();
+        testData();
     }
 
     private void testData() {
-        mRepoLayout.setVisibility(View.VISIBLE);
-        String day = "1天";
-        String repoText = "占款天数\n";
-        String strRepoText = repoText + day;
-        SpannableString ss = new SpannableString(strRepoText);
-        ss.setSpan(new ForegroundColorSpan(ContextCompat.getColor(CustomApplication.getContext(), R.color.title_list)), 0, repoText.length(), Spanned.SPAN_EXCLUSIVE_EXCLUSIVE);
-        ss.setSpan(new ForegroundColorSpan(ContextCompat.getColor(CustomApplication.getContext(), R.color.red)), repoText.length(), strRepoText.length(), Spanned.SPAN_EXCLUSIVE_EXCLUSIVE);
-        ss.setSpan(new AbsoluteSizeSpan(12, true), 0, repoText.length(), Spanned.SPAN_EXCLUSIVE_EXCLUSIVE);
-        ss.setSpan(new AbsoluteSizeSpan(14, true), repoText.length(), strRepoText.length(), Spanned.SPAN_EXCLUSIVE_EXCLUSIVE);
-        mRepoTextView.setGravity(Gravity.CENTER);
-        mRepoTextView.setText(ss);
 
-        String [] strs = {"借款", "可用", "可取"};
-        String[] strDate = {"2017/08/01", "2017/08/03", "2017/08/09"};
+        boolean occupied = false;
+        boolean sqtime = false;
+        boolean dqtime = false;
+        boolean djtime = false;
 
+        if (!TextUtils.isEmpty(stockInfoBean.occupied_days)) {
+            occupied = true;
+            mRepoTextView.setText(stockInfoBean.occupied_days);
 
-        for (int i = 0; i < strs.length; i++) {
-            LinearLayout layout = new LinearLayout(this);
-            layout.setOrientation(LinearLayout.VERTICAL);
-            layout.setGravity(Gravity.CENTER);
-            TextView textView = new TextView(this);
-            textView.setText(strs[i]);
-            textView.setTextSize(TypedValue.COMPLEX_UNIT_SP, 12);
-            textView.setTextColor(ContextCompat.getColor(this, R.color.reverse_tvcolor));
-            textView.setGravity(Gravity.CENTER);
-            textView.setBackgroundDrawable(ContextCompat.getDrawable(this, R.drawable.reverse_selectortvbg));
+            String day = stockInfoBean.occupied_days + "天";
+            String repoText = "占款天数\n";
+            String strRepoText = repoText + day;
+            SpannableString ss = new SpannableString(strRepoText);
+            ss.setSpan(new ForegroundColorSpan(ContextCompat.getColor(CustomApplication.getContext(), R.color.title_list)), 0, repoText.length(), Spanned.SPAN_EXCLUSIVE_EXCLUSIVE);
+            ss.setSpan(new ForegroundColorSpan(ContextCompat.getColor(CustomApplication.getContext(), R.color.red)), repoText.length(), strRepoText.length(), Spanned.SPAN_EXCLUSIVE_EXCLUSIVE);
+            ss.setSpan(new AbsoluteSizeSpan(12, true), 0, repoText.length(), Spanned.SPAN_EXCLUSIVE_EXCLUSIVE);
+            ss.setSpan(new AbsoluteSizeSpan(14, true), repoText.length(), strRepoText.length(), Spanned.SPAN_EXCLUSIVE_EXCLUSIVE);
+            mRepoTextView.setGravity(Gravity.CENTER);
+            mRepoTextView.setText(ss);
 
-            int width =View.MeasureSpec.makeMeasureSpec(0,View.MeasureSpec.UNSPECIFIED);
-            int height =View.MeasureSpec.makeMeasureSpec(0,View.MeasureSpec.UNSPECIFIED);
-            textView.measure(width,height);
+        }
 
+        CheckedTextView jkTitleTv = (CheckedTextView) findViewById(R.id.jktitle);
+        CheckedTextView jktime = (CheckedTextView)findViewById(R.id.jktime);
 
-            TextView daytv = new TextView(this);
-            daytv.setGravity(Gravity.CENTER);
-            daytv.setTextSize(TypedValue.COMPLEX_UNIT_SP, 12);
-            daytv.setTextColor(ContextCompat.getColor(this, R.color.newStockTitle));
-            daytv.setText(strDate[i]);
+        if (!TextUtils.isEmpty(stockInfoBean.sq_time)) {
+            sqtime = true;
+            jkTitleTv.setText("借款");
+            jktime.setText(stockInfoBean.sq_time);
+        }
 
-            layout.addView(textView);
-            layout.addView(daytv);
+        CheckedTextView kyTitleTv = (CheckedTextView) findViewById(R.id.kytitle);
+        CheckedTextView kytime = (CheckedTextView)findViewById(R.id.kytime);
+        if (!TextUtils.isEmpty(stockInfoBean.dq_time)) {
+            dqtime = true;
+            kyTitleTv.setText("可用");
+            kytime.setText(stockInfoBean.dq_time);
+        }
 
-            mRepoLayout.addView(layout);
-            int margin = textView.getMeasuredHeight();
+        CheckedTextView kqTitleTv = (CheckedTextView) findViewById(R.id.kqtitle);
+        CheckedTextView kqtime = (CheckedTextView)findViewById(R.id.kqtime);
 
-            if (i < strs.length - 1) {
-                View view = new View(this);
-                view.setBackgroundColor(ContextCompat.getColor(this, R.color.newStockTitle));
-                mRepoLayout.addView(view);
-                LinearLayout.LayoutParams layoutParams = (LinearLayout.LayoutParams) view.getLayoutParams();
-                layoutParams.gravity = Gravity.TOP;
-                layoutParams.width = 100;
-                layoutParams.height = 1;
-                layoutParams.topMargin = margin;
-                view.setLayoutParams(layoutParams);
-            }
+        if (!TextUtils.isEmpty(stockInfoBean.dj_time)) {
+            djtime = true;
+            kqTitleTv.setText("可取");
+            kqtime.setText(stockInfoBean.dj_time);
+        }
+
+        if (occupied && sqtime && dqtime && djtime) {
+            mRepoLayout.setVisibility(View.VISIBLE);
+        } else {
+            mRepoLayout.setVisibility(View.GONE);
         }
     }
 
@@ -162,6 +167,10 @@ public class ReverseRepoActivity extends BaseActivity implements View.OnClickLis
 
         Intent intent = getIntent();
         stockInfoBean = (StockInfoBean) intent.getSerializableExtra("data");
+        if (stockInfoBean == null) {
+            return;
+        }
+
         tv_title.setText(stockInfoBean.stockName2 + "天期(" + stockInfoBean.stockName1 + ")");
         buyAdapter = new BuySellAdapter(this, price_buy, sum_buy, "0");
         sellAdapter = new BuySellAdapter(this, price_sell, sum_sell, "1");
@@ -181,7 +190,6 @@ public class ReverseRepoActivity extends BaseActivity implements View.OnClickLis
         tv_chedan.setOnClickListener(this);
         tv_search.setOnClickListener(this);
         iv_back.setOnClickListener(this);
-        bt_loan.setOnClickListener(this);
         iv_sub_price.setOnClickListener(this);
         iv_add_price.setOnClickListener(this);
         iv_sub_sum.setOnClickListener(this);
@@ -190,6 +198,9 @@ public class ReverseRepoActivity extends BaseActivity implements View.OnClickLis
         et_price.addTextChangedListener(stockNumWatch);
         lv_buy.setOnItemClickListener(this);
         lv_sell.setOnItemClickListener(this);
+
+
+
     }
 
     /**
@@ -212,18 +223,49 @@ public class ReverseRepoActivity extends BaseActivity implements View.OnClickLis
             if (Helper.isDecimal(numString)) {
                 if (TextUtils.isEmpty(numString) || "0.000".equals(numString) || ".".equals(numString) || "- -".equals(numString)) {
                     price = 0;
+                    mSyTv.setText("0.00");
                 } else {
                     double numInt = Double.parseDouble(numString);
                     if (numInt < 0) {
                         Toast.makeText(getApplication(), "请输入一个大于0的数字", Toast.LENGTH_SHORT).show();
                         et_income.setText("");
+                        mSyTv.setText("0.00");
                     } else {
                         price = numInt;
+                        getYqsy();
                     }
                 }
+            } else {
+                mSyTv.setText("0.00");
             }
         }
     };
+
+    /**
+     * 获取预期收益
+     */
+    private void getYqsy() {
+        String numString = et_income.getText().toString();
+        String outPrice = et_price.getText().toString();
+        String day = stockInfoBean.occupied_days;
+        if (TextUtils.isEmpty(numString)) {
+            numString = "0";
+        }
+
+        if (TextUtils.isEmpty(outPrice)) {
+            outPrice = "0";
+        }
+
+        if (TextUtils.isEmpty(day)) {
+            day = "0";
+        }
+
+        BigDecimal bigDecima0 = new BigDecimal(numString);
+        BigDecimal bigDecimal = new BigDecimal(outPrice);
+        BigDecimal bigDecima2 = new BigDecimal(day);
+
+        mSyTv.setText(mFormat2.format((bigDecima0.doubleValue() / 365) * bigDecimal.doubleValue() * bigDecima2.doubleValue()));
+    }
 
     /**
      * 数量变化监听器
@@ -246,14 +288,20 @@ public class ReverseRepoActivity extends BaseActivity implements View.OnClickLis
             if (numString.startsWith("0")) {
                 ToastUtils.showShort(ReverseRepoActivity.this, "交易数量首位不能为0");
                 et_price.setText(TransitionUtils.delHeaderZero(numString));
+                mSyTv.setText("0.00");
                 return;
             }
             if (numString == null || numString.equals("")) {
                 amount = 0;
+                mSyTv.setText("0.00");
             } else {
+
+                getYqsy();
+
                 long numInt = Long.parseLong(numString);
                 if (numInt < 0) {
                     Toast.makeText(getApplication(), "请输入一个大于0的数字", Toast.LENGTH_SHORT).show();
+                    mSyTv.setText("0.00");
                     et_price.setText("");
                 } else {
                     amount = numInt;
