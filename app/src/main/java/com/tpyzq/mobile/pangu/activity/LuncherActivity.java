@@ -93,7 +93,7 @@ public class LuncherActivity extends BaseActivity implements ICallbackResult {
                 return;
             }
             titleLinearLayout.setVisibility(View.VISIBLE);
-            timeText.setText(i+"秒");
+            timeText.setText(i+" 跳过 ");
             i--;
             super.handleMessage(msg);
         }
@@ -167,6 +167,7 @@ public class LuncherActivity extends BaseActivity implements ICallbackResult {
             @Override
             public void onClick(View view) {
                 timer.cancel();
+                finishLuncher();
             }
         });
     }

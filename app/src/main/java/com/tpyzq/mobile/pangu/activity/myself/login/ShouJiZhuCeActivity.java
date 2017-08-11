@@ -386,6 +386,9 @@ public class ShouJiZhuCeActivity extends BaseActivity implements View.OnClickLis
                 String stockNumber = mChartTimeDatas.get(i).getStockNumber();
                 String stockName = mChartTimeDatas.get(i).getStockName();
                 String NewPrice = mChartTimeDatas.get(i).getNewPrice();
+                if (TextUtils.isEmpty(NewPrice)||"null".equalsIgnoreCase(NewPrice)) {
+                    NewPrice = "0";
+                }
 
                 sb.append(stockNumber).append(",");
                 sb1.append(stockName).append(",");
