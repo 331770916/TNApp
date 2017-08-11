@@ -192,7 +192,15 @@ public class WavaBezierProgress extends View implements View.OnClickListener {
         mPath.lineTo(0, mscreenHeight);
         mPath.close();
         canvas.drawPath(mPath, mPaint);
-        canvas.drawText("已下载" + textc + "%", mTotalWidth / 2 - mTextPaint.measureText("已下载" + textc + "%") / 2, mTotalHeight / 2 + progerssTestSize / 2, mTextPaint);
+
+        //设置当前画笔基准线
+        mTextPaint.setTextAlign(Paint.Align.CENTER);
+        Paint.FontMetrics fontMetrics = mTextPaint.getFontMetrics();
+        float top = fontMetrics.top;
+        float bottom = fontMetrics.bottom;
+
+        int baseLineY = (int) (mRectF.centerY() - top/2 - bottom/2);//基线中间点的y轴计算公式
+        canvas.drawText("已下载" + textc + "%", mRectF.centerX(),baseLineY, mTextPaint);
 
         mPaint.setStyle(Paint.Style.STROKE);
         mPaint.setStrokeWidth(dp2px(2));

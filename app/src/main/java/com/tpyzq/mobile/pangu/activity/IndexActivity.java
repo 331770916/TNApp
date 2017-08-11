@@ -68,7 +68,6 @@ public class IndexActivity extends BaseActivity implements InterfaceCollection.I
     private int tabIds[] = new int[]{R.id.homeRadioBtn, R.id.marketRadioBtn, R.id.transactionRadioBtn, R.id.informationRadioBtn};
     private ExitDialog dialog;
     private Boolean flag = false;
-    private String url  ="";
     private FrameLayout newstockremind;
     private TextView tvNewStock,tvNewStockJump;
     private ImageView ivNewStockClose;
@@ -351,10 +350,14 @@ public class IndexActivity extends BaseActivity implements InterfaceCollection.I
      * 版本更新
      */
     private void getVersionData() {
+        String[] thisVersionCode = APPInfoUtils.getVersionName(IndexActivity.this).split("\\.");
+        double version = Double.parseDouble(thisVersionCode[0]);
+        String versionNumber = String.valueOf(version);
         HashMap map400101 = new HashMap();
         HashMap map400101_1 = new HashMap();
         map400101_1.put("versionType", "2");
         map400101_1.put("urltpye", "1");
+        map400101_1.put("versionNumber",versionNumber);
         map400101.put("funcid", "400101");
         map400101.put("token", "");
         map400101.put("parms", map400101_1);
@@ -377,6 +380,7 @@ public class IndexActivity extends BaseActivity implements InterfaceCollection.I
                         String forceIsupdate = joResult.getString("forceIsupdate");   //是否强制更新
                         String versionNumber = joResult.getString("versionNumber");   //版本号
                         String apkAddress = joResult.getString("apkAddress");         //下载地址
+                        String remarks = joResult.optString("remarks");
                         if (TextUtils.isEmpty(versionNumber)) {
                             return;
                         }
@@ -384,15 +388,15 @@ public class IndexActivity extends BaseActivity implements InterfaceCollection.I
                         String[] thisVersionCode = APPInfoUtils.getVersionName(IndexActivity.this).split("\\.");
                         //如果 版本号  与  当前版本号 相同 删除安装包
                         if (Double.parseDouble(versionCode[0]) > Double.parseDouble(thisVersionCode[0])) {
-                            Dialog mDialog = new VersionDialog(IndexActivity.this, apkAddress, forceIsupdate, versionNumber,url);
+                            Dialog mDialog = new VersionDialog(IndexActivity.this, apkAddress, forceIsupdate, versionNumber,remarks);
                             mDialog.show();
                         } else if(Double.parseDouble(versionCode[0]) == Double.parseDouble(thisVersionCode[0])){
                             if (Double.parseDouble(versionCode[1]) > Double.parseDouble(thisVersionCode[1])) {
-                                Dialog mDialog = new VersionDialog(IndexActivity.this, apkAddress, forceIsupdate, versionNumber,url);
+                                Dialog mDialog = new VersionDialog(IndexActivity.this, apkAddress, forceIsupdate, versionNumber,remarks);
                                 mDialog.show();
                             } else if (Double.parseDouble(versionCode[1]) == Double.parseDouble(thisVersionCode[1])) {
                                 if (Double.parseDouble(versionCode[2]) > Double.parseDouble(thisVersionCode[2])) {
-                                    Dialog mDialog = new VersionDialog(IndexActivity.this, apkAddress, forceIsupdate, versionNumber,url);
+                                    Dialog mDialog = new VersionDialog(IndexActivity.this, apkAddress, forceIsupdate, versionNumber,remarks);
                                     mDialog.show();
                                 }
                             }
