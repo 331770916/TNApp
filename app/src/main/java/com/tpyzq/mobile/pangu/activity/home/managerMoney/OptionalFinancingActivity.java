@@ -214,6 +214,7 @@ public class OptionalFinancingActivity extends BaseActivity implements View.OnCl
                     intent.putExtra("prod_nhsy", fixSucessBean.prod.get(0).prod_nhsy);
                     intent.putExtra("prod_qgje", fixSucessBean.prod.get(0).prod_qgje);
                     intent.putExtra("schema_id", fixSucessBean.schema_id);
+                    intent.putExtra("target", "finncing");
                     intent.putExtra("prod_code", fixSucessBean.prod.get(0).prod_code);
                     intent.putExtra("ofund_risklevel_name", fixSucessBean.prod.get(0).ofund_risklevel_name);
                     register = Db_PUB_USERS.isRegister();

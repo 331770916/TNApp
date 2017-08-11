@@ -310,6 +310,7 @@ public class HomeFragment extends BaseFragment implements AdapterView.OnItemClic
                     intent.putExtra("prod_qgje", optionalFinancingList.get(position - 1).getProd_qgje());
                     intent.putExtra("schema_id", optionalFinancingList.get(position - 1).getSchema_id());
                     intent.putExtra("prod_code", optionalFinancingList.get(position - 1).getProd_code());
+                    intent.putExtra("target", "finncing");
                     intent.putExtra("ofund_risklevel_name", optionalFinancingList.get(position - 1).getOfund_risklevel_name());
                     register = Db_PUB_USERS.isRegister();
                     BRutil.menuNewSelect("Z1-4-4", optionalFinancingList.get(position - 1).getSchema_id(), optionalFinancingList.get(position - 1).getProd_code(), "2", new Date(), "-1", "-1");
