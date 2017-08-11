@@ -144,7 +144,7 @@ public class CustomTab extends BaseTransferObserverTabView implements
                     int days = Helper.daysBetween(startDay, endDay);
 
                     if (str.equalsIgnoreCase(startDay) && !str.equals(endDay)) {
-                        showDialog(("起始时间不能大于等于截止时间");
+                        showDialog("起始时间不能大于等于截止时间",false);
                     } else if (days > 90) {
                         showDialog("起始时间和截止时间不能大于3个月",false);
                     } else {
