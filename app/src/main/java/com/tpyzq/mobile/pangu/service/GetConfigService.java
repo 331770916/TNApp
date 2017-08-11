@@ -4,6 +4,7 @@ import android.app.Service;
 import android.content.Intent;
 import android.os.IBinder;
 import android.support.annotation.Nullable;
+import android.util.Log;
 
 import com.tpyzq.mobile.pangu.base.CustomApplication;
 import com.tpyzq.mobile.pangu.base.InterfaceCollection;
@@ -57,8 +58,8 @@ public class GetConfigService extends Service implements InterfaceCollection.Int
         } else {
             Thread.sleep(500);
             if (count <= 2) {
-                doConnect();
                 count++;
+                doConnect();
             } else {
                 stopSelf();
             }
