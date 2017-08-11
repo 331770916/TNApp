@@ -136,13 +136,16 @@ public class ManagerMoenyDetailActivity extends BaseActivity implements View.OnC
         String target = intent.getStringExtra("target");//来自基金信息跳转
         if ("fundInfoTarget".equals(target)) {
             mBuyBtn.setVisibility(View.GONE);
-//            findViewById(R.id.managerDetailTargetLayout).setVisibility(View.VISIBLE);
-//            findViewById(R.id.targetTouBtn).setOnClickListener(this);
-//            findViewById(R.id.targetBuyBtn).setOnClickListener(this);
-//
-//            if ("0".equals(mProdType)) {
-//                findViewById(R.id.targetTouBtn).setVisibility(View.GONE);
-//            }
+            findViewById(R.id.managerDetailTargetLayout).setVisibility(View.GONE);
+        } else if ("finncing".equals(target)) {
+            mBuyBtn.setVisibility(View.GONE);
+            findViewById(R.id.managerDetailTargetLayout).setVisibility(View.VISIBLE);
+            findViewById(R.id.targetTouBtn).setOnClickListener(this);
+            findViewById(R.id.targetBuyBtn).setOnClickListener(this);
+
+            if ("0".equals(mProdType)) {
+                findViewById(R.id.targetTouBtn).setVisibility(View.GONE);
+            }
         }
 
 

@@ -30,6 +30,7 @@ public class TainiuRefreshHead extends SimpleRefreshHead {
             animationDrawable = (AnimationDrawable) CustomApplication.getContext().getResources().getDrawable(R.drawable.cow);
             mHeadView = LayoutInflater.from(parent.getContext()).inflate(R.layout.refresh_header_tainiu, parent, false);
             initView(mHeadView);
+//            ivHeaderDownArrow.setBackgroundDrawable(animationDrawable);
             ivHeaderDownArrow.setImageDrawable(animationDrawable);
         }
         return mHeadView;
@@ -51,7 +52,7 @@ public class TainiuRefreshHead extends SimpleRefreshHead {
         animationDrawable.start();
         if (scrollY > mHeadViewHeight && mArrowDown) {
             textView.setText(R.string.release_refresh);
-            SimpleDateFormat sDateFormat = new SimpleDateFormat("最后更新时间"+"yyyy-MM-dd HH:mm:ss");
+            SimpleDateFormat sDateFormat = new SimpleDateFormat("刷新时间："+"HH:mm:ss");
             String date = sDateFormat.format(new java.util.Date());
             textViewDate.setText(date);
             textViewDate.setTextColor(ContextCompat.getColor(CustomApplication.getContext(), R.color.texts));
@@ -124,7 +125,7 @@ public class TainiuRefreshHead extends SimpleRefreshHead {
         isRefreshing = false;
         ivHeaderDownArrow.setImageDrawable(animationDrawable);
         textView.setText(R.string.pull_refresh);
-        SimpleDateFormat sDateFormat = new SimpleDateFormat("最后更新时间"+"yyyy-MM-dd HH:mm:ss");
+        SimpleDateFormat sDateFormat = new SimpleDateFormat("刷新时间："+"HH:mm:ss");
         String date = sDateFormat.format(new java.util.Date());
         textViewDate.setText(date);
     }

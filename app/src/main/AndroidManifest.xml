@@ -215,7 +215,6 @@
         <activity android:name=".activity.detail.stockTab.CashFlowActivity" />
         <activity android:name=".activity.detail.stockTab.KeyIndexActivity" />
         <activity android:name=".activity.detail.stockTab.StockProfitActivity" />
-        <activity android:name=".activity.detail.exponetTab.ExpontentMoreActivity"/>
         <!-- myself  login相关activity -->
         <activity
             android:name=".activity.myself.login.TransactionLoginActivity"
