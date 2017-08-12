@@ -3,6 +3,7 @@ package com.tpyzq.mobile.pangu.activity.trade.stock;
 import android.app.Activity;
 import android.content.Context;
 import android.content.Intent;
+import android.graphics.Color;
 import android.os.CountDownTimer;
 import android.support.v4.content.ContextCompat;
 import android.text.Editable;
@@ -256,11 +257,18 @@ public class ReverseRepoActivity extends BaseActivity implements View.OnClickLis
             day = "0";
         }
 
-        BigDecimal bigDecima0 = new BigDecimal(numString);
+
+        BigDecimal bigDecima0 = new BigDecimal((Double.parseDouble(numString)/ 100));
         BigDecimal bigDecimal = new BigDecimal(outPrice);
         BigDecimal bigDecima2 = new BigDecimal(day);
 
-        mSyTv.setText(mFormat2.format((bigDecima0.doubleValue() / 365) * bigDecimal.doubleValue() * bigDecima2.doubleValue()));
+        String value = mFormat2.format((bigDecima0.doubleValue() / 365) * bigDecimal.doubleValue() * bigDecima2.doubleValue());
+        String unit = "元";
+
+        SpannableString ss1 = new SpannableString(value + unit);
+        ss1.setSpan(new ForegroundColorSpan(Color.RED), 0, value.length(), Spanned.SPAN_EXCLUSIVE_EXCLUSIVE);
+        ss1.setSpan(new ForegroundColorSpan(ContextCompat.getColor(CustomApplication.getContext(), R.color.title_list)), value.length(), (value + unit).length(), Spanned.SPAN_EXCLUSIVE_EXCLUSIVE);
+        mSyTv.setText(ss1);
     }
 
     /**

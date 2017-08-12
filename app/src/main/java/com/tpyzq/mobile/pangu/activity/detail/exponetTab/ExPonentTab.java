@@ -92,42 +92,9 @@ public class ExPonentTab extends BaseExponentTab implements ICallbackResult, Ada
         MyListView listView = (MyListView) view.findViewById(R.id.detailExponentListView);
         mAdapter = new ExponentAdapter();
         listView.addFooterView(footerView);
+        noMore();
         listView.setAdapter(mAdapter);
         listView.setOnItemClickListener(this);
-            footerView.setOnClickListener(new View.OnClickListener() {
-                @Override
-                public void onClick(View v) {
-                    Intent intent = new Intent();
-                    StockListIntent data = new StockListIntent();
-                    data.setHead2("现价");
-                    data.setHead3("涨跌幅");
-                    data.setHead1("股票名称");
-
-                    intent.putExtra("tag","exponent");
-                    intent.putExtra("stockIntent", data);
-                    intent.putExtra("isExponent", true);
-
-                    if (mIndex == 0) {
-                        intent.putExtra("flag", "1");
-                        intent.putExtra("asc", "1");
-                        intent.putExtra("type", "1000");
-                    } else if (mIndex == 1) {
-                        intent.putExtra("flag", "1");
-                        intent.putExtra("asc", "2");
-                        intent.putExtra("type", "2000");
-                        intent.putExtra("order", "2");
-                    } else {
-                        data.setHead3("换手率");
-                        intent.putExtra("flag", "2");
-                        intent.putExtra("asc", "1");
-                        intent.putExtra("type", "3000");
-                    }
-                    intent.putExtra("exponentCode", _exponentCode);
-                    intent.setClass(activity, StockListActivity.class);
-                    activity.startActivity(intent);
-                }
-            });
-
 
         final SimpleRemoteControl simpleRemoteControl = new SimpleRemoteControl(this);
         simpleRemoteControl.setCommand(new ToExponentConnect(new ExponentConnect("0", "10", TAG, "1", "1", _exponentCode, ZF_TYPE, this)));
@@ -169,20 +136,69 @@ public class ExPonentTab extends BaseExponentTab implements ICallbackResult, Ada
 
         if (mBeans != null && mBeans.size() > 0) {
             mAdapter.setData(mBeans);
-
             if (mBeans.size() < 10) {
-                TextView textView = (TextView) footerView.findViewById(R.id.footerMore);
-                textView.setText("没有更多啦");
-                textView.setTextColor(ContextCompat.getColor(mActivity, R.color.newStockTitle));
-                footerView.setBackgroundColor(ContextCompat.getColor(mActivity, R.color.bgColor));
-                footerView.setClickable(false);
-                footerView.setFocusable(false);
-                footerView.setFocusableInTouchMode(false);
+                noMore();
+            } else {
+                more();
             }
+        } else {
+            noMore();
         }
 
+    }
 
+    private void noMore() {
+        TextView textView = (TextView) footerView.findViewById(R.id.footerMore);
+        textView.setText("没有更多啦");
+        textView.setTextColor(ContextCompat.getColor(mActivity, R.color.newStockTitle));
+        footerView.setBackgroundColor(ContextCompat.getColor(mActivity, R.color.bgColor));
+        footerView.setClickable(false);
+        footerView.setFocusable(false);
+        footerView.setFocusableInTouchMode(false);
+    }
 
+    private void more() {
+        TextView textView = (TextView) footerView.findViewById(R.id.footerMore);
+        textView.setText("查看更多");
+        textView.setTextColor(ContextCompat.getColor(mActivity, R.color.title_list));
+        footerView.setBackgroundColor(ContextCompat.getColor(mActivity, R.color.white));
+        footerView.setClickable(true);
+        footerView.setFocusable(true);
+        footerView.setFocusableInTouchMode(true);
+
+        footerView.setOnClickListener(new View.OnClickListener() {
+            @Override
+            public void onClick(View v) {
+                Intent intent = new Intent();
+                StockListIntent data = new StockListIntent();
+                data.setHead2("现价");
+                data.setHead3("涨跌幅");
+                data.setHead1("股票名称");
+
+                intent.putExtra("tag","exponent");
+                intent.putExtra("stockIntent", data);
+                intent.putExtra("isExponent", true);
+
+                if (mIndex == 0) {
+                    intent.putExtra("flag", "1");
+                    intent.putExtra("asc", "1");
+                    intent.putExtra("type", "1000");
+                } else if (mIndex == 1) {
+                    intent.putExtra("flag", "1");
+                    intent.putExtra("asc", "2");
+                    intent.putExtra("type", "2000");
+                    intent.putExtra("order", "2");
+                } else {
+                    data.setHead3("换手率");
+                    intent.putExtra("flag", "2");
+                    intent.putExtra("asc", "1");
+                    intent.putExtra("type", "3000");
+                }
+                intent.putExtra("exponentCode", _exponentCode);
+                intent.setClass(mActivity, StockListActivity.class);
+                mActivity.startActivity(intent);
+            }
+        });
     }
 
     @Override
