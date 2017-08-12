@@ -29,6 +29,7 @@ import android.widget.TextView;
 import android.widget.Toast;
 import com.tpyzq.mobile.pangu.R;
 import com.tpyzq.mobile.pangu.activity.IndexActivity;
+import com.tpyzq.mobile.pangu.activity.TNWebActivity;
 import com.tpyzq.mobile.pangu.activity.home.HomeFragment;
 import com.tpyzq.mobile.pangu.activity.home.LovingHeartActivity;
 import com.tpyzq.mobile.pangu.activity.home.SearchActivity;
@@ -106,7 +107,7 @@ public class Helper {
             case "TN0006"://开户
                 jump = OPEN_USER;
                 break;
-            case "TN0007 "://资讯
+            case "TN0007"://资讯
                 jump = MESSAGE;
                 break;
             case "TN0008"://交易动态
@@ -161,7 +162,7 @@ public class Helper {
         }
         if(activity.getClass().equals(IndexActivity.class)){
             if(!TextUtils.isEmpty(type)){
-                Intent intent = new Intent(activity,LovingHeartActivity.class);
+                Intent intent = new Intent(activity,TNWebActivity.class);
                 intent.putExtra("jump",jump);
                 activity.startActivity(intent);
             }else

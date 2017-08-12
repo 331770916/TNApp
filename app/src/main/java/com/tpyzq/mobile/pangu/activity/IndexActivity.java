@@ -158,7 +158,7 @@ public class IndexActivity extends BaseActivity implements InterfaceCollection.I
             if(!TextUtils.isEmpty(jump)){
                 String type = getIntent().getStringExtra("type");
                 if(!TextUtils.isEmpty(type)&&type.equals("0")) {
-                    Intent intent = new Intent(this, LovingHeartActivity.class);
+                    Intent intent = new Intent(this, TNWebActivity.class);
                     intent.putExtra("url",jump);
                     startActivity(intent);
                 }else

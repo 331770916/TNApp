@@ -207,7 +207,6 @@ public class HomeFragment extends BaseFragment implements AdapterView.OnItemClic
         CustomApplication.setGetMessageListenr(this);  //消息的Handler
         gridView.setOnItemClickListener(this);
         initScrollView(); //下拉刷新初始化
-        requestCarouselImg(); // 请求轮播图
         initData();
     }
 
@@ -272,6 +271,7 @@ public class HomeFragment extends BaseFragment implements AdapterView.OnItemClic
         if (mInformationEntities == null || mInformationEntities.size() <= 0) {
             getInfoListByDb();     //从数据库获取资讯数据
         }
+        requestCarouselImg(); // 请求轮播图
     }
 
     private void requestCarouselImg() {

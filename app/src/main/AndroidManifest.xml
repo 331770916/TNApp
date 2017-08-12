@@ -184,6 +184,7 @@
         <activity android:name=".activity.home.MoreActivity" />
         <activity android:name=".activity.home.AdvertActivity" />
         <activity android:name=".activity.home.LovingHeartActivity" />
+        <activity android:name=".activity.TNWebActivity" />
         <!-- 预约 相关activity -->
         <activity android:name=".activity.home.managerMoney.product.precontract.AlreadyReservationActivity" />
         <activity

@@ -1,0 +1,43 @@
+<?xml version="1.0" encoding="utf-8"?>
+<RelativeLayout xmlns:android="http://schemas.android.com/apk/res/android"
+    android:orientation="vertical"
+    android:layout_width="match_parent"
+    android:layout_height="match_parent"
+    >
+
+    <ProgressBar
+        android:id="@+id/pb"
+        style="?android:attr/progressBarStyleHorizontal"
+        android:layout_width="fill_parent"
+        android:layout_height="3dip"
+        android:progressDrawable="@drawable/progress_bar_states"/>
+
+    <android.support.v4.widget.SwipeRefreshLayout
+        android:id="@+id/swipe_container"
+        android:layout_width="match_parent"
+        android:layout_height="match_parent"
+        android:layout_below="@+id/pb">
+
+            <WebView
+                android:id="@+id/webview"
+                android:layout_width="match_parent"
+                android:layout_height="match_parent"/>
+
+    </android.support.v4.widget.SwipeRefreshLayout>
+
+    <!-- 网络状态不好的提示 -->
+    <ViewStub
+        android:id="@+id/vs_net_work_error"
+        android:layout_width="match_parent"
+        android:layout_height="match_parent"
+        android:layout_below="@+id/pb"
+        android:layout="@layout/new_work_error"/>
+
+    <!--<include
+        android:id="@+id/rl_loading_layout"
+        android:layout_width="match_parent"
+        android:layout_height="match_parent"
+        layout="@layout/loading_anim_layout"
+        android:layout_below="@+id/line_comment_talking"/>-->
+
+</RelativeLayout>

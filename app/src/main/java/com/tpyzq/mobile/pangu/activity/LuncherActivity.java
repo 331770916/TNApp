@@ -109,8 +109,11 @@ public class LuncherActivity extends BaseActivity implements ICallbackResult {
             mHandler.sendEmptyMessage(0);
         }
     };
+    private boolean isFirstTag;
+
     @Override
     public void initView() {
+        isFirstTag = SpUtils.getBoolean(this, NavigationActivity.FIRST_INTO_APP, false);
         getWindow().setFlags(WindowManager.LayoutParams.FLAG_FULLSCREEN, WindowManager.LayoutParams.FLAG_FULLSCREEN);
         handler = new Handler();
         initData();
@@ -195,7 +198,6 @@ public class LuncherActivity extends BaseActivity implements ICallbackResult {
 
     private void finishLuncher() {
 
-            boolean isFirstTag = SpUtils.getBoolean(this, NavigationActivity.FIRST_INTO_APP, false);
             Intent intent = new Intent();
             if (isFirstTag) {
                 intent.setClass(this, IndexActivity.class);
@@ -224,7 +226,7 @@ public class LuncherActivity extends BaseActivity implements ICallbackResult {
         runnable = new Runnable() {
             @Override
             public void run() {
-                if (startflag){
+                if (startflag&&isFirstTag){
                     Uri uri = Uri.parse(show_url);
                     ControllerListener controllerListener = new BaseControllerListener<ImageInfo>() {
                         @Override
@@ -233,6 +235,7 @@ public class LuncherActivity extends BaseActivity implements ICallbackResult {
                             simpleDraweeView.setOnClickListener(new View.OnClickListener() {
                                 @Override
                                 public void onClick(View v) {
+                                    timer.cancel();
                                     if(!TextUtils.isEmpty(jump_type)){
                                         switch (jump_type){
                                             case "0":
