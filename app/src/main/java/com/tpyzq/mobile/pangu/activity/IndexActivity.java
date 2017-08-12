@@ -366,14 +366,13 @@ public class IndexActivity extends BaseActivity implements InterfaceCollection.I
      * 版本更新
      */
     private void getVersionData() {
-        String[] thisVersionCode = APPInfoUtils.getVersionName(IndexActivity.this).split("\\.");
-        double version = Double.parseDouble(thisVersionCode[0]);
-        String versionNumber = String.valueOf(version);
+//        String[] thisVersionCode = APPInfoUtils.getVersionName(IndexActivity.this).split("\\.");
+//        double version = Double.parseDouble(thisVersionCode[0]);
+//        String versionNumber = String.valueOf(version);
         HashMap map400101 = new HashMap();
         HashMap map400101_1 = new HashMap();
         map400101_1.put("versionType", "2");
-        map400101_1.put("urltpye", "1");
-        map400101_1.put("versionNumber",versionNumber);
+        map400101_1.put("versionNumber",APPInfoUtils.getVersionName(IndexActivity.this));
         map400101.put("funcid", "400101");
         map400101.put("token", "");
         map400101.put("parms", map400101_1);
