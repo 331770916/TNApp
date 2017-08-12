@@ -172,7 +172,7 @@ public class WavaBezierProgress extends View implements View.OnClickListener {
         mRectF.right = mscreenWidth;
         mRectF.top = 0;
         mRectF.bottom = mscreenHeight;
-        path.addRoundRect(mRectF,dp2px(5),dp2px(5),Path.Direction.CCW);
+        path.addRoundRect(mRectF,dp2px(12),dp2px(12),Path.Direction.CCW);
         canvas.clipPath(path, Region.Op.REPLACE);
 
 
@@ -206,7 +206,7 @@ public class WavaBezierProgress extends View implements View.OnClickListener {
         mPaint.setStrokeWidth(dp2px(2));
         mPaint.setAntiAlias(true);
 
-        canvas.drawRoundRect(mRectF, dp2px(5), dp2px(5), mPaint);
+        canvas.drawRoundRect(mRectF, dp2px(12), dp2px(12), mPaint);
     }
 
     private int dp2px(int dp) {
