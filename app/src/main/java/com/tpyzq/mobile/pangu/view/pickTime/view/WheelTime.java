@@ -29,6 +29,7 @@ public class WheelTime {
 	public static final int DEFULT_END_YEAR = 2100;
 	private int startYear = DEFULT_START_YEAR;
 	private int endYear = DEFULT_END_YEAR;
+	private String day_tian;
 
 
 
@@ -73,7 +74,7 @@ public class WheelTime {
 		// 日
 		wv_day = (WheelView) view.findViewById(R.id.day);
 		if(this.type == TimePickerView.Type.DAY){
-			wv_day.setLabel("天");
+			wv_day.setLabel("日");
 			wv_day.setAdapter(new NumericWheelAdapter(startDay,endDay));
 			wv_day.setCurrentItem(day);
 		}else{

@@ -82,6 +82,7 @@ public class AddOrModFixFundActivity extends BaseActivity implements View.OnClic
     private String currentDate;
     private StructuredFundDialog mStructuredFundDialog;
     private RelativeLayout rl_en_date,rl_start_date,rl_end_date;
+    private int startDay = 0 ;
 
     @Override
     public void initView() {
@@ -117,7 +118,20 @@ public class AddOrModFixFundActivity extends BaseActivity implements View.OnClic
             et_input_code.setEnabled(false);
             tv_fund_name.setText(fixFundEntity.getFUND_NAME());
 //            tv_fund_jz.setText(fixFundEntity.getBALANCE());
-            tv_en_date.setText(fixFundEntity.getEN_FUND_DATE()+"日");
+            if (!TextUtils.isEmpty(fixFundEntity.getEN_FUND_DATE())){
+                startDay = Integer.parseInt(fixFundEntity.getEN_FUND_DATE());
+                if (startDay>20){
+                    startDay = 0;
+                    tv_en_date.setText(1+"日");
+                }else if (startDay>0 && startDay<20){
+                    startDay = startDay-1;
+                    tv_en_date.setText(fixFundEntity.getEN_FUND_DATE()+"日");
+                }
+            }else {
+                startDay = 0;
+                tv_en_date.setText(1+"日");
+
+            }
             tv_start_date.setText(fixFundEntity.getSTART_DATE());
             tv_end_date.setText(fixFundEntity.getEND_DATE());
             et_input_branch.setText(fixFundEntity.getBALANCE());
@@ -172,10 +186,10 @@ public class AddOrModFixFundActivity extends BaseActivity implements View.OnClic
         });
 
         choosEnDate = new TimePickerView(this, TimePickerView.Type.DAY);
-        choosEnDate.setDay(1,20,1);
+        choosEnDate.setDay(1,20,startDay);
         choosEnDate.setCyclic(false);
         choosEnDate.setCancelable(true);
-        choosEnDate.setTitle("选择天数");
+        choosEnDate.setTitle("选择定投日期");
         choosEnDate.setOnDaySelectListener(new TimePickerView.OnDaySelectListener() {
             @Override
             public void onDaySelect(int day) {
