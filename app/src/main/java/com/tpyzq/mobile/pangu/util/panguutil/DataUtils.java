@@ -14,14 +14,16 @@ public class DataUtils {
     public static String[] borrow = {"借入1", "借入2", "借入3", "借入4", "借入5"};
 
 
-    public static String[] transaction_name = {"股票", "开放式基金", "OTC业务"};
-    public static int[] transaction_icon = {R.mipmap.jy_gupiao, R.mipmap.jy_kaifangshijijin, R.mipmap.jy_otc};
+    public static String[] transaction_name = {"股票", "开放式基金", "OTC业务","融资融券"};
+    public static int[] transaction_icon = {R.mipmap.jy_gupiao, R.mipmap.jy_kaifangshijijin, R.mipmap.jy_otc,R.mipmap.jy_otc};
     public static String[][] transaction_grid_name = {{"我的持仓", "买入", "卖出", "撤单", "查询", "新股", "银证转账", ""},
             {"基金份额", "基金认购", "基金申购", "基金赎回", "基金撤单", "基金信息", "基金开户", ""},
-            {"OTC份额", "OTC认购", "OTC申购", "OTC赎回", "OTC撤单", "查询", "OTC账户", "电子合同"}};
+            {"OTC份额", "OTC认购", "OTC申购", "OTC赎回", "OTC撤单", "查询", "OTC账户", "电子合同"},
+            {"资产负债","持仓","普通买卖","融买融卖","还款","还券","撤单","担保品划转","合约展期","新股申购","银证业务","综合查询"}};
     public static int[][] transaction_grid_icon = {{R.mipmap.jy_wodechicang, R.mipmap.jy_mairu, R.mipmap.jy_maichu, R.mipmap.jy_chedan, R.mipmap.jy_chaxun, R.mipmap.jy_xingu, R.mipmap.jy_yinzhengzhuanzhang, R.mipmap.jy_gengduo},
             {R.mipmap.jy_jijinfene, R.mipmap.jy_jijinrengou, R.mipmap.jy_jijinshengou, R.mipmap.jy_jijingouhui, R.mipmap.jy_jijinchedan, R.mipmap.jy_jijinxinxi, R.mipmap.jy_jijinkaihu, R.mipmap.jy_gengduo},
-            {R.mipmap.jy_jijinfene, R.mipmap.jy_jijinrengou, R.mipmap.jy_jijinshengou, R.mipmap.jy_jijingouhui, R.mipmap.jy_jijinchedan, R.mipmap.jy_chaxun, R.mipmap.otc_zhanghu, R.mipmap.jy_dianzihetong}};
+            {R.mipmap.jy_jijinfene, R.mipmap.jy_jijinrengou, R.mipmap.jy_jijinshengou, R.mipmap.jy_jijingouhui, R.mipmap.jy_jijinchedan, R.mipmap.jy_chaxun, R.mipmap.otc_zhanghu, R.mipmap.jy_dianzihetong},
+            {R.mipmap.jy_jijinfene,R.mipmap.jy_jijinfene,R.mipmap.jy_jijinfene,R.mipmap.jy_jijinfene,R.mipmap.jy_jijinfene,R.mipmap.jy_jijinfene,R.mipmap.jy_jijinfene,R.mipmap.jy_jijinfene,R.mipmap.jy_jijinfene,R.mipmap.jy_jijinfene,R.mipmap.jy_jijinfene,R.mipmap.jy_jijinfene}};
 
 
     public static String[] open_fund_name = {"委托查询", "历史成交", "分红设置", "基金转换", "基金账户查询", "基金电子合同签署","基金定投"};

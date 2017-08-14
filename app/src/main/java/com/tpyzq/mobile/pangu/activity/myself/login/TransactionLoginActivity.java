@@ -41,6 +41,18 @@ import com.tpyzq.mobile.pangu.activity.myself.handhall.FrogetTransactionPwdActiv
 import com.tpyzq.mobile.pangu.activity.myself.handhall.PersonalDataActivity;
 import com.tpyzq.mobile.pangu.activity.myself.handhall.RiskEvaluationActivity;
 import com.tpyzq.mobile.pangu.activity.myself.handhall.StockHolderInfoActivity;
+import com.tpyzq.mobile.pangu.activity.trade.margin_trading.BankBusinessActivity;
+import com.tpyzq.mobile.pangu.activity.trade.margin_trading.CollateralActivity;
+import com.tpyzq.mobile.pangu.activity.trade.margin_trading.HoldActivity;
+import com.tpyzq.mobile.pangu.activity.trade.margin_trading.IntegratedBusinessActivity;
+import com.tpyzq.mobile.pangu.activity.trade.margin_trading.LiabilityActivity;
+import com.tpyzq.mobile.pangu.activity.trade.margin_trading.MarginBuySellActivity;
+import com.tpyzq.mobile.pangu.activity.trade.margin_trading.OrdinarySaleActivity;
+import com.tpyzq.mobile.pangu.activity.trade.margin_trading.RepaymentActivity;
+import com.tpyzq.mobile.pangu.activity.trade.margin_trading.RepaymentSecurityActivity;
+import com.tpyzq.mobile.pangu.activity.trade.margin_trading.RevokeOrderActivity;
+import com.tpyzq.mobile.pangu.activity.trade.margin_trading.StockPurchaseActivity;
+import com.tpyzq.mobile.pangu.activity.trade.margin_trading.TreatyActivity;
 import com.tpyzq.mobile.pangu.activity.trade.open_fund.FundInfoActivity;
 import com.tpyzq.mobile.pangu.activity.trade.open_fund.FundOpenAccountActivity;
 import com.tpyzq.mobile.pangu.activity.trade.open_fund.FundPurchaseActivity;
@@ -191,6 +203,20 @@ public class TransactionLoginActivity extends BaseActivity implements ICallbackR
     public static final int PAGE_INDEX_StructuredFundActivity = 49;//分级基金
     public static final int PAGE_INDEX_NetworkVotingActivity = 50;//网络投票
     public static final int PAGE_INDEX_ETFNavigationBarActivity = 51;//ETF
+
+    public static final int PAGE_INDEX_LiabilityActivity = 52;//融资融券 资产负债
+    public static final int PAGE_INDEX_HoldActivity = 53;//融资融券 持仓
+    public static final int PAGE_INDEX_OrdinarySaleActivity = 54;//融资融券 普通买卖
+    public static final int PAGE_INDEX_MarginBuySellActivity = 55;//融资融券 融买融卖
+    public static final int PAGE_INDEX_RepaymentActivity = 56;//融资融券 还款
+    public static final int PAGE_INDEX_RepaymentSecurityActivity = 57;//融资融券 还券
+    public static final int PAGE_INDEX_RevokeOrderActivity = 58;//融资融券 撤单
+    public static final int PAGE_INDEX_CollateralActivity = 59;//融资融券 担保品划转
+    public static final int PAGE_INDEX_TreatyActivity = 60;//融资融券 合约展期
+    public static final int PAGE_INDEX_StockPurchaseActivity = 61;////融资融券 新股申购
+    public static final int PAGE_INDEX_BankBusinessActivity = 62;//融资融券 银证业务
+    public static final int PAGE_INDEX_IntegratedBusinessActivity = 63;//融资融券 综合业务
+
     private static final String KEY_BOARD_INPUT_ENCRYPTED_FORMAT = "密码键盘输入加密数据:%s";
 
     //接口数据
@@ -1334,6 +1360,42 @@ public class TransactionLoginActivity extends BaseActivity implements ICallbackR
                     break;
                 case PAGE_INDEX_ReverseRepoGuideActivity:
                     intent.setClass(this, ReverseRepoGuideActivity.class);
+                    break;
+                case PAGE_INDEX_LiabilityActivity:
+                    intent.setClass(this, LiabilityActivity.class);
+                    break;
+                case PAGE_INDEX_HoldActivity:
+                    intent.setClass(this, HoldActivity.class);
+                    break;
+                case PAGE_INDEX_OrdinarySaleActivity:
+                    intent.setClass(this, OrdinarySaleActivity.class);
+                    break;
+                case PAGE_INDEX_MarginBuySellActivity:
+                    intent.setClass(this, MarginBuySellActivity.class);
+                    break;
+                case PAGE_INDEX_RepaymentActivity:
+                    intent.setClass(this, RepaymentActivity.class);
+                    break;
+                case PAGE_INDEX_RepaymentSecurityActivity:
+                    intent.setClass(this, RepaymentSecurityActivity.class);
+                    break;
+                case PAGE_INDEX_RevokeOrderActivity:
+                    intent.setClass(this, RevokeOrderActivity.class);
+                    break;
+                case PAGE_INDEX_CollateralActivity:
+                    intent.setClass(this, CollateralActivity.class);
+                    break;
+                case PAGE_INDEX_TreatyActivity:
+                    intent.setClass(this, TreatyActivity.class);
+                    break;
+                case PAGE_INDEX_StockPurchaseActivity:
+                    intent.setClass(this, StockPurchaseActivity.class);
+                    break;
+                case PAGE_INDEX_BankBusinessActivity:
+                    intent.setClass(this, BankBusinessActivity.class);
+                    break;
+                case PAGE_INDEX_IntegratedBusinessActivity:
+                    intent.setClass(this, IntegratedBusinessActivity.class);
                     break;
             }
             startActivity(intent);

@@ -17,6 +17,18 @@ import com.tpyzq.mobile.pangu.R;
 import com.tpyzq.mobile.pangu.activity.myself.login.ShouJiVerificationActivity;
 import com.tpyzq.mobile.pangu.activity.myself.login.ShouJiZhuCeActivity;
 import com.tpyzq.mobile.pangu.activity.myself.login.TransactionLoginActivity;
+import com.tpyzq.mobile.pangu.activity.trade.margin_trading.BankBusinessActivity;
+import com.tpyzq.mobile.pangu.activity.trade.margin_trading.IntegratedBusinessActivity;
+import com.tpyzq.mobile.pangu.activity.trade.margin_trading.MarginBuySellActivity;
+import com.tpyzq.mobile.pangu.activity.trade.margin_trading.StockPurchaseActivity;
+import com.tpyzq.mobile.pangu.activity.trade.margin_trading.CollateralActivity;
+import com.tpyzq.mobile.pangu.activity.trade.margin_trading.HoldActivity;
+import com.tpyzq.mobile.pangu.activity.trade.margin_trading.LiabilityActivity;
+import com.tpyzq.mobile.pangu.activity.trade.margin_trading.OrdinarySaleActivity;
+import com.tpyzq.mobile.pangu.activity.trade.margin_trading.RepaymentActivity;
+import com.tpyzq.mobile.pangu.activity.trade.margin_trading.RepaymentSecurityActivity;
+import com.tpyzq.mobile.pangu.activity.trade.margin_trading.RevokeOrderActivity;
+import com.tpyzq.mobile.pangu.activity.trade.margin_trading.TreatyActivity;
 import com.tpyzq.mobile.pangu.activity.trade.open_fund.FundInfoActivity;
 import com.tpyzq.mobile.pangu.activity.trade.open_fund.FundOpenAccountActivity;
 import com.tpyzq.mobile.pangu.activity.trade.open_fund.FundPurchaseActivity;
@@ -75,11 +87,12 @@ public class TradeFragment extends BaseFragment
     private boolean flag1 = false;
     private boolean flag2 = false;
     private boolean flag3 = false;
+    private boolean flag4 = false;
     private TextView tv_drop_transaction;
     private String login;
     private boolean flag = false;       //当前页是否隐藏的标识    true 隐藏 false 显示
     private MyAdapter myAdapter;
-    private View[] item = new View[3];              //创建数组保存相应的view，用于展开收缩
+    private View[] item = new View[4];              //创建数组保存相应的view，用于展开收缩
     private int openPosition = 0;                   //保存被展开的条目位置
     private boolean firstOpenFlag = false;          //用于判断当前页签是否第一次打开，false未打开，true已打开
     private boolean initListFalg = false;          //用于判断当前列表是否初始化布局，false未初始化，true已初始化
@@ -198,6 +211,41 @@ public class TradeFragment extends BaseFragment
                         JSONArray jsonArray = new JSONArray(data);
                         tv1.setText("总市值:" + jsonArray.getJSONObject(0).getString("OTC_MARKET_VALUE"));
                         tv2.setText("总盈亏:" + jsonArray.getJSONObject(0).getString("OTC_INCOME"));
+                    }
+                } catch (JSONException e) {
+                    e.printStackTrace();
+                }
+            }
+        });
+    }
+
+    private void getServer4(final TextView tv1, final TextView tv2) {
+        HashMap map300501 = new HashMap();
+        map300501.put("funcid", "300501");
+        map300501.put("token", SpUtils.getString(getContext(), "mSession", null));
+        HashMap map300501_1 = new HashMap();
+        map300501_1.put("SEC_ID", "tpyzq");
+        map300501_1.put("FLAG", "true");
+        map300501.put("parms", map300501_1);
+        NetWorkUtil.getInstence().okHttpForPostString("", ConstantUtil.getURL_JY_HS(), map300501, new StringCallback() {
+            @Override
+            public void onError(Call call, Exception e, int id) {
+            }
+
+            @Override
+            public void onResponse(String response, int id) {
+                if (TextUtils.isEmpty(response)) {
+                    return;
+                }
+                try {
+                    JSONObject object = new JSONObject(response);
+                    String msg = object.getString("msg");
+                    String data = object.getString("data");
+                    String code = object.getString("code");
+                    if ("0".equals(code)) {
+                        JSONArray jsonArray = new JSONArray(data);
+                        tv1.setText("融资合约金额:" + jsonArray.getJSONObject(0).getString("OTC_MARKET_VALUE"));
+                        tv2.setText("融券合约金额:" + jsonArray.getJSONObject(0).getString("OTC_INCOME"));
                     }
                 } catch (JSONException e) {
                     e.printStackTrace();
@@ -426,6 +474,83 @@ public class TradeFragment extends BaseFragment
         startActivity(intent);
     }
 
+    private int[]  getPageArrayPartFour = {
+            TransactionLoginActivity.PAGE_INDEX_LiabilityActivity,TransactionLoginActivity.PAGE_INDEX_HoldActivity,
+            TransactionLoginActivity.PAGE_INDEX_OrdinarySaleActivity,TransactionLoginActivity.PAGE_INDEX_MarginBuySellActivity,
+            TransactionLoginActivity.PAGE_INDEX_RepaymentActivity,TransactionLoginActivity.PAGE_INDEX_RepaymentSecurityActivity,
+            TransactionLoginActivity.PAGE_INDEX_RevokeOrderActivity,TransactionLoginActivity.PAGE_INDEX_CollateralActivity,
+            TransactionLoginActivity.PAGE_INDEX_TreatyActivity,TransactionLoginActivity.PAGE_INDEX_StockPurchaseActivity,
+            TransactionLoginActivity.PAGE_INDEX_BankBusinessActivity,TransactionLoginActivity.PAGE_INDEX_IntegratedBusinessActivity
+    };
+
+    private void patr4GotoPage(int position) {
+        Intent intent = new Intent();
+        intent.putExtra("pageindex", getPageArrayPartFour[position]);
+        if (!Db_PUB_USERS.isRegister()) {
+            intent.setClass(getContext(), ShouJiZhuCeActivity.class);
+        } else {
+            if (!TextUtils.isEmpty(UserUtil.Mobile)) {
+                if ("true".equals(login)) {
+                    switch (position) {
+                        case 0:
+                            //融资融券 资产负债
+                            intent.setClass(getActivity(), LiabilityActivity.class);
+                            break;
+                        case 1:
+                            //融资融券 持仓
+                            intent.setClass(getActivity(), HoldActivity.class);
+                            break;
+                        case 2:
+                            //融资融券 普通买卖
+                            intent.setClass(getActivity(), OrdinarySaleActivity.class);
+                            break;
+                        case 3://融资融券 融买融卖
+                            intent.setClass(getActivity(), MarginBuySellActivity.class);
+                            break;
+                        case 4:
+                            //融资融券 还款
+                            intent.setClass(getActivity(), RepaymentActivity.class);
+                            break;
+                        case 5:
+                            //融资融券 还券
+                            intent.setClass(getActivity(), RepaymentSecurityActivity.class);
+                            break;
+                        case 6:
+                            //融资融券 撤单
+                            intent.setClass(getActivity(), RevokeOrderActivity.class);
+                            break;
+                        case 7:
+                            //融资融券 担保品划转
+                            intent.setClass(getActivity(), CollateralActivity.class);
+                            break;
+                        case 8:
+                            // 融资融券 合约展期
+                            intent.setClass(getActivity(), TreatyActivity.class);
+                            break;
+                        case 9:
+                            // 融资融券 新股申购
+                            intent.setClass(getActivity(), StockPurchaseActivity.class);
+                            break;
+                        case 10:
+                            // 融资融券 银证业务
+                            intent.setClass(getActivity(), BankBusinessActivity.class);
+                            break;
+                        case 11:
+                            // 融资融券 综合业务
+                            intent.setClass(getActivity(), IntegratedBusinessActivity.class);
+                            break;
+
+                    }
+                } else {
+                    intent.setClass(getActivity(), TransactionLoginActivity.class);
+                }
+            } else {
+                intent.setClass(getActivity(), ShouJiVerificationActivity.class);
+            }
+        }
+        startActivity(intent);
+    }
+
 
     class MyAdapter extends BaseAdapter {
         boolean clearflag = false;
@@ -433,7 +558,7 @@ public class TradeFragment extends BaseFragment
 
         @Override
         public int getCount() {
-            return 3;
+            return 4;
         }
 
         public void clearDate() {
@@ -480,6 +605,11 @@ public class TradeFragment extends BaseFragment
                 case 2:
                     item[2] = vh.itemView;
                     break;
+                case 3:
+                    vh.tv_market_value.setText("融资合约金额:-.--");
+                    vh.tv_today_value.setText("融券合约金额:-.--");
+                    item[3] = vh.itemView;
+                    break;
             }
 
             switch (position) {
@@ -523,6 +653,18 @@ public class TradeFragment extends BaseFragment
                         vh.itemView.setSelected(false);
                         vh.iv_item_state.setRotation(0);
                     }
+                    break;
+                case 3:
+                    if(flag4){
+                        vh.itemView.setSelected(true);
+                        vh.ll_grid.setVisibility(View.VISIBLE);
+                        vh.iv_item_state.setRotation(180);
+                    }else {
+                        vh.ll_grid.setVisibility(View.GONE);
+                        vh.itemView.setSelected(false);
+                        vh.iv_item_state.setRotation(0);
+                    }
+                    break;
             }
             vh.tv_item_title.setText(DataUtils.transaction_name[position]);
             vh.iv_item_img.setImageResource(DataUtils.transaction_icon[position]);
@@ -552,6 +694,14 @@ public class TradeFragment extends BaseFragment
                         }
                     });
                     break;
+                case 3:
+                    vh.gv_item.setOnItemClickListener(new AdapterView.OnItemClickListener() {
+                        @Override
+                        public void onItemClick(AdapterView<?> parent, View view, int position, long id) {
+                            patr4GotoPage(position);
+                        }
+                    });
+                    break;
             }
             vh.itemView.setOnClickListener(new View.OnClickListener() {
                 @Override
@@ -562,6 +712,7 @@ public class TradeFragment extends BaseFragment
                             flag1 = true;
                             flag2 = false;
                             flag3 = false;
+                            flag4 = false;
                             openPosition = 0;
                             if (getLoginStatus()) {
                                 getServer1(vh.tv_market_value, vh.tv_today_value);
@@ -572,6 +723,7 @@ public class TradeFragment extends BaseFragment
                             flag1 = false;
                             flag2 = true;
                             flag3 = false;
+                            flag4 = false;
                             openPosition = 1;
                             if (getLoginStatus()) {
                                 getServer2(vh.tv_market_value, vh.tv_today_value);
@@ -582,9 +734,20 @@ public class TradeFragment extends BaseFragment
                             flag1 = false;
                             flag2 = false;
                             flag3 = true;
+                            flag4 = false;
                             openPosition = 2;
                             if (getLoginStatus()) {
                                 getServer3(vh.tv_market_value, vh.tv_today_value);
+                            }
+                            break;
+                        case 3:
+                            flag1 = false;
+                            flag2 = false;
+                            flag3 = false;
+                            flag4 = true;
+                            openPosition = 3;
+                            if(getLoginStatus()){
+                                getServer4(vh.tv_market_value, vh.tv_today_value);
                             }
                             break;
                     }

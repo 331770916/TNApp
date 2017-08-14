@@ -23,6 +23,7 @@ public class PageShowView extends View {
     int total = 0;
     int current = 0;
     private Paint mPaint = null;
+    private int viewHeight;
 
     public PageShowView(Context context) {
         this(context, null);
@@ -36,6 +37,10 @@ public class PageShowView extends View {
     protected void initColor(int current,int other) {
         colorCurrent = current;
         colorOther = other;
+    }
+
+    protected void setViewHeight(int height){
+        this.viewHeight = height;
     }
 
     protected void drawType(int type){
@@ -55,16 +60,15 @@ public class PageShowView extends View {
     @Override
     protected void dispatchDraw(Canvas canvas) {
         super.dispatchDraw(canvas);
-        int view_height = getHeight() - getPaddingBottom() - getPaddingBottom();
+        int view_height = getHeight() - getPaddingTop() - getPaddingBottom();
         int view_width = getWidth() - getPaddingLeft() - getPaddingRight();
-        int height = view_height / 10;
-        int width = height * mScale;
+        int width = viewHeight * mScale;
         if (total > 1) {
-            if (width * total + height * (total - 1) > view_width) {
-                width = (view_width - (height * (total - 1))) / total;
+            if (width * total + viewHeight * (total - 1) > view_width) {
+                width = (view_width - (viewHeight * (total - 1))) / total;
             }
-            int posX = view_width / 2 - (width * total + height * (total - 1) * 3) / 2;
-            mPaint.setStrokeWidth(height);
+            int posX = view_width / 2 - (width * total + viewHeight * (total - 1) * 3) / 2;
+            mPaint.setStrokeWidth(viewHeight);
             for (int i = 0; i < total; i++) {
                 if (i != current) {
                     mPaint.setColor(colorOther);
@@ -76,10 +80,10 @@ public class PageShowView extends View {
                         canvas.drawCircle(posX, view_height / 2, width / 2  , mPaint);
                         break;
                     case 1:
-                        canvas.drawLine(posX, view_height / 2, posX + width, view_height / 2, mPaint);
+                        canvas.drawLine(posX, view_height , posX + width, view_height, mPaint);
                         break;
                 }
-                posX += height * 3 + width;
+                posX += viewHeight * 3 + width ;
             }
         }
 

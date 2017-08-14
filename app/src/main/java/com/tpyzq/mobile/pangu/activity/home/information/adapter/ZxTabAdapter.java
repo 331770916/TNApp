@@ -70,7 +70,7 @@ public class ZxTabAdapter extends BaseAdapter {
 
         InformationEntity informationBean = list.get(position);
         viewHolder.tvTabTitle.setText(informationBean.getTitle());
-        viewHolder.tvTabDate.setText(informationBean.getTime());
+        viewHolder.tvTabDate.setText(informationBean.getDate()+" "+informationBean.getTime());
 
 
         return convertView;

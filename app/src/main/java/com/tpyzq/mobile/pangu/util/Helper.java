@@ -16,6 +16,7 @@ import android.telephony.TelephonyManager;
 import android.text.InputType;
 import android.text.TextUtils;
 import android.util.Base64;
+import android.util.DisplayMetrics;
 import android.view.Display;
 import android.view.Gravity;
 import android.view.LayoutInflater;
@@ -399,6 +400,14 @@ public class Helper {
                 .getSystemService(Context.WINDOW_SERVICE);
         Display display = manager.getDefaultDisplay();
         return display.getHeight();
+    }
+
+    public static int getDensityValue(DisplayMetrics display, int height){
+       if(display.density>2){
+            return height;
+       }else{
+           return height/2;
+       }
     }
 
     /**

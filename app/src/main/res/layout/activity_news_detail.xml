@@ -137,7 +137,7 @@
                         android:id="@+id/tvLaiYuanName"
                         android:layout_width="wrap_content"
                         android:layout_height="wrap_content"
-                        android:layout_marginLeft="@dimen/size140"
+                        android:layout_marginLeft="@dimen/size80"
                         android:layout_toRightOf="@id/tvLaiYuanDate"
                         android:textSize="13sp"
                         android:singleLine="true"
