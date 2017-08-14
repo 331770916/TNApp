@@ -152,5 +152,4 @@
             android:layout_alignRight="@+id/rcv_progress"
             android:textColor="@color/lineColor"/>
     </RelativeLayout>
-
 </LinearLayout>

@@ -84,7 +84,7 @@ public class VersionDialog extends BaseDialogCenter implements View.OnClickListe
 //        mUpdateContont.setText("");            // 更新内容
         tvVersionNumber.setText(versionNumber);
         tv_download.setOnClickListener(this);         //更新
-        mTopImage.setOnClickListener(this);              //关闭 按钮
+        mTopImage.setOnClickListener(this);
         mCloseDialog.setOnClickListener(this);
     }
 

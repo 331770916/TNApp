@@ -76,7 +76,7 @@ public class FundWithDrawActivity extends BaseActivity implements View.OnClickLi
         lv_fund.setOnItemClickListener(new AdapterView.OnItemClickListener() {
             @Override
             public void onItemClick(AdapterView<?> parent, View view, int position, long id) {
-                FundWithDrawDialog fundWithDrawDialog = new FundWithDrawDialog(FundWithDrawActivity.this, FundWithDrawActivity.this, withDrawBeens.get(position).FUND_NAME, withDrawBeens.get(position).FUND_CODE, withDrawBeens.get(position).BUSINESS_NAME, withDrawBeens.get(position).TRADE_AMOUNT, withDrawBeens.get(position).TRADE_AMOUNT, withDrawBeens.get(position).ORDER_DATE, withDrawBeens.get(position).ENTRUST_NO);
+                FundWithDrawDialog fundWithDrawDialog = new FundWithDrawDialog(FundWithDrawActivity.this, FundWithDrawActivity.this, withDrawBeens.get(position-1).FUND_NAME, withDrawBeens.get(position-1).FUND_CODE, withDrawBeens.get(position-1).BUSINESS_NAME, withDrawBeens.get(position-1).TRADE_AMOUNT, withDrawBeens.get(position-1).TRADE_AMOUNT, withDrawBeens.get(position-1).ORDER_DATE, withDrawBeens.get(position-1).ENTRUST_NO);
                 fundWithDrawDialog.show();
             }
         });
@@ -140,7 +140,7 @@ public class FundWithDrawActivity extends BaseActivity implements View.OnClickLi
                     String msg = object.getString("msg");
                     String data = object.getString("data");
                     JSONArray dataArray = new JSONArray(data);
-                    if (code.equals("0")) {
+                    if ("0".equals(code)) {
                         WithDrawEntity withDrawBean;
                         withDrawBeens.clear();
                         for (int i = 0; i < dataArray.length(); i++) {

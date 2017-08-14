@@ -161,6 +161,7 @@ public class MarketFragment extends BaseFragment
                 FragmentTransaction transaction = getChildFragmentManager().beginTransaction();
                 transaction.hide(mCurrentFragment).show(to).commit(); // 隐藏当前的fragment，显示下一个
                 mCurrentFragment = to;
+                mCurrentFragment.onResume();
             }
         } catch (Exception e) {
             e.printStackTrace();
@@ -186,6 +187,7 @@ public class MarketFragment extends BaseFragment
             case R.id.market_RadioBtn:
                 BRutil.menuSelect("A001");
                 mType = 2;
+                mSelfChoiceFragment.setShow(true);
                 switchContent(mSelfChoiceFragment);
                 mEditSelfiv.setText("编辑");
                 mEditSelfiv.setVisibility(View.VISIBLE);

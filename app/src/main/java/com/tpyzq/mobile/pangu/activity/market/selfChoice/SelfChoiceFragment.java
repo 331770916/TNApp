@@ -172,6 +172,10 @@ public class SelfChoiceFragment extends BaseFragment implements BaseTabPager.Loa
         }
     }
 
+    public void setShow(boolean isShow) {
+        this.isShow = isShow;
+    }
+
     @Override
     public void onResume() {
         super.onResume();
