@@ -660,6 +660,8 @@ public class SelfChoiceQuotationTab extends BaseTabPager implements View.OnClick
         LogHelper.e(TAG,"onHiddenChanged hided:"+hided);
         if(!hided){
             initDBStockInfo();
+            mAdapter.refleshHoldStatus();//刷新一下持仓标签状态
+            mAdapter.setDatas(mStockData,true);
             requestData();
             setTimerTask();
         }else{

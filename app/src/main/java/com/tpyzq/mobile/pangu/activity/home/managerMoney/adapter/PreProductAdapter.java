@@ -129,10 +129,10 @@ public class PreProductAdapter extends BaseAdapter {
                     break;
                 case "1":
                     prod_status = "预约中";
-                    vh.rcv_progress.setProgressColor(ColorUtils.BLUE);
-                    vh.tv_text2.setTextColor(context.getResources().getColor(R.color.blue));
-                    vh.tv_text5.setTextColor(context.getResources().getColor(R.color.blue));
-                    vh.tv_text6.setTextColor(context.getResources().getColor(R.color.blue));
+                    vh.rcv_progress.setProgressColor(ColorUtils.ORANGE);
+                    vh.tv_text2.setTextColor(context.getResources().getColor(R.color.orange2));
+                    vh.tv_text5.setTextColor(context.getResources().getColor(R.color.orange2));
+                    vh.tv_text6.setTextColor(context.getResources().getColor(R.color.orange2));
                     vh.tv_text7.setBackgroundResource(R.mipmap.bg_bule_item);
                     break;
                 case "2":
