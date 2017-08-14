@@ -94,7 +94,7 @@ public class FundInfoActivity extends BaseActivity implements View.OnClickListen
     @Override
     public void detailClick(FundSubsEntity entity) {
         Intent intent = new Intent();
-        if ("0".equals(entity.FUND_TYPE)) {//基金 （非资管）
+        if ("1".equals(entity.FUND_TYPE)) {//基金 （非资管）
             intent.putExtra("TYPE", "1");
             //基金分 货币基金和非货币基金
             intent.putExtra("prod_type", entity.FUND_TYPE_CODE);

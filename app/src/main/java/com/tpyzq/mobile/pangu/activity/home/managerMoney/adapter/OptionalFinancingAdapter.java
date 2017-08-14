@@ -139,10 +139,10 @@ public class OptionalFinancingAdapter extends BaseAdapter {
                     case "1":
                         prod_status = "预约中";
                         vh2.tv_text7.setBackgroundResource(R.mipmap.bg_bule_item);
-                        vh2.tv_text2.setTextColor(ColorUtils.ORANGE);
-                        vh2.tv_text5.setTextColor(ColorUtils.ORANGE);
-                        vh2.tv_text6.setTextColor(ColorUtils.ORANGE);
-                        vh2.rcv_progress.setProgressColor(ColorUtils.ORANGE);
+                        vh2.tv_text2.setTextColor(ColorUtils.BLUE);
+                        vh2.tv_text5.setTextColor(ColorUtils.BLUE);
+                        vh2.tv_text6.setTextColor(ColorUtils.BLUE);
+                        vh2.rcv_progress.setProgressColor(ColorUtils.BLUE);
                         break;
                     case "2":
                         prod_status = "预约已满";

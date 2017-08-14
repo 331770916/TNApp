@@ -75,8 +75,8 @@
         android:visibility="gone">
         <ImageView
             android:id="@+id/iv_add"
-            android:layout_width="@dimen/size45"
-            android:layout_height="@dimen/size45"
+            android:layout_width="@dimen/size80"
+            android:layout_height="@dimen/size80"
             android:layout_centerHorizontal="true"
             android:background="@mipmap/null_add"/>
         <TextView
