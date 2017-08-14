@@ -1,6 +1,8 @@
 package com.tpyzq.mobile.pangu.adapter.trade;
 
+import android.app.Activity;
 import android.content.Context;
+import android.content.Intent;
 import android.view.LayoutInflater;
 import android.view.View;
 import android.view.ViewGroup;
@@ -9,6 +11,8 @@ import android.widget.LinearLayout;
 import android.widget.TextView;
 
 import com.tpyzq.mobile.pangu.R;
+import com.tpyzq.mobile.pangu.activity.trade.open_fund.AddOrModFixFundActivity;
+import com.tpyzq.mobile.pangu.activity.trade.open_fund.FixFundListActivity;
 import com.tpyzq.mobile.pangu.base.BaseListAdapter;
 import com.tpyzq.mobile.pangu.data.FixFundEntity;
 import com.tpyzq.mobile.pangu.view.CentreToast;
@@ -23,6 +27,7 @@ import java.util.ArrayList;
 public class FixFundAdapter extends BaseListAdapter {
     public static final int TAG_REVOKE = 1000001;
     public static final int TAG_MODIFY = 1000002;
+    public static final int TAG_ADD = 1000003;
     private Context mContext;
     private ArrayList<FixFundEntity> mList;
     private boolean isAll = false;
@@ -92,7 +97,7 @@ public class FixFundAdapter extends BaseListAdapter {
         viewHolder.tv_accumulated_money.setText(fixFundEntity.getSEND_BALANCE());
         viewHolder.tv_money.setText(fixFundEntity.getBALANCE());
         viewHolder.tv_start_date.setText(fixFundEntity.getSTART_DATE());
-        viewHolder.tv_en_date.setText(fixFundEntity.getEN_FUND_DATE());
+        viewHolder.tv_en_date.setText("每月"+fixFundEntity.getEN_FUND_DATE()+"日");
         viewHolder.tv_end_date.setText(fixFundEntity.getEND_DATE());
         if (position == mList.size()-1 && isAll) {
             viewHolder.ll_bottom.setVisibility(View.VISIBLE);
@@ -102,8 +107,8 @@ public class FixFundAdapter extends BaseListAdapter {
         viewHolder.tv_modify.setOnClickListener(new View.OnClickListener() {
             @Override
             public void onClick(View v) {
-                CentreToast.showText(mContext,"跳转修改页面");
-                itemOnClickListener.onItemClick(TAG_MODIFY, position);
+                if (null!=itemOnClickListener)
+                    itemOnClickListener.onItemClick(TAG_MODIFY, position);
             }
         });
         viewHolder.tv_revoke.setOnClickListener(new View.OnClickListener() {
@@ -117,7 +122,7 @@ public class FixFundAdapter extends BaseListAdapter {
             @Override
             public void onClick(View v) {
                 if (null!=itemOnClickListener)
-                    itemOnClickListener.onItemClick(TAG_MODIFY, position);
+                    itemOnClickListener.onItemClick(TAG_ADD, position);
             }
         });
         return convertView;

@@ -69,7 +69,7 @@
                     android:hint="@string/QingShuRuJiJinDaiMa"
                     android:maxLength="6"
                     android:inputType="number"
-                    android:layout_marginLeft="@dimen/size25"
+                    android:layout_marginLeft="@dimen/size10"
                     android:singleLine="true"
                     android:textColor="@color/hushenTab_titleColor"
                     android:textColorHint="@color/texts"
@@ -113,7 +113,7 @@
                     android:id="@+id/tv_fund_name"
                     android:layout_width="wrap_content"
                     android:layout_height="match_parent"
-                    android:layout_marginLeft="@dimen/size25"
+                    android:layout_marginLeft="@dimen/size10"
                     android:gravity="center_vertical"
                     android:hint="--"
                     android:singleLine="true"
@@ -142,7 +142,7 @@
                     android:id="@+id/tv_fund_jz"
                     android:layout_width="wrap_content"
                     android:layout_height="match_parent"
-                    android:layout_marginLeft="@dimen/size25"
+                    android:layout_marginLeft="@dimen/size10"
                     android:gravity="center_vertical"
                     android:hint="--"
                     android:singleLine="true"
@@ -176,15 +176,26 @@
                         android:text="@string/fix_fund_en_date"
                         android:textColor="@color/texts"
                         android:textSize="@dimen/txtSize15" />
-
-                    <TextView
-                        android:id="@+id/tv_en_date"
+                    <RelativeLayout
+                        android:id="@+id/rl_en_date"
                         android:layout_width="match_parent"
                         android:layout_height="wrap_content"
-                        android:layout_marginLeft="@dimen/size24"
-                        android:text="@string/fix_fund_end_date_def"
-                        android:textColor="@color/color_4a4a4a"
-                        android:textSize="@dimen/txtSize14" />
+                        android:layout_marginLeft="@dimen/size10"
+                        android:layout_marginRight="@dimen/size20">
+                        <TextView
+                            android:id="@+id/tv_en_date"
+                            android:layout_width="match_parent"
+                            android:layout_height="wrap_content"
+                            android:text="@string/fix_fund_end_date_def"
+                            android:textColor="@color/color_4a4a4a"
+                            android:textSize="@dimen/txtSize14"/>
+                        <ImageView
+                            android:layout_width="@dimen/size8"
+                            android:layout_height="@dimen/size8"
+                            android:layout_centerVertical="true"
+                            android:layout_alignParentRight="true"
+                            android:background="@mipmap/drop_fix_fund"/>
+                    </RelativeLayout>
 
                 </LinearLayout>
                 <View
@@ -206,15 +217,25 @@
                         android:text="@string/fix_fund_start_date"
                         android:textColor="@color/texts"
                         android:textSize="@dimen/txtSize15" />
-
-                    <TextView
-                        android:id="@+id/tv_start_date"
+                    <RelativeLayout
+                        android:id="@+id/rl_start_date"
                         android:layout_width="match_parent"
                         android:layout_height="wrap_content"
-                        android:layout_marginLeft="@dimen/size24"
-                        android:textColor="@color/color_4a4a4a"
-                        android:textSize="@dimen/txtSize14" />
-
+                        android:layout_marginLeft="@dimen/size10"
+                        android:layout_marginRight="@dimen/size20">
+                        <TextView
+                            android:id="@+id/tv_start_date"
+                            android:layout_width="match_parent"
+                            android:layout_height="wrap_content"
+                            android:textColor="@color/color_4a4a4a"
+                            android:textSize="@dimen/txtSize14" />
+                        <ImageView
+                            android:layout_width="@dimen/size8"
+                            android:layout_height="@dimen/size8"
+                            android:layout_centerVertical="true"
+                            android:layout_alignParentRight="true"
+                            android:background="@mipmap/drop_fix_fund"/>
+                    </RelativeLayout>
 
                 </LinearLayout>
                 <View
@@ -236,14 +257,25 @@
                         android:text="@string/fix_fund_end_date"
                         android:textColor="@color/texts"
                         android:textSize="@dimen/txtSize15" />
-
-                    <TextView
-                        android:id="@+id/tv_end_date"
+                    <RelativeLayout
+                        android:id="@+id/rl_end_date"
                         android:layout_width="match_parent"
                         android:layout_height="wrap_content"
-                        android:layout_marginLeft="@dimen/size24"
-                        android:textColor="@color/color_4a4a4a"
-                        android:textSize="@dimen/txtSize14" />
+                        android:layout_marginLeft="@dimen/size10"
+                        android:layout_marginRight="@dimen/size20">
+                        <TextView
+                            android:id="@+id/tv_end_date"
+                            android:layout_width="match_parent"
+                            android:layout_height="wrap_content"
+                            android:textColor="@color/color_4a4a4a"
+                            android:textSize="@dimen/txtSize14" />
+                        <ImageView
+                            android:layout_width="@dimen/size8"
+                            android:layout_height="@dimen/size8"
+                            android:layout_centerVertical="true"
+                            android:layout_alignParentRight="true"
+                            android:background="@mipmap/drop_fix_fund"/>
+                    </RelativeLayout>
                 </LinearLayout>
 
                 <View
@@ -274,7 +306,7 @@
                         android:hint="@string/fix_fund_balance_hint"
                         android:maxLength="6"
                         android:inputType="number"
-                        android:layout_marginLeft="@dimen/size25"
+                        android:layout_marginLeft="@dimen/size10"
                         android:singleLine="true"
                         android:textColor="@color/hushenTab_titleColor"
                         android:textColorHint="@color/texts"
@@ -288,7 +320,7 @@
                         android:drawablePadding="@dimen/size5"
                         android:text="@string/fix_fund_balance_enable"
                         android:textColor="@color/text"
-                        android:textSize="@dimen/txtSize14" />
+                        android:textSize="@dimen/txtSize12" />
                 </LinearLayout>
 
             </LinearLayout>

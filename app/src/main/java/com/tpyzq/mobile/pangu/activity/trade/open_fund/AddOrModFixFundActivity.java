@@ -34,6 +34,7 @@ import android.view.View;
 import android.widget.Button;
 import android.widget.EditText;
 import android.widget.ImageView;
+import android.widget.RelativeLayout;
 import android.widget.TextView;
 
 import org.json.JSONArray;
@@ -80,6 +81,7 @@ public class AddOrModFixFundActivity extends BaseActivity implements View.OnClic
     private TimePickerView choosEnDate;
     private String currentDate;
     private StructuredFundDialog mStructuredFundDialog;
+    private RelativeLayout rl_en_date,rl_start_date,rl_end_date;
 
     @Override
     public void initView() {
@@ -92,17 +94,20 @@ public class AddOrModFixFundActivity extends BaseActivity implements View.OnClic
         tv_fund_jz = (TextView)findViewById(R.id.tv_fund_jz);//基金净值
         et_input_branch = (EditText)findViewById(R.id.et_input_branch);//投资金额
         tv_en_date = (TextView)findViewById(R.id.tv_en_date);//月定投日
+        rl_en_date = (RelativeLayout)findViewById(R.id.rl_en_date);//月定投日
         tv_start_date = (TextView)findViewById(R.id.tv_start_date);//开始时间
+        rl_start_date = (RelativeLayout)findViewById(R.id.rl_start_date);//开始时间大布局
         tv_end_date = (TextView)findViewById(R.id.tv_end_date);//结束时间
+        rl_end_date = (RelativeLayout)findViewById(R.id.rl_end_date);//结束时间大布局
         tv_choose_fund = (TextView)findViewById(R.id.tv_choose_fund);//选择产品点击
         tv_branch_enable = (TextView)findViewById(R.id.tv_branch_enable);//可用资金
         bt_commint = (Button)findViewById(R.id.bt_commint);//确定按钮
         initData();
-        getUserfulPrice();
+//        getUserfulPrice();
     }
 
     private void initData() {
-        currentDate = Helper.getNextDate(new Date(),"yyyy-MM-dd");
+        currentDate = Helper.getCurDate();
         position = getIntent().getIntExtra("position",-1);//position不为-1表示为修改
         if (position != -1) {
             fixFundEntity = (FixFundEntity)getIntent().getSerializableExtra("fixFundEntity");
@@ -130,9 +135,9 @@ public class AddOrModFixFundActivity extends BaseActivity implements View.OnClic
             fixFundEntity.setSTART_DATE(currentDate);
             fixFundEntity.setEND_DATE(Helper.getInstance().getNextYear(new Date(),"yyyyMMdd"));
         }
-        tv_en_date.setOnClickListener(this);
-        tv_start_date.setOnClickListener(this);
-        tv_end_date.setOnClickListener(this);
+        rl_en_date.setOnClickListener(this);
+        rl_start_date.setOnClickListener(this);
+        rl_end_date.setOnClickListener(this);
         tv_choose_fund.setOnClickListener(this);
         bt_commint.setOnClickListener(this);
         iv_back.setOnClickListener(this);
@@ -209,16 +214,16 @@ public class AddOrModFixFundActivity extends BaseActivity implements View.OnClic
     @Override
     public void onClick(View v) {
         switch (v.getId()){
-            case R.id.tv_en_date:
+            case R.id.rl_en_date:
                 tv_dest = tv_en_date;
                 choosEnDate.show();
                 break;
-            case R.id.tv_start_date:
-                tv_dest = (TextView) v;
+            case R.id.rl_start_date:
+                tv_dest = tv_start_date;
                 choosStartDate.show();
                 break;
-            case R.id.tv_end_date:
-                tv_dest = (TextView) v;
+            case R.id.rl_end_date:
+                tv_dest = tv_end_date;
                 choosEndDate.show();
                 break;
             case R.id.tv_choose_fund:
@@ -237,13 +242,13 @@ public class AddOrModFixFundActivity extends BaseActivity implements View.OnClic
                 }
 
                 int numDate2 = Helper.compareToDate(Helper.getCurDate(), tv_start_date.getText().toString());
-                if (numDate2 != 2) {
+                if (numDate2 == 1) {
                     CentreToast.showText(this,"开始日期不能小于当前日期");
                     break;
                 }
 
                 int numDate1 = Helper.compareToDate(tv_start_date.getText().toString(), tv_end_date.getText().toString());
-                if (numDate1 != 2) {
+                if (numDate1 == 1) {
                     CentreToast.showText(this,"结束日期不能小于开始日期");
                     break;
                 }

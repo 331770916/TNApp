@@ -221,6 +221,10 @@ public class FixFundListActivity extends BaseActivity implements View.OnClickLis
     public void onItemClick(int type, int position) {
         this.position = position;
         switch (type) {
+            case FixFundAdapter.TAG_ADD:
+                Intent addIntent = new Intent(this, AddOrModFixFundActivity.class);
+                startActivityForResult(addIntent,REQUEST_ADD);
+                break;
             case FixFundAdapter.TAG_REVOKE:
                 FixFundEntity fixFundEntity = mList.get(position);
                 if (ConstantUtil.list_item_flag) {
