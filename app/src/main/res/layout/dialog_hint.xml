@@ -6,12 +6,11 @@
 
     <RelativeLayout
         android:layout_width="@dimen/size250"
-        android:layout_height="wrap_content"
+        android:layout_height="350dp"
         android:layout_gravity="center"
-        android:minHeight="400dp"
-        android:layout_marginTop="70dp"
+        android:minHeight="300dp"
         android:background="@mipmap/bg_notice"
-        android:layout_marginBottom="120dp"
+        android:layout_marginBottom="10dp"
         android:orientation="vertical">
 
         <TextView
@@ -24,6 +23,15 @@
             android:ellipsize="end"
             android:maxLines="2"
             android:text="" />
+        <View
+            android:layout_marginTop="5dp"
+            android:id="@+id/view_line"
+            android:layout_marginLeft="@dimen/size15"
+            android:layout_marginRight="@dimen/size15"
+            android:layout_below="@id/tv_title"
+            android:layout_width="match_parent"
+            android:layout_height="@dimen/size2"
+            android:background="@color/lineColor2"/>
 
         <RelativeLayout
             android:layout_below="@id/tv_title"
@@ -32,30 +40,30 @@
             android:layout_gravity="center_horizontal"
             android:orientation="vertical">
 
-            <Button
-                android:layout_centerHorizontal="true"
-                android:layout_alignParentBottom="true"
-                android:id="@+id/but_yes"
-                android:layout_width="@dimen/size200"
-                android:layout_height="@dimen/size40"
-                android:layout_gravity="center"
-                android:layout_marginTop="25dp"
-                android:background="@drawable/shape_blue_button"
-                android:text="哞~！"
-                android:layout_marginBottom="@dimen/size5"
-                android:textColor="@color/white"
-                android:textSize="@dimen/txtSize18" />
-
             <WebView
-                android:layout_above="@id/but_yes"
                 android:id="@+id/wv"
                 android:layout_width="match_parent"
                 android:layout_height="@dimen/size150"
                 android:layout_marginLeft="@dimen/size15"
                 android:layout_marginRight="@dimen/size15"
-                android:layout_marginTop="@dimen/size8"
+                android:layout_marginTop="@dimen/size15"
                 android:background="@color/blue" />
 
         </RelativeLayout>
+    </RelativeLayout>
+
+    <RelativeLayout
+        android:layout_marginTop="@dimen/size38"
+        android:layout_width="match_parent"
+        android:layout_height="wrap_content">
+
+        <ImageView
+            android:layout_centerHorizontal="true"
+            android:id="@+id/but_yes"
+            android:layout_width="@dimen/size21"
+            android:layout_height="@dimen/size20"
+            android:background="@mipmap/icon_delete"
+            android:layout_marginBottom="@dimen/size5" />
+
     </RelativeLayout>
 </LinearLayout>
