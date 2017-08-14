@@ -1,5 +1,6 @@
 package com.tpyzq.mobile.pangu.activity.trade.margin_trading.integrated;
 
+import com.tpyzq.mobile.pangu.R;
 import com.tpyzq.mobile.pangu.base.BaseActivity;
 
 /**
@@ -16,7 +17,7 @@ public class DeliveryActivity extends BaseActivity {
 
     @Override
     public int getLayoutId() {
-        return 0;
+        return R.layout.activity_delivery;
     }
 }
 

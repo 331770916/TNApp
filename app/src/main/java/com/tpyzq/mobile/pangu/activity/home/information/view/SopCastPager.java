@@ -1,5 +1,7 @@
 package com.tpyzq.mobile.pangu.activity.home.information.view;
 
+import android.app.Activity;
+import android.app.Dialog;
 import android.content.Context;
 import android.content.Intent;
 import android.support.v4.content.ContextCompat;
@@ -22,6 +24,8 @@ import com.tpyzq.mobile.pangu.base.BasePager;
 import com.tpyzq.mobile.pangu.base.InterfaceCollection;
 import com.tpyzq.mobile.pangu.data.InformationEntity;
 import com.tpyzq.mobile.pangu.data.ResultInfo;
+import com.tpyzq.mobile.pangu.view.dialog.LoadingDialog;
+
 import java.util.ArrayList;
 import java.util.List;
 
@@ -40,7 +44,9 @@ public class SopCastPager extends BasePager implements InterfaceCollection.Inter
     private LinearLayout llSopCastJiaZai;          //内容为空的   图片
     private TextView tvDay,tvDate;
     private boolean isFirst = true;
+    private Dialog dialog;
     private String classno;
+
 
     public SopCastPager(Context context,String params) {
         super(context,params);
@@ -54,6 +60,7 @@ public class SopCastPager extends BasePager implements InterfaceCollection.Inter
     @Override
     public void setView(String params) {
         this.classno = params;
+        dialog = LoadingDialog.initDialog((Activity) mContext, "加载中...");
         mListView = (PullToRefreshListView) rootView.findViewById(R.id.lvSopCast);
         mListView.setVisibility(View.GONE);         //初始化隐藏 listView
         View rl = rootView.findViewById(R.id.itemSopcast);
@@ -104,6 +111,7 @@ public class SopCastPager extends BasePager implements InterfaceCollection.Inter
     @Override
     public void initData() {
         if(isFirst) {
+            dialog.show();
             ifc.queryStreaming("3", "2", ZIXUN_NUM, String.valueOf(count), classno, this);
             isFirst = false;
         }
@@ -118,6 +126,7 @@ public class SopCastPager extends BasePager implements InterfaceCollection.Inter
 
     @Override
     public void callResult(ResultInfo info) {
+        dialog.dismiss();
         rlSopCast.setBackgroundColor(ContextCompat.getColor(mContext, R.color.white));   //背景设置为白色
         if(info.getCode().equals("200")){
             Object obj = info.getData();
@@ -149,6 +158,7 @@ public class SopCastPager extends BasePager implements InterfaceCollection.Inter
 
     @Override
     public void destroy() {
+        dialog.dismiss();
         net.cancelSingleRequest(classno);
     }
 }

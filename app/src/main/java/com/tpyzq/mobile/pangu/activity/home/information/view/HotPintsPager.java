@@ -1,6 +1,7 @@
 package com.tpyzq.mobile.pangu.activity.home.information.view;
 
 import android.app.Activity;
+import android.app.Dialog;
 import android.content.Context;
 import android.content.Intent;
 import android.support.v4.content.ContextCompat;
@@ -22,6 +23,7 @@ import com.tpyzq.mobile.pangu.base.InterfaceCollection;
 import com.tpyzq.mobile.pangu.data.InformationEntity;
 import com.tpyzq.mobile.pangu.data.ResultInfo;
 import com.tpyzq.mobile.pangu.util.Helper;
+import com.tpyzq.mobile.pangu.view.dialog.LoadingDialog;
 import com.tpyzq.mobile.pangu.view.loopswitch.AutoSwitchAdapter;
 import com.tpyzq.mobile.pangu.view.loopswitch.AutoSwitchView;
 import java.util.ArrayList;
@@ -43,6 +45,7 @@ public class HotPintsPager extends BasePager implements View.OnClickListener,Int
     private AutoSwitchView loopView;
     private AutoSwitchAdapter adapter;
     private boolean isFirst = true;
+    private Dialog dialog;
     public int page =1;
 
     public HotPintsPager(Context context,String params) {
@@ -58,6 +61,7 @@ public class HotPintsPager extends BasePager implements View.OnClickListener,Int
     public void setView(final String params) {
         leve4 = new ArrayList<>();
         leve1 = new ArrayList<>();
+        dialog = LoadingDialog.initDialog((Activity) mContext, "加载中...");
         refreshListView = (PullToRefreshListView)rootView.findViewById(R.id.listview);
         rlHot = (RelativeLayout) rootView.findViewById(R.id.rlHot);     //包裹所有布局的 RelativeLayout  默认为灰色
         llHotJiaZai = (LinearLayout) rootView.findViewById(R.id.llHotJiaZai);
@@ -107,6 +111,7 @@ public class HotPintsPager extends BasePager implements View.OnClickListener,Int
 
     public void initData() {
        if(isFirst){
+           dialog.show();
            ifc.queryImportant("3","1","4","GetImportant4",this);
            ifc.queryImportant(ZIXUN_NUM,page+"","3","GetImportant1",this);
            isFirst = false;
@@ -116,6 +121,7 @@ public class HotPintsPager extends BasePager implements View.OnClickListener,Int
 
     @Override
     public void callResult(ResultInfo info) {
+        dialog.dismiss();
         rlHot.setBackgroundColor(ContextCompat.getColor(mContext, R.color.white));
         if(info.getCode().equals("200")){
             Object obj = info.getData();
@@ -160,6 +166,7 @@ public class HotPintsPager extends BasePager implements View.OnClickListener,Int
 
     @Override
     public void destroy() {
+        dialog.dismiss();
         net.cancelSingleRequest("GetImportant4");
         net.cancelSingleRequest("GetImportant1");
     }

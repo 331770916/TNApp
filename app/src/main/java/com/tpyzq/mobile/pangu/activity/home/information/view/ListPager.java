@@ -1,5 +1,7 @@
 package com.tpyzq.mobile.pangu.activity.home.information.view;
 
+import android.app.Activity;
+import android.app.Dialog;
 import android.content.Context;
 import android.content.Intent;
 import android.support.v4.content.ContextCompat;
@@ -17,6 +19,8 @@ import com.tpyzq.mobile.pangu.base.BasePager;
 import com.tpyzq.mobile.pangu.base.InterfaceCollection;
 import com.tpyzq.mobile.pangu.data.InformationEntity;
 import com.tpyzq.mobile.pangu.data.ResultInfo;
+import com.tpyzq.mobile.pangu.view.dialog.LoadingDialog;
+
 import java.util.ArrayList;
 import java.util.List;
 
@@ -35,6 +39,8 @@ public class ListPager extends BasePager implements InterfaceCollection.Interfac
     private RelativeLayout rl_Pager;
     private LinearLayout llChongXinJiaZai;               //内容为空的   图片
     private boolean isFirst = true;
+    private Dialog dialog;
+
     public ListPager(Context context,String param) {
         super(context,param);
     }
@@ -42,6 +48,7 @@ public class ListPager extends BasePager implements InterfaceCollection.Interfac
     @Override
     public void initData() {
         if(isFirst) {
+            dialog.show();
             ifc.queryHkstocks(classno, ZIXUN_NUM, String.valueOf(mIndex), classno, this);
             isFirst = false;
         }
@@ -50,6 +57,7 @@ public class ListPager extends BasePager implements InterfaceCollection.Interfac
     @Override
     public void setView(String params) {
         this.classno = params;
+        dialog = LoadingDialog.initDialog((Activity) mContext, "加载中...");
         mListView = (PullToRefreshListView) rootView.findViewById(R.id.lvFinancial);
         rl_Pager = (RelativeLayout) rootView.findViewById(R.id.rl_Pager);
         llChongXinJiaZai = (LinearLayout) rootView.findViewById(R.id.llChongXinJiaZai);
@@ -92,6 +100,7 @@ public class ListPager extends BasePager implements InterfaceCollection.Interfac
 
     @Override
     public void callResult(ResultInfo info) {
+        dialog.dismiss();
         rl_Pager.setBackgroundColor(ContextCompat.getColor(mContext, R.color.white));
         if(info.getCode().equals("200")){
             Object obj = info.getData();
@@ -128,6 +137,7 @@ public class ListPager extends BasePager implements InterfaceCollection.Interfac
 
     @Override
     public void destroy() {
+        dialog.dismiss();
         net.cancelSingleRequest(classno);
     }
 }
