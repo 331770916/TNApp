@@ -126,7 +126,7 @@ public class IndexActivity extends BaseActivity implements InterfaceCollection.I
             }
         });
         homeRadioBtn.setChecked(true);
-        replaceFragment(0);
+
         radioGroup.setOnCheckedChangeListener(new RadioGroup.OnCheckedChangeListener() {
             @Override
             public void onCheckedChanged(RadioGroup group, int checkedId) {
@@ -165,6 +165,7 @@ public class IndexActivity extends BaseActivity implements InterfaceCollection.I
                     HomeFragmentHelper.getInstance().gotoPager(jump, this, mJumpPageListener, null);
             }
         }
+        replaceFragment(0);
     }
 
 
