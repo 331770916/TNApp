@@ -369,13 +369,11 @@ public class HuShenAdapter extends BaseAdapter {
 
         } else if (mBeans.get(position).getIsChangeHand() == 1003
                 && !TextUtils.isEmpty(mBeans.get(position).getTurnover())) {
-
             if ("-".equals(mBeans.get(position).getTurnover())) {
                 stockZdf.setText(mBeans.get(position).getTurnover());
             } else {
                 stockZdf.setText(mFormat2.format(Double.parseDouble(mBeans.get(position).getTurnover())));
             }
-
             stockZdf.setTextColor(ContextCompat.getColor(CustomApplication.getContext(), R.color.hideTextColor));
         } else if (mBeans.get(position).getFoundFlag() == 1000 && !TextUtils.isEmpty(mBeans.get(position).getPriceToal())) {
             stockZdf.setText(Helper.long2million(mBeans.get(position).getPriceToal()));
@@ -395,6 +393,7 @@ public class HuShenAdapter extends BaseAdapter {
                 viewHodler2.chuangY_name, viewHodler2.chuangY_currentPrice, viewHodler2.chuangY_zd, viewHodler2.chuangY_zdf};//这四组是创业
 
         RelativeLayout[] rls = {viewHodler2.topBgLayout1, viewHodler2.topBgLayout2, viewHodler2.topBgLayout3};
+        RelativeLayout[] rl_top = {viewHodler2.topLayout1,viewHodler2.topLayout2,viewHodler2.topLayout3};
 
         List<StockInfoEntity> _beans = mBeans.get(position).getSubDatas();
 
@@ -483,28 +482,29 @@ public class HuShenAdapter extends BaseAdapter {
                             textViews[i].setTextColor(ContextCompat.getColor(CustomApplication.getContext(), R.color.white));
 
                             if (colors == 101) {
-
-                                rls[num].setBackgroundColor(ContextCompat.getColor(CustomApplication.getContext(), R.color.red));
+                                rl_top[num].setBackgroundResource(R.drawable.shape_item_red);
+//                                rls[num].setBackgroundColor(ContextCompat.getColor(CustomApplication.getContext(), R.color.red));
                             } else if (colors == 100) {
-
-                                rls[num].setBackgroundColor(ContextCompat.getColor(CustomApplication.getContext(), R.color.green));
+                                rl_top[num].setBackgroundResource(R.drawable.shape_item_green);
+//                                rls[num].setBackgroundColor(ContextCompat.getColor(CustomApplication.getContext(), R.color.green));
 
                             } else if (colors == 102) {
-                                rls[num].setBackgroundColor(ContextCompat.getColor(CustomApplication.getContext(), R.color.hushenTab_titleColor));
+                                rl_top[num].setBackgroundResource(R.drawable.shape_item_gray);
+//                                rls[num].setBackgroundColor(ContextCompat.getColor(CustomApplication.getContext(), R.color.hushenTab_titleColor));
                             }
 
 
                         } else {
                             textViews[i - 1].setText("--");
                             textViews[i].setText("--");
-                            rls[num].setBackgroundColor(ContextCompat.getColor(CustomApplication.getContext(), R.color.hushenTab_titleColor));
+//                            rls[num].setBackgroundColor(ContextCompat.getColor(CustomApplication.getContext(), R.color.hushenTab_titleColor));
                         }
 
 
                     } else {
                         textViews[i - 1].setText("--");
                         textViews[i].setText("--");
-                        rls[num].setBackgroundColor(ContextCompat.getColor(CustomApplication.getContext(), R.color.hushenTab_titleColor));
+//                        rls[num].setBackgroundColor(ContextCompat.getColor(CustomApplication.getContext(), R.color.hushenTab_titleColor));
                     }
 
                     num++;

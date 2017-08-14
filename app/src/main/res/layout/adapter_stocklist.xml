@@ -3,8 +3,7 @@
     android:layout_width="match_parent"
     android:layout_height="wrap_content"
     android:orientation="vertical"
-    android:background="@drawable/listview_item_bg"
-    >
+    android:background="@drawable/listview_item_bg">
 
     <LinearLayout
         android:layout_width="match_parent"
@@ -21,7 +20,7 @@
                 android:id="@+id/stockItemName"
                 android:layout_width="wrap_content"
                 android:layout_height="wrap_content"
-                android:layout_marginLeft="@dimen/size20"
+                android:paddingLeft="@dimen/size10"
                 android:textSize="@dimen/self_stockNameText"
                 android:text="--"
                 android:textStyle="bold"
@@ -33,28 +32,29 @@
                 android:layout_width="wrap_content"
                 android:layout_height="wrap_content"
                 android:textColor="@color/newStockTitle"
-                android:textSize="@dimen/self_stockNumberText"
+                android:paddingLeft="@dimen/size10"
+                android:textSize="@dimen/txtSize14"
                 android:layout_alignLeft="@id/stockItemName"
                 android:text="--"/>
         </RelativeLayout>
 
 
         <TextView
+            android:paddingRight="@dimen/size30"
             android:id="@+id/stockItemPrice"
             android:layout_width="0dp"
             android:layout_weight="1"
             android:textColor="@color/black"
-            android:gravity="center"
+            android:gravity="center|end"
             android:textSize="@dimen/self_stockNumberPrice"
             android:text="--"
-            android:layout_gravity="center"
             android:layout_height="match_parent" />
         <TextView
             android:id="@+id/stockItemRate"
             android:layout_width="0dp"
             android:layout_weight="1"
             android:gravity="center_vertical|right"
-            android:paddingRight="@dimen/size20"
+            android:paddingRight="@dimen/size10"
             android:layout_height="match_parent"
             android:textSize="@dimen/self_stockNumberPrice"
             android:textColor="@color/red"

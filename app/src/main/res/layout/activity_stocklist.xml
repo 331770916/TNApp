@@ -24,7 +24,8 @@
             android:layout_width="wrap_content"
             android:layout_height="match_parent"
             android:layout_alignParentLeft="true"
-            android:padding="@dimen/size10"
+            android:paddingLeft="@dimen/size15"
+            android:paddingRight="@dimen/size20"
             android:src="@mipmap/back_btn"
             tools:ignore="ContentDescription" />
 
@@ -59,9 +60,10 @@
 
     </RelativeLayout>
 
+
     <LinearLayout
         android:layout_width="match_parent"
-        android:layout_height="wrap_content"
+        android:layout_height="@dimen/size35"
         android:background="@color/white"
         android:orientation="horizontal">
 
@@ -71,11 +73,11 @@
             android:layout_weight="1">
 
             <TextView
+                android:paddingLeft="@dimen/size10"
                 android:id="@+id/stocklist_headTv1"
                 android:layout_width="wrap_content"
                 android:layout_height="match_parent"
                 android:gravity="center_vertical"
-                android:layout_marginLeft="@dimen/size20"
                 android:textColor="@color/black" />
         </LinearLayout>
 
@@ -83,14 +85,14 @@
             android:layout_width="0dp"
             android:layout_height="wrap_content"
             android:layout_weight="1"
-            android:gravity="center">
+            android:layout_gravity="center">
 
             <TextView
+                android:paddingRight="@dimen/size30"
                 android:id="@+id/stocklist_headTv2"
-                android:layout_width="wrap_content"
-                android:layout_height="wrap_content"
-                android:gravity="center"
-                android:padding="@dimen/size10"
+                android:layout_width="match_parent"
+                android:layout_height="match_parent"
+                android:gravity="center|end"
                 android:textColor="@color/hushenTab_titleColor" />
         </LinearLayout>
 
@@ -101,11 +103,11 @@
             android:layout_weight="1">
 
             <TextView
+                android:paddingRight="@dimen/size10"
                 android:id="@+id/stocklist_headTv3"
-                android:layout_width="wrap_content"
+                android:layout_width="match_parent"
                 android:layout_height="match_parent"
-                android:gravity="center"
-                android:layout_marginRight="@dimen/size20"
+                android:gravity="center|end"
                 android:textColor="@color/black" />
         </LinearLayout>
     </LinearLayout>

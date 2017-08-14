@@ -16,13 +16,14 @@
             android:paddingTop="@dimen/size10"
             android:paddingBottom="@dimen/size10"
             android:layout_height="wrap_content"
-            android:layout_marginLeft="@dimen/size20"
+            android:paddingLeft="@dimen/size10"
             android:text="--"
             android:textColor="@color/hushenTab_titleColor"
             android:textSize="@dimen/self_stockNameText"
             android:textStyle="bold" />
 
         <TextView
+            android:paddingRight="@dimen/size30"
             android:id="@+id/stockItemPrice"
             android:layout_width="0dp"
             android:layout_weight="1"
@@ -30,7 +31,7 @@
             android:paddingBottom="@dimen/size10"
             android:layout_height="wrap_content"
             android:text="--"
-            android:gravity="center"
+            android:gravity="center|end"
             android:textColor="@color/black"
             android:textSize="@dimen/self_stockNumberPrice" />
 
@@ -42,7 +43,7 @@
             android:paddingTop="@dimen/size10"
             android:paddingBottom="@dimen/size10"
             android:gravity="center_vertical|right"
-            android:layout_marginRight="@dimen/size20"
+            android:paddingRight="@dimen/size10"
             android:text="--"
             android:layout_alignParentRight="true"
             android:layout_centerVertical="true"

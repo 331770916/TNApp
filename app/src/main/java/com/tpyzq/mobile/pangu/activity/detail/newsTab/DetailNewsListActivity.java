@@ -33,7 +33,7 @@ public class DetailNewsListActivity extends BaseActivity implements View.OnClick
     private Dialog dialog;
     private NewsAdapter adapter;
     private int page;
-    private ArrayList<InformationEntity> list;
+    private List<InformationEntity> list;
     private String code;
 
     @Override
@@ -64,29 +64,18 @@ public class DetailNewsListActivity extends BaseActivity implements View.OnClick
                 startActivity(intent);
             }
         });
-        //下拉刷新
-        mListView.setOnRefreshListener(new PullToRefreshBase.OnRefreshListener<ListView>() {
+        mListView.setOnRefreshListener(new PullToRefreshBase.OnRefreshListener2<ListView>() {
             @Override
-            public void onRefresh(PullToRefreshBase<ListView> refreshView) {
-                if (refreshView.isShownHeader()) {
-                    //判断头布局是否可见，如果可见执行下拉刷新
-                    //设置尾布局样式文字
-                    mListView.getLoadingLayoutProxy().setRefreshingLabel("正在刷新");
-                    mListView.getLoadingLayoutProxy().setPullLabel("下拉刷新数据");
-                    mListView.getLoadingLayoutProxy().setReleaseLabel("释放开始刷新");
-                    //模拟加载数据线程休息3秒
-                    page = 1;
-                    list.clear();
-                    mInterface.queryStockNews(code,"30","1",TAG,DetailNewsListActivity.this);
-                }else if (refreshView.isShownFooter()) {
-                    //判断尾布局是否可见，如果可见执行上拉加载更多
-                    //设置尾布局样式文字
-                    mListView.getLoadingLayoutProxy().setRefreshingLabel("正在加载");
-                    mListView.getLoadingLayoutProxy().setPullLabel("上拉加载更多");
-                    mListView.getLoadingLayoutProxy().setReleaseLabel("释放开始加载");
-                    page ++;
-                    mInterface.queryStockNews(code,"30",page+"",TAG,DetailNewsListActivity.this);
-                }
+            public void onPullDownToRefresh(PullToRefreshBase<ListView> refreshView) {
+                page = 1;
+                list.clear();
+                mInterface.queryStockNews(code,"30","1",TAG,DetailNewsListActivity.this);
+            }
+
+            @Override
+            public void onPullUpToRefresh(PullToRefreshBase<ListView> refreshView) {
+                page ++;
+                mInterface.queryStockNews(code,"30",page+"",TAG,DetailNewsListActivity.this);
             }
         });
     }
@@ -102,7 +91,8 @@ public class DetailNewsListActivity extends BaseActivity implements View.OnClick
                 llNewJiaZai.setVisibility(View.GONE);       //隐藏重新加载
                 rlDetailNew.setBackgroundColor(ContextCompat.getColor(DetailNewsListActivity.this,R.color.white));      //背景设置为白色
                 mListView.setVisibility(View.VISIBLE);      //请求到数据 展示 listView
-                adapter.setList((List<InformationEntity>)object);
+                list.addAll((List<InformationEntity>)object);
+                adapter.setList(list);
             }
         }else {
             rlDetailNew.setBackgroundColor(ContextCompat.getColor(DetailNewsListActivity.this,R.color.white));    //背景 为 白色

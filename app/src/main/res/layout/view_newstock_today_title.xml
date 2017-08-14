@@ -16,43 +16,41 @@
                     android:textColor="@color/hideTextColor"
                     android:paddingLeft="@dimen/size10"
                     android:paddingTop="@dimen/size10"
-                    android:paddingRight="@dimen/size5"
                     android:paddingBottom="@dimen/size10"
-                    android:textSize="14sp"
+                    android:textSize="13sp"
                     android:text="@string/sgdm"
                     android:layout_height="wrap_content" />
 
                 <TextView
+                    android:paddingRight="@dimen/size18"
                     android:layout_width="0dp"
-                    android:layout_weight="0.9"
-                    android:gravity="center"
+                    android:layout_weight="1.2"
+                    android:gravity="center|end"
                     android:textColor="@color/hideTextColor"
-                    android:padding="@dimen/size5"
-                    android:textSize="14sp"
+                    android:textSize="13sp"
                     android:text="@string/fxjg"
                     android:layout_height="wrap_content"
                     android:id="@+id/textView26" />
 
                 <TextView
+                    android:paddingRight="@dimen/size20"
                     android:layout_width="0dp"
-                    android:layout_weight="0.9"
-                    android:gravity="center"
+                    android:layout_weight="1"
+                    android:gravity="center|end"
                     android:textColor="@color/hideTextColor"
-                    android:padding="@dimen/size5"
-                    android:textSize="14sp"
+                    android:textSize="13sp"
                     android:text="@string/fxsyl"
                     android:layout_height="wrap_content" />
 
                 <TextView
                     android:layout_width="0dp"
-                    android:layout_weight="1.3"
+                    android:layout_weight="1"
                     android:gravity="right"
                     android:textColor="@color/hideTextColor"
-                    android:paddingLeft="@dimen/size5"
                     android:paddingTop="@dimen/size10"
                     android:paddingRight="@dimen/size10"
                     android:paddingBottom="@dimen/size10"
-                    android:textSize="14sp"
+                    android:textSize="13sp"
                     android:text="@string/dgsgsj"
                     android:layout_height="wrap_content" />
         </LinearLayout>

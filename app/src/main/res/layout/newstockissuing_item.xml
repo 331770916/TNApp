@@ -42,25 +42,27 @@
             android:layout_weight="1"
             android:gravity="left"
             android:paddingLeft="@dimen/size10"
-            android:textSize="14sp"
+            android:textSize="@dimen/txtSize13"
             android:text="@string/mcdm"
             android:textColor="@color/newStockTitle" />
 
         <TextView
+            android:paddingRight="@dimen/size18"
             android:layout_width="0dp"
             android:layout_height="wrap_content"
-            android:layout_weight="1"
-            android:gravity="center"
-            android:textSize="14sp"
+            android:layout_weight="1.2"
+            android:gravity="center|end"
+            android:textSize="@dimen/txtSize13"
             android:text="@string/fxj"
             android:textColor="@color/newStockTitle" />
 
         <TextView
+            android:paddingRight="@dimen/size20"
             android:layout_width="0dp"
             android:layout_height="wrap_content"
             android:layout_weight="1"
-            android:gravity="center"
-            android:textSize="14sp"
+            android:gravity="center|end"
+            android:textSize="@dimen/txtSize13"
             android:text="@string/zql"
             android:textColor="@color/newStockTitle" />
 
@@ -71,7 +73,7 @@
             android:layout_weight="1"
             android:gravity="right"
             android:paddingRight="@dimen/size10"
-            android:textSize="14sp"
+            android:textSize="@dimen/txtSize13"
             android:text="@string/ssrq"
             android:textColor="@color/newStockTitle" />
     </LinearLayout>

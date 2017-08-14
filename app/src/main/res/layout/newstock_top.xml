@@ -6,27 +6,32 @@
     android:orientation="vertical">
 
     <LinearLayout
+        android:paddingRight="@dimen/size11"
+        android:paddingLeft="@dimen/size11"
+        android:gravity="center"
         android:layout_width="match_parent"
-        android:layout_height="wrap_content"
+        android:layout_height="@dimen/size110"
         android:orientation="horizontal">
 
         <RelativeLayout
+            android:background="@drawable/shape_item_gray"
+            android:layout_marginRight="@dimen/size4"
             android:id="@+id/newStock_gv2"
             android:layout_width="0dp"
             android:layout_height="wrap_content"
-            android:background="@drawable/listview_item_bg"
             android:layout_weight="1"
-            android:padding="@dimen/size10">
+            android:padding="@dimen/size6">
 
             <TextView
+                android:text="90909090"
                 android:id="@+id/newStock_shenZheng"
                 android:layout_width="wrap_content"
                 android:layout_height="wrap_content"
                 android:layout_centerHorizontal="true"
-                android:textSize="@dimen/hushen_TopTitle"
+                android:textSize="@dimen/txtSize12"
                 android:textStyle="bold"
                 android:layout_margin="@dimen/size1"
-                android:textColor="@color/hushenTab_titleColor"/>
+                android:textColor="@color/white"/>
 
             <RelativeLayout
                 android:id="@+id/rl_top1Bg"
@@ -34,13 +39,14 @@
                 android:layout_height="wrap_content"
                 android:layout_below="@id/newStock_shenZheng">
                 <TextView
+                    android:text="909090"
                     android:id="@+id/newStock_shengZhengTv1"
                     android:layout_width="wrap_content"
                     android:layout_height="wrap_content"
                     android:layout_centerHorizontal="true"
                     android:layout_margin="@dimen/size1"
-                    android:textColor="@color/green"
-                    android:textSize="@dimen/txtSize18"/>
+                    android:textColor="@color/white"
+                    android:textSize="@dimen/txtSize20"/>
 
                 <LinearLayout
                     android:layout_width="wrap_content"
@@ -50,26 +56,26 @@
                     android:orientation="horizontal">
 
                     <TextView
+                        android:text="909090"
                         android:id="@+id/newStock_shengZhengTv2"
                         android:layout_width="wrap_content"
                         android:layout_height="wrap_content"
                         android:layout_marginLeft="@dimen/size4"
                         android:layout_marginRight="@dimen/size4"
                         android:layout_marginTop="@dimen/size1"
-                        android:layout_marginBottom="@dimen/size1"
-                        android:textSize="@dimen/txtSize10"
-                        android:textColor="@color/green" />
+                        android:textSize="@dimen/txtSize11"
+                        android:textColor="@color/white" />
 
                     <TextView
+                        android:text="9090"
                         android:id="@+id/newStock_shengZhengTv3"
                         android:layout_width="wrap_content"
                         android:layout_height="wrap_content"
                         android:layout_marginLeft="@dimen/size4"
                         android:layout_marginRight="@dimen/size4"
                         android:layout_marginTop="@dimen/size1"
-                        android:layout_marginBottom="@dimen/size1"
-                        android:textSize="@dimen/txtSize10"
-                        android:textColor="@color/green" />
+                        android:textSize="@dimen/txtSize11"
+                        android:textColor="@color/white" />
                 </LinearLayout>
             </RelativeLayout>
 
@@ -77,27 +83,23 @@
 
         </RelativeLayout>
 
-        <View
-            android:layout_width="1px"
-            android:layout_height="match_parent"
-            android:background="@color/lineColor" />
 
         <RelativeLayout
+            android:layout_marginRight="@dimen/size4"
+            android:layout_marginLeft="@dimen/size4"
             android:id="@+id/newStock_gv1"
             android:layout_width="0dp"
             android:layout_height="wrap_content"
-            android:background="@drawable/listview_item_bg"
             android:layout_weight="1"
-            android:padding="@dimen/size10">
+            android:padding="@dimen/size6">
 
             <TextView
                 android:id="@+id/newStock_shangZheng"
                 android:layout_width="wrap_content"
                 android:layout_height="wrap_content"
                 android:layout_centerHorizontal="true"
-                android:layout_margin="@dimen/size1"
-                android:textSize="@dimen/hushen_TopTitle"
-                android:textColor="@color/hushenTab_titleColor"
+                android:textSize="@dimen/txtSize12"
+                android:textColor="@color/white"
                 android:textStyle="bold" />
 
             <RelativeLayout
@@ -110,9 +112,8 @@
                     android:layout_width="wrap_content"
                     android:layout_height="wrap_content"
                     android:layout_centerHorizontal="true"
-                    android:layout_margin="@dimen/size1"
-                    android:textColor="@color/green"
-                    android:textSize="@dimen/txtSize18"/>
+                    android:textColor="@color/white"
+                    android:textSize="@dimen/txtSize20"/>
 
                 <LinearLayout
                     android:layout_width="wrap_content"
@@ -128,9 +129,8 @@
                         android:layout_marginLeft="@dimen/size4"
                         android:layout_marginRight="@dimen/size4"
                         android:layout_marginTop="@dimen/size1"
-                        android:layout_marginBottom="@dimen/size1"
-                        android:textSize="@dimen/txtSize10"
-                        android:textColor="@color/green" />
+                        android:textSize="@dimen/txtSize11"
+                        android:textColor="@color/white" />
 
                     <TextView
                         android:id="@+id/newStock_shangZhengTv3"
@@ -139,40 +139,29 @@
                         android:layout_marginLeft="@dimen/size4"
                         android:layout_marginRight="@dimen/size4"
                         android:layout_marginTop="@dimen/size1"
-                        android:layout_marginBottom="@dimen/size1"
-                        android:textSize="@dimen/txtSize10"
-                        android:textColor="@color/green" />
+                        android:textSize="@dimen/txtSize11"
+                        android:textColor="@color/white" />
                 </LinearLayout>
             </RelativeLayout>
 
 
         </RelativeLayout>
 
-        <!--  123456789 -->
-
-
-
-        <View
-            android:layout_width="1px"
-            android:layout_height="match_parent"
-            android:background="@color/lineColor" />
-
         <RelativeLayout
+            android:layout_marginLeft="@dimen/size4"
             android:id="@+id/newStock_gv3"
             android:layout_width="0dp"
             android:layout_height="wrap_content"
-            android:background="@drawable/listview_item_bg"
             android:layout_weight="1"
-            android:padding="@dimen/size10">
+            android:padding="@dimen/size6">
 
             <TextView
                 android:id="@+id/newStock_chuangye"
                 android:layout_width="wrap_content"
                 android:layout_height="wrap_content"
                 android:layout_centerHorizontal="true"
-                android:layout_margin="@dimen/size1"
-                android:textSize="@dimen/hushen_TopTitle"
-                android:textColor="@color/hushenTab_titleColor"
+                android:textSize="@dimen/txtSize12"
+                android:textColor="@color/white"
                 android:textStyle="bold" />
 
             <RelativeLayout
@@ -185,9 +174,8 @@
                     android:layout_width="wrap_content"
                     android:layout_height="wrap_content"
                     android:layout_centerHorizontal="true"
-                    android:layout_margin="@dimen/size1"
-                    android:textColor="@color/green"
-                    android:textSize="@dimen/txtSize18"/>
+                    android:textColor="@color/white"
+                    android:textSize="@dimen/txtSize20"/>
 
                 <LinearLayout
                     android:layout_width="wrap_content"
@@ -203,9 +191,8 @@
                         android:layout_marginLeft="@dimen/size4"
                         android:layout_marginRight="@dimen/size4"
                         android:layout_marginTop="@dimen/size1"
-                        android:layout_marginBottom="@dimen/size1"
-                        android:textSize="@dimen/txtSize10"
-                        android:textColor="@color/green" />
+                        android:textSize="@dimen/txtSize11"
+                        android:textColor="@color/white" />
 
                     <TextView
                         android:id="@+id/newStock_chuangyeTv3"
@@ -214,9 +201,8 @@
                         android:layout_marginLeft="@dimen/size4"
                         android:layout_marginRight="@dimen/size4"
                         android:layout_marginTop="@dimen/size1"
-                        android:layout_marginBottom="@dimen/size1"
-                        android:textSize="@dimen/txtSize10"
-                        android:textColor="@color/green" />
+                        android:textSize="@dimen/txtSize11"
+                        android:textColor="@color/white" />
                 </LinearLayout>
             </RelativeLayout>
 

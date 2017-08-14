@@ -37,35 +37,43 @@
         android:visibility="visible">
 
         <TextView
+            android:textSize="@dimen/txtSize13"
             android:layout_width="0dp"
             android:layout_height="wrap_content"
             android:layout_weight="1"
-            android:gravity="center"
+            android:paddingLeft="@dimen/size10"
+            android:gravity="center|start"
             android:text="@string/mcdm"
             android:textColor="@color/newStockTitle" />
 
         <TextView
+            android:textSize="@dimen/txtSize13"
+            android:paddingRight="@dimen/size18"
             android:layout_width="0dp"
             android:layout_height="wrap_content"
-            android:layout_weight="1"
-            android:gravity="center"
+            android:layout_weight="1.2"
+            android:gravity="center|end"
             android:text="@string/ssrq"
             android:textColor="@color/newStockTitle" />
 
         <TextView
+            android:textSize="@dimen/txtSize13"
+            android:paddingRight="@dimen/size20"
             android:layout_width="0dp"
             android:layout_height="wrap_content"
             android:layout_weight="1"
-            android:gravity="center"
+            android:gravity="center|end"
             android:text="@string/currentPrice"
             android:textColor="@color/newStockTitle" />
 
 
         <TextView
+            android:textSize="@dimen/txtSize13"
+            android:paddingRight="@dimen/size10"
             android:layout_width="0dp"
             android:layout_height="wrap_content"
             android:layout_weight="1"
-            android:gravity="center"
+            android:gravity="center|end"
             android:text="@string/totaleIncrease"
             android:textColor="@color/newStockTitle" />
     </LinearLayout>
