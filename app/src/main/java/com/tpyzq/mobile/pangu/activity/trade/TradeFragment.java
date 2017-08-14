@@ -558,7 +558,7 @@ public class TradeFragment extends BaseFragment
 
         @Override
         public int getCount() {
-            return 3;
+            return 4;
         }
 
         public void clearDate() {

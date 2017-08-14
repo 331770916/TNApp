@@ -122,6 +122,9 @@ public class IndexActivity extends BaseActivity implements InterfaceCollection.I
             @Override
             public void onClick(View v) {
                 newstockremind.setVisibility(View.GONE);
+                String isNewStock = SpUtils.getString(CustomApplication.getContext(),"isNewStock","");
+                SpUtils.putString(CustomApplication.getContext(),"isNewStock",isNewStock+enitiy.getNewStockSize());
+                enitiy = null;
             }
         });
         homeRadioBtn.setChecked(true);
@@ -131,6 +134,10 @@ public class IndexActivity extends BaseActivity implements InterfaceCollection.I
             public void onCheckedChanged(RadioGroup group, int checkedId) {
                 for (int i = 0; i < tabIds.length; i++) {
                     if (tabIds[i] == checkedId) {
+                        if(i==0)
+                            newstockremind.setVisibility(View.VISIBLE);
+                        else
+                            newstockremind.setVisibility(View.GONE);
                         replaceFragment(i);
                         break;
                     }
@@ -170,13 +177,11 @@ public class IndexActivity extends BaseActivity implements InterfaceCollection.I
 
     @Override
     public void callResult(ResultInfo info) {
-        if(info.getCode().equals("0")){
+        if(info.getCode().equals("0")) {
             enitiy = (NewStockEnitiy) info.getData();
-            if(enitiy!=null){
+            if(enitiy!=null) {
                 newstockremind.setVisibility(View.VISIBLE);
                 tvNewStock.setText(String.valueOf(enitiy.getNewStockSize()));
-                String isNewStock = SpUtils.getString(CustomApplication.getContext(),"isNewStock","");
-                SpUtils.putString(CustomApplication.getContext(),"isNewStock",isNewStock+enitiy.getNewStockSize());
             }
         }
     }
