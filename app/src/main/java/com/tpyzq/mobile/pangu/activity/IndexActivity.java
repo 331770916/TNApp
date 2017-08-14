@@ -19,7 +19,6 @@ import android.widget.TextView;
 
 import com.tpyzq.mobile.pangu.R;
 import com.tpyzq.mobile.pangu.activity.home.HomeFragment;
-import com.tpyzq.mobile.pangu.activity.home.LovingHeartActivity;
 import com.tpyzq.mobile.pangu.activity.home.helper.HomeFragmentHelper;
 import com.tpyzq.mobile.pangu.activity.market.MarketFragment;
 import com.tpyzq.mobile.pangu.activity.myself.MySelfFragment;
@@ -397,25 +396,9 @@ public class IndexActivity extends BaseActivity implements InterfaceCollection.I
                         String versionNumber = joResult.getString("versionNumber");   //版本号
                         String apkAddress = joResult.getString("apkAddress");         //下载地址
                         String remarks = joResult.optString("remarks");
-                        if (TextUtils.isEmpty(versionNumber)) {
-                            return;
-                        }
-                        String[] versionCode = versionNumber.split("\\.");
-                        String[] thisVersionCode = APPInfoUtils.getVersionName(IndexActivity.this).split("\\.");
-                        //如果 版本号  与  当前版本号 相同 删除安装包
-                        if (Double.parseDouble(versionCode[0]) > Double.parseDouble(thisVersionCode[0])) {
-                            Dialog mDialog = new VersionDialog(IndexActivity.this, apkAddress, forceIsupdate, versionNumber,remarks);
+                        if (!"2".equals(forceIsupdate)) {
+                            Dialog mDialog = new VersionDialog(IndexActivity.this, apkAddress, forceIsupdate, versionNumber, remarks);
                             mDialog.show();
-                        } else if(Double.parseDouble(versionCode[0]) == Double.parseDouble(thisVersionCode[0])){
-                            if (Double.parseDouble(versionCode[1]) > Double.parseDouble(thisVersionCode[1])) {
-                                Dialog mDialog = new VersionDialog(IndexActivity.this, apkAddress, forceIsupdate, versionNumber,remarks);
-                                mDialog.show();
-                            } else if (Double.parseDouble(versionCode[1]) == Double.parseDouble(thisVersionCode[1])) {
-                                if (Double.parseDouble(versionCode[2]) > Double.parseDouble(thisVersionCode[2])) {
-                                    Dialog mDialog = new VersionDialog(IndexActivity.this, apkAddress, forceIsupdate, versionNumber,remarks);
-                                    mDialog.show();
-                                }
-                            }
                         }
                     }
                 } catch (JSONException e) {
