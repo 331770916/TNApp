@@ -228,7 +228,7 @@
                 android:layout_marginTop="@dimen/size8"
                 android:background="@color/white"
                 android:orientation="horizontal"
-                android:padding="@dimen/size8">
+                android:padding="@dimen/size5">
 
                 <LinearLayout
                     android:layout_width="0dp"
@@ -239,7 +239,7 @@
                     <TextView
                         android:layout_width="wrap_content"
                         android:layout_height="wrap_content"
-                        android:layout_marginTop="@dimen/size14"
+                        android:layout_marginTop="@dimen/size5"
                         android:paddingLeft="@dimen/size8"
                         android:text="借出年利率"
                         android:textColor="@color/textss" />
@@ -248,8 +248,8 @@
                         android:id="@+id/traLayout3"
                         android:layout_width="match_parent"
                         android:layout_height="wrap_content"
-                        android:layout_margin="@dimen/size3"
                         android:layout_marginTop="@dimen/size10"
+                        android:layout_marginLeft="@dimen/size8"
                         android:padding="@dimen/size5"
                         android:background="@drawable/shape_gray_rectangle">
 
@@ -358,8 +358,8 @@
                         android:id="@+id/traLayout4"
                         android:layout_width="match_parent"
                         android:layout_height="wrap_content"
-                        android:layout_margin="@dimen/size3"
                         android:layout_marginTop="@dimen/size10"
+                        android:layout_marginLeft="@dimen/size8"
                         android:padding="@dimen/size5"
                         android:background="@drawable/shape_gray_rectangle">
 
@@ -481,7 +481,7 @@
                     android:layout_height="match_parent"
                     android:layout_marginLeft="@dimen/size8"
                     android:layout_marginRight="@dimen/size3"
-                    android:layout_marginTop="@dimen/size3"
+                    android:layout_marginTop="@dimen/size32"
                     android:layout_weight="4"
                     android:background="@drawable/shape_gray_rectangle"
                     android:orientation="vertical">
