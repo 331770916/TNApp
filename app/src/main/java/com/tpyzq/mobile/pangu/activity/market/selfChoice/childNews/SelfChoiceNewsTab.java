@@ -151,7 +151,7 @@ public class SelfChoiceNewsTab extends BaseTabPager implements
                 if (mEntities == null || mEntities.size() <= 0 ) {
                     mKongLayout.setVisibility(View.VISIBLE);
                 }
-                CentreToast.showText(CustomApplication.getContext(), (String)result);
+//                CentreToast.showText(CustomApplication.getContext(), (String)result);
                 return;
             }
             ArrayList<NewsInofEntity> entities = (ArrayList<NewsInofEntity>) result;

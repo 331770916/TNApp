@@ -126,6 +126,7 @@
         android:background="@color/lineColor" />
 
     <LinearLayout
+        android:id="@+id/ll_fhfs"
         android:layout_width="match_parent"
         android:layout_height="@dimen/size60"
         android:background="@color/white"

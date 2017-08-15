@@ -7,6 +7,7 @@ import android.text.TextUtils;
 import android.text.TextWatcher;
 import android.util.DisplayMetrics;
 import android.view.View;
+import android.widget.LinearLayout;
 import android.widget.TextView;
 import android.widget.Toast;
 
@@ -62,6 +63,7 @@ public class ProductBuyActivity extends BaseActivity implements View.OnClickList
     private TextView tv_stock_info2;
     private TextView et_stock_price;
     private TextView tv_fhfs;
+    private LinearLayout ll_fhfs;
     private TextView tv_transaction_account;
     private TextView tv_transaction_price;
     private FundDataEntity fundDataEntity;
@@ -88,6 +90,7 @@ public class ProductBuyActivity extends BaseActivity implements View.OnClickList
         tv_stock_info2 = (TextView) findViewById(R.id.tv_stock_info2);
         et_stock_price = (TextView) findViewById(R.id.et_stock_price);
         tv_fhfs = (TextView) findViewById(R.id.tv_fhfs);
+        ll_fhfs = (LinearLayout) findViewById(R.id.ll_fhfs);
         tv_transaction_account = (TextView) findViewById(R.id.tv_transaction_account);
         tv_transaction_price = (TextView) findViewById(R.id.tv_transaction_price);
         findViewById(R.id.productBuyBack).setOnClickListener(this);
@@ -111,6 +114,13 @@ public class ProductBuyActivity extends BaseActivity implements View.OnClickList
         tv_fhfs.setOnClickListener(this);
         fundcode = intent.getStringExtra("productCode");
         type = intent.getStringExtra("productType");
+//        type = "1";
+        if ("3".equals(type)) {
+            ll_fhfs.setVisibility(View.GONE);
+        } else {
+            ll_fhfs.setVisibility(View.VISIBLE);
+        }
+
         schema_id = intent.getStringExtra("schema_id");
         prod_code = intent.getStringExtra("prod_code");
         session = SpUtils.getString(this, "mSession", null);
@@ -153,17 +163,18 @@ public class ProductBuyActivity extends BaseActivity implements View.OnClickList
                         @Override
                         public void onNagtiveClick() {
                             dialogBean.stockprice = et_stock_price.getText().toString();
-                            productBuyDialog = new ProductBuyDialog(ProductBuyActivity.this, ProductBuyActivity.this, dialogBean);
+                            productBuyDialog = new ProductBuyDialog(ProductBuyActivity.this, ProductBuyActivity.this, dialogBean, type);
                             productBuyDialog.show();
                         }
                     });
                 } else {
                     dialogBean.stockprice = et_stock_price.getText().toString();
-                    productBuyDialog = new ProductBuyDialog(ProductBuyActivity.this, ProductBuyActivity.this, dialogBean);
+                    productBuyDialog = new ProductBuyDialog(ProductBuyActivity.this, ProductBuyActivity.this, dialogBean, type);
                     productBuyDialog.show();
                 }
                 break;
             case R.id.tv_fhfs:
+
                 Helper.showItemSelectDialog(this,getWidth(),new Helper.OnItemSelectedListener(){
                     @Override
                     public void getSelectedItem(String content) {

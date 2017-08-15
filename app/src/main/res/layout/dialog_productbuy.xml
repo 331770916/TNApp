@@ -1,6 +1,6 @@
 <LinearLayout xmlns:android="http://schemas.android.com/apk/res/android"
     android:layout_width="match_parent"
-    android:layout_height="@dimen/size250"
+    android:layout_height="wrap_content"
     android:background="@color/white"
     android:orientation="vertical">
 
@@ -90,6 +90,7 @@
                 android:textColor="@color/black" />
         </LinearLayout>
         <LinearLayout
+            android:id="@+id/ll_fhfs"
             android:layout_width="wrap_content"
             android:layout_height="wrap_content"
             android:layout_marginTop="@dimen/size5">
@@ -140,6 +141,7 @@
         android:layout_width="match_parent"
         android:layout_height="wrap_content"
         android:layout_alignParentBottom="true"
+        android:layout_marginBottom="20dp"
         android:layout_marginTop="@dimen/size20"
         android:orientation="horizontal"
         android:paddingLeft="@dimen/size20"
