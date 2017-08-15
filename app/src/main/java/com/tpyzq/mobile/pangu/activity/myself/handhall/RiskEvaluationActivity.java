@@ -331,9 +331,11 @@ public class RiskEvaluationActivity extends BaseActivity implements View.OnClick
                                 mDate.setText(json.optString("CORP_BEGIN_DATE"));
                                 switch (json.optString("CORP_RISK_VAILD")){
                                     case "0":
-                                        Anew.setVisibility(View.VISIBLE);
-                                        Answer.setVisibility(View.GONE);
-                                        Result.setVisibility(View.GONE);
+                                        if (showResult != -1) {
+                                            Anew.setVisibility(View.VISIBLE);
+                                            Answer.setVisibility(View.GONE);
+                                            Result.setVisibility(View.GONE);
+                                        }
                                         mResultTV.setText(json.optString("RISK_LEVEL_NAME"));
                                         switch (json.optString("CORP_RISK_LEVEL")){
                                             case "0":
@@ -376,9 +378,11 @@ public class RiskEvaluationActivity extends BaseActivity implements View.OnClick
                                         mResulDate1.setText(Helper.getMyDateY_M_D(json.optString("CORP_END_DATE")));
                                         break;
                                     case "1":
-                                        Anew.setVisibility(View.GONE);
-                                        Answer.setVisibility(View.VISIBLE);
-                                        Result.setVisibility(View.GONE);
+                                        if (showResult != -1) {
+                                            Anew.setVisibility(View.GONE);
+                                            Answer.setVisibility(View.VISIBLE);
+                                            Result.setVisibility(View.GONE);
+                                        }
                                         toConnect();
                                         break;
                                 }

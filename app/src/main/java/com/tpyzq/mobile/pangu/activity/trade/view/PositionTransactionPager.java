@@ -187,6 +187,6 @@ public class PositionTransactionPager extends BaseTransactionPager implements Ad
         }else if ("1".equals(market)){
             stockCode = Helper.getStockCode(stockCode,"83");
         }
-        stockCodeCallBack.setStockCode(datas.get(position).SECU_NAME, stockCode);
+        stockCodeCallBack.setStockCode(datas.get(position-1).SECU_NAME, stockCode);
     }
 }
