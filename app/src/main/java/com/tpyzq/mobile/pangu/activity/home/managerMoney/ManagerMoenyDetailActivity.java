@@ -19,6 +19,7 @@ import com.tpyzq.mobile.pangu.activity.home.managerMoney.product.currencyFund.Mo
 import com.tpyzq.mobile.pangu.activity.myself.login.ShouJiVerificationActivity;
 import com.tpyzq.mobile.pangu.activity.myself.login.ShouJiZhuCeActivity;
 import com.tpyzq.mobile.pangu.activity.myself.login.TransactionLoginActivity;
+import com.tpyzq.mobile.pangu.activity.trade.open_fund.AddOrModFixFundActivity;
 import com.tpyzq.mobile.pangu.activity.trade.open_fund.FixFundListActivity;
 import com.tpyzq.mobile.pangu.base.BaseActivity;
 import com.tpyzq.mobile.pangu.base.SimpleRemoteControl;
@@ -511,7 +512,7 @@ public class ManagerMoenyDetailActivity extends BaseActivity implements View.OnC
             case R.id.targetTouBtn:
 
                 intent = new Intent();
-                intent.setClass(ManagerMoenyDetailActivity.this, FixFundListActivity.class);
+                intent.setClass(this, AddOrModFixFundActivity.class);
                 startActivity(intent);
                 break;
         }
