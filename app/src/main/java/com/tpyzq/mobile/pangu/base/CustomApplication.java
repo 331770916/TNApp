@@ -102,7 +102,7 @@ public class CustomApplication extends MultiDexApplication {
                 .connectTimeout(10000L, TimeUnit.MILLISECONDS)
                 .readTimeout(10000L, TimeUnit.MILLISECONDS)
                 .build();
-        OkHttpUtils.initClient(client);
+        OkHttpUtils.initClient(client,this);
         OkHttpUtils.setUserAgent(generateUserAgent());
         final IntentFilter homeFilter = new IntentFilter();
         homeFilter.addAction(Intent.ACTION_CLOSE_SYSTEM_DIALOGS);
