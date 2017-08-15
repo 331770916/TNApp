@@ -89,6 +89,7 @@
                 android:textColor="@color/black"/>
         </LinearLayout>
         <LinearLayout
+            android:id="@+id/ll_fhfs"
             android:layout_width="wrap_content"
             android:layout_height="0dp"
             android:layout_weight="1"

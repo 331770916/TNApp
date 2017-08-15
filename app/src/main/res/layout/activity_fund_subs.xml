@@ -89,9 +89,8 @@
         <View
             android:layout_width="match_parent"
             android:layout_height="1px"
-            android:background="@color/white"
             android:layout_marginLeft="@dimen/size15"
-            android:src="@color/grey" />
+            android:background="@color/gray" />
 
         <LinearLayout
             android:layout_width="match_parent"
@@ -125,9 +124,8 @@
         <View
             android:layout_width="match_parent"
             android:layout_height="1px"
-            android:background="@color/white"
             android:layout_marginLeft="@dimen/size15"
-            android:src="@color/grey" />
+            android:background="@color/gray"/>
 
         <LinearLayout
             android:layout_width="match_parent"
@@ -157,7 +155,11 @@
                 android:textColor="@color/title_list"
                 android:textSize="@dimen/txtSize14" />
         </LinearLayout>
-
+        <View
+            android:layout_width="match_parent"
+            android:layout_height="1px"
+            android:layout_marginLeft="@dimen/size15"
+            android:background="@color/gray" />
         <LinearLayout
             android:layout_width="match_parent"
             android:layout_height="@dimen/size200"
@@ -186,6 +188,7 @@
                     android:gravity="center_vertical"
                     android:textColor="@color/title_list"
                     android:layout_marginLeft="@dimen/size15"
+                    android:text="--"
                     android:layout_width="wrap_content"
                     android:layout_height="match_parent" />
 
@@ -210,6 +213,7 @@
                     android:gravity="center_vertical"
                     android:textColor="@color/title_list"
                     android:layout_marginLeft="@dimen/size15"
+                    android:text="--"
                     android:layout_width="wrap_content"
                     android:layout_height="match_parent" />
 
@@ -235,6 +239,7 @@
                     android:gravity="center_vertical"
                     android:textColor="@color/title_list"
                     android:layout_marginLeft="@dimen/size15"
+                    android:text="--"
                     android:layout_width="wrap_content"
                     android:layout_height="match_parent" />
 
@@ -259,6 +264,7 @@
                     android:gravity="center_vertical"
                     android:textColor="@color/title_list"
                     android:layout_marginLeft="@dimen/size15"
+                    android:text="--"
                     android:layout_width="wrap_content"
                     android:layout_height="match_parent" />
 

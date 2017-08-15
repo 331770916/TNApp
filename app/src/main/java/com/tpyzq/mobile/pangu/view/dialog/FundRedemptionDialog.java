@@ -38,6 +38,7 @@ public class FundRedemptionDialog extends BaseDialog implements View.OnClickList
         tv_fund_price = (TextView) findViewById(R.id.tv_fund_price);
         tv_title = (TextView) findViewById(R.id.tv_title);
         tv_fund_priceway = (TextView) findViewById(R.id.tv_fund_priceway);
+        findViewById(R.id.ll_fhfs).setVisibility(View.GONE);
         bt_true = (Button) findViewById(R.id.bt_true);
         bt_false = (Button) findViewById(R.id.bt_false);
     }
