@@ -70,13 +70,15 @@
                         android:id="@+id/homeProductReservation"
                         android:layout_width="match_parent"
                         android:layout_height="wrap_content"
+                        android:background="@color/white"
                         android:divider="@null" />
 
 
                     <com.tpyzq.mobile.pangu.view.gridview.MyListView
                         android:id="@+id/homeSelfNewsListView"
                         android:layout_width="match_parent"
-                        android:layout_height="wrap_content" />
+                        android:layout_height="wrap_content"
+                        android:background="@color/white"/>
 
                         <LinearLayout
                             android:id="@+id/ll_homeInfoListLayout"
@@ -101,6 +103,7 @@
                         android:id="@+id/homeHotListView"
                         android:layout_width="match_parent"
                         android:layout_height="wrap_content"
+                        android:background="@color/white"
                         android:divider="@null" />
                 </LinearLayout>
 
