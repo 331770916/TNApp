@@ -92,6 +92,28 @@
                 android:text=""
                 android:textColor="@color/black" />
         </LinearLayout>
+        <LinearLayout
+            android:id="@+id/ll_secc"
+            android:visibility="gone"
+            android:layout_width="wrap_content"
+            android:layout_height="0dp"
+            android:layout_weight="1">
+
+            <TextView
+                android:layout_width="wrap_content"
+                android:layout_height="wrap_content"
+                android:text="股东代码:"
+                android:textColor="@color/text" />
+
+            <TextView
+                android:id="@+id/tv_secc_code"
+                android:layout_width="wrap_content"
+                android:layout_height="wrap_content"
+                android:layout_marginLeft="@dimen/size10"
+                android:text=""
+                android:textColor="@color/blue" />
+        </LinearLayout>
+
     </LinearLayout>
 
     <LinearLayout

@@ -87,16 +87,14 @@
                 </RelativeLayout>
             </LinearLayout>
 
-            <HorizontalScrollView
-                android:id="@+id/reverse_repoLayout"
-                android:layout_width="match_parent"
-                android:layout_height="wrap_content"
-                android:layout_marginTop="@dimen/size8">
 
                 <LinearLayout
+                    android:id="@+id/reverse_repoLayout"
                     android:layout_width="match_parent"
                     android:layout_height="match_parent"
+                    android:layout_marginRight="@dimen/size10"
                     android:gravity="center_vertical"
+                    android:layout_marginTop="@dimen/size8"
                     android:orientation="horizontal">
 
                     <TextView
@@ -117,7 +115,8 @@
                         android:background="@color/lineColor" />
 
                     <LinearLayout
-                        android:layout_width="wrap_content"
+                        android:layout_width="0dp"
+                        android:layout_weight="1"
                         android:layout_height="wrap_content"
                         android:layout_marginLeft="@dimen/size10"
                         android:gravity="center_horizontal"
@@ -125,7 +124,7 @@
 
                         <CheckedTextView
                             android:id="@+id/jktitle"
-                            android:layout_width="wrap_content"
+                            android:layout_width="match_parent"
                             android:layout_height="@dimen/size20"
                             android:layout_gravity="center_horizontal"
                             android:checked="true"
@@ -148,7 +147,8 @@
 
                     <View
                         android:id="@+id/tempView2"
-                        android:layout_width="@dimen/size30"
+                        android:layout_width="0dp"
+                        android:layout_weight="1"
                         android:layout_height="1px"
                         android:layout_marginTop="@dimen/size11"
                         android:layout_gravity="top"
@@ -156,14 +156,15 @@
                         android:background="@color/lineColor" />
 
                     <LinearLayout
-                        android:layout_width="wrap_content"
+                        android:layout_width="0dp"
+                        android:layout_weight="1"
                         android:layout_height="wrap_content"
                         android:gravity="center_horizontal"
                         android:orientation="vertical">
 
                         <CheckedTextView
                             android:id="@+id/kytitle"
-                            android:layout_width="wrap_content"
+                            android:layout_width="match_parent"
                             android:layout_height="@dimen/size20"
                             android:layout_gravity="center_horizontal"
                             android:background="@drawable/reverse_selectortvbg"
@@ -184,7 +185,8 @@
 
                     <View
                         android:id="@+id/tempView3"
-                        android:layout_width="@dimen/size30"
+                        android:layout_width="0dp"
+                        android:layout_weight="1"
                         android:layout_height="1px"
                         android:layout_marginTop="@dimen/size11"
                         android:layout_gravity="top"
@@ -192,14 +194,15 @@
                         android:background="@color/lineColor" />
 
                     <LinearLayout
-                        android:layout_width="wrap_content"
+                        android:layout_width="0dp"
+                        android:layout_weight="1"
                         android:layout_height="wrap_content"
                         android:gravity="center_horizontal"
                         android:orientation="vertical">
 
                         <CheckedTextView
                             android:id="@+id/kqtitle"
-                            android:layout_width="wrap_content"
+                            android:layout_width="match_parent"
                             android:layout_height="@dimen/size20"
                             android:layout_gravity="center_horizontal"
                             android:background="@drawable/reverse_selectortvbg"
@@ -219,8 +222,6 @@
 
 
                 </LinearLayout>
-            </HorizontalScrollView>
-
 
             <LinearLayout
                 android:layout_width="match_parent"

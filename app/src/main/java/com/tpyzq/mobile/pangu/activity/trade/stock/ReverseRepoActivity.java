@@ -68,7 +68,7 @@ public class ReverseRepoActivity extends BaseActivity implements View.OnClickLis
     ReverseRepoActivityPresenter presenter;
     private LinearLayout ll_mKeyboard;
 
-    private HorizontalScrollView mRepoLayout;
+    private LinearLayout mRepoLayout;
     private TextView     mRepoTextView;
     private DecimalFormat mFormat2 = new DecimalFormat("#0.00");
 
@@ -94,7 +94,7 @@ public class ReverseRepoActivity extends BaseActivity implements View.OnClickLis
         ll_mKeyboard = (LinearLayout) findViewById(R.id.Keyboard_LinearLayout);
         mSyTv = (TextView) findViewById(R.id.syTv);
 
-        mRepoLayout = (HorizontalScrollView) findViewById(R.id.reverse_repoLayout);
+        mRepoLayout = (LinearLayout) findViewById(R.id.reverse_repoLayout);
         mRepoTextView = (TextView) findViewById(R.id.reverse_daytv);
 
         initData();
@@ -396,7 +396,7 @@ public class ReverseRepoActivity extends BaseActivity implements View.OnClickLis
                         } else {
 //                输入钱小于最大可借出
                             String result = stockInfoBean.stockCode.substring(2, stockInfoBean.stockCode.length());
-                            CommissionedBuyAndSellDialog commissionedBuyAndSellDialog = new CommissionedBuyAndSellDialog(this, commissionedBuyAndSell, stockInfoBean.stockName1, result, price + "", et_price.getText().toString(), "卖", et_income.getText().toString());
+                            CommissionedBuyAndSellDialog commissionedBuyAndSellDialog = new CommissionedBuyAndSellDialog(this, commissionedBuyAndSell, stockInfoBean.stockName1, result, price + "", et_price.getText().toString(),"","", "卖", et_income.getText().toString());
                             commissionedBuyAndSellDialog.show();
                         }
 
@@ -492,6 +492,11 @@ public class ReverseRepoActivity extends BaseActivity implements View.OnClickLis
         @Override
         public void setSell(String code, String price, String num) {
             presenter.getBuy(stockInfoBean.stockCode, price + "", amount / 100 + "");
+        }
+
+        @Override
+        public void showSeccDialog() {
+
         }
 
     };

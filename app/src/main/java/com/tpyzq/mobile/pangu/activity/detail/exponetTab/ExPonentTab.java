@@ -180,15 +180,18 @@ public class ExPonentTab extends BaseExponentTab implements ICallbackResult, Ada
                 intent.putExtra("isExponent", true);
 
                 if (mIndex == 0) {
+                    data.setTitle("成份股涨幅");
                     intent.putExtra("flag", "1");
                     intent.putExtra("asc", "1");
                     intent.putExtra("type", "1000");
                 } else if (mIndex == 1) {
+                    data.setTitle("成份股跌幅");
                     intent.putExtra("flag", "1");
                     intent.putExtra("asc", "2");
                     intent.putExtra("type", "2000");
                     intent.putExtra("order", "2");
                 } else {
+                    data.setTitle("成份股换手率");
                     data.setHead3("换手率");
                     intent.putExtra("flag", "2");
                     intent.putExtra("asc", "1");

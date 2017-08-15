@@ -843,7 +843,7 @@
     <string name="fix_fund_item_start">起始时间</string>
     <string name="fix_fund_item_end">终止日期</string>
     <string name="fix_fund_item_date">定投日</string>
-    <string name="fix_fund_balance_enable">可用资金：--</string>
+    <string name="fix_fund_balance_enable">可用余额：--</string>
     <string name="fix_fund_balance_hint">请输入定投金额</string>
     <string name="fix_fund_balance">定投金额：</string>
     <string name="fix_fund_end_date">结束日期：</string>

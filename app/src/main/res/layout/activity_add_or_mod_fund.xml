@@ -310,7 +310,7 @@
                         android:singleLine="true"
                         android:textColor="@color/hushenTab_titleColor"
                         android:textColorHint="@color/texts"
-                        android:textSize="@dimen/txtSize14" />
+                        android:textSize="@dimen/txtSize13" />
                     <TextView
                         android:id="@+id/tv_branch_enable"
                         android:layout_width="wrap_content"

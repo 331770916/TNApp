@@ -474,7 +474,7 @@ public class AddOrModFixFundActivity extends BaseActivity implements View.OnClic
 //        et_fund_price.setEnabled(true);
         tv_fund_name.setText(fundDataBean.data.get(0).FUND_NAME);
         tv_fund_jz.setText(fundDataBean.data.get(0).NAV);
-        tv_branch_enable.setText("可用资金："+fundDataBean.data.get(0).ENABLE_BALANCE);
+        tv_branch_enable.setText("可用余额："+fundDataBean.data.get(0).ENABLE_BALANCE);
     }
     @Override
     protected void onActivityResult(int requestCode, int resultCode, Intent data) {
