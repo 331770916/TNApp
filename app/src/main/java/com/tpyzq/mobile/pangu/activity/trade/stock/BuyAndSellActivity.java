@@ -1044,6 +1044,8 @@ public class BuyAndSellActivity extends BaseActivity implements View.OnClickList
     class ChooseStatus implements RadioGroup.OnCheckedChangeListener {
         @Override
         public void onCheckedChanged(RadioGroup group, int checkedId) {
+            MARKET_NAME = "";
+            secc_code = "";
             switch (group.getId()) {
                 case R.id.rg_buysell:
                     switch (checkedId) {
@@ -1106,6 +1108,8 @@ public class BuyAndSellActivity extends BaseActivity implements View.OnClickList
         switch (v.getId()) {
             case R.id.iv_delete:
                 isSearchAgin = true;
+                MARKET_NAME = "";
+                secc_code = "";
                 clearView(true);
                 break;
             case R.id.iv_sub_price:
@@ -1181,7 +1185,7 @@ public class BuyAndSellActivity extends BaseActivity implements View.OnClickList
                 }
                 break;
             case R.id.bt_sell:
-                if (!TextUtils.isEmpty(stockCode)) {
+                if (!TextUtils.isEmpty(stockCode)||et_stock_code.getText().toString().trim().length()==6) {
                     if (rb_sell.isChecked()) {
                         if ("0".equals(et_num.getText().toString()) || TextUtils.isEmpty(et_num.getText().toString())) {
                             CentreToast.showText(BuyAndSellActivity.this,"请确认价格或数量为有效数值",Toast.LENGTH_SHORT);
@@ -1196,6 +1200,10 @@ public class BuyAndSellActivity extends BaseActivity implements View.OnClickList
                                 if (stockCode.length() == 8) {
                                     tempStockCode = stockCode.substring(2);
                                 }
+                            }
+                            if (TextUtils.isEmpty(secc_code)&&null!=ConstantUtil.stock_account_list&&ConstantUtil.stock_account_list.size()>0) {
+                                secc_code = ConstantUtil.stock_account_list.get(0).get("SECU_ACCOUNT");
+                                MARKET_NAME = ConstantUtil.stock_account_list.get(0).get("MARKET_NAME");
                             }
                             commissionedBuyAndSellDialog = new CommissionedBuyAndSellDialog(this, commissionedBuyAndSell, stockName, tempStockCode, price + "", stocknum,MARKET_NAME,secc_code, transactiontype, entrustWays);
                             commissionedBuyAndSellDialog.show();
@@ -1230,6 +1238,11 @@ public class BuyAndSellActivity extends BaseActivity implements View.OnClickList
                 if (stockCode.length()==8) {
                     tempStockCode = stockCode.substring(2);
                 }
+            }
+
+            if (TextUtils.isEmpty(secc_code)&&null!=ConstantUtil.stock_account_list&&ConstantUtil.stock_account_list.size()>0) {
+                secc_code = ConstantUtil.stock_account_list.get(0).get("SECU_ACCOUNT");
+                MARKET_NAME = ConstantUtil.stock_account_list.get(0).get("MARKET_NAME");
             }
             commissionedBuyAndSellDialog = new CommissionedBuyAndSellDialog(this, commissionedBuyAndSell, stockName, tempStockCode, price + "", stocknum,MARKET_NAME,secc_code, transactiontype, entrustWays);
             commissionedBuyAndSellDialog.show();
@@ -1699,6 +1712,8 @@ public class BuyAndSellActivity extends BaseActivity implements View.OnClickList
             et_stock_code.setText("");
             CentreToast.showText(BuyAndSellActivity.this, "当前股票代码不可交易", Toast.LENGTH_SHORT);
         } else {
+            MARKET_NAME = "";
+            secc_code = "";
             setStock(stockName, code);
             isSearchAgin = false;
             refresh(code);
@@ -1724,6 +1739,8 @@ public class BuyAndSellActivity extends BaseActivity implements View.OnClickList
 //                CentreToast.showText(BuyAndSellActivity.this, "当前股票代码不可交易");
                 CentreToast.showText(BuyAndSellActivity.this, "当前股票代码不可交易",Toast.LENGTH_SHORT);
             } else {
+                MARKET_NAME = "";
+                secc_code = "";
                 searchNetStock(false,code.substring(2));
                 setStock(stockName, code);
                 isSearchAgin = false;
