@@ -396,7 +396,7 @@ public class ReverseRepoActivity extends BaseActivity implements View.OnClickLis
                         } else {
 //                输入钱小于最大可借出
                             String result = stockInfoBean.stockCode.substring(2, stockInfoBean.stockCode.length());
-                            CommissionedBuyAndSellDialog commissionedBuyAndSellDialog = new CommissionedBuyAndSellDialog(this, commissionedBuyAndSell, stockInfoBean.stockName1, result, price + "", et_price.getText().toString(), "卖", et_income.getText().toString());
+                            CommissionedBuyAndSellDialog commissionedBuyAndSellDialog = new CommissionedBuyAndSellDialog(this, commissionedBuyAndSell, stockInfoBean.stockName1, result, price + "", et_price.getText().toString(),"","", "卖", et_income.getText().toString());
                             commissionedBuyAndSellDialog.show();
                         }
 
@@ -492,6 +492,11 @@ public class ReverseRepoActivity extends BaseActivity implements View.OnClickLis
         @Override
         public void setSell(String code, String price, String num) {
             presenter.getBuy(stockInfoBean.stockCode, price + "", amount / 100 + "");
+        }
+
+        @Override
+        public void showSeccDialog() {
+
         }
 
     };

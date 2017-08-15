@@ -9,6 +9,8 @@ import com.tpyzq.mobile.pangu.R;
 import com.tpyzq.mobile.pangu.base.CustomApplication;
 
 import java.io.File;
+import java.util.ArrayList;
+import java.util.HashMap;
 
 /**
  * 业务常量文件
@@ -93,6 +95,8 @@ public class ConstantUtil {
 //    public static String bjUrl = BuildConfig.bjUrl;//北京行情地址 测试
 //    public static String kmUrl = BuildConfig.kmUrl;//昆明行情地址  灰度
 //    public static String currentUrl = BuildConfig.currentUrl;//昆明行情地址  灰度
+
+    public static ArrayList<HashMap<String, String>> stock_account_list = new ArrayList<>();
 
     public static String SITE_JSON ;
 
