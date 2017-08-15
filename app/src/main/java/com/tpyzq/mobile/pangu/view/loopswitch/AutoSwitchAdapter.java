@@ -62,7 +62,7 @@ public class AutoSwitchAdapter extends AutoLoopSwitchBaseAdapter{
         TextView tvTime = new TextView(mContext);
         tvTime.setId(R.id.autoloopswitch_time_id);
         tvTime.setTextSize(12);
-        tvTime.setText(model.getDate()+" "+model.getTime());
+        tvTime.setText(model.getTime());
         tvTime.setPadding(0,2,0,2);
         tvTime.setTextColor(mContext.getResources().getColor(R.color.hideTextColor));
         ll.addView(tvTime,lpbottom);

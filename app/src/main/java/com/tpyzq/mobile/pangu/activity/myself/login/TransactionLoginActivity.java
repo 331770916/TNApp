@@ -135,6 +135,7 @@ import org.json.JSONObject;
 
 import java.text.SimpleDateFormat;
 import java.util.ArrayList;
+import java.util.HashMap;
 import java.util.List;
 
 import okhttp3.Call;
@@ -698,6 +699,23 @@ public class TransactionLoginActivity extends BaseActivity implements ICallbackR
                     SpUtils.putString(TransactionLoginActivity.this, "CORP_RISK_LEVEL", CORP_RISK_LEVEL);
                     SpUtils.putString(TransactionLoginActivity.this, "mSession", mSession);
                     SpUtils.putString(TransactionLoginActivity.this, "CORP_END_DATE", CORP_END_DATE);
+
+                    //获取股东账号列表
+                    JSONArray STOCK_ACCOUNT_LIST = result_ary.getJSONObject(i).optJSONArray("STOCK_ACCOUNT_LIST");
+                    ConstantUtil.stock_account_list.clear();
+                    if (null!=STOCK_ACCOUNT_LIST&&STOCK_ACCOUNT_LIST.length()>0) {
+                        JSONObject jsonObj ;
+                        HashMap<String, String> hashMap ;
+                        for (int j=0; j< STOCK_ACCOUNT_LIST.length(); j++){
+                            hashMap = new HashMap<>();
+                            jsonObj = STOCK_ACCOUNT_LIST.optJSONObject(j);
+                            hashMap.put("SECU_ACCOUNT",jsonObj.optString("SECU_ACCOUNT"));
+                            hashMap.put("FUND_ACCOUNT",jsonObj.optString("FUND_ACCOUNT"));
+                            hashMap.put("MARKET_NAME",jsonObj.optString("MARKET_NAME"));
+                            hashMap.put("MARKET",jsonObj.optString("MARKET"));
+                            ConstantUtil.stock_account_list.add(hashMap);
+                        }
+                    }
                     getAccountData();
 
                 } catch (JSONException e) {

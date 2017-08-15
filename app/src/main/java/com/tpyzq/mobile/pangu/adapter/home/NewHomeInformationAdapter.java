@@ -71,7 +71,7 @@ public class NewHomeInformationAdapter extends BaseAdapter{
         final InformationEntity info = mDatas.get(position);
         viewHolder.image.setImageURI(info.getImage_url());
         viewHolder.title.setText(info.getTitle()+" | "+info.getDigest());
-        viewHolder.time.setText(info.getDate()+" "+info.getTime());
+        viewHolder.time.setText(info.getTime());
         return convertView;
     }
 

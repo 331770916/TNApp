@@ -6,15 +6,14 @@
 
     <LinearLayout
         android:layout_width="wrap_content"
-        android:layout_height="@dimen/size80"
+        android:layout_height="@dimen/size100"
         android:layout_centerHorizontal="true"
         android:layout_marginTop="@dimen/size60"
         android:orientation="vertical">
 
         <LinearLayout
             android:layout_width="wrap_content"
-            android:layout_height="0dp"
-            android:layout_weight="1">
+            android:layout_height="wrap_content">
 
             <TextView
                 android:layout_width="wrap_content"
@@ -34,8 +33,7 @@
 
         <LinearLayout
             android:layout_width="wrap_content"
-            android:layout_height="0dp"
-            android:layout_weight="1"
+            android:layout_height="wrap_content"
             >
 
             <TextView
@@ -55,8 +53,7 @@
 
         <LinearLayout
             android:layout_width="wrap_content"
-            android:layout_height="0dp"
-            android:layout_weight="1">
+            android:layout_height="wrap_content">
 
             <TextView
                 android:layout_width="wrap_content"
@@ -75,8 +72,7 @@
 
         <LinearLayout
             android:layout_width="wrap_content"
-            android:layout_height="0dp"
-            android:layout_weight="1">
+            android:layout_height="wrap_content">
 
             <TextView
                 android:layout_width="wrap_content"
@@ -92,6 +88,27 @@
                 android:text=""
                 android:textColor="@color/black" />
         </LinearLayout>
+        <LinearLayout
+            android:id="@+id/ll_secc"
+            android:visibility="visible"
+            android:layout_width="wrap_content"
+            android:layout_height="wrap_content">
+
+            <TextView
+                android:layout_width="wrap_content"
+                android:layout_height="wrap_content"
+                android:text="股东代码:"
+                android:textColor="@color/text" />
+
+            <TextView
+                android:id="@+id/tv_secc_code"
+                android:layout_width="wrap_content"
+                android:layout_height="wrap_content"
+                android:layout_marginLeft="@dimen/size10"
+                android:text=""
+                android:textColor="@color/blue" />
+        </LinearLayout>
+
     </LinearLayout>
 
     <LinearLayout
