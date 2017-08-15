@@ -103,10 +103,9 @@ public class CommissionedBuyAndSellDialog extends BaseDialog implements View.OnC
         SpannableString spannableString = new SpannableString(desc);
         MyClickableSpan clickableSpan = new MyClickableSpan(desc);
         spannableString.setSpan(clickableSpan, 0, desc.length(), Spanned.SPAN_EXCLUSIVE_EXCLUSIVE);
-        spannableString.setSpan(new ForegroundColorSpan(Color.parseColor("#1C86EE")), 0, desc.length(), Spanned.SPAN_EXCLUSIVE_EXCLUSIVE);
-        spannableString.setSpan(new UnderlineSpan(), 0, desc.length(), Spanned.SPAN_EXCLUSIVE_EXCLUSIVE);
         tv_secc_code.setText(spannableString);
         tv_secc_code.setMovementMethod(LinkMovementMethod.getInstance());
+        tv_secc_code.setHighlightColor(Color.TRANSPARENT); //设置点击后的颜色为透明，否则会一直出现高亮
     }
     /*// 通过继承UnderlineSpan重写updateDrawState方法setUnderlineText(false)取消下划线
     class MyUnderlineSpan extends UnderlineSpan {
@@ -155,7 +154,8 @@ public class CommissionedBuyAndSellDialog extends BaseDialog implements View.OnC
 
         @Override
         public void updateDrawState(TextPaint ds) {
-            ds.setUnderlineText(false);
+            ds.setColor(Color.parseColor("#1C86EE"));
+            ds.setUnderlineText(true);      //设置下划线
         }
 
         @Override
