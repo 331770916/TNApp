@@ -68,7 +68,7 @@ public class ReverseRepoActivity extends BaseActivity implements View.OnClickLis
     ReverseRepoActivityPresenter presenter;
     private LinearLayout ll_mKeyboard;
 
-    private HorizontalScrollView mRepoLayout;
+    private LinearLayout mRepoLayout;
     private TextView     mRepoTextView;
     private DecimalFormat mFormat2 = new DecimalFormat("#0.00");
 
@@ -94,7 +94,7 @@ public class ReverseRepoActivity extends BaseActivity implements View.OnClickLis
         ll_mKeyboard = (LinearLayout) findViewById(R.id.Keyboard_LinearLayout);
         mSyTv = (TextView) findViewById(R.id.syTv);
 
-        mRepoLayout = (HorizontalScrollView) findViewById(R.id.reverse_repoLayout);
+        mRepoLayout = (LinearLayout) findViewById(R.id.reverse_repoLayout);
         mRepoTextView = (TextView) findViewById(R.id.reverse_daytv);
 
         initData();
