@@ -1,17 +1,20 @@
 package com.tpyzq.mobile.pangu.activity.myself.account;
 
+import android.app.Dialog;
 import android.text.TextUtils;
 import android.view.View;
 import android.widget.ImageView;
 import android.widget.TextView;
 
 import com.tpyzq.mobile.pangu.R;
+import com.tpyzq.mobile.pangu.activity.IndexActivity;
 import com.tpyzq.mobile.pangu.base.BaseActivity;
 import com.tpyzq.mobile.pangu.http.NetWorkUtil;
 import com.tpyzq.mobile.pangu.util.ColorUtils;
 import com.tpyzq.mobile.pangu.util.ConstantUtil;
 import com.tpyzq.mobile.pangu.util.panguutil.APPInfoUtils;
 import com.tpyzq.mobile.pangu.view.dialog.APPUpdateDialog;
+import com.tpyzq.mobile.pangu.view.dialog.VersionDialog;
 import com.zhy.http.okhttp.callback.StringCallback;
 
 import org.json.JSONException;
@@ -28,6 +31,8 @@ public class VersionUpdateActivity extends BaseActivity implements View.OnClickL
     ImageView iv_back;
     TextView tv_version_name;
     TextView tv_update;
+    private Dialog mDialog;
+
     @Override
     public void initView() {
         iv_back = (ImageView) findViewById(R.id.iv_back);
@@ -46,10 +51,11 @@ public class VersionUpdateActivity extends BaseActivity implements View.OnClickL
 
     private void getData() {
         HashMap map400101 = new HashMap();
-        map400101.put("funcid", "400101");
-        map400101.put("token", "");
         HashMap map400101_1 = new HashMap();
         map400101_1.put("versionType", "2");
+        map400101_1.put("versionNumber",APPInfoUtils.getVersionName(VersionUpdateActivity.this));
+        map400101.put("funcid", "400101");
+        map400101.put("token", "");
         map400101.put("parms", map400101_1);
         NetWorkUtil.getInstence().okHttpForPostString("", ConstantUtil.getURL_NEW(), map400101, new StringCallback() {
             @Override
@@ -68,24 +74,36 @@ public class VersionUpdateActivity extends BaseActivity implements View.OnClickL
                     if ("0".equals(code)) {
                         String result = jsonObject.getString("result");
                         JSONObject joResult = new JSONObject(result);
-                        String versionNumber = joResult.getString("versionNumber");  //版本号
-                        if (TextUtils.isEmpty(versionNumber)) {
-                            return;
-                        }
-                        String[] versionCode = versionNumber.split("\\.");
-                        String[] thisVersionCode = APPInfoUtils.getVersionName(VersionUpdateActivity.this).split("\\.");
-                        //如果 版本号  与  当前版本号 相同 删除安装包
-                        if (Double.parseDouble(versionCode[0]) > Double.parseDouble(thisVersionCode[0])) {
-//                        if (!APPInfoUtils.getVersionName(VersionUpdateActivity.this).equals(versionNumber)){
-                            tv_update.setTextColor(ColorUtils.BLUE);
-                            tv_update.setText("有更新版本，马上安装？");
-                            tv_update.setClickable(true);
-                        }
+//                        String versionNumber = joResult.getString("versionNumber");  //版本号
+//                        if (TextUtils.isEmpty(versionNumber)) {
+//                            return;
+//                        }
+//                        String[] versionCode = versionNumber.split("\\.");
+//                        String[] thisVersionCode = APPInfoUtils.getVersionName(VersionUpdateActivity.this).split("\\.");
+//                        //如果 版本号  与  当前版本号 相同 删除安装包
+//                        if (Double.parseDouble(versionCode[0]) > Double.parseDouble(thisVersionCode[0])) {
+////                        if (!APPInfoUtils.getVersionName(VersionUpdateActivity.this).equals(versionNumber)){
+//                            tv_update.setTextColor(ColorUtils.BLUE);
+//                            tv_update.setText("有更新版本，马上安装？");
+//                            tv_update.setClickable(true);
+//                        }
                         //版本名
 //                        CentreToast.showText(VersionUpdateActivity.this,"最新版本号"+versionNumber);
 //                        APPUpdateBean appUpdateBean = new Gson().fromJson(result,APPUpdateBean.class);
 //                        CentreToast.showText(VersionUpdateActivity.this,"版本号"+appUpdateBean.versionNumber);
 //                        MistakeDialog.showDialog("版本需要更新", VersionUpdateActivity.this);
+
+
+                        String forceIsupdate = joResult.getString("forceIsupdate");   //是否强制更新
+                        String versionNumber = joResult.getString("versionNumber");   //版本号
+                        String apkAddress = joResult.getString("apkAddress");         //下载地址
+                        String remarks = joResult.optString("remarks");
+                        if (!"2".equals(forceIsupdate)) {
+                            tv_update.setTextColor(ColorUtils.BLUE);
+                            tv_update.setText("有更新版本，马上安装？");
+                            tv_update.setClickable(true);
+                            mDialog = new VersionDialog(VersionUpdateActivity.this, apkAddress, forceIsupdate, versionNumber, remarks);
+                        }
                     }
                 } catch (JSONException e) {
                     e.printStackTrace();
@@ -107,8 +125,10 @@ public class VersionUpdateActivity extends BaseActivity implements View.OnClickL
                 finish();
                 break;
             case R.id.tv_update:
-                APPUpdateDialog appUpdateDialog = new APPUpdateDialog(this);
-                appUpdateDialog.show();
+//                APPUpdateDialog appUpdateDialog = new APPUpdateDialog(this);
+//                appUpdateDialog.show();
+
+                mDialog.show();
                 break;
         }
     }
