@@ -65,6 +65,7 @@ import com.tpyzq.mobile.pangu.util.ConstantUtil;
 import com.tpyzq.mobile.pangu.util.Helper;
 import com.tpyzq.mobile.pangu.util.ScreenShot;
 import com.tpyzq.mobile.pangu.util.SpUtils;
+import com.tpyzq.mobile.pangu.util.ViewUtil;
 import com.tpyzq.mobile.pangu.util.panguutil.AddPosition;
 import com.tpyzq.mobile.pangu.util.panguutil.BRutil;
 import com.tpyzq.mobile.pangu.util.panguutil.SelfChoiceStockTempData;
@@ -1709,6 +1710,7 @@ public class StockDetailActivity extends BaseActivity implements  View.OnClickLi
                 if(land_chartWholeLayout.getChildCount()>0){
                     land_chartWholeLayout.removeAllViews();
                 }
+                ViewUtil.unbindView(land_minChartWholeLayout);
                 land_chartWholeLayout.addView(land_minChartWholeLayout);
                 land_KlineLayout.setVisibility(View.GONE);
                 break;
@@ -1722,6 +1724,7 @@ public class StockDetailActivity extends BaseActivity implements  View.OnClickLi
                     landFiveDayMinChart.setViewLand(true);
                     landFiveDayMinChart.setListener(this);
                 }
+                ViewUtil.unbindView(landFiveDayMinChart);
                 land_chartWholeLayout.addView(landFiveDayMinChart);
                 landFiveDayMinChart.setData(m_fiveDayminData,mFormat1);
                 break;
