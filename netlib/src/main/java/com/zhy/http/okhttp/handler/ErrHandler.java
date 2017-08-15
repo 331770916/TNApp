@@ -28,32 +28,36 @@ public class ErrHandler extends BaseHandler {
     }
 
     public void handleErr(Call call, Exception e, Callback callback, int id) {
-        String url = call.request().url().toString();
-        if (map.get(url)!=null){
-            if(System.currentTimeMillis()-map.get(url)<3000){
-                map.put(url,System.currentTimeMillis());
-                return;
-            }else if(System.currentTimeMillis()-map.get(url)<10000){
+        try {
+            String url = call.request().url().toString();
+            if (map.get(url)!=null){
+                if(System.currentTimeMillis()-map.get(url)<3000){
+                    map.put(url,System.currentTimeMillis());
+                    return;
+                }else if(System.currentTimeMillis()-map.get(url)<10000){
+                    return;
+                }
+            }
+            map.put(url,System.currentTimeMillis());
+            if (OkHttpUtils.NOT_NEED_ERR_HANDLER.equals(call.request().tag())) return;
+
+            if (!isNetWorked()) {
+                if (noNet==0){
+                    noNet=System.currentTimeMillis();
+                }else if(System.currentTimeMillis()-noNet<3000){
+                    return;
+                }
+                Toast.makeText(mContext, "当前无网络", Toast.LENGTH_SHORT).show();
                 return;
             }
-        }
-        map.put(url,System.currentTimeMillis());
-        if (OkHttpUtils.NOT_NEED_ERR_HANDLER.equals(call.request().tag())) return;
 
-        if (!isNetWorked()) {
-            if (noNet==0){
-                noNet=System.currentTimeMillis();
-            }else if(System.currentTimeMillis()-noNet<3000){
-                return;
-            }
-            Toast.makeText(mContext, "当前无网络", Toast.LENGTH_SHORT).show();
-            return;
+            RequestCall requestCall = OkHttpUtils.get().url("https://www.baidu.com/").tag(OkHttpUtils.NOT_NEED_ERR_HANDLER).build();
+            requestCall.buildCall(stringCallback);
+            //请求百度
+            OkHttpUtils.getInstance().execute(requestCall, stringCallback);
+        } catch (Exception e1) {
+            e1.printStackTrace();
         }
-
-        RequestCall requestCall = OkHttpUtils.get().url("https://www.baidu.com/").tag(OkHttpUtils.NOT_NEED_ERR_HANDLER).build();
-        requestCall.buildCall(stringCallback);
-        //请求百度
-        OkHttpUtils.getInstance().execute(requestCall, stringCallback);
     }
 
     StringCallback stringCallback = new StringCallback() {
