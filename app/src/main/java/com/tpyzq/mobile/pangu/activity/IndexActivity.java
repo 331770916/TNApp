@@ -134,10 +134,12 @@ public class IndexActivity extends BaseActivity implements InterfaceCollection.I
             public void onCheckedChanged(RadioGroup group, int checkedId) {
                 for (int i = 0; i < tabIds.length; i++) {
                     if (tabIds[i] == checkedId) {
-                        if(i==0)
-                            newstockremind.setVisibility(View.VISIBLE);
-                        else
-                            newstockremind.setVisibility(View.GONE);
+                        if(enitiy!=null){
+                            if(i==0)
+                                newstockremind.setVisibility(View.VISIBLE);
+                            else
+                                newstockremind.setVisibility(View.GONE);
+                        }
                         replaceFragment(i);
                         break;
                     }
