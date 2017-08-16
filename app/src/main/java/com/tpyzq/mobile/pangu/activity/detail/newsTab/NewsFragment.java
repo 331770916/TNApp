@@ -77,7 +77,6 @@ public class NewsFragment extends BasePager implements View.OnClickListener ,Int
             tvNewJiaZai.setVisibility(View.GONE);       //隐藏重新加载
             rlNews.setBackgroundColor(ContextCompat.getColor(mContext, R.color.white));      //背景设置为白色
             mListView.setVisibility(View.VISIBLE);      //请求到数据 展示 listView
-            tvNewGengDuo.setVisibility(View.VISIBLE);   //显示点击查看更多
             list = (ArrayList<InformationEntity>)info.getData();
             if(list!=null&&!list.isEmpty()){
                 if (list.size() >= 2){

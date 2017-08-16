@@ -154,7 +154,7 @@ public class FundPurchaseActivity extends BaseActivity implements View.OnClickLi
                 }
                 break;
             case R.id.tv_fhfs://分红方式
-                Helper.showItemSelectDialog(this,getWidth(),new Helper.OnItemSelectedListener(){
+                Helper.showItemSelectDialog(this,getWidth(),tv_fhfs.getText().toString(),new Helper.OnItemSelectedListener(){
                     @Override
                     public void getSelectedItem(String content) {
                         tv_fhfs.setText(content);

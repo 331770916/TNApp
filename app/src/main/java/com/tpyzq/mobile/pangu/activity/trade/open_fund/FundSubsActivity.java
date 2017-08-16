@@ -441,7 +441,7 @@ public class FundSubsActivity extends BaseActivity implements View.OnClickListen
                 finish();
                 break;
             case R.id.tv_fhfs:
-                Helper.showItemSelectDialog(this,getWidth(),new Helper.OnItemSelectedListener(){
+                Helper.showItemSelectDialog(this,getWidth(),tv_fhfs.getText().toString(),new Helper.OnItemSelectedListener(){
                     @Override
                     public void getSelectedItem(String content) {
                         tv_fhfs.setText(content);

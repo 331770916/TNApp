@@ -2011,7 +2011,7 @@ public class Helper {
      * @return
      */
     public static Dialog showItemSelectDialog(Context context
-            , int mWidth
+            , int mWidth,String choose
             , final OnItemSelectedListener listener
             , boolean isShowCancel, final String... contents) {
         final Dialog mDialog = new Dialog(context, R.style.Theme_Dialog_From_Bottom);
@@ -2019,44 +2019,55 @@ public class Helper {
         LinearLayout contentsView = (LinearLayout) rootView.findViewById(R.id.dialogContent);
         for (int i = 0; i < contents.length; i++) {
             if (i == 0) {
-                View topView = LayoutInflater.from(context).inflate(R.layout.dialog_top_item, null);
+                final View topView = LayoutInflater.from(context).inflate(R.layout.dialog_top_item, null);
                 TextView topText = (TextView) topView.findViewById(R.id.dialog_top);
                 topText.setText(contents[0]);
+                if(choose.equals(contents[0]))
+                    topView.findViewById(R.id.dialog_top_img).setVisibility(View.VISIBLE);
                 topText.setOnClickListener(new View.OnClickListener() {
                     @Override
                     public void onClick(View v) {
                         mDialog.dismiss();
-                        if (listener != null)
+                        if (listener != null) {
+                            topView.findViewById(R.id.dialog_top_img).setVisibility(View.VISIBLE);
                             listener.getSelectedItem(contents[0]);
+                        }
                     }
                 });
                 contentsView.addView(topView);
             } else if (i == contents.length - 1) {
-                View bottomView = LayoutInflater.from(context).inflate(R.layout.dialog_bottom_item, null);
+               final View bottomView = LayoutInflater.from(context).inflate(R.layout.dialog_bottom_item, null);
                 TextView boottomTv = (TextView) bottomView.findViewById(R.id.dialog_bottom);
                 boottomTv.setText(contents[contents.length - 1]);
+                if(choose.equals(contents[contents.length - 1]))
+                    bottomView.findViewById(R.id.dialog_bottom_img).setVisibility(View.VISIBLE);
                 boottomTv.setOnClickListener(new View.OnClickListener() {
                     @Override
                     public void onClick(View v) {
-
                         mDialog.dismiss();
-                        if (listener != null)
+                        if (listener != null) {
+                            bottomView.findViewById(R.id.dialog_bottom_img).setVisibility(View.VISIBLE);
                             listener.getSelectedItem(contents[contents.length - 1]);
+                        }
                     }
                 });
                 contentsView.addView(bottomView);
             } else {
-                View centerView = LayoutInflater.from(context).inflate(R.layout.dialog_center_item, null);
+                final View centerView = LayoutInflater.from(context).inflate(R.layout.dialog_center_item, null);
                 TextView centTv = (TextView) centerView.findViewById(R.id.dialog_center_item);
                 final int finalI = i;
                 centTv.setText(contents[finalI]);
+                if(choose.equals(contents[finalI]))
+                    centerView.findViewById(R.id.dialog_center_img).setVisibility(View.VISIBLE);
                 centTv.setOnClickListener(new View.OnClickListener() {
                     @Override
                     public void onClick(View v) {
 
                         mDialog.dismiss();
-                        if (listener != null)
+                        if (listener != null) {
+                            centerView.findViewById(R.id.dialog_center_img).setVisibility(View.VISIBLE);
                             listener.getSelectedItem(contents[finalI]);
+                        }
                     }
                 });
                 contentsView.addView(centerView);

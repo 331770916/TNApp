@@ -106,6 +106,7 @@ public class IndexActivity extends BaseActivity implements InterfaceCollection.I
         transactionRaioBtn = (MyRadioButton) findViewById(R.id.transactionRadioBtn);
         mySelfRaioBtn = (MyRadioButton) findViewById(R.id.informationRadioBtn);
         newstockremind = (FrameLayout)findViewById(R.id.newstockremind);
+        newstockremind.setOnClickListener(null);
         tvNewStock = (TextView)findViewById(R.id.newstockNumber);
         ivNewStockClose = (ImageView)findViewById(R.id.newstockclose);
         tvNewStockJump = (TextView)findViewById(R.id.newstockjump);

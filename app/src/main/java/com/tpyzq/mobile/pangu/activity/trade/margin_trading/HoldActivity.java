@@ -131,6 +131,7 @@ public class HoldActivity extends BaseActivity implements View.OnClickListener{
             } else {
                 viewHodler = (ViewHodler) convertView.getTag();
             }
+            Map<String,String> bean = mSetText.get(position);
             DecimalFormat mFormat1 = new DecimalFormat("#0.000");
             viewHodler.takeapositionItem0.setVisibility(position == mExpandedMenuPos ? View.VISIBLE : View.GONE);
 //            if (!TextUtils.isEmpty(mSetText.get(position).getTransactionName()) && !"0".equals(mSetText.get(position).getTransactionName())) {
@@ -154,8 +155,6 @@ public class HoldActivity extends BaseActivity implements View.OnClickListener{
 //                viewHodler.takeapositionItem3.setText("0.000");
 //                viewHodler.takeapositionItem3.setTextColor(Color.parseColor("#999999"));
 //            }
-//
-//
 //            if (!TextUtils.isEmpty(mSetText.get(position).getTransactionProfit1()) && !"0".equals(mSetText.get(position).getTransactionProfit1())) {
 //                if (mSetText.get(position).getTransactionProfit1().contains("-")) {
 //                    viewHodler.takeapositionItem4.setText(mFormat1.format(Double.parseDouble(mSetText.get(position).getTransactionProfit1())) + "%");
@@ -168,7 +167,6 @@ public class HoldActivity extends BaseActivity implements View.OnClickListener{
 //                viewHodler.takeapositionItem4.setText("0.000%");
 //                viewHodler.takeapositionItem4.setTextColor(Color.parseColor("#999999"));
 //            }
-//
 //            String TransactionPositions = mSetText.get(position).getTransactionPositions();
 //            if (!TextUtils.isEmpty(TransactionPositions) && !"0".equals(TransactionPositions)) {
 //                int idx = TransactionPositions.lastIndexOf(".");//查找小数点的位置
@@ -177,8 +175,6 @@ public class HoldActivity extends BaseActivity implements View.OnClickListener{
 //            } else {
 //                viewHodler.takeapositionItem5.setText("0");
 //            }
-//
-//
 //            String TransactionPositions1 = mSetText.get(position).getTransactionPositions1();
 //            if (!TextUtils.isEmpty(TransactionPositions1) && !"0".equals(TransactionPositions1)) {
 //                int idx = TransactionPositions1.lastIndexOf(".");//查找小数点的位置
@@ -236,25 +232,29 @@ public class HoldActivity extends BaseActivity implements View.OnClickListener{
             viewHodler.dbpmrLayout.setOnClickListener(new View.OnClickListener() {
                 @Override
                 public void onClick(View v) {
-
+                    Intent intent = new Intent(HoldActivity.this,OrdinarySaleActivity.class);
+                    startActivity(intent);
                 }
             });
             viewHodler.dbpzrLayout.setOnClickListener(new View.OnClickListener() {
                 @Override
                 public void onClick(View v) {
-
+                    Intent intent = new Intent(HoldActivity.this,CollateralActivity.class);
+                    startActivity(intent);
                 }
             });
             viewHodler.rqmcLayout.setOnClickListener(new View.OnClickListener() {
                 @Override
                 public void onClick(View v) {
-
+                    Intent intent = new Intent(HoldActivity.this,MarginBuySellActivity.class);
+                    startActivity(intent);
                 }
             });
             viewHodler.hqLayout.setOnClickListener(new View.OnClickListener() {
                 @Override
                 public void onClick(View v) {
-
+                    Intent intent = new Intent(HoldActivity.this,StockDetailActivity.class);
+                    startActivity(intent);
                 }
             });
             return convertView;

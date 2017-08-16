@@ -1,11 +1,20 @@
 <?xml version="1.0" encoding="utf-8"?>
-<LinearLayout xmlns:android="http://schemas.android.com/apk/res/android"
+<RelativeLayout xmlns:android="http://schemas.android.com/apk/res/android"
     android:layout_width="match_parent"
-    android:layout_height="match_parent"
-    android:orientation="vertical">
-
+    android:layout_height="wrap_content"
+    >
+    <ImageView
+        android:id="@+id/dialog_center_img"
+        android:layout_width="wrap_content"
+        android:layout_height="wrap_content"
+        android:layout_centerVertical="true"
+        android:layout_alignParentRight="true"
+        android:visibility="invisible"
+        android:layout_marginRight="@dimen/size20"
+        android:background="@mipmap/secc_select"/>
     <TextView
         android:id="@+id/dialog_center_item"
+        android:layout_toLeftOf="@id/dialog_center_img"
         android:layout_width="match_parent"
         android:layout_height="@dimen/size66"
         android:layout_gravity="center"
@@ -15,7 +24,8 @@
         android:textSize="@dimen/txtSize16" />
 
     <View
+        android:layout_below="@id/dialog_center_item"
         android:layout_width="match_parent"
         android:layout_height="0.5dp"
         android:background="#dddddd"/>
-</LinearLayout>
+</RelativeLayout>
