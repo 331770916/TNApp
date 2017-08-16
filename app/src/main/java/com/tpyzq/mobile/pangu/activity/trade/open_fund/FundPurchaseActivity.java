@@ -121,7 +121,7 @@ public class FundPurchaseActivity extends BaseActivity implements View.OnClickLi
             case R.id.tv_choose_fund:
                 Intent intent = new Intent();
                 intent.setClass(this, FundInfoActivity.class);
-                intent.putExtra(IS_SHOW, true);
+                intent.putExtra(IS_SHOW, false);
                 intent.putExtra(ITEM_CLICK, true);
                 intent.putExtra(LIST_TYPE, "2");//基金申购
                 startActivityForResult(intent, REQUEST);
