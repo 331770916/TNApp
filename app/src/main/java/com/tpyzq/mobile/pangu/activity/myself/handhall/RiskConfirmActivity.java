@@ -1,10 +1,12 @@
 package com.tpyzq.mobile.pangu.activity.myself.handhall;
 
+import android.app.Dialog;
 import android.graphics.Color;
 import android.text.TextUtils;
 import android.view.View;
 import android.widget.Button;
 import android.widget.CheckBox;
+import android.widget.FrameLayout;
 import android.widget.ImageView;
 import android.widget.LinearLayout;
 import android.widget.TextView;
@@ -20,6 +22,7 @@ import com.tpyzq.mobile.pangu.util.Helper;
 import com.tpyzq.mobile.pangu.util.SpUtils;
 import com.tpyzq.mobile.pangu.view.CentreToast;
 import com.tpyzq.mobile.pangu.view.CustomCenterDialog;
+import com.tpyzq.mobile.pangu.view.dialog.LoadingDialog;
 
 import java.util.HashMap;
 
@@ -47,6 +50,7 @@ public class RiskConfirmActivity extends BaseActivity implements View.OnClickLis
     private static String OK_RESULT = "适当性评估结果确认书";
     private static String ERROR_RESULT = "金融产品或金融服务不适当警示\n及客户投资确认书";
     private TextView Headline;//页面标题
+    private Dialog mLoadingDialog;
 
     @Override
     public void initView() {
@@ -210,9 +214,16 @@ public class RiskConfirmActivity extends BaseActivity implements View.OnClickLis
                 } else {
                     oper_info = "已向用户揭示适当性评估结果不匹配确认书，经用户确认同意后继续委托";
                 }
+
+                mLoadingDialog = LoadingDialog.initDialog(this, "正在加载");
+                mLoadingDialog.show();
+
                 InterfaceCollection.getInstance().productSuitabilityRecord(session, instr_batch_no, oper_info, "331279", new InterfaceCollection.InterfaceCallback() {
                     @Override
                     public void callResult(ResultInfo info) {
+
+                        mLoadingDialog.dismiss();
+
                         if ("0".equalsIgnoreCase(info.getCode())) {
                             setResult(RESULT_OK);
                             finish();
