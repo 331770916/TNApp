@@ -26,7 +26,6 @@ public class NewsFragment extends BasePager implements View.OnClickListener ,Int
     private final String TAG = "NewsFragment";
     private ListView mListView;
     private ArrayList<InformationEntity> list;
-    private ArrayList<InformationEntity> newlist;
     private NewHomeInformationAdapter adapter;
     private RelativeLayout rlNews;          //背景
     private ProgressBar pb_New_Pager;      //菊花
@@ -55,7 +54,6 @@ public class NewsFragment extends BasePager implements View.OnClickListener ,Int
         tvNewGengDuo.setVisibility(View.GONE);  //初始化 隐藏 点击查看更多
         ifc.queryStockNews(stockCode,"30","1",TAG,this);
         list = new ArrayList<>();
-        newlist = new ArrayList<>();
         adapter = new NewHomeInformationAdapter(mContext);
         mListView.setAdapter(adapter);
         tvNewGengDuo.setOnClickListener(this);
@@ -80,21 +78,16 @@ public class NewsFragment extends BasePager implements View.OnClickListener ,Int
             rlNews.setBackgroundColor(ContextCompat.getColor(mContext, R.color.white));      //背景设置为白色
             mListView.setVisibility(View.VISIBLE);      //请求到数据 展示 listView
             tvNewGengDuo.setVisibility(View.VISIBLE);   //显示点击查看更多
-            if (list != null && list.size() > 0) {
-                for (int i = 0; i < list.size(); i++) {
-                    if (i < 2) {
-                        newlist.add(list.get(i));
-                    }
-                }
-                if (newlist != null && newlist.size() > 0) {
-                    if (newlist.size() >= 2) {
-                        tvNewGengDuo.setVisibility(View.VISIBLE);
-                    } else {
-                        tvNewGengDuo.setVisibility(View.GONE);
-                    }
+            list = (ArrayList<InformationEntity>)info.getData();
+            if(list!=null&&!list.isEmpty()){
+                if (list.size() >= 2){
+                    tvNewGengDuo.setVisibility(View.VISIBLE);
+                    adapter.setDatas((ArrayList<InformationEntity>) list.subList(0,1));
+                }else {
+                    tvNewGengDuo.setVisibility(View.GONE);
+                    adapter.setDatas(list);
                 }
             }
-            adapter.setDatas(newlist);
         }else {
             pb_New_Pager.setVisibility(View.GONE);      //隐藏菊花
             rlNews.setBackgroundColor(ContextCompat.getColor(mContext, R.color.white));    //背景 为 白色
