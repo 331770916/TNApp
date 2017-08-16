@@ -199,6 +199,10 @@ public class FixFundListActivity extends BaseActivity implements View.OnClickLis
                 CentreToast.showText(this, msg, true);
                 mList.remove(position);
                 fixFundAdapter.notifyDataSetChanged();
+                if (mList.size()==0) {
+                    rl_null.setVisibility(View.VISIBLE);
+                    lv.setVisibility(View.GONE);
+                }
             } else if ("-6".equalsIgnoreCase(code)) {
                 skip.startLogin(FixFundListActivity.this);
             } else {
@@ -269,7 +273,7 @@ public class FixFundListActivity extends BaseActivity implements View.OnClickLis
             fixFundAdapter.notifyDataSetChanged();
         }
         if (requestCode == REQUEST_ADD && resultCode == RESULT_OK) {
-            FixFundEntity fixFundEntity = (FixFundEntity) data.getSerializableExtra("fixFundEntity");
+            /*FixFundEntity fixFundEntity = (FixFundEntity) data.getSerializableExtra("fixFundEntity");
             ArrayList<FixFundEntity> tempList = new ArrayList<>();
             tempList.addAll(mList);
             mList.clear();
@@ -278,6 +282,10 @@ public class FixFundListActivity extends BaseActivity implements View.OnClickLis
             fixFundAdapter.notifyDataSetChanged();
             tempList.clear();
             tempList = null;
+            rl_null.setVisibility(View.GONE);
+            lv.setVisibility(View.VISIBLE);*/
+            mDialog.show();
+            InterfaceCollection.getInstance().getFixFundList("",TAG_LIST,FixFundListActivity.this);
         }
     }
 }
