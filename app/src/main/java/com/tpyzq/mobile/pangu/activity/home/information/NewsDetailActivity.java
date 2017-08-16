@@ -145,6 +145,7 @@ public class NewsDetailActivity extends BaseActivity implements View.OnClickList
         }else{
             mPullRefreshScrollView.setVisibility(View.GONE);
         }
+        mPullRefreshScrollView.onRefreshComplete();
     }
 
 
@@ -214,7 +215,6 @@ public class NewsDetailActivity extends BaseActivity implements View.OnClickList
                     }
                 }else
                     this.findViewById(R.id.flagLayout).setVisibility(View.GONE);
-                mPullRefreshScrollView.onRefreshComplete();
             }
         }
     }
