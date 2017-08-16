@@ -83,6 +83,7 @@ public class AddOrModFixFundActivity extends BaseActivity implements View.OnClic
     private StructuredFundDialog mStructuredFundDialog;
     private RelativeLayout rl_en_date,rl_start_date,rl_end_date;
     private int startDay = 0 ;
+    private int showChoose = -1;
 
     @Override
     public void initView() {
@@ -110,6 +111,7 @@ public class AddOrModFixFundActivity extends BaseActivity implements View.OnClic
     private void initData() {
         currentDate = Helper.getCurDate();
         position = getIntent().getIntExtra("position",-1);//position不为-1表示为修改
+        showChoose = getIntent().getIntExtra("showChoose",-1);//showChoose 为1表示不显示选择基金产品，用于position=-1情况下即新增定投
         if (position != -1) {
             fixFundEntity = (FixFundEntity)getIntent().getSerializableExtra("fixFundEntity");
             tv_title.setText(getResources().getString(R.string.modify_fund));
@@ -140,6 +142,11 @@ public class AddOrModFixFundActivity extends BaseActivity implements View.OnClic
             mDialog.show();
             InterfaceCollection.getInstance().getFundData(fixFundEntity.getFUND_CODE(), fixFundEntity.getFUND_COMPANY(),TAG_REQUEST_FUND,this);
         } else {
+            if (showChoose == 1) {
+                tv_choose_fund.setVisibility(View.GONE);
+            } else {
+                tv_choose_fund.setVisibility(View.VISIBLE);
+            }
             tv_title.setText(getResources().getString(R.string.add_fund));
             tv_start_date.setText(currentDate);
             tv_end_date.setText(Helper.getInstance().getNextYear(new Date(),"yyyy-MM-dd"));
