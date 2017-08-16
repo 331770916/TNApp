@@ -184,6 +184,7 @@
     </LinearLayout>
 
     <View
+        android:visibility="gone"
         android:layout_width="match_parent"
         android:layout_height="@dimen/size0.5"
         android:background="@color/lineColor" />

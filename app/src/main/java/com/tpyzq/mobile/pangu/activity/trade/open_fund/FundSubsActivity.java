@@ -479,6 +479,10 @@ public class FundSubsActivity extends BaseActivity implements View.OnClickListen
         if (requestCode == REQUESTCODE && resultCode == RESULT_OK) {//风险同意书签署返回
             buy_rengou(et_rengou_price.getText().toString().trim(), fundDataBean.data.get(0).FUND_COMPANY);
         }
+        if (requestCode == REQAGREEMENTCODE && resultCode == RESULT_CANCELED) {//签署协议页面返回
+            et_rengou_price.setText("");
+            clearView(true);
+        }
     }
 
     class PriceWatch implements TextWatcher {
