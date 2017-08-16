@@ -21,9 +21,11 @@ import com.tpyzq.mobile.pangu.activity.myself.login.ShouJiZhuCeActivity;
 import com.tpyzq.mobile.pangu.activity.myself.login.TransactionLoginActivity;
 import com.tpyzq.mobile.pangu.activity.trade.open_fund.AddOrModFixFundActivity;
 import com.tpyzq.mobile.pangu.activity.trade.open_fund.FixFundListActivity;
+import com.tpyzq.mobile.pangu.activity.trade.open_fund.FundInfoActivity;
 import com.tpyzq.mobile.pangu.base.BaseActivity;
 import com.tpyzq.mobile.pangu.base.SimpleRemoteControl;
 import com.tpyzq.mobile.pangu.data.CleverManamgerMoneyEntity;
+import com.tpyzq.mobile.pangu.data.FundSubsEntity;
 import com.tpyzq.mobile.pangu.db.Db_PUB_USERS;
 import com.tpyzq.mobile.pangu.http.NetWorkUtil;
 import com.tpyzq.mobile.pangu.http.doConnect.home.GetProductInfoConnect;
@@ -32,6 +34,7 @@ import com.tpyzq.mobile.pangu.http.doConnect.home.LoadPdfConnect;
 import com.tpyzq.mobile.pangu.http.doConnect.home.ToGetProductInfoConnect;
 import com.tpyzq.mobile.pangu.http.doConnect.home.ToGetProductInfoOtcConnect;
 import com.tpyzq.mobile.pangu.http.doConnect.home.ToLoadPdfConnect;
+import com.tpyzq.mobile.pangu.http.doConnect.trade.FundInoConnect;
 import com.tpyzq.mobile.pangu.interfac.DoPrecontractLoadImpl;
 import com.tpyzq.mobile.pangu.interfac.ICallbackResult;
 import com.tpyzq.mobile.pangu.util.ConstantUtil;
@@ -48,20 +51,20 @@ import java.util.ArrayList;
 /**
  * Created by zhangwenbo on 2016/9/24.
  * 理财详情
- *
+ * <p>
  * 产品分三大类
- *904339
+ * 904339
  * 1.开发式基金
- *      a.非货币基金
- *      b.货币基金
+ * a.非货币基金
+ * b.货币基金
  * 2.14天理财
- *      14天理财增益
+ * 14天理财增益
  * 3.OTC收益凭证
- *      a.固定增益
- *      b.浮动收益
- *      c.固定+浮动收益
+ * a.固定增益
+ * b.浮动收益
+ * c.固定+浮动收益
  */
-public class ManagerMoenyDetailActivity extends BaseActivity implements View.OnClickListener, ICallbackResult {
+public class ManagerMoenyDetailActivity extends BaseActivity implements View.OnClickListener, ICallbackResult, FundInoConnect.FundInfoConnectListener {
 
     private static final String TAG = "ManagerMoenyDetailActivity";
     private BaseProductView mBaseProductView;
@@ -76,7 +79,7 @@ public class ManagerMoenyDetailActivity extends BaseActivity implements View.OnC
     private String mProductType;
     private ArrayList<CleverManamgerMoneyEntity> mEntities;
     private LinearLayout mViewGroup;
-    private Dialog  mLoadingDialog;
+    private Dialog mLoadingDialog;
     private FrameLayout mLoadingLayout;
 
     private String mProductCode;
@@ -89,6 +92,8 @@ public class ManagerMoenyDetailActivity extends BaseActivity implements View.OnC
     private String prod_code;
     private String mProdType;
     public static FragmentManager ManagerMoenyfragmentManager;
+    private FundInoConnect mFundInoConnect = new FundInoConnect();
+    private boolean isToLogin = false;
 
     @Override
     public void initView() {
@@ -97,23 +102,20 @@ public class ManagerMoenyDetailActivity extends BaseActivity implements View.OnC
         mTitle.setText("基金详情");
 
 
-
-
         ManagerMoenyfragmentManager = getFragmentManager();
-        mLoadingDialog = LoadingDialog.initDialog(this, "正在加载");
         mLoadingLayout = (FrameLayout) findViewById(R.id.manamgerMoneyloadingLayout);
         mLoadingLayout.setVisibility(View.VISIBLE);
+        mLoadingDialog = LoadingDialog.initDialog(this, "正在加载");
         mLoadingDialog.show();
 
 
         mTopName = (TextView) findViewById(R.id.managerMoenyDetailFundName);
         mTopType = (TextView) findViewById(R.id.managerMoenyDetailfundType);
         mTopRadio = (TextView) findViewById(R.id.managerMoenyDetailFundRadio);
-        mTopRadioDiscrib = (TextView)  findViewById(R.id.managerMoenyDetailFundRadioDisrib);
+        mTopRadioDiscrib = (TextView) findViewById(R.id.managerMoenyDetailFundRadioDisrib);
         mTopContent1 = (TextView) findViewById(R.id.managerMoenyDetailFundBotom1);
         mTopContent2 = (TextView) findViewById(R.id.managerMoenyDetailFundBotom2);
         mTopContent3 = (TextView) findViewById(R.id.managerMoenyDetailFundBotom3);
-
 
 
         mCounter = (RelativeLayout) findViewById(R.id.counter);
@@ -133,6 +135,7 @@ public class ManagerMoenyDetailActivity extends BaseActivity implements View.OnC
         prod_code = intent.getStringExtra("prod_code");
         mStartBuyPrice = intent.getStringExtra("prod_qgje");
         String productCode = intent.getStringExtra("productCode");
+        mProductCode = productCode;
         mDangerousLeavel = intent.getStringExtra("ofund_risklevel_name");
         if (!TextUtils.isEmpty(mPersent) && "-".equals(mPersent)) {
             mPersent = "0.0%";
@@ -164,8 +167,10 @@ public class ManagerMoenyDetailActivity extends BaseActivity implements View.OnC
                 simpleRemoteControl.setCommand(new ToGetProductInfoOtcConnect(new GetProductInfoOtcConnect(TAG, "", productCode, mProductType)));
                 simpleRemoteControl.startConnect();
             } else {
-                simpleRemoteControl.setCommand(new ToGetProductInfoConnect(new GetProductInfoConnect(TAG, "", productCode, mProductType)));
-                simpleRemoteControl.startConnect();
+                mFundInoConnect.fundQueryConnect(productCode, "", "", 0, TAG, this);
+//                SimpleRemoteControl simpleRemoteControl = new SimpleRemoteControl(this);
+//                simpleRemoteControl.setCommand(new ToGetProductInfoConnect(new GetProductInfoConnect(TAG, "", productCode, mProductType)));
+//                simpleRemoteControl.startConnect();
             }
         }
 
@@ -174,6 +179,16 @@ public class ManagerMoenyDetailActivity extends BaseActivity implements View.OnC
 //        CleverManamgerMoneyEntity entity = intent.getParcelableExtra("entity");
 //        initDetailView(type, entity, linearLayout);
 
+    }
+
+    @Override
+    protected void onResume() {
+        super.onResume();
+        if (!"3".equals(mProductType) && isToLogin) {
+            mLoadingDialog = LoadingDialog.initDialog(this, "正在加载");
+            mLoadingDialog.show();
+            mFundInoConnect.fundQueryConnect(mProductCode, "", "", 0, TAG, this);
+        }
     }
 
     /**
@@ -231,8 +246,8 @@ public class ManagerMoenyDetailActivity extends BaseActivity implements View.OnC
 //                mTitle.setText("" + entity.getPRODNAME());
 //                mBaseProductView = new FloatEarningsView(this, ManagerHelp.OTC_F_INT, entity);
 //            } else if (FileUtil.OTC_FL.equals(incomeType)) {    //固定 + 浮动
-                mTitle.setText("" + entity.getPRODNAME());
-                mBaseProductView = new FixationAndFloatEarningsView(this, ManagerHelp.OTC_FL_INT, entity);
+            mTitle.setText("" + entity.getPRODNAME());
+            mBaseProductView = new FixationAndFloatEarningsView(this, ManagerHelp.OTC_FL_INT, entity);
 //            }
 
         } else if (ConstantUtil.MANAGERMONEYTYPE_FOURTEEN.equals(type)) {  //14天理财
@@ -247,6 +262,7 @@ public class ManagerMoenyDetailActivity extends BaseActivity implements View.OnC
 
     /**
      * 设置头布局
+     *
      * @param type
      * @param entity
      */
@@ -360,7 +376,7 @@ public class ManagerMoenyDetailActivity extends BaseActivity implements View.OnC
             }
 
             if (!TextUtils.isEmpty(entity.getBUY_LOW_AMOUNT())) {
-                mTopContent1.setText("起购" + entity.getBUY_LOW_AMOUNT()+ "元");
+                mTopContent1.setText("起购" + entity.getBUY_LOW_AMOUNT() + "元");
             }
 
             if (!TextUtils.isEmpty(entity.getINVESTDAYS())) {
@@ -383,38 +399,38 @@ public class ManagerMoenyDetailActivity extends BaseActivity implements View.OnC
         if (mLoadingDialog != null) {
             mLoadingDialog.dismiss();
         }
-        if(result instanceof String ){
-            showDialog(result + "------------"+tag,false);
+        if (result instanceof String) {
+            showDialog(result + "------------" + tag, false);
             return;
         }
         mEntities = (ArrayList<CleverManamgerMoneyEntity>) result;
         if ("LoadPdfConnect".equals(tag) || "GetProductInfoConnect".equals(tag)) {
             if (mEntities == null || mEntities.size() <= 0) {
                 try {
-                    showDialog("暂无数据",true);
+                    showDialog("暂无数据", true);
                 } catch (Exception e) {
                     e.printStackTrace();
                 }
-            return;
-        }
-        mLoadingLayout.setVisibility(View.GONE);
+                return;
+            }
+            mLoadingLayout.setVisibility(View.GONE);
             if (!TextUtils.isEmpty(mEntities.get(0).getMistackMsg())) {
-                showDialog(mEntities.get(0).getMistackMsg(),true);
+                showDialog(mEntities.get(0).getMistackMsg(), true);
                 return;
             }
 
-        initDetailView(mProductType, mEntities.get(0), mViewGroup);
-        } else if("GetProductInfoOtcConnect".equals(tag)){
+            initDetailView(mProductType, mEntities.get(0), mViewGroup);
+        } else if ("GetProductInfoOtcConnect".equals(tag)) {
             SimpleRemoteControl simpleRemoteControl = new SimpleRemoteControl(this);
             simpleRemoteControl.setCommand(new ToLoadPdfConnect(new LoadPdfConnect(TAG, "", prod_code, mProductType, mEntities)));
             simpleRemoteControl.startConnect();
         }
     }
 
-    private void showDialog(String msg,boolean isShowClick){
-        final CustomCenterDialog customCenterDialog = CustomCenterDialog.CustomCenterDialog(msg,CustomCenterDialog.SHOWCENTER);
-        customCenterDialog.show(ManagerMoenyfragmentManager,ManagerMoenyDetailActivity.class.toString());
-        if (isShowClick){
+    private void showDialog(String msg, boolean isShowClick) {
+        final CustomCenterDialog customCenterDialog = CustomCenterDialog.CustomCenterDialog(msg, CustomCenterDialog.SHOWCENTER);
+        customCenterDialog.show(ManagerMoenyfragmentManager, ManagerMoenyDetailActivity.class.toString());
+        if (isShowClick) {
             customCenterDialog.setOnClickListener(new CustomCenterDialog.ConfirmOnClick() {
                 @Override
                 public void confirmOnclick() {
@@ -427,6 +443,7 @@ public class ManagerMoenyDetailActivity extends BaseActivity implements View.OnC
 
     /**
      * 获取产品类型
+     *
      * @return
      */
     private String getProductType(Intent intent) {
@@ -458,7 +475,7 @@ public class ManagerMoenyDetailActivity extends BaseActivity implements View.OnC
                             m = nf.parse(mPersent);//mPersent 或 mPersent + "%"
                         }
 
-                        CounterDialog.showDialog(ManagerMoenyDetailActivity.this,  m.floatValue());
+                        CounterDialog.showDialog(ManagerMoenyDetailActivity.this, m.floatValue());
                     } catch (Exception e) {
                         e.printStackTrace();
                     }
@@ -480,10 +497,10 @@ public class ManagerMoenyDetailActivity extends BaseActivity implements View.OnC
                     intent.setClass(ManagerMoenyDetailActivity.this, ShouJiZhuCeActivity.class);
                     ManagerMoenyDetailActivity.this.startActivity(intent);
                 } else {
-                    if(TextUtils.isEmpty(phone)){
+                    if (TextUtils.isEmpty(phone)) {
                         intent.setClass(ManagerMoenyDetailActivity.this, ShouJiVerificationActivity.class);
                         ManagerMoenyDetailActivity.this.startActivity(intent);
-                    }else {
+                    } else {
                         if ("true".equals(login)) {
 
                             if (mEntities != null && mEntities.size() > 0) {
@@ -517,9 +534,52 @@ public class ManagerMoenyDetailActivity extends BaseActivity implements View.OnC
 
                 intent = new Intent();
                 intent.setClass(this, AddOrModFixFundActivity.class);
-                intent.putExtra("showChoose",1);
+                intent.putExtra("showChoose", 1);
                 startActivity(intent);
                 break;
         }
+    }
+
+
+    /***定投基金详情**/
+
+    @Override
+    public void onRefreshComplete() {
+
+    }
+
+    @Override
+    public void sessionFailed() {
+        if (mLoadingDialog != null) {
+            mLoadingDialog.dismiss();
+        }
+
+        isToLogin = true;
+        startActivity(new Intent(ManagerMoenyDetailActivity.this, TransactionLoginActivity.class));
+    }
+
+    @Override
+    public void getFundResult(ArrayList<FundSubsEntity> entities) {
+
+        if (entities != null && entities.size() > 0) {
+            for (FundSubsEntity fundSubsEntity : entities) {
+                if (mProductCode.equals(fundSubsEntity.FUND_CODE) && "0".equals(fundSubsEntity.FUND_TYPE)) {
+                    findViewById(R.id.targetTouBtn).setVisibility(View.GONE);
+                }
+            }
+        }
+
+        SimpleRemoteControl simpleRemoteControl = new SimpleRemoteControl(this);
+        simpleRemoteControl.setCommand(new ToGetProductInfoConnect(new GetProductInfoConnect(TAG, "", mProductCode, mProductType)));
+        simpleRemoteControl.startConnect();
+
+    }
+
+    @Override
+    public void showError(String error) {
+        if (mLoadingDialog != null) {
+            mLoadingDialog.dismiss();
+        }
+        showDialog(error, true);
     }
 }
