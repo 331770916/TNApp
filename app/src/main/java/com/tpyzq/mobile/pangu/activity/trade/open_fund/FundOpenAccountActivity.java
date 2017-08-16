@@ -183,8 +183,18 @@ public class FundOpenAccountActivity extends BaseActivity implements View.OnClic
     protected void onActivityResult(int requestCode, int resultCode, Intent intent) {
         super.onActivityResult(requestCode, resultCode, intent);
         if (requestCode == REQUSET && resultCode == RESULT_OK) {
-            point = intent.getIntExtra("point", -1);
-            tv_fund_company.setText(fundBeans.get(point).fund_company);
+
+            int position = intent.getIntExtra("point", -1);
+
+            tv_fund_company.setText(fundBeans.get(position).fund_company);
+
+            if (point != position) {
+                cb_open_fund.setChecked(false);
+            } else {
+                cb_open_fund.setChecked(true);
+            }
+
+            point = position;
             if (cb_open_fund.isChecked()) {
                 bt_true.setClickable(true);
                 bt_true.setBackgroundResource(R.drawable.button_login_pitchon);
