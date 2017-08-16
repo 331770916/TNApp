@@ -6,6 +6,7 @@ import android.view.LayoutInflater;
 import android.view.View;
 
 import com.tpyzq.mobile.pangu.base.CustomApplication;
+import com.tpyzq.mobile.pangu.base.InterfaceCollection;
 import com.tpyzq.mobile.pangu.log.LogHelper;
 
 import java.util.ArrayList;
@@ -24,9 +25,10 @@ public abstract class BaseTabPager {
     public LoadInterface mLoadInterface;
     public MarketFragmentEditIsGoneListener mMarketFragmentEditIsGoneListener;
     private OnPageChangeListener mOnPageChangeListener;
+    protected InterfaceCollection mInterface;
     protected int pageTag = 11;
     public BaseTabPager(Activity activity, ArrayList<BaseTabPager> tabs) {
-
+        mInterface = InterfaceCollection.getInstance();
         mView = LayoutInflater.from(CustomApplication.getContext()).inflate(getFragmentLayoutId(), null);
         initView(mView, activity);
         tabs.add(this);
