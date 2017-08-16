@@ -144,9 +144,10 @@ public class ManagerMoenyDetailActivity extends BaseActivity implements View.OnC
             findViewById(R.id.targetTouBtn).setOnClickListener(this);
             findViewById(R.id.targetBuyBtn).setOnClickListener(this);
 
-            if ("0".equals(mProdType)) {
+            if ("0".equals(mProdType) || "3".equals(mProductType)) {
                 findViewById(R.id.targetTouBtn).setVisibility(View.GONE);
             }
+
         }
 
 
