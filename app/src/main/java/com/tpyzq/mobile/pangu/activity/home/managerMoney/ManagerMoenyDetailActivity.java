@@ -73,7 +73,6 @@ public class ManagerMoenyDetailActivity extends BaseActivity implements View.OnC
     private TextView mTopContent1;
     private TextView mTopContent2;
     private TextView mTopContent3;
-    private ImageView mIcShareBtn;
     private String mProductType;
     private ArrayList<CleverManamgerMoneyEntity> mEntities;
     private LinearLayout mViewGroup;
@@ -93,13 +92,20 @@ public class ManagerMoenyDetailActivity extends BaseActivity implements View.OnC
 
     @Override
     public void initView() {
+        findViewById(R.id.userIdBackBtn).setOnClickListener(this);
+        mTitle = (TextView) findViewById(R.id.toolbar_title);
+        mTitle.setText("基金详情");
+
+
+
+
         ManagerMoenyfragmentManager = getFragmentManager();
         mLoadingDialog = LoadingDialog.initDialog(this, "正在加载");
         mLoadingLayout = (FrameLayout) findViewById(R.id.manamgerMoneyloadingLayout);
         mLoadingLayout.setVisibility(View.VISIBLE);
         mLoadingDialog.show();
-        mIcShareBtn = (ImageView) findViewById(R.id.manangerMoneyFenxiangIc);
-        mIcShareBtn.setVisibility(View.GONE);
+
+
         mTopName = (TextView) findViewById(R.id.managerMoenyDetailFundName);
         mTopType = (TextView) findViewById(R.id.managerMoenyDetailfundType);
         mTopRadio = (TextView) findViewById(R.id.managerMoenyDetailFundRadio);
@@ -108,7 +114,7 @@ public class ManagerMoenyDetailActivity extends BaseActivity implements View.OnC
         mTopContent2 = (TextView) findViewById(R.id.managerMoenyDetailFundBotom2);
         mTopContent3 = (TextView) findViewById(R.id.managerMoenyDetailFundBotom3);
 
-        findViewById(R.id.managerMoneyDetailBack).setOnClickListener(this);
+
 
         mCounter = (RelativeLayout) findViewById(R.id.counter);
         mCounter.setOnClickListener(this);
@@ -118,7 +124,7 @@ public class ManagerMoenyDetailActivity extends BaseActivity implements View.OnC
         mBuyBtn.setVisibility(View.VISIBLE);
 
         mViewGroup = (LinearLayout) findViewById(R.id.managerMoneyDetailLayout);
-        mTitle = (TextView) findViewById(R.id.managerMoenyDetailTitle);
+
 
         Intent intent = getIntent();
 
@@ -437,12 +443,9 @@ public class ManagerMoenyDetailActivity extends BaseActivity implements View.OnC
     @Override
     public void onClick(View v) {
         switch (v.getId()) {
-            case R.id.managerMoneyDetailBack:
+            case R.id.userIdBackBtn:
                 finish();
                 break;
-            case R.id.manangerMoneyFenxiangIc:
-                break;
-
             case R.id.counter:
 
                 if (!TextUtils.isEmpty(mPersent)) {

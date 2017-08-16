@@ -124,7 +124,7 @@ public class FJEntrustDealQueryPager extends BasePager implements InterfaceColle
                     if (!TextUtils.isEmpty(startDate) && !TextUtils.isEmpty(finishDate)) {
                         String str = helper.compareTo(startDate, finishDate);
                         int days = helper.daysBetween(startDate, finishDate);
-                        if (str.equalsIgnoreCase(startDate) && !str.equals(startDate)) {
+                        if (str.equalsIgnoreCase(startDate) && !str.equals(finishDate)) {
 //                            mistakeDialog = MistakeDialog.showDialog("请选择正确日期,起始日期不能超过截止日期", (Activity) mContext);
                             CustomCenterDialog customCenterDialog = CustomCenterDialog.CustomCenterDialog("请选择正确日期,起始日期不能超过截止日期",CustomCenterDialog.SHOWCENTER);
                             if (activity instanceof FJEntrustedQueryActivity){

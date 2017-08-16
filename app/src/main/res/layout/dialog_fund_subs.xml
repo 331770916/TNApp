@@ -1,6 +1,7 @@
-<RelativeLayout xmlns:android="http://schemas.android.com/apk/res/android"
-    android:layout_width="wrap_content"
-    android:layout_height="250dp"
+<LinearLayout xmlns:android="http://schemas.android.com/apk/res/android"
+    android:layout_width="match_parent"
+    android:layout_height="wrap_content"
+    android:gravity="center_horizontal"
     android:background="@color/white"
     android:orientation="vertical">
 
@@ -17,51 +18,52 @@
         android:textStyle="bold" />
 
     <LinearLayout
-        android:layout_width="wrap_content"
+        android:layout_width="match_parent"
         android:layout_height="@dimen/size80"
         android:layout_centerHorizontal="true"
-        android:layout_marginTop="@dimen/size80"
+        android:gravity="center_horizontal"
+        android:layout_marginTop="@dimen/size30"
         android:orientation="vertical">
 
         <LinearLayout
             android:layout_width="match_parent"
-            android:layout_gravity="center"
-            android:layout_height="0dp"
-            android:layout_weight="1"
-            android:layout_centerHorizontal="true"
-            >
+            android:layout_height="wrap_content"
+            android:orientation="horizontal">
             <TextView
-                android:layout_width="wrap_content"
+                android:layout_width="0dp"
+                android:layout_weight="1"
+                android:gravity="right"
                 android:layout_height="wrap_content"
                 android:text="基金名称:"
                 android:textColor="@color/text" />
 
             <TextView
                 android:id="@+id/tv_fund_name"
-                android:layout_width="wrap_content"
+                android:layout_width="0dp"
+                android:layout_weight="1"
                 android:layout_height="wrap_content"
                 android:layout_marginLeft="@dimen/size10"
-                android:text=""
                 android:textColor="@color/black"
                 android:textSize="@dimen/txtSize14" />
         </LinearLayout>
 
         <LinearLayout
-            android:layout_width="wrap_content"
-            android:layout_height="0dp"
-            android:layout_weight="1"
-
-            >
+            android:layout_width="match_parent"
+            android:layout_height="wrap_content"
+            android:orientation="horizontal" >
 
             <TextView
-                android:layout_width="wrap_content"
+                android:layout_width="0dp"
+                android:layout_weight="1"
+                android:gravity="right"
                 android:layout_height="wrap_content"
                 android:text="基金代码:"
                 android:textColor="@color/text" />
 
             <TextView
                 android:id="@+id/tv_fund_code"
-                android:layout_width="wrap_content"
+                android:layout_width="0dp"
+                android:layout_weight="1"
                 android:layout_height="wrap_content"
                 android:layout_marginLeft="@dimen/size10"
                 android:textColor="@color/black"
@@ -69,20 +71,22 @@
         </LinearLayout>
 
         <LinearLayout
-            android:layout_width="wrap_content"
-            android:layout_height="0dp"
-            android:layout_weight="1"
-            >
+            android:layout_width="match_parent"
+            android:layout_height="wrap_content"
+            android:orientation="horizontal" >
             <TextView
                 android:id="@+id/tv_fund_priceway"
-                android:layout_width="wrap_content"
+                android:layout_width="0dp"
+                android:layout_weight="1"
+                android:gravity="right"
                 android:layout_height="wrap_content"
                 android:text="认购金额:"
                 android:textColor="@color/text" />
 
             <TextView
                 android:id="@+id/tv_fund_price"
-                android:layout_width="wrap_content"
+                android:layout_width="0dp"
+                android:layout_weight="1"
                 android:layout_height="wrap_content"
                 android:layout_marginLeft="@dimen/size10"
                 android:text=""
@@ -90,19 +94,21 @@
         </LinearLayout>
         <LinearLayout
             android:id="@+id/ll_fhfs"
-            android:layout_width="wrap_content"
-            android:layout_height="0dp"
-            android:layout_weight="1"
-            >
+            android:layout_width="match_parent"
+            android:layout_height="wrap_content"
+            android:orientation="horizontal" >
             <TextView
-                android:layout_width="wrap_content"
+                android:layout_width="0dp"
+                android:layout_weight="1"
+                android:gravity="right"
                 android:layout_height="wrap_content"
                 android:text="分红方式:"
                 android:textColor="@color/text" />
 
             <TextView
                 android:id="@+id/tv_fund_fhfs"
-                android:layout_width="wrap_content"
+                android:layout_width="0dp"
+                android:layout_weight="1"
                 android:layout_height="wrap_content"
                 android:layout_marginLeft="@dimen/size10"
                 android:text=""
@@ -116,9 +122,7 @@
         android:layout_height="wrap_content"
         android:layout_alignParentBottom="true"
         android:orientation="horizontal"
-        android:paddingLeft="@dimen/size20"
-        android:paddingRight="@dimen/size20"
-        android:paddingBottom="@dimen/size20">
+        android:padding="@dimen/size20">
 
         <Button
             android:id="@+id/bt_false"
@@ -140,4 +144,4 @@
             android:textColor="@color/white"
             />
     </LinearLayout>
-</RelativeLayout>
+</LinearLayout>
