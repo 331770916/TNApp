@@ -708,7 +708,70 @@ public class Helper {
         return null;
     }
 
+    /**
+     *
+     * @content 获取股票代码
+     *
+     * @date 2016年7月29日 下午2:01:44
+     *
+     * @params 入参:股票代码，市场
+     *
+     * @return 出参: String股票代码
+     */
+    public static String getStockCode2(String code, String maker) {
+        if ("D".equalsIgnoreCase(maker)) {
+            maker = "1";
+        } else if ("H".equalsIgnoreCase(maker)) {
+            maker = "2";
+        }
+        String code_2 = code.substring(0, 2);
+        String code_3 = code.substring(0, 3);
+        if (maker.equals("1")) {
+            if (code_2.equals("60")) {
+                return 11 + code; // 沪市A股
 
+            } else if (code_3.equals("900")) {
+                return 12 + code;// 沪市B股
+            } else if (code_3.equals("019") || //
+                    code_3.equals("122") || //
+                    code_3.equals("130") || //
+                    code_3.equals("126") || //
+                    code_3.equals("110") || //
+                    code_3.equals("113")) {
+                return 13 + code; // 沪市债券
+            } else if (code_2.equals("51") || code_2.equals("50")) {
+                return 15 + code; // 沪市基金
+            } else if (code_2.equals("00")) {
+                return 10 + code; // 沪市指数
+            } else if(code_3.equals("204")){
+                return  17+code;//逆回购
+            } else{
+                return 16 + code; // 其他
+            }
+        } else if (maker.equals("2")) {
+            // 000xxx、002xxx、300xxx
+            if (code_2.equals("20")) {
+                return 22 + code; // 深市B股
+            } else if (code_2.equals("39")) {
+                return 20 + code; // 深市指数
+            } else if (code_3.equals("300")) {
+                return 26 + code; // 深市创业板
+            } else if (code_3.equals("002")) {
+                return 27 + code; // 深市中小板
+            } else if (code_2.equals("15") || code_2.equals("16") || code_3.equals("118")) {
+                return 24 + code; // 深市基金
+            } else if (code_2.equals("10") || code_3.equals("111") || code_3.equals("112") || code_3.equals("115") || code_2.equals("12")) {
+                return 23 + code; // 深市债券
+            } else if (code_2.equals("00")) {
+                return 21 + code;// 深市A股
+            } else if(code_3.equals("131")){
+                return 29 + code;// 逆回购
+            }else {
+                return 28 + code;
+            }
+        }
+        return null;
+    }
     /**
      * 根据股票代码选择该股票的的类型
      * <p>

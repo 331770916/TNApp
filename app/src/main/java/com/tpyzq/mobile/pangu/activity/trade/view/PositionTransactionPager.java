@@ -182,11 +182,12 @@ public class PositionTransactionPager extends BaseTransactionPager implements Ad
     public void onItemClick(AdapterView<?> parent, View view, int position, long id) {
         String stockCode = datas.get(position-1).SECU_CODE;
         String market = datas.get(position-1).MARKET;
-        if ("2".equals(market)){
+        /*if ("2".equals(market)){
             stockCode = Helper.getStockCode(stockCode,"90");
         }else if ("1".equals(market)){
             stockCode = Helper.getStockCode(stockCode,"83");
-        }
+        }*/
+        stockCode = Helper.getStockCode2(stockCode,market);
         stockCodeCallBack.setStockCode(datas.get(position-1).SECU_NAME, stockCode);
     }
 }

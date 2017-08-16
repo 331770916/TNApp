@@ -157,6 +157,7 @@ public class BuyAndSellActivity extends BaseActivity implements View.OnClickList
     private String secc_code;//股东代码
     private CommissionedBuyAndSellDialog commissionedBuyAndSellDialog;
     private String MARKET_NAME;//股东代码中返回的市场名称
+    private boolean isSetStockCodeEt = true;
 
     @Override
     public void initView() {
@@ -290,6 +291,7 @@ public class BuyAndSellActivity extends BaseActivity implements View.OnClickList
                 if (hasFocus&&!TextUtils.isEmpty(stockCode)) {
                     et_stock_code.setText(stockCode.substring(2));
                     et_stock_code.setSelection(6);
+                    isSetStockCodeEt = false;
                 }
             }
         });
@@ -371,15 +373,15 @@ public class BuyAndSellActivity extends BaseActivity implements View.OnClickList
             rb_buy.setChecked(true);        //初始化
         }
         if (!TextUtils.isEmpty(istockcode)){
-            if (istockcode.startsWith("20") || istockcode.startsWith("10") || istockcode.startsWith("12") || istockcode.startsWith("22")) {
+            /*if (istockcode.startsWith("20") || istockcode.startsWith("10") || istockcode.startsWith("12") || istockcode.startsWith("22")) {
                 CentreToast.showText(BuyAndSellActivity.this, "当前股票代码不可交易",Toast.LENGTH_SHORT);
-            } else {
+            } else {*/
                 searchNetStock(false,istockcode.substring(2));
                 refresh(istockcode);
                 stockCode = istockcode;
                 iv_depute_way.setClickable(true);
                 iv_depute_way.setBackgroundResource(R.mipmap.icon_entrust_way);
-            }
+//            }
         }
 
         //底部Viewpager切换监听器
@@ -1521,11 +1523,11 @@ public class BuyAndSellActivity extends BaseActivity implements View.OnClickList
                         if (!isShow) {
                             return;
                         }
-                        isSearchAgin = false;
+//                        isSearchAgin = false;
                         String data = jsonObject.getString("data");
                         JSONArray jaData = new JSONArray(data);
                         transStockBeen.clear();
-                        if (jaData.length()==1) {
+                        if (jaData.length()==1&&isSetStockCodeEt) {
                             transStockBeen.clear();
                             if (null != stockPw) {
                                 stockPw.refreshView();
@@ -1535,6 +1537,9 @@ public class BuyAndSellActivity extends BaseActivity implements View.OnClickList
                             }
                             onPwClick(jaData.getJSONArray(0).getString(1),jaData.getJSONArray(0).getString(0));
                             return;
+                        }
+                        if (!isSetStockCodeEt) {
+                            isSetStockCodeEt = true;
                         }
                         for (int i = 0; i < jaData.length(); i++) {
                             TransStockEntity transStockBean = new TransStockEntity();
@@ -1598,7 +1603,7 @@ public class BuyAndSellActivity extends BaseActivity implements View.OnClickList
                     return;
                 }
                 try {
-                    isSearchAgin = false;
+//                    isSearchAgin = false;
                     JSONObject jsonObject = new JSONObject(response);
                     String code = jsonObject.optString("code");
                     String msg = jsonObject.optString("msg");
@@ -1708,18 +1713,17 @@ public class BuyAndSellActivity extends BaseActivity implements View.OnClickList
     };
 
     private void onPwClick(String stockName, String code) {
-        if (TextUtils.isEmpty(code) || code.startsWith("20") || code.startsWith("10") || code.startsWith("12") || code.startsWith("22")) {
+       /* if (TextUtils.isEmpty(code) || code.startsWith("20") || code.startsWith("10") || code.startsWith("12") || code.startsWith("22")) {
             et_stock_code.setText("");
             CentreToast.showText(BuyAndSellActivity.this, "当前股票代码不可交易", Toast.LENGTH_SHORT);
-        } else {
+        } else {*/
             MARKET_NAME = "";
             secc_code = "";
             setStock(stockName, code);
-            isSearchAgin = false;
             refresh(code);
             iv_depute_way.setClickable(true);
             iv_depute_way.setBackgroundResource(R.mipmap.icon_entrust_way);
-        }
+//        }
     }
 
     private void setStock(String stockName, String code) {
@@ -1735,15 +1739,14 @@ public class BuyAndSellActivity extends BaseActivity implements View.OnClickList
     StockCodeCallBack stockCodeCallBack = new StockCodeCallBack() {
         @Override
         public void setStockCode(String stockName, String code) {
-            if (TextUtils.isEmpty(code) || code.startsWith("20") || code.startsWith("10") || code.startsWith("12") || code.startsWith("22")) {
-//                CentreToast.showText(BuyAndSellActivity.this, "当前股票代码不可交易");
-                CentreToast.showText(BuyAndSellActivity.this, "当前股票代码不可交易",Toast.LENGTH_SHORT);
-            } else {
+//            if (TextUtils.isEmpty(code) || code.startsWith("20") || code.startsWith("10") || code.startsWith("12") || code.startsWith("22")) {
+////                CentreToast.showText(BuyAndSellActivity.this, "当前股票代码不可交易");
+//                CentreToast.showText(BuyAndSellActivity.this, "当前股票代码不可交易",Toast.LENGTH_SHORT);
+//            } else {
                 MARKET_NAME = "";
                 secc_code = "";
                 searchNetStock(false,code.substring(2));
                 setStock(stockName, code);
-                isSearchAgin = false;
                 refresh(code);
 //                stockCode = code;
 //                stockName = name;
@@ -1751,7 +1754,7 @@ public class BuyAndSellActivity extends BaseActivity implements View.OnClickList
                 iv_depute_way.setBackgroundResource(R.mipmap.icon_entrust_way);
 
             }
-        }
+//        }
     };
 
     @Override

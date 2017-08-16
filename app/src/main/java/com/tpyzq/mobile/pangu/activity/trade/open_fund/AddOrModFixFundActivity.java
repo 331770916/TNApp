@@ -272,6 +272,9 @@ public class AddOrModFixFundActivity extends BaseActivity implements View.OnClic
                 if (numDate1 == 1) {
                     CentreToast.showText(this,"结束日期不能小于开始日期");
                     break;
+                } else if (numDate1 == 0) {
+                    CentreToast.showText(this,"结束日期不能等于开始日期");
+                    break;
                 }
 
                 fixFundEntity.setBALANCE(balance);

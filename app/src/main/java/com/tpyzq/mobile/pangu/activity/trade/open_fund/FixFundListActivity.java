@@ -125,6 +125,8 @@ public class FixFundListActivity extends BaseActivity implements View.OnClickLis
         String msg = info.getMsg();
         if (TAG_LIST.equalsIgnoreCase(tag)) {//刷新或者上拉获取数据
             if ("0".equalsIgnoreCase(code)) {
+                lv.setVisibility(View.VISIBLE);
+                rl_null.setVisibility(View.GONE);
                 ArrayList<FixFundEntity> tempList;
                 if (isRefresh) {
                     mList.clear();

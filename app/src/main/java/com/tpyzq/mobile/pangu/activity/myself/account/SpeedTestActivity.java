@@ -96,7 +96,7 @@ public class SpeedTestActivity extends BaseActivity implements View.OnClickListe
                 speedTestEntity = new SpeedTestEntity();
                 speedTestEntity.version_name = arr[0];
                 speedTestEntity.version_ip = arr[1];
-                if (ConstantUtil.JY_IP.equals(speedTestEntity.version_ip)) {
+                if (ConstantUtil.HQ_IP.equals(speedTestEntity.version_ip)) {
                     speedTestEntity.isChecked = true;
                 } else {
                     speedTestEntity.isChecked = false;
@@ -200,7 +200,7 @@ public class SpeedTestActivity extends BaseActivity implements View.OnClickListe
             map005_1.put("order", "0");
             object[0] = map005_1;
             map005.put("PARAMS", Arrays.toString(object));
-            NetWorkUtil.getInstence().okHttpForGet("", url, map005, new StringCallback() {
+            NetWorkUtil.getInstence().okHttpForGet("", url+"/hqserver/http/newGet", map005, new StringCallback() {
                 @Override
                 public void onError(Call call, Exception e, int id) {
                     count++;
