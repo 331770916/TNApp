@@ -1,16 +1,16 @@
 <?xml version="1.0" encoding="utf-8"?>
 <LinearLayout xmlns:android="http://schemas.android.com/apk/res/android"
+    xmlns:tools="http://schemas.android.com/tools"
     android:layout_width="match_parent"
     android:layout_height="match_parent"
-    android:background="@color/white"
     android:orientation="vertical">
 
     <RelativeLayout
-        android:id="@+id/rl_top_bar"
         android:layout_width="match_parent"
         android:layout_height="@dimen/size25"
         android:background="@color/blue"
         android:clipToPadding="true"
+        android:id="@+id/rl_top_bar"
         android:fitsSystemWindows="true" />
 
     <RelativeLayout
@@ -33,7 +33,7 @@
             android:layout_width="wrap_content"
             android:layout_height="wrap_content"
             android:layout_centerInParent="true"
-            android:text="检查更新"
+            android:text="版本升级"
             android:textColor="@color/white"
             android:textSize="@dimen/pickerview_topbar_title_textsize" />
     </RelativeLayout>
@@ -42,197 +42,27 @@
         android:layout_width="wrap_content"
         android:layout_height="wrap_content"
         android:layout_gravity="center_horizontal"
-        android:layout_marginTop="@dimen/size70"
-        android:src="@mipmap/icon_logo" />
-
+        android:layout_marginTop="@dimen/size120"
+        android:src="@mipmap/version_update_taipingyangzhengquan" />
     <TextView
-        android:id="@+id/tv_app_name"
         android:layout_width="wrap_content"
         android:layout_height="wrap_content"
-        android:layout_gravity="center_horizontal"
+        android:text="-太牛APP-"
         android:layout_marginTop="@dimen/size20"
-        android:text="当前版本"
-        android:textColor="@color/versionupdate"
-        android:textSize="@dimen/txtSize12" />
-
-    <LinearLayout
-        android:id="@+id/ll_show"
-        android:layout_width="match_parent"
-        android:layout_height="0dp"
-        android:layout_weight="1"
-        android:orientation="vertical"
-        android:visibility="visible">
-
-        <TextView
-            android:id="@+id/tv_version_name"
-            android:layout_width="wrap_content"
-            android:layout_height="wrap_content"
-            android:layout_gravity="center_horizontal"
-            android:layout_marginTop="@dimen/size10"
-            android:text="太牛:V1.0.0"
-            android:textColor="@color/pickerview_topbar_title" />
-
-
-        <LinearLayout
-            android:layout_width="281dp"
-            android:layout_height="150dp"
-            android:layout_gravity="center"
-            android:layout_marginLeft="@dimen/size24"
-            android:layout_marginRight="@dimen/size23"
-            android:layout_marginTop="@dimen/size15"
-            android:orientation="vertical">
-
-            <View
-                android:layout_width="match_parent"
-                android:layout_height="@dimen/size1"
-                android:layout_gravity="center"
-                android:layout_marginBottom="@dimen/size15"
-                android:background="@color/lineColor3" />
-
-
-            <ScrollView
-                android:layout_width="match_parent"
-                android:layout_height="match_parent">
-
-                <LinearLayout
-                    android:layout_width="match_parent"
-                    android:layout_height="match_parent"
-                    android:orientation="horizontal">
-
-                    <LinearLayout
-                        android:layout_width="wrap_content"
-                        android:layout_height="match_parent"
-                        android:orientation="vertical">
-
-                        <TextView
-                            android:layout_width="wrap_content"
-                            android:layout_height="wrap_content"
-                            android:text="最新版本："
-                            android:textColor="@color/black"
-                            android:textSize="@dimen/txtSize13"
-                            android:visibility="gone" />
-
-                        <TextView
-                            android:layout_width="wrap_content"
-                            android:layout_height="wrap_content"
-                            android:layout_marginTop="@dimen/size13"
-                            android:text="版本大小："
-                            android:textColor="@color/versionupdate1"
-                            android:textSize="@dimen/txtSize13" />
-
-                        <TextView
-                            android:layout_width="wrap_content"
-                            android:layout_height="wrap_content"
-                            android:layout_marginTop="@dimen/size13"
-                            android:text="更新内容："
-                            android:textColor="@color/versionupdate1"
-                            android:textSize="@dimen/txtSize13" />
-
-                    </LinearLayout>
-
-                    <LinearLayout
-                        android:layout_width="match_parent"
-                        android:layout_height="match_parent"
-                        android:layout_marginLeft="@dimen/size6"
-                        android:orientation="vertical">
-
-                        <TextView
-                            android:id="@+id/tvShiFouZuiXin"
-                            android:layout_width="wrap_content"
-                            android:layout_height="wrap_content"
-                            android:textColor="@color/normalRadioBtnColor"
-                            android:textSize="@dimen/txtSize13"
-                            android:visibility="gone" />
-
-                        <TextView
-                            android:id="@+id/tvVersionNumber"
-                            android:layout_width="wrap_content"
-                            android:layout_height="wrap_content"
-                            android:layout_marginTop="@dimen/size13"
-                            android:textColor="@color/versionupdate1"
-                            android:textSize="@dimen/txtSize13" />
-
-                        <TextView
-                            android:id="@+id/update_content"
-                            android:layout_width="wrap_content"
-                            android:layout_height="wrap_content"
-                            android:layout_marginTop="@dimen/size13"
-                            android:textColor="@color/versionupdate1"
-                            android:textSize="@dimen/txtSize13" />
-
-                    </LinearLayout>
-
-                </LinearLayout>
-
-            </ScrollView>
-
-
-            <WebView
-                android:id="@+id/loading_contont"
-                android:layout_width="match_parent"
-                android:layout_height="match_parent"
-                android:visibility="gone" />
-
-        </LinearLayout>
-
-        <View
-            android:layout_width="281dp"
-            android:layout_height="@dimen/size1"
-            android:layout_gravity="center"
-            android:background="@color/lineColor3" />
-    </LinearLayout>
-
-    <LinearLayout
-        android:id="@+id/ll_show1"
-        android:layout_width="match_parent"
+        android:layout_gravity="center_horizontal"/>
+    <TextView
+        android:id="@+id/tv_version_name"
+        android:layout_width="wrap_content"
         android:layout_height="wrap_content"
-        android:layout_marginBottom="@dimen/size90"
-        android:layout_marginTop="@dimen/size60"
-        android:orientation="vertical"
-        android:visibility="gone">
-
-
-        <TextView
-            android:layout_width="wrap_content"
-            android:layout_height="wrap_content"
-            android:layout_gravity="center"
-            android:text="下载安装过程中请不要关闭此页或进行其他操作" />
-
-        <ProgressBar
-            android:id="@+id/progressbar"
-            style="?android:attr/progressBarStyleHorizontal"
-            android:layout_width="match_parent"
-            android:layout_height="2dp"
-            android:layout_marginLeft="@dimen/size24"
-            android:layout_marginRight="@dimen/size23"
-            android:layout_marginTop="@dimen/size30"
-            android:max="100"
-            android:progressDrawable="@drawable/bar_color" />
-
-        <TextView
-            android:id="@+id/tvpro"
-            android:layout_width="wrap_content"
-            android:layout_height="wrap_content"
-            android:layout_gravity="center_horizontal"
-            android:layout_marginTop="@dimen/size10" />
-
-    </LinearLayout>
-
-    <LinearLayout
-        android:layout_width="match_parent"
+        android:text="V1.0.0"
+        android:layout_marginTop="@dimen/size200"
+        android:layout_gravity="center_horizontal"/>
+    <TextView
+        android:id="@+id/tv_update"
+        android:layout_width="wrap_content"
         android:layout_height="wrap_content"
-        android:layout_marginBottom="@dimen/size80"
-        android:gravity="bottom"
-        android:orientation="vertical">
-
-        <Button
-            android:id="@+id/tv_update"
-            android:layout_width="@dimen/size168"
-            android:layout_height="wrap_content"
-            android:layout_gravity="center_horizontal"
-            android:background="@drawable/shape_light_blue"
-            android:text="检查新版本"
-            android:textColor="@color/white" />
-
-    </LinearLayout>
+        android:hint="当前已是最新版本。"
+        android:textColorHint="@color/text"
+        android:layout_marginTop="@dimen/size20"
+        android:layout_gravity="center_horizontal"/>
 </LinearLayout>

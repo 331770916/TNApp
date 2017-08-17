@@ -32,6 +32,10 @@ public class VersionUpdateActivity extends BaseActivity implements View.OnClickL
     TextView tv_version_name;
     TextView tv_update;
     private Dialog mDialog;
+    private String forceIsupdate;
+    private String versionNumber;
+    private String apkAddress;
+    private String remarks;
 
     @Override
     public void initView() {
@@ -94,15 +98,18 @@ public class VersionUpdateActivity extends BaseActivity implements View.OnClickL
 //                        MistakeDialog.showDialog("版本需要更新", VersionUpdateActivity.this);
 
 
-                        String forceIsupdate = joResult.getString("forceIsupdate");   //是否强制更新
-                        String versionNumber = joResult.getString("versionNumber");   //版本号
-                        String apkAddress = joResult.getString("apkAddress");         //下载地址
-                        String remarks = joResult.optString("remarks");
+                        //是否强制更新
+                        forceIsupdate = joResult.getString("forceIsupdate");
+                        //版本号
+                        versionNumber = joResult.getString("versionNumber");
+                        //下载地址
+                        apkAddress = joResult.getString("apkAddress");
+                        remarks = joResult.optString("remarks");
                         if (!"2".equals(forceIsupdate)) {
                             tv_update.setTextColor(ColorUtils.BLUE);
                             tv_update.setText("有更新版本，马上安装？");
                             tv_update.setClickable(true);
-                            mDialog = new VersionDialog(VersionUpdateActivity.this, apkAddress, forceIsupdate, versionNumber, remarks);
+
                         }
                     }
                 } catch (JSONException e) {
@@ -127,7 +134,7 @@ public class VersionUpdateActivity extends BaseActivity implements View.OnClickL
             case R.id.tv_update:
 //                APPUpdateDialog appUpdateDialog = new APPUpdateDialog(this);
 //                appUpdateDialog.show();
-
+                mDialog = new VersionDialog(VersionUpdateActivity.this, apkAddress, forceIsupdate, versionNumber, remarks);
                 mDialog.show();
                 break;
         }
