@@ -21,7 +21,6 @@
     <uses-permission android:name="android.permission.ACCESS_WIFI_STATE" />
     <uses-permission android:name="android.permission.READ_EXTERNAL_STORAGE" />
     <uses-permission android:name="android.permission.CALL_PHONE" />
-    <uses-permission android:name="android.permission.WRITE_SECURE_SETTINGS" />
 
     <!-- 加密键盘所需权限 -->
     <uses-permission android:name="android.permission.RECEIVE_USER_PRESENT" />
@@ -420,7 +419,6 @@
         <activity android:name=".activity.trade.margin_trading.integrated.QueryQTargetActivity" />
         <activity android:name=".activity.trade.margin_trading.integrated.QueryZTargetActivity" />
         <activity android:name=".activity.trade.margin_trading.integrated.UnFinishedActivity" />
-        <activity android:name=".activity.trade.margin_trading.TreatyApplyActivity"/>
 
         <!--行情 相关activity-->
         <activity android:name=".activity.market.quotation.plate.PlateListActivity" />

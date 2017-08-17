@@ -40,6 +40,7 @@ import com.tpyzq.mobile.pangu.interfac.ICallbackResult;
 import com.tpyzq.mobile.pangu.util.ConstantUtil;
 import com.tpyzq.mobile.pangu.util.Helper;
 import com.tpyzq.mobile.pangu.util.TransitionUtils;
+import com.tpyzq.mobile.pangu.util.panguutil.UserUtil;
 import com.tpyzq.mobile.pangu.view.CustomCenterDialog;
 import com.tpyzq.mobile.pangu.view.dialog.CounterDialog;
 import com.tpyzq.mobile.pangu.view.dialog.LoadingDialog;
@@ -557,7 +558,20 @@ public class ManagerMoenyDetailActivity extends BaseActivity implements View.OnC
         }
 
         isToLogin = true;
-        startActivity(new Intent(ManagerMoenyDetailActivity.this, TransactionLoginActivity.class));
+
+        if (!Db_PUB_USERS.isRegister()) {
+            startActivity(new Intent(ManagerMoenyDetailActivity.this, ShouJiZhuCeActivity.class));
+        } else {
+            if (!TextUtils.isEmpty(UserUtil.Mobile)){
+                if (!Db_PUB_USERS.islogin()){
+                    startActivity(new Intent(ManagerMoenyDetailActivity.this, TransactionLoginActivity.class));
+                }
+            }else {
+                startActivity(new Intent(ManagerMoenyDetailActivity.this, ShouJiVerificationActivity.class));
+            }
+
+        }
+
     }
 
     @Override
