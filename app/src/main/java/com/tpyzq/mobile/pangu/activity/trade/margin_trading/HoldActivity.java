@@ -1,29 +1,25 @@
 package com.tpyzq.mobile.pangu.activity.trade.margin_trading;
 
 import android.content.Intent;
-import android.graphics.Color;
-import android.text.TextUtils;
 import android.view.LayoutInflater;
 import android.view.View;
 import android.view.ViewGroup;
+import android.widget.AdapterView;
 import android.widget.BaseAdapter;
 import android.widget.ImageView;
 import android.widget.LinearLayout;
 import android.widget.RelativeLayout;
+import android.widget.ScrollView;
 import android.widget.TextView;
-
+import com.handmark.pulltorefresh.library.PullToRefreshBase;
 import com.handmark.pulltorefresh.library.PullToRefreshScrollView;
 import com.tpyzq.mobile.pangu.R;
 import com.tpyzq.mobile.pangu.activity.detail.StockDetailActivity;
-import com.tpyzq.mobile.pangu.activity.trade.stock.BuyAndSellActivity;
-import com.tpyzq.mobile.pangu.activity.trade.stock.TakeAPositionActivity;
 import com.tpyzq.mobile.pangu.base.BaseActivity;
 import com.tpyzq.mobile.pangu.base.CustomApplication;
-import com.tpyzq.mobile.pangu.data.StockDetailEntity;
-import com.tpyzq.mobile.pangu.data.TakeAPositionEntity;
-import com.tpyzq.mobile.pangu.util.TransitionUtils;
+import com.tpyzq.mobile.pangu.base.InterfaceCollection;
+import com.tpyzq.mobile.pangu.data.ResultInfo;
 import com.tpyzq.mobile.pangu.view.listview.AutoListview;
-
 import java.text.DecimalFormat;
 import java.util.List;
 import java.util.Map;
@@ -34,14 +30,17 @@ import java.util.Map;
  * Describe: 融资融券 持仓 activity_hold
  */
 
-public class HoldActivity extends BaseActivity implements View.OnClickListener{
+public class HoldActivity extends BaseActivity implements View.OnClickListener,AdapterView.OnItemClickListener,InterfaceCollection.InterfaceCallback{
     private RelativeLayout RelativeLayout_color_1, RelativeLayout_color_2;
     private PullToRefreshScrollView mPullToRefreshScrollView;
+    private List<Map<String,String>> beans;
     private int mExpandedMenuPos = -1;
     private LinearLayout mBackground;
     private ImageView iv_isEmpty;
+    private ScrollView scroll_view;
     private TextView wcdbbl,ccyk,zsz,jzc,fzze;
-    private AutoListview listview;
+    private AutoListview mCcListView;
+    private MyAdapter adapter;
     @Override
     public void initView() {
         findViewById(R.id.detail_back).setOnClickListener(this);
@@ -59,7 +58,49 @@ public class HoldActivity extends BaseActivity implements View.OnClickListener{
         zsz = (TextView)findViewById(R.id.szAmount);
         jzc = (TextView)findViewById(R.id.kyAmount);
         fzze = (TextView)findViewById(R.id.kqAmount);
-        listview = (AutoListview)findViewById(R.id.ccListView);
+        mCcListView = (AutoListview)findViewById(R.id.ccListView);
+        adapter = new MyAdapter();
+        mCcListView.setAdapter(adapter);
+        mCcListView.setEmptyView(iv_isEmpty);
+        mCcListView.setOnItemClickListener(this);
+        mPullToRefreshScrollView.setFocusableInTouchMode(true);
+        scroll_view = mPullToRefreshScrollView.getRefreshableView();   // 获取当前PullToRefreshScrollView的子view
+        mPullToRefreshScrollView.setMode(PullToRefreshBase.Mode.PULL_FROM_START);
+        mPullToRefreshScrollView.setOnRefreshListener(new PullToRefreshBase.OnRefreshListener<ScrollView>() {
+            @Override
+            public void onRefresh(PullToRefreshBase<ScrollView> refreshView) {
+            }
+        });
+    }
+
+    @Override
+    public void onItemClick(AdapterView<?> parent, View view, int position, long id) {
+        if (position == mExpandedMenuPos) {
+            mExpandedMenuPos = -1;
+        } else {
+            mExpandedMenuPos = position;
+        }
+        adapter.notifyDataSetChanged();
+        if (beans.size()-1==position) {
+            scroll_view.post(new Runnable() {
+                @Override
+                public void run() {
+                    scroll_view.fullScroll(ScrollView.FOCUS_DOWN);
+                }
+            });
+        }
+    }
+
+    @Override
+    public void callResult(ResultInfo info) {
+        if(info.getCode().equals("0")){
+            Object data = info.getData();
+            if(data!=null&&data instanceof List){
+                beans = (List<Map<String,String>>)data;
+                adapter.setData(beans);
+            }
+        }
+        mPullToRefreshScrollView.onRefreshComplete();
     }
 
     @Override

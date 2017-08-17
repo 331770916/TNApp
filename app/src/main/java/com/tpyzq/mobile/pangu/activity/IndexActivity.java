@@ -135,7 +135,7 @@ public class IndexActivity extends BaseActivity implements InterfaceCollection.I
             public void onCheckedChanged(RadioGroup group, int checkedId) {
                 for (int i = 0; i < tabIds.length; i++) {
                     if (tabIds[i] == checkedId) {
-                        if(enitiy!=null){
+                        if(enitiy!=null&&enitiy.getNewStockSize()>0){
                             if(i==0)
                                 newstockremind.setVisibility(View.VISIBLE);
                             else
@@ -182,7 +182,7 @@ public class IndexActivity extends BaseActivity implements InterfaceCollection.I
     public void callResult(ResultInfo info) {
         if(info.getCode().equals("0")) {
             enitiy = (NewStockEnitiy) info.getData();
-            if(enitiy!=null) {
+            if(enitiy!=null&&enitiy.getNewStockSize()>0) {
                 newstockremind.setVisibility(View.VISIBLE);
                 tvNewStock.setText(String.valueOf(enitiy.getNewStockSize()));
             }
