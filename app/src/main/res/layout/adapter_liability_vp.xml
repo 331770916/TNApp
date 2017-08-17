@@ -39,7 +39,7 @@
                     android:textStyle="bold"
                     />
             </LinearLayout>
-            <View
+            <ImageView
                 android:id="@+id/line1"
                 android:layout_width="@dimen/size1"
                 android:layout_height="match_parent"
@@ -71,7 +71,7 @@
                     android:textStyle="bold"
                     />
             </LinearLayout>
-            <View
+            <ImageView
                 android:id="@+id/line2"
                 android:layout_width="@dimen/size1"
                 android:layout_height="match_parent"
@@ -162,7 +162,7 @@
                     android:textColor="@color/texts"
                     android:text="可用保证金"/>
                 <TextView
-                    android:id="@+id/line2_tvtext2"
+                    android:id="@+id/line2_tvtext"
                     android:layout_width="wrap_content"
                     android:layout_height="wrap_content"
                     android:layout_gravity="center_horizontal"
@@ -192,7 +192,6 @@
                     android:textColor="@color/texts"
                     android:text="可用资金"/>
                 <TextView
-                    android:id="@+id/line2_tvtext3"
                     android:layout_width="wrap_content"
                     android:layout_height="wrap_content"
                     android:layout_gravity="center_horizontal"
