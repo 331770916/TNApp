@@ -30,6 +30,16 @@ public class InformationEntity {
     private String secuAbbr;
     private int type;
 
+    public String getWholeTime() {
+        return wholeTime;
+    }
+
+    public void setWholeTime(String wholeTime) {
+        this.wholeTime = wholeTime;
+    }
+
+    private String wholeTime;
+
     public int getType() {
         return type;
     }

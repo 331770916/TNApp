@@ -8,27 +8,19 @@ import android.view.View;
 import android.widget.AdapterView;
 import android.widget.FrameLayout;
 import android.widget.ListView;
-import android.widget.Toast;
 
 import com.tpyzq.mobile.pangu.R;
-import com.tpyzq.mobile.pangu.activity.detail.newsTab.DetailNewsListActivity;
 import com.tpyzq.mobile.pangu.activity.home.information.NewsDetailActivity;
 import com.tpyzq.mobile.pangu.activity.market.BaseTabPager;
-import com.tpyzq.mobile.pangu.base.CustomApplication;
 import com.tpyzq.mobile.pangu.base.InterfaceCollection;
-import com.tpyzq.mobile.pangu.base.SimpleRemoteControl;
 import com.tpyzq.mobile.pangu.data.InformationEntity;
 import com.tpyzq.mobile.pangu.data.NewsInofEntity;
 import com.tpyzq.mobile.pangu.data.ResultInfo;
 import com.tpyzq.mobile.pangu.data.StockInfoEntity;
 import com.tpyzq.mobile.pangu.db.Db_HOME_INFO;
 import com.tpyzq.mobile.pangu.db.Db_PUB_STOCKLIST;
-import com.tpyzq.mobile.pangu.http.doConnect.self.SelfChoiceStockNews;
-import com.tpyzq.mobile.pangu.http.doConnect.self.ToSelfChoiceStockNews;
-import com.tpyzq.mobile.pangu.interfac.ICallbackResult;
 import com.tpyzq.mobile.pangu.log.LogHelper;
 import com.tpyzq.mobile.pangu.log.LogUtil;
-import com.tpyzq.mobile.pangu.view.CentreToast;
 import com.tpyzq.mobile.pangu.view.dialog.LoadingDialog;
 import com.tpyzq.mobile.pangu.view.pulllayou.PullLayout;
 

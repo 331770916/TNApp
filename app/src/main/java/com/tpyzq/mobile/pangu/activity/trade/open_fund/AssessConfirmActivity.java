@@ -668,7 +668,7 @@ public class AssessConfirmActivity extends BaseActivity implements View.OnClickL
         customCenterDialog.setOnClickListener(new CustomCenterDialog.ConfirmOnClick() {
             @Override
             public void confirmOnclick() {
-                setResult(RESULT_OK);
+                setResult(RESULT_CANCELED);
                 finish();
                 customCenterDialog.dismiss();
             }

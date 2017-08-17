@@ -74,7 +74,7 @@ public class FundInfoActivity extends BaseActivity implements View.OnClickListen
 
 
         initLoadDialog();
-        mFundInoConnect.fundQueryConnect(mListType, "", 0, TAG, this);
+        mFundInoConnect.fundQueryConnect("", mListType, "", 0, TAG, this);
     }
 
     @Override
@@ -86,7 +86,7 @@ public class FundInfoActivity extends BaseActivity implements View.OnClickListen
             case R.id.bt_search:
                 mBeans.clear();
                 mAdapter.setDatas(mBeans);
-                mFundInoConnect.fundQueryConnect(mListType, mSearchContent_et.getText().toString(), 0, TAG, this);
+                mFundInoConnect.fundQueryConnect("", mListType, mSearchContent_et.getText().toString(), 0, TAG, this);
                 break;
         }
     }
@@ -152,9 +152,9 @@ public class FundInfoActivity extends BaseActivity implements View.OnClickListen
     public void onPullDownToRefresh(PullToRefreshBase refreshView) {
         if (position > 0) {
             position--;
-            mFundInoConnect.fundQueryConnect(mListType, mSearchContent_et.getText().toString(), position, TAG, this);
+            mFundInoConnect.fundQueryConnect("", mListType, mSearchContent_et.getText().toString(), position, TAG, this);
         } else {
-            mFundInoConnect.fundQueryConnect(mListType, mSearchContent_et.getText().toString(), 0, TAG, this);
+            mFundInoConnect.fundQueryConnect("", mListType, mSearchContent_et.getText().toString(), 0, TAG, this);
         }
 
     }
@@ -162,7 +162,7 @@ public class FundInfoActivity extends BaseActivity implements View.OnClickListen
     @Override
     public void onPullUpToRefresh(PullToRefreshBase refreshView) {
         position++;
-        mFundInoConnect.fundQueryConnect(mListType, mSearchContent_et.getText().toString(), position, TAG, this);
+        mFundInoConnect.fundQueryConnect("", mListType, mSearchContent_et.getText().toString(), position, TAG, this);
     }
 
 

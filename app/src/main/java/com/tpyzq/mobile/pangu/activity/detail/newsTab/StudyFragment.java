@@ -58,6 +58,7 @@ public class StudyFragment extends BasePager implements View.OnClickListener{
         pb_Study_Pager = (ProgressBar) rootView.findViewById(R.id.pb_Study_Pager);    //初始化显示 菊花
         tvStudyJiaZai = (TextView) rootView.findViewById(R.id.tvStudyJiaZai);         //重新加载
         tvStudyGengDuo = (TextView) rootView.findViewById(R.id.tvStudyGengDuo);         //加载更多
+        initData();
     }
 
     @Override

@@ -37,6 +37,7 @@ import com.tpyzq.mobile.pangu.util.ConstantUtil;
 import com.tpyzq.mobile.pangu.util.Helper;
 import com.tpyzq.mobile.pangu.util.SpUtils;
 import com.tpyzq.mobile.pangu.util.keyboard.NoSoftInputEditText;
+import com.tpyzq.mobile.pangu.util.keyboard.PasswordKeyboardUtils;
 import com.tpyzq.mobile.pangu.util.keyboard.UsefulKeyBoard;
 import com.tpyzq.mobile.pangu.util.panguutil.PanguParameters;
 import com.tpyzq.mobile.pangu.util.panguutil.UserUtil;
@@ -482,7 +483,7 @@ public class TransferAcountsTab extends BaseTransferSubjectTabView implements
                         .getSystemService(Context.INPUT_METHOD_SERVICE);
 
                 imm.hideSoftInputFromWindow(mViewGroup.getWindowToken(), 0);
-
+                PasswordKeyboardUtils.hideSoftKeyboard(mBankPasswrodEdit,mActivity,true);
                 if (mPopKeyBody != null && !mPopKeyBody.isShow()) {
                     mPopKeyBody.clearContent();
                     mPopKeyBody.setTitleText("请输入查询密码");

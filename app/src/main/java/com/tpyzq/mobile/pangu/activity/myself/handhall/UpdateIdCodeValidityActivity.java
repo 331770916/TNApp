@@ -77,7 +77,7 @@ public class UpdateIdCodeValidityActivity extends BaseActivity implements Dialog
     public void initView() {
         findViewById(R.id.userIdBackBtn).setOnClickListener(this);
         TextView title = (TextView) findViewById(R.id.toolbar_title);
-        title.setText("身份证有效期变更");
+        title.setText("身份证重要信息修改");
 
         mRightBtn = (TextView) findViewById(R.id.userIdOutBtn);
         mRightBtn.setOnClickListener(this);

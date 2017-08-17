@@ -2263,6 +2263,7 @@ public class InterfaceCollection {
         bean.setTitle(obj.optString("title"));
         bean.setDigest(obj.optString("digest"));
         String time = obj.optString("time");
+        bean.setWholeTime(time);
         if(!TextUtils.isEmpty(time)&&time.length()==19)
             time = time.substring(5,time.length()-3);
         bean.setTime(time);

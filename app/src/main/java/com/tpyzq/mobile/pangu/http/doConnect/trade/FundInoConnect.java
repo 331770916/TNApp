@@ -32,7 +32,7 @@ public class FundInoConnect {
      * @param pageIndex    第几页
      * @param tag
      */
-    public void fundQueryConnect(String fundType, String company_name, int pageIndex, String tag, final FundInfoConnectListener listener) {
+    public void fundQueryConnect(String funCode, String fundType, String company_name, int pageIndex, String tag, final FundInfoConnectListener listener) {
 
         HashMap map300441 = new HashMap();
         map300441.put("funcid", "300441");
@@ -40,7 +40,7 @@ public class FundInoConnect {
         HashMap map300441_1 = new HashMap();
         map300441_1.put("SEC_ID", "tpyzq");
         map300441_1.put("FUND_TYPE", fundType);
-//        map300441_1.put("FUND_CODE", "");
+        map300441_1.put("FUND_CODE", funCode);
         map300441_1.put("FUND_COMPANY_NAME", company_name);
         map300441_1.put("PAGE_INDEX", pageIndex);
         map300441_1.put("PAGE_SIZE", "20");
