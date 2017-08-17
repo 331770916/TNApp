@@ -134,12 +134,14 @@
                         android:textColor="@color/text"/>
 
                     <TextView
+                        android:layout_marginRight="@dimen/size20"
                         android:id="@+id/tvLaiYuanName"
-                        android:layout_width="wrap_content"
+                        android:layout_width="match_parent"
                         android:layout_height="wrap_content"
                         android:layout_marginLeft="@dimen/size80"
                         android:layout_toRightOf="@id/tvLaiYuanDate"
                         android:textSize="13sp"
+                        android:gravity="center|end"
                         android:singleLine="true"
                         android:textColor="@color/text"/>
                 </RelativeLayout>

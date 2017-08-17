@@ -1068,11 +1068,11 @@ public class StockDetailActivity extends BaseActivity implements  View.OnClickLi
     }
 
     private void gotoStkBuyAndSell(String optType) {
-        if (stkType==0||stkType==2) {
+        /*if (stkType==0||stkType==2) {
             CentreToast.showText(StockDetailActivity.this, "当前股票代码不可交易");
 
             return;
-        }
+        }*/
         Intent intent = new Intent();
         intent.putExtra("stockcode", stkCode);
         intent.putExtra("status", optType);
