@@ -2264,8 +2264,16 @@ public class InterfaceCollection {
         bean.setDigest(obj.optString("digest"));
         String time = obj.optString("time");
         bean.setWholeTime(time);
-        if(!TextUtils.isEmpty(time)&&time.length()==19)
-            time = time.substring(5,time.length()-3);
+        if(!TextUtils.isEmpty(time)){
+            switch (time.length()){
+                case 16:
+                    time = time.substring(5,time.length());
+                    break;
+                case 19:
+                    time = time.substring(5,time.length()-3);
+                    break;
+            }
+        }
         bean.setTime(time);
         bean.setImage_url(obj.optString("image"));
         bean.setDate(obj.optString("date"));
