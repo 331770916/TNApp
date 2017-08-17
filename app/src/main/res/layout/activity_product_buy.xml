@@ -174,12 +174,14 @@
             android:textSize="@dimen/txtSize14" />
 
         <TextView
+            android:gravity="right"
             android:id="@+id/tv_transaction_price"
             android:layout_width="0dp"
             android:layout_height="wrap_content"
             android:layout_gravity="center_vertical"
             android:layout_weight="1"
             android:text="可用：--"
+
             android:textColor="@color/textss" />
     </LinearLayout>
 
