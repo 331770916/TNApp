@@ -11,6 +11,7 @@ import android.widget.TextView;
 
 import com.tpyzq.mobile.pangu.R;
 import com.tpyzq.mobile.pangu.base.BaseDialogCenter;
+import com.tpyzq.mobile.pangu.http.OkHttpUtil;
 import com.tpyzq.mobile.pangu.util.FileUtil;
 import com.tpyzq.mobile.pangu.util.panguutil.APPInfoUtils;
 import com.tpyzq.mobile.pangu.view.WavaBezierProgress;
@@ -43,6 +44,7 @@ public class VersionDialog extends BaseDialogCenter implements View.OnClickListe
     private String url ;
     private String mimeType  = "text/html";
     private String encoding = "utf-8";
+    private String file;
 
     public VersionDialog(Context context, String apkAddress, String forceIsupdate, String versionNumber,String url) {
         super(context);
@@ -99,7 +101,7 @@ public class VersionDialog extends BaseDialogCenter implements View.OnClickListe
         switch (v.getId()) {
             case R.id.tv_download:
                 //更新
-                String file = Environment.getExternalStorageDirectory().getAbsolutePath() + "/Pangu/apk/";
+                file = Environment.getExternalStorageDirectory().getAbsolutePath() + "/Pangu/apk/";
                 File apkfile = new File(file + "new.apk");
                 if (apkfile.exists()) {
                     APPInfoUtils.installApk(context, apkfile.getAbsolutePath());
@@ -117,13 +119,22 @@ public class VersionDialog extends BaseDialogCenter implements View.OnClickListe
 //                dismiss();
                 break;
             case R.id.mclose:
+                OkHttpUtil.cancelSingleRequestByTag(OkHttpUtils.TAG_DOWNLOAD_APK);
+                if(null != file){
+                File files = new File(file+"new.apk");
+                    try {
+                        FileUtil.deleteFile(files);
+                    } catch (IOException e1) {
+                        e1.printStackTrace();
+                    }
+                }
                   dismiss();
                 break;
         }
     }
 
     private void downloadApk(String url, final String files) {
-        OkHttpUtils.get().url(url).build().execute(new FileCallBack(files, "new.apk") {
+        OkHttpUtil.okHttpForDownLoasFile(OkHttpUtils.TAG_DOWNLOAD_APK,url,new FileCallBack(files, "new.apk"){
 
             @Override
             public void onResponse(final File file, int id) {

@@ -36,6 +36,7 @@ public class OkHttpUtil {
 
     public static final String NO_TAG="no_tag";
 
+
     /** okhttp的一般get请求 */
     public static void OkHttpForGet (Object tag, String url, Map <String, String> params, Callback callback) {
         GetBuilder getBuilder = OkHttpUtils.get().url(url);

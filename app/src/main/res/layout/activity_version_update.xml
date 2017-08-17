@@ -11,7 +11,7 @@
         android:background="@color/blue"
         android:clipToPadding="true"
         android:id="@+id/rl_top_bar"
-		android:fitsSystemWindows="true" />
+        android:fitsSystemWindows="true" />
 
     <RelativeLayout
         android:layout_width="match_parent"
