@@ -163,6 +163,8 @@ public class ManagerMoenyDetailActivity extends BaseActivity implements View.OnC
         if (!TextUtils.isEmpty(productCode) && !TextUtils.isEmpty(mProductType)) {
             SimpleRemoteControl simpleRemoteControl = new SimpleRemoteControl(this);
             if ("3".equals(mProductType)) {
+                mBuyBtn.setVisibility(View.VISIBLE);
+                findViewById(R.id.managerDetailTargetLayout).setVisibility(View.GONE);
                 mBuyBtn.setText("下一步");
                 simpleRemoteControl.setCommand(new ToGetProductInfoOtcConnect(new GetProductInfoOtcConnect(TAG, "", productCode, mProductType)));
                 simpleRemoteControl.startConnect();
@@ -568,7 +570,7 @@ public class ManagerMoenyDetailActivity extends BaseActivity implements View.OnC
                 }
             }
         }
-
+        isToLogin = false;
         SimpleRemoteControl simpleRemoteControl = new SimpleRemoteControl(this);
         simpleRemoteControl.setCommand(new ToGetProductInfoConnect(new GetProductInfoConnect(TAG, "", mProductCode, mProductType)));
         simpleRemoteControl.startConnect();
