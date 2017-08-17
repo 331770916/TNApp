@@ -28,6 +28,7 @@ import okhttp3.Response;
  */
 public class OkHttpUtils {
     public static final String NOT_NEED_ERR_HANDLER="not_need_err_handler";
+    public static final String TAG_DOWNLOAD_APK="TAG_DOWNLOAD_APK";
     public static final long DEFAULT_MILLISECONDS = 10_000L;
     private volatile static OkHttpUtils mInstance;
     private OkHttpClient mOkHttpClient;
@@ -175,9 +176,13 @@ public class OkHttpUtils {
                         Log.e("OkHttp", call.request().url() + "  onError " + (e == null ? "" : e.getMessage()));
                         Log.e("OkHttp", "===================================================");
                     }
-                    errHandler.handleErr(call, e, callback, id);
-                    if (!(e != null && !TextUtils.isEmpty(e.getMessage()) && e.getMessage().toLowerCase().matches(".*(cancel|closed).*")))
+
+                    if (call.request()!=null&&call.request().tag()!=null&&call.request().tag().toString().contains(TAG_DOWNLOAD_APK)){
                         callback.onError(call, e, id);
+                    }else if (!(e != null && !TextUtils.isEmpty(e.getMessage()) && e.getMessage().toLowerCase().matches(".*(cancel|closed).*"))){
+                        errHandler.handleErr(call, e, callback, id);
+                        callback.onError(call, e, id);
+                    }
                 } catch (Exception e) {
                     e.printStackTrace();
                 }
