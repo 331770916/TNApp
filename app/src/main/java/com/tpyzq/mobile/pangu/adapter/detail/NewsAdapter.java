@@ -7,6 +7,7 @@ import android.view.ViewGroup;
 import android.widget.BaseAdapter;
 import android.widget.TextView;
 import com.tpyzq.mobile.pangu.R;
+import com.tpyzq.mobile.pangu.activity.detail.newsTab.DetailNewsListActivity;
 import com.tpyzq.mobile.pangu.data.InformationEntity;
 import java.util.List;
 
@@ -68,9 +69,17 @@ public class NewsAdapter extends BaseAdapter {
         if(type == 1){
             viewHolder.tvDetailNewsSource.setVisibility(View.GONE);
         }
-        viewHolder.tvDetailNewsSource.setText(bean.getSource());
-        viewHolder.tvDetailNewsTitle.setText(bean.getTitle());
-        viewHolder.tvDetailNewsTime.setText(bean.getTime());
+        if (context instanceof DetailNewsListActivity){
+            viewHolder.tvDetailNewsSource.setText(bean.getWholeTime());
+            viewHolder.tvDetailNewsTitle.setText(bean.getTitle());
+//        viewHolder.tvDetailNewsTime.setText(bean.getWholeTime());\
+            viewHolder.tvDetailNewsTime.setVisibility(View.GONE);
+        }else {
+            viewHolder.tvDetailNewsSource.setText(bean.getSource());
+            viewHolder.tvDetailNewsTitle.setText(bean.getTitle());
+            viewHolder.tvDetailNewsTime.setText(bean.getTime());
+        }
+
 
         return convertView;
     }

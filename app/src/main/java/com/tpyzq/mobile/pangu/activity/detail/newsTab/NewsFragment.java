@@ -11,7 +11,7 @@ import android.widget.RelativeLayout;
 import android.widget.TextView;
 import com.tpyzq.mobile.pangu.R;
 import com.tpyzq.mobile.pangu.activity.home.information.NewsDetailActivity;
-import com.tpyzq.mobile.pangu.adapter.home.NewHomeInformationAdapter;
+import com.tpyzq.mobile.pangu.adapter.home.NewInformationAdapter;
 import com.tpyzq.mobile.pangu.base.BasePager;
 import com.tpyzq.mobile.pangu.base.InterfaceCollection;
 import com.tpyzq.mobile.pangu.data.InformationEntity;
@@ -26,7 +26,7 @@ public class NewsFragment extends BasePager implements View.OnClickListener ,Int
     private final String TAG = "NewsFragment";
     private ListView mListView;
     private ArrayList<InformationEntity> list;
-    private NewHomeInformationAdapter adapter;
+    private NewInformationAdapter adapter;
     private RelativeLayout rlNews;          //背景
     private ProgressBar pb_New_Pager;      //菊花
     private TextView tvNewJiaZai, tvNewGengDuo;          //重新加载  , 点击查看更多
@@ -54,7 +54,7 @@ public class NewsFragment extends BasePager implements View.OnClickListener ,Int
         tvNewGengDuo.setVisibility(View.GONE);  //初始化 隐藏 点击查看更多
         ifc.queryStockNews(stockCode,"30","1",TAG,this);
         list = new ArrayList<>();
-        adapter = new NewHomeInformationAdapter(mContext);
+        adapter = new NewInformationAdapter(mContext);
         mListView.setAdapter(adapter);
         tvNewGengDuo.setOnClickListener(this);
         mListView.setOnItemClickListener(new AdapterView.OnItemClickListener() {
@@ -79,9 +79,13 @@ public class NewsFragment extends BasePager implements View.OnClickListener ,Int
             mListView.setVisibility(View.VISIBLE);      //请求到数据 展示 listView
             list = (ArrayList<InformationEntity>)info.getData();
             if(list!=null&&!list.isEmpty()){
+
                 if (list.size() >= 2){
+                    ArrayList<InformationEntity> list1 = new ArrayList<>();
+                    list1.add(list.get(0));
+                    list1.add(list.get(1));
                     tvNewGengDuo.setVisibility(View.VISIBLE);
-                    adapter.setDatas((ArrayList<InformationEntity>) list.subList(0,1));
+                    adapter.setDatas(list1);
                 }else {
                     tvNewGengDuo.setVisibility(View.GONE);
                     adapter.setDatas(list);
