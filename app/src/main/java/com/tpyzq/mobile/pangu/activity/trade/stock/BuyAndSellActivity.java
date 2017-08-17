@@ -157,7 +157,9 @@ public class BuyAndSellActivity extends BaseActivity implements View.OnClickList
     private String secc_code;//股东代码
     private CommissionedBuyAndSellDialog commissionedBuyAndSellDialog;
     private String MARKET_NAME;//股东代码中返回的市场名称
+    private String MARKET = "";
     private boolean isSetStockCodeEt = true;
+    private String istatus;
 
     @Override
     public void initView() {
@@ -360,7 +362,7 @@ public class BuyAndSellActivity extends BaseActivity implements View.OnClickList
         for (int i = 1; i < listSell.size(); i++) {
             sell.put(i,false);
         }
-        final String istatus = intent.getStringExtra("status");
+        istatus = intent.getStringExtra("status");
         final String istockcode = intent.getStringExtra("stockcode");
         if (!TextUtils.isEmpty(istatus) && "买".equals(istatus)) {
             rb_buy.setChecked(true);        //初始化
@@ -668,6 +670,7 @@ public class BuyAndSellActivity extends BaseActivity implements View.OnClickList
                         tv_sum.setText(num + "");
                         secc_code = authorizeBean.SECU_ACCOUNT;//股东账号
                         MARKET_NAME = authorizeBean.MARKET_NAME;//交易市场
+                        MARKET = authorizeBean.MARKET;//交易市场
                         if (Helper.isDecimal(et_price.getText().toString())) {
                             Double stock_price = Double.valueOf(et_price.getText().toString());
                             Double stock_sum = Double.valueOf(amount);
@@ -750,6 +753,7 @@ public class BuyAndSellActivity extends BaseActivity implements View.OnClickList
                             tv_sum.setText(num + "");
                             secc_code = authorizeBean.SECU_ACCOUNT;//股东账号
                             MARKET_NAME = authorizeBean.MARKET_NAME;//交易市场
+                            MARKET = authorizeBean.MARKET;//交易市场
                             iv_add_sum.setClickable(true);
                             iv_sub_sum.setClickable(true);
 //                            et_num.setEnabled(true);
@@ -1048,6 +1052,7 @@ public class BuyAndSellActivity extends BaseActivity implements View.OnClickList
         public void onCheckedChanged(RadioGroup group, int checkedId) {
             MARKET_NAME = "";
             secc_code = "";
+            MARKET = "";
             switch (group.getId()) {
                 case R.id.rg_buysell:
                     switch (checkedId) {
@@ -1112,6 +1117,7 @@ public class BuyAndSellActivity extends BaseActivity implements View.OnClickList
                 isSearchAgin = true;
                 MARKET_NAME = "";
                 secc_code = "";
+                MARKET = "";
                 clearView(true);
                 break;
             case R.id.iv_sub_price:
@@ -1329,9 +1335,10 @@ public class BuyAndSellActivity extends BaseActivity implements View.OnClickList
     //股东代码弹框回调
     private SeccDialog.SeccDialogCallListener listener = new SeccDialog.SeccDialogCallListener() {
         @Override
-        public void select(String MARKET_NAME,String secc_account) {
+        public void select(String MARKET,String MARKET_NAME,String secc_account) {
             BuyAndSellActivity.this.secc_code =secc_account;
             BuyAndSellActivity.this.MARKET_NAME =MARKET_NAME;
+            BuyAndSellActivity.this.MARKET = MARKET;
             commissionedBuyAndSellDialog.setSecc_code(MARKET_NAME,secc_account);
         }
     };
@@ -1349,13 +1356,19 @@ public class BuyAndSellActivity extends BaseActivity implements View.OnClickList
         map300140.put("secret",  UserUtil.Keyboard);
         HashMap map300140_1 = new HashMap();
         map300140_1.put("SEC_ID", encryptBySessionKey("tpyzq"));
-        String market_code = "";
+        /*String market_code = "";
         if (code.startsWith("2")) {
             market_code = "2";
         } else if (code.startsWith("1")) {
             market_code = "1";
         }
-        map300140_1.put("MARKET", encryptBySessionKey(market_code));
+        map300140_1.put("MARKET", encryptBySessionKey(market_code));*/
+        if (TextUtils.isEmpty(MARKET)) {
+            map300140_1.put("MARKET", encryptBySessionKey("1"));
+        } else {
+            map300140_1.put("MARKET", encryptBySessionKey(MARKET));
+        }
+
         map300140_1.put("TRD_ID", encryptBySessionKey("1"));
         if (TextUtils.isEmpty(secc_code)) {
             secc_code = "";
@@ -1412,13 +1425,21 @@ public class BuyAndSellActivity extends BaseActivity implements View.OnClickList
         map300140.put("secret",  UserUtil.Keyboard);
         HashMap map300140_1 = new HashMap();
         map300140_1.put("SEC_ID", encryptBySessionKey("tpyzq"));
-        String market_code = "";
+        /*String market_code = "";
         if (code.startsWith("2")) {
             market_code = "2";
         } else if (code.startsWith("1")) {
             market_code = "1";
         }
         map300140_1.put("MARKET", encryptBySessionKey(market_code));
+        */
+
+        if (TextUtils.isEmpty(MARKET)) {
+            map300140_1.put("MARKET", encryptBySessionKey("1"));
+        } else {
+            map300140_1.put("MARKET", encryptBySessionKey(MARKET));
+        }
+
         if (TextUtils.isEmpty(secc_code)) {
             secc_code = "";
         }
@@ -1527,7 +1548,7 @@ public class BuyAndSellActivity extends BaseActivity implements View.OnClickList
                         String data = jsonObject.getString("data");
                         JSONArray jaData = new JSONArray(data);
                         transStockBeen.clear();
-                        if (jaData.length()==1&&isSetStockCodeEt) {
+                        if (jaData.length()==1&&(isSetStockCodeEt||!TextUtils.isEmpty(istatus))) {
                             transStockBeen.clear();
                             if (null != stockPw) {
                                 stockPw.refreshView();
@@ -1536,6 +1557,7 @@ public class BuyAndSellActivity extends BaseActivity implements View.OnClickList
                                 stockPw.dismiss();
                             }
                             onPwClick(jaData.getJSONArray(0).getString(1),jaData.getJSONArray(0).getString(0));
+                            istatus = "";
                             return;
                         }
                         if (!isSetStockCodeEt) {
@@ -1719,6 +1741,7 @@ public class BuyAndSellActivity extends BaseActivity implements View.OnClickList
         } else {*/
             MARKET_NAME = "";
             secc_code = "";
+            MARKET = "";
             setStock(stockName, code);
             refresh(code);
             iv_depute_way.setClickable(true);
@@ -1745,6 +1768,7 @@ public class BuyAndSellActivity extends BaseActivity implements View.OnClickList
 //            } else {
                 MARKET_NAME = "";
                 secc_code = "";
+                MARKET = "";
                 searchNetStock(false,code.substring(2));
                 setStock(stockName, code);
                 refresh(code);
