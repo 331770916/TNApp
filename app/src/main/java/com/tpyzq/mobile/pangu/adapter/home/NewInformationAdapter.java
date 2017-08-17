@@ -74,7 +74,7 @@ public class NewInformationAdapter extends BaseAdapter {
         final InformationEntity info = mDatas.get(position);
 //        viewHolder.image.setImageURI(info.getImage_url());
         viewHolder.tvNewAnnStudyTitle.setText(info.getTitle());  //+" | "+info.getDigest()
-        viewHolder.tvNewAnnStudySource.setText(info.getWholeTime());
+        viewHolder.tvNewAnnStudySource.setText(info.getTime());
         return convertView;
     }
 

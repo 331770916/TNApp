@@ -119,33 +119,4 @@
             android:layout_centerInParent="true"
             android:src="@mipmap/kong" />
     </RelativeLayout>
-
-
-    <!--<RelativeLayout-->
-    <!--android:layout_width="match_parent"-->
-    <!--android:layout_height="match_parent">-->
-
-    <!--<com.handmark.pulltorefresh.library.PullToRefreshListView-->
-    <!--android:id="@+id/RKListView"-->
-    <!--android:layout_width="match_parent"-->
-    <!--android:layout_height="match_parent"-->
-    <!--android:divider="@null"-->
-    <!--android:scrollbars="none"-->
-    <!--app:ptrAnimationStyle="flip"-->
-    <!--app:ptrMode="pullFromStart" />-->
-
-    <!--<RelativeLayout-->
-    <!--android:id="@+id/MyRelativeLayout"-->
-    <!--android:layout_width="match_parent"-->
-    <!--android:layout_height="match_parent">-->
-
-    <!--<ImageView-->
-    <!--android:layout_width="match_parent"-->
-    <!--android:layout_height="match_parent"-->
-    <!--android:scaleX="0.6"-->
-    <!--android:scaleY="0.6"-->
-    <!--android:src="@mipmap/kong" />-->
-    <!--</RelativeLayout>-->
-    <!--</RelativeLayout>-->
-
 </LinearLayout>

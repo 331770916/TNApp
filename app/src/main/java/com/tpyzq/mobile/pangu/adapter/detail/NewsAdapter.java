@@ -70,9 +70,8 @@ public class NewsAdapter extends BaseAdapter {
             viewHolder.tvDetailNewsSource.setVisibility(View.GONE);
         }
         if (context instanceof DetailNewsListActivity){
-            viewHolder.tvDetailNewsSource.setText(bean.getWholeTime());
+            viewHolder.tvDetailNewsSource.setText(bean.getTime());
             viewHolder.tvDetailNewsTitle.setText(bean.getTitle());
-//        viewHolder.tvDetailNewsTime.setText(bean.getWholeTime());\
             viewHolder.tvDetailNewsTime.setVisibility(View.GONE);
         }else {
             viewHolder.tvDetailNewsSource.setText(bean.getSource());

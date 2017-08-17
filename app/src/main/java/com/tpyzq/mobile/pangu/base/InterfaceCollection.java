@@ -2262,19 +2262,7 @@ public class InterfaceCollection {
         bean.setNewsno(obj.optString("newsno"));
         bean.setTitle(obj.optString("title"));
         bean.setDigest(obj.optString("digest"));
-        String time = obj.optString("time");
-        bean.setWholeTime(time);
-        if(!TextUtils.isEmpty(time)){
-            switch (time.length()){
-                case 16:
-                    time = time.substring(5,time.length());
-                    break;
-                case 19:
-                    time = time.substring(5,time.length()-3);
-                    break;
-            }
-        }
-        bean.setTime(time);
+        bean.setTime(obj.optString("time"));
         bean.setImage_url(obj.optString("image"));
         bean.setDate(obj.optString("date"));
         bean.setContent(obj.optString("content"));
