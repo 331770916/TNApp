@@ -215,4 +215,9 @@
     <color name="item_green">#28a946</color>
     <color name="item_red">#e84342</color>
     <color name="item_gray">#c7c7c7</color>
+
+    <!---->
+    <color name="table_text_normal">#4a4a4a</color>
+    <color name="table_text_selected">#368ce6</color>
+
 </resources>
