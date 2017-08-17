@@ -158,6 +158,3 @@ dependencies {
     compile 'com.github.barteksc:android-pdf-viewer:2.3.0'
     compile 'com.kyleduo.switchbutton:library:1.4.2'
 }
-bonree {
-    enable true
-}
