@@ -162,7 +162,7 @@
                     android:textColor="@color/texts"
                     android:text="可用保证金"/>
                 <TextView
-                    android:id="@+id/line2_tvtext"
+                    android:id="@+id/line2_tvtext2"
                     android:layout_width="wrap_content"
                     android:layout_height="wrap_content"
                     android:layout_gravity="center_horizontal"
@@ -192,6 +192,7 @@
                     android:textColor="@color/texts"
                     android:text="可用资金"/>
                 <TextView
+                    android:id="@+id/line2_tvtext3"
                     android:layout_width="wrap_content"
                     android:layout_height="wrap_content"
                     android:layout_gravity="center_horizontal"
