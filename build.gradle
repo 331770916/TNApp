@@ -2,11 +2,14 @@
 
 buildscript {
     repositories {
+        maven {
+            url uri('app/repo')
+        }
         jcenter()
     }
     dependencies {
         classpath 'com.android.tools.build:gradle:2.2.2'
-        classpath fileTree(dir: 'app/plugin', include: ['*.jar'])
+       	classpath 'com.bonree.agent.android:bonree:2.2.1.6'
 
         // NOTE: Do not place your application dependencies here; they belong
         // in the individual module build.gradle files

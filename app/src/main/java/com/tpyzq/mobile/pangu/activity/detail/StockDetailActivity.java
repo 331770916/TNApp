@@ -91,6 +91,7 @@ import java.util.HashMap;
 import java.util.Map;
 import java.util.Timer;
 import java.util.TimerTask;
+import java.util.Vector;
 
 import okhttp3.Call;
 
@@ -889,6 +890,7 @@ public class StockDetailActivity extends BaseActivity implements  View.OnClickLi
                 this.Kline_xrdrType = (Integer) v.getTag();
                 changeXrdrType();
                 kdata = null;
+                Kline_start=0;
                 requestKlineData();
                 break;
             case R.id.stk_detail_bottomBtn1://buy
@@ -2379,13 +2381,80 @@ public class StockDetailActivity extends BaseActivity implements  View.OnClickLi
             requestHoldStocks();
         }
     }
+    private void requestKlineLastPageData() {
+        if(kLine!=null){
+            kLine.setData(null,mFormat1);
+        }
+        if(kdata!=null)
+        {
+            Kline_start = vec.size();
+        }
+        Map<String, String> params = new HashMap();
+        try {
+            params.put("PARAMS", "[{\"market\":\""+stkCode.substring(0,1)+"\",\"code\":\""+stkCode+"\",\"cycle\":\""+Kline_cycle+"\",\"start\":\""+Kline_start+"\",\"number\":\""+Kline_size+"\",\"xrdrType\":\""+Kline_xrdrType+"\"}]");
+            params.put("FUNCTIONCODE","HQING010");
+
+            LogHelper.e(TAG, ""+params.toString());
+
+        } catch (Exception e) {
+            e.printStackTrace();
+        }
+
+
+        NetWorkUtil.getInstence().okHttpForGet(TAG+"kline",ConstantUtil.getURL_HQ_HHN(), params, new StringCallback() {
+            @Override
+            public void onError(Call call, Exception e, int id) {
+                LogHelper.e(TAG, e.toString());
+            }
+
+            @Override
+            public void onResponse(String response, int id) {
+                if (TextUtils.isEmpty(response)) {
+                    return;
+                }
+                try {
+                    JSONObject jsonObject = new JSONObject(response.substring(1, response.length() - 1));
+                    if (!"0".equals(jsonObject.optString("code"))) {
+                        LogHelper.e(TAG, "stockDetailData 数据异常:" + response);
+                        return;
+                    }
+//                    int totalCount = jsonObject.optInt("totalCount");
+                    String cycle = jsonObject.optString("cycle");
+                    String IssuePrice = jsonObject.optString("IssuePrice");
+                    String IssueDate = jsonObject.optString("listdate");
+//                    if(totalCount>0){
+                    String obj = jsonObject.optString("data");
+                    JSONArray dataArr = new JSONArray(obj);
+                    analysisKlineData(dataArr);
+                    if(kdata!=null)
+                    {
+                        if(!TextUtils.isEmpty(IssueDate))
+                        {
+                            kdata.listDate = IssueDate.replace("-","");
+                        }
+                        kdata.m_fIssuePrice = getStrFloat(IssuePrice);
+                    }
+//                        mingxiAdapter.notifyDataSetChanged();
+//                    }
+                    LogHelper.e(TAG, "stockKlineData call Back totalCount:"+response.length());
+
+                }catch (Exception e){
+                    e.printStackTrace();
+                }
+//                LogHelper.e(TAG, "stockDetailTradeData :"+response);
+            }
+        });
+    }
+    Vector<KPoints> vec = new Vector<KPoints>();
     private KData kdata = null;
     private void analysisKlineData(JSONArray arry) throws JSONException{
         if(kdata==null)
         {
             kdata = new KData();
         }
-
+        if(Kline_start==0){
+            vec.removeAllElements();
+        }
         int len = arry.length();
 
         byte [] b = new byte[len];
@@ -2398,8 +2467,8 @@ public class StockDetailActivity extends BaseActivity implements  View.OnClickLi
         if(Kline_cycle!=KLine.KLINE_CYCLE_DAY){
             count = len/40;
         }
-        kdata.m_KPoints = new KPoints[count];
-        kdata.kPointsLen = count;
+        Vector<KPoints> vecT = new Vector<KPoints>(count);
+
         LogHelper.e(TAG, "stockDetailTradeData itemLen :"+count);
         int k = 0;
         while(k<count){
@@ -2433,12 +2502,12 @@ public class StockDetailActivity extends BaseActivity implements  View.OnClickLi
                 pki.m_nDate = date;
             }
 
-            kdata.m_KPoints[k] = pki;
+//            kdata.m_KPoints[k] = pki;
 
-            pki.m_nM5Price = MAKline(kdata,pki,5,k);
-            pki.m_nM10Price = MAKline(kdata,pki,10,k);
-            pki.m_nM20Price = MAKline(kdata,pki,20,k);
-
+//            pki.m_nM5Price = MAKline(kdata,pki,5,k);
+//            pki.m_nM10Price = MAKline(kdata,pki,10,k);
+//            pki.m_nM20Price = MAKline(kdata,pki,20,k);
+            vecT.add(pki);
 //            if(k>count-20)
 //            {
 //                LogHelper.e(TAG, k+":stockDetail KlineData :"+t+","+mFormat1.format(pki.m_nM5Price)+"||"+mFormat1.format(openPrice)+","+mFormat1.format(highPrice)
@@ -2446,11 +2515,37 @@ public class StockDetailActivity extends BaseActivity implements  View.OnClickLi
 //            }
             k++;
         }
+        vec.addAll(0,vecT);
+        kdata.kPointsLen = vec.size();
+        kdata.m_KPoints = new KPoints[vec.size()];
+        vec.copyInto(kdata.m_KPoints);
+        for(int i = 0 ;i<vec.size();i++){
+            KPoints pki = vec.get(i);
+            pki.m_nM5Price = MAKline(kdata,pki,5,i);
+            pki.m_nM10Price = MAKline(kdata,pki,10,i);
+            pki.m_nM20Price = MAKline(kdata,pki,20,i);
+            pki.m_nM60Price = MAKline(kdata,pki,60,i);
+            pki.m_nM120Price = MAKline(kdata,pki,120,i);
+//            LogHelper.e(TAG, i+":stockDetail KlineData :"+pki.m_nDate+","+mFormat1.format(pki.m_nM5Price)+"|"+mFormat1.format(pki.m_nM10Price));
+            kdata.m_KPoints[i]=pki;
+        }
         kLine.setHoldPrice(m_strHoldPrice);
-        kLine.setData(kdata,mFormat1);
+
+
+        if(Kline_start!=0){
+            kLine.setData(kdata,count);
+        }else{
+            kLine.setData(kdata,mFormat1);
+        }
+
         if(isLandScreen&&landKline!=null){
             landKline.setHoldPrice(m_strHoldPrice);
-            landKline.setData(kdata,mFormat1);
+            if(Kline_start!=0){
+                landKline.setData(kdata,count);
+            }else
+            {
+                landKline.setData(kdata,mFormat1);
+            }
         }
     }
 
@@ -2580,6 +2675,15 @@ public class StockDetailActivity extends BaseActivity implements  View.OnClickLi
                 }
                 isModifyTitle  = arg2;
 
+                break;
+            case 11://K线滑动到最左端了，需要出发前翻页事件
+            {
+                if(vec.size()>0&&vec.size()%Kline_size==0)
+                {
+                    requestKlineLastPageData();
+                    LogHelper.e(TAG,"request more KlineData!");
+                }
+            }
                 break;
         }
     }
