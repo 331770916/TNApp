@@ -420,6 +420,7 @@
         <activity android:name=".activity.trade.margin_trading.integrated.QueryQTargetActivity" />
         <activity android:name=".activity.trade.margin_trading.integrated.QueryZTargetActivity" />
         <activity android:name=".activity.trade.margin_trading.integrated.UnFinishedActivity" />
+        <activity android:name=".activity.trade.margin_trading.TreatyApplyActivity"/>
 
         <!--行情 相关activity-->
         <activity android:name=".activity.market.quotation.plate.PlateListActivity" />
