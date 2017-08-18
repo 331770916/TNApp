@@ -24,11 +24,6 @@
                     android:layout_height="wrap_content"
                     android:orientation="vertical">
 
-                    <!--<com.bigkoo.convenientbanner.ConvenientBanner-->
-                        <!--android:id="@+id/convenientBanner"-->
-                        <!--android:layout_width="match_parent"-->
-                        <!--android:layout_height="@dimen/size225"-->
-                        <!--app:canLoop="true" />-->
                         <RelativeLayout
                             android:id="@+id/vp_carousel"
                             android:layout_width="match_parent"
@@ -52,33 +47,27 @@
                         android:layout_height="@dimen/size7"
                         android:background="@color/bgColor" />
 
-                    <ImageView
+                    <com.facebook.drawee.view.SimpleDraweeView
                         android:id="@+id/home_middlebander"
                         android:layout_width="match_parent"
                         android:layout_height="@dimen/size80"
                         android:visibility="visible" />
 
 
-                    <View
-                        android:layout_width="wrap_content"
-                        android:layout_height="@dimen/size7"
-                        android:background="@color/bgColor"
-                        android:visibility="gone" />
+                <View
+                    android:layout_width="wrap_content"
+                    android:layout_height="@dimen/size7"
+                    android:background="@color/bgColor" />
 
 
-                    <com.tpyzq.mobile.pangu.view.gridview.MyListView
-                        android:id="@+id/homeProductReservation"
-                        android:layout_width="match_parent"
-                        android:layout_height="wrap_content"
-                        android:background="@color/white"
-                        android:divider="@null" />
+                <LinearLayout
+                    android:id="@+id/homeProductReservation"
+                    android:layout_width="match_parent"
+                    android:layout_height="wrap_content"
+                    android:background="@color/white"
+                    android:divider="@null"
+                    android:orientation="vertical" />
 
-
-                    <com.tpyzq.mobile.pangu.view.gridview.MyListView
-                        android:id="@+id/homeSelfNewsListView"
-                        android:layout_width="match_parent"
-                        android:layout_height="wrap_content"
-                        android:background="@color/white"/>
 
                         <LinearLayout
                             android:id="@+id/ll_homeInfoListLayout"

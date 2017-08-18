@@ -1,6 +1,7 @@
 package com.tpyzq.mobile.pangu.activity.home.information.adapter;
 
 import android.content.Context;
+import android.text.TextUtils;
 import android.view.LayoutInflater;
 import android.view.View;
 import android.view.ViewGroup;
@@ -21,7 +22,7 @@ public class SopCastAdapter extends BaseAdapter {
     private Context context;
     private ArrayList<InformationEntity> list;
     private TextView tvDay,tvDate;
-    private String currentDay;
+    private String currentDay="",currentTime="";
 
     public SopCastAdapter(Context context) {
         this.context = context;
@@ -72,17 +73,22 @@ public class SopCastAdapter extends BaseAdapter {
         }else {
             viewHolder = (ViewHolder) convertView.getTag();
         }
+        if(position==0)
+            viewHolder.tvTime.setVisibility(View.GONE);
+        else
+            viewHolder.tvTime.setVisibility(View.VISIBLE);
         InformationEntity informationBean = list.get(position);
         String date = informationBean.getDate();                    //日期
-        currentDay = date;
+        String time = informationBean.getTime();
         if(tvDay!=null)
-            tvDay.setText(getWeekOfDate(getDate(currentDay)));
+            tvDay.setText(getWeekOfDate(getDate(TextUtils.isEmpty(currentDay)?date:currentDay)));
         if(tvDate!=null)
-            tvDate.setText(currentDay);
-        String times = informationBean.getTime();                  //时间
+            tvDate.setText(TextUtils.isEmpty(currentDay)?date:currentDay+" "+(TextUtils.isEmpty(currentTime)?time:currentTime));
+        currentDay = date;
+        currentTime = time;
         String title = informationBean.getTitle();    //标题
         String content = informationBean.getDigest();
-        viewHolder.tvTime.setText(times);
+        viewHolder.tvTime.setText(date+" "+time);
         viewHolder.tvTitle.setText(title);
         viewHolder.tvContent.setText(content);
         return convertView;

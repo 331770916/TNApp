@@ -98,7 +98,7 @@
                 android:layout_width="wrap_content"
                 android:layout_height="wrap_content"
                 android:text="股东代码:"
-                android:textColor="@color/text" />
+                android:textColor="@color/black" />
 
             <TextView
                 android:id="@+id/tv_secc_code"
@@ -142,17 +142,26 @@
             android:textColor="@color/white" />
 
     </LinearLayout>
-
-    <TextView
-        android:id="@+id/tv_title"
-        android:layout_width="wrap_content"
+    <LinearLayout
+        android:layout_width="match_parent"
         android:layout_height="wrap_content"
         android:layout_marginTop="18dp"
-        android:drawableLeft="@mipmap/xinxiqueren"
-        android:text="委托买入"
-        android:textColor="@color/black"
-        android:textSize="@dimen/txtSize16"
-        android:textStyle="bold"
-        android:layout_alignParentTop="true"
-        android:layout_centerHorizontal="true" />
+        android:gravity="center">
+        <ImageView
+            android:id="@+id/iv_title_icon"
+            android:layout_width="18dp"
+            android:layout_height="18dp"
+            android:layout_marginRight="10dp"
+            android:background="@mipmap/xinxiqueren"/>
+        <TextView
+            android:id="@+id/tv_title"
+            android:layout_width="wrap_content"
+            android:layout_height="wrap_content"
+            android:text="委托买入"
+            android:textColor="@color/black"
+            android:textSize="@dimen/txtSize16"
+            android:textStyle="bold"
+            android:layout_alignParentTop="true"
+            android:layout_centerHorizontal="true" />
+    </LinearLayout>
 </RelativeLayout>

@@ -23,6 +23,7 @@
         </RelativeLayout>
         <TextView
             android:id="@+id/tvDate"
+            android:text="11111"
             android:layout_width="wrap_content"
             android:layout_height="wrap_content"
             android:layout_centerVertical="true"
@@ -40,39 +41,43 @@
             android:id="@+id/topLine"
             android:layout_marginLeft="@dimen/size16"
             android:layout_width="@dimen/size0.3"
-            android:layout_height="@dimen/size20"
+            android:layout_height="@dimen/size90"
             android:background="@color/gravy"/>
-        <TextView
-            android:id="@+id/tvTime"
+        <ImageView
             android:layout_below="@id/topLine"
-            android:layout_margin="@dimen/size2"
             android:layout_width="wrap_content"
             android:layout_height="wrap_content"
-            android:textColor="@color/newStockTitle"
-            android:textSize="@dimen/txtSize12"
-            />
-        <View
-            android:layout_marginLeft="@dimen/size16"
-            android:layout_below="@id/tvTime"
-            android:layout_width="@dimen/size0.3"
-            android:layout_height="@dimen/size70"
-            android:background="@color/gravy"/>
+            android:layout_marginLeft="@dimen/size13"
+            android:src="@mipmap/cycle"/>
     </RelativeLayout>
     <RelativeLayout
         android:id="@+id/rlRight"
         android:visibility="gone"
+        android:layout_marginLeft="@dimen/size18"
         android:layout_toRightOf="@id/rlLeft"
         android:layout_below="@id/rlTop"
+        android:layout_marginTop="@dimen/size5"
+        android:layout_marginBottom="@dimen/size5"
         android:layout_width="match_parent"
         android:layout_height="wrap_content"
         android:layout_marginRight="@dimen/size21">
         <TextView
+            android:id="@+id/tvTime"
+            android:layout_marginLeft="@dimen/size6"
+            android:layout_width="match_parent"
+            android:layout_height="wrap_content"
+            android:textColor="@color/newStockTitle"
+            android:textSize="@dimen/txtSize12"
+            />
+        <TextView
             android:id="@+id/tvTitle"
+            android:layout_below="@id/tvTime"
             android:layout_width="match_parent"
             android:layout_height="wrap_content"
             android:layout_marginLeft="@dimen/size6"
-            android:layout_marginTop="@dimen/size24"
+            android:layout_marginTop="@dimen/size4"
             android:textSize="@dimen/txtSize15"
+            android:ellipsize="end"
             android:maxLines="2"/>
         <TextView
             android:id="@+id/tvContent"
@@ -82,6 +87,7 @@
             android:layout_marginLeft="@dimen/size6"
             android:layout_marginTop="@dimen/size4"
             android:textSize="@dimen/txtSize13"
+            android:ellipsize="end"
             android:textColor="@color/newStockTitle"
             android:maxLines="2"/>
     </RelativeLayout>

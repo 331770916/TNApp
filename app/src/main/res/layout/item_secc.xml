@@ -4,12 +4,13 @@
     android:layout_width="match_parent"
     android:layout_height="wrap_content">
     <LinearLayout
+        android:id="@+id/ll_secc"
         android:layout_width="match_parent"
         android:layout_height="wrap_content"
         android:layout_marginLeft="@dimen/size20"
         android:layout_marginRight="@dimen/size20"
         android:gravity="center_vertical"
-        android:background="@drawable/bg_secc_select">
+        android:background="@drawable/bg_secc">
         <TextView
             android:id="@+id/tv_secc"
             android:layout_width="0dp"

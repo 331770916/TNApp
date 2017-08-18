@@ -4,17 +4,26 @@
     android:background="@color/white"
     android:gravity="center_horizontal"
     android:orientation="vertical">
-    <TextView
-        android:id="@+id/tv_title"
-        android:layout_width="wrap_content"
+    <LinearLayout
+        android:layout_width="match_parent"
         android:layout_height="wrap_content"
         android:layout_marginTop="30dp"
-        android:drawableLeft="@mipmap/xinxiqueren"
-        android:drawablePadding="10dp"
-        android:text="选择股东代码"
-        android:textColor="@color/black"
-        android:textSize="@dimen/txtSize16"
-        android:textStyle="bold" />
+        android:gravity="center">
+        <ImageView
+            android:id="@+id/iv_title_icon"
+            android:layout_width="18dp"
+            android:layout_height="18dp"
+            android:layout_marginRight="10dp"
+            android:background="@mipmap/icon_select"/>
+        <TextView
+            android:id="@+id/tv_title"
+            android:layout_width="wrap_content"
+            android:layout_height="wrap_content"
+            android:text="选择股东代码"
+            android:textColor="@color/black"
+            android:textSize="@dimen/txtSize16"
+            android:textStyle="bold" />
+    </LinearLayout>
 
     <ListView
         android:id="@+id/lv"
