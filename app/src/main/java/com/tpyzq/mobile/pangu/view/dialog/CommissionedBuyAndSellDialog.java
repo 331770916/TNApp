@@ -13,6 +13,7 @@ import android.text.style.ForegroundColorSpan;
 import android.text.style.UnderlineSpan;
 import android.view.View;
 import android.widget.Button;
+import android.widget.ImageView;
 import android.widget.LinearLayout;
 import android.widget.TextView;
 
@@ -37,6 +38,7 @@ public class CommissionedBuyAndSellDialog extends BaseDialog implements View.OnC
     private String type;
     private String entrustWays;
     private TextView tv_title;
+    private ImageView iv_title_icon;
     private TextView tv_secc_code;
     private LinearLayout ll_secc;
     private String MARKET_NAME;
@@ -66,6 +68,7 @@ public class CommissionedBuyAndSellDialog extends BaseDialog implements View.OnC
         bt_true = (Button) findViewById(R.id.bt_true);
         bt_false = (Button) findViewById(R.id.bt_false);
         tv_title = (TextView) findViewById(R.id.tv_title);
+        iv_title_icon = (ImageView) findViewById(R.id.iv_title_icon);
     }
 
     @Override
@@ -86,7 +89,9 @@ public class CommissionedBuyAndSellDialog extends BaseDialog implements View.OnC
         }
         if ("买".equals(type)) {
             tv_title.setText("委托买入");
+            iv_title_icon.setBackgroundResource(R.mipmap.icon_buy);
         } else if ("卖".equals(type)) {
+            iv_title_icon.setBackgroundResource(R.mipmap.icon_sell);
             tv_title.setText("委托卖出");
         }
         if (!TextUtils.isEmpty(entrustWays)){

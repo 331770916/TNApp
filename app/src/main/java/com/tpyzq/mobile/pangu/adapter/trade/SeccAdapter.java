@@ -6,6 +6,7 @@ import android.view.View;
 import android.view.ViewGroup;
 import android.widget.BaseAdapter;
 import android.widget.ImageView;
+import android.widget.LinearLayout;
 import android.widget.TextView;
 
 import com.tpyzq.mobile.pangu.R;
@@ -64,6 +65,7 @@ public class SeccAdapter extends BaseAdapter {
             viewHodler = new ViewHodler();
             viewHodler.tv_secc = (TextView) convertView.findViewById(R.id.tv_secc);
             viewHodler.iv_select_status = (ImageView) convertView.findViewById(R.id.iv_select_status);
+            viewHodler.ll_secc = (LinearLayout) convertView.findViewById(R.id.ll_secc);
             convertView.setTag(viewHodler);
         } else {
             viewHodler = (ViewHodler) convertView.getTag();
@@ -72,8 +74,10 @@ public class SeccAdapter extends BaseAdapter {
         viewHodler.tv_secc.setText(hashMap.get("MARKET_NAME")+" "+hashMap.get("SECU_ACCOUNT"));
         if (secc_code.equalsIgnoreCase(hashMap.get("SECU_ACCOUNT"))) {
             viewHodler.iv_select_status.setVisibility(View.VISIBLE);
+            viewHodler.ll_secc.setBackgroundResource(R.drawable.bg_secc_select);
         } else {
             viewHodler.iv_select_status.setVisibility(View.GONE);
+            viewHodler.ll_secc.setBackgroundResource(R.drawable.bg_secc);
         }
         return convertView;
     }
@@ -81,5 +85,6 @@ public class SeccAdapter extends BaseAdapter {
     class ViewHodler {
         TextView tv_secc;
         ImageView iv_select_status;
+        LinearLayout ll_secc;
     }
 }
