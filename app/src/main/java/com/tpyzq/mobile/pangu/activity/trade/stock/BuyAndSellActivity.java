@@ -1549,6 +1549,8 @@ public class BuyAndSellActivity extends BaseActivity implements View.OnClickList
                         JSONArray jaData = new JSONArray(data);
                         transStockBeen.clear();
                         if (jaData.length()==1&&(isSetStockCodeEt||!TextUtils.isEmpty(istatus))) {
+                            //当只有一条股票返回时，直接放置输入框，isSetStockCodeEt表示选择了股票，点击输入框展示列表
+                            //istatus当直接从股票详情进入 istatus，只有一条时也是直接展示
                             transStockBeen.clear();
                             if (null != stockPw) {
                                 stockPw.refreshView();
@@ -1560,8 +1562,14 @@ public class BuyAndSellActivity extends BaseActivity implements View.OnClickList
                             istatus = "";
                             return;
                         }
+
                         if (!isSetStockCodeEt) {
                             isSetStockCodeEt = true;
+                        }
+                        if (!TextUtils.isEmpty(istatus)&&jaData.length()>0) {//外部进入到买卖界面,且搜索到股票，直接展示
+                            onPwClick(jaData.getJSONArray(0).getString(1),jaData.getJSONArray(0).getString(0));
+                            istatus = "";
+                            return;
                         }
                         for (int i = 0; i < jaData.length(); i++) {
                             TransStockEntity transStockBean = new TransStockEntity();

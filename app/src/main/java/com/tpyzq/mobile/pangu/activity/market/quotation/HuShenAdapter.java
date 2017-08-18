@@ -126,9 +126,9 @@ public class HuShenAdapter extends BaseAdapter {
                     viewHodler2.chuangY_zd = (TextView) convertView.findViewById(R.id.newStock_chuangyeTv2);
                     viewHodler2.chuangY_zdf = (TextView) convertView.findViewById(R.id.newStock_chuangyeTv3);
 
-                    viewHodler2.topLayout1 = (RelativeLayout) convertView.findViewById(R.id.newStock_gv1);
-                    viewHodler2.topLayout2 = (RelativeLayout) convertView.findViewById(R.id.newStock_gv2);
-                    viewHodler2.topLayout3 = (RelativeLayout) convertView.findViewById(R.id.newStock_gv3);
+                    viewHodler2.shangzheng = (RelativeLayout) convertView.findViewById(R.id.shangzheng);
+                    viewHodler2.shenzheng = (RelativeLayout) convertView.findViewById(R.id.shengzheng);
+                    viewHodler2.changye = (RelativeLayout) convertView.findViewById(R.id.changye);
 
                     viewHodler2.topBgLayout1 = (RelativeLayout) convertView.findViewById(R.id.rl_top1Bg);
                     viewHodler2.topBgLayout2 = (RelativeLayout) convertView.findViewById(R.id.rl_top2Bg);
@@ -232,9 +232,9 @@ public class HuShenAdapter extends BaseAdapter {
         TextView chuangY_zd;
         TextView chuangY_zdf;
 
-        RelativeLayout topLayout1;
-        RelativeLayout topLayout2;
-        RelativeLayout topLayout3;
+        RelativeLayout shangzheng;
+        RelativeLayout shenzheng;
+        RelativeLayout changye;
 
         RelativeLayout topBgLayout1;
         RelativeLayout topBgLayout2;
@@ -330,15 +330,15 @@ public class HuShenAdapter extends BaseAdapter {
             if (!TextUtils.isEmpty(mBeans.get(position).getNewPrice())) {
 
 //                if (Helper.isDecimal(mBeans.get(position).getPriceChangeRatio())) {
-                    double zdf = mBeans.get(position).getPriceChangeRatio();
+                double zdf = mBeans.get(position).getPriceChangeRatio();
 
-                    if (zdf > 0f) {
-                        currentPrice.setTextColor(ContextCompat.getColor(CustomApplication.getContext(), R.color.red));
-                    } else if (zdf == 0f) {
-                        currentPrice.setTextColor(ContextCompat.getColor(CustomApplication.getContext(), R.color.hushenTab_titleColor));
-                    } else {
-                        currentPrice.setTextColor(ContextCompat.getColor(CustomApplication.getContext(), R.color.green));
-                    }
+                if (zdf > 0f) {
+                    currentPrice.setTextColor(ContextCompat.getColor(CustomApplication.getContext(), R.color.red));
+                } else if (zdf == 0f) {
+                    currentPrice.setTextColor(ContextCompat.getColor(CustomApplication.getContext(), R.color.hushenTab_titleColor));
+                } else {
+                    currentPrice.setTextColor(ContextCompat.getColor(CustomApplication.getContext(), R.color.green));
+                }
 //                } else {
 //                    currentPrice.setTextColor(ContextCompat.getColor(CustomApplication.getContext(), R.color.hushenTab_titleColor));
 //                }
@@ -351,16 +351,16 @@ public class HuShenAdapter extends BaseAdapter {
         if (mBeans.get(position).getIsChangeHand() == 1004 ) {//&&            !TextUtils.isEmpty(mBeans.get(position).getPriceChangeRatio())
 
 //            if (Helper.isDecimal(mBeans.get(position).getPriceChangeRatio())) {
-                double zdf = mBeans.get(position).getPriceChangeRatio();
-                stockZdf.setText(mFormat2.format(zdf));
+            double zdf = mBeans.get(position).getPriceChangeRatio();
+            stockZdf.setText(mFormat2.format(zdf));
 
-                if (zdf > 0f) {
-                    stockZdf.setTextColor(ContextCompat.getColor(CustomApplication.getContext(), R.color.red));
-                } else if (zdf == 0f) {
-                    stockZdf.setTextColor(ContextCompat.getColor(CustomApplication.getContext(), R.color.hushenTab_titleColor));
-                } else {
-                    stockZdf.setTextColor(ContextCompat.getColor(CustomApplication.getContext(), R.color.green));
-                }
+            if (zdf > 0f) {
+                stockZdf.setTextColor(ContextCompat.getColor(CustomApplication.getContext(), R.color.red));
+            } else if (zdf == 0f) {
+                stockZdf.setTextColor(ContextCompat.getColor(CustomApplication.getContext(), R.color.hushenTab_titleColor));
+            } else {
+                stockZdf.setTextColor(ContextCompat.getColor(CustomApplication.getContext(), R.color.green));
+            }
 //            } else {
 //                stockZdf.setText(mBeans.get(position).getPriceChangeRatio());
 //                stockZdf.setTextColor(ContextCompat.getColor(CustomApplication.getContext(), R.color.hushenTab_titleColor));
@@ -393,13 +393,13 @@ public class HuShenAdapter extends BaseAdapter {
                 viewHodler2.chuangY_name, viewHodler2.chuangY_currentPrice, viewHodler2.chuangY_zd, viewHodler2.chuangY_zdf};//这四组是创业
 
         RelativeLayout[] rls = {viewHodler2.topBgLayout1, viewHodler2.topBgLayout2, viewHodler2.topBgLayout3};
-        RelativeLayout[] rl_top = {viewHodler2.topLayout1,viewHodler2.topLayout2,viewHodler2.topLayout3};
+        RelativeLayout[] rl_top = {viewHodler2.shangzheng,viewHodler2.shenzheng,viewHodler2.changye};
 
         List<StockInfoEntity> _beans = mBeans.get(position).getSubDatas();
 
-        viewHodler2.topLayout1.setOnClickListener(new AdapterTopClickListener(_beans, mActivity, 1));
-        viewHodler2.topLayout2.setOnClickListener(new AdapterTopClickListener(_beans, mActivity, 0));
-        viewHodler2.topLayout3.setOnClickListener(new AdapterTopClickListener(_beans, mActivity, 2));
+        viewHodler2.shangzheng.setOnClickListener(new AdapterTopClickListener(_beans, mActivity, 1));
+        viewHodler2.shenzheng.setOnClickListener(new AdapterTopClickListener(_beans, mActivity, 0));
+        viewHodler2.changye.setOnClickListener(new AdapterTopClickListener(_beans, mActivity, 2));
 
         StockInfoEntity modelshang = null;
         StockInfoEntity modelshen = null;
@@ -599,9 +599,9 @@ public class HuShenAdapter extends BaseAdapter {
                     if (!TextUtils.isEmpty(_beans.get(num).getNewPrice())) {
 
 //                        if (Helper.isDecimal(_beans.get(num).getPriceChangeRatio())) {
-                            double zdf = _beans.get(num).getPriceChangeRatio();
+                        double zdf = _beans.get(num).getPriceChangeRatio();
 
-                            textViews[i].setText(mFormat2.format(zdf));
+                        textViews[i].setText(mFormat2.format(zdf));
 //                        } else {
 //                            textViews[i].setText(_beans.get(num).getPriceChangeRatio());
 //                        }
@@ -639,21 +639,21 @@ public class HuShenAdapter extends BaseAdapter {
 
             StockDetailEntity stockDetailEntity = new StockDetailEntity();
             switch (v.getId()) {
-                case R.id.newStock_gv1:
+                case R.id.shangzheng:
                     stockDetailEntity.setStockName(mEntitys.get(0).getStockName());
                     stockDetailEntity.setStockCode(mEntitys.get(0).getStockNumber());
                     intent.putExtra("stockIntent", stockDetailEntity);
                     intent.setClass(mActivity, StockDetailActivity.class);
                     mActivity.startActivity(intent);
                     break;
-                case R.id.newStock_gv2:
+                case R.id.shengzheng:
                     stockDetailEntity.setStockName(mEntitys.get(1).getStockName());
                     stockDetailEntity.setStockCode(mEntitys.get(1).getStockNumber());
                     intent.putExtra("stockIntent", stockDetailEntity);
                     intent.setClass(mActivity, StockDetailActivity.class);
                     mActivity.startActivity(intent);
                     break;
-                case R.id.newStock_gv3:
+                case R.id.changye:
                     stockDetailEntity.setStockName(mEntitys.get(2).getStockName());
                     stockDetailEntity.setStockCode(mEntitys.get(2).getStockNumber());
                     intent.putExtra("stockIntent", stockDetailEntity);
