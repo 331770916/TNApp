@@ -9,7 +9,7 @@
     <RelativeLayout
         android:id="@+id/moreLayout"
         android:layout_width="match_parent"
-        android:layout_height="@dimen/size47">
+        android:layout_height="@dimen/size40">
         <TextView
             android:id="@+id/homeHeadName"
             android:layout_width="wrap_content"
@@ -109,7 +109,7 @@
             android:layout_centerHorizontal="true"
             android:layout_marginBottom="@dimen/size20"
             android:gravity="center"
-            android:textColor="@color/blue"
+            android:textColor="@color/newStockTitle"
             android:text="--" />
 
         <LinearLayout

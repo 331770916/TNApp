@@ -42,7 +42,7 @@
             android:id="@+id/targetTouBtn"
             android:layout_width="0dp"
             android:layout_height="match_parent"
-            android:background="#368ce6"
+            android:background="#F29527"
             android:text="定投"
             android:gravity="center"
             android:textColor="@color/white"
@@ -51,7 +51,7 @@
         <TextView
             android:id="@+id/targetBuyBtn"
             android:layout_width="0dp"
-            android:background="#AA368ce6"
+            android:background="#F2AD27"
             android:text="立即购买"
             android:gravity="center"
             android:textColor="@color/white"

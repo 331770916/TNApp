@@ -14,9 +14,8 @@
         android:orientation="horizontal">
 
         <RelativeLayout
-            android:background="@drawable/shape_item_gray"
             android:layout_marginRight="@dimen/size4"
-            android:id="@+id/newStock_gv2"
+            android:id="@+id/shangzheng"
             android:layout_width="0dp"
             android:layout_height="wrap_content"
             android:layout_weight="1"
@@ -39,7 +38,6 @@
                 android:layout_height="wrap_content"
                 android:layout_below="@id/newStock_shenZheng">
                 <TextView
-                    android:text="909090"
                     android:id="@+id/newStock_shengZhengTv1"
                     android:layout_width="wrap_content"
                     android:layout_height="wrap_content"
@@ -56,7 +54,6 @@
                     android:orientation="horizontal">
 
                     <TextView
-                        android:text="909090"
                         android:id="@+id/newStock_shengZhengTv2"
                         android:layout_width="wrap_content"
                         android:layout_height="wrap_content"
@@ -67,7 +64,6 @@
                         android:textColor="@color/white" />
 
                     <TextView
-                        android:text="9090"
                         android:id="@+id/newStock_shengZhengTv3"
                         android:layout_width="wrap_content"
                         android:layout_height="wrap_content"
@@ -87,7 +83,7 @@
         <RelativeLayout
             android:layout_marginRight="@dimen/size4"
             android:layout_marginLeft="@dimen/size4"
-            android:id="@+id/newStock_gv1"
+            android:id="@+id/shengzheng"
             android:layout_width="0dp"
             android:layout_height="wrap_content"
             android:layout_weight="1"
@@ -149,7 +145,7 @@
 
         <RelativeLayout
             android:layout_marginLeft="@dimen/size4"
-            android:id="@+id/newStock_gv3"
+            android:id="@+id/changye"
             android:layout_width="0dp"
             android:layout_height="wrap_content"
             android:layout_weight="1"
