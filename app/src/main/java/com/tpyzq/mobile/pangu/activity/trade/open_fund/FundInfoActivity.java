@@ -8,7 +8,6 @@ import android.view.View;
 import android.widget.AdapterView;
 import android.widget.EditText;
 import android.widget.ImageView;
-import android.widget.Toast;
 
 import com.handmark.pulltorefresh.library.PullToRefreshBase;
 import com.handmark.pulltorefresh.library.PullToRefreshListView;
@@ -21,7 +20,6 @@ import com.tpyzq.mobile.pangu.base.CustomApplication;
 import com.tpyzq.mobile.pangu.data.FundSubsEntity;
 import com.tpyzq.mobile.pangu.http.OkHttpUtil;
 import com.tpyzq.mobile.pangu.http.doConnect.trade.FundInoConnect;
-import com.tpyzq.mobile.pangu.util.SpUtils;
 import com.tpyzq.mobile.pangu.view.CentreToast;
 import com.tpyzq.mobile.pangu.view.dialog.LoadingDialog;
 import java.util.ArrayList;
@@ -71,7 +69,6 @@ public class FundInfoActivity extends BaseActivity implements View.OnClickListen
         mListView.setOnItemClickListener(this);
 
         mBeans = new ArrayList<FundSubsEntity>();
-
 
         initLoadDialog();
         mFundInoConnect.fundQueryConnect("", mListType, "", 0, TAG, this);

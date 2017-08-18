@@ -30,58 +30,41 @@ import com.tpyzq.mobile.pangu.activity.home.helper.HomeInfomationSubject;
 import com.tpyzq.mobile.pangu.activity.home.hotsearchstock.HotSearchStockActivity;
 import com.tpyzq.mobile.pangu.activity.home.information.InformationHomeActivity;
 import com.tpyzq.mobile.pangu.activity.home.information.NewsDetailActivity;
-import com.tpyzq.mobile.pangu.activity.home.managerMoney.ManagerMoenyDetailActivity;
-import com.tpyzq.mobile.pangu.activity.home.managerMoney.adapter.PreProductAdapter;
-import com.tpyzq.mobile.pangu.activity.myself.login.ShouJiZhuCeActivity;
+import com.tpyzq.mobile.pangu.activity.home.managerMoney.view.homeSafeBetView.HomeSafeBetView;
 import com.tpyzq.mobile.pangu.adapter.home.HomeAdapter;
 import com.tpyzq.mobile.pangu.adapter.home.HomeHotAdapter;
 import com.tpyzq.mobile.pangu.adapter.home.NewHomeInformationAdapter;
-import com.tpyzq.mobile.pangu.adapter.home.NewOptionalFinancingAdapter;
 import com.tpyzq.mobile.pangu.base.BaseFragment;
 import com.tpyzq.mobile.pangu.base.CustomApplication;
 import com.tpyzq.mobile.pangu.base.InterfaceCollection;
 import com.tpyzq.mobile.pangu.base.SimpleRemoteControl;
 import com.tpyzq.mobile.pangu.data.InformationEntity;
 import com.tpyzq.mobile.pangu.data.MyHomePageEntity;
-import com.tpyzq.mobile.pangu.data.NewOptionalFinancingEntity;
 import com.tpyzq.mobile.pangu.data.ResultInfo;
 import com.tpyzq.mobile.pangu.data.StockDetailEntity;
 import com.tpyzq.mobile.pangu.data.StockInfoEntity;
 import com.tpyzq.mobile.pangu.db.Db_HOME_INFO;
-import com.tpyzq.mobile.pangu.db.Db_PUB_USERS;
-import com.tpyzq.mobile.pangu.http.NetWorkUtil;
-import com.tpyzq.mobile.pangu.http.doConnect.home.GetHomeBanderConnect;
-import com.tpyzq.mobile.pangu.http.doConnect.home.GetOptionalFinancingConnect;
-import com.tpyzq.mobile.pangu.http.doConnect.home.ToGetHomeBanderConnect;
-import com.tpyzq.mobile.pangu.http.doConnect.home.ToOptionalFinancingConnect;
 import com.tpyzq.mobile.pangu.http.doConnect.home.ToTwentyFourHoursHotSearch;
 import com.tpyzq.mobile.pangu.http.doConnect.home.TwentyFourHoursHotSearchConnect;
 import com.tpyzq.mobile.pangu.http.doConnect.self.GetMyNomePage;
 import com.tpyzq.mobile.pangu.http.doConnect.self.ToMyNewsHomePage;
 import com.tpyzq.mobile.pangu.interfac.ICallbackResult;
-import com.tpyzq.mobile.pangu.log.LogHelper;
 import com.tpyzq.mobile.pangu.util.ConstantUtil;
 import com.tpyzq.mobile.pangu.util.Helper;
 import com.tpyzq.mobile.pangu.util.SpUtils;
-import com.tpyzq.mobile.pangu.util.imageUtil.ImageUtil;
 import com.tpyzq.mobile.pangu.util.panguutil.BRutil;
-import com.tpyzq.mobile.pangu.view.CentreToast;
 import com.tpyzq.mobile.pangu.view.gridview.MyGridView;
 import com.tpyzq.mobile.pangu.view.gridview.MyListView;
 import com.tpyzq.mobile.pangu.view.gridview.MyScrollView;
 import com.tpyzq.mobile.pangu.view.listview.HomeSwitchAdapter;
 import com.tpyzq.mobile.pangu.view.loopswitch.AutoSwitchView;
-import com.zhy.http.okhttp.callback.BitmapCallback;
 
 import org.json.JSONException;
 
 import java.util.ArrayList;
-import java.util.Date;
 import java.util.HashMap;
 import java.util.List;
 import java.util.Map;
-
-import okhttp3.Call;
 
 
 /**
@@ -114,14 +97,7 @@ public class HomeFragment extends BaseFragment implements AdapterView.OnItemClic
     /**
      * 预约产品模块
      */
-    private MyListView mProductReservationView;
-    private PreProductAdapter productreservationadapter;
-    /**
-     * 稳赢模块，暂定
-     */
-    private MyListView mFinaceView;
-    private NewOptionalFinancingAdapter optionalFinancingAdapter;
-    private ArrayList<NewOptionalFinancingEntity> optionalFinancingList;
+    private LinearLayout mProductReservationView;
 
     /**
      * 资讯模块
@@ -158,11 +134,8 @@ public class HomeFragment extends BaseFragment implements AdapterView.OnItemClic
 
     @Override
     public void initView(View view) {
-//        mBitmaps = new ArrayList<>();
-//        mAdType = new ArrayList<>();
         startRefreshTime = System.currentTimeMillis();
         mDataSourceList = new ArrayList<>();
-        optionalFinancingList = new ArrayList<>();
         mInformationEntities = new ArrayList<>();
         mHotEntities = new ArrayList<>();
         messageList = new ArrayList<>();
@@ -171,6 +144,7 @@ public class HomeFragment extends BaseFragment implements AdapterView.OnItemClic
 
 
         mTopTextView = (TextView) view.findViewById(R.id.homeLayoutTopTextView);
+
         vp_carousel = (RelativeLayout) view.findViewById(R.id.vp_carousel);
         initCarouseView();
         mMiddleImageView = (SimpleDraweeView) view.findViewById(R.id.home_middlebander);
@@ -187,17 +161,12 @@ public class HomeFragment extends BaseFragment implements AdapterView.OnItemClic
         //下拉刷新
         mPullDownScrollView = (PullToRefreshScrollView) view.findViewById(R.id.selfchoice_PullDownScroll);
 
-        mProductReservationView = (MyListView) view.findViewById(R.id.homeProductReservation);
-        mFinaceView = (MyListView) view.findViewById(R.id.homeSelfNewsListView);
+        mProductReservationView = (LinearLayout) view.findViewById(R.id.homeProductReservation);
         mNewslistView = (MyListView) view.findViewById(R.id.homeListView);
         hotListView = (MyListView) view.findViewById(R.id.homeHotListView);
-        //轮播图片目前实现为从asset文件下取，然后保存到ImageView文件夹下，后续需要变更从网络获取
-//        copyFundOpenUserPdf();
-//        getSdcardImageViewForAdvertisement();
 
         initGridView();  //九宫格初始化
         initProductReservation(); //产品预约初始化
-//        initAmazingLifeListView();  //稳赢初始化
         initNewsListView(view);       //资讯初始化
         initHotSearchStockListView();  //热搜初始化
         CustomApplication.setGetMessageListenr(this);  //消息的Handler
@@ -261,7 +230,6 @@ public class HomeFragment extends BaseFragment implements AdapterView.OnItemClic
 
 
     public void initData() {
-        getFinaceConnect(simpleRemoteControl);  //请求稳赢数据
         //请求资讯数据 1级30条
         InterfaceCollection.getInstance().queryImportant("3","1","3","GetImportant",this);
         getHotConnect(simpleRemoteControl);      //请求热搜数据
@@ -279,81 +247,8 @@ public class HomeFragment extends BaseFragment implements AdapterView.OnItemClic
 
     //产品预约列表
     private void initProductReservation() {
-        View selfNewsHeadView = LayoutInflater.from(CustomApplication.getContext()).inflate(R.layout.home_item_head, null);
-        TextView textView = (TextView) selfNewsHeadView.findViewById(R.id.homeHeadName);
-        Drawable drawable = ContextCompat.getDrawable(CustomApplication.getContext(), R.mipmap.wenyinglicai);
-        drawable.setBounds(0, 0, drawable.getMinimumWidth(), drawable.getMinimumHeight()); //设置边界
-        textView.setCompoundDrawables(drawable, null, null, null);//画在右边
-        textView.setText("稳赢理财");
-        mProductReservationView.addHeaderView(selfNewsHeadView);
-
-        productreservationadapter = new PreProductAdapter(getContext());
-        mProductReservationView.setAdapter(productreservationadapter);
-        mProductReservationView.setOnItemClickListener(new AdapterView.OnItemClickListener() {
-            @Override
-            public void onItemClick(AdapterView<?> parent, View view, int position, long id) {
-                Intent intent = null;
-                String type;
-                boolean register;
-                if (position == 0) {
-                    HomeFragmentHelper.getInstance().gotoPager("稳赢理财", getActivity(), mJumpPageListener, null);
-                } else {    //稳赢 item
-                    intent = new Intent();
-                    String prod_status = optionalFinancingList.get(position - 1).getProd_status();
-                    intent.putExtra("productCode", optionalFinancingList.get(position - 1).getProd_code());
-                    type = optionalFinancingList.get(position - 1).getType();
-                    intent.putExtra("TYPE", type);
-                    intent.putExtra("prod_type", optionalFinancingList.get(position - 1).getProd_type());
-                    intent.putExtra("prod_nhsy", optionalFinancingList.get(position - 1).getProd_nhsy());
-                    intent.putExtra("prod_qgje", optionalFinancingList.get(position - 1).getProd_qgje());
-                    intent.putExtra("schema_id", optionalFinancingList.get(position - 1).getSchema_id());
-                    intent.putExtra("prod_code", optionalFinancingList.get(position - 1).getProd_code());
-                    intent.putExtra("target", "finncing");
-                    intent.putExtra("ofund_risklevel_name", optionalFinancingList.get(position - 1).getOfund_risklevel_name());
-                    register = Db_PUB_USERS.isRegister();
-                    BRutil.menuNewSelect("Z1-4-4", optionalFinancingList.get(position - 1).getSchema_id(), optionalFinancingList.get(position - 1).getProd_code(), "2", new Date(), "-1", "-1");
-                    if ("3".equals(type)) {
-                        if (!register) {
-                            intent.putExtra("Identify", "2");
-                            intent.setClass(getActivity(), ShouJiZhuCeActivity.class);
-                        } else {
-                            intent.putExtra("prod_status", prod_status);
-                            intent.setClass(getActivity(), ManagerMoenyDetailActivity.class);
-                        }
-                    } else {
-                        intent.setClass(getActivity(), ManagerMoenyDetailActivity.class);
-
-                    }
-                    getActivity().startActivity(intent);
-                }
-            }
-        });
-    }
-
-    //稳赢列表
-    private void initAmazingLifeListView() {
-        View selfNewsHeadView = LayoutInflater.from(CustomApplication.getContext()).inflate(R.layout.home_item_head, null);
-        TextView textView = (TextView) selfNewsHeadView.findViewById(R.id.homeHeadName);
-        Drawable drawable = ContextCompat.getDrawable(CustomApplication.getContext(), R.mipmap.wenyinglicai);
-        drawable.setBounds(0, 0, drawable.getMinimumWidth(), drawable.getMinimumHeight()); //设置边界
-        textView.setCompoundDrawables(drawable, null, null, null);//画在右边
-        textView.setText("稳赢理财");
-        mFinaceView.addHeaderView(selfNewsHeadView);
-
-        optionalFinancingAdapter = new NewOptionalFinancingAdapter(getContext());
-        mFinaceView.setAdapter(optionalFinancingAdapter);
-        mFinaceView.setOnItemClickListener(new AdapterView.OnItemClickListener() {
-            @Override
-            public void onItemClick(AdapterView<?> parent, View view, int position, long id) {
-                if (position == 0) {
-                    HomeFragmentHelper.getInstance().gotoPager("稳赢理财", getActivity(), mJumpPageListener, null);
-                } else {
-                    CentreToast.showText(getContext(), "1");
-                }
-            }
-        });
-
-
+        HomeSafeBetView homeSafeBetView = new HomeSafeBetView(getActivity(), mJumpPageListener);
+        mProductReservationView.addView(homeSafeBetView.getContentView());
     }
 
 
@@ -459,11 +354,6 @@ public class HomeFragment extends BaseFragment implements AdapterView.OnItemClic
                 BRutil.menuSelect("N004");
                 break;
         }
-    }
-
-    private void getFinaceConnect(SimpleRemoteControl simpleRemoteControl) {   //稳赢
-        simpleRemoteControl.setCommand(new ToOptionalFinancingConnect(new GetOptionalFinancingConnect(TAG)));
-        simpleRemoteControl.startConnect();
     }
 
     private void getInfoListByDb() {
@@ -639,14 +529,6 @@ public class HomeFragment extends BaseFragment implements AdapterView.OnItemClic
                 }
                 mHotAdapter.setDatas(mHotEntities);
             }
-        } else if ("GetOptionalFinancingConnect".equals(tag)) {
-            optionalFinancingList = (ArrayList<NewOptionalFinancingEntity>) result;
-            if (optionalFinancingList == null || optionalFinancingList.size() <= 0) {
-                mProductReservationView.setVisibility(View.GONE);
-            } else {
-                mProductReservationView.setVisibility(View.VISIBLE);
-                productreservationadapter.setData(optionalFinancingList);
-            }
         } else if ("GetMyHomePage".equals(tag)) {
             messageList = (ArrayList<MyHomePageEntity>) result;
             if (messageList == null || messageList.size() <= 0) {
@@ -657,7 +539,6 @@ public class HomeFragment extends BaseFragment implements AdapterView.OnItemClic
         }
     }
 
-//
 
     /**
      * 我的消息

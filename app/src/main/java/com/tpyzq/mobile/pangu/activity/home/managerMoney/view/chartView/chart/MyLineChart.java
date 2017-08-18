@@ -1,6 +1,7 @@
 package com.tpyzq.mobile.pangu.activity.home.managerMoney.view.chartView.chart;
 
 import android.content.Context;
+import android.graphics.Canvas;
 import android.util.AttributeSet;
 
 import com.github.mikephil.charting.charts.LineChart;
@@ -58,17 +59,6 @@ public class MyLineChart extends LineChart {
     @Override
     public MyYAxis getAxisRight() {
         return (MyYAxis) super.getAxisRight();
-    }
-
-
-    public void setHighlightValue(Highlight h) {
-        if (mData == null)
-            mIndicesToHighlight = null;
-        else {
-            mIndicesToHighlight = new Highlight[]{
-                    h};
-        }
-        invalidate();
     }
 
 }
