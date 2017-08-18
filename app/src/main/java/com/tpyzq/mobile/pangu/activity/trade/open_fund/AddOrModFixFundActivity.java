@@ -83,7 +83,7 @@ public class AddOrModFixFundActivity extends BaseActivity implements View.OnClic
     private StructuredFundDialog mStructuredFundDialog;
     private RelativeLayout rl_en_date,rl_start_date,rl_end_date;
     private int startDay = 0 ;
-    private int showChoose = -1;
+    private String mProductCode = "";
 
     @Override
     public void initView() {
@@ -111,7 +111,7 @@ public class AddOrModFixFundActivity extends BaseActivity implements View.OnClic
     private void initData() {
         currentDate = Helper.getCurDate();
         position = getIntent().getIntExtra("position",-1);//position不为-1表示为修改
-        showChoose = getIntent().getIntExtra("showChoose",-1);//showChoose 为1表示不显示选择基金产品，用于position=-1情况下即新增定投
+        mProductCode = getIntent().getStringExtra("mProductCode");//showChoose 为1表示不显示选择基金产品，用于position=-1情况下即新增定投
         if (position != -1) {
             fixFundEntity = (FixFundEntity)getIntent().getSerializableExtra("fixFundEntity");
             tv_title.setText(getResources().getString(R.string.modify_fund));
@@ -142,10 +142,12 @@ public class AddOrModFixFundActivity extends BaseActivity implements View.OnClic
             mDialog.show();
             InterfaceCollection.getInstance().getFundData(fixFundEntity.getFUND_CODE(), fixFundEntity.getFUND_COMPANY(),TAG_REQUEST_FUND,this);
         } else {
-            if (showChoose == 1) {
-                tv_choose_fund.setVisibility(View.GONE);
-            } else {
+            if (TextUtils.isEmpty(mProductCode)) {
                 tv_choose_fund.setVisibility(View.VISIBLE);
+            } else {
+                tv_choose_fund.setVisibility(View.GONE);
+                et_input_code.setText(fixFundEntity.getFUND_CODE());
+                et_input_code.setEnabled(false);
             }
             tv_title.setText(getResources().getString(R.string.add_fund));
             tv_start_date.setText(currentDate);
@@ -387,7 +389,7 @@ public class AddOrModFixFundActivity extends BaseActivity implements View.OnClic
             InterfaceCollection.getInstance().modifyFixFund(fixFundEntity.getFUND_COMPANY(),
                     fixFundEntity.getFUND_CODE(), balance,
                     Helper.getInstance().getMyDate(fixFundEntity.getSTART_DATE()), Helper.getInstance().getMyDate(fixFundEntity.getEND_DATE()),
-                    fixFundEntity.getEN_FUND_DATE(), fixFundEntity.getALLOTNO(), TAG_SUBMIT, this);
+                    fixFundEntity.getEN_FUND_DATE(), fixFundEntity.getALLOTNO(), TAG_MODIFY, this);
         }
     }
 

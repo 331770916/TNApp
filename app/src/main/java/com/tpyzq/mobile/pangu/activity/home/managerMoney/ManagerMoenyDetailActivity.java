@@ -537,7 +537,7 @@ public class ManagerMoenyDetailActivity extends BaseActivity implements View.OnC
 
                 intent = new Intent();
                 intent.setClass(this, AddOrModFixFundActivity.class);
-                intent.putExtra("showChoose", 1);
+                intent.putExtra("mProductCode", "mProductCode");
                 startActivity(intent);
                 break;
         }

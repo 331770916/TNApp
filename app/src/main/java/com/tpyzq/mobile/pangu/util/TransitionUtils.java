@@ -40,6 +40,18 @@ public class TransitionUtils {
             return "0.00";
         }
     }
+    //double取小数点后2位 直接舍弃第三位
+    public static String string2doubleDown(String s) {
+        if (!s.equals("")) {
+            DecimalFormat df = new DecimalFormat("######0.00");
+//            double d = Double.parseDouble(s);
+            BigDecimal b = new BigDecimal(s);
+            double c = b.setScale(2, BigDecimal.ROUND_DOWN).doubleValue();
+            return df.format(c);
+        } else {
+            return "0.00";
+        }
+    }
 
     //根据字符串转换成double类型并乘以100保留2位小数
     public static String s2d2(String s) {

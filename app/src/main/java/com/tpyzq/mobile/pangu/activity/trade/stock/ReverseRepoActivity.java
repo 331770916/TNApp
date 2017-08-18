@@ -263,7 +263,7 @@ public class ReverseRepoActivity extends BaseActivity implements View.OnClickLis
         BigDecimal bigDecima2 = new BigDecimal(day);
 
         Double result = (bigDecima0.doubleValue() / 365) * bigDecimal.doubleValue() * bigDecima2.doubleValue();
-        String value = TransitionUtils.string2doubleS(result+"");
+        String value = TransitionUtils.string2doubleDown(result+"");
         String unit = "元";
 
         SpannableString ss1 = new SpannableString(value + unit);

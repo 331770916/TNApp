@@ -304,7 +304,6 @@
                         android:background="@null"
                         android:gravity="center_vertical"
                         android:hint="@string/fix_fund_balance_hint"
-                        android:maxLength="6"
                         android:inputType="number"
                         android:layout_marginLeft="@dimen/size10"
                         android:singleLine="true"
