@@ -127,35 +127,40 @@ public class ReverseRepoActivity extends BaseActivity implements View.OnClickLis
 
         CheckedTextView jkTitleTv = (CheckedTextView) findViewById(R.id.jktitle);
         CheckedTextView jktime = (CheckedTextView)findViewById(R.id.jktime);
-
+        jkTitleTv.setText("借款");
         if (!TextUtils.isEmpty(stockInfoBean.sq_time)) {
             sqtime = true;
-            jkTitleTv.setText("借款");
             jktime.setText(stockInfoBean.sq_time);
+        } else {
+            jktime.setText("--");
         }
 
         CheckedTextView kyTitleTv = (CheckedTextView) findViewById(R.id.kytitle);
         CheckedTextView kytime = (CheckedTextView)findViewById(R.id.kytime);
+        kyTitleTv.setText("可用");
         if (!TextUtils.isEmpty(stockInfoBean.dq_time)) {
             dqtime = true;
-            kyTitleTv.setText("可用");
             kytime.setText(stockInfoBean.dq_time);
+        } else {
+            kytime.setText("--");
         }
 
         CheckedTextView kqTitleTv = (CheckedTextView) findViewById(R.id.kqtitle);
         CheckedTextView kqtime = (CheckedTextView)findViewById(R.id.kqtime);
 
+        kqTitleTv.setText("可取");
         if (!TextUtils.isEmpty(stockInfoBean.dj_time)) {
             djtime = true;
-            kqTitleTv.setText("可取");
             kqtime.setText(stockInfoBean.dj_time);
+        } else {
+            kqtime.setText("--");
         }
 
-        if (occupied && sqtime && dqtime && djtime) {
-            mRepoLayout.setVisibility(View.VISIBLE);
-        } else {
-            mRepoLayout.setVisibility(View.GONE);
-        }
+//        if (occupied && sqtime && dqtime && djtime) {
+//            mRepoLayout.setVisibility(View.VISIBLE);
+//        } else {
+//            mRepoLayout.setVisibility(View.GONE);
+//        }
     }
 
     private void initData() {
