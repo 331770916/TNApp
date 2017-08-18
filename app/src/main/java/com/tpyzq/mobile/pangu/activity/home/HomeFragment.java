@@ -4,6 +4,7 @@ import android.content.Intent;
 import android.graphics.Bitmap;
 import android.graphics.Color;
 import android.graphics.drawable.Drawable;
+import android.net.Uri;
 import android.os.Handler;
 import android.support.v4.content.ContextCompat;
 import android.text.TextUtils;
@@ -226,30 +227,32 @@ public class HomeFragment extends BaseFragment implements AdapterView.OnItemClic
             }
         }else if ("getCarouselImg".equals(info.getTag())){
             if ("0".equals(info.getCode())){
-                if (info.getCode()!=null){
+                if (info.getData()!=null){
                    List<List<Map<String,String>>> list = (List<List<Map<String, String>>>) info.getData();
-                    int listsize = list.size();
-                    if (listsize!=0 &&listsize ==2){
-                        if (list.get(0)!=null){
+                        if (list.size()>0){
                             List<Map<String,String>> centerImage = list.get(0);   // 中间广告图
-
+                            if(!centerImage.isEmpty())
+                                 mMiddleImageView.setImageURI(Uri.parse(centerImage.get(0).get("show_url")));
                         }
-                        if (list.get(1)!=null){
+                        if (list.size()>1){
                             List<Map<String,String>> topImage = list.get(1);     // 顶部轮播图
                             adapter.setDatas(topImage);
-                        }
-                    }
-
-                }
-            }else {
-                List<Map<String,String>> defaultList = new ArrayList<>();
-                Map<String,String> map = new HashMap<>();
-                map.put("show_url","default");
-                defaultList.add(map);
-                adapter.setDatas(defaultList);
-            }
+                        }else
+                            setDefault();
+                }else
+                    setDefault();
+            }else
+                setDefault();
         }
 
+    }
+
+    public void setDefault(){
+        List<Map<String,String>> defaultList = new ArrayList<>();
+        Map<String,String> map = new HashMap<>();
+        map.put("show_url","default");
+        defaultList.add(map);
+        adapter.setDatas(defaultList);
     }
 
     private void initCarouseView() {
