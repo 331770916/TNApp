@@ -2,8 +2,44 @@
 <LinearLayout xmlns:android="http://schemas.android.com/apk/res/android"
     android:layout_width="match_parent"
     android:layout_height="wrap_content"
+    android:id="@+id/finncingLayout"
     android:background="@color/white"
     android:orientation="vertical">
+
+    <RelativeLayout
+        android:id="@+id/moreLayout"
+        android:layout_width="match_parent"
+        android:layout_height="@dimen/size47">
+        <TextView
+            android:id="@+id/homeHeadName"
+            android:layout_width="wrap_content"
+            android:layout_height="wrap_content"
+            android:layout_alignParentLeft="true"
+            android:layout_centerInParent="true"
+            android:layout_margin="@dimen/size10"
+            android:drawableLeft="@mipmap/wenyinglicai"
+            android:drawablePadding="@dimen/size5"
+            android:gravity="center"
+            android:text="稳赢理财"
+            android:textColor="@color/blue"
+            android:textSize="@dimen/txtSize12"
+            android:typeface="sans" />
+
+        <ImageView
+            android:id="@+id/homeHeadMore"
+            android:layout_width="wrap_content"
+            android:layout_height="wrap_content"
+            android:layout_alignParentRight="true"
+            android:layout_centerInParent="true"
+            android:padding="@dimen/size10"
+            android:src="@mipmap/icon_right" />
+    </RelativeLayout>
+
+    <View
+        android:layout_width="match_parent"
+        android:layout_height="1px"
+        android:layout_alignParentBottom="true"
+        android:background="@color/lineColor" />
 
     <RelativeLayout
         android:layout_width="match_parent"
@@ -73,6 +109,7 @@
             android:layout_centerHorizontal="true"
             android:layout_marginBottom="@dimen/size20"
             android:gravity="center"
+            android:textColor="@color/blue"
             android:text="--" />
 
         <LinearLayout
@@ -152,5 +189,11 @@
             android:layout_alignRight="@+id/rcv_progress"
             android:textColor="@color/lineColor"/>
     </RelativeLayout>
+
+    <com.tpyzq.mobile.pangu.activity.home.managerMoney.view.chartView.chart.MyLineChart
+        android:id="@+id/item_newoptional_chart"
+        android:layout_width="match_parent"
+        android:layout_height="@dimen/size80"
+        />
 
 </LinearLayout>

@@ -167,6 +167,7 @@ public class ManagerMoenyDetailActivity extends BaseActivity implements View.OnC
                 simpleRemoteControl.setCommand(new ToGetProductInfoOtcConnect(new GetProductInfoOtcConnect(TAG, "", productCode, mProductType)));
                 simpleRemoteControl.startConnect();
             } else {
+                findViewById(R.id.managerDetailTargetLayout).setVisibility(View.GONE);
                 mFundInoConnect.fundQueryConnect(productCode, "", "", 0, TAG, this);
 //                SimpleRemoteControl simpleRemoteControl = new SimpleRemoteControl(this);
 //                simpleRemoteControl.setCommand(new ToGetProductInfoConnect(new GetProductInfoConnect(TAG, "", productCode, mProductType)));
@@ -307,9 +308,9 @@ public class ManagerMoenyDetailActivity extends BaseActivity implements View.OnC
 
             } else {   //非货币基金
                 mTopRadioDiscrib.setText("近一月涨跌幅");
-
+                DecimalFormat format1 = new DecimalFormat("#0.00%");
                 if (!TextUtils.isEmpty(entity.getCHANGEPCTRM())) {
-                    mTopRadio.setText(entity.getCHANGEPCTRM());
+                    mTopRadio.setText(format1.format(Double.parseDouble(entity.getCHANGEPCTRM())));
                 }
 
                 String topContent1_temp = "最新净值\n";
@@ -575,6 +576,7 @@ public class ManagerMoenyDetailActivity extends BaseActivity implements View.OnC
     public void getFundResult(ArrayList<FundSubsEntity> entities) {
 
         if (entities != null && entities.size() > 0) {
+            findViewById(R.id.managerDetailTargetLayout).setVisibility(View.VISIBLE);
             for (FundSubsEntity fundSubsEntity : entities) {
                 if (mProductCode.equals(fundSubsEntity.FUND_CODE) && "0".equals(fundSubsEntity.FUND_TYPE)) {
                     findViewById(R.id.targetTouBtn).setVisibility(View.GONE);
