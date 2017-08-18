@@ -249,17 +249,17 @@ public abstract class WebViewActivity extends BaseActivity {
     /**
      * 按键响应，在WebView中查看网页时，按返回键的时候按浏览历史退回,如果不做此项处理则整个WebView返回退出
      */
-    @Override
-    public boolean onKeyDown(int keyCode, KeyEvent event) {
-//        if (keyCode == KeyEvent.KEYCODE_BACK && mWebView.canGoBack() && !isGoBack) {
-        if (keyCode == KeyEvent.KEYCODE_BACK && mWebView.canGoBack()) {
-            mWebView.goBack();
-            isGoBack = true;
-            return true;
-        } else {
-            return super.onKeyDown(keyCode, event);
-        }
-    }
+//    @Override
+//    public boolean onKeyDown(int keyCode, KeyEvent event) {
+////        if (keyCode == KeyEvent.KEYCODE_BACK && mWebView.canGoBack() && !isGoBack) {
+//        if (keyCode == KeyEvent.KEYCODE_BACK && mWebView.canGoBack()) {
+//            mWebView.goBack();
+//            isGoBack = true;
+//            return true;
+//        } else {
+//            return super.onKeyDown(keyCode, event);
+//        }
+//    }
 
     protected void showOnNetWorkState() {
         if(Helper.isNetWorked()) {

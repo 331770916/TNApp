@@ -1,6 +1,7 @@
 package com.tpyzq.mobile.pangu.activity;
 
 import android.text.TextUtils;
+import android.view.View;
 import android.webkit.WebView;
 
 import com.tpyzq.mobile.pangu.R;
@@ -40,6 +41,12 @@ public class TNWebActivity extends WebViewActivity {
 
     @Override
     public void initView() {
+        findViewById(R.id.iv_back).setOnClickListener(new View.OnClickListener() {
+            @Override
+            public void onClick(View v) {
+                finish();
+            }
+        });
         baseUtl = getIntent().getStringExtra("jump");
         initFatherWidget();
     }
