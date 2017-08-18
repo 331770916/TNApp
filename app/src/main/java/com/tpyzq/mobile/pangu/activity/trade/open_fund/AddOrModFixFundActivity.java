@@ -1,5 +1,17 @@
 package com.tpyzq.mobile.pangu.activity.trade.open_fund;
 
+import android.app.Dialog;
+import android.content.Intent;
+import android.text.Editable;
+import android.text.TextUtils;
+import android.text.TextWatcher;
+import android.view.View;
+import android.widget.Button;
+import android.widget.EditText;
+import android.widget.ImageView;
+import android.widget.RelativeLayout;
+import android.widget.TextView;
+
 import com.tpyzq.mobile.pangu.R;
 import com.tpyzq.mobile.pangu.activity.myself.handhall.AgreementActivity;
 import com.tpyzq.mobile.pangu.activity.myself.handhall.RiskConfirmActivity;
@@ -24,18 +36,6 @@ import com.tpyzq.mobile.pangu.view.dialog.LoadingDialog;
 import com.tpyzq.mobile.pangu.view.dialog.StructuredFundDialog;
 import com.tpyzq.mobile.pangu.view.pickTime.TimePickerView;
 import com.zhy.http.okhttp.callback.StringCallback;
-
-import android.app.Dialog;
-import android.content.Intent;
-import android.text.Editable;
-import android.text.TextUtils;
-import android.text.TextWatcher;
-import android.view.View;
-import android.widget.Button;
-import android.widget.EditText;
-import android.widget.ImageView;
-import android.widget.RelativeLayout;
-import android.widget.TextView;
 
 import org.json.JSONArray;
 import org.json.JSONObject;
@@ -142,11 +142,12 @@ public class AddOrModFixFundActivity extends BaseActivity implements View.OnClic
             mDialog.show();
             InterfaceCollection.getInstance().getFundData(fixFundEntity.getFUND_CODE(), fixFundEntity.getFUND_COMPANY(),TAG_REQUEST_FUND,this);
         } else {
-            if (TextUtils.isEmpty(mProductCode)) {
+            if (TextUtils.isEmpty(mProductCode)) {//稳赢列表进入产品详情，点击定投携带基金代码
                 tv_choose_fund.setVisibility(View.VISIBLE);
             } else {
                 tv_choose_fund.setVisibility(View.GONE);
-                et_input_code.setText(fixFundEntity.getFUND_CODE());
+                et_input_code.setText(mProductCode);
+                InterfaceCollection.getInstance().getFundData(mProductCode, "",TAG_REQUEST_FUND,AddOrModFixFundActivity.this);
                 et_input_code.setEnabled(false);
             }
             tv_title.setText(getResources().getString(R.string.add_fund));

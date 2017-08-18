@@ -6,7 +6,6 @@ import android.content.Intent;
 import android.text.TextUtils;
 import android.view.View;
 import android.widget.FrameLayout;
-import android.widget.ImageView;
 import android.widget.LinearLayout;
 import android.widget.RelativeLayout;
 import android.widget.TextView;
@@ -20,8 +19,6 @@ import com.tpyzq.mobile.pangu.activity.myself.login.ShouJiVerificationActivity;
 import com.tpyzq.mobile.pangu.activity.myself.login.ShouJiZhuCeActivity;
 import com.tpyzq.mobile.pangu.activity.myself.login.TransactionLoginActivity;
 import com.tpyzq.mobile.pangu.activity.trade.open_fund.AddOrModFixFundActivity;
-import com.tpyzq.mobile.pangu.activity.trade.open_fund.FixFundListActivity;
-import com.tpyzq.mobile.pangu.activity.trade.open_fund.FundInfoActivity;
 import com.tpyzq.mobile.pangu.base.BaseActivity;
 import com.tpyzq.mobile.pangu.base.SimpleRemoteControl;
 import com.tpyzq.mobile.pangu.data.CleverManamgerMoneyEntity;
@@ -537,7 +534,7 @@ public class ManagerMoenyDetailActivity extends BaseActivity implements View.OnC
 
                 intent = new Intent();
                 intent.setClass(this, AddOrModFixFundActivity.class);
-                intent.putExtra("mProductCode", "mProductCode");
+                intent.putExtra("mProductCode", mProductCode);
                 startActivity(intent);
                 break;
         }

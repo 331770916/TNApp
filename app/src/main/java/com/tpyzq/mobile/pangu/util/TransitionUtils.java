@@ -30,7 +30,7 @@ public class TransitionUtils {
 
     //double取小数点后2位
     public static String string2doubleS(String s) {
-        if (!s.equals("")) {
+        if (!"".equals(s)) {
             DecimalFormat df = new DecimalFormat("######0.00");
 //            double d = Double.parseDouble(s);
             BigDecimal b = new BigDecimal(s);
@@ -42,7 +42,7 @@ public class TransitionUtils {
     }
     //double取小数点后2位 直接舍弃第三位
     public static String string2doubleDown(String s) {
-        if (!s.equals("")) {
+        if (!"".equals(s)) {
             DecimalFormat df = new DecimalFormat("######0.00");
 //            double d = Double.parseDouble(s);
             BigDecimal b = new BigDecimal(s);
@@ -55,7 +55,7 @@ public class TransitionUtils {
 
     //根据字符串转换成double类型并乘以100保留2位小数
     public static String s2d2(String s) {
-        if (!s.equals("")) {
+        if (!"".equals(s)) {
             DecimalFormat df = new DecimalFormat("######0.00");
 //            double d = Double.parseDouble(s);
             BigDecimal b = new BigDecimal(s);
@@ -81,7 +81,7 @@ public class TransitionUtils {
 
     //double取小数点后2位
     public static String string2doubleS3(String s) {
-        if (!s.equals("")) {
+        if (!"".equals(s)) {
             DecimalFormat df = new DecimalFormat("######0.000");
 //            double d = Double.parseDouble(s);
             BigDecimal b = new BigDecimal(s);
@@ -94,7 +94,7 @@ public class TransitionUtils {
     }
     //double取小数点后4位
     public static String string2double4(String s) {
-        if (!s.equals("")) {
+        if (!"".equals(s)) {
             DecimalFormat df = new DecimalFormat("######0.0000");
 //            double d = Double.parseDouble(s);
             BigDecimal b = new BigDecimal(s);
@@ -107,7 +107,7 @@ public class TransitionUtils {
 
     //double不取小数点
     public static String string2doubleS4(String s) {
-        if (!s.equals("")) {
+        if (!"".equals(s)) {
             DecimalFormat df = new DecimalFormat("######0");
 //            double d = Double.parseDouble(s);
             BigDecimal b = new BigDecimal(s);
@@ -180,7 +180,7 @@ public class TransitionUtils {
     //字符串转换成double类型
     public static double string2double(String s) {
         try{
-            if (!s.equals("")) {
+            if (!"".equals(s)) {
                 return Double.parseDouble(s);
             } else {
                 return 0;
@@ -192,7 +192,7 @@ public class TransitionUtils {
     //字符串转换成int类型
     public static int string2int(String s) {
         try{
-            if (!s.equals("")) {
+            if (!"".equals(s)) {
                 return Integer.parseInt(s);
             } else {
                 return 0;
@@ -219,7 +219,7 @@ public class TransitionUtils {
 
     //字符串转换成日期格式long类型
     public static long string2dateL(String s) {
-        if (!s.equals("")) {
+        if (!"".equals(s)) {
             String ss = s.substring(0, 4) + s.substring(5, 7) + s.substring(8, 10);
             return Long.parseLong(ss);
         } else {
@@ -251,7 +251,7 @@ public class TransitionUtils {
 
     //字符串转换成日期格式int类型
     public static int string2dateI(String s) {
-        if (!s.equals("")) {
+        if (!"".equals(s)) {
             String ss = s.substring(0, 4) + s.substring(5, 7) + s.substring(8, 10);
             return Integer.parseInt(ss);
         } else {
@@ -263,7 +263,7 @@ public class TransitionUtils {
     public static String long2million(String s) {
         DecimalFormat df = new DecimalFormat("######0.00");
         if (!s.contains("E")) {
-            if (!s.equals("")) {
+            if (!"".equals(s)) {
                 if (s.contains(" ")) {
                     return "0.00";
                 } else {
@@ -336,7 +336,7 @@ public class TransitionUtils {
     public static String long2string(String s) {
         DecimalFormat df = new DecimalFormat("######0.00");
         if (!s.contains("E")) {
-            if (!s.equals("")) {
+            if (!"".equals(s)) {
                 if (s.contains(" ")) {
                     return "0.00";
                 } else {
@@ -371,7 +371,7 @@ public class TransitionUtils {
         try {
             DecimalFormat df = new DecimalFormat("######0.00");
             if (!s.contains("E")) {
-                if (!s.equals("")) {
+                if (!"".equals(s)) {
                     if (s.contains(" ")) {
                         return "0.00";
                     } else {
@@ -397,7 +397,7 @@ public class TransitionUtils {
     public static float price2tenthousandF(String s) {
         DecimalFormat df = new DecimalFormat("######0.00");
         if (!s.contains("E")) {
-            if (!s.equals("")) {
+            if (!"".equals(s)) {
                 if (s.contains(" ")) {
                     return Float.parseFloat("0.00");
                 } else {
