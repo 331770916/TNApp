@@ -19,6 +19,7 @@ import android.widget.RelativeLayout;
 import android.widget.ScrollView;
 import android.widget.TextView;
 
+import com.facebook.drawee.view.SimpleDraweeView;
 import com.handmark.pulltorefresh.library.PullToRefreshBase;
 import com.handmark.pulltorefresh.library.PullToRefreshScrollView;
 import com.tpyzq.mobile.pangu.R;
@@ -140,7 +141,7 @@ public class HomeFragment extends BaseFragment implements AdapterView.OnItemClic
     /**
      * 其他功能，如下拉刷新、首页消息等
      */
-    private ImageView mMiddleImageView; //中间图片
+    private SimpleDraweeView mMiddleImageView; //中间图片
     private TextView mTopTextView; //上推时显示应用标题
 
     private SimpleRemoteControl simpleRemoteControl;
@@ -170,16 +171,10 @@ public class HomeFragment extends BaseFragment implements AdapterView.OnItemClic
 
 
         mTopTextView = (TextView) view.findViewById(R.id.homeLayoutTopTextView);
-
-//        mConvenientBanner = (ConvenientBanner) view.findViewById(R.id.convenientBanner);
-//        mConvenientBanner.setPageIndicator(new int[]{R.mipmap.ic_page_indicator, R.mipmap.ic_page_indicator_focused});
-//        mConvenientBanner.setPageIndicatorAlign(ConvenientBanner.PageIndicatorAlign.CENTER_HORIZONTAL);
-//        mConvenientBanner.startTurning(5000);
-//        mConvenientBanner.setOnItemClickListener(this);
         vp_carousel = (RelativeLayout) view.findViewById(R.id.vp_carousel);
         initCarouseView();
-        mMiddleImageView = (ImageView) view.findViewById(R.id.home_middlebander);
-        mMiddleImageView.setImageDrawable(ContextCompat.getDrawable(CustomApplication.getContext(), R.mipmap.openanaccount_shouye));
+        mMiddleImageView = (SimpleDraweeView) view.findViewById(R.id.home_middlebander);
+        mMiddleImageView.setBackgroundResource(R.mipmap.openanaccount_shouye);
         mMiddleImageView.setOnClickListener(this);
         mMiddleImageView.setVisibility(View.VISIBLE);
 
@@ -618,20 +613,10 @@ public class HomeFragment extends BaseFragment implements AdapterView.OnItemClic
 
     }
 
-    /**
-     * 获取广告
-     *
-     * @param simpleRemoteControl
-     */
-    private void getBanderConnect(SimpleRemoteControl simpleRemoteControl) {
-        simpleRemoteControl.setCommand(new ToGetHomeBanderConnect(new GetHomeBanderConnect(TAG)));
-        simpleRemoteControl.startConnect();
-    }
 
     @Override
     public void getResult(Object result, String tag) {
         if (result instanceof String) {
-//            MistakeDialog.showDialog("网络异常", getActivity());
             return;
         }  else if ("TwentyFourHoursHotSearchConnect".equals(tag)) {
             ArrayList<StockInfoEntity> entities = (ArrayList<StockInfoEntity>) result;   //返回结果可能存在多条，但只展示5条
@@ -672,95 +657,7 @@ public class HomeFragment extends BaseFragment implements AdapterView.OnItemClic
         }
     }
 
-//    private void copyFundOpenUserPdf() {
-//        File file = Helper.getExternalFileDir(CustomApplication.getContext(), "pdf");
-//        File[] files = file.listFiles();
-//        if (files == null || files.length == 0) {
-//            Helper.getAssestFile("pdf", "fundOpenUser.pdf");
-//        }
-//    }
-
-//    /**
-//     * 获取SDcard下的广告图片
-//     */
-//    private void getSdcardImageViewForAdvertisement() {
-//        File file = Helper.getExternalFileDir(CustomApplication.getContext(), "ImageView");
-//        File[] files = file.listFiles();
-//        ArrayList<Bitmap> bitmaps = new ArrayList<>();
-//        if (files == null || files.length == 0) {
-//            //从Assets下获取默认图片
-//            Bitmap bitmap1 = Helper.getAssetBitmap("money.png");
-//            Bitmap bitmap2 = Helper.getAssetBitmap("account.png");
-//            Bitmap bitmap3 = Helper.getAssetBitmap("infomation.png");
-//            Bitmap bitmap4 = Helper.getAssetBitmap("hotSell.png");
-//            bitmaps.add(bitmap1);
-//            bitmaps.add(bitmap2);
-//            bitmaps.add(bitmap3);
-//            bitmaps.add(bitmap4);
-//            //保存图片到imagview文件夹下
-//            Helper.getAssestFile("ImageView", "money.png");
-//            Helper.getAssestFile("ImageView", "account.png");
-//            Helper.getAssestFile("ImageView", "infomation.png");
-//            Helper.getAssestFile("ImageView", "hotSell.png");
-//        }
-//        else{
-//            for (File _file : files) {
-//                String _ivPath = _file.getPath();
-//                Bitmap bitmap = ImageUtil.decodeBitmap(_ivPath);
-//                bitmaps.add(bitmap);
-//            }
-//        }
-//        mConvenientBanner.setPages(new BanderHolderCreator(), bitmaps);
-//    }
-
-    private void getBitmapConnect(String imgUrl) {
-
-        NetWorkUtil.getInstence().okHttpForShowBitmap(TAG, imgUrl, new BitmapCallback() {
-            @Override
-            public void onError(Call call, Exception e, int id) {
-                LogHelper.e(TAG, e.toString());
-                CentreToast.showText(getActivity(), "" + e.toString());
-            }
-
-            @Override
-            public void onResponse(Bitmap response, int id) {
-                if (response != null) {
-                    long time = System.currentTimeMillis();
-                    ImageUtil.saveBitmap(response, Helper.getExternalDirPath(CustomApplication.getContext(), "ImageView", time + ".png"), 3);
-//                    mBitmaps.add(response);
-//                    mConvenientBanner.setPages(new BanderHolderCreator(), mBitmaps);
-                }
-            }
-        });
-
-    }
 //
-//    @Override
-//    public void onItemClick(int position) {
-//        Intent intent = new Intent();
-//
-//        if (position == 0) {
-//            BRutil.menuSelect("N022");
-//            intent.setClass(getActivity(), OptionalFinancingActivity.class);
-//            getActivity().startActivity(intent);
-//        } else if (position == 1) {
-//            Intent intent1 = new Intent();
-//            intent1.setClass(getActivity(), AdvertActivity.class);
-//            startActivity(intent1);
-//
-//        } else if (position == 2) {
-//
-//            if (mJumpPageListener != null) {
-//                intent.setClass(getActivity(), LovingHeartActivity.class);
-//                getActivity().startActivity(intent);
-//            }
-//
-//        } else if (position == 3) {
-//            intent.setClass(getActivity(), InformationHomeActivity.class);
-//            getActivity().startActivity(intent);
-//            BRutil.menuSelect("N004");
-//        }
-//    }
 
     /**
      * 我的消息

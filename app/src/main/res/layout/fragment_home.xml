@@ -24,11 +24,6 @@
                     android:layout_height="wrap_content"
                     android:orientation="vertical">
 
-                    <!--<com.bigkoo.convenientbanner.ConvenientBanner-->
-                        <!--android:id="@+id/convenientBanner"-->
-                        <!--android:layout_width="match_parent"-->
-                        <!--android:layout_height="@dimen/size225"-->
-                        <!--app:canLoop="true" />-->
                         <RelativeLayout
                             android:id="@+id/vp_carousel"
                             android:layout_width="match_parent"
@@ -52,7 +47,7 @@
                         android:layout_height="@dimen/size7"
                         android:background="@color/bgColor" />
 
-                    <ImageView
+                    <com.facebook.drawee.view.SimpleDraweeView
                         android:id="@+id/home_middlebander"
                         android:layout_width="match_parent"
                         android:layout_height="@dimen/size80"

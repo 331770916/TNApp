@@ -1,16 +1,13 @@
 package com.tpyzq.mobile.pangu.view.listview;
 
 import android.app.Activity;
-import android.content.Context;
 import android.text.TextUtils;
 import android.view.View;
 import android.view.ViewGroup;
 import android.widget.ImageView;
 import com.facebook.drawee.view.SimpleDraweeView;
 import com.tpyzq.mobile.pangu.R;
-import com.tpyzq.mobile.pangu.activity.LuncherActivity;
 import com.tpyzq.mobile.pangu.activity.home.HomeFragment;
-import com.tpyzq.mobile.pangu.activity.home.helper.HomeFragmentHelper;
 import com.tpyzq.mobile.pangu.util.Helper;
 import com.tpyzq.mobile.pangu.view.loopswitch.AutoLoopSwitchBaseAdapter;
 import java.util.List;
