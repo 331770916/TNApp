@@ -2509,7 +2509,7 @@ public class InterfaceCollection {
                         info.setTag(TAG);
 
                         if ("0".equals(code)) {
-                            info.setMsg("基金定投登记成功");
+                            info.setMsg("基金定投修改成功");
                         }
                     } catch (Exception e) {
                         info.setCode(ConstantUtil.JSON_ERROR_CODE);
