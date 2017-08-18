@@ -23,6 +23,7 @@
         </RelativeLayout>
         <TextView
             android:id="@+id/tvDate"
+            android:text="11111"
             android:layout_width="wrap_content"
             android:layout_height="wrap_content"
             android:layout_centerVertical="true"
@@ -52,6 +53,7 @@
     <RelativeLayout
         android:id="@+id/rlRight"
         android:visibility="gone"
+        android:layout_marginLeft="@dimen/size18"
         android:layout_toRightOf="@id/rlLeft"
         android:layout_below="@id/rlTop"
         android:layout_marginTop="@dimen/size5"
