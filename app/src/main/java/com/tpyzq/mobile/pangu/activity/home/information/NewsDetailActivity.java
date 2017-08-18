@@ -161,7 +161,8 @@ public class NewsDetailActivity extends BaseActivity implements View.OnClickList
                 //标题赋值
                 tvNewsTitle.setText(entity.getTitle());
                 //来源时间赋值
-                tvLaiYuanDate.setText(entity.getTime());
+                String time = entity.getTime();
+                tvLaiYuanDate.setText(time.length()==19?time.substring(0,time.length()-3):time);
                 tvLaiYuanName.setText("来源："+entity.getSource());
                 tvStatement.setText(entity.getStatement());
                 /**
