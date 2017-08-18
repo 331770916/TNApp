@@ -55,7 +55,7 @@ public class HomeSwitchAdapter extends AutoLoopSwitchBaseAdapter {
         SimpleDraweeView imageView = new SimpleDraweeView(mContext);
         imageView.setScaleType(ImageView.ScaleType.FIT_XY);
         if("default".equals(show_url))
-            imageView.setImageResource(R.mipmap.news_default_bbg);
+            imageView.setImageResource(R.mipmap.top2);
          else
             imageView.setImageURI(show_url);
         imageView.setOnClickListener(new View.OnClickListener() {
