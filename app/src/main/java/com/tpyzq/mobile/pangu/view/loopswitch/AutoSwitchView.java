@@ -47,17 +47,12 @@ public class AutoSwitchView extends AutoLoopSwitchBaseView {
         switch (mType){
             case 0://首页轮播
                 mPageShowView.initColor(getResources().getColor(R.color.white),getResources().getColor(R.color.dark));
-                mPageShowView.setViewHeight(Helper.getDensityValue(displayMetrics,20));
-                params.addRule(RelativeLayout.CENTER_HORIZONTAL);
                 addView(mPageShowView, params);
                 break;
             case 1://要闻轮播
                 mPageShowView.initColor(getResources().getColor(R.color.blue),getResources().getColor(R.color.text));
                 mPageShowView.drawType(1);
-                mPageShowView.scale(Helper.getDensityValue(displayMetrics,10));
-                mPageShowView.setViewHeight(Helper.getDensityValue(displayMetrics,10));
-                mPageShowView.setPadding(Helper.getDensityValue(displayMetrics,-660),0,0,Helper.getDensityValue(displayMetrics,20));
-                params.addRule(RelativeLayout.ALIGN_PARENT_RIGHT);
+                mPageShowView.setWidthHeightMargin(displayMetrics,60,6,5);
                 addView(mPageShowView, params);
                 break;
         }

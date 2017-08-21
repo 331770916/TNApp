@@ -402,13 +402,6 @@ public class Helper {
         return display.getHeight();
     }
 
-    public static int getDensityValue(DisplayMetrics display, int height){
-       if(display.density>2){
-            return height;
-       }else{
-           return height/2;
-       }
-    }
 
     /**
      * 获取屏幕中控件顶部位置的高度--即控件顶部的Y点
