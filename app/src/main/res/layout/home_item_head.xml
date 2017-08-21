@@ -25,9 +25,9 @@
             android:layout_margin="@dimen/size10"
             android:drawableLeft="@mipmap/iv_homnews"
             android:drawablePadding="@dimen/size5"
+            android:textColor="@color/color_4a4a4a"
             android:gravity="center"
             android:text="要闻"
-            android:textColor="@color/blue"
             android:textSize="@dimen/txtSize12"
             android:typeface="sans" />
 
