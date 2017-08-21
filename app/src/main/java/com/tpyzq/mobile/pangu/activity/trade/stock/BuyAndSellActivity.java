@@ -160,6 +160,7 @@ public class BuyAndSellActivity extends BaseActivity implements View.OnClickList
     private String MARKET = "";
     private boolean isSetStockCodeEt = true;
     private String istatus;
+    private boolean isGetStockCode;//从外面携带代码来
 
     @Override
     public void initView() {
@@ -375,6 +376,7 @@ public class BuyAndSellActivity extends BaseActivity implements View.OnClickList
             rb_buy.setChecked(true);        //初始化
         }
         if (!TextUtils.isEmpty(istockcode)){
+            isGetStockCode = true;
             /*if (istockcode.startsWith("20") || istockcode.startsWith("10") || istockcode.startsWith("12") || istockcode.startsWith("22")) {
                 CentreToast.showText(BuyAndSellActivity.this, "当前股票代码不可交易",Toast.LENGTH_SHORT);
             } else {*/
@@ -384,6 +386,8 @@ public class BuyAndSellActivity extends BaseActivity implements View.OnClickList
                 iv_depute_way.setClickable(true);
                 iv_depute_way.setBackgroundResource(R.mipmap.icon_entrust_way);
 //            }
+        } else {
+            isGetStockCode = false;
         }
 
         //底部Viewpager切换监听器
@@ -1548,7 +1552,7 @@ public class BuyAndSellActivity extends BaseActivity implements View.OnClickList
                         String data = jsonObject.getString("data");
                         JSONArray jaData = new JSONArray(data);
                         transStockBeen.clear();
-                        if (jaData.length()==1&&(isSetStockCodeEt||!TextUtils.isEmpty(istatus))) {
+                        if (jaData.length()==1&&(isSetStockCodeEt||isGetStockCode)) {
                             //当只有一条股票返回时，直接放置输入框，isSetStockCodeEt表示选择了股票，点击输入框展示列表
                             //istatus当直接从股票详情进入 istatus，只有一条时也是直接展示
                             transStockBeen.clear();
@@ -1559,16 +1563,16 @@ public class BuyAndSellActivity extends BaseActivity implements View.OnClickList
                                 stockPw.dismiss();
                             }
                             onPwClick(jaData.getJSONArray(0).getString(1),jaData.getJSONArray(0).getString(0));
-                            istatus = "";
+                            isGetStockCode = false;
                             return;
                         }
 
                         if (!isSetStockCodeEt) {
                             isSetStockCodeEt = true;
                         }
-                        if (!TextUtils.isEmpty(istatus)&&jaData.length()>0) {//外部进入到买卖界面,且搜索到股票，直接展示
+                        if (isGetStockCode&&jaData.length()>0) {//外部进入到买卖界面,且搜索到股票，直接展示
                             onPwClick(jaData.getJSONArray(0).getString(1),jaData.getJSONArray(0).getString(0));
-                            istatus = "";
+                            isGetStockCode = false;
                             return;
                         }
                         for (int i = 0; i < jaData.length(); i++) {
