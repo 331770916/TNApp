@@ -19,7 +19,6 @@
         android:layout_height="match_parent">
 
         <TextView
-            android:text="909090"
             android:id="@+id/hushen_stockName"
             android:layout_width="wrap_content"
             android:layout_height="wrap_content"
@@ -29,7 +28,6 @@
             android:textColor="@color/hushenTab_titleColor" />
 
         <TextView
-            android:text="909090"
             android:id="@+id/hushen_stockNumber"
             android:layout_width="wrap_content"
             android:layout_height="wrap_content"
@@ -47,7 +45,6 @@
             android:layout_height="match_parent">
 
             <TextView
-                android:text="909090"
                 android:gravity="center|right"
                 android:layout_marginRight="@dimen/size16"
                 android:id="@+id/hushen_stockCurrentPrice"
@@ -65,7 +62,6 @@
             android:layout_height="match_parent">
 
             <TextView
-                android:text="909090"
                 android:gravity="center|right"
                 android:id="@+id/hushen_stockZD"
                 android:layout_width="match_parent"
