@@ -289,7 +289,7 @@ public class LuncherActivity extends BaseActivity implements ICallbackResult {
         if (result instanceof String) {
 //            CentreToast.showText(this,ConstantUtil.NETWORK_ERROR);
         } else {
-            if (TAG.equals(tag)){
+            if ("QuerySelfChoiceStockConnect".equals(tag)){
                 deleteData(result);
             }else if (LuncherActivityTAG.equals(tag)){
                 cancelFinish((Map<String,String>)result);
