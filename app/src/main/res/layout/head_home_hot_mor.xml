@@ -13,19 +13,24 @@
 
     <RelativeLayout
         android:layout_width="match_parent"
-        android:layout_height="wrap_content">
-
+        android:layout_height="@dimen/size40"
+        android:gravity="center_vertical">
+        <ImageView
+            android:id="@+id/iv"
+            android:layout_width="@dimen/size18"
+            android:layout_height="@dimen/size18"
+            android:layout_centerVertical="true"
+            android:layout_marginLeft="10dp"
+            android:background="@mipmap/resougupiao" />
         <TextView
             android:layout_width="wrap_content"
             android:layout_height="wrap_content"
-            android:layout_alignParentLeft="true"
+            android:layout_toRightOf="@id/iv"
             android:layout_centerVertical="true"
-            android:layout_marginLeft="10dp"
-            android:drawableLeft="@mipmap/resougupiao"
-            android:drawablePadding="5dp"
+            android:layout_marginLeft="5dp"
             android:gravity="center_vertical"
             android:text="热搜股票"
-            android:textColor="@color/blue"
+            android:textColor="@color/color_4a4a4a"
             android:textSize="@dimen/txtSize12"
             android:typeface="sans" />
 
