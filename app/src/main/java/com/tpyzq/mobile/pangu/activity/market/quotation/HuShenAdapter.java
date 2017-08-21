@@ -398,6 +398,7 @@ public class HuShenAdapter extends BaseAdapter {
         List<StockInfoEntity> _beans = mBeans.get(position).getSubDatas();
 
         viewHodler2.shangzheng.setOnClickListener(new AdapterTopClickListener(_beans, mActivity, 0));
+        viewHodler2.shenzheng.setOnClickListener(new AdapterTopClickListener(_beans, mActivity, 1));
         viewHodler2.changye.setOnClickListener(new AdapterTopClickListener(_beans, mActivity, 2));
 
         StockInfoEntity modelshang = null;
