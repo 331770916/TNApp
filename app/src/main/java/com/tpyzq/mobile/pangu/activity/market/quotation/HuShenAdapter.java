@@ -111,23 +111,23 @@ public class HuShenAdapter extends BaseAdapter {
                     convertView = LayoutInflater.from(CustomApplication.getContext()).inflate(R.layout.newstock_top, null);
                     viewHodler2 = new ViewHodler2();
 
-                    viewHodler2.shangZ_name = (TextView) convertView.findViewById(R.id.newStock_shangZheng);
-                    viewHodler2.shangZ_currentPrice = (TextView) convertView.findViewById(R.id.newStock_shangZhengTv1);
-                    viewHodler2.shangZ_zd = (TextView) convertView.findViewById(R.id.newStock_shangZhengTv2);
-                    viewHodler2.shangZ_zdf = (TextView) convertView.findViewById(R.id.newStock_shangZhengTv3);
+                    viewHodler2.shangzheng = (RelativeLayout) convertView.findViewById(R.id.shangzheng);
+                    viewHodler2.shangzheng_name = (TextView) convertView.findViewById(R.id.newStock_shangzheng);
+                    viewHodler2.shangzheng_currentPrice1 = (TextView) convertView.findViewById(R.id.newStock_shangzhengTv1);
+                    viewHodler2.shangzheng_zd = (TextView) convertView.findViewById(R.id.newStock_shangzhengTv2);
+                    viewHodler2.shangzheng_zdf = (TextView) convertView.findViewById(R.id.newStock_shangzhengTv3);
 
-                    viewHodler2.shengZ_name = (TextView) convertView.findViewById(R.id.newStock_shenZheng);
-                    viewHodler2.shenZ_currentPrice1 = (TextView) convertView.findViewById(R.id.newStock_shengZhengTv1);
-                    viewHodler2.shenZ_zd = (TextView) convertView.findViewById(R.id.newStock_shengZhengTv2);
-                    viewHodler2.shenZ_zdf = (TextView) convertView.findViewById(R.id.newStock_shengZhengTv3);
+                    viewHodler2.shenzheng = (RelativeLayout) convertView.findViewById(R.id.shengzheng);
+                    viewHodler2.shenzheng_name = (TextView) convertView.findViewById(R.id.newStock_shengzheng);
+                    viewHodler2.shenzheng_currentPrice = (TextView) convertView.findViewById(R.id.newStock_shengzhengTv1);
+                    viewHodler2.shenzheng_zd = (TextView) convertView.findViewById(R.id.newStock_shengzhengTv2);
+                    viewHodler2.shenzheng_zdf = (TextView) convertView.findViewById(R.id.newStock_shengzhengTv3);
+
 
                     viewHodler2.chuangY_name = (TextView) convertView.findViewById(R.id.newStock_chuangye);
                     viewHodler2.chuangY_currentPrice = (TextView) convertView.findViewById(R.id.newStock_chuangyeTv1);
                     viewHodler2.chuangY_zd = (TextView) convertView.findViewById(R.id.newStock_chuangyeTv2);
                     viewHodler2.chuangY_zdf = (TextView) convertView.findViewById(R.id.newStock_chuangyeTv3);
-
-                    viewHodler2.shangzheng = (RelativeLayout) convertView.findViewById(R.id.shangzheng);
-                    viewHodler2.shenzheng = (RelativeLayout) convertView.findViewById(R.id.shengzheng);
                     viewHodler2.changye = (RelativeLayout) convertView.findViewById(R.id.changye);
 
                     viewHodler2.topBgLayout1 = (RelativeLayout) convertView.findViewById(R.id.rl_top1Bg);
@@ -217,15 +217,15 @@ public class HuShenAdapter extends BaseAdapter {
     }
 
     private class ViewHodler2 {
-        TextView shangZ_name;
-        TextView shangZ_currentPrice;
-        TextView shangZ_zd;
-        TextView shangZ_zdf;
+        TextView shenzheng_name;
+        TextView shenzheng_currentPrice;
+        TextView shenzheng_zd;
+        TextView shenzheng_zdf;
 
-        TextView shengZ_name;
-        TextView shenZ_currentPrice1;
-        TextView shenZ_zd;
-        TextView shenZ_zdf;
+        TextView shangzheng_name;
+        TextView shangzheng_currentPrice1;
+        TextView shangzheng_zd;
+        TextView shangzheng_zdf;
 
         TextView chuangY_name;
         TextView chuangY_currentPrice;
@@ -388,8 +388,8 @@ public class HuShenAdapter extends BaseAdapter {
 
     private void initTopView(ViewHodler2 viewHodler2, int position) {
 
-        TextView[] textViews = {viewHodler2.shengZ_name, viewHodler2.shenZ_currentPrice1, viewHodler2.shenZ_zd, viewHodler2.shenZ_zdf,//这四组是上证
-                viewHodler2.shangZ_name, viewHodler2.shangZ_currentPrice, viewHodler2.shangZ_zd, viewHodler2.shangZ_zdf,//这四组是深证
+        TextView[] textViews = {viewHodler2.shangzheng_name, viewHodler2.shangzheng_currentPrice1, viewHodler2.shangzheng_zd, viewHodler2.shangzheng_zdf,//这四组是上证
+                viewHodler2.shenzheng_name, viewHodler2.shenzheng_currentPrice, viewHodler2.shenzheng_zd, viewHodler2.shenzheng_zdf,//这四组是深证
                 viewHodler2.chuangY_name, viewHodler2.chuangY_currentPrice, viewHodler2.chuangY_zd, viewHodler2.chuangY_zdf};//这四组是创业
 
         RelativeLayout[] rls = {viewHodler2.topBgLayout1, viewHodler2.topBgLayout2, viewHodler2.topBgLayout3};

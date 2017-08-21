@@ -23,7 +23,7 @@
 
             <TextView
                 android:text="90909090"
-                android:id="@+id/newStock_shenZheng"
+                android:id="@+id/newStock_shangzheng"
                 android:layout_width="wrap_content"
                 android:layout_height="wrap_content"
                 android:layout_centerHorizontal="true"
@@ -36,9 +36,9 @@
                 android:id="@+id/rl_top1Bg"
                 android:layout_width="match_parent"
                 android:layout_height="wrap_content"
-                android:layout_below="@id/newStock_shenZheng">
+                android:layout_below="@id/newStock_shangzheng">
                 <TextView
-                    android:id="@+id/newStock_shengZhengTv1"
+                    android:id="@+id/newStock_shangzhengTv1"
                     android:layout_width="wrap_content"
                     android:layout_height="wrap_content"
                     android:layout_centerHorizontal="true"
@@ -49,12 +49,12 @@
                 <LinearLayout
                     android:layout_width="wrap_content"
                     android:layout_height="wrap_content"
-                    android:layout_below="@+id/newStock_shengZhengTv1"
+                    android:layout_below="@+id/newStock_shangzhengTv1"
                     android:layout_centerHorizontal="true"
                     android:orientation="horizontal">
 
                     <TextView
-                        android:id="@+id/newStock_shengZhengTv2"
+                        android:id="@+id/newStock_shangzhengTv2"
                         android:layout_width="wrap_content"
                         android:layout_height="wrap_content"
                         android:layout_marginLeft="@dimen/size4"
@@ -64,7 +64,7 @@
                         android:textColor="@color/white" />
 
                     <TextView
-                        android:id="@+id/newStock_shengZhengTv3"
+                        android:id="@+id/newStock_shangzhengTv3"
                         android:layout_width="wrap_content"
                         android:layout_height="wrap_content"
                         android:layout_marginLeft="@dimen/size4"
@@ -90,7 +90,7 @@
             android:padding="@dimen/size6">
 
             <TextView
-                android:id="@+id/newStock_shangZheng"
+                android:id="@+id/newStock_shengzheng"
                 android:layout_width="wrap_content"
                 android:layout_height="wrap_content"
                 android:layout_centerHorizontal="true"
@@ -102,9 +102,9 @@
                 android:id="@+id/rl_top2Bg"
                 android:layout_width="match_parent"
                 android:layout_height="wrap_content"
-                android:layout_below="@id/newStock_shangZheng">
+                android:layout_below="@id/newStock_shengzheng">
                 <TextView
-                    android:id="@+id/newStock_shangZhengTv1"
+                    android:id="@+id/newStock_shengzhengTv1"
                     android:layout_width="wrap_content"
                     android:layout_height="wrap_content"
                     android:layout_centerHorizontal="true"
@@ -114,12 +114,12 @@
                 <LinearLayout
                     android:layout_width="wrap_content"
                     android:layout_height="wrap_content"
-                    android:layout_below="@+id/newStock_shangZhengTv1"
+                    android:layout_below="@+id/newStock_shengzhengTv1"
                     android:layout_centerHorizontal="true"
                     android:orientation="horizontal">
 
                     <TextView
-                        android:id="@+id/newStock_shangZhengTv2"
+                        android:id="@+id/newStock_shengzhengTv2"
                         android:layout_width="wrap_content"
                         android:layout_height="wrap_content"
                         android:layout_marginLeft="@dimen/size4"
@@ -129,7 +129,7 @@
                         android:textColor="@color/white" />
 
                     <TextView
-                        android:id="@+id/newStock_shangZhengTv3"
+                        android:id="@+id/newStock_shengzhengTv3"
                         android:layout_width="wrap_content"
                         android:layout_height="wrap_content"
                         android:layout_marginLeft="@dimen/size4"
