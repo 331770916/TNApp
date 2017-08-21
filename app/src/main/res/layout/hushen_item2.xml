@@ -2,14 +2,14 @@
 <LinearLayout xmlns:android="http://schemas.android.com/apk/res/android"
     android:layout_width="match_parent"
     android:orientation="vertical"
+    android:background="@color/white"
     android:layout_height="match_parent">
 
     <LinearLayout
         android:orientation="horizontal"
         android:background="@drawable/listview_item_bg"
-        android:paddingTop="@dimen/size7"
         android:layout_width="match_parent"
-        android:layout_height="wrap_content">
+        android:layout_height="@dimen/size56">
 
     <LinearLayout
         android:gravity="center|start"
@@ -19,6 +19,7 @@
         android:layout_height="match_parent">
 
         <TextView
+            android:text="909090"
             android:id="@+id/hushen_stockName"
             android:layout_width="wrap_content"
             android:layout_height="wrap_content"
@@ -28,12 +29,12 @@
             android:textColor="@color/hushenTab_titleColor" />
 
         <TextView
+            android:text="909090"
             android:id="@+id/hushen_stockNumber"
             android:layout_width="wrap_content"
             android:layout_height="wrap_content"
             android:layout_below="@id/hushen_stockName"
             android:layout_marginLeft="@dimen/size20"
-            android:paddingBottom="@dimen/size7"
             android:textColor="@color/newStockTitle"
             android:textSize="@dimen/txtSize14" />
 
@@ -46,9 +47,8 @@
             android:layout_height="match_parent">
 
             <TextView
+                android:text="909090"
                 android:gravity="center|right"
-                android:layout_marginTop="@dimen/size20"
-                android:layout_marginBottom="@dimen/size19"
                 android:layout_marginRight="@dimen/size16"
                 android:id="@+id/hushen_stockCurrentPrice"
                 android:layout_width="match_parent"
@@ -65,9 +65,8 @@
             android:layout_height="match_parent">
 
             <TextView
+                android:text="909090"
                 android:gravity="center|right"
-                android:layout_marginTop="@dimen/size20"
-                android:layout_marginBottom="@dimen/size19"
                 android:id="@+id/hushen_stockZD"
                 android:layout_width="match_parent"
                 android:layout_height="match_parent"

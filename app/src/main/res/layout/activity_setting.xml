@@ -122,31 +122,6 @@
                     android:gravity="right"
                     android:paddingRight="@dimen/size20" />
             </LinearLayout>
-            <LinearLayout
-                android:id="@+id/jy_speed"
-                android:layout_width="match_parent"
-                android:layout_height="@dimen/size50"
-                android:layout_marginTop="@dimen/size5"
-                android:background="@color/white"
-                android:orientation="horizontal">
-
-                <TextView
-                    android:layout_width="wrap_content"
-                    android:layout_height="wrap_content"
-                    android:layout_gravity="center_vertical"
-                    android:paddingLeft="@dimen/size20"
-                    android:text="交易站点切换" />
-
-                <TextView
-                    android:layout_width="0dp"
-                    android:layout_height="wrap_content"
-                    android:layout_gravity="center_vertical"
-                    android:layout_weight="1"
-                    android:drawablePadding="@dimen/size10"
-                    android:drawableRight="@mipmap/more"
-                    android:gravity="right"
-                    android:paddingRight="@dimen/size20" />
-            </LinearLayout>
 
             <LinearLayout
                 android:id="@+id/ll_speed"
@@ -175,6 +150,32 @@
             </LinearLayout>
 
             <LinearLayout
+                android:id="@+id/jy_speed"
+                android:layout_width="match_parent"
+                android:layout_height="@dimen/size50"
+                android:layout_marginTop="@dimen/size5"
+                android:background="@color/white"
+                android:orientation="horizontal">
+
+                <TextView
+                    android:layout_width="wrap_content"
+                    android:layout_height="wrap_content"
+                    android:layout_gravity="center_vertical"
+                    android:paddingLeft="@dimen/size20"
+                    android:text="交易站点切换" />
+
+                <TextView
+                    android:layout_width="0dp"
+                    android:layout_height="wrap_content"
+                    android:layout_gravity="center_vertical"
+                    android:layout_weight="1"
+                    android:drawablePadding="@dimen/size10"
+                    android:drawableRight="@mipmap/more"
+                    android:gravity="right"
+                    android:paddingRight="@dimen/size20" />
+            </LinearLayout>
+
+            <LinearLayout
                 android:id="@+id/ll_version"
                 android:layout_width="match_parent"
                 android:layout_height="@dimen/size50"
@@ -187,7 +188,7 @@
                     android:layout_height="wrap_content"
                     android:layout_gravity="center_vertical"
                     android:paddingLeft="@dimen/size20"
-                    android:text="版本更新" />
+                    android:text="版本信息" />
 
                 <TextView
                     android:id="@+id/tv_version_name"
