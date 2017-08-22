@@ -65,6 +65,7 @@
                 android:layout_width="wrap_content"
                 android:layout_height="wrap_content"
                 android:text="--天"
+                android:textSize="@dimen/txtSize12"
                 android:textColor="@color/orange2" />
 
             <TextView
@@ -72,6 +73,7 @@
                 android:id="@+id/tv_text9"
                 android:layout_width="wrap_content"
                 android:layout_height="wrap_content"
+                android:textSize="@dimen/txtSize12"
                 android:layout_marginTop="@dimen/size5"
                 android:text="收益期限" />
         </LinearLayout>
@@ -89,6 +91,7 @@
                 android:id="@+id/tv_text6"
                 android:layout_width="wrap_content"
                 android:layout_height="wrap_content"
+                android:textSize="@dimen/txtSize12"
                 android:text="--元"
                 android:textColor="@color/orange2" />
 
@@ -97,6 +100,7 @@
                 android:id="@+id/tv_text10"
                 android:layout_width="wrap_content"
                 android:layout_height="wrap_content"
+                android:textSize="@dimen/txtSize12"
                 android:layout_marginTop="@dimen/size5"
                 android:text="起投金额" />
         </LinearLayout>
@@ -173,6 +177,7 @@
             android:layout_width="wrap_content"
             android:layout_height="wrap_content"
             android:layout_centerHorizontal="true"
+            android:textSize="@dimen/txtSize12"
             android:layout_marginTop="@dimen/size20"
             android:text="发行时间: --"/>
 
@@ -184,6 +189,7 @@
             android:layout_alignParentBottom="true"
             android:layout_alignRight="@+id/rcv_progress"
             android:textColor="@color/lineColor"
+            android:textSize="@dimen/txtSize12"
             android:id="@+id/textView28" />
 
         <TextView
@@ -196,6 +202,7 @@
             android:layout_alignBottom="@+id/textView28"
             android:layout_alignLeft="@+id/rcv_progress"
             android:layout_alignStart="@+id/rcv_progress"
+            android:textSize="@dimen/txtSize12"
             android:id="@+id/textView33" />
     </RelativeLayout>
 
