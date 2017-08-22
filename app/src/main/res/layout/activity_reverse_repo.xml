@@ -1,5 +1,5 @@
 <?xml version="1.0" encoding="utf-8"?>
-<LinearLayout xmlns:android="http://schemas.android.com/apk/res/android"
+<RelativeLayout xmlns:android="http://schemas.android.com/apk/res/android"
     xmlns:tools="http://schemas.android.com/tools"
     android:id="@+id/Keyboard_LinearLayout"
     android:layout_width="match_parent"
@@ -7,7 +7,50 @@
     android:background="@color/bgColor"
     android:orientation="vertical">
 
+    <LinearLayout
+        android:id="@+id/repoBoomLayout"
+        android:layout_alignParentBottom="true"
+        android:layout_width="match_parent"
+        android:layout_height="@dimen/size40"
+        android:layout_marginTop="@dimen/size10"
+        android:background="@color/white"
+        android:orientation="horizontal">
+
+        <TextView
+            android:id="@+id/tv_chedan"
+            android:layout_width="0dp"
+            android:layout_height="match_parent"
+            android:layout_weight="1"
+            android:drawableLeft="@mipmap/icon_reverse_backorder"
+            android:drawablePadding="@dimen/size5"
+            android:gravity="center_vertical"
+            android:paddingLeft="@dimen/size70"
+            android:paddingTop="@dimen/size10"
+            android:paddingBottom="@dimen/size10"
+            android:text="撤单" />
+
+        <View
+            android:layout_width="@dimen/size0.5"
+            android:layout_height="match_parent"
+            android:background="@color/lineColor"
+            android:paddingBottom="@dimen/size8"
+            android:paddingTop="@dimen/size8" />
+
+        <TextView
+            android:id="@+id/tv_search"
+            android:layout_width="0dp"
+            android:layout_height="match_parent"
+            android:layout_weight="1"
+            android:drawableLeft="@mipmap/icon_reverse_search"
+            android:drawablePadding="@dimen/size5"
+            android:gravity="center_vertical"
+            android:paddingLeft="@dimen/size70"
+            android:text="查询" />
+    </LinearLayout>
+
     <ScrollView
+        android:id="@+id/repoScroll"
+        android:layout_above="@id/repoBoomLayout"
         android:layout_width="match_parent"
         android:layout_height="match_parent">
         <LinearLayout
@@ -531,46 +574,8 @@
                 </LinearLayout>
             </LinearLayout>
 
-            <LinearLayout
-                android:layout_width="match_parent"
-                android:layout_height="wrap_content"
-                android:layout_marginTop="@dimen/size10"
-                android:background="@color/white"
-                android:orientation="horizontal">
 
-                <TextView
-                    android:id="@+id/tv_chedan"
-                    android:layout_width="0dp"
-                    android:layout_height="match_parent"
-                    android:layout_weight="1"
-                    android:drawableLeft="@mipmap/icon_reverse_backorder"
-                    android:drawablePadding="@dimen/size5"
-                    android:gravity="center_vertical"
-                    android:paddingLeft="@dimen/size70"
-                    android:paddingTop="@dimen/size10"
-                    android:paddingBottom="@dimen/size10"
-                    android:text="撤单" />
-
-                <View
-                    android:layout_width="@dimen/size0.5"
-                    android:layout_height="match_parent"
-                    android:background="@color/lineColor"
-                    android:paddingBottom="@dimen/size8"
-                    android:paddingTop="@dimen/size8" />
-
-                <TextView
-                    android:id="@+id/tv_search"
-                    android:layout_width="0dp"
-                    android:layout_height="match_parent"
-                    android:layout_weight="1"
-                    android:drawableLeft="@mipmap/icon_reverse_search"
-                    android:drawablePadding="@dimen/size5"
-                    android:gravity="center_vertical"
-                    android:paddingLeft="@dimen/size70"
-                    android:text="查询" />
-            </LinearLayout>
         </LinearLayout>
     </ScrollView>
 
-
-</LinearLayout>
+</RelativeLayout>
