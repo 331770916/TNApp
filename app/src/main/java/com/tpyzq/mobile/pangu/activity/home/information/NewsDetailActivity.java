@@ -140,7 +140,6 @@ public class NewsDetailActivity extends BaseActivity implements View.OnClickList
     public void callResult(ResultInfo info) {
         dialog.dismiss();
         if(info.getCode().equals("200")){
-            mPullRefreshScrollView.setVisibility(View.VISIBLE);
             operation(info.getData());        //给   UI赋值
         }else{
             mPullRefreshScrollView.setVisibility(View.GONE);
@@ -157,6 +156,8 @@ public class NewsDetailActivity extends BaseActivity implements View.OnClickList
         if(data!=null&&data instanceof List){
             ArrayList<InformationEntity> mData = (ArrayList<InformationEntity>)data;
             if(mData.size()>0){
+                mPullRefreshScrollView.setVisibility(View.VISIBLE);
+
                 entity = mData.get(0);
                 //标题赋值
                 tvNewsTitle.setText(entity.getTitle());
@@ -176,8 +177,6 @@ public class NewsDetailActivity extends BaseActivity implements View.OnClickList
                 myWebView.removeJavascriptInterface("accessibilityTraversal");
                 myWebView.getSettings().setSavePassword(false);
                 reload();
-
-
                 /**
                  * 给行业标签赋值
                  */
@@ -216,6 +215,10 @@ public class NewsDetailActivity extends BaseActivity implements View.OnClickList
                     }
                 }else
                     this.findViewById(R.id.flagLayout).setVisibility(View.GONE);
+            }else {
+                llNewDetailJiaZai.setVisibility(View.VISIBLE);
+                mPullRefreshScrollView.setVisibility(View.GONE);
+
             }
         }
     }
