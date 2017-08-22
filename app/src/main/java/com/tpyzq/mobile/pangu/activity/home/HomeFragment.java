@@ -53,6 +53,7 @@ import com.tpyzq.mobile.pangu.util.ConstantUtil;
 import com.tpyzq.mobile.pangu.util.Helper;
 import com.tpyzq.mobile.pangu.util.SpUtils;
 import com.tpyzq.mobile.pangu.util.panguutil.BRutil;
+import com.tpyzq.mobile.pangu.view.gridview.HomeGridView;
 import com.tpyzq.mobile.pangu.view.gridview.MyGridView;
 import com.tpyzq.mobile.pangu.view.gridview.MyListView;
 import com.tpyzq.mobile.pangu.view.gridview.MyScrollView;
@@ -91,7 +92,7 @@ public class HomeFragment extends BaseFragment implements AdapterView.OnItemClic
     /**
      * 九宫格控件
      */
-    private MyGridView gridView;
+    private HomeGridView gridView;
     private HomeAdapter mGrideAdapter;
     private ArrayList<Map<String, Object>> mDataSourceList;
     /**
@@ -153,7 +154,7 @@ public class HomeFragment extends BaseFragment implements AdapterView.OnItemClic
         mMiddleImageView.setVisibility(View.VISIBLE);
 
 
-        gridView = (MyGridView) view.findViewById(R.id.homeGridView);
+        gridView = (HomeGridView) view.findViewById(R.id.homeGridView);
         mGrideAdapter = new HomeAdapter(true, getActivity());
         mOberservers.add(mGrideAdapter);
         gridView.setAdapter(mGrideAdapter);

@@ -94,7 +94,7 @@ public class SelfNewsAdapter extends BaseAdapter {
             tick = mDatas.get(position).getTick();
         }
 
-        viewHolder.newsFromTitle.setText(comp + "(" + tick + ")");
+        viewHolder.newsFromTitle.setText(comp + "(" + Helper.getStockNumber(tick) + ")");
         viewHolder.newsFromTime.setText(mDatas.get(position).getDate());
 
         String auth = "";

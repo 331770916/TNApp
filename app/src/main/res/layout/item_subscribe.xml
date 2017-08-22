@@ -28,6 +28,7 @@
                 android:id="@+id/tv_text5"
                 android:layout_width="wrap_content"
                 android:layout_height="wrap_content"
+                android:textSize="@dimen/txtSize12"
                 android:text="--天"
                 android:textColor="@color/orange2" />
 
@@ -37,6 +38,7 @@
                 android:layout_height="wrap_content"
                 android:layout_marginTop="@dimen/size5"
                 android:textColor="@color/text"
+                android:textSize="@dimen/txtSize12"
                 android:text="收益期限" />
         </LinearLayout>
 
@@ -53,6 +55,7 @@
                 android:id="@+id/tv_text6"
                 android:layout_width="wrap_content"
                 android:layout_height="wrap_content"
+                android:textSize="@dimen/txtSize12"
                 android:text="--元"
                 android:textColor="@color/orange2" />
 
@@ -60,6 +63,7 @@
                 android:layout_width="wrap_content"
                 android:layout_height="wrap_content"
                 android:layout_marginTop="@dimen/size5"
+                android:textSize="@dimen/txtSize12"
                 android:textColor="@color/text"
                 android:text="起投金额" />
         </LinearLayout>
@@ -71,6 +75,7 @@
             android:layout_alignParentBottom="true"
             android:layout_centerHorizontal="true"
             android:layout_marginBottom="@dimen/size20"
+            android:textSize="@dimen/txtSize12"
             android:gravity="center"
             android:text="--" />
 
@@ -86,6 +91,7 @@
                 android:layout_width="wrap_content"
                 android:layout_height="wrap_content"
                 android:textColor="@color/text"
+                android:textSize="@dimen/txtSize12"
                 android:text="--" />
 
             <TextView
@@ -102,6 +108,7 @@
                 android:layout_width="wrap_content"
                 android:layout_height="wrap_content"
                 android:layout_marginTop="@dimen/size5"
+                android:textSize="@dimen/txtSize12"
                 android:textColor="@color/text"
                 android:text="--" />
 
@@ -120,6 +127,7 @@
             android:text="--"
             android:gravity="center"
             android:layout_alignParentRight="true"
+            android:textSize="@dimen/txtSize12"
             android:layout_marginTop="@dimen/size20"
             android:textColor="@color/white" />
 
@@ -130,6 +138,7 @@
             android:layout_centerHorizontal="true"
             android:layout_marginTop="@dimen/size20"
             android:textColor="@color/text"
+            android:textSize="@dimen/txtSize12"
             android:text="发行时间: --"/>
         <TextView
             android:layout_width="wrap_content"
@@ -138,12 +147,15 @@
             android:layout_marginBottom="@dimen/size30"
             android:layout_alignParentBottom="true"
             android:layout_alignLeft="@+id/rcv_progress"
+            android:layout_marginLeft="@dimen/size10"
+            android:textSize="@dimen/txtSize12"
             android:textColor="@color/lineColor"/>
         <TextView
             android:layout_width="wrap_content"
             android:layout_height="wrap_content"
             android:text="20%"
             android:layout_marginBottom="@dimen/size30"
+            android:textSize="@dimen/txtSize12"
             android:layout_alignParentBottom="true"
             android:layout_alignRight="@+id/rcv_progress"
             android:textColor="@color/lineColor"/>
