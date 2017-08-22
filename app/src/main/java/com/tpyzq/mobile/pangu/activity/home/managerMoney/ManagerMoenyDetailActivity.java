@@ -4,6 +4,7 @@ import android.app.Dialog;
 import android.app.FragmentManager;
 import android.content.Intent;
 import android.text.TextUtils;
+import android.view.KeyEvent;
 import android.view.View;
 import android.widget.FrameLayout;
 import android.widget.LinearLayout;
@@ -19,6 +20,7 @@ import com.tpyzq.mobile.pangu.activity.myself.login.ShouJiVerificationActivity;
 import com.tpyzq.mobile.pangu.activity.myself.login.ShouJiZhuCeActivity;
 import com.tpyzq.mobile.pangu.activity.myself.login.TransactionLoginActivity;
 import com.tpyzq.mobile.pangu.activity.trade.open_fund.AddOrModFixFundActivity;
+import com.tpyzq.mobile.pangu.adapter.trade.TragetRecordItemAdapter;
 import com.tpyzq.mobile.pangu.base.BaseActivity;
 import com.tpyzq.mobile.pangu.base.SimpleRemoteControl;
 import com.tpyzq.mobile.pangu.data.CleverManamgerMoneyEntity;
@@ -92,6 +94,7 @@ public class ManagerMoenyDetailActivity extends BaseActivity implements View.OnC
     public static FragmentManager ManagerMoenyfragmentManager;
     private FundInoConnect mFundInoConnect = new FundInoConnect();
     private boolean isToLogin = false;
+    private Intent mIntent;
 
     @Override
     public void initView() {
@@ -127,6 +130,7 @@ public class ManagerMoenyDetailActivity extends BaseActivity implements View.OnC
 
 
         Intent intent = getIntent();
+        mIntent = intent;
 
         mPersent = intent.getStringExtra("prod_nhsy");
         schema_id = intent.getStringExtra("schema_id");
@@ -185,12 +189,13 @@ public class ManagerMoenyDetailActivity extends BaseActivity implements View.OnC
     @Override
     protected void onResume() {
         super.onResume();
-        if (!"3".equals(mProductType) && isToLogin) {
-            mLoadingDialog = LoadingDialog.initDialog(this, "正在加载");
-            mLoadingDialog.show();
-            mFundInoConnect.fundQueryConnect(mProductCode, "", "", 0, TAG, this);
-        }
+//        if (!"3".equals(mProductType) && isToLogin) {
+//            mLoadingDialog = LoadingDialog.initDialog(this, "正在加载");
+//            mLoadingDialog.show();
+//            mFundInoConnect.fundQueryConnect(mProductCode, "", "", 0, TAG, this);
+//        }
     }
+
 
     /**
      * 设置详情view的布局
@@ -426,6 +431,7 @@ public class ManagerMoenyDetailActivity extends BaseActivity implements View.OnC
             simpleRemoteControl.setCommand(new ToLoadPdfConnect(new LoadPdfConnect(TAG, "", prod_code, mProductType, mEntities)));
             simpleRemoteControl.startConnect();
         }
+
     }
 
     private void showDialog(String msg, boolean isShowClick) {
@@ -556,16 +562,22 @@ public class ManagerMoenyDetailActivity extends BaseActivity implements View.OnC
         }
 
         isToLogin = true;
-
+        mIntent.putExtra("pageindex",TransactionLoginActivity.PAGE_INDEX_ManagerMoenyDetailActivity);
         if (!Db_PUB_USERS.isRegister()) {
-            startActivity(new Intent(ManagerMoenyDetailActivity.this, ShouJiZhuCeActivity.class));
+            mIntent.setClass(ManagerMoenyDetailActivity.this, ShouJiZhuCeActivity.class);
+            startActivity(mIntent);
+            finish();
         } else {
             if (!TextUtils.isEmpty(UserUtil.Mobile)){
                 if (!Db_PUB_USERS.islogin()){
-                    startActivity(new Intent(ManagerMoenyDetailActivity.this, TransactionLoginActivity.class));
+                    mIntent.setClass(ManagerMoenyDetailActivity.this, TransactionLoginActivity.class);
+                    startActivity(mIntent);
+                    finish();
                 }
             }else {
-                startActivity(new Intent(ManagerMoenyDetailActivity.this, ShouJiVerificationActivity.class));
+                mIntent.setClass(ManagerMoenyDetailActivity.this, ShouJiVerificationActivity.class);
+                startActivity(mIntent);
+                finish();
             }
 
         }
