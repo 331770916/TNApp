@@ -91,12 +91,12 @@
         android:layout_height="wrap_content"
         android:layout_gravity="bottom"
         android:layout_above="@id/indexViewTip"
-        android:visibility="gone">
+        >
         <RelativeLayout
             android:layout_width="match_parent"
             android:layout_height="wrap_content"
             android:orientation="horizontal"
-            android:layout_marginTop="@dimen/size22"
+            android:layout_gravity="bottom"
             android:background="@mipmap/newstockremindbg">
             <ImageView
                 android:id="@+id/newstockclose"
@@ -156,6 +156,7 @@
             android:layout_width="wrap_content"
             android:layout_height="wrap_content"
             android:layout_marginLeft="@dimen/size10"
+            android:layout_marginBottom="@dimen/size4"
             android:background="@mipmap/newstockbg"/>
     </FrameLayout>
 </RelativeLayout>

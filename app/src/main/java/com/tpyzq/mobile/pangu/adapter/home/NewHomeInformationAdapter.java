@@ -2,6 +2,8 @@ package com.tpyzq.mobile.pangu.adapter.home;
 
 import android.app.Activity;
 import android.content.Context;
+import android.content.Intent;
+import android.text.TextUtils;
 import android.view.LayoutInflater;
 import android.view.View;
 import android.view.ViewGroup;
@@ -9,6 +11,7 @@ import android.widget.BaseAdapter;
 import android.widget.TextView;
 import com.facebook.drawee.view.SimpleDraweeView;
 import com.tpyzq.mobile.pangu.R;
+import com.tpyzq.mobile.pangu.activity.home.information.NewsDetailActivity;
 import com.tpyzq.mobile.pangu.base.CustomApplication;
 import com.tpyzq.mobile.pangu.data.InformationEntity;
 import com.tpyzq.mobile.pangu.util.Helper;
@@ -70,8 +73,16 @@ public class NewHomeInformationAdapter extends BaseAdapter{
         }
         final InformationEntity info = mDatas.get(position);
         viewHolder.image.setImageURI(info.getImage_url());
-        viewHolder.title.setText(info.getTitle()+" | "+info.getDigest());
+        viewHolder.title.setText(info.getTitle());
         viewHolder.time.setText(info.getTime());
+        convertView.setOnClickListener(new View.OnClickListener() {
+            @Override
+            public void onClick(View v) {
+                Intent intent = new Intent(context, NewsDetailActivity.class);
+                intent.putExtra("requestId", info.getNewsno());
+                context.startActivity(intent);
+            }
+        });
         return convertView;
     }
 

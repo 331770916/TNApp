@@ -94,16 +94,6 @@ public class HotPintsPager extends BasePager implements View.OnClickListener,Int
         });
         mListViewAdapter = new NewHomeInformationAdapter(mContext);            //实例化 ListView 适配器
         refreshListView.setAdapter(mListViewAdapter);                                  //适配
-        // 给热点公告解析列表添加   item 的点击事件
-        refreshListView.setOnItemClickListener(new AdapterView.OnItemClickListener() {
-            @Override
-            public void onItemClick(AdapterView<?> parent, View view, int position, long id) {
-                Intent intent = new Intent(mContext, NewsDetailActivity.class);
-                if (!TextUtils.isEmpty(leve1.get(position).getNewsno()))
-                    intent.putExtra("requestId", leve1.get(position).getNewsno());
-                mContext.startActivity(intent);
-            }
-        });
         adapter = new AutoSwitchAdapter(mContext);
         loopView.setAdapter(adapter);
     }

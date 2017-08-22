@@ -6,7 +6,6 @@ import android.graphics.Color;
 import android.graphics.Paint;
 import android.util.AttributeSet;
 import android.util.DisplayMetrics;
-import android.util.Log;
 import android.view.View;
 
 import com.tpyzq.mobile.pangu.log.LogUtil;
@@ -150,7 +149,6 @@ public class PageShowView extends View {
                         posX += height * 3 + width;
                         break;
                     case 1:
-                        LogUtil.i("posX="+posX+"  startY"+view_height+"  stopX="+(posX + width)+"  stopY"+view_height);
                         canvas.drawLine(posX, view_height / 2 , posX + width, view_height/2 , mPaint);
                         posX += ViewMargin + width;
                         break;
