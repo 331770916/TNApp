@@ -46,11 +46,12 @@
         </RelativeLayout>
 
         <TextView
+            android:paddingRight="@dimen/size30"
             android:id="@+id/homeItemHotRift"
             android:layout_width="0dp"
             android:layout_weight="1"
             android:layout_height="match_parent"
-            android:gravity="center"
+            android:gravity="center|end"
             android:text="-"
             android:textSize="@dimen/self_stockNumberPrice"/>
 

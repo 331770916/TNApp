@@ -22,12 +22,13 @@
             android:id="@+id/textView27" />
 
         <TextView
+            android:paddingRight="@dimen/size30"
             android:layout_width="0dp"
             android:layout_weight="1"
             android:layout_height="wrap_content"
             android:textColor="@color/newStockTitle"
             android:textSize="14sp"
-            android:gravity="center"
+            android:gravity="center|end"
             android:text="涨跌幅"/>
 
         <TextView
