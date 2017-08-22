@@ -5,7 +5,9 @@ import android.view.Gravity;
 import android.view.LayoutInflater;
 import android.view.View;
 import android.view.ViewGroup;
+import android.widget.ImageView;
 import android.widget.LinearLayout;
+import android.widget.TextView;
 
 import com.tpyzq.mobile.pangu.R;
 import com.tpyzq.mobile.pangu.view.pulllayou.base.AnimationCallback;
@@ -23,9 +25,9 @@ public class FooterView extends LinearLayout implements ILoadFooter {
 
     private static final String TAG = "Mr.su";
 
-//    private final ImageView ivArrow;
+    private final ImageView ivArrow;
 
-//    private final TextView mTextViewTip;
+    private final TextView mTextViewTip;
 
     private final FooterAnimDrawable mAnimDrawable;
 
@@ -52,15 +54,15 @@ public class FooterView extends LinearLayout implements ILoadFooter {
         super(context);
         setOrientation(HORIZONTAL);
         setGravity(Gravity.CENTER);
-//        LayoutInflater.from(context).inflate(R.layout.lay_refresh_footer, this);      //自带的布局
-        LayoutInflater.from(context).inflate(R.layout.lay_water_bottom_view, this);     //更改的布局
+        LayoutInflater.from(context).inflate(R.layout.lay_refresh_footer, this);      //自带的布局
+//        LayoutInflater.from(context).inflate(R.layout.lay_water_bottom_view, this);     //更改的布局
 
         criticalDistance *= getResources().getDisplayMetrics().density;
 
-//        ivArrow = (ImageView) findViewById(R.id.iv_arrow);
+        ivArrow = (ImageView) findViewById(R.id.iv_arrow);
         mAnimDrawable = new FooterAnimDrawable();
-//        ivArrow.setImageDrawable(mAnimDrawable);
-//        mTextViewTip = (TextView) findViewById(R.id.tv_tip);
+        ivArrow.setImageDrawable(mAnimDrawable);
+        mTextViewTip = (TextView) findViewById(R.id.tv_tip);
 
         reset();
     }
@@ -72,11 +74,11 @@ public class FooterView extends LinearLayout implements ILoadFooter {
         if (rate >= maxRate && !mPreLoading) {
             mAnimDrawable.arrowDown();
             mPreLoading = true;
-//            mTextViewTip.setText(R.string.release_to_loading);
+            mTextViewTip.setText(R.string.release_to_loading);
         } else if (rate < maxRate && mPreLoading) {
             mAnimDrawable.arrowUp();
             mPreLoading = false;
-//            mTextViewTip.setText(R.string.up_to_loading);
+            mTextViewTip.setText(R.string.up_to_loading);
         }
     }
 
@@ -88,7 +90,7 @@ public class FooterView extends LinearLayout implements ILoadFooter {
     public void loading() {
         isLoading = true;
         mAnimDrawable.rotating();
-//        mTextViewTip.setText(R.string.loading);
+        mTextViewTip.setText(R.string.loading);
 
         pullLayout.pullUpCallback();
     }
@@ -115,7 +117,7 @@ public class FooterView extends LinearLayout implements ILoadFooter {
         clearAnimation();
         isLoading = false;
         mAnimDrawable.showArrow();
-//        mTextViewTip.setText("上拉加载");
+        mTextViewTip.setText("上拉加载");
     }
 
     @Override

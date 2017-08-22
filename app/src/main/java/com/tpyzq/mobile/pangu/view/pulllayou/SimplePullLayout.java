@@ -4,7 +4,6 @@ import android.content.Context;
 import android.content.res.TypedArray;
 import android.graphics.Color;
 import android.util.AttributeSet;
-import android.view.ViewGroup;
 
 import com.tpyzq.mobile.pangu.R;
 import com.tpyzq.mobile.pangu.view.pulllayou.base.BasePullLayout;
@@ -43,7 +42,7 @@ public class SimplePullLayout extends BasePullLayout {
         footer.setIndicatorArrowColorColor(indicatorArrowColor);
         footer.setLoadStartColor(loadStartColor);
         footer.setLoadEndColor(loadEndColor);
-        footer.setLayoutParams(new ViewGroup.LayoutParams(-1, -2));
+        footer.setLayoutParams(new LayoutParams(-1, -2));
         attachFooterView(footer);
     }
 }
