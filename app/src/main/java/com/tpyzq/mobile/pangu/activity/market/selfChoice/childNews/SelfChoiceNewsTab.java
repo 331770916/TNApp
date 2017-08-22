@@ -208,7 +208,7 @@ public class SelfChoiceNewsTab extends BaseTabPager implements
         }
 
         if(entities != null && entities.size() > 0){
-            if(mPagerNum == 0){
+            if(mPagerNum == 1){
                 Db_HOME_INFO.deleteAllSelfNewsDatas();
                 Db_HOME_INFO.addStockListDatas(entities);
                 mEntities.clear();
@@ -232,7 +232,7 @@ public class SelfChoiceNewsTab extends BaseTabPager implements
     public void onClick(View v) {
         switch (v.getId()) {
             case R.id.stockNewsLayout:
-                requestSelfChoiceNews("0");
+                requestSelfChoiceNews("1");
                 break;
         }
     }
