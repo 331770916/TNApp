@@ -14,7 +14,6 @@ import android.view.LayoutInflater;
 import android.view.View;
 import android.view.ViewGroup;
 import android.widget.BaseAdapter;
-import android.widget.LinearLayout;
 import android.widget.TextView;
 
 import com.tpyzq.mobile.pangu.R;
@@ -81,7 +80,12 @@ public class FundInfoAdapter extends BaseAdapter {
             viewHodler.mDetailTv = (TextView) convertView.findViewById(R.id.tv_detail);
             viewHodler.mFundVal = (TextView) convertView.findViewById(R.id.tv_fund_val);
             viewHodler.mOpenShare = (TextView) convertView.findViewById(R.id.tv_open_share);
-            viewHodler.mDiscrbLayout = (LinearLayout) convertView.findViewById(R.id.ll_disrib);
+
+            viewHodler.mDsiribcompany = (TextView) convertView.findViewById(R.id.tv_dsiribcompany);
+            viewHodler.mDsiritype = (TextView) convertView.findViewById(R.id.tv_dsiritype);
+            viewHodler.mDsiriblevel = (TextView) convertView.findViewById(R.id.tv_dsiriblevel);
+            viewHodler.mDsiribstatus = (TextView) convertView.findViewById(R.id.tv_dsiribstatus);
+
             convertView.setTag(viewHodler);
         } else {
             viewHodler = (ViewHodler) convertView.getTag();
@@ -106,7 +110,36 @@ public class FundInfoAdapter extends BaseAdapter {
 
         initVal(position, viewHodler.mFundVal);
         initOpenShare(position, viewHodler.mOpenShare);
-        initDiscriblayout(position, viewHodler.mDiscrbLayout);
+
+        String company = mEntitys.get(position).FUND_COMPANY_NAME;
+        String type = mEntitys.get(position).OFUND_TYPE;
+        String level = mEntitys.get(position).OFUND_RISKLEVEL_NAME;
+        String status = mEntitys.get(position).FUND_STATUS_NAME;
+
+        if (!TextUtils.isEmpty(company)) {
+            viewHodler.mDsiribcompany.setText(company);
+        } else {
+            viewHodler.mDsiribcompany.setVisibility(View.GONE);
+        }
+
+        if (!TextUtils.isEmpty(company)) {
+            viewHodler.mDsiritype.setText(type);
+        } else {
+            viewHodler.mDsiritype.setVisibility(View.GONE);
+        }
+
+        if (!TextUtils.isEmpty(company)) {
+            viewHodler.mDsiriblevel.setText(level);
+        } else {
+            viewHodler.mDsiriblevel.setVisibility(View.GONE);
+        }
+
+        if (!TextUtils.isEmpty(company)) {
+            viewHodler.mDsiribstatus.setText(status);
+        } else {
+            viewHodler.mDsiribstatus.setVisibility(View.GONE);
+        }
+
         return convertView;
     }
 
@@ -165,58 +198,6 @@ public class FundInfoAdapter extends BaseAdapter {
         textView.setText(opensharess);
     }
 
-    private void initDiscriblayout(int position, LinearLayout layout) {
-        layout.removeAllViews();
-        String company = mEntitys.get(position).FUND_COMPANY_NAME;
-        String type = mEntitys.get(position).OFUND_TYPE;
-        String level = mEntitys.get(position).OFUND_RISKLEVEL_NAME;
-        String status = mEntitys.get(position).FUND_STATUS_NAME;
-
-        LinearLayout.LayoutParams layoutParams = new LinearLayout.LayoutParams(ViewGroup.LayoutParams.WRAP_CONTENT, ViewGroup.LayoutParams.WRAP_CONTENT);
-        int margin = Helper.dip2px(mContext, 3);
-        layoutParams.setMargins(0, 0, margin, 0);
-
-        if (!TextUtils.isEmpty(company)) {
-            TextView textView = new TextView(mContext);
-            textView.setTextColor(ContextCompat.getColor(mContext, R.color.texts));
-            textView.setTextSize(10);
-            textView.setBackgroundResource(R.drawable.bg_tv_fundinfo);
-            textView.setText(company);
-            textView.setLayoutParams(layoutParams);
-            layout.addView(textView);
-        }
-
-        if (!TextUtils.isEmpty(type)) {
-            TextView textView = new TextView(mContext);
-            textView.setTextColor(ContextCompat.getColor(mContext, R.color.texts));
-            textView.setTextSize(10);
-            textView.setBackgroundResource(R.drawable.bg_tv_fundinfo);
-            textView.setText(type);
-            textView.setLayoutParams(layoutParams);
-            layout.addView(textView);
-        }
-
-        if (!TextUtils.isEmpty(level)) {
-            TextView textView = new TextView(mContext);
-            textView.setTextColor(ContextCompat.getColor(mContext, R.color.texts));
-            textView.setBackgroundResource(R.drawable.bg_tv_fundinfo);
-            textView.setTextSize(10);
-            textView.setText(level);
-            textView.setLayoutParams(layoutParams);
-            layout.addView(textView);
-        }
-
-        if (!TextUtils.isEmpty(status)) {
-            TextView textView = new TextView(mContext);
-            textView.setTextColor(ContextCompat.getColor(mContext, R.color.texts));
-            textView.setBackgroundResource(R.drawable.bg_tv_fundinfo);
-            textView.setTextSize(10);
-            textView.setText(status);
-            textView.setLayoutParams(layoutParams);
-            layout.addView(textView);
-        }
-
-    }
 
     private String setString(String str) {
         String temStr = "";
@@ -256,7 +237,10 @@ public class FundInfoAdapter extends BaseAdapter {
         TextView mDetailTv;
         TextView mFundVal;
         TextView mOpenShare;
-        LinearLayout mDiscrbLayout;
+        TextView mDsiribcompany;
+        TextView mDsiritype;
+        TextView mDsiriblevel;
+        TextView mDsiribstatus;
 
     }
 
