@@ -412,10 +412,13 @@ public class HuShenAdapter extends BaseAdapter {
             if (null==model)return;
             if ("10000001".equals(model.getStockNumber())) {
                 modelshang = model;
+                modelshang.setStockName("上证指数");
             } else if ("20399001".equals(model.getStockNumber())) {
                 modelshen = model;
+                modelshen.setStockName("深证指数");
             } else if ("20399006".equals(model.getStockNumber())) {
                 modelchuang = model;
+                modelchuang.setStockName("创业指数");
             }
         }
         //清除数据
@@ -497,6 +500,7 @@ public class HuShenAdapter extends BaseAdapter {
                         } else {
                             textViews[i - 1].setText("--");
                             textViews[i].setText("--");
+                            rl_top[num].setBackgroundResource(R.drawable.shape_item_gray);
 //                            rls[num].setBackgroundColor(ContextCompat.getColor(CustomApplication.getContext(), R.color.hushenTab_titleColor));
                         }
 
@@ -505,6 +509,7 @@ public class HuShenAdapter extends BaseAdapter {
                         textViews[i - 1].setText("--");
                         textViews[i].setText("--");
 //                        rls[num].setBackgroundColor(ContextCompat.getColor(CustomApplication.getContext(), R.color.hushenTab_titleColor));
+                        rl_top[num].setBackgroundResource(R.drawable.shape_item_gray);
                     }
 
                     num++;
