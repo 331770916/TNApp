@@ -45,9 +45,9 @@ public class TabOther   extends BaseTabPager implements OtherAdapter2.OnItemClic
                 R.mipmap.more_sza,
                 R.mipmap.more_zxb,
                 R.mipmap.more_startabusiness,
-                R.mipmap.tuishizhengli,
-                R.mipmap.fengxianjingshi};
-        String [] disribs = {"沪深A股", "沪深B股", "沪深基金", "沪深债券", "深证A股", "上证A股", "中小板", "创业板", "退市整理", "风险警示"};
+                R.mipmap.fengxianjingshi,
+                R.mipmap.tuishizhengli};
+        String [] disribs = {"沪深A股", "沪深B股", "沪深基金", "沪深债券", "深证A股", "上证A股", "中小板", "创业板", "风险警示", "退市整理"};
 
         for (int i = 0 ; i < disribs.length; i++) {
             HashMap<String, Object> itemHashMap  = new HashMap<String, Object>();
@@ -118,17 +118,17 @@ public class TabOther   extends BaseTabPager implements OtherAdapter2.OnItemClic
             intent.putExtra("type", "6");
             intent.putExtra("isPlateList", true);
         } else if (position == 8) {
-            data.setTitle("退市整理");
-            data.setHead2("现价");
-            data.setHead3("涨跌幅");
-            intent.putExtra("isRiskBackMarket", true);
-            intent.putExtra("type", "2");
-        } else if (position == 9) {
             data.setTitle("风险警示");
             data.setHead2("现价");
             data.setHead3("涨跌幅");
             intent.putExtra("isRiskBackMarket", true);
             intent.putExtra("type", "1");
+        } else if (position == 9) {
+            data.setTitle("退市整理");
+            data.setHead2("现价");
+            data.setHead3("涨跌幅");
+            intent.putExtra("isRiskBackMarket", true);
+            intent.putExtra("type", "2");
         }
 
         intent.putExtra("flag", "1");
