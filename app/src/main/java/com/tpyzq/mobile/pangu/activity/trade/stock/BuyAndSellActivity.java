@@ -298,8 +298,8 @@ public class BuyAndSellActivity extends BaseActivity implements View.OnClickList
                 }
             }
         });
-//        et_price.setEnabled(false);
-//        et_num.setEnabled(false);
+        et_price.setEnabled(false);
+        et_num.setEnabled(false);
         iv_depute_way.setClickable(false);
         iv_add_price.setClickable(false);
         iv_sub_price.setClickable(false);
@@ -690,11 +690,6 @@ public class BuyAndSellActivity extends BaseActivity implements View.OnClickList
                                 bt_sell.setText("卖(" + string2doubleS(result1 + "") + ")");
                             }
                         }
-
-                        iv_add_sum.setClickable(true);
-                        iv_sub_sum.setClickable(true);
-                        iv_add_price.setClickable(true);
-                        iv_sub_price.setClickable(true);
 //                        et_num.setEnabled(true);
                     } else if ("-6".equals(code)){
                         startActivity(new Intent(BuyAndSellActivity.this, TransactionLoginActivity.class));
@@ -807,15 +802,21 @@ public class BuyAndSellActivity extends BaseActivity implements View.OnClickList
         @Override
         public void afterTextChanged(Editable s) {
             String code = s.toString().trim();
-            if (code.length() == 6){
+            if (code.length() >= 6){
                 iv_sub_price.setClickable(true);
                 iv_add_price.setClickable(true);
                 et_price.setEnabled(true);
+                iv_sub_sum.setClickable(true);
+                iv_add_sum.setClickable(true);
+                et_num.setEnabled(true);
             } else {
                 if (TextUtils.isEmpty(stockCode)) {
                     iv_sub_price.setClickable(false);
                     iv_add_price.setClickable(false);
                     et_price.setEnabled(false);
+                    iv_sub_sum.setClickable(false);
+                    iv_add_sum.setClickable(false);
+                    et_num.setEnabled(false);
                 }
             }
             if (TextUtils.isEmpty(code) || code.length() == 0){
@@ -868,10 +869,6 @@ public class BuyAndSellActivity extends BaseActivity implements View.OnClickList
 //        iv_depute_way.setBackgroundResource(R.mipmap.icon_entrust_way);
 //        et_price.setEnabled(false);
 //        et_num.setEnabled(false);
-        iv_add_price.setClickable(false);
-        iv_sub_price.setClickable(false);
-        iv_add_sum.setClickable(false);
-        iv_sub_sum.setClickable(false);
 //        bt_buy.setClickable(false);
 //        bt_sell.setClickable(false);
         entrusttype = "0";
@@ -912,13 +909,13 @@ public class BuyAndSellActivity extends BaseActivity implements View.OnClickList
         public void afterTextChanged(Editable s) {
             String numString = s.toString();
 
-            if (!TextUtils.isEmpty(stockCode)||et_price.getText().toString().trim().length()==6) {
+            /*if (!TextUtils.isEmpty(stockCode)||et_price.getText().toString().trim().length()==6) {
                 iv_add_sum.setClickable(true);
                 iv_sub_sum.setClickable(true);
             } else {
                 iv_add_sum.setClickable(false);
                 iv_sub_sum.setClickable(false);
-            }
+            }*/
             if (TextUtils.isEmpty(numString)) {
                 bt_buy.setText("买");
                 bt_sell.setText("卖");
@@ -974,13 +971,7 @@ public class BuyAndSellActivity extends BaseActivity implements View.OnClickList
         @Override
         public void afterTextChanged(Editable s) {
             String numString = s.toString();
-            iv_add_price.setClickable(false);
-            iv_sub_price.setClickable(false);
             if (Helper.isDecimal(numString)) {
-                if (!TextUtils.isEmpty(stockCode)||et_stock_code.getText().toString().trim().length()==6) {
-                    iv_add_price.setClickable(true);
-                    iv_sub_price.setClickable(true);
-                }
                 if (TextUtils.isEmpty(numString) || "0.0".equals(numString) || ".".equals(numString) || "- -".equals(numString)) {
                     price = 0;
                 } else {
@@ -1138,7 +1129,16 @@ public class BuyAndSellActivity extends BaseActivity implements View.OnClickList
                 break;
             case R.id.iv_sub_sum:
                 String tvSubText = tv_sum.getText().toString();
-                if (!TextUtils.isEmpty(tvSubText) && Helper.isDecimal(tvSubText)) {
+                if (TextUtils.isEmpty(tvSubText)||"0.0".equalsIgnoreCase(tvSubText)||"0".equalsIgnoreCase(tvSubText)||"0.00".equalsIgnoreCase(tvSubText)) {
+                    amount = 0;
+                }
+                amount -= 100;
+                if (amount < 0){
+                    break;
+                }
+                et_num.setText(amount + "");
+                et_num.setSelection(et_num.getText().length());
+                /*if (!TextUtils.isEmpty(tvSubText) && Helper.isDecimal(tvSubText)) {
                     amount -= 100;
                     if (amount < 0){
                         break;
@@ -1151,11 +1151,17 @@ public class BuyAndSellActivity extends BaseActivity implements View.OnClickList
                     }else if(rb_sell.isChecked()){
                         CentreToast.showText(this,"请确认可买数量为有效数值",Toast.LENGTH_SHORT);
                     }
-                }
+                }*/
                 break;
             case R.id.iv_add_sum:
                 String tvSumText = tv_sum.getText().toString();
-                if (!TextUtils.isEmpty(tvSumText) && Helper.isDecimal(tvSumText)) {
+                if (TextUtils.isEmpty(tvSumText)||"0.0".equalsIgnoreCase(tvSumText)||"0".equalsIgnoreCase(tvSumText)||"0.00".equalsIgnoreCase(tvSumText)) {
+                    amount = 0;
+                }
+                amount += 100;
+                et_num.setText(amount + "");
+                et_num.setSelection(et_num.getText().length());
+                /*if (!TextUtils.isEmpty(tvSumText) && Helper.isDecimal(tvSumText)) {
                     amount += 100;
                     et_num.setText(amount + "");
                     et_num.setSelection(et_num.getText().length());
@@ -1165,7 +1171,7 @@ public class BuyAndSellActivity extends BaseActivity implements View.OnClickList
                     }else if(rb_sell.isChecked()){
                         CentreToast.showText(this,"请确认可买数量为有效数值",Toast.LENGTH_SHORT);
                     }
-                }
+                }*/
                 break;
             case R.id.publish_detail_back:
                 finish();

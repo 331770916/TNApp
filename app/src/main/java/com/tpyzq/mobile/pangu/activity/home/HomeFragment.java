@@ -5,12 +5,15 @@ import android.graphics.Bitmap;
 import android.graphics.Color;
 import android.graphics.drawable.Drawable;
 import android.net.Uri;
+import android.os.Build;
 import android.os.Handler;
 import android.support.v4.content.ContextCompat;
 import android.text.TextUtils;
 import android.util.ArrayMap;
 import android.view.LayoutInflater;
 import android.view.View;
+import android.view.Window;
+import android.view.WindowManager;
 import android.widget.AbsListView;
 import android.widget.AdapterView;
 import android.widget.ImageView;
@@ -408,14 +411,24 @@ public class HomeFragment extends BaseFragment implements AdapterView.OnItemClic
             float scale = (float) scrollY / topLayotpx;
             float alpha = (255 * scale);
             // 只是layout背景透明(仿知乎滑动效果)
-            mTopTextView.setBackgroundColor(Color.argb((int) alpha, 28, 134, 238));
+//            mTopTextView.setBackgroundColor(Color.argb((int) alpha, 28, 134, 238));
+            mTopTextView.setBackgroundColor(ContextCompat.getColor(CustomApplication.getContext(), R.color.translucent));
         } else if (scrollY > topLayotpx) {
-            mTopTextView.setBackgroundColor(ContextCompat.getColor(CustomApplication.getContext(), R.color.blue));
-            mTopTextView.setText("太牛");
+            if (Build.VERSION.SDK_INT > Build.VERSION_CODES.LOLLIPOP_MR1) {//大于5.0
+                // Translucent status bar
+                mTopTextView.setBackgroundColor(ContextCompat.getColor(CustomApplication.getContext(), R.color.white));
+            } else {
+                mTopTextView.setBackgroundColor(ContextCompat.getColor(CustomApplication.getContext(), R.color.textss));
+            }
+//            mTopTextView.setText("太牛");
+            mTopTextView.setText("");
         } else {
             mTopTextView.setBackgroundColor(ContextCompat.getColor(CustomApplication.getContext(), android.R.color.transparent));
             mTopTextView.setText("");
         }
+        /*getActivity().getWindow().setStatusBarColor(Color.TRANSPARENT); // 透明
+        getActivity().getWindow().setStatusBarColor(Color.BLACK); // 黑色
+        getActivity().getWindow().setStatusBarColor(Color.YELLOW); // 黄色*/
     }
 
     public void setJumPageListener(JumpPageListener listener) {
