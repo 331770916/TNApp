@@ -1354,12 +1354,13 @@ public class BuyAndSellActivity extends BaseActivity implements View.OnClickList
      * @param price
      */
     private void getBuy(String code, String price, String num) {
-        HashMap map300140 = new HashMap();
-        map300140.put("funcid", "300140");
-        map300140.put("token", SpUtils.getString(this, "mSession", null));
-        map300140.put("secret",  UserUtil.Keyboard);
-        HashMap map300140_1 = new HashMap();
-        map300140_1.put("SEC_ID", encryptBySessionKey("tpyzq"));
+        try {
+            HashMap map300140 = new HashMap();
+            map300140.put("funcid", "300140");
+            map300140.put("token", SpUtils.getString(this, "mSession", null));
+            map300140.put("secret",  UserUtil.Keyboard);
+            HashMap map300140_1 = new HashMap();
+            map300140_1.put("SEC_ID", encryptBySessionKey("tpyzq"));
         /*String market_code = "";
         if (code.startsWith("2")) {
             market_code = "2";
@@ -1367,53 +1368,56 @@ public class BuyAndSellActivity extends BaseActivity implements View.OnClickList
             market_code = "1";
         }
         map300140_1.put("MARKET", encryptBySessionKey(market_code));*/
-        if (TextUtils.isEmpty(MARKET)) {
-            map300140_1.put("MARKET", encryptBySessionKey("1"));
-        } else {
-            map300140_1.put("MARKET", encryptBySessionKey(MARKET));
-        }
-
-        map300140_1.put("TRD_ID", encryptBySessionKey("1"));
-        if (TextUtils.isEmpty(secc_code)) {
-            secc_code = "";
-        }
-        map300140_1.put("SECU_ACCOUNT", encryptBySessionKey(secc_code));
-        map300140_1.put("SECU_CODE", encryptBySessionKey(code));
-        map300140_1.put("ORDER_PRICE", encryptBySessionKey(price));
-        map300140_1.put("ORDER_QTY", encryptBySessionKey(num));
-        map300140_1.put("ENTRUST_PROP", encryptBySessionKey(entrusttype));
-        map300140_1.put("FLAG", encryptBySessionKey("true"));
-        map300140.put("parms", map300140_1);
-        NetWorkUtil.getInstence().okHttpForPostString("", ConstantUtil.getURL_JY_HS(), map300140, new StringCallback() {
-            @Override
-            public void onError(Call call, Exception e, int id) {
-                CentreToast.showText(BuyAndSellActivity.this,ConstantUtil.NETWORK_ERROR);
+            if (TextUtils.isEmpty(MARKET)) {
+                map300140_1.put("MARKET", encryptBySessionKey("1"));
+            } else {
+                map300140_1.put("MARKET", encryptBySessionKey(MARKET));
             }
 
-            @Override
-            public void onResponse(String response, int id) {
-                if (TextUtils.isEmpty(response)) {
-                    return;
+            map300140_1.put("TRD_ID", encryptBySessionKey("1"));
+            if (TextUtils.isEmpty(secc_code)) {
+                secc_code = "";
+            }
+            map300140_1.put("SECU_ACCOUNT", encryptBySessionKey(secc_code));
+            map300140_1.put("SECU_CODE", encryptBySessionKey(code));
+            map300140_1.put("ORDER_PRICE", encryptBySessionKey(price));
+            map300140_1.put("ORDER_QTY", encryptBySessionKey(num));
+            map300140_1.put("ENTRUST_PROP", encryptBySessionKey(entrusttype));
+            map300140_1.put("FLAG", encryptBySessionKey("true"));
+            map300140.put("parms", map300140_1);
+            NetWorkUtil.getInstence().okHttpForPostString("", ConstantUtil.getURL_JY_HS(), map300140, new StringCallback() {
+                @Override
+                public void onError(Call call, Exception e, int id) {
+                    CentreToast.showText(BuyAndSellActivity.this,ConstantUtil.NETWORK_ERROR);
                 }
-                try {
-                    JSONObject jsonObject = new JSONObject(response);
-                    String code = jsonObject.getString("code");
-                    String msg = jsonObject.getString("msg");
-                    String data = jsonObject.getString("data");
-                    if ("0".equals(code)) {
-                        clearView(true);
-                        CentreToast.showText(BuyAndSellActivity.this,"委托已提交",true);
-                    }else if ("-6".equals(code)){
-                        startActivity(new Intent(BuyAndSellActivity.this, TransactionLoginActivity.class));
-                        finish();
-                    }  else {
-                        showDialog(msg);
+
+                @Override
+                public void onResponse(String response, int id) {
+                    if (TextUtils.isEmpty(response)) {
+                        return;
                     }
-                } catch (JSONException e) {
-                    e.printStackTrace();
+                    try {
+                        JSONObject jsonObject = new JSONObject(response);
+                        String code = jsonObject.getString("code");
+                        String msg = jsonObject.getString("msg");
+                        String data = jsonObject.getString("data");
+                        if ("0".equals(code)) {
+                            clearView(true);
+                            CentreToast.showText(BuyAndSellActivity.this,"委托已提交",true);
+                        }else if ("-6".equals(code)){
+                            startActivity(new Intent(BuyAndSellActivity.this, TransactionLoginActivity.class));
+                            finish();
+                        }  else {
+                            showDialog(msg);
+                        }
+                    } catch (JSONException e) {
+                        e.printStackTrace();
+                    }
                 }
-            }
-        });
+            });
+        } catch (Exception e) {
+            e.printStackTrace();
+        }
     }
 
     /**

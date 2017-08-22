@@ -17,9 +17,6 @@ import android.support.annotation.Nullable;
 import android.support.v4.app.ActivityCompat;
 import android.support.v4.content.ContextCompat;
 import android.support.v7.app.AppCompatActivity;
-import android.text.TextUtils;
-import android.util.Log;
-import android.view.Gravity;
 import android.view.View;
 import android.view.ViewGroup;
 import android.view.Window;
@@ -34,8 +31,6 @@ import com.android.keyboardlibrary.KeyboardUtil;
 import com.tpyzq.mobile.pangu.R;
 import com.tpyzq.mobile.pangu.http.NetWorkUtil;
 import com.tpyzq.mobile.pangu.http.OkHttpUtil;
-import com.tpyzq.mobile.pangu.http.doConnect.detail.GetSearchStockConnect;
-import com.tpyzq.mobile.pangu.http.doConnect.detail.ToGetSearchStockConnect;
 import com.tpyzq.mobile.pangu.http.manager.NetworkManager;
 import com.tpyzq.mobile.pangu.util.panguutil.SkipUtils;
 
@@ -153,10 +148,14 @@ public abstract class BaseActivity extends AppCompatActivity {
     public abstract int getLayoutId();
     @Override
     public Resources getResources() {
-        Resources res = super.getResources();
-        Configuration config=new Configuration();
-        config.setToDefaults();
-        res.updateConfiguration(config,res.getDisplayMetrics() );
+        Resources res =  super.getResources();
+        try {
+            Configuration config=new Configuration();
+            config.setToDefaults();
+            res.updateConfiguration(config,res.getDisplayMetrics() );
+        } catch (Exception e) {
+            e.printStackTrace();
+        }
         return res;
     }
 

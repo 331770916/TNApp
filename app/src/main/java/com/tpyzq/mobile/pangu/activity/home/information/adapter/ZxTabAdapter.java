@@ -55,23 +55,28 @@ public class ZxTabAdapter extends BaseAdapter {
     @Override
     public View getView(int position, View convertView, ViewGroup parent) {
 
-        ViewHolder viewHolder;
-        if(convertView == null){
-            viewHolder = new ViewHolder();
-            convertView = LayoutInflater.from(context).inflate(R.layout.item_tab_zixun,null);
-            viewHolder.tvTabTitle = (TextView) convertView.findViewById(R.id.tvTabTitle);
-            viewHolder.tvTabDate = (TextView) convertView.findViewById(R.id.tvTabDate);
-            viewHolder.tvTabRelateStock = (TextView) convertView.findViewById(R.id.tvTabRelateStock);
-            viewHolder.rlTabRelate = (RelativeLayout) convertView.findViewById(R.id.rlTabRelate);
-            convertView.setTag(viewHolder);
-        }else {
-            viewHolder = (ViewHolder) convertView.getTag();
+        try {
+            ViewHolder viewHolder;
+            if(convertView == null){
+                viewHolder = new ViewHolder();
+                convertView = LayoutInflater.from(context).inflate(R.layout.item_tab_zixun,null);
+                viewHolder.tvTabTitle = (TextView) convertView.findViewById(R.id.tvTabTitle);
+                viewHolder.tvTabDate = (TextView) convertView.findViewById(R.id.tvTabDate);
+                viewHolder.tvTabRelateStock = (TextView) convertView.findViewById(R.id.tvTabRelateStock);
+                viewHolder.rlTabRelate = (RelativeLayout) convertView.findViewById(R.id.rlTabRelate);
+                convertView.setTag(viewHolder);
+            }else {
+                viewHolder = (ViewHolder) convertView.getTag();
+            }
+            if (position<list.size()){
+                InformationEntity      informationBean = list.get(position);
+                viewHolder.tvTabTitle.setText(informationBean.getTitle());
+                String time = informationBean.getTime();
+                viewHolder.tvTabDate.setText(time.length()==19?time.substring(0,time.length()-3):time);
+            }
+        } catch (Exception e) {
+            e.printStackTrace();
         }
-
-        InformationEntity informationBean = list.get(position);
-        viewHolder.tvTabTitle.setText(informationBean.getTitle());
-        String time = informationBean.getTime();
-        viewHolder.tvTabDate.setText(time.length()==19?time.substring(0,time.length()-3):time);
 
 
         return convertView;
