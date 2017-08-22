@@ -108,6 +108,7 @@
             android:layout_alignParentBottom="true"
             android:layout_centerHorizontal="true"
             android:layout_marginBottom="@dimen/size20"
+            android:textSize="@dimen/txtSize12"
             android:gravity="center"
             android:textColor="@color/newStockTitle"
             android:text="--" />
@@ -122,9 +123,9 @@
             <TextView
                 android:paddingLeft="@dimen/size3"
                 android:paddingRight="@dimen/size3"
-                android:background="@drawable/text_bg"
                 android:textColor="@color/texts"
                 android:id="@+id/tv_text1"
+                android:textSize="@dimen/txtSize12"
                 android:layout_width="wrap_content"
                 android:layout_height="wrap_content"
                 android:text="--" />
@@ -144,6 +145,7 @@
                 android:layout_width="wrap_content"
                 android:layout_height="wrap_content"
                 android:layout_marginTop="@dimen/size5"
+                android:textSize="@dimen/txtSize12"
                 android:text="--" />
 
             <View
@@ -159,6 +161,7 @@
             android:layout_height="wrap_content"
             android:background="@mipmap/bg_bule_item"
             android:text="--"
+            android:textSize="@dimen/txtSize12"
             android:gravity="center"
             android:layout_alignParentRight="true"
             android:layout_marginTop="@dimen/size20"
@@ -172,14 +175,7 @@
             android:layout_centerHorizontal="true"
             android:layout_marginTop="@dimen/size20"
             android:text="发行时间: --"/>
-        <TextView
-            android:layout_width="wrap_content"
-            android:layout_height="wrap_content"
-            android:text="0%"
-            android:layout_marginBottom="@dimen/size30"
-            android:layout_alignParentBottom="true"
-            android:layout_alignLeft="@+id/rcv_progress"
-            android:textColor="@color/lineColor"/>
+
         <TextView
             android:layout_width="wrap_content"
             android:layout_height="wrap_content"
@@ -187,7 +183,20 @@
             android:layout_marginBottom="@dimen/size30"
             android:layout_alignParentBottom="true"
             android:layout_alignRight="@+id/rcv_progress"
-            android:textColor="@color/lineColor"/>
+            android:textColor="@color/lineColor"
+            android:id="@+id/textView28" />
+
+        <TextView
+            android:layout_width="wrap_content"
+            android:layout_height="wrap_content"
+            android:text="0%"
+            android:layout_marginLeft="@dimen/size10"
+            android:textColor="@color/lineColor"
+            android:layout_alignBaseline="@+id/textView28"
+            android:layout_alignBottom="@+id/textView28"
+            android:layout_alignLeft="@+id/rcv_progress"
+            android:layout_alignStart="@+id/rcv_progress"
+            android:id="@+id/textView33" />
     </RelativeLayout>
 
     <com.tpyzq.mobile.pangu.activity.home.managerMoney.view.chartView.chart.MyLineChart
