@@ -103,23 +103,6 @@
             android:gravity="center">
 
             <TextView
-                android:id="@+id/tvQuDing"
-                android:layout_width="@dimen/size155"
-                android:layout_height="@dimen/size40"
-                android:background="@color/blue"
-                android:clickable="true"
-                android:gravity="center"
-                android:text="确定"
-                android:textColor="@color/white" />
-        </LinearLayout>
-
-        <LinearLayout
-            android:layout_width="wrap_content"
-            android:layout_height="wrap_content"
-            android:layout_weight="1"
-            android:gravity="center">
-
-            <TextView
                 android:id="@+id/tvQuXiao"
                 android:layout_width="@dimen/size155"
                 android:layout_height="@dimen/size40"
@@ -129,10 +112,24 @@
                 android:text="取消"
                 android:textColor="@color/hushenTab_titleColor" />
         </LinearLayout>
+
+        <LinearLayout
+            android:layout_width="wrap_content"
+            android:layout_height="wrap_content"
+            android:layout_weight="1"
+            android:gravity="center">
+
+            <TextView
+                android:id="@+id/tvQuDing"
+                android:layout_width="@dimen/size155"
+                android:layout_height="@dimen/size40"
+                android:background="@color/blue"
+                android:clickable="true"
+                android:gravity="center"
+                android:text="确定"
+                android:textColor="@color/white" />
+        </LinearLayout>
     </LinearLayout>
 
-    <TextView
-        android:layout_width="match_parent"
-        android:layout_height="@dimen/size30" />
 
 </LinearLayout>
