@@ -418,8 +418,8 @@ public class UpdateIdCodeValidityActivity extends BaseActivity implements Dialog
 
                         mTempStartTime = id_begindate;
                         mTempEndTime = id_enddate;
-                        mStartTimeTv.setText(id_begindate);
-                        mEndTimeTv.setText(id_enddate);
+                        mStartTimeTv.setText(Helper.formateDate1(id_begindate));
+                        mEndTimeTv.setText(Helper.formateDate1(id_enddate));
 
                         changeEffectiveTimeTextColor(R.color.hushenTab_titleColor, R.color.text, R.color.red);
 
