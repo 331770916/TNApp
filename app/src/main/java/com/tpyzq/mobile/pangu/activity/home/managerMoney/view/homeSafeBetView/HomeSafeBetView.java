@@ -86,6 +86,10 @@ public class HomeSafeBetView extends MoneyFundBaseView implements GetHomeSafeBet
         mPresenter.getSafeBetData(TAG, this);
     }
 
+    public void refush() {
+        mPresenter.getSafeBetData(TAG, this);
+    }
+
     private void initSafeBet(View view) {
         view.findViewById(R.id.moreLayout).setOnClickListener(this);
         mViewGroup = (LinearLayout) view.findViewById(R.id.finncingLayout);

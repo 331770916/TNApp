@@ -236,6 +236,7 @@ public class HomeFragment extends BaseFragment implements AdapterView.OnItemClic
     public void initData() {
         //请求资讯数据 1级30条
         InterfaceCollection.getInstance().queryImportant("3","1","3","GetImportant",this);
+        mHomeSafeBetView.refush();
         getHotConnect(simpleRemoteControl);      //请求热搜数据
         getNews(simpleRemoteControl);            //请求消息
         if (mInformationEntities == null || mInformationEntities.size() <= 0) {
@@ -248,11 +249,12 @@ public class HomeFragment extends BaseFragment implements AdapterView.OnItemClic
         InterfaceCollection.getInstance().requestCarouselImg("getCarouselImg","7","","",this);
     }
 
+    private HomeSafeBetView mHomeSafeBetView;
 
     //产品预约列表
     private void initProductReservation() {
-        HomeSafeBetView homeSafeBetView = new HomeSafeBetView(getActivity(), mJumpPageListener);
-        mProductReservationView.addView(homeSafeBetView.getContentView());
+        mHomeSafeBetView = new HomeSafeBetView(getActivity(), mJumpPageListener);
+        mProductReservationView.addView(mHomeSafeBetView.getContentView());
     }
 
 
