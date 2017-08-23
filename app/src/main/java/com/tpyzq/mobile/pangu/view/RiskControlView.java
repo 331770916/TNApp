@@ -112,11 +112,11 @@ public class RiskControlView extends View {
     }
 
     private void drawScale(Canvas canvas) {
-        for (int i = 0; i < 72; i++) {
-            if (i <= 45 || i >= 63) {
+        for (int i = 0; i < 120; i++) {
+            if (i <= 75 || i>104) {
                 canvas.drawLine(pointX - raduis + 20 * dp, pointY, pointX - raduis + 40 * dp, pointY, mPaint);
             }
-            canvas.rotate(5, pointX, pointY);
+            canvas.rotate(3, pointX, pointY);
         }
     }
 

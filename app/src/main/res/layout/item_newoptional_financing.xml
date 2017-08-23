@@ -120,7 +120,7 @@
             android:layout_height="wrap_content"
             android:layout_alignParentBottom="true"
             android:layout_centerHorizontal="true"
-            android:layout_marginBottom="@dimen/size20"
+            android:layout_marginBottom="@dimen/size30"
             android:textSize="@dimen/txtSize12"
             android:gravity="center"
             android:textColor="@color/newStockTitle"
@@ -139,6 +139,7 @@
                 android:textColor="@color/texts"
                 android:id="@+id/tv_text1"
                 android:textSize="@dimen/txtSize12"
+                android:layout_marginTop="@dimen/size20"
                 android:layout_width="wrap_content"
                 android:layout_height="wrap_content"
                 android:text="--" />
