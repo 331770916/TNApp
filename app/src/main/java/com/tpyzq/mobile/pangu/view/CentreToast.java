@@ -152,7 +152,7 @@ public class CentreToast extends Toast {
             TextView toast_text = (TextView) layout.findViewById(R.id.toast_text);
             toast_text.setText(text);
             toast.setView(layout);
-            toast.setGravity(Gravity.CENTER, 0, 70);
+            toast.setGravity(Gravity.CENTER, 0, 0);
         } catch (Exception e) {
             e.printStackTrace();
         }
