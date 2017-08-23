@@ -90,7 +90,7 @@ public class ShouJiZhuCeActivity extends BaseActivity implements View.OnClickLis
                 OkHttpUtil.cancelSingleRequestByTag(ShouJiZhuCeActivity.this.getClass().getName());
                 mImage_et.setText("");
                 mCaptcha_et.setText("");
-                isShow = false;
+                isShow = true;
                 ImageVerification();
                 if (time != null){
                     time.cancel();
@@ -202,6 +202,7 @@ public class ShouJiZhuCeActivity extends BaseActivity implements View.OnClickLis
                 Marker = 1;
                 break;
             case R.id.SecurityCode:
+                isShow = false;
                 ImageVerification();
                 break;
         }
@@ -298,6 +299,7 @@ public class ShouJiZhuCeActivity extends BaseActivity implements View.OnClickLis
                 mSecurityCode.setImageResource(R.mipmap.ic_again);
                 CentreToast.showText(this, info.getMsg());
             }
+            isShow = false;
         } else if (TAG2.equals(info.getTag())) {   //短信
             if (!"0".equals(info.getCode()) && !ConstantUtil.NETWORK_ERROR_CODE.equals(info.getCode())) {
                 showMissCallDialog(info.getMsg(),"4");
