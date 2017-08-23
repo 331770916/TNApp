@@ -8,6 +8,7 @@ import android.text.TextWatcher;
 import android.view.View;
 import android.widget.Button;
 import android.widget.EditText;
+import android.widget.ImageView;
 import android.widget.LinearLayout;
 import android.widget.ScrollView;
 import android.widget.TextView;
@@ -65,6 +66,8 @@ public class OTC_SubscribeActivity extends BaseActivity implements View.OnClickL
     private ScrollView mScrollView;
     private Dialog submit;
     private OTC_SubscriptionDialog dialog;
+    private ImageView iv_delete;
+    private ImageView iv_delete_price;
 
     private static int REQUESTCODE = 1001; //进入风险确认页面的请求码
     private static int REQAGREEMENTCODE = 1002; //进入签署协议页面的请求码
@@ -79,6 +82,10 @@ public class OTC_SubscribeActivity extends BaseActivity implements View.OnClickL
         tvOTC_SGProductNameValue = (TextView) this.findViewById(R.id.tvOTC_SGProductNameValue);                  //产品名称
         tvOTC_SGProductJingZhiValue = (TextView) this.findViewById(R.id.tvOTC_SGProductJingZhiValue);           //产品净值
         tvOTC_SGExpendableCapitalValue = (TextView) this.findViewById(R.id.tvOTC_SGExpendableCapitalValue);    //可用资金
+        iv_delete = (ImageView) findViewById(R.id.iv_delete);
+        iv_delete_price = (ImageView) findViewById(R.id.iv_price_delete);
+        iv_delete_price.setOnClickListener(this);
+        iv_delete.setOnClickListener(this);
 
         LinearLayout rootLayout = (LinearLayout) findViewById(R.id.fundRootLayout);
         initMoveKeyBoard(rootLayout, null,etOTC_SGProductCode);
@@ -102,6 +109,13 @@ public class OTC_SubscribeActivity extends BaseActivity implements View.OnClickL
 
             @Override
             public void afterTextChanged(Editable s) {
+
+                if (!TextUtils.isEmpty(s.toString())) {
+                    iv_delete.setVisibility(View.VISIBLE);
+                }else {
+                    iv_delete.setVisibility(View.GONE);
+                }
+
                 if (s.length() == MAXNUM) {                                                           //当输入的代码为6位数时请求数据
                     getAffirmMsg(mSession, s.toString());                                              //根据输入的代码获取确认信息
                     etOTC_SubscribeMoney.setFocusableInTouchMode(true);
@@ -132,10 +146,12 @@ public class OTC_SubscribeActivity extends BaseActivity implements View.OnClickL
 
             @Override
             public void afterTextChanged(Editable s) {
-                if (s.length() > 0) {                                                                  //如果申购金额输入框有数据
+                if (s.length() > 0) {
+                    iv_delete_price.setVisibility(View.VISIBLE);//如果申购金额输入框有数据
                     bnOTC_SubscribeQueDing.setBackgroundResource(R.drawable.lonin);                 //背景亮
                     bnOTC_SubscribeQueDing.setEnabled(true);                                        //可点击
                 } else {
+                    iv_delete_price.setVisibility(View.GONE);
                     bnOTC_SubscribeQueDing.setBackgroundResource(R.drawable.lonin4);                //背景灰色
                     bnOTC_SubscribeQueDing.setEnabled(false);                                       //不可点击
                 }
@@ -440,6 +456,14 @@ public class OTC_SubscribeActivity extends BaseActivity implements View.OnClickL
                 } else {
                     dialog.show();
                 }
+                break;
+            case R.id.iv_delete:
+                etOTC_SGProductCode.setText("");
+                iv_delete.setVisibility(View.GONE);
+                break;
+            case R.id.iv_price_delete:
+                etOTC_SubscribeMoney.setText("");
+                iv_delete_price.setVisibility(View.GONE);
                 break;
         }
     }

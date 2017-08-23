@@ -39,6 +39,9 @@ import okhttp3.Call;
 public class FundRedemptionActivity extends BaseActivity implements View.OnClickListener {
     Button bt_true;
     ImageView iv_back;
+    private ImageView iv_delete;
+    private ImageView iv_delete_price;
+
     TextView tv_choose_fund;
     EditText et_fund_code   /*基金代码*/, et_fund_sum/*赎回份额*/;
     TextView tv_fund_name, tv_fund_value, tv_redeem_sum, tv_redeem_min_sum, tv_fund_redeem_way;
@@ -52,6 +55,11 @@ public class FundRedemptionActivity extends BaseActivity implements View.OnClick
     @Override
     public void initView() {
         iv_back = (ImageView) findViewById(R.id.iv_back);
+        iv_delete = (ImageView) findViewById(R.id.iv_delete);
+        iv_delete_price = (ImageView) findViewById(R.id.iv_price_delete);
+        iv_delete_price.setOnClickListener(this);
+        iv_delete.setOnClickListener(this);
+
         bt_true = (Button) findViewById(R.id.bt_true);
         tv_choose_fund = (TextView) findViewById(R.id.tv_choose_fund);
         et_fund_code = (EditText) findViewById(R.id.et_fund_code);
@@ -99,6 +107,13 @@ public class FundRedemptionActivity extends BaseActivity implements View.OnClick
             @Override
             public void afterTextChanged(Editable s) {
                 String fund_code = s.toString();
+
+                if (!TextUtils.isEmpty(fund_code)) {
+                    iv_delete.setVisibility(View.VISIBLE);
+                }else {
+                    iv_delete.setVisibility(View.GONE);
+                }
+
                 et_fund_sum.setText("");
                 if (fund_code.length() == 6) {
                     et_fund_sum.setEnabled(true);
@@ -123,9 +138,11 @@ public class FundRedemptionActivity extends BaseActivity implements View.OnClick
             public void afterTextChanged(Editable s) {
                 String sum = s.toString();
                 if (!TextUtils.isEmpty(sum)) {
+                    iv_delete_price.setVisibility(View.VISIBLE);
                     bt_true.setClickable(true);
                     bt_true.setBackgroundResource(R.drawable.button_login_pitchon);
                 } else {
+                    iv_delete_price.setVisibility(View.GONE);
                     bt_true.setClickable(false);
                     bt_true.setBackgroundResource(R.drawable.button_login_unchecked);
                 }
@@ -252,6 +269,14 @@ public class FundRedemptionActivity extends BaseActivity implements View.OnClick
                 break;
             case R.id.iv_back:
                 finish();
+                break;
+            case R.id.iv_delete:
+                et_fund_code.setText("");
+                iv_delete.setVisibility(View.GONE);
+                break;
+            case R.id.iv_price_delete:
+                et_fund_sum.setText("");
+                iv_delete_price.setVisibility(View.GONE);
                 break;
         }
     }

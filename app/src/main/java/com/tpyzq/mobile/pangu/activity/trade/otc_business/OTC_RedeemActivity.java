@@ -8,6 +8,7 @@ import android.text.TextWatcher;
 import android.view.View;
 import android.widget.Button;
 import android.widget.EditText;
+import android.widget.ImageView;
 import android.widget.LinearLayout;
 import android.widget.ScrollView;
 import android.widget.TextView;
@@ -51,6 +52,9 @@ public class OTC_RedeemActivity extends BaseActivity implements View.OnClickList
     private ScrollView mScrollView;
     public static FragmentManager OTC_RedeemfragmentManager;
 
+    private ImageView iv_delete;
+    private ImageView iv_delete_price;
+
     @Override
     public void initView() {
         OTC_RedeemfragmentManager = getFragmentManager();
@@ -64,6 +68,10 @@ public class OTC_RedeemActivity extends BaseActivity implements View.OnClickList
         tvOTC_SHProductNameValue = (TextView) this.findViewById(R.id.tvOTC_SHProductNameValue);         //产品名称
         tvOTC_SHProductJingZhiValue = (TextView) this.findViewById(R.id.tvOTC_SHProductJingZhiValue);   //产品净值
         tvOTC_SHExpendableCapitalValue = (TextView) this.findViewById(R.id.tvOTC_SHExpendableCapitalValue); //可赎
+        iv_delete = (ImageView) findViewById(R.id.iv_delete);
+        iv_delete_price = (ImageView) findViewById(R.id.iv_price_delete);
+        iv_delete_price.setOnClickListener(this);
+        iv_delete.setOnClickListener(this);
 
         tvOTC_ChooseOTCSHProduct.setOnClickListener(this);                                                //选择OTC产品添加监听
         this.findViewById(R.id.ivOTC_Reddem_back).setOnClickListener(this);                               //返回按钮
@@ -92,6 +100,13 @@ public class OTC_RedeemActivity extends BaseActivity implements View.OnClickList
 
             @Override
             public void afterTextChanged(Editable s) {
+
+                if (!TextUtils.isEmpty(s.toString())) {
+                    iv_delete.setVisibility(View.VISIBLE);
+                }else {
+                    iv_delete.setVisibility(View.GONE);
+                }
+
                 if (s.length() == MAXNUM) {                                                           //当输入的代码为6位数时请求数据
                     etOTC_RedeemShare.setFocusableInTouchMode(true);
                     getAffirmMsg(mSession, s.toString());                                              //根据输入的代码获取确认信息
@@ -122,10 +137,12 @@ public class OTC_RedeemActivity extends BaseActivity implements View.OnClickList
 
             @Override
             public void afterTextChanged(Editable s) {
-                if (s.length() > 0) {                                                              //如果申购金额输入框有数据
+                if (s.length() > 0) {
+                    iv_delete_price.setVisibility(View.VISIBLE);
                     bnOTC_RedeemQueDing.setBackgroundResource(R.drawable.lonin);                 //背景亮
                     bnOTC_RedeemQueDing.setEnabled(true);                                        //可点击
                 } else {
+                    iv_delete_price.setVisibility(View.GONE);
                     bnOTC_RedeemQueDing.setBackgroundResource(R.drawable.lonin4);                //背景灰色
                     bnOTC_RedeemQueDing.setEnabled(false);                                       //不可点击
                 }
@@ -246,6 +263,14 @@ public class OTC_RedeemActivity extends BaseActivity implements View.OnClickList
                 //实例化PopupWindow
                 OTC_RedeemDialog dialog = new OTC_RedeemDialog(this, this, map, RedeemShare, stockCode, this);
                 dialog.show();
+                break;
+            case R.id.iv_delete:
+                etOTC_SHProductCode.setText("");
+                iv_delete.setVisibility(View.GONE);
+                break;
+            case R.id.iv_price_delete:
+                etOTC_RedeemShare.setText("");
+                iv_delete_price.setVisibility(View.GONE);
                 break;
         }
     }

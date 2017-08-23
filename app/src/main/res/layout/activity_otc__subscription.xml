@@ -73,41 +73,49 @@
                     android:layout_marginLeft="@dimen/size20"
                     android:text="@string/OTC_chanpindaima" />
 
-                <EditText
-                    android:textColor="@color/title_list"
-                    android:id="@+id/etOTC_ProductCode"
-                    android:layout_width="90dp"
-                    android:layout_height="wrap_content"
-                    android:layout_centerVertical="true"
-                    android:layout_marginLeft="@dimen/size35"
-                    android:layout_toRightOf="@id/tvOTC_ProductCode"
-                    android:background="@null"
-                    android:digits="0123456789abcdefjhigklmnopqrstuvwxyzABCDEFJHIGKLMNOPQRSTUVWXYZ"
-                    android:hint="@string/OTC_shuruchanpindaima"
-                    android:maxLength="6"
-                    android:singleLine="true"
-                    android:textColorHint="@color/texts"
-                    android:textSize="@dimen/txtSize14" />
-
-                <ImageView
-                    android:id="@+id/ivOTC_SubscriptionMore"
-                    android:layout_width="wrap_content"
-                    android:layout_height="wrap_content"
-                    android:layout_alignParentRight="true"
-                    android:layout_centerVertical="true"
-                    android:layout_marginRight="@dimen/size20"
-                    android:src="@mipmap/more" />
-
                 <TextView
                     android:id="@+id/tvOTC_ChooseOTCProduct"
                     android:layout_width="wrap_content"
                     android:layout_height="wrap_content"
                     android:layout_centerVertical="true"
+                    android:drawableRight="@mipmap/more"
+                    android:layout_alignParentRight="true"
+                    android:drawablePadding="@dimen/size10"
                     android:layout_marginRight="@dimen/size5"
-                    android:layout_toLeftOf="@id/ivOTC_SubscriptionMore"
                     android:text="@string/OTC_xuanzeotcchanpin"
                     android:textColor="@color/texts"
                     android:textSize="@dimen/txtSize14" />
+
+                <FrameLayout
+                    android:layout_width="match_parent"
+                    android:layout_height="match_parent"
+                    android:layout_toRightOf="@id/tvOTC_ProductCode"
+                    android:layout_toLeftOf="@id/tvOTC_ChooseOTCProduct">
+                    <EditText
+                        android:textColor="@color/title_list"
+                        android:id="@+id/etOTC_ProductCode"
+                        android:layout_width="match_parent"
+                        android:layout_height="wrap_content"
+                        android:layout_marginLeft="@dimen/size35"
+                        android:layout_gravity="center_vertical"
+                        android:background="@null"
+                        android:digits="0123456789abcdefjhigklmnopqrstuvwxyzABCDEFJHIGKLMNOPQRSTUVWXYZ"
+                        android:hint="@string/OTC_shuruchanpindaima"
+                        android:maxLength="6"
+                        android:singleLine="true"
+                        android:textColorHint="@color/texts"
+                        android:textSize="@dimen/txtSize14" />
+
+                    <ImageView
+                        android:id="@+id/iv_delete"
+                        android:layout_width="@dimen/size30"
+                        android:layout_height="@dimen/size30"
+                        android:visibility="gone"
+                        android:layout_gravity="right|center_vertical"
+                        android:scaleType="center"
+                        android:src="@mipmap/icon_delete" />
+
+                </FrameLayout>
 
             </RelativeLayout>
 
@@ -135,20 +143,35 @@
                     android:layout_marginLeft="@dimen/size20"
                     android:text="@string/OTC_rengoujine" />
 
-                <EditText
-                    android:textColor="@color/title_list"
-                    android:inputType="numberDecimal"
-                    android:id="@+id/etOTC_SubscriptionMoney"
+                <FrameLayout
                     android:layout_width="match_parent"
                     android:layout_height="match_parent"
-                    android:layout_centerVertical="true"
                     android:layout_marginLeft="@dimen/size35"
-                    android:layout_toRightOf="@id/tvOTC_SubscriptionMoney"
-                    android:background="@null"
-                    android:hint="@string/OTC_shururengoujine"
-                    android:singleLine="true"
-                    android:textColorHint="@color/texts"
-                    android:textSize="@dimen/txtSize14" />
+                    android:layout_toRightOf="@id/tvOTC_SubscriptionMoney">
+                    <EditText
+                        android:textColor="@color/title_list"
+                        android:inputType="numberDecimal"
+                        android:id="@+id/etOTC_SubscriptionMoney"
+                        android:layout_width="match_parent"
+                        android:layout_height="match_parent"
+                        android:layout_centerVertical="true"
+                        android:background="@null"
+                        android:hint="@string/OTC_shururengoujine"
+                        android:singleLine="true"
+                        android:textColorHint="@color/texts"
+                        android:textSize="@dimen/txtSize14" />
+
+                    <ImageView
+                        android:id="@+id/iv_price_delete"
+                        android:layout_width="@dimen/size30"
+                        android:layout_height="@dimen/size30"
+                        android:layout_gravity="right|center_vertical"
+                        android:visibility="gone"
+                        android:scaleType="center"
+                        android:src="@mipmap/icon_delete" />
+
+                </FrameLayout>
+
 
             </RelativeLayout>
 

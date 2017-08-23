@@ -57,6 +57,8 @@ public class FundSubsActivity extends BaseActivity implements View.OnClickListen
     private Button bt_true/* 确定按钮 */;
     private FundDataEntity fundDataBean;
     private ImageView iv_back;//退出
+    private ImageView iv_delete;
+    private ImageView iv_delete_price;
     public static final int REQUSET = 1;//进入产品列表和签署协议界面
     public int point = -1;
     private SubsStatusEntity subsStatusBean;
@@ -73,6 +75,10 @@ public class FundSubsActivity extends BaseActivity implements View.OnClickListen
     @Override
     public void initView() {
         iv_back = (ImageView) findViewById(R.id.iv_back);
+        iv_delete = (ImageView) findViewById(R.id.iv_delete);
+        iv_delete_price = (ImageView) findViewById(R.id.iv_price_delete);
+        iv_delete_price.setOnClickListener(this);
+        iv_delete.setOnClickListener(this);
         et_fund_code = (EditText) findViewById(R.id.et_fund_code);
         et_rengou_price = (EditText) findViewById(R.id.et_rengou_price);
         tv_fund_name = (TextView) findViewById(R.id.tv_fund_name);
@@ -336,6 +342,13 @@ public class FundSubsActivity extends BaseActivity implements View.OnClickListen
             @Override
             public void afterTextChanged(Editable s) {
                 String fundcode = s.toString();
+
+                if (!TextUtils.isEmpty(fundcode)) {
+                    iv_delete.setVisibility(View.VISIBLE);
+                }else {
+                    iv_delete.setVisibility(View.GONE);
+                }
+
                 if (!TextUtils.isEmpty(fundcode) && s.length() == 6) {
 
                     getFundData(fundcode, "");
@@ -440,6 +453,14 @@ public class FundSubsActivity extends BaseActivity implements View.OnClickListen
             case R.id.iv_back:
                 finish();
                 break;
+            case R.id.iv_delete:
+                et_fund_code.setText("");
+                iv_delete.setVisibility(View.GONE);
+                break;
+            case R.id.iv_price_delete:
+                et_rengou_price.setText("");
+                iv_delete_price.setVisibility(View.GONE);
+                break;
             case R.id.tv_fhfs:
                 Helper.showItemSelectDialog(this,getWidth(),tv_fhfs.getText().toString(),new Helper.OnItemSelectedListener(){
                     @Override
@@ -500,9 +521,11 @@ public class FundSubsActivity extends BaseActivity implements View.OnClickListen
         @Override
         public void afterTextChanged(Editable s) {
             if (s.toString().length() > 0) {
+                iv_delete_price.setVisibility(View.VISIBLE);
                 bt_true.setClickable(true);
                 bt_true.setBackgroundResource(R.drawable.button_login_pitchon);
             } else {
+                iv_delete_price.setVisibility(View.GONE);
                 bt_true.setClickable(false);
                 bt_true.setBackgroundResource(R.drawable.button_login_unchecked);
             }
