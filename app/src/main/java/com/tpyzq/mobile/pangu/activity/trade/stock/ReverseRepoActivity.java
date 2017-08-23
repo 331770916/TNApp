@@ -23,6 +23,7 @@ import android.widget.HorizontalScrollView;
 import android.widget.ImageView;
 import android.widget.LinearLayout;
 import android.widget.ListView;
+import android.widget.RelativeLayout;
 import android.widget.TextView;
 import android.widget.Toast;
 
@@ -66,7 +67,7 @@ public class ReverseRepoActivity extends BaseActivity implements View.OnClickLis
     private int addsub;
 
     ReverseRepoActivityPresenter presenter;
-    private LinearLayout ll_mKeyboard;
+    private RelativeLayout ll_mKeyboard;
 
     private LinearLayout mRepoLayout;
     private TextView     mRepoTextView;
@@ -91,7 +92,7 @@ public class ReverseRepoActivity extends BaseActivity implements View.OnClickLis
         iv_sub_sum = (ImageView) findViewById(R.id.iv_sub_sum);
         iv_add_sum = (ImageView) findViewById(R.id.iv_add_sum);
         iv_back = (ImageView) findViewById(R.id.iv_back);
-        ll_mKeyboard = (LinearLayout) findViewById(R.id.Keyboard_LinearLayout);
+        ll_mKeyboard = (RelativeLayout) findViewById(R.id.Keyboard_LinearLayout);
         mSyTv = (TextView) findViewById(R.id.syTv);
 
         mRepoLayout = (LinearLayout) findViewById(R.id.reverse_repoLayout);
