@@ -247,7 +247,7 @@ public class HomeSafeBetView extends MoneyFundBaseView implements GetHomeSafeBet
                     mRadio.setTextColor(mActivity.getResources().getColor(R.color.texts));
                     mDay.setTextColor(mActivity.getResources().getColor(R.color.texts));
                     mPrice.setTextColor(mActivity.getResources().getColor(R.color.texts));
-                    mStauts.setBackgroundResource(R.mipmap.bg_bule_item);
+                    mStauts.setBackgroundResource(R.drawable.shape_left_radius_blue);
 
                     break;
                 case "1":
@@ -256,7 +256,7 @@ public class HomeSafeBetView extends MoneyFundBaseView implements GetHomeSafeBet
                     mRadio.setTextColor(mActivity.getResources().getColor(R.color.blue));
                     mDay.setTextColor(mActivity.getResources().getColor(R.color.blue));
                     mPrice.setTextColor(mActivity.getResources().getColor(R.color.blue));
-                    mStauts.setBackgroundResource(R.mipmap.bg_bule_item);
+                    mStauts.setBackgroundResource(R.drawable.shape_left_radius_blue);
                     break;
                 case "2":
                     prod_status = "预约已满";
@@ -264,7 +264,7 @@ public class HomeSafeBetView extends MoneyFundBaseView implements GetHomeSafeBet
                     mRadio.setTextColor(mActivity.getResources().getColor(R.color.texts));
                     mDay.setTextColor(mActivity.getResources().getColor(R.color.texts));
                     mPrice.setTextColor(mActivity.getResources().getColor(R.color.texts));
-                    mStauts.setBackgroundResource(R.mipmap.bg_bule_item);
+                    mStauts.setBackgroundResource(R.drawable.shape_left_radius_blue);
 
                     break;
                 case "3":
@@ -273,7 +273,7 @@ public class HomeSafeBetView extends MoneyFundBaseView implements GetHomeSafeBet
                     mRadio.setTextColor(mActivity.getResources().getColor(R.color.orange2));
                     mDay.setTextColor(mActivity.getResources().getColor(R.color.orange2));
                     mPrice.setTextColor(mActivity.getResources().getColor(R.color.orange2));
-                    mStauts.setBackgroundResource(R.mipmap.bg_red_item);
+                    mStauts.setBackgroundResource(R.drawable.shape_left_radius_orange);
                     break;
                 case "4":
                     prod_status = "已售罄";
@@ -281,7 +281,7 @@ public class HomeSafeBetView extends MoneyFundBaseView implements GetHomeSafeBet
                     mRadio.setTextColor(mActivity.getResources().getColor(R.color.texts));
                     mDay.setTextColor(mActivity.getResources().getColor(R.color.texts));
                     mPrice.setTextColor(mActivity.getResources().getColor(R.color.texts));
-                    mStauts.setBackgroundResource(R.mipmap.bg_red_item);
+                    mStauts.setBackgroundResource(R.drawable.shape_left_radius_gray);
 
                     break;
                 case "-1":
@@ -290,7 +290,7 @@ public class HomeSafeBetView extends MoneyFundBaseView implements GetHomeSafeBet
                     mRadio.setTextColor(mActivity.getResources().getColor(R.color.orange2));
                     mDay.setTextColor(mActivity.getResources().getColor(R.color.orange2));
                     mPrice.setTextColor(mActivity.getResources().getColor(R.color.orange2));
-                    mStauts.setBackgroundResource(R.mipmap.bg_red_item);
+                    mStauts.setBackgroundResource(R.drawable.shape_left_radius_orange);
                     break;
                 default:
                     break;
@@ -302,7 +302,7 @@ public class HomeSafeBetView extends MoneyFundBaseView implements GetHomeSafeBet
             mRadio.setTextColor(mActivity.getResources().getColor(R.color.orange2));
             mDay.setTextColor(mActivity.getResources().getColor(R.color.orange2));
             mPrice.setTextColor(mActivity.getResources().getColor(R.color.orange2));
-            mStauts.setBackgroundResource(R.mipmap.bg_red_item);
+            mStauts.setBackgroundResource(R.drawable.shape_left_radius_orange);
         }
 
         if ("3".equals(list.get(0).getType())) {

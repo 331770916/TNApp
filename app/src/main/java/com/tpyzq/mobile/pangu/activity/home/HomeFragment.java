@@ -482,7 +482,7 @@ public class HomeFragment extends BaseFragment implements AdapterView.OnItemClic
 
         ArrayList<Map<String, Object>> allSource = new ArrayList<>();
         Map<String, Object> all = new HashMap<>();
-        all.put("img", R.mipmap.home_quanbu);
+        all.put("img", R.mipmap.jy_gengduo);
         all.put("title", "全部");
         allSource.add(all);
 
