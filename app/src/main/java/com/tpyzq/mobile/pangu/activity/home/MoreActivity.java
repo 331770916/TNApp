@@ -164,8 +164,8 @@ public class MoreActivity extends BaseActivity implements View.OnClickListener {
         map.put("资讯",R.mipmap.sy_zixun);
         map.put("交易动态",R.mipmap.sy_jiaoyidongtai);
         map.put("股市回忆录",R.mipmap.sy_gushihuiyilu);
-        map.put("股票买入",R.mipmap.sybj_gupiaomairu);
-        map.put("股票卖出",R.mipmap.sybj_gupiaomaichu);
+        map.put("股票买入",R.mipmap.jy_mairu);
+        map.put("股票卖出",R.mipmap.jy_maichu);
         map.put("股票持仓",R.mipmap.sy_gupiaochicang);
         map.put("OTC持仓",R.mipmap.sy_otcchicang);
         map.put("可取资金",R.mipmap.sy_keyongzijin);

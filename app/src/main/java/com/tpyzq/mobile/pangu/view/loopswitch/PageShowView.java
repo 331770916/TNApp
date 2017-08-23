@@ -145,7 +145,7 @@ public class PageShowView extends View {
 
                 switch (drawType) {
                     case 0:
-                        canvas.drawCircle(posX, view_height / 2, width / 2, mPaint);
+                        canvas.drawCircle(posX, view_height / 3, width / 3, mPaint);
                         posX += height * 3 + width;
                         break;
                     case 1:
