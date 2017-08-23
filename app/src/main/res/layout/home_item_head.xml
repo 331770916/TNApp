@@ -12,20 +12,27 @@
 
     <RelativeLayout
         android:layout_width="match_parent"
-        android:layout_height="wrap_content"
+        android:layout_height="@dimen/size35"
         android:layout_below="@+id/view"
         android:background="@drawable/listview_item_bg">
 
+        <ImageView
+            android:src="@mipmap/iv_homnews"
+            android:layout_marginLeft="@dimen/size20"
+            android:layout_alignParentLeft="true"
+            android:layout_centerInParent="true"
+            android:id="@+id/img_left"
+            android:layout_width="@dimen/size16"
+            android:layout_height="@dimen/size17" />
+
         <TextView
+            android:layout_marginLeft="@dimen/size4"
+            android:layout_centerInParent="true"
+            android:layout_toRightOf="@id/img_left"
             android:id="@+id/homeHeadName"
             android:layout_width="wrap_content"
             android:layout_height="wrap_content"
-            android:layout_alignParentLeft="true"
-            android:layout_centerInParent="true"
-            android:layout_margin="@dimen/size10"
-            android:drawableLeft="@mipmap/iv_homnews"
-            android:drawablePadding="@dimen/size5"
-            android:textColor="@color/color_4a4a4a"
+            android:textColor="@color/black"
             android:gravity="center"
             android:text="要闻"
             android:textSize="@dimen/txtSize12"
@@ -38,7 +45,7 @@
             android:layout_height="wrap_content"
             android:layout_alignParentRight="true"
             android:layout_centerInParent="true"
-            android:padding="@dimen/size10"
+            android:layout_marginRight="@dimen/size20"
             android:src="@mipmap/icon_right" />
 
         <View
