@@ -33,7 +33,7 @@
             android:id="@+id/choice_tabPageIndicator"
             android:background="@color/white"
             android:layout_width="match_parent"
-            android:layout_height="@dimen/size45"
+            android:layout_height="@dimen/size40"
             />
         <View
             android:layout_width="match_parent"

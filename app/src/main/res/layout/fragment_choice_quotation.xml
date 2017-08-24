@@ -27,7 +27,7 @@
             android:layout_height="wrap_content"
             android:layout_weight="1"
             android:gravity="center_vertical"
-            android:layout_marginLeft="@dimen/size10"
+            android:layout_marginLeft="@dimen/size20"
             android:paddingBottom="@dimen/size10"
             android:paddingTop="@dimen/size10"
             android:text="@string/securityName"
@@ -41,10 +41,11 @@
             android:orientation="horizontal">
 
             <TextView
+                android:paddingRight="@dimen/size30"
                 android:id="@+id/currentPriceHeadtv2"
-                android:layout_width="wrap_content"
-                android:layout_height="wrap_content"
-                android:gravity="center"
+                android:layout_width="match_parent"
+                android:layout_height="match_parent"
+                android:gravity="center|end"
                 android:paddingBottom="@dimen/size10"
                 android:paddingTop="@dimen/size10"
                 android:drawablePadding="@dimen/size5"
@@ -66,7 +67,7 @@
                 android:gravity="center"
                 android:paddingBottom="@dimen/size10"
                 android:paddingTop="@dimen/size10"
-                android:layout_marginRight="@dimen/size10"
+                android:layout_marginRight="@dimen/size20"
                 android:drawablePadding="@dimen/size5"
                 android:text="@string/zdf"
                 android:textColor="@color/black" />

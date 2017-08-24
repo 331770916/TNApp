@@ -42,7 +42,7 @@ public class SelfChoiceNavigatorAdapter extends CommonNavigatorAdapter {
     @Override
     public IPagerTitleView getTitleView(Context context, final int index) {
         ScaleTransitionPagerTitleView simplePagerTitleView = new ScaleTransitionPagerTitleView(mConext);
-        simplePagerTitleView.setTextSize(16);
+        simplePagerTitleView.setTextSize(14);
         simplePagerTitleView.setNormalColor(Color.BLACK);
         simplePagerTitleView.setSelectedColor(ContextCompat.getColor(CustomApplication.getContext(), R.color.blue));
         simplePagerTitleView.setText(mTitlelist.get(index));

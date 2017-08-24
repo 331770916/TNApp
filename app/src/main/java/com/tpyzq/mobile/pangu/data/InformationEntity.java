@@ -81,7 +81,7 @@ public class InformationEntity {
     }
 
     public String getTrimDigest() {
-        return digest.replaceAll("\\s+","");
+        return digest.replaceAll("\\s*(.*)\\s*", "$1");
     }
 
     public void setDigest(String digest) {

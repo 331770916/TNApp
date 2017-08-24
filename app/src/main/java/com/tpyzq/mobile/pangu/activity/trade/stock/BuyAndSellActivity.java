@@ -203,6 +203,7 @@ public class BuyAndSellActivity extends BaseActivity implements View.OnClickList
         tv_sum = (TextView) findViewById(R.id.tv_sum);
         mi_buy = (MagicIndicator) findViewById(R.id.mi_buy);
         tv_max_buysell = (TextView) findViewById(R.id.tv_max_buysell);
+        tv_max_buysell.requestFocus();
         initData();
         initMoveKeyBoard(ll_father, null);
     }

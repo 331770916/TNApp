@@ -3,6 +3,9 @@ package com.tpyzq.mobile.pangu.activity.trade.open_fund;
 import android.app.Dialog;
 import android.content.DialogInterface;
 import android.content.Intent;
+import android.text.Editable;
+import android.text.TextUtils;
+import android.text.TextWatcher;
 import android.view.KeyEvent;
 import android.view.View;
 import android.widget.AdapterView;
@@ -33,6 +36,7 @@ public class FundInfoActivity extends BaseActivity implements View.OnClickListen
     public static final String TAG = FundInfoActivity.class.getSimpleName();
     private Dialog                  mProgressDialog;
     private EditText                mSearchContent_et;
+    private ImageView               mDeleteIv;
     private PullToRefreshListView   mListView;
     private FundInfoAdapter         mAdapter;
     private ArrayList<FundSubsEntity>    mBeans;
@@ -50,6 +54,8 @@ public class FundInfoActivity extends BaseActivity implements View.OnClickListen
 
     @Override
     public void initView() {
+        mDeleteIv = (ImageView) findViewById(R.id.iv_delete);
+        mDeleteIv.setOnClickListener(this);
         findViewById(R.id.iv_back).setOnClickListener(this);
         findViewById(R.id.bt_search).setOnClickListener(this);
         ImageView emptyIv = (ImageView) findViewById(R.id.emptyIv);
@@ -60,6 +66,26 @@ public class FundInfoActivity extends BaseActivity implements View.OnClickListen
         mListType = intent.getStringExtra(LIST_TYPE);
 
         mSearchContent_et = (EditText) findViewById(R.id.et_search_fundcompany);
+        mSearchContent_et.addTextChangedListener(new TextWatcher() {
+            @Override
+            public void beforeTextChanged(CharSequence s, int start, int count, int after) {
+
+            }
+
+            @Override
+            public void onTextChanged(CharSequence s, int start, int before, int count) {
+
+            }
+
+            @Override
+            public void afterTextChanged(Editable s) {
+                if (TextUtils.isEmpty(s.toString())) {
+                    mDeleteIv.setVisibility(View.GONE);
+                } else {
+                    mDeleteIv.setVisibility(View.VISIBLE);
+                }
+            }
+        });
         mListView = (PullToRefreshListView) findViewById(R.id.lv_fund);
         mAdapter = new FundInfoAdapter(this, isShowDetail);
         mAdapter.setDetailClickListener(this);
@@ -79,6 +105,10 @@ public class FundInfoActivity extends BaseActivity implements View.OnClickListen
         switch (v.getId()) {
             case R.id.iv_back:
                 finish();
+                break;
+            case R.id.iv_delete:
+                mDeleteIv.setVisibility(View.GONE);
+                mSearchContent_et.setText("");
                 break;
             case R.id.bt_search:
                 mBeans.clear();

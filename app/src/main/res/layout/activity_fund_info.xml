@@ -51,17 +51,30 @@
             android:background="@color/white"
             android:orientation="horizontal">
 
-            <EditText
-                android:id="@+id/et_search_fundcompany"
+            <FrameLayout
                 android:layout_width="0dp"
                 android:layout_height="match_parent"
-                android:layout_weight="3"
-                android:background="@null"
-                android:drawableLeft="@mipmap/fangdajinghui"
-                android:drawablePadding="@dimen/size5"
-                android:hint="请输入基金代码/基金名称/基金公司"
-                android:paddingLeft="@dimen/size20"
-                android:textSize="@dimen/txtSize12" />
+                android:layout_weight="3">
+                <EditText
+                    android:id="@+id/et_search_fundcompany"
+                    android:layout_width="match_parent"
+                    android:layout_height="match_parent"
+                    android:background="@null"
+                    android:drawableLeft="@mipmap/fangdajinghui"
+                    android:drawablePadding="@dimen/size5"
+                    android:hint="请输入基金代码/基金名称/基金公司"
+                    android:paddingLeft="@dimen/size20"
+                    android:textSize="@dimen/txtSize12" />
+
+                <ImageView
+                    android:id="@+id/iv_delete"
+                    android:layout_width="@dimen/size30"
+                    android:layout_height="@dimen/size30"
+                    android:layout_gravity="right|center_vertical"
+                    android:scaleType="center"
+                    android:visibility="gone"
+                    android:src="@mipmap/icon_delete" />
+            </FrameLayout>
 
             <Button
                 android:id="@+id/bt_search"
