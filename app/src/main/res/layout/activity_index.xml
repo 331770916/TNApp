@@ -110,7 +110,7 @@
                 />
             <TextView
                 android:id="@+id/newstockjump"
-                android:layout_marginRight="@dimen/size26"
+                android:layout_marginRight="@dimen/size15"
                 android:layout_toLeftOf="@id/newstockclose"
                 android:layout_width="wrap_content"
                 android:layout_height="wrap_content"
@@ -125,8 +125,8 @@
             <LinearLayout
                 android:layout_width="wrap_content"
                 android:layout_height="wrap_content"
-                android:layout_centerInParent="true"
-                android:layout_marginLeft="@dimen/size100"
+                android:layout_centerVertical="true"
+                android:layout_marginLeft="@dimen/size108"
                 >
                 <TextView
                     android:layout_width="wrap_content"

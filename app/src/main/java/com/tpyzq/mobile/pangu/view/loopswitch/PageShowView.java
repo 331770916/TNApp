@@ -102,33 +102,17 @@ public class PageShowView extends View {
 
 
         int view_height = getHeight() - getPaddingBottom() - getPaddingBottom();
-
-
-
-        int view_width = getWidth() - getPaddingLeft() - getPaddingRight();
-
-
-
-        int height =view_height / 10 ;
-
-
-
-        int width = height * 6 ;
-
-
         if (total > 1) {
-
-            if (width * total + height * (total - 1) > view_width) {
-                width =(view_width - (height * (total - 1))) / total;
-            }
-
-            int posX = view_width / 2 - (width * total + height * (total - 1) * 3) / 2;
-
-
-            if(drawType==1){
-                width = ViewWidth;
-                height = ViewHeight;
-                posX = displayMetrics.widthPixels - (ViewWidth * (total+1) + ViewMargin * total -22);
+            int posX = 0 ;
+            int width = ViewWidth;
+            int height = ViewHeight;
+            switch (drawType){
+                case 0:
+                    posX = (displayMetrics.widthPixels - (ViewWidth * total + ViewMargin * (total -1)))/2;
+                    break;
+                case 1:
+                    posX = displayMetrics.widthPixels - (ViewWidth * (total+1) + ViewMargin * total -22);
+                    break;
             }
             mPaint.setStrokeWidth(height);
             for (int i = 0; i < total; i++) {
@@ -145,8 +129,8 @@ public class PageShowView extends View {
 
                 switch (drawType) {
                     case 0:
-                        canvas.drawCircle(posX, view_height / 3, width / 3, mPaint);
-                        posX += height * 3 + width;
+                        canvas.drawCircle(posX, view_height / 3, width / 2, mPaint);
+                        posX += ViewMargin + width;
                         break;
                     case 1:
                         canvas.drawLine(posX, view_height / 2 , posX + width, view_height/2 , mPaint);

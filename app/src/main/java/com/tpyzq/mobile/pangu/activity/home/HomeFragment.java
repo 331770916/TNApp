@@ -1,22 +1,18 @@
 package com.tpyzq.mobile.pangu.activity.home;
 
 import android.content.Intent;
-import android.graphics.Bitmap;
 import android.graphics.Color;
-import android.graphics.drawable.Drawable;
 import android.net.Uri;
 import android.os.Build;
 import android.os.Handler;
 import android.support.v4.content.ContextCompat;
 import android.text.TextUtils;
-import android.util.ArrayMap;
 import android.view.LayoutInflater;
 import android.view.View;
 import android.view.Window;
 import android.view.WindowManager;
 import android.widget.AbsListView;
 import android.widget.AdapterView;
-import android.widget.ImageView;
 import android.widget.LinearLayout;
 import android.widget.RelativeLayout;
 import android.widget.ScrollView;
@@ -32,7 +28,6 @@ import com.tpyzq.mobile.pangu.activity.home.helper.HomeInfomationObsever;
 import com.tpyzq.mobile.pangu.activity.home.helper.HomeInfomationSubject;
 import com.tpyzq.mobile.pangu.activity.home.hotsearchstock.HotSearchStockActivity;
 import com.tpyzq.mobile.pangu.activity.home.information.InformationHomeActivity;
-import com.tpyzq.mobile.pangu.activity.home.information.NewsDetailActivity;
 import com.tpyzq.mobile.pangu.activity.home.managerMoney.view.homeSafeBetView.HomeSafeBetView;
 import com.tpyzq.mobile.pangu.adapter.home.HomeAdapter;
 import com.tpyzq.mobile.pangu.adapter.home.HomeHotAdapter;
@@ -266,15 +261,6 @@ public class HomeFragment extends BaseFragment implements AdapterView.OnItemClic
         headView.setOnClickListener(this);
         ll.addView(headView, 0);
         mNewslistView.setAdapter(mAdapter);
-        mNewslistView.setOnItemClickListener(new AdapterView.OnItemClickListener() {
-            @Override
-            public void onItemClick(AdapterView<?> parent, View view, int position, long id) {
-                Intent intent = new Intent(getActivity(), NewsDetailActivity.class);
-                if (!TextUtils.isEmpty(mInformationEntities.get(position).getNewsno()))
-                    intent.putExtra("requestId", mInformationEntities.get(position).getNewsno());
-                getActivity().startActivity(intent);
-            }
-        });
     }
 
     //热搜股票列表
