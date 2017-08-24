@@ -60,13 +60,13 @@ public class LoadPdfConnect {
             @Override
             public void onError(Call call, Exception e, int id) {
                 e.printStackTrace();
-                mCallbackResult.getResult("网络请求异常", TAG);
+                mCallbackResult.getResult(ConstantUtil.NETWORK_ERROR, TAG);
             }
 
             @Override
             public void onResponse(String response, int id) {
                 if (TextUtils.isEmpty(response)) {
-                    mCallbackResult.getResult("网络请求异常", TAG);
+                    mCallbackResult.getResult(ConstantUtil.SERVICE_NO_DATA, TAG);
                     return;
                 }
                 LogUtil.e(TAG,"--------res:"+response);
@@ -93,7 +93,7 @@ public class LoadPdfConnect {
                     }
                 }catch (JSONException e){
                     e.printStackTrace();
-                    mCallbackResult.getResult("报文数据解析异常", TAG);
+                    mCallbackResult.getResult(ConstantUtil.JSON_ERROR, TAG);
                 }
 //                ObjectMapper objectMapper = JacksonMapper.getInstance();
 //                try {

@@ -36,13 +36,13 @@ public class TotalPriceImpl implements ITotalPrice {
             @Override
             public void onError(Call call, Exception e, int id) {
                 e.printStackTrace();
-                iTotalPriceResult.getStockPriceResultError(e.toString());
+                iTotalPriceResult.getStockPriceResultError(ConstantUtil.NETWORK_ERROR);
             }
 
             @Override
             public void onResponse(String response, int id) {
                 if (TextUtils.isEmpty(response)) {
-                    iTotalPriceResult.getStockPriceResultError("response is null");
+                    iTotalPriceResult.getStockPriceResultError(ConstantUtil.SERVICE_NO_DATA);
                     return;
                 }
 
@@ -69,79 +69,8 @@ public class TotalPriceImpl implements ITotalPrice {
 
                 }catch (JSONException e){
                     e.printStackTrace();
-                    iTotalPriceResult.getStockPriceResultError("报文解析异常");
+                    iTotalPriceResult.getStockPriceResultError(ConstantUtil.JSON_ERROR);
                 }
-
-//                ObjectMapper objectMapper = JacksonMapper.getInstance();
-//                try {
-//
-//                    Map<String, Object> result = objectMapper.readValue(response, new HashMap<String, Object>().getClass());
-//
-//                    String code = "";
-//                    if (null != result.get("code")) {
-//                        code = String.valueOf(result.get("code"));
-//                    }
-//
-//                    String msg = "";
-//                    if (null != result.get("msg")) {
-//                        msg = String.valueOf(result.get("msg"));
-//                    }
-//
-//                    if (TextUtils.isEmpty(code) || !code.equals("0")) {
-//
-//                        if ("-6".equals(code)) {
-//                            iTotalPriceResult.getStockPriceResultError(code);
-//                        } else {
-//                            iTotalPriceResult.getStockPriceResultError(msg);
-//                        }
-//
-//                        return;
-//                    }
-//
-//                    Object object = result.get("data");
-//                    if (null != object && object instanceof List) {
-//                        List<Map<String, Object>> data = (List<Map<String, Object>>) object;
-//
-//                        if (data != null && data.size() > 0) {
-//
-//                            for (Map<String, Object> subData : data) {
-//
-//                                String ENABLE_BALANCE = "0.0"; //可取资金
-//                                if (null != subData.get("ENABLE_BALANCE")) {
-//                                    ENABLE_BALANCE = String.valueOf(subData.get("ENABLE_BALANCE"));
-//                                }
-//
-//                                String OPFUND_MARKET_VALUE = "0.0";//基金
-//                                if (null != subData.get("OPFUND_MARKET_VALUE")) {
-//                                    OPFUND_MARKET_VALUE = String.valueOf(subData.get("OPFUND_MARKET_VALUE"));
-//                                }
-//
-//
-//                                String MARKET_VALUE = "0.0";//股票市值
-//                                if (null != subData.get("MARKET_VALUE")) {
-//                                    MARKET_VALUE = String.valueOf(subData.get("MARKET_VALUE"));
-//                                }
-//
-//                                double d_ENABLE_BALANCE = Double.valueOf(ENABLE_BALANCE);
-//                                double d_OPFUND_MARKET_VALUE = Double.valueOf(OPFUND_MARKET_VALUE);
-//                                double d_MARKET_VALUE = Double.valueOf(MARKET_VALUE);
-//
-//                                double d_total = d_ENABLE_BALANCE + d_OPFUND_MARKET_VALUE + d_MARKET_VALUE;
-//
-//                                iTotalPriceResult.getStockPriceResultSuccess(String.valueOf(d_total));
-//                            }
-//                        } else {
-//                            iTotalPriceResult.getStockPriceResultError("data is null");
-//                        }
-//
-//                    } else {
-//                        iTotalPriceResult.getStockPriceResultError("data is null");
-//                    }
-//
-//                } catch (Exception e) {
-//                    e.printStackTrace();
-//                    iTotalPriceResult.getStockPriceResultError(e.toString());
-//                }
 
             }
         });

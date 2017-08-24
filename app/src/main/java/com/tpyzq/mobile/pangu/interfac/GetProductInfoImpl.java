@@ -39,7 +39,7 @@ public class GetProductInfoImpl implements IGetProductInfo {
             @Override
             public void onError(Call call, Exception e, int id) {
                 e.printStackTrace();
-                iGetProductInfoResult.getProductInfoResultError("网络异常");
+                iGetProductInfoResult.getProductInfoResultError(ConstantUtil.NETWORK_ERROR);
             }
 
             @Override
@@ -67,7 +67,7 @@ public class GetProductInfoImpl implements IGetProductInfo {
                     }
                 }catch (JSONException e){
                     e.printStackTrace();
-                    iGetProductInfoResult.getProductInfoResultError("报文解析异常");
+                    iGetProductInfoResult.getProductInfoResultError(ConstantUtil.JSON_ERROR);
                 }
 //                ObjectMapper objectMapper = JacksonMapper.getInstance();
 //
