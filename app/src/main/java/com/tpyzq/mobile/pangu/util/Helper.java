@@ -698,8 +698,9 @@ public class Helper {
             }else {
                 return 28 + code;
             }
+        } else {
+            return "00" + code;
         }
-        return null;
     }
 
     /**
@@ -763,8 +764,9 @@ public class Helper {
             }else {
                 return 28 + code;
             }
+        } else {
+            return "00" + code;
         }
-        return null;
     }
     /**
      * 根据股票代码选择该股票的的类型
