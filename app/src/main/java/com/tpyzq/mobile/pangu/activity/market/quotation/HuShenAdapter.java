@@ -32,6 +32,9 @@ public class HuShenAdapter extends BaseAdapter {
     private DecimalFormat mFormat1;
     private DecimalFormat mFormat2;
     private Activity mActivity;
+    private String mShangZ = "上证指数";
+    private String mShenZ = "深证成指";
+    private String mChuangY = "创业板指";
 
     public HuShenAdapter(Activity activity) {
         mActivity = activity;
@@ -412,13 +415,19 @@ public class HuShenAdapter extends BaseAdapter {
             if (null==model)return;
             if ("10000001".equals(model.getStockNumber())) {
                 modelshang = model;
-                modelshang.setStockName("上证指数");
+                if (null != modelshang && TextUtils.isEmpty(modelshang.getStockName())) {
+                    modelshang.setStockName(mShangZ);
+                }
             } else if ("20399001".equals(model.getStockNumber())) {
                 modelshen = model;
-                modelshen.setStockName("深证指数");
+                if (modelshen != null && TextUtils.isEmpty(modelshen.getStockName())) {
+                    modelshen.setStockName(mShenZ);
+                }
             } else if ("20399006".equals(model.getStockNumber())) {
                 modelchuang = model;
-                modelchuang.setStockName("创业指数");
+                if (modelchuang != null && !TextUtils.isEmpty(modelchuang.getStockName())) {
+                    modelchuang.setStockName(mChuangY);
+                }
             }
         }
         //清除数据
