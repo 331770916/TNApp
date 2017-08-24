@@ -48,7 +48,9 @@ import com.tpyzq.mobile.pangu.http.doConnect.self.GetMyNomePage;
 import com.tpyzq.mobile.pangu.http.doConnect.self.ToMyNewsHomePage;
 import com.tpyzq.mobile.pangu.interfac.ICallbackResult;
 import com.tpyzq.mobile.pangu.util.ConstantUtil;
+import com.tpyzq.mobile.pangu.util.FlymeUtils;
 import com.tpyzq.mobile.pangu.util.Helper;
+import com.tpyzq.mobile.pangu.util.MIUIUtils;
 import com.tpyzq.mobile.pangu.util.SpUtils;
 import com.tpyzq.mobile.pangu.util.panguutil.BRutil;
 import com.tpyzq.mobile.pangu.view.gridview.HomeGridView;
@@ -393,28 +395,40 @@ public class HomeFragment extends BaseFragment implements AdapterView.OnItemClic
 
     @Override
     public void onScroll(int scrollY) {
-        int topLayotpx = Helper.dip2px(getActivity(), 200);
-        int _height = Helper.dip2px(getActivity(), 44);
-        if (scrollY >= topLayotpx - _height && scrollY <= topLayotpx) {
-            float scale = (float) scrollY / topLayotpx;
-            float alpha = (255 * scale);
-            // 只是layout背景透明(仿知乎滑动效果)
+        try{
+            int topLayotpx = Helper.dip2px(getActivity(), 200);
+            int _height = Helper.dip2px(getActivity(), 44);
+            if (scrollY >= topLayotpx - _height && scrollY <= topLayotpx) {
+                float scale = (float) scrollY / topLayotpx;
+                float alpha = (255 * scale);
+                // 只是layout背景透明(仿知乎滑动效果)
 //            mTopTextView.setBackgroundColor(Color.argb((int) alpha, 28, 134, 238));
-            mTopTextView.setBackgroundColor(ContextCompat.getColor(CustomApplication.getContext(), R.color.translucent));
-        } else if (scrollY > topLayotpx) {
-            if (Build.VERSION.SDK_INT > Build.VERSION_CODES.LOLLIPOP_MR1) {//大于5.0
-                // Translucent status bar
-                mTopTextView.setBackgroundColor(ContextCompat.getColor(CustomApplication.getContext(), R.color.white));
-                getActivity().getWindow().getDecorView().setSystemUiVisibility( View.SYSTEM_UI_FLAG_LAYOUT_FULLSCREEN|View.SYSTEM_UI_FLAG_LIGHT_STATUS_BAR);
-            } else {
-                mTopTextView.setBackgroundColor(ContextCompat.getColor(CustomApplication.getContext(), R.color.textss));
-            }
+                mTopTextView.setBackgroundColor(ContextCompat.getColor(CustomApplication.getContext(), R.color.translucent));
+            } else if (scrollY > topLayotpx) {
+                if (Build.VERSION.SDK_INT > Build.VERSION_CODES.LOLLIPOP_MR1) {//大于5.0
+                    if (MIUIUtils.isMIUI()) {
+                        Helper.setMiuiStatusBarDarkMode(getActivity(),true);
+                    } else if (FlymeUtils.isFlyme()) {
+                        Helper.setMeizuStatusBarDarkIcon(getActivity(),true);
+                    } else {
+                        getActivity().getWindow().getDecorView().setSystemUiVisibility( View.SYSTEM_UI_FLAG_LAYOUT_FULLSCREEN|View.SYSTEM_UI_FLAG_LIGHT_STATUS_BAR);
+                    }
+                    // Translucent status bar
+                    mTopTextView.setBackgroundColor(ContextCompat.getColor(CustomApplication.getContext(), R.color.white));
+
+                } else {
+                    mTopTextView.setBackgroundColor(ContextCompat.getColor(CustomApplication.getContext(), R.color.textss));
+                }
 //            mTopTextView.setText("太牛");
-            mTopTextView.setText("");
-        } else {
-            mTopTextView.setBackgroundColor(ContextCompat.getColor(CustomApplication.getContext(), android.R.color.transparent));
-            mTopTextView.setText("");
+                mTopTextView.setText("");
+            } else {
+                mTopTextView.setBackgroundColor(ContextCompat.getColor(CustomApplication.getContext(), android.R.color.transparent));
+                mTopTextView.setText("");
+            }
+        }catch (Exception e){
+            e.printStackTrace();
         }
+
         /*getActivity().getWindow().setStatusBarColor(Color.TRANSPARENT); // 透明
         getActivity().getWindow().setStatusBarColor(Color.BLACK); // 黑色
         getActivity().getWindow().setStatusBarColor(Color.YELLOW); // 黄色*/
