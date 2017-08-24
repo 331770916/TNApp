@@ -36,8 +36,7 @@
                 android:layout_width="wrap_content"
                 android:layout_height="wrap_content"
                 android:layout_below="@id/tv_title"
-                android:layout_marginBottom="@dimen/size27"
-                android:layout_marginTop="@dimen/size8"
+                android:layout_marginTop="@dimen/size6"
                 android:lines="1"
                 android:textColor="@color/newStockTitle"
                 android:textSize="@dimen/txtSize12" />

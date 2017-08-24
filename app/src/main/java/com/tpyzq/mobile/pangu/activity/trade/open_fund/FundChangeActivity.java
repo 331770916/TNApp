@@ -50,6 +50,7 @@ public class FundChangeActivity extends BaseActivity implements View.OnClickList
     private TextView et_fund_code2;          //转入基金代码
     private EditText et_fund_fene;           //转换份额
     private ImageView iv_back;                //返回按键
+    private ImageView iv_delete_price;
     private Button bt_true;                    //确定按钮
     private FundRedemptionEntity fundRedemptionBean;  //持仓对象
     private List<FundEntity> fundBeans;
@@ -69,6 +70,8 @@ public class FundChangeActivity extends BaseActivity implements View.OnClickList
     @Override
     public void initView() {
         iv_back = (ImageView) findViewById(R.id.iv_back);
+        iv_delete_price = (ImageView) findViewById(R.id.iv_price_delete);
+        iv_delete_price.setOnClickListener(this);
         tv_choose_fund = (TextView) findViewById(R.id.tv_choose_fund);
         tv_choose_shareway = (TextView) findViewById(R.id.tv_choose_shareway);
         tv_fund_code1 = (TextView) findViewById(R.id.tv_fund_code1);
@@ -278,6 +281,10 @@ public class FundChangeActivity extends BaseActivity implements View.OnClickList
             case R.id.iv_back:
                 finish();
                 break;
+            case R.id.iv_price_delete:
+                et_fund_fene.setText("");
+                iv_delete_price.setVisibility(View.GONE);
+                break;
         }
     }
 
@@ -296,8 +303,11 @@ public class FundChangeActivity extends BaseActivity implements View.OnClickList
         @Override
         public void afterTextChanged(Editable s) {
             if (s.toString().length() > 0) {
+                iv_delete_price.setVisibility(View.VISIBLE);
                 bt_true.setClickable(true);
                 bt_true.setBackgroundResource(R.drawable.button_login_pitchon);
+            } else {
+                iv_delete_price.setVisibility(View.GONE);
             }
         }
     }

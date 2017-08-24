@@ -198,20 +198,36 @@
             android:layout_marginLeft="@dimen/size20"
             android:text="转换份额" />
 
-        <EditText
-            android:id="@+id/et_fund_fene"
+        <FrameLayout
             android:layout_width="0dp"
             android:layout_height="wrap_content"
-            android:layout_gravity="center"
-            android:layout_marginLeft="@dimen/size20"
-            android:layout_marginRight="@dimen/size20"
-            android:layout_weight="1"
-            android:background="@android:color/transparent"
-            android:gravity="left"
-            android:inputType="numberDecimal"
-            android:hint="输入转换份额"
-            android:textColorHint="@color/text"
-            android:textSize="@dimen/txtSize14" />
+            android:layout_gravity="center_vertical"
+            android:layout_weight="1">
+            <EditText
+                android:id="@+id/et_fund_fene"
+                android:layout_width="match_parent"
+                android:layout_height="wrap_content"
+                android:layout_gravity="center"
+                android:layout_marginLeft="@dimen/size20"
+                android:layout_marginRight="@dimen/size20"
+                android:background="@android:color/transparent"
+                android:gravity="left"
+                android:inputType="numberDecimal"
+                android:hint="输入转换份额"
+                android:textColorHint="@color/text"
+                android:textSize="@dimen/txtSize14" />
+
+            <ImageView
+                android:id="@+id/iv_price_delete"
+                android:layout_width="@dimen/size30"
+                android:layout_height="@dimen/size30"
+                android:layout_gravity="right|center_vertical"
+                android:visibility="gone"
+                android:scaleType="center"
+                android:src="@mipmap/icon_delete" />
+
+        </FrameLayout>
+
     </LinearLayout>
 
     <Button

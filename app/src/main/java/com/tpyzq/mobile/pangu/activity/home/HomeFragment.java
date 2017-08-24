@@ -1,22 +1,18 @@
 package com.tpyzq.mobile.pangu.activity.home;
 
 import android.content.Intent;
-import android.graphics.Bitmap;
 import android.graphics.Color;
-import android.graphics.drawable.Drawable;
 import android.net.Uri;
 import android.os.Build;
 import android.os.Handler;
 import android.support.v4.content.ContextCompat;
 import android.text.TextUtils;
-import android.util.ArrayMap;
 import android.view.LayoutInflater;
 import android.view.View;
 import android.view.Window;
 import android.view.WindowManager;
 import android.widget.AbsListView;
 import android.widget.AdapterView;
-import android.widget.ImageView;
 import android.widget.LinearLayout;
 import android.widget.RelativeLayout;
 import android.widget.ScrollView;
@@ -32,7 +28,6 @@ import com.tpyzq.mobile.pangu.activity.home.helper.HomeInfomationObsever;
 import com.tpyzq.mobile.pangu.activity.home.helper.HomeInfomationSubject;
 import com.tpyzq.mobile.pangu.activity.home.hotsearchstock.HotSearchStockActivity;
 import com.tpyzq.mobile.pangu.activity.home.information.InformationHomeActivity;
-import com.tpyzq.mobile.pangu.activity.home.information.NewsDetailActivity;
 import com.tpyzq.mobile.pangu.activity.home.managerMoney.view.homeSafeBetView.HomeSafeBetView;
 import com.tpyzq.mobile.pangu.adapter.home.HomeAdapter;
 import com.tpyzq.mobile.pangu.adapter.home.HomeHotAdapter;
@@ -236,6 +231,7 @@ public class HomeFragment extends BaseFragment implements AdapterView.OnItemClic
     public void initData() {
         //请求资讯数据 1级30条
         InterfaceCollection.getInstance().queryImportant("3","1","3","GetImportant",this);
+        mHomeSafeBetView.refush();
         getHotConnect(simpleRemoteControl);      //请求热搜数据
         getNews(simpleRemoteControl);            //请求消息
         if (mInformationEntities == null || mInformationEntities.size() <= 0) {
@@ -248,11 +244,12 @@ public class HomeFragment extends BaseFragment implements AdapterView.OnItemClic
         InterfaceCollection.getInstance().requestCarouselImg("getCarouselImg","7","","",this);
     }
 
+    private HomeSafeBetView mHomeSafeBetView;
 
     //产品预约列表
     private void initProductReservation() {
-        HomeSafeBetView homeSafeBetView = new HomeSafeBetView(getActivity(), mJumpPageListener);
-        mProductReservationView.addView(homeSafeBetView.getContentView());
+        mHomeSafeBetView = new HomeSafeBetView(getActivity(), mJumpPageListener);
+        mProductReservationView.addView(mHomeSafeBetView.getContentView());
     }
 
 
@@ -264,15 +261,6 @@ public class HomeFragment extends BaseFragment implements AdapterView.OnItemClic
         headView.setOnClickListener(this);
         ll.addView(headView, 0);
         mNewslistView.setAdapter(mAdapter);
-        mNewslistView.setOnItemClickListener(new AdapterView.OnItemClickListener() {
-            @Override
-            public void onItemClick(AdapterView<?> parent, View view, int position, long id) {
-                Intent intent = new Intent(getActivity(), NewsDetailActivity.class);
-                if (!TextUtils.isEmpty(mInformationEntities.get(position).getNewsno()))
-                    intent.putExtra("requestId", mInformationEntities.get(position).getNewsno());
-                getActivity().startActivity(intent);
-            }
-        });
     }
 
     //热搜股票列表
@@ -417,6 +405,7 @@ public class HomeFragment extends BaseFragment implements AdapterView.OnItemClic
             if (Build.VERSION.SDK_INT > Build.VERSION_CODES.LOLLIPOP_MR1) {//大于5.0
                 // Translucent status bar
                 mTopTextView.setBackgroundColor(ContextCompat.getColor(CustomApplication.getContext(), R.color.white));
+                getActivity().getWindow().getDecorView().setSystemUiVisibility( View.SYSTEM_UI_FLAG_LAYOUT_FULLSCREEN|View.SYSTEM_UI_FLAG_LIGHT_STATUS_BAR);
             } else {
                 mTopTextView.setBackgroundColor(ContextCompat.getColor(CustomApplication.getContext(), R.color.textss));
             }
@@ -480,7 +469,7 @@ public class HomeFragment extends BaseFragment implements AdapterView.OnItemClic
 
         ArrayList<Map<String, Object>> allSource = new ArrayList<>();
         Map<String, Object> all = new HashMap<>();
-        all.put("img", R.mipmap.home_quanbu);
+        all.put("img", R.mipmap.jy_gengduo);
         all.put("title", "全部");
         allSource.add(all);
 

@@ -1,6 +1,10 @@
 package com.tpyzq.mobile.pangu.data;
 
+import android.text.TextUtils;
+
 import java.util.List;
+import java.util.regex.Matcher;
+import java.util.regex.Pattern;
 
 /**
  * Created by zhangwenbo on 2016/9/17.
@@ -74,6 +78,10 @@ public class InformationEntity {
 
     public String getDigest() {
         return digest;
+    }
+
+    public String getTrimDigest() {
+        return digest.replaceAll("\\s+","");
     }
 
     public void setDigest(String digest) {

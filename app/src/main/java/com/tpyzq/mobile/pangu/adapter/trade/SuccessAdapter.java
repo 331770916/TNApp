@@ -87,7 +87,7 @@ public class SuccessAdapter extends BaseAdapter {
         }
         holder.tv_text5.setText(state);
         holder.tv_text6.setText((int)(successTransactionBeans.get(position).MATCHED_QTY)+"");
-        holder.tv_text8.setText(TransitionUtils.string2doubleS3(successTransactionBeans.get(position).MATCHED_AMT));
+        holder.tv_text8.setText(TransitionUtils.string2doubleDown(successTransactionBeans.get(position).MATCHED_AMT));
         return convertView;
     }
 

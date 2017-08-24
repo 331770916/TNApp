@@ -49,6 +49,8 @@ public class FundPurchaseActivity extends BaseActivity implements View.OnClickLi
     private static int REQAGREEMENTCODE = 1002; //进入签署协议页面的请求码
     private TextView tv_choose_fund/*选择基金产品*/, tv_fund_name/*基金名称*/, tv_fund_value/*基金净值*/, tv_low_money/*个人最低投资*/, tv_usable_money/*可用资金*/,tv_fhfs/*分红方式*/;
     private ImageView iv_back/*返回*/;
+    private ImageView iv_delete;
+    private ImageView iv_delete_price;
     private EditText et_fund_code/*基金代码*/, et_fund_price/*申购金额*/;
     private static int REQUEST = 5; //Activity请求码
     private FundDataEntity fundDataBean;      //基金信息
@@ -68,6 +70,10 @@ public class FundPurchaseActivity extends BaseActivity implements View.OnClickLi
         tv_usable_money = (TextView) findViewById(R.id.tv_usable_money);
         tv_fhfs = (TextView)findViewById(R.id.tv_fhfs);
         iv_back = (ImageView) findViewById(R.id.iv_back);
+        iv_delete = (ImageView) findViewById(R.id.iv_delete);
+        iv_delete.setOnClickListener(this);
+        iv_delete_price = (ImageView) findViewById(R.id.iv_price_delete);
+        iv_delete_price.setOnClickListener(this);
         et_fund_code = (EditText) findViewById(R.id.et_fund_code);
         et_fund_price = (EditText) findViewById(R.id.et_fund_price);
         bt_true = (Button) findViewById(R.id.bt_true);
@@ -103,6 +109,12 @@ public class FundPurchaseActivity extends BaseActivity implements View.OnClickLi
             @Override
             public void afterTextChanged(Editable s) {
                 String fundcode = s.toString();
+                if (!TextUtils.isEmpty(fundcode)) {
+                    iv_delete.setVisibility(View.VISIBLE);
+                }else {
+                    iv_delete.setVisibility(View.GONE);
+                }
+
                 if (!TextUtils.isEmpty(fundcode) && s.length() == 6) {
                     getFundData(fundcode, "");
                     et_fund_price.setText("");
@@ -128,6 +140,14 @@ public class FundPurchaseActivity extends BaseActivity implements View.OnClickLi
                 break;
             case R.id.iv_back:
                 finish();
+                break;
+            case R.id.iv_delete:
+                et_fund_code.setText("");
+                iv_delete.setVisibility(View.GONE);
+                break;
+            case R.id.iv_price_delete:
+                et_fund_price.setText("");
+                iv_delete_price.setVisibility(View.GONE);
                 break;
             case R.id.bt_true:
                 if (null == fundData)
@@ -433,9 +453,11 @@ public class FundPurchaseActivity extends BaseActivity implements View.OnClickLi
         @Override
         public void afterTextChanged(Editable s) {
             if (s.toString().length() > 0) {
+                iv_delete_price.setVisibility(View.VISIBLE);
                 bt_true.setClickable(true);
                 bt_true.setBackgroundResource(R.drawable.button_login_pitchon);
             } else {
+                iv_delete_price.setVisibility(View.GONE);
                 bt_true.setClickable(false);
                 bt_true.setBackgroundResource(R.drawable.button_login_unchecked);
             }

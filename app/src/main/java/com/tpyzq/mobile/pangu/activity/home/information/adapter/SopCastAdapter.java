@@ -87,7 +87,7 @@ public class SopCastAdapter extends BaseAdapter {
         currentDay = date;
         currentTime = time;
         String title = informationBean.getTitle();    //标题
-        String content = informationBean.getDigest();
+        String content = informationBean.getTrimDigest();
         viewHolder.tvTime.setText(date+" "+time);
         viewHolder.tvTitle.setText(title);
         viewHolder.tvContent.setText(content);

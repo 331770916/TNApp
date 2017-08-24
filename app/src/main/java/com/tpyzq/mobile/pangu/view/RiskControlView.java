@@ -12,7 +12,7 @@ import android.view.View;
 public class RiskControlView extends View {
     private Context mContext;
 
-    private Paint mPaint, textPaint;
+    private Paint mPaint, textPaint, mLinePaint;
     private int screenWidth, screenHeight;
     private float raduis;
     private int pointX, pointY;
@@ -50,6 +50,12 @@ public class RiskControlView extends View {
         mPaint.setStyle(Paint.Style.FILL);
         mPaint.setStrokeWidth(5 * dp);
         mPaint.setStrokeCap(Paint.Cap.ROUND);
+        mLinePaint = new Paint(Paint.ANTI_ALIAS_FLAG);
+        mLinePaint.setAntiAlias(true);
+        mLinePaint.setStyle(Paint.Style.FILL);
+        mLinePaint.setStrokeWidth(3 * dp);
+        mLinePaint.setStrokeCap(Paint.Cap.ROUND);
+        mLinePaint.setColor(bigprogress);
         setLayerType(LAYER_TYPE_SOFTWARE, null);
         textPaint = new Paint(Paint.ANTI_ALIAS_FLAG);
         textPaint.setAntiAlias(true);
@@ -112,11 +118,11 @@ public class RiskControlView extends View {
     }
 
     private void drawScale(Canvas canvas) {
-        for (int i = 0; i < 72; i++) {
-            if (i <= 45 || i >= 63) {
-                canvas.drawLine(pointX - raduis + 10 * dp, pointY, pointX - raduis + 30 * dp, pointY, mPaint);
+        for (int i = 0; i < 120; i++) {
+            if (i <= 75 || i>104) {
+                canvas.drawLine(pointX - raduis + 25 * dp, pointY, pointX - raduis + 45 * dp, pointY, mLinePaint);
             }
-            canvas.rotate(5, pointX, pointY);
+            canvas.rotate(3, pointX, pointY);
         }
     }
 

@@ -1203,7 +1203,7 @@ public class BuyAndSellActivity extends BaseActivity implements View.OnClickList
                 }
                 break;
             case R.id.bt_sell:
-                if (!TextUtils.isEmpty(stockCode)||et_stock_code.getText().toString().trim().length()==6) {
+                if (!TextUtils.isEmpty(stockCode)||et_stock_code.getText().toString().trim().length()>=6) {
                     if (rb_sell.isChecked()) {
                         if ("0".equals(et_num.getText().toString()) || TextUtils.isEmpty(et_num.getText().toString())) {
                             CentreToast.showText(BuyAndSellActivity.this,"请确认价格或数量为有效数值",Toast.LENGTH_SHORT);
@@ -1663,74 +1663,90 @@ public class BuyAndSellActivity extends BaseActivity implements View.OnClickList
                          */
                         DecimalFormat mFormat1 = new DecimalFormat("#0.00");
                         LAST_PRICE = mFormat1.format(Double.parseDouble(LAST_PRICE));
-                        String market = "";
-                        if("1".equals(EXCHANGE_TYPE)){
-                            market = "SH";
-                            stockCode = Helper.getStockCode(g_code,"83");
-                        }else{
-                            market = "SZ";
-                            stockCode = Helper.getStockCode(g_code,"90");
-                        }
                         isClearHeadData = false;
-                        et_price.setText(LAST_PRICE);
-                        String content = market + g_code;
                         isChangeSearchStatus = false;
-                        et_stock_code.setText(stockName + "  "+content);
+                        if (!isSetStockCodeEt) {
+                            if (null==transStockBeen) {
+                                transStockBeen = new ArrayList<TransStockEntity>();
+                            }
+                            transStockBeen.clear();
+                            TransStockEntity transStockBean = new TransStockEntity();
+                            transStockBean.stockCode = Helper.getStockCode2(g_code,EXCHANGE_TYPE);
+                            transStockBean.stockName = stockName;
+                            transStockBeen.add(transStockBean);
+                            if (null!=stockPw) {
+                                stockPw.showPopupWindow(traLayout1);
+                                stockPw.refreshView();
+                            }
+                            isSetStockCodeEt = true;
+                        } else {
+                            String market = "";
+                            if("1".equals(EXCHANGE_TYPE)){
+                                market = "SH";
+                                stockCode = Helper.getStockCode(g_code,"83");
+                            }else{
+                                market = "SZ";
+                                stockCode = Helper.getStockCode(g_code,"90");
+                            }
+                            et_price.setText(LAST_PRICE);
+                            String content = market + g_code;
+                            et_stock_code.setText(stockName + "  " + content);
 //                        et_price.setEnabled(true);
-                        et_price.requestFocus();
-                        mKeyBoardUtil.hideAllKeyBoard();
+                            et_price.requestFocus();
+                            mKeyBoardUtil.hideAllKeyBoard();
 
-                        String closePrice = jsonObject.optString("CLOSE_PRICE");
-                        if (TextUtils.isEmpty(closePrice)) {
-                            closePrice = "0.00";
-                        }
-                        timeShareData.mClosePrice = Float.parseFloat(closePrice);
+                            String closePrice = jsonObject.optString("CLOSE_PRICE");
+                            if (TextUtils.isEmpty(closePrice)) {
+                                closePrice = "0.00";
+                            }
+                            timeShareData.mClosePrice = Float.parseFloat(closePrice);
 
-                        price_sell[0] = fundPirce(stockCode,jsonObject.optString("SALE_PRICE5"));
-                        price_sell[1] = fundPirce(stockCode,jsonObject.optString("SALE_PRICE4"));
-                        price_sell[2] = fundPirce(stockCode,jsonObject.optString("SALE_PRICE3"));
-                        price_sell[3] = fundPirce(stockCode,jsonObject.optString("SALE_PRICE2"));
-                        price_sell[4] = fundPirce(stockCode,jsonObject.optString("SALE_PRICE1"));
+                            price_sell[0] = fundPirce(stockCode, jsonObject.optString("SALE_PRICE5"));
+                            price_sell[1] = fundPirce(stockCode, jsonObject.optString("SALE_PRICE4"));
+                            price_sell[2] = fundPirce(stockCode, jsonObject.optString("SALE_PRICE3"));
+                            price_sell[3] = fundPirce(stockCode, jsonObject.optString("SALE_PRICE2"));
+                            price_sell[4] = fundPirce(stockCode, jsonObject.optString("SALE_PRICE1"));
 
-                        sum_sell[0] = fundPirce(stockCode,jsonObject.optString("SALE_AMOUNT5"));
-                        sum_sell[1] = fundPirce(stockCode,jsonObject.optString("SALE_AMOUNT4"));
-                        sum_sell[2] = fundPirce(stockCode,jsonObject.optString("SALE_AMOUNT3"));
-                        sum_sell[3] = fundPirce(stockCode,jsonObject.optString("SALE_AMOUNT2"));
-                        sum_sell[4] = fundPirce(stockCode,jsonObject.optString("SALE_AMOUNT1"));
+                            sum_sell[0] = fundPirce(stockCode, jsonObject.optString("SALE_AMOUNT5"));
+                            sum_sell[1] = fundPirce(stockCode, jsonObject.optString("SALE_AMOUNT4"));
+                            sum_sell[2] = fundPirce(stockCode, jsonObject.optString("SALE_AMOUNT3"));
+                            sum_sell[3] = fundPirce(stockCode, jsonObject.optString("SALE_AMOUNT2"));
+                            sum_sell[4] = fundPirce(stockCode, jsonObject.optString("SALE_AMOUNT1"));
 
-                        price_buy[0] = fundPirce(stockCode,jsonObject.optString("BUY_PRICE1"));
-                        price_buy[1] = fundPirce(stockCode,jsonObject.optString("BUY_PRICE2"));
-                        price_buy[2] = fundPirce(stockCode,jsonObject.optString("BUY_PRICE3"));
-                        price_buy[3] = fundPirce(stockCode,jsonObject.optString("BUY_PRICE4"));
-                        price_buy[4] = fundPirce(stockCode,jsonObject.optString("BUY_PRICE5"));
+                            price_buy[0] = fundPirce(stockCode, jsonObject.optString("BUY_PRICE1"));
+                            price_buy[1] = fundPirce(stockCode, jsonObject.optString("BUY_PRICE2"));
+                            price_buy[2] = fundPirce(stockCode, jsonObject.optString("BUY_PRICE3"));
+                            price_buy[3] = fundPirce(stockCode, jsonObject.optString("BUY_PRICE4"));
+                            price_buy[4] = fundPirce(stockCode, jsonObject.optString("BUY_PRICE5"));
 
-                        sum_buy[0] = fundPirce(stockCode,jsonObject.optString("BUY_AMOUNT1"));
-                        sum_buy[1] = fundPirce(stockCode,jsonObject.optString("BUY_AMOUNT2"));
-                        sum_buy[2] = fundPirce(stockCode,jsonObject.optString("BUY_AMOUNT3"));
-                        sum_buy[3] = fundPirce(stockCode,jsonObject.optString("BUY_AMOUNT4"));
-                        sum_buy[4] = fundPirce(stockCode,jsonObject.optString("BUY_AMOUNT5"));
+                            sum_buy[0] = fundPirce(stockCode, jsonObject.optString("BUY_AMOUNT1"));
+                            sum_buy[1] = fundPirce(stockCode, jsonObject.optString("BUY_AMOUNT2"));
+                            sum_buy[2] = fundPirce(stockCode, jsonObject.optString("BUY_AMOUNT3"));
+                            sum_buy[3] = fundPirce(stockCode, jsonObject.optString("BUY_AMOUNT4"));
+                            sum_buy[4] = fundPirce(stockCode, jsonObject.optString("BUY_AMOUNT5"));
 
-                        sellAdapter.setYesterdayPrice(closePrice, stockCode);
-                        buyAdapter.setYesterdayPrice(closePrice, stockCode);
+                            sellAdapter.setYesterdayPrice(closePrice, stockCode);
+                            buyAdapter.setYesterdayPrice(closePrice, stockCode);
 
-                        String down = string2doubleS(TransitionUtils.string2double(closePrice) * 0.9 + "");
-                        String up = string2doubleS(TransitionUtils.string2double(closePrice) * 1.1 + "");
-                        tv_drop.setText("跌停:" + down);
-                        tv_rise.setText("涨停:" + up);
-                        iv_depute_way.setClickable(true);
-                        iv_depute_way.setBackgroundResource(R.mipmap.icon_entrust_way);
-                        if (priceflag) {
-                            et_price.setEnabled(true);
-                            et_num.setEnabled(true);
-                            et_num.requestFocus();
-                            String tempNumInt = price+"";
-                            if (!TextUtils.isEmpty(tempNumInt) && !"0.0".equals(tempNumInt) && !".".equals(tempNumInt) && !"- -".equals(tempNumInt)) {
-                                if ("买".equals(transactiontype)) {
-                                    if (price > 0) {
-                                        getAmount(stockCode, price + "");
+                            String down = string2doubleS(TransitionUtils.string2double(closePrice) * 0.9 + "");
+                            String up = string2doubleS(TransitionUtils.string2double(closePrice) * 1.1 + "");
+                            tv_drop.setText("跌停:" + down);
+                            tv_rise.setText("涨停:" + up);
+                            iv_depute_way.setClickable(true);
+                            iv_depute_way.setBackgroundResource(R.mipmap.icon_entrust_way);
+                            if (priceflag) {
+                                et_price.setEnabled(true);
+                                et_num.setEnabled(true);
+                                et_num.requestFocus();
+                                String tempNumInt = price + "";
+                                if (!TextUtils.isEmpty(tempNumInt) && !"0.0".equals(tempNumInt) && !".".equals(tempNumInt) && !"- -".equals(tempNumInt)) {
+                                    if ("买".equals(transactiontype)) {
+                                        if (price > 0) {
+                                            getAmount(stockCode, price + "");
+                                        }
+                                    } else if ("卖".equals(transactiontype)) {
+                                        getMaxSell(stockCode, price + "");
                                     }
-                                } else if ("卖".equals(transactiontype)) {
-                                    getMaxSell(stockCode, price + "");
                                 }
                             }
                         }

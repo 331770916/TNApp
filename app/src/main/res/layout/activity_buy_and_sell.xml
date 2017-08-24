@@ -117,6 +117,7 @@
                             android:layout_centerVertical="true"
                             android:layout_toRightOf="@id/iv_search"
                             android:layout_marginRight="@dimen/size38"
+                            android:singleLine="true"
                             android:background="@null"
                             android:layout_gravity="center_horizontal"
                             android:hint="股票代码"
@@ -175,6 +176,7 @@
                         android:layout_centerInParent="true"
                         android:layout_marginLeft="@dimen/size40"
                         android:layout_marginRight="@dimen/size40"
+                        android:singleLine="true"
                         android:background="@null"
                         android:gravity="center"
                         android:hint="价格"
@@ -220,11 +222,11 @@
                         android:layout_centerInParent="true"
                         android:layout_marginLeft="@dimen/size40"
                         android:layout_marginRight="@dimen/size40"
+                        android:singleLine="true"
                         android:background="@null"
                         android:gravity="center"
                         android:hint="数量"
                         android:inputType="number"
-                        android:maxLength="8"
                         android:textSize="@dimen/txtSize14" />
 
                     <ImageView

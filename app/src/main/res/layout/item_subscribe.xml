@@ -74,7 +74,7 @@
             android:layout_height="wrap_content"
             android:layout_alignParentBottom="true"
             android:layout_centerHorizontal="true"
-            android:layout_marginBottom="@dimen/size20"
+            android:layout_marginBottom="@dimen/size35"
             android:textSize="@dimen/txtSize12"
             android:gravity="center"
             android:text="--" />
@@ -91,6 +91,7 @@
                 android:layout_width="wrap_content"
                 android:layout_height="wrap_content"
                 android:textColor="@color/text"
+                android:layout_marginTop="@dimen/size20"
                 android:textSize="@dimen/txtSize12"
                 android:text="--" />
 
@@ -144,18 +145,18 @@
             android:layout_width="wrap_content"
             android:layout_height="wrap_content"
             android:text="0%"
-            android:layout_marginBottom="@dimen/size30"
+            android:layout_marginBottom="@dimen/size35"
             android:layout_alignParentBottom="true"
             android:layout_alignLeft="@+id/rcv_progress"
-            android:layout_marginLeft="@dimen/size10"
             android:textSize="@dimen/txtSize12"
             android:textColor="@color/lineColor"/>
         <TextView
             android:layout_width="wrap_content"
             android:layout_height="wrap_content"
             android:text="20%"
-            android:layout_marginBottom="@dimen/size30"
+            android:layout_marginBottom="@dimen/size35"
             android:textSize="@dimen/txtSize12"
+            android:layout_marginLeft="@dimen/size20"
             android:layout_alignParentBottom="true"
             android:layout_alignRight="@+id/rcv_progress"
             android:textColor="@color/lineColor"/>

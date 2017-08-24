@@ -59,19 +59,34 @@
                 android:layout_gravity="center"
                 android:text="基金代码" />
 
-            <EditText
-                android:id="@+id/et_fund_code"
+            <FrameLayout
                 android:layout_width="0dp"
                 android:layout_height="wrap_content"
-                android:layout_gravity="center"
-                android:padding="@dimen/size15"
-                android:layout_weight="1"
-                android:background="@android:color/transparent"
-                android:gravity="left"
-                android:hint="@string/shurujijindaima"
-                android:maxLength="6"
-                android:textColorHint="@color/text"
-                android:textSize="@dimen/txtSize14" />
+                android:layout_gravity="center_vertical"
+                android:layout_weight="1">
+                <EditText
+                    android:id="@+id/et_fund_code"
+                    android:layout_width="match_parent"
+                    android:layout_height="wrap_content"
+                    android:layout_gravity="center"
+                    android:padding="@dimen/size15"
+                    android:background="@android:color/transparent"
+                    android:gravity="left|center_vertical"
+                    android:hint="@string/shurujijindaima"
+                    android:maxLength="6"
+                    android:textColorHint="@color/text"
+                    android:textSize="@dimen/txtSize14" />
+
+                <ImageView
+                    android:id="@+id/iv_delete"
+                    android:layout_width="@dimen/size30"
+                    android:layout_height="@dimen/size30"
+                    android:visibility="gone"
+                    android:layout_gravity="right|center_vertical"
+                    android:scaleType="center"
+                    android:src="@mipmap/icon_delete" />
+
+            </FrameLayout>
 
             <TextView
                 android:id="@+id/tv_choose_fund"
@@ -106,19 +121,33 @@
                 android:padding="@dimen/size15"
                 android:text="认购金额" />
 
-            <EditText
-                android:id="@+id/et_rengou_price"
+            <FrameLayout
                 android:layout_width="0dp"
                 android:layout_height="wrap_content"
-                android:layout_gravity="center"
-                android:padding="@dimen/size15"
-                android:layout_weight="1"
-                android:background="@android:color/transparent"
-                android:gravity="left"
-                android:hint="@string/shururengoujine"
-                android:inputType="numberDecimal"
-                android:textColorHint="@color/text"
-                android:textSize="@dimen/txtSize14" />
+                android:layout_weight="1">
+                <EditText
+                    android:id="@+id/et_rengou_price"
+                    android:layout_width="match_parent"
+                    android:layout_height="wrap_content"
+                    android:layout_gravity="center"
+                    android:padding="@dimen/size15"
+                    android:background="@android:color/transparent"
+                    android:gravity="left"
+                    android:hint="@string/shururengoujine"
+                    android:inputType="numberDecimal"
+                    android:textColorHint="@color/text"
+                    android:textSize="@dimen/txtSize14" />
+
+                <ImageView
+                    android:id="@+id/iv_price_delete"
+                    android:layout_width="@dimen/size30"
+                    android:layout_height="@dimen/size30"
+                    android:layout_gravity="right|center_vertical"
+                    android:visibility="gone"
+                    android:scaleType="center"
+                    android:src="@mipmap/icon_delete" />
+
+            </FrameLayout>
         </LinearLayout>
 
         <View

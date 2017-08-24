@@ -9,19 +9,28 @@
     <RelativeLayout
         android:id="@+id/moreLayout"
         android:layout_width="match_parent"
-        android:layout_height="@dimen/size40">
+        android:layout_height="@dimen/size35">
+        
+        <ImageView
+            android:layout_marginLeft="@dimen/size20"
+            android:id="@+id/left_img"
+            android:src="@mipmap/sy_wenying"
+            android:layout_alignParentLeft="true"
+            android:layout_centerInParent="true"
+            android:layout_width="@dimen/size16"
+            android:layout_height="@dimen/size17" />
+        
+        
         <TextView
+            android:layout_toRightOf="@id/left_img"
+            android:layout_marginLeft="@dimen/size4"
             android:id="@+id/homeHeadName"
             android:layout_width="wrap_content"
             android:layout_height="wrap_content"
-            android:layout_alignParentLeft="true"
             android:layout_centerInParent="true"
-            android:layout_margin="@dimen/size10"
-            android:drawableLeft="@mipmap/wenyinglicai"
-            android:drawablePadding="@dimen/size5"
             android:gravity="center"
             android:text="稳赢理财"
-            android:textColor="@color/color_4a4a4a"
+            android:textColor="@color/black"
             android:textSize="@dimen/txtSize12"
             android:typeface="sans" />
 
@@ -31,7 +40,7 @@
             android:layout_height="wrap_content"
             android:layout_alignParentRight="true"
             android:layout_centerInParent="true"
-            android:padding="@dimen/size10"
+            android:layout_marginRight="@dimen/size20"
             android:src="@mipmap/icon_right" />
     </RelativeLayout>
 
@@ -111,11 +120,11 @@
             android:layout_height="wrap_content"
             android:layout_alignParentBottom="true"
             android:layout_centerHorizontal="true"
-            android:layout_marginBottom="@dimen/size20"
+            android:layout_marginBottom="@dimen/size35"
             android:textSize="@dimen/txtSize12"
             android:gravity="center"
             android:textColor="@color/newStockTitle"
-            android:text="--" />
+            android:text="太牛" />
 
         <LinearLayout
             android:layout_width="wrap_content"
@@ -130,6 +139,7 @@
                 android:textColor="@color/texts"
                 android:id="@+id/tv_text1"
                 android:textSize="@dimen/txtSize12"
+                android:layout_marginTop="@dimen/size20"
                 android:layout_width="wrap_content"
                 android:layout_height="wrap_content"
                 android:text="--" />
@@ -161,12 +171,13 @@
 
         <TextView
             android:id="@+id/tv_text7"
-            android:layout_width="@dimen/size100"
-            android:layout_height="wrap_content"
-            android:background="@mipmap/bg_bule_item"
-            android:text="--"
+            android:layout_width="wrap_content"
+            android:layout_height="@dimen/size20"
             android:textSize="@dimen/txtSize12"
             android:gravity="center"
+            android:text="--"
+            android:paddingLeft="@dimen/size14"
+            android:paddingRight="@dimen/size20"
             android:layout_alignParentRight="true"
             android:layout_marginTop="@dimen/size20"
             android:textColor="@color/white" />
@@ -185,7 +196,8 @@
             android:layout_width="wrap_content"
             android:layout_height="wrap_content"
             android:text="20%"
-            android:layout_marginBottom="@dimen/size30"
+            android:layout_marginBottom="@dimen/size35"
+            android:layout_marginLeft="@dimen/size20"
             android:layout_alignParentBottom="true"
             android:layout_alignRight="@+id/rcv_progress"
             android:textColor="@color/lineColor"
@@ -196,7 +208,6 @@
             android:layout_width="wrap_content"
             android:layout_height="wrap_content"
             android:text="0%"
-            android:layout_marginLeft="@dimen/size10"
             android:textColor="@color/lineColor"
             android:layout_alignBaseline="@+id/textView28"
             android:layout_alignBottom="@+id/textView28"

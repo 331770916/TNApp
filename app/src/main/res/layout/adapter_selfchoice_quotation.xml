@@ -94,8 +94,8 @@
             <LinearLayout
                 android:layout_width="0dp"
                 android:layout_height="wrap_content"
-                android:layout_marginBottom="@dimen/size5"
-                android:layout_marginTop="@dimen/size5"
+                android:layout_marginBottom="@dimen/size6"
+                android:layout_marginTop="@dimen/size6"
                 android:layout_weight="1"
                 android:orientation="horizontal">
 
@@ -104,12 +104,12 @@
                     android:layout_width="0dp"
                     android:layout_height="match_parent"
                     android:layout_marginBottom="@dimen/size5"
-                    android:layout_marginLeft="@dimen/size15"
+                    android:layout_marginLeft="@dimen/size25"
                     android:layout_marginRight="@dimen/size15"
                     android:layout_marginTop="@dimen/size5"
                     android:layout_weight="1"
                     android:background="@color/hideTextColor"
-                    android:gravity="center"
+                    android:gravity="center|right"
                     android:padding="@dimen/size5"
                     android:text="0.03"
                     android:textColor="@color/white"

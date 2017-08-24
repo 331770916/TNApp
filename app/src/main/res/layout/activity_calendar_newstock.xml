@@ -18,18 +18,18 @@
         android:layout_below="@id/rl_top_bar"
         android:id="@+id/newStockTopLayout"
         android:layout_width="match_parent"
-        android:layout_height="wrap_content"
-
+        android:layout_height="@dimen/pickerview_topbar_height"
         android:background="@color/blue">
 
-        <TextView
+        <ImageView
             android:id="@+id/publish_back"
             android:layout_width="wrap_content"
-            android:layout_height="wrap_content"
+            android:layout_height="match_parent"
             android:layout_alignParentLeft="true"
+            android:layout_gravity="center_vertical"
             android:paddingLeft="@dimen/size15"
             android:paddingRight="@dimen/size20"
-            android:background="@drawable/btn_back" />
+            android:src="@mipmap/back_btn" />
 
         <TextView
             android:id="@+id/publish_title"
@@ -110,21 +110,21 @@
                     android:layout_height="wrap_content" />
 
                 <TextView
+                    android:paddingRight="@dimen/size18"
                     android:layout_width="0dp"
-                    android:layout_weight="1"
-                    android:gravity="center"
+                    android:layout_weight="1.2"
+                    android:gravity="center|end"
                     android:textColor="@color/hideTextColor"
-                    android:padding="@dimen/size5"
                     android:textSize="@dimen/txtSize12"
                     android:text="@string/fxjg"
                     android:layout_height="wrap_content" />
 
                 <TextView
+                    android:paddingRight="@dimen/size20"
                     android:layout_width="0dp"
                     android:layout_weight="1"
-                    android:gravity="center"
+                    android:gravity="center|end"
                     android:textColor="@color/hideTextColor"
-                    android:padding="@dimen/size5"
                     android:textSize="@dimen/txtSize12"
                     android:text="@string/fxsyl"
                     android:layout_height="wrap_content" />

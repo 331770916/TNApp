@@ -8,6 +8,7 @@ import android.text.TextWatcher;
 import android.view.View;
 import android.widget.Button;
 import android.widget.EditText;
+import android.widget.ImageView;
 import android.widget.LinearLayout;
 import android.widget.TextView;
 
@@ -66,6 +67,8 @@ public class OTC_SubscriptionActivity extends BaseActivity implements View.OnCli
     private OTC_SubscriptionDialog dialog;
     private static int REQUESTCODE = 1001; //进入风险确认页面的请求码
     private static int REQAGREEMENTCODE = 1002; //进入签署协议页面的请求码
+    private ImageView iv_delete;
+    private ImageView iv_delete_price;
 
     @Override
     public void initView() {
@@ -80,6 +83,10 @@ public class OTC_SubscriptionActivity extends BaseActivity implements View.OnCli
         this.findViewById(R.id.ivOTC_Subscription_back).setOnClickListener(this);                        //返回按钮
         bnOTC_SubscriptionQueDing = (Button) this.findViewById(R.id.bnOTC_SubscriptionQueDing);        //确定按钮
         bnOTC_SubscriptionQueDing.setOnClickListener(this);
+        iv_delete = (ImageView) findViewById(R.id.iv_delete);
+        iv_delete_price = (ImageView) findViewById(R.id.iv_price_delete);
+        iv_delete_price.setOnClickListener(this);
+        iv_delete.setOnClickListener(this);
 
         LinearLayout rootLayout = (LinearLayout) findViewById(R.id.fundRootLayout);
         initMoveKeyBoard(rootLayout, null,etOTC_ProductCode);
@@ -100,6 +107,13 @@ public class OTC_SubscriptionActivity extends BaseActivity implements View.OnCli
 
             @Override
             public void afterTextChanged(Editable s) {
+
+                if (!TextUtils.isEmpty(s.toString())) {
+                    iv_delete.setVisibility(View.VISIBLE);
+                }else {
+                    iv_delete.setVisibility(View.GONE);
+                }
+
                 if (s.length() == MAXNUM) {
                     etOTC_SubscriptionMoney.setFocusableInTouchMode(true); //当输入的代码为6位数时请求数据
                     getAffirmMsg(mSession, s.toString());
@@ -133,10 +147,14 @@ public class OTC_SubscriptionActivity extends BaseActivity implements View.OnCli
 
             @Override
             public void afterTextChanged(Editable s) {
-                if (s.length() > 0) {                                                                     //如果申购金额输入框有数据
+                if (s.length() > 0) {
+
+                    //如果申购金额输入框有数据
+                    iv_delete_price.setVisibility(View.VISIBLE);
                     bnOTC_SubscriptionQueDing.setBackgroundResource(R.drawable.lonin);                 //背景亮
                     bnOTC_SubscriptionQueDing.setEnabled(true);                                        //可点击
                 } else {
+                    iv_delete_price.setVisibility(View.GONE);
                     bnOTC_SubscriptionQueDing.setBackgroundResource(R.drawable.lonin4);                //背景灰色
                     bnOTC_SubscriptionQueDing.setEnabled(false);                                       //不可点击
                 }
@@ -349,6 +367,14 @@ public class OTC_SubscriptionActivity extends BaseActivity implements View.OnCli
                 } else {
                     dialog.show();
                 }
+                break;
+            case R.id.iv_delete:
+                etOTC_ProductCode.setText("");
+                iv_delete.setVisibility(View.GONE);
+                break;
+            case R.id.iv_price_delete:
+                etOTC_SubscriptionMoney.setText("");
+                iv_delete_price.setVisibility(View.GONE);
                 break;
         }
     }
