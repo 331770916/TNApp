@@ -3,11 +3,9 @@ package com.tpyzq.mobile.pangu.activity.detail.stockTab;
 import android.content.Context;
 import android.os.Handler;
 import android.os.Message;
-import android.util.Log;
-import android.view.View;
 import android.view.ViewGroup;
-import android.view.WindowManager;
 import android.webkit.JavascriptInterface;
+import android.webkit.WebSettings;
 import android.webkit.WebView;
 
 import com.tpyzq.mobile.pangu.R;
@@ -32,6 +30,7 @@ public class CapitalWebView extends BaseStockDetailPager implements Handler.Call
     public void setView() {
         webView = (WebView) rootView.findViewById(R.id.webView);
         webView.getSettings().setJavaScriptEnabled(true);
+        webView.getSettings().setCacheMode(WebSettings.LOAD_NO_CACHE);
         webView.getSettings().setDomStorageEnabled(true);
         webView.addJavascriptInterface(new JsInterface(context),"egos");
     }
