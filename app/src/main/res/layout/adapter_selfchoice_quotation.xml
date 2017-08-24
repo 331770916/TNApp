@@ -12,6 +12,7 @@
         android:scaleType="center"
         android:src="@mipmap/item_green"/>
 
+
     <LinearLayout
         android:layout_width="match_parent"
         android:layout_height="@dimen/size51"
@@ -28,7 +29,7 @@
                 android:layout_height="wrap_content"
                 android:layout_gravity="center_vertical"
                 android:layout_marginBottom="@dimen/size5"
-                android:layout_marginLeft="@dimen/size10"
+                android:layout_marginLeft="@dimen/size20"
                 android:layout_marginTop="@dimen/size5"
                 android:layout_weight="1">
 
@@ -80,13 +81,14 @@
             </RelativeLayout>
 
             <TextView
+                android:paddingRight="@dimen/size30"
                 android:id="@+id/selfchoice_Price"
                 android:layout_width="0dp"
                 android:layout_height="match_parent"
                 android:layout_marginBottom="@dimen/size5"
                 android:layout_marginTop="@dimen/size5"
                 android:layout_weight="1"
-                android:gravity="center"
+                android:gravity="center|end"
                 android:text="-"
                 android:textColor="@color/hushenTab_titleColor"
                 android:textSize="@dimen/self_stockNumberPrice" />
@@ -105,12 +107,12 @@
                     android:layout_height="match_parent"
                     android:layout_marginBottom="@dimen/size5"
                     android:layout_marginLeft="@dimen/size25"
-                    android:layout_marginRight="@dimen/size15"
+                    android:layout_marginRight="@dimen/size20"
                     android:layout_marginTop="@dimen/size5"
                     android:layout_weight="1"
                     android:background="@color/hideTextColor"
-                    android:gravity="center|right"
-                    android:padding="@dimen/size5"
+                    android:gravity="center"
+                    android:padding="@dimen/size3"
                     android:text="0.03"
                     android:textColor="@color/white"
                     android:textSize="@dimen/self_stockNumberZdf" />

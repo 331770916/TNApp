@@ -73,8 +73,8 @@ public class RevokeAdapter extends BaseAdapter {
         }
         viewHodler.textView1.setText(mList.get(position).getName());
 
-        viewHodler.textView2.setText(Helper.formateDate(mList.get(position).getTitm().toString()));
-
+//        viewHodler.textView2.setText(Helper.formateDate(mList.get(position).getTitm().toString()));
+        viewHodler.textView2.setText(mList.get(position).getCode());
 
         if (!"0".equals(mList.get(position).getPrice())) {
             viewHodler.textView3.setText(mList.get(position).getPrice());

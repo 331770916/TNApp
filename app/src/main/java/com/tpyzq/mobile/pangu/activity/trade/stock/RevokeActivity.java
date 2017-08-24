@@ -138,6 +138,7 @@ public class RevokeActivity extends BaseActivity implements AdapterView.OnItemCl
                         if (data != null && data.length() > 0) {
                             for (int i = 0; i < data.length(); i++) {
                                 RevokeEntity _bean = new RevokeEntity();
+                                _bean.setCode(data.optJSONObject(i).optString("SECU_CODE"));
                                 _bean.setName(data.getJSONObject(i).getString("SECU_NAME"));
                                 _bean.setTitm(data.getJSONObject(i).getString("ORDER_TIME"));
                                 _bean.setPrice(data.getJSONObject(i).getString("PRICE"));

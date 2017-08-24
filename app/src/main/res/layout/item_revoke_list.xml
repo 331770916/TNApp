@@ -15,7 +15,7 @@
         <LinearLayout
             android:id="@+id/ll_1"
             android:layout_width="0dp"
-            android:layout_height="40dp"
+            android:layout_height="match_parent"
             android:layout_marginBottom="@dimen/size5"
             android:layout_marginTop="@dimen/size5"
             android:layout_weight="0.8"
@@ -27,13 +27,10 @@
                 android:layout_height="0dp"
                 android:layout_weight="1"
                 android:gravity="center|start"
-                android:paddingBottom="@dimen/size2"
                 android:paddingLeft="@dimen/size10"
-                android:paddingTop="@dimen/size2"
                 android:textSize="@dimen/txtSize14" />
 
             <TextView
-
                 android:id="@+id/tv_revoke_text2"
                 android:layout_width="match_parent"
                 android:layout_height="0dp"
@@ -49,7 +46,7 @@
         <LinearLayout
             android:id="@+id/ll_2"
             android:layout_width="0dp"
-            android:layout_height="40dp"
+            android:layout_height="match_parent"
             android:layout_marginBottom="@dimen/size5"
             android:layout_marginTop="@dimen/size5"
             android:layout_weight="1"
@@ -63,7 +60,6 @@
                 android:layout_weight="1"
                 android:gravity="center|end"
                 android:paddingBottom="@dimen/size2"
-                android:paddingTop="@dimen/size2"
                 android:textSize="@dimen/txtSize14" />
 
             <TextView
@@ -81,7 +77,7 @@
         <LinearLayout
             android:id="@+id/ll_3"
             android:layout_width="0dp"
-            android:layout_height="40dp"
+            android:layout_height="match_parent"
             android:layout_marginBottom="@dimen/size5"
             android:layout_marginTop="@dimen/size5"
             android:layout_weight="1"
@@ -95,7 +91,6 @@
                 android:layout_weight="1"
                 android:gravity="center|end"
                 android:paddingBottom="@dimen/size2"
-                android:paddingTop="@dimen/size2"
                 android:textSize="@dimen/txtSize14" />
 
             <TextView
@@ -113,7 +108,7 @@
         <LinearLayout
             android:id="@+id/ll_4"
             android:layout_width="0dp"
-            android:layout_height="40dp"
+            android:layout_height="match_parent"
             android:layout_marginBottom="@dimen/size5"
             android:layout_marginTop="@dimen/size5"
             android:layout_weight="0.8"
@@ -126,7 +121,6 @@
                 android:layout_weight="1"
                 android:gravity="center|end"
                 android:paddingBottom="@dimen/size2"
-                android:paddingTop="@dimen/size2"
                 android:paddingRight="@dimen/size10"
                 android:textSize="@dimen/txtSize14" />
 
@@ -146,6 +140,6 @@
     <View
         android:layout_width="match_parent"
         android:layout_height="@dimen/size0.5"
-        android:layout_marginLeft="@dimen/size20"
+        android:layout_marginLeft="@dimen/size10"
         android:background="@color/stkDetailDividerColor" />
 </LinearLayout>

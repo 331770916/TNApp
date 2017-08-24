@@ -203,10 +203,13 @@ public class SelfChoiceNewsTab extends BaseTabPager implements
             newsInofEntity.setAuth(informationEntity.getSource());
             newsInofEntity.setTitle(informationEntity.getTitle());
             String digest = informationEntity.getDigest();
+//            digest = digest.replace((char) 12288, ' ');
             if (TextUtils.isEmpty(digest)) {
                 digest = "";
             } else {
-                digest = digest.trim();
+//                digest.trim();
+                digest = digest.replaceAll("\\s*(.*)\\s*", "$1");
+//                digest = digest.trim();
             }
             newsInofEntity.setSum(digest);
             newsInofEntity.setStockCode(informationEntity.getSecuCode());
