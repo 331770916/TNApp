@@ -1,11 +1,9 @@
 package com.tpyzq.mobile.pangu.activity.trade.stock;
 
 import android.app.Dialog;
-import android.os.SystemClock;
 import android.view.View;
 import android.widget.ImageView;
 import android.widget.ListView;
-import android.widget.RelativeLayout;
 import com.handmark.pulltorefresh.library.PullToRefreshBase;
 import com.handmark.pulltorefresh.library.PullToRefreshListView;
 import com.tpyzq.mobile.pangu.R;
@@ -31,7 +29,6 @@ public class VoteActivity extends BaseActivity  implements InterfaceCollection.I
     private List<NetworkVotingEntity> myList;
     private PullToRefreshListView listView;
     private String mSession,position = "";
-    private RelativeLayout kong_null;
     private VoteAdapter mAdapter;
     private ImageView iv_isEmpty;
     private boolean mIsClean;
@@ -45,7 +42,6 @@ public class VoteActivity extends BaseActivity  implements InterfaceCollection.I
         listView = (PullToRefreshListView) findViewById(R.id.voteListview);
         listView.setMode(PullToRefreshBase.Mode.BOTH);
         iv_isEmpty = (ImageView) findViewById(R.id.iv_isEmpty);
-        kong_null = (RelativeLayout)findViewById(R.id.VTEAMP_Kong_Null);
         findViewById(R.id.detail_back).setOnClickListener(this);
         mDialog = LoadingDialog.initDialog(this, "正在查询...");
         mAdapter = new VoteAdapter(this);
@@ -111,7 +107,6 @@ public class VoteActivity extends BaseActivity  implements InterfaceCollection.I
 //                        showToast(" 暂无数据");
                         CentreToast.showText(VoteActivity.this,"暂无数据");
                     }
-                    kong_null.setVisibility(View.GONE);
                     listView.onRefreshComplete();
                     listView.setMode(PullToRefreshBase.Mode.PULL_FROM_START);
                 }
@@ -121,7 +116,6 @@ public class VoteActivity extends BaseActivity  implements InterfaceCollection.I
             listView.onRefreshComplete();
         }else{//-1,-2,-3情况下显示定义好信息
             CentreToast.showText(VoteActivity.this,info.getMsg());
-            kong_null.setVisibility(View.GONE);
             listView.onRefreshComplete();
         }
         isRequest = false;
@@ -141,7 +135,6 @@ public class VoteActivity extends BaseActivity  implements InterfaceCollection.I
         }
         mAdapter = null;
         listView = null;
-        kong_null = null;
         iv_isEmpty = null;
     }
 }
