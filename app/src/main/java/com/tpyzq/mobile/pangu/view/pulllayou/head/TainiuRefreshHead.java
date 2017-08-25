@@ -98,6 +98,7 @@ public class TainiuRefreshHead extends SimpleRefreshHead {
             @Override
             public void onAnimationEnd() {
                 animationDrawable.stop();
+                reset();
             }
         });
     }

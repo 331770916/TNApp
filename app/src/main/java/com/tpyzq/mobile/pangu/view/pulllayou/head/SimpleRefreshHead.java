@@ -157,14 +157,21 @@ public class SimpleRefreshHead implements IRefreshHead {
 
     @Override
     public void finishPull(boolean isBeingDragged) {
-        //显示一个刷新结果
-        iPull.animToStartPosition(new AnimationCallback() {
-            @Override
-            public void onAnimationEnd() {
-                showArrow();
-            }
-        });
+
+        if (isBeingDragged)
+            reset();
+        else {
+            //显示一个刷新结果
+            iPull.animToStartPosition(new AnimationCallback() {
+                @Override
+                public void onAnimationEnd() {
+                    showArrow();
+                }
+            });
+        }
     }
+
+
 
     @Override
     public void finishPull(boolean isBeingDragged, CharSequence msg, boolean result) {
