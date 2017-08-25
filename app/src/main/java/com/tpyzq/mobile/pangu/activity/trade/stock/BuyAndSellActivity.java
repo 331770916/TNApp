@@ -87,6 +87,7 @@ import okhttp3.Call;
 
 import static com.tpyzq.mobile.pangu.util.TransitionUtils.fundPirce;
 import static com.tpyzq.mobile.pangu.util.TransitionUtils.string2doubleS;
+import static com.tpyzq.mobile.pangu.util.TransitionUtils.string2doubleS3;
 import static com.tpyzq.mobile.pangu.util.keyboard.KeyEncryptionUtils.encryptBySessionKey;
 
 
@@ -1101,6 +1102,70 @@ public class BuyAndSellActivity extends BaseActivity implements View.OnClickList
     }
 
     /**
+     * 点击增加或减小价格按钮  判断是买还是卖调用setPrice
+     * @param isAdd true 买 false 卖
+     */
+    private void setSumOrAddPrice(boolean isAdd) {
+        if (rb_buy.isChecked()) {
+            //买入界面
+            setPrice(price_buy, isAdd);
+        } else {
+            //卖出界面
+            setPrice(price_sell,isAdd);
+        }
+    }
+
+    /**
+     * 判断当前加减的单位是0.01 0.001
+     * @param tempArr 买或卖五档行情
+     * @param isAdd true 买 false 卖
+     */
+    private void setPrice(String[] tempArr,boolean isAdd) {
+        try {
+            String tempPrice;
+            double increment = 0.01;
+            int length;
+            if (null==tempArr||tempArr.length==0|| TextUtils.isEmpty(tempArr[0])|| !Helper.isDecimal(tempArr[0])) {
+                //没有买入价格
+                increment = 0.01;
+            } else {
+                tempPrice = tempArr[0];
+                if (tempPrice.indexOf(".")!=-1) {
+                    length = tempPrice.length() - tempPrice.indexOf(".") - 1;
+                    if (length <= 2) {
+                        increment = 0.01;
+                    } else {
+                        increment = 0.001;
+                    }
+                } else {
+                    increment = 0.01;
+                }
+            }
+            String numString = et_price.getText().toString().trim();
+            if (TextUtils.isEmpty(numString) || "0.0".equals(numString) || ".".equals(numString) || "- -".equals(numString)) {
+                price = 0;
+            }
+            if (isAdd) {
+                price = price + increment;
+            } else {
+                price = price - increment;
+            }
+            if (price < 0) {
+                price = 0.0;
+            }
+            if (increment == 0.01) {
+                et_price.setText(string2doubleS(price + ""));
+            } else {
+                et_price.setText(string2doubleS3(price + ""));
+            }
+            et_price.requestFocus();
+            et_price.setSelection(et_price.getText().length());
+        } catch (Exception e) {
+            e.printStackTrace();
+        }
+    }
+
+    /**
      * 点击事件
      *
      * @param v
@@ -1117,16 +1182,10 @@ public class BuyAndSellActivity extends BaseActivity implements View.OnClickList
                 clearView(true);
                 break;
             case R.id.iv_sub_price:
-                price -= 0.01;
-                et_price.setText(string2doubleS(price + ""));
-                et_price.requestFocus();
-                et_price.setSelection(et_price.getText().length());
+                setSumOrAddPrice(false);
                 break;
             case R.id.iv_add_price:
-                price += 0.01;
-                et_price.setText(string2doubleS(price + ""));
-                et_price.requestFocus();
-                et_price.setSelection(et_price.getText().length());
+                setSumOrAddPrice(true);
                 break;
             case R.id.iv_sub_sum:
                 String tvSubText = tv_sum.getText().toString();

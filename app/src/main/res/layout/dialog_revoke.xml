@@ -9,19 +9,33 @@
         android:layout_height="250dp"
         android:background="@color/white"
         android:orientation="vertical">
-
-        <TextView
-            android:id="@+id/tv_title"
-            android:layout_width="wrap_content"
-            android:layout_height="wrap_content"
-            android:layout_centerHorizontal="true"
+        
+        <LinearLayout
             android:layout_marginTop="@dimen/size20"
-            android:drawableLeft="@mipmap/queren"
-            android:drawablePadding="@dimen/size10"
-            android:text="是否撤回此委托"
-            android:textColor="@color/black"
-            android:textSize="@dimen/txtSize16"
-            android:textStyle="bold" />
+            android:gravity="center"
+            android:layout_width="match_parent"
+            android:layout_height="wrap_content">
+            
+            
+            <ImageView
+                android:src="@mipmap/jy_chedan"
+                android:layout_width="16dp"
+                android:layout_height="16dp" />
+
+
+            <TextView
+                android:layout_marginLeft="@dimen/size10"
+                android:id="@+id/tv_title"
+                android:layout_width="wrap_content"
+                android:layout_height="wrap_content"
+                android:layout_centerHorizontal="true"
+                android:drawablePadding="@dimen/size10"
+                android:text="是否撤回此委托"
+                android:textColor="@color/black"
+                android:textSize="@dimen/txtSize16"
+                android:textStyle="bold" />
+
+        </LinearLayout>
 
         <LinearLayout
             android:layout_width="wrap_content"
@@ -129,7 +143,7 @@
                 <TextView
                     android:layout_width="wrap_content"
                     android:layout_height="wrap_content"
-                    android:text="买\t\t\t卖:"
+                    android:text="买\t\t\t\t卖:"
                     android:textColor="@color/text" />
 
                 <TextView
@@ -156,7 +170,7 @@
             <Button
                 android:id="@+id/bt_false"
                 android:layout_width="0dp"
-                android:layout_height="@dimen/size50"
+                android:layout_height="@dimen/size40"
                 android:layout_weight="1"
                 android:background="@color/grey"
                 android:text="取消"
@@ -166,7 +180,7 @@
                 android:layout_marginLeft="@dimen/size20"
                 android:id="@+id/bt_true"
                 android:layout_width="0dp"
-                android:layout_height="@dimen/size50"
+                android:layout_height="@dimen/size40"
                 android:layout_weight="1"
                 android:background="@color/blue"
                 android:text="确定"
