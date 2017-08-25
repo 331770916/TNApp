@@ -86,8 +86,9 @@ import java.util.Map;
 import okhttp3.Call;
 
 import static com.tpyzq.mobile.pangu.util.TransitionUtils.fundPirce;
-import static com.tpyzq.mobile.pangu.util.TransitionUtils.string2doubleS;
+import static com.tpyzq.mobile.pangu.util.TransitionUtils.string2doubleDown;
 import static com.tpyzq.mobile.pangu.util.TransitionUtils.string2doubleS3;
+import static com.tpyzq.mobile.pangu.util.TransitionUtils.string2doubleS;
 import static com.tpyzq.mobile.pangu.util.keyboard.KeyEncryptionUtils.encryptBySessionKey;
 
 
@@ -162,6 +163,7 @@ public class BuyAndSellActivity extends BaseActivity implements View.OnClickList
     private boolean isSetStockCodeEt = true;
     private String istatus;
     private boolean isGetStockCode;//从外面携带代码来
+    private CustomCenterDialog customCenterDialog;
 
     @Override
     public void initView() {
@@ -328,8 +330,8 @@ public class BuyAndSellActivity extends BaseActivity implements View.OnClickList
                     return;
                 }
                 String numString = et_price.getText().toString().trim();
-                if ((Helper.isDecimal(numString)&&numString.length()==6)||!TextUtils.isEmpty(stockCode)) {
-                    if (TextUtils.isEmpty(numString) || "0.0".equals(numString) || ".".equals(numString) || "- -".equals(numString)) {
+                if ((et_stock_code.getText().toString().trim().length()==6)||!TextUtils.isEmpty(stockCode)) {
+                    if (!Helper.isDecimal(numString)||TextUtils.isEmpty(numString) || "0.0".equals(numString) || ".".equals(numString) || "- -".equals(numString)) {
                         return;
                     } else {
                         double numInt = Double.parseDouble(numString);
@@ -684,13 +686,7 @@ public class BuyAndSellActivity extends BaseActivity implements View.OnClickList
                             BigDecimal b1 = new BigDecimal(stock_sum);
                             BigDecimal result1 = a1.multiply(b1);
 
-                            if (rb_buy.isChecked()) {
-                                bt_buy.setText("买(" + string2doubleS(result1 + "") + ")");
-                                bt_sell.setText("卖");
-                            } else if (rb_sell.isChecked()) {
-                                bt_buy.setText("买");
-                                bt_sell.setText("卖(" + string2doubleS(result1 + "") + ")");
-                            }
+                            setBtnSellAndBuyTxt(result1);
                         }
 //                        et_num.setEnabled(true);
                     } else if ("-6".equals(code)){
@@ -705,6 +701,24 @@ public class BuyAndSellActivity extends BaseActivity implements View.OnClickList
 
             }
         });
+    }
+
+    private void setBtnSellAndBuyTxt(BigDecimal result1) {
+        if (rb_buy.isChecked()) {
+            if (getIncrement(price_buy) == 100) {
+                bt_buy.setText("买(" + string2doubleDown(result1 + "") + ")");
+            } else {
+                bt_buy.setText("买(" + string2doubleS3(result1 + "") + ")");
+            }
+            bt_sell.setText("卖");
+        } else if (rb_sell.isChecked()) {
+            bt_buy.setText("买");
+            if (getIncrement(price_buy) == 100) {
+                bt_sell.setText("卖(" + string2doubleDown(result1 + "") + ")");
+            } else {
+                bt_sell.setText("卖(" + string2doubleS3(result1 + "") + ")");
+            }
+        }
     }
 
     /**
@@ -944,13 +958,7 @@ public class BuyAndSellActivity extends BaseActivity implements View.OnClickList
                         BigDecimal b1 = new BigDecimal(stock_sum);
                         BigDecimal result1 = a1.multiply(b1);
 
-                        if (rb_buy.isChecked()) {
-                            bt_buy.setText("买(" + string2doubleS(result1 + "") + ")");
-                            bt_sell.setText("卖");
-                        } else if (rb_sell.isChecked()) {
-                            bt_buy.setText("买");
-                            bt_sell.setText("卖(" + string2doubleS(result1 + "") + ")");
-                        }
+                        setBtnSellAndBuyTxt(result1);
                     }
                 }
             }
@@ -1002,13 +1010,7 @@ public class BuyAndSellActivity extends BaseActivity implements View.OnClickList
                             BigDecimal b1 = new BigDecimal(stock_sum);
                             BigDecimal result1 = a1.multiply(b1);
 
-                            if (rb_buy.isChecked()) {
-                                bt_buy.setText("买(" + string2doubleS(result1 + "") + ")");
-                                bt_sell.setText("卖");
-                            } else if (rb_sell.isChecked()) {
-                                bt_buy.setText("买");
-                                bt_sell.setText("卖(" + string2doubleS(result1 + "") + ")");
-                            }
+                            setBtnSellAndBuyTxt(result1);
                         }
                     }
                 }
@@ -1125,36 +1127,21 @@ public class BuyAndSellActivity extends BaseActivity implements View.OnClickList
             String tempPrice;
             double increment = 0.01;
             int length;
-            if (null==tempArr||tempArr.length==0|| TextUtils.isEmpty(tempArr[0])|| !Helper.isDecimal(tempArr[0])) {
-                //没有买入价格
-                increment = 0.01;
-            } else {
-                tempPrice = tempArr[0];
-                if (tempPrice.indexOf(".")!=-1) {
-                    length = tempPrice.length() - tempPrice.indexOf(".") - 1;
-                    if (length <= 2) {
-                        increment = 0.01;
-                    } else {
-                        increment = 0.001;
-                    }
-                } else {
-                    increment = 0.01;
-                }
-            }
+            increment = getIncrement(tempArr);
             String numString = et_price.getText().toString().trim();
             if (TextUtils.isEmpty(numString) || "0.0".equals(numString) || ".".equals(numString) || "- -".equals(numString)) {
                 price = 0;
             }
             if (isAdd) {
-                price = price + increment;
+                price = (price * increment + 1)/increment;
             } else {
-                price = price - increment;
+                price = (price * increment - 1)/increment;
             }
             if (price < 0) {
                 price = 0.0;
             }
-            if (increment == 0.01) {
-                et_price.setText(string2doubleS(price + ""));
+            if (increment == 100) {
+                et_price.setText(string2doubleDown(price + ""));
             } else {
                 et_price.setText(string2doubleS3(price + ""));
             }
@@ -1163,6 +1150,29 @@ public class BuyAndSellActivity extends BaseActivity implements View.OnClickList
         } catch (Exception e) {
             e.printStackTrace();
         }
+    }
+
+    private double getIncrement(String[] tempArr) {
+        double increment;
+        String tempPrice;
+        int length;
+        if (null==tempArr||tempArr.length==0|| TextUtils.isEmpty(tempArr[0])|| !Helper.isDecimal(tempArr[0])) {
+            //没有买入价格
+            increment = 100;
+        } else {
+            tempPrice = tempArr[0];
+            if (tempPrice.indexOf(".")!=-1) {
+                length = tempPrice.length() - tempPrice.indexOf(".") - 1;
+                if (length <= 2) {
+                    increment = 100;
+                } else {
+                    increment = 1000;
+                }
+            } else {
+                increment = 100;
+            }
+        }
+        return increment;
     }
 
     /**
@@ -1188,10 +1198,10 @@ public class BuyAndSellActivity extends BaseActivity implements View.OnClickList
                 setSumOrAddPrice(true);
                 break;
             case R.id.iv_sub_sum:
-                String tvSubText = tv_sum.getText().toString();
+                /*String tvSubText = tv_sum.getText().toString();
                 if (TextUtils.isEmpty(tvSubText)||"0.0".equalsIgnoreCase(tvSubText)||"0".equalsIgnoreCase(tvSubText)||"0.00".equalsIgnoreCase(tvSubText)) {
                     amount = 0;
-                }
+                }*/
                 amount -= 100;
                 if (amount < 0){
                     break;
@@ -1214,10 +1224,10 @@ public class BuyAndSellActivity extends BaseActivity implements View.OnClickList
                 }*/
                 break;
             case R.id.iv_add_sum:
-                String tvSumText = tv_sum.getText().toString();
+                /*String tvSumText = tv_sum.getText().toString();
                 if (TextUtils.isEmpty(tvSumText)||"0.0".equalsIgnoreCase(tvSumText)||"0".equalsIgnoreCase(tvSumText)||"0.00".equalsIgnoreCase(tvSumText)) {
                     amount = 0;
-                }
+                }*/
                 amount += 100;
                 et_num.setText(amount + "");
                 et_num.setSelection(et_num.getText().length());
@@ -1358,7 +1368,8 @@ public class BuyAndSellActivity extends BaseActivity implements View.OnClickList
                     iv_depute_way.setText(ways);
                     et_price.setText(final_price);
                     price = Double.valueOf(final_price);
-
+                    iv_sub_price.setEnabled(true);
+                    iv_add_price.setEnabled(true);
                 } else {
                     entrustWays = ways;
                     iv_depute_way.setText(ways);
@@ -1370,6 +1381,8 @@ public class BuyAndSellActivity extends BaseActivity implements View.OnClickList
                         bt_buy.setText("买");
                         bt_sell.setText("卖出");
                     }
+                    iv_sub_price.setEnabled(false);
+                    iv_add_price.setEnabled(false);
                 }
             }catch (Exception e){
              e.printStackTrace();
@@ -1558,7 +1571,9 @@ public class BuyAndSellActivity extends BaseActivity implements View.OnClickList
     }
 
     public void showDialog(String msg){
-        CustomCenterDialog customCenterDialog = CustomCenterDialog.CustomCenterDialog(msg,CustomCenterDialog.SHOWCENTER);
+        if (null == customCenterDialog) {
+            customCenterDialog = CustomCenterDialog.CustomCenterDialog(msg, CustomCenterDialog.SHOWCENTER);
+        }
         customCenterDialog.show(getFragmentManager(),BuyAndSellActivity.class.toString());
     }
 
