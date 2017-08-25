@@ -206,7 +206,7 @@ public class BuyAndSellActivity extends BaseActivity implements View.OnClickList
         tv_sum = (TextView) findViewById(R.id.tv_sum);
         mi_buy = (MagicIndicator) findViewById(R.id.mi_buy);
         tv_max_buysell = (TextView) findViewById(R.id.tv_max_buysell);
-        tv_max_buysell.requestFocus();
+        et_price.requestFocus();
         initData();
         initMoveKeyBoard(ll_father, null);
     }
@@ -680,13 +680,7 @@ public class BuyAndSellActivity extends BaseActivity implements View.OnClickList
                         MARKET_NAME = authorizeBean.MARKET_NAME;//交易市场
                         MARKET = authorizeBean.MARKET;//交易市场
                         if (Helper.isDecimal(et_price.getText().toString())) {
-                            Double stock_price = Double.valueOf(et_price.getText().toString());
-                            Double stock_sum = Double.valueOf(amount);
-                            BigDecimal a1 = new BigDecimal(stock_price);
-                            BigDecimal b1 = new BigDecimal(stock_sum);
-                            BigDecimal result1 = a1.multiply(b1);
-
-                            setBtnSellAndBuyTxt(result1);
+                            setBtnSellAndBuyTxt(TransitionUtils.mul(et_price.getText().toString(), amount+""));
                         }
 //                        et_num.setEnabled(true);
                     } else if ("-6".equals(code)){
@@ -703,9 +697,9 @@ public class BuyAndSellActivity extends BaseActivity implements View.OnClickList
         });
     }
 
-    private void setBtnSellAndBuyTxt(BigDecimal result1) {
+    private void setBtnSellAndBuyTxt(Double result1) {
         if (rb_buy.isChecked()) {
-            if (getIncrement(price_buy) == 100) {
+            if (getIncrement(price_buy) == 0.01) {
                 bt_buy.setText("买(" + string2doubleDown(result1 + "") + ")");
             } else {
                 bt_buy.setText("买(" + string2doubleS3(result1 + "") + ")");
@@ -713,7 +707,7 @@ public class BuyAndSellActivity extends BaseActivity implements View.OnClickList
             bt_sell.setText("卖");
         } else if (rb_sell.isChecked()) {
             bt_buy.setText("买");
-            if (getIncrement(price_buy) == 100) {
+            if (getIncrement(price_buy) == 0.01) {
                 bt_sell.setText("卖(" + string2doubleDown(result1 + "") + ")");
             } else {
                 bt_sell.setText("卖(" + string2doubleS3(result1 + "") + ")");
@@ -937,7 +931,7 @@ public class BuyAndSellActivity extends BaseActivity implements View.OnClickList
                 bt_sell.setText("卖");
             }
             if (numString.startsWith("0")) {
-                CentreToast.showText(BuyAndSellActivity.this, "交易数量首位不能为0",Toast.LENGTH_SHORT);
+//                CentreToast.showText(BuyAndSellActivity.this, "交易数量首位不能为0",Toast.LENGTH_SHORT);
                 et_num.setText(TransitionUtils.delHeaderZero(numString));
                 return;
             }
@@ -952,13 +946,7 @@ public class BuyAndSellActivity extends BaseActivity implements View.OnClickList
                 } else {
                     amount = numInt;
                     if (Helper.isDecimal(et_price.getText().toString())) {
-                        Double stock_price = Double.valueOf(et_price.getText().toString());
-                        Double stock_sum = Double.valueOf(amount);
-                        BigDecimal a1 = new BigDecimal(stock_price);
-                        BigDecimal b1 = new BigDecimal(stock_sum);
-                        BigDecimal result1 = a1.multiply(b1);
-
-                        setBtnSellAndBuyTxt(result1);
+                        setBtnSellAndBuyTxt(TransitionUtils.mul(et_price.getText().toString(), amount+""));
                     }
                 }
             }
@@ -1004,13 +992,7 @@ public class BuyAndSellActivity extends BaseActivity implements View.OnClickList
                         }
 
                         if (Helper.isDecimal(et_price.getText().toString())) {
-                            Double stock_price = Double.valueOf(et_price.getText().toString());
-                            Double stock_sum = Double.valueOf(amount);
-                            BigDecimal a1 = new BigDecimal(stock_price);
-                            BigDecimal b1 = new BigDecimal(stock_sum);
-                            BigDecimal result1 = a1.multiply(b1);
-
-                            setBtnSellAndBuyTxt(result1);
+                            setBtnSellAndBuyTxt(TransitionUtils.mul(et_price.getText().toString(), amount+""));
                         }
                     }
                 }
@@ -1133,14 +1115,14 @@ public class BuyAndSellActivity extends BaseActivity implements View.OnClickList
                 price = 0;
             }
             if (isAdd) {
-                price = (price * increment + 1)/increment;
+                price = TransitionUtils.add(price, increment);
             } else {
-                price = (price * increment - 1)/increment;
+                price = TransitionUtils.sub(price, increment);
             }
             if (price < 0) {
                 price = 0.0;
             }
-            if (increment == 100) {
+            if (increment == 0.01) {
                 et_price.setText(string2doubleDown(price + ""));
             } else {
                 et_price.setText(string2doubleS3(price + ""));
@@ -1158,18 +1140,18 @@ public class BuyAndSellActivity extends BaseActivity implements View.OnClickList
         int length;
         if (null==tempArr||tempArr.length==0|| TextUtils.isEmpty(tempArr[0])|| !Helper.isDecimal(tempArr[0])) {
             //没有买入价格
-            increment = 100;
+            increment = 0.01;
         } else {
             tempPrice = tempArr[0];
             if (tempPrice.indexOf(".")!=-1) {
                 length = tempPrice.length() - tempPrice.indexOf(".") - 1;
                 if (length <= 2) {
-                    increment = 100;
+                    increment = 0.01;
                 } else {
-                    increment = 1000;
+                    increment = 0.001;
                 }
             } else {
-                increment = 100;
+                increment = 0.01;
             }
         }
         return increment;
@@ -1204,6 +1186,7 @@ public class BuyAndSellActivity extends BaseActivity implements View.OnClickList
                 }*/
                 amount -= 100;
                 if (amount < 0){
+                    amount = 0;
                     break;
                 }
                 et_num.setText(amount + "");
@@ -1571,9 +1554,10 @@ public class BuyAndSellActivity extends BaseActivity implements View.OnClickList
     }
 
     public void showDialog(String msg){
-        if (null == customCenterDialog) {
-            customCenterDialog = CustomCenterDialog.CustomCenterDialog(msg, CustomCenterDialog.SHOWCENTER);
+        if (null != customCenterDialog) {
+            customCenterDialog.dismiss();
         }
+        customCenterDialog = CustomCenterDialog.CustomCenterDialog(msg, CustomCenterDialog.SHOWCENTER);
         customCenterDialog.show(getFragmentManager(),BuyAndSellActivity.class.toString());
     }
 
@@ -1617,12 +1601,15 @@ public class BuyAndSellActivity extends BaseActivity implements View.OnClickList
                 LogHelper.e("BuyAndSellActivity", e.toString());
                 if (stockInfo.length()==6) {
                     confirmCode(stockInfo);
+                } else {
+                    isGetStockCode = false;
                 }
             }
 
             @Override
             public void onResponse(String response, int id) {
                 if (TextUtils.isEmpty(response)) {
+                    isGetStockCode = false;
                     return;
                 }
                 try {
@@ -1685,6 +1672,8 @@ public class BuyAndSellActivity extends BaseActivity implements View.OnClickList
                         // TODO: 2017/7/20 调用333000接口 获取股票代码名称和最新价
                         if (stockInfo.length()==6) {
                             confirmCode(stockInfo);
+                        } else {
+                            isGetStockCode = false;
                         }
                     } else {
                         if (null!=stockPw&&stockPw.isShowing()) {
@@ -1692,6 +1681,8 @@ public class BuyAndSellActivity extends BaseActivity implements View.OnClickList
                         }
                         if (stockInfo.length()==6) {
                             confirmCode(stockInfo);
+                        } else {
+                            isGetStockCode = false;
                         }
                     }
                 } catch (JSONException e) {
@@ -1714,11 +1705,13 @@ public class BuyAndSellActivity extends BaseActivity implements View.OnClickList
             @Override
             public void onError(Call call, Exception e, int id) {
                 CentreToast.showText(BuyAndSellActivity.this,ConstantUtil.NETWORK_ERROR);
+                isGetStockCode = false;
             }
 
             @Override
             public void onResponse(String response, int id) {
                 if (TextUtils.isEmpty(response)) {
+                    isGetStockCode = false;
                     return;
                 }
                 try {
@@ -1740,7 +1733,7 @@ public class BuyAndSellActivity extends BaseActivity implements View.OnClickList
                         LAST_PRICE = mFormat1.format(Double.parseDouble(LAST_PRICE));
                         isClearHeadData = false;
                         isChangeSearchStatus = false;
-                        if (!isSetStockCodeEt) {
+                        if (!isSetStockCodeEt && !isGetStockCode) {
                             if (null==transStockBeen) {
                                 transStockBeen = new ArrayList<TransStockEntity>();
                             }
@@ -1825,8 +1818,10 @@ public class BuyAndSellActivity extends BaseActivity implements View.OnClickList
                                 }
                             }
                         }
+                        isGetStockCode = false;
                     } else {
                         CentreToast.showText(BuyAndSellActivity.this,msg);
+                        isGetStockCode = false;
                     }
                 } catch (Exception e) {
                     e.printStackTrace();
