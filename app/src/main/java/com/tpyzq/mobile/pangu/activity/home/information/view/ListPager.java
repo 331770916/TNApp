@@ -71,6 +71,7 @@ public class ListPager extends BasePager implements InterfaceCollection.Interfac
                 intent.setClass(mContext, NewsDetailActivity.class);
                 InformationEntity informationBean = list.get(position - 1);
                 intent.putExtra("requestId", informationBean.getNewsno());
+                intent.putExtra("classno", classno);
                 mContext.startActivity(intent);
             }
         });

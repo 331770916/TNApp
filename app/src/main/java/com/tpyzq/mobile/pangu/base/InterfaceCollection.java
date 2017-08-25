@@ -1,15 +1,8 @@
 package com.tpyzq.mobile.pangu.base;
 
-import android.graphics.Bitmap;
-import android.graphics.Color;
 import android.text.TextUtils;
-import android.util.ArrayMap;
-
 import com.google.gson.Gson;
 import com.google.gson.reflect.TypeToken;
-import com.tpyzq.mobile.pangu.R;
-import com.tpyzq.mobile.pangu.activity.myself.login.ShouJiZhuCeActivity;
-import com.tpyzq.mobile.pangu.activity.trade.open_fund.AddOrModFixFundActivity;
 import com.tpyzq.mobile.pangu.data.AssessConfirmEntity;
 import com.tpyzq.mobile.pangu.data.EtfDataEntity;
 import com.tpyzq.mobile.pangu.data.FixFundEntity;
@@ -23,29 +16,21 @@ import com.tpyzq.mobile.pangu.data.ResultInfo;
 import com.tpyzq.mobile.pangu.data.StockHolderInfoEntity;
 import com.tpyzq.mobile.pangu.data.StructuredFundEntity;
 import com.tpyzq.mobile.pangu.http.NetWorkUtil;
-import com.tpyzq.mobile.pangu.log.LogHelper;
-import com.tpyzq.mobile.pangu.log.LogUtil;
 import com.tpyzq.mobile.pangu.util.ConstantUtil;
 import com.tpyzq.mobile.pangu.util.DeviceUtil;
 import com.tpyzq.mobile.pangu.util.Helper;
 import com.tpyzq.mobile.pangu.util.SpUtils;
 import com.tpyzq.mobile.pangu.util.keyboard.KeyEncryptionUtils;
 import com.tpyzq.mobile.pangu.util.panguutil.UserUtil;
-import com.tpyzq.mobile.pangu.view.CentreToast;
-import com.tpyzq.mobile.pangu.view.dialog.MistakeDialog;
 import com.zhy.http.okhttp.callback.StringCallback;
-
 import org.json.JSONArray;
 import org.json.JSONException;
 import org.json.JSONObject;
-
 import java.lang.reflect.Type;
 import java.util.ArrayList;
 import java.util.HashMap;
 import java.util.List;
 import java.util.Map;
-
-import bonree.k.M;
 import okhttp3.Call;
 
 /**
@@ -2167,9 +2152,10 @@ public class InterfaceCollection {
      *
      * @param newsno 信息id
      */
-    public void queryDetail(String newsno, String TAG, InterfaceCallback callback) {
+    public void queryDetail(String newsno,String type, String TAG, InterfaceCallback callback) {
         Map map1 = new HashMap<>();
         map1.put("newsno", newsno);
+        map1.put("type", type);
         parseInformation(ConstantUtil.getURL_DETAIL(), map1, TAG, callback, "queryDetail");
     }
 

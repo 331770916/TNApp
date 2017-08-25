@@ -4,6 +4,7 @@ import android.app.Activity;
 import android.app.Dialog;
 import android.content.Intent;
 import android.support.v4.content.ContextCompat;
+import android.text.TextUtils;
 import android.view.View;
 import android.webkit.WebView;
 import android.widget.FrameLayout;
@@ -60,7 +61,7 @@ public class NewsDetailActivity extends BaseActivity implements View.OnClickList
     private LinearLayout llDetailYiJianZiXuan, llNewDetailJiaZai;      //相关行业 , 一键自选,重新加载的图片
     private SimulateListView tvDetailListView;                                 //listView
     private FlowLayout.LayoutParams layoutParams;                        //flowLayout  的属性设置
-    private String requestId;
+    private String requestId,classno;
     //存储 网络请求回来数据的实体类
     private InformationEntity entity;
     private EventDetailListAdapter adapter;
@@ -78,62 +79,62 @@ public class NewsDetailActivity extends BaseActivity implements View.OnClickList
     @Override
     public void initView() {
         requestId = getIntent().getStringExtra("requestId");
-        if (requestId == null) {
-            return;
-        }
-        this.findViewById(R.id.ivNewsDetail_back).setOnClickListener(this);         //详情页返回按钮
-        this.findViewById(R.id.ivDetailFenXiang).setOnClickListener(this);         //详情页分享按钮
-        ivDetailA = (ImageView) this.findViewById(R.id.ivDetailA);//字体变大变小
-        ivDetailA.setOnClickListener(this);
-        mPullRefreshScrollView = (PullToRefreshScrollView) this.findViewById(R.id.svNewsDetail);
-        tvLaiYuanName = (TextView)this.findViewById(R.id.tvLaiYuanName);
-        tvStatement = (TextView)this.findViewById(R.id.tvStatement);
-        tvNewsTitle = (TextView) this.findViewById(R.id.tvNewsTitle);              //标题
+        classno = getIntent().getStringExtra("classno");
+        if (requestId != null) {
+            this.findViewById(R.id.ivNewsDetail_back).setOnClickListener(this);         //详情页返回按钮
+            this.findViewById(R.id.ivDetailFenXiang).setOnClickListener(this);         //详情页分享按钮
+            ivDetailA = (ImageView) this.findViewById(R.id.ivDetailA);//字体变大变小
+            ivDetailA.setOnClickListener(this);
+            mPullRefreshScrollView = (PullToRefreshScrollView) this.findViewById(R.id.svNewsDetail);
+            tvLaiYuanName = (TextView)this.findViewById(R.id.tvLaiYuanName);
+            tvStatement = (TextView)this.findViewById(R.id.tvStatement);
+            tvNewsTitle = (TextView) this.findViewById(R.id.tvNewsTitle);              //标题
 //        tvChaKanQuanBu = (TextView) this.findViewById(R.id.tvChaKanQuanBu);         //查看全部
-        tvLaiYuanDate = (TextView) this.findViewById(R.id.tvLaiYuanDate);         //发布时间
-        tvShangYou = (TextView) this.findViewById(R.id.tvShangYou);                 //上游
-        tvZhongJian = (TextView) this.findViewById(R.id.tvZhongJian);               //中间
-        tvXiaYou = (TextView) this.findViewById(R.id.tvXiaYou);                      //下游
-        tvOneKeyXuan = (TextView) this.findViewById(R.id.tvOneKeyXuan);             //一键自选
-        tvListViewFenGe = (TextView) this.findViewById(R.id.tvListViewFenGe);             //listView 上面的分割线
-        myWebView = (WebView) this.findViewById(R.id.wvNewDetal);                   // 展示内容的 webView
-        myFlowLayout = (FlowLayout) this.findViewById(R.id.FlowLayout);             // 展示标签的流失布局
-        llRelevantIndustry = (FrameLayout) this.findViewById(R.id.llRelevantIndustry);     //存放 行业标签的 线性布局
-        llDetailYiJianZiXuan = (LinearLayout) this.findViewById(R.id.llDetailYiJianZiXuan); //一键自选的 线性布局
-        llXiangGuanTitle = (LinearLayout) this.findViewById(R.id.llXiangGuanTitle); //相关行业上面的  title;
-        llListViewTitle = (LinearLayout) this.findViewById(R.id.llListViewTitle); //listView 上面的title
-        tvDetailListView = (SimulateListView) this.findViewById(R.id.tvDetailListView);            //展示相关股票的  listView
-        mPullRefreshScrollView.scrollTo(0, 0);
+            tvLaiYuanDate = (TextView) this.findViewById(R.id.tvLaiYuanDate);         //发布时间
+            tvShangYou = (TextView) this.findViewById(R.id.tvShangYou);                 //上游
+            tvZhongJian = (TextView) this.findViewById(R.id.tvZhongJian);               //中间
+            tvXiaYou = (TextView) this.findViewById(R.id.tvXiaYou);                      //下游
+            tvOneKeyXuan = (TextView) this.findViewById(R.id.tvOneKeyXuan);             //一键自选
+            tvListViewFenGe = (TextView) this.findViewById(R.id.tvListViewFenGe);             //listView 上面的分割线
+            myWebView = (WebView) this.findViewById(R.id.wvNewDetal);                   // 展示内容的 webView
+            myFlowLayout = (FlowLayout) this.findViewById(R.id.FlowLayout);             // 展示标签的流失布局
+            llRelevantIndustry = (FrameLayout) this.findViewById(R.id.llRelevantIndustry);     //存放 行业标签的 线性布局
+            llDetailYiJianZiXuan = (LinearLayout) this.findViewById(R.id.llDetailYiJianZiXuan); //一键自选的 线性布局
+            llXiangGuanTitle = (LinearLayout) this.findViewById(R.id.llXiangGuanTitle); //相关行业上面的  title;
+            llListViewTitle = (LinearLayout) this.findViewById(R.id.llListViewTitle); //listView 上面的title
+            tvDetailListView = (SimulateListView) this.findViewById(R.id.tvDetailListView);            //展示相关股票的  listView
+            mPullRefreshScrollView.scrollTo(0, 0);
 //        tvChaKanQuanBu.setOnClickListener(this);
-        llDetailYiJianZiXuan.setOnClickListener(this);          //一键自选点击事件
-        llNewDetailJiaZai = (LinearLayout) this.findViewById(R.id.llNewDetailJiaZai);   //重新加载图片
-        llNewDetailJiaZai.setVisibility(View.GONE);     //初始化  隐藏
-        shareDialog  = new ShareDialog(this);
-        dialog = LoadingDialogTwo.initDialog(this);       //加载数据的   菊花
-        dialog.show();      //显示菊花
-        mPullRefreshScrollView.setVisibility(View.GONE);    //隐藏 scrollView
-        adapter = new EventDetailListAdapter(this);
-        tvDetailListView.setAdapter(adapter);
-        layoutParams = new FlowLayout.LayoutParams(FlowLayout.LayoutParams.WRAP_CONTENT, TransitionUtils.dp2px(40, this));
-        //上拉、下拉设定  Mode.PULL_FROM_START
-        mPullRefreshScrollView.setMode(PullToRefreshBase.Mode.PULL_FROM_START);
-        //上拉监听函数
-        mPullRefreshScrollView.setOnRefreshListener(new PullToRefreshBase.OnRefreshListener<ScrollView>() {
-            @Override
-            public void onRefresh(PullToRefreshBase<ScrollView> refreshView) {
-                if (refreshView.isShownHeader()) {
-                    //判断头布局是否可见，如果可见执行下拉刷新
-                    //设置尾布局样式文字
-                    mPullRefreshScrollView.getLoadingLayoutProxy().setRefreshingLabel("正在刷新");
-                    mPullRefreshScrollView.getLoadingLayoutProxy().setPullLabel("下拉刷新数据");
-                    mPullRefreshScrollView.getLoadingLayoutProxy().setReleaseLabel("释放开始刷新");
-                    //模拟加载数据线程休息3秒
-                    myFlowLayout.removeAllViews();   //清空  子View
-                    mInterface.queryDetail(requestId,TAG,NewsDetailActivity.this);
+            llDetailYiJianZiXuan.setOnClickListener(this);          //一键自选点击事件
+            llNewDetailJiaZai = (LinearLayout) this.findViewById(R.id.llNewDetailJiaZai);   //重新加载图片
+            llNewDetailJiaZai.setVisibility(View.GONE);     //初始化  隐藏
+            shareDialog  = new ShareDialog(this);
+            dialog = LoadingDialogTwo.initDialog(this);       //加载数据的   菊花
+            dialog.show();      //显示菊花
+            mPullRefreshScrollView.setVisibility(View.GONE);    //隐藏 scrollView
+            adapter = new EventDetailListAdapter(this);
+            tvDetailListView.setAdapter(adapter);
+            layoutParams = new FlowLayout.LayoutParams(FlowLayout.LayoutParams.WRAP_CONTENT, TransitionUtils.dp2px(40, this));
+            //上拉、下拉设定  Mode.PULL_FROM_START
+            mPullRefreshScrollView.setMode(PullToRefreshBase.Mode.PULL_FROM_START);
+            //上拉监听函数
+            mPullRefreshScrollView.setOnRefreshListener(new PullToRefreshBase.OnRefreshListener<ScrollView>() {
+                @Override
+                public void onRefresh(PullToRefreshBase<ScrollView> refreshView) {
+                    if (refreshView.isShownHeader()) {
+                        //判断头布局是否可见，如果可见执行下拉刷新
+                        //设置尾布局样式文字
+                        mPullRefreshScrollView.getLoadingLayoutProxy().setRefreshingLabel("正在刷新");
+                        mPullRefreshScrollView.getLoadingLayoutProxy().setPullLabel("下拉刷新数据");
+                        mPullRefreshScrollView.getLoadingLayoutProxy().setReleaseLabel("释放开始刷新");
+                        //模拟加载数据线程休息3秒
+                        myFlowLayout.removeAllViews();   //清空  子View
+                        mInterface.queryDetail(requestId,"11".equals(classno)?"1":"",TAG,NewsDetailActivity.this);
+                    }
                 }
-            }
-        });
-        mInterface.queryDetail(requestId,TAG,NewsDetailActivity.this);
+            });
+            mInterface.queryDetail(requestId,"11".equals(classno)?"1":"",TAG,NewsDetailActivity.this);
+        }
     }
 
     @Override
