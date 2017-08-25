@@ -198,9 +198,8 @@ public class HomeFragment extends BaseFragment implements AdapterView.OnItemClic
                     topData = mapList.get("M1N1");
                     if(null!=topData&&!topData.isEmpty())
                         adapter.setDatas(topData);
-                    else {
+                    else
                         setDefault();
-                    }
                     List<Map<String,String>> midData = mapList.get("M1N2");
                     if(null!=midData&&!midData.isEmpty()) {
                         String image = midData.get(0).get("show_url");
@@ -216,13 +215,12 @@ public class HomeFragment extends BaseFragment implements AdapterView.OnItemClic
     }
 
     public void setDefault(){
-        if(topData!=null&&!topData.isEmpty())
-             topData.clear();
         List<Map<String,String>> defaultList = new ArrayList<>();
         Map<String,String> map = new HashMap<>();
         map.put("show_url","default");
         defaultList.add(map);
         adapter.setDatas(defaultList);
+        adapter.updateView(adapter.getEmptyView(),0);
     }
 
     private void initCarouseView() {
@@ -248,7 +246,7 @@ public class HomeFragment extends BaseFragment implements AdapterView.OnItemClic
     }
 
     private void requestCarouselImg() {
-        InterfaceCollection.getInstance().requestCarouselImg("getCarouselImg","7","","",this);
+        InterfaceCollection.getInstance().requestCarouselImg("getCarouselImg","M1","","",this);
     }
 
     private HomeSafeBetView mHomeSafeBetView;

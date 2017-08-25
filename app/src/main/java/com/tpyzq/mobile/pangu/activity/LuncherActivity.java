@@ -181,7 +181,7 @@ public class LuncherActivity extends BaseActivity implements ICallbackResult {
     private void initData() {
         SimpleRemoteControl mSimpleRemoteControls = new SimpleRemoteControl(LuncherActivity.this);
         mSimpleRemoteControls.setCommand(new ToQueryAdForLuncherConnect(new
-                QueryAdForLuncherConnect(LuncherActivityTAG,"","20","","")));
+                QueryAdForLuncherConnect(LuncherActivityTAG,"","M2","","")));
         mSimpleRemoteControls.startConnect();
         //判断当前用户是否注册
         if (Db_PUB_USERS.isRegister()) {

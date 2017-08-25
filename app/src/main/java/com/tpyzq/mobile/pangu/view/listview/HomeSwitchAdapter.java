@@ -55,10 +55,6 @@ public class HomeSwitchAdapter extends AutoLoopSwitchBaseAdapter {
         String show_url = model.get("show_url");
         SimpleDraweeView imageView = new SimpleDraweeView(mContext);
         imageView.setScaleType(ImageView.ScaleType.FIT_XY);
-        Uri imgurl= Uri.parse(show_url);
-        ImagePipeline imagePipeline = Fresco.getImagePipeline();
-        imagePipeline.evictFromMemoryCache(imgurl);
-        imagePipeline.evictFromDiskCache(imgurl);
         if("default".equals(show_url))
             imageView.setImageResource(R.mipmap.top2);
          else
@@ -96,11 +92,40 @@ public class HomeSwitchAdapter extends AutoLoopSwitchBaseAdapter {
 
     @Override
     public View getEmptyView() {
+        if(mDatas.size()==1&&"default".equals(mDatas.get(0).get("show_url")))
+            return getView(0);
         return null;
     }
 
     @Override
     public void updateView(View view, int position) {
+        if(!mDatas.isEmpty()&&mDatas.size()==1){
+            String show_url = mDatas.get(0).get("show_url");
+            final String jump_type =mDatas.get(0).get("jump_type");
+            final String jump_position = mDatas.get(0).get("jump_position");
+            final String jump_url = mDatas.get(0).get("jump_url");
+            if("default".equals(show_url))
+                ((SimpleDraweeView)view).setImageResource(R.mipmap.top2);
+            else {
+                ((SimpleDraweeView) view).setImageURI(show_url);
+                view.setOnClickListener(new View.OnClickListener() {
+                    @Override
+                    public void onClick(View v) {
+                        if(!TextUtils.isEmpty(jump_type)){
+                            switch (jump_type){
+                                case "0":
+                                    Helper.startActivity(mContext,"TN0023",jump_url,listener);
+                                    break;
+                                case "1":
+                                    if(!TextUtils.isEmpty(jump_position))
+                                        Helper.startActivity(mContext,jump_position,null,listener);
+                                    break;
+                            }
+                        }
+                    }
+                });
+            }
+        }
     }
 
     @Override
