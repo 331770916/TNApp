@@ -79,6 +79,7 @@ public class HomeFragment extends BaseFragment implements AdapterView.OnItemClic
 
     private static final String TAG = "HomeFragment";
     private JumpPageListener mJumpPageListener; //页面跳转监听
+    private List<Map<String,String>> topData;
     /**
      * 轮播控件
      */
@@ -194,12 +195,14 @@ public class HomeFragment extends BaseFragment implements AdapterView.OnItemClic
             if ("0".equals(info.getCode())){
                 if (info.getData()!=null){
                     Map<String,List<Map<String,String>>> mapList = (Map)info.getData();
-                    if(!mapList.isEmpty())
-                        adapter.setDatas(mapList.get("M1N1"));
-                    else
+                    topData = mapList.get("M1N1");
+                    if(null!=topData&&!topData.isEmpty())
+                        adapter.setDatas(topData);
+                    else {
                         setDefault();
+                    }
                     List<Map<String,String>> midData = mapList.get("M1N2");
-                    if(!midData.isEmpty()) {
+                    if(null!=midData&&!midData.isEmpty()) {
                         String image = midData.get(0).get("show_url");
                         if(!TextUtils.isEmpty(image))
                             mMiddleImageView.setImageURI(Uri.parse(image));
@@ -213,6 +216,8 @@ public class HomeFragment extends BaseFragment implements AdapterView.OnItemClic
     }
 
     public void setDefault(){
+        if(topData!=null&&!topData.isEmpty())
+             topData.clear();
         List<Map<String,String>> defaultList = new ArrayList<>();
         Map<String,String> map = new HashMap<>();
         map.put("show_url","default");

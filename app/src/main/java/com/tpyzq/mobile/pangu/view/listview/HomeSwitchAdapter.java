@@ -1,11 +1,15 @@
 package com.tpyzq.mobile.pangu.view.listview;
 
 import android.app.Activity;
+import android.net.Uri;
 import android.text.TextUtils;
 import android.view.View;
 import android.view.ViewGroup;
 import android.widget.ImageView;
+
+import com.facebook.drawee.backends.pipeline.Fresco;
 import com.facebook.drawee.view.SimpleDraweeView;
+import com.facebook.imagepipeline.core.ImagePipeline;
 import com.tpyzq.mobile.pangu.R;
 import com.tpyzq.mobile.pangu.activity.home.HomeFragment;
 import com.tpyzq.mobile.pangu.util.Helper;
@@ -51,6 +55,10 @@ public class HomeSwitchAdapter extends AutoLoopSwitchBaseAdapter {
         String show_url = model.get("show_url");
         SimpleDraweeView imageView = new SimpleDraweeView(mContext);
         imageView.setScaleType(ImageView.ScaleType.FIT_XY);
+        Uri imgurl= Uri.parse(show_url);
+        ImagePipeline imagePipeline = Fresco.getImagePipeline();
+        imagePipeline.evictFromMemoryCache(imgurl);
+        imagePipeline.evictFromDiskCache(imgurl);
         if("default".equals(show_url))
             imageView.setImageResource(R.mipmap.top2);
          else
@@ -93,7 +101,6 @@ public class HomeSwitchAdapter extends AutoLoopSwitchBaseAdapter {
 
     @Override
     public void updateView(View view, int position) {
-
     }
 
     @Override
