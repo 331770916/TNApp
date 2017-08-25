@@ -3051,13 +3051,14 @@ public class InterfaceCollection {
                         info.setTag(TAG);
                         if ("0".equals(code)){
                             JSONArray data = jsonObject.optJSONArray("data");
-                            List<Map<String,String>> list = new ArrayList<>();
                             for (int i = 0; i< data.length();i++) {
                                 JSONObject ob = data.optJSONObject(i);
                                 if(null!=ob){
+                                    List<Map<String,String>> list = new ArrayList<>();
                                     String type = ob.optString("marshalling");
+                                    int size = Integer.parseInt(ob.optString("advert_size"));
                                     JSONArray array = ob.optJSONArray("advert_data");
-                                    for (int j = 0; j < array.length(); j++) {
+                                    for (int j = 0;j <size;j++){
                                         Map<String,String> map = new HashMap<>();
                                         JSONObject object = array.optJSONObject(j);
                                         map.put("jump_type",object.optString("jump_type"));
@@ -3071,7 +3072,6 @@ public class InterfaceCollection {
                             }
                             info.setData(lists);
                         }
-
                     } catch (Exception e) {
                         info.setCode(ConstantUtil.JSON_ERROR_CODE);
                         info.setMsg(ConstantUtil.JSON_ERROR);
