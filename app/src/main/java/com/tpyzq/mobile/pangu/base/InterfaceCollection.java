@@ -3042,8 +3042,7 @@ public class InterfaceCollection {
                     info.setTag(TAG);
                 } else {
                     try {
-//                        List<Map<String,String>> list = new ArrayList<>();
-                        List<List<Map<String,String>>> lists = new ArrayList<>();
+                        Map<String,List<Map<String,String>>> lists = new HashMap();
                         JSONObject jsonObject = new JSONObject(response);
                         String code = jsonObject.optString("code");
                         String msg = jsonObject.optString("message");
@@ -3051,39 +3050,23 @@ public class InterfaceCollection {
                         info.setMsg(msg);
                         info.setTag(TAG);
                         if ("0".equals(code)){
-                            JSONArray jsonArray = jsonObject.optJSONArray("data");
-                            for (int i = 0; i < jsonArray.length(); i++) {
-                                List<Map<String,String>> list = new ArrayList<>();
-                                if ("M1N2".equals(jsonArray.optJSONObject(i).optString("marshalling"))){
-                                    JSONArray array = jsonArray.optJSONObject(i).optJSONArray("advert_data");
+                            JSONArray data = jsonObject.optJSONArray("data");
+                            List<Map<String,String>> list = new ArrayList<>();
+                            for (int i = 0; i< data.length();i++) {
+                                JSONObject ob = data.optJSONObject(i);
+                                if(null!=ob){
+                                    String type = ob.optString("marshalling");
+                                    JSONArray array = ob.optJSONArray("advert_data");
                                     for (int j = 0; j < array.length(); j++) {
                                         Map<String,String> map = new HashMap<>();
-                                        String jump_type = array.optJSONObject(j).optString("jump_type");
-                                        String jump_url = array.optJSONObject(j).optString("jump_url");
-                                        String jump_position = array.optJSONObject(j).optString("jump_position");
-                                        String show_url = array.optJSONObject(j).optString("show_url");
-                                        map.put("show_url",show_url);
-                                        map.put("jump_position",jump_position);
-                                        map.put("jump_url",jump_url);
-                                        map.put("jump_type",jump_type);
+                                        JSONObject object = array.optJSONObject(j);
+                                        map.put("jump_type",object.optString("jump_type"));
+                                        map.put("jump_url",object.optString("jump_url"));
+                                        map.put("jump_position",object.optString("jump_position"));
+                                        map.put("show_url",object.optString("show_url"));
                                         list.add(map);
                                     }
-                                    lists.add(0,list);
-                                }else if ("M1N1".equals(jsonArray.optJSONObject(i).optString("marshalling"))){
-                                    JSONArray array = jsonArray.optJSONObject(i).optJSONArray("advert_data");
-                                    for (int j = 0; j < array.length(); j++) {
-                                        Map<String,String> map = new HashMap<>();
-                                        String jump_type = array.optJSONObject(j).optString("jump_type");
-                                        String jump_url = array.optJSONObject(j).optString("jump_url");
-                                        String jump_position = array.optJSONObject(j).optString("jump_position");
-                                        String show_url = array.optJSONObject(j).optString("show_url");
-                                        map.put("show_url",show_url);
-                                        map.put("jump_position",jump_position);
-                                        map.put("jump_url",jump_url);
-                                        map.put("jump_type",jump_type);
-                                        list.add(map);
-                                    }
-                                    lists.add(list);
+                                    lists.put(type,list);
                                 }
                             }
                             info.setData(lists);

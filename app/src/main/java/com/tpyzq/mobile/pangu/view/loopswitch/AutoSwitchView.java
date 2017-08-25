@@ -12,6 +12,7 @@ import android.view.WindowManager;
 import android.widget.RelativeLayout;
 
 import com.tpyzq.mobile.pangu.R;
+import com.tpyzq.mobile.pangu.log.LogUtil;
 import com.tpyzq.mobile.pangu.util.Helper;
 
 /**
@@ -22,8 +23,10 @@ import com.tpyzq.mobile.pangu.util.Helper;
 
 public class AutoSwitchView extends AutoLoopSwitchBaseView {
     private int mType;
+    private Context mContext;
     public AutoSwitchView(Context context) {
         super(context);
+        this.mContext = context;
     }
 
     public void setType(int mType) {
@@ -47,10 +50,13 @@ public class AutoSwitchView extends AutoLoopSwitchBaseView {
         switch (mType){
             case 0://首页轮播
                 mPageShowView.initColor(getResources().getColor(R.color.white),getResources().getColor(R.color.translucent));
-                if(displayMetrics.density<2)
-                    mPageShowView.setWidthHeightMargin(displayMetrics,10,10,5);
-                else
+                LogUtil.i("手机密度："+displayMetrics.density+"--"+displayMetrics.densityDpi);
+                if(displayMetrics.density==2.0)
+                    mPageShowView.setWidthHeightMargin(displayMetrics,16,16,8);
+                else if(displayMetrics.density>2.0)
                     mPageShowView.setWidthHeightMargin(displayMetrics,20,20,10);
+                else if(displayMetrics.density<2.0)
+                    mPageShowView.setWidthHeightMargin(displayMetrics,12,12,5);
                 addView(mPageShowView, params);
                 break;
             case 1://要闻轮播
@@ -62,7 +68,6 @@ public class AutoSwitchView extends AutoLoopSwitchBaseView {
         }
         mHandler = new LoopHandler(this);
     }
-
 
     public Handler getHandler() {
         return mHandler;

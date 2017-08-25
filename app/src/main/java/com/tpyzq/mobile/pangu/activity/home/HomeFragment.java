@@ -193,17 +193,17 @@ public class HomeFragment extends BaseFragment implements AdapterView.OnItemClic
         }else if ("getCarouselImg".equals(info.getTag())){
             if ("0".equals(info.getCode())){
                 if (info.getData()!=null){
-                   List<List<Map<String,String>>> list = (List<List<Map<String, String>>>) info.getData();
-                        if (list.size()>0){
-                            List<Map<String,String>> centerImage = list.get(0);   // 中间广告图
-                            if(!centerImage.isEmpty())
-                                 mMiddleImageView.setImageURI(Uri.parse(centerImage.get(0).get("show_url")));
-                        }
-                        if (list.size()>1){
-                            List<Map<String,String>> topImage = list.get(1);     // 顶部轮播图
-                            adapter.setDatas(topImage);
-                        }else
-                            setDefault();
+                    Map<String,List<Map<String,String>>> mapList = (Map)info.getData();
+                    if(!mapList.isEmpty())
+                        adapter.setDatas(mapList.get("M1N1"));
+                    else
+                        setDefault();
+                    List<Map<String,String>> midData = mapList.get("M1N2");
+                    if(!midData.isEmpty()) {
+                        String image = midData.get(0).get("show_url");
+                        if(!TextUtils.isEmpty(image))
+                            mMiddleImageView.setImageURI(Uri.parse(image));
+                    }
                 }else
                     setDefault();
             }else
@@ -221,7 +221,7 @@ public class HomeFragment extends BaseFragment implements AdapterView.OnItemClic
     }
 
     private void initCarouseView() {
-        loopView = new AutoSwitchView(mContext);
+        loopView = new AutoSwitchView(getActivity());
         loopView.setLayoutParams(new AbsListView.LayoutParams(-1,mContext.getResources().getDimensionPixelSize(R.dimen.size250)));
         vp_carousel.addView(loopView);
         adapter = new HomeSwitchAdapter(getActivity());
