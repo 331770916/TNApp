@@ -25,14 +25,17 @@ import java.util.List;
 public class SeccAdapter extends BaseAdapter {
     Context mContext;
     private String secc_code;
+    private String MARKET_NAME;
 
-    public SeccAdapter(Context context,String secc_code) {
+    public SeccAdapter(Context context,String secc_code, String MARKET_NAME) {
         mContext = context;
         this.secc_code = secc_code;
+        this.MARKET_NAME = MARKET_NAME;
     }
 
-    public void setData(String secc_code) {
+    public void setData(String secc_code, String MARKET_NAME) {
         this.secc_code= secc_code;
+        this.MARKET_NAME= MARKET_NAME;
         notifyDataSetChanged();
     }
 
@@ -72,7 +75,7 @@ public class SeccAdapter extends BaseAdapter {
         }
         HashMap<String,String> hashMap = ConstantUtil.stock_account_list.get(position);
         viewHodler.tv_secc.setText(hashMap.get("MARKET_NAME")+" "+hashMap.get("SECU_ACCOUNT"));
-        if (secc_code.equalsIgnoreCase(hashMap.get("SECU_ACCOUNT"))) {
+        if (secc_code.equalsIgnoreCase(hashMap.get("SECU_ACCOUNT"))&&MARKET_NAME.equalsIgnoreCase(hashMap.get("MARKET_NAME"))) {
             viewHodler.iv_select_status.setVisibility(View.VISIBLE);
             viewHodler.ll_secc.setBackgroundResource(R.drawable.bg_secc_select);
         } else {

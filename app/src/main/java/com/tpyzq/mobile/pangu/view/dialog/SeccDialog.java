@@ -35,7 +35,7 @@ public class SeccDialog extends BaseDialog implements View.OnClickListener {
     }
     private void setData(String secc_code){
         this.sec_code = secc_code;
-        seccAdapter.setData(secc_code);
+//        seccAdapter.setData(secc_code);
     }
     @Override
     public void setView() {
@@ -53,7 +53,7 @@ public class SeccDialog extends BaseDialog implements View.OnClickListener {
     public void initData() {
         bt_false.setOnClickListener(this);
         bt_true.setOnClickListener(this);
-        seccAdapter = new SeccAdapter(mContext,sec_code);
+        seccAdapter = new SeccAdapter(mContext,sec_code, MARKET_NAME);
         lv.setAdapter(seccAdapter);
         lv.setOnItemClickListener(new AdapterView.OnItemClickListener() {
             @Override
@@ -61,7 +61,7 @@ public class SeccDialog extends BaseDialog implements View.OnClickListener {
                 sec_code = ConstantUtil.stock_account_list.get(position).get("SECU_ACCOUNT");
                 MARKET_NAME = ConstantUtil.stock_account_list.get(position).get("MARKET_NAME");
                 MARKET = ConstantUtil.stock_account_list.get(position).get("MARKET");
-                seccAdapter.setData(sec_code);
+                seccAdapter.setData(sec_code, MARKET_NAME);
             }
         });
     }
